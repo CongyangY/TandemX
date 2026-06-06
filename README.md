@@ -132,3 +132,13 @@ pytest
 ```
 
 The tests currently validate CLI help, missing-input errors, simulator reproducibility, toy-scale discover output behavior, toy-scale quantify behavior, toy-scale assembly localization behavior, toy-scale probe ranking behavior, and basic static visualization output.
+
+## MVP Documentation
+
+Current status and limitations:
+
+```text
+docs/mvp_status.md
+docs/known_limitations.md
+docs/roadmap.md
+```
