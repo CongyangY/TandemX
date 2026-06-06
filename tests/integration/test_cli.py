@@ -114,6 +114,7 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     assembly = write_file(tmp_path / "assembly.fa", ">chr1\nACGTACGT\n")
     copy_number = write_file(tmp_path / "copy_number.tsv")
     density = write_file(tmp_path / "repeat_density.tsv")
+    arrays = write_file(tmp_path / "arrays.bed", "chr1\t0\t8\tm1\t1000\t.\thigh\t\n")
     probes = write_file(tmp_path / "probe_candidates.tsv")
     comparison = write_file(tmp_path / "copy_number_comparison.tsv")
 
@@ -167,23 +168,42 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     assert 'status: "locate_mvp_completed"' in locate_config
     assert "func" not in locate_config
 
+    copy_number.write_text(
+        "family_id\tmonomer_length\tdiagnostic_kmer_count\tmedian_kmer_depth\t"
+        "haploid_depth\testimated_copy_number\testimated_bp\tconfidence\twarning\n"
+        "m1\t4\t1\t1\t1\t1\t4\tmedium\t\n",
+        encoding="utf-8",
+    )
+    probe_result = run_cli(
+        "probe",
+        "--catalogue",
+        str(monomers),
+        "--assembly",
+        str(assembly),
+        "--copy-number",
+        str(copy_number),
+        "--arrays",
+        str(arrays),
+        "--min-len",
+        "4",
+        "--max-len",
+        "4",
+        "--outdir",
+        str(tmp_path / "probe"),
+    )
+    probe_outdir = tmp_path / "probe"
+    assert probe_result.returncode == 0, probe_result.stderr
+    assert "probes" in probe_result.stdout
+    assert (probe_outdir / "probes.fa").is_file()
+    assert (probe_outdir / "probes.rank.tsv").is_file()
+    assert (probe_outdir / "in_silico_fish.tsv").is_file()
+    probe_config = (probe_outdir / "run_config.yaml").read_text(encoding="utf-8")
+    assert 'command: "tandemx probe"' in probe_config
+    assert 'subcommand: "probe"' in probe_config
+    assert 'status: "probe_mvp_completed"' in probe_config
+    assert "func" not in probe_config
+
     commands = [
-        (
-            "probe",
-            [
-                "probe",
-                "--catalogue",
-                str(catalogue),
-                "--monomers",
-                str(monomers),
-                "--copy-number",
-                str(copy_number),
-                "--locations",
-                str(density),
-                "--outdir",
-                str(tmp_path / "probe"),
-            ],
-        ),
         (
             "compare",
             [

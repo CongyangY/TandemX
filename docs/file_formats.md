@@ -150,16 +150,15 @@ Produced by: `tandemx probe`
 |---|---|---:|---|
 | probe_id | string | NA | Probe identifier |
 | family_id | string | NA | Target repeat family |
-| rank | integer | rank | Rank, with 1 as the highest ranked probe |
-| probe_length_bp | integer | bp | Probe length |
-| gc_fraction | float | fraction | GC fraction from 0 to 1 |
-| tm_estimate_c | float | degrees C | Simple melting temperature estimate |
+| sequence_length | integer | bp | Probe sequence length |
+| gc_content | float | fraction | GC fraction from 0 to 1 |
+| tm | float | degrees C | Simple melting temperature estimate |
 | estimated_copy_number | float | copies | Target family read-based copy number |
-| specificity_score | float | unitless | Higher values indicate stronger predicted specificity |
+| arrayiness_score | float | unitless | Fraction of predicted probe hits overlapping target arrays |
+| specificity_score | float | unitless | Higher values indicate fewer predicted off-target hits |
 | off_target_count | integer | hits | Predicted off-target count |
-| predicted_signal_region | string | NA | Region summary, or empty if unavailable |
+| predicted_regions | string | NA | Semicolon-separated predicted target regions |
 | probe_score | float | unitless | Combined ranking score |
-| confidence | string | NA | Confidence label |
 | warning | string | NA | Semicolon-separated warnings or empty |
 
 ## in_silico_fish.tsv
@@ -169,15 +168,11 @@ Produced by: `tandemx probe`
 | Field | Type | Unit | Description |
 |---|---|---:|---|
 | probe_id | string | NA | Probe identifier |
-| family_id | string | NA | Target repeat family |
 | chrom | string | NA | Chromosome or contig |
-| region_start | integer | bp | 0-based predicted signal-region start |
-| region_end | integer | bp | 0-based half-open predicted signal-region end |
-| signal_score | float | unitless | Predicted signal strength score |
-| off_target_signal_score | float | unitless | Predicted off-target signal score |
-| specificity_class | string | NA | `high`, `medium`, `low` or `uncertain` |
+| start | integer | bp | 0-based predicted signal-region start |
+| end | integer | bp | 0-based half-open predicted signal-region end |
+| predicted_signal | float | unitless | Predicted signal strength score |
 | confidence | string | NA | Confidence label |
-| warning | string | NA | Semicolon-separated warnings or empty |
 
 ## Toy Simulation Outputs
 

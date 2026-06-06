@@ -1,6 +1,6 @@
 # TandemX Algorithm Design
 
-This document describes current MVP algorithms and planned future algorithms. The repository currently implements the toy simulator, toy-scale `discover` MVP, toy-scale `quantify` MVP, and toy-scale `locate` MVP.
+This document describes current MVP algorithms and planned future algorithms. The repository currently implements the toy simulator, toy-scale `discover`, `quantify`, `locate`, and `probe` MVPs.
 
 ## Candidate Periodic k-mer Discovery
 
@@ -133,20 +133,27 @@ Future work:
 
 MVP goal: rank simple candidate probes for toy repeat families.
 
-Planned approach:
+Current MVP implementation:
 
-1. generate probe candidates from consensus monomers or concatenated monomer sequence;
-2. compute probe length, GC fraction and simple melting temperature estimate;
-3. evaluate target abundance from `copy_number.tsv`;
-4. estimate specificity from k-mer sharing with non-target families;
-5. summarize predicted signal regions from assembly localization when available;
-6. combine abundance, specificity and localization evidence into a probe score.
+1. read monomer FASTA, assembly FASTA, `copy_number.tsv`, and `arrays.bed`;
+2. generate fixed windows from each monomer using `--min-len` and `--max-len`;
+3. exclude probes with high single-base low-complexity ratio;
+4. compute probe length, GC content and a simple Wallace-rule Tm estimate;
+5. scan assembly with probe k-mers to find predicted target and off-target regions;
+6. treat hits overlapping same-family `arrays.bed` intervals as target-array hits;
+7. estimate `arrayiness_score` as target hits divided by all predicted hits;
+8. estimate `specificity_score` as `1 / (1 + off_target_hits)`;
+9. combine normalized copy number, specificity, arrayiness and GC balance into `probe_score`;
+10. write ranked probes and toy in silico FISH predicted signal regions.
 
 MVP constraints:
 
 1. score is a prioritization heuristic;
 2. no guarantee of experimental FISH success;
-3. no thermodynamic hybridization model.
+3. no thermodynamic hybridization model;
+4. no full off-target alignment;
+5. no probe tiling optimization;
+6. no experimental calibration.
 
 Future work:
 

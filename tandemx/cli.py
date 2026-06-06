@@ -14,6 +14,7 @@ from typing import Any, Iterable
 from tandemx import __version__
 from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
 from tandemx.locate.mvp import LocateConfig, locate_toy_arrays
+from tandemx.probe.mvp import ProbeConfig, rank_toy_probes
 from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
 
@@ -211,10 +212,36 @@ def run_locate(args: argparse.Namespace) -> int:
 
 
 def run_probe(args: argparse.Namespace) -> int:
-    required = [args.catalogue, args.monomers, args.copy_number]
-    if args.locations is not None:
-        required.append(args.locations)
-    return _prepare_placeholder_run("probe", args, required)
+    monomers_path = args.monomers if args.monomers is not None else args.catalogue
+    arrays_path = args.arrays if args.arrays is not None else args.locations
+    if args.assembly is None:
+        raise ValueError("--assembly is required for probe MVP")
+    if arrays_path is None:
+        raise ValueError("--arrays is required for probe MVP")
+    _require_existing_files([monomers_path, args.assembly, args.copy_number, arrays_path])
+    args.outdir.mkdir(parents=True, exist_ok=True)
+    candidates, signals = rank_toy_probes(
+        ProbeConfig(
+            monomers=monomers_path,
+            assembly=args.assembly,
+            copy_number=args.copy_number,
+            arrays=arrays_path,
+            outdir=args.outdir,
+            min_len=args.min_len,
+            max_len=args.max_len,
+        )
+    )
+    _write_run_config(args.outdir, "probe", args, status="probe_mvp_completed")
+    logger = _configure_log(args.outdir, "probe")
+    logger.info("command=tandemx probe")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=probe_mvp_completed")
+    logger.info("probe_count=%s", len(candidates))
+    logger.info("signal_count=%s", len(signals))
+    logger.info("Probe MVP is a toy-scale prioritization heuristic")
+    print(f"tandemx probe: wrote {len(candidates)} probes and {len(signals)} predicted signals to {args.outdir}")
+    return 0
 
 
 def run_compare(args: argparse.Namespace) -> int:
@@ -312,13 +339,15 @@ def build_parser() -> argparse.ArgumentParser:
         "probe",
         help="Rank candidate FISH probes from repeat families.",
     )
-    probe.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Repeat family catalogue produced by discover.")
-    probe.add_argument("--monomers", required=True, type=_path_value, help="Monomer FASTA used to derive future probe candidates.")
+    probe.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Monomer FASTA produced by discover. The --catalog spelling is accepted.")
+    probe.add_argument("--monomers", type=_path_value, help="Optional explicit monomer FASTA. If omitted, --catalogue/--catalog is used.")
+    probe.add_argument("--assembly", type=_path_value, help="Toy-scale assembly FASTA used to estimate probe target and off-target regions.")
     probe.add_argument("--copy-number", required=True, type=_path_value, dest="copy_number", help="Read-based copy-number table produced by quantify.")
-    probe.add_argument("--locations", type=_path_value, help="Optional repeat density or localization table produced by locate.")
-    probe.add_argument("--min-probe-len", type=int, default=80, help="Minimum candidate probe length in bp.")
-    probe.add_argument("--max-probe-len", type=int, default=300, help="Maximum candidate probe length in bp.")
-    probe.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and future probe outputs.")
+    probe.add_argument("--arrays", type=_path_value, help="arrays.bed produced by locate.")
+    probe.add_argument("--locations", type=_path_value, help="Backward-compatible alias for --arrays.")
+    probe.add_argument("--min-len", "--min-probe-len", type=int, default=80, help="Minimum candidate probe length in bp.")
+    probe.add_argument("--max-len", "--max-probe-len", type=int, default=300, help="Maximum candidate probe length in bp.")
+    probe.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, probes.fa, probes.rank.tsv, and in_silico_fish.tsv.")
     probe.set_defaults(func=run_probe)
 
     compare = subparsers.add_parser(
