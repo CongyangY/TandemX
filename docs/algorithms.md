@@ -1,26 +1,36 @@
 # TandemX Algorithm Design
 
-This document describes planned algorithms. The current repository skeleton does not implement these algorithms yet.
+This document describes current MVP algorithms and planned future algorithms. The repository currently implements only the toy simulator and the toy-scale `discover` MVP.
 
 ## Candidate Periodic k-mer Discovery
 
-MVP goal: identify simple candidate tandem repeat monomers from toy HiFi-like reads.
+MVP goal: identify simple candidate tandem repeat monomers from toy HiFi-like FASTA reads.
 
-Planned approach:
+Current MVP implementation:
 
-1. stream reads instead of loading all reads at once;
-2. scan each read for periodic k-mer patterns within a configured monomer length range;
-3. record candidate repeat spans and period estimates;
-4. filter low-complexity candidates;
-5. cluster similar candidate monomers into repeat families;
-6. derive a simple consensus monomer for each toy-scale family.
+1. parse FASTA reads only;
+2. for each read, test candidate periods from `--min-monomer-len` to `--max-monomer-len`, limited to at most half the read length;
+3. compute a simple shifted periodicity identity score for each candidate period:
+   `matches(sequence[i], sequence[i + period]) / compared_bases`;
+4. keep the best period for a read when the score is at least 0.75;
+5. write each retained read-level candidate to `candidate_reads.tsv`;
+6. cluster candidates by period length using a small bp tolerance;
+7. keep clusters with at least `--min-support-reads` distinct reads;
+8. use the highest-scoring candidate sequence as the representative monomer for each family;
+9. write `monomers.fa` and `families.tsv`.
+
+This method is intentionally simple. It is designed to recover the 566 bp and 350 bp simulated repeat families from the toy dataset, not to analyze real large plant genomes.
 
 MVP constraints:
 
 1. toy data only;
 2. simple tandem arrays only;
-3. no higher-order repeat inference;
-4. no production-scale memory optimization claims.
+3. FASTA only; FASTQ support is future work;
+4. one best candidate period per read;
+5. no local repeat-boundary refinement;
+6. no multiple-alignment consensus;
+7. no higher-order repeat inference;
+8. no production-scale memory optimization claims.
 
 Future work:
 

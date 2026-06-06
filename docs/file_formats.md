@@ -4,7 +4,7 @@ All TSV files must use tab separators, include a header line and use stable colu
 
 All BED files use 0-based half-open coordinates: `start` is included and `end` is excluded.
 
-The current repository is a skeleton. The formats below define planned core outputs.
+The current repository implements the toy simulator and the toy-scale `discover` MVP. The formats below define current and planned core outputs.
 
 ## candidate_reads.tsv
 

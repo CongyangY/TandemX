@@ -13,9 +13,9 @@ The intended long-term design is a read-first, assembly-aware workflow for:
 
 ## Current Status
 
-This repository currently contains only the project skeleton and CLI skeleton.
+This repository currently contains the project skeleton, CLI skeleton, a toy dataset simulator, and a toy-scale `discover` MVP.
 
-No real tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is implemented yet.
+No production-scale tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is implemented yet.
 
 The first implementation target is a toy-scale MVP. It should run on small simulated data and should not claim support for real 7-20 Gb plant genomes until benchmarked.
 
@@ -42,9 +42,10 @@ pip install -e .
 
 ## CLI
 
-Available placeholder commands:
+Available commands:
 
 ```bash
+tandemx simulate toy --help
 tandemx discover --help
 tandemx quantify --help
 tandemx locate --help
@@ -53,24 +54,24 @@ tandemx compare --help
 tandemx visualize --help
 ```
 
-Each command currently:
+`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`.
 
-1. parses arguments;
-2. checks that required input files exist;
-3. creates the output directory;
-4. writes `run_config.yaml`;
-5. writes `run.log`; and
-6. reports that the algorithm is not implemented yet.
+The `quantify`, `locate`, `probe`, `compare`, and `visualize` commands are still placeholders. Placeholder commands currently:
 
-The toy dataset has not been added yet. It will be added in the next development phase.
+1. parse arguments;
+2. check that required input files exist;
+3. create the output directory;
+4. write `run_config.yaml`;
+5. write `run.log`; and
+6. report that the algorithm is not implemented yet.
 
-Temporary skeleton run with a minimal local FASTA:
+Generate a toy dataset and run discover:
 
 ```bash
-mkdir -p tmp
-printf ">read1\nACGTACGTACGT\n" > tmp/reads.fa
+mkdir -p results
+tandemx simulate toy --outdir results/toy
 tandemx discover \
-  --reads tmp/reads.fa \
+  --reads results/toy/reads.fa \
   --outdir results/discover
 ```
 
@@ -89,4 +90,4 @@ conda activate tandemx-dev
 pytest
 ```
 
-The tests currently validate CLI help, missing-input errors, and placeholder output-directory/config behavior.
+The tests currently validate CLI help, missing-input errors, simulator reproducibility, and toy-scale discover output behavior.

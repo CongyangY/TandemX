@@ -65,28 +65,45 @@ def test_directory_input_path_errors(tmp_path: Path) -> None:
 
 
 def test_discover_writes_run_files(tmp_path: Path) -> None:
-    reads = write_file(tmp_path / "reads.fastq", "@r1\nACGT\n+\nIIII\n")
+    reads = write_file(tmp_path / "reads.fa", ">r1\nACGTACGTACGTACGT\n")
     outdir = tmp_path / "discover"
 
-    result = run_cli("discover", "--reads", str(reads), "--outdir", str(outdir))
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads),
+        "--outdir",
+        str(outdir),
+        "--min-monomer-len",
+        "4",
+        "--max-monomer-len",
+        "8",
+        "--min-support-reads",
+        "1",
+        "--min-repeat-span",
+        "8",
+    )
 
     assert result.returncode == 0
-    assert "not implemented yet" in result.stdout
+    assert "wrote" in result.stdout
     assert outdir.is_dir()
     assert (outdir / "run_config.yaml").is_file()
     assert (outdir / "run.log").is_file()
+    assert (outdir / "candidate_reads.tsv").is_file()
+    assert (outdir / "monomers.fa").is_file()
+    assert (outdir / "families.tsv").is_file()
     config = (outdir / "run_config.yaml").read_text(encoding="utf-8")
     log = (outdir / "run.log").read_text(encoding="utf-8")
     assert 'command: "tandemx discover"' in config
     assert 'subcommand: "discover"' in config
-    assert 'status: "skeleton_not_implemented"' in config
+    assert 'status: "discover_mvp_completed"' in config
     assert "cwd:" in config
     assert "argv:" in config
     assert "python_version:" in config
     assert "platform:" in config
     assert "func" not in config
     assert "command=tandemx discover" in log
-    assert "status=skeleton_not_implemented" in log
+    assert "status=discover_mvp_completed" in log
     assert f"output_directory={outdir}" in log
 
 

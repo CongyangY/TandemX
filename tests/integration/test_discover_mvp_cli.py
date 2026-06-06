@@ -1,0 +1,104 @@
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+def run_cli(*args: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [sys.executable, "-m", "tandemx.cli", *args],
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+
+
+def parse_family_lengths(path: Path) -> list[int]:
+    lines = path.read_text(encoding="utf-8").splitlines()
+    return [int(line.split("\t")[2]) for line in lines[1:] if line.strip()]
+
+
+def test_discover_mvp_recovers_toy_family_lengths(tmp_path: Path) -> None:
+    toy = tmp_path / "toy"
+    discover = tmp_path / "discover"
+    simulate_result = run_cli(
+        "simulate",
+        "toy",
+        "--outdir",
+        str(toy),
+        "--seed",
+        "19",
+        "--num-reads",
+        "80",
+        "--read-length",
+        "1200",
+        "--background-length",
+        "2000",
+        "--monomer-lengths",
+        "566,350",
+        "--copies",
+        "9,7",
+        "--error-rate",
+        "0.01",
+    )
+    assert simulate_result.returncode == 0, simulate_result.stderr
+
+    discover_result = run_cli(
+        "discover",
+        "--reads",
+        str(toy / "reads.fa"),
+        "--outdir",
+        str(discover),
+        "--min-monomer-len",
+        "300",
+        "--max-monomer-len",
+        "700",
+        "--min-support-reads",
+        "3",
+        "--min-repeat-span",
+        "600",
+    )
+    assert discover_result.returncode == 0, discover_result.stderr
+    assert "wrote" in discover_result.stdout
+
+    assert (discover / "candidate_reads.tsv").is_file()
+    assert (discover / "monomers.fa").is_file()
+    assert (discover / "families.tsv").is_file()
+
+    lengths = parse_family_lengths(discover / "families.tsv")
+    assert any(abs(length - 566) <= 5 for length in lengths)
+    assert any(abs(length - 350) <= 5 for length in lengths)
+
+    candidate_text = (discover / "candidate_reads.tsv").read_text(encoding="utf-8")
+    assert "strand=+" not in candidate_text
+    assert "\t+\t" in candidate_text
+    assert "\t-\t" in candidate_text
+
+    monomers_text = (discover / "monomers.fa").read_text(encoding="utf-8")
+    assert ">family_id=TXF" in monomers_text
+    assert "length_bp=566" in monomers_text
+    assert "length_bp=350" in monomers_text
+
+    config = (discover / "run_config.yaml").read_text(encoding="utf-8")
+    assert 'status: "discover_mvp_completed"' in config
+
+
+def test_discover_mvp_rejects_fastq(tmp_path: Path) -> None:
+    reads = tmp_path / "reads.fastq"
+    reads.write_text("@r1\nACGTACGT\n+\nIIIIIIII\n", encoding="utf-8")
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads),
+        "--outdir",
+        str(tmp_path / "discover"),
+        "--min-monomer-len",
+        "4",
+        "--max-monomer-len",
+        "8",
+    )
+
+    assert result.returncode != 0
+    assert "FASTA" in result.stderr or "sequence found before header" in result.stderr

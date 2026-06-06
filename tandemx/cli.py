@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from tandemx import __version__
+from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
 
 
@@ -122,7 +123,31 @@ def _prepare_placeholder_run(
 
 
 def run_discover(args: argparse.Namespace) -> int:
-    return _prepare_placeholder_run("discover", args, [args.reads])
+    _require_existing_files([args.reads])
+    args.outdir.mkdir(parents=True, exist_ok=True)
+    config = DiscoverConfig(
+        reads=args.reads,
+        outdir=args.outdir,
+        min_monomer_len=args.min_monomer_len,
+        max_monomer_len=args.max_monomer_len,
+        min_support_reads=args.min_support_reads,
+        min_repeat_span=args.min_repeat_span,
+    )
+    candidates, families = discover_toy_repeats(config)
+    _write_run_config(args.outdir, "discover", args, status="discover_mvp_completed")
+    logger = _configure_log(args.outdir, "discover")
+    logger.info("command=tandemx discover")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=discover_mvp_completed")
+    logger.info("candidate_count=%s", len(candidates))
+    logger.info("family_count=%s", len(families))
+    logger.info("Discover MVP supports toy-scale FASTA input only")
+    print(
+        f"tandemx discover: wrote {len(candidates)} candidates and "
+        f"{len(families)} families to {args.outdir}"
+    )
+    return 0
 
 
 def run_quantify(args: argparse.Namespace) -> int:
@@ -202,13 +227,13 @@ def build_parser() -> argparse.ArgumentParser:
         "discover",
         help="Discover candidate tandem repeat monomers from reads.",
     )
-    discover.add_argument("--reads", required=True, type=_path_value, help="Input HiFi-like reads in FASTA or FASTQ format.")
-    discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and future discover outputs.")
+    discover.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale HiFi-like reads in FASTA format. FASTQ is future work.")
+    discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, candidate_reads.tsv, monomers.fa, and families.tsv.")
     discover.add_argument("--min-monomer-len", type=int, default=20, help="Minimum candidate monomer length in bp.")
     discover.add_argument("--max-monomer-len", type=int, default=2000, help="Maximum candidate monomer length in bp.")
     discover.add_argument("--min-support-reads", type=int, default=5, help="Minimum number of reads supporting a candidate family.")
     discover.add_argument("--min-repeat-span", type=int, default=100, help="Minimum repeat-supporting span in a read, in bp.")
-    discover.add_argument("--seed", type=int, default=1, help="Random seed for reproducible toy-scale workflows.")
+    discover.add_argument("--seed", type=int, default=1, help="Reserved for reproducible future stochastic discovery steps.")
     discover.set_defaults(func=run_discover)
 
     quantify = subparsers.add_parser(
