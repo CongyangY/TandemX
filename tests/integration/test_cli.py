@@ -108,7 +108,7 @@ def test_discover_writes_run_files(tmp_path: Path) -> None:
 
 
 def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
-    reads = write_file(tmp_path / "reads.fastq", "@r1\nACGT\n+\nIIII\n")
+    reads = write_file(tmp_path / "reads.fa", ">r1\nACGTACGTACGTACGT\n")
     catalogue = write_file(tmp_path / "repeat_catalogue.tsv")
     monomers = write_file(tmp_path / "monomers.fasta", ">m1\nACGT\n")
     assembly = write_file(tmp_path / "assembly.fa", ">chr1\nACGTACGT\n")
@@ -117,23 +117,30 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     probes = write_file(tmp_path / "probe_candidates.tsv")
     comparison = write_file(tmp_path / "copy_number_comparison.tsv")
 
+    quantify_result = run_cli(
+        "quantify",
+        "--reads",
+        str(reads),
+        "--catalogue",
+        str(monomers),
+        "--genome-size",
+        "16",
+        "--k",
+        "4",
+        "--outdir",
+        str(tmp_path / "quantify"),
+    )
+    quantify_outdir = tmp_path / "quantify"
+    assert quantify_result.returncode == 0, quantify_result.stderr
+    assert "copy-number estimates" in quantify_result.stdout
+    assert (quantify_outdir / "copy_number.tsv").is_file()
+    quantify_config = (quantify_outdir / "run_config.yaml").read_text(encoding="utf-8")
+    assert 'command: "tandemx quantify"' in quantify_config
+    assert 'subcommand: "quantify"' in quantify_config
+    assert 'status: "quantify_mvp_completed"' in quantify_config
+    assert "func" not in quantify_config
+
     commands = [
-        (
-            "quantify",
-            [
-                "quantify",
-                "--reads",
-                str(reads),
-                "--catalogue",
-                str(catalogue),
-                "--monomers",
-                str(monomers),
-                "--genome-size",
-                "1000",
-                "--outdir",
-                str(tmp_path / "quantify"),
-            ],
-        ),
         (
             "locate",
             [

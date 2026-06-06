@@ -1,6 +1,6 @@
 # TandemX Algorithm Design
 
-This document describes current MVP algorithms and planned future algorithms. The repository currently implements only the toy simulator and the toy-scale `discover` MVP.
+This document describes current MVP algorithms and planned future algorithms. The repository currently implements the toy simulator, toy-scale `discover` MVP, and toy-scale `quantify` MVP.
 
 ## Candidate Periodic k-mer Discovery
 
@@ -41,22 +41,30 @@ Future work:
 
 ## Diagnostic k-mer Copy-number Calibration
 
-MVP goal: estimate repeat family copy number from diagnostic k-mer depth on toy reads.
+MVP goal: estimate repeat family copy number from diagnostic k-mer depth on toy FASTA reads.
 
-Planned approach:
+Current MVP implementation:
 
-1. enumerate canonical k-mers from each consensus monomer;
-2. exclude low-complexity and non-specific k-mers;
-3. count selected diagnostic k-mers in reads;
-4. summarize depth per family using robust statistics such as median depth;
-5. normalize against an estimated genome-wide depth;
-6. report estimated repeat bp and monomer copy number with confidence labels.
+1. read monomer FASTA from `--catalog/--catalogue` or `--monomers`;
+2. enumerate canonical k-mers from each consensus monomer;
+3. count k-mer multiplicity within each monomer;
+4. remove low-complexity k-mers and k-mers shared by multiple families;
+5. count canonical k-mers in the input reads;
+6. correct each diagnostic k-mer depth by its multiplicity within the monomer;
+7. summarize corrected diagnostic k-mer depth with the median;
+8. if `--haploid-depth` is provided, use it directly;
+9. otherwise estimate haploid depth as total read bases divided by `--genome-size` and add a warning;
+10. estimate copy number as `median_kmer_depth / haploid_depth`;
+11. estimate repeat bp as `estimated_copy_number * monomer_length`.
 
 MVP constraints:
 
-1. simple genome-size input;
+1. toy FASTA reads only;
 2. no complex ploidy model;
-3. confidence labels based on diagnostic k-mer count and depth dispersion.
+3. no genome-wide unique k-mer depth estimation;
+4. no external k-mer counter;
+5. missing `--haploid-depth` uses a rough total-bases/genome-size estimate and is labeled with a warning;
+6. confidence labels are based on diagnostic k-mer count and whether haploid depth was provided.
 
 Future work:
 

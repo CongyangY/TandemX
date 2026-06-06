@@ -68,14 +68,12 @@ Produced by: `tandemx quantify`
 | Field | Type | Unit | Description |
 |---|---|---:|---|
 | family_id | string | NA | Repeat family identifier |
-| monomer_length_bp | integer | bp | Consensus monomer length |
+| monomer_length | integer | bp | Consensus monomer length |
 | diagnostic_kmer_count | integer | k-mers | Number of selected diagnostic k-mers |
 | median_kmer_depth | float | counts | Median diagnostic k-mer count in reads |
-| genome_depth_estimate | float | X | Estimated genome-wide sequencing depth |
-| estimated_repeat_bp | float | bp | Estimated total repeat bp in reads |
+| haploid_depth | float | X | Haploid sequencing depth provided by the user or estimated as total read bases divided by genome size |
 | estimated_copy_number | float | copies | Estimated monomer copy number |
-| copy_number_ci_low | float | copies | Lower uncertainty bound |
-| copy_number_ci_high | float | copies | Upper uncertainty bound |
+| estimated_bp | float | bp | Estimated total repeat bp in reads |
 | confidence | string | NA | Confidence label |
 | warning | string | NA | Semicolon-separated warnings or empty |
 

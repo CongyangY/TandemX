@@ -13,7 +13,7 @@ The intended long-term design is a read-first, assembly-aware workflow for:
 
 ## Current Status
 
-This repository currently contains the project skeleton, CLI skeleton, a toy dataset simulator, and a toy-scale `discover` MVP.
+This repository currently contains the project skeleton, CLI skeleton, a toy dataset simulator, a toy-scale `discover` MVP, and a toy-scale `quantify` MVP.
 
 No production-scale tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is implemented yet.
 
@@ -54,9 +54,9 @@ tandemx compare --help
 tandemx visualize --help
 ```
 
-`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`.
+`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from diagnostic k-mer depth and writes `copy_number.tsv`.
 
-The `quantify`, `locate`, `probe`, `compare`, and `visualize` commands are still placeholders. Placeholder commands currently:
+The `locate`, `probe`, `compare`, and `visualize` commands are still placeholders. Placeholder commands currently:
 
 1. parse arguments;
 2. check that required input files exist;
@@ -73,6 +73,11 @@ tandemx simulate toy --outdir results/toy
 tandemx discover \
   --reads results/toy/reads.fa \
   --outdir results/discover
+tandemx quantify \
+  --reads results/toy/reads.fa \
+  --catalog results/discover/monomers.fa \
+  --genome-size 7744 \
+  --outdir results/quantify
 ```
 
 ## Tests
@@ -90,4 +95,4 @@ conda activate tandemx-dev
 pytest
 ```
 
-The tests currently validate CLI help, missing-input errors, simulator reproducibility, and toy-scale discover output behavior.
+The tests currently validate CLI help, missing-input errors, simulator reproducibility, toy-scale discover output behavior, and toy-scale quantify behavior.

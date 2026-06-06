@@ -13,6 +13,7 @@ from typing import Any, Iterable
 
 from tandemx import __version__
 from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
+from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
 
 
@@ -151,11 +152,29 @@ def run_discover(args: argparse.Namespace) -> int:
 
 
 def run_quantify(args: argparse.Namespace) -> int:
-    return _prepare_placeholder_run(
-        "quantify",
-        args,
-        [args.reads, args.catalogue, args.monomers],
+    monomers_path = args.monomers if args.monomers is not None else args.catalogue
+    _require_existing_files([args.reads, monomers_path])
+    args.outdir.mkdir(parents=True, exist_ok=True)
+    estimates = quantify_toy_copy_number(
+        QuantifyConfig(
+            reads=args.reads,
+            monomers=monomers_path,
+            genome_size=args.genome_size,
+            outdir=args.outdir,
+            k=args.k,
+            haploid_depth=args.haploid_depth,
+        )
     )
+    _write_run_config(args.outdir, "quantify", args, status="quantify_mvp_completed")
+    logger = _configure_log(args.outdir, "quantify")
+    logger.info("command=tandemx quantify")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=quantify_mvp_completed")
+    logger.info("family_count=%s", len(estimates))
+    logger.info("Quantify MVP supports toy-scale FASTA input only")
+    print(f"tandemx quantify: wrote copy-number estimates for {len(estimates)} families to {args.outdir}")
+    return 0
 
 
 def run_locate(args: argparse.Namespace) -> int:
@@ -240,12 +259,13 @@ def build_parser() -> argparse.ArgumentParser:
         "quantify",
         help="Estimate read-based repeat copy number from diagnostic k-mers.",
     )
-    quantify.add_argument("--reads", required=True, type=_path_value, help="Input reads used to estimate diagnostic k-mer depth.")
-    quantify.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Repeat family catalogue produced by discover.")
-    quantify.add_argument("--monomers", required=True, type=_path_value, help="Monomer FASTA produced by discover.")
+    quantify.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale FASTA reads used to estimate diagnostic k-mer depth.")
+    quantify.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Monomer FASTA produced by discover. The --catalog spelling is accepted.")
+    quantify.add_argument("--monomers", type=_path_value, help="Optional explicit monomer FASTA. If omitted, --catalogue/--catalog is used.")
     quantify.add_argument("--genome-size", required=True, type=int, help="Estimated haploid or target genome size in bp.")
     quantify.add_argument("--k", type=int, default=21, help="Diagnostic k-mer size.")
-    quantify.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and future quantify outputs.")
+    quantify.add_argument("--haploid-depth", type=float, help="Optional haploid sequencing depth. If omitted, depth is estimated as total read bases divided by genome size.")
+    quantify.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and copy_number.tsv.")
     quantify.set_defaults(func=run_quantify)
 
     locate = subparsers.add_parser(
