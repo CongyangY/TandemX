@@ -13,7 +13,7 @@ The intended long-term design is a read-first, assembly-aware workflow for:
 
 ## Current Status
 
-This repository currently contains the project skeleton, CLI skeleton, a toy dataset simulator, toy-scale `discover`, `quantify`, `locate`, and `probe` MVPs.
+This repository currently contains the project skeleton, CLI skeleton, a toy dataset simulator, toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs.
 
 No production-scale tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is implemented yet.
 
@@ -30,7 +30,7 @@ pip install -e .
 pytest
 ```
 
-The current `environment.yml` intentionally contains only lightweight dependencies needed for the skeleton and tests. Larger scientific dependencies should be added only when the corresponding module actually uses them.
+The current `environment.yml` intentionally contains only lightweight dependencies needed for the MVP and tests. `matplotlib` is included for static SVG/PDF visualization. Larger scientific dependencies should be added only when the corresponding module actually uses them.
 
 ## Install
 
@@ -70,9 +70,9 @@ examples/toy/results/
 
 Generated results are ignored by git and should not be committed.
 
-`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from diagnostic k-mer depth and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`.
+`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from diagnostic k-mer depth and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots.
 
-The `compare` and `visualize` commands are still placeholders. Placeholder commands currently:
+The `compare` command is still a placeholder. Placeholder commands currently:
 
 1. parse arguments;
 2. check that required input files exist;
@@ -107,6 +107,13 @@ tandemx probe \
   --copy-number results/quantify/copy_number.tsv \
   --arrays results/locate/arrays.bed \
   --outdir results/probe
+tandemx visualize \
+  --catalog results/discover/monomers.fa \
+  --copy-number results/quantify/copy_number.tsv \
+  --comparison results/locate/assembly_vs_read_cn.tsv \
+  --probes results/probe/probes.rank.tsv \
+  --fish results/probe/in_silico_fish.tsv \
+  --outdir results/visualize
 ```
 
 ## Tests
@@ -124,4 +131,4 @@ conda activate tandemx-dev
 pytest
 ```
 
-The tests currently validate CLI help, missing-input errors, simulator reproducibility, toy-scale discover output behavior, toy-scale quantify behavior, toy-scale assembly localization behavior, and toy-scale probe ranking behavior.
+The tests currently validate CLI help, missing-input errors, simulator reproducibility, toy-scale discover output behavior, toy-scale quantify behavior, toy-scale assembly localization behavior, toy-scale probe ranking behavior, and basic static visualization output.

@@ -17,6 +17,7 @@ from tandemx.locate.mvp import LocateConfig, locate_toy_arrays
 from tandemx.probe.mvp import ProbeConfig, rank_toy_probes
 from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
+from tandemx.visualize.mvp import VisualizeConfig, render_static_plots
 
 
 COMMANDS = ("discover", "quantify", "locate", "probe", "compare", "visualize", "simulate")
@@ -254,10 +255,29 @@ def run_compare(args: argparse.Namespace) -> int:
 
 def run_visualize(args: argparse.Namespace) -> int:
     required = [args.catalogue, args.copy_number]
-    for optional in (args.locations, args.probes, args.comparison):
+    for optional in (args.locations, args.probes, args.comparison, args.fish):
         if optional is not None:
             required.append(optional)
-    return _prepare_placeholder_run("visualize", args, required)
+    _require_existing_files(required)
+    args.outdir.mkdir(parents=True, exist_ok=True)
+    outputs = render_static_plots(
+        VisualizeConfig(
+            copy_number=args.copy_number,
+            comparison=args.comparison,
+            probes=args.probes,
+            fish=args.fish,
+            outdir=args.outdir,
+        )
+    )
+    _write_run_config(args.outdir, "visualize", args, status="visualize_mvp_completed")
+    logger = _configure_log(args.outdir, "visualize")
+    logger.info("command=tandemx visualize")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=visualize_mvp_completed")
+    logger.info("plot_count=%s", len(outputs))
+    print(f"tandemx visualize: wrote {len(outputs)} plot files to {args.outdir}")
+    return 0
 
 
 def run_simulate_toy(args: argparse.Namespace) -> int:
@@ -382,7 +402,8 @@ def build_parser() -> argparse.ArgumentParser:
     visualize.add_argument("--locations", type=_path_value, help="Optional repeat localization or density table produced by locate.")
     visualize.add_argument("--probes", type=_path_value, help="Optional ranked probe table produced by probe.")
     visualize.add_argument("--comparison", type=_path_value, help="Optional assembly-vs-read comparison table produced by compare.")
-    visualize.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and future visualize outputs.")
+    visualize.add_argument("--fish", type=_path_value, help="Optional in_silico_fish.tsv produced by probe.")
+    visualize.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, SVG, and PDF static plots.")
     visualize.set_defaults(func=run_visualize)
 
     simulate = subparsers.add_parser(

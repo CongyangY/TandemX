@@ -30,6 +30,12 @@ def test_end_to_end_toy_workflow_script(tmp_path: Path) -> None:
         output_dir / "probe" / "probes.fa",
         output_dir / "probe" / "probes.rank.tsv",
         output_dir / "probe" / "in_silico_fish.tsv",
+        output_dir / "visualize" / "catalogue_summary.svg",
+        output_dir / "visualize" / "catalogue_summary.pdf",
+        output_dir / "visualize" / "assembly_vs_read.svg",
+        output_dir / "visualize" / "assembly_vs_read.pdf",
+        output_dir / "visualize" / "in_silico_fish.svg",
+        output_dir / "visualize" / "in_silico_fish.pdf",
     ]
     for path in expected:
         assert path.is_file(), path

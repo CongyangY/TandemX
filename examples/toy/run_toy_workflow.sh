@@ -10,6 +10,7 @@ DISCOVER="${OUTDIR}/discover"
 QUANTIFY="${OUTDIR}/quantify"
 LOCATE="${OUTDIR}/locate"
 PROBE="${OUTDIR}/probe"
+VISUALIZE="${OUTDIR}/visualize"
 
 mkdir -p "${OUTDIR}"
 
@@ -60,5 +61,13 @@ PY
   --copy-number "${QUANTIFY}/copy_number.tsv" \
   --arrays "${LOCATE}/arrays.bed" \
   --outdir "${PROBE}"
+
+"${TANDEMX[@]}" visualize \
+  --catalog "${DISCOVER}/monomers.fa" \
+  --copy-number "${QUANTIFY}/copy_number.tsv" \
+  --comparison "${LOCATE}/assembly_vs_read_cn.tsv" \
+  --probes "${PROBE}/probes.rank.tsv" \
+  --fish "${PROBE}/in_silico_fish.tsv" \
+  --outdir "${VISUALIZE}"
 
 echo "Toy workflow complete: ${OUTDIR}"

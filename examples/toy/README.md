@@ -34,6 +34,7 @@ tandemx discover
 tandemx quantify
 tandemx locate
 tandemx probe
+tandemx visualize
 ```
 
 Expected key outputs:
@@ -50,6 +51,9 @@ results/locate/assembly_vs_read_cn.tsv
 results/probe/probes.fa
 results/probe/probes.rank.tsv
 results/probe/in_silico_fish.tsv
+results/visualize/catalogue_summary.svg
+results/visualize/assembly_vs_read.svg
+results/visualize/in_silico_fish.svg
 ```
 
 Do not commit generated `results/` directories.

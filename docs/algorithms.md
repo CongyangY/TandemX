@@ -1,6 +1,6 @@
 # TandemX Algorithm Design
 
-This document describes current MVP algorithms and planned future algorithms. The repository currently implements the toy simulator, toy-scale `discover`, `quantify`, `locate`, and `probe` MVPs.
+This document describes current MVP algorithms and planned future algorithms. The repository currently implements the toy simulator, toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs.
 
 ## Candidate Periodic k-mer Discovery
 
@@ -160,3 +160,23 @@ Future work:
 1. off-target search against full assemblies;
 2. probe tiling and multiplex design;
 3. empirical calibration against published and new FISH data.
+
+## Static Visualization
+
+MVP goal: generate basic publication-oriented static summaries from existing TandemX toy outputs.
+
+Current MVP implementation:
+
+1. use matplotlib with a non-interactive backend;
+2. generate `catalogue_summary.svg/pdf` from copy-number, assembly comparison and probe-ranking tables;
+3. generate `assembly_vs_read.svg/pdf` from `assembly_vs_read_cn.tsv`;
+4. generate `in_silico_fish.svg/pdf` from `in_silico_fish.tsv`;
+5. keep plots simple and deterministic.
+
+MVP constraints:
+
+1. no web dashboard;
+2. no interactive plots;
+3. no pixel-level tests;
+4. no seaborn dependency;
+5. figures summarize toy outputs only.

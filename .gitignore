@@ -1,4 +1,5 @@
 .venv/
+.conda_pkgs/
 __pycache__/
 *.py[cod]
 .pytest_cache/

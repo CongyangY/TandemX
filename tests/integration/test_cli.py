@@ -115,8 +115,22 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     copy_number = write_file(tmp_path / "copy_number.tsv")
     density = write_file(tmp_path / "repeat_density.tsv")
     arrays = write_file(tmp_path / "arrays.bed", "chr1\t0\t8\tm1\t1000\t.\thigh\t\n")
-    probes = write_file(tmp_path / "probe_candidates.tsv")
-    comparison = write_file(tmp_path / "copy_number_comparison.tsv")
+    probes = write_file(
+        tmp_path / "probes.rank.tsv",
+        "probe_id\tfamily_id\tsequence_length\tgc_content\ttm\testimated_copy_number\t"
+        "arrayiness_score\tspecificity_score\toff_target_hits\tpredicted_regions\tprobe_score\twarning\n"
+        "p1\tm1\t4\t0.5\t12\t1\t1\t1\t0\tchr1:0-8\t0.8\t\n",
+    )
+    comparison = write_file(
+        tmp_path / "assembly_vs_read_cn.tsv",
+        "family_id\tread_estimated_bp\tassembly_estimated_bp\tassembly_read_ratio\tstatus\tconfidence\twarning\n"
+        "m1\t4\t8\t2\tconsistent\tmedium\t\n",
+    )
+    fish = write_file(
+        tmp_path / "in_silico_fish.tsv",
+        "probe_id\tchrom\tstart\tend\tpredicted_signal\tconfidence\n"
+        "p1\tchr1\t0\t8\t0.8\thigh\n",
+    )
 
     quantify_result = run_cli(
         "quantify",
@@ -203,6 +217,35 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     assert 'status: "probe_mvp_completed"' in probe_config
     assert "func" not in probe_config
 
+    visualize_result = run_cli(
+        "visualize",
+        "--catalogue",
+        str(catalogue),
+        "--copy-number",
+        str(copy_number),
+        "--locations",
+        str(density),
+        "--probes",
+        str(probes),
+        "--comparison",
+        str(comparison),
+        "--fish",
+        str(fish),
+        "--outdir",
+        str(tmp_path / "visualize"),
+    )
+    visualize_outdir = tmp_path / "visualize"
+    assert visualize_result.returncode == 0, visualize_result.stderr
+    assert "plot files" in visualize_result.stdout
+    assert (visualize_outdir / "catalogue_summary.svg").is_file()
+    assert (visualize_outdir / "assembly_vs_read.svg").is_file()
+    assert (visualize_outdir / "in_silico_fish.svg").is_file()
+    visualize_config = (visualize_outdir / "run_config.yaml").read_text(encoding="utf-8")
+    assert 'command: "tandemx visualize"' in visualize_config
+    assert 'subcommand: "visualize"' in visualize_config
+    assert 'status: "visualize_mvp_completed"' in visualize_config
+    assert "func" not in visualize_config
+
     commands = [
         (
             "compare",
@@ -214,24 +257,6 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
                 str(density),
                 "--outdir",
                 str(tmp_path / "compare"),
-            ],
-        ),
-        (
-            "visualize",
-            [
-                "visualize",
-                "--catalogue",
-                str(catalogue),
-                "--copy-number",
-                str(copy_number),
-                "--locations",
-                str(density),
-                "--probes",
-                str(probes),
-                "--comparison",
-                str(comparison),
-                "--outdir",
-                str(tmp_path / "visualize"),
             ],
         ),
     ]

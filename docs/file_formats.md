@@ -272,3 +272,18 @@ Top-level fields:
 | monomer_lengths | list[integer] | bp | Simulated monomer lengths |
 | copies | list[integer] | copies | Read-truth copy counts |
 | families | list[object] | NA | Family IDs, monomer IDs, monomer lengths and assembly copies |
+
+## Static Visualization Outputs
+
+Produced by: `tandemx visualize`
+
+The MVP writes SVG and PDF files. SVG text should remain editable where matplotlib supports it.
+
+| File | Format | Description |
+|---|---|---|
+| catalogue_summary.svg | SVG | Family-level read bp, assembly bp and probe-score summary |
+| catalogue_summary.pdf | PDF | PDF version of catalogue summary |
+| assembly_vs_read.svg | SVG | Scatter plot of read-estimated bp versus assembly-estimated bp |
+| assembly_vs_read.pdf | PDF | PDF version of assembly-vs-read plot |
+| in_silico_fish.svg | SVG | Toy ideogram-like predicted signal plot |
+| in_silico_fish.pdf | PDF | PDF version of in silico FISH plot |
