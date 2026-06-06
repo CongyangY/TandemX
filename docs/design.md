@@ -1,0 +1,115 @@
+# TandemX Design
+
+## Goal
+
+TandemX is an open-source computational genomics tool for tandem repeat and satellite repeat analysis in large plant genomes. The target use cases include wheat, rye, barley, oat, maize and other large repetitive plant genomes, with emphasis on centromeric, pericentromeric, subtelomeric repeats and FISH probe design.
+
+TandemX is designed as a read-first, assembly-aware platform. The first implementation target is a toy-scale MVP, not real 7-20 Gb genome analysis.
+
+## Existing Tool Context
+
+TRF is a sequence-level tandem repeat finder. It is useful as a detection baseline, but it is not designed around HiFi read-first copy-number calibration, assembly-vs-read comparison or FISH probe ranking.
+
+TideHunter is relevant for long-read tandem repeat and monomer detection. It is an important baseline for read-level monomer recovery, but it does not provide the full TandemX workflow for diagnostic k-mer copy number, assembly representation checks and probe prioritization.
+
+TRASH is relevant for satellite repeat discovery in large genomes. TandemX should be compared with TRASH for repeat family recovery, while keeping TandemX focused on standardized copy-number and probe-ranking outputs.
+
+RepeatExplorer2/TAREAN is an important graph/clustering-based satellite repeat framework. It is a biological comparison point for repeat family recovery and known satellite characterization, but its assumptions and workflow differ from a HiFi read-first command-line pipeline.
+
+## TandemX Positioning
+
+TandemX should not be a thin wrapper around existing tools. Its core design requirements are:
+
+1. discover candidate repeat monomers from reads;
+2. calibrate repeat family copy number from diagnostic k-mer depth;
+3. localize repeat evidence on assemblies when assemblies are provided;
+4. compare read-based and assembly-based abundance to flag possible under-representation or over-expansion;
+5. rank FISH probe candidates using abundance, specificity, off-target evidence and predicted signal regions.
+
+Use qualified language: candidate family, estimated copy number, possible assembly under-representation, predicted signal region and prioritized probe candidate.
+
+Avoid claims such as fully resolving all tandem arrays, exactly locating every repeat copy, completely assembling satellite arrays from reads or guaranteeing FISH success.
+
+## Module Boundaries
+
+### discover
+
+Responsibility: identify candidate tandem repeat families and monomers from HiFi-like reads.
+
+Inputs: reads FASTA/FASTQ, monomer length range, minimum support reads, minimum repeat span and random seed.
+
+Outputs planned for implementation: `candidate_reads.tsv`, `monomers.fa`, `families.tsv`.
+
+Must not estimate final copy number, localize repeats on assemblies or rank probes.
+
+### quantify
+
+Responsibility: estimate read-based repeat family copy number from diagnostic k-mer depth.
+
+Inputs: reads, `families.tsv`, `monomers.fa`, genome size and k-mer size.
+
+Outputs planned for implementation: `copy_number.tsv`.
+
+Must not discover new families, use assembly abundance as the primary copy-number estimate or rank probes.
+
+### locate
+
+Responsibility: localize repeat family evidence on an assembly when an assembly is supplied.
+
+Inputs: assembly FASTA, `families.tsv`, `monomers.fa`, window size, step size and match thresholds.
+
+Outputs planned for implementation: `arrays.bed`, `repeat_density.bedgraph`.
+
+Must not be required for read-only analysis and must not claim exact placement of every repeat copy.
+
+### probe
+
+Responsibility: rank FISH probe candidates from repeat families.
+
+Inputs: `families.tsv`, `monomers.fa`, `copy_number.tsv` and optional localization evidence.
+
+Outputs planned for implementation: `probes.fa`, `probes.rank.tsv`, `in_silico_fish.tsv`.
+
+Must not claim experimental validation or guaranteed FISH success.
+
+### compare
+
+Responsibility: compare read-based and assembly-based repeat abundance.
+
+Inputs: `copy_number.tsv`, `repeat_density.bedgraph` or an assembly abundance summary.
+
+Outputs planned for implementation: `assembly_vs_read_cn.tsv`.
+
+Must not claim proof of collapse without uncertainty labels.
+
+### visualize
+
+Responsibility: produce static visual summaries from existing TandemX outputs.
+
+Inputs: standard output files from the other modules.
+
+Outputs planned for implementation: publication-oriented SVG/PDF summaries.
+
+Must not recompute discovery, quantification, localization, comparison or probe scores.
+
+## MVP Scope
+
+The MVP will:
+
+1. run on toy inputs smaller than 1 MB;
+2. include a toy read and toy assembly generator;
+3. support simple repeat-family discovery on toy reads;
+4. estimate toy read-based copy number from diagnostic k-mers;
+5. estimate toy assembly repeat density;
+6. compare read and assembly abundance for simulated under-representation;
+7. rank simple FISH probe candidates;
+8. include unit and integration tests.
+
+The MVP will not:
+
+1. process real 7-20 Gb plant genomes;
+2. support production multi-sample workflows;
+3. infer complex higher-order repeat organization;
+4. require bigWig output;
+5. provide an interactive dashboard;
+6. claim experimental FISH validation.

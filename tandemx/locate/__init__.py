@@ -1,0 +1,1 @@
+"""Assembly localization module placeholder."""
