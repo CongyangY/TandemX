@@ -96,16 +96,18 @@ Family-specific bedGraph tracks should use family-specific filenames or document
 
 Produced by: `tandemx locate`
 
-BED6, 0-based half-open.
+BED6 plus confidence fields, 0-based half-open. This file has no header line.
 
 | Field | Type | Unit | Description |
 |---|---|---:|---|
 | chrom | string | NA | Chromosome or contig name |
 | start | integer | bp | 0-based interval start |
 | end | integer | bp | 0-based half-open interval end |
-| name | string | NA | Repeat family or array identifier |
+| family_id | string | NA | Repeat family identifier |
 | score | integer | unitless | Scaled score from 0 to 1000 |
 | strand | string | NA | `+`, `-` or `.` |
+| confidence | string | NA | Confidence label |
+| warning | string | NA | Semicolon-separated warnings or empty |
 
 ## assembly_vs_read_cn.tsv
 
@@ -114,10 +116,10 @@ Produced by: `tandemx compare`
 | Field | Type | Unit | Description |
 |---|---|---:|---|
 | family_id | string | NA | Repeat family identifier |
-| read_estimated_repeat_bp | float | bp | Repeat bp estimated from reads |
-| assembly_estimated_repeat_bp | float | bp | Repeat bp observed or inferred from assembly |
-| read_to_assembly_ratio | float | ratio | Read estimate divided by assembly estimate |
-| status | string | NA | `consistent`, `possible_under_assembly`, `possible_over_expansion` or `uncertain` |
+| read_estimated_bp | float | bp | Repeat bp estimated from reads |
+| assembly_estimated_bp | float | bp | Repeat bp observed or inferred from assembly |
+| assembly_read_ratio | float | ratio | Assembly estimate divided by read estimate |
+| status | string | NA | `consistent`, `possible_collapse`, `possible_overexpansion` or `low_confidence` |
 | confidence | string | NA | Confidence label |
 | warning | string | NA | Semicolon-separated warnings or empty |
 

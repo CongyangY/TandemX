@@ -13,6 +13,7 @@ from typing import Any, Iterable
 
 from tandemx import __version__
 from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
+from tandemx.locate.mvp import LocateConfig, locate_toy_arrays
 from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
 
@@ -178,11 +179,35 @@ def run_quantify(args: argparse.Namespace) -> int:
 
 
 def run_locate(args: argparse.Namespace) -> int:
-    return _prepare_placeholder_run(
-        "locate",
-        args,
-        [args.assembly, args.catalogue, args.monomers],
+    monomers_path = args.monomers if args.monomers is not None else args.catalogue
+    required = [args.assembly, monomers_path]
+    if args.copy_number is not None:
+        required.append(args.copy_number)
+    _require_existing_files(required)
+    args.outdir.mkdir(parents=True, exist_ok=True)
+    density, arrays, comparisons = locate_toy_arrays(
+        LocateConfig(
+            assembly=args.assembly,
+            monomers=monomers_path,
+            copy_number=args.copy_number,
+            outdir=args.outdir,
+            window_size=args.window_size,
+            step_size=args.step_size,
+            k=args.k,
+        )
     )
+    _write_run_config(args.outdir, "locate", args, status="locate_mvp_completed")
+    logger = _configure_log(args.outdir, "locate")
+    logger.info("command=tandemx locate")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=locate_mvp_completed")
+    logger.info("density_window_count=%s", len(density))
+    logger.info("array_count=%s", len(arrays))
+    logger.info("comparison_count=%s", len(comparisons))
+    logger.info("Locate MVP supports toy-scale FASTA assembly input only")
+    print(f"tandemx locate: wrote {len(arrays)} arrays and {len(comparisons)} comparisons to {args.outdir}")
+    return 0
 
 
 def run_probe(args: argparse.Namespace) -> int:
@@ -272,13 +297,15 @@ def build_parser() -> argparse.ArgumentParser:
         "locate",
         help="Localize repeat family evidence on an assembly.",
     )
-    locate.add_argument("--assembly", required=True, type=_path_value, help="Genome assembly FASTA used for repeat localization.")
-    locate.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Repeat family catalogue produced by discover.")
-    locate.add_argument("--monomers", required=True, type=_path_value, help="Monomer FASTA used as localization query sequences.")
+    locate.add_argument("--assembly", required=True, type=_path_value, help="Toy-scale genome assembly FASTA used for repeat localization.")
+    locate.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Monomer FASTA produced by discover. The --catalog spelling is accepted.")
+    locate.add_argument("--monomers", type=_path_value, help="Optional explicit monomer FASTA. If omitted, --catalogue/--catalog is used.")
+    locate.add_argument("--copy-number", type=_path_value, dest="copy_number", help="Optional copy_number.tsv produced by quantify for assembly-vs-read comparison.")
     locate.add_argument("--window-size", type=int, default=100000, help="Window size in bp for assembly repeat density summaries.")
     locate.add_argument("--step-size", type=int, default=10000, help="Step size in bp for sliding-window density summaries.")
+    locate.add_argument("--k", type=int, default=21, help="K-mer size used to scan assembly for monomer evidence.")
     locate.add_argument("--min-identity", type=float, default=0.8, help="Minimum match or alignment identity for future repeat hits.")
-    locate.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and future locate outputs.")
+    locate.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, repeat_density.bedgraph, arrays.bed, and assembly_vs_read_cn.tsv.")
     locate.set_defaults(func=run_locate)
 
     probe = subparsers.add_parser(

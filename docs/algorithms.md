@@ -1,6 +1,6 @@
 # TandemX Algorithm Design
 
-This document describes current MVP algorithms and planned future algorithms. The repository currently implements the toy simulator, toy-scale `discover` MVP, and toy-scale `quantify` MVP.
+This document describes current MVP algorithms and planned future algorithms. The repository currently implements the toy simulator, toy-scale `discover` MVP, toy-scale `quantify` MVP, and toy-scale `locate` MVP.
 
 ## Candidate Periodic k-mer Discovery
 
@@ -77,19 +77,26 @@ Future work:
 
 MVP goal: locate simple repeat evidence on a toy assembly and summarize density in windows.
 
-Planned approach:
+Current MVP implementation:
 
-1. scan assembly sequence for monomer matches or approximate matches;
-2. write repeat hit intervals as 0-based half-open BED;
-3. merge overlapping hits for density summaries;
-4. compute covered bp per window;
-5. write bedGraph density tracks for visualization.
+1. read assembly FASTA and monomer FASTA;
+2. enumerate non-low-complexity canonical k-mers from each monomer;
+3. scan assembly sequence for matching canonical k-mers;
+4. convert matching k-mers into intervals;
+5. merge nearby intervals for each family;
+6. filter very short intervals;
+7. write candidate arrays as 0-based half-open `arrays.bed`;
+8. compute merged-interval coverage per sliding window;
+9. write `repeat_density.bedgraph`;
+10. if `copy_number.tsv` is provided, compare read-estimated bp and assembly-estimated bp in `assembly_vs_read_cn.tsv`.
 
 MVP constraints:
 
 1. toy assemblies only;
-2. simple matching is acceptable;
-3. bigWig output is future work.
+2. k-mer evidence only, no read mapping;
+3. no exact per-copy placement claim;
+4. simple threshold classification for `possible_collapse` and `possible_overexpansion`;
+5. bigWig output is future work.
 
 Future work:
 

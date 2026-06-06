@@ -140,21 +140,34 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     assert 'status: "quantify_mvp_completed"' in quantify_config
     assert "func" not in quantify_config
 
+    locate_result = run_cli(
+        "locate",
+        "--assembly",
+        str(assembly),
+        "--catalogue",
+        str(monomers),
+        "--window-size",
+        "4",
+        "--step-size",
+        "4",
+        "--k",
+        "4",
+        "--outdir",
+        str(tmp_path / "locate"),
+    )
+    locate_outdir = tmp_path / "locate"
+    assert locate_result.returncode == 0, locate_result.stderr
+    assert "arrays" in locate_result.stdout
+    assert (locate_outdir / "repeat_density.bedgraph").is_file()
+    assert (locate_outdir / "arrays.bed").is_file()
+    assert (locate_outdir / "assembly_vs_read_cn.tsv").is_file()
+    locate_config = (locate_outdir / "run_config.yaml").read_text(encoding="utf-8")
+    assert 'command: "tandemx locate"' in locate_config
+    assert 'subcommand: "locate"' in locate_config
+    assert 'status: "locate_mvp_completed"' in locate_config
+    assert "func" not in locate_config
+
     commands = [
-        (
-            "locate",
-            [
-                "locate",
-                "--assembly",
-                str(assembly),
-                "--catalogue",
-                str(catalogue),
-                "--monomers",
-                str(monomers),
-                "--outdir",
-                str(tmp_path / "locate"),
-            ],
-        ),
         (
             "probe",
             [

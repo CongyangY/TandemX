@@ -13,7 +13,7 @@ The intended long-term design is a read-first, assembly-aware workflow for:
 
 ## Current Status
 
-This repository currently contains the project skeleton, CLI skeleton, a toy dataset simulator, a toy-scale `discover` MVP, and a toy-scale `quantify` MVP.
+This repository currently contains the project skeleton, CLI skeleton, a toy dataset simulator, toy-scale `discover`, `quantify`, and `locate` MVPs.
 
 No production-scale tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is implemented yet.
 
@@ -54,9 +54,9 @@ tandemx compare --help
 tandemx visualize --help
 ```
 
-`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from diagnostic k-mer depth and writes `copy_number.tsv`.
+`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from diagnostic k-mer depth and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`.
 
-The `locate`, `probe`, `compare`, and `visualize` commands are still placeholders. Placeholder commands currently:
+The `probe`, `compare`, and `visualize` commands are still placeholders. Placeholder commands currently:
 
 1. parse arguments;
 2. check that required input files exist;
@@ -78,6 +78,13 @@ tandemx quantify \
   --catalog results/discover/monomers.fa \
   --genome-size 7744 \
   --outdir results/quantify
+tandemx locate \
+  --assembly results/toy/assembly.fa \
+  --catalog results/discover/monomers.fa \
+  --copy-number results/quantify/copy_number.tsv \
+  --window-size 500 \
+  --step-size 250 \
+  --outdir results/locate
 ```
 
 ## Tests
@@ -95,4 +102,4 @@ conda activate tandemx-dev
 pytest
 ```
 
-The tests currently validate CLI help, missing-input errors, simulator reproducibility, toy-scale discover output behavior, and toy-scale quantify behavior.
+The tests currently validate CLI help, missing-input errors, simulator reproducibility, toy-scale discover output behavior, toy-scale quantify behavior, and toy-scale assembly localization behavior.
