@@ -54,6 +54,22 @@ tandemx compare --help
 tandemx visualize --help
 ```
 
+## Quick Start: Toy Workflow
+
+After activating `tandemx-dev` and installing TandemX in editable mode, run:
+
+```bash
+bash examples/toy/run_toy_workflow.sh
+```
+
+This writes simulated input and MVP outputs under:
+
+```text
+examples/toy/results/
+```
+
+Generated results are ignored by git and should not be committed.
+
 `tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from diagnostic k-mer depth and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`.
 
 The `compare` and `visualize` commands are still placeholders. Placeholder commands currently:
