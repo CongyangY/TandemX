@@ -133,6 +133,8 @@ pytest
 
 The tests currently validate CLI help, missing-input errors, simulator reproducibility, toy-scale discover output behavior, toy-scale quantify behavior, toy-scale assembly localization behavior, toy-scale probe ranking behavior, and basic static visualization output.
 
+The test suite also includes non-default toy repeat lengths, currently 421 bp and 729 bp, to check that the MVP workflow is not hardcoded to the simulator defaults. This is an anti-hardcoding check for toy-scale behavior, not validation for real 7-20 Gb plant genomes.
+
 ## MVP Documentation
 
 Current status and limitations:

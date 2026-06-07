@@ -13,6 +13,8 @@ The current MVP:
 7. does not model ploidy or subgenomes;
 8. does not provide experimentally calibrated FISH probe prediction.
 
+Anti-hardcoding tests now cover non-default toy repeat lengths, but this only checks that the toy MVP is not narrowly tied to the simulator defaults. It does not establish performance on real plant repeats, related repeat families, noisy real reads, polyploid genomes, or chromosome-scale assemblies.
+
 ## Not Suitable for Real Large Genomes Yet
 
 The current code should not be used for production analysis of wheat, rye, barley, oat, maize or other 7-20 Gb plant genomes.

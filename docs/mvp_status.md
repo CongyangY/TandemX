@@ -56,6 +56,8 @@ Visualize:
 
 The MVP includes unit and integration tests for toy simulation, discovery, quantification, localization, probe ranking, visualization, and the end-to-end toy workflow.
 
+The test suite includes an anti-hardcoding integration test using non-default simulated repeat lengths, currently 421 bp and 729 bp. The test runs simulate, discover, quantify, locate, and probe without passing truth files to the analysis commands. Truth files are used only for test assertions.
+
 All tests should be run in the `tandemx-dev` conda environment.
 
 ## Scope Status

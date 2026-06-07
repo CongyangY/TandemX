@@ -19,7 +19,7 @@ Current MVP implementation:
 8. use the highest-scoring candidate sequence as the representative monomer for each family;
 9. write `monomers.fa` and `families.tsv`.
 
-This method is intentionally simple. It is designed to recover the 566 bp and 350 bp simulated repeat families from the toy dataset, not to analyze real large plant genomes.
+This method is intentionally simple. It is designed to recover simple simulated repeat families from toy datasets, not to analyze real large plant genomes. The test suite includes non-default repeat lengths to reduce the risk of overfitting to simulator defaults.
 
 MVP constraints:
 
