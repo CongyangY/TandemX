@@ -1,1 +1,1 @@
-"""Discovery module placeholder."""
+"""Tandem repeat discovery routines for TandemX."""

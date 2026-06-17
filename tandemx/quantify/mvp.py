@@ -43,15 +43,17 @@ class CopyNumberEstimate:
 
 def quantify_toy_copy_number(config: QuantifyConfig) -> list[CopyNumberEstimate]:
     validate_quantify_config(config)
-    reads = list(read_fasta(config.reads))
     monomers = list(read_monomer_fasta(config.monomers))
-    if not reads:
-        raise ValueError("No FASTA reads found for quantify")
     if not monomers:
         raise ValueError("No monomers found for quantify")
+    if all(len(monomer.sequence) < config.k for monomer in monomers):
+        raise ValueError("--k is greater than all monomer lengths in the catalogue")
 
-    read_kmers = count_read_kmers(reads, config.k)
-    total_read_bases = sum(len(record.sequence) for record in reads)
+    read_kmers, total_read_bases, read_count, max_read_len = count_read_kmers_and_bases(config.reads, config.k)
+    if read_count == 0:
+        raise ValueError("No reads found for quantify")
+    if max_read_len < config.k:
+        raise ValueError("--k is greater than all read lengths")
     haploid_depth = (
         config.haploid_depth
         if config.haploid_depth is not None
@@ -143,6 +145,19 @@ def count_read_kmers(reads: Sequence[FastaRecord], k: int) -> Counter[str]:
     for read in reads:
         counts.update(iter_kmers(read.sequence, k))
     return counts
+
+
+def count_read_kmers_and_bases(path: Path, k: int) -> tuple[Counter[str], int, int, int]:
+    counts: Counter[str] = Counter()
+    total_bases = 0
+    read_count = 0
+    max_read_len = 0
+    for read in read_fasta(path):
+        read_count += 1
+        total_bases += len(read.sequence)
+        max_read_len = max(max_read_len, len(read.sequence))
+        counts.update(iter_kmers(read.sequence, k))
+    return counts, total_bases, read_count, max_read_len
 
 
 def monomer_kmer_counts(sequence: str, k: int) -> Counter[str]:

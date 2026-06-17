@@ -1,1 +1,1 @@
-"""Utility helpers placeholder."""
+"""Shared utility helpers for TandemX."""

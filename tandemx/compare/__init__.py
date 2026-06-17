@@ -1,1 +1,1 @@
-"""Read-vs-assembly comparison module placeholder."""
+"""Read-vs-assembly comparison interfaces for TandemX."""

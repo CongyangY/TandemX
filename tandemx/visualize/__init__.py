@@ -1,1 +1,1 @@
-"""Visualization module placeholder."""
+"""Static visualization routines for TandemX."""

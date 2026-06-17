@@ -14,7 +14,7 @@ def run_cli(*args: str) -> subprocess.CompletedProcess[str]:
     )
 
 
-def write_file(path: Path, text: str = "placeholder\n") -> Path:
+def write_file(path: Path, text: str = "example\n") -> Path:
     path.write_text(text, encoding="utf-8")
     return path
 
@@ -29,7 +29,7 @@ def test_top_level_help() -> None:
 
 
 def test_subcommand_help() -> None:
-    for command in ("discover", "quantify", "locate", "probe", "compare", "visualize", "simulate"):
+    for command in ("discover", "quantify", "locate", "probe", "compare", "visualize", "simulate", "validate"):
         result = run_cli(command, "--help")
         assert result.returncode == 0
         assert "usage:" in result.stdout
@@ -118,8 +118,8 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     probes = write_file(
         tmp_path / "probes.rank.tsv",
         "probe_id\tfamily_id\tsequence_length\tgc_content\ttm\testimated_copy_number\t"
-        "arrayiness_score\tspecificity_score\toff_target_hits\tpredicted_regions\tprobe_score\twarning\n"
-        "p1\tm1\t4\t0.5\t12\t1\t1\t1\t0\tchr1:0-8\t0.8\t\n",
+        "arrayiness_score\tspecificity_score\toff_target_hits\tpredicted_regions\tprobe_score\tconfidence\twarning\n"
+        "p1\tm1\t4\t0.5\t12\t1\t1\t1\t0\tchr1:0-8\t0.8\thigh\t\n",
     )
     comparison = write_file(
         tmp_path / "assembly_vs_read_cn.tsv",
@@ -128,8 +128,8 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     )
     fish = write_file(
         tmp_path / "in_silico_fish.tsv",
-        "probe_id\tchrom\tstart\tend\tpredicted_signal\tconfidence\n"
-        "p1\tchr1\t0\t8\t0.8\thigh\n",
+        "probe_id\tchrom\tstart\tend\tpredicted_signal\tconfidence\twarning\n"
+        "p1\tchr1\t0\t8\t0.8\thigh\t\n",
     )
 
     quantify_result = run_cli(
@@ -265,7 +265,7 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
         result = run_cli(*args)
         outdir = tmp_path / command
         assert result.returncode == 0, result.stderr
-        assert "not implemented yet" in result.stdout
+        assert "deferred in this MVP" in result.stdout
         assert (outdir / "run_config.yaml").is_file()
         assert (outdir / "run.log").is_file()
         config = (outdir / "run_config.yaml").read_text(encoding="utf-8")

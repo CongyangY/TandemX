@@ -4,7 +4,22 @@ All TSV files must use tab separators, include a header line and use stable colu
 
 All BED files use 0-based half-open coordinates: `start` is included and `end` is excluded.
 
-The current repository implements the toy simulator and the toy-scale `discover` MVP. The formats below define current and planned core outputs.
+The current repository implements the toy simulator and toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs. The formats below define current core outputs.
+
+## Sequence Inputs
+
+TandemX uses `tandemx.io.sequences` for streaming sequence input where possible. Supported extensions are:
+
+1. `.fa`
+2. `.fasta`
+3. `.fq`
+4. `.fastq`
+5. `.fa.gz`
+6. `.fasta.gz`
+7. `.fq.gz`
+8. `.fastq.gz`
+
+Each parsed record is normalized as `SequenceRecord(id, sequence, quality=None, description="...")`. FASTQ records retain quality strings and must have matching sequence and quality lengths. The reader reports clear errors for empty files, malformed FASTA/FASTQ syntax, duplicate record IDs, unsupported extensions, and unsupported bases.
 
 ## candidate_reads.tsv
 
@@ -111,7 +126,7 @@ BED6 plus confidence fields, 0-based half-open. This file has no header line.
 
 ## assembly_vs_read_cn.tsv
 
-Produced by: `tandemx compare`
+Produced by: `tandemx locate` in the current MVP. A dedicated `tandemx compare` command is planned.
 
 | Field | Type | Unit | Description |
 |---|---|---:|---|
@@ -156,9 +171,10 @@ Produced by: `tandemx probe`
 | estimated_copy_number | float | copies | Target family read-based copy number |
 | arrayiness_score | float | unitless | Fraction of predicted probe hits overlapping target arrays |
 | specificity_score | float | unitless | Higher values indicate fewer predicted off-target hits |
-| off_target_count | integer | hits | Predicted off-target count |
+| off_target_hits | integer | hits | Predicted off-target count |
 | predicted_regions | string | NA | Semicolon-separated predicted target regions |
 | probe_score | float | unitless | Combined ranking score |
+| confidence | string | NA | Confidence label |
 | warning | string | NA | Semicolon-separated warnings or empty |
 
 ## in_silico_fish.tsv
@@ -173,6 +189,27 @@ Produced by: `tandemx probe`
 | end | integer | bp | 0-based half-open predicted signal-region end |
 | predicted_signal | float | unitless | Predicted signal strength score |
 | confidence | string | NA | Confidence label |
+| warning | string | NA | Semicolon-separated warnings or empty |
+
+## Output Validation
+
+Run:
+
+```bash
+tandemx validate --project results
+```
+
+The validator scans the project directory for recognized TandemX output filenames and checks:
+
+1. required TSV fields;
+2. numeric fields that must parse as integers or floats;
+3. required `confidence`, `status`, or `warning` fields where defined by the schema;
+4. BED and bedGraph 0-based half-open coordinates;
+5. BED scores and strand values;
+6. TandemX FASTA header structure for `monomers.fa` and `probes.fa`;
+7. non-empty recognized output files.
+
+Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, and `probes.fa`.
 
 ## Toy Simulation Outputs
 

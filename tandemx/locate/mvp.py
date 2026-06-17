@@ -61,6 +61,10 @@ def locate_toy_arrays(config: LocateConfig) -> tuple[list[DensityWindow], list[A
         raise ValueError("No assembly FASTA records found")
     if not monomers:
         raise ValueError("No monomers found for locate")
+    if all(len(record.sequence) < config.k for record in assembly_records):
+        raise ValueError("--k is greater than all assembly sequence lengths")
+    if all(len(monomer.sequence) < config.k for monomer in monomers):
+        raise ValueError("--k is greater than all monomer lengths in the catalogue")
 
     arrays: list[ArrayHit] = []
     per_chrom_intervals: dict[str, list[tuple[int, int]]] = defaultdict(list)

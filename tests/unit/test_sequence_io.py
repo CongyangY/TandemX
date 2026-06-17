@@ -1,0 +1,49 @@
+from __future__ import annotations
+
+import gzip
+from pathlib import Path
+
+import pytest
+
+from tandemx.io.sequences import SequenceFormatError, read_sequence_records
+
+
+def collect(path: Path) -> list[tuple[str, str, str | None]]:
+    return [(record.id, record.sequence, record.quality) for record in read_sequence_records(path)]
+
+
+def test_reads_fasta_fastq_and_gzip_variants(tmp_path: Path) -> None:
+    fasta = tmp_path / "reads.fa"
+    fastq = tmp_path / "reads.fastq"
+    fasta_gz = tmp_path / "reads.fasta.gz"
+    fastq_gz = tmp_path / "reads.fq.gz"
+
+    fasta.write_text(">r1 description\nACGT\nACGT\n>r2\nNNAA\n", encoding="utf-8")
+    fastq.write_text("@q1 description\nACGT\n+\n!!!!\n@q2\nNNAA\n+\n####\n", encoding="utf-8")
+    with gzip.open(fasta_gz, "wt", encoding="utf-8") as handle:
+        handle.write(fasta.read_text(encoding="utf-8"))
+    with gzip.open(fastq_gz, "wt", encoding="utf-8") as handle:
+        handle.write(fastq.read_text(encoding="utf-8"))
+
+    assert collect(fasta) == [("r1", "ACGTACGT", None), ("r2", "NNAA", None)]
+    assert collect(fasta_gz) == collect(fasta)
+    assert collect(fastq) == [("q1", "ACGT", "!!!!"), ("q2", "NNAA", "####")]
+    assert collect(fastq_gz) == collect(fastq)
+
+
+@pytest.mark.parametrize(
+    ("name", "text", "message"),
+    [
+        ("empty.fa", "", "empty or contains no records"),
+        ("bad.fa", "ACGT\n", "sequence before header"),
+        ("dup.fa", ">r1\nACGT\n>r1 other\nACGT\n", "Duplicate sequence id"),
+        ("bad.fastq", "@r1\nACGT\n-\n!!!!\n", "Invalid FASTQ separator"),
+        ("mismatch.fq", "@r1\nACGT\n+\n!!!\n", "sequence and quality lengths differ"),
+    ],
+)
+def test_sequence_reader_reports_clear_format_errors(tmp_path: Path, name: str, text: str, message: str) -> None:
+    path = tmp_path / name
+    path.write_text(text, encoding="utf-8")
+
+    with pytest.raises(SequenceFormatError, match=message):
+        list(read_sequence_records(path))

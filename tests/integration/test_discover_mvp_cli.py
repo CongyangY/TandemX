@@ -84,9 +84,13 @@ def test_discover_mvp_recovers_toy_family_lengths(tmp_path: Path) -> None:
     assert 'status: "discover_mvp_completed"' in config
 
 
-def test_discover_mvp_rejects_fastq(tmp_path: Path) -> None:
+def test_discover_mvp_accepts_fastq(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fastq"
-    reads.write_text("@r1\nACGTACGT\n+\nIIIIIIII\n", encoding="utf-8")
+    sequence = "ACGTACGA" * 8
+    reads.write_text(
+        "".join(f"@r{index};strand=+\n{sequence}\n+\n{'I' * len(sequence)}\n" for index in range(1, 6)),
+        encoding="utf-8",
+    )
 
     result = run_cli(
         "discover",
@@ -95,10 +99,14 @@ def test_discover_mvp_rejects_fastq(tmp_path: Path) -> None:
         "--outdir",
         str(tmp_path / "discover"),
         "--min-monomer-len",
-        "4",
+        "8",
         "--max-monomer-len",
         "8",
+        "--min-support-reads",
+        "2",
+        "--min-repeat-span",
+        "32",
     )
 
-    assert result.returncode != 0
-    assert "FASTA" in result.stderr or "sequence found before header" in result.stderr
+    assert result.returncode == 0, result.stderr
+    assert (tmp_path / "discover" / "families.tsv").is_file()

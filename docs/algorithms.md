@@ -4,20 +4,21 @@ This document describes current MVP algorithms and planned future algorithms. Th
 
 ## Candidate Periodic k-mer Discovery
 
-MVP goal: identify simple candidate tandem repeat monomers from toy HiFi-like FASTA reads.
+MVP goal: identify simple candidate tandem repeat monomers from toy HiFi-like sequence reads.
 
 Current MVP implementation:
 
-1. parse FASTA reads only;
+1. stream FASTA or FASTQ reads, including gzip-compressed inputs;
 2. for each read, test candidate periods from `--min-monomer-len` to `--max-monomer-len`, limited to at most half the read length;
 3. compute a simple shifted periodicity identity score for each candidate period:
    `matches(sequence[i], sequence[i + period]) / compared_bases`;
 4. keep the best period for a read when the score is at least 0.75;
-5. write each retained read-level candidate to `candidate_reads.tsv`;
-6. cluster candidates by period length using a small bp tolerance;
-7. keep clusters with at least `--min-support-reads` distinct reads;
-8. use the highest-scoring candidate sequence as the representative monomer for each family;
-9. write `monomers.fa` and `families.tsv`.
+5. reject runs with no candidates or only low-complexity candidates;
+6. write each retained read-level candidate to `candidate_reads.tsv`;
+7. cluster candidates by period length using a small bp tolerance;
+8. keep clusters with at least `--min-support-reads` distinct reads;
+9. use the highest-scoring candidate sequence as the representative monomer for each family;
+10. write `monomers.fa` and `families.tsv`.
 
 This method is intentionally simple. It is designed to recover simple simulated repeat families from toy datasets, not to analyze real large plant genomes. The test suite includes non-default repeat lengths to reduce the risk of overfitting to simulator defaults.
 
@@ -25,7 +26,7 @@ MVP constraints:
 
 1. toy data only;
 2. simple tandem arrays only;
-3. FASTA only; FASTQ support is future work;
+3. FASTA/FASTQ/gzip parsing is supported, but discovery remains a simple toy algorithm;
 4. one best candidate period per read;
 5. no local repeat-boundary refinement;
 6. no multiple-alignment consensus;
@@ -41,7 +42,7 @@ Future work:
 
 ## Diagnostic k-mer Copy-number Calibration
 
-MVP goal: estimate repeat family copy number from diagnostic k-mer depth on toy FASTA reads.
+MVP goal: estimate repeat family copy number from diagnostic k-mer depth on toy reads.
 
 Current MVP implementation:
 
@@ -49,7 +50,7 @@ Current MVP implementation:
 2. enumerate canonical k-mers from each consensus monomer;
 3. count k-mer multiplicity within each monomer;
 4. remove low-complexity k-mers and k-mers shared by multiple families;
-5. count canonical k-mers in the input reads;
+5. stream canonical k-mers from FASTA or FASTQ reads, including gzip-compressed inputs;
 6. correct each diagnostic k-mer depth by its multiplicity within the monomer;
 7. summarize corrected diagnostic k-mer depth with the median;
 8. if `--haploid-depth` is provided, use it directly;
@@ -59,7 +60,7 @@ Current MVP implementation:
 
 MVP constraints:
 
-1. toy FASTA reads only;
+1. toy reads only;
 2. no complex ploidy model;
 3. no genome-wide unique k-mer depth estimation;
 4. no external k-mer counter;
@@ -79,7 +80,7 @@ MVP goal: locate simple repeat evidence on a toy assembly and summarize density 
 
 Current MVP implementation:
 
-1. read assembly FASTA and monomer FASTA;
+1. read assembly FASTA, including gzip-compressed input, and monomer FASTA;
 2. enumerate non-low-complexity canonical k-mers from each monomer;
 3. scan assembly sequence for matching canonical k-mers;
 4. convert matching k-mers into intervals;
@@ -104,6 +105,26 @@ Future work:
 2. chromosome-scale streaming;
 3. family-specific tracks;
 4. confidence labels for ambiguous or multi-family hits.
+
+## Output Validation
+
+MVP goal: check that TandemX core outputs match documented schemas before downstream use.
+
+Current MVP implementation:
+
+1. scan a project directory with `tandemx validate --project`;
+2. validate required TSV columns for candidate, family, copy-number, comparison, probe, and FISH tables;
+3. validate numeric fields as integers or floats;
+4. require documented confidence, status, and warning fields where defined;
+5. validate `arrays.bed` and `repeat_density.bedgraph` as 0-based half-open intervals;
+6. validate TandemX FASTA headers for `monomers.fa` and `probes.fa`;
+7. fail clearly on empty recognized output files.
+
+MVP constraints:
+
+1. schema validation does not prove biological correctness;
+2. validators check documented field structure, not full cross-file consistency;
+3. recognized filenames are fixed for the current MVP.
 
 ## Assembly-vs-read Comparison
 

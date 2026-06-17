@@ -8,6 +8,7 @@ from pathlib import Path
 from statistics import mean
 from typing import Iterable, Sequence
 
+from tandemx.io.sequences import SequenceFormatError, read_sequence_records
 from tandemx.simulate.toy import reverse_complement, wrap_sequence
 
 
@@ -60,13 +61,9 @@ class DiscoverConfig:
 
 
 def discover_toy_repeats(config: DiscoverConfig) -> tuple[list[CandidateRepeat], list[RepeatFamily]]:
-    """Discover toy-scale simple tandem repeat families from FASTA reads."""
-    records = list(read_fasta(config.reads))
-    if not records:
-        raise ValueError("No FASTA records found. discover MVP currently supports FASTA input only.")
-
+    """Discover toy-scale simple tandem repeat families from sequence reads."""
     candidates = []
-    for record in records:
+    for record in read_fasta(config.reads):
         candidate = find_best_periodic_candidate(
             record,
             min_period=config.min_monomer_len,
@@ -77,7 +74,17 @@ def discover_toy_repeats(config: DiscoverConfig) -> tuple[list[CandidateRepeat],
         if candidate is not None:
             candidates.append(candidate)
 
+    if not candidates:
+        raise ValueError("No tandem repeat candidates found in reads")
+    if all(candidate.low_complexity_flag for candidate in candidates):
+        raise ValueError("Only low-complexity tandem candidates found in reads")
+
     families = cluster_candidates(candidates, config.min_support_reads)
+    if not families:
+        raise ValueError(
+            "No repeat families passed the minimum support threshold; "
+            "try lowering --min-support-reads for toy data or check the reads"
+        )
     write_candidate_reads(config.outdir / "candidate_reads.tsv", candidates)
     write_monomers(config.outdir / "monomers.fa", families)
     write_families(config.outdir / "families.tsv", families)
@@ -85,26 +92,15 @@ def discover_toy_repeats(config: DiscoverConfig) -> tuple[list[CandidateRepeat],
 
 
 def read_fasta(path: Path) -> Iterable[FastaRecord]:
-    current_header: str | None = None
-    sequence_parts: list[str] = []
-    for line_number, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
-        line = raw_line.strip()
-        if not line:
-            continue
-        if line.startswith(">"):
-            if current_header is not None:
-                yield make_fasta_record(current_header, sequence_parts)
-            current_header = line[1:]
-            sequence_parts = []
-        elif current_header is None:
-            raise ValueError(f"Invalid FASTA: sequence found before header at line {line_number}")
-        else:
-            sequence = line.upper()
-            if any(base not in "ACGTN" for base in sequence):
-                raise ValueError(f"Invalid FASTA: unsupported base at line {line_number}")
-            sequence_parts.append(sequence)
-    if current_header is not None:
-        yield make_fasta_record(current_header, sequence_parts)
+    try:
+        for record in read_sequence_records(path):
+            yield FastaRecord(
+                read_id=record.id,
+                description=record.description,
+                sequence=record.sequence,
+            )
+    except SequenceFormatError:
+        raise
 
 
 def make_fasta_record(header: str, sequence_parts: Sequence[str]) -> FastaRecord:
@@ -194,8 +190,13 @@ def parse_strand(description: str) -> str:
 def is_low_complexity(sequence: str) -> bool:
     if not sequence:
         return True
+    if len(sequence) <= 2:
+        return True
     counts = {base: sequence.count(base) for base in "ACGT"}
-    return max(counts.values()) / len(sequence) >= 0.8
+    if max(counts.values()) / len(sequence) >= 0.8:
+        return True
+    dinucleotides = {sequence[index : index + 2] for index in range(0, len(sequence) - 1, 2)}
+    return len(dinucleotides) <= 1
 
 
 def cluster_candidates(

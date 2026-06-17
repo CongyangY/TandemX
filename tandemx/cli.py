@@ -13,6 +13,8 @@ from typing import Any, Iterable
 
 from tandemx import __version__
 from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
+from tandemx.io.sequences import SequenceFormatError
+from tandemx.io.validators import ValidationError, validate_project
 from tandemx.locate.mvp import LocateConfig, locate_toy_arrays
 from tandemx.probe.mvp import ProbeConfig, rank_toy_probes
 from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
@@ -20,7 +22,7 @@ from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, pars
 from tandemx.visualize.mvp import VisualizeConfig, render_static_plots
 
 
-COMMANDS = ("discover", "quantify", "locate", "probe", "compare", "visualize", "simulate")
+COMMANDS = ("discover", "quantify", "locate", "probe", "compare", "visualize", "simulate", "validate")
 
 
 class InputFileError(Exception):
@@ -104,7 +106,7 @@ def _configure_log(outdir: Path, command: str) -> logging.Logger:
     return logger
 
 
-def _prepare_placeholder_run(
+def _prepare_deferred_run(
     command: str,
     args: argparse.Namespace,
     required_inputs: Iterable[Path],
@@ -117,10 +119,10 @@ def _prepare_placeholder_run(
     logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
     logger.info("output_directory=%s", args.outdir)
     logger.info("status=skeleton_not_implemented")
-    logger.info("Core algorithm is not implemented yet")
+    logger.info("Core algorithm is deferred in this MVP")
 
     print(
-        f"tandemx {command}: not implemented yet. "
+        f"tandemx {command}: deferred in this MVP. "
         f"Wrote run_config.yaml and run.log to {args.outdir}"
     )
     return 0
@@ -146,7 +148,7 @@ def run_discover(args: argparse.Namespace) -> int:
     logger.info("status=discover_mvp_completed")
     logger.info("candidate_count=%s", len(candidates))
     logger.info("family_count=%s", len(families))
-    logger.info("Discover MVP supports toy-scale FASTA input only")
+    logger.info("Discover MVP supports toy-scale FASTA/FASTQ input, including gzip-compressed files")
     print(
         f"tandemx discover: wrote {len(candidates)} candidates and "
         f"{len(families)} families to {args.outdir}"
@@ -175,7 +177,7 @@ def run_quantify(args: argparse.Namespace) -> int:
     logger.info("output_directory=%s", args.outdir)
     logger.info("status=quantify_mvp_completed")
     logger.info("family_count=%s", len(estimates))
-    logger.info("Quantify MVP supports toy-scale FASTA input only")
+    logger.info("Quantify MVP supports toy-scale FASTA/FASTQ read input, including gzip-compressed files")
     print(f"tandemx quantify: wrote copy-number estimates for {len(estimates)} families to {args.outdir}")
     return 0
 
@@ -207,7 +209,7 @@ def run_locate(args: argparse.Namespace) -> int:
     logger.info("density_window_count=%s", len(density))
     logger.info("array_count=%s", len(arrays))
     logger.info("comparison_count=%s", len(comparisons))
-    logger.info("Locate MVP supports toy-scale FASTA assembly input only")
+    logger.info("Locate MVP supports toy-scale FASTA assembly input, including gzip-compressed files")
     print(f"tandemx locate: wrote {len(arrays)} arrays and {len(comparisons)} comparisons to {args.outdir}")
     return 0
 
@@ -246,7 +248,7 @@ def run_probe(args: argparse.Namespace) -> int:
 
 
 def run_compare(args: argparse.Namespace) -> int:
-    return _prepare_placeholder_run(
+    return _prepare_deferred_run(
         "compare",
         args,
         [args.read_copy_number, args.assembly_density],
@@ -306,6 +308,20 @@ def run_simulate_toy(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_validate(args: argparse.Namespace) -> int:
+    if not args.project.exists():
+        raise InputFileError(f"Project directory does not exist: {args.project}")
+    if not args.project.is_dir():
+        raise InputFileError(f"Project path is not a directory: {args.project}")
+    results = validate_project(args.project)
+    total_records = sum(result.record_count for result in results)
+    print(
+        f"tandemx validate: validated {len(results)} output files "
+        f"with {total_records} records under {args.project}"
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tandemx",
@@ -318,7 +334,7 @@ def build_parser() -> argparse.ArgumentParser:
         "discover",
         help="Discover candidate tandem repeat monomers from reads.",
     )
-    discover.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale HiFi-like reads in FASTA format. FASTQ is future work.")
+    discover.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale HiFi-like reads in FASTA/FASTQ format, optionally gzip-compressed.")
     discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, candidate_reads.tsv, monomers.fa, and families.tsv.")
     discover.add_argument("--min-monomer-len", type=int, default=20, help="Minimum candidate monomer length in bp.")
     discover.add_argument("--max-monomer-len", type=int, default=2000, help="Maximum candidate monomer length in bp.")
@@ -331,7 +347,7 @@ def build_parser() -> argparse.ArgumentParser:
         "quantify",
         help="Estimate read-based repeat copy number from diagnostic k-mers.",
     )
-    quantify.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale FASTA reads used to estimate diagnostic k-mer depth.")
+    quantify.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale FASTA/FASTQ reads used to estimate diagnostic k-mer depth, optionally gzip-compressed.")
     quantify.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Monomer FASTA produced by discover. The --catalog spelling is accepted.")
     quantify.add_argument("--monomers", type=_path_value, help="Optional explicit monomer FASTA. If omitted, --catalogue/--catalog is used.")
     quantify.add_argument("--genome-size", required=True, type=int, help="Estimated haploid or target genome size in bp.")
@@ -344,7 +360,7 @@ def build_parser() -> argparse.ArgumentParser:
         "locate",
         help="Localize repeat family evidence on an assembly.",
     )
-    locate.add_argument("--assembly", required=True, type=_path_value, help="Toy-scale genome assembly FASTA used for repeat localization.")
+    locate.add_argument("--assembly", required=True, type=_path_value, help="Toy-scale genome assembly FASTA used for repeat localization, optionally gzip-compressed.")
     locate.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Monomer FASTA produced by discover. The --catalog spelling is accepted.")
     locate.add_argument("--monomers", type=_path_value, help="Optional explicit monomer FASTA. If omitted, --catalogue/--catalog is used.")
     locate.add_argument("--copy-number", type=_path_value, dest="copy_number", help="Optional copy_number.tsv produced by quantify for assembly-vs-read comparison.")
@@ -425,6 +441,13 @@ def build_parser() -> argparse.ArgumentParser:
     toy.add_argument("--error-rate", type=float, default=0.01, help="Per-base substitution error rate for simulated reads.")
     toy.set_defaults(func=run_simulate_toy)
 
+    validate = subparsers.add_parser(
+        "validate",
+        help="Validate TandemX MVP output files under a project directory.",
+    )
+    validate.add_argument("--project", required=True, type=_path_value, help="Project or output directory to scan for TandemX output files.")
+    validate.set_defaults(func=run_validate)
+
     return parser
 
 
@@ -436,7 +459,7 @@ def main(argv: list[str] | None = None) -> int:
     args._argv = list(argv)
     try:
         return args.func(args)
-    except (InputFileError, ValueError) as exc:
+    except (InputFileError, SequenceFormatError, ValidationError, ValueError) as exc:
         parser.exit(2, f"error: {exc}\n")
 
 

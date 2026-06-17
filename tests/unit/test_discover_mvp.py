@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from tandemx.discover.mvp import (
     DiscoverConfig,
     FastaRecord,
@@ -35,12 +33,15 @@ def test_find_best_periodic_candidate() -> None:
     assert candidate.confidence == "high"
 
 
-def test_read_fasta_rejects_fastq_like_input(tmp_path: Path) -> None:
+def test_read_fasta_accepts_fastq_input(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fastq"
     reads.write_text("@r1\nACGT\n+\nIIII\n", encoding="utf-8")
 
-    with pytest.raises(ValueError, match="sequence found before header"):
-        list(read_fasta(reads))
+    records = list(read_fasta(reads))
+
+    assert len(records) == 1
+    assert records[0].read_id == "r1"
+    assert records[0].sequence == "ACGT"
 
 
 def test_discover_toy_repeats_writes_documented_outputs(tmp_path: Path) -> None:

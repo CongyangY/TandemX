@@ -35,6 +35,7 @@ tandemx quantify
 tandemx locate
 tandemx probe
 tandemx visualize
+tandemx validate
 ```
 
 Expected key outputs:
@@ -55,5 +56,7 @@ results/visualize/catalogue_summary.svg
 results/visualize/assembly_vs_read.svg
 results/visualize/in_silico_fish.svg
 ```
+
+The final validation step checks recognized TandemX output schemas, numeric fields, BED-style coordinates and TandemX FASTA headers.
 
 Do not commit generated `results/` directories.

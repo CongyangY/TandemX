@@ -1,1 +1,1 @@
-"""Assembly localization module placeholder."""
+"""Assembly localization routines for TandemX."""

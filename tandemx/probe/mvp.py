@@ -45,6 +45,7 @@ class ProbeCandidate:
     off_target_hits: int
     predicted_regions: str
     probe_score: float
+    confidence: str
     warning: str
 
 
@@ -56,6 +57,7 @@ class FishSignal:
     end: int
     predicted_signal: float
     confidence: str
+    warning: str
 
 
 def rank_toy_probes(config: ProbeConfig) -> tuple[list[ProbeCandidate], list[FishSignal]]:
@@ -89,6 +91,7 @@ def rank_toy_probes(config: ProbeConfig) -> tuple[list[ProbeCandidate], list[Fis
             probe_score = copy_component * specificity * max(arrayiness, 0.1) * gc_balance
             predicted_regions = ";".join(f"{chrom}:{start}-{end}" for chrom, start, end in target_regions)
             warning = "" if target_regions else "no_predicted_array_region"
+            confidence = "high" if target_regions and off_target_hits == 0 else "medium"
             candidate = ProbeCandidate(
                 probe_id=probe_id,
                 family_id=monomer.family_id,
@@ -102,6 +105,7 @@ def rank_toy_probes(config: ProbeConfig) -> tuple[list[ProbeCandidate], list[Fis
                 off_target_hits=off_target_hits,
                 predicted_regions=predicted_regions,
                 probe_score=probe_score,
+                confidence=confidence,
                 warning=warning,
             )
             candidates.append(candidate)
@@ -113,7 +117,8 @@ def rank_toy_probes(config: ProbeConfig) -> tuple[list[ProbeCandidate], list[Fis
                         start=start,
                         end=end,
                         predicted_signal=probe_score,
-                        confidence="medium" if warning else "high",
+                        confidence=confidence,
+                        warning="",
                     )
                 )
 
@@ -164,26 +169,49 @@ def low_complexity_ratio(sequence: str) -> float:
 def read_copy_numbers(path: Path) -> dict[str, float]:
     lines = path.read_text(encoding="utf-8").splitlines()
     if not lines:
-        return {}
+        raise ValueError(f"Copy-number table is empty: {path}")
     header = lines[0].split("\t")
+    required = {"family_id", "estimated_copy_number"}
+    missing = sorted(required - set(header))
+    if missing:
+        raise ValueError(f"{path} is missing required field(s): {', '.join(missing)}")
     family_index = header.index("family_id")
     copy_index = header.index("estimated_copy_number")
     values = {}
-    for line in lines[1:]:
+    for line_number, line in enumerate(lines[1:], start=2):
         if not line:
             continue
         parts = line.split("\t")
-        values[parts[family_index]] = float(parts[copy_index])
+        try:
+            values[parts[family_index]] = float(parts[copy_index])
+        except (IndexError, ValueError) as exc:
+            raise ValueError(f"Invalid copy-number value in {path} at line {line_number}") from exc
+    if not values:
+        raise ValueError(f"Copy-number table has no records: {path}")
     return values
 
 
 def read_arrays(path: Path) -> list[ArrayRegion]:
     arrays = []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if not lines:
+        raise ValueError(f"Array BED file is empty: {path}")
+    for line_number, line in enumerate(lines, start=1):
         if not line:
             continue
         parts = line.split("\t")
-        arrays.append(ArrayRegion(chrom=parts[0], start=int(parts[1]), end=int(parts[2]), family_id=parts[3]))
+        if len(parts) < 4:
+            raise ValueError(f"Invalid arrays BED record in {path} at line {line_number}")
+        try:
+            start = int(parts[1])
+            end = int(parts[2])
+        except ValueError as exc:
+            raise ValueError(f"Invalid arrays BED coordinates in {path} at line {line_number}") from exc
+        if start < 0 or end <= start:
+            raise ValueError(f"Invalid 0-based half-open interval in {path} at line {line_number}")
+        arrays.append(ArrayRegion(chrom=parts[0], start=start, end=end, family_id=parts[3]))
+    if not arrays:
+        raise ValueError(f"Array BED file has no records: {path}")
     return arrays
 
 
@@ -228,7 +256,8 @@ def write_probes_fasta(path: Path, candidates: Sequence[ProbeCandidate]) -> None
         lines.append(
             (
                 f">probe_id={candidate.probe_id};family_id={candidate.family_id};"
-                f"length_bp={candidate.sequence_length};probe_score={candidate.probe_score:.4f}"
+                f"length_bp={candidate.sequence_length};probe_score={candidate.probe_score:.4f};"
+                f"confidence={candidate.confidence}"
             )
         )
         lines.append(wrap_sequence(candidate.sequence))
@@ -239,7 +268,7 @@ def write_probe_ranks(path: Path, candidates: Sequence[ProbeCandidate]) -> None:
     lines = [
         (
             "probe_id\tfamily_id\tsequence_length\tgc_content\ttm\testimated_copy_number\t"
-            "arrayiness_score\tspecificity_score\toff_target_hits\tpredicted_regions\tprobe_score\twarning"
+            "arrayiness_score\tspecificity_score\toff_target_hits\tpredicted_regions\tprobe_score\tconfidence\twarning"
         )
     ]
     for candidate in candidates:
@@ -257,6 +286,7 @@ def write_probe_ranks(path: Path, candidates: Sequence[ProbeCandidate]) -> None:
                     str(candidate.off_target_hits),
                     candidate.predicted_regions,
                     f"{candidate.probe_score:.4f}",
+                    candidate.confidence,
                     candidate.warning,
                 ]
             )
@@ -265,7 +295,7 @@ def write_probe_ranks(path: Path, candidates: Sequence[ProbeCandidate]) -> None:
 
 
 def write_fish_signals(path: Path, signals: Sequence[FishSignal]) -> None:
-    lines = ["probe_id\tchrom\tstart\tend\tpredicted_signal\tconfidence"]
+    lines = ["probe_id\tchrom\tstart\tend\tpredicted_signal\tconfidence\twarning"]
     for signal in signals:
         lines.append(
             "\t".join(
@@ -276,6 +306,7 @@ def write_fish_signals(path: Path, signals: Sequence[FishSignal]) -> None:
                     str(signal.end),
                     f"{signal.predicted_signal:.4f}",
                     signal.confidence,
+                    signal.warning,
                 ]
             )
         )

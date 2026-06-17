@@ -13,9 +13,9 @@ The intended long-term design is a read-first, assembly-aware workflow for:
 
 ## Current Status
 
-This repository currently contains the project skeleton, CLI skeleton, a toy dataset simulator, toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs.
+This repository currently contains a toy dataset simulator and toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs.
 
-No production-scale tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is implemented yet.
+No production-scale tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is available yet.
 
 The first implementation target is a toy-scale MVP. It should run on small simulated data and should not claim support for real 7-20 Gb plant genomes until benchmarked.
 
@@ -52,6 +52,7 @@ tandemx locate --help
 tandemx probe --help
 tandemx compare --help
 tandemx visualize --help
+tandemx validate --help
 ```
 
 ## Quick Start: Toy Workflow
@@ -70,16 +71,18 @@ examples/toy/results/
 
 Generated results are ignored by git and should not be committed.
 
-`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` currently implements a toy-scale FASTA-only MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from diagnostic k-mer depth and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots.
+`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` implements a toy-scale MVP that writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from diagnostic k-mer depth and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots. `tandemx validate` checks recognized MVP outputs under a project directory.
 
-The `compare` command is still a placeholder. Placeholder commands currently:
+Sequence input support is centralized in `tandemx.io.sequences`. Analysis commands can read `.fa`, `.fasta`, `.fq`, `.fastq`, and gzip-compressed `.fa.gz`, `.fasta.gz`, `.fq.gz`, and `.fastq.gz` inputs where that file type is appropriate. Readers stream records with a shared `SequenceRecord` structure and validate empty files, malformed FASTQ records, duplicate IDs, and sequence/quality length mismatches.
+
+The `compare` command is deferred in the current MVP. Deferred commands currently:
 
 1. parse arguments;
 2. check that required input files exist;
 3. create the output directory;
 4. write `run_config.yaml`;
 5. write `run.log`; and
-6. report that the algorithm is not implemented yet.
+6. report that the algorithm is deferred in this MVP.
 
 Generate a toy dataset and run discover:
 
@@ -114,6 +117,7 @@ tandemx visualize \
   --probes results/probe/probes.rank.tsv \
   --fish results/probe/in_silico_fish.tsv \
   --outdir results/visualize
+tandemx validate --project results
 ```
 
 ## Tests
@@ -131,9 +135,11 @@ conda activate tandemx-dev
 pytest
 ```
 
-The tests currently validate CLI help, missing-input errors, simulator reproducibility, toy-scale discover output behavior, toy-scale quantify behavior, toy-scale assembly localization behavior, toy-scale probe ranking behavior, and basic static visualization output.
+The tests currently validate CLI help, missing-input errors, simulator reproducibility, streaming FASTA/FASTQ/gzip input behavior, toy-scale discover output behavior, toy-scale quantify behavior, toy-scale assembly localization behavior, toy-scale probe ranking behavior, output schema validation, and basic static visualization output.
 
-The test suite also includes non-default toy repeat lengths, currently 421 bp and 729 bp, to check that the MVP workflow is not hardcoded to the simulator defaults. This is an anti-hardcoding check for toy-scale behavior, not validation for real 7-20 Gb plant genomes.
+The test suite also includes non-default toy repeat lengths, currently 421 bp and 729 bp, to check that the MVP workflow is not tied to the simulator defaults. Randomized toy workflow tests run fixed seeds `1`, `7`, `13`, `42`, and `99`; each seed generates two monomer lengths and controlled copy counts, then runs simulate, discover, quantify, locate, probe, and validate. Truth files are used only for test assertions, not as algorithm input.
+
+These tests improve engineering reliability for the toy MVP. They are not validation for real 7-20 Gb plant genomes. Real large-genome support still requires streaming optimization, parallel execution, external benchmarking, and validation on real reads and assemblies.
 
 ## MVP Documentation
 

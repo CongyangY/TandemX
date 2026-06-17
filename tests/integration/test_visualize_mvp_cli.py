@@ -36,13 +36,13 @@ def test_visualize_mvp_outputs_svg_and_pdf(tmp_path: Path) -> None:
     )
     probes.write_text(
         "probe_id\tfamily_id\tsequence_length\tgc_content\ttm\testimated_copy_number\t"
-        "arrayiness_score\tspecificity_score\toff_target_hits\tpredicted_regions\tprobe_score\twarning\n"
-        "TXP000001\tTXF000001\t100\t0.5\t300\t10\t1\t1\t0\tchr1:10-100\t0.9\t\n",
+        "arrayiness_score\tspecificity_score\toff_target_hits\tpredicted_regions\tprobe_score\tconfidence\twarning\n"
+        "TXP000001\tTXF000001\t100\t0.5\t300\t10\t1\t1\t0\tchr1:10-100\t0.9\thigh\t\n",
         encoding="utf-8",
     )
     fish.write_text(
-        "probe_id\tchrom\tstart\tend\tpredicted_signal\tconfidence\n"
-        "TXP000001\tchr1\t10\t100\t0.9\thigh\n",
+        "probe_id\tchrom\tstart\tend\tpredicted_signal\tconfidence\twarning\n"
+        "TXP000001\tchr1\t10\t100\t0.9\thigh\t\n",
         encoding="utf-8",
     )
 

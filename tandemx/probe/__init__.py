@@ -1,1 +1,1 @@
-"""FISH probe ranking module placeholder."""
+"""FISH probe ranking routines for TandemX."""

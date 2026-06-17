@@ -70,4 +70,6 @@ PY
   --fish "${PROBE}/in_silico_fish.tsv" \
   --outdir "${VISUALIZE}"
 
+"${TANDEMX[@]}" validate --project "${OUTDIR}"
+
 echo "Toy workflow complete: ${OUTDIR}"

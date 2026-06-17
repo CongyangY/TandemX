@@ -3,22 +3,24 @@
 ## Near-term MVP Completion
 
 1. Split `assembly_vs_read_cn.tsv` comparison logic into a dedicated `tandemx compare` implementation.
-2. Add FASTQ parsing.
-3. Add toy tests for empty input, invalid input, low-complexity reads and reproducibility edge cases.
-4. Add richer confidence and warning propagation across modules.
-5. Add versioned toy benchmark configs.
+2. Expand output validation toward cross-file consistency checks.
+3. Add richer confidence and warning propagation across modules.
+4. Add versioned toy benchmark configs.
+5. Keep randomized toy workflow tests small, reproducible and independent of simulator truth files as algorithm input.
 
 ## Large-genome Optimization Path
 
 Future real plant genome support will require:
 
-1. streaming read processing;
+1. streaming algorithm design beyond the parser layer;
 2. chunked assembly scanning;
 3. scalable k-mer counting;
 4. multiprocessing with bounded memory;
 5. resumable intermediate files;
 6. indexed monomer and assembly search;
 7. robust logging and resource reporting.
+
+FASTA, FASTQ and gzip input parsing is now available for the MVP. This does not remove the need for streaming optimization, parallelization, bounded-memory k-mer counting, external benchmarking, and real read validation before 7-20 Gb plant genome analysis.
 
 ## Possible Rust or C++ Rewrite Targets
 
