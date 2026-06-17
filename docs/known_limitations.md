@@ -34,6 +34,8 @@ Reasons:
 
 An optional guided mode using user-supplied known-repeat FASTA files may be added later, but it is not the default MVP workflow.
 
+The synthetic benchmark harness can measure tiny and manual scale runs, but it does not make the MVP suitable for real 7-20 Gb production analysis. Real data should be limited to pilot subsets until chunking, resumable execution, memory reporting and external benchmarks are implemented.
+
 ## Claims Not Supported
 
 Do not claim that TandemX can:

@@ -7,6 +7,7 @@
 3. Add richer confidence and warning propagation across modules.
 4. Add versioned toy benchmark configs.
 5. Keep randomized toy workflow tests small, reproducible and independent of simulator truth files as algorithm input.
+6. Use the synthetic benchmark harness to track runtime, output validity and toy accuracy across tiny/small/medium/manual stress scales.
 
 The default workflow should remain de novo: reads enter `tandemx discover`, and the discovered repeat catalog feeds downstream commands. A future optional guided mode may allow `--catalog` to point to user-supplied known-repeat FASTA files, such as named satellite sequences, for guided quantification, localization or probe design. That guided mode must be documented as optional and separate from the default discovery workflow.
 
@@ -23,6 +24,8 @@ Future real plant genome support will require:
 7. robust logging and resource reporting.
 
 FASTA, FASTQ and gzip input parsing is now available for the MVP. This does not remove the need for streaming optimization, parallelization, bounded-memory k-mer counting, external benchmarking, and real read validation before 7-20 Gb plant genome analysis.
+
+Real-data work should begin with the staged pilot plan in `docs/real_data_pilot_plan.md`: read subsets, post-discovery sanity checks, and constrained assembly regions before any full-genome attempt.
 
 ## Possible Rust or C++ Rewrite Targets
 

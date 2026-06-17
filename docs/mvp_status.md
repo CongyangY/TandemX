@@ -12,6 +12,14 @@ Current implemented commands:
 6. `tandemx visualize`
 7. `tandemx validate`
 
+Implemented benchmark support:
+
+1. synthetic scale configuration in `benchmarks/configs/synthetic_scale.yaml`;
+2. benchmark runner in `benchmarks/scripts/run_synthetic_benchmark.py`;
+3. `benchmark_summary.tsv` runtime/status output;
+4. `accuracy_summary.tsv` toy truth evaluation output;
+5. pytest coverage for the `tiny` synthetic benchmark only.
+
 `tandemx compare` remains deferred. Assembly-vs-read comparison is currently produced inside `tandemx locate` as `assembly_vs_read_cn.tsv`.
 
 Default analysis flow:
@@ -96,3 +104,5 @@ All tests should be run in the `tandemx-dev` conda environment.
 The MVP is strictly toy-scale. It is intended to establish architecture, file formats, command behavior, and reproducible tests.
 
 The MVP is not validated for real 7-20 Gb plant genomes. Before real large-genome use, TandemX needs streaming algorithm optimization, parallelization, external benchmarks, and validation on real reads and assemblies.
+
+Real-data work should follow `docs/real_data_pilot_plan.md` and stay limited to read subsets or assembly regions until the scale prerequisites are met.

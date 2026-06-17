@@ -1,5 +1,29 @@
 # TandemX Benchmark Plan
 
+## Current Synthetic Harness
+
+TandemX now includes a synthetic benchmark runner:
+
+```bash
+python benchmarks/scripts/run_synthetic_benchmark.py \
+  --config benchmarks/configs/synthetic_scale.yaml \
+  --scale tiny \
+  --outdir /tmp/tandemx_benchmark_tiny
+```
+
+Configured scales:
+
+1. `tiny`: CI-scale synthetic run below 1 MB of reads.
+2. `small`: manual run around 10 MB of reads.
+3. `medium`: manual run around 100 MB of reads.
+4. `large`: manual stress run around 500 MB of reads.
+
+The runner records wall-clock runtime per command and writes `benchmark_summary.tsv`. Peak memory is not recorded portably yet; use `/usr/bin/time -v` on Linux or the platform `time` command on macOS for manual memory measurement.
+
+`accuracy_summary.tsv` uses simulator truth files only after analysis commands finish. Truth files are benchmark evaluation metadata and must not be passed to `discover`, `quantify`, `locate`, `probe` or `validate`.
+
+Synthetic benchmark success does not validate real 7-20 Gb plant genome production analysis.
+
 ## Purpose
 
 Benchmarks should test whether TandemX can identify candidate repeat families, estimate read-based copy number, detect possible assembly under-representation and rank FISH probe candidates. Benchmarks must separate toy MVP validation from real plant genome claims.

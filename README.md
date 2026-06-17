@@ -159,4 +159,19 @@ Current status and limitations:
 docs/mvp_status.md
 docs/known_limitations.md
 docs/roadmap.md
+docs/benchmark_plan.md
+docs/real_data_pilot_plan.md
 ```
+
+## Synthetic Benchmarks
+
+TandemX includes a synthetic benchmark harness for engineering checks before real-data pilots:
+
+```bash
+python benchmarks/scripts/run_synthetic_benchmark.py \
+  --config benchmarks/configs/synthetic_scale.yaml \
+  --scale tiny \
+  --outdir /tmp/tandemx_benchmark_tiny
+```
+
+The runner executes `simulate -> discover -> quantify -> locate -> probe -> validate`, writes `benchmark_summary.tsv` and `accuracy_summary.tsv`, and stores per-command logs. Only the `tiny` scale is intended for pytest. Larger synthetic scales are manual tests and do not imply real 7-20 Gb production readiness.
