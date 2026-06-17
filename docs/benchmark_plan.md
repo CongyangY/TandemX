@@ -122,7 +122,7 @@ TideHunter:
 TRASH:
 
 1. satellite family recovery;
-2. known repeat recovery in plant genomes;
+2. curated satellite recovery in plant genomes;
 3. runtime and memory.
 
 RepeatExplorer2/TAREAN:

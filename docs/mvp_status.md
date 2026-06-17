@@ -14,6 +14,14 @@ Current implemented commands:
 
 `tandemx compare` remains deferred. Assembly-vs-read comparison is currently produced inside `tandemx locate` as `assembly_vs_read_cn.tsv`.
 
+Default analysis flow:
+
+```text
+raw reads -> de novo discover -> repeat catalog -> quantify/locate/probe/visualize
+```
+
+`tandemx discover` is de novo in the MVP: it needs reads and output parameters, not a catalog, user-supplied repeat sequence or simulator truth file. Downstream `--catalog` arguments refer to `monomers.fa` produced by `tandemx discover`.
+
 Implemented sequence input support:
 
 1. `.fa`
@@ -35,6 +43,8 @@ Toy simulator:
 4. `truth_arrays.bed`
 5. `truth_copy_number.tsv`
 6. `simulation_config.yaml`
+
+The simulator `truth_*` files are for simulator validation and tests only. They are not part of the default analysis input set.
 
 Discover:
 

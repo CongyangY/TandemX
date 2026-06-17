@@ -7,6 +7,11 @@ from pathlib import Path
 
 
 def test_end_to_end_toy_workflow_script(tmp_path: Path) -> None:
+    script = Path("examples/toy/run_toy_workflow.sh").read_text(encoding="utf-8")
+    assert "truth_monomers.fa" not in script
+    assert "truth_arrays.bed" not in script
+    assert "truth_copy_number.tsv" not in script
+
     output_dir = tmp_path / "toy_results"
     result = subprocess.run(
         ["bash", "examples/toy/run_toy_workflow.sh", str(output_dir)],

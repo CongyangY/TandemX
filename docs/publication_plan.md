@@ -39,7 +39,7 @@ Required evidence:
 
 1. rigorous assembly-vs-read copy-number comparison;
 2. case studies showing how satellite arrays are represented or under-represented in assemblies;
-3. validation against high-quality assemblies and known repeat annotations;
+3. validation against high-quality assemblies and curated satellite annotations;
 4. careful uncertainty labels;
 5. biological interpretation for real plant genomes;
 6. comparison to established repeat discovery workflows.

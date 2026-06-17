@@ -5,13 +5,16 @@
 The current MVP:
 
 1. supports FASTA, FASTQ and gzip-compressed sequence inputs, but only for toy-scale datasets;
-2. assumes small toy data;
-3. uses simple k-mer and shifted-periodicity heuristics;
-4. does not use external tandem repeat finders;
-5. does not perform read mapping;
-6. does not infer higher-order repeat structure;
-7. does not model ploidy or subgenomes;
-8. does not provide experimentally calibrated FISH probe prediction.
+2. performs de novo discovery from reads in `tandemx discover`;
+3. assumes small toy data;
+4. uses simple k-mer and shifted-periodicity heuristics;
+5. does not use external tandem repeat finders;
+6. does not perform read mapping;
+7. does not infer higher-order repeat structure;
+8. does not model ploidy or subgenomes;
+9. does not provide experimentally calibrated FISH probe prediction.
+
+The downstream `--catalog` input reuses the de novo repeat catalog produced by `tandemx discover`. It is not a requirement that users already know the repeat sequence before running TandemX.
 
 Anti-hardcoding and randomized toy workflow tests now cover non-default repeat lengths and fixed random seeds. This checks that the toy MVP is not narrowly tied to simulator defaults and that output schemas remain valid across small controlled cases. It does not establish performance on real plant repeats, related repeat families, noisy real reads, polyploid genomes, or chromosome-scale assemblies.
 
@@ -28,6 +31,8 @@ Reasons:
 5. copy-number calibration depends on user-provided or rough haploid depth;
 6. localization uses k-mer evidence, not alignments;
 7. probe specificity is a heuristic, not a validated hybridization model.
+
+An optional guided mode using user-supplied known-repeat FASTA files may be added later, but it is not the default MVP workflow.
 
 ## Claims Not Supported
 

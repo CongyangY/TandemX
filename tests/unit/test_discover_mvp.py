@@ -18,6 +18,14 @@ def test_periodicity_score_detects_exact_period() -> None:
     assert periodicity_score(sequence, 5) < 0.5
 
 
+def test_discover_core_does_not_reference_simulator_truth_files() -> None:
+    source = Path("tandemx/discover/mvp.py").read_text(encoding="utf-8")
+
+    assert "truth_monomers.fa" not in source
+    assert "truth_arrays.bed" not in source
+    assert "truth_copy_number.tsv" not in source
+
+
 def test_find_best_periodic_candidate() -> None:
     record = FastaRecord(read_id="read1", description="read1;strand=-", sequence="AACCGGTT" * 8)
     candidate = find_best_periodic_candidate(

@@ -8,6 +8,8 @@
 4. Add versioned toy benchmark configs.
 5. Keep randomized toy workflow tests small, reproducible and independent of simulator truth files as algorithm input.
 
+The default workflow should remain de novo: reads enter `tandemx discover`, and the discovered repeat catalog feeds downstream commands. A future optional guided mode may allow `--catalog` to point to user-supplied known-repeat FASTA files, such as named satellite sequences, for guided quantification, localization or probe design. That guided mode must be documented as optional and separate from the default discovery workflow.
+
 ## Large-genome Optimization Path
 
 Future real plant genome support will require:

@@ -84,6 +84,23 @@ def test_discover_mvp_recovers_toy_family_lengths(tmp_path: Path) -> None:
     assert 'status: "discover_mvp_completed"' in config
 
 
+def test_discover_runs_de_novo_with_only_reads_and_outdir(tmp_path: Path) -> None:
+    reads = tmp_path / "reads.fa"
+    sequence = "ACGTACGTACGTACGTACGT" * 8
+    reads.write_text(
+        "".join(f">read_{index}\n{sequence}\n" for index in range(1, 6)),
+        encoding="utf-8",
+    )
+    outdir = tmp_path / "discover"
+
+    result = run_cli("discover", "--reads", str(reads), "--outdir", str(outdir))
+
+    assert result.returncode == 0, result.stderr
+    assert (outdir / "candidate_reads.tsv").is_file()
+    assert (outdir / "monomers.fa").is_file()
+    assert (outdir / "families.tsv").is_file()
+
+
 def test_discover_mvp_accepts_fastq(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fastq"
     sequence = "ACGTACGA" * 8
