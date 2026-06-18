@@ -3,12 +3,25 @@
 from __future__ import annotations
 
 import hashlib
+import logging
+import random
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from statistics import mean
 from typing import Iterable, Sequence
 
 from tandemx.io.sequences import SequenceFormatError, read_sequence_records
+from tandemx.discover.spacing import (
+    bounded_periodicity_score,
+    build_spacing_histogram,
+    canonical_kmer,
+    extract_repeated_kmer_positions,
+    is_low_complexity_kmer,
+    modulo_periodicity_score,
+    refine_candidate_period,
+    select_candidate_periods,
+)
 from tandemx.simulate.toy import reverse_complement, wrap_sequence
 
 
@@ -58,24 +71,121 @@ class DiscoverConfig:
     max_monomer_len: int
     min_support_reads: int
     min_repeat_span: int
+    min_read_length: int = 1
+    kmer_size: int = 11
+    top_periods: int = 5
+    min_seed_occurrences: int = 2
+    min_spacing_support: int = 2
+    max_pairs_per_kmer: int = 100
+    max_reads: int | None = None
+    sample_rate: float = 1.0
+    seed: int = 1
+    progress_every: int = 1000
+    chunk_size: int = 1000
+    kmer_backend: str = "python"
 
 
-def discover_toy_repeats(config: DiscoverConfig) -> tuple[list[CandidateRepeat], list[RepeatFamily]]:
-    """Discover toy-scale simple tandem repeat families from sequence reads."""
-    candidates = []
-    for record in read_fasta(config.reads):
-        candidate = find_best_periodic_candidate(
-            record,
-            min_period=config.min_monomer_len,
-            max_period=config.max_monomer_len,
-            min_repeat_span=config.min_repeat_span,
-            candidate_index=len(candidates) + 1,
+def discover_toy_repeats(
+    config: DiscoverConfig,
+    logger: logging.Logger | None = None,
+) -> tuple[list[CandidateRepeat], list[RepeatFamily]]:
+    """Discover tandem repeat families with a bounded k-mer spacing prefilter."""
+    validate_discover_config(config)
+    config.outdir.mkdir(parents=True, exist_ok=True)
+    logger = logger or logging.getLogger("tandemx.discover")
+    candidate_path = config.outdir / "candidate_reads.tsv"
+    for stale_path in (config.outdir / "monomers.fa", config.outdir / "families.tsv"):
+        stale_path.unlink(missing_ok=True)
+
+    candidates: list[CandidateRepeat] = []
+    processed_reads = 0
+    processed_bases = 0
+    skipped_short_reads = 0
+    skipped_short_kmer = 0
+    skipped_low_complexity = 0
+    seed_overflow_count = 0
+    started = time.perf_counter()
+    rng = random.Random(config.seed)
+
+    with candidate_path.open("wt", encoding="utf-8") as handle:
+        handle.write(candidate_reads_header() + "\n")
+        handle.flush()
+        for record in read_fasta(config.reads):
+            if config.max_reads is not None and processed_reads >= config.max_reads:
+                break
+            if config.sample_rate < 1.0 and rng.random() > config.sample_rate:
+                continue
+
+            processed_reads += 1
+            processed_bases += len(record.sequence)
+            candidate: CandidateRepeat | None = None
+            if len(record.sequence) < config.min_read_length:
+                skipped_short_reads += 1
+            elif len(record.sequence) < config.kmer_size:
+                skipped_short_kmer += 1
+            elif is_low_complexity(record.sequence):
+                skipped_low_complexity += 1
+            else:
+                candidate, overflow_count = find_best_periodic_candidate_with_stats(
+                    record,
+                    min_period=config.min_monomer_len,
+                    max_period=config.max_monomer_len,
+                    min_repeat_span=config.min_repeat_span,
+                    candidate_index=len(candidates) + 1,
+                    kmer_size=config.kmer_size,
+                    top_periods=config.top_periods,
+                    min_seed_occurrences=config.min_seed_occurrences,
+                    min_spacing_support=config.min_spacing_support,
+                    max_pairs_per_kmer=config.max_pairs_per_kmer,
+                )
+                seed_overflow_count += overflow_count
+
+            if candidate is not None:
+                candidates.append(candidate)
+                handle.write(format_candidate_read(candidate) + "\n")
+                handle.flush()
+
+            if processed_reads % config.progress_every == 0:
+                log_discover_progress(
+                    logger,
+                    processed_reads,
+                    processed_bases,
+                    len(candidates),
+                    started,
+                    config.max_reads,
+                )
+
+        log_discover_progress(
+            logger,
+            processed_reads,
+            processed_bases,
+            len(candidates),
+            started,
+            config.max_reads,
         )
-        if candidate is not None:
-            candidates.append(candidate)
+        logger.info(
+            "filter_summary skipped_short_reads=%s skipped_short_kmer=%s "
+            "skipped_low_complexity=%s seed_overflow_count=%s",
+            skipped_short_reads,
+            skipped_short_kmer,
+            skipped_low_complexity,
+            seed_overflow_count,
+        )
 
     if not candidates:
-        raise ValueError("No tandem repeat candidates found in reads")
+        if processed_reads and skipped_short_kmer == processed_reads:
+            raise ValueError(
+                f"No reads were long enough for --kmer-size {config.kmer_size}; "
+                f"processed {processed_reads} reads"
+            )
+        if processed_reads and skipped_low_complexity == processed_reads:
+            raise ValueError(
+                f"Only low-complexity reads were found; processed {processed_reads} reads"
+            )
+        raise ValueError(
+            "No tandem repeat candidates found after k-mer spacing prefilter; "
+            f"processed {processed_reads} reads"
+        )
     if all(candidate.low_complexity_flag for candidate in candidates):
         raise ValueError("Only low-complexity tandem candidates found in reads")
 
@@ -85,10 +195,38 @@ def discover_toy_repeats(config: DiscoverConfig) -> tuple[list[CandidateRepeat],
             "No repeat families passed the minimum support threshold; "
             "try lowering --min-support-reads for toy data or check the reads"
         )
-    write_candidate_reads(config.outdir / "candidate_reads.tsv", candidates)
     write_monomers(config.outdir / "monomers.fa", families)
     write_families(config.outdir / "families.tsv", families)
     return candidates, families
+
+
+def validate_discover_config(config: DiscoverConfig) -> None:
+    if config.min_monomer_len <= 0:
+        raise ValueError("--min-period must be positive")
+    if config.max_monomer_len < config.min_monomer_len:
+        raise ValueError("--max-period must be greater than or equal to --min-period")
+    if config.min_read_length <= 0:
+        raise ValueError("--min-read-length must be positive")
+    if config.kmer_size <= 0:
+        raise ValueError("--kmer-size must be positive")
+    if config.top_periods <= 0:
+        raise ValueError("--top-periods must be positive")
+    if config.min_seed_occurrences < 2:
+        raise ValueError("--min-seed-occurrences must be at least 2")
+    if config.min_spacing_support <= 0:
+        raise ValueError("--min-spacing-support must be positive")
+    if config.max_pairs_per_kmer <= 0:
+        raise ValueError("--max-pairs-per-kmer must be positive")
+    if config.max_reads is not None and config.max_reads <= 0:
+        raise ValueError("--max-reads must be positive when provided")
+    if not 0 < config.sample_rate <= 1:
+        raise ValueError("--sample-rate must be greater than 0 and at most 1")
+    if config.progress_every <= 0:
+        raise ValueError("--progress-every must be positive")
+    if config.chunk_size <= 0:
+        raise ValueError("--chunk-size must be positive")
+    if config.kmer_backend != "python":
+        raise ValueError("Only --kmer-backend python is available in the current pilot implementation")
 
 
 def read_fasta(path: Path) -> Iterable[FastaRecord]:
@@ -117,24 +255,78 @@ def find_best_periodic_candidate(
     max_period: int,
     min_repeat_span: int,
     candidate_index: int,
+    kmer_size: int = 11,
+    top_periods: int = 5,
+    min_seed_occurrences: int = 2,
+    min_spacing_support: int = 2,
+    max_pairs_per_kmer: int = 100,
 ) -> CandidateRepeat | None:
-    sequence = record.sequence.replace("N", "")
-    if len(sequence) < max(min_repeat_span, min_period * 2):
-        return None
-    max_test_period = min(max_period, len(sequence) // 2)
-    if max_test_period < min_period:
-        return None
+    candidate, _ = find_best_periodic_candidate_with_stats(
+        record,
+        min_period=min_period,
+        max_period=max_period,
+        min_repeat_span=min_repeat_span,
+        candidate_index=candidate_index,
+        kmer_size=kmer_size,
+        top_periods=top_periods,
+        min_seed_occurrences=min_seed_occurrences,
+        min_spacing_support=min_spacing_support,
+        max_pairs_per_kmer=max_pairs_per_kmer,
+    )
+    return candidate
 
-    best_period = 0
-    best_score = 0.0
-    for period in range(min_period, max_test_period + 1):
-        score = periodicity_score(sequence, period)
-        if score > best_score:
-            best_score = score
-            best_period = period
+
+def find_best_periodic_candidate_with_stats(
+    record: FastaRecord,
+    min_period: int,
+    max_period: int,
+    min_repeat_span: int,
+    candidate_index: int,
+    kmer_size: int,
+    top_periods: int,
+    min_seed_occurrences: int,
+    min_spacing_support: int,
+    max_pairs_per_kmer: int,
+) -> tuple[CandidateRepeat | None, int]:
+    sequence = record.sequence.upper()
+    if len(sequence) < max(min_repeat_span, min_period * 2):
+        return None, 0
+    bounded_max_period = min(max_period, len(sequence) // 2)
+    if bounded_max_period < min_period or len(sequence) < kmer_size:
+        return None, 0
+
+    repeated_positions, overflow_count = extract_repeated_kmer_positions(
+        sequence,
+        kmer_size,
+        min_seed_occurrences=min_seed_occurrences,
+        max_pairs_per_kmer=max_pairs_per_kmer,
+    )
+    histogram = build_spacing_histogram(
+        repeated_positions,
+        min_period=min_period,
+        max_period=bounded_max_period,
+        max_pairs_per_kmer=max_pairs_per_kmer,
+    )
+    candidate_periods = select_candidate_periods(
+        histogram,
+        min_period=min_period,
+        max_period=bounded_max_period,
+        top_periods=top_periods,
+        min_spacing_support=min_spacing_support,
+    )
+    if not candidate_periods:
+        return None, overflow_count
+
+    best_period, best_score = refine_candidate_period(
+        sequence,
+        repeated_positions,
+        candidate_periods,
+        min_period=min_period,
+        max_period=bounded_max_period,
+    )
 
     if best_score < 0.75:
-        return None
+        return None, overflow_count
 
     repeat_span = len(sequence)
     warning = ""
@@ -156,7 +348,7 @@ def find_best_periodic_candidate(
         low_complexity_flag=low_complexity,
         confidence=confidence,
         warning=warning,
-    )
+    ), overflow_count
 
 
 def periodicity_score(sequence: str, period: int) -> float:
@@ -253,32 +445,65 @@ def sequence_md5(sequence: str) -> str:
     return hashlib.md5(sequence.encode("ascii")).hexdigest()
 
 
+def log_discover_progress(
+    logger: logging.Logger,
+    processed_reads: int,
+    processed_bases: int,
+    candidate_reads: int,
+    started: float,
+    max_reads: int | None,
+) -> None:
+    elapsed = max(time.perf_counter() - started, 1e-9)
+    reads_per_second = processed_reads / elapsed
+    mb_per_second = (processed_bases / 1_000_000) / elapsed
+    if max_reads is not None and reads_per_second > 0:
+        remaining = max(0, max_reads - processed_reads) / reads_per_second
+        estimated_remaining = f"{remaining:.1f}"
+    else:
+        estimated_remaining = "unknown"
+    logger.info(
+        "progress processed_reads=%s processed_bases=%s candidate_reads=%s "
+        "elapsed_seconds=%.3f reads_per_second=%.3f mb_per_second=%.3f "
+        "estimated_remaining_seconds=%s",
+        processed_reads,
+        processed_bases,
+        candidate_reads,
+        elapsed,
+        reads_per_second,
+        mb_per_second,
+        estimated_remaining,
+    )
+
+
+def candidate_reads_header() -> str:
+    return (
+        "read_id\tcandidate_id\tread_start\tread_end\tstrand\tperiod_bp\t"
+        "repeat_span_bp\tunit_count\tscore\tlow_complexity_flag\tconfidence\twarning"
+    )
+
+
+def format_candidate_read(candidate: CandidateRepeat) -> str:
+    return "\t".join(
+        [
+            candidate.read_id,
+            candidate.candidate_id,
+            str(candidate.read_start),
+            str(candidate.read_end),
+            candidate.strand,
+            str(candidate.period_bp),
+            str(candidate.repeat_span_bp),
+            f"{candidate.unit_count:.3f}",
+            f"{candidate.score:.4f}",
+            str(candidate.low_complexity_flag).lower(),
+            candidate.confidence,
+            candidate.warning,
+        ]
+    )
+
+
 def write_candidate_reads(path: Path, candidates: Sequence[CandidateRepeat]) -> None:
-    lines = [
-        (
-            "read_id\tcandidate_id\tread_start\tread_end\tstrand\tperiod_bp\t"
-            "repeat_span_bp\tunit_count\tscore\tlow_complexity_flag\tconfidence\twarning"
-        )
-    ]
-    for candidate in candidates:
-        lines.append(
-            "\t".join(
-                [
-                    candidate.read_id,
-                    candidate.candidate_id,
-                    str(candidate.read_start),
-                    str(candidate.read_end),
-                    candidate.strand,
-                    str(candidate.period_bp),
-                    str(candidate.repeat_span_bp),
-                    f"{candidate.unit_count:.3f}",
-                    f"{candidate.score:.4f}",
-                    str(candidate.low_complexity_flag).lower(),
-                    candidate.confidence,
-                    candidate.warning,
-                ]
-            )
-        )
+    lines = [candidate_reads_header()]
+    lines.extend(format_candidate_read(candidate) for candidate in candidates)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 

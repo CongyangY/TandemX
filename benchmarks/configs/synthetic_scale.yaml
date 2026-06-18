@@ -1,31 +1,33 @@
 benchmarks:
   tiny:
-    benchmark_id: synthetic_tiny_seed101
+    benchmark_id: synthetic_tiny_1k_seed101
     manual_only: false
-    description: "CI-scale synthetic benchmark kept below 1 MB of reads."
+    description: "CI benchmark with 1,000 reads."
     seed: 101
-    read_count: 140
+    read_count: 1000
     read_length: 1800
-    total_read_bp: 252000
+    total_read_bp: 1800000
     background_length: 2500
     monomer_length_range: [300, 760]
     monomer_lengths: [421, 729]
     copy_numbers: [8, 6]
     error_rate: 0.005
     discover:
-      min_monomer_len: 300
-      max_monomer_len: 760
-      min_support_reads: 3
+      min_period: 300
+      max_period: 760
+      min_support_reads: 5
       min_repeat_span: 800
-    locate:
-      window_size: 500
-      step_size: 250
-      k: 21
-    probe:
-      min_len: 80
-      max_len: 300
+      min_read_length: 500
+      kmer_size: 11
+      top_periods: 5
+      min_seed_occurrences: 2
+      min_spacing_support: 2
+      max_pairs_per_kmer: 100
+      progress_every: 250
+    locate: {window_size: 500, step_size: 250, k: 21}
+    probe: {min_len: 80, max_len: 300}
     expected_runtime_record: "benchmark_summary.tsv"
-    expected_output_files:
+    expected_output_files: &expected_outputs
       - simulated/reads.fa
       - simulated/assembly.fa
       - discover/candidate_reads.tsv
@@ -38,120 +40,93 @@ benchmarks:
       - probe/probes.fa
       - probe/probes.rank.tsv
       - probe/in_silico_fish.tsv
+
   small:
-    benchmark_id: synthetic_small_seed202
+    benchmark_id: synthetic_small_10k_seed202
     manual_only: true
-    description: "Manual synthetic benchmark around 10 MB of reads."
+    description: "Manual pilot benchmark with 10,000 reads."
     seed: 202
-    read_count: 2000
-    read_length: 5000
-    total_read_bp: 10000000
-    background_length: 20000
-    monomer_length_range: [300, 900]
+    read_count: 10000
+    read_length: 1800
+    total_read_bp: 18000000
+    background_length: 10000
+    monomer_length_range: [300, 760]
     monomer_lengths: [421, 729]
     copy_numbers: [12, 9]
     error_rate: 0.005
     discover:
-      min_monomer_len: 300
-      max_monomer_len: 900
+      min_period: 300
+      max_period: 760
       min_support_reads: 10
-      min_repeat_span: 900
-    locate:
-      window_size: 2000
-      step_size: 1000
-      k: 21
-    probe:
-      min_len: 80
-      max_len: 300
+      min_repeat_span: 800
+      min_read_length: 500
+      kmer_size: 11
+      top_periods: 5
+      min_seed_occurrences: 2
+      min_spacing_support: 2
+      max_pairs_per_kmer: 100
+      progress_every: 1000
+    locate: {window_size: 2000, step_size: 1000, k: 21}
+    probe: {min_len: 80, max_len: 300}
     expected_runtime_record: "benchmark_summary.tsv"
-    expected_output_files:
-      - simulated/reads.fa
-      - simulated/assembly.fa
-      - discover/candidate_reads.tsv
-      - discover/monomers.fa
-      - discover/families.tsv
-      - quantify/copy_number.tsv
-      - locate/repeat_density.bedgraph
-      - locate/arrays.bed
-      - locate/assembly_vs_read_cn.tsv
-      - probe/probes.fa
-      - probe/probes.rank.tsv
-      - probe/in_silico_fish.tsv
-  medium:
-    benchmark_id: synthetic_medium_seed303
+    expected_output_files: *expected_outputs
+
+  pilot:
+    benchmark_id: synthetic_pilot_50k_seed303
     manual_only: true
-    description: "Manual synthetic benchmark around 100 MB of reads."
+    description: "Manual scale test with 50,000 reads; excluded from pytest."
     seed: 303
-    read_count: 20000
-    read_length: 5000
-    total_read_bp: 100000000
-    background_length: 100000
-    monomer_length_range: [300, 900]
+    read_count: 50000
+    read_length: 1800
+    total_read_bp: 90000000
+    background_length: 50000
+    monomer_length_range: [300, 760]
     monomer_lengths: [421, 729]
     copy_numbers: [20, 14]
     error_rate: 0.005
     discover:
-      min_monomer_len: 300
-      max_monomer_len: 900
+      min_period: 300
+      max_period: 760
       min_support_reads: 20
-      min_repeat_span: 900
-    locate:
-      window_size: 5000
-      step_size: 2500
-      k: 21
-    probe:
-      min_len: 80
-      max_len: 300
+      min_repeat_span: 800
+      min_read_length: 500
+      kmer_size: 11
+      top_periods: 5
+      min_seed_occurrences: 2
+      min_spacing_support: 2
+      max_pairs_per_kmer: 100
+      progress_every: 5000
+    locate: {window_size: 5000, step_size: 2500, k: 21}
+    probe: {min_len: 80, max_len: 300}
     expected_runtime_record: "benchmark_summary.tsv"
-    expected_output_files:
-      - simulated/reads.fa
-      - simulated/assembly.fa
-      - discover/candidate_reads.tsv
-      - discover/monomers.fa
-      - discover/families.tsv
-      - quantify/copy_number.tsv
-      - locate/repeat_density.bedgraph
-      - locate/arrays.bed
-      - locate/assembly_vs_read_cn.tsv
-      - probe/probes.fa
-      - probe/probes.rank.tsv
-      - probe/in_silico_fish.tsv
-  large:
-    benchmark_id: synthetic_large_seed404
+    expected_output_files: *expected_outputs
+
+  real_pilot_manual:
+    benchmark_id: synthetic_real_pilot_100k_seed404
     manual_only: true
-    description: "Manual stress benchmark around 500 MB of reads; do not run in pytest."
+    description: "Manual 100,000-read stress test; never run by default."
     seed: 404
     read_count: 100000
-    read_length: 5000
-    total_read_bp: 500000000
-    background_length: 250000
-    monomer_length_range: [300, 900]
+    read_length: 1800
+    total_read_bp: 180000000
+    background_length: 100000
+    monomer_length_range: [300, 760]
     monomer_lengths: [421, 729]
     copy_numbers: [25, 18]
     error_rate: 0.005
     discover:
-      min_monomer_len: 300
-      max_monomer_len: 900
+      min_period: 300
+      max_period: 760
       min_support_reads: 30
-      min_repeat_span: 900
-    locate:
-      window_size: 10000
-      step_size: 5000
-      k: 21
-    probe:
-      min_len: 80
-      max_len: 300
+      min_repeat_span: 800
+      min_read_length: 500
+      kmer_size: 11
+      top_periods: 5
+      min_seed_occurrences: 2
+      min_spacing_support: 2
+      max_pairs_per_kmer: 100
+      progress_every: 10000
+    locate: {window_size: 10000, step_size: 5000, k: 21}
+    probe: {min_len: 80, max_len: 300}
     expected_runtime_record: "benchmark_summary.tsv"
-    expected_output_files:
-      - simulated/reads.fa
-      - simulated/assembly.fa
-      - discover/candidate_reads.tsv
-      - discover/monomers.fa
-      - discover/families.tsv
-      - quantify/copy_number.tsv
-      - locate/repeat_density.bedgraph
-      - locate/arrays.bed
-      - locate/assembly_vs_read_cn.tsv
-      - probe/probes.fa
-      - probe/probes.rank.tsv
-      - probe/in_silico_fish.tsv
+    expected_output_files: *expected_outputs

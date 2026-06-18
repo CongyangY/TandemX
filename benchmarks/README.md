@@ -23,12 +23,12 @@ benchmarks/simulated/.gitkeep
 
 `synthetic_scale.yaml` defines:
 
-1. `tiny`: CI-scale, kept below 1 MB of reads.
-2. `small`: manual synthetic run around 10 MB of reads.
-3. `medium`: manual synthetic run around 100 MB of reads.
-4. `large`: manual stress run around 500 MB of reads.
+1. `tiny`: 1,000 reads and the only scale used by pytest.
+2. `small`: 10,000 reads for manual runtime checks.
+3. `pilot`: 50,000 reads for manual subset scaling.
+4. `real_pilot_manual`: 100,000 reads, never run by default.
 
-Only `tiny` is intended for pytest. `small`, `medium` and `large` are manual scale tests and may be slow with the current Python toy algorithms.
+Only `tiny` is intended for pytest. Larger scales remain manual because the Python backend is still single-process.
 
 ## Run
 
@@ -61,7 +61,15 @@ Outputs:
 10. `exit_status`
 11. `output_validated`
 12. `recovered_family_count`
-13. `notes`
+13. `processed_reads`
+14. `processed_bases`
+15. `candidate_reads`
+16. `candidates_per_mb`
+17. `reads_per_second`
+18. `mb_per_second`
+19. `peak_memory_mb`
+20. `algorithm_mode`
+21. `notes`
 
 `accuracy_summary.tsv` fields:
 

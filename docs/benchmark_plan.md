@@ -13,12 +13,12 @@ python benchmarks/scripts/run_synthetic_benchmark.py \
 
 Configured scales:
 
-1. `tiny`: CI-scale synthetic run below 1 MB of reads.
-2. `small`: manual run around 10 MB of reads.
-3. `medium`: manual run around 100 MB of reads.
-4. `large`: manual stress run around 500 MB of reads.
+1. `tiny`: 1,000 reads for CI.
+2. `small`: 10,000 reads for manual runtime measurement.
+3. `pilot`: 50,000 reads for manual subset scaling.
+4. `real_pilot_manual`: 100,000 reads, excluded from default tests and commands.
 
-The runner records wall-clock runtime per command and writes `benchmark_summary.tsv`. Peak memory is not recorded portably yet; use `/usr/bin/time -v` on Linux or the platform `time` command on macOS for manual memory measurement.
+The runner records wall-clock runtime per command and discover throughput metrics in `benchmark_summary.tsv`: processed reads/bases, candidate reads, candidates/MB, reads/s, MB/s and `algorithm_mode=spacing_prefilter`. Peak memory remains blank when unavailable; use `/usr/bin/time -v` on Linux or the platform `time` command on macOS for manual measurement.
 
 `accuracy_summary.tsv` uses simulator truth files only after analysis commands finish. Truth files are benchmark evaluation metadata and must not be passed to `discover`, `quantify`, `locate`, `probe` or `validate`.
 

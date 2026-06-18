@@ -20,6 +20,15 @@ Implemented benchmark support:
 4. `accuracy_summary.tsv` toy truth evaluation output;
 5. pytest coverage for the `tiny` synthetic benchmark only.
 
+Discover performance status:
+
+1. full per-read period enumeration has been removed;
+2. repeated k-mer spacing peaks prefilter candidate periods;
+3. only bounded local period neighborhoods are refined;
+4. candidate output and progress logs are written incrementally;
+5. `--max-reads` and reproducible sampling support real-read pilot subsets;
+6. multiprocessing and resume remain future work.
+
 `tandemx compare` remains deferred. Assembly-vs-read comparison is currently produced inside `tandemx locate` as `assembly_vs_read_cn.tsv`.
 
 Default analysis flow:

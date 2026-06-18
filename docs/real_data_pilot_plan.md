@@ -15,8 +15,14 @@ Inputs:
 Run only:
 
 ```bash
-tandemx discover --reads sampled_reads.fastq.gz --outdir discover_subset
+tandemx discover \
+  --reads sampled_reads.fastq.gz \
+  --outdir discover_subset \
+  --max-reads 10000 \
+  --progress-every 1000
 ```
+
+Start with 10,000 reads. Increase to 50,000 only after reviewing runtime, candidate rate and logs. Treat 100,000 reads as a manual stress pilot until the Python backend has measured acceptable throughput.
 
 Checks:
 

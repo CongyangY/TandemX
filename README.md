@@ -175,3 +175,20 @@ python benchmarks/scripts/run_synthetic_benchmark.py \
 ```
 
 The runner executes `simulate -> discover -> quantify -> locate -> probe -> validate`, writes `benchmark_summary.tsv` and `accuracy_summary.tsv`, and stores per-command logs. Only the `tiny` scale is intended for pytest. Larger synthetic scales are manual tests and do not imply real 7-20 Gb production readiness.
+
+## Discover Pilot Controls
+
+Discover uses a repeated-k-mer spacing prefilter and bounded local period refinement; it no longer scans every possible period against every base. For real HiFi subset pilots, limit work explicitly and monitor `run.log`:
+
+```bash
+tandemx discover \
+  --reads subset.fastq.gz \
+  --outdir pilot_discover \
+  --max-reads 10000 \
+  --min-read-length 1000 \
+  --min-period 20 \
+  --max-period 2000 \
+  --progress-every 1000
+```
+
+`candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The current `python` k-mer backend is for toy/pilot use. See `docs/performance.md` for algorithm and scaling limits.

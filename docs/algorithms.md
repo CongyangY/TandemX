@@ -9,31 +9,30 @@ MVP goal: identify simple candidate tandem repeat monomers de novo from toy HiFi
 Current MVP implementation:
 
 1. stream FASTA or FASTQ reads, including gzip-compressed inputs;
-2. for each read, test candidate periods from `--min-monomer-len` to `--max-monomer-len`, limited to at most half the read length;
-3. compute a simple shifted periodicity identity score for each candidate period:
-   `matches(sequence[i], sequence[i + period]) / compared_bases`;
-4. keep the best period for a read when the score is at least 0.75;
-5. reject runs with no candidates or only low-complexity candidates;
-6. write each retained read-level candidate to `candidate_reads.tsv`;
-7. cluster candidates by period length using a small bp tolerance;
-8. keep clusters with at least `--min-support-reads` distinct reads;
-9. use the highest-scoring candidate sequence as the representative monomer for each family;
+2. apply `--max-reads`, reproducible `--sample-rate`, minimum length and low-complexity filters;
+3. extract canonical, non-low-complexity k-mers for one read at a time with a rolling 2-bit encoder;
+4. retain only repeated within-read k-mer positions with strict position/pair caps;
+5. build a spacing histogram in the configured period range;
+6. retain only `--top-periods` supported spacing peaks;
+7. refine a ±2 bp neighborhood around each peak with modulo phase support from at most 128 high-occurrence seed groups and bounded sampled shifted identity;
+8. append accepted candidates immediately to `candidate_reads.tsv`;
+9. cluster only accepted candidate monomers by period length;
 10. write `monomers.fa` and `families.tsv`.
 
 `monomers.fa` is an output of de novo discovery. It is not a required input to `tandemx discover`.
 
-This method is intentionally simple. It is designed to recover simple simulated repeat families from toy datasets, not to analyze real large plant genomes. The test suite includes non-default repeat lengths to reduce the risk of overfitting to simulator defaults.
+The previous full period scan has been removed from the execution path. The current Python implementation targets toy data and real-read subset pilots, not full large plant genomes. See `docs/performance.md`.
 
 MVP constraints:
 
 1. toy data only;
 2. simple tandem arrays only;
-3. FASTA/FASTQ/gzip parsing is supported, but discovery remains a simple toy algorithm;
+3. FASTA/FASTQ/gzip parsing and streaming progress are supported;
 4. one best candidate period per read;
 5. no local repeat-boundary refinement;
 6. no multiple-alignment consensus;
 7. no higher-order repeat inference;
-8. no production-scale memory optimization claims.
+8. no multiprocessing, resume or production-scale backend yet.
 
 Future work:
 

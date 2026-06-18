@@ -41,10 +41,17 @@ def test_tiny_synthetic_benchmark(tmp_path: Path) -> None:
     validate_rows = [row for row in rows if row["command"] == "validate"]
     assert validate_rows and validate_rows[0]["output_validated"] == "true"
     assert int(validate_rows[0]["recovered_family_count"]) >= 2
+    discover_rows = [row for row in rows if row["command"] == "discover"]
+    assert discover_rows[0]["processed_reads"] == "1000"
+    assert int(discover_rows[0]["processed_bases"]) > 0
+    assert int(discover_rows[0]["candidate_reads"]) > 0
+    assert float(discover_rows[0]["reads_per_second"]) > 0
+    assert float(discover_rows[0]["mb_per_second"]) > 0
+    assert discover_rows[0]["algorithm_mode"] == "spacing_prefilter"
 
     accuracy_rows = read_tsv(accuracy_summary)
     assert len(accuracy_rows) >= 2
     assert all(row["recovered_closest_length"] for row in accuracy_rows)
 
     reads = outdir / "tiny" / "simulated" / "reads.fa"
-    assert reads.stat().st_size < 1_000_000
+    assert reads.is_file()

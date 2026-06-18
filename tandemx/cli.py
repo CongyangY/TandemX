@@ -100,7 +100,7 @@ def _configure_log(outdir: Path, command: str) -> logging.Logger:
     logger.handlers.clear()
     logger.setLevel(logging.INFO)
 
-    handler = logging.FileHandler(outdir / "run.log", encoding="utf-8")
+    handler = logging.FileHandler(outdir / "run.log", mode="w", encoding="utf-8")
     handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
     logger.addHandler(handler)
     return logger
@@ -131,6 +131,18 @@ def _prepare_deferred_run(
 def run_discover(args: argparse.Namespace) -> int:
     _require_existing_files([args.reads])
     args.outdir.mkdir(parents=True, exist_ok=True)
+    _write_run_config(args.outdir, "discover", args, status="discover_running")
+    logger = _configure_log(args.outdir, "discover")
+    logger.info("command=tandemx discover")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=discover_running")
+    logger.info(
+        "algorithm_mode=spacing_prefilter kmer_backend=%s min_period=%s max_period=%s",
+        args.kmer_backend,
+        args.min_monomer_len,
+        args.max_monomer_len,
+    )
     config = DiscoverConfig(
         reads=args.reads,
         outdir=args.outdir,
@@ -138,13 +150,25 @@ def run_discover(args: argparse.Namespace) -> int:
         max_monomer_len=args.max_monomer_len,
         min_support_reads=args.min_support_reads,
         min_repeat_span=args.min_repeat_span,
+        min_read_length=args.min_read_length,
+        kmer_size=args.kmer_size,
+        top_periods=args.top_periods,
+        min_seed_occurrences=args.min_seed_occurrences,
+        min_spacing_support=args.min_spacing_support,
+        max_pairs_per_kmer=args.max_pairs_per_kmer,
+        max_reads=args.max_reads,
+        sample_rate=args.sample_rate,
+        seed=args.seed,
+        progress_every=args.progress_every,
+        chunk_size=args.chunk_size,
+        kmer_backend=args.kmer_backend,
     )
-    candidates, families = discover_toy_repeats(config)
+    try:
+        candidates, families = discover_toy_repeats(config, logger=logger)
+    except KeyboardInterrupt:
+        logger.warning("status=discover_interrupted partial_candidate_output=%s", args.outdir / "candidate_reads.tsv")
+        raise
     _write_run_config(args.outdir, "discover", args, status="discover_mvp_completed")
-    logger = _configure_log(args.outdir, "discover")
-    logger.info("command=tandemx discover")
-    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
-    logger.info("output_directory=%s", args.outdir)
     logger.info("status=discover_mvp_completed")
     logger.info("candidate_count=%s", len(candidates))
     logger.info("family_count=%s", len(families))
@@ -336,11 +360,22 @@ def build_parser() -> argparse.ArgumentParser:
     )
     discover.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale HiFi-like reads in FASTA/FASTQ format, optionally gzip-compressed.")
     discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, candidate_reads.tsv, monomers.fa, and families.tsv.")
-    discover.add_argument("--min-monomer-len", type=int, default=20, help="Minimum candidate monomer length in bp.")
-    discover.add_argument("--max-monomer-len", type=int, default=2000, help="Maximum candidate monomer length in bp.")
+    discover.add_argument("--min-period", "--min-monomer-len", dest="min_monomer_len", type=int, default=20, help="Minimum candidate repeat period in bp.")
+    discover.add_argument("--max-period", "--max-monomer-len", dest="max_monomer_len", type=int, default=2000, help="Maximum candidate repeat period in bp.")
     discover.add_argument("--min-support-reads", type=int, default=5, help="Minimum number of reads supporting a candidate family.")
     discover.add_argument("--min-repeat-span", type=int, default=100, help="Minimum repeat-supporting span in a read, in bp.")
-    discover.add_argument("--seed", type=int, default=1, help="Reserved for reproducible future stochastic discovery steps.")
+    discover.add_argument("--min-read-length", type=int, default=1, help="Skip reads shorter than this length in bp; set explicitly for real-read pilots.")
+    discover.add_argument("--kmer-size", type=int, default=11, help="Canonical seed k-mer size for spacing prefiltering.")
+    discover.add_argument("--top-periods", type=int, default=5, help="Maximum spacing peaks refined per read.")
+    discover.add_argument("--min-seed-occurrences", type=int, default=2, help="Minimum within-read occurrences required for a seed k-mer.")
+    discover.add_argument("--min-spacing-support", type=int, default=2, help="Minimum repeated-seed support required for a spacing peak.")
+    discover.add_argument("--max-pairs-per-kmer", type=int, default=100, help="Maximum adjacent position pairs retained per seed k-mer.")
+    discover.add_argument("--max-reads", type=int, help="Maximum sampled reads to process for pilot runs.")
+    discover.add_argument("--sample-rate", type=float, default=1.0, help="Fraction of input reads sampled reproducibly, in (0, 1].")
+    discover.add_argument("--seed", type=int, default=1, help="Random seed for reproducible read sampling.")
+    discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")
+    discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
+    discover.add_argument("--kmer-backend", choices=("python",), default="python", help="Seed backend. Python is the current toy/pilot backend; external backends are future work.")
     discover.set_defaults(func=run_discover)
 
     quantify = subparsers.add_parser(
@@ -459,6 +494,8 @@ def main(argv: list[str] | None = None) -> int:
     args._argv = list(argv)
     try:
         return args.func(args)
+    except KeyboardInterrupt:
+        parser.exit(130, "error: interrupted by user; partial outputs may be available\n")
     except (InputFileError, SequenceFormatError, ValidationError, ValueError) as exc:
         parser.exit(2, f"error: {exc}\n")
 

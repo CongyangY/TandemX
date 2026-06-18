@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import re
 import subprocess
 import sys
 import time
@@ -31,6 +32,14 @@ SUMMARY_FIELDS = [
     "exit_status",
     "output_validated",
     "recovered_family_count",
+    "processed_reads",
+    "processed_bases",
+    "candidate_reads",
+    "candidates_per_mb",
+    "reads_per_second",
+    "mb_per_second",
+    "peak_memory_mb",
+    "algorithm_mode",
     "notes",
 ]
 
@@ -112,6 +121,7 @@ def run_benchmark(scale: str, config: dict[str, Any], outdir: Path) -> int:
 
     output_validated = any(result.name == "validate" and result.exit_status == 0 for result in results)
     recovered_family_count = count_recovered_families(scale_dir / "discover" / "families.tsv")
+    discover_metrics = parse_discover_metrics(scale_dir / "discover" / "run.log")
     summary_rows = [
         summary_row(
             config=config,
@@ -120,6 +130,7 @@ def run_benchmark(scale: str, config: dict[str, Any], outdir: Path) -> int:
             total_read_bp=total_read_bp,
             output_validated=output_validated if result.name == "validate" else False,
             recovered_family_count=recovered_family_count,
+            discover_metrics=discover_metrics if result.name == "discover" else {},
         )
         for result in results
     ]
@@ -186,14 +197,30 @@ def build_commands(
                 str(simulated / "reads.fa"),
                 "--outdir",
                 str(discover),
-                "--min-monomer-len",
-                str(discover_config["min_monomer_len"]),
-                "--max-monomer-len",
-                str(discover_config["max_monomer_len"]),
+                "--min-period",
+                str(discover_config["min_period"]),
+                "--max-period",
+                str(discover_config["max_period"]),
                 "--min-support-reads",
                 str(discover_config["min_support_reads"]),
                 "--min-repeat-span",
                 str(discover_config["min_repeat_span"]),
+                "--min-read-length",
+                str(discover_config["min_read_length"]),
+                "--kmer-size",
+                str(discover_config["kmer_size"]),
+                "--top-periods",
+                str(discover_config["top_periods"]),
+                "--min-seed-occurrences",
+                str(discover_config["min_seed_occurrences"]),
+                "--min-spacing-support",
+                str(discover_config["min_spacing_support"]),
+                "--max-pairs-per-kmer",
+                str(discover_config["max_pairs_per_kmer"]),
+                "--max-reads",
+                str(config["read_count"]),
+                "--progress-every",
+                str(discover_config["progress_every"]),
             ],
         ),
         (
@@ -279,6 +306,7 @@ def summary_row(
     total_read_bp: int,
     output_validated: bool,
     recovered_family_count: int,
+    discover_metrics: dict[str, str],
 ) -> dict[str, str]:
     return {
         "benchmark_id": str(config["benchmark_id"]),
@@ -293,8 +321,37 @@ def summary_row(
         "exit_status": str(command_result.exit_status),
         "output_validated": str(output_validated).lower(),
         "recovered_family_count": str(recovered_family_count),
+        "processed_reads": discover_metrics.get("processed_reads", ""),
+        "processed_bases": discover_metrics.get("processed_bases", ""),
+        "candidate_reads": discover_metrics.get("candidate_reads", ""),
+        "candidates_per_mb": discover_metrics.get("candidates_per_mb", ""),
+        "reads_per_second": discover_metrics.get("reads_per_second", ""),
+        "mb_per_second": discover_metrics.get("mb_per_second", ""),
+        "peak_memory_mb": "",
+        "algorithm_mode": "spacing_prefilter" if command_result.name == "discover" else "",
         "notes": command_result.notes,
     }
+
+
+def parse_discover_metrics(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    progress_lines = [
+        line
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if "progress processed_reads=" in line
+    ]
+    if not progress_lines:
+        return {}
+    values = dict(re.findall(r"([a-z_]+)=([^ ]+)", progress_lines[-1]))
+    processed_bases = float(values.get("processed_bases", "0"))
+    candidate_reads = float(values.get("candidate_reads", "0"))
+    values["candidates_per_mb"] = (
+        f"{candidate_reads / (processed_bases / 1_000_000):.6f}"
+        if processed_bases > 0
+        else "0.000000"
+    )
+    return values
 
 
 def write_tsv(path: Path, fields: list[str], rows: list[dict[str, Any]]) -> None:

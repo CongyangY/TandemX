@@ -7,7 +7,7 @@ The current MVP:
 1. supports FASTA, FASTQ and gzip-compressed sequence inputs, but only for toy-scale datasets;
 2. performs de novo discovery from reads in `tandemx discover`;
 3. assumes small toy data;
-4. uses simple k-mer and shifted-periodicity heuristics;
+4. uses a bounded k-mer spacing prefilter and local period refinement in Python;
 5. does not use external tandem repeat finders;
 6. does not perform read mapping;
 7. does not infer higher-order repeat structure;
@@ -35,6 +35,8 @@ Reasons:
 An optional guided mode using user-supplied known-repeat FASTA files may be added later, but it is not the default MVP workflow.
 
 The synthetic benchmark harness can measure tiny and manual scale runs, but it does not make the MVP suitable for real 7-20 Gb production analysis. Real data should be limited to pilot subsets until chunking, resumable execution, memory reporting and external benchmarks are implemented.
+
+Discover now provides incremental candidates and progress logs, but it remains single-process. `--chunk-size` does not yet provide checkpoint/resume behavior. The Python seed backend is suitable for staged subset tests, not full raw-read production workloads.
 
 ## Claims Not Supported
 
