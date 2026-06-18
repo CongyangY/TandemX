@@ -64,3 +64,23 @@ def scan_read_for_periods(
         overflow_count=result.overflow_count,
         status=result.status,
     )
+
+
+class RustDiagnosticKmerCounter:
+    """Small target-only counter; this is not a global k-mer counting backend."""
+
+    def __init__(self, k: int, targets: set[str]) -> None:
+        try:
+            from tandemx import _rust_core
+        except ImportError as exc:
+            raise RustBackendUnavailable(
+                "Rust backend is unavailable. Install from the repository with "
+                "`pip install -e .` or run `maturin develop`."
+            ) from exc
+        self._counter = _rust_core.DiagnosticKmerCounter(k, sorted(targets))
+
+    def count_sequence(self, sequence: str) -> None:
+        self._counter.count_sequence(sequence)
+
+    def counts(self) -> dict[str, int]:
+        return dict(self._counter.counts())

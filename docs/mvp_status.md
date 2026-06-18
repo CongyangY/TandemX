@@ -11,6 +11,7 @@ Current implemented commands:
 5. `tandemx probe`
 6. `tandemx visualize`
 7. `tandemx validate`
+8. `tandemx run`
 
 Implemented benchmark support:
 
@@ -19,6 +20,7 @@ Implemented benchmark support:
 3. `benchmark_summary.tsv` runtime/status output;
 4. `accuracy_summary.tsv` toy truth evaluation output;
 5. pytest coverage for the `tiny` synthetic benchmark only.
+6. step-level pipeline summaries in TSV/JSON with per-step stdout, stderr, optional cProfile output, and basic validated resume.
 
 Discover performance status:
 
@@ -28,7 +30,7 @@ Discover performance status:
 4. candidate output and progress logs are written incrementally;
 5. `--max-reads`, `--max-read-bases` and reproducible sampling support real-read pilot subsets;
 6. `--kmer-backend rust` provides a compiled read-local seed/spacing implementation while Python remains the default/fallback;
-7. multiprocessing and resume remain future work.
+7. multiprocessing and intra-step checkpoint resume remain future work; output-level pipeline resume is implemented.
 
 `tandemx compare` remains deferred. Assembly-vs-read comparison is currently produced inside `tandemx locate` as `assembly_vs_read_cn.tsv`.
 

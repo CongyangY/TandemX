@@ -8,9 +8,10 @@
 4. Add versioned toy benchmark configs.
 5. Keep randomized toy workflow tests small, reproducible and independent of simulator truth files as algorithm input.
 6. Use the synthetic benchmark harness to track runtime, output validity and toy accuracy across 1k/10k/50k/100k-read scales.
-7. Implement real chunk checkpoints and `--resume`; do not expose a resume flag until restart behavior is tested.
+7. Extend the implemented output-level `tandemx run --resume` into real intra-step chunk checkpoints with input/config fingerprints.
 8. Add optional `kmc`, `meryl` or `jellyfish` adapters for global production k-mer workloads while keeping Python for toy/pilot runs.
 9. Stabilize and package the implemented Rust read-local rolling seed/position interface across supported Python/platform combinations; global k-mer counters do not replace this position-aware operation.
+10. Preserve `tandemx run` step summaries while adding resource metrics and dependency-aware invalidation.
 
 The default workflow should remain de novo: reads enter `tandemx discover`, and the discovered repeat catalog feeds downstream commands. A future optional guided mode may allow `--catalog` to point to user-supplied known-repeat FASTA files, such as named satellite sequences, for guided quantification, localization or probe design. That guided mode must be documented as optional and separate from the default discovery workflow.
 
@@ -26,6 +27,8 @@ Future real plant genome support will require:
 6. indexed monomer and assembly search;
 7. robust logging and resource reporting;
 8. a compiled or mature external seed-counting backend for high-throughput workloads.
+
+The current profiling order is: reduce discover overhead with batch Rust calls or bounded multiprocessing; evaluate a mature external counter before scaling quantify beyond pilots; then replace locate and probe's simple assembly scans with indexed/windowed approaches. Visualization startup is only dominant on tiny inputs and is not the first large-genome optimization target.
 
 FASTA, FASTQ and gzip input parsing is now available for the MVP. This does not remove the need for streaming optimization, parallelization, bounded-memory k-mer counting, external benchmarking, and real read validation before 7-20 Gb plant genome analysis.
 

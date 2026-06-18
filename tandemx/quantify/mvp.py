@@ -9,6 +9,7 @@ from statistics import median
 from typing import Iterable, Sequence
 
 from tandemx.discover.mvp import FastaRecord, read_fasta
+from tandemx.discover.rust_backend import RustDiagnosticKmerCounter
 from tandemx.simulate.toy import reverse_complement
 
 
@@ -26,6 +27,9 @@ class QuantifyConfig:
     outdir: Path
     k: int
     haploid_depth: float | None
+    kmer_backend: str = "python"
+    max_reads: int | None = None
+    max_read_bases: int | None = None
 
 
 @dataclass(frozen=True)
@@ -49,7 +53,28 @@ def quantify_toy_copy_number(config: QuantifyConfig) -> list[CopyNumberEstimate]
     if all(len(monomer.sequence) < config.k for monomer in monomers):
         raise ValueError("--k is greater than all monomer lengths in the catalogue")
 
-    read_kmers, total_read_bases, read_count, max_read_len = count_read_kmers_and_bases(config.reads, config.k)
+    shared_map = family_kmer_membership(monomers, config.k)
+    diagnostic_by_family = {
+        monomer.family_id: {
+            kmer: multiplicity
+            for kmer, multiplicity in monomer_kmer_counts(monomer.sequence, config.k).items()
+            if len(shared_map[kmer]) == 1 and not is_low_complexity_kmer(kmer)
+        }
+        for monomer in monomers
+    }
+    target_kmers = {
+        kmer
+        for diagnostic in diagnostic_by_family.values()
+        for kmer in diagnostic
+    }
+    read_kmers, total_read_bases, read_count, max_read_len = count_selected_read_kmers_and_bases(
+        config.reads,
+        config.k,
+        target_kmers,
+        config.kmer_backend,
+        max_reads=config.max_reads,
+        max_read_bases=config.max_read_bases,
+    )
     if read_count == 0:
         raise ValueError("No reads found for quantify")
     if max_read_len < config.k:
@@ -59,16 +84,10 @@ def quantify_toy_copy_number(config: QuantifyConfig) -> list[CopyNumberEstimate]
         if config.haploid_depth is not None
         else total_read_bases / config.genome_size
     )
-    shared_map = family_kmer_membership(monomers, config.k)
 
     estimates = []
     for monomer in monomers:
-        monomer_counts = monomer_kmer_counts(monomer.sequence, config.k)
-        diagnostic = {
-            kmer: multiplicity
-            for kmer, multiplicity in monomer_counts.items()
-            if len(shared_map[kmer]) == 1 and not is_low_complexity_kmer(kmer)
-        }
+        diagnostic = diagnostic_by_family[monomer.family_id]
         corrected_depths = [
             read_kmers.get(kmer, 0) / multiplicity
             for kmer, multiplicity in diagnostic.items()
@@ -112,6 +131,14 @@ def validate_quantify_config(config: QuantifyConfig) -> None:
         raise ValueError("--k must be positive")
     if config.haploid_depth is not None and config.haploid_depth <= 0:
         raise ValueError("--haploid-depth must be positive when provided")
+    if config.kmer_backend not in {"python", "rust"}:
+        raise ValueError("--kmer-backend must be python or rust")
+    if config.kmer_backend == "rust" and config.k > 31:
+        raise ValueError("Rust backend requires --k at most 31")
+    if config.max_reads is not None and config.max_reads <= 0:
+        raise ValueError("--max-reads must be positive when provided")
+    if config.max_read_bases is not None and config.max_read_bases <= 0:
+        raise ValueError("--max-read-bases must be positive when provided")
 
 
 def read_monomer_fasta(path: Path) -> Iterable[MonomerRecord]:
@@ -157,6 +184,37 @@ def count_read_kmers_and_bases(path: Path, k: int) -> tuple[Counter[str], int, i
         total_bases += len(read.sequence)
         max_read_len = max(max_read_len, len(read.sequence))
         counts.update(iter_kmers(read.sequence, k))
+    return counts, total_bases, read_count, max_read_len
+
+
+def count_selected_read_kmers_and_bases(
+    path: Path,
+    k: int,
+    targets: set[str],
+    backend: str,
+    *,
+    max_reads: int | None = None,
+    max_read_bases: int | None = None,
+) -> tuple[Counter[str], int, int, int]:
+    counts: Counter[str] = Counter()
+    rust_counter = RustDiagnosticKmerCounter(k, targets) if backend == "rust" else None
+    total_bases = 0
+    read_count = 0
+    max_read_len = 0
+    for read in read_fasta(path):
+        if max_reads is not None and read_count >= max_reads:
+            break
+        if max_read_bases is not None and total_bases + len(read.sequence) > max_read_bases:
+            break
+        read_count += 1
+        total_bases += len(read.sequence)
+        max_read_len = max(max_read_len, len(read.sequence))
+        if rust_counter is not None:
+            rust_counter.count_sequence(read.sequence)
+        else:
+            counts.update(kmer for kmer in iter_kmers(read.sequence, k) if kmer in targets)
+    if rust_counter is not None:
+        counts.update(rust_counter.counts())
     return counts, total_bases, read_count, max_read_len
 
 

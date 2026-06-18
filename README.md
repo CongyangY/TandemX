@@ -21,7 +21,7 @@ raw reads -> tandemx discover -> de novo repeat catalog -> quantify/locate/probe
 
 ## Current Status
 
-This repository currently contains a toy dataset simulator and toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs.
+This repository currently contains a toy dataset simulator, toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs, and a step-level `tandemx run` orchestrator.
 
 No production-scale tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is available yet.
 
@@ -62,6 +62,7 @@ Available commands:
 
 ```bash
 tandemx simulate toy --help
+tandemx run --help
 tandemx discover --help
 tandemx quantify --help
 tandemx locate --help
@@ -137,6 +138,20 @@ tandemx validate --project results
 ```
 
 In this workflow, `results/discover/monomers.fa` is a de novo discovery output. Passing it to `--catalog` in downstream commands reuses TandemX's discovered catalog; it does not mean TandemX needs repeat sequences before discovery.
+
+The same dependency chain can be run in one command:
+
+```bash
+tandemx run \
+  --reads results/toy/reads.fa \
+  --assembly results/toy/assembly.fa \
+  --genome-size 7744 \
+  --outdir results/run \
+  --steps discover,quantify,locate,probe,visualize,validate \
+  --kmer-backend rust
+```
+
+Without `--assembly`, locate, probe, and assembly-dependent visualization steps are recorded as skipped. `--resume` is basic output-level resume, not an intra-step checkpoint. `--force` reruns selected steps. Pipeline runs write per-step logs plus `pipeline_summary.tsv` and `pipeline_summary.json`. Read limits are passed to both discover and quantify so copy-number depth uses the same input prefix.
 
 ## Tests
 
@@ -216,3 +231,16 @@ python benchmarks/scripts/run_real_read_pilot_benchmark.py \
 ```
 
 The real-read runner executes only `discover` and `validate`; it does not read simulator truth files.
+
+For step-level timing, use:
+
+```bash
+python benchmarks/scripts/run_pipeline_benchmark.py \
+  --reads subset.fastq.gz \
+  --genome-size 16000000000 \
+  --outdir /tmp/tandemx_pipeline_pilot \
+  --steps discover,quantify,validate \
+  --kmer-backend rust \
+  --max-reads 100000 \
+  --profile
+```

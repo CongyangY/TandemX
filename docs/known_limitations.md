@@ -38,6 +38,10 @@ The synthetic benchmark harness can measure tiny and manual scale runs, but it d
 
 Discover now provides incremental candidates and progress logs, but it remains single-process. `--chunk-size` does not yet provide checkpoint/resume behavior. The Python backend is suitable for toy and staged subset tests; the Rust backend makes larger real-read pilots practical but does not address clustering memory, restartability, full-dataset resource reporting or downstream scaling.
 
+`tandemx run --resume` operates between commands only. It validates expected output files before skipping a step, but it does not resume a partially processed FASTQ, fingerprint inputs, or detect that an upstream file changed after a downstream result was written. `--threads` is recorded and currently must be 1.
+
+Quantify's in-process counters retain only catalogue-derived diagnostic k-mers, which avoids all-read distinct-k-mer memory growth. This is appropriate for toy and bounded pilot runs; it is not a substitute for KMC, meryl, Jellyfish, or production-scale coverage calibration.
+
 ## Claims Not Supported
 
 Do not claim that TandemX can:

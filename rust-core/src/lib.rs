@@ -26,6 +26,14 @@ struct ScanResult {
     status: String,
 }
 
+#[pyclass]
+struct DiagnosticKmerCounter {
+    k: usize,
+    target_indices: HashMap<u64, usize>,
+    target_names: Vec<String>,
+    counts: Vec<u64>,
+}
+
 fn base_code(base: u8) -> Option<u64> {
     match base {
         b'A' | b'a' => Some(0),
@@ -33,6 +41,91 @@ fn base_code(base: u8) -> Option<u64> {
         b'G' | b'g' => Some(2),
         b'T' | b't' => Some(3),
         _ => None,
+    }
+}
+
+fn canonical_code(sequence: &[u8]) -> Option<u64> {
+    let k = sequence.len();
+    if k == 0 || k > 31 {
+        return None;
+    }
+    let mut forward = 0_u64;
+    let mut reverse = 0_u64;
+    for (index, &base) in sequence.iter().enumerate() {
+        let code = base_code(base)?;
+        forward = (forward << 2) | code;
+        reverse |= (3 - code) << (2 * index);
+    }
+    Some(forward.min(reverse))
+}
+
+#[pymethods]
+impl DiagnosticKmerCounter {
+    #[new]
+    fn new(k: usize, targets: Vec<String>) -> PyResult<Self> {
+        if !(1..=31).contains(&k) {
+            return Err(PyValueError::new_err(
+                "Rust k-mer counter requires k in 1..=31",
+            ));
+        }
+        let mut target_indices = HashMap::new();
+        let mut target_names = Vec::new();
+        for target in targets {
+            if target.len() != k {
+                return Err(PyValueError::new_err(
+                    "diagnostic k-mer length does not match k",
+                ));
+            }
+            let code = canonical_code(target.as_bytes()).ok_or_else(|| {
+                PyValueError::new_err("diagnostic k-mer contains an invalid base")
+            })?;
+            if !target_indices.contains_key(&code) {
+                let index = target_indices.len();
+                target_indices.insert(code, index);
+                target_names.push(target);
+            }
+        }
+        let counts = vec![0_u64; target_indices.len()];
+        Ok(Self {
+            k,
+            target_indices,
+            target_names,
+            counts,
+        })
+    }
+
+    fn count_sequence(&mut self, sequence: &str) {
+        let mask = (1_u64 << (2 * self.k)) - 1;
+        let reverse_shift = 2 * (self.k - 1);
+        let mut forward = 0_u64;
+        let mut reverse = 0_u64;
+        let mut valid_length = 0_usize;
+        for &base in sequence.as_bytes() {
+            let Some(code) = base_code(base) else {
+                forward = 0;
+                reverse = 0;
+                valid_length = 0;
+                continue;
+            };
+            valid_length += 1;
+            forward = ((forward << 2) | code) & mask;
+            reverse = (reverse >> 2) | ((3 - code) << reverse_shift);
+            if valid_length < self.k {
+                continue;
+            }
+            let canonical = forward.min(reverse);
+            if let Some(&index) = self.target_indices.get(&canonical) {
+                self.counts[index] += 1;
+            }
+        }
+    }
+
+    fn counts(&self) -> HashMap<String, u64> {
+        self.target_names
+            .iter()
+            .enumerate()
+            .map(|(index, name)| (name.clone(), self.counts[index]))
+            .collect()
     }
 }
 
@@ -350,6 +443,7 @@ fn scan_read_for_periods(
 #[pymodule]
 fn _rust_core(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<ScanResult>()?;
+    module.add_class::<DiagnosticKmerCounter>()?;
     module.add_function(wrap_pyfunction!(scan_read_for_periods, module)?)?;
     Ok(())
 }
@@ -388,5 +482,13 @@ mod tests {
         sequence.extend_from_slice(seed);
         let (positions, _) = extract_repeated_positions(&sequence, 11, 2, 100);
         assert_eq!(positions.values().next(), Some(&vec![0, 12]));
+    }
+
+    #[test]
+    fn diagnostic_counter_counts_only_targets() {
+        let target = "ACGTTCAGGAC".to_string();
+        let mut counter = DiagnosticKmerCounter::new(11, vec![target.clone()]).unwrap();
+        counter.count_sequence("ACGTTCAGGACNACGTTCAGGAC");
+        assert_eq!(counter.counts().get(&target), Some(&2));
     }
 }

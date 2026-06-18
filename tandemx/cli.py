@@ -16,13 +16,14 @@ from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
 from tandemx.io.sequences import SequenceFormatError
 from tandemx.io.validators import ValidationError, validate_project
 from tandemx.locate.mvp import LocateConfig, locate_toy_arrays
+from tandemx.pipeline import add_pipeline_arguments, run_pipeline_cli
 from tandemx.probe.mvp import ProbeConfig, rank_toy_probes
 from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
 from tandemx.visualize.mvp import VisualizeConfig, render_static_plots
 
 
-COMMANDS = ("discover", "quantify", "locate", "probe", "compare", "visualize", "simulate", "validate")
+COMMANDS = ("run", "discover", "quantify", "locate", "probe", "compare", "visualize", "simulate", "validate")
 
 
 class InputFileError(Exception):
@@ -193,6 +194,9 @@ def run_quantify(args: argparse.Namespace) -> int:
             outdir=args.outdir,
             k=args.k,
             haploid_depth=args.haploid_depth,
+            kmer_backend=args.kmer_backend,
+            max_reads=args.max_reads,
+            max_read_bases=args.max_read_bases,
         )
     )
     _write_run_config(args.outdir, "quantify", args, status="quantify_mvp_completed")
@@ -355,6 +359,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--version", action="version", version=f"tandemx {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
+    pipeline = subparsers.add_parser(
+        "run",
+        help="Run a step-level TandemX workflow with summaries and basic resume.",
+    )
+    add_pipeline_arguments(pipeline)
+    pipeline.set_defaults(func=run_pipeline_cli)
+
     discover = subparsers.add_parser(
         "discover",
         help="Discover candidate tandem repeat monomers from reads.",
@@ -390,6 +401,9 @@ def build_parser() -> argparse.ArgumentParser:
     quantify.add_argument("--genome-size", required=True, type=int, help="Estimated haploid or target genome size in bp.")
     quantify.add_argument("--k", type=int, default=21, help="Diagnostic k-mer size.")
     quantify.add_argument("--haploid-depth", type=float, help="Optional haploid sequencing depth. If omitted, depth is estimated as total read bases divided by genome size.")
+    quantify.add_argument("--kmer-backend", choices=("python", "rust"), default="python", help="Diagnostic target k-mer counting backend; Rust remains target-only, not a global counter.")
+    quantify.add_argument("--max-reads", type=int, help="Maximum input reads to count; useful for a subset matched to discover.")
+    quantify.add_argument("--max-read-bases", type=int, help="Maximum cumulative input read bases to count without splitting a read.")
     quantify.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and copy_number.tsv.")
     quantify.set_defaults(func=run_quantify)
 

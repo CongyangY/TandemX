@@ -64,6 +64,8 @@ Use these controls for real-read subsets:
 
 Production-scale global k-mer counting is a separate problem and should use optional mature backends such as KMC, meryl or Jellyfish instead of a new TandemX counter. The Rust backend does not replace those tools.
 
+Quantify derives diagnostic k-mers from the discovered families before scanning reads. Both backends count only those targets, so memory scales with the catalogue rather than all distinct read k-mers. The Rust implementation is a small stateful target counter, not a production global k-mer counter.
+
 ## Remaining Limits
 
 The spacing prefilter enables larger subsets but does not make TandemX ready for full 7-20 Gb genomes or 100 Gb read sets. Remaining work includes multiprocessing, chunk checkpoints, resumable execution, faster compiled seed extraction, portable peak-memory reporting and validation on real HiFi subsets.
@@ -108,3 +110,19 @@ The release-mode Rust extension was measured on the same local FASTQ and paramet
 | 50,000 | NA | 42.84 s | 16.443 MB/s | NA | 30 | 3 |
 
 All Rust benchmark outputs passed schema validation. These are engineering measurements, not biological validation. The Rust backend remains single-process and per-read; full 7–20 Gb production use still requires checkpoint/resume, memory profiling, robust clustering, downstream scaling and external tool comparisons.
+
+The 100,000-read standalone discover run processed 1,406,681,945 bp in 83.25 seconds (16.917 MB/s), found 50 candidate reads and four families, and passed output validation. Its progress log reached all 100,000 reads. This is an engineering pilot, not evidence that the recovered families are biologically correct.
+
+## Step-level Pipeline Measurements
+
+The reads-only 100,000-read run used cProfile for each step and the Rust backend:
+
+| Step | Runtime | Output validation |
+|---|---:|---:|
+| discover | 101.08 s | passed |
+| quantify | 32.68 s | passed |
+| validate | 0.09 s | passed |
+
+Profiling overhead explains why discover is slower here than the standalone measurement. Total measured step time was 133.85 seconds. Discover remains the main real-read pilot bottleneck; quantify is material but bounded-memory after target-only counting.
+
+The profiled toy full workflow recorded discover 0.10 s, quantify 0.17 s, locate 0.12 s, probe 0.15 s, visualize 9.04 s, and validate 0.08 s. Matplotlib and process startup dominate this tiny visualization measurement, so it does not predict chromosome-scale behavior.

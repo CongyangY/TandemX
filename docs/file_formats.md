@@ -223,6 +223,30 @@ The validator scans the project directory for recognized TandemX output filename
 
 Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, and `probes.fa`.
 
+## Pipeline Summaries
+
+Produced by: `tandemx run` and `benchmarks/scripts/run_pipeline_benchmark.py`.
+
+`pipeline_summary.tsv` has one row per requested step. `pipeline_summary.json` contains the same rows as a JSON array. Skipped and failed steps remain explicit rows.
+
+| Field | Type | Description |
+|---|---|---|
+| run_id | string | Unique pipeline invocation identifier |
+| input_reads | path | Reads supplied to the pipeline |
+| input_assembly | path or empty | Optional assembly supplied to the pipeline |
+| max_reads | integer or empty | Configured read limit |
+| max_read_bases | integer or empty | Configured cumulative read-base limit |
+| kmer_backend | string | Selected `python` or `rust` backend |
+| step | string | Pipeline step name |
+| command | string | Shell-escaped executed command; empty for skipped steps |
+| start_time | ISO-8601 string | UTC step start time |
+| end_time | ISO-8601 string | UTC step end time |
+| runtime_seconds | float | Measured wall-clock seconds |
+| exit_status | integer | Process exit status; zero for successful or intentionally skipped steps |
+| output_dir | path | Step output directory |
+| output_validated | boolean | Whether expected outputs passed current validation |
+| notes | string | Skip reason, failure reason, profiling state, or recorded thread setting |
+
 ## Toy Simulation Outputs
 
 Produced by: `tandemx simulate toy`
