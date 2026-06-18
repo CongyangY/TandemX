@@ -22,6 +22,7 @@ from tandemx.discover.spacing import (
     refine_candidate_period,
     select_candidate_periods,
 )
+from tandemx.discover.rust_backend import RustBackendUnavailable, scan_read_for_periods
 from tandemx.simulate.toy import reverse_complement, wrap_sequence
 
 
@@ -137,18 +138,27 @@ def discover_toy_repeats(
             elif is_low_complexity(record.sequence):
                 skipped_low_complexity += 1
             else:
-                candidate, overflow_count = find_best_periodic_candidate_with_stats(
-                    record,
-                    min_period=config.min_monomer_len,
-                    max_period=config.max_monomer_len,
-                    min_repeat_span=config.min_repeat_span,
-                    candidate_index=len(candidates) + 1,
-                    kmer_size=config.kmer_size,
-                    top_periods=config.top_periods,
-                    min_seed_occurrences=config.min_seed_occurrences,
-                    min_spacing_support=config.min_spacing_support,
-                    max_pairs_per_kmer=config.max_pairs_per_kmer,
+                finder = (
+                    find_best_periodic_candidate_rust
+                    if config.kmer_backend == "rust"
+                    else find_best_periodic_candidate_with_stats
                 )
+                try:
+                    candidate, overflow_count = finder(
+                        record,
+                        min_period=config.min_monomer_len,
+                        max_period=config.max_monomer_len,
+                        min_repeat_span=config.min_repeat_span,
+                        candidate_index=len(candidates) + 1,
+                        kmer_size=config.kmer_size,
+                        top_periods=config.top_periods,
+                        min_seed_occurrences=config.min_seed_occurrences,
+                        min_spacing_support=config.min_spacing_support,
+                        max_pairs_per_kmer=config.max_pairs_per_kmer,
+                    )
+                except RustBackendUnavailable as exc:
+                    logger.error("rust_backend_unavailable=%s", exc)
+                    raise ValueError(str(exc)) from exc
                 seed_overflow_count += overflow_count
 
             if candidate is not None:
@@ -240,8 +250,10 @@ def validate_discover_config(config: DiscoverConfig) -> None:
         raise ValueError("--progress-every must be positive")
     if config.chunk_size <= 0:
         raise ValueError("--chunk-size must be positive")
-    if config.kmer_backend != "python":
-        raise ValueError("Only --kmer-backend python is available in the current pilot implementation")
+    if config.kmer_backend not in {"python", "rust"}:
+        raise ValueError("--kmer-backend must be python or rust")
+    if config.kmer_backend == "rust" and config.kmer_size > 31:
+        raise ValueError("Rust backend requires --kmer-size at most 31")
 
 
 def read_fasta(path: Path) -> Iterable[FastaRecord]:
@@ -340,9 +352,61 @@ def find_best_periodic_candidate_with_stats(
         max_period=bounded_max_period,
     )
 
-    if best_score < 0.75:
-        return None, overflow_count
+    return build_candidate_from_period(
+        record,
+        sequence,
+        best_period,
+        best_score,
+        candidate_index,
+    ), overflow_count
 
+
+def find_best_periodic_candidate_rust(
+    record: FastaRecord,
+    min_period: int,
+    max_period: int,
+    min_repeat_span: int,
+    candidate_index: int,
+    kmer_size: int,
+    top_periods: int,
+    min_seed_occurrences: int,
+    min_spacing_support: int,
+    max_pairs_per_kmer: int,
+) -> tuple[CandidateRepeat | None, int]:
+    sequence = record.sequence.upper()
+    if len(sequence) < max(min_repeat_span, min_period * 2):
+        return None, 0
+    bounded_max_period = min(max_period, len(sequence) // 2)
+    if bounded_max_period < min_period or len(sequence) < kmer_size:
+        return None, 0
+    result = scan_read_for_periods(
+        sequence,
+        k=kmer_size,
+        min_period=min_period,
+        max_period=bounded_max_period,
+        top_periods=top_periods,
+        min_seed_occurrences=min_seed_occurrences,
+        min_spacing_support=min_spacing_support,
+        max_pairs_per_kmer=max_pairs_per_kmer,
+    )
+    return build_candidate_from_period(
+        record,
+        sequence,
+        result.best_period,
+        result.periodicity_score,
+        candidate_index,
+    ), result.overflow_count
+
+
+def build_candidate_from_period(
+    record: FastaRecord,
+    sequence: str,
+    best_period: int,
+    best_score: float,
+    candidate_index: int,
+) -> CandidateRepeat | None:
+    if best_period <= 0 or best_score < 0.75:
+        return None
     repeat_span = len(sequence)
     warning = ""
     low_complexity = is_low_complexity(sequence[:best_period])
@@ -363,7 +427,7 @@ def find_best_periodic_candidate_with_stats(
         low_complexity_flag=low_complexity,
         confidence=confidence,
         warning=warning,
-    ), overflow_count
+    )
 
 
 def periodicity_score(sequence: str, period: int) -> float:

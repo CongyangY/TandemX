@@ -10,3 +10,6 @@ dist/
 results/
 examples/toy/results/
 /test_data/
+/rust-core/target/
+/tandemx/_rust_core*.so
+/tandemx/_rust_core*.pyd

@@ -377,7 +377,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--seed", type=int, default=1, help="Random seed for reproducible read sampling.")
     discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")
     discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
-    discover.add_argument("--kmer-backend", choices=("python",), default="python", help="Seed backend. Python is the current toy/pilot backend; external backends are future work.")
+    discover.add_argument("--kmer-backend", choices=("python", "rust"), default="python", help="Read-local seed backend. Rust requires the compiled extension; Python remains the fallback/default.")
     discover.set_defaults(func=run_discover)
 
     quantify = subparsers.add_parser(

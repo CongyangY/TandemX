@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=68"]
-build-backend = "setuptools.build_meta"
+requires = ["maturin>=1.7,<2"]
+build-backend = "maturin"
 
 [project]
 name = "tandemx"
@@ -25,3 +25,9 @@ tandemx = "tandemx.cli:main"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.maturin]
+manifest-path = "rust-core/Cargo.toml"
+python-source = "."
+module-name = "tandemx._rust_core"
+features = ["pyo3/extension-module"]

@@ -10,7 +10,7 @@
 6. Use the synthetic benchmark harness to track runtime, output validity and toy accuracy across 1k/10k/50k/100k-read scales.
 7. Implement real chunk checkpoints and `--resume`; do not expose a resume flag until restart behavior is tested.
 8. Add optional `kmc`, `meryl` or `jellyfish` adapters for global production k-mer workloads while keeping Python for toy/pilot runs.
-9. Move the profiled read-local rolling seed/position loop behind a stable Rust/C++ backend interface; global k-mer counters do not replace this position-aware operation.
+9. Stabilize and package the implemented Rust read-local rolling seed/position interface across supported Python/platform combinations; global k-mer counters do not replace this position-aware operation.
 
 The default workflow should remain de novo: reads enter `tandemx discover`, and the discovered repeat catalog feeds downstream commands. A future optional guided mode may allow `--catalog` to point to user-supplied known-repeat FASTA files, such as named satellite sequences, for guided quantification, localization or probe design. That guided mode must be documented as optional and separate from the default discovery workflow.
 
@@ -35,7 +35,7 @@ Real-data work should begin with the staged pilot plan in `docs/real_data_pilot_
 
 Python should remain the prototype layer until algorithms stabilize. Future compiled components may be useful for:
 
-1. high-throughput k-mer counting;
+1. additional high-throughput read-local and global k-mer operations not covered by the current Rust backend;
 2. large-read periodicity scanning;
 3. assembly k-mer indexing;
 4. interval merging at chromosome scale;

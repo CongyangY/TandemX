@@ -27,7 +27,8 @@ Discover performance status:
 3. only bounded local period neighborhoods are refined;
 4. candidate output and progress logs are written incrementally;
 5. `--max-reads`, `--max-read-bases` and reproducible sampling support real-read pilot subsets;
-6. multiprocessing and resume remain future work.
+6. `--kmer-backend rust` provides a compiled read-local seed/spacing implementation while Python remains the default/fallback;
+7. multiprocessing and resume remain future work.
 
 `tandemx compare` remains deferred. Assembly-vs-read comparison is currently produced inside `tandemx locate` as `assembly_vs_read_cn.tsv`.
 
@@ -110,7 +111,7 @@ All tests should be run in the `tandemx-dev` conda environment.
 
 ## Scope Status
 
-The MVP is strictly toy-scale. It is intended to establish architecture, file formats, command behavior, and reproducible tests.
+The MVP establishes architecture, file formats, command behavior and reproducible tests. The Rust backend has been exercised on bounded real HiFi subsets, but biological validation remains toy-scale.
 
 The MVP is not validated for real 7-20 Gb plant genomes. Before real large-genome use, TandemX needs streaming algorithm optimization, parallelization, external benchmarks, and validation on real reads and assemblies.
 

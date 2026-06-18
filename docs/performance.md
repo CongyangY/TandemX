@@ -16,7 +16,7 @@ For 100,000 HiFi reads with an N50 near 16 kb and a 20-2,000 bp period range, th
 
 1. stream one read from `tandemx.io.sequences`;
 2. skip reads that are too short or low complexity;
-3. extract canonical, non-low-complexity k-mers with a streaming 2-bit rolling encoder and retain only repeated within-read seeds;
+3. extract canonical, non-low-complexity k-mers with a streaming 2-bit rolling encoder in the selected Python or Rust backend and retain only repeated within-read seeds;
 4. cap stored positions and inspected pairs per k-mer;
 5. build a bounded seed-spacing histogram;
 6. select only the strongest spacing peaks;
@@ -60,7 +60,9 @@ Use these controls for real-read subsets:
 
 ## Backend Boundary
 
-`--kmer-backend python` is the current toy/pilot implementation. Production-scale global k-mer counting should use optional mature backends such as KMC, meryl or Jellyfish instead of a new Python production counter. Read-local position-aware seed spacing is distinct from global counting; profiling indicates that its rolling extraction loop is the primary Rust/C++ migration target. These external or compiled backends are planned interfaces, not current dependencies.
+`--kmer-backend python` remains the default and fallback. `--kmer-backend rust` implements single-read rolling canonical k-mers, repeated positions, bounded spacing histograms, top periods and local scoring behind a PyO3 interface. FASTA/FASTQ parsing, filters, clustering and file output remain in Python.
+
+Production-scale global k-mer counting is a separate problem and should use optional mature backends such as KMC, meryl or Jellyfish instead of a new TandemX counter. The Rust backend does not replace those tools.
 
 ## Remaining Limits
 
@@ -92,3 +94,17 @@ The 1,000-read runtime with `--min-period 50 --max-period 1000 --top-periods 3` 
 | 50,000 | 703,466,091 | 464.69 s | 1.514 MB/s | 0.0600% | passed |
 
 `cProfile` on 10,000 reads attributed about 78% of cumulative runtime to read-local rolling k-mer extraction, 14% to bounded shifted-identity scoring, 4% to spacing histograms, and less than 1% to FASTQ parsing. File output and reverse-complement string construction were not material costs; canonical reverse complements are encoded incrementally as integers.
+
+## Rust Backend Measurements
+
+The release-mode Rust extension was measured on the same local FASTQ and parameters. Python and Rust returned identical candidate and family counts at 1,000, 5,000 and 10,000 reads. On a synthetic 1,000-read parity run, family monomer lengths were identical and candidate counts differed by 3.3%.
+
+| Reads | Python runtime | Rust runtime | Rust throughput | Speedup | Rust candidates | Rust families |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1,000 | 9.51 s | 0.89 s | 16.961 MB/s | 10.64x | 2 | 1 |
+| 5,000 | 47.88 s | 4.40 s | 16.198 MB/s | 10.87x | 4 | 2 |
+| 10,000 | 92.57 s | 8.44 s | 16.795 MB/s | 10.97x | 6 | 2 |
+| 25,000 | NA | 20.94 s | 16.841 MB/s | NA | 16 | 3 |
+| 50,000 | NA | 42.84 s | 16.443 MB/s | NA | 30 | 3 |
+
+All Rust benchmark outputs passed schema validation. These are engineering measurements, not biological validation. The Rust backend remains single-process and per-read; full 7–20 Gb production use still requires checkpoint/resume, memory profiling, robust clustering, downstream scaling and external tool comparisons.

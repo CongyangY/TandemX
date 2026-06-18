@@ -4,10 +4,10 @@
 
 The current MVP:
 
-1. supports FASTA, FASTQ and gzip-compressed sequence inputs, but only for toy-scale datasets;
+1. supports FASTA, FASTQ and gzip-compressed sequence inputs; engineering benchmarks include bounded real-read subsets, but biological validation remains toy-scale;
 2. performs de novo discovery from reads in `tandemx discover`;
 3. assumes small toy data;
-4. uses a bounded k-mer spacing prefilter and local period refinement in Python;
+4. uses a bounded k-mer spacing prefilter and local period refinement with Python and optional Rust backends;
 5. does not use external tandem repeat finders;
 6. does not perform read mapping;
 7. does not infer higher-order repeat structure;
@@ -25,7 +25,7 @@ The current code should not be used for production analysis of wheat, rye, barle
 Reasons:
 
 1. read processing is streaming at the parser layer but the algorithms are not optimized for large inputs;
-2. k-mer counting is in-memory Python;
+2. read-local seed spacing can use Rust, but global k-mer counting and downstream large-scale algorithms are not production backends;
 3. assembly scanning is simple and not indexed;
 4. monomer clustering is period-based and not robust to related repeat families;
 5. copy-number calibration depends on user-provided or rough haploid depth;
@@ -36,7 +36,7 @@ An optional guided mode using user-supplied known-repeat FASTA files may be adde
 
 The synthetic benchmark harness can measure tiny and manual scale runs, but it does not make the MVP suitable for real 7-20 Gb production analysis. Real data should be limited to pilot subsets until chunking, resumable execution, memory reporting and external benchmarks are implemented.
 
-Discover now provides incremental candidates and progress logs, but it remains single-process. `--chunk-size` does not yet provide checkpoint/resume behavior. The Python seed backend is suitable for staged subset tests, not full raw-read production workloads.
+Discover now provides incremental candidates and progress logs, but it remains single-process. `--chunk-size` does not yet provide checkpoint/resume behavior. The Python backend is suitable for toy and staged subset tests; the Rust backend makes larger real-read pilots practical but does not address clustering memory, restartability, full-dataset resource reporting or downstream scaling.
 
 ## Claims Not Supported
 

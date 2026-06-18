@@ -16,6 +16,7 @@ from pathlib import Path
 FIELDS = [
     "input_file",
     "max_reads",
+    "backend",
     "processed_reads",
     "processed_bases",
     "runtime_seconds",
@@ -26,6 +27,7 @@ FIELDS = [
     "recovered_family_count",
     "peak_memory_mb",
     "output_validated",
+    "speedup_vs_python",
     "exit_status",
     "command",
     "notes",
@@ -102,6 +104,8 @@ def run_scale(args: argparse.Namespace, max_reads: int) -> dict[str, str | int]:
         str(args.min_support_reads),
         "--progress-every",
         str(args.progress_every),
+        "--kmer-backend",
+        args.kmer_backend,
     ]
     if args.max_read_bases is not None:
         command.extend(["--max-read-bases", str(args.max_read_bases)])
@@ -130,6 +134,7 @@ def run_scale(args: argparse.Namespace, max_reads: int) -> dict[str, str | int]:
     return {
         "input_file": str(args.reads),
         "max_reads": max_reads,
+        "backend": args.kmer_backend,
         "processed_reads": processed_reads,
         "processed_bases": metrics.get("processed_bases", "0"),
         "runtime_seconds": f"{runtime:.4f}",
@@ -140,6 +145,7 @@ def run_scale(args: argparse.Namespace, max_reads: int) -> dict[str, str | int]:
         "recovered_family_count": count_families(scale_dir / "families.tsv"),
         "peak_memory_mb": "NA",
         "output_validated": str(validated).lower(),
+        "speedup_vs_python": "1.000000" if args.kmer_backend == "python" else "NA",
         "exit_status": exit_status,
         "command": shlex.join(command),
         "notes": "peak_memory_not_portably_available",
@@ -165,6 +171,7 @@ def main() -> int:
     parser.add_argument("--min-spacing-support", type=int, default=2)
     parser.add_argument("--min-support-reads", type=int, default=1)
     parser.add_argument("--progress-every", type=int, default=100)
+    parser.add_argument("--kmer-backend", choices=("python", "rust"), default="python")
     args = parser.parse_args()
 
     if not args.reads.is_file():

@@ -38,7 +38,7 @@ pip install -e .
 pytest
 ```
 
-The current `environment.yml` intentionally contains only lightweight dependencies needed for the MVP and tests. `matplotlib` is included for static SVG/PDF visualization. Larger scientific dependencies should be added only when the corresponding module actually uses them.
+`environment.yml` includes Rust and maturin to build the optional compiled read-local discovery backend. No production global k-mer counter is bundled.
 
 ## Install
 
@@ -47,6 +47,14 @@ After activating `tandemx-dev`, install the package in editable mode:
 ```bash
 pip install -e .
 ```
+
+The editable install uses maturin and builds the Rust extension in addition to the Python package. During backend development, the equivalent explicit command is:
+
+```bash
+maturin develop --release
+```
+
+Use `--release` for performance measurements. The Python backend remains available if a compiled extension is not installed.
 
 ## CLI
 
@@ -189,10 +197,11 @@ tandemx discover \
   --min-read-length 1000 \
   --min-period 20 \
   --max-period 2000 \
+  --kmer-backend rust \
   --progress-every 1000
 ```
 
-`candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The current `python` k-mer backend is for toy/pilot use. See `docs/performance.md` for algorithm and scaling limits.
+`candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. `--kmer-backend python` remains the default and fallback; `--kmer-backend rust` accelerates the same read-local algorithm when the extension is installed. See `docs/performance.md` for parity results and scaling limits.
 
 Inspect and benchmark a local real-read subset without running downstream biological analyses:
 

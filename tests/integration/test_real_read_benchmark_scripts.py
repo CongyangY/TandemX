@@ -70,3 +70,4 @@ def test_inspect_and_real_read_pilot_benchmark(tmp_path: Path) -> None:
     assert all(row["output_validated"] == "true" for row in rows)
     assert all(float(row["mb_per_second"]) > 0 for row in rows)
     assert all(row["peak_memory_mb"] == "NA" for row in rows)
+    assert all(row["backend"] == "python" for row in rows)

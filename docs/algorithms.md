@@ -10,7 +10,7 @@ Current MVP implementation:
 
 1. stream FASTA or FASTQ reads, including gzip-compressed inputs;
 2. apply `--max-reads`, `--max-read-bases`, reproducible `--sample-rate`, minimum length and low-complexity filters;
-3. extract canonical, non-low-complexity k-mers for one read at a time with a rolling 2-bit encoder;
+3. extract canonical, non-low-complexity k-mers for one read at a time with a rolling 2-bit encoder in the selected Python or Rust backend;
 4. retain only repeated within-read k-mer positions with strict position/pair caps;
 5. build a spacing histogram in the configured period range;
 6. retain only `--top-periods` supported spacing peaks;
@@ -21,7 +21,7 @@ Current MVP implementation:
 
 `monomers.fa` is an output of de novo discovery. It is not a required input to `tandemx discover`.
 
-The previous full period scan has been removed from the execution path. The current Python implementation targets toy data and real-read subset pilots, not full large plant genomes. See `docs/performance.md`.
+The previous full period scan has been removed from the execution path. Python remains the default/fallback backend. The optional Rust backend implements the same single-read seed/spacing/refinement boundary and returns only a compact result to Python; parsing, clustering and output remain in Python. Neither backend makes TandemX a full large-plant-genome production workflow. See `docs/performance.md`.
 
 MVP constraints:
 
@@ -32,7 +32,7 @@ MVP constraints:
 5. no local repeat-boundary refinement;
 6. no multiple-alignment consensus;
 7. no higher-order repeat inference;
-8. no multiprocessing, resume or production-scale backend yet.
+8. no multiprocessing, resume or production-scale full-workflow backend yet.
 
 Future work:
 

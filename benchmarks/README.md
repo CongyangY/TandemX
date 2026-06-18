@@ -40,8 +40,11 @@ Use the real-read runner only for bounded engineering pilots. It runs `discover 
 python benchmarks/scripts/run_real_read_pilot_benchmark.py \
   --reads reads.fastq.gz \
   --max-reads 1000,5000,10000,25000 \
+  --kmer-backend rust \
   --outdir /tmp/tandemx_real_pilot
 ```
+
+The summary includes the selected backend. Run Python and Rust into separate output directories before computing speedups; do not benchmark a debug-mode Rust build.
 
 ## Run
 

@@ -1,0 +1,66 @@
+"""Optional wrapper around TandemX's compiled read-local discovery backend."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+
+class RustBackendUnavailable(RuntimeError):
+    """Raised when the optional compiled extension cannot be imported."""
+
+
+@dataclass(frozen=True)
+class RustScanResult:
+    candidate_periods: tuple[int, ...]
+    spacing_support: tuple[tuple[int, int], ...]
+    best_period: int
+    periodicity_score: float
+    overflow_count: int
+    status: str
+
+
+def rust_backend_available() -> bool:
+    try:
+        from tandemx import _rust_core  # noqa: F401
+    except ImportError:
+        return False
+    return True
+
+
+def scan_read_for_periods(
+    sequence: str,
+    *,
+    k: int,
+    min_period: int,
+    max_period: int,
+    top_periods: int,
+    min_seed_occurrences: int,
+    min_spacing_support: int,
+    max_pairs_per_kmer: int,
+) -> RustScanResult:
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable(
+            "Rust backend is unavailable. Install from the repository with "
+            "`pip install -e .` or run `maturin develop`."
+        ) from exc
+
+    result = _rust_core.scan_read_for_periods(
+        sequence,
+        k,
+        min_period,
+        max_period,
+        top_periods,
+        min_seed_occurrences,
+        min_spacing_support,
+        max_pairs_per_kmer,
+    )
+    return RustScanResult(
+        candidate_periods=tuple(result.candidate_periods),
+        spacing_support=tuple(tuple(item) for item in result.spacing_support),
+        best_period=result.best_period,
+        periodicity_score=result.periodicity_score,
+        overflow_count=result.overflow_count,
+        status=result.status,
+    )
