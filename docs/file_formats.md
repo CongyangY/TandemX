@@ -247,6 +247,46 @@ Produced by: `tandemx run` and `benchmarks/scripts/run_pipeline_benchmark.py`.
 | output_validated | boolean | Whether expected outputs passed current validation |
 | notes | string | Skip reason, failure reason, profiling state, or recorded thread setting |
 
+## output_manifest.tsv
+
+Produced by: every `tandemx run` invocation after pipeline setup succeeds.
+
+The manifest inventories requested step outputs and pipeline-level reports. Missing outputs remain explicit rows. If an assembly-dependent step was requested without an assembly, each expected output row records `skipped_missing_assembly`.
+
+| Field | Type | Description |
+|---|---|---|
+| step | string | Producing step or `pipeline` |
+| output_type | string | Stable semantic output label |
+| file_path | path | Output path under the configured run directory |
+| exists | boolean | Whether the file existed when the manifest was finalized |
+| file_size_bytes | integer | File size, or zero when absent |
+| description | string | Human-readable output purpose |
+| required_for_next_step | string | Downstream consumer or review purpose |
+| notes | string | Step status, skip reason, or missing-output warning |
+
+## run_report.md
+
+Produced by: every `tandemx run` invocation after pipeline setup succeeds.
+
+The Markdown report summarizes inputs, requested and completed steps, timings, output row counts, validation status, warnings, skips, primary paths, and suggested validation or post hoc matching commands. It is a run overview, not a biological claim report.
+
+## known_repeat_matches.tsv
+
+Produced by: `benchmarks/scripts/check_known_repeats_against_catalog.py`.
+
+Known sequences are read only after discovery and are never inputs to `tandemx discover`.
+
+| Field | Type | Description |
+|---|---|---|
+| known_repeat_id | string | Known repeat FASTA identifier |
+| known_repeat_length | integer | Known repeat sequence length in bp |
+| best_family_id | string | Best discovered catalog family |
+| best_monomer_length | integer | Best monomer length in bp |
+| similarity_score | float | Orientation-aware k-mer Dice similarity from 0 to 1 |
+| shared_kmer_fraction | float | Fraction of known-repeat k-mers shared with the best monomer |
+| orientation | string | `forward` or `reverse` orientation of the best match |
+| interpretation | string | Calibrated MVP label: strong, possible, weak, or no k-mer match |
+
 ## Toy Simulation Outputs
 
 Produced by: `tandemx simulate toy`

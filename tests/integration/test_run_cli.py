@@ -39,6 +39,11 @@ def read_summary(outdir: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle, delimiter="\t"))
 
 
+def read_manifest(outdir: Path) -> list[dict[str, str]]:
+    with (outdir / "output_manifest.tsv").open(encoding="utf-8") as handle:
+        return list(csv.DictReader(handle, delimiter="\t"))
+
+
 def test_reads_only_run_writes_summaries(tmp_path: Path) -> None:
     toy = simulate_toy(tmp_path)
     outdir = tmp_path / "reads_only"
@@ -61,11 +66,23 @@ def test_reads_only_run_writes_summaries(tmp_path: Path) -> None:
     assert (outdir / "discover" / "monomers.fa").is_file()
     assert (outdir / "quantify" / "copy_number.tsv").is_file()
     assert (outdir / "pipeline_summary.json").is_file()
+    assert (outdir / "output_manifest.tsv").is_file()
+    assert (outdir / "run_report.md").is_file()
+    assert "output_manifest.tsv:" in result.stdout
+    assert "run_report.md:" in result.stdout
     assert [row["step"] for row in read_summary(outdir)] == ["discover", "quantify", "validate"]
     assert len(json.loads((outdir / "pipeline_summary.json").read_text(encoding="utf-8"))) == 3
     assert (outdir / "profiles" / "discover.prof").is_file()
     quantify_command = read_summary(outdir)[1]["command"]
     assert "--max-reads" not in quantify_command
+    manifest_paths = {Path(row["file_path"]).relative_to(outdir).as_posix() for row in read_manifest(outdir)}
+    assert "discover/candidate_reads.tsv" in manifest_paths
+    assert "discover/monomers.fa" in manifest_paths
+    assert "discover/families.tsv" in manifest_paths
+    assert "quantify/copy_number.tsv" in manifest_paths
+    report = (outdir / "run_report.md").read_text(encoding="utf-8")
+    assert "## Output counts" in report
+    assert "Validation status: passed" in report
 
 
 def test_full_toy_run_and_missing_assembly_skips(tmp_path: Path) -> None:
@@ -115,6 +132,15 @@ def test_full_toy_run_and_missing_assembly_skips(tmp_path: Path) -> None:
     rows = {row["step"]: row for row in read_summary(skip_outdir)}
     assert rows["locate"]["notes"] == "skipped_missing_assembly"
     assert rows["probe"]["notes"] == "skipped_missing_assembly"
+    skipped_manifest = read_manifest(skip_outdir)
+    assert any(
+        row["step"] == "locate" and row["notes"] == "skipped_missing_assembly"
+        for row in skipped_manifest
+    )
+    assert any(
+        row["step"] == "probe" and row["notes"] == "skipped_missing_assembly"
+        for row in skipped_manifest
+    )
 
 
 def test_missing_genome_size_and_force_resume_behavior(tmp_path: Path) -> None:
@@ -188,3 +214,10 @@ def test_run_passes_read_limits_to_discover_and_quantify(tmp_path: Path) -> None
     assert result.returncode == 0, result.stderr
     rows = read_summary(outdir)
     assert all("--max-reads 20" in row["command"] for row in rows)
+
+
+def test_discover_has_no_known_repeat_input() -> None:
+    result = run_cli("discover", "--help")
+    assert result.returncode == 0
+    assert "--known" not in result.stdout
+    assert "known_repeats" not in result.stdout

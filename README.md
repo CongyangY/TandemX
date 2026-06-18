@@ -153,6 +153,40 @@ tandemx run \
 
 Without `--assembly`, locate, probe, and assembly-dependent visualization steps are recorded as skipped. `--resume` is basic output-level resume, not an intra-step checkpoint. `--force` reruns selected steps. Pipeline runs write per-step logs plus `pipeline_summary.tsv` and `pipeline_summary.json`. Read limits are passed to both discover and quantify so copy-number depth uses the same input prefix.
 
+## Where are my outputs?
+
+`tandemx run --outdir results/run1` uses this standard structure:
+
+```text
+results/run1/
+├── discover/
+├── quantify/
+├── locate/
+├── probe/
+├── visualize/
+├── validate/
+├── logs/
+├── profiles/                 # only with --profile
+├── output_manifest.tsv       # file inventory, sizes, status and dependencies
+├── run_report.md             # human-readable results and next commands
+├── pipeline_summary.tsv      # per-step timing and status
+├── pipeline_summary.json
+└── pipeline.log
+```
+
+Start with `run_report.md` for a concise run overview and use `output_manifest.tsv` to locate individual files or diagnose skipped/missing outputs.
+
+Known repeat sequences can be compared only after de novo discovery:
+
+```bash
+python benchmarks/scripts/check_known_repeats_against_catalog.py \
+  --catalog results/run1/discover/monomers.fa \
+  --known known_repeats.fa \
+  --out results/run1/known_repeat_matches.tsv
+```
+
+This post hoc check does not pass known repeats to `tandemx discover` and does not make them templates for candidate detection.
+
 ## Tests
 
 ```bash
@@ -184,6 +218,7 @@ docs/known_limitations.md
 docs/roadmap.md
 docs/benchmark_plan.md
 docs/real_data_pilot_plan.md
+docs/sensitivity_validation.md
 ```
 
 ## Synthetic Benchmarks

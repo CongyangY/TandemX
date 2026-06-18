@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Sequence
 
 from tandemx.io.validators import ValidationError, validate_project
+from tandemx.reporting import write_output_manifest, write_run_report
 
 
 PIPELINE_STEPS = ("discover", "quantify", "locate", "probe", "visualize", "validate")
@@ -309,6 +310,12 @@ def write_summaries(config: PipelineConfig, records: Sequence[StepRecord]) -> No
     )
 
 
+def finalize_run_outputs(config: PipelineConfig, records: Sequence[StepRecord]) -> None:
+    write_summaries(config, records)
+    write_run_report(config, records)
+    write_output_manifest(config, records)
+
+
 def make_record(
     config: PipelineConfig,
     run_id: str,
@@ -355,6 +362,7 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
     run_id = f"tandemx-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-{time.time_ns()}"
     records: list[StepRecord] = []
     pipeline_log = config.outdir / "pipeline.log"
+    pipeline_log.touch(exist_ok=True)
 
     for step in config.steps:
         start_time = utc_now()
@@ -404,7 +412,7 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
                     notes="output_exists_use_force_or_resume",
                 )
                 records.append(record)
-                write_summaries(config, records)
+                finalize_run_outputs(config, records)
                 return records, 2
 
         try:
@@ -422,7 +430,7 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
                 notes=str(exc),
             )
             records.append(record)
-            write_summaries(config, records)
+            finalize_run_outputs(config, records)
             return records, 2
 
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -469,7 +477,9 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
             )
         write_summaries(config, records)
         if result.returncode != 0:
+            finalize_run_outputs(config, records)
             return records, result.returncode
+    finalize_run_outputs(config, records)
     return records, 0
 
 
@@ -477,8 +487,17 @@ def run_pipeline_cli(args: argparse.Namespace) -> int:
     config = config_from_args(args)
     records, exit_status = run_pipeline(config)
     total_runtime = sum(record.runtime_seconds for record in records)
-    print(
-        f"tandemx run: recorded {len(records)} steps in {total_runtime:.3f} seconds "
-        f"under {config.outdir}"
-    )
+    print(f"tandemx run: recorded {len(records)} steps in {total_runtime:.3f} seconds")
+    print(f"output directory: {config.outdir}")
+    for label, path in (
+        ("families.tsv", config.outdir / "discover" / "families.tsv"),
+        ("monomers.fa", config.outdir / "discover" / "monomers.fa"),
+        ("copy_number.tsv", config.outdir / "quantify" / "copy_number.tsv"),
+    ):
+        if path.is_file():
+            print(f"{label}: {path}")
+    print(f"output_manifest.tsv: {config.outdir / 'output_manifest.tsv'}")
+    print(f"run_report.md: {config.outdir / 'run_report.md'}")
+    print(f"pipeline_summary.tsv: {config.outdir / 'pipeline_summary.tsv'}")
+    print(f"validation: tandemx validate --project {shlex.quote(str(config.outdir))}")
     return exit_status

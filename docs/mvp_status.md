@@ -19,8 +19,10 @@ Implemented benchmark support:
 2. benchmark runner in `benchmarks/scripts/run_synthetic_benchmark.py`;
 3. `benchmark_summary.tsv` runtime/status output;
 4. `accuracy_summary.tsv` toy truth evaluation output;
-5. pytest coverage for the `tiny` synthetic benchmark only.
+5. pytest coverage for the `tiny` synthetic benchmark only;
 6. step-level pipeline summaries in TSV/JSON with per-step stdout, stderr, optional cProfile output, and basic validated resume.
+7. per-run `output_manifest.tsv` and human-readable `run_report.md` files.
+8. post hoc known-repeat k-mer matching for sensitivity interpretation without using known sequences during discovery.
 
 Discover performance status:
 
