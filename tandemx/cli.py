@@ -157,6 +157,7 @@ def run_discover(args: argparse.Namespace) -> int:
         min_spacing_support=args.min_spacing_support,
         max_pairs_per_kmer=args.max_pairs_per_kmer,
         max_reads=args.max_reads,
+        max_read_bases=args.max_read_bases,
         sample_rate=args.sample_rate,
         seed=args.seed,
         progress_every=args.progress_every,
@@ -371,6 +372,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--min-spacing-support", type=int, default=2, help="Minimum repeated-seed support required for a spacing peak.")
     discover.add_argument("--max-pairs-per-kmer", type=int, default=100, help="Maximum adjacent position pairs retained per seed k-mer.")
     discover.add_argument("--max-reads", type=int, help="Maximum sampled reads to process for pilot runs.")
+    discover.add_argument("--max-read-bases", type=int, help="Maximum cumulative sampled read bases to process for pilot runs.")
     discover.add_argument("--sample-rate", type=float, default=1.0, help="Fraction of input reads sampled reproducibly, in (0, 1].")
     discover.add_argument("--seed", type=int, default=1, help="Random seed for reproducible read sampling.")
     discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")

@@ -185,6 +185,7 @@ tandemx discover \
   --reads subset.fastq.gz \
   --outdir pilot_discover \
   --max-reads 10000 \
+  --max-read-bases 200000000 \
   --min-read-length 1000 \
   --min-period 20 \
   --max-period 2000 \
@@ -192,3 +193,17 @@ tandemx discover \
 ```
 
 `candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The current `python` k-mer backend is for toy/pilot use. See `docs/performance.md` for algorithm and scaling limits.
+
+Inspect and benchmark a local real-read subset without running downstream biological analyses:
+
+```bash
+python benchmarks/scripts/inspect_reads.py \
+  --reads subset.fastq.gz \
+  --output /tmp/read_stats.tsv
+python benchmarks/scripts/run_real_read_pilot_benchmark.py \
+  --reads subset.fastq.gz \
+  --max-reads 1000,5000,10000,25000 \
+  --outdir /tmp/tandemx_real_pilot
+```
+
+The real-read runner executes only `discover` and `validate`; it does not read simulator truth files.

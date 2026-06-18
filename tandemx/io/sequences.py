@@ -68,7 +68,7 @@ def validate_sequence(sequence: str, path: Path, line_number: int) -> str:
     sequence = sequence.strip().upper()
     if not sequence:
         raise SequenceFormatError(f"Empty sequence line in {path} at line {line_number}")
-    invalid = sorted({base for base in sequence if base not in "ACGTN"})
+    invalid = sorted(set(sequence).difference("ACGTN"))
     if invalid:
         joined = "".join(invalid)
         raise SequenceFormatError(f"Invalid base(s) '{joined}' in {path} at line {line_number}")

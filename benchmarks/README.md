@@ -14,6 +14,8 @@ The default discovery step remains de novo. Simulator truth files are used only 
 
 ```text
 benchmarks/configs/synthetic_scale.yaml
+benchmarks/scripts/inspect_reads.py
+benchmarks/scripts/run_real_read_pilot_benchmark.py
 benchmarks/scripts/run_synthetic_benchmark.py
 benchmarks/results/.gitkeep
 benchmarks/simulated/.gitkeep
@@ -29,6 +31,17 @@ benchmarks/simulated/.gitkeep
 4. `real_pilot_manual`: 100,000 reads, never run by default.
 
 Only `tiny` is intended for pytest. Larger scales remain manual because the Python backend is still single-process.
+
+## Real-read Pilot
+
+Use the real-read runner only for bounded engineering pilots. It runs `discover -> validate`, never reads truth files, and writes `tmpfq_benchmark_summary.tsv` with processed reads/bases, runtime, throughput, candidate rate, recovered family count, validation status, and the exact command. Peak memory is recorded as `NA` until a portable reporter is available.
+
+```bash
+python benchmarks/scripts/run_real_read_pilot_benchmark.py \
+  --reads reads.fastq.gz \
+  --max-reads 1000,5000,10000,25000 \
+  --outdir /tmp/tandemx_real_pilot
+```
 
 ## Run
 

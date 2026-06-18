@@ -9,12 +9,12 @@ MVP goal: identify simple candidate tandem repeat monomers de novo from toy HiFi
 Current MVP implementation:
 
 1. stream FASTA or FASTQ reads, including gzip-compressed inputs;
-2. apply `--max-reads`, reproducible `--sample-rate`, minimum length and low-complexity filters;
+2. apply `--max-reads`, `--max-read-bases`, reproducible `--sample-rate`, minimum length and low-complexity filters;
 3. extract canonical, non-low-complexity k-mers for one read at a time with a rolling 2-bit encoder;
 4. retain only repeated within-read k-mer positions with strict position/pair caps;
 5. build a spacing histogram in the configured period range;
 6. retain only `--top-periods` supported spacing peaks;
-7. refine a ±2 bp neighborhood around each peak with modulo phase support from at most 128 high-occurrence seed groups and bounded sampled shifted identity;
+7. refine a ±2 bp neighborhood around each peak with modulo phase support from at most 128 high-occurrence seed groups and at most 1,024 evenly sampled shifted-identity comparisons;
 8. append accepted candidates immediately to `candidate_reads.tsv`;
 9. cluster only accepted candidate monomers by period length;
 10. write `monomers.fa` and `families.tsv`.

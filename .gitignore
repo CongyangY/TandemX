@@ -9,3 +9,4 @@ dist/
 *.egg-info/
 results/
 examples/toy/results/
+/test_data/

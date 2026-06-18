@@ -78,6 +78,7 @@ class DiscoverConfig:
     min_spacing_support: int = 2
     max_pairs_per_kmer: int = 100
     max_reads: int | None = None
+    max_read_bases: int | None = None
     sample_rate: float = 1.0
     seed: int = 1
     progress_every: int = 1000
@@ -115,6 +116,16 @@ def discover_toy_repeats(
                 break
             if config.sample_rate < 1.0 and rng.random() > config.sample_rate:
                 continue
+            if (
+                config.max_read_bases is not None
+                and processed_bases + len(record.sequence) > config.max_read_bases
+            ):
+                logger.info(
+                    "limit_reached=max_read_bases configured_bases=%s next_read_bases=%s",
+                    config.max_read_bases,
+                    len(record.sequence),
+                )
+                break
 
             processed_reads += 1
             processed_bases += len(record.sequence)
@@ -153,6 +164,7 @@ def discover_toy_repeats(
                     len(candidates),
                     started,
                     config.max_reads,
+                    config.max_read_bases,
                 )
 
         log_discover_progress(
@@ -162,6 +174,7 @@ def discover_toy_repeats(
             len(candidates),
             started,
             config.max_reads,
+            config.max_read_bases,
         )
         logger.info(
             "filter_summary skipped_short_reads=%s skipped_short_kmer=%s "
@@ -219,6 +232,8 @@ def validate_discover_config(config: DiscoverConfig) -> None:
         raise ValueError("--max-pairs-per-kmer must be positive")
     if config.max_reads is not None and config.max_reads <= 0:
         raise ValueError("--max-reads must be positive when provided")
+    if config.max_read_bases is not None and config.max_read_bases <= 0:
+        raise ValueError("--max-read-bases must be positive when provided")
     if not 0 < config.sample_rate <= 1:
         raise ValueError("--sample-rate must be greater than 0 and at most 1")
     if config.progress_every <= 0:
@@ -387,8 +402,11 @@ def is_low_complexity(sequence: str) -> bool:
     counts = {base: sequence.count(base) for base in "ACGT"}
     if max(counts.values()) / len(sequence) >= 0.8:
         return True
-    dinucleotides = {sequence[index : index + 2] for index in range(0, len(sequence) - 1, 2)}
-    return len(dinucleotides) <= 1
+    first_dinucleotide = sequence[:2]
+    for index in range(2, len(sequence) - 1, 2):
+        if sequence[index : index + 2] != first_dinucleotide:
+            return False
+    return True
 
 
 def cluster_candidates(
@@ -452,15 +470,20 @@ def log_discover_progress(
     candidate_reads: int,
     started: float,
     max_reads: int | None,
+    max_read_bases: int | None,
 ) -> None:
     elapsed = max(time.perf_counter() - started, 1e-9)
     reads_per_second = processed_reads / elapsed
     mb_per_second = (processed_bases / 1_000_000) / elapsed
+    remaining_estimates: list[float] = []
     if max_reads is not None and reads_per_second > 0:
-        remaining = max(0, max_reads - processed_reads) / reads_per_second
-        estimated_remaining = f"{remaining:.1f}"
-    else:
-        estimated_remaining = "unknown"
+        remaining_estimates.append(max(0, max_reads - processed_reads) / reads_per_second)
+    if max_read_bases is not None and mb_per_second > 0:
+        remaining_mb = max(0, max_read_bases - processed_bases) / 1_000_000
+        remaining_estimates.append(remaining_mb / mb_per_second)
+    estimated_remaining = (
+        f"{min(remaining_estimates):.1f}" if remaining_estimates else "unknown"
+    )
     logger.info(
         "progress processed_reads=%s processed_bases=%s candidate_reads=%s "
         "elapsed_seconds=%.3f reads_per_second=%.3f mb_per_second=%.3f "

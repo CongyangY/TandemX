@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import tandemx.discover.spacing as spacing
 from tandemx.discover.mvp import is_low_complexity
 from tandemx.discover.spacing import (
     build_spacing_histogram,
     extract_repeated_kmer_positions,
     is_low_complexity_kmer,
     modulo_periodicity_score,
+    refine_candidate_period,
     select_candidate_periods,
 )
 
@@ -70,6 +72,24 @@ def test_modulo_periodicity_score_wraps_across_period_boundary() -> None:
     positions = {"seed": [19, 20, 39, 40, 59, 60]}
 
     assert modulo_periodicity_score(positions, 20, tolerance=1) == 1.0
+
+
+def test_refinement_skips_modulo_when_identity_cannot_pass(monkeypatch) -> None:
+    def unexpected_modulo(*args, **kwargs) -> float:
+        raise AssertionError("modulo scoring should be skipped for non-viable identity")
+
+    monkeypatch.setattr(spacing, "modulo_periodicity_score", unexpected_modulo)
+    period, score = refine_candidate_period(
+        "A" * 100 + "C" * 100,
+        {"seed": [0, 100]},
+        [100],
+        min_period=100,
+        max_period=100,
+        refinement_radius=0,
+    )
+
+    assert period == 0
+    assert score == 0.0
 
 
 def test_low_complexity_filters_reads_and_seeds() -> None:

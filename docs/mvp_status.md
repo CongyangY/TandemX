@@ -26,7 +26,7 @@ Discover performance status:
 2. repeated k-mer spacing peaks prefilter candidate periods;
 3. only bounded local period neighborhoods are refined;
 4. candidate output and progress logs are written incrementally;
-5. `--max-reads` and reproducible sampling support real-read pilot subsets;
+5. `--max-reads`, `--max-read-bases` and reproducible sampling support real-read pilot subsets;
 6. multiprocessing and resume remain future work.
 
 `tandemx compare` remains deferred. Assembly-vs-read comparison is currently produced inside `tandemx locate` as `assembly_vs_read_cn.tsv`.

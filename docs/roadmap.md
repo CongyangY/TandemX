@@ -9,7 +9,8 @@
 5. Keep randomized toy workflow tests small, reproducible and independent of simulator truth files as algorithm input.
 6. Use the synthetic benchmark harness to track runtime, output validity and toy accuracy across 1k/10k/50k/100k-read scales.
 7. Implement real chunk checkpoints and `--resume`; do not expose a resume flag until restart behavior is tested.
-8. Add optional `kmc`, `meryl` or `jellyfish` backend adapters for production k-mer workloads while keeping Python for toy/pilot runs.
+8. Add optional `kmc`, `meryl` or `jellyfish` adapters for global production k-mer workloads while keeping Python for toy/pilot runs.
+9. Move the profiled read-local rolling seed/position loop behind a stable Rust/C++ backend interface; global k-mer counters do not replace this position-aware operation.
 
 The default workflow should remain de novo: reads enter `tandemx discover`, and the discovered repeat catalog feeds downstream commands. A future optional guided mode may allow `--catalog` to point to user-supplied known-repeat FASTA files, such as named satellite sequences, for guided quantification, localization or probe design. That guided mode must be documented as optional and separate from the default discovery workflow.
 

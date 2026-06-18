@@ -55,6 +55,35 @@ def test_max_reads_progress_and_incremental_files(tmp_path: Path) -> None:
     assert len(candidate_lines) == 11
 
 
+def test_max_read_bases_stops_before_exceeding_limit(tmp_path: Path) -> None:
+    reads = tmp_path / "reads.fa"
+    reads.write_text(periodic_reads(10, length=400), encoding="utf-8")
+    outdir = tmp_path / "discover"
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads),
+        "--outdir",
+        str(outdir),
+        "--min-period",
+        "20",
+        "--max-period",
+        "30",
+        "--min-support-reads",
+        "2",
+        "--max-read-bases",
+        "1200",
+        "--progress-every",
+        "1",
+    )
+
+    assert result.returncode == 0, result.stderr
+    log = (outdir / "run.log").read_text(encoding="utf-8")
+    assert "processed_reads=3 processed_bases=1200" in log
+    assert "limit_reached=max_read_bases" in log
+
+
 def test_run_log_and_candidate_table_exist_while_discover_is_running(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fa"
     reads.write_text(periodic_reads(3000, length=800), encoding="utf-8")
