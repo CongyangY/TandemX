@@ -1,0 +1,18 @@
+name: tandemx-benchmark
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - pip
+  - pytest
+  - pyyaml
+  - matplotlib
+  - pandas
+  - rust
+  - maturin
+  - trf
+
+# TideHunter is installed separately on macOS ARM64 because Bioconda does not
+# currently provide an osx-arm64 package. The tested binary was downloaded
+# from the official v1.5.6 GitHub release archive; the binary reports v1.5.5.

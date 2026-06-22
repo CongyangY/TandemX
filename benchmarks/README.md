@@ -2,6 +2,32 @@
 
 This directory contains synthetic benchmark configuration and runner scripts for measuring the toy-scale TandemX MVP before any real large-genome analysis.
 
+## External Tool Comparison
+
+The truth-aware comparison harness runs TandemX, TRF, and TideHunter on the
+same single-family synthetic FASTA datasets using one thread per tool:
+
+```bash
+.conda-benchmark/bin/python benchmarks/scripts/run_external_tool_comparison.py \
+  --config benchmarks/configs/external_tool_comparison.yaml \
+  --outdir benchmarks/results/external_tool_comparison
+```
+
+It writes `raw_runs.tsv`, `summary.tsv`, generated FASTA/truth files, an
+environment manifest, and per-run logs. Accuracy is evaluated at read level
+with a period tolerance of `max(2 bp, 2% of truth period)`. Simulated errors
+are substitutions only, so these are engineering comparisons rather than a
+complete model of HiFi or ONT error profiles. TRASH and TAREAN are excluded
+from the numeric chart because their primary assembly and short-read graph
+tasks are not directly equivalent to per-read detection.
+
+The tested macOS ARM64 environment lives at `.conda-benchmark/` and is
+described by `benchmarks/environment.external-tools.yml`. TideHunter must be
+installed from its official ARM64 release archive because the Bioconda package
+is unavailable for this platform. The downloaded v1.5.6 archive currently
+contains a binary that reports version 1.5.5; this discrepancy is retained in
+`tool_versions.tsv` rather than silently normalized.
+
 The benchmark workflow is:
 
 ```text

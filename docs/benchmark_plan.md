@@ -32,6 +32,13 @@ Benchmarks should test whether TandemX can identify candidate repeat families, e
 
 Benchmark comparisons should include TRF, TideHunter, TRASH and RepeatExplorer2/TAREAN when applicable. Comparisons must be task-specific because these tools have different assumptions and outputs.
 
+The implemented external comparison harness covers the directly comparable
+read-level discovery subset for TandemX, TRF, and TideHunter. It uses the same
+synthetic FASTA inputs and one thread per tool. TRASH and
+RepeatExplorer2/TAREAN remain separate task-specific benchmarks because their
+assembly and low-coverage short-read graph workflows are not interchangeable
+with per-read tandem-repeat detection.
+
 ## Stage 1: Simulated Reads Benchmark
 
 Goal: evaluate candidate monomer discovery and diagnostic k-mer copy-number calibration on controlled reads.

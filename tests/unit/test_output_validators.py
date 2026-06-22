@@ -123,3 +123,19 @@ def test_validate_tsv_rejects_header_only_file(tmp_path: Path) -> None:
 
     with pytest.raises(ValidationError, match="no records"):
         validate_project(tmp_path)
+
+
+def test_validate_project_allows_header_only_family_similarity(tmp_path: Path) -> None:
+    path = tmp_path / "family_similarity.tsv"
+    path.write_text(
+        "family_a\tfamily_b\tlength_a_bp\tlength_b_bp\tkmer_jaccard\t"
+        "shared_kmer_fraction\tlocal_identity\tlocal_overlap_bp\t"
+        "local_overlap_fraction_shorter\tlength_ratio\torientation\t"
+        "relationship\tredundant_candidate\tnotes\n",
+        encoding="utf-8",
+    )
+
+    results = validate_project(tmp_path)
+
+    assert results[0].path.name == "family_similarity.tsv"
+    assert results[0].record_count == 0

@@ -6,7 +6,7 @@ import hashlib
 import logging
 import random
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from statistics import mean
 from typing import Iterable, Sequence
@@ -65,6 +65,24 @@ class RepeatFamily:
 
 
 @dataclass(frozen=True)
+class FamilySimilarity:
+    family_a: str
+    family_b: str
+    length_a_bp: int
+    length_b_bp: int
+    kmer_jaccard: float
+    shared_kmer_fraction: float
+    local_identity: float
+    local_overlap_bp: int
+    local_overlap_fraction_shorter: float
+    length_ratio: float
+    orientation: str
+    relationship: str
+    redundant_candidate: bool
+    notes: str
+
+
+@dataclass(frozen=True)
 class DiscoverConfig:
     reads: Path
     outdir: Path
@@ -96,7 +114,11 @@ def discover_toy_repeats(
     config.outdir.mkdir(parents=True, exist_ok=True)
     logger = logger or logging.getLogger("tandemx.discover")
     candidate_path = config.outdir / "candidate_reads.tsv"
-    for stale_path in (config.outdir / "monomers.fa", config.outdir / "families.tsv"):
+    for stale_path in (
+        config.outdir / "monomers.fa",
+        config.outdir / "families.tsv",
+        config.outdir / "family_similarity.tsv",
+    ):
         stale_path.unlink(missing_ok=True)
 
     candidates: list[CandidateRepeat] = []
@@ -218,8 +240,11 @@ def discover_toy_repeats(
             "No repeat families passed the minimum support threshold; "
             "try lowering --min-support-reads for toy data or check the reads"
         )
+    similarities = compare_families(families, k=config.kmer_size)
+    families = annotate_family_redundancy(families, similarities)
     write_monomers(config.outdir / "monomers.fa", families)
     write_families(config.outdir / "families.tsv", families)
+    write_family_similarity(config.outdir / "family_similarity.tsv", similarities)
     return candidates, families
 
 
@@ -523,6 +548,142 @@ def orient_monomer(sequence: str) -> str:
     return min(sequence, reverse)
 
 
+def compare_families(families: Sequence[RepeatFamily], k: int = 11) -> list[FamilySimilarity]:
+    """Compare representative monomers to flag possible family redundancy."""
+    similarities: list[FamilySimilarity] = []
+    for index, family_a in enumerate(families):
+        for family_b in families[index + 1 :]:
+            similarities.append(compare_family_pair(family_a, family_b, k=k))
+    return similarities
+
+
+def compare_family_pair(family_a: RepeatFamily, family_b: RepeatFamily, k: int = 11) -> FamilySimilarity:
+    kmers_a = canonical_kmer_set(family_a.monomer_sequence, k)
+    kmers_b = canonical_kmer_set(family_b.monomer_sequence, k)
+    shared = len(kmers_a & kmers_b)
+    union = len(kmers_a | kmers_b)
+    kmer_jaccard = shared / union if union else 0.0
+    shared_fraction = shared / min(len(kmers_a), len(kmers_b)) if kmers_a and kmers_b else 0.0
+    identity, overlap, orientation = best_local_identity(
+        family_a.monomer_sequence,
+        family_b.monomer_sequence,
+    )
+    shorter = max(1, min(family_a.monomer_length_bp, family_b.monomer_length_bp))
+    longer = max(family_a.monomer_length_bp, family_b.monomer_length_bp)
+    overlap_fraction_shorter = overlap / shorter
+    length_ratio = longer / shorter
+    relationship, redundant_candidate, notes = classify_family_relationship(
+        kmer_jaccard=kmer_jaccard,
+        shared_kmer_fraction=shared_fraction,
+        local_identity=identity,
+        local_overlap_fraction_shorter=overlap_fraction_shorter,
+        length_ratio=length_ratio,
+    )
+    return FamilySimilarity(
+        family_a=family_a.family_id,
+        family_b=family_b.family_id,
+        length_a_bp=family_a.monomer_length_bp,
+        length_b_bp=family_b.monomer_length_bp,
+        kmer_jaccard=kmer_jaccard,
+        shared_kmer_fraction=shared_fraction,
+        local_identity=identity,
+        local_overlap_bp=overlap,
+        local_overlap_fraction_shorter=overlap_fraction_shorter,
+        length_ratio=length_ratio,
+        orientation=orientation,
+        relationship=relationship,
+        redundant_candidate=redundant_candidate,
+        notes=notes,
+    )
+
+
+def canonical_kmer_set(sequence: str, k: int) -> set[str]:
+    if k <= 0 or len(sequence) < k:
+        return set()
+    return {canonical_kmer(sequence[index : index + k]) for index in range(len(sequence) - k + 1)}
+
+
+def best_local_identity(sequence_a: str, sequence_b: str) -> tuple[float, int, str]:
+    """Return the best ungapped local identity over both orientations."""
+    min_overlap = min(50, len(sequence_a), len(sequence_b))
+    best_identity = 0.0
+    best_overlap = 0
+    best_orientation = "forward"
+    for orientation, oriented_b in (
+        ("forward", sequence_b),
+        ("reverse", reverse_complement(sequence_b)),
+    ):
+        for offset in range(-len(oriented_b) + 1, len(sequence_a)):
+            start_a = max(0, offset)
+            start_b = max(0, -offset)
+            overlap = min(len(sequence_a) - start_a, len(oriented_b) - start_b)
+            if overlap < min_overlap:
+                continue
+            matches = sum(
+                1
+                for base_index in range(overlap)
+                if sequence_a[start_a + base_index] == oriented_b[start_b + base_index]
+            )
+            identity = matches / overlap
+            if identity > best_identity or (identity == best_identity and overlap > best_overlap):
+                best_identity = identity
+                best_overlap = overlap
+                best_orientation = orientation
+    return best_identity, best_overlap, best_orientation
+
+
+def classify_family_relationship(
+    *,
+    kmer_jaccard: float,
+    shared_kmer_fraction: float,
+    local_identity: float,
+    local_overlap_fraction_shorter: float,
+    length_ratio: float,
+) -> tuple[str, bool, str]:
+    near_integer_ratio = abs(length_ratio - round(length_ratio)) <= 0.05 and round(length_ratio) >= 2
+    if (
+        local_identity >= 0.9
+        and local_overlap_fraction_shorter >= 0.85
+        and (shared_kmer_fraction >= 0.8 or near_integer_ratio)
+    ):
+        return (
+            "likely_redundant",
+            True,
+            "High sequence similarity; shorter or lower-support representative may be redundant.",
+        )
+    if (
+        local_identity >= 0.75
+        and local_overlap_fraction_shorter >= 0.75
+        and (kmer_jaccard >= 0.25 or shared_kmer_fraction >= 0.5)
+    ):
+        return (
+            "possible_higher_order_or_partial",
+            False,
+            "Moderate local similarity; inspect as possible higher-order unit, partial duplicate, or related family.",
+        )
+    return "distinct", False, ""
+
+
+def annotate_family_redundancy(
+    families: Sequence[RepeatFamily],
+    similarities: Sequence[FamilySimilarity],
+) -> list[RepeatFamily]:
+    warnings_by_family: dict[str, list[str]] = {family.family_id: [] for family in families}
+    for similarity in similarities:
+        if similarity.relationship == "distinct":
+            continue
+        warning = f"{similarity.relationship}:{similarity.family_a}-{similarity.family_b}"
+        warnings_by_family[similarity.family_a].append(warning)
+        warnings_by_family[similarity.family_b].append(warning)
+
+    annotated: list[RepeatFamily] = []
+    for family in families:
+        warnings = [family.warning] if family.warning else []
+        warnings.extend(warnings_by_family[family.family_id])
+        annotated.append(replace(family, warning=";".join(warnings)))
+    return annotated
+
+
 def sequence_md5(sequence: str) -> str:
     return hashlib.md5(sequence.encode("ascii")).hexdigest()
 
@@ -634,4 +795,40 @@ def write_families(path: Path, families: Sequence[RepeatFamily]) -> None:
                 ]
             )
         )
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def family_similarity_header() -> str:
+    return (
+        "family_a\tfamily_b\tlength_a_bp\tlength_b_bp\tkmer_jaccard\t"
+        "shared_kmer_fraction\tlocal_identity\tlocal_overlap_bp\t"
+        "local_overlap_fraction_shorter\tlength_ratio\torientation\t"
+        "relationship\tredundant_candidate\tnotes"
+    )
+
+
+def format_family_similarity(similarity: FamilySimilarity) -> str:
+    return "\t".join(
+        [
+            similarity.family_a,
+            similarity.family_b,
+            str(similarity.length_a_bp),
+            str(similarity.length_b_bp),
+            f"{similarity.kmer_jaccard:.4f}",
+            f"{similarity.shared_kmer_fraction:.4f}",
+            f"{similarity.local_identity:.4f}",
+            str(similarity.local_overlap_bp),
+            f"{similarity.local_overlap_fraction_shorter:.4f}",
+            f"{similarity.length_ratio:.4f}",
+            similarity.orientation,
+            similarity.relationship,
+            str(similarity.redundant_candidate).lower(),
+            similarity.notes,
+        ]
+    )
+
+
+def write_family_similarity(path: Path, similarities: Sequence[FamilySimilarity]) -> None:
+    lines = [family_similarity_header()]
+    lines.extend(format_family_similarity(similarity) for similarity in similarities)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

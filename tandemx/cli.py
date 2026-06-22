@@ -371,7 +371,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Discover candidate tandem repeat monomers from reads.",
     )
     discover.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale HiFi-like reads in FASTA/FASTQ format, optionally gzip-compressed.")
-    discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, candidate_reads.tsv, monomers.fa, and families.tsv.")
+    discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, candidate_reads.tsv, monomers.fa, families.tsv, and family_similarity.tsv.")
     discover.add_argument("--min-period", "--min-monomer-len", dest="min_monomer_len", type=int, default=20, help="Minimum candidate repeat period in bp.")
     discover.add_argument("--max-period", "--max-monomer-len", dest="max_monomer_len", type=int, default=2000, help="Maximum candidate repeat period in bp.")
     discover.add_argument("--min-support-reads", type=int, default=5, help="Minimum number of reads supporting a candidate family.")

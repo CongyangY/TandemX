@@ -5,6 +5,8 @@ from pathlib import Path
 from tandemx.discover.mvp import (
     DiscoverConfig,
     FastaRecord,
+    RepeatFamily,
+    compare_family_pair,
     discover_toy_repeats,
     find_best_periodic_candidate,
     periodicity_score,
@@ -74,5 +76,39 @@ def test_discover_toy_repeats_writes_documented_outputs(tmp_path: Path) -> None:
     assert (outdir / "candidate_reads.tsv").is_file()
     assert (outdir / "monomers.fa").is_file()
     assert (outdir / "families.tsv").is_file()
+    assert (outdir / "family_similarity.tsv").is_file()
     families_text = (outdir / "families.tsv").read_text(encoding="utf-8")
     assert families_text.startswith("family_id\tmonomer_id\tmonomer_length_bp")
+
+
+def test_family_similarity_flags_possible_related_monomers() -> None:
+    family_a = RepeatFamily(
+        family_id="TXF000001",
+        monomer_id="TXM000001",
+        monomer_sequence=("ACGTTCAGGACTAACCGTGA" * 8)[:120],
+        monomer_length_bp=120,
+        support_read_count=10,
+        support_span_bp=1200,
+        mean_identity=0.95,
+        low_complexity_flag=False,
+        confidence="high",
+        warning="",
+    )
+    family_b = RepeatFamily(
+        family_id="TXF000002",
+        monomer_id="TXM000002",
+        monomer_sequence=family_a.monomer_sequence + family_a.monomer_sequence[:80],
+        monomer_length_bp=200,
+        support_read_count=2,
+        support_span_bp=400,
+        mean_identity=0.9,
+        low_complexity_flag=False,
+        confidence="medium",
+        warning="",
+    )
+
+    similarity = compare_family_pair(family_a, family_b, k=11)
+
+    assert similarity.relationship in {"likely_redundant", "possible_higher_order_or_partial"}
+    assert similarity.local_identity >= 0.9
+    assert similarity.shared_kmer_fraction >= 0.8

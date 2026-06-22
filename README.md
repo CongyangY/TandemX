@@ -88,7 +88,7 @@ examples/toy/results/
 
 Generated results are ignored by git and should not be committed.
 
-`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` implements toy-scale de novo repeat discovery from reads and writes `candidate_reads.tsv`, `monomers.fa`, and `families.tsv`. `tandemx quantify` estimates toy read-based copy number from the discovered repeat catalog and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with discovered monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates from the discovered catalog and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots. `tandemx validate` checks recognized MVP outputs under a project directory.
+`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` implements toy-scale de novo repeat discovery from reads and writes `candidate_reads.tsv`, `monomers.fa`, `families.tsv`, and `family_similarity.tsv` for pairwise catalog redundancy review. `tandemx quantify` estimates toy read-based copy number from the discovered repeat catalog and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with discovered monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates from the discovered catalog and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots. `tandemx validate` checks recognized MVP outputs under a project directory.
 
 Sequence input support is centralized in `tandemx.io.sequences`. Analysis commands can read `.fa`, `.fasta`, `.fq`, `.fastq`, and gzip-compressed `.fa.gz`, `.fasta.gz`, `.fq.gz`, and `.fastq.gz` inputs where that file type is appropriate. Readers stream records with a shared `SequenceRecord` structure and validate empty files, malformed FASTQ records, duplicate IDs, and sequence/quality length mismatches.
 
@@ -175,6 +175,26 @@ results/run1/
 ```
 
 Start with `run_report.md` for a concise run overview and use `output_manifest.tsv` to locate individual files or diagnose skipped/missing outputs.
+
+## Comparing two run directories
+
+When two outputs were generated from the same reads but with different discovery
+parameters, family counts can differ without indicating a biological conflict.
+Use the run-comparison helper to make that explicit:
+
+```bash
+python benchmarks/scripts/compare_tandemx_runs.py \
+  --run-a test_data/output/real_hifi_100k_discover \
+  --run-b test_data/output/real_hifi_100k_reads_only \
+  --outdir test_data/output/compare_real_hifi_100k
+```
+
+The script writes `compare_runs.tsv` and `compare_runs.md`. It compares the
+discover `run_config.yaml`, optional `pipeline_summary.tsv`, `families.tsv`,
+`candidate_reads.tsv`, and `monomers.fa`. The report states whether reads and
+read limits match, lists result-affecting discover parameter differences such as
+`min_support_reads`, reports candidate/family/monomer-length differences, and
+marks whether the two catalogs are directly comparable.
 
 Known repeat sequences can be compared only after de novo discovery:
 

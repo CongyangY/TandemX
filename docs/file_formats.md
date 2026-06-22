@@ -86,6 +86,37 @@ Produced by: `tandemx discover`
 | confidence | string | NA | Confidence label |
 | warning | string | NA | Semicolon-separated warnings or empty |
 
+Families with possible sequence-level redundancy are not automatically removed in
+the MVP. Instead, `warning` may include labels such as
+`possible_higher_order_or_partial:TXF000001-TXF000004`; inspect
+`family_similarity.tsv` before collapsing or excluding a monomer.
+
+## family_similarity.tsv
+
+Produced by: `tandemx discover`
+
+This file compares discovered representative monomers against each other. It is
+a catalog-quality check that helps identify possible redundant monomers,
+higher-order units, partial duplicates, or related families. Known repeats are
+not used.
+
+| Field | Type | Unit | Description |
+|---|---|---:|---|
+| family_a | string | NA | First family identifier |
+| family_b | string | NA | Second family identifier |
+| length_a_bp | integer | bp | Monomer length for `family_a` |
+| length_b_bp | integer | bp | Monomer length for `family_b` |
+| kmer_jaccard | float | fraction | Jaccard similarity of canonical monomer k-mer sets |
+| shared_kmer_fraction | float | fraction | Shared canonical k-mers divided by the smaller k-mer set |
+| local_identity | float | fraction | Best ungapped local identity over both orientations |
+| local_overlap_bp | integer | bp | Aligned overlap length for the best local identity |
+| local_overlap_fraction_shorter | float | fraction | Local overlap divided by the shorter monomer length |
+| length_ratio | float | ratio | Longer monomer length divided by shorter monomer length |
+| orientation | string | NA | `forward` or `reverse` orientation for the best local match |
+| relationship | string | NA | `distinct`, `possible_higher_order_or_partial`, or `likely_redundant` |
+| redundant_candidate | boolean | NA | Whether TandemX considers the pair a likely redundant representative |
+| notes | string | NA | Interpretation notes for non-distinct pairs |
+
 ## copy_number.tsv
 
 Produced by: `tandemx quantify`
@@ -221,7 +252,7 @@ The validator scans the project directory for recognized TandemX output filename
 6. TandemX FASTA header structure for `monomers.fa` and `probes.fa`;
 7. non-empty recognized output files.
 
-Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, and `probes.fa`.
+Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `family_similarity.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, and `probes.fa`.
 
 ## Pipeline Summaries
 
@@ -286,6 +317,27 @@ Known sequences are read only after discovery and are never inputs to `tandemx d
 | shared_kmer_fraction | float | Fraction of known-repeat k-mers shared with the best monomer |
 | orientation | string | `forward` or `reverse` orientation of the best match |
 | interpretation | string | Calibrated MVP label: strong, possible, weak, or no k-mer match |
+
+## compare_runs.tsv
+
+Produced by: `benchmarks/scripts/compare_tandemx_runs.py`.
+
+This is a post hoc run-consistency report. It compares two TandemX discover or
+pipeline output directories so users can distinguish parameter-driven catalog
+differences from apparent result conflicts. It does not rerun discovery and does
+not use external truth sequences.
+
+The companion `compare_runs.md` is a human-readable summary of the same checks.
+
+| Field | Type | Description |
+|---|---|---|
+| category | string | Check group: `input`, `metadata`, `discover_parameter`, `result`, or `interpretation` |
+| item | string | Specific checked value, such as `reads`, `max_reads`, `min_support_reads`, or `family_count` |
+| run_a_value | string | Value observed in the first run |
+| run_b_value | string | Value observed in the second run |
+| same | boolean | Whether the normalized values match |
+| direct_comparison_impact | string | `blocking_if_different`, `result_difference`, `informational`, or `summary` |
+| notes | string | Reason a difference matters, including why direct comparison is not valid |
 
 ## Toy Simulation Outputs
 

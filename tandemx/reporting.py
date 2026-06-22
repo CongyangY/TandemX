@@ -38,6 +38,7 @@ OUTPUT_SPECS = {
         ("candidate_reads", "discover/candidate_reads.tsv", "Read-local tandem repeat candidates.", "family review"),
         ("monomer_catalog", "discover/monomers.fa", "Discovered representative monomer sequences.", "quantify,locate,probe,visualize"),
         ("family_catalog", "discover/families.tsv", "Discovered repeat family summary.", "interpretation"),
+        ("family_similarity", "discover/family_similarity.tsv", "Pairwise monomer similarity and redundancy flags.", "catalog review"),
     ),
     "quantify": (
         ("copy_number", "quantify/copy_number.tsv", "Read-based repeat copy-number estimates.", "locate,probe,visualize"),
@@ -81,6 +82,7 @@ def collect_output_warnings(config: ReportConfig) -> list[str]:
     for relative_path in (
         "discover/candidate_reads.tsv",
         "discover/families.tsv",
+        "discover/family_similarity.tsv",
         "quantify/copy_number.tsv",
         "locate/assembly_vs_read_cn.tsv",
         "probe/probes.rank.tsv",

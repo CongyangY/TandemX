@@ -1,5 +1,7 @@
 .venv/
 .conda_pkgs/
+.conda-benchmark/
+outputs/
 __pycache__/
 *.py[cod]
 .pytest_cache/

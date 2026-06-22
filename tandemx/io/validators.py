@@ -51,6 +51,34 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
         },
         "numeric": {"monomer_length_bp", "gc_fraction", "support_read_count", "support_span_bp", "mean_identity"},
     },
+    "family_similarity.tsv": {
+        "required": {
+            "family_a",
+            "family_b",
+            "length_a_bp",
+            "length_b_bp",
+            "kmer_jaccard",
+            "shared_kmer_fraction",
+            "local_identity",
+            "local_overlap_bp",
+            "local_overlap_fraction_shorter",
+            "length_ratio",
+            "orientation",
+            "relationship",
+            "redundant_candidate",
+            "notes",
+        },
+        "numeric": {
+            "length_a_bp",
+            "length_b_bp",
+            "kmer_jaccard",
+            "shared_kmer_fraction",
+            "local_identity",
+            "local_overlap_bp",
+            "local_overlap_fraction_shorter",
+            "length_ratio",
+        },
+    },
     "copy_number.tsv": {
         "required": {
             "family_id",
@@ -117,6 +145,8 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
     },
 }
 
+ALLOW_EMPTY_TSV_RECORDS = {"family_similarity.tsv"}
+
 
 FASTA_HEADER_PATTERNS = {
     "monomers.fa": re.compile(r"^family_id=[^;]+;monomer_id=[^;]+;length_bp=\d+;confidence=[^;]+$"),
@@ -169,7 +199,7 @@ def validate_tsv(path: Path, schema: dict[str, set[str]]) -> ValidationResult:
             # Empty warning is valid and means no warning for this record.
             pass
         record_count += 1
-    if record_count == 0:
+    if record_count == 0 and path.name not in ALLOW_EMPTY_TSV_RECORDS:
         raise ValidationError(f"TSV file has no records: {path}")
     return ValidationResult(path=path, record_count=record_count)
 
