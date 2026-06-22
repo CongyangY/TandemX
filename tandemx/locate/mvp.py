@@ -9,6 +9,13 @@ from typing import Iterable, Sequence
 
 from tandemx.discover.mvp import FastaRecord, read_fasta
 from tandemx.quantify.mvp import MonomerRecord, canonical_kmer, is_low_complexity_kmer, read_monomer_fasta
+from tandemx.compare.mvp import (
+    AssemblyReadComparison,
+    classify_assembly_read_ratio,
+    compare_assembly_to_reads,
+    read_copy_number,
+    write_comparisons,
+)
 
 
 @dataclass(frozen=True)
@@ -40,17 +47,6 @@ class DensityWindow:
     start: int
     end: int
     score: float
-
-
-@dataclass(frozen=True)
-class AssemblyReadComparison:
-    family_id: str
-    read_estimated_bp: float
-    assembly_estimated_bp: float
-    assembly_read_ratio: float
-    status: str
-    confidence: str
-    warning: str
 
 
 def locate_toy_arrays(config: LocateConfig) -> tuple[list[DensityWindow], list[ArrayHit], list[AssemblyReadComparison]]:
@@ -172,68 +168,6 @@ def window_density(record: FastaRecord, intervals: Sequence[tuple[int, int]], wi
     return windows
 
 
-def read_copy_number(path: Path | None) -> dict[str, float]:
-    if path is None:
-        return {}
-    lines = path.read_text(encoding="utf-8").splitlines()
-    if not lines:
-        return {}
-    header = lines[0].split("\t")
-    family_index = header.index("family_id")
-    if "estimated_bp" in header:
-        bp_index = header.index("estimated_bp")
-    elif "estimated_repeat_bp" in header:
-        bp_index = header.index("estimated_repeat_bp")
-    else:
-        return {}
-    values = {}
-    for line in lines[1:]:
-        if not line:
-            continue
-        parts = line.split("\t")
-        values[parts[family_index]] = float(parts[bp_index])
-    return values
-
-
-def compare_assembly_to_reads(arrays: Sequence[ArrayHit], copy_number_path: Path | None) -> list[AssemblyReadComparison]:
-    read_bp = read_copy_number(copy_number_path)
-    assembly_bp: dict[str, float] = defaultdict(float)
-    for array in arrays:
-        assembly_bp[array.family_id] += array.end - array.start
-    family_ids = sorted(set(read_bp) | set(assembly_bp))
-    comparisons = []
-    for family_id in family_ids:
-        read_value = read_bp.get(family_id, 0.0)
-        assembly_value = assembly_bp.get(family_id, 0.0)
-        ratio = assembly_value / read_value if read_value > 0 else 0.0
-        status, confidence, warning = classify_assembly_read_ratio(read_value, assembly_value)
-        comparisons.append(
-            AssemblyReadComparison(
-                family_id=family_id,
-                read_estimated_bp=read_value,
-                assembly_estimated_bp=assembly_value,
-                assembly_read_ratio=ratio,
-                status=status,
-                confidence=confidence,
-                warning=warning,
-            )
-        )
-    return comparisons
-
-
-def classify_assembly_read_ratio(read_bp: float, assembly_bp: float) -> tuple[str, str, str]:
-    if read_bp <= 0 and assembly_bp <= 0:
-        return "low_confidence", "low", "missing_read_and_assembly_estimates"
-    if read_bp <= 0:
-        return "low_confidence", "low", "missing_read_estimate"
-    ratio = assembly_bp / read_bp
-    if ratio < 0.6:
-        return "possible_collapse", "medium", ""
-    if ratio > 1.5:
-        return "possible_overexpansion", "medium", ""
-    return "consistent", "medium", ""
-
-
 def write_density(path: Path, density: Sequence[DensityWindow]) -> None:
     lines = [f"{row.chrom}\t{row.start}\t{row.end}\t{row.score:.4f}" for row in density]
     path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
@@ -257,23 +191,3 @@ def write_arrays(path: Path, arrays: Sequence[ArrayHit]) -> None:
     ]
     path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
 
-
-def write_comparisons(path: Path, comparisons: Sequence[AssemblyReadComparison]) -> None:
-    lines = [
-        "family_id\tread_estimated_bp\tassembly_estimated_bp\tassembly_read_ratio\tstatus\tconfidence\twarning"
-    ]
-    for comparison in comparisons:
-        lines.append(
-            "\t".join(
-                [
-                    comparison.family_id,
-                    f"{comparison.read_estimated_bp:.4f}",
-                    f"{comparison.assembly_estimated_bp:.4f}",
-                    f"{comparison.assembly_read_ratio:.4f}",
-                    comparison.status,
-                    comparison.confidence,
-                    comparison.warning,
-                ]
-            )
-        )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")

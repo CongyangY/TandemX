@@ -18,8 +18,8 @@ from tandemx.io.validators import ValidationError, validate_project
 from tandemx.reporting import write_output_manifest, write_run_report
 
 
-PIPELINE_STEPS = ("discover", "quantify", "locate", "probe", "visualize", "validate")
-ASSEMBLY_STEPS = {"locate", "probe", "visualize"}
+PIPELINE_STEPS = ("discover", "quantify", "locate", "compare", "probe", "visualize", "validate")
+ASSEMBLY_STEPS = {"locate", "compare", "probe", "visualize"}
 SUMMARY_FIELDS = (
     "run_id",
     "input_reads",
@@ -111,7 +111,7 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--steps",
         type=parse_steps,
-        default=parse_steps("discover,quantify,locate,probe,visualize,validate"),
+        default=parse_steps("discover,quantify,locate,compare,probe,visualize,validate"),
     )
     parser.add_argument("--min-period", type=int, default=20)
     parser.add_argument("--max-period", type=int, default=2000)
@@ -162,6 +162,7 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
     discover_dir = config.outdir / "discover"
     quantify_dir = config.outdir / "quantify"
     locate_dir = config.outdir / "locate"
+    compare_dir = config.outdir / "compare"
     probe_dir = config.outdir / "probe"
     visualize_dir = config.outdir / "visualize"
     catalog = discover_dir / "monomers.fa"
@@ -227,6 +228,17 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
             "--outdir",
             str(locate_dir),
         ]
+    if step == "compare":
+        return [
+            *cli,
+            "compare",
+            "--copy-number",
+            str(copy_number),
+            "--arrays",
+            str(locate_dir / "arrays.bed"),
+            "--outdir",
+            str(compare_dir),
+        ]
     if step == "probe":
         assert config.assembly is not None
         return [
@@ -258,7 +270,7 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
             command.extend(
                 [
                     "--comparison",
-                    str(locate_dir / "assembly_vs_read_cn.tsv"),
+                    str(compare_dir / "assembly_vs_read_cn.tsv"),
                     "--probes",
                     str(probe_dir / "probes.rank.tsv"),
                     "--fish",
@@ -277,6 +289,7 @@ def expected_outputs(config: PipelineConfig, step: str) -> tuple[Path, ...]:
         "discover": (output_dir / "candidate_reads.tsv", output_dir / "monomers.fa", output_dir / "families.tsv"),
         "quantify": (output_dir / "copy_number.tsv",),
         "locate": (output_dir / "repeat_density.bedgraph", output_dir / "arrays.bed", output_dir / "assembly_vs_read_cn.tsv"),
+        "compare": (output_dir / "assembly_vs_read_cn.tsv",),
         "probe": (output_dir / "probes.fa", output_dir / "probes.rank.tsv", output_dir / "in_silico_fish.tsv"),
         "visualize": (output_dir / "catalogue_summary.svg", output_dir / "catalogue_summary.pdf"),
         "validate": (),
@@ -295,6 +308,13 @@ def step_outputs_validate(config: PipelineConfig, step: str) -> bool:
     except ValidationError:
         return False
     return True
+
+
+def missing_step_inputs(config: PipelineConfig, step: str) -> tuple[Path, ...]:
+    if step == "compare":
+        required = (config.outdir / "quantify" / "copy_number.tsv", config.outdir / "locate" / "arrays.bed")
+        return tuple(path for path in required if not path.is_file())
+    return ()
 
 
 def write_summaries(config: PipelineConfig, records: Sequence[StepRecord]) -> None:
@@ -381,6 +401,23 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
             records.append(record)
             write_summaries(config, records)
             continue
+
+        missing_inputs = missing_step_inputs(config, step)
+        if missing_inputs:
+            record = make_record(
+                config,
+                run_id,
+                step,
+                start_time=start_time,
+                end_time=utc_now(),
+                runtime_seconds=0.0,
+                exit_status=2,
+                output_validated=False,
+                notes="missing_input:" + ",".join(str(path) for path in missing_inputs),
+            )
+            records.append(record)
+            finalize_run_outputs(config, records)
+            return records, 2
 
         output_dir = config.outdir / step
         if step != "validate" and output_dir.exists() and any(output_dir.iterdir()):
@@ -493,6 +530,7 @@ def run_pipeline_cli(args: argparse.Namespace) -> int:
         ("families.tsv", config.outdir / "discover" / "families.tsv"),
         ("monomers.fa", config.outdir / "discover" / "monomers.fa"),
         ("copy_number.tsv", config.outdir / "quantify" / "copy_number.tsv"),
+        ("assembly_vs_read_cn.tsv", config.outdir / "compare" / "assembly_vs_read_cn.tsv"),
     ):
         if path.is_file():
             print(f"{label}: {path}")

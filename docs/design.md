@@ -9,7 +9,7 @@ TandemX is designed as a read-first, assembly-aware platform. The first implemen
 The default workflow is de novo discovery:
 
 ```text
-raw reads -> tandemx discover -> de novo repeat catalog -> quantify/locate/probe/visualize
+raw reads -> tandemx discover -> de novo repeat catalog -> quantify/locate/compare/probe/visualize
 ```
 
 The repeat catalog consumed by downstream modules is the output of `tandemx discover`. Simulator truth files are not part of the analysis workflow.
@@ -84,11 +84,11 @@ Must not claim experimental validation or guaranteed FISH success.
 
 Responsibility: compare read-based and assembly-based repeat abundance.
 
-Inputs: `copy_number.tsv`, `repeat_density.bedgraph` or an assembly abundance summary.
+Inputs: `copy_number.tsv` and `arrays.bed`. `repeat_density.bedgraph` does not contain `family_id` and is not the preferred input for family-level comparison.
 
-Outputs planned for implementation: `assembly_vs_read_cn.tsv`.
+Implemented MVP output: `assembly_vs_read_cn.tsv`.
 
-Must not claim proof of collapse without uncertainty labels.
+Must not claim proof of collapse without uncertainty labels and must not be presented as multi-sample population comparison.
 
 ### visualize
 

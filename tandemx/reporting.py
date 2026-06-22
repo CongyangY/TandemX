@@ -49,7 +49,10 @@ OUTPUT_SPECS = {
     "locate": (
         ("repeat_density", "locate/repeat_density.bedgraph", "Assembly repeat-density track.", "assembly interpretation"),
         ("arrays", "locate/arrays.bed", "Candidate assembly repeat arrays.", "probe"),
-        ("assembly_read_comparison", "locate/assembly_vs_read_cn.tsv", "Assembly-versus-read abundance comparison.", "visualize"),
+        ("assembly_read_comparison_compat", "locate/assembly_vs_read_cn.tsv", "Backward-compatible assembly-versus-read comparison.", "compare review"),
+    ),
+    "compare": (
+        ("assembly_read_comparison", "compare/assembly_vs_read_cn.tsv", "Read-based abundance versus assembly array abundance comparison.", "visualize"),
     ),
     "probe": (
         ("probe_fasta", "probe/probes.fa", "Ranked probe sequences.", "probe synthesis review"),
@@ -115,6 +118,7 @@ def collect_output_warnings(config: ReportConfig) -> list[str]:
         "discover/family_similarity.tsv",
         "quantify/copy_number.tsv",
         "locate/assembly_vs_read_cn.tsv",
+        "compare/assembly_vs_read_cn.tsv",
         "probe/probes.rank.tsv",
         "probe/in_silico_fish.tsv",
     ):
@@ -160,6 +164,7 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
     family_path = config.outdir / "discover" / "families.tsv"
     candidate_path = config.outdir / "discover" / "candidate_reads.tsv"
     copy_number_path = config.outdir / "quantify" / "copy_number.tsv"
+    compare_path = config.outdir / "compare" / "assembly_vs_read_cn.tsv"
     family_similarity_path = config.outdir / "discover" / "family_similarity.tsv"
     repeat_annotation_path = config.outdir / "repeat_annotation.tsv"
     possible_higher_order_count = count_tsv_value(
@@ -203,6 +208,8 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
             f"- Discovered families: {count_data_rows(family_path)}",
             f"- Candidate reads: {count_data_rows(candidate_path)}",
             f"- Copy-number rows: {count_data_rows(copy_number_path)}",
+            f"- Compare rows: {count_data_rows(compare_path)}",
+            f"- Compare status summary: {summarize_tsv_counts(compare_path, 'status')}",
             f"- Family similarity rows: {count_data_rows(family_similarity_path)}",
             f"- Repeat annotation summary: {summarize_tsv_counts(repeat_annotation_path, 'annotation_status')}",
             "",
@@ -212,6 +219,7 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
             f"- Monomer FASTA: `{config.outdir / 'discover' / 'monomers.fa'}`",
             f"- Family similarity: `{family_similarity_path}`",
             f"- Copy-number table: `{copy_number_path}`" if copy_number_path.is_file() else "- Copy-number table: not generated",
+            f"- Assembly/read comparison: `{compare_path}`" if compare_path.is_file() else "- Assembly/read comparison: not generated",
             f"- Repeat annotation: `{repeat_annotation_path}`" if repeat_annotation_path.is_file() else "- Repeat annotation: not generated",
             f"- Output manifest: `{config.outdir / 'output_manifest.tsv'}`",
             f"- Pipeline summary: `{config.outdir / 'pipeline_summary.tsv'}`",

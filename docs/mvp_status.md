@@ -8,10 +8,11 @@ Current implemented commands:
 2. `tandemx discover`
 3. `tandemx quantify`
 4. `tandemx locate`
-5. `tandemx probe`
-6. `tandemx visualize`
-7. `tandemx validate`
-8. `tandemx run`
+5. `tandemx compare`
+6. `tandemx probe`
+7. `tandemx visualize`
+8. `tandemx validate`
+9. `tandemx run`
 
 Implemented benchmark support:
 
@@ -34,12 +35,12 @@ Discover performance status:
 6. `--kmer-backend rust` provides a compiled read-local seed/spacing implementation while Python remains the default/fallback;
 7. multiprocessing and intra-step checkpoint resume remain future work; output-level pipeline resume is implemented.
 
-`tandemx compare` remains deferred. Assembly-vs-read comparison is currently produced inside `tandemx locate` as `assembly_vs_read_cn.tsv`.
+`tandemx compare` is implemented for the toy MVP. It compares read-based abundance from `copy_number.tsv` with family-level assembly array abundance summarized from `arrays.bed`. `tandemx locate` still writes `assembly_vs_read_cn.tsv` for backward compatibility, but the comparison logic lives in `tandemx.compare.mvp`.
 
 Default analysis flow:
 
 ```text
-raw reads -> de novo discover -> repeat catalog -> quantify/locate/probe/visualize
+raw reads -> de novo discover -> repeat catalog -> quantify/locate/compare/probe/visualize
 ```
 
 `tandemx discover` is de novo in the MVP: it needs reads and output parameters, not a catalog, user-supplied repeat sequence or simulator truth file. Downstream `--catalog` arguments refer to `monomers.fa` produced by `tandemx discover`.
@@ -83,6 +84,10 @@ Locate:
 1. `repeat_density.bedgraph`
 2. `arrays.bed`
 3. `assembly_vs_read_cn.tsv`
+
+Compare:
+
+1. `assembly_vs_read_cn.tsv`
 
 Probe:
 

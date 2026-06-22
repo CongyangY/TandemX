@@ -13,6 +13,7 @@ from typing import Any, Iterable
 
 from tandemx import __version__
 from tandemx.annotation import annotate_repeat_catalog
+from tandemx.compare.mvp import CompareConfig, compare_toy_abundance
 from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
 from tandemx.io.sequences import SequenceFormatError
 from tandemx.io.validators import ValidationError, validate_project
@@ -279,11 +280,38 @@ def run_probe(args: argparse.Namespace) -> int:
 
 
 def run_compare(args: argparse.Namespace) -> int:
-    return _prepare_deferred_run(
-        "compare",
-        args,
-        [args.read_copy_number, args.assembly_density],
+    if args.copy_number is None:
+        raise ValueError("--copy-number is required for compare MVP")
+    if args.arrays is None:
+        if args.assembly_density is not None:
+            raise ValueError(
+                "--arrays is required for family-level compare MVP; "
+                "--assembly-density/repeat_density.bedgraph does not include family_id"
+            )
+        raise ValueError("--arrays is required for compare MVP")
+    _require_existing_files([args.copy_number, args.arrays])
+    args.outdir.mkdir(parents=True, exist_ok=True)
+    comparisons = compare_toy_abundance(
+        CompareConfig(
+            copy_number=args.copy_number,
+            arrays=args.arrays,
+            outdir=args.outdir,
+            collapse_threshold=args.collapse_threshold,
+            overexpansion_threshold=args.overexpansion_threshold,
+        )
     )
+    _write_run_config(args.outdir, "compare", args, status="compare_mvp_completed")
+    logger = _configure_log(args.outdir, "compare")
+    logger.info("command=tandemx compare")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=compare_mvp_completed")
+    logger.info("comparison_count=%s", len(comparisons))
+    logger.info("Compare MVP uses copy_number.tsv and arrays.bed for family-level abundance comparison")
+    if args.assembly_density is not None:
+        logger.info("assembly_density_ignored=%s", args.assembly_density)
+    print(f"tandemx compare: wrote {len(comparisons)} comparisons to {args.outdir}")
+    return 0
 
 
 def run_visualize(args: argparse.Namespace) -> int:
@@ -472,22 +500,29 @@ def build_parser() -> argparse.ArgumentParser:
         help="Compare read-based and assembly-based repeat abundance.",
     )
     compare.add_argument(
+        "--copy-number",
         "--read-copy-number",
-        required=True,
         type=_path_value,
-        dest="read_copy_number",
-        help="Read-based copy-number table produced by quantify.",
+        dest="copy_number",
+        help="copy_number.tsv produced by quantify. The --read-copy-number spelling is accepted for compatibility.",
+    )
+    compare.add_argument(
+        "--arrays",
+        type=_path_value,
+        help="arrays.bed produced by locate; preferred family-level assembly abundance input.",
     )
     compare.add_argument(
         "--assembly-density",
-        required=True,
         type=_path_value,
         dest="assembly_density",
-        help="Assembly repeat-density table produced by locate.",
+        help=(
+            "Deprecated compatibility option. repeat_density.bedgraph lacks family_id "
+            "and is not used as the primary family-level compare input."
+        ),
     )
-    compare.add_argument("--under-assembly-ratio", type=float, default=2.0, help="Read/assembly ratio threshold for possible under-representation.")
-    compare.add_argument("--over-expansion-ratio", type=float, default=0.5, help="Read/assembly ratio threshold for possible over-expansion.")
-    compare.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and future compare outputs.")
+    compare.add_argument("--collapse-threshold", type=float, default=0.6, help="Assembly/read ratio below this threshold is possible_collapse.")
+    compare.add_argument("--overexpansion-threshold", type=float, default=1.5, help="Assembly/read ratio above this threshold is possible_overexpansion.")
+    compare.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and assembly_vs_read_cn.tsv.")
     compare.set_defaults(func=run_compare)
 
     visualize = subparsers.add_parser(

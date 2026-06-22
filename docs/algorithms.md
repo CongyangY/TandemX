@@ -92,7 +92,7 @@ Current MVP implementation:
 7. write candidate arrays as 0-based half-open `arrays.bed`;
 8. compute merged-interval coverage per sliding window;
 9. write `repeat_density.bedgraph`;
-10. if `copy_number.tsv` is provided, compare read-estimated bp and assembly-estimated bp in `assembly_vs_read_cn.tsv`.
+10. if `copy_number.tsv` is provided, call `tandemx.compare.mvp` to write a backward-compatible `assembly_vs_read_cn.tsv`.
 
 MVP constraints:
 
@@ -133,19 +133,22 @@ MVP constraints:
 
 MVP goal: compare toy read-based and assembly-based repeat abundance.
 
-Planned approach:
+Current MVP implementation:
 
-1. convert read-based copy number into estimated repeat bp;
-2. summarize assembly repeat bp from localization outputs;
-3. calculate read-to-assembly ratio;
-4. classify status as consistent, possible under-representation, possible over-expansion or uncertain;
-5. preserve warnings from input estimates.
+1. read `copy_number.tsv` and use `estimated_bp` as the read-based family abundance;
+2. read `arrays.bed` and sum 0-based half-open interval lengths by `family_id`;
+3. calculate `assembly_read_ratio` as assembly-estimated bp divided by read-estimated bp;
+4. classify status as `consistent`, `possible_collapse`, `possible_overexpansion`, `assembly_only`, `reads_only` or `low_confidence`;
+5. write `assembly_vs_read_cn.tsv` from `tandemx compare`.
+
+`repeat_density.bedgraph` is not the main input because it lacks `family_id` and cannot support family-level comparison.
 
 MVP constraints:
 
 1. simple threshold-based classification;
 2. no claim of proof of collapse;
-3. no complex assembly quality model.
+3. no complex assembly quality model;
+4. no multi-sample population comparison.
 
 Future work:
 

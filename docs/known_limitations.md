@@ -67,6 +67,6 @@ Do not claim that TandemX can:
 4. guarantee FISH probe success;
 5. outperform TRF, TideHunter, TRASH or RepeatExplorer2/TAREAN on real genomes.
 
-## Current Deferred Command
+## Compare Limitations
 
-`tandemx compare` remains deferred. The implemented assembly-vs-read comparison currently lives in `tandemx locate`.
+`tandemx compare` is implemented only as a toy-scale single-run comparison between read-based repeat abundance and assembly-based array abundance. It does not compare multiple samples or populations, and it does not prove array collapse. `repeat_density.bedgraph` is not a family-level compare input because it has no `family_id`.

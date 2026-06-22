@@ -9,6 +9,7 @@ SIMULATED="${OUTDIR}/simulated"
 DISCOVER="${OUTDIR}/discover"
 QUANTIFY="${OUTDIR}/quantify"
 LOCATE="${OUTDIR}/locate"
+COMPARE="${OUTDIR}/compare"
 PROBE="${OUTDIR}/probe"
 VISUALIZE="${OUTDIR}/visualize"
 
@@ -55,6 +56,11 @@ PY
   --step-size 250 \
   --outdir "${LOCATE}"
 
+"${TANDEMX[@]}" compare \
+  --copy-number "${QUANTIFY}/copy_number.tsv" \
+  --arrays "${LOCATE}/arrays.bed" \
+  --outdir "${COMPARE}"
+
 "${TANDEMX[@]}" probe \
   --catalog "${DISCOVER}/monomers.fa" \
   --assembly "${SIMULATED}/assembly.fa" \
@@ -65,7 +71,7 @@ PY
 "${TANDEMX[@]}" visualize \
   --catalog "${DISCOVER}/monomers.fa" \
   --copy-number "${QUANTIFY}/copy_number.tsv" \
-  --comparison "${LOCATE}/assembly_vs_read_cn.tsv" \
+  --comparison "${COMPARE}/assembly_vs_read_cn.tsv" \
   --probes "${PROBE}/probes.rank.tsv" \
   --fish "${PROBE}/in_silico_fish.tsv" \
   --outdir "${VISUALIZE}"

@@ -267,30 +267,23 @@ def test_each_subcommand_writes_run_config(tmp_path: Path) -> None:
     assert 'status: "visualize_mvp_completed"' in visualize_config
     assert "func" not in visualize_config
 
-    commands = [
-        (
-            "compare",
-            [
-                "compare",
-                "--read-copy-number",
-                str(copy_number),
-                "--assembly-density",
-                str(density),
-                "--outdir",
-                str(tmp_path / "compare"),
-            ],
-        ),
-    ]
-
-    for command, args in commands:
-        result = run_cli(*args)
-        outdir = tmp_path / command
-        assert result.returncode == 0, result.stderr
-        assert "deferred in this MVP" in result.stdout
-        assert (outdir / "run_config.yaml").is_file()
-        assert (outdir / "run.log").is_file()
-        config = (outdir / "run_config.yaml").read_text(encoding="utf-8")
-        assert f'command: "tandemx {command}"' in config
-        assert f'subcommand: "{command}"' in config
-        assert 'status: "skeleton_not_implemented"' in config
-        assert "func" not in config
+    compare_result = run_cli(
+        "compare",
+        "--read-copy-number",
+        str(copy_number),
+        "--arrays",
+        str(arrays),
+        "--outdir",
+        str(tmp_path / "compare"),
+    )
+    compare_outdir = tmp_path / "compare"
+    assert compare_result.returncode == 0, compare_result.stderr
+    assert "comparisons" in compare_result.stdout
+    assert (compare_outdir / "assembly_vs_read_cn.tsv").is_file()
+    assert (compare_outdir / "run_config.yaml").is_file()
+    assert (compare_outdir / "run.log").is_file()
+    compare_config = (compare_outdir / "run_config.yaml").read_text(encoding="utf-8")
+    assert 'command: "tandemx compare"' in compare_config
+    assert 'subcommand: "compare"' in compare_config
+    assert 'status: "compare_mvp_completed"' in compare_config
+    assert "func" not in compare_config

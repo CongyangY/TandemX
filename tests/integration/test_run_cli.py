@@ -102,7 +102,7 @@ def test_full_toy_run_and_missing_assembly_skips(tmp_path: Path) -> None:
         "--outdir",
         str(full_outdir),
         "--steps",
-        "discover,quantify,locate,probe,visualize,validate",
+        "discover,quantify,locate,compare,probe,visualize,validate",
         "--kmer-backend",
         "rust",
     )
@@ -111,11 +111,18 @@ def test_full_toy_run_and_missing_assembly_skips(tmp_path: Path) -> None:
         "discover",
         "quantify",
         "locate",
+        "compare",
         "probe",
         "visualize",
         "validate",
     ]
+    assert (full_outdir / "compare" / "assembly_vs_read_cn.tsv").is_file()
     assert (full_outdir / "visualize" / "catalogue_summary.svg").is_file()
+    manifest_paths = {Path(row["file_path"]).relative_to(full_outdir).as_posix() for row in read_manifest(full_outdir)}
+    assert "compare/assembly_vs_read_cn.tsv" in manifest_paths
+    report = (full_outdir / "run_report.md").read_text(encoding="utf-8")
+    assert "Compare rows:" in report
+    assert "Compare status summary:" in report
 
     skip_outdir = tmp_path / "skip"
     skipped = run_cli(
@@ -127,13 +134,14 @@ def test_full_toy_run_and_missing_assembly_skips(tmp_path: Path) -> None:
         "--outdir",
         str(skip_outdir),
         "--steps",
-        "discover,locate,probe,validate",
+        "discover,locate,compare,probe,validate",
         "--kmer-backend",
         "rust",
     )
     assert skipped.returncode == 0, skipped.stderr
     rows = {row["step"]: row for row in read_summary(skip_outdir)}
     assert rows["locate"]["notes"] == "skipped_missing_assembly"
+    assert rows["compare"]["notes"] == "skipped_missing_assembly"
     assert rows["probe"]["notes"] == "skipped_missing_assembly"
     skipped_manifest = read_manifest(skip_outdir)
     assert any(
@@ -144,6 +152,33 @@ def test_full_toy_run_and_missing_assembly_skips(tmp_path: Path) -> None:
         row["step"] == "probe" and row["notes"] == "skipped_missing_assembly"
         for row in skipped_manifest
     )
+
+
+def test_compare_step_reports_missing_arrays(tmp_path: Path) -> None:
+    toy = simulate_toy(tmp_path)
+    outdir = tmp_path / "missing_compare_inputs"
+    result = run_cli(
+        "run",
+        "--reads",
+        str(toy / "reads.fa"),
+        "--assembly",
+        str(toy / "assembly.fa"),
+        "--genome-size",
+        "1000000",
+        "--outdir",
+        str(outdir),
+        "--steps",
+        "discover,quantify,compare",
+        "--kmer-backend",
+        "rust",
+    )
+
+    assert result.returncode != 0
+    rows = {row["step"]: row for row in read_summary(outdir)}
+    assert rows["compare"]["notes"].startswith("missing_input:")
+    assert "locate/arrays.bed" in rows["compare"]["notes"]
+    report = (outdir / "run_report.md").read_text(encoding="utf-8")
+    assert "compare: missing_input:" in report
 
 
 def test_missing_genome_size_and_force_resume_behavior(tmp_path: Path) -> None:

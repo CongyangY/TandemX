@@ -14,16 +14,16 @@ The intended long-term design is a read-first, assembly-aware workflow for:
 The default TandemX workflow is de novo:
 
 ```text
-raw reads -> tandemx discover -> de novo repeat catalog -> quantify/locate/probe/visualize
+raw reads -> tandemx discover -> de novo repeat catalog -> quantify/locate/compare/probe/visualize
 ```
 
 `tandemx discover` starts from reads only. It does not require pre-existing repeat sequences, a user library or simulator truth file. Its `monomers.fa`, `families.tsv` and `candidate_reads.tsv` outputs are the de novo repeat catalog used by downstream commands.
 
 ## Current Status
 
-This repository currently contains a toy dataset simulator, toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs, and a step-level `tandemx run` orchestrator.
+This repository currently contains a toy dataset simulator, toy-scale `discover`, `quantify`, `locate`, `compare`, `probe`, and `visualize` MVPs, and a step-level `tandemx run` orchestrator.
 
-No production-scale tandem repeat discovery, copy-number estimation, assembly localization, probe scoring, comparison, or visualization algorithm is available yet.
+No production-scale tandem repeat discovery, copy-number estimation, assembly localization, assembly/read comparison, probe scoring, or visualization algorithm is available yet.
 
 The first implementation target is a toy-scale MVP. It should run on small simulated data and should not claim support for real 7-20 Gb plant genomes until benchmarked.
 
@@ -89,18 +89,11 @@ examples/toy/results/
 
 Generated results are ignored by git and should not be committed.
 
-`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` implements toy-scale de novo repeat discovery from reads and writes `candidate_reads.tsv`, `monomers.fa`, `families.tsv`, and `family_similarity.tsv` for pairwise catalog redundancy review. `tandemx quantify` estimates toy read-based copy number from the discovered repeat catalog and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with discovered monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates from the discovered catalog and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots. `tandemx annotate-repeats` performs post hoc known-repeat annotation after discovery. `tandemx validate` checks recognized MVP outputs under a project directory.
+`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` implements toy-scale de novo repeat discovery from reads and writes `candidate_reads.tsv`, `monomers.fa`, `families.tsv`, and `family_similarity.tsv` for pairwise catalog redundancy review. `tandemx quantify` estimates toy read-based copy number from the discovered repeat catalog and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with discovered monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and a backward-compatible `assembly_vs_read_cn.tsv`. `tandemx compare` compares read-based abundance from `copy_number.tsv` with family-level assembly array abundance from `arrays.bed` and writes `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates from the discovered catalog and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots. `tandemx annotate-repeats` performs post hoc known-repeat annotation after discovery. `tandemx validate` checks recognized MVP outputs under a project directory.
 
 Sequence input support is centralized in `tandemx.io.sequences`. Analysis commands can read `.fa`, `.fasta`, `.fq`, `.fastq`, and gzip-compressed `.fa.gz`, `.fasta.gz`, `.fq.gz`, and `.fastq.gz` inputs where that file type is appropriate. Readers stream records with a shared `SequenceRecord` structure and validate empty files, malformed FASTQ records, duplicate IDs, and sequence/quality length mismatches.
 
-The `compare` command is deferred in the current MVP. Deferred commands currently:
-
-1. parse arguments;
-2. check that required input files exist;
-3. create the output directory;
-4. write `run_config.yaml`;
-5. write `run.log`; and
-6. report that the algorithm is deferred in this MVP.
+The `compare` MVP is an assembly/read abundance comparison for one run, not a multi-sample population comparison. It uses `copy_number.tsv` and `arrays.bed`; `repeat_density.bedgraph` is not the primary compare input because it does not contain `family_id`.
 
 Generate a toy dataset and run discover:
 
@@ -122,6 +115,10 @@ tandemx locate \
   --window-size 500 \
   --step-size 250 \
   --outdir results/locate
+tandemx compare \
+  --copy-number results/quantify/copy_number.tsv \
+  --arrays results/locate/arrays.bed \
+  --outdir results/compare
 tandemx probe \
   --catalog results/discover/monomers.fa \
   --assembly results/toy/assembly.fa \
@@ -131,7 +128,7 @@ tandemx probe \
 tandemx visualize \
   --catalog results/discover/monomers.fa \
   --copy-number results/quantify/copy_number.tsv \
-  --comparison results/locate/assembly_vs_read_cn.tsv \
+  --comparison results/compare/assembly_vs_read_cn.tsv \
   --probes results/probe/probes.rank.tsv \
   --fish results/probe/in_silico_fish.tsv \
   --outdir results/visualize
@@ -148,11 +145,11 @@ tandemx run \
   --assembly results/toy/assembly.fa \
   --genome-size 7744 \
   --outdir results/run \
-  --steps discover,quantify,locate,probe,visualize,validate \
+  --steps discover,quantify,locate,compare,probe,visualize,validate \
   --kmer-backend rust
 ```
 
-Without `--assembly`, locate, probe, and assembly-dependent visualization steps are recorded as skipped. `--resume` is basic output-level resume, not an intra-step checkpoint. `--force` reruns selected steps. Pipeline runs write per-step logs plus `pipeline_summary.tsv` and `pipeline_summary.json`. Read limits are passed to both discover and quantify so copy-number depth uses the same input prefix.
+Without `--assembly`, locate, compare, probe, and assembly-dependent visualization steps are recorded as skipped. `--resume` is basic output-level resume, not an intra-step checkpoint. `--force` reruns selected steps. Pipeline runs write per-step logs plus `pipeline_summary.tsv`, `pipeline_summary.json`, `output_manifest.tsv`, and `run_report.md`. Read limits are passed to both discover and quantify so copy-number depth uses the same input prefix.
 
 ## Where are my outputs?
 
@@ -163,6 +160,7 @@ results/run1/
 ├── discover/
 ├── quantify/
 ├── locate/
+├── compare/
 ├── probe/
 ├── visualize/
 ├── validate/

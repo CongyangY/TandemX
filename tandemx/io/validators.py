@@ -168,6 +168,27 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
             "warning",
         },
         "numeric": {"read_estimated_bp", "assembly_estimated_bp", "assembly_read_ratio"},
+        "status": {
+            "consistent",
+            "possible_collapse",
+            "possible_overexpansion",
+            "assembly_only",
+            "reads_only",
+            "low_confidence",
+        },
+    },
+    "output_manifest.tsv": {
+        "required": {
+            "step",
+            "output_type",
+            "file_path",
+            "exists",
+            "file_size_bytes",
+            "description",
+            "required_for_next_step",
+            "notes",
+        },
+        "numeric": {"file_size_bytes"},
     },
     "probes.rank.tsv": {
         "required": {
@@ -253,6 +274,8 @@ def validate_tsv(path: Path, schema: dict[str, set[str]]) -> ValidationResult:
             raise ValidationError(f"{path} line {line_number} has empty confidence")
         if "status" in index and not fields[index["status"]]:
             raise ValidationError(f"{path} line {line_number} has empty status")
+        if "status" in index and "status" in schema and fields[index["status"]] not in schema["status"]:
+            raise ValidationError(f"{path} line {line_number} has invalid status: {fields[index['status']]}")
         if "warning" in index and len(fields[index["warning"]]) == 0:
             # Empty warning is valid and means no warning for this record.
             pass

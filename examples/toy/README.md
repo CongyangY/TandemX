@@ -33,6 +33,7 @@ tandemx simulate toy
 tandemx discover
 tandemx quantify
 tandemx locate
+tandemx compare
 tandemx probe
 tandemx visualize
 tandemx validate
@@ -49,6 +50,7 @@ results/quantify/copy_number.tsv
 results/locate/repeat_density.bedgraph
 results/locate/arrays.bed
 results/locate/assembly_vs_read_cn.tsv
+results/compare/assembly_vs_read_cn.tsv
 results/probe/probes.fa
 results/probe/probes.rank.tsv
 results/probe/in_silico_fish.tsv

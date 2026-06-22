@@ -32,6 +32,7 @@ def test_end_to_end_toy_workflow_script(tmp_path: Path) -> None:
         output_dir / "locate" / "repeat_density.bedgraph",
         output_dir / "locate" / "arrays.bed",
         output_dir / "locate" / "assembly_vs_read_cn.tsv",
+        output_dir / "compare" / "assembly_vs_read_cn.tsv",
         output_dir / "probe" / "probes.fa",
         output_dir / "probe" / "probes.rank.tsv",
         output_dir / "probe" / "in_silico_fish.tsv",

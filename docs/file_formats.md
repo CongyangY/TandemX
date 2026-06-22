@@ -196,7 +196,9 @@ BED6 plus confidence fields, 0-based half-open. This file has no header line.
 
 ## assembly_vs_read_cn.tsv
 
-Produced by: `tandemx locate` in the current MVP. A dedicated `tandemx compare` command is planned.
+Produced by: `tandemx compare`. Also produced by `tandemx locate` for backward compatibility.
+
+The formal compare MVP input is `copy_number.tsv` plus `arrays.bed`. `repeat_density.bedgraph` does not include `family_id`, so it is not suitable as the primary family-level comparison input.
 
 | Field | Type | Unit | Description |
 |---|---|---:|---|
@@ -204,7 +206,7 @@ Produced by: `tandemx locate` in the current MVP. A dedicated `tandemx compare` 
 | read_estimated_bp | float | bp | Repeat bp estimated from reads |
 | assembly_estimated_bp | float | bp | Repeat bp observed or inferred from assembly |
 | assembly_read_ratio | float | ratio | Assembly estimate divided by read estimate |
-| status | string | NA | `consistent`, `possible_collapse`, `possible_overexpansion` or `low_confidence` |
+| status | string | NA | `consistent`, `possible_collapse`, `possible_overexpansion`, `assembly_only`, `reads_only` or `low_confidence` |
 | confidence | string | NA | Confidence label |
 | warning | string | NA | Semicolon-separated warnings or empty |
 
@@ -279,7 +281,7 @@ The validator scans the project directory for recognized TandemX output filename
 6. TandemX FASTA header structure for `monomers.fa` and `probes.fa`;
 7. non-empty recognized output files, except pairwise/audit tables that can legitimately have no data rows when there are no pairs or no collapse events.
 
-Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `family_similarity.tsv`, `collapsed_families.tsv`, `family_collapse.tsv`, `repeat_annotation.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, `collapsed_monomers.fa`, and `probes.fa`.
+Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `family_similarity.tsv`, `collapsed_families.tsv`, `family_collapse.tsv`, `repeat_annotation.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `output_manifest.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, `collapsed_monomers.fa`, and `probes.fa`.
 
 ## Pipeline Summaries
 

@@ -2,18 +2,18 @@
 
 ## Near-term MVP Completion
 
-1. Split `assembly_vs_read_cn.tsv` comparison logic into a dedicated `tandemx compare` implementation.
-2. Expand output validation toward cross-file consistency checks.
-3. Add richer confidence and warning propagation across modules.
-4. Add versioned toy benchmark configs.
-5. Keep randomized toy workflow tests small, reproducible and independent of simulator truth files as algorithm input.
-6. Use the synthetic benchmark harness to track runtime, output validity and toy accuracy across 1k/10k/50k/100k-read scales.
-7. Extend the implemented output-level `tandemx run --resume` into real intra-step chunk checkpoints with input/config fingerprints.
-8. Add optional `kmc`, `meryl` or `jellyfish` adapters for global production k-mer workloads while keeping Python for toy/pilot runs.
-9. Stabilize and package the implemented Rust read-local rolling seed/position interface across supported Python/platform combinations; global k-mer counters do not replace this position-aware operation.
-10. Preserve `tandemx run` step summaries while adding resource metrics and dependency-aware invalidation.
-11. Refine post hoc known-repeat annotation and family-similarity review without turning known libraries into discovery templates.
-12. Keep optional family collapse conservative: only `likely_redundant` pairs should collapse, while possible higher-order or partial relationships remain visible for review.
+1. Expand output validation toward cross-file consistency checks.
+2. Add richer confidence and warning propagation across modules.
+3. Add versioned toy benchmark configs.
+4. Keep randomized toy workflow tests small, reproducible and independent of simulator truth files as algorithm input.
+5. Use the synthetic benchmark harness to track runtime, output validity and toy accuracy across 1k/10k/50k/100k-read scales.
+6. Extend the implemented output-level `tandemx run --resume` into real intra-step chunk checkpoints with input/config fingerprints.
+7. Add optional `kmc`, `meryl` or `jellyfish` adapters for global production k-mer workloads while keeping Python for toy/pilot runs.
+8. Stabilize and package the implemented Rust read-local rolling seed/position interface across supported Python/platform combinations; global k-mer counters do not replace this position-aware operation.
+9. Preserve `tandemx run` step summaries while adding resource metrics and dependency-aware invalidation.
+10. Refine post hoc known-repeat annotation and family-similarity review without turning known libraries into discovery templates.
+11. Keep optional family collapse conservative: only `likely_redundant` pairs should collapse, while possible higher-order or partial relationships remain visible for review.
+12. Add future multi-sample compare support separately from the current single-run assembly/read abundance MVP.
 
 The default workflow should remain de novo: reads enter `tandemx discover`, and the discovered repeat catalog feeds downstream commands. A future optional guided mode may allow `--catalog` to point to user-supplied known-repeat FASTA files, such as named satellite sequences, for guided quantification, localization or probe design. That guided mode must be documented as optional and separate from the default discovery workflow.
 
