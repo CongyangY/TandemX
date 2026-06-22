@@ -79,9 +79,12 @@ def test_reads_only_run_writes_summaries(tmp_path: Path) -> None:
     assert "discover/candidate_reads.tsv" in manifest_paths
     assert "discover/monomers.fa" in manifest_paths
     assert "discover/families.tsv" in manifest_paths
+    assert "discover/family_similarity.tsv" in manifest_paths
     assert "quantify/copy_number.tsv" in manifest_paths
     report = (outdir / "run_report.md").read_text(encoding="utf-8")
     assert "## Output counts" in report
+    assert "Family similarity rows:" in report
+    assert "Repeat annotation summary: not generated" in report
     assert "Validation status: passed" in report
 
 

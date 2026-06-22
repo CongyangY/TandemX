@@ -12,8 +12,15 @@
 8. Add optional `kmc`, `meryl` or `jellyfish` adapters for global production k-mer workloads while keeping Python for toy/pilot runs.
 9. Stabilize and package the implemented Rust read-local rolling seed/position interface across supported Python/platform combinations; global k-mer counters do not replace this position-aware operation.
 10. Preserve `tandemx run` step summaries while adding resource metrics and dependency-aware invalidation.
+11. Refine post hoc known-repeat annotation and family-similarity review without turning known libraries into discovery templates.
+12. Keep optional family collapse conservative: only `likely_redundant` pairs should collapse, while possible higher-order or partial relationships remain visible for review.
 
 The default workflow should remain de novo: reads enter `tandemx discover`, and the discovered repeat catalog feeds downstream commands. A future optional guided mode may allow `--catalog` to point to user-supplied known-repeat FASTA files, such as named satellite sequences, for guided quantification, localization or probe design. That guided mode must be documented as optional and separate from the default discovery workflow.
+
+The implemented `tandemx annotate-repeats` command is not that guided mode. It
+is post hoc interpretation after discovery. Publication-level workflows should
+combine known-repeat annotation with read support, copy number, assembly
+localization and, where possible, FISH or other experimental evidence.
 
 ## Large-genome Optimization Path
 

@@ -51,6 +51,22 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
         },
         "numeric": {"monomer_length_bp", "gc_fraction", "support_read_count", "support_span_bp", "mean_identity"},
     },
+    "collapsed_families.tsv": {
+        "required": {
+            "family_id",
+            "monomer_id",
+            "monomer_length_bp",
+            "consensus_md5",
+            "gc_fraction",
+            "support_read_count",
+            "support_span_bp",
+            "mean_identity",
+            "low_complexity_flag",
+            "confidence",
+            "warning",
+        },
+        "numeric": {"monomer_length_bp", "gc_fraction", "support_read_count", "support_span_bp", "mean_identity"},
+    },
     "family_similarity.tsv": {
         "required": {
             "family_a",
@@ -77,6 +93,47 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
             "local_overlap_bp",
             "local_overlap_fraction_shorter",
             "length_ratio",
+        },
+    },
+    "family_collapse.tsv": {
+        "required": {
+            "original_family_id",
+            "retained_family_id",
+            "action",
+            "reason",
+            "relationship",
+            "similarity_metrics",
+            "notes",
+        },
+        "numeric": set(),
+    },
+    "repeat_annotation.tsv": {
+        "required": {
+            "family_id",
+            "monomer_length",
+            "best_known_id",
+            "best_known_length",
+            "best_orientation",
+            "shared_kmer_fraction",
+            "jaccard",
+            "dice",
+            "containment_discovered_in_known",
+            "containment_known_in_discovered",
+            "local_identity",
+            "local_overlap_bp",
+            "annotation_status",
+            "notes",
+        },
+        "numeric": {
+            "monomer_length",
+            "best_known_length",
+            "shared_kmer_fraction",
+            "jaccard",
+            "dice",
+            "containment_discovered_in_known",
+            "containment_known_in_discovered",
+            "local_identity",
+            "local_overlap_bp",
         },
     },
     "copy_number.tsv": {
@@ -145,11 +202,12 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
     },
 }
 
-ALLOW_EMPTY_TSV_RECORDS = {"family_similarity.tsv"}
+ALLOW_EMPTY_TSV_RECORDS = {"family_similarity.tsv", "family_collapse.tsv"}
 
 
 FASTA_HEADER_PATTERNS = {
     "monomers.fa": re.compile(r"^family_id=[^;]+;monomer_id=[^;]+;length_bp=\d+;confidence=[^;]+$"),
+    "collapsed_monomers.fa": re.compile(r"^family_id=[^;]+;monomer_id=[^;]+;length_bp=\d+;confidence=[^;]+$"),
     "probes.fa": re.compile(r"^probe_id=[^;]+;family_id=[^;]+;length_bp=\d+;probe_score=[0-9.]+;confidence=[^;]+$"),
 }
 

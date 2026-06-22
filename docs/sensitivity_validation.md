@@ -15,14 +15,16 @@ reads -> tandemx discover -> monomers.fa -> post hoc known-repeat comparison
 Run:
 
 ```bash
-python benchmarks/scripts/check_known_repeats_against_catalog.py \
+tandemx annotate-repeats \
   --catalog results/discover/monomers.fa \
   --known validation/known_repeats.fa \
-  --out results/known_repeat_matches.tsv \
+  --out results/repeat_annotation.tsv \
   --kmer-size 11
 ```
 
-For each known repeat, the MVP checker compares exact k-mer sets against every discovered monomer in forward and reverse-complement orientations. It reports Dice similarity, the fraction of known-repeat k-mers shared, the best family, orientation, and a thresholded interpretation. This method is lightweight and rotation-tolerant for most monomer k-mers, but it is not a replacement for a gapped alignment, repeat-family phylogeny, or manual biological review.
+For each discovered family, the annotation command compares exact k-mer sets against every known repeat in forward and reverse-complement orientations. It reports Dice, Jaccard, containment, best local identity, orientation, and a thresholded post hoc annotation. This method is lightweight and useful for triage, but it is not a replacement for a gapped alignment, repeat-family phylogeny, cytogenetic validation, or manual biological review.
+
+Known-repeat annotation must not be used to tune `tandemx discover` until a separate validation experiment has been completed. For publication-level analysis, report the de novo discovery command, then report annotation as downstream interpretation.
 
 ## Synthetic spike-ins in a real-read background
 
@@ -72,3 +74,13 @@ The framework supports a defensible evidence ladder:
 5. independent annotations and experimental FISH results assess biological relevance.
 
 Results must distinguish engineering validation from biological validation. A high k-mer match supports family correspondence but does not prove array location, exact copy number, chromosome specificity, or successful FISH hybridization.
+
+## Optional family collapse during sensitivity analysis
+
+`tandemx discover --collapse-redundant-families` is disabled by default. When
+enabled, it collapses only `likely_redundant` pairs from `family_similarity.tsv`
+and writes an audit trail in `family_collapse.tsv`. Relationships labelled
+`possible_higher_order_or_partial` are retained because they may represent
+higher-order organization, dimers, partial overlaps, or genuinely related
+families. Publication analyses should report both the original and optional
+collapsed catalog decisions when collapse mode is used.

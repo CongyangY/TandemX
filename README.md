@@ -70,6 +70,7 @@ tandemx probe --help
 tandemx compare --help
 tandemx visualize --help
 tandemx validate --help
+tandemx annotate-repeats --help
 ```
 
 ## Quick Start: Toy Workflow
@@ -88,7 +89,7 @@ examples/toy/results/
 
 Generated results are ignored by git and should not be committed.
 
-`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` implements toy-scale de novo repeat discovery from reads and writes `candidate_reads.tsv`, `monomers.fa`, `families.tsv`, and `family_similarity.tsv` for pairwise catalog redundancy review. `tandemx quantify` estimates toy read-based copy number from the discovered repeat catalog and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with discovered monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates from the discovered catalog and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots. `tandemx validate` checks recognized MVP outputs under a project directory.
+`tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` implements toy-scale de novo repeat discovery from reads and writes `candidate_reads.tsv`, `monomers.fa`, `families.tsv`, and `family_similarity.tsv` for pairwise catalog redundancy review. `tandemx quantify` estimates toy read-based copy number from the discovered repeat catalog and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with discovered monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates from the discovered catalog and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots. `tandemx annotate-repeats` performs post hoc known-repeat annotation after discovery. `tandemx validate` checks recognized MVP outputs under a project directory.
 
 Sequence input support is centralized in `tandemx.io.sequences`. Analysis commands can read `.fa`, `.fasta`, `.fq`, `.fastq`, and gzip-compressed `.fa.gz`, `.fasta.gz`, `.fq.gz`, and `.fastq.gz` inputs where that file type is appropriate. Readers stream records with a shared `SequenceRecord` structure and validate empty files, malformed FASTQ records, duplicate IDs, and sequence/quality length mismatches.
 
@@ -199,13 +200,15 @@ marks whether the two catalogs are directly comparable.
 Known repeat sequences can be compared only after de novo discovery:
 
 ```bash
-python benchmarks/scripts/check_known_repeats_against_catalog.py \
+tandemx annotate-repeats \
   --catalog results/run1/discover/monomers.fa \
   --known known_repeats.fa \
-  --out results/run1/known_repeat_matches.tsv
+  --out results/run1/repeat_annotation.tsv
 ```
 
-This post hoc check does not pass known repeats to `tandemx discover` and does not make them templates for candidate detection.
+This post hoc check does not pass known repeats to `tandemx discover` and does not make them templates for candidate detection. It reports the best known-repeat match for each discovered family with Dice, Jaccard, containment and local-identity metrics.
+
+`tandemx discover --collapse-redundant-families` is optional and off by default. When enabled, it writes `collapsed_families.tsv`, `collapsed_monomers.fa`, and `family_collapse.tsv`, but only collapses pairs classified as `likely_redundant`. Pairs labelled `possible_higher_order_or_partial` are retained and should be reviewed; TandemX does not claim they are definitely redundant or definitely higher-order repeats.
 
 ## Tests
 

@@ -39,6 +39,9 @@ OUTPUT_SPECS = {
         ("monomer_catalog", "discover/monomers.fa", "Discovered representative monomer sequences.", "quantify,locate,probe,visualize"),
         ("family_catalog", "discover/families.tsv", "Discovered repeat family summary.", "interpretation"),
         ("family_similarity", "discover/family_similarity.tsv", "Pairwise monomer similarity and redundancy flags.", "catalog review"),
+        ("collapsed_monomer_catalog", "discover/collapsed_monomers.fa", "Optional catalog collapsed only for likely_redundant families.", "optional catalog review"),
+        ("collapsed_family_catalog", "discover/collapsed_families.tsv", "Optional family summary after likely_redundant collapse.", "optional catalog review"),
+        ("family_collapse", "discover/family_collapse.tsv", "Optional audit trail for likely_redundant family collapse.", "optional catalog review"),
     ),
     "quantify": (
         ("copy_number", "quantify/copy_number.tsv", "Read-based repeat copy-number estimates.", "locate,probe,visualize"),
@@ -67,7 +70,14 @@ PIPELINE_OUTPUT_SPECS = (
     ("pipeline_summary_json", "pipeline_summary.json", "Step-level pipeline summary for programmatic use."),
     ("pipeline_log", "pipeline.log", "Pipeline step completion log."),
     ("run_report", "run_report.md", "Human-readable run report."),
+    ("repeat_annotation", "repeat_annotation.tsv", "Post hoc known-repeat annotation when generated."),
 )
+OPTIONAL_OUTPUT_TYPES = {
+    "collapsed_monomer_catalog",
+    "collapsed_family_catalog",
+    "family_collapse",
+    "repeat_annotation",
+}
 
 
 def count_data_rows(path: Path) -> int:
@@ -75,6 +85,26 @@ def count_data_rows(path: Path) -> int:
         return 0
     with path.open("rt", encoding="utf-8") as handle:
         return max(0, sum(1 for line in handle if line.strip()) - 1)
+
+
+def count_tsv_value(path: Path, field: str, value: str) -> int:
+    if not path.is_file():
+        return 0
+    with path.open("rt", encoding="utf-8", newline="") as handle:
+        return sum(1 for row in csv.DictReader(handle, delimiter="\t") if row.get(field) == value)
+
+
+def summarize_tsv_counts(path: Path, field: str) -> str:
+    if not path.is_file():
+        return "not generated"
+    counts: dict[str, int] = {}
+    with path.open("rt", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle, delimiter="\t"):
+            key = row.get(field, "") or "empty"
+            counts[key] = counts.get(key, 0) + 1
+    if not counts:
+        return "no records"
+    return ", ".join(f"{key}={counts[key]}" for key in sorted(counts))
 
 
 def collect_output_warnings(config: ReportConfig) -> list[str]:
@@ -130,6 +160,18 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
     family_path = config.outdir / "discover" / "families.tsv"
     candidate_path = config.outdir / "discover" / "candidate_reads.tsv"
     copy_number_path = config.outdir / "quantify" / "copy_number.tsv"
+    family_similarity_path = config.outdir / "discover" / "family_similarity.tsv"
+    repeat_annotation_path = config.outdir / "repeat_annotation.tsv"
+    possible_higher_order_count = count_tsv_value(
+        family_similarity_path,
+        "relationship",
+        "possible_higher_order_or_partial",
+    )
+    if possible_higher_order_count:
+        notes.append(
+            "family similarity: possible_higher_order_or_partial candidate(s) detected; "
+            "review before interpreting as redundancy or higher-order organization."
+        )
 
     lines = [
         "# TandemX Run Report",
@@ -161,12 +203,16 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
             f"- Discovered families: {count_data_rows(family_path)}",
             f"- Candidate reads: {count_data_rows(candidate_path)}",
             f"- Copy-number rows: {count_data_rows(copy_number_path)}",
+            f"- Family similarity rows: {count_data_rows(family_similarity_path)}",
+            f"- Repeat annotation summary: {summarize_tsv_counts(repeat_annotation_path, 'annotation_status')}",
             "",
             "## Main outputs",
             "",
             f"- Family catalogue: `{family_path}`",
             f"- Monomer FASTA: `{config.outdir / 'discover' / 'monomers.fa'}`",
+            f"- Family similarity: `{family_similarity_path}`",
             f"- Copy-number table: `{copy_number_path}`" if copy_number_path.is_file() else "- Copy-number table: not generated",
+            f"- Repeat annotation: `{repeat_annotation_path}`" if repeat_annotation_path.is_file() else "- Repeat annotation: not generated",
             f"- Output manifest: `{config.outdir / 'output_manifest.tsv'}`",
             f"- Pipeline summary: `{config.outdir / 'pipeline_summary.tsv'}`",
             "",
@@ -189,10 +235,10 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
     if (config.outdir / "discover" / "monomers.fa").is_file():
         lines.extend(
             [
-                "python benchmarks/scripts/check_known_repeats_against_catalog.py \\",
+                "tandemx annotate-repeats \\",
                 f"  --catalog {shlex.quote(str(config.outdir / 'discover' / 'monomers.fa'))} \\",
                 "  --known known_repeats.fa \\",
-                f"  --out {shlex.quote(str(config.outdir / 'known_repeat_matches.tsv'))}",
+                f"  --out {shlex.quote(str(config.outdir / 'repeat_annotation.tsv'))}",
             ]
         )
     lines.extend(["```", ""])
@@ -213,6 +259,8 @@ def write_output_manifest(config: ReportConfig, records: Sequence[ReportStep]) -
             row_notes = notes
             if not exists and not row_notes:
                 row_notes = "output_missing"
+            if not exists and output_type in OPTIONAL_OUTPUT_TYPES:
+                row_notes = "optional_not_generated"
             rows.append(
                 {
                     "step": step,
@@ -237,7 +285,7 @@ def write_output_manifest(config: ReportConfig, records: Sequence[ReportStep]) -
                 "file_size_bytes": path.stat().st_size if exists else 0,
                 "description": description,
                 "required_for_next_step": "run review",
-                "notes": "" if exists else "output_missing",
+                "notes": "" if exists else ("optional_not_generated" if output_type in OPTIONAL_OUTPUT_TYPES else "output_missing"),
             }
         )
     with (config.outdir / "output_manifest.tsv").open("wt", encoding="utf-8", newline="") as handle:

@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from tandemx import __version__
+from tandemx.annotation import annotate_repeat_catalog
 from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
 from tandemx.io.sequences import SequenceFormatError
 from tandemx.io.validators import ValidationError, validate_project
@@ -23,7 +24,7 @@ from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, pars
 from tandemx.visualize.mvp import VisualizeConfig, render_static_plots
 
 
-COMMANDS = ("run", "discover", "quantify", "locate", "probe", "compare", "visualize", "simulate", "validate")
+COMMANDS = ("run", "discover", "quantify", "locate", "probe", "compare", "visualize", "simulate", "validate", "annotate-repeats")
 
 
 class InputFileError(Exception):
@@ -164,6 +165,7 @@ def run_discover(args: argparse.Namespace) -> int:
         progress_every=args.progress_every,
         chunk_size=args.chunk_size,
         kmer_backend=args.kmer_backend,
+        collapse_redundant_families=args.collapse_redundant_families,
     )
     try:
         candidates, families = discover_toy_repeats(config, logger=logger)
@@ -351,6 +353,29 @@ def run_validate(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_annotate_repeats(args: argparse.Namespace) -> int:
+    _require_existing_files([args.catalog, args.known])
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    run_dir = args.out.parent
+    _write_run_config(run_dir, "annotate-repeats", args, status="annotate_repeats_running")
+    logger = _configure_log(run_dir, "annotate-repeats")
+    logger.info("command=tandemx annotate-repeats")
+    logger.info("catalog=%s", args.catalog)
+    logger.info("known=%s", args.known)
+    logger.info("output=%s", args.out)
+    annotations = annotate_repeat_catalog(
+        args.catalog,
+        args.known,
+        args.out,
+        kmer_size=args.kmer_size,
+    )
+    _write_run_config(run_dir, "annotate-repeats", args, status="annotate_repeats_completed")
+    logger.info("status=annotate_repeats_completed")
+    logger.info("annotation_count=%s", len(annotations))
+    print(f"tandemx annotate-repeats: wrote {len(annotations)} annotations to {args.out}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tandemx",
@@ -389,6 +414,11 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")
     discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
     discover.add_argument("--kmer-backend", choices=("python", "rust"), default="python", help="Read-local seed backend. Rust requires the compiled extension; Python remains the fallback/default.")
+    discover.add_argument(
+        "--collapse-redundant-families",
+        action="store_true",
+        help="Write collapsed_families.tsv/collapsed_monomers.fa by collapsing only likely_redundant family pairs. Default is off.",
+    )
     discover.set_defaults(func=run_discover)
 
     quantify = subparsers.add_parser(
@@ -498,6 +528,20 @@ def build_parser() -> argparse.ArgumentParser:
     )
     validate.add_argument("--project", required=True, type=_path_value, help="Project or output directory to scan for TandemX output files.")
     validate.set_defaults(func=run_validate)
+
+    annotate = subparsers.add_parser(
+        "annotate-repeats",
+        help="Post hoc annotation of discovered monomers against a known repeat library.",
+        description=(
+            "Compare discovered monomers to known repeats after discovery. "
+            "Known repeats are never used as tandemx discover input."
+        ),
+    )
+    annotate.add_argument("--catalog", required=True, type=_path_value, help="monomers.fa produced by tandemx discover.")
+    annotate.add_argument("--known", required=True, type=_path_value, help="Known repeat FASTA used only for post hoc interpretation.")
+    annotate.add_argument("--out", required=True, type=_path_value, help="Output repeat_annotation.tsv path.")
+    annotate.add_argument("--kmer-size", type=int, default=11, help="K-mer size for Dice/Jaccard/containment metrics.")
+    annotate.set_defaults(func=run_annotate_repeats)
 
     return parser
 

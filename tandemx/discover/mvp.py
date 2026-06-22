@@ -83,6 +83,17 @@ class FamilySimilarity:
 
 
 @dataclass(frozen=True)
+class FamilyCollapse:
+    original_family_id: str
+    retained_family_id: str
+    action: str
+    reason: str
+    relationship: str
+    similarity_metrics: str
+    notes: str
+
+
+@dataclass(frozen=True)
 class DiscoverConfig:
     reads: Path
     outdir: Path
@@ -103,6 +114,7 @@ class DiscoverConfig:
     progress_every: int = 1000
     chunk_size: int = 1000
     kmer_backend: str = "python"
+    collapse_redundant_families: bool = False
 
 
 def discover_toy_repeats(
@@ -118,6 +130,9 @@ def discover_toy_repeats(
         config.outdir / "monomers.fa",
         config.outdir / "families.tsv",
         config.outdir / "family_similarity.tsv",
+        config.outdir / "collapsed_families.tsv",
+        config.outdir / "collapsed_monomers.fa",
+        config.outdir / "family_collapse.tsv",
     ):
         stale_path.unlink(missing_ok=True)
 
@@ -245,6 +260,11 @@ def discover_toy_repeats(
     write_monomers(config.outdir / "monomers.fa", families)
     write_families(config.outdir / "families.tsv", families)
     write_family_similarity(config.outdir / "family_similarity.tsv", similarities)
+    if config.collapse_redundant_families:
+        collapsed_families, collapse_records = collapse_redundant_families(families, similarities)
+        write_monomers(config.outdir / "collapsed_monomers.fa", collapsed_families)
+        write_families(config.outdir / "collapsed_families.tsv", collapsed_families)
+        write_family_collapse(config.outdir / "family_collapse.tsv", collapse_records)
     return candidates, families
 
 
@@ -642,9 +662,21 @@ def classify_family_relationship(
 ) -> tuple[str, bool, str]:
     near_integer_ratio = abs(length_ratio - round(length_ratio)) <= 0.05 and round(length_ratio) >= 2
     if (
+        near_integer_ratio
+        and local_identity >= 0.75
+        and local_overlap_fraction_shorter >= 0.75
+        and (kmer_jaccard >= 0.25 or shared_kmer_fraction >= 0.5)
+    ):
+        return (
+            "possible_higher_order_or_partial",
+            False,
+            "Moderate or high similarity with near-integer length ratio; inspect as possible higher-order unit, dimer, or related family.",
+        )
+    if (
         local_identity >= 0.9
         and local_overlap_fraction_shorter >= 0.85
-        and (shared_kmer_fraction >= 0.8 or near_integer_ratio)
+        and shared_kmer_fraction >= 0.8
+        and length_ratio <= 1.20
     ):
         return (
             "likely_redundant",
@@ -682,6 +714,103 @@ def annotate_family_redundancy(
         warnings.extend(warnings_by_family[family.family_id])
         annotated.append(replace(family, warning=";".join(warnings)))
     return annotated
+
+
+def collapse_redundant_families(
+    families: Sequence[RepeatFamily],
+    similarities: Sequence[FamilySimilarity],
+) -> tuple[list[RepeatFamily], list[FamilyCollapse]]:
+    """Collapse only pairs classified as likely redundant."""
+    family_by_id = {family.family_id: family for family in families}
+    parent = {family.family_id: family.family_id for family in families}
+
+    def find(family_id: str) -> str:
+        while parent[family_id] != family_id:
+            parent[family_id] = parent[parent[family_id]]
+            family_id = parent[family_id]
+        return family_id
+
+    def union(left: str, right: str) -> None:
+        root_left = find(left)
+        root_right = find(right)
+        if root_left != root_right:
+            parent[root_right] = root_left
+
+    for similarity in similarities:
+        if similarity.relationship == "likely_redundant":
+            union(similarity.family_a, similarity.family_b)
+
+    components: dict[str, list[RepeatFamily]] = {}
+    for family in families:
+        components.setdefault(find(family.family_id), []).append(family)
+
+    retained_by_family: dict[str, str] = {}
+    for component in components.values():
+        retained = choose_retained_family(component)
+        for family in component:
+            retained_by_family[family.family_id] = retained.family_id
+
+    similarity_lookup = {
+        frozenset((similarity.family_a, similarity.family_b)): similarity
+        for similarity in similarities
+        if similarity.relationship == "likely_redundant"
+    }
+    records: list[FamilyCollapse] = []
+    collapsed: list[RepeatFamily] = []
+    for family in families:
+        retained_id = retained_by_family[family.family_id]
+        if family.family_id == retained_id:
+            collapsed.append(family)
+            records.append(
+                FamilyCollapse(
+                    original_family_id=family.family_id,
+                    retained_family_id=retained_id,
+                    action="retained",
+                    reason="selected_representative" if len(components[find(family.family_id)]) > 1 else "no_likely_redundant_match",
+                    relationship="",
+                    similarity_metrics="",
+                    notes="Possible higher-order or partial relationships are not collapsed.",
+                )
+            )
+            continue
+        similarity = similarity_lookup.get(frozenset((family.family_id, retained_id)))
+        records.append(
+            FamilyCollapse(
+                original_family_id=family.family_id,
+                retained_family_id=retained_id,
+                action="collapsed",
+                reason="likely_redundant_to_retained_family",
+                relationship=similarity.relationship if similarity else "likely_redundant",
+                similarity_metrics=format_similarity_metrics(similarity) if similarity else "",
+                notes="Collapsed only because the relationship was likely_redundant.",
+            )
+        )
+    return collapsed, records
+
+
+def choose_retained_family(families: Sequence[RepeatFamily]) -> RepeatFamily:
+    return max(
+        families,
+        key=lambda family: (
+            family.support_read_count,
+            family.support_span_bp,
+            family.mean_identity,
+            -family.monomer_length_bp,
+            family.family_id,
+        ),
+    )
+
+
+def format_similarity_metrics(similarity: FamilySimilarity | None) -> str:
+    if similarity is None:
+        return ""
+    return (
+        f"kmer_jaccard={similarity.kmer_jaccard:.4f};"
+        f"shared_kmer_fraction={similarity.shared_kmer_fraction:.4f};"
+        f"local_identity={similarity.local_identity:.4f};"
+        f"local_overlap_bp={similarity.local_overlap_bp};"
+        f"length_ratio={similarity.length_ratio:.4f}"
+    )
 
 
 def sequence_md5(sequence: str) -> str:
@@ -831,4 +960,28 @@ def format_family_similarity(similarity: FamilySimilarity) -> str:
 def write_family_similarity(path: Path, similarities: Sequence[FamilySimilarity]) -> None:
     lines = [family_similarity_header()]
     lines.extend(format_family_similarity(similarity) for similarity in similarities)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def family_collapse_header() -> str:
+    return "original_family_id\tretained_family_id\taction\treason\trelationship\tsimilarity_metrics\tnotes"
+
+
+def format_family_collapse(record: FamilyCollapse) -> str:
+    return "\t".join(
+        [
+            record.original_family_id,
+            record.retained_family_id,
+            record.action,
+            record.reason,
+            record.relationship,
+            record.similarity_metrics,
+            record.notes,
+        ]
+    )
+
+
+def write_family_collapse(path: Path, records: Sequence[FamilyCollapse]) -> None:
+    lines = [family_collapse_header()]
+    lines.extend(format_family_collapse(record) for record in records)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

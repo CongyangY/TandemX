@@ -101,6 +101,32 @@ def test_discover_runs_de_novo_with_only_reads_and_outdir(tmp_path: Path) -> Non
     assert (outdir / "families.tsv").is_file()
 
 
+def test_discover_collapse_mode_writes_optional_outputs(tmp_path: Path) -> None:
+    reads = tmp_path / "reads.fa"
+    sequence = "ACGTACGTACGTACGTACGT" * 8
+    reads.write_text(
+        "".join(f">read_{index}\n{sequence}\n" for index in range(1, 6)),
+        encoding="utf-8",
+    )
+    outdir = tmp_path / "discover"
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads),
+        "--outdir",
+        str(outdir),
+        "--collapse-redundant-families",
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert (outdir / "collapsed_families.tsv").is_file()
+    assert (outdir / "collapsed_monomers.fa").is_file()
+    assert (outdir / "family_collapse.tsv").is_file()
+    validate = run_cli("validate", "--project", str(outdir))
+    assert validate.returncode == 0, validate.stderr
+
+
 def test_discover_mvp_accepts_fastq(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fastq"
     sequence = "ACGTACGA" * 8

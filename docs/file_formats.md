@@ -117,6 +117,33 @@ not used.
 | redundant_candidate | boolean | NA | Whether TandemX considers the pair a likely redundant representative |
 | notes | string | NA | Interpretation notes for non-distinct pairs |
 
+## collapsed_families.tsv and collapsed_monomers.fa
+
+Produced by: `tandemx discover --collapse-redundant-families`
+
+These optional files use the same schema as `families.tsv` and `monomers.fa`,
+but include only families retained after collapsing pairs labelled
+`likely_redundant` in `family_similarity.tsv`. They are not written by default.
+`possible_higher_order_or_partial` families are not collapsed.
+
+## family_collapse.tsv
+
+Produced by: `tandemx discover --collapse-redundant-families`
+
+This audit table records how the optional collapse mode treated each original
+family. If no likely redundant family exists, rows are retained records and no
+family is removed from the collapsed catalog.
+
+| Field | Type | Description |
+|---|---|---|
+| original_family_id | string | Family identifier in the original de novo catalog |
+| retained_family_id | string | Family retained in the collapsed catalog |
+| action | string | `retained` or `collapsed` |
+| reason | string | Decision reason |
+| relationship | string | Relationship used for collapse; only `likely_redundant` should collapse |
+| similarity_metrics | string | Semicolon-separated metrics supporting a collapse decision |
+| notes | string | Interpretation notes |
+
 ## copy_number.tsv
 
 Produced by: `tandemx quantify`
@@ -250,9 +277,9 @@ The validator scans the project directory for recognized TandemX output filename
 4. BED and bedGraph 0-based half-open coordinates;
 5. BED scores and strand values;
 6. TandemX FASTA header structure for `monomers.fa` and `probes.fa`;
-7. non-empty recognized output files.
+7. non-empty recognized output files, except pairwise/audit tables that can legitimately have no data rows when there are no pairs or no collapse events.
 
-Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `family_similarity.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, and `probes.fa`.
+Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `family_similarity.tsv`, `collapsed_families.tsv`, `family_collapse.tsv`, `repeat_annotation.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, `collapsed_monomers.fa`, and `probes.fa`.
 
 ## Pipeline Summaries
 
@@ -317,6 +344,32 @@ Known sequences are read only after discovery and are never inputs to `tandemx d
 | shared_kmer_fraction | float | Fraction of known-repeat k-mers shared with the best monomer |
 | orientation | string | `forward` or `reverse` orientation of the best match |
 | interpretation | string | Calibrated MVP label: strong, possible, weak, or no k-mer match |
+
+## repeat_annotation.tsv
+
+Produced by: `tandemx annotate-repeats`.
+
+This is a post hoc interpretation file. Known-repeat libraries are compared only
+after `tandemx discover` has produced `monomers.fa`; they are not discovery
+templates. The table reports the best known-repeat match for each discovered
+family.
+
+| Field | Type | Description |
+|---|---|---|
+| family_id | string | Discovered family identifier from `monomers.fa` |
+| monomer_length | integer | Discovered monomer length in bp |
+| best_known_id | string | Best matching known-repeat identifier |
+| best_known_length | integer | Known-repeat length in bp |
+| best_orientation | string | `forward` or `reverse` orientation of the best known-repeat comparison |
+| shared_kmer_fraction | float | Shared k-mers divided by the smaller k-mer set |
+| jaccard | float | K-mer Jaccard similarity |
+| dice | float | K-mer Dice similarity |
+| containment_discovered_in_known | float | Fraction of discovered monomer k-mers found in the known repeat |
+| containment_known_in_discovered | float | Fraction of known-repeat k-mers found in the discovered monomer |
+| local_identity | float | Best ungapped local identity |
+| local_overlap_bp | integer | Local overlap length supporting `local_identity` |
+| annotation_status | string | `strong_known_match`, `weak_known_match`, `no_known_match`, `possible_partial_match`, or `possible_higher_order_match` |
+| notes | string | Interpretation note; does not convert annotation into discovery evidence |
 
 ## compare_runs.tsv
 
