@@ -32,6 +32,7 @@ class SequenceFormatError(ValueError):
 
 FASTA_SUFFIXES = (".fa", ".fasta")
 FASTQ_SUFFIXES = (".fq", ".fastq")
+VALID_BASES = frozenset("ACGTN")
 
 
 def read_sequence_records(path: Path) -> Iterator[SequenceRecord]:
@@ -134,7 +135,7 @@ def validate_sequence(sequence: str, path: Path, line_number: int) -> str:
     sequence = sequence.strip().upper()
     if not sequence:
         raise SequenceFormatError(f"Empty sequence line in {path} at line {line_number}")
-    invalid = sorted(set(sequence).difference("ACGTN"))
+    invalid = sorted(set(sequence).difference(VALID_BASES))
     if invalid:
         joined = "".join(invalid)
         raise SequenceFormatError(f"Invalid base(s) '{joined}' in {path} at line {line_number}")
@@ -144,7 +145,7 @@ def validate_sequence(sequence: str, path: Path, line_number: int) -> str:
 def read_fasta_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
     seen_ids: set[str] = set()
     current_header: str | None = None
-    parts: list[str] = []
+    parts: list[tuple[str, int]] = []
     yielded = False
     for line_number, raw_line in enumerate(handle, start=1):
         line = raw_line.strip()
@@ -161,7 +162,7 @@ def read_fasta_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
             continue
         if current_header is None:
             raise SequenceFormatError(f"Invalid FASTA in {path}: sequence before header at line {line_number}")
-        parts.append(validate_sequence(line, path, line_number))
+        parts.append((line, line_number))
     if current_header is not None:
         yield make_fasta_record(current_header, parts, seen_ids, path)
         yielded = True
@@ -171,13 +172,23 @@ def read_fasta_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
 
 def make_fasta_record(
     header: str,
-    parts: list[str],
+    parts: list[tuple[str, int]],
     seen_ids: set[str],
     path: Path,
 ) -> SequenceRecord:
-    sequence = "".join(parts)
+    sequence = "".join(part for part, _ in parts).upper()
     if not sequence:
         raise SequenceFormatError(f"Invalid FASTA in {path}: empty sequence for record {header}")
+    invalid = sorted(set(sequence).difference(VALID_BASES))
+    if invalid:
+        for part, line_number in parts:
+            normalized = part.upper()
+            line_invalid = sorted(set(normalized).difference(VALID_BASES))
+            if line_invalid:
+                joined = "".join(line_invalid)
+                raise SequenceFormatError(f"Invalid base(s) '{joined}' in {path} at line {line_number}")
+        joined = "".join(invalid)
+        raise SequenceFormatError(f"Invalid base(s) '{joined}' in {path}")
     identifier = record_id(header)
     if identifier in seen_ids:
         raise SequenceFormatError(f"Duplicate sequence id in {path}: {identifier}")

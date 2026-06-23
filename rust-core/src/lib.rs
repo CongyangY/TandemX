@@ -363,6 +363,92 @@ fn refine_candidate_period(
     (best_period, best_score)
 }
 
+fn validate_scan_parameters(
+    k: usize,
+    min_period: usize,
+    max_period: usize,
+    top_periods: usize,
+    min_seed_occurrences: usize,
+    min_spacing_support: usize,
+    max_pairs_per_kmer: usize,
+) -> PyResult<()> {
+    if !(1..=31).contains(&k) {
+        return Err(PyValueError::new_err("Rust backend requires k in 1..=31"));
+    }
+    if min_period == 0 || max_period < min_period {
+        return Err(PyValueError::new_err("invalid period range"));
+    }
+    if top_periods == 0
+        || min_seed_occurrences < 2
+        || min_spacing_support == 0
+        || max_pairs_per_kmer == 0
+    {
+        return Err(PyValueError::new_err("invalid seed/period limits"));
+    }
+    Ok(())
+}
+
+fn scan_owned_sequence(
+    owned_sequence: Vec<u8>,
+    k: usize,
+    min_period: usize,
+    max_period: usize,
+    top_periods: usize,
+    min_seed_occurrences: usize,
+    min_spacing_support: usize,
+    max_pairs_per_kmer: usize,
+) -> ScanResult {
+    let (repeated_positions, overflow_count) = extract_repeated_positions(
+        &owned_sequence,
+        k,
+        min_seed_occurrences,
+        max_pairs_per_kmer,
+    );
+    let histogram = build_spacing_histogram(
+        &repeated_positions,
+        min_period,
+        max_period,
+        max_pairs_per_kmer,
+    );
+    let peaks = select_candidate_periods(
+        &histogram,
+        min_period,
+        max_period,
+        top_periods,
+        min_spacing_support,
+    );
+    let candidate_periods: Vec<usize> = peaks.iter().map(|(period, _)| *period).collect();
+    if candidate_periods.is_empty() {
+        return ScanResult {
+            candidate_periods,
+            spacing_support: peaks,
+            best_period: 0,
+            periodicity_score: 0.0,
+            overflow_count,
+            status: "no_spacing_peak".to_string(),
+        };
+    }
+    let (best_period, periodicity_score) = refine_candidate_period(
+        &owned_sequence,
+        &repeated_positions,
+        &candidate_periods,
+        min_period,
+        max_period,
+    );
+    ScanResult {
+        candidate_periods,
+        spacing_support: peaks,
+        best_period,
+        periodicity_score,
+        overflow_count,
+        status: if periodicity_score >= ACCEPTANCE_SCORE {
+            "accepted".to_string()
+        } else {
+            "rejected_score".to_string()
+        },
+    }
+}
+
 #[pyfunction]
 #[allow(clippy::too_many_arguments)]
 #[pyo3(signature = (sequence, k, min_period, max_period, top_periods, min_seed_occurrences, min_spacing_support, max_pairs_per_kmer))]
@@ -377,66 +463,73 @@ fn scan_read_for_periods(
     min_spacing_support: usize,
     max_pairs_per_kmer: usize,
 ) -> PyResult<ScanResult> {
-    if !(1..=31).contains(&k) {
-        return Err(PyValueError::new_err("Rust backend requires k in 1..=31"));
-    }
-    if min_period == 0 || max_period < min_period {
-        return Err(PyValueError::new_err("invalid period range"));
-    }
-    if top_periods == 0 || min_seed_occurrences < 2 || max_pairs_per_kmer == 0 {
-        return Err(PyValueError::new_err("invalid seed/period limits"));
-    }
+    validate_scan_parameters(
+        k,
+        min_period,
+        max_period,
+        top_periods,
+        min_seed_occurrences,
+        min_spacing_support,
+        max_pairs_per_kmer,
+    )?;
     let owned_sequence = sequence.as_bytes().to_vec();
     Ok(py.allow_threads(move || {
-        let (repeated_positions, overflow_count) = extract_repeated_positions(
-            &owned_sequence,
+        scan_owned_sequence(
+            owned_sequence,
             k,
-            min_seed_occurrences,
-            max_pairs_per_kmer,
-        );
-        let histogram = build_spacing_histogram(
-            &repeated_positions,
-            min_period,
-            max_period,
-            max_pairs_per_kmer,
-        );
-        let peaks = select_candidate_periods(
-            &histogram,
             min_period,
             max_period,
             top_periods,
+            min_seed_occurrences,
             min_spacing_support,
-        );
-        let candidate_periods: Vec<usize> = peaks.iter().map(|(period, _)| *period).collect();
-        if candidate_periods.is_empty() {
-            return ScanResult {
-                candidate_periods,
-                spacing_support: peaks,
-                best_period: 0,
-                periodicity_score: 0.0,
-                overflow_count,
-                status: "no_spacing_peak".to_string(),
-            };
-        }
-        let (best_period, periodicity_score) = refine_candidate_period(
-            &owned_sequence,
-            &repeated_positions,
-            &candidate_periods,
-            min_period,
-            max_period,
-        );
-        ScanResult {
-            candidate_periods,
-            spacing_support: peaks,
-            best_period,
-            periodicity_score,
-            overflow_count,
-            status: if periodicity_score >= ACCEPTANCE_SCORE {
-                "accepted".to_string()
-            } else {
-                "rejected_score".to_string()
-            },
-        }
+            max_pairs_per_kmer,
+        )
+    }))
+}
+
+#[pyfunction]
+#[allow(clippy::too_many_arguments)]
+#[pyo3(signature = (sequences, k, min_period, max_period, top_periods, min_seed_occurrences, min_spacing_support, max_pairs_per_kmer))]
+fn scan_reads_for_periods(
+    py: Python<'_>,
+    sequences: Vec<String>,
+    k: usize,
+    min_period: usize,
+    max_period: usize,
+    top_periods: usize,
+    min_seed_occurrences: usize,
+    min_spacing_support: usize,
+    max_pairs_per_kmer: usize,
+) -> PyResult<Vec<ScanResult>> {
+    validate_scan_parameters(
+        k,
+        min_period,
+        max_period,
+        top_periods,
+        min_seed_occurrences,
+        min_spacing_support,
+        max_pairs_per_kmer,
+    )?;
+    let owned_sequences: Vec<Vec<u8>> = sequences
+        .into_iter()
+        .map(|sequence| sequence.into_bytes())
+        .collect();
+    Ok(py.allow_threads(move || {
+        owned_sequences
+            .into_iter()
+            .map(|owned_sequence| {
+                scan_owned_sequence(
+                    owned_sequence,
+                    k,
+                    min_period,
+                    max_period,
+                    top_periods,
+                    min_seed_occurrences,
+                    min_spacing_support,
+                    max_pairs_per_kmer,
+                )
+            })
+            .collect()
     }))
 }
 
@@ -445,6 +538,7 @@ fn _rust_core(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<ScanResult>()?;
     module.add_class::<DiagnosticKmerCounter>()?;
     module.add_function(wrap_pyfunction!(scan_read_for_periods, module)?)?;
+    module.add_function(wrap_pyfunction!(scan_reads_for_periods, module)?)?;
     Ok(())
 }
 

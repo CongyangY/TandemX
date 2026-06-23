@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Sequence, TextIO
 
+from tandemx.discover.rust_backend import rust_backend_available
 from tandemx.io.validators import ValidationError, validate_project
 from tandemx.reporting import write_output_manifest, write_run_report
 from tandemx.utils.threads import DEFAULT_DISCOVER_THREADS, discover_thread_limit, resolve_discover_threads
@@ -109,7 +110,7 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--outdir", required=True, type=Path)
     parser.add_argument("--max-reads", type=int)
     parser.add_argument("--max-read-bases", type=int)
-    parser.add_argument("--kmer-backend", choices=("python", "rust"), default="python")
+    parser.add_argument("--kmer-backend", choices=("auto", "python", "rust"), default="auto")
     parser.add_argument(
         "--steps",
         type=parse_steps,
@@ -125,7 +126,7 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
         help=(
             f"Discover scan threads. Default is {DEFAULT_DISCOVER_THREADS}, "
             f"capped at {discover_thread_limit()} on this host "
-            "(minimum of 64 and half of available logical CPUs)."
+            "(smaller of 64 and half of available logical CPUs)."
         ),
     )
     parser.add_argument("--resume", action="store_true", help="Skip existing steps only when their expected outputs validate.")
@@ -141,6 +142,7 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
     if args.resume and args.force:
         raise ValueError("--resume and --force are mutually exclusive")
     threads = resolve_discover_threads(args.threads)
+    kmer_backend = resolve_kmer_backend(args.kmer_backend)
     for name in ("max_reads", "max_read_bases", "genome_size"):
         value = getattr(args, name)
         if value is not None and value <= 0:
@@ -155,7 +157,7 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         outdir=args.outdir,
         max_reads=args.max_reads,
         max_read_bases=args.max_read_bases,
-        kmer_backend=args.kmer_backend,
+        kmer_backend=kmer_backend,
         steps=steps,
         min_period=args.min_period,
         max_period=args.max_period,
@@ -293,6 +295,12 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
     if step == "validate":
         return [*cli, "validate", "--project", str(config.outdir)]
     raise ValueError(f"Unsupported pipeline step: {step}")
+
+
+def resolve_kmer_backend(requested: str) -> str:
+    if requested == "auto":
+        return "rust" if rust_backend_available() else "python"
+    return requested
 
 
 def expected_outputs(config: PipelineConfig, step: str) -> tuple[Path, ...]:

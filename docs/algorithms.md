@@ -22,7 +22,7 @@ Current MVP implementation:
 
 `monomers.fa` is an output of de novo discovery. It is not a required input to `tandemx discover`.
 
-The previous full period scan has been removed from the execution path. Python remains the default/fallback backend. The optional Rust backend implements the same single-read seed/spacing/refinement boundary and returns only a compact result to Python; parsing, clustering and output remain in Python. With `--kmer-backend rust`, read-local scanning can run across multiple threads while preserving deterministic output order. Neither backend makes TandemX a full large-plant-genome production workflow. See `docs/performance.md`.
+The previous full period scan has been removed from the execution path. `--kmer-backend auto` is the default and uses the Rust backend when the compiled extension and requested k-mer size are supported, otherwise it falls back to Python. The Rust backend implements the same single-read seed/spacing/refinement boundary and returns only a compact result to Python; parsing, clustering and output remain in Python. With Rust, read-local scanning can run across multiple threads while preserving deterministic output order. Neither backend makes TandemX a full large-plant-genome production workflow. See `docs/performance.md`.
 
 MVP constraints:
 

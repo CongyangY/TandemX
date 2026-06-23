@@ -3,9 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 
 from tandemx.discover.mvp import (
+    CandidateRepeat,
     DiscoverConfig,
     FastaRecord,
+    ReadScanTask,
     RepeatFamily,
+    cluster_candidates,
     compare_family_pair,
     compare_families,
     collapse_redundant_families,
@@ -14,6 +17,7 @@ from tandemx.discover.mvp import (
     find_best_short_periodic_candidate_with_stats,
     periodicity_score,
     read_fasta,
+    split_read_scan_tasks,
     write_families,
     write_family_collapse,
     write_family_similarity,
@@ -26,6 +30,44 @@ def test_periodicity_score_detects_exact_period() -> None:
     sequence = "ACGT" * 20
     assert periodicity_score(sequence, 4) == 1.0
     assert periodicity_score(sequence, 5) < 0.5
+
+
+def test_cluster_candidates_uses_incremental_cluster_statistics() -> None:
+    candidates = [
+        CandidateRepeat("read1", "TXC000001", "A" * 100, 0, 400, "+", 100, 400, 4.0, 0.91, False, "high", ""),
+        CandidateRepeat("read2", "TXC000002", "C" * 102, 0, 408, "+", 102, 408, 4.0, 0.95, False, "high", ""),
+        CandidateRepeat("read2", "TXC000003", "G" * 101, 0, 303, "+", 101, 303, 3.0, 0.90, True, "medium", ""),
+        CandidateRepeat("read3", "TXC000004", "T" * 250, 0, 500, "+", 250, 500, 2.0, 0.99, False, "high", ""),
+    ]
+
+    families = cluster_candidates(candidates, min_support_reads=2)
+
+    assert len(families) == 1
+    family = families[0]
+    assert family.monomer_length_bp == 102
+    assert family.support_read_count == 2
+    assert family.support_span_bp == 1111
+    assert family.mean_identity == (0.91 + 0.95 + 0.90) / 3
+    assert family.low_complexity_flag
+    assert family.warning == "low_complexity_family"
+
+
+def test_split_read_scan_tasks_preserves_order_and_caps_batches() -> None:
+    tasks = [
+        ReadScanTask(FastaRecord(f"read{index}", f"read{index}", "ACGT"))
+        for index in range(5)
+    ]
+
+    batches = split_read_scan_tasks(tasks, worker_count=4)
+
+    assert len(batches) == 3
+    assert [task.record.read_id for batch in batches for task in batch] == [
+        "read0",
+        "read1",
+        "read2",
+        "read3",
+        "read4",
+    ]
 
 
 def test_discover_core_does_not_reference_simulator_truth_files() -> None:

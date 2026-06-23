@@ -71,3 +71,11 @@ def test_sequence_reader_reports_clear_format_errors(tmp_path: Path, name: str, 
 
     with pytest.raises(SequenceFormatError, match=message):
         list(read_sequence_records(path))
+
+
+def test_fasta_invalid_base_reports_source_line_after_record_level_validation(tmp_path: Path) -> None:
+    path = tmp_path / "bad_base.fa"
+    path.write_text(">r1\nACGT\nACXT\n", encoding="utf-8")
+
+    with pytest.raises(SequenceFormatError, match=r"Invalid base.*line 3"):
+        list(read_sequence_records(path))

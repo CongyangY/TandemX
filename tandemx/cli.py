@@ -16,6 +16,7 @@ from tandemx import __version__
 from tandemx.annotation import annotate_repeat_catalog
 from tandemx.compare.mvp import CompareConfig, compare_toy_abundance
 from tandemx.discover.mvp import DiscoverConfig, DiscoverProgressTotals, discover_toy_repeats
+from tandemx.discover.rust_backend import RUST_MAX_KMER_SIZE, rust_backend_available
 from tandemx.io.sequences import SequenceFormatError, count_sequence_records_many
 from tandemx.io.validators import ValidationError, validate_project
 from tandemx.locate.mvp import LocateConfig, locate_toy_arrays
@@ -154,6 +155,7 @@ def _prepare_deferred_run(
 def run_discover(args: argparse.Namespace) -> int:
     args.threads = resolve_discover_threads(args.threads)
     args.count_threads = resolve_count_threads(args.count_threads, args.threads)
+    args.kmer_backend = resolve_kmer_backend(args.kmer_backend, args.kmer_size)
     _require_existing_files([args.reads])
     args.outdir.mkdir(parents=True, exist_ok=True)
     _write_run_config(args.outdir, "discover", args, status="discover_running")
@@ -246,6 +248,7 @@ def run_discover(args: argparse.Namespace) -> int:
 
 
 def run_quantify(args: argparse.Namespace) -> int:
+    args.kmer_backend = resolve_kmer_backend(args.kmer_backend, args.k)
     monomers_path = args.monomers if args.monomers is not None else args.catalogue
     _require_existing_files([args.reads, monomers_path])
     args.outdir.mkdir(parents=True, exist_ok=True)
@@ -488,6 +491,13 @@ def run_annotate_repeats(args: argparse.Namespace) -> int:
     return 0
 
 
+def resolve_kmer_backend(requested: str, kmer_size: int | None = None) -> str:
+    if requested == "auto":
+        rust_supports_kmer_size = kmer_size is None or kmer_size <= RUST_MAX_KMER_SIZE
+        return "rust" if rust_backend_available() and rust_supports_kmer_size else "python"
+    return requested
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tandemx",
@@ -525,7 +535,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--seed", type=int, default=1, help="Random seed for reproducible read sampling.")
     discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")
     discover.add_argument("--no-progress", action="store_true", help="Disable live terminal progress output; run.log still records progress.")
-    discover.add_argument("--count-threads", type=int, default=None, help="Threads used to pre-count input reads and bases before discovery. Default uses up to 4 threads, capped by --threads.")
+    discover.add_argument("--count-threads", type=int, default=None, help="Threads used by the background input read/base counter. Default uses up to 4 threads, capped by --threads.")
     discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
     discover.add_argument(
         "--threads",
@@ -534,10 +544,10 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             f"Requested discover scan threads. Default is {DEFAULT_DISCOVER_THREADS}, "
             f"capped at {discover_thread_limit()} on this host "
-            "(minimum of 64 and half of available logical CPUs)."
+            "(smaller of 64 and half of available logical CPUs)."
         ),
     )
-    discover.add_argument("--kmer-backend", choices=("python", "rust"), default="python", help="Read-local seed backend. Rust requires the compiled extension; Python remains the fallback/default.")
+    discover.add_argument("--kmer-backend", choices=("auto", "python", "rust"), default="auto", help="Read-local seed backend. auto uses Rust when the compiled extension and k-mer size are supported, otherwise Python.")
     discover.add_argument(
         "--collapse-redundant-families",
         action="store_true",
@@ -555,7 +565,7 @@ def build_parser() -> argparse.ArgumentParser:
     quantify.add_argument("--genome-size", required=True, type=int, help="Estimated haploid or target genome size in bp.")
     quantify.add_argument("--k", type=int, default=21, help="Diagnostic k-mer size.")
     quantify.add_argument("--haploid-depth", type=float, help="Optional haploid sequencing depth. If omitted, depth is estimated as total read bases divided by genome size.")
-    quantify.add_argument("--kmer-backend", choices=("python", "rust"), default="python", help="Diagnostic target k-mer counting backend; Rust remains target-only, not a global counter.")
+    quantify.add_argument("--kmer-backend", choices=("auto", "python", "rust"), default="auto", help="Diagnostic target k-mer counting backend. auto uses Rust when the compiled extension and k-mer size are supported, otherwise Python.")
     quantify.add_argument("--max-reads", type=int, help="Maximum input reads to count; useful for a subset matched to discover.")
     quantify.add_argument("--max-read-bases", type=int, help="Maximum cumulative input read bases to count without splitting a read.")
     quantify.add_argument("--progress-every", type=int, default=1000, help="Log and display progress after this many processed reads.")

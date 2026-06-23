@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Sequence
 
 
 class RustBackendUnavailable(RuntimeError):
     """Raised when the optional compiled extension cannot be imported."""
+
+
+RUST_MAX_KMER_SIZE = 31
 
 
 @dataclass(frozen=True)
@@ -63,6 +67,48 @@ def scan_read_for_periods(
         periodicity_score=result.periodicity_score,
         overflow_count=result.overflow_count,
         status=result.status,
+    )
+
+
+def scan_reads_for_periods(
+    sequences: Sequence[str],
+    *,
+    k: int,
+    min_period: int,
+    max_period: int,
+    top_periods: int,
+    min_seed_occurrences: int,
+    min_spacing_support: int,
+    max_pairs_per_kmer: int,
+) -> tuple[RustScanResult, ...]:
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable(
+            "Rust backend is unavailable. Install from the repository with "
+            "`pip install -e .` or run `maturin develop`."
+        ) from exc
+
+    results = _rust_core.scan_reads_for_periods(
+        list(sequences),
+        k,
+        min_period,
+        max_period,
+        top_periods,
+        min_seed_occurrences,
+        min_spacing_support,
+        max_pairs_per_kmer,
+    )
+    return tuple(
+        RustScanResult(
+            candidate_periods=tuple(result.candidate_periods),
+            spacing_support=tuple(tuple(item) for item in result.spacing_support),
+            best_period=result.best_period,
+            periodicity_score=result.periodicity_score,
+            overflow_count=result.overflow_count,
+            status=result.status,
+        )
+        for result in results
     )
 
 

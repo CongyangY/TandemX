@@ -10,6 +10,7 @@ from tandemx.discover.rust_backend import (
     RustBackendUnavailable,
     rust_backend_available,
     scan_read_for_periods,
+    scan_reads_for_periods,
 )
 from tandemx.discover.spacing import (
     build_spacing_histogram,
@@ -68,6 +69,28 @@ def test_rust_matches_python_period_and_score() -> None:
     assert rust_result.candidate_periods == tuple(python_candidates)
     assert rust_result.best_period == python_period
     assert rust_result.periodicity_score == pytest.approx(python_score)
+
+
+def test_rust_batch_matches_single_read_api() -> None:
+    sequences = [
+        "ACGTTCAGGACTAACCGTGA" * 20,
+        "ACGTTCAGGACTAACCGTGATCGATCGATCG" * 20,
+        "".join(random.Random(7).choices("ACGT", k=2000)),
+    ]
+
+    batch_results = scan_reads_for_periods(
+        sequences,
+        k=11,
+        min_period=20,
+        max_period=100,
+        top_periods=3,
+        min_seed_occurrences=2,
+        min_spacing_support=2,
+        max_pairs_per_kmer=100,
+    )
+    single_results = tuple(rust_scan(sequence) for sequence in sequences)
+
+    assert batch_results == single_results
 
 
 def test_rust_handles_random_low_complexity_and_ambiguous_reads() -> None:

@@ -10,7 +10,6 @@ from contextlib import nullcontext
 from concurrent.futures import Future, ThreadPoolExecutor
 from dataclasses import dataclass, replace
 from pathlib import Path
-from statistics import mean
 from typing import Iterable, Sequence
 
 from tandemx.io.sequences import SequenceFormatError, SequenceStats, read_sequence_records, read_sequence_records_many
@@ -24,7 +23,7 @@ from tandemx.discover.spacing import (
     refine_candidate_period,
     select_candidate_periods,
 )
-from tandemx.discover.rust_backend import RustBackendUnavailable, scan_read_for_periods
+from tandemx.discover.rust_backend import RustBackendUnavailable, scan_read_for_periods, scan_reads_for_periods
 from tandemx.simulate.toy import reverse_complement, wrap_sequence
 from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
 from tandemx.utils.threads import effective_discover_threads
@@ -70,6 +69,56 @@ class RepeatFamily:
     low_complexity_flag: bool
     confidence: str
     warning: str
+
+
+@dataclass
+class CandidateCluster:
+    """Incremental candidate cluster statistics used by family clustering."""
+
+    period_sum: int
+    candidate_count: int
+    read_ids: set[str]
+    support_span_sum: int
+    score_sum: float
+    low_complexity_flag: bool
+    representative: CandidateRepeat
+
+    @classmethod
+    def from_candidate(cls, candidate: CandidateRepeat) -> CandidateCluster:
+        return cls(
+            period_sum=candidate.period_bp,
+            candidate_count=1,
+            read_ids={candidate.read_id},
+            support_span_sum=candidate.repeat_span_bp,
+            score_sum=candidate.score,
+            low_complexity_flag=candidate.low_complexity_flag,
+            representative=candidate,
+        )
+
+    @property
+    def center(self) -> int:
+        return round(self.period_sum / self.candidate_count)
+
+    @property
+    def support_read_count(self) -> int:
+        return len(self.read_ids)
+
+    @property
+    def mean_identity(self) -> float:
+        return self.score_sum / self.candidate_count
+
+    def add(self, candidate: CandidateRepeat) -> None:
+        self.period_sum += candidate.period_bp
+        self.candidate_count += 1
+        self.read_ids.add(candidate.read_id)
+        self.support_span_sum += candidate.repeat_span_bp
+        self.score_sum += candidate.score
+        self.low_complexity_flag = self.low_complexity_flag or candidate.low_complexity_flag
+        if (candidate.score, candidate.repeat_span_bp) > (
+            self.representative.score,
+            self.representative.repeat_span_bp,
+        ):
+            self.representative = candidate
 
 
 @dataclass(frozen=True)
@@ -162,6 +211,7 @@ def discover_toy_repeats(
     config.outdir.mkdir(parents=True, exist_ok=True)
     logger = logger or logging.getLogger("tandemx.discover")
     candidate_path = config.outdir / "candidate_reads.tsv"
+    candidate_tmp_path = candidate_path.with_suffix(candidate_path.suffix + ".tmp")
     for stale_path in (
         config.outdir / "monomers.fa",
         config.outdir / "families.tsv",
@@ -215,9 +265,9 @@ def discover_toy_repeats(
             )
         )
 
-    with candidate_path.open("wt", encoding="utf-8") as handle:
-        handle.write(candidate_reads_header() + "\n")
-        handle.flush()
+    candidate_tmp_path.write_text(candidate_reads_header() + "\n", encoding="utf-8")
+    candidate_tmp_path.replace(candidate_path)
+    with candidate_path.open("a", encoding="utf-8") as handle:
         chunk: list[ReadScanTask] = []
         selected_reads = 0
         selected_bases = 0
@@ -243,7 +293,6 @@ def discover_toy_repeats(
                 )
                 candidates.append(candidate)
                 handle.write(format_candidate_read(candidate) + "\n")
-                handle.flush()
 
             if processed_reads % config.progress_every == 0:
                 poll_discover_count_future(count_future, totals, logger, config)
@@ -271,15 +320,21 @@ def discover_toy_repeats(
                 return
             try:
                 if executor is None:
-                    results = (scan_discover_read(task, config) for task in chunk)
+                    results = scan_discover_chunk(chunk, config)
                 else:
-                    results = executor.map(
-                        scan_discover_read,
-                        chunk,
-                        [config] * len(chunk),
+                    batches = split_read_scan_tasks(chunk, effective_threads)
+                    results = (
+                        result
+                        for batch_results in executor.map(
+                            scan_discover_chunk,
+                            batches,
+                            [config] * len(batches),
+                        )
+                        for result in batch_results
                     )
                 for result in results:
                     handle_scan_result(result)
+                handle.flush()
             except RustBackendUnavailable as exc:
                 logger.error("rust_backend_unavailable=%s", exc)
                 raise ValueError(str(exc)) from exc
@@ -521,6 +576,105 @@ def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanRe
         candidate=candidate,
         seed_overflow_count=short_overflow_count + overflow_count,
     )
+
+
+def scan_discover_chunk(
+    tasks: Sequence[ReadScanTask],
+    config: DiscoverConfig,
+) -> list[ReadScanResult]:
+    if config.kmer_backend == "rust":
+        return scan_discover_chunk_rust(tasks, config)
+    return [scan_discover_read(task, config) for task in tasks]
+
+
+def scan_discover_chunk_rust(
+    tasks: Sequence[ReadScanTask],
+    config: DiscoverConfig,
+) -> list[ReadScanResult]:
+    return [scan_discover_read(task, config) for task in tasks]
+
+
+def scan_discover_chunk_rust_batch(
+    tasks: Sequence[ReadScanTask],
+    config: DiscoverConfig,
+) -> list[ReadScanResult]:
+    results: list[ReadScanResult | None] = [None] * len(tasks)
+    rust_groups: dict[int, list[tuple[int, FastaRecord, str]]] = {}
+
+    for index, task in enumerate(tasks):
+        record = task.record
+        sequence = record.sequence.upper()
+        if len(sequence) < config.min_read_length:
+            results[index] = ReadScanResult(read_bases=len(sequence), skipped_short_reads=1)
+            continue
+
+        short_candidate, short_overflow_count = find_best_short_periodic_candidate_with_stats(
+            record,
+            min_period=config.min_monomer_len,
+            max_period=min(config.max_monomer_len, SHORT_PERIOD_SCAN_MAX),
+            min_repeat_span=config.min_repeat_span,
+            candidate_index=0,
+        )
+        if short_candidate is not None:
+            results[index] = ReadScanResult(
+                read_bases=len(sequence),
+                candidate=short_candidate,
+                seed_overflow_count=short_overflow_count,
+            )
+            continue
+
+        if len(sequence) < config.kmer_size:
+            results[index] = ReadScanResult(read_bases=len(sequence), skipped_short_kmer=1)
+            continue
+        if len(sequence) < max(config.min_repeat_span, config.min_monomer_len * 2):
+            results[index] = ReadScanResult(read_bases=len(sequence))
+            continue
+        bounded_max_period = min(config.max_monomer_len, len(sequence) // 2)
+        if bounded_max_period < config.min_monomer_len:
+            results[index] = ReadScanResult(read_bases=len(sequence))
+            continue
+        rust_groups.setdefault(bounded_max_period, []).append((index, record, sequence))
+
+    for bounded_max_period, group in rust_groups.items():
+        rust_results = scan_reads_for_periods(
+            [sequence for _, _, sequence in group],
+            k=config.kmer_size,
+            min_period=config.min_monomer_len,
+            max_period=bounded_max_period,
+            top_periods=config.top_periods,
+            min_seed_occurrences=config.min_seed_occurrences,
+            min_spacing_support=config.min_spacing_support,
+            max_pairs_per_kmer=config.max_pairs_per_kmer,
+        )
+        for (index, record, sequence), rust_result in zip(group, rust_results):
+            candidate = build_candidate_from_period(
+                record,
+                sequence,
+                rust_result.best_period,
+                rust_result.periodicity_score,
+                candidate_index=0,
+            )
+            results[index] = ReadScanResult(
+                read_bases=len(sequence),
+                candidate=candidate,
+                seed_overflow_count=rust_result.overflow_count,
+            )
+
+    return [result for result in results if result is not None]
+
+
+def split_read_scan_tasks(
+    tasks: Sequence[ReadScanTask],
+    worker_count: int,
+) -> list[tuple[ReadScanTask, ...]]:
+    if not tasks:
+        return []
+    batch_count = max(1, min(worker_count, len(tasks)))
+    batch_size = (len(tasks) + batch_count - 1) // batch_count
+    return [
+        tuple(tasks[index : index + batch_size])
+        for index in range(0, len(tasks), batch_size)
+    ]
 
 
 def validate_discover_config(config: DiscoverConfig) -> None:
@@ -825,38 +979,38 @@ def cluster_candidates(
     min_support_reads: int,
     period_tolerance_bp: int = 5,
 ) -> list[RepeatFamily]:
-    clusters: list[list[CandidateRepeat]] = []
+    clusters: list[CandidateCluster] = []
     for candidate in sorted(candidates, key=lambda item: item.period_bp):
         placed = False
         for cluster in clusters:
-            center = round(mean(item.period_bp for item in cluster))
+            center = cluster.center
             tolerance = 0 if min(candidate.period_bp, center) <= SHORT_PERIOD_SCAN_MAX else period_tolerance_bp
             if abs(candidate.period_bp - center) <= tolerance:
-                cluster.append(candidate)
+                cluster.add(candidate)
                 placed = True
                 break
         if not placed:
-            clusters.append([candidate])
+            clusters.append(CandidateCluster.from_candidate(candidate))
 
-    supported = [cluster for cluster in clusters if len({item.read_id for item in cluster}) >= min_support_reads]
-    supported.sort(key=lambda cluster: (-len({item.read_id for item in cluster}), round(mean(item.period_bp for item in cluster))))
+    supported = [cluster for cluster in clusters if cluster.support_read_count >= min_support_reads]
+    supported.sort(key=lambda cluster: (-cluster.support_read_count, cluster.center))
 
     families = []
     for index, cluster in enumerate(supported, start=1):
-        representative = max(cluster, key=lambda item: (item.score, item.repeat_span_bp))
+        representative = cluster.representative
         monomer_sequence = orient_monomer(representative.sequence)
-        mean_identity = mean(item.score for item in cluster)
-        low_complexity = any(item.low_complexity_flag for item in cluster)
+        mean_identity = cluster.mean_identity
+        low_complexity = cluster.low_complexity_flag
         warning = "low_complexity_family" if low_complexity else ""
-        confidence = "high" if len({item.read_id for item in cluster}) >= max(3, min_support_reads) and mean_identity >= 0.9 else "medium"
+        confidence = "high" if cluster.support_read_count >= max(3, min_support_reads) and mean_identity >= 0.9 else "medium"
         families.append(
             RepeatFamily(
                 family_id=f"TXF{index:06d}",
                 monomer_id=f"TXM{index:06d}",
                 monomer_sequence=monomer_sequence,
                 monomer_length_bp=representative.period_bp,
-                support_read_count=len({item.read_id for item in cluster}),
-                support_span_bp=sum(item.repeat_span_bp for item in cluster),
+                support_read_count=cluster.support_read_count,
+                support_span_bp=cluster.support_span_sum,
                 mean_identity=mean_identity,
                 low_complexity_flag=low_complexity,
                 confidence=confidence,

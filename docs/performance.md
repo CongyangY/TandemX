@@ -60,7 +60,7 @@ Use these controls for real-read subsets:
 --no-progress
 ```
 
-`--threads` defaults to a request of 8 for `discover`, capped at the smaller of 64 and half of available logical CPUs. Multi-threaded scanning is enabled only for `--kmer-backend rust`, whose PyO3 implementation releases the Python GIL during read-local scanning. The Python backend records the requested thread setting but scans reads serially because its CPU-heavy path is GIL-bound.
+`--threads` defaults to a request of 8 for `discover`, capped at the smaller of 64 and half of available logical CPUs. `--kmer-backend auto` is the default and uses Rust when the compiled extension is available and the requested k-mer size is supported by Rust, so normal installs with the default k-mer size get the multi-threaded scan path by default. Multi-threaded scanning is enabled only with the Rust backend, whose PyO3 implementation releases the Python GIL during read-local scanning. The Python backend records the requested thread setting but scans reads serially because its CPU-heavy path is GIL-bound.
 
 `--count-threads` controls the background input count of reads and bases. It is capped at 4 threads and parallelizes across multiple input files. Counting does not block discovery startup. A single gzip stream is still counted by one worker, because splitting compressed streams safely is outside the MVP.
 
@@ -77,7 +77,7 @@ should focus on longer satellite-like monomers and ignore STR-like periods.
 
 ## Backend Boundary
 
-`--kmer-backend python` remains the default and fallback. `--kmer-backend rust` implements single-read rolling canonical k-mers, repeated positions, bounded spacing histograms, top periods and local scoring behind a PyO3 interface. FASTA/FASTQ parsing, filters, clustering and file output remain in Python. Rust scan results are written in input order even when multiple worker threads finish out of order.
+`--kmer-backend auto` is the default. It resolves to `rust` when the compiled extension is importable and the k-mer size is supported by Rust, and to `python` otherwise; the resolved backend is written to `run_config.yaml` and `run.log`. `--kmer-backend rust` implements single-read rolling canonical k-mers, repeated positions, bounded spacing histograms, top periods and local scoring behind a PyO3 interface. FASTA/FASTQ parsing, filters, clustering and file output remain in Python. Rust scan results are written in input order even when multiple worker threads finish out of order.
 
 Production-scale global k-mer counting is a separate problem and should use optional mature backends such as KMC, meryl or Jellyfish instead of a new TandemX counter. The Rust backend does not replace those tools.
 

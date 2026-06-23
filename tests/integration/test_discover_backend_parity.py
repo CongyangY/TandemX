@@ -138,6 +138,42 @@ def test_rust_discover_threads_preserve_outputs(tmp_path: Path) -> None:
     assert "scan_threads requested=2 effective=2 parallel=true backend=rust" in parallel_log
 
 
+def test_discover_auto_backend_uses_rust_threads_by_default(tmp_path: Path) -> None:
+    if discover_thread_limit() < 2:
+        pytest.skip("host thread policy allows only one discover thread")
+
+    reads = tmp_path / "reads.fa"
+    sequence = "ACGTTCAGGACTAACCGTGA" * 20
+    reads.write_text(
+        "".join(f">read_{index}\n{sequence}\n" for index in range(1, 8)),
+        encoding="utf-8",
+    )
+    outdir = tmp_path / "discover"
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads),
+        "--outdir",
+        str(outdir),
+        "--min-period",
+        "20",
+        "--max-period",
+        "30",
+        "--min-support-reads",
+        "2",
+        "--min-repeat-span",
+        "100",
+    )
+
+    assert result.returncode == 0, result.stderr
+    log = (outdir / "run.log").read_text(encoding="utf-8")
+    assert "scan_threads requested=" in log
+    assert "parallel=true backend=rust" in log
+    config = (outdir / "run_config.yaml").read_text(encoding="utf-8")
+    assert 'kmer_backend: "rust"' in config
+
+
 def test_rust_cli_reports_unavailable_extension(
     tmp_path: Path, monkeypatch, capsys
 ) -> None:

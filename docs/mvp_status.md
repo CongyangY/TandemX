@@ -32,7 +32,7 @@ Discover performance status:
 3. only bounded local period neighborhoods are refined;
 4. candidate output and progress logs are written incrementally;
 5. `--max-reads`, `--max-read-bases` and reproducible sampling support real-read pilot subsets;
-6. `--kmer-backend rust` provides a compiled read-local seed/spacing implementation while Python remains the default/fallback;
+6. `--kmer-backend auto` uses the compiled Rust read-local seed/spacing implementation when available and compatible with the requested k-mer size, and falls back to Python otherwise;
 7. multiprocessing and intra-step checkpoint resume remain future work; output-level pipeline resume is implemented.
 
 `tandemx compare` is implemented for the toy MVP. It compares read-based abundance from `copy_number.tsv` with family-level assembly array abundance summarized from `arrays.bed`. `tandemx locate` still writes `assembly_vs_read_cn.tsv` for backward compatibility, but the comparison logic lives in `tandemx.compare.mvp`.
