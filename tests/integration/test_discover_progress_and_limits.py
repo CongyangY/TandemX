@@ -84,9 +84,11 @@ def test_discover_precounts_reads_for_bounded_progress_without_limits(tmp_path: 
     )
 
     assert result.returncode == 0, result.stderr
-    assert "discover | count_inputs" in result.stderr
+    assert "discover | scan_reads" in result.stderr
+    assert "counting_inputs" in result.stderr
     assert "/12 reads" in result.stderr
     log = (outdir / "run.log").read_text(encoding="utf-8")
+    assert "input_count_started read_files=1" in log
     assert "input_summary read_files=1 total_reads=12" in log
 
 

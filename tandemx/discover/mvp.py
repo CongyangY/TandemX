@@ -7,13 +7,13 @@ import logging
 import random
 import time
 from contextlib import nullcontext
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import Future, ThreadPoolExecutor
 from dataclasses import dataclass, replace
 from pathlib import Path
 from statistics import mean
 from typing import Iterable, Sequence
 
-from tandemx.io.sequences import SequenceFormatError, read_sequence_records, read_sequence_records_many
+from tandemx.io.sequences import SequenceFormatError, SequenceStats, read_sequence_records, read_sequence_records_many
 from tandemx.discover.spacing import (
     bounded_periodicity_score,
     build_spacing_histogram,
@@ -143,10 +143,19 @@ class ReadScanResult:
     seed_overflow_count: int = 0
 
 
+@dataclass
+class DiscoverProgressTotals:
+    total_reads: int | None = None
+    total_read_bases: int | None = None
+    count_done: bool = False
+
+
 def discover_toy_repeats(
     config: DiscoverConfig,
     logger: logging.Logger | None = None,
     progress: TerminalProgress | None = None,
+    count_future: Future[SequenceStats] | None = None,
+    progress_totals: DiscoverProgressTotals | None = None,
 ) -> tuple[list[CandidateRepeat], list[RepeatFamily]]:
     """Discover tandem repeat families with a bounded k-mer spacing prefilter."""
     validate_discover_config(config)
@@ -172,6 +181,11 @@ def discover_toy_repeats(
     seed_overflow_count = 0
     started = time.perf_counter()
     rng = random.Random(config.seed)
+    totals = progress_totals or DiscoverProgressTotals(
+        total_reads=config.total_reads,
+        total_read_bases=config.total_read_bases,
+        count_done=config.total_reads is not None or config.total_read_bases is not None,
+    )
     effective_threads = effective_discover_threads(config.threads)
     parallel_scan = config.kmer_backend == "rust" and effective_threads > 1
     logger.info(
@@ -190,12 +204,14 @@ def discover_toy_repeats(
     if config.kmer_backend != "rust" and effective_threads > 1:
         logger.info("parallel_scan_disabled reason=python_backend_gil effective_scan_threads=1")
     if progress is not None:
+        poll_discover_count_future(count_future, totals, logger, config)
         progress.update(
             ProgressSnapshot(
                 command="discover",
                 step="scan_reads",
-                total_reads=discover_progress_total_reads(config),
-                total_bases=discover_progress_total_bases(config),
+                total_reads=discover_progress_total_reads(config, totals),
+                total_bases=discover_progress_total_bases(config, totals),
+                extra=discover_progress_extra(0, totals),
             )
         )
 
@@ -230,14 +246,15 @@ def discover_toy_repeats(
                 handle.flush()
 
             if processed_reads % config.progress_every == 0:
+                poll_discover_count_future(count_future, totals, logger, config)
                 log_discover_progress(
                     logger,
                     processed_reads,
                     processed_bases,
                     len(candidates),
                     started,
-                    discover_progress_total_reads(config),
-                    discover_progress_total_bases(config),
+                    discover_progress_total_reads(config, totals),
+                    discover_progress_total_bases(config, totals),
                 )
                 update_discover_terminal_progress(
                     progress,
@@ -246,6 +263,7 @@ def discover_toy_repeats(
                     processed_bases,
                     len(candidates),
                     config,
+                    totals,
                 )
 
         def flush_chunk(executor: ThreadPoolExecutor | None) -> None:
@@ -297,14 +315,15 @@ def discover_toy_repeats(
                     flush_chunk(executor)
             flush_chunk(executor)
 
+        poll_discover_count_future(count_future, totals, logger, config)
         log_discover_progress(
             logger,
             processed_reads,
             processed_bases,
             len(candidates),
             started,
-            discover_progress_total_reads(config),
-            discover_progress_total_bases(config),
+            discover_progress_total_reads(config, totals),
+            discover_progress_total_bases(config, totals),
         )
         update_discover_terminal_progress(
             progress,
@@ -313,6 +332,7 @@ def discover_toy_repeats(
             processed_bases,
             len(candidates),
             config,
+            totals,
         )
         logger.info(
             "filter_summary skipped_short_reads=%s skipped_short_kmer=%s "
@@ -341,6 +361,7 @@ def discover_toy_repeats(
         processed_bases,
         len(candidates),
         config,
+        totals,
     )
     families = cluster_candidates(candidates, config.min_support_reads)
     if not families:
@@ -355,6 +376,7 @@ def discover_toy_repeats(
         processed_bases,
         len(candidates),
         config,
+        totals,
     )
     similarities = compare_families(families, k=config.kmer_size)
     families = annotate_family_redundancy(families, similarities)
@@ -365,6 +387,7 @@ def discover_toy_repeats(
         processed_bases,
         len(candidates),
         config,
+        totals,
     )
     write_monomers(config.outdir / "monomers.fa", families)
     write_families(config.outdir / "families.tsv", families)
@@ -384,6 +407,7 @@ def update_discover_terminal_progress(
     processed_bases: int,
     candidate_reads: int,
     config: DiscoverConfig,
+    totals: DiscoverProgressTotals,
 ) -> None:
     if progress is None:
         return
@@ -393,29 +417,64 @@ def update_discover_terminal_progress(
             step=step,
             processed_reads=processed_reads,
             processed_bases=processed_bases,
-            total_reads=discover_progress_total_reads(config),
-            total_bases=discover_progress_total_bases(config),
-            extra=f"candidates={candidate_reads:,}",
+            total_reads=discover_progress_total_reads(config, totals),
+            total_bases=discover_progress_total_bases(config, totals),
+            extra=discover_progress_extra(candidate_reads, totals),
         )
     )
 
 
-def discover_progress_total_reads(config: DiscoverConfig) -> int | None:
+def poll_discover_count_future(
+    count_future: Future[SequenceStats] | None,
+    totals: DiscoverProgressTotals,
+    logger: logging.Logger,
+    config: DiscoverConfig,
+) -> None:
+    if totals.count_done or count_future is None or not count_future.done():
+        return
+    stats = count_future.result()
+    totals.total_reads = stats.record_count
+    totals.total_read_bases = stats.total_bases
+    totals.count_done = True
+    read_files = len(config.reads) if not isinstance(config.reads, Path) else 1
+    logger.info(
+        "input_summary read_files=%s total_reads=%s total_bases=%s max_read_length=%s",
+        read_files,
+        stats.record_count,
+        stats.total_bases,
+        stats.max_read_length,
+    )
+
+
+def discover_progress_total_reads(
+    config: DiscoverConfig,
+    totals: DiscoverProgressTotals,
+) -> int | None:
     if config.max_reads is not None:
         return config.max_reads
-    if config.total_reads is None:
+    if totals.total_reads is None:
         return None
     if config.sample_rate < 1.0:
-        return max(1, round(config.total_reads * config.sample_rate))
-    return config.total_reads
+        return max(1, round(totals.total_reads * config.sample_rate))
+    return totals.total_reads
 
 
-def discover_progress_total_bases(config: DiscoverConfig) -> int | None:
+def discover_progress_total_bases(
+    config: DiscoverConfig,
+    totals: DiscoverProgressTotals,
+) -> int | None:
     if config.max_read_bases is not None:
         return config.max_read_bases
     if config.sample_rate < 1.0:
         return None
-    return config.total_read_bases
+    return totals.total_read_bases
+
+
+def discover_progress_extra(candidate_reads: int, totals: DiscoverProgressTotals) -> str:
+    parts = [f"candidates={candidate_reads:,}"]
+    if not totals.count_done:
+        parts.append("counting_inputs")
+    return " ".join(parts)
 
 
 def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanResult:

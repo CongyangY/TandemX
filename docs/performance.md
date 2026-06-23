@@ -34,7 +34,7 @@ At command start, discover creates:
 2. `run_config.yaml` with running status;
 3. `candidate_reads.tsv` with its header.
 
-Each accepted candidate is appended and flushed immediately. Discover first pre-counts input reads and bases, then refreshes one terminal progress line in place while scanning. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and estimated remaining time. The CLI progress line shows the current step, processed reads and bases, elapsed time, estimated total runtime, remaining time, reads/min and MB/min. Ctrl-C leaves existing candidate output available for diagnosis.
+Each accepted candidate is appended and flushed immediately. Discover starts read scanning immediately and runs input read/base counting as a background task. The CLI refreshes one terminal progress line in place; before counting finishes, total and remaining time are unavailable, and after counting finishes the same line shows percentage, estimated total runtime and remaining time. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and estimated remaining time when total input size is known. Ctrl-C leaves existing candidate output available for diagnosis.
 
 ## Pilot Controls
 
@@ -62,7 +62,7 @@ Use these controls for real-read subsets:
 
 `--threads` defaults to a request of 8 for `discover`, capped at the smaller of 64 and half of available logical CPUs. Multi-threaded scanning is enabled only for `--kmer-backend rust`, whose PyO3 implementation releases the Python GIL during read-local scanning. The Python backend records the requested thread setting but scans reads serially because its CPU-heavy path is GIL-bound.
 
-`--count-threads` controls the startup pre-count of input reads and bases. It is capped at 4 threads and parallelizes across multiple input files. A single gzip stream is still counted by one worker, because splitting compressed streams safely is outside the MVP.
+`--count-threads` controls the background input count of reads and bases. It is capped at 4 threads and parallelizes across multiple input files. Counting does not block discovery startup. A single gzip stream is still counted by one worker, because splitting compressed streams safely is outside the MVP.
 
 `--reads` accepts multiple files. They are streamed in the supplied order and
 merged for the run without preloading all reads into memory. Duplicate read IDs

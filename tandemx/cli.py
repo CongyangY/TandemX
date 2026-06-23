@@ -7,6 +7,7 @@ import logging
 import os
 import platform as platform_module
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -14,7 +15,7 @@ from typing import Any, Iterable
 from tandemx import __version__
 from tandemx.annotation import annotate_repeat_catalog
 from tandemx.compare.mvp import CompareConfig, compare_toy_abundance
-from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
+from tandemx.discover.mvp import DiscoverConfig, DiscoverProgressTotals, discover_toy_repeats
 from tandemx.io.sequences import SequenceFormatError, count_sequence_records_many
 from tandemx.io.validators import ValidationError, validate_project
 from tandemx.locate.mvp import LocateConfig, locate_toy_arrays
@@ -171,33 +172,21 @@ def run_discover(args: argparse.Namespace) -> int:
     progress.update(
         ProgressSnapshot(
             command="discover",
-            step="count_inputs",
-            extra=f"count_threads={args.count_threads}",
+            step="scan_reads",
+            extra=f"counting_inputs count_threads={args.count_threads}",
         )
     )
-    try:
-        stats = count_sequence_records_many(args.reads, threads=args.count_threads)
-    except Exception:
-        progress.finish("discover", "failed", extra="step=count_inputs")
-        raise
+    count_executor = ThreadPoolExecutor(max_workers=1)
+    count_future = count_executor.submit(
+        count_sequence_records_many,
+        args.reads,
+        threads=args.count_threads,
+    )
+    progress_totals = DiscoverProgressTotals()
     logger.info(
-        "input_summary read_files=%s total_reads=%s total_bases=%s max_read_length=%s count_threads=%s",
+        "input_count_started read_files=%s count_threads=%s mode=background",
         len(args.reads),
-        stats.record_count,
-        stats.total_bases,
-        stats.max_read_length,
         args.count_threads,
-    )
-    progress.update(
-        ProgressSnapshot(
-            command="discover",
-            step="count_inputs",
-            processed_reads=stats.record_count,
-            processed_bases=stats.total_bases,
-            total_reads=stats.record_count,
-            total_bases=stats.total_bases,
-            extra=f"files={len(args.reads)}",
-        )
     )
     config = DiscoverConfig(
         reads=args.reads,
@@ -214,8 +203,6 @@ def run_discover(args: argparse.Namespace) -> int:
         max_pairs_per_kmer=args.max_pairs_per_kmer,
         max_reads=args.max_reads,
         max_read_bases=args.max_read_bases,
-        total_reads=stats.record_count,
-        total_read_bases=stats.total_bases,
         sample_rate=args.sample_rate,
         seed=args.seed,
         progress_every=args.progress_every,
@@ -225,7 +212,13 @@ def run_discover(args: argparse.Namespace) -> int:
         collapse_redundant_families=args.collapse_redundant_families,
     )
     try:
-        candidates, families = discover_toy_repeats(config, logger=logger, progress=progress)
+        candidates, families = discover_toy_repeats(
+            config,
+            logger=logger,
+            progress=progress,
+            count_future=count_future,
+            progress_totals=progress_totals,
+        )
     except KeyboardInterrupt:
         logger.warning("status=discover_interrupted partial_candidate_output=%s", args.outdir / "candidate_reads.tsv")
         progress.finish("discover", "interrupted", extra=f"outdir={args.outdir}")
@@ -233,6 +226,8 @@ def run_discover(args: argparse.Namespace) -> int:
     except Exception:
         progress.finish("discover", "failed", extra=f"outdir={args.outdir}")
         raise
+    finally:
+        count_executor.shutdown(wait=False, cancel_futures=True)
     progress.finish(
         "discover",
         "completed",
