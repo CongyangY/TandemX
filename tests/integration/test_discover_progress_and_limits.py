@@ -48,11 +48,11 @@ def test_max_reads_progress_and_incremental_files(tmp_path: Path) -> None:
     assert result.returncode == 0, result.stderr
     assert (outdir / "run.log").is_file()
     assert (outdir / "candidate_reads.tsv").is_file()
-    assert "discover | scan_reads" in result.stderr
-    assert "reads/min" in result.stderr
+    assert "discover scan_reads" in result.stderr
+    assert "r/min" in result.stderr
     assert "elapsed" in result.stderr
-    assert "total est" in result.stderr
-    assert "remaining" in result.stderr
+    assert "est" in result.stderr
+    assert "rem" in result.stderr
     log = (outdir / "run.log").read_text(encoding="utf-8")
     assert "processed_reads=10" in log
     assert "reads_per_second=" in log
@@ -84,8 +84,8 @@ def test_discover_precounts_reads_for_bounded_progress_without_limits(tmp_path: 
     )
 
     assert result.returncode == 0, result.stderr
-    assert "discover | scan_reads" in result.stderr
-    assert "counting_inputs" in result.stderr
+    assert "discover scan_reads" in result.stderr
+    assert "counting" in result.stderr
     assert "/12 reads" in result.stderr
     log = (outdir / "run.log").read_text(encoding="utf-8")
     assert "input_count_started read_files=1" in log

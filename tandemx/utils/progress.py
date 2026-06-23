@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sys
 import time
+import shutil
 from dataclasses import dataclass
 from typing import Callable, TextIO
 
@@ -30,6 +31,7 @@ class TerminalProgress:
         width: int = 24,
         clock: Callable[[], float] | None = None,
         dynamic: bool = True,
+        max_columns: int | None = None,
     ) -> None:
         self.stream = stream if stream is not None else sys.stderr
         self.enabled = enabled
@@ -38,15 +40,16 @@ class TerminalProgress:
         self.started = self.clock()
         self.last_rendered_length = 0
         self.dynamic = dynamic
+        self.max_columns = max_columns
+        self.is_terminal = bool(getattr(self.stream, "isatty", lambda: False)())
 
     def update(self, snapshot: ProgressSnapshot) -> None:
         if not self.enabled:
             return
         elapsed = max(self.clock() - self.started, 1e-9)
-        line = self._format(snapshot, elapsed)
+        line = self._render_line(self._format(snapshot, elapsed))
         if self.dynamic:
-            padding = " " * max(0, self.last_rendered_length - len(line))
-            self.stream.write("\r" + line + padding)
+            self.stream.write("\r\x1b[2K" + line)
             self.last_rendered_length = len(line)
         else:
             self.stream.write(line + "\n")
@@ -59,9 +62,9 @@ class TerminalProgress:
         line = f"{command} | {status} | elapsed {format_duration(elapsed)}"
         if extra:
             line += f" | {extra}"
+        line = self._render_line(line)
         if self.dynamic:
-            padding = " " * max(0, self.last_rendered_length - len(line))
-            self.stream.write("\r" + line + padding + "\n")
+            self.stream.write("\r\x1b[2K" + line + "\n")
         else:
             self.stream.write(line + "\n")
         self.stream.flush()
@@ -76,16 +79,30 @@ class TerminalProgress:
         total_reads = f"/{snapshot.total_reads:,}" if snapshot.total_reads is not None else ""
         total_bases = f"/{format_bases(snapshot.total_bases)}" if snapshot.total_bases is not None else ""
         base = (
-            f"{snapshot.command} | {snapshot.step} | {bar} "
-            f"{format_percent(fraction)} | {snapshot.processed_reads:,}{total_reads} reads | "
-            f"{format_bases(snapshot.processed_bases)}{total_bases} bases | "
-            f"elapsed {format_duration(elapsed)} | total est {format_optional_duration(total)} | "
-            f"remaining {format_optional_duration(remaining)} | "
-            f"{reads_per_minute:,.1f} reads/min | {mb_per_minute:.2f} MB/min"
+            f"{snapshot.command} {snapshot.step} {bar} "
+            f"{format_percent(fraction)} "
+            f"{snapshot.processed_reads:,}{total_reads} reads "
+            f"{format_bases(snapshot.processed_bases)}{total_bases} "
+            f"elapsed {format_duration(elapsed)} "
+            f"est {format_optional_duration(total)} "
+            f"rem {format_optional_duration(remaining)} "
+            f"{reads_per_minute:,.0f} r/min "
+            f"{mb_per_minute:.1f} MB/min"
         )
         if snapshot.extra:
-            base += f" | {snapshot.extra}"
+            base += f" {compact_extra(snapshot.extra)}"
         return base
+
+    def _render_line(self, line: str) -> str:
+        if self.max_columns is None and not self.is_terminal:
+            return line
+        columns = self.max_columns or shutil.get_terminal_size((120, 20)).columns
+        usable_columns = max(20, columns - 1)
+        if len(line) <= usable_columns:
+            return line
+        if usable_columns <= 3:
+            return line[:usable_columns]
+        return line[: usable_columns - 1] + "…"
 
 
 def progress_fraction(snapshot: ProgressSnapshot) -> float | None:
@@ -154,7 +171,15 @@ def format_bases(bases: int | None) -> str:
     if bases < 1_000:
         return f"{bases} bp"
     if bases < 1_000_000:
-        return f"{bases / 1_000:.1f} kb"
+        return f"{bases / 1_000:.1f}kb"
     if bases < 1_000_000_000:
-        return f"{bases / 1_000_000:.1f} Mb"
-    return f"{bases / 1_000_000_000:.1f} Gb"
+        return f"{bases / 1_000_000:.1f}Mb"
+    return f"{bases / 1_000_000_000:.1f}Gb"
+
+
+def compact_extra(extra: str) -> str:
+    return (
+        extra.replace("candidates=", "cand=")
+        .replace("counting_inputs", "counting")
+        .replace("count_threads=", "count_threads=")
+    )

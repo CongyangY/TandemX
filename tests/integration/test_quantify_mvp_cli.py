@@ -86,8 +86,8 @@ def test_quantify_mvp_estimates_toy_copy_number(tmp_path: Path) -> None:
         str(quantify),
     )
     assert quantify_result.returncode == 0, quantify_result.stderr
-    assert "quantify | scan_reads" in quantify_result.stderr
-    assert "reads/min" in quantify_result.stderr
+    assert "quantify scan_reads" in quantify_result.stderr
+    assert "r/min" in quantify_result.stderr
     assert (quantify / "copy_number.tsv").is_file()
 
     estimates = parse_tsv(quantify / "copy_number.tsv")
