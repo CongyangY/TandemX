@@ -254,6 +254,48 @@ def test_run_passes_read_limits_to_discover_and_quantify(tmp_path: Path) -> None
     assert all("--max-reads 20" in row["command"] for row in rows)
 
 
+def test_run_accepts_multiple_read_files(tmp_path: Path) -> None:
+    reads_a = tmp_path / "reads_a.fa"
+    reads_b = tmp_path / "reads_b.fa"
+    monomer = "ACGTTCAGGACTAACCGTGATCGA"
+    sequence = monomer * 8
+    reads_a.write_text(
+        "".join(f">a_read_{index}\n{sequence}\n" for index in range(1, 4)),
+        encoding="utf-8",
+    )
+    reads_b.write_text(
+        "".join(f">b_read_{index}\n{sequence}\n" for index in range(1, 4)),
+        encoding="utf-8",
+    )
+    outdir = tmp_path / "multi_reads"
+
+    result = run_cli(
+        "run",
+        "--reads",
+        str(reads_a),
+        str(reads_b),
+        "--genome-size",
+        "1000000",
+        "--outdir",
+        str(outdir),
+        "--steps",
+        "discover,quantify",
+        "--min-period",
+        "24",
+        "--max-period",
+        "24",
+    )
+
+    assert result.returncode == 0, result.stderr
+    rows = read_summary(outdir)
+    assert str(reads_a) in rows[0]["input_reads"]
+    assert str(reads_b) in rows[0]["input_reads"]
+    assert (outdir / "discover" / "families.tsv").is_file()
+    assert (outdir / "quantify" / "copy_number.tsv").is_file()
+    report = (outdir / "run_report.md").read_text(encoding="utf-8")
+    assert f"{reads_a}; {reads_b}" in report
+
+
 def test_discover_has_no_known_repeat_input() -> None:
     result = run_cli("discover", "--help")
     assert result.returncode == 0

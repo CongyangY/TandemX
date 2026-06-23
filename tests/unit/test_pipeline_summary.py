@@ -9,7 +9,7 @@ from tandemx.pipeline import PipelineConfig, StepRecord, finalize_run_outputs, w
 
 def pipeline_config(tmp_path: Path) -> PipelineConfig:
     return PipelineConfig(
-        reads=tmp_path / "reads.fa",
+        reads=(tmp_path / "reads.fa",),
         assembly=None,
         genome_size=1_000_000,
         haploid_depth=None,

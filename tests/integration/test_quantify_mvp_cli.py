@@ -104,3 +104,37 @@ def test_quantify_mvp_estimates_toy_copy_number(tmp_path: Path) -> None:
 
     config = (quantify / "run_config.yaml").read_text(encoding="utf-8")
     assert 'status: "quantify_mvp_completed"' in config
+
+
+def test_quantify_accepts_multiple_read_files(tmp_path: Path) -> None:
+    reads_a = tmp_path / "reads_a.fa"
+    reads_b = tmp_path / "reads_b.fa"
+    monomers = tmp_path / "monomers.fa"
+    outdir = tmp_path / "quantify"
+    reads_a.write_text(">a_read_1\nACGTTCAGGAC\n", encoding="utf-8")
+    reads_b.write_text(">b_read_1\nACGTTCAGGAC\n", encoding="utf-8")
+    monomers.write_text(
+        ">family_id=TXF000001;length_bp=11\nACGTTCAGGAC\n",
+        encoding="utf-8",
+    )
+
+    result = run_cli(
+        "quantify",
+        "--reads",
+        str(reads_a),
+        str(reads_b),
+        "--catalog",
+        str(monomers),
+        "--genome-size",
+        "22",
+        "--haploid-depth",
+        "1",
+        "--k",
+        "5",
+        "--outdir",
+        str(outdir),
+    )
+
+    assert result.returncode == 0, result.stderr
+    estimates = parse_tsv(outdir / "copy_number.tsv")
+    assert estimates[0]["median_kmer_depth"] == "2.0000"

@@ -10,7 +10,7 @@ from pathlib import Path
 from statistics import median
 from typing import Iterable, Sequence
 
-from tandemx.discover.mvp import FastaRecord, read_fasta
+from tandemx.discover.mvp import FastaRecord, read_fasta, read_fasta_many
 from tandemx.discover.rust_backend import RustDiagnosticKmerCounter
 from tandemx.simulate.toy import reverse_complement
 from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
@@ -24,7 +24,7 @@ class MonomerRecord:
 
 @dataclass(frozen=True)
 class QuantifyConfig:
-    reads: Path
+    reads: Path | Sequence[Path]
     monomers: Path
     genome_size: int
     outdir: Path
@@ -206,7 +206,7 @@ def count_read_kmers_and_bases(path: Path, k: int) -> tuple[Counter[str], int, i
 
 
 def count_selected_read_kmers_and_bases(
-    path: Path,
+    path: Path | Sequence[Path],
     k: int,
     targets: set[str],
     backend: str,
@@ -231,7 +231,7 @@ def count_selected_read_kmers_and_bases(
         max_reads,
         max_read_bases,
     )
-    for read in read_fasta(path):
+    for read in read_fasta_many(path):
         if max_reads is not None and read_count >= max_reads:
             break
         if max_read_bases is not None and total_bases + len(read.sequence) > max_read_bases:

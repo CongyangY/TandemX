@@ -15,13 +15,14 @@ For 100,000 HiFi reads with an N50 near 16 kb and a 20-2,000 bp period range, th
 `tandemx discover` now uses two bounded stages per read:
 
 1. stream one read from `tandemx.io.sequences`;
-2. skip reads that are too short or low complexity;
-3. extract canonical, non-low-complexity k-mers with a streaming 2-bit rolling encoder in the selected Python or Rust backend and retain only repeated within-read seeds;
-4. cap stored positions and inspected pairs per k-mer;
-5. build a bounded seed-spacing histogram;
-6. select only the strongest spacing peaks;
-7. refine each peak in a small local neighborhood with modulo phase support from at most 128 high-occurrence seed groups and at most 1,024 evenly sampled base comparisons;
-8. release the read-local seed structures before reading the next record.
+2. skip reads that are too short;
+3. directly scan bounded short periods from 2-19 bp so high-copy STR-like repeats are not discarded by the k-mer seed filter;
+4. extract canonical, non-low-complexity k-mers with a streaming 2-bit rolling encoder in the selected Python or Rust backend and retain only repeated within-read seeds;
+5. cap stored positions and inspected pairs per k-mer;
+6. build a bounded seed-spacing histogram;
+7. select only the strongest spacing peaks;
+8. refine each peak in a small local neighborhood with modulo phase support from at most 128 high-occurrence seed groups and at most 1,024 evenly sampled base comparisons;
+9. release the read-local seed structures before reading the next record.
 
 The algorithm no longer compares every base for every possible period. Its Python pilot cost is dominated by per-read k-mer extraction plus bounded spacing/refinement work.
 
@@ -33,7 +34,7 @@ At command start, discover creates:
 2. `run_config.yaml` with running status;
 3. `candidate_reads.tsv` with its header.
 
-Each accepted candidate is appended and flushed immediately. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and an estimated remaining time when `--max-reads` or `--max-read-bases` is set. The CLI also prints live terminal progress with the current step, processed reads, reads/min, MB/min and ETA when a bounded target is configured. Ctrl-C leaves existing candidate output available for diagnosis.
+Each accepted candidate is appended and flushed immediately. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and an estimated remaining time when `--max-reads` or `--max-read-bases` is set. The CLI also prints live terminal progress with the current step, processed reads and bases, elapsed time, estimated total runtime, remaining time, reads/min and MB/min. Estimated total and remaining time are shown as `--` for unbounded runs because TandemX avoids pre-scanning large read files just to count total records. Ctrl-C leaves existing candidate output available for diagnosis.
 
 ## Pilot Controls
 
@@ -54,16 +55,26 @@ Use these controls for real-read subsets:
 --min-spacing-support
 --max-pairs-per-kmer
 --chunk-size
+--threads
 --no-progress
 ```
 
-`--chunk-size` currently defines a logical boundary for future parallel/checkpoint work. Resume is not implemented and the CLI does not expose a non-functional `--resume` flag.
+`--threads` defaults to a request of 8 for `discover`, capped at the smaller of 64 and half of available logical CPUs. Multi-threaded scanning is enabled only for `--kmer-backend rust`, whose PyO3 implementation releases the Python GIL during read-local scanning. The Python backend records the requested thread setting but scans reads serially because its CPU-heavy path is GIL-bound.
+
+`--reads` accepts multiple files. They are streamed in the supplied order and
+merged for the run without preloading all reads into memory. Duplicate read IDs
+across files are treated as input errors.
+
+The default `--min-period` is 2 bp. Use `--min-period 20` when engineering pilots
+should focus on longer satellite-like monomers and ignore STR-like periods.
+
+`--chunk-size` controls how many selected reads are submitted to the Rust thread pool at a time. It is not yet a checkpoint or resume boundary. Resume is not implemented and the CLI does not expose a non-functional `--resume` flag.
 
 `tandemx quantify` uses the same live progress style while scanning reads for diagnostic k-mers. When commands are launched through `tandemx run`, child command output is streamed to the terminal while still being saved under `logs/`.
 
 ## Backend Boundary
 
-`--kmer-backend python` remains the default and fallback. `--kmer-backend rust` implements single-read rolling canonical k-mers, repeated positions, bounded spacing histograms, top periods and local scoring behind a PyO3 interface. FASTA/FASTQ parsing, filters, clustering and file output remain in Python.
+`--kmer-backend python` remains the default and fallback. `--kmer-backend rust` implements single-read rolling canonical k-mers, repeated positions, bounded spacing histograms, top periods and local scoring behind a PyO3 interface. FASTA/FASTQ parsing, filters, clustering and file output remain in Python. Rust scan results are written in input order even when multiple worker threads finish out of order.
 
 Production-scale global k-mer counting is a separate problem and should use optional mature backends such as KMC, meryl or Jellyfish instead of a new TandemX counter. The Rust backend does not replace those tools.
 
@@ -71,7 +82,7 @@ Quantify derives diagnostic k-mers from the discovered families before scanning 
 
 ## Remaining Limits
 
-The spacing prefilter enables larger subsets but does not make TandemX ready for full 7-20 Gb genomes or 100 Gb read sets. Remaining work includes multiprocessing, chunk checkpoints, resumable execution, faster compiled seed extraction, portable peak-memory reporting and validation on real HiFi subsets.
+The spacing prefilter and Rust read-scanning threads enable larger subsets but do not make TandemX ready for full 7-20 Gb genomes or 100 Gb read sets. Remaining work includes multiprocessing or distributed chunks, chunk checkpoints, resumable execution, portable peak-memory reporting and validation on real HiFi subsets.
 
 ## Synthetic Reference Measurements
 

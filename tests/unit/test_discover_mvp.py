@@ -11,6 +11,7 @@ from tandemx.discover.mvp import (
     collapse_redundant_families,
     discover_toy_repeats,
     find_best_periodic_candidate,
+    find_best_short_periodic_candidate_with_stats,
     periodicity_score,
     read_fasta,
     write_families,
@@ -48,6 +49,23 @@ def test_find_best_periodic_candidate() -> None:
     assert candidate.period_bp == 8
     assert candidate.strand == "-"
     assert candidate.confidence == "high"
+
+
+def test_find_best_short_periodic_candidate_detects_trinucleotide_repeat() -> None:
+    record = FastaRecord(read_id="read1", description="read1", sequence="CAG" * 120)
+
+    candidate, overflow_count = find_best_short_periodic_candidate_with_stats(
+        record,
+        min_period=2,
+        max_period=19,
+        min_repeat_span=100,
+        candidate_index=1,
+    )
+
+    assert overflow_count == 0
+    assert candidate is not None
+    assert candidate.period_bp == 3
+    assert candidate.warning == "short_period_candidate"
 
 
 def test_read_fasta_accepts_fastq_input(tmp_path: Path) -> None:

@@ -19,6 +19,12 @@ def parse_family_lengths(path: Path) -> list[int]:
     return [int(line.split("\t")[2]) for line in lines[1:] if line.strip()]
 
 
+def parse_tsv(path: Path) -> list[dict[str, str]]:
+    lines = path.read_text(encoding="utf-8").splitlines()
+    header = lines[0].split("\t")
+    return [dict(zip(header, line.split("\t"))) for line in lines[1:] if line.strip()]
+
+
 def test_discover_mvp_recovers_toy_family_lengths(tmp_path: Path) -> None:
     toy = tmp_path / "toy"
     discover = tmp_path / "discover"
@@ -84,6 +90,46 @@ def test_discover_mvp_recovers_toy_family_lengths(tmp_path: Path) -> None:
     assert 'status: "discover_mvp_completed"' in config
 
 
+def test_discover_recovers_short_str_periods(tmp_path: Path) -> None:
+    reads = tmp_path / "short_str.fa"
+    records = []
+    motifs = {
+        "di": "AT",
+        "tri": "CAG",
+        "hepta": "ACGTTCA",
+    }
+    for label, motif in motifs.items():
+        for index in range(1, 4):
+            records.append(f">{label}_{index}\n{motif * 180}\n")
+    reads.write_text("".join(records), encoding="utf-8")
+    outdir = tmp_path / "discover"
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads),
+        "--outdir",
+        str(outdir),
+        "--min-period",
+        "2",
+        "--max-period",
+        "10",
+        "--min-support-reads",
+        "3",
+        "--min-repeat-span",
+        "100",
+    )
+
+    assert result.returncode == 0, result.stderr
+    lengths = parse_family_lengths(outdir / "families.tsv")
+    assert {2, 3, 7} <= set(lengths)
+    candidates = parse_tsv(outdir / "candidate_reads.tsv")
+    assert all("short_period_candidate" in row["warning"] for row in candidates)
+    di_candidates = [row for row in candidates if row["period_bp"] == "2"]
+    assert di_candidates
+    assert all(row["low_complexity_flag"] == "true" for row in di_candidates)
+
+
 def test_discover_runs_de_novo_with_only_reads_and_outdir(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fa"
     sequence = "ACGTACGTACGTACGTACGT" * 8
@@ -99,6 +145,64 @@ def test_discover_runs_de_novo_with_only_reads_and_outdir(tmp_path: Path) -> Non
     assert (outdir / "candidate_reads.tsv").is_file()
     assert (outdir / "monomers.fa").is_file()
     assert (outdir / "families.tsv").is_file()
+
+
+def test_discover_accepts_multiple_read_files_and_merges_results(tmp_path: Path) -> None:
+    reads_a = tmp_path / "reads_a.fa"
+    reads_b = tmp_path / "reads_b.fa"
+    sequence = "ACGTACGTACGTACGTACGT" * 8
+    reads_a.write_text(
+        "".join(f">a_read_{index}\n{sequence}\n" for index in range(1, 4)),
+        encoding="utf-8",
+    )
+    reads_b.write_text(
+        "".join(f">b_read_{index}\n{sequence}\n" for index in range(1, 4)),
+        encoding="utf-8",
+    )
+    outdir = tmp_path / "discover"
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads_a),
+        str(reads_b),
+        "--outdir",
+        str(outdir),
+        "--min-monomer-len",
+        "20",
+        "--max-monomer-len",
+        "20",
+        "--min-support-reads",
+        "6",
+        "--min-repeat-span",
+        "80",
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert len((outdir / "candidate_reads.tsv").read_text(encoding="utf-8").splitlines()) == 7
+    config = (outdir / "run_config.yaml").read_text(encoding="utf-8")
+    assert "  reads:\n" in config
+    assert f'    - "{reads_a}"' in config
+    assert f'    - "{reads_b}"' in config
+
+
+def test_discover_rejects_duplicate_read_ids_across_input_files(tmp_path: Path) -> None:
+    reads_a = tmp_path / "reads_a.fa"
+    reads_b = tmp_path / "reads_b.fa"
+    reads_a.write_text(">read_1\nACGTACGTACGTACGT\n", encoding="utf-8")
+    reads_b.write_text(">read_1\nACGTACGTACGTACGT\n", encoding="utf-8")
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads_a),
+        str(reads_b),
+        "--outdir",
+        str(tmp_path / "discover"),
+    )
+
+    assert result.returncode != 0
+    assert "Duplicate sequence id across input read files: read_1" in result.stderr
 
 
 def test_discover_collapse_mode_writes_optional_outputs(tmp_path: Path) -> None:

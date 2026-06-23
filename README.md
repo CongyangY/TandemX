@@ -261,18 +261,21 @@ Discover uses a repeated-k-mer spacing prefilter and bounded local period refine
 
 ```bash
 tandemx discover \
-  --reads subset.fastq.gz \
+  --reads subset_lane1.fastq.gz subset_lane2.fastq.gz \
   --outdir pilot_discover \
   --max-reads 10000 \
   --max-read-bases 200000000 \
   --min-read-length 1000 \
-  --min-period 20 \
+  --min-period 2 \
   --max-period 2000 \
   --kmer-backend rust \
+  --threads 8 \
   --progress-every 1000
 ```
 
-`candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The terminal progress line reports the current step, processed reads, reads/min, MB/min and ETA when `--max-reads` or `--max-read-bases` gives a bounded target. Use `--no-progress` for non-interactive batch logs. `--kmer-backend python` remains the default and fallback; `--kmer-backend rust` accelerates the same read-local algorithm when the extension is installed. See `docs/performance.md` for parity results and scaling limits.
+`--reads` accepts one or more FASTA/FASTQ files, including gzip-compressed files. Multiple files are streamed in the order supplied and analyzed as one merged read set. Duplicate read IDs across input files are treated as an input error, which helps catch accidental repeated file arguments. `candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The terminal progress line reports the current step, processed reads and bases, elapsed time, estimated total runtime, remaining time, reads/min and MB/min. Total and remaining time are shown when `--max-reads` or `--max-read-bases` gives a bounded target; otherwise those fields are `--` because TandemX does not pre-scan large read files just to count them. Use `--no-progress` for non-interactive batch logs. `--kmer-backend python` remains the default and fallback; `--kmer-backend rust` accelerates the same read-local algorithm when the extension is installed. With the Rust backend, `--threads` parallelizes read-local scanning; the default request is 8 threads, capped at the smaller of 64 and half of available logical CPUs. See `docs/performance.md` for parity results and scaling limits.
+
+The default minimum period is 2 bp so short tandem repeats such as di-, tri- and heptanucleotide repeats can be reported when they span enough read sequence. Short or low-complexity candidates are flagged with warnings. Set `--min-period 20` when a run should focus only on longer satellite-like monomers.
 
 Inspect and benchmark a local real-read subset without running downstream biological analyses:
 

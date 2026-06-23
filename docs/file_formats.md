@@ -29,6 +29,11 @@ TandemX uses `tandemx.io.sequences` for streaming sequence input where possible.
 
 Each parsed record is normalized as `SequenceRecord(id, sequence, quality=None, description="...")`. FASTQ records retain quality strings and must have matching sequence and quality lengths. The reader reports clear errors for empty files, malformed FASTA/FASTQ syntax, duplicate record IDs, unsupported extensions, and unsupported bases.
 
+Commands that accept `--reads` may receive one or more read files. Multiple
+files are streamed in the order supplied and treated as one merged read set.
+Read identifiers must be unique across all supplied files; duplicate IDs fail
+the run instead of being renamed silently.
+
 ## candidate_reads.tsv
 
 Produced by: `tandemx discover`
@@ -48,7 +53,7 @@ This is a de novo discovery output used as the repeat catalog for downstream com
 | score | float | unitless | Internal candidate score |
 | low_complexity_flag | boolean | NA | Whether candidate is low complexity |
 | confidence | string | NA | `high`, `medium` or `low` |
-| warning | string | NA | Semicolon-separated warnings or empty |
+| warning | string | NA | Semicolon-separated warnings or empty, such as `short_period_candidate` or `low_complexity_candidate` |
 
 ## monomers.fa
 
@@ -84,7 +89,7 @@ Produced by: `tandemx discover`
 | mean_identity | float | fraction | Mean candidate-to-consensus identity |
 | low_complexity_flag | boolean | NA | Whether family is low complexity |
 | confidence | string | NA | Confidence label |
-| warning | string | NA | Semicolon-separated warnings or empty |
+| warning | string | NA | Semicolon-separated warnings or empty, such as `low_complexity_family` |
 
 Families with possible sequence-level redundancy are not automatically removed in
 the MVP. Instead, `warning` may include labels such as
@@ -292,7 +297,7 @@ Produced by: `tandemx run` and `benchmarks/scripts/run_pipeline_benchmark.py`.
 | Field | Type | Description |
 |---|---|---|
 | run_id | string | Unique pipeline invocation identifier |
-| input_reads | path | Reads supplied to the pipeline |
+| input_reads | path list | Reads supplied to the pipeline, separated by semicolons when multiple files were provided |
 | input_assembly | path or empty | Optional assembly supplied to the pipeline |
 | max_reads | integer or empty | Configured read limit |
 | max_read_bases | integer or empty | Configured cumulative read-base limit |
@@ -387,12 +392,16 @@ The companion `compare_runs.md` is a human-readable summary of the same checks.
 | Field | Type | Description |
 |---|---|---|
 | category | string | Check group: `input`, `metadata`, `discover_parameter`, `result`, or `interpretation` |
-| item | string | Specific checked value, such as `reads`, `max_reads`, `min_support_reads`, or `family_count` |
+| item | string | Specific checked value, such as `reads`, `max_reads`, `threads`, `min_support_reads`, or `family_count` |
 | run_a_value | string | Value observed in the first run |
 | run_b_value | string | Value observed in the second run |
 | same | boolean | Whether the normalized values match |
 | direct_comparison_impact | string | `blocking_if_different`, `result_difference`, `informational`, or `summary` |
 | notes | string | Reason a difference matters, including why direct comparison is not valid |
+
+Discovery thread count is treated as an execution parameter. It may affect runtime
+but should not change deterministic candidate or family output for the same
+backend and biological parameters.
 
 ## Toy Simulation Outputs
 

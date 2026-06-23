@@ -70,15 +70,17 @@ class TerminalProgress:
         bar = progress_bar(fraction, self.width)
         reads_per_minute = snapshot.processed_reads / elapsed * 60
         mb_per_minute = snapshot.processed_bases / 1_000_000 / elapsed * 60
-        eta = estimated_remaining_seconds(snapshot, elapsed)
+        remaining = estimated_remaining_seconds(snapshot, elapsed)
+        total = estimated_total_seconds(fraction, elapsed)
         total_reads = f"/{snapshot.total_reads:,}" if snapshot.total_reads is not None else ""
         total_bases = f"/{format_bases(snapshot.total_bases)}" if snapshot.total_bases is not None else ""
         base = (
             f"{snapshot.command} | {snapshot.step} | {bar} "
             f"{format_percent(fraction)} | {snapshot.processed_reads:,}{total_reads} reads | "
             f"{format_bases(snapshot.processed_bases)}{total_bases} bases | "
+            f"elapsed {format_duration(elapsed)} | total est {format_optional_duration(total)} | "
+            f"remaining {format_optional_duration(remaining)} | "
             f"{reads_per_minute:,.1f} reads/min | {mb_per_minute:.2f} MB/min | "
-            f"ETA {format_eta(eta)}"
         )
         if snapshot.extra:
             base += f" | {snapshot.extra}"
@@ -109,6 +111,12 @@ def estimated_remaining_seconds(snapshot: ProgressSnapshot, elapsed: float) -> f
     return min(estimates)
 
 
+def estimated_total_seconds(fraction: float | None, elapsed: float) -> float | None:
+    if fraction is None or fraction <= 0:
+        return None
+    return elapsed / fraction
+
+
 def progress_bar(fraction: float | None, width: int) -> str:
     if fraction is None:
         return "[" + "-" * width + "]"
@@ -118,13 +126,13 @@ def progress_bar(fraction: float | None, width: int) -> str:
 
 def format_percent(fraction: float | None) -> str:
     if fraction is None:
-        return "unknown"
+        return "--"
     return f"{fraction * 100:5.1f}%"
 
 
-def format_eta(seconds: float | None) -> str:
+def format_optional_duration(seconds: float | None) -> str:
     if seconds is None:
-        return "unknown"
+        return "--"
     return format_duration(seconds)
 
 
@@ -141,7 +149,7 @@ def format_duration(seconds: float) -> str:
 
 def format_bases(bases: int | None) -> str:
     if bases is None:
-        return "unknown"
+        return "--"
     if bases < 1_000:
         return f"{bases} bp"
     if bases < 1_000_000:

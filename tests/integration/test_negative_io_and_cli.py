@@ -44,7 +44,7 @@ def test_fastq_quality_length_mismatch_fails_clearly(tmp_path: Path) -> None:
     assert "sequence and quality lengths differ" in result.stderr
 
 
-def test_low_complexity_reads_do_not_produce_catalogue(tmp_path: Path) -> None:
+def test_low_complexity_short_period_reads_are_flagged(tmp_path: Path) -> None:
     reads = write(
         tmp_path / "reads.fa",
         ">r1\n" + "A" * 500 + "\n"
@@ -67,9 +67,11 @@ def test_low_complexity_reads_do_not_produce_catalogue(tmp_path: Path) -> None:
         "100",
     )
 
-    assert result.returncode != 0
-    assert "low-complexity" in result.stderr
-    assert not (tmp_path / "discover" / "families.tsv").exists()
+    assert result.returncode == 0, result.stderr
+    families = (tmp_path / "discover" / "families.tsv").read_text(encoding="utf-8")
+    candidates = (tmp_path / "discover" / "candidate_reads.tsv").read_text(encoding="utf-8")
+    assert "low_complexity_family" in families
+    assert "low_complexity_candidate" in candidates
 
 
 def test_missing_catalog_fails_before_quantify(tmp_path: Path) -> None:

@@ -9,7 +9,7 @@ from typing import Protocol, Sequence
 
 
 class ReportConfig(Protocol):
-    reads: Path
+    reads: Path | Sequence[Path]
     assembly: Path | None
     outdir: Path
     steps: tuple[str, ...]
@@ -183,7 +183,7 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
         "",
         "## Run overview",
         "",
-        f"- Input reads: `{config.reads}`",
+        f"- Input reads: `{format_read_inputs(config.reads)}`",
         f"- Input assembly: `{config.assembly}`" if config.assembly else "- Input assembly: not provided",
         f"- Steps requested: {', '.join(config.steps)}",
         f"- Steps completed: {', '.join(completed) if completed else 'none'}",
@@ -251,6 +251,12 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
         )
     lines.extend(["```", ""])
     (config.outdir / "run_report.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def format_read_inputs(reads: Path | Sequence[Path]) -> str:
+    if isinstance(reads, Path):
+        return str(reads)
+    return "; ".join(str(path) for path in reads)
 
 
 def write_output_manifest(config: ReportConfig, records: Sequence[ReportStep]) -> None:

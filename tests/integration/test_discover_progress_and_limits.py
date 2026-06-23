@@ -50,7 +50,9 @@ def test_max_reads_progress_and_incremental_files(tmp_path: Path) -> None:
     assert (outdir / "candidate_reads.tsv").is_file()
     assert "discover | scan_reads" in result.stderr
     assert "reads/min" in result.stderr
-    assert "ETA" in result.stderr
+    assert "elapsed" in result.stderr
+    assert "total est" in result.stderr
+    assert "remaining" in result.stderr
     log = (outdir / "run.log").read_text(encoding="utf-8")
     assert "processed_reads=10" in log
     assert "reads_per_second=" in log

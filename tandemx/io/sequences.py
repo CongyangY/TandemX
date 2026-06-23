@@ -5,7 +5,7 @@ from __future__ import annotations
 import gzip
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterator, TextIO
+from typing import Iterator, Sequence, TextIO
 
 
 @dataclass(frozen=True)
@@ -34,6 +34,29 @@ def read_sequence_records(path: Path) -> Iterator[SequenceRecord]:
             yield from read_fasta_records(handle, path)
         else:
             yield from read_fastq_records(handle, path)
+
+
+def read_sequence_records_many(paths: Path | Sequence[Path]) -> Iterator[SequenceRecord]:
+    """Read one or more FASTA/FASTQ inputs as a single streaming record iterator."""
+    sequence_paths = normalize_sequence_paths(paths)
+    seen_ids: set[str] = set()
+    for path in sequence_paths:
+        for record in read_sequence_records(path):
+            if record.id in seen_ids:
+                raise SequenceFormatError(
+                    f"Duplicate sequence id across input read files: {record.id}"
+                )
+            seen_ids.add(record.id)
+            yield record
+
+
+def normalize_sequence_paths(paths: Path | Sequence[Path]) -> tuple[Path, ...]:
+    if isinstance(paths, Path):
+        return (paths,)
+    normalized = tuple(paths)
+    if not normalized:
+        raise SequenceFormatError("At least one sequence input file is required")
+    return normalized
 
 
 def detect_sequence_format(path: Path) -> str:

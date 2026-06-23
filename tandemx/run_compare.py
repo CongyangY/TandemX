@@ -269,17 +269,29 @@ def parse_run_config(path: Path) -> dict[str, Any]:
     result: dict[str, Any] = {}
     section: str | None = None
     current_list_key: str | None = None
+    current_parameter_list_key: str | None = None
     for raw_line in path.read_text(encoding="utf-8").splitlines():
         if not raw_line.strip():
+            continue
+        if raw_line.startswith("    - ") and section == "parameters" and current_parameter_list_key:
+            result.setdefault("parameters", {}).setdefault(current_parameter_list_key, []).append(
+                parse_scalar(raw_line[6:])
+            )
             continue
         if raw_line.startswith("  - ") and section and current_list_key:
             result.setdefault(current_list_key, []).append(parse_scalar(raw_line[4:]))
             continue
         if raw_line.startswith("  ") and section:
             key, value = split_key_value(raw_line.strip())
-            result.setdefault(section, {})[key] = parse_scalar(value)
+            current_parameter_list_key = None
+            if section == "parameters" and value == "":
+                result.setdefault(section, {})[key] = []
+                current_parameter_list_key = key
+            else:
+                result.setdefault(section, {})[key] = parse_scalar(value)
             continue
         key, value = split_key_value(raw_line)
+        current_parameter_list_key = None
         if value == "":
             section = key
             current_list_key = key

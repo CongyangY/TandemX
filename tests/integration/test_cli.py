@@ -4,6 +4,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from tandemx.utils.threads import discover_thread_limit
+
 
 def run_cli(*args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
@@ -67,6 +69,21 @@ def test_missing_input_file_errors(tmp_path: Path) -> None:
     )
     assert result.returncode != 0
     assert f"Input file does not exist: {missing}" in result.stderr
+
+
+def test_discover_rejects_threads_above_host_policy(tmp_path: Path) -> None:
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(tmp_path / "missing.fastq"),
+        "--outdir",
+        str(tmp_path / "out"),
+        "--threads",
+        str(discover_thread_limit() + 1),
+    )
+
+    assert result.returncode != 0
+    assert "--threads must be at most" in result.stderr
 
 
 def test_directory_input_path_errors(tmp_path: Path) -> None:

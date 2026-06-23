@@ -23,6 +23,7 @@ from tandemx.probe.mvp import ProbeConfig, rank_toy_probes
 from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
 from tandemx.utils.progress import TerminalProgress
+from tandemx.utils.threads import DEFAULT_DISCOVER_THREADS, discover_thread_limit, resolve_discover_threads
 from tandemx.visualize.mvp import VisualizeConfig, render_static_plots
 
 
@@ -38,11 +39,19 @@ def _path_value(value: str) -> Path:
 
 
 def _require_existing_files(paths: Iterable[Path]) -> None:
-    for path in paths:
+    for path in _flatten_paths(paths):
         if not path.exists():
             raise InputFileError(f"Input file does not exist: {path}")
         if not path.is_file():
             raise InputFileError(f"Input path is not a file: {path}")
+
+
+def _flatten_paths(paths: Iterable[Path | Iterable[Path]]) -> Iterable[Path]:
+    for path in paths:
+        if isinstance(path, Path):
+            yield path
+        else:
+            yield from path
 
 
 def _yaml_value(value: Any, indent: int = 0) -> str:
@@ -95,7 +104,11 @@ def _write_run_config(
     ]
     for key in sorted(values):
         value = values[key]
-        lines.append(f"  {key}: {_yaml_value(value, indent=4)}")
+        if isinstance(value, (list, tuple)) and value:
+            lines.append(f"  {key}:")
+            lines.append(_yaml_value(value, indent=4))
+        else:
+            lines.append(f"  {key}: {_yaml_value(value, indent=4)}")
     config_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -133,6 +146,7 @@ def _prepare_deferred_run(
 
 
 def run_discover(args: argparse.Namespace) -> int:
+    args.threads = resolve_discover_threads(args.threads)
     _require_existing_files([args.reads])
     args.outdir.mkdir(parents=True, exist_ok=True)
     _write_run_config(args.outdir, "discover", args, status="discover_running")
@@ -166,6 +180,7 @@ def run_discover(args: argparse.Namespace) -> int:
         seed=args.seed,
         progress_every=args.progress_every,
         chunk_size=args.chunk_size,
+        threads=args.threads,
         kmer_backend=args.kmer_backend,
         collapse_redundant_families=args.collapse_redundant_families,
     )
@@ -458,9 +473,9 @@ def build_parser() -> argparse.ArgumentParser:
         "discover",
         help="Discover candidate tandem repeat monomers from reads.",
     )
-    discover.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale HiFi-like reads in FASTA/FASTQ format, optionally gzip-compressed.")
+    discover.add_argument("--reads", required=True, nargs="+", type=_path_value, help="One or more toy-scale HiFi-like read files in FASTA/FASTQ format, optionally gzip-compressed. Multiple files are streamed and merged in input order.")
     discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, candidate_reads.tsv, monomers.fa, families.tsv, and family_similarity.tsv.")
-    discover.add_argument("--min-period", "--min-monomer-len", dest="min_monomer_len", type=int, default=20, help="Minimum candidate repeat period in bp.")
+    discover.add_argument("--min-period", "--min-monomer-len", dest="min_monomer_len", type=int, default=2, help="Minimum candidate repeat period in bp.")
     discover.add_argument("--max-period", "--max-monomer-len", dest="max_monomer_len", type=int, default=2000, help="Maximum candidate repeat period in bp.")
     discover.add_argument("--min-support-reads", type=int, default=5, help="Minimum number of reads supporting a candidate family.")
     discover.add_argument("--min-repeat-span", type=int, default=100, help="Minimum repeat-supporting span in a read, in bp.")
@@ -477,6 +492,16 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")
     discover.add_argument("--no-progress", action="store_true", help="Disable live terminal progress output; run.log still records progress.")
     discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
+    discover.add_argument(
+        "--threads",
+        type=int,
+        default=None,
+        help=(
+            f"Requested discover scan threads. Default is {DEFAULT_DISCOVER_THREADS}, "
+            f"capped at {discover_thread_limit()} on this host "
+            "(minimum of 64 and half of available logical CPUs)."
+        ),
+    )
     discover.add_argument("--kmer-backend", choices=("python", "rust"), default="python", help="Read-local seed backend. Rust requires the compiled extension; Python remains the fallback/default.")
     discover.add_argument(
         "--collapse-redundant-families",
@@ -489,7 +514,7 @@ def build_parser() -> argparse.ArgumentParser:
         "quantify",
         help="Estimate read-based repeat copy number from diagnostic k-mers.",
     )
-    quantify.add_argument("--reads", required=True, type=_path_value, help="Input toy-scale FASTA/FASTQ reads used to estimate diagnostic k-mer depth, optionally gzip-compressed.")
+    quantify.add_argument("--reads", required=True, nargs="+", type=_path_value, help="One or more toy-scale FASTA/FASTQ read files used to estimate diagnostic k-mer depth, optionally gzip-compressed. Multiple files are streamed and merged in input order.")
     quantify.add_argument("--catalogue", "--catalog", required=True, type=_path_value, help="Repeat catalog FASTA generated by `tandemx discover`. The --catalog spelling is accepted.")
     quantify.add_argument("--monomers", type=_path_value, help="Optional explicit path to the discovered monomer catalog FASTA. If omitted, --catalogue/--catalog is used.")
     quantify.add_argument("--genome-size", required=True, type=int, help="Estimated haploid or target genome size in bp.")

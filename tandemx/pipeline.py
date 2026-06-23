@@ -17,6 +17,7 @@ from typing import Sequence, TextIO
 
 from tandemx.io.validators import ValidationError, validate_project
 from tandemx.reporting import write_output_manifest, write_run_report
+from tandemx.utils.threads import DEFAULT_DISCOVER_THREADS, discover_thread_limit, resolve_discover_threads
 
 
 PIPELINE_STEPS = ("discover", "quantify", "locate", "compare", "probe", "visualize", "validate")
@@ -42,7 +43,7 @@ SUMMARY_FIELDS = (
 
 @dataclass(frozen=True)
 class PipelineConfig:
-    reads: Path
+    reads: tuple[Path, ...]
     assembly: Path | None
     genome_size: int | None
     haploid_depth: float | None
@@ -101,7 +102,7 @@ def parse_steps(value: str) -> tuple[str, ...]:
 
 
 def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument("--reads", required=True, type=Path)
+    parser.add_argument("--reads", required=True, nargs="+", type=Path)
     parser.add_argument("--assembly", type=Path)
     parser.add_argument("--genome-size", type=int)
     parser.add_argument("--haploid-depth", type=float)
@@ -114,10 +115,19 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
         type=parse_steps,
         default=parse_steps("discover,quantify,locate,compare,probe,visualize,validate"),
     )
-    parser.add_argument("--min-period", type=int, default=20)
+    parser.add_argument("--min-period", type=int, default=2)
     parser.add_argument("--max-period", type=int, default=2000)
     parser.add_argument("--top-periods", type=int, default=5)
-    parser.add_argument("--threads", type=int, default=1, help="Recorded for future parallel execution; currently must be 1.")
+    parser.add_argument(
+        "--threads",
+        type=int,
+        default=None,
+        help=(
+            f"Discover scan threads. Default is {DEFAULT_DISCOVER_THREADS}, "
+            f"capped at {discover_thread_limit()} on this host "
+            "(minimum of 64 and half of available logical CPUs)."
+        ),
+    )
     parser.add_argument("--resume", action="store_true", help="Skip existing steps only when their expected outputs validate.")
     parser.add_argument("--force", action="store_true", help="Rerun selected steps even when output directories already exist.")
     parser.add_argument("--profile", action="store_true", help="Write a cProfile file for each executed step.")
@@ -130,8 +140,7 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         steps = tuple(step for step in PIPELINE_STEPS if step in {*steps, "validate"})
     if args.resume and args.force:
         raise ValueError("--resume and --force are mutually exclusive")
-    if args.threads != 1:
-        raise ValueError("--threads is reserved for future parallel execution and currently must be 1")
+    threads = resolve_discover_threads(args.threads)
     for name in ("max_reads", "max_read_bases", "genome_size"):
         value = getattr(args, name)
         if value is not None and value <= 0:
@@ -139,7 +148,7 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
     if args.haploid_depth is not None and args.haploid_depth <= 0:
         raise ValueError("--haploid-depth must be positive")
     return PipelineConfig(
-        reads=args.reads,
+        reads=tuple(args.reads),
         assembly=args.assembly,
         genome_size=args.genome_size,
         haploid_depth=args.haploid_depth,
@@ -151,7 +160,7 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         min_period=args.min_period,
         max_period=args.max_period,
         top_periods=args.top_periods,
-        threads=args.threads,
+        threads=threads,
         resume=args.resume,
         force=args.force,
         profile=args.profile,
@@ -174,7 +183,7 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
             *cli,
             "discover",
             "--reads",
-            str(config.reads),
+            *(str(path) for path in config.reads),
             "--outdir",
             str(discover_dir),
             "--kmer-backend",
@@ -185,6 +194,8 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
             str(config.max_period),
             "--top-periods",
             str(config.top_periods),
+            "--threads",
+            str(config.threads),
         ]
         if config.max_reads is not None:
             command.extend(["--max-reads", str(config.max_reads)])
@@ -198,7 +209,7 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
             *cli,
             "quantify",
             "--reads",
-            str(config.reads),
+            *(str(path) for path in config.reads),
             "--catalog",
             str(catalog),
             "--genome-size",
@@ -352,7 +363,7 @@ def make_record(
 ) -> StepRecord:
     return StepRecord(
         run_id=run_id,
-        input_reads=str(config.reads),
+        input_reads=format_read_paths(config.reads),
         input_assembly=str(config.assembly) if config.assembly else "",
         max_reads=config.max_reads,
         max_read_bases=config.max_read_bases,
@@ -406,8 +417,9 @@ def run_command_with_live_logs(
 
 
 def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
-    if not config.reads.is_file():
-        raise ValueError(f"Input reads file does not exist: {config.reads}")
+    for reads_path in config.reads:
+        if not reads_path.is_file():
+            raise ValueError(f"Input reads file does not exist: {reads_path}")
     if config.assembly is not None and not config.assembly.is_file():
         raise ValueError(f"Input assembly file does not exist: {config.assembly}")
     config.outdir.mkdir(parents=True, exist_ok=True)
@@ -565,6 +577,10 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
             return records, returncode
     finalize_run_outputs(config, records)
     return records, 0
+
+
+def format_read_paths(reads: Sequence[Path]) -> str:
+    return ";".join(str(path) for path in reads)
 
 
 def run_pipeline_cli(args: argparse.Namespace) -> int:

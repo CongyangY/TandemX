@@ -9,36 +9,38 @@ MVP goal: identify simple candidate tandem repeat monomers de novo from toy HiFi
 Current MVP implementation:
 
 1. stream FASTA or FASTQ reads, including gzip-compressed inputs;
-2. apply `--max-reads`, `--max-read-bases`, reproducible `--sample-rate`, minimum length and low-complexity filters;
-3. extract canonical, non-low-complexity k-mers for one read at a time with a rolling 2-bit encoder in the selected Python or Rust backend;
-4. retain only repeated within-read k-mer positions with strict position/pair caps;
-5. build a spacing histogram in the configured period range;
-6. retain only `--top-periods` supported spacing peaks;
-7. refine a ±2 bp neighborhood around each peak with modulo phase support from at most 128 high-occurrence seed groups and at most 1,024 evenly sampled shifted-identity comparisons;
-8. append accepted candidates immediately to `candidate_reads.tsv`;
-9. cluster only accepted candidate monomers by period length;
-10. write `monomers.fa` and `families.tsv`.
+2. apply `--max-reads`, `--max-read-bases`, reproducible `--sample-rate` and minimum length filters;
+3. directly scan bounded short periods so STR-like 2-19 bp repeats can be retained;
+4. extract canonical, non-low-complexity k-mers for one read at a time with a rolling 2-bit encoder in the selected Python or Rust backend for longer periods;
+5. retain only repeated within-read k-mer positions with strict position/pair caps;
+6. build a spacing histogram in the configured period range;
+7. retain only `--top-periods` supported spacing peaks;
+8. refine a ±2 bp neighborhood around each peak with modulo phase support from at most 128 high-occurrence seed groups and at most 1,024 evenly sampled shifted-identity comparisons;
+9. append accepted candidates immediately to `candidate_reads.tsv`;
+10. cluster only accepted candidate monomers by period length;
+11. write `monomers.fa` and `families.tsv`.
 
 `monomers.fa` is an output of de novo discovery. It is not a required input to `tandemx discover`.
 
-The previous full period scan has been removed from the execution path. Python remains the default/fallback backend. The optional Rust backend implements the same single-read seed/spacing/refinement boundary and returns only a compact result to Python; parsing, clustering and output remain in Python. Neither backend makes TandemX a full large-plant-genome production workflow. See `docs/performance.md`.
+The previous full period scan has been removed from the execution path. Python remains the default/fallback backend. The optional Rust backend implements the same single-read seed/spacing/refinement boundary and returns only a compact result to Python; parsing, clustering and output remain in Python. With `--kmer-backend rust`, read-local scanning can run across multiple threads while preserving deterministic output order. Neither backend makes TandemX a full large-plant-genome production workflow. See `docs/performance.md`.
 
 MVP constraints:
 
 1. toy data only;
 2. simple tandem arrays only;
-3. FASTA/FASTQ/gzip parsing and streaming progress are supported;
+3. FASTA/FASTQ/gzip parsing, multiple read input files and streaming progress are supported;
 4. one best candidate period per read;
-5. no local repeat-boundary refinement;
-6. no multiple-alignment consensus;
-7. no higher-order repeat inference;
-8. no multiprocessing, resume or production-scale full-workflow backend yet.
+5. short-period and low-complexity candidates are retained with warnings, not interpreted as high-confidence long satellite arrays by default;
+6. no local repeat-boundary refinement;
+7. no multiple-alignment consensus;
+8. no higher-order repeat inference;
+9. no multiprocessing, resume or production-scale full-workflow backend yet.
 
 Future work:
 
 1. robust clustering for related satellite families;
 2. strand-aware consensus refinement;
-3. parallel chunked read processing;
+3. multiprocessing or distributed chunk processing for non-Rust backends;
 4. uncertainty modeling for ambiguous monomer periods.
 
 ## Diagnostic k-mer Copy-number Calibration

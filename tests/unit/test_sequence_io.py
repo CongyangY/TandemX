@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from tandemx.io.sequences import SequenceFormatError, read_sequence_records
+from tandemx.io.sequences import SequenceFormatError, read_sequence_records, read_sequence_records_many
 
 
 def collect(path: Path) -> list[tuple[str, str, str | None]]:
@@ -29,6 +29,30 @@ def test_reads_fasta_fastq_and_gzip_variants(tmp_path: Path) -> None:
     assert collect(fasta_gz) == collect(fasta)
     assert collect(fastq) == [("q1", "ACGT", "!!!!"), ("q2", "NNAA", "####")]
     assert collect(fastq_gz) == collect(fastq)
+
+
+def test_read_sequence_records_many_streams_files_in_order(tmp_path: Path) -> None:
+    first = tmp_path / "first.fa"
+    second = tmp_path / "second.fa"
+    first.write_text(">r1\nACGT\n", encoding="utf-8")
+    second.write_text(">r2\nTTAA\n", encoding="utf-8")
+
+    observed = [
+        (record.id, record.sequence)
+        for record in read_sequence_records_many((first, second))
+    ]
+
+    assert observed == [("r1", "ACGT"), ("r2", "TTAA")]
+
+
+def test_read_sequence_records_many_rejects_duplicate_ids_across_files(tmp_path: Path) -> None:
+    first = tmp_path / "first.fa"
+    second = tmp_path / "second.fa"
+    first.write_text(">r1\nACGT\n", encoding="utf-8")
+    second.write_text(">r1\nTTAA\n", encoding="utf-8")
+
+    with pytest.raises(SequenceFormatError, match="Duplicate sequence id across input read files: r1"):
+        list(read_sequence_records_many((first, second)))
 
 
 @pytest.mark.parametrize(

@@ -10,6 +10,7 @@ import tandemx
 
 from tandemx.cli import main
 from tandemx.discover.rust_backend import rust_backend_available
+from tandemx.utils.threads import discover_thread_limit
 
 
 pytestmark = pytest.mark.skipif(
@@ -91,6 +92,50 @@ def test_python_and_rust_discover_backend_parity(tmp_path: Path) -> None:
             family_lengths["python"], family_lengths["rust"]
         )
     )
+
+
+def test_rust_discover_threads_preserve_outputs(tmp_path: Path) -> None:
+    if discover_thread_limit() < 2:
+        pytest.skip("host thread policy allows only one discover thread")
+
+    reads = tmp_path / "reads.fa"
+    monomer = "ACGTTCAGGACTAACCGTGA"
+    sequence = monomer * 30
+    reads.write_text(
+        "".join(f">read_{index}\n{sequence}\n" for index in range(1, 81)),
+        encoding="utf-8",
+    )
+
+    outputs: dict[str, list[dict[str, str]]] = {}
+    for label, threads in (("single", "1"), ("parallel", "2")):
+        outdir = tmp_path / label
+        result = run_cli(
+            "discover",
+            "--reads",
+            str(reads),
+            "--outdir",
+            str(outdir),
+            "--min-period",
+            "20",
+            "--max-period",
+            "30",
+            "--min-support-reads",
+            "2",
+            "--min-repeat-span",
+            "100",
+            "--kmer-backend",
+            "rust",
+            "--threads",
+            threads,
+            "--chunk-size",
+            "7",
+        )
+        assert result.returncode == 0, result.stderr
+        outputs[label] = read_rows(outdir / "candidate_reads.tsv")
+
+    assert outputs["parallel"] == outputs["single"]
+    parallel_log = (tmp_path / "parallel" / "run.log").read_text(encoding="utf-8")
+    assert "scan_threads requested=2 effective=2 parallel=true backend=rust" in parallel_log
 
 
 def test_rust_cli_reports_unavailable_extension(

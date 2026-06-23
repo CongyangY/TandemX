@@ -6,12 +6,14 @@ import hashlib
 import logging
 import random
 import time
+from contextlib import nullcontext
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, replace
 from pathlib import Path
 from statistics import mean
 from typing import Iterable, Sequence
 
-from tandemx.io.sequences import SequenceFormatError, read_sequence_records
+from tandemx.io.sequences import SequenceFormatError, read_sequence_records, read_sequence_records_many
 from tandemx.discover.spacing import (
     bounded_periodicity_score,
     build_spacing_histogram,
@@ -25,6 +27,11 @@ from tandemx.discover.spacing import (
 from tandemx.discover.rust_backend import RustBackendUnavailable, scan_read_for_periods
 from tandemx.simulate.toy import reverse_complement, wrap_sequence
 from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
+from tandemx.utils.threads import effective_discover_threads
+
+
+SHORT_PERIOD_SCAN_MAX = 19
+SHORT_PERIOD_ACCEPTANCE_SCORE = 0.80
 
 
 @dataclass(frozen=True)
@@ -96,7 +103,7 @@ class FamilyCollapse:
 
 @dataclass(frozen=True)
 class DiscoverConfig:
-    reads: Path
+    reads: Path | Sequence[Path]
     outdir: Path
     min_monomer_len: int
     max_monomer_len: int
@@ -114,8 +121,24 @@ class DiscoverConfig:
     seed: int = 1
     progress_every: int = 1000
     chunk_size: int = 1000
+    threads: int = 8
     kmer_backend: str = "python"
     collapse_redundant_families: bool = False
+
+
+@dataclass(frozen=True)
+class ReadScanTask:
+    record: FastaRecord
+
+
+@dataclass(frozen=True)
+class ReadScanResult:
+    read_bases: int
+    candidate: CandidateRepeat | None = None
+    skipped_short_reads: int = 0
+    skipped_short_kmer: int = 0
+    skipped_low_complexity: int = 0
+    seed_overflow_count: int = 0
 
 
 def discover_toy_repeats(
@@ -147,6 +170,23 @@ def discover_toy_repeats(
     seed_overflow_count = 0
     started = time.perf_counter()
     rng = random.Random(config.seed)
+    effective_threads = effective_discover_threads(config.threads)
+    parallel_scan = config.kmer_backend == "rust" and effective_threads > 1
+    logger.info(
+        "scan_threads requested=%s effective=%s parallel=%s backend=%s",
+        config.threads,
+        effective_threads,
+        str(parallel_scan).lower(),
+        config.kmer_backend,
+    )
+    if effective_threads < config.threads:
+        logger.info(
+            "threads_capped requested=%s effective=%s reason=host_thread_policy",
+            config.threads,
+            effective_threads,
+        )
+    if config.kmer_backend != "rust" and effective_threads > 1:
+        logger.info("parallel_scan_disabled reason=python_backend_gil effective_scan_threads=1")
     if progress is not None:
         progress.update(
             ProgressSnapshot(
@@ -160,56 +200,29 @@ def discover_toy_repeats(
     with candidate_path.open("wt", encoding="utf-8") as handle:
         handle.write(candidate_reads_header() + "\n")
         handle.flush()
-        for record in read_fasta(config.reads):
-            if config.max_reads is not None and processed_reads >= config.max_reads:
-                break
-            if config.sample_rate < 1.0 and rng.random() > config.sample_rate:
-                continue
-            if (
-                config.max_read_bases is not None
-                and processed_bases + len(record.sequence) > config.max_read_bases
-            ):
-                logger.info(
-                    "limit_reached=max_read_bases configured_bases=%s next_read_bases=%s",
-                    config.max_read_bases,
-                    len(record.sequence),
-                )
-                break
+        chunk: list[ReadScanTask] = []
+        selected_reads = 0
+        selected_bases = 0
+
+        def handle_scan_result(result: ReadScanResult) -> None:
+            nonlocal processed_reads
+            nonlocal processed_bases
+            nonlocal skipped_short_reads
+            nonlocal skipped_short_kmer
+            nonlocal skipped_low_complexity
+            nonlocal seed_overflow_count
 
             processed_reads += 1
-            processed_bases += len(record.sequence)
-            candidate: CandidateRepeat | None = None
-            if len(record.sequence) < config.min_read_length:
-                skipped_short_reads += 1
-            elif len(record.sequence) < config.kmer_size:
-                skipped_short_kmer += 1
-            elif is_low_complexity(record.sequence):
-                skipped_low_complexity += 1
-            else:
-                finder = (
-                    find_best_periodic_candidate_rust
-                    if config.kmer_backend == "rust"
-                    else find_best_periodic_candidate_with_stats
+            processed_bases += result.read_bases
+            skipped_short_reads += result.skipped_short_reads
+            skipped_short_kmer += result.skipped_short_kmer
+            skipped_low_complexity += result.skipped_low_complexity
+            seed_overflow_count += result.seed_overflow_count
+            if result.candidate is not None:
+                candidate = replace(
+                    result.candidate,
+                    candidate_id=f"TXC{len(candidates) + 1:06d}",
                 )
-                try:
-                    candidate, overflow_count = finder(
-                        record,
-                        min_period=config.min_monomer_len,
-                        max_period=config.max_monomer_len,
-                        min_repeat_span=config.min_repeat_span,
-                        candidate_index=len(candidates) + 1,
-                        kmer_size=config.kmer_size,
-                        top_periods=config.top_periods,
-                        min_seed_occurrences=config.min_seed_occurrences,
-                        min_spacing_support=config.min_spacing_support,
-                        max_pairs_per_kmer=config.max_pairs_per_kmer,
-                    )
-                except RustBackendUnavailable as exc:
-                    logger.error("rust_backend_unavailable=%s", exc)
-                    raise ValueError(str(exc)) from exc
-                seed_overflow_count += overflow_count
-
-            if candidate is not None:
                 candidates.append(candidate)
                 handle.write(format_candidate_read(candidate) + "\n")
                 handle.flush()
@@ -232,6 +245,55 @@ def discover_toy_repeats(
                     len(candidates),
                     config,
                 )
+
+        def flush_chunk(executor: ThreadPoolExecutor | None) -> None:
+            if not chunk:
+                return
+            try:
+                if executor is None:
+                    results = (scan_discover_read(task, config) for task in chunk)
+                else:
+                    results = executor.map(
+                        scan_discover_read,
+                        chunk,
+                        [config] * len(chunk),
+                    )
+                for result in results:
+                    handle_scan_result(result)
+            except RustBackendUnavailable as exc:
+                logger.error("rust_backend_unavailable=%s", exc)
+                raise ValueError(str(exc)) from exc
+            finally:
+                chunk.clear()
+
+        executor_context = (
+            ThreadPoolExecutor(max_workers=effective_threads)
+            if parallel_scan
+            else nullcontext(None)
+        )
+        with executor_context as executor:
+            for record in read_fasta_many(config.reads):
+                if config.max_reads is not None and selected_reads >= config.max_reads:
+                    break
+                if config.sample_rate < 1.0 and rng.random() > config.sample_rate:
+                    continue
+                if (
+                    config.max_read_bases is not None
+                    and selected_bases + len(record.sequence) > config.max_read_bases
+                ):
+                    logger.info(
+                        "limit_reached=max_read_bases configured_bases=%s next_read_bases=%s",
+                        config.max_read_bases,
+                        len(record.sequence),
+                    )
+                    break
+
+                selected_reads += 1
+                selected_bases += len(record.sequence)
+                chunk.append(ReadScanTask(record=record))
+                if len(chunk) >= config.chunk_size:
+                    flush_chunk(executor)
+            flush_chunk(executor)
 
         log_discover_progress(
             logger,
@@ -265,16 +327,10 @@ def discover_toy_repeats(
                 f"No reads were long enough for --kmer-size {config.kmer_size}; "
                 f"processed {processed_reads} reads"
             )
-        if processed_reads and skipped_low_complexity == processed_reads:
-            raise ValueError(
-                f"Only low-complexity reads were found; processed {processed_reads} reads"
-            )
         raise ValueError(
             "No tandem repeat candidates found after k-mer spacing prefilter; "
             f"processed {processed_reads} reads"
         )
-    if all(candidate.low_complexity_flag for candidate in candidates):
-        raise ValueError("Only low-complexity tandem candidates found in reads")
 
     update_discover_terminal_progress(
         progress,
@@ -342,6 +398,52 @@ def update_discover_terminal_progress(
     )
 
 
+def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanResult:
+    record = task.record
+    if len(record.sequence) < config.min_read_length:
+        return ReadScanResult(read_bases=len(record.sequence), skipped_short_reads=1)
+
+    short_candidate, short_overflow_count = find_best_short_periodic_candidate_with_stats(
+        record,
+        min_period=config.min_monomer_len,
+        max_period=min(config.max_monomer_len, SHORT_PERIOD_SCAN_MAX),
+        min_repeat_span=config.min_repeat_span,
+        candidate_index=0,
+    )
+    if short_candidate is not None:
+        return ReadScanResult(
+            read_bases=len(record.sequence),
+            candidate=short_candidate,
+            seed_overflow_count=short_overflow_count,
+        )
+
+    if len(record.sequence) < config.kmer_size:
+        return ReadScanResult(read_bases=len(record.sequence), skipped_short_kmer=1)
+
+    finder = (
+        find_best_periodic_candidate_rust
+        if config.kmer_backend == "rust"
+        else find_best_periodic_candidate_with_stats
+    )
+    candidate, overflow_count = finder(
+        record,
+        min_period=config.min_monomer_len,
+        max_period=config.max_monomer_len,
+        min_repeat_span=config.min_repeat_span,
+        candidate_index=0,
+        kmer_size=config.kmer_size,
+        top_periods=config.top_periods,
+        min_seed_occurrences=config.min_seed_occurrences,
+        min_spacing_support=config.min_spacing_support,
+        max_pairs_per_kmer=config.max_pairs_per_kmer,
+    )
+    return ReadScanResult(
+        read_bases=len(record.sequence),
+        candidate=candidate,
+        seed_overflow_count=short_overflow_count + overflow_count,
+    )
+
+
 def validate_discover_config(config: DiscoverConfig) -> None:
     if config.min_monomer_len <= 0:
         raise ValueError("--min-period must be positive")
@@ -369,6 +471,8 @@ def validate_discover_config(config: DiscoverConfig) -> None:
         raise ValueError("--progress-every must be positive")
     if config.chunk_size <= 0:
         raise ValueError("--chunk-size must be positive")
+    if config.threads <= 0:
+        raise ValueError("--threads must be positive")
     if config.kmer_backend not in {"python", "rust"}:
         raise ValueError("--kmer-backend must be python or rust")
     if config.kmer_backend == "rust" and config.kmer_size > 31:
@@ -378,6 +482,18 @@ def validate_discover_config(config: DiscoverConfig) -> None:
 def read_fasta(path: Path) -> Iterable[FastaRecord]:
     try:
         for record in read_sequence_records(path):
+            yield FastaRecord(
+                read_id=record.id,
+                description=record.description,
+                sequence=record.sequence,
+            )
+    except SequenceFormatError:
+        raise
+
+
+def read_fasta_many(paths: Path | Sequence[Path]) -> Iterable[FastaRecord]:
+    try:
+        for record in read_sequence_records_many(paths):
             yield FastaRecord(
                 read_id=record.id,
                 description=record.description,
@@ -420,6 +536,37 @@ def find_best_periodic_candidate(
         max_pairs_per_kmer=max_pairs_per_kmer,
     )
     return candidate
+
+
+def find_best_short_periodic_candidate_with_stats(
+    record: FastaRecord,
+    min_period: int,
+    max_period: int,
+    min_repeat_span: int,
+    candidate_index: int,
+) -> tuple[CandidateRepeat | None, int]:
+    sequence = record.sequence.upper()
+    bounded_max_period = min(max_period, len(sequence) // 2)
+    if min_period > bounded_max_period or len(sequence) < min_repeat_span:
+        return None, 0
+
+    best_period = 0
+    best_score = 0.0
+    for period in range(min_period, bounded_max_period + 1):
+        score = bounded_periodicity_score(sequence, period)
+        if (score, -period) > (best_score, -best_period):
+            best_period = period
+            best_score = score
+
+    if best_score < SHORT_PERIOD_ACCEPTANCE_SCORE:
+        return None, 0
+    return build_candidate_from_period(
+        record,
+        sequence,
+        best_period,
+        best_score,
+        candidate_index,
+    ), 0
 
 
 def find_best_periodic_candidate_with_stats(
@@ -527,11 +674,13 @@ def build_candidate_from_period(
     if best_period <= 0 or best_score < 0.75:
         return None
     repeat_span = len(sequence)
-    warning = ""
+    warnings = []
     low_complexity = is_low_complexity(sequence[:best_period])
     if low_complexity:
-        warning = "low_complexity_candidate"
-    confidence = "high" if best_score >= 0.9 else "medium"
+        warnings.append("low_complexity_candidate")
+    if best_period < 20:
+        warnings.append("short_period_candidate")
+    confidence = "high" if best_score >= 0.9 and not low_complexity else "medium"
     return CandidateRepeat(
         read_id=record.read_id,
         candidate_id=f"TXC{candidate_index:06d}",
@@ -545,7 +694,7 @@ def build_candidate_from_period(
         score=best_score,
         low_complexity_flag=low_complexity,
         confidence=confidence,
-        warning=warning,
+        warning=";".join(warnings),
     )
 
 
@@ -585,11 +734,11 @@ def is_low_complexity(sequence: str) -> bool:
     counts = {base: sequence.count(base) for base in "ACGT"}
     if max(counts.values()) / len(sequence) >= 0.8:
         return True
-    first_dinucleotide = sequence[:2]
-    for index in range(2, len(sequence) - 1, 2):
-        if sequence[index : index + 2] != first_dinucleotide:
-            return False
-    return True
+    if len(sequence) >= 4 and len(sequence) % 2 == 0:
+        first_dinucleotide = sequence[:2]
+        if all(sequence[index : index + 2] == first_dinucleotide for index in range(2, len(sequence), 2)):
+            return True
+    return False
 
 
 def cluster_candidates(
@@ -602,7 +751,8 @@ def cluster_candidates(
         placed = False
         for cluster in clusters:
             center = round(mean(item.period_bp for item in cluster))
-            if abs(candidate.period_bp - center) <= period_tolerance_bp:
+            tolerance = 0 if min(candidate.period_bp, center) <= SHORT_PERIOD_SCAN_MAX else period_tolerance_bp
+            if abs(candidate.period_bp - center) <= tolerance:
                 cluster.append(candidate)
                 placed = True
                 break
