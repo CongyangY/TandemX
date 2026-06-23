@@ -8,11 +8,12 @@ import json
 import shlex
 import subprocess
 import sys
+import threading
 import time
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Sequence
+from typing import Sequence, TextIO
 
 from tandemx.io.validators import ValidationError, validate_project
 from tandemx.reporting import write_output_manifest, write_run_report
@@ -368,6 +369,42 @@ def make_record(
     )
 
 
+def run_command_with_live_logs(
+    command: Sequence[str],
+    stdout_path: Path,
+    stderr_path: Path,
+) -> int:
+    """Run a command while teeing child output to log files and this terminal."""
+    with stdout_path.open("wt", encoding="utf-8") as stdout_log, stderr_path.open(
+        "wt", encoding="utf-8"
+    ) as stderr_log:
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            bufsize=1,
+        )
+
+        def forward(pipe: TextIO, log_handle: TextIO, mirror: TextIO) -> None:
+            for line in pipe:
+                log_handle.write(line)
+                log_handle.flush()
+                mirror.write(line)
+                mirror.flush()
+
+        threads = [
+            threading.Thread(target=forward, args=(process.stdout, stdout_log, sys.stdout)),
+            threading.Thread(target=forward, args=(process.stderr, stderr_log, sys.stderr)),
+        ]
+        for thread in threads:
+            thread.start()
+        returncode = process.wait()
+        for thread in threads:
+            thread.join()
+        return returncode
+
+
 def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
     if not config.reads.is_file():
         raise ValueError(f"Input reads file does not exist: {config.reads}")
@@ -482,13 +519,23 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
                 str(profiles_dir / f"{step}.prof"),
                 *command[1:],
             ]
+        print(
+            f"tandemx run: starting step {len(records) + 1}/{len(config.steps)}: {step}",
+            flush=True,
+        )
         started = time.perf_counter()
-        result = subprocess.run(actual_command, check=False, text=True, capture_output=True)
+        returncode = run_command_with_live_logs(
+            actual_command,
+            logs_dir / f"{step}.stdout.log",
+            logs_dir / f"{step}.stderr.log",
+        )
         runtime = time.perf_counter() - started
         end_time = utc_now()
-        (logs_dir / f"{step}.stdout.log").write_text(result.stdout, encoding="utf-8")
-        (logs_dir / f"{step}.stderr.log").write_text(result.stderr, encoding="utf-8")
-        validated = result.returncode == 0 and (
+        print(
+            f"tandemx run: finished step {step} exit_status={returncode} runtime_seconds={runtime:.3f}",
+            flush=True,
+        )
+        validated = returncode == 0 and (
             step == "validate" or step_outputs_validate(config, step)
         )
         notes = f"threads_recorded={config.threads}"
@@ -502,20 +549,20 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
             start_time=start_time,
             end_time=end_time,
             runtime_seconds=runtime,
-            exit_status=result.returncode,
+            exit_status=returncode,
             output_validated=validated,
             notes=notes,
         )
         records.append(record)
         with pipeline_log.open("at", encoding="utf-8") as handle:
             handle.write(
-                f"{end_time} step={step} exit_status={result.returncode} "
+                f"{end_time} step={step} exit_status={returncode} "
                 f"runtime_seconds={runtime:.6f} validated={str(validated).lower()}\n"
             )
         write_summaries(config, records)
-        if result.returncode != 0:
+        if returncode != 0:
             finalize_run_outputs(config, records)
-            return records, result.returncode
+            return records, returncode
     finalize_run_outputs(config, records)
     return records, 0
 

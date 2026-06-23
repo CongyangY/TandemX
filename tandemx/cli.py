@@ -22,6 +22,7 @@ from tandemx.pipeline import add_pipeline_arguments, run_pipeline_cli
 from tandemx.probe.mvp import ProbeConfig, rank_toy_probes
 from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
+from tandemx.utils.progress import TerminalProgress
 from tandemx.visualize.mvp import VisualizeConfig, render_static_plots
 
 
@@ -168,11 +169,21 @@ def run_discover(args: argparse.Namespace) -> int:
         kmer_backend=args.kmer_backend,
         collapse_redundant_families=args.collapse_redundant_families,
     )
+    progress = TerminalProgress(enabled=not args.no_progress)
     try:
-        candidates, families = discover_toy_repeats(config, logger=logger)
+        candidates, families = discover_toy_repeats(config, logger=logger, progress=progress)
     except KeyboardInterrupt:
         logger.warning("status=discover_interrupted partial_candidate_output=%s", args.outdir / "candidate_reads.tsv")
+        progress.finish("discover", "interrupted", extra=f"outdir={args.outdir}")
         raise
+    except Exception:
+        progress.finish("discover", "failed", extra=f"outdir={args.outdir}")
+        raise
+    progress.finish(
+        "discover",
+        "completed",
+        extra=f"candidates={len(candidates):,} families={len(families):,} outdir={args.outdir}",
+    )
     _write_run_config(args.outdir, "discover", args, status="discover_mvp_completed")
     logger.info("status=discover_mvp_completed")
     logger.info("candidate_count=%s", len(candidates))
@@ -189,24 +200,48 @@ def run_quantify(args: argparse.Namespace) -> int:
     monomers_path = args.monomers if args.monomers is not None else args.catalogue
     _require_existing_files([args.reads, monomers_path])
     args.outdir.mkdir(parents=True, exist_ok=True)
-    estimates = quantify_toy_copy_number(
-        QuantifyConfig(
-            reads=args.reads,
-            monomers=monomers_path,
-            genome_size=args.genome_size,
-            outdir=args.outdir,
-            k=args.k,
-            haploid_depth=args.haploid_depth,
-            kmer_backend=args.kmer_backend,
-            max_reads=args.max_reads,
-            max_read_bases=args.max_read_bases,
-        )
-    )
-    _write_run_config(args.outdir, "quantify", args, status="quantify_mvp_completed")
+    _write_run_config(args.outdir, "quantify", args, status="quantify_running")
     logger = _configure_log(args.outdir, "quantify")
     logger.info("command=tandemx quantify")
     logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
     logger.info("output_directory=%s", args.outdir)
+    logger.info("status=quantify_running")
+    logger.info(
+        "algorithm_mode=diagnostic_kmer_counting kmer_backend=%s k=%s",
+        args.kmer_backend,
+        args.k,
+    )
+    progress = TerminalProgress(enabled=not args.no_progress)
+    try:
+        estimates = quantify_toy_copy_number(
+            QuantifyConfig(
+                reads=args.reads,
+                monomers=monomers_path,
+                genome_size=args.genome_size,
+                outdir=args.outdir,
+                k=args.k,
+                haploid_depth=args.haploid_depth,
+                kmer_backend=args.kmer_backend,
+                max_reads=args.max_reads,
+                max_read_bases=args.max_read_bases,
+                progress_every=args.progress_every,
+            ),
+            logger=logger,
+            progress=progress,
+        )
+    except KeyboardInterrupt:
+        logger.warning("status=quantify_interrupted partial_output=%s", args.outdir / "copy_number.tsv")
+        progress.finish("quantify", "interrupted", extra=f"outdir={args.outdir}")
+        raise
+    except Exception:
+        progress.finish("quantify", "failed", extra=f"outdir={args.outdir}")
+        raise
+    progress.finish(
+        "quantify",
+        "completed",
+        extra=f"families={len(estimates):,} outdir={args.outdir}",
+    )
+    _write_run_config(args.outdir, "quantify", args, status="quantify_mvp_completed")
     logger.info("status=quantify_mvp_completed")
     logger.info("family_count=%s", len(estimates))
     logger.info("Quantify MVP supports toy-scale FASTA/FASTQ read input, including gzip-compressed files")
@@ -440,6 +475,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--sample-rate", type=float, default=1.0, help="Fraction of input reads sampled reproducibly, in (0, 1].")
     discover.add_argument("--seed", type=int, default=1, help="Random seed for reproducible read sampling.")
     discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")
+    discover.add_argument("--no-progress", action="store_true", help="Disable live terminal progress output; run.log still records progress.")
     discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
     discover.add_argument("--kmer-backend", choices=("python", "rust"), default="python", help="Read-local seed backend. Rust requires the compiled extension; Python remains the fallback/default.")
     discover.add_argument(
@@ -462,6 +498,8 @@ def build_parser() -> argparse.ArgumentParser:
     quantify.add_argument("--kmer-backend", choices=("python", "rust"), default="python", help="Diagnostic target k-mer counting backend; Rust remains target-only, not a global counter.")
     quantify.add_argument("--max-reads", type=int, help="Maximum input reads to count; useful for a subset matched to discover.")
     quantify.add_argument("--max-read-bases", type=int, help="Maximum cumulative input read bases to count without splitting a read.")
+    quantify.add_argument("--progress-every", type=int, default=1000, help="Log and display progress after this many processed reads.")
+    quantify.add_argument("--no-progress", action="store_true", help="Disable live terminal progress output; run.log still records progress.")
     quantify.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and copy_number.tsv.")
     quantify.set_defaults(func=run_quantify)
 

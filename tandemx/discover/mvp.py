@@ -24,6 +24,7 @@ from tandemx.discover.spacing import (
 )
 from tandemx.discover.rust_backend import RustBackendUnavailable, scan_read_for_periods
 from tandemx.simulate.toy import reverse_complement, wrap_sequence
+from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
 
 
 @dataclass(frozen=True)
@@ -120,6 +121,7 @@ class DiscoverConfig:
 def discover_toy_repeats(
     config: DiscoverConfig,
     logger: logging.Logger | None = None,
+    progress: TerminalProgress | None = None,
 ) -> tuple[list[CandidateRepeat], list[RepeatFamily]]:
     """Discover tandem repeat families with a bounded k-mer spacing prefilter."""
     validate_discover_config(config)
@@ -145,6 +147,15 @@ def discover_toy_repeats(
     seed_overflow_count = 0
     started = time.perf_counter()
     rng = random.Random(config.seed)
+    if progress is not None:
+        progress.update(
+            ProgressSnapshot(
+                command="discover",
+                step="scan_reads",
+                total_reads=config.max_reads,
+                total_bases=config.max_read_bases,
+            )
+        )
 
     with candidate_path.open("wt", encoding="utf-8") as handle:
         handle.write(candidate_reads_header() + "\n")
@@ -213,6 +224,14 @@ def discover_toy_repeats(
                     config.max_reads,
                     config.max_read_bases,
                 )
+                update_discover_terminal_progress(
+                    progress,
+                    "scan_reads",
+                    processed_reads,
+                    processed_bases,
+                    len(candidates),
+                    config,
+                )
 
         log_discover_progress(
             logger,
@@ -222,6 +241,14 @@ def discover_toy_repeats(
             started,
             config.max_reads,
             config.max_read_bases,
+        )
+        update_discover_terminal_progress(
+            progress,
+            "scan_reads",
+            processed_reads,
+            processed_bases,
+            len(candidates),
+            config,
         )
         logger.info(
             "filter_summary skipped_short_reads=%s skipped_short_kmer=%s "
@@ -249,14 +276,38 @@ def discover_toy_repeats(
     if all(candidate.low_complexity_flag for candidate in candidates):
         raise ValueError("Only low-complexity tandem candidates found in reads")
 
+    update_discover_terminal_progress(
+        progress,
+        "cluster_families",
+        processed_reads,
+        processed_bases,
+        len(candidates),
+        config,
+    )
     families = cluster_candidates(candidates, config.min_support_reads)
     if not families:
         raise ValueError(
             "No repeat families passed the minimum support threshold; "
             "try lowering --min-support-reads for toy data or check the reads"
         )
+    update_discover_terminal_progress(
+        progress,
+        "compare_families",
+        processed_reads,
+        processed_bases,
+        len(candidates),
+        config,
+    )
     similarities = compare_families(families, k=config.kmer_size)
     families = annotate_family_redundancy(families, similarities)
+    update_discover_terminal_progress(
+        progress,
+        "write_outputs",
+        processed_reads,
+        processed_bases,
+        len(candidates),
+        config,
+    )
     write_monomers(config.outdir / "monomers.fa", families)
     write_families(config.outdir / "families.tsv", families)
     write_family_similarity(config.outdir / "family_similarity.tsv", similarities)
@@ -266,6 +317,29 @@ def discover_toy_repeats(
         write_families(config.outdir / "collapsed_families.tsv", collapsed_families)
         write_family_collapse(config.outdir / "family_collapse.tsv", collapse_records)
     return candidates, families
+
+
+def update_discover_terminal_progress(
+    progress: TerminalProgress | None,
+    step: str,
+    processed_reads: int,
+    processed_bases: int,
+    candidate_reads: int,
+    config: DiscoverConfig,
+) -> None:
+    if progress is None:
+        return
+    progress.update(
+        ProgressSnapshot(
+            command="discover",
+            step=step,
+            processed_reads=processed_reads,
+            processed_bases=processed_bases,
+            total_reads=config.max_reads,
+            total_bases=config.max_read_bases,
+            extra=f"candidates={candidate_reads:,}",
+        )
+    )
 
 
 def validate_discover_config(config: DiscoverConfig) -> None:

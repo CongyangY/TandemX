@@ -33,7 +33,7 @@ At command start, discover creates:
 2. `run_config.yaml` with running status;
 3. `candidate_reads.tsv` with its header.
 
-Each accepted candidate is appended and flushed immediately. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and an estimated remaining time when `--max-reads` is set. Ctrl-C leaves existing candidate output available for diagnosis.
+Each accepted candidate is appended and flushed immediately. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and an estimated remaining time when `--max-reads` or `--max-read-bases` is set. The CLI also prints live terminal progress with the current step, processed reads, reads/min, MB/min and ETA when a bounded target is configured. Ctrl-C leaves existing candidate output available for diagnosis.
 
 ## Pilot Controls
 
@@ -54,9 +54,12 @@ Use these controls for real-read subsets:
 --min-spacing-support
 --max-pairs-per-kmer
 --chunk-size
+--no-progress
 ```
 
 `--chunk-size` currently defines a logical boundary for future parallel/checkpoint work. Resume is not implemented and the CLI does not expose a non-functional `--resume` flag.
+
+`tandemx quantify` uses the same live progress style while scanning reads for diagnostic k-mers. When commands are launched through `tandemx run`, child command output is streamed to the terminal while still being saved under `logs/`.
 
 ## Backend Boundary
 

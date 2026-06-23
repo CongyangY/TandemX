@@ -257,7 +257,7 @@ The runner executes `simulate -> discover -> quantify -> locate -> probe -> vali
 
 ## Discover Pilot Controls
 
-Discover uses a repeated-k-mer spacing prefilter and bounded local period refinement; it no longer scans every possible period against every base. For real HiFi subset pilots, limit work explicitly and monitor `run.log`:
+Discover uses a repeated-k-mer spacing prefilter and bounded local period refinement; it no longer scans every possible period against every base. For real HiFi subset pilots, limit work explicitly and monitor the live terminal progress plus `run.log`:
 
 ```bash
 tandemx discover \
@@ -272,7 +272,7 @@ tandemx discover \
   --progress-every 1000
 ```
 
-`candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. `--kmer-backend python` remains the default and fallback; `--kmer-backend rust` accelerates the same read-local algorithm when the extension is installed. See `docs/performance.md` for parity results and scaling limits.
+`candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The terminal progress line reports the current step, processed reads, reads/min, MB/min and ETA when `--max-reads` or `--max-read-bases` gives a bounded target. Use `--no-progress` for non-interactive batch logs. `--kmer-backend python` remains the default and fallback; `--kmer-backend rust` accelerates the same read-local algorithm when the extension is installed. See `docs/performance.md` for parity results and scaling limits.
 
 Inspect and benchmark a local real-read subset without running downstream biological analyses:
 

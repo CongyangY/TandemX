@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -11,6 +13,7 @@ from typing import Iterable, Sequence
 from tandemx.discover.mvp import FastaRecord, read_fasta
 from tandemx.discover.rust_backend import RustDiagnosticKmerCounter
 from tandemx.simulate.toy import reverse_complement
+from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
 
 
 @dataclass(frozen=True)
@@ -30,6 +33,7 @@ class QuantifyConfig:
     kmer_backend: str = "python"
     max_reads: int | None = None
     max_read_bases: int | None = None
+    progress_every: int = 1000
 
 
 @dataclass(frozen=True)
@@ -45,14 +49,21 @@ class CopyNumberEstimate:
     warning: str
 
 
-def quantify_toy_copy_number(config: QuantifyConfig) -> list[CopyNumberEstimate]:
+def quantify_toy_copy_number(
+    config: QuantifyConfig,
+    logger: logging.Logger | None = None,
+    progress: TerminalProgress | None = None,
+) -> list[CopyNumberEstimate]:
     validate_quantify_config(config)
+    logger = logger or logging.getLogger("tandemx.quantify")
+    update_quantify_terminal_progress(progress, "load_catalog", 0, 0, config)
     monomers = list(read_monomer_fasta(config.monomers))
     if not monomers:
         raise ValueError("No monomers found for quantify")
     if all(len(monomer.sequence) < config.k for monomer in monomers):
         raise ValueError("--k is greater than all monomer lengths in the catalogue")
 
+    update_quantify_terminal_progress(progress, "build_diagnostic_kmers", 0, 0, config)
     shared_map = family_kmer_membership(monomers, config.k)
     diagnostic_by_family = {
         monomer.family_id: {
@@ -74,6 +85,9 @@ def quantify_toy_copy_number(config: QuantifyConfig) -> list[CopyNumberEstimate]
         config.kmer_backend,
         max_reads=config.max_reads,
         max_read_bases=config.max_read_bases,
+        progress_every=config.progress_every,
+        logger=logger,
+        progress=progress,
     )
     if read_count == 0:
         raise ValueError("No reads found for quantify")
@@ -85,6 +99,7 @@ def quantify_toy_copy_number(config: QuantifyConfig) -> list[CopyNumberEstimate]
         else total_read_bases / config.genome_size
     )
 
+    update_quantify_terminal_progress(progress, "estimate_copy_number", read_count, total_read_bases, config)
     estimates = []
     for monomer in monomers:
         diagnostic = diagnostic_by_family[monomer.family_id]
@@ -120,6 +135,7 @@ def quantify_toy_copy_number(config: QuantifyConfig) -> list[CopyNumberEstimate]
             )
         )
 
+    update_quantify_terminal_progress(progress, "write_outputs", read_count, total_read_bases, config)
     write_copy_number(config.outdir / "copy_number.tsv", estimates)
     return estimates
 
@@ -139,6 +155,8 @@ def validate_quantify_config(config: QuantifyConfig) -> None:
         raise ValueError("--max-reads must be positive when provided")
     if config.max_read_bases is not None and config.max_read_bases <= 0:
         raise ValueError("--max-read-bases must be positive when provided")
+    if config.progress_every <= 0:
+        raise ValueError("--progress-every must be positive")
 
 
 def read_monomer_fasta(path: Path) -> Iterable[MonomerRecord]:
@@ -195,16 +213,33 @@ def count_selected_read_kmers_and_bases(
     *,
     max_reads: int | None = None,
     max_read_bases: int | None = None,
+    progress_every: int = 1000,
+    logger: logging.Logger | None = None,
+    progress: TerminalProgress | None = None,
 ) -> tuple[Counter[str], int, int, int]:
     counts: Counter[str] = Counter()
     rust_counter = RustDiagnosticKmerCounter(k, targets) if backend == "rust" else None
     total_bases = 0
     read_count = 0
     max_read_len = 0
+    started = time.perf_counter()
+    logger = logger or logging.getLogger("tandemx.quantify")
+    update_quantify_read_progress(
+        progress,
+        read_count,
+        total_bases,
+        max_reads,
+        max_read_bases,
+    )
     for read in read_fasta(path):
         if max_reads is not None and read_count >= max_reads:
             break
         if max_read_bases is not None and total_bases + len(read.sequence) > max_read_bases:
+            logger.info(
+                "limit_reached=max_read_bases configured_bases=%s next_read_bases=%s",
+                max_read_bases,
+                len(read.sequence),
+            )
             break
         read_count += 1
         total_bases += len(read.sequence)
@@ -213,9 +248,98 @@ def count_selected_read_kmers_and_bases(
             rust_counter.count_sequence(read.sequence)
         else:
             counts.update(kmer for kmer in iter_kmers(read.sequence, k) if kmer in targets)
+        if read_count % progress_every == 0:
+            log_quantify_progress(logger, read_count, total_bases, started, max_reads, max_read_bases)
+            update_quantify_read_progress(
+                progress,
+                read_count,
+                total_bases,
+                max_reads,
+                max_read_bases,
+            )
+    log_quantify_progress(logger, read_count, total_bases, started, max_reads, max_read_bases)
+    update_quantify_read_progress(
+        progress,
+        read_count,
+        total_bases,
+        max_reads,
+        max_read_bases,
+    )
     if rust_counter is not None:
         counts.update(rust_counter.counts())
     return counts, total_bases, read_count, max_read_len
+
+
+def update_quantify_terminal_progress(
+    progress: TerminalProgress | None,
+    step: str,
+    processed_reads: int,
+    processed_bases: int,
+    config: QuantifyConfig,
+) -> None:
+    if progress is None:
+        return
+    progress.update(
+        ProgressSnapshot(
+            command="quantify",
+            step=step,
+            processed_reads=processed_reads,
+            processed_bases=processed_bases,
+            total_reads=config.max_reads,
+            total_bases=config.max_read_bases,
+        )
+    )
+
+
+def update_quantify_read_progress(
+    progress: TerminalProgress | None,
+    processed_reads: int,
+    processed_bases: int,
+    max_reads: int | None,
+    max_read_bases: int | None,
+) -> None:
+    if progress is None:
+        return
+    progress.update(
+        ProgressSnapshot(
+            command="quantify",
+            step="scan_reads",
+            processed_reads=processed_reads,
+            processed_bases=processed_bases,
+            total_reads=max_reads,
+            total_bases=max_read_bases,
+        )
+    )
+
+
+def log_quantify_progress(
+    logger: logging.Logger,
+    processed_reads: int,
+    processed_bases: int,
+    started: float,
+    max_reads: int | None,
+    max_read_bases: int | None,
+) -> None:
+    elapsed = max(time.perf_counter() - started, 1e-9)
+    reads_per_second = processed_reads / elapsed
+    mb_per_second = (processed_bases / 1_000_000) / elapsed
+    remaining_estimates: list[float] = []
+    if max_reads is not None and reads_per_second > 0:
+        remaining_estimates.append(max(0, max_reads - processed_reads) / reads_per_second)
+    if max_read_bases is not None and mb_per_second > 0:
+        remaining_mb = max(0, max_read_bases - processed_bases) / 1_000_000
+        remaining_estimates.append(remaining_mb / mb_per_second)
+    estimated_remaining = f"{min(remaining_estimates):.1f}" if remaining_estimates else "unknown"
+    logger.info(
+        "progress processed_reads=%s processed_bases=%s elapsed_seconds=%.3f "
+        "reads_per_second=%.3f mb_per_second=%.3f estimated_remaining_seconds=%s",
+        processed_reads,
+        processed_bases,
+        elapsed,
+        reads_per_second,
+        mb_per_second,
+        estimated_remaining,
+    )
 
 
 def monomer_kmer_counts(sequence: str, k: int) -> Counter[str]:
