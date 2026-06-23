@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import gzip
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterator, Sequence, TextIO
@@ -16,6 +17,13 @@ class SequenceRecord:
     sequence: str
     quality: str | None = None
     description: str = ""
+
+
+@dataclass(frozen=True)
+class SequenceStats:
+    record_count: int
+    total_bases: int
+    max_read_length: int
 
 
 class SequenceFormatError(ValueError):
@@ -57,6 +65,41 @@ def normalize_sequence_paths(paths: Path | Sequence[Path]) -> tuple[Path, ...]:
     if not normalized:
         raise SequenceFormatError("At least one sequence input file is required")
     return normalized
+
+
+def count_sequence_records(path: Path) -> SequenceStats:
+    record_count = 0
+    total_bases = 0
+    max_read_length = 0
+    for record in read_sequence_records(path):
+        record_count += 1
+        read_length = len(record.sequence)
+        total_bases += read_length
+        max_read_length = max(max_read_length, read_length)
+    return SequenceStats(
+        record_count=record_count,
+        total_bases=total_bases,
+        max_read_length=max_read_length,
+    )
+
+
+def count_sequence_records_many(
+    paths: Path | Sequence[Path],
+    *,
+    threads: int = 1,
+) -> SequenceStats:
+    sequence_paths = normalize_sequence_paths(paths)
+    workers = max(1, min(threads, 4, len(sequence_paths)))
+    if workers == 1:
+        stats = [count_sequence_records(path) for path in sequence_paths]
+    else:
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            stats = list(executor.map(count_sequence_records, sequence_paths))
+    return SequenceStats(
+        record_count=sum(item.record_count for item in stats),
+        total_bases=sum(item.total_bases for item in stats),
+        max_read_length=max((item.max_read_length for item in stats), default=0),
+    )
 
 
 def detect_sequence_format(path: Path) -> str:

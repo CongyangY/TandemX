@@ -34,7 +34,7 @@ At command start, discover creates:
 2. `run_config.yaml` with running status;
 3. `candidate_reads.tsv` with its header.
 
-Each accepted candidate is appended and flushed immediately. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and an estimated remaining time when `--max-reads` or `--max-read-bases` is set. The CLI also prints live terminal progress with the current step, processed reads and bases, elapsed time, estimated total runtime, remaining time, reads/min and MB/min. Estimated total and remaining time are shown as `--` for unbounded runs because TandemX avoids pre-scanning large read files just to count total records. Ctrl-C leaves existing candidate output available for diagnosis.
+Each accepted candidate is appended and flushed immediately. Discover first pre-counts input reads and bases, then refreshes one terminal progress line in place while scanning. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and estimated remaining time. The CLI progress line shows the current step, processed reads and bases, elapsed time, estimated total runtime, remaining time, reads/min and MB/min. Ctrl-C leaves existing candidate output available for diagnosis.
 
 ## Pilot Controls
 
@@ -46,6 +46,7 @@ Use these controls for real-read subsets:
 --sample-rate
 --seed
 --progress-every
+--count-threads
 --min-read-length
 --min-period
 --max-period
@@ -60,6 +61,8 @@ Use these controls for real-read subsets:
 ```
 
 `--threads` defaults to a request of 8 for `discover`, capped at the smaller of 64 and half of available logical CPUs. Multi-threaded scanning is enabled only for `--kmer-backend rust`, whose PyO3 implementation releases the Python GIL during read-local scanning. The Python backend records the requested thread setting but scans reads serially because its CPU-heavy path is GIL-bound.
+
+`--count-threads` controls the startup pre-count of input reads and bases. It is capped at 4 threads and parallelizes across multiple input files. A single gzip stream is still counted by one worker, because splitting compressed streams safely is outside the MVP.
 
 `--reads` accepts multiple files. They are streamed in the supplied order and
 merged for the run without preloading all reads into memory. Duplicate read IDs

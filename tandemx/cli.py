@@ -15,15 +15,20 @@ from tandemx import __version__
 from tandemx.annotation import annotate_repeat_catalog
 from tandemx.compare.mvp import CompareConfig, compare_toy_abundance
 from tandemx.discover.mvp import DiscoverConfig, discover_toy_repeats
-from tandemx.io.sequences import SequenceFormatError
+from tandemx.io.sequences import SequenceFormatError, count_sequence_records_many
 from tandemx.io.validators import ValidationError, validate_project
 from tandemx.locate.mvp import LocateConfig, locate_toy_arrays
 from tandemx.pipeline import add_pipeline_arguments, run_pipeline_cli
 from tandemx.probe.mvp import ProbeConfig, rank_toy_probes
 from tandemx.quantify.mvp import QuantifyConfig, quantify_toy_copy_number
 from tandemx.simulate.toy import ToySimulationConfig, generate_toy_dataset, parse_int_list
-from tandemx.utils.progress import TerminalProgress
-from tandemx.utils.threads import DEFAULT_DISCOVER_THREADS, discover_thread_limit, resolve_discover_threads
+from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
+from tandemx.utils.threads import (
+    DEFAULT_DISCOVER_THREADS,
+    discover_thread_limit,
+    resolve_count_threads,
+    resolve_discover_threads,
+)
 from tandemx.visualize.mvp import VisualizeConfig, render_static_plots
 
 
@@ -147,6 +152,7 @@ def _prepare_deferred_run(
 
 def run_discover(args: argparse.Namespace) -> int:
     args.threads = resolve_discover_threads(args.threads)
+    args.count_threads = resolve_count_threads(args.count_threads, args.threads)
     _require_existing_files([args.reads])
     args.outdir.mkdir(parents=True, exist_ok=True)
     _write_run_config(args.outdir, "discover", args, status="discover_running")
@@ -160,6 +166,38 @@ def run_discover(args: argparse.Namespace) -> int:
         args.kmer_backend,
         args.min_monomer_len,
         args.max_monomer_len,
+    )
+    progress = TerminalProgress(enabled=not args.no_progress)
+    progress.update(
+        ProgressSnapshot(
+            command="discover",
+            step="count_inputs",
+            extra=f"count_threads={args.count_threads}",
+        )
+    )
+    try:
+        stats = count_sequence_records_many(args.reads, threads=args.count_threads)
+    except Exception:
+        progress.finish("discover", "failed", extra="step=count_inputs")
+        raise
+    logger.info(
+        "input_summary read_files=%s total_reads=%s total_bases=%s max_read_length=%s count_threads=%s",
+        len(args.reads),
+        stats.record_count,
+        stats.total_bases,
+        stats.max_read_length,
+        args.count_threads,
+    )
+    progress.update(
+        ProgressSnapshot(
+            command="discover",
+            step="count_inputs",
+            processed_reads=stats.record_count,
+            processed_bases=stats.total_bases,
+            total_reads=stats.record_count,
+            total_bases=stats.total_bases,
+            extra=f"files={len(args.reads)}",
+        )
     )
     config = DiscoverConfig(
         reads=args.reads,
@@ -176,6 +214,8 @@ def run_discover(args: argparse.Namespace) -> int:
         max_pairs_per_kmer=args.max_pairs_per_kmer,
         max_reads=args.max_reads,
         max_read_bases=args.max_read_bases,
+        total_reads=stats.record_count,
+        total_read_bases=stats.total_bases,
         sample_rate=args.sample_rate,
         seed=args.seed,
         progress_every=args.progress_every,
@@ -184,7 +224,6 @@ def run_discover(args: argparse.Namespace) -> int:
         kmer_backend=args.kmer_backend,
         collapse_redundant_families=args.collapse_redundant_families,
     )
-    progress = TerminalProgress(enabled=not args.no_progress)
     try:
         candidates, families = discover_toy_repeats(config, logger=logger, progress=progress)
     except KeyboardInterrupt:
@@ -491,6 +530,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--seed", type=int, default=1, help="Random seed for reproducible read sampling.")
     discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")
     discover.add_argument("--no-progress", action="store_true", help="Disable live terminal progress output; run.log still records progress.")
+    discover.add_argument("--count-threads", type=int, default=None, help="Threads used to pre-count input reads and bases before discovery. Default uses up to 4 threads, capped by --threads.")
     discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
     discover.add_argument(
         "--threads",

@@ -60,6 +60,36 @@ def test_max_reads_progress_and_incremental_files(tmp_path: Path) -> None:
     assert len(candidate_lines) == 11
 
 
+def test_discover_precounts_reads_for_bounded_progress_without_limits(tmp_path: Path) -> None:
+    reads = tmp_path / "reads.fa"
+    reads.write_text(periodic_reads(12), encoding="utf-8")
+    outdir = tmp_path / "discover"
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads),
+        "--outdir",
+        str(outdir),
+        "--min-period",
+        "20",
+        "--max-period",
+        "30",
+        "--min-support-reads",
+        "2",
+        "--progress-every",
+        "6",
+        "--count-threads",
+        "1",
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "discover | count_inputs" in result.stderr
+    assert "/12 reads" in result.stderr
+    log = (outdir / "run.log").read_text(encoding="utf-8")
+    assert "input_summary read_files=1 total_reads=12" in log
+
+
 def test_max_read_bases_stops_before_exceeding_limit(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fa"
     reads.write_text(periodic_reads(10, length=400), encoding="utf-8")

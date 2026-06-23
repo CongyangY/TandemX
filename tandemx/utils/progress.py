@@ -29,6 +29,7 @@ class TerminalProgress:
         enabled: bool = True,
         width: int = 24,
         clock: Callable[[], float] | None = None,
+        dynamic: bool = True,
     ) -> None:
         self.stream = stream if stream is not None else sys.stderr
         self.enabled = enabled
@@ -36,14 +37,14 @@ class TerminalProgress:
         self.clock = clock if clock is not None else time.perf_counter
         self.started = self.clock()
         self.last_rendered_length = 0
-        self.is_terminal = bool(getattr(self.stream, "isatty", lambda: False)())
+        self.dynamic = dynamic
 
     def update(self, snapshot: ProgressSnapshot) -> None:
         if not self.enabled:
             return
         elapsed = max(self.clock() - self.started, 1e-9)
         line = self._format(snapshot, elapsed)
-        if self.is_terminal:
+        if self.dynamic:
             padding = " " * max(0, self.last_rendered_length - len(line))
             self.stream.write("\r" + line + padding)
             self.last_rendered_length = len(line)
@@ -58,7 +59,7 @@ class TerminalProgress:
         line = f"{command} | {status} | elapsed {format_duration(elapsed)}"
         if extra:
             line += f" | {extra}"
-        if self.is_terminal:
+        if self.dynamic:
             padding = " " * max(0, self.last_rendered_length - len(line))
             self.stream.write("\r" + line + padding + "\n")
         else:
@@ -80,7 +81,7 @@ class TerminalProgress:
             f"{format_bases(snapshot.processed_bases)}{total_bases} bases | "
             f"elapsed {format_duration(elapsed)} | total est {format_optional_duration(total)} | "
             f"remaining {format_optional_duration(remaining)} | "
-            f"{reads_per_minute:,.1f} reads/min | {mb_per_minute:.2f} MB/min | "
+            f"{reads_per_minute:,.1f} reads/min | {mb_per_minute:.2f} MB/min"
         )
         if snapshot.extra:
             base += f" | {snapshot.extra}"

@@ -117,6 +117,8 @@ class DiscoverConfig:
     max_pairs_per_kmer: int = 100
     max_reads: int | None = None
     max_read_bases: int | None = None
+    total_reads: int | None = None
+    total_read_bases: int | None = None
     sample_rate: float = 1.0
     seed: int = 1
     progress_every: int = 1000
@@ -192,8 +194,8 @@ def discover_toy_repeats(
             ProgressSnapshot(
                 command="discover",
                 step="scan_reads",
-                total_reads=config.max_reads,
-                total_bases=config.max_read_bases,
+                total_reads=discover_progress_total_reads(config),
+                total_bases=discover_progress_total_bases(config),
             )
         )
 
@@ -234,8 +236,8 @@ def discover_toy_repeats(
                     processed_bases,
                     len(candidates),
                     started,
-                    config.max_reads,
-                    config.max_read_bases,
+                    discover_progress_total_reads(config),
+                    discover_progress_total_bases(config),
                 )
                 update_discover_terminal_progress(
                     progress,
@@ -301,8 +303,8 @@ def discover_toy_repeats(
             processed_bases,
             len(candidates),
             started,
-            config.max_reads,
-            config.max_read_bases,
+            discover_progress_total_reads(config),
+            discover_progress_total_bases(config),
         )
         update_discover_terminal_progress(
             progress,
@@ -391,11 +393,29 @@ def update_discover_terminal_progress(
             step=step,
             processed_reads=processed_reads,
             processed_bases=processed_bases,
-            total_reads=config.max_reads,
-            total_bases=config.max_read_bases,
+            total_reads=discover_progress_total_reads(config),
+            total_bases=discover_progress_total_bases(config),
             extra=f"candidates={candidate_reads:,}",
         )
     )
+
+
+def discover_progress_total_reads(config: DiscoverConfig) -> int | None:
+    if config.max_reads is not None:
+        return config.max_reads
+    if config.total_reads is None:
+        return None
+    if config.sample_rate < 1.0:
+        return max(1, round(config.total_reads * config.sample_rate))
+    return config.total_reads
+
+
+def discover_progress_total_bases(config: DiscoverConfig) -> int | None:
+    if config.max_read_bases is not None:
+        return config.max_read_bases
+    if config.sample_rate < 1.0:
+        return None
+    return config.total_read_bases
 
 
 def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanResult:

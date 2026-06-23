@@ -398,10 +398,13 @@ def run_command_with_live_logs(
         )
 
         def forward(pipe: TextIO, log_handle: TextIO, mirror: TextIO) -> None:
-            for line in pipe:
-                log_handle.write(line)
+            while True:
+                chunk = pipe.read(1)
+                if not chunk:
+                    break
+                log_handle.write(chunk)
                 log_handle.flush()
-                mirror.write(line)
+                mirror.write(chunk)
                 mirror.flush()
 
         threads = [

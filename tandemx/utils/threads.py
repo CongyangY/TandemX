@@ -7,6 +7,7 @@ import os
 
 DEFAULT_DISCOVER_THREADS = 8
 HARD_MAX_THREADS = 64
+MAX_COUNT_THREADS = 4
 
 
 def discover_thread_limit(cpu_count: int | None = None) -> int:
@@ -34,3 +35,13 @@ def resolve_discover_threads(requested: int | None) -> int:
 def effective_discover_threads(configured: int) -> int:
     """Clamp programmatic discover configuration to the host policy."""
     return max(1, min(configured, discover_thread_limit()))
+
+
+def resolve_count_threads(requested: int | None, discover_threads: int) -> int:
+    if requested is None:
+        return max(1, min(MAX_COUNT_THREADS, discover_threads))
+    if requested <= 0:
+        raise ValueError("--count-threads must be positive")
+    if requested > MAX_COUNT_THREADS:
+        raise ValueError(f"--count-threads must be at most {MAX_COUNT_THREADS}")
+    return requested
