@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Sequence
 
 
@@ -21,6 +23,13 @@ class RustScanResult:
     periodicity_score: float
     overflow_count: int
     status: str
+
+
+@dataclass(frozen=True)
+class RustSequenceStats:
+    record_count: int
+    total_bases: int
+    max_read_length: int
 
 
 def rust_backend_available() -> bool:
@@ -130,3 +139,29 @@ class RustDiagnosticKmerCounter:
 
     def counts(self) -> dict[str, int]:
         return dict(self._counter.counts())
+
+
+def count_sequence_paths_stats(paths: Sequence[Path], *, threads: int) -> RustSequenceStats:
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable(
+            "Rust backend is unavailable. Install from the repository with "
+            "`pip install -e .` or run `maturin develop`."
+        ) from exc
+    path_list = list(paths)
+    worker_count = max(1, min(threads, len(path_list)))
+
+    def count_one(path: Path):
+        return _rust_core.count_sequence_file_stats(str(path))
+
+    if worker_count == 1:
+        stats = [count_one(path) for path in path_list]
+    else:
+        with ThreadPoolExecutor(max_workers=worker_count) as executor:
+            stats = list(executor.map(count_one, path_list))
+    return RustSequenceStats(
+        record_count=sum(item.record_count for item in stats),
+        total_bases=sum(item.total_bases for item in stats),
+        max_read_length=max((item.max_read_length for item in stats), default=0),
+    )

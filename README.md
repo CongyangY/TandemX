@@ -263,8 +263,9 @@ Discover uses a repeated-k-mer spacing prefilter and bounded local period refine
 tandemx discover \
   --reads subset_lane1.fastq.gz subset_lane2.fastq.gz \
   --outdir pilot_discover \
-  --max-reads 10000 \
-  --max-read-bases 200000000 \
+  --genome-size 16000000000 \
+  --enable-auto-discovery-budget \
+  --target-discovery-coverage 10.0 \
   --min-read-length 1000 \
   --min-period 2 \
   --max-period 2000 \
@@ -274,7 +275,7 @@ tandemx discover \
   --progress-every 1000
 ```
 
-`--reads` accepts one or more FASTA/FASTQ files, including gzip-compressed files. Multiple files are streamed in the order supplied and analyzed as one merged read set. Duplicate read IDs across input files are treated as an input error, which helps catch accidental repeated file arguments. `candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The terminal progress line refreshes in place and reports the current step, processed reads and bases, elapsed time, estimated total runtime, remaining time, reads/min and MB/min. Discover starts scanning immediately while a background task counts input reads and bases using up to `--count-threads 4`; once counting finishes, the same progress line gains percentage, estimated total runtime and remaining time. Use `--no-progress` for non-interactive batch logs. `--kmer-backend auto` is the default and uses Rust when the compiled extension and k-mer size are supported; use `--kmer-backend python` only for fallback/debugging. With the Rust backend, `--threads` parallelizes read-local scanning; the default request is 8 threads, capped at the smaller of 64 and half of available logical CPUs. See `docs/performance.md` for parity results and scaling limits.
+`--reads` accepts one or more FASTA/FASTQ files, including gzip-compressed files. Multiple files are streamed in the order supplied and analyzed as one merged read set. Duplicate read IDs across input files are treated as an input error, which helps catch accidental repeated file arguments. `candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The terminal progress line refreshes in place and reports the current step, processed reads and bases, elapsed time, estimated total runtime, remaining time, reads/min and MB/min. Discover starts scanning immediately while a background task counts input reads and bases using up to `--count-threads`; once counting finishes, the same progress line gains percentage, estimated total runtime and remaining time. Use `--no-progress` for non-interactive batch logs. `--kmer-backend auto` is the default and uses Rust when the compiled extension and k-mer size are supported; use `--kmer-backend python` only for fallback/debugging. With the Rust backend, `--threads` parallelizes read-local scanning; the default request is 8 threads, capped at the smaller of 64 and half of available logical CPUs. By default discover scans the full input unless you set explicit `--max-reads/--max-read-bases` limits. If you want bounded large-input discovery, enable it explicitly with `--enable-auto-discovery-budget`; with `--genome-size`, TandemX then caps discovery to approximately `--target-discovery-coverage` genome equivalents, and with multiple files the bounded mode switches to round-robin file streaming so early stopping is less biased toward the first file. See `docs/performance.md` for parity results and scaling limits.
 
 The default minimum period is 2 bp so short tandem repeats such as di-, tri- and heptanucleotide repeats can be reported when they span enough read sequence. Short or low-complexity candidates are flagged with warnings. Set `--min-period 20` when a run should focus only on longer satellite-like monomers.
 

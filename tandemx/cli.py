@@ -154,7 +154,7 @@ def _prepare_deferred_run(
 
 def run_discover(args: argparse.Namespace) -> int:
     args.threads = resolve_discover_threads(args.threads)
-    args.count_threads = resolve_count_threads(args.count_threads, args.threads)
+    args.count_threads = resolve_count_threads(args.count_threads, args.threads, len(args.reads))
     args.kmer_backend = resolve_kmer_backend(args.kmer_backend, args.kmer_size)
     _require_existing_files([args.reads])
     args.outdir.mkdir(parents=True, exist_ok=True)
@@ -205,12 +205,17 @@ def run_discover(args: argparse.Namespace) -> int:
         max_pairs_per_kmer=args.max_pairs_per_kmer,
         max_reads=args.max_reads,
         max_read_bases=args.max_read_bases,
+        genome_size=args.genome_size,
         sample_rate=args.sample_rate,
         seed=args.seed,
         progress_every=args.progress_every,
         chunk_size=args.chunk_size,
         threads=args.threads,
         kmer_backend=args.kmer_backend,
+        target_discovery_coverage=args.target_discovery_coverage,
+        auto_discovery_trigger_bases=args.auto_discovery_trigger_bases,
+        auto_discovery_max_bases=args.auto_discovery_max_bases,
+        enable_auto_discovery_budget=args.enable_auto_discovery_budget,
         collapse_redundant_families=args.collapse_redundant_families,
     )
     try:
@@ -531,11 +536,21 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--max-pairs-per-kmer", type=int, default=100, help="Maximum adjacent position pairs retained per seed k-mer.")
     discover.add_argument("--max-reads", type=int, help="Maximum sampled reads to process for pilot runs.")
     discover.add_argument("--max-read-bases", type=int, help="Maximum cumulative sampled read bases to process for pilot runs.")
+    discover.add_argument("--genome-size", type=int, help="Optional haploid genome size in bp. When provided, large-input discover can auto-cap discovery work by target coverage.")
     discover.add_argument("--sample-rate", type=float, default=1.0, help="Fraction of input reads sampled reproducibly, in (0, 1].")
     discover.add_argument("--seed", type=int, default=1, help="Random seed for reproducible read sampling.")
     discover.add_argument("--progress-every", type=int, default=1000, help="Log progress after this many processed reads.")
     discover.add_argument("--no-progress", action="store_true", help="Disable live terminal progress output; run.log still records progress.")
-    discover.add_argument("--count-threads", type=int, default=None, help="Threads used by the background input read/base counter. Default uses up to 4 threads, capped by --threads.")
+    discover.add_argument(
+        "--count-threads",
+        type=int,
+        default=None,
+        help=(
+            "Threads used by the background input read/base counter. "
+            "Default uses 4 threads for single-file input and can scale with "
+            "multiple read files, always capped by --threads."
+        ),
+    )
     discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
     discover.add_argument(
         "--threads",
@@ -548,6 +563,29 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     discover.add_argument("--kmer-backend", choices=("auto", "python", "rust"), default="auto", help="Read-local seed backend. auto uses Rust when the compiled extension and k-mer size are supported, otherwise Python.")
+    discover.add_argument(
+        "--target-discovery-coverage",
+        type=float,
+        default=10.0,
+        help="When automatic discovery budgeting is enabled, target approximately this many genome equivalents before stopping.",
+    )
+    discover.add_argument(
+        "--auto-discovery-trigger-bases",
+        type=int,
+        default=20_000_000_000,
+        help="If total input bases exceed this threshold and no explicit discovery limits are set, enable the automatic large-input discovery budget.",
+    )
+    discover.add_argument(
+        "--auto-discovery-max-bases",
+        type=int,
+        default=40_000_000_000,
+        help="Upper bound in bp for the automatic large-input discovery budget.",
+    )
+    discover.add_argument(
+        "--enable-auto-discovery-budget",
+        action="store_true",
+        help="Enable the automatic large-input discovery budget. By default discover scans the full input unless explicit max-read limits are set.",
+    )
     discover.add_argument(
         "--collapse-redundant-families",
         action="store_true",

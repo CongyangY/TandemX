@@ -9,7 +9,7 @@ MVP goal: identify simple candidate tandem repeat monomers de novo from toy HiFi
 Current MVP implementation:
 
 1. stream FASTA or FASTQ reads, including gzip-compressed inputs;
-2. apply `--max-reads`, `--max-read-bases`, reproducible `--sample-rate` and minimum length filters;
+2. apply `--max-reads`, `--max-read-bases`, reproducible `--sample-rate`, minimum length filters and the automatic large-input discovery budget when enabled;
 3. directly scan bounded short periods so STR-like 2-19 bp repeats can be retained;
 4. extract canonical, non-low-complexity k-mers for one read at a time with a rolling 2-bit encoder in the selected Python or Rust backend for longer periods;
 5. retain only repeated within-read k-mer positions with strict position/pair caps;
@@ -23,6 +23,13 @@ Current MVP implementation:
 `monomers.fa` is an output of de novo discovery. It is not a required input to `tandemx discover`.
 
 The previous full period scan has been removed from the execution path. `--kmer-backend auto` is the default and uses the Rust backend when the compiled extension and requested k-mer size are supported, otherwise it falls back to Python. The Rust backend implements the same single-read seed/spacing/refinement boundary and returns only a compact result to Python; parsing, clustering and output remain in Python. With Rust, read-local scanning can run across multiple threads while preserving deterministic output order. Neither backend makes TandemX a full large-plant-genome production workflow. See `docs/performance.md`.
+
+For large real-read inputs, `discover` can stop early by design, but only when the user opts in. If `--enable-auto-discovery-budget` is set and the user has not set explicit `--max-reads` or `--max-read-bases` limits, TandemX enables an automatic discovery budget in either of two cases:
+
+1. `--genome-size` is provided, in which case discover targets approximately `--target-discovery-coverage` genome equivalents, bounded by `--auto-discovery-max-bases`;
+2. the counted input exceeds `--auto-discovery-trigger-bases`, in which case discover uses a conservative absolute cap of `--auto-discovery-max-bases`.
+
+This bounded mode is intended to keep monomer discovery in the subset regime rather than exhaustively scanning every read in 30-50X HiFi data. When multiple files are supplied and the automatic budget is active, reads are pulled in round-robin order across files so early stopping is less biased toward the first file.
 
 MVP constraints:
 

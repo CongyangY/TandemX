@@ -3,16 +3,20 @@
 from __future__ import annotations
 
 import logging
+import os
 import time
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
 from statistics import median
 from typing import Iterable, Sequence
 
 from tandemx.discover.mvp import FastaRecord, read_fasta, read_fasta_many
+from tandemx.io.sequences import normalize_sequence_paths
 from tandemx.discover.rust_backend import RustDiagnosticKmerCounter
 from tandemx.simulate.toy import reverse_complement
+from tandemx.utils.threads import discover_thread_limit
 from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
 
 
@@ -217,6 +221,22 @@ def count_selected_read_kmers_and_bases(
     logger: logging.Logger | None = None,
     progress: TerminalProgress | None = None,
 ) -> tuple[Counter[str], int, int, int]:
+    sequence_paths = normalize_sequence_paths(path)
+    if (
+        len(sequence_paths) > 1
+        and max_reads is None
+        and max_read_bases is None
+    ):
+        return count_selected_read_kmers_and_bases_parallel_files(
+            sequence_paths,
+            k,
+            targets,
+            backend,
+            progress_every=progress_every,
+            logger=logger,
+            progress=progress,
+        )
+
     counts: Counter[str] = Counter()
     rust_counter = RustDiagnosticKmerCounter(k, targets) if backend == "rust" else None
     total_bases = 0
@@ -231,7 +251,7 @@ def count_selected_read_kmers_and_bases(
         max_reads,
         max_read_bases,
     )
-    for read in read_fasta_many(path):
+    for read in read_fasta_many(sequence_paths):
         if max_reads is not None and read_count >= max_reads:
             break
         if max_read_bases is not None and total_bases + len(read.sequence) > max_read_bases:
@@ -265,6 +285,89 @@ def count_selected_read_kmers_and_bases(
         max_reads,
         max_read_bases,
     )
+    if rust_counter is not None:
+        counts.update(rust_counter.counts())
+    return counts, total_bases, read_count, max_read_len
+
+
+def count_selected_read_kmers_and_bases_parallel_files(
+    paths: Sequence[Path],
+    k: int,
+    targets: set[str],
+    backend: str,
+    *,
+    progress_every: int = 1000,
+    logger: logging.Logger | None = None,
+    progress: TerminalProgress | None = None,
+) -> tuple[Counter[str], int, int, int]:
+    logger = logger or logging.getLogger("tandemx.quantify")
+    started = time.perf_counter()
+    workers = min(len(paths), max(1, min(discover_thread_limit(), os.cpu_count() or 1)))
+    logger.info(
+        "parallel_file_count enabled=true read_files=%s workers=%s backend=%s",
+        len(paths),
+        workers,
+        backend,
+    )
+    update_quantify_read_progress(progress, 0, 0, None, None)
+    partial_results: dict[Path, tuple[Counter[str], int, int, int]] = {}
+    completed_reads = 0
+    completed_bases = 0
+    completed_max_read_len = 0
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        future_to_path = {
+            executor.submit(
+                count_selected_read_kmers_and_bases_one_file,
+                path,
+                k,
+                targets,
+                backend,
+            ): path
+            for path in paths
+        }
+        for completed_index, future in enumerate(as_completed(future_to_path), start=1):
+            path = future_to_path[future]
+            file_counts, file_bases, file_reads, file_max_len = future.result()
+            partial_results[path] = (file_counts, file_bases, file_reads, file_max_len)
+            completed_reads += file_reads
+            completed_bases += file_bases
+            completed_max_read_len = max(completed_max_read_len, file_max_len)
+            if completed_index == len(paths) or completed_reads % progress_every == 0:
+                log_quantify_progress(logger, completed_reads, completed_bases, started, None, None)
+                update_quantify_read_progress(progress, completed_reads, completed_bases, None, None)
+
+    merged_counts: Counter[str] = Counter()
+    total_bases = 0
+    read_count = 0
+    max_read_len = 0
+    for path in paths:
+        file_counts, file_bases, file_reads, file_max_len = partial_results[path]
+        merged_counts.update(file_counts)
+        total_bases += file_bases
+        read_count += file_reads
+        max_read_len = max(max_read_len, file_max_len)
+    return merged_counts, total_bases, read_count, max_read_len
+
+
+def count_selected_read_kmers_and_bases_one_file(
+    path: Path,
+    k: int,
+    targets: set[str],
+    backend: str,
+) -> tuple[Counter[str], int, int, int]:
+    counts: Counter[str] = Counter()
+    rust_counter = RustDiagnosticKmerCounter(k, targets) if backend == "rust" else None
+    total_bases = 0
+    read_count = 0
+    max_read_len = 0
+    for read in read_fasta(path):
+        read_count += 1
+        total_bases += len(read.sequence)
+        max_read_len = max(max_read_len, len(read.sequence))
+        if rust_counter is not None:
+            rust_counter.count_sequence(read.sequence)
+        else:
+            counts.update(kmer for kmer in iter_kmers(read.sequence, k) if kmer in targets)
     if rust_counter is not None:
         counts.update(rust_counter.counts())
     return counts, total_bases, read_count, max_read_len

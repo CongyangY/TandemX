@@ -2,11 +2,21 @@
 
 from __future__ import annotations
 
+import csv
 import gzip
+import io
+import shutil
+import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterator, Sequence, TextIO
+
+from tandemx.discover.rust_backend import (
+    RustBackendUnavailable,
+    count_sequence_paths_stats as rust_count_sequence_paths_stats,
+    rust_backend_available,
+)
 
 
 @dataclass(frozen=True)
@@ -90,7 +100,13 @@ def count_sequence_records_many(
     threads: int = 1,
 ) -> SequenceStats:
     sequence_paths = normalize_sequence_paths(paths)
-    workers = max(1, min(threads, 4, len(sequence_paths)))
+    seqkit_stats = count_sequence_records_with_seqkit(sequence_paths, threads=threads)
+    if seqkit_stats is not None:
+        return seqkit_stats
+    rust_stats = count_sequence_records_with_rust(sequence_paths, threads=threads)
+    if rust_stats is not None:
+        return rust_stats
+    workers = max(1, min(threads, len(sequence_paths)))
     if workers == 1:
         stats = [count_sequence_records(path) for path in sequence_paths]
     else:
@@ -101,6 +117,78 @@ def count_sequence_records_many(
         total_bases=sum(item.total_bases for item in stats),
         max_read_length=max((item.max_read_length for item in stats), default=0),
     )
+
+
+def count_sequence_records_with_seqkit(
+    paths: Sequence[Path],
+    *,
+    threads: int,
+) -> SequenceStats | None:
+    seqkit = shutil.which("seqkit")
+    if seqkit is None:
+        return None
+    command = [
+        seqkit,
+        "stats",
+        "-T",
+        "-j",
+        str(max(1, threads)),
+        *[str(path) for path in paths],
+    ]
+    try:
+        result = subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    try:
+        return parse_seqkit_stats_table(result.stdout)
+    except ValueError:
+        return None
+
+
+def count_sequence_records_with_rust(
+    paths: Sequence[Path],
+    *,
+    threads: int,
+) -> SequenceStats | None:
+    if not rust_backend_available():
+        return None
+    try:
+        stats = rust_count_sequence_paths_stats(paths, threads=max(1, threads))
+    except RustBackendUnavailable:
+        return None
+    except AttributeError:
+        return None
+    except ValueError:
+        return None
+    return SequenceStats(
+        record_count=stats.record_count,
+        total_bases=stats.total_bases,
+        max_read_length=stats.max_read_length,
+    )
+
+
+def parse_seqkit_stats_table(text: str) -> SequenceStats:
+    reader = csv.DictReader(io.StringIO(text), delimiter="\t")
+    required = {"num_seqs", "sum_len", "max_len"}
+    if reader.fieldnames is None or not required.issubset(reader.fieldnames):
+        raise ValueError("seqkit stats output is missing required fields")
+    rows = [row for row in reader if any((value or "").strip() for value in row.values())]
+    if not rows:
+        raise ValueError("seqkit stats output contains no data rows")
+    return SequenceStats(
+        record_count=sum(parse_seqkit_int(row["num_seqs"]) for row in rows),
+        total_bases=sum(parse_seqkit_int(row["sum_len"]) for row in rows),
+        max_read_length=max(parse_seqkit_int(row["max_len"]) for row in rows),
+    )
+
+
+def parse_seqkit_int(value: str) -> int:
+    return int(value.replace(",", "").strip())
 
 
 def detect_sequence_format(path: Path) -> str:
@@ -145,7 +233,7 @@ def validate_sequence(sequence: str, path: Path, line_number: int) -> str:
 def read_fasta_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
     seen_ids: set[str] = set()
     current_header: str | None = None
-    parts: list[tuple[str, int]] = []
+    parts: list[str] = []
     yielded = False
     for line_number, raw_line in enumerate(handle, start=1):
         line = raw_line.strip()
@@ -162,7 +250,7 @@ def read_fasta_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
             continue
         if current_header is None:
             raise SequenceFormatError(f"Invalid FASTA in {path}: sequence before header at line {line_number}")
-        parts.append((line, line_number))
+        parts.append(validate_sequence(line, path, line_number))
     if current_header is not None:
         yield make_fasta_record(current_header, parts, seen_ids, path)
         yielded = True
@@ -172,23 +260,16 @@ def read_fasta_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
 
 def make_fasta_record(
     header: str,
-    parts: list[tuple[str, int]],
+    parts: list[str],
     seen_ids: set[str],
     path: Path,
 ) -> SequenceRecord:
-    sequence = "".join(part for part, _ in parts).upper()
+    if len(parts) == 1:
+        sequence = parts[0]
+    else:
+        sequence = "".join(parts)
     if not sequence:
         raise SequenceFormatError(f"Invalid FASTA in {path}: empty sequence for record {header}")
-    invalid = sorted(set(sequence).difference(VALID_BASES))
-    if invalid:
-        for part, line_number in parts:
-            normalized = part.upper()
-            line_invalid = sorted(set(normalized).difference(VALID_BASES))
-            if line_invalid:
-                joined = "".join(line_invalid)
-                raise SequenceFormatError(f"Invalid base(s) '{joined}' in {path} at line {line_number}")
-        joined = "".join(invalid)
-        raise SequenceFormatError(f"Invalid base(s) '{joined}' in {path}")
     identifier = record_id(header)
     if identifier in seen_ids:
         raise SequenceFormatError(f"Duplicate sequence id in {path}: {identifier}")

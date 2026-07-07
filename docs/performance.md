@@ -62,11 +62,18 @@ Use these controls for real-read subsets:
 
 `--threads` defaults to a request of 8 for `discover`, capped at the smaller of 64 and half of available logical CPUs. `--kmer-backend auto` is the default and uses Rust when the compiled extension is available and the requested k-mer size is supported by Rust, so normal installs with the default k-mer size get the multi-threaded scan path by default. Multi-threaded scanning is enabled only with the Rust backend, whose PyO3 implementation releases the Python GIL during read-local scanning. The Python backend records the requested thread setting but scans reads serially because its CPU-heavy path is GIL-bound.
 
-`--count-threads` controls the background input count of reads and bases. It is capped at 4 threads and parallelizes across multiple input files. Counting does not block discovery startup. A single gzip stream is still counted by one worker, because splitting compressed streams safely is outside the MVP.
+`--count-threads` defaults to 4 on single-file input and can scale with multiple read files, always capped by `--threads`. Counting still does not block discovery startup. A single gzip stream is counted by one worker unless an external tool such as `seqkit` is available.
 
 `--reads` accepts multiple files. They are streamed in the supplied order and
 merged for the run without preloading all reads into memory. Duplicate read IDs
 across files are treated as input errors.
+
+For large real-read inputs, discover now has an optional bounded mode. By default it scans the full input unless the user sets explicit `--max-reads` or `--max-read-bases`. If `--enable-auto-discovery-budget` is set and the user does not set explicit `--max-reads` or `--max-read-bases`, then:
+
+1. with `--genome-size`, discover targets approximately `--target-discovery-coverage` genome equivalents, bounded by `--auto-discovery-max-bases`;
+2. without `--genome-size`, discover enables the same bounded mode once the counted input exceeds `--auto-discovery-trigger-bases`.
+
+When this bounded mode is active and multiple files are supplied, discover reads files in round-robin order so early stopping is less biased toward the first file.
 
 The default `--min-period` is 2 bp. Use `--min-period 20` when engineering pilots
 should focus on longer satellite-like monomers and ignore STR-like periods.

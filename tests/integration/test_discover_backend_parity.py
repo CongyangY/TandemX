@@ -135,7 +135,58 @@ def test_rust_discover_threads_preserve_outputs(tmp_path: Path) -> None:
 
     assert outputs["parallel"] == outputs["single"]
     parallel_log = (tmp_path / "parallel" / "run.log").read_text(encoding="utf-8")
-    assert "scan_threads requested=2 effective=2 parallel=true backend=rust" in parallel_log
+    assert "scan_threads requested=2 effective=2 parallel=true parallel_files=false backend=rust" in parallel_log
+
+
+def test_rust_discover_multiple_files_preserve_outputs(tmp_path: Path) -> None:
+    if discover_thread_limit() < 2:
+        pytest.skip("host thread policy allows only one discover thread")
+
+    first = tmp_path / "reads_a.fa"
+    second = tmp_path / "reads_b.fa"
+    merged = tmp_path / "reads_merged.fa"
+    monomer = "ACGTTCAGGACTAACCGTGA"
+    sequence = monomer * 30
+    first.write_text(
+        "".join(f">read_a_{index}\n{sequence}\n" for index in range(1, 41)),
+        encoding="utf-8",
+    )
+    second.write_text(
+        "".join(f">read_b_{index}\n{sequence}\n" for index in range(1, 41)),
+        encoding="utf-8",
+    )
+    merged.write_text(first.read_text(encoding="utf-8") + second.read_text(encoding="utf-8"), encoding="utf-8")
+
+    outputs: dict[str, list[dict[str, str]]] = {}
+    for label, reads in (("merged", (str(merged),)), ("split", (str(first), str(second)))):
+        outdir = tmp_path / label
+        result = run_cli(
+            "discover",
+            "--reads",
+            *reads,
+            "--outdir",
+            str(outdir),
+            "--min-period",
+            "20",
+            "--max-period",
+            "30",
+            "--min-support-reads",
+            "2",
+            "--min-repeat-span",
+            "100",
+            "--kmer-backend",
+            "rust",
+            "--threads",
+            "2",
+            "--chunk-size",
+            "7",
+        )
+        assert result.returncode == 0, result.stderr
+        outputs[label] = read_rows(outdir / "candidate_reads.tsv")
+
+    assert outputs["split"] == outputs["merged"]
+    split_log = (tmp_path / "split" / "run.log").read_text(encoding="utf-8")
+    assert "parallel_files=false" in split_log
 
 
 def test_discover_auto_backend_uses_rust_threads_by_default(tmp_path: Path) -> None:
@@ -169,7 +220,7 @@ def test_discover_auto_backend_uses_rust_threads_by_default(tmp_path: Path) -> N
     assert result.returncode == 0, result.stderr
     log = (outdir / "run.log").read_text(encoding="utf-8")
     assert "scan_threads requested=" in log
-    assert "parallel=true backend=rust" in log
+    assert "parallel=true parallel_files=false backend=rust" in log
     config = (outdir / "run_config.yaml").read_text(encoding="utf-8")
     assert 'kmer_backend: "rust"' in config
 

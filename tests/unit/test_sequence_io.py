@@ -1,11 +1,19 @@
 from __future__ import annotations
 
 import gzip
+import subprocess
 from pathlib import Path
 
 import pytest
 
-from tandemx.io.sequences import SequenceFormatError, read_sequence_records, read_sequence_records_many
+from tandemx.io.sequences import (
+    SequenceFormatError,
+    SequenceStats,
+    count_sequence_records_many,
+    parse_seqkit_stats_table,
+    read_sequence_records,
+    read_sequence_records_many,
+)
 
 
 def collect(path: Path) -> list[tuple[str, str, str | None]]:
@@ -79,3 +87,72 @@ def test_fasta_invalid_base_reports_source_line_after_record_level_validation(tm
 
     with pytest.raises(SequenceFormatError, match=r"Invalid base.*line 3"):
         list(read_sequence_records(path))
+
+
+def test_parse_seqkit_stats_table_aggregates_rows() -> None:
+    stats = parse_seqkit_stats_table(
+        "file\tformat\ttype\tnum_seqs\tsum_len\tmin_len\tavg_len\tmax_len\n"
+        "a.fa\tFASTA\tDNA\t2\t12\t4\t6.0\t8\n"
+        "b.fa\tFASTA\tDNA\t3\t21\t5\t7.0\t10\n"
+    )
+
+    assert stats == SequenceStats(record_count=5, total_bases=33, max_read_length=10)
+
+
+def test_count_sequence_records_many_prefers_seqkit_when_available(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    first = tmp_path / "first.fa"
+    second = tmp_path / "second.fa"
+    first.write_text(">r1\nACGT\n", encoding="utf-8")
+    second.write_text(">r2\nTTAA\n", encoding="utf-8")
+
+    monkeypatch.setattr("tandemx.io.sequences.shutil.which", lambda name: "/usr/bin/seqkit" if name == "seqkit" else None)
+
+    def fake_run(command: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        assert command[:4] == ["/usr/bin/seqkit", "stats", "-T", "-j"]
+        return subprocess.CompletedProcess(
+            command,
+            0,
+            stdout=(
+                "file\tformat\ttype\tnum_seqs\tsum_len\tmin_len\tavg_len\tmax_len\n"
+                "first.fa\tFASTA\tDNA\t1\t4\t4\t4.0\t4\n"
+                "second.fa\tFASTA\tDNA\t1\t4\t4\t4.0\t4\n"
+            ),
+            stderr="",
+        )
+
+    monkeypatch.setattr("tandemx.io.sequences.subprocess.run", fake_run)
+
+    stats = count_sequence_records_many((first, second), threads=6)
+
+    assert stats == SequenceStats(record_count=2, total_bases=8, max_read_length=4)
+
+
+def test_count_sequence_records_many_uses_rust_before_python_fallback(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    first = tmp_path / "first.fa"
+    second = tmp_path / "second.fa"
+    first.write_text(">r1\nACGT\n", encoding="utf-8")
+    second.write_text(">r2\nTTAA\n", encoding="utf-8")
+
+    monkeypatch.setattr("tandemx.io.sequences.shutil.which", lambda name: None)
+    monkeypatch.setattr("tandemx.io.sequences.rust_backend_available", lambda: True)
+
+    called = {"rust": False}
+
+    def fake_rust(paths: tuple[Path, ...], *, threads: int) -> SequenceStats:
+        called["rust"] = True
+        assert paths == (first, second)
+        assert threads == 6
+        return SequenceStats(record_count=2, total_bases=8, max_read_length=4)
+
+    monkeypatch.setattr("tandemx.io.sequences.rust_count_sequence_paths_stats", fake_rust)
+
+    stats = count_sequence_records_many((first, second), threads=6)
+
+    assert called["rust"] is True
+    assert stats == SequenceStats(record_count=2, total_bases=8, max_read_length=4)

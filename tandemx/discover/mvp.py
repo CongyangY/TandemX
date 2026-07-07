@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import deque
 import hashlib
 import logging
 import random
@@ -12,7 +13,13 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Iterable, Sequence
 
-from tandemx.io.sequences import SequenceFormatError, SequenceStats, read_sequence_records, read_sequence_records_many
+from tandemx.io.sequences import (
+    SequenceFormatError,
+    SequenceStats,
+    normalize_sequence_paths,
+    read_sequence_records,
+    read_sequence_records_many,
+)
 from tandemx.discover.spacing import (
     bounded_periodicity_score,
     build_spacing_histogram,
@@ -31,6 +38,9 @@ from tandemx.utils.threads import effective_discover_threads
 
 SHORT_PERIOD_SCAN_MAX = 19
 SHORT_PERIOD_ACCEPTANCE_SCORE = 0.80
+DEFAULT_AUTO_DISCOVERY_TRIGGER_BASES = 20_000_000_000
+DEFAULT_AUTO_DISCOVERY_MAX_BASES = 40_000_000_000
+DEFAULT_TARGET_DISCOVERY_COVERAGE = 10.0
 
 
 @dataclass(frozen=True)
@@ -166,6 +176,7 @@ class DiscoverConfig:
     max_pairs_per_kmer: int = 100
     max_reads: int | None = None
     max_read_bases: int | None = None
+    genome_size: int | None = None
     total_reads: int | None = None
     total_read_bases: int | None = None
     sample_rate: float = 1.0
@@ -174,6 +185,10 @@ class DiscoverConfig:
     chunk_size: int = 1000
     threads: int = 8
     kmer_backend: str = "python"
+    target_discovery_coverage: float = DEFAULT_TARGET_DISCOVERY_COVERAGE
+    auto_discovery_trigger_bases: int = DEFAULT_AUTO_DISCOVERY_TRIGGER_BASES
+    auto_discovery_max_bases: int = DEFAULT_AUTO_DISCOVERY_MAX_BASES
+    enable_auto_discovery_budget: bool = False
     collapse_redundant_families: bool = False
 
 
@@ -196,6 +211,8 @@ class ReadScanResult:
 class DiscoverProgressTotals:
     total_reads: int | None = None
     total_read_bases: int | None = None
+    effective_max_reads: int | None = None
+    effective_max_read_bases: int | None = None
     count_done: bool = False
 
 
@@ -231,18 +248,32 @@ def discover_toy_repeats(
     seed_overflow_count = 0
     started = time.perf_counter()
     rng = random.Random(config.seed)
+    sequence_paths = normalize_sequence_paths(config.reads)
+    effective_max_reads = config.max_reads
+    effective_max_read_bases = config.max_read_bases
     totals = progress_totals or DiscoverProgressTotals(
         total_reads=config.total_reads,
         total_read_bases=config.total_read_bases,
+        effective_max_reads=effective_max_reads,
+        effective_max_read_bases=effective_max_read_bases,
         count_done=config.total_reads is not None or config.total_read_bases is not None,
     )
     effective_threads = effective_discover_threads(config.threads)
     parallel_scan = config.kmer_backend == "rust" and effective_threads > 1
+    parallel_file_scan = False
+    effective_max_reads, effective_max_read_bases = maybe_enable_auto_discovery_budget(
+        config,
+        totals,
+        logger,
+        effective_max_reads,
+        effective_max_read_bases,
+    )
     logger.info(
-        "scan_threads requested=%s effective=%s parallel=%s backend=%s",
+        "scan_threads requested=%s effective=%s parallel=%s parallel_files=%s backend=%s",
         config.threads,
         effective_threads,
         str(parallel_scan).lower(),
+        str(parallel_file_scan).lower(),
         config.kmer_backend,
     )
     if effective_threads < config.threads:
@@ -255,6 +286,13 @@ def discover_toy_repeats(
         logger.info("parallel_scan_disabled reason=python_backend_gil effective_scan_threads=1")
     if progress is not None:
         poll_discover_count_future(count_future, totals, logger, config)
+        effective_max_reads, effective_max_read_bases = maybe_enable_auto_discovery_budget(
+            config,
+            totals,
+            logger,
+            effective_max_reads,
+            effective_max_read_bases,
+        )
         progress.update(
             ProgressSnapshot(
                 command="discover",
@@ -287,9 +325,9 @@ def discover_toy_repeats(
             skipped_low_complexity += result.skipped_low_complexity
             seed_overflow_count += result.seed_overflow_count
             if result.candidate is not None:
-                candidate = replace(
+                candidate = renumber_candidate(
                     result.candidate,
-                    candidate_id=f"TXC{len(candidates) + 1:06d}",
+                    f"TXC{len(candidates) + 1:06d}",
                 )
                 candidates.append(candidate)
                 handle.write(format_candidate_read(candidate) + "\n")
@@ -347,18 +385,31 @@ def discover_toy_repeats(
             else nullcontext(None)
         )
         with executor_context as executor:
-            for record in read_fasta_many(config.reads):
-                if config.max_reads is not None and selected_reads >= config.max_reads:
+            record_iter = (
+                read_fasta_many_round_robin(sequence_paths)
+                if auto_discovery_uses_round_robin(sequence_paths, effective_max_read_bases, config)
+                else read_fasta_many(sequence_paths)
+            )
+            for record in record_iter:
+                poll_discover_count_future(count_future, totals, logger, config)
+                effective_max_reads, effective_max_read_bases = maybe_enable_auto_discovery_budget(
+                    config,
+                    totals,
+                    logger,
+                    effective_max_reads,
+                    effective_max_read_bases,
+                )
+                if effective_max_reads is not None and selected_reads >= effective_max_reads:
                     break
                 if config.sample_rate < 1.0 and rng.random() > config.sample_rate:
                     continue
                 if (
-                    config.max_read_bases is not None
-                    and selected_bases + len(record.sequence) > config.max_read_bases
+                    effective_max_read_bases is not None
+                    and selected_bases + len(record.sequence) > effective_max_read_bases
                 ):
                     logger.info(
                         "limit_reached=max_read_bases configured_bases=%s next_read_bases=%s",
-                        config.max_read_bases,
+                        effective_max_read_bases,
                         len(record.sequence),
                     )
                     break
@@ -501,10 +552,94 @@ def poll_discover_count_future(
     )
 
 
+def maybe_enable_auto_discovery_budget(
+    config: DiscoverConfig,
+    totals: DiscoverProgressTotals,
+    logger: logging.Logger,
+    effective_max_reads: int | None,
+    effective_max_read_bases: int | None,
+) -> tuple[int | None, int | None]:
+    if not config.enable_auto_discovery_budget:
+        totals.effective_max_reads = effective_max_reads
+        totals.effective_max_read_bases = effective_max_read_bases
+        return effective_max_reads, effective_max_read_bases
+
+    if (
+        effective_max_read_bases is not None
+        and effective_max_reads is None
+        and config.max_reads is None
+        and config.max_read_bases is None
+        and totals.total_reads is not None
+        and totals.total_read_bases is not None
+    ):
+        effective_max_reads = max(
+            1,
+            round(totals.total_reads * effective_max_read_bases / totals.total_read_bases),
+        )
+
+    if effective_max_reads is not None or effective_max_read_bases is not None:
+        totals.effective_max_reads = effective_max_reads
+        totals.effective_max_read_bases = effective_max_read_bases
+        return effective_max_reads, effective_max_read_bases
+
+    budget_bases, reason = infer_auto_discovery_budget(config, totals)
+    if budget_bases is None:
+        totals.effective_max_reads = effective_max_reads
+        totals.effective_max_read_bases = effective_max_read_bases
+        return effective_max_reads, effective_max_read_bases
+
+    effective_max_read_bases = budget_bases
+    if totals.total_reads and totals.total_read_bases:
+        estimated_reads = max(1, round(totals.total_reads * budget_bases / totals.total_read_bases))
+        effective_max_reads = estimated_reads
+    totals.effective_max_reads = effective_max_reads
+    totals.effective_max_read_bases = effective_max_read_bases
+    logger.info(
+        "auto_discovery_budget enabled reason=%s effective_max_read_bases=%s effective_max_reads=%s",
+        reason,
+        effective_max_read_bases,
+        effective_max_reads,
+    )
+    return effective_max_reads, effective_max_read_bases
+
+
+def infer_auto_discovery_budget(
+    config: DiscoverConfig,
+    totals: DiscoverProgressTotals,
+) -> tuple[int | None, str | None]:
+    if not config.enable_auto_discovery_budget:
+        return None, None
+
+    if config.genome_size is not None:
+        genome_budget = max(1, round(config.genome_size * config.target_discovery_coverage))
+        budget = min(config.auto_discovery_max_bases, genome_budget)
+        if totals.total_read_bases is not None:
+            budget = min(budget, totals.total_read_bases)
+        return budget, "genome_size_x_target_coverage"
+
+    if totals.total_read_bases is None or totals.total_read_bases < config.auto_discovery_trigger_bases:
+        return None, None
+    return min(config.auto_discovery_max_bases, totals.total_read_bases), "large_input_default_cap"
+
+
+def auto_discovery_uses_round_robin(
+    sequence_paths: Sequence[Path],
+    effective_max_read_bases: int | None,
+    config: DiscoverConfig,
+) -> bool:
+    return (
+        effective_max_read_bases is not None
+        and len(sequence_paths) > 1
+        and config.sample_rate == 1.0
+    )
+
+
 def discover_progress_total_reads(
     config: DiscoverConfig,
     totals: DiscoverProgressTotals,
 ) -> int | None:
+    if totals.effective_max_reads is not None:
+        return totals.effective_max_reads
     if config.max_reads is not None:
         return config.max_reads
     if totals.total_reads is None:
@@ -518,6 +653,8 @@ def discover_progress_total_bases(
     config: DiscoverConfig,
     totals: DiscoverProgressTotals,
 ) -> int | None:
+    if totals.effective_max_read_bases is not None:
+        return totals.effective_max_read_bases
     if config.max_read_bases is not None:
         return config.max_read_bases
     if config.sample_rate < 1.0:
@@ -534,8 +671,9 @@ def discover_progress_extra(candidate_reads: int, totals: DiscoverProgressTotals
 
 def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanResult:
     record = task.record
-    if len(record.sequence) < config.min_read_length:
-        return ReadScanResult(read_bases=len(record.sequence), skipped_short_reads=1)
+    sequence = record.sequence
+    if len(sequence) < config.min_read_length:
+        return ReadScanResult(read_bases=len(sequence), skipped_short_reads=1)
 
     short_candidate, short_overflow_count = find_best_short_periodic_candidate_with_stats(
         record,
@@ -546,13 +684,13 @@ def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanRe
     )
     if short_candidate is not None:
         return ReadScanResult(
-            read_bases=len(record.sequence),
+            read_bases=len(sequence),
             candidate=short_candidate,
             seed_overflow_count=short_overflow_count,
         )
 
-    if len(record.sequence) < config.kmer_size:
-        return ReadScanResult(read_bases=len(record.sequence), skipped_short_kmer=1)
+    if len(sequence) < config.kmer_size:
+        return ReadScanResult(read_bases=len(sequence), skipped_short_kmer=1)
 
     finder = (
         find_best_periodic_candidate_rust
@@ -572,7 +710,7 @@ def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanRe
         max_pairs_per_kmer=config.max_pairs_per_kmer,
     )
     return ReadScanResult(
-        read_bases=len(record.sequence),
+        read_bases=len(sequence),
         candidate=candidate,
         seed_overflow_count=short_overflow_count + overflow_count,
     )
@@ -591,7 +729,7 @@ def scan_discover_chunk_rust(
     tasks: Sequence[ReadScanTask],
     config: DiscoverConfig,
 ) -> list[ReadScanResult]:
-    return [scan_discover_read(task, config) for task in tasks]
+    return scan_discover_chunk_rust_batch(tasks, config)
 
 
 def scan_discover_chunk_rust_batch(
@@ -600,10 +738,11 @@ def scan_discover_chunk_rust_batch(
 ) -> list[ReadScanResult]:
     results: list[ReadScanResult | None] = [None] * len(tasks)
     rust_groups: dict[int, list[tuple[int, FastaRecord, str]]] = {}
+    min_batch_length = max(config.min_repeat_span, config.min_monomer_len * 2)
 
     for index, task in enumerate(tasks):
         record = task.record
-        sequence = record.sequence.upper()
+        sequence = record.sequence
         if len(sequence) < config.min_read_length:
             results[index] = ReadScanResult(read_bases=len(sequence), skipped_short_reads=1)
             continue
@@ -626,7 +765,7 @@ def scan_discover_chunk_rust_batch(
         if len(sequence) < config.kmer_size:
             results[index] = ReadScanResult(read_bases=len(sequence), skipped_short_kmer=1)
             continue
-        if len(sequence) < max(config.min_repeat_span, config.min_monomer_len * 2):
+        if len(sequence) < min_batch_length:
             results[index] = ReadScanResult(read_bases=len(sequence))
             continue
         bounded_max_period = min(config.max_monomer_len, len(sequence) // 2)
@@ -698,8 +837,16 @@ def validate_discover_config(config: DiscoverConfig) -> None:
         raise ValueError("--max-reads must be positive when provided")
     if config.max_read_bases is not None and config.max_read_bases <= 0:
         raise ValueError("--max-read-bases must be positive when provided")
+    if config.genome_size is not None and config.genome_size <= 0:
+        raise ValueError("--genome-size must be positive when provided")
     if not 0 < config.sample_rate <= 1:
         raise ValueError("--sample-rate must be greater than 0 and at most 1")
+    if config.target_discovery_coverage <= 0:
+        raise ValueError("--target-discovery-coverage must be positive")
+    if config.auto_discovery_trigger_bases <= 0:
+        raise ValueError("--auto-discovery-trigger-bases must be positive")
+    if config.auto_discovery_max_bases <= 0:
+        raise ValueError("--auto-discovery-max-bases must be positive")
     if config.progress_every <= 0:
         raise ValueError("--progress-every must be positive")
     if config.chunk_size <= 0:
@@ -734,6 +881,28 @@ def read_fasta_many(paths: Path | Sequence[Path]) -> Iterable[FastaRecord]:
             )
     except SequenceFormatError:
         raise
+
+
+def read_fasta_many_round_robin(paths: Path | Sequence[Path]) -> Iterable[FastaRecord]:
+    sequence_paths = normalize_sequence_paths(paths)
+    seen_ids: set[str] = set()
+    active = deque(
+        (path, iter(read_fasta(path)))
+        for path in sequence_paths
+    )
+    while active:
+        path, iterator = active.popleft()
+        try:
+            record = next(iterator)
+        except StopIteration:
+            continue
+        if record.read_id in seen_ids:
+            raise SequenceFormatError(
+                f"Duplicate sequence id across input read files: {record.read_id}"
+            )
+        seen_ids.add(record.read_id)
+        yield record
+        active.append((path, iterator))
 
 
 def make_fasta_record(header: str, sequence_parts: Sequence[str]) -> FastaRecord:
@@ -778,7 +947,7 @@ def find_best_short_periodic_candidate_with_stats(
     min_repeat_span: int,
     candidate_index: int,
 ) -> tuple[CandidateRepeat | None, int]:
-    sequence = record.sequence.upper()
+    sequence = record.sequence
     bounded_max_period = min(max_period, len(sequence) // 2)
     if min_period > bounded_max_period or len(sequence) < min_repeat_span:
         return None, 0
@@ -814,7 +983,7 @@ def find_best_periodic_candidate_with_stats(
     min_spacing_support: int,
     max_pairs_per_kmer: int,
 ) -> tuple[CandidateRepeat | None, int]:
-    sequence = record.sequence.upper()
+    sequence = record.sequence
     if len(sequence) < max(min_repeat_span, min_period * 2):
         return None, 0
     bounded_max_period = min(max_period, len(sequence) // 2)
@@ -872,7 +1041,7 @@ def find_best_periodic_candidate_rust(
     min_spacing_support: int,
     max_pairs_per_kmer: int,
 ) -> tuple[CandidateRepeat | None, int]:
-    sequence = record.sequence.upper()
+    sequence = record.sequence
     if len(sequence) < max(min_repeat_span, min_period * 2):
         return None, 0
     bounded_max_period = min(max_period, len(sequence) // 2)
@@ -928,6 +1097,24 @@ def build_candidate_from_period(
         low_complexity_flag=low_complexity,
         confidence=confidence,
         warning=";".join(warnings),
+    )
+
+
+def renumber_candidate(candidate: CandidateRepeat, candidate_id: str) -> CandidateRepeat:
+    return CandidateRepeat(
+        read_id=candidate.read_id,
+        candidate_id=candidate_id,
+        sequence=candidate.sequence,
+        read_start=candidate.read_start,
+        read_end=candidate.read_end,
+        strand=candidate.strand,
+        period_bp=candidate.period_bp,
+        repeat_span_bp=candidate.repeat_span_bp,
+        unit_count=candidate.unit_count,
+        score=candidate.score,
+        low_complexity_flag=candidate.low_complexity_flag,
+        confidence=candidate.confidence,
+        warning=candidate.warning,
     )
 
 

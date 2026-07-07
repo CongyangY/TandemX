@@ -199,3 +199,78 @@ def test_gzip_fastq_discover_and_kmer_too_long_warning(tmp_path: Path) -> None:
     assert invalid.returncode != 0
     assert "No reads were long enough for --kmer-size 1000" in invalid.stderr
     assert "skipped_short_kmer=5" in (invalid_outdir / "run.log").read_text(encoding="utf-8")
+
+
+def test_auto_discovery_budget_uses_genome_size_and_round_robin(tmp_path: Path) -> None:
+    first = tmp_path / "reads_a.fa"
+    second = tmp_path / "reads_b.fa"
+    first.write_text(periodic_reads(5, length=600), encoding="utf-8")
+    monomer_b = "TTGCAACCTTGGAACCGTTAGGCAATCGTA"
+    sequence_b = (monomer_b * 40)[:600]
+    second.write_text(
+        "".join(f">read_b_{index}\n{sequence_b}\n" for index in range(1, 6)),
+        encoding="utf-8",
+    )
+    outdir = tmp_path / "discover"
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(first),
+        str(second),
+        "--outdir",
+        str(outdir),
+        "--min-period",
+        "18",
+        "--max-period",
+        "32",
+        "--min-support-reads",
+        "1",
+        "--genome-size",
+        "1200",
+        "--enable-auto-discovery-budget",
+        "--target-discovery-coverage",
+        "1.0",
+        "--progress-every",
+        "1",
+    )
+
+    assert result.returncode == 0, result.stderr
+    log = (outdir / "run.log").read_text(encoding="utf-8")
+    assert "auto_discovery_budget enabled reason=genome_size_x_target_coverage" in log
+    assert "processed_reads=2 processed_bases=1200" in log
+    candidates = (outdir / "candidate_reads.tsv").read_text(encoding="utf-8")
+    assert "read_1" in candidates
+    assert "read_b_1" in candidates
+    families = (outdir / "families.tsv").read_text(encoding="utf-8")
+    assert "TXF000001" in families
+    assert "TXF000002" in families
+
+
+def test_genome_size_alone_does_not_enable_auto_discovery_budget(tmp_path: Path) -> None:
+    reads = tmp_path / "reads.fa"
+    reads.write_text(periodic_reads(6, length=400), encoding="utf-8")
+    outdir = tmp_path / "discover"
+
+    result = run_cli(
+        "discover",
+        "--reads",
+        str(reads),
+        "--outdir",
+        str(outdir),
+        "--min-period",
+        "20",
+        "--max-period",
+        "30",
+        "--min-support-reads",
+        "1",
+        "--genome-size",
+        "1200",
+        "--progress-every",
+        "2",
+    )
+
+    assert result.returncode == 0, result.stderr
+    log = (outdir / "run.log").read_text(encoding="utf-8")
+    assert "auto_discovery_budget enabled" not in log
+    assert "processed_reads=6 processed_bases=2400" in log

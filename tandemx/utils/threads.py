@@ -7,7 +7,7 @@ import os
 
 DEFAULT_DISCOVER_THREADS = 8
 HARD_MAX_THREADS = 64
-MAX_COUNT_THREADS = 4
+DEFAULT_BACKGROUND_COUNT_THREADS = 4
 
 
 def discover_thread_limit(cpu_count: int | None = None) -> int:
@@ -37,11 +37,15 @@ def effective_discover_threads(configured: int) -> int:
     return max(1, min(configured, discover_thread_limit()))
 
 
-def resolve_count_threads(requested: int | None, discover_threads: int) -> int:
+def resolve_count_threads(
+    requested: int | None,
+    discover_threads: int,
+    read_file_count: int = 1,
+) -> int:
     if requested is None:
-        return max(1, min(MAX_COUNT_THREADS, discover_threads))
+        return max(1, min(discover_threads, max(DEFAULT_BACKGROUND_COUNT_THREADS, read_file_count)))
     if requested <= 0:
         raise ValueError("--count-threads must be positive")
-    if requested > MAX_COUNT_THREADS:
-        raise ValueError(f"--count-threads must be at most {MAX_COUNT_THREADS}")
+    if requested > discover_threads:
+        raise ValueError(f"--count-threads must be at most {discover_threads} (capped by --threads)")
     return requested

@@ -1,6 +1,8 @@
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 use std::collections::{BTreeSet, HashMap, HashSet};
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 
 const BIN_SIZE: usize = 5;
 const REFINEMENT_RADIUS: isize = 2;
@@ -9,6 +11,17 @@ const MAX_IDENTITY_COMPARISONS: usize = 1024;
 const ACCEPTANCE_SCORE: f64 = 0.75;
 const SEED_WEIGHT: f64 = 0.20;
 const IDENTITY_WEIGHT: f64 = 0.80;
+const DIRECT_PERIOD_SCAN_MAX_RANGE: usize = 64;
+
+#[pyclass(frozen)]
+struct SequenceStatsResult {
+    #[pyo3(get)]
+    record_count: usize,
+    #[pyo3(get)]
+    total_bases: usize,
+    #[pyo3(get)]
+    max_read_length: usize,
+}
 
 #[pyclass(frozen)]
 struct ScanResult {
@@ -57,6 +70,228 @@ fn canonical_code(sequence: &[u8]) -> Option<u64> {
         reverse |= (3 - code) << (2 * index);
     }
     Some(forward.min(reverse))
+}
+
+fn is_valid_base(base: u8) -> bool {
+    matches!(
+        base,
+        b'A' | b'a' | b'C' | b'c' | b'G' | b'g' | b'T' | b't' | b'N' | b'n'
+    )
+}
+
+fn normalize_sequence_line<'a>(
+    line: &'a str,
+    path: &str,
+    line_number: usize,
+) -> PyResult<&'a [u8]> {
+    let bytes = line.trim().as_bytes();
+    if bytes.is_empty() {
+        return Err(PyValueError::new_err(format!(
+            "Empty sequence line in {} at line {}",
+            path, line_number
+        )));
+    }
+    if let Some(invalid) = bytes.iter().copied().find(|base| !is_valid_base(*base)) {
+        return Err(PyValueError::new_err(format!(
+            "Invalid base '{}' in {} at line {}",
+            invalid as char, path, line_number
+        )));
+    }
+    Ok(bytes)
+}
+
+fn detect_sequence_format(path: &str) -> PyResult<&'static str> {
+    let lowercase = path.to_lowercase();
+    let name = lowercase.strip_suffix(".gz").unwrap_or(&lowercase);
+    if name.ends_with(".fa") || name.ends_with(".fasta") {
+        return Ok("fasta");
+    }
+    if name.ends_with(".fq") || name.ends_with(".fastq") {
+        return Ok("fastq");
+    }
+    Err(PyValueError::new_err(format!(
+        "Unsupported sequence file extension for {}. Expected .fa, .fasta, .fq, .fastq, or .gz-compressed variants.",
+        path
+    )))
+}
+
+fn open_sequence_reader(path: &str) -> PyResult<Box<dyn BufRead>> {
+    if path.to_lowercase().ends_with(".gz") {
+        return Err(PyValueError::new_err(format!(
+            "Rust sequence stats do not support gzip-compressed inputs: {}",
+            path
+        )));
+    }
+    let file = File::open(path)
+        .map_err(|err| PyValueError::new_err(format!("Failed to open {}: {}", path, err)))?;
+    Ok(Box::new(BufReader::new(file)))
+}
+
+fn count_fasta_stats(reader: &mut dyn BufRead, path: &str) -> PyResult<SequenceStatsResult> {
+    let mut line = String::new();
+    let mut line_number = 0_usize;
+    let mut record_count = 0_usize;
+    let mut total_bases = 0_usize;
+    let mut max_read_length = 0_usize;
+    let mut current_len = 0_usize;
+    let mut current_header = false;
+    let mut yielded = false;
+    loop {
+        line.clear();
+        let read = reader
+            .read_line(&mut line)
+            .map_err(|err| PyValueError::new_err(format!("Failed reading {}: {}", path, err)))?;
+        if read == 0 {
+            break;
+        }
+        line_number += 1;
+        let trimmed = line.trim();
+        if trimmed.is_empty() {
+            continue;
+        }
+        if trimmed.starts_with('>') {
+            if current_header {
+                record_count += 1;
+                total_bases += current_len;
+                max_read_length = max_read_length.max(current_len);
+                yielded = true;
+            }
+            if trimmed.len() == 1 {
+                return Err(PyValueError::new_err(format!(
+                    "Empty FASTA header in {} at line {}",
+                    path, line_number
+                )));
+            }
+            current_header = true;
+            current_len = 0;
+            continue;
+        }
+        if !current_header {
+            return Err(PyValueError::new_err(format!(
+                "Invalid FASTA in {}: sequence before header at line {}",
+                path, line_number
+            )));
+        }
+        let sequence = normalize_sequence_line(trimmed, path, line_number)?;
+        current_len += sequence.len();
+    }
+    if current_header {
+        record_count += 1;
+        total_bases += current_len;
+        max_read_length = max_read_length.max(current_len);
+        yielded = true;
+    }
+    if !yielded {
+        return Err(PyValueError::new_err(format!(
+            "Sequence file is empty or contains no records: {}",
+            path
+        )));
+    }
+    Ok(SequenceStatsResult {
+        record_count,
+        total_bases,
+        max_read_length,
+    })
+}
+
+fn count_fastq_stats(reader: &mut dyn BufRead, path: &str) -> PyResult<SequenceStatsResult> {
+    let mut line = String::new();
+    let mut line_number = 0_usize;
+    let mut record_count = 0_usize;
+    let mut total_bases = 0_usize;
+    let mut max_read_length = 0_usize;
+    let mut yielded = false;
+    loop {
+        line.clear();
+        let read = reader
+            .read_line(&mut line)
+            .map_err(|err| PyValueError::new_err(format!("Failed reading {}: {}", path, err)))?;
+        if read == 0 {
+            break;
+        }
+        line_number += 1;
+        let header = line.trim_end_matches(&['\n', '\r'][..]).trim();
+        if header.is_empty() {
+            continue;
+        }
+        if !header.starts_with('@') || header.len() == 1 {
+            return Err(PyValueError::new_err(format!(
+                "Invalid FASTQ header in {} at line {}",
+                path, line_number
+            )));
+        }
+
+        let mut sequence = String::new();
+        let mut plus = String::new();
+        let mut quality = String::new();
+        if reader
+            .read_line(&mut sequence)
+            .map_err(|err| PyValueError::new_err(format!("Failed reading {}: {}", path, err)))?
+            == 0
+            || reader
+                .read_line(&mut plus)
+                .map_err(|err| PyValueError::new_err(format!("Failed reading {}: {}", path, err)))?
+                == 0
+            || reader
+                .read_line(&mut quality)
+                .map_err(|err| PyValueError::new_err(format!("Failed reading {}: {}", path, err)))?
+                == 0
+        {
+            return Err(PyValueError::new_err(format!(
+                "Truncated FASTQ record in {} starting at line {}",
+                path, line_number
+            )));
+        }
+        let sequence_line = line_number + 1;
+        line_number += 3;
+        let sequence_trimmed = sequence.trim_end_matches(&['\n', '\r'][..]).trim();
+        let plus_trimmed = plus.trim_end_matches(&['\n', '\r'][..]).trim();
+        let quality_trimmed = quality.trim_end_matches(&['\n', '\r'][..]).trim();
+        if !plus_trimmed.starts_with('+') {
+            return Err(PyValueError::new_err(format!(
+                "Invalid FASTQ separator in {} at line {}",
+                path,
+                sequence_line + 1
+            )));
+        }
+        let bases = normalize_sequence_line(sequence_trimmed, path, sequence_line)?;
+        if bases.len() != quality_trimmed.len() {
+            return Err(PyValueError::new_err(format!(
+                "FASTQ sequence and quality lengths differ in {} at line {}",
+                path, sequence_line
+            )));
+        }
+        record_count += 1;
+        total_bases += bases.len();
+        max_read_length = max_read_length.max(bases.len());
+        yielded = true;
+    }
+    if !yielded {
+        return Err(PyValueError::new_err(format!(
+            "Sequence file is empty or contains no records: {}",
+            path
+        )));
+    }
+    Ok(SequenceStatsResult {
+        record_count,
+        total_bases,
+        max_read_length,
+    })
+}
+
+fn count_sequence_file_stats_inner(path: &str) -> PyResult<SequenceStatsResult> {
+    let mut reader = open_sequence_reader(path)?;
+    match detect_sequence_format(path)? {
+        "fasta" => count_fasta_stats(reader.as_mut(), path),
+        "fastq" => count_fastq_stats(reader.as_mut(), path),
+        _ => Err(PyValueError::new_err(format!("Unsupported format for {}", path))),
+    }
+}
+
+#[pyfunction]
+fn count_sequence_file_stats(py: Python<'_>, path: &str) -> PyResult<SequenceStatsResult> {
+    let owned = path.to_string();
+    py.allow_threads(move || count_sequence_file_stats_inner(&owned))
 }
 
 #[pymethods]
@@ -295,9 +530,9 @@ fn bounded_periodicity_score(sequence: &[u8], period: usize) -> f64 {
     let mut matches = 0_usize;
     let mut valid = 0_usize;
     for index in (0..compared_span).step_by(step) {
-        let left = sequence[index].to_ascii_uppercase();
-        let right = sequence[index + period].to_ascii_uppercase();
-        if left == b'N' || right == b'N' {
+        let left = sequence[index];
+        let right = sequence[index + period];
+        if left == b'N' || left == b'n' || right == b'N' || right == b'n' {
             continue;
         }
         valid += 1;
@@ -312,6 +547,43 @@ fn bounded_periodicity_score(sequence: &[u8], period: usize) -> f64 {
         0.0
     } else {
         matches as f64 / valid as f64
+    }
+}
+
+fn direct_period_scan(
+    sequence: &[u8],
+    min_period: usize,
+    max_period: usize,
+    top_periods: usize,
+) -> ScanResult {
+    let mut scored_periods: Vec<(usize, f64)> = (min_period..=max_period)
+        .map(|period| (period, bounded_periodicity_score(sequence, period)))
+        .collect();
+    scored_periods.sort_unstable_by(|left, right| {
+        right
+            .1
+            .partial_cmp(&left.1)
+            .unwrap_or(std::cmp::Ordering::Equal)
+            .then(left.0.cmp(&right.0))
+    });
+    let best = scored_periods.first().copied().unwrap_or((0, 0.0));
+    let candidate_periods = scored_periods
+        .iter()
+        .take(top_periods)
+        .filter(|(_, score)| *score >= ACCEPTANCE_SCORE)
+        .map(|(period, _)| *period)
+        .collect();
+    ScanResult {
+        candidate_periods,
+        spacing_support: Vec::new(),
+        best_period: best.0,
+        periodicity_score: best.1,
+        overflow_count: 0,
+        status: if best.1 >= ACCEPTANCE_SCORE {
+            "accepted".to_string()
+        } else {
+            "rejected_score".to_string()
+        },
     }
 }
 
@@ -398,6 +670,9 @@ fn scan_owned_sequence(
     min_spacing_support: usize,
     max_pairs_per_kmer: usize,
 ) -> ScanResult {
+    if max_period.saturating_sub(min_period) <= DIRECT_PERIOD_SCAN_MAX_RANGE {
+        return direct_period_scan(&owned_sequence, min_period, max_period, top_periods);
+    }
     let (repeated_positions, overflow_count) = extract_repeated_positions(
         &owned_sequence,
         k,
@@ -535,8 +810,10 @@ fn scan_reads_for_periods(
 
 #[pymodule]
 fn _rust_core(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    module.add_class::<SequenceStatsResult>()?;
     module.add_class::<ScanResult>()?;
     module.add_class::<DiagnosticKmerCounter>()?;
+    module.add_function(wrap_pyfunction!(count_sequence_file_stats, module)?)?;
     module.add_function(wrap_pyfunction!(scan_read_for_periods, module)?)?;
     module.add_function(wrap_pyfunction!(scan_reads_for_periods, module)?)?;
     Ok(())
