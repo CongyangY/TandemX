@@ -13,13 +13,43 @@ same single-family synthetic FASTA datasets using one thread per tool:
   --outdir benchmarks/results/external_tool_comparison
 ```
 
-It writes `raw_runs.tsv`, `summary.tsv`, generated FASTA/truth files, an
-environment manifest, and per-run logs. Accuracy is evaluated at read level
+To rerun tools against existing benchmark inputs without rewriting them, use:
+
+```bash
+.conda-benchmark/bin/python benchmarks/scripts/run_external_tool_comparison.py \
+  --config benchmarks/configs/external_tool_comparison.yaml \
+  --datasets-dir benchmarks/results/external_tool_comparison/datasets \
+  --outdir benchmarks/results/external_tool_comparison_20260715
+```
+
+It writes `raw_runs.tsv`, `summary.tsv`, `dataset_manifest.tsv`, generated
+FASTA/truth files when `--datasets-dir` is omitted, an environment manifest,
+and per-run logs. Runtime and direct-process peak resident memory are recorded
+with `wait4`; three-run medians, runtime CV, and normalized-prediction digests
+are included in the summary. TandemX and TideHunter are explicitly restricted
+to one thread, while TRF is single-process. Accuracy is evaluated at read level
 with a period tolerance of `max(2 bp, 2% of truth period)`. Simulated errors
 are substitutions only, so these are engineering comparisons rather than a
 complete model of HiFi or ONT error profiles. TRASH and TAREAN are excluded
 from the numeric chart because their primary assembly and short-read graph
 tasks are not directly equivalent to per-read detection.
+
+All parsed predictions are filtered to the configured period range before
+scoring. This is necessary because TRF exposes a maximum-period argument but
+does not expose the same minimum-period restriction as the other two tools.
+
+Validate and derive publication-review tables from a completed comparison with:
+
+```bash
+python benchmarks/scripts/analyze_external_tool_comparison.py \
+  --summary benchmarks/results/external_tool_comparison_20260715/summary.tsv \
+  --dataset-manifest benchmarks/results/external_tool_comparison_20260715/dataset_manifest.tsv \
+  --outdir benchmarks/results/external_tool_comparison_20260715/analysis
+```
+
+The analysis step writes pairwise speed/memory comparisons, macro accuracy,
+the largest-dataset chart source, a bounded dataset table, and a validation
+receipt. Its report companion notebook uses only the Python standard library.
 
 The tested macOS ARM64 environment lives at `.conda-benchmark/` and is
 described by `benchmarks/environment.external-tools.yml`. TideHunter must be

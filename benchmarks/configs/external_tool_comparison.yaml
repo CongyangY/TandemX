@@ -1,4 +1,4 @@
-benchmark_id: tandemx_external_tools_v1
+benchmark_id: tandemx_external_tools_v2
 seed: 20260620
 repetitions: 3
 period_range: [30, 500]
@@ -6,6 +6,10 @@ tools:
   tandemx: .conda-benchmark/bin/tandemx
   trf: .conda-benchmark/bin/trf
   tidehunter: .conda-benchmark/bin/TideHunter
+tool_versions:
+  tandemx: 0.1.0 (release build from this repository)
+  trf: 4.10.0-rc.2 (Bioconda)
+  tidehunter: 1.5.5 (official binary self-report)
 datasets:
   - {id: small_clean_60, read_count: 200, read_length: 2000, monomer_length: 60, error_rate: 0.0, positive_fraction: 0.75}
   - {id: small_noisy_60, read_count: 500, read_length: 2000, monomer_length: 60, error_rate: 0.02, positive_fraction: 0.75}

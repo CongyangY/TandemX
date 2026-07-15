@@ -119,6 +119,41 @@ copy-number relative errors were 8.84% and 3.94% in this engineering dataset.
 Two independent end-to-end runs produced byte-identical content for all 11
 primary analysis outputs. Runtime and RSS naturally vary by host and run.
 
+## Single-thread External Tool Comparison
+
+The current truth-aware comparison was rerun on 2026-07-15 against TRF
+4.10.0-rc.2 and TideHunter 1.5.5 using the five existing repository benchmark
+FASTA files. Inputs were reused without rewriting and their SHA-256 digests
+were recorded. TandemX and TideHunter were explicitly limited to one thread;
+TRF ran as a single process. Each tool ran three times per dataset, and the
+table reports medians. Direct-process peak RSS was measured with `wait4`.
+
+| Dataset | Tool | Runtime | Peak RSS | Recall | Precision |
+|---|---|---:|---:|---:|---:|
+| 2.5 Mb, 171 bp, 0% error | TandemX | 1.48 s | 30.5 MB | 1.000 | 1.000 |
+|  | TRF | 2.73 s | 23.7 MB | 1.000 | 1.000 |
+|  | TideHunter | 2.27 s | 37.6 MB | 1.000 | 1.000 |
+| 5 Mb, 171 bp, 5% error | TandemX | 2.94 s | 37.4 MB | 1.000 | 1.000 |
+|  | TRF | 6.74 s | 23.8 MB | 1.000 | 1.000 |
+|  | TideHunter | 4.48 s | 147.6 MB | 1.000 | 0.9987 |
+| 10 Mb, 421 bp, 5% error | TandemX | 2.46 s | 49.1 MB | 1.000 | 1.000 |
+|  | TRF | 10.32 s | 56.0 MB | 1.000 | 1.000 |
+|  | TideHunter | 11.77 s | 277.6 MB | 1.000 | 0.9960 |
+
+Across the 2.5-10 Mb workloads, TandemX was 1.84-4.19x faster than TRF and
+1.52-4.78x faster than TideHunter. TandemX used less peak memory than
+TideHunter on all five datasets, but TRF used less memory on four of the five;
+TandemX used 12.2% less than TRF only on the 10 Mb dataset. TandemX and TRF
+were tied on the current simple accuracy model, so these data support a scoped
+throughput claim but not a general accuracy-superiority claim.
+
+The inputs contain a single whole-read tandem family with substitution-only
+errors and random-background negatives. They do not model indels, partial or
+mixed arrays, low-complexity genomic backgrounds, higher-order repeats or a
+real plant HiFi quality distribution. The smallest 0.4 Mb workload also showed
+process cold-start variability, so the strongest runtime statement is limited
+to the larger workloads.
+
 A separate 10.13 MB assembly scaling check reduced peak RSS from 60.3 to
 40.9 MB for locate and from 59.3 to 37.5 MB for probe after bounded FASTA
 chunking, while retaining identical validated outputs. The remaining fixed
