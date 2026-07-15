@@ -10,6 +10,7 @@ This file is the durable handoff for a new Codex conversation. Read it after
 - GitHub repository: `https://github.com/CongyangY/TandemX`
 - Default branch: `main`
 - Current publication branch: `codex/publish-current-progress`
+- Draft pull request: `https://github.com/CongyangY/TandemX/pull/1`
 - Baseline on GitHub before this handoff: `b9ef30a`
 - Local implementation commits included in the publication branch:
   - `ac4b7f8 Optimize streaming algorithms and strengthen validation`
@@ -18,6 +19,9 @@ This file is the durable handoff for a new Codex conversation. Read it after
 - Benchmark outputs under `benchmarks/results/` are reproducible local artifacts
   and are intentionally ignored by Git unless a future task explicitly selects
   a small publication artifact for version control.
+- SSH-based Git push works. The local GitHub CLI token reported as invalid on
+  2026-07-15; use the connected GitHub integration or re-authenticate `gh` before
+  relying on CLI API commands.
 
 At the start of a new session, run:
 
@@ -129,8 +133,8 @@ provenance, and run the same fixed-input, fixed-thread, repeated benchmark desig
 
 ## Recommended next work
 
-1. Complete GitHub publication of the current branch and keep this file updated
-   with the resulting pull-request link.
+1. Review the checks and diff in draft pull request #1, then merge it into `main`
+   when it is ready.
 2. Obtain or locate the raw real-data reads and run TandemX, TRF, TideHunter, and
    where practical TRASH on identical bounded subsets.
 3. Add truth-controlled noisy simulations covering substitutions, indels,
