@@ -38,6 +38,8 @@ def test_tiny_synthetic_benchmark(tmp_path: Path) -> None:
     rows = read_tsv(benchmark_summary)
     assert {row["command"] for row in rows} == {"simulate", "discover", "quantify", "locate", "probe", "validate"}
     assert all(row["exit_status"] == "0" for row in rows)
+    assert all(float(row["runtime_seconds"]) > 0 for row in rows)
+    assert all(float(row["peak_memory_mb"]) > 0 for row in rows)
     validate_rows = [row for row in rows if row["command"] == "validate"]
     assert validate_rows and validate_rows[0]["output_validated"] == "true"
     assert int(validate_rows[0]["recovered_family_count"]) >= 2
@@ -52,6 +54,10 @@ def test_tiny_synthetic_benchmark(tmp_path: Path) -> None:
     accuracy_rows = read_tsv(accuracy_summary)
     assert len(accuracy_rows) >= 2
     assert all(row["recovered_closest_length"] for row in accuracy_rows)
+    assert all(int(row["length_error_bp"]) == 0 for row in accuracy_rows)
+    assert all(float(row["recovered_sequence_identity"]) >= 0.99 for row in accuracy_rows)
+    assert all(float(row["copy_number_relative_error"]) < 0.15 for row in accuracy_rows)
+    assert all(row["matching_method"] == "sequence_identity_length_aware" for row in accuracy_rows)
 
     reads = outdir / "tiny" / "simulated" / "reads.fa"
     assert reads.is_file()

@@ -32,7 +32,7 @@ def test_periodicity_score_detects_exact_period() -> None:
     assert periodicity_score(sequence, 5) < 0.5
 
 
-def test_cluster_candidates_uses_incremental_cluster_statistics() -> None:
+def test_cluster_candidates_does_not_merge_unrelated_similar_length_sequences() -> None:
     candidates = [
         CandidateRepeat("read1", "TXC000001", "A" * 100, 0, 400, "+", 100, 400, 4.0, 0.91, False, "high", ""),
         CandidateRepeat("read2", "TXC000002", "C" * 102, 0, 408, "+", 102, 408, 4.0, 0.95, False, "high", ""),
@@ -42,14 +42,22 @@ def test_cluster_candidates_uses_incremental_cluster_statistics() -> None:
 
     families = cluster_candidates(candidates, min_support_reads=2)
 
+    assert families == []
+
+
+def test_cluster_candidates_merges_phase_shifted_related_sequences() -> None:
+    monomer = "ACGTTCAGGACTAACCGTGA"
+    shifted = monomer[7:] + monomer[:7]
+    candidates = [
+        CandidateRepeat("read1", "TXC000001", monomer, 0, 80, "+", 20, 80, 4.0, 0.95, False, "high", ""),
+        CandidateRepeat("read2", "TXC000002", shifted, 0, 80, "+", 20, 80, 4.0, 0.94, False, "high", ""),
+    ]
+
+    families = cluster_candidates(candidates, min_support_reads=2)
+
     assert len(families) == 1
-    family = families[0]
-    assert family.monomer_length_bp == 102
-    assert family.support_read_count == 2
-    assert family.support_span_bp == 1111
-    assert family.mean_identity == (0.91 + 0.95 + 0.90) / 3
-    assert family.low_complexity_flag
-    assert family.warning == "low_complexity_family"
+    assert families[0].support_read_count == 2
+    assert families[0].monomer_length_bp == 20
 
 
 def test_split_read_scan_tasks_preserves_order_and_caps_batches() -> None:

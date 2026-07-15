@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import shlex
 import subprocess
@@ -40,6 +41,8 @@ SUMMARY_FIELDS = (
     "output_validated",
     "notes",
 )
+
+_FILE_HASH_CACHE: dict[tuple[str, int, int, int], str] = {}
 
 
 @dataclass(frozen=True)
@@ -330,11 +333,95 @@ def step_outputs_validate(config: PipelineConfig, step: str) -> bool:
     return True
 
 
+def step_input_paths(config: PipelineConfig, step: str) -> tuple[Path, ...]:
+    discover_dir = config.outdir / "discover"
+    quantify_dir = config.outdir / "quantify"
+    locate_dir = config.outdir / "locate"
+    compare_dir = config.outdir / "compare"
+    probe_dir = config.outdir / "probe"
+    catalog = discover_dir / "monomers.fa"
+    copy_number = quantify_dir / "copy_number.tsv"
+    paths: dict[str, tuple[Path, ...]] = {
+        "discover": config.reads,
+        "quantify": (*config.reads, catalog),
+        "locate": tuple(path for path in (config.assembly, catalog, copy_number) if path is not None),
+        "compare": (copy_number, locate_dir / "arrays.bed"),
+        "probe": tuple(
+            path
+            for path in (config.assembly, catalog, copy_number, locate_dir / "arrays.bed")
+            if path is not None
+        ),
+        "visualize": (
+            catalog,
+            copy_number,
+            compare_dir / "assembly_vs_read_cn.tsv",
+            probe_dir / "probes.rank.tsv",
+            probe_dir / "in_silico_fish.tsv",
+        ) if config.assembly is not None else (catalog, copy_number),
+        "validate": (),
+    }
+    return paths[step]
+
+
+def file_sha256(path: Path) -> str:
+    stat = path.stat()
+    cache_key = (str(path.resolve()), stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+    cached = _FILE_HASH_CACHE.get(cache_key)
+    if cached is not None:
+        return cached
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    value = digest.hexdigest()
+    _FILE_HASH_CACHE[cache_key] = value
+    return value
+
+
+def step_fingerprint(config: PipelineConfig, step: str) -> dict[str, object]:
+    command = build_step_command(config, step)
+    inputs = []
+    for path in step_input_paths(config, step):
+        if not path.is_file():
+            raise ValueError(f"Cannot fingerprint missing step input: {path}")
+        stat = path.stat()
+        inputs.append(
+            {
+                "path": str(path.resolve()),
+                "size": stat.st_size,
+                "sha256": file_sha256(path),
+            }
+        )
+    return {"schema_version": 1, "step": step, "command": command, "inputs": inputs}
+
+
+def fingerprint_path(config: PipelineConfig, step: str) -> Path:
+    return config.outdir / step / ".resume_fingerprint.json"
+
+
+def write_step_fingerprint(config: PipelineConfig, step: str) -> None:
+    if step == "validate":
+        return
+    payload = step_fingerprint(config, step)
+    path = fingerprint_path(config, step)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def step_fingerprint_matches(config: PipelineConfig, step: str) -> bool:
+    path = fingerprint_path(config, step)
+    if not path.is_file():
+        return False
+    try:
+        stored = json.loads(path.read_text(encoding="utf-8"))
+        return stored == step_fingerprint(config, step)
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+
+
 def missing_step_inputs(config: PipelineConfig, step: str) -> tuple[Path, ...]:
-    if step == "compare":
-        required = (config.outdir / "quantify" / "copy_number.tsv", config.outdir / "locate" / "arrays.bed")
-        return tuple(path for path in required if not path.is_file())
-    return ()
+    return tuple(path for path in step_input_paths(config, step) if not path.is_file())
 
 
 def write_summaries(config: PipelineConfig, records: Sequence[StepRecord]) -> None:
@@ -406,10 +493,7 @@ def run_command_with_live_logs(
         )
 
         def forward(pipe: TextIO, log_handle: TextIO, mirror: TextIO) -> None:
-            while True:
-                chunk = pipe.read(1)
-                if not chunk:
-                    break
+            for chunk in iter(pipe.readline, ""):
                 log_handle.write(chunk)
                 log_handle.flush()
                 mirror.write(chunk)
@@ -481,7 +565,11 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
 
         output_dir = config.outdir / step
         if step != "validate" and output_dir.exists() and any(output_dir.iterdir()):
-            if config.resume and step_outputs_validate(config, step):
+            if (
+                config.resume
+                and step_outputs_validate(config, step)
+                and step_fingerprint_matches(config, step)
+            ):
                 record = make_record(
                     config,
                     run_id,
@@ -561,6 +649,13 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
         validated = returncode == 0 and (
             step == "validate" or step_outputs_validate(config, step)
         )
+        if validated and step != "validate":
+            try:
+                write_step_fingerprint(config, step)
+            except (OSError, ValueError) as exc:
+                validated = False
+                returncode = 2
+                print(f"tandemx run: failed to record resume fingerprint for {step}: {exc}", file=sys.stderr)
         notes = f"threads_recorded={config.threads}"
         if config.profile:
             notes += ";cprofile_written"

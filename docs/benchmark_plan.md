@@ -18,9 +18,9 @@ Configured scales:
 3. `pilot`: 50,000 reads for manual subset scaling.
 4. `real_pilot_manual`: 100,000 reads, excluded from default tests and commands.
 
-The runner records wall-clock runtime per command and discover throughput metrics in `benchmark_summary.tsv`: processed reads/bases, candidate reads, candidates/MB, reads/s, MB/s and `algorithm_mode=spacing_prefilter`. Peak memory remains blank when unavailable; use `/usr/bin/time -v` on Linux or the platform `time` command on macOS for manual measurement.
+The runner records wall-clock runtime, peak resident memory from `wait4`, and discover throughput metrics in `benchmark_summary.tsv`: processed reads/bases, candidate reads, candidates/MB, reads/s, MB/s and `algorithm_mode=spacing_prefilter`.
 
-`accuracy_summary.tsv` uses simulator truth files only after analysis commands finish. Truth files are benchmark evaluation metadata and must not be passed to `discover`, `quantify`, `locate`, `probe` or `validate`.
+`accuracy_summary.tsv` uses simulator truth files only after analysis commands finish. Recovered families are paired to truth by length-aware sequence identity rather than monomer length alone. Truth files are benchmark evaluation metadata and must not be passed to `discover`, `quantify`, `locate`, `probe` or `validate`.
 
 Synthetic benchmark success does not validate real 7-20 Gb plant genome production analysis.
 

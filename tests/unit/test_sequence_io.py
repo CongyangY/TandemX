@@ -11,6 +11,7 @@ from tandemx.io.sequences import (
     SequenceStats,
     count_sequence_records_many,
     parse_seqkit_stats_table,
+    read_fasta_chunks,
     read_sequence_records,
     read_sequence_records_many,
 )
@@ -51,6 +52,20 @@ def test_read_sequence_records_many_streams_files_in_order(tmp_path: Path) -> No
     ]
 
     assert observed == [("r1", "ACGT"), ("r2", "TTAA")]
+
+
+def test_read_fasta_chunks_preserves_records_and_offsets(tmp_path: Path) -> None:
+    path = tmp_path / "assembly.fa"
+    path.write_text(">chr1 description\nACGTAC\nGTAC\n>chr2\nTTAA\n", encoding="utf-8")
+
+    chunks = list(read_fasta_chunks(path, chunk_bases=4))
+
+    assert [(chunk.id, chunk.start, chunk.sequence) for chunk in chunks] == [
+        ("chr1", 0, "ACGT"),
+        ("chr1", 4, "ACGT"),
+        ("chr1", 8, "AC"),
+        ("chr2", 0, "TTAA"),
+    ]
 
 
 def test_read_sequence_records_many_rejects_duplicate_ids_across_files(tmp_path: Path) -> None:

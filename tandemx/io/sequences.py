@@ -5,8 +5,10 @@ from __future__ import annotations
 import csv
 import gzip
 import io
+import sqlite3
 import shutil
 import subprocess
+import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
@@ -36,8 +38,79 @@ class SequenceStats:
     max_read_length: int
 
 
+@dataclass(frozen=True)
+class FastaChunk:
+    """One bounded sequence chunk with its 0-based offset in a FASTA record."""
+
+    id: str
+    description: str
+    start: int
+    sequence: str
+
+
 class SequenceFormatError(ValueError):
     """Raised when a sequence file is empty, malformed, or internally inconsistent."""
+
+
+class DuplicateIdTracker:
+    """Exact duplicate detector that spills identifiers to SQLite at a fixed limit."""
+
+    def __init__(self, memory_limit: int = 100_000) -> None:
+        if memory_limit < 1:
+            raise ValueError("memory_limit must be positive")
+        self.memory_limit = memory_limit
+        self._memory: set[str] = set()
+        self._database: sqlite3.Connection | None = None
+        self._database_path: Path | None = None
+
+    @property
+    def spilled(self) -> bool:
+        return self._database is not None
+
+    def add(self, identifier: str) -> bool:
+        """Add an identifier and return False when it was already present."""
+        if self._database is None and len(self._memory) < self.memory_limit:
+            if identifier in self._memory:
+                return False
+            self._memory.add(identifier)
+            return True
+        if self._database is None:
+            self._spill()
+        assert self._database is not None
+        try:
+            self._database.execute("INSERT INTO sequence_ids(identifier) VALUES (?)", (identifier,))
+        except sqlite3.IntegrityError:
+            return False
+        return True
+
+    def _spill(self) -> None:
+        temporary = tempfile.NamedTemporaryFile(prefix="tandemx-ids-", suffix=".sqlite3", delete=False)
+        temporary.close()
+        self._database_path = Path(temporary.name)
+        self._database = sqlite3.connect(self._database_path)
+        self._database.execute("PRAGMA journal_mode=OFF")
+        self._database.execute("PRAGMA synchronous=OFF")
+        self._database.execute("CREATE TABLE sequence_ids(identifier TEXT PRIMARY KEY) WITHOUT ROWID")
+        self._database.executemany(
+            "INSERT INTO sequence_ids(identifier) VALUES (?)",
+            ((identifier,) for identifier in self._memory),
+        )
+        self._memory.clear()
+
+    def close(self) -> None:
+        if self._database is not None:
+            self._database.close()
+            self._database = None
+        if self._database_path is not None:
+            self._database_path.unlink(missing_ok=True)
+            self._database_path = None
+        self._memory.clear()
+
+    def __enter__(self) -> DuplicateIdTracker:
+        return self
+
+    def __exit__(self, *_args: object) -> None:
+        self.close()
 
 
 FASTA_SUFFIXES = (".fa", ".fasta")
@@ -47,26 +120,41 @@ VALID_BASES = frozenset("ACGTN")
 
 def read_sequence_records(path: Path) -> Iterator[SequenceRecord]:
     """Read FASTA/FASTQ, optionally gzip-compressed, as a streaming iterator."""
+    with DuplicateIdTracker() as seen_ids:
+        yield from _read_sequence_records(path, seen_ids)
+
+
+def _read_sequence_records(path: Path, seen_ids: DuplicateIdTracker) -> Iterator[SequenceRecord]:
     kind = detect_sequence_format(path)
     with open_text(path) as handle:
         if kind == "fasta":
-            yield from read_fasta_records(handle, path)
+            yield from read_fasta_records(handle, path, seen_ids=seen_ids)
         else:
-            yield from read_fastq_records(handle, path)
+            yield from read_fastq_records(handle, path, seen_ids=seen_ids)
 
 
-def read_sequence_records_many(paths: Path | Sequence[Path]) -> Iterator[SequenceRecord]:
+def read_sequence_records_many(
+    paths: Path | Sequence[Path],
+    *,
+    check_duplicate_ids_across_files: bool = True,
+) -> Iterator[SequenceRecord]:
     """Read one or more FASTA/FASTQ inputs as a single streaming record iterator."""
     sequence_paths = normalize_sequence_paths(paths)
-    seen_ids: set[str] = set()
-    for path in sequence_paths:
-        for record in read_sequence_records(path):
-            if record.id in seen_ids:
-                raise SequenceFormatError(
-                    f"Duplicate sequence id across input read files: {record.id}"
-                )
-            seen_ids.add(record.id)
-            yield record
+    if not check_duplicate_ids_across_files:
+        for path in sequence_paths:
+            yield from read_sequence_records(path)
+        return
+    with DuplicateIdTracker() as seen_ids:
+        for path in sequence_paths:
+            try:
+                yield from _read_sequence_records(path, seen_ids)
+            except SequenceFormatError as exc:
+                if "Duplicate sequence id in" in str(exc):
+                    identifier = str(exc).rsplit(": ", 1)[-1]
+                    raise SequenceFormatError(
+                        f"Duplicate sequence id across input read files: {identifier}"
+                    ) from exc
+                raise
 
 
 def normalize_sequence_paths(paths: Path | Sequence[Path]) -> tuple[Path, ...]:
@@ -76,6 +164,76 @@ def normalize_sequence_paths(paths: Path | Sequence[Path]) -> tuple[Path, ...]:
     if not normalized:
         raise SequenceFormatError("At least one sequence input file is required")
     return normalized
+
+
+def read_fasta_chunks(path: Path, *, chunk_bases: int = 1_000_000) -> Iterator[FastaChunk]:
+    """Stream bounded chunks without materializing an entire assembly contig."""
+    if chunk_bases <= 0:
+        raise ValueError("chunk_bases must be positive")
+    if detect_sequence_format(path) != "fasta":
+        raise SequenceFormatError(f"Assembly input must be FASTA: {path}")
+    with DuplicateIdTracker() as seen_ids, open_text(path) as handle:
+        current_id: str | None = None
+        current_description = ""
+        parts: list[str] = []
+        buffered_bases = 0
+        offset = 0
+        record_has_sequence = False
+        yielded = False
+        for line_number, raw_line in enumerate(handle, start=1):
+            line = raw_line.strip()
+            if not line:
+                continue
+            if line.startswith(">"):
+                if current_id is not None:
+                    if not record_has_sequence:
+                        raise SequenceFormatError(
+                            f"Invalid FASTA in {path}: empty sequence for record {current_description}"
+                        )
+                    if parts:
+                        sequence = "".join(parts)
+                        yield FastaChunk(current_id, current_description, offset, sequence)
+                        yielded = True
+                current_description = line[1:].strip()
+                if not current_description:
+                    raise SequenceFormatError(f"Empty FASTA header in {path} at line {line_number}")
+                current_id = record_id(current_description)
+                if not seen_ids.add(current_id):
+                    raise SequenceFormatError(f"Duplicate sequence id in {path}: {current_id}")
+                parts = []
+                buffered_bases = 0
+                offset = 0
+                record_has_sequence = False
+                continue
+            if current_id is None:
+                raise SequenceFormatError(
+                    f"Invalid FASTA in {path}: sequence before header at line {line_number}"
+                )
+            validated = validate_sequence(line, path, line_number)
+            parts.append(validated)
+            buffered_bases += len(validated)
+            record_has_sequence = True
+            if buffered_bases >= chunk_bases:
+                combined = "".join(parts)
+                while len(combined) >= chunk_bases:
+                    sequence = combined[:chunk_bases]
+                    yield FastaChunk(current_id, current_description, offset, sequence)
+                    yielded = True
+                    offset += len(sequence)
+                    combined = combined[chunk_bases:]
+                parts = [combined] if combined else []
+                buffered_bases = len(combined)
+        if current_id is not None:
+            if not record_has_sequence:
+                raise SequenceFormatError(
+                    f"Invalid FASTA in {path}: empty sequence for record {current_description}"
+                )
+            if parts:
+                sequence = "".join(parts)
+                yield FastaChunk(current_id, current_description, offset, sequence)
+                yielded = True
+        if not yielded:
+            raise SequenceFormatError(f"Sequence file is empty or contains no records: {path}")
 
 
 def count_sequence_records(path: Path) -> SequenceStats:
@@ -230,8 +388,24 @@ def validate_sequence(sequence: str, path: Path, line_number: int) -> str:
     return sequence
 
 
-def read_fasta_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
-    seen_ids: set[str] = set()
+def read_fasta_records(
+    handle: TextIO,
+    path: Path,
+    *,
+    seen_ids: DuplicateIdTracker | None = None,
+) -> Iterator[SequenceRecord]:
+    if seen_ids is None:
+        with DuplicateIdTracker() as tracker:
+            yield from _read_fasta_records(handle, path, tracker)
+        return
+    yield from _read_fasta_records(handle, path, seen_ids)
+
+
+def _read_fasta_records(
+    handle: TextIO,
+    path: Path,
+    seen_ids: DuplicateIdTracker,
+) -> Iterator[SequenceRecord]:
     current_header: str | None = None
     parts: list[str] = []
     yielded = False
@@ -261,7 +435,7 @@ def read_fasta_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
 def make_fasta_record(
     header: str,
     parts: list[str],
-    seen_ids: set[str],
+    seen_ids: DuplicateIdTracker,
     path: Path,
 ) -> SequenceRecord:
     if len(parts) == 1:
@@ -271,14 +445,29 @@ def make_fasta_record(
     if not sequence:
         raise SequenceFormatError(f"Invalid FASTA in {path}: empty sequence for record {header}")
     identifier = record_id(header)
-    if identifier in seen_ids:
+    if not seen_ids.add(identifier):
         raise SequenceFormatError(f"Duplicate sequence id in {path}: {identifier}")
-    seen_ids.add(identifier)
     return SequenceRecord(id=identifier, sequence=sequence, quality=None, description=header)
 
 
-def read_fastq_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
-    seen_ids: set[str] = set()
+def read_fastq_records(
+    handle: TextIO,
+    path: Path,
+    *,
+    seen_ids: DuplicateIdTracker | None = None,
+) -> Iterator[SequenceRecord]:
+    if seen_ids is None:
+        with DuplicateIdTracker() as tracker:
+            yield from _read_fastq_records(handle, path, tracker)
+        return
+    yield from _read_fastq_records(handle, path, seen_ids)
+
+
+def _read_fastq_records(
+    handle: TextIO,
+    path: Path,
+    seen_ids: DuplicateIdTracker,
+) -> Iterator[SequenceRecord]:
     yielded = False
     line_number = 0
     while True:
@@ -308,9 +497,8 @@ def read_fastq_records(handle: TextIO, path: Path) -> Iterator[SequenceRecord]:
                 f"FASTQ sequence and quality lengths differ for {record_id(header_text)} in {path}"
             )
         identifier = record_id(header_text)
-        if identifier in seen_ids:
+        if not seen_ids.add(identifier):
             raise SequenceFormatError(f"Duplicate sequence id in {path}: {identifier}")
-        seen_ids.add(identifier)
         yielded = True
         yield SequenceRecord(
             id=identifier,

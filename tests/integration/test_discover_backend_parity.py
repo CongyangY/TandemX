@@ -55,8 +55,9 @@ def test_python_and_rust_discover_backend_parity(tmp_path: Path) -> None:
     )
     assert simulated.returncode == 0, simulated.stderr
 
-    candidate_counts: dict[str, int] = {}
     family_lengths: dict[str, list[int]] = {}
+    candidate_rows: dict[str, list[dict[str, str]]] = {}
+    family_rows: dict[str, list[dict[str, str]]] = {}
     for backend in ("python", "rust"):
         outdir = tmp_path / backend
         result = run_cli(
@@ -77,21 +78,16 @@ def test_python_and_rust_discover_backend_parity(tmp_path: Path) -> None:
             backend,
         )
         assert result.returncode == 0, result.stderr
-        candidate_counts[backend] = len(read_rows(outdir / "candidate_reads.tsv"))
+        candidate_rows[backend] = read_rows(outdir / "candidate_reads.tsv")
+        family_rows[backend] = read_rows(outdir / "families.tsv")
         family_lengths[backend] = sorted(
             int(row["monomer_length_bp"])
             for row in read_rows(outdir / "families.tsv")
         )
 
-    difference = abs(candidate_counts["python"] - candidate_counts["rust"])
-    assert difference / max(candidate_counts.values()) <= 0.20
-    assert len(family_lengths["python"]) == len(family_lengths["rust"])
-    assert all(
-        abs(python_length - rust_length) <= 5
-        for python_length, rust_length in zip(
-            family_lengths["python"], family_lengths["rust"]
-        )
-    )
+    assert candidate_rows["python"] == candidate_rows["rust"]
+    assert family_rows["python"] == family_rows["rust"]
+    assert family_lengths["python"] == family_lengths["rust"]
 
 
 def test_rust_discover_threads_preserve_outputs(tmp_path: Path) -> None:

@@ -15,9 +15,14 @@ from typing import Iterable, Sequence
 from tandemx.discover.mvp import FastaRecord, read_fasta, read_fasta_many
 from tandemx.io.sequences import normalize_sequence_paths
 from tandemx.discover.rust_backend import RustDiagnosticKmerCounter
-from tandemx.simulate.toy import reverse_complement
 from tandemx.utils.threads import discover_thread_limit
 from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
+from tandemx.utils.kmers import (
+    canonical_kmer,
+    circular_kmer_counts,
+    is_low_complexity_kmer,
+    iter_linear_canonical_kmers,
+)
 
 
 @dataclass(frozen=True)
@@ -49,6 +54,9 @@ class CopyNumberEstimate:
     haploid_depth: float
     estimated_copy_number: float
     estimated_bp: float
+    depth_mad: float
+    copy_number_interval_low: float
+    copy_number_interval_high: float
     confidence: str
     warning: str
 
@@ -59,14 +67,12 @@ def quantify_toy_copy_number(
     progress: TerminalProgress | None = None,
 ) -> list[CopyNumberEstimate]:
     validate_quantify_config(config)
+    config.outdir.mkdir(parents=True, exist_ok=True)
     logger = logger or logging.getLogger("tandemx.quantify")
     update_quantify_terminal_progress(progress, "load_catalog", 0, 0, config)
     monomers = list(read_monomer_fasta(config.monomers))
     if not monomers:
         raise ValueError("No monomers found for quantify")
-    if all(len(monomer.sequence) < config.k for monomer in monomers):
-        raise ValueError("--k is greater than all monomer lengths in the catalogue")
-
     update_quantify_terminal_progress(progress, "build_diagnostic_kmers", 0, 0, config)
     shared_map = family_kmer_membership(monomers, config.k)
     diagnostic_by_family = {
@@ -113,15 +119,29 @@ def quantify_toy_copy_number(
             if multiplicity > 0
         ]
         median_depth = float(median(corrected_depths)) if corrected_depths else 0.0
+        depth_mad = (
+            float(median(abs(value - median_depth) for value in corrected_depths))
+            if corrected_depths
+            else 0.0
+        )
         estimated_copy_number = median_depth / haploid_depth if haploid_depth > 0 else 0.0
         estimated_bp = estimated_copy_number * len(monomer.sequence)
+        interval_low_depth = empirical_quantile(corrected_depths, 0.10)
+        interval_high_depth = empirical_quantile(corrected_depths, 0.90)
+        interval_low = interval_low_depth / haploid_depth if haploid_depth > 0 else 0.0
+        interval_high = interval_high_depth / haploid_depth if haploid_depth > 0 else 0.0
         warning_parts = []
         if config.haploid_depth is None:
             warning_parts.append("haploid_depth_estimated_from_total_read_bases_and_genome_size")
         if not diagnostic:
             warning_parts.append("no_diagnostic_kmers")
-        confidence = "high"
-        if len(diagnostic) < 10 or config.haploid_depth is None:
+        else:
+            warning_parts.append("genome_background_uniqueness_not_verified")
+        # Catalogue-only diagnostic k-mers have not been checked against an
+        # independent genome background, so this MVP must not label them high.
+        confidence = "medium"
+        relative_mad = depth_mad / median_depth if median_depth > 0 else 0.0
+        if len(diagnostic) < 10 or config.haploid_depth is None or relative_mad > 0.25:
             confidence = "medium"
         if not diagnostic or haploid_depth <= 0:
             confidence = "low"
@@ -134,6 +154,9 @@ def quantify_toy_copy_number(
                 haploid_depth=haploid_depth,
                 estimated_copy_number=estimated_copy_number,
                 estimated_bp=estimated_bp,
+                depth_mad=depth_mad,
+                copy_number_interval_low=interval_low,
+                copy_number_interval_high=interval_high,
                 confidence=confidence,
                 warning=";".join(warning_parts),
             )
@@ -145,6 +168,9 @@ def quantify_toy_copy_number(
 
 
 def validate_quantify_config(config: QuantifyConfig) -> None:
+    paths = normalize_sequence_paths(config.reads)
+    if len(set(paths)) != len(paths):
+        raise ValueError("--reads must not contain the same file path more than once")
     if config.genome_size <= 0:
         raise ValueError("--genome-size must be positive")
     if config.k <= 0:
@@ -166,7 +192,7 @@ def validate_quantify_config(config: QuantifyConfig) -> None:
 def read_monomer_fasta(path: Path) -> Iterable[MonomerRecord]:
     for record in read_fasta(path):
         family_id = parse_family_id(record.description)
-        yield MonomerRecord(family_id=family_id, sequence=record.sequence.replace("N", ""))
+        yield MonomerRecord(family_id=family_id, sequence=record.sequence)
 
 
 def parse_family_id(header: str) -> str:
@@ -176,17 +202,8 @@ def parse_family_id(header: str) -> str:
     return header.split()[0]
 
 
-def canonical_kmer(kmer: str) -> str:
-    reverse = reverse_complement(kmer)
-    return min(kmer.upper(), reverse)
-
-
 def iter_kmers(sequence: str, k: int) -> Iterable[str]:
-    sequence = sequence.upper()
-    for index in range(0, len(sequence) - k + 1):
-        kmer = sequence[index : index + k]
-        if "N" not in kmer:
-            yield canonical_kmer(kmer)
+    yield from iter_linear_canonical_kmers(sequence, k)
 
 
 def count_read_kmers(reads: Sequence[FastaRecord], k: int) -> Counter[str]:
@@ -243,6 +260,8 @@ def count_selected_read_kmers_and_bases(
     read_count = 0
     max_read_len = 0
     started = time.perf_counter()
+    rust_batch: list[str] = []
+    rust_batch_bases = 0
     logger = logger or logging.getLogger("tandemx.quantify")
     update_quantify_read_progress(
         progress,
@@ -251,7 +270,10 @@ def count_selected_read_kmers_and_bases(
         max_reads,
         max_read_bases,
     )
-    for read in read_fasta_many(sequence_paths):
+    for read in read_fasta_many(
+        sequence_paths,
+        check_duplicate_ids_across_files=False,
+    ):
         if max_reads is not None and read_count >= max_reads:
             break
         if max_read_bases is not None and total_bases + len(read.sequence) > max_read_bases:
@@ -265,7 +287,12 @@ def count_selected_read_kmers_and_bases(
         total_bases += len(read.sequence)
         max_read_len = max(max_read_len, len(read.sequence))
         if rust_counter is not None:
-            rust_counter.count_sequence(read.sequence)
+            rust_batch.append(read.sequence)
+            rust_batch_bases += len(read.sequence)
+            if len(rust_batch) >= 512 or rust_batch_bases >= 8_000_000:
+                rust_counter.count_sequences(rust_batch)
+                rust_batch.clear()
+                rust_batch_bases = 0
         else:
             counts.update(kmer for kmer in iter_kmers(read.sequence, k) if kmer in targets)
         if read_count % progress_every == 0:
@@ -286,6 +313,7 @@ def count_selected_read_kmers_and_bases(
         max_read_bases,
     )
     if rust_counter is not None:
+        rust_counter.count_sequences(rust_batch)
         counts.update(rust_counter.counts())
     return counts, total_bases, read_count, max_read_len
 
@@ -360,15 +388,23 @@ def count_selected_read_kmers_and_bases_one_file(
     total_bases = 0
     read_count = 0
     max_read_len = 0
+    rust_batch: list[str] = []
+    rust_batch_bases = 0
     for read in read_fasta(path):
         read_count += 1
         total_bases += len(read.sequence)
         max_read_len = max(max_read_len, len(read.sequence))
         if rust_counter is not None:
-            rust_counter.count_sequence(read.sequence)
+            rust_batch.append(read.sequence)
+            rust_batch_bases += len(read.sequence)
+            if len(rust_batch) >= 512 or rust_batch_bases >= 8_000_000:
+                rust_counter.count_sequences(rust_batch)
+                rust_batch.clear()
+                rust_batch_bases = 0
         else:
             counts.update(kmer for kmer in iter_kmers(read.sequence, k) if kmer in targets)
     if rust_counter is not None:
+        rust_counter.count_sequences(rust_batch)
         counts.update(rust_counter.counts())
     return counts, total_bases, read_count, max_read_len
 
@@ -446,7 +482,7 @@ def log_quantify_progress(
 
 
 def monomer_kmer_counts(sequence: str, k: int) -> Counter[str]:
-    return Counter(iter_kmers(sequence, k))
+    return circular_kmer_counts(sequence, k)
 
 
 def family_kmer_membership(monomers: Sequence[MonomerRecord], k: int) -> dict[str, set[str]]:
@@ -457,21 +493,23 @@ def family_kmer_membership(monomers: Sequence[MonomerRecord], k: int) -> dict[st
     return membership
 
 
-def is_low_complexity_kmer(kmer: str) -> bool:
-    if not kmer:
-        return True
-    counts = Counter(kmer)
-    if max(counts.values()) / len(kmer) >= 0.8:
-        return True
-    dinucleotides = {kmer[index : index + 2] for index in range(0, len(kmer) - 1, 2)}
-    return len(dinucleotides) <= 1
+def empirical_quantile(values: Sequence[float], fraction: float) -> float:
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    position = fraction * (len(ordered) - 1)
+    lower = int(position)
+    upper = min(len(ordered) - 1, lower + 1)
+    weight = position - lower
+    return ordered[lower] * (1.0 - weight) + ordered[upper] * weight
 
 
 def write_copy_number(path: Path, estimates: Sequence[CopyNumberEstimate]) -> None:
     lines = [
         (
             "family_id\tmonomer_length\tdiagnostic_kmer_count\tmedian_kmer_depth\t"
-            "haploid_depth\testimated_copy_number\testimated_bp\tconfidence\twarning"
+            "haploid_depth\testimated_copy_number\testimated_bp\tdepth_mad\t"
+            "copy_number_interval_low\tcopy_number_interval_high\tconfidence\twarning"
         )
     ]
     for estimate in estimates:
@@ -485,6 +523,9 @@ def write_copy_number(path: Path, estimates: Sequence[CopyNumberEstimate]) -> No
                     f"{estimate.haploid_depth:.4f}",
                     f"{estimate.estimated_copy_number:.4f}",
                     f"{estimate.estimated_bp:.4f}",
+                    f"{estimate.depth_mad:.4f}",
+                    f"{estimate.copy_number_interval_low:.4f}",
+                    f"{estimate.copy_number_interval_high:.4f}",
                     estimate.confidence,
                     estimate.warning,
                 ]

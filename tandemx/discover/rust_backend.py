@@ -21,6 +21,8 @@ class RustScanResult:
     spacing_support: tuple[tuple[int, int], ...]
     best_period: int
     periodicity_score: float
+    repeat_start: int
+    repeat_end: int
     overflow_count: int
     status: str
 
@@ -50,6 +52,7 @@ def scan_read_for_periods(
     min_seed_occurrences: int,
     min_spacing_support: int,
     max_pairs_per_kmer: int,
+    min_repeat_span: int = 1,
 ) -> RustScanResult:
     try:
         from tandemx import _rust_core
@@ -68,12 +71,15 @@ def scan_read_for_periods(
         min_seed_occurrences,
         min_spacing_support,
         max_pairs_per_kmer,
+        min_repeat_span,
     )
     return RustScanResult(
         candidate_periods=tuple(result.candidate_periods),
         spacing_support=tuple(tuple(item) for item in result.spacing_support),
         best_period=result.best_period,
         periodicity_score=result.periodicity_score,
+        repeat_start=result.repeat_start,
+        repeat_end=result.repeat_end,
         overflow_count=result.overflow_count,
         status=result.status,
     )
@@ -89,6 +95,7 @@ def scan_reads_for_periods(
     min_seed_occurrences: int,
     min_spacing_support: int,
     max_pairs_per_kmer: int,
+    min_repeat_span: int = 1,
 ) -> tuple[RustScanResult, ...]:
     try:
         from tandemx import _rust_core
@@ -107,6 +114,7 @@ def scan_reads_for_periods(
         min_seed_occurrences,
         min_spacing_support,
         max_pairs_per_kmer,
+        min_repeat_span,
     )
     return tuple(
         RustScanResult(
@@ -114,6 +122,8 @@ def scan_reads_for_periods(
             spacing_support=tuple(tuple(item) for item in result.spacing_support),
             best_period=result.best_period,
             periodicity_score=result.periodicity_score,
+            repeat_start=result.repeat_start,
+            repeat_end=result.repeat_end,
             overflow_count=result.overflow_count,
             status=result.status,
         )
@@ -136,6 +146,10 @@ class RustDiagnosticKmerCounter:
 
     def count_sequence(self, sequence: str) -> None:
         self._counter.count_sequence(sequence)
+
+    def count_sequences(self, sequences: Sequence[str]) -> None:
+        if sequences:
+            self._counter.count_sequences(list(sequences))
 
     def counts(self) -> dict[str, int]:
         return dict(self._counter.counts())

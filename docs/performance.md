@@ -21,7 +21,7 @@ For 100,000 HiFi reads with an N50 near 16 kb and a 20-2,000 bp period range, th
 5. cap stored positions and inspected pairs per k-mer;
 6. build a bounded seed-spacing histogram;
 7. select only the strongest spacing peaks;
-8. refine each peak in a small local neighborhood with modulo phase support from at most 128 high-occurrence seed groups and at most 1,024 evenly sampled base comparisons;
+8. refine peaks and plausible fundamental divisors against a linear-time local shifted-identity interval, requiring evidence across at least two repeat units;
 9. release the read-local seed structures before reading the next record.
 
 The algorithm no longer compares every base for every possible period. Its Python pilot cost is dominated by per-read k-mer extraction plus bounded spacing/refinement work.
@@ -34,7 +34,7 @@ At command start, discover creates:
 2. `run_config.yaml` with running status;
 3. `candidate_reads.tsv` with its header.
 
-Each accepted candidate is appended and flushed immediately. Discover starts read scanning immediately and runs input read/base counting as a background task. The CLI refreshes one terminal progress line in place; before counting finishes, total and remaining time are unavailable, and after counting finishes the same line shows percentage, estimated total runtime and remaining time. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s, MB/s and estimated remaining time when total input size is known. Ctrl-C leaves existing candidate output available for diagnosis.
+Each accepted candidate is appended and flushed immediately. Discover normally starts scanning without a separate full-input count, avoiding doubled input I/O and an uncancellable background task. A synchronous pre-count is used only when the user explicitly enables automatic budgeting without providing `--genome-size`. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s and MB/s; a percentage and remaining-time estimate are shown only when a configured limit or counted total is available. Ctrl-C leaves existing candidate output available for diagnosis.
 
 ## Pilot Controls
 
@@ -56,13 +56,14 @@ Use these controls for real-read subsets:
 --min-spacing-support
 --max-pairs-per-kmer
 --chunk-size
+--chunk-bases
 --threads
 --no-progress
 ```
 
 `--threads` defaults to a request of 8 for `discover`, capped at the smaller of 64 and half of available logical CPUs. `--kmer-backend auto` is the default and uses Rust when the compiled extension is available and the requested k-mer size is supported by Rust, so normal installs with the default k-mer size get the multi-threaded scan path by default. Multi-threaded scanning is enabled only with the Rust backend, whose PyO3 implementation releases the Python GIL during read-local scanning. The Python backend records the requested thread setting but scans reads serially because its CPU-heavy path is GIL-bound.
 
-`--count-threads` defaults to 4 on single-file input and can scale with multiple read files, always capped by `--threads`. Counting still does not block discovery startup. A single gzip stream is counted by one worker unless an external tool such as `seqkit` is available.
+`--count-threads` is used only for the explicit automatic-budget pre-count when no genome size is available. A single gzip stream is counted by one worker unless an external tool such as `seqkit` is available.
 
 `--reads` accepts multiple files. They are streamed in the supplied order and
 merged for the run without preloading all reads into memory. Duplicate read IDs
@@ -78,7 +79,7 @@ When this bounded mode is active and multiple files are supplied, discover reads
 The default `--min-period` is 2 bp. Use `--min-period 20` when engineering pilots
 should focus on longer satellite-like monomers and ignore STR-like periods.
 
-`--chunk-size` controls how many selected reads are submitted to the Rust thread pool at a time. It is not yet a checkpoint or resume boundary. Resume is not implemented and the CLI does not expose a non-functional `--resume` flag.
+`--chunk-size` and `--chunk-bases` jointly bound how many selected reads and sequence bases are submitted to the Rust thread pool at once. They are not checkpoint boundaries. Step-level `tandemx run --resume` uses validated outputs plus SHA-256 input/command fingerprints, but intra-step checkpointing is not implemented.
 
 `tandemx quantify` uses the same live progress style while scanning reads for diagnostic k-mers. When commands are launched through `tandemx run`, child command output is streamed to the terminal while still being saved under `logs/`.
 
@@ -88,13 +89,40 @@ should focus on longer satellite-like monomers and ignore STR-like periods.
 
 Production-scale global k-mer counting is a separate problem and should use optional mature backends such as KMC, meryl or Jellyfish instead of a new TandemX counter. The Rust backend does not replace those tools.
 
-Quantify derives diagnostic k-mers from the discovered families before scanning reads. Both backends count only those targets, so memory scales with the catalogue rather than all distinct read k-mers. The Rust implementation is a small stateful target counter, not a production global k-mer counter.
+Quantify derives circular diagnostic k-mers from the discovered families before scanning reads. Both backends count only those targets, so memory scales with the catalogue rather than all distinct read k-mers. Rust receives bounded batches and counts them while the GIL is released. The implementation remains a target counter, not a production global k-mer counter.
+
+Locate builds one family-specific k-mer index, streams assembly FASTA in bounded
+chunks with exact cross-chunk rolling context, merges hits online, and calculates
+window coverage from interval unions. Probe ranking likewise indexes all candidates
+before one bounded-chunk assembly pass. These changes remove the
+previous `families × assembly` and `probes × assembly` rescans. Result tables can
+still grow with the number of reported arrays, windows and probe regions.
 
 ## Remaining Limits
 
-The spacing prefilter and Rust read-scanning threads enable larger subsets but do not make TandemX ready for full 7-20 Gb genomes or 100 Gb read sets. Remaining work includes multiprocessing or distributed chunks, chunk checkpoints, resumable execution, portable peak-memory reporting and validation on real HiFi subsets.
+The spacing prefilter and Rust read-scanning threads enable larger subsets but do not make TandemX ready for full 7-20 Gb genomes or 100 Gb read sets. Remaining work includes multiprocessing or distributed chunks, intra-step checkpoints, bounded on-disk result tables and validation on real HiFi subsets. The synthetic benchmark runner now records per-command peak resident memory with `wait4` on supported Unix platforms.
 
 ## Synthetic Reference Measurements
+
+Current correctness-and-streaming reference on the development workstation on
+2026-07-15 (`tiny`, 1,000 × 1.8 kb reads; 421/729 bp truth monomers):
+
+| Step | Runtime | Peak RSS | Result |
+|---|---:|---:|---|
+| discover | 1.32 s | 31.0 MB | 869 candidates, 2 families |
+| quantify | 0.12 s | 25.0 MB | 2 estimates |
+| locate | 0.08 s | 22.8 MB | validated |
+| probe | 0.09 s | 22.4 MB | validated |
+
+Both truth monomers were recovered at exact length and sequence identity 1.0;
+copy-number relative errors were 8.84% and 3.94% in this engineering dataset.
+Two independent end-to-end runs produced byte-identical content for all 11
+primary analysis outputs. Runtime and RSS naturally vary by host and run.
+
+A separate 10.13 MB assembly scaling check reduced peak RSS from 60.3 to
+40.9 MB for locate and from 59.3 to 37.5 MB for probe after bounded FASTA
+chunking, while retaining identical validated outputs. The remaining fixed
+Python/import overhead dominates these small absolute sizes.
 
 Measurements on the development workstation on 2026-06-18:
 

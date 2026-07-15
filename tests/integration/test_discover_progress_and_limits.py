@@ -60,7 +60,7 @@ def test_max_reads_progress_and_incremental_files(tmp_path: Path) -> None:
     assert len(candidate_lines) == 11
 
 
-def test_discover_precounts_reads_for_bounded_progress_without_limits(tmp_path: Path) -> None:
+def test_discover_avoids_unneeded_full_input_precount(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fa"
     reads.write_text(periodic_reads(12), encoding="utf-8")
     outdir = tmp_path / "discover"
@@ -85,11 +85,9 @@ def test_discover_precounts_reads_for_bounded_progress_without_limits(tmp_path: 
 
     assert result.returncode == 0, result.stderr
     assert "discover scan_reads" in result.stderr
-    assert "counting" in result.stderr
-    assert "/12 reads" in result.stderr
+    assert "counting" not in result.stderr
     log = (outdir / "run.log").read_text(encoding="utf-8")
-    assert "input_count_started read_files=1" in log
-    assert "input_summary read_files=1 total_reads=12" in log
+    assert "input_count_skipped reason=not_required_for_discovery_budget" in log
 
 
 def test_max_read_bases_stops_before_exceeding_limit(tmp_path: Path) -> None:

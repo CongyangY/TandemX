@@ -145,6 +145,9 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
             "haploid_depth",
             "estimated_copy_number",
             "estimated_bp",
+            "depth_mad",
+            "copy_number_interval_low",
+            "copy_number_interval_high",
             "confidence",
             "warning",
         },
@@ -155,6 +158,9 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
             "haploid_depth",
             "estimated_copy_number",
             "estimated_bp",
+            "depth_mad",
+            "copy_number_interval_low",
+            "copy_number_interval_high",
         },
     },
     "assembly_vs_read_cn.tsv": {
@@ -253,33 +259,32 @@ def validate_project(project_dir: Path) -> list[ValidationResult]:
 
 
 def validate_tsv(path: Path, schema: dict[str, set[str]]) -> ValidationResult:
-    lines = path.read_text(encoding="utf-8").splitlines()
-    if not lines:
-        raise ValidationError(f"TSV file is empty: {path}")
-    header = lines[0].split("\t")
-    missing = sorted(schema["required"] - set(header))
-    if missing:
-        raise ValidationError(f"{path} is missing required field(s): {', '.join(missing)}")
-    index = {name: header.index(name) for name in header}
-    record_count = 0
-    for line_number, line in enumerate(lines[1:], start=2):
-        if not line:
-            continue
-        fields = line.split("\t")
-        if len(fields) != len(header):
-            raise ValidationError(f"{path} line {line_number} has {len(fields)} fields, expected {len(header)}")
-        for name in schema["numeric"]:
-            parse_numeric(fields[index[name]], path, line_number, name)
-        if "confidence" in index and not fields[index["confidence"]]:
-            raise ValidationError(f"{path} line {line_number} has empty confidence")
-        if "status" in index and not fields[index["status"]]:
-            raise ValidationError(f"{path} line {line_number} has empty status")
-        if "status" in index and "status" in schema and fields[index["status"]] not in schema["status"]:
-            raise ValidationError(f"{path} line {line_number} has invalid status: {fields[index['status']]}")
-        if "warning" in index and len(fields[index["warning"]]) == 0:
-            # Empty warning is valid and means no warning for this record.
-            pass
-        record_count += 1
+    with path.open("rt", encoding="utf-8") as handle:
+        header_line = handle.readline().rstrip("\n\r")
+        if not header_line:
+            raise ValidationError(f"TSV file is empty: {path}")
+        header = header_line.split("\t")
+        missing = sorted(schema["required"] - set(header))
+        if missing:
+            raise ValidationError(f"{path} is missing required field(s): {', '.join(missing)}")
+        index = {name: header.index(name) for name in header}
+        record_count = 0
+        for line_number, raw_line in enumerate(handle, start=2):
+            line = raw_line.rstrip("\n\r")
+            if not line:
+                continue
+            fields = line.split("\t")
+            if len(fields) != len(header):
+                raise ValidationError(f"{path} line {line_number} has {len(fields)} fields, expected {len(header)}")
+            for name in schema["numeric"].intersection(index):
+                parse_numeric(fields[index[name]], path, line_number, name)
+            if "confidence" in index and not fields[index["confidence"]]:
+                raise ValidationError(f"{path} line {line_number} has empty confidence")
+            if "status" in index and not fields[index["status"]]:
+                raise ValidationError(f"{path} line {line_number} has empty status")
+            if "status" in index and "status" in schema and fields[index["status"]] not in schema["status"]:
+                raise ValidationError(f"{path} line {line_number} has invalid status: {fields[index['status']]}")
+            record_count += 1
     if record_count == 0 and path.name not in ALLOW_EMPTY_TSV_RECORDS:
         raise ValidationError(f"TSV file has no records: {path}")
     return ValidationResult(path=path, record_count=record_count)
@@ -294,17 +299,21 @@ def parse_numeric(value: str, path: Path, line_number: int, field: str) -> None:
 
 def validate_bedgraph(path: Path) -> ValidationResult:
     record_count = 0
-    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
-        if not line:
-            continue
-        fields = line.split("\t")
-        if len(fields) != 4:
-            raise ValidationError(f"{path} line {line_number} must have 4 bedGraph fields")
-        start = parse_int(fields[1], path, line_number, "start")
-        end = parse_int(fields[2], path, line_number, "end")
-        parse_numeric(fields[3], path, line_number, "score")
-        validate_half_open(path, line_number, start, end)
-        record_count += 1
+    with path.open("rt", encoding="utf-8") as handle:
+        for line_number, raw_line in enumerate(handle, start=1):
+            line = raw_line.rstrip("\n\r")
+            if not line:
+                continue
+            fields = line.split("\t")
+            if len(fields) != 4:
+                raise ValidationError(f"{path} line {line_number} must have 4 bedGraph fields")
+            start = parse_int(fields[1], path, line_number, "start")
+            end = parse_int(fields[2], path, line_number, "end")
+            parse_numeric(fields[3], path, line_number, "score")
+            validate_half_open(path, line_number, start, end)
+            if not 0 <= float(fields[3]) <= 1:
+                raise ValidationError(f"{path} line {line_number} bedGraph density must be in [0, 1]")
+            record_count += 1
     if record_count == 0:
         raise ValidationError(f"bedGraph file has no records: {path}")
     return ValidationResult(path=path, record_count=record_count)
@@ -312,23 +321,25 @@ def validate_bedgraph(path: Path) -> ValidationResult:
 
 def validate_arrays_bed(path: Path) -> ValidationResult:
     record_count = 0
-    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
-        if not line:
-            continue
-        fields = line.split("\t")
-        if len(fields) < 8:
-            raise ValidationError(f"{path} line {line_number} must have at least 8 fields")
-        start = parse_int(fields[1], path, line_number, "start")
-        end = parse_int(fields[2], path, line_number, "end")
-        score = parse_int(fields[4], path, line_number, "score")
-        validate_half_open(path, line_number, start, end)
-        if not 0 <= score <= 1000:
-            raise ValidationError(f"{path} line {line_number} BED score must be 0-1000")
-        if fields[5] not in {"+", "-", "."}:
-            raise ValidationError(f"{path} line {line_number} strand must be '+', '-', or '.'")
-        if not fields[6]:
-            raise ValidationError(f"{path} line {line_number} confidence is empty")
-        record_count += 1
+    with path.open("rt", encoding="utf-8") as handle:
+        for line_number, raw_line in enumerate(handle, start=1):
+            line = raw_line.rstrip("\n\r")
+            if not line:
+                continue
+            fields = line.split("\t")
+            if len(fields) < 8:
+                raise ValidationError(f"{path} line {line_number} must have at least 8 fields")
+            start = parse_int(fields[1], path, line_number, "start")
+            end = parse_int(fields[2], path, line_number, "end")
+            score = parse_int(fields[4], path, line_number, "score")
+            validate_half_open(path, line_number, start, end)
+            if not 0 <= score <= 1000:
+                raise ValidationError(f"{path} line {line_number} BED score must be 0-1000")
+            if fields[5] not in {"+", "-", "."}:
+                raise ValidationError(f"{path} line {line_number} strand must be '+', '-', or '.'")
+            if not fields[6]:
+                raise ValidationError(f"{path} line {line_number} confidence is empty")
+            record_count += 1
     if record_count == 0:
         raise ValidationError(f"BED file has no records: {path}")
     return ValidationResult(path=path, record_count=record_count)
@@ -352,22 +363,24 @@ def validate_tandemx_fasta(path: Path, pattern: re.Pattern[str]) -> ValidationRe
     record_count = 0
     current_header: str | None = None
     current_has_sequence = False
-    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
-        if not line:
-            continue
-        if line.startswith(">"):
-            if current_header is not None and not current_has_sequence:
-                raise ValidationError(f"{path} has a header without sequence: {current_header}")
-            header = line[1:]
-            if not pattern.match(header):
-                raise ValidationError(f"{path} line {line_number} has invalid TandemX FASTA header: {header}")
-            record_count += 1
-            current_header = header
-            current_has_sequence = False
-        else:
-            if record_count == 0:
-                raise ValidationError(f"{path} line {line_number} has sequence before first FASTA header")
-            current_has_sequence = True
+    with path.open("rt", encoding="utf-8") as handle:
+        for line_number, raw_line in enumerate(handle, start=1):
+            line = raw_line.rstrip("\n\r")
+            if not line:
+                continue
+            if line.startswith(">"):
+                if current_header is not None and not current_has_sequence:
+                    raise ValidationError(f"{path} has a header without sequence: {current_header}")
+                header = line[1:]
+                if not pattern.match(header):
+                    raise ValidationError(f"{path} line {line_number} has invalid TandemX FASTA header: {header}")
+                record_count += 1
+                current_header = header
+                current_has_sequence = False
+            else:
+                if record_count == 0:
+                    raise ValidationError(f"{path} line {line_number} has sequence before first FASTA header")
+                current_has_sequence = True
     if record_count == 0:
         raise ValidationError(f"FASTA file is empty: {path}")
     if current_header is not None and not current_has_sequence:

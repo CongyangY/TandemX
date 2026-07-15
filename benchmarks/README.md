@@ -123,11 +123,13 @@ Outputs:
 6. `estimated_read_copy_bp`
 7. `copy_number_relative_error`
 8. `locate_status`
-9. `notes`
+9. `recovered_sequence_identity`
+10. `matching_method`
+11. `notes`
 
 ## Runtime And Memory
 
-The runner records wall-clock runtime with Python's standard library. Peak memory is not recorded portably yet; use `/usr/bin/time -v` on Linux or the platform `time` command on macOS for manual memory measurement until TandemX has a cross-platform resource reporter.
+The runner records wall-clock runtime and per-process peak resident memory with the Unix `wait4` resource record. `peak_memory_mb` is reported directly in `benchmark_summary.tsv`. Accuracy pairing is length-aware but sequence-driven, so unrelated repeats with the same monomer length are not treated as the same truth family.
 
 ## Interpretation
 
