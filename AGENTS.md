@@ -258,8 +258,9 @@ These repository-level instructions are the persistent project memory for Codex.
 At the start of every new Codex conversation in this repository:
 
 1. Read and follow this `AGENTS.md` before making changes.
-2. Preserve the scientific boundaries above and avoid overclaiming biological inference.
-3. Treat generated outputs, benchmark scratch directories, and local environment caches as non-source artifacts unless explicitly requested.
-4. Use the `tandemx-dev` conda environment for development checks and run `pytest` before committing when practical.
-5. Commit meaningful code, tests, and documentation together so GitHub remains the durable project record across compressed or restarted conversations.
-6. Do not modify global shell configuration or install packages outside the project environment without explicit approval.
+2. Read `docs/current_status.md` completely before planning or changing code. Verify its Git and test claims with `git status`, `git log`, and the relevant checks because the document is a handoff snapshot.
+3. Preserve the scientific boundaries above and avoid overclaiming biological inference.
+4. Treat generated outputs, benchmark scratch directories, and local environment caches as non-source artifacts unless explicitly requested.
+5. Use the `tandemx-dev` conda environment for development checks and run `pytest` before committing when practical.
+6. Commit meaningful code, tests, and documentation together so GitHub remains the durable project record across compressed or restarted conversations.
+7. Do not modify global shell configuration or install packages outside the project environment without explicit approval.
