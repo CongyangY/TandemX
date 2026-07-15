@@ -49,7 +49,8 @@ def test_quantify_uses_haploid_depth_and_multiplicity_correction(tmp_path: Path)
     assert len(estimates) == 1
     assert estimates[0].diagnostic_kmer_count > 0
     assert estimates[0].estimated_copy_number > 1
-    assert estimates[0].warning == ""
+    assert estimates[0].warning == "genome_background_uniqueness_not_verified"
+    assert estimates[0].confidence == "medium"
     assert (outdir / "copy_number.tsv").is_file()
 
 

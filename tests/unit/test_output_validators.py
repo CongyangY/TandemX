@@ -27,8 +27,9 @@ def write_valid_project(project: Path) -> None:
     )
     (project / "copy_number.tsv").write_text(
         "family_id\tmonomer_length\tdiagnostic_kmer_count\tmedian_kmer_depth\thaploid_depth\t"
-        "estimated_copy_number\testimated_bp\tconfidence\twarning\n"
-        "TXF000001\t200\t20\t10\t2\t5\t1000\thigh\t\n",
+        "estimated_copy_number\testimated_bp\tdepth_mad\tcopy_number_interval_low\t"
+        "copy_number_interval_high\tconfidence\twarning\n"
+        "TXF000001\t200\t20\t10\t2\t5\t1000\t1\t4\t6\tmedium\tgenome_background_uniqueness_not_verified\n",
         encoding="utf-8",
     )
     (project / "repeat_density.bedgraph").write_text("chr1\t0\t100\t0.5\n", encoding="utf-8")
@@ -88,8 +89,9 @@ def test_validate_tsv_rejects_non_numeric_values(tmp_path: Path) -> None:
     path = tmp_path / "copy_number.tsv"
     path.write_text(
         "family_id\tmonomer_length\tdiagnostic_kmer_count\tmedian_kmer_depth\thaploid_depth\t"
-        "estimated_copy_number\testimated_bp\tconfidence\twarning\n"
-        "TXF000001\tabc\t1\t1\t1\t1\t100\thigh\t\n",
+        "estimated_copy_number\testimated_bp\tdepth_mad\tcopy_number_interval_low\t"
+        "copy_number_interval_high\tconfidence\twarning\n"
+        "TXF000001\tabc\t1\t1\t1\t1\t100\t0\t1\t1\tmedium\twarning\n",
         encoding="utf-8",
     )
 
@@ -117,7 +119,8 @@ def test_validate_tsv_rejects_header_only_file(tmp_path: Path) -> None:
     path = tmp_path / "copy_number.tsv"
     path.write_text(
         "family_id\tmonomer_length\tdiagnostic_kmer_count\tmedian_kmer_depth\thaploid_depth\t"
-        "estimated_copy_number\testimated_bp\tconfidence\twarning\n",
+        "estimated_copy_number\testimated_bp\tdepth_mad\tcopy_number_interval_low\t"
+        "copy_number_interval_high\tconfidence\twarning\n",
         encoding="utf-8",
     )
 

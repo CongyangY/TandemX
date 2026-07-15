@@ -13,6 +13,7 @@ DEFAULT_OVEREXPANSION_THRESHOLD = 1.5
 
 
 class ArrayLike(Protocol):
+    chrom: str
     start: int
     end: int
     family_id: str
@@ -76,73 +77,77 @@ def validate_compare_config(config: CompareConfig) -> None:
 def read_copy_number(path: Path | None) -> dict[str, float]:
     if path is None:
         return {}
-    lines = path.read_text(encoding="utf-8").splitlines()
-    if not lines:
-        raise ValueError(f"copy_number.tsv is empty: {path}")
-    header = lines[0].split("\t")
-    if "family_id" not in header:
-        raise ValueError(f"{path} is missing required field: family_id")
-    family_index = header.index("family_id")
-    if "estimated_bp" in header:
-        bp_index = header.index("estimated_bp")
-    elif "estimated_repeat_bp" in header:
-        bp_index = header.index("estimated_repeat_bp")
-    else:
-        raise ValueError(f"{path} is missing required field: estimated_bp")
     values: dict[str, float] = defaultdict(float)
-    for line_number, line in enumerate(lines[1:], start=2):
-        if not line:
-            continue
-        parts = line.split("\t")
-        if len(parts) != len(header):
-            raise ValueError(f"{path} line {line_number} has {len(parts)} fields, expected {len(header)}")
-        family_id = parts[family_index]
-        if not family_id:
-            raise ValueError(f"{path} line {line_number} has empty family_id")
-        try:
-            values[family_id] += float(parts[bp_index])
-        except ValueError as exc:
-            raise ValueError(f"{path} line {line_number} estimated_bp is not numeric: {parts[bp_index]}") from exc
+    with path.open("rt", encoding="utf-8") as handle:
+        header_line = handle.readline().rstrip("\n\r")
+        if not header_line:
+            raise ValueError(f"copy_number.tsv is empty: {path}")
+        header = header_line.split("\t")
+        if "family_id" not in header:
+            raise ValueError(f"{path} is missing required field: family_id")
+        family_index = header.index("family_id")
+        if "estimated_bp" in header:
+            bp_index = header.index("estimated_bp")
+        elif "estimated_repeat_bp" in header:
+            bp_index = header.index("estimated_repeat_bp")
+        else:
+            raise ValueError(f"{path} is missing required field: estimated_bp")
+        for line_number, raw_line in enumerate(handle, start=2):
+            line = raw_line.rstrip("\n\r")
+            if not line:
+                continue
+            parts = line.split("\t")
+            if len(parts) != len(header):
+                raise ValueError(f"{path} line {line_number} has {len(parts)} fields, expected {len(header)}")
+            family_id = parts[family_index]
+            if not family_id:
+                raise ValueError(f"{path} line {line_number} has empty family_id")
+            try:
+                values[family_id] += float(parts[bp_index])
+            except ValueError as exc:
+                raise ValueError(f"{path} line {line_number} estimated_bp is not numeric: {parts[bp_index]}") from exc
     return dict(values)
 
 
 def read_arrays_bed(path: Path) -> list[AssemblyArray]:
     arrays: list[AssemblyArray] = []
-    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
-        if not line:
-            continue
-        fields = line.split("\t")
-        if len(fields) < 4:
-            raise ValueError(f"{path} line {line_number} must have at least 4 BED fields including family_id")
-        try:
-            start = int(fields[1])
-            end = int(fields[2])
-        except ValueError as exc:
-            raise ValueError(f"{path} line {line_number} start/end must be integers") from exc
-        if start < 0 or end <= start:
-            raise ValueError(f"{path} line {line_number} must use 0-based half-open coordinates with end > start")
-        family_id = fields[3]
-        if not family_id:
-            raise ValueError(f"{path} line {line_number} has empty family_id")
-        try:
-            score = int(fields[4]) if len(fields) > 4 and fields[4] else 0
-        except ValueError as exc:
-            raise ValueError(f"{path} line {line_number} score must be an integer") from exc
-        strand = fields[5] if len(fields) > 5 and fields[5] else "."
-        confidence = fields[6] if len(fields) > 6 and fields[6] else "medium"
-        warning = fields[7] if len(fields) > 7 else ""
-        arrays.append(
-            AssemblyArray(
-                chrom=fields[0],
-                start=start,
-                end=end,
-                family_id=family_id,
-                score=score,
-                strand=strand,
-                confidence=confidence,
-                warning=warning,
+    with path.open("rt", encoding="utf-8") as handle:
+        for line_number, raw_line in enumerate(handle, start=1):
+            line = raw_line.rstrip("\n\r")
+            if not line:
+                continue
+            fields = line.split("\t")
+            if len(fields) < 4:
+                raise ValueError(f"{path} line {line_number} must have at least 4 BED fields including family_id")
+            try:
+                start = int(fields[1])
+                end = int(fields[2])
+            except ValueError as exc:
+                raise ValueError(f"{path} line {line_number} start/end must be integers") from exc
+            if start < 0 or end <= start:
+                raise ValueError(f"{path} line {line_number} must use 0-based half-open coordinates with end > start")
+            family_id = fields[3]
+            if not family_id:
+                raise ValueError(f"{path} line {line_number} has empty family_id")
+            try:
+                score = int(fields[4]) if len(fields) > 4 and fields[4] else 0
+            except ValueError as exc:
+                raise ValueError(f"{path} line {line_number} score must be an integer") from exc
+            strand = fields[5] if len(fields) > 5 and fields[5] else "."
+            confidence = fields[6] if len(fields) > 6 and fields[6] else "medium"
+            warning = fields[7] if len(fields) > 7 else ""
+            arrays.append(
+                AssemblyArray(
+                    chrom=fields[0],
+                    start=start,
+                    end=end,
+                    family_id=family_id,
+                    score=score,
+                    strand=strand,
+                    confidence=confidence,
+                    warning=warning,
+                )
             )
-        )
     return arrays
 
 
@@ -155,8 +160,15 @@ def compare_assembly_to_reads(
 ) -> list[AssemblyReadComparison]:
     read_bp = read_copy_number(copy_number_path)
     assembly_bp: dict[str, float] = defaultdict(float)
+    grouped_intervals: dict[tuple[str, str], list[tuple[int, int]]] = defaultdict(list)
+    family_warnings: dict[str, set[str]] = defaultdict(set)
     for array in arrays:
-        assembly_bp[array.family_id] += array.end - array.start
+        grouped_intervals[(array.family_id, array.chrom)].append((array.start, array.end))
+        warning = getattr(array, "warning", "")
+        if warning:
+            family_warnings[array.family_id].update(item for item in warning.split(";") if item)
+    for (family_id, _chrom), intervals in grouped_intervals.items():
+        assembly_bp[family_id] += union_interval_length(intervals)
     family_ids = sorted(set(read_bp) | set(assembly_bp))
     comparisons = []
     for family_id in family_ids:
@@ -169,6 +181,10 @@ def compare_assembly_to_reads(
             collapse_threshold=collapse_threshold,
             overexpansion_threshold=overexpansion_threshold,
         )
+        warnings = set(item for item in warning.split(";") if item)
+        warnings.update(family_warnings.get(family_id, ()))
+        if warnings and confidence == "high":
+            confidence = "medium"
         comparisons.append(
             AssemblyReadComparison(
                 family_id=family_id,
@@ -177,10 +193,26 @@ def compare_assembly_to_reads(
                 assembly_read_ratio=ratio,
                 status=status,
                 confidence=confidence,
-                warning=warning,
+                warning=";".join(sorted(warnings)),
             )
         )
     return comparisons
+
+
+def union_interval_length(intervals: Sequence[tuple[int, int]]) -> int:
+    """Sum half-open interval union length without double counting overlaps."""
+    if not intervals:
+        return 0
+    ordered = sorted(intervals)
+    total = 0
+    start, end = ordered[0]
+    for next_start, next_end in ordered[1:]:
+        if next_start <= end:
+            end = max(end, next_end)
+        else:
+            total += end - start
+            start, end = next_start, next_end
+    return total + end - start
 
 
 def classify_assembly_read_ratio(

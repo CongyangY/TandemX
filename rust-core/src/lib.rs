@@ -7,11 +7,11 @@ use std::io::{BufRead, BufReader};
 const BIN_SIZE: usize = 5;
 const REFINEMENT_RADIUS: isize = 2;
 const MAX_SEED_GROUPS: usize = 128;
-const MAX_IDENTITY_COMPARISONS: usize = 1024;
 const ACCEPTANCE_SCORE: f64 = 0.75;
 const SEED_WEIGHT: f64 = 0.20;
 const IDENTITY_WEIGHT: f64 = 0.80;
-const DIRECT_PERIOD_SCAN_MAX_RANGE: usize = 64;
+const SHORT_PERIOD_SCAN_MAX: usize = 19;
+const SHORT_PERIOD_ACCEPTANCE_SCORE: f64 = 0.80;
 
 #[pyclass(frozen)]
 struct SequenceStatsResult {
@@ -33,6 +33,10 @@ struct ScanResult {
     best_period: usize,
     #[pyo3(get)]
     periodicity_score: f64,
+    #[pyo3(get)]
+    repeat_start: usize,
+    #[pyo3(get)]
+    repeat_end: usize,
     #[pyo3(get)]
     overflow_count: usize,
     #[pyo3(get)]
@@ -284,7 +288,10 @@ fn count_sequence_file_stats_inner(path: &str) -> PyResult<SequenceStatsResult> 
     match detect_sequence_format(path)? {
         "fasta" => count_fasta_stats(reader.as_mut(), path),
         "fastq" => count_fastq_stats(reader.as_mut(), path),
-        _ => Err(PyValueError::new_err(format!("Unsupported format for {}", path))),
+        _ => Err(PyValueError::new_err(format!(
+            "Unsupported format for {}",
+            path
+        ))),
     }
 }
 
@@ -329,13 +336,35 @@ impl DiagnosticKmerCounter {
         })
     }
 
-    fn count_sequence(&mut self, sequence: &str) {
+    fn count_sequence(&mut self, py: Python<'_>, sequence: String) {
+        py.allow_threads(|| self.count_sequence_bytes(sequence.as_bytes()));
+    }
+
+    fn count_sequences(&mut self, py: Python<'_>, sequences: Vec<String>) {
+        py.allow_threads(|| {
+            for sequence in sequences {
+                self.count_sequence_bytes(sequence.as_bytes());
+            }
+        });
+    }
+
+    fn counts(&self) -> HashMap<String, u64> {
+        self.target_names
+            .iter()
+            .enumerate()
+            .map(|(index, name)| (name.clone(), self.counts[index]))
+            .collect()
+    }
+}
+
+impl DiagnosticKmerCounter {
+    fn count_sequence_bytes(&mut self, sequence: &[u8]) {
         let mask = (1_u64 << (2 * self.k)) - 1;
         let reverse_shift = 2 * (self.k - 1);
         let mut forward = 0_u64;
         let mut reverse = 0_u64;
         let mut valid_length = 0_usize;
-        for &base in sequence.as_bytes() {
+        for &base in sequence {
             let Some(code) = base_code(base) else {
                 forward = 0;
                 reverse = 0;
@@ -353,14 +382,6 @@ impl DiagnosticKmerCounter {
                 self.counts[index] += 1;
             }
         }
-    }
-
-    fn counts(&self) -> HashMap<String, u64> {
-        self.target_names
-            .iter()
-            .enumerate()
-            .map(|(index, name)| (name.clone(), self.counts[index]))
-            .collect()
     }
 }
 
@@ -411,8 +432,8 @@ fn extract_repeated_positions(
         forward = ((forward << 2) | code_u64) & mask;
         reverse = (reverse >> 2) | ((3 - code_u64) << reverse_shift);
         if valid_length < k
-            || distinct_bases <= 2
             || base_counts.iter().copied().max().unwrap_or(0) >= complexity_threshold
+            || (distinct_bases <= 2 && is_simple_periodic_window(&window_codes, index, k))
         {
             continue;
         }
@@ -438,6 +459,16 @@ fn extract_repeated_positions(
         repeated_positions.retain(|_, positions| positions.len() >= min_seed_occurrences);
     }
     (repeated_positions, overflowed.len())
+}
+
+fn is_simple_periodic_window(window_codes: &[usize], index: usize, k: usize) -> bool {
+    let ordered: Vec<usize> = (0..k)
+        .map(|offset| window_codes[(index + 1 + offset) % k])
+        .collect();
+    if ordered.iter().all(|code| *code == ordered[0]) {
+        return true;
+    }
+    k >= 4 && (2..k).all(|offset| ordered[offset] == ordered[offset % 2])
 }
 
 fn build_spacing_histogram(
@@ -521,33 +552,79 @@ fn modulo_periodicity_score(positions: &[&Vec<usize>], period: usize, tolerance:
     }
 }
 
-fn bounded_periodicity_score(sequence: &[u8], period: usize) -> f64 {
+fn best_local_periodicity_score(
+    sequence: &[u8],
+    period: usize,
+    min_repeat_span: usize,
+    acceptance_score: f64,
+) -> (f64, usize, usize) {
     let compared_span = sequence.len().saturating_sub(period);
-    if compared_span == 0 {
-        return 0.0;
+    let min_compared = min_repeat_span.saturating_sub(period).max(period).max(1);
+    if period == 0 || compared_span < min_compared {
+        return (0.0, 0, 0);
     }
-    let step = (compared_span / MAX_IDENTITY_COMPARISONS).max(1);
-    let mut matches = 0_usize;
-    let mut valid = 0_usize;
-    for index in (0..compared_span).step_by(step) {
+    let mismatch_penalty = acceptance_score / (1.0 - acceptance_score).max(1e-12);
+    let mut prefix_score = Vec::with_capacity(compared_span + 1);
+    let mut prefix_matches = Vec::with_capacity(compared_span + 1);
+    let mut prefix_valid = Vec::with_capacity(compared_span + 1);
+    prefix_score.push(0.0);
+    prefix_matches.push(0_usize);
+    prefix_valid.push(0_usize);
+    for index in 0..compared_span {
         let left = sequence[index];
         let right = sequence[index + period];
-        if left == b'N' || left == b'n' || right == b'N' || right == b'n' {
-            continue;
+        let ambiguous = matches!(left, b'N' | b'n') || matches!(right, b'N' | b'n');
+        let is_match = !ambiguous && left.eq_ignore_ascii_case(&right);
+        let value = if ambiguous {
+            0.0
+        } else if is_match {
+            1.0
+        } else {
+            -mismatch_penalty
+        };
+        prefix_score.push(prefix_score.last().copied().unwrap_or(0.0) + value);
+        prefix_matches.push(prefix_matches.last().copied().unwrap_or(0) + usize::from(is_match));
+        prefix_valid.push(prefix_valid.last().copied().unwrap_or(0) + usize::from(!ambiguous));
+    }
+
+    let mut minimum_prefix_value = prefix_score[0];
+    let mut minimum_prefix_index = 0_usize;
+    let mut best_score = f64::NEG_INFINITY;
+    let mut best_start = 0_usize;
+    let mut best_end = 0_usize;
+    for end in min_compared..=compared_span {
+        let eligible = end - min_compared;
+        let eligible_value = prefix_score[eligible];
+        if eligible_value < minimum_prefix_value {
+            minimum_prefix_value = eligible_value;
+            minimum_prefix_index = eligible;
         }
-        valid += 1;
-        if left == right {
-            matches += 1;
-        }
-        if valid >= MAX_IDENTITY_COMPARISONS {
-            break;
+        let interval_score = prefix_score[end] - minimum_prefix_value;
+        let interval_length = end - minimum_prefix_index;
+        let best_length = best_end - best_start;
+        if interval_score > best_score
+            || (interval_score == best_score && interval_length > best_length)
+            || (interval_score == best_score
+                && interval_length == best_length
+                && minimum_prefix_index < best_start)
+        {
+            best_score = interval_score;
+            best_start = minimum_prefix_index;
+            best_end = end;
         }
     }
-    if valid == 0 {
+    let valid = prefix_valid[best_end] - prefix_valid[best_start];
+    let matches = prefix_matches[best_end] - prefix_matches[best_start];
+    let identity = if valid == 0 {
         0.0
     } else {
         matches as f64 / valid as f64
-    }
+    };
+    (
+        identity,
+        best_start,
+        (best_end + period).min(sequence.len()),
+    )
 }
 
 fn direct_period_scan(
@@ -555,31 +632,43 @@ fn direct_period_scan(
     min_period: usize,
     max_period: usize,
     top_periods: usize,
+    min_repeat_span: usize,
 ) -> ScanResult {
-    let mut scored_periods: Vec<(usize, f64)> = (min_period..=max_period)
-        .map(|period| (period, bounded_periodicity_score(sequence, period)))
+    let mut scored_periods: Vec<(usize, f64, usize, usize)> = (min_period..=max_period)
+        .map(|period| {
+            let (score, start, end) = best_local_periodicity_score(
+                sequence,
+                period,
+                min_repeat_span,
+                SHORT_PERIOD_ACCEPTANCE_SCORE,
+            );
+            (period, score, start, end)
+        })
         .collect();
     scored_periods.sort_unstable_by(|left, right| {
         right
             .1
             .partial_cmp(&left.1)
             .unwrap_or(std::cmp::Ordering::Equal)
+            .then((right.3 - right.2).cmp(&(left.3 - left.2)))
             .then(left.0.cmp(&right.0))
     });
-    let best = scored_periods.first().copied().unwrap_or((0, 0.0));
+    let best = scored_periods.first().copied().unwrap_or((0, 0.0, 0, 0));
     let candidate_periods = scored_periods
         .iter()
         .take(top_periods)
-        .filter(|(_, score)| *score >= ACCEPTANCE_SCORE)
-        .map(|(period, _)| *period)
+        .filter(|(_, score, _, _)| *score >= SHORT_PERIOD_ACCEPTANCE_SCORE)
+        .map(|(period, _, _, _)| *period)
         .collect();
     ScanResult {
         candidate_periods,
         spacing_support: Vec::new(),
         best_period: best.0,
         periodicity_score: best.1,
+        repeat_start: best.2,
+        repeat_end: best.3,
         overflow_count: 0,
-        status: if best.1 >= ACCEPTANCE_SCORE {
+        status: if best.1 >= SHORT_PERIOD_ACCEPTANCE_SCORE {
             "accepted".to_string()
         } else {
             "rejected_score".to_string()
@@ -593,13 +682,26 @@ fn refine_candidate_period(
     candidate_periods: &[usize],
     min_period: usize,
     max_period: usize,
-) -> (usize, f64) {
+    min_repeat_span: usize,
+) -> (usize, f64, usize, usize) {
     let mut local_periods = BTreeSet::new();
     for &candidate in candidate_periods {
         for offset in -REFINEMENT_RADIUS..=REFINEMENT_RADIUS {
             let period = candidate as isize + offset;
             if period >= min_period as isize && period <= max_period as isize {
                 local_periods.insert(period as usize);
+                let local = period as usize;
+                let mut divisor = 2_usize;
+                while divisor.saturating_mul(divisor) <= local {
+                    if local.is_multiple_of(divisor) {
+                        for fundamental in [divisor, local / divisor] {
+                            if (min_period..=max_period).contains(&fundamental) {
+                                local_periods.insert(fundamental);
+                            }
+                        }
+                    }
+                    divisor += 1;
+                }
             }
         }
     }
@@ -618,21 +720,34 @@ fn refine_candidate_period(
     let minimum_viable_identity = (ACCEPTANCE_SCORE - SEED_WEIGHT) / IDENTITY_WEIGHT;
     let mut best_period = 0_usize;
     let mut best_score = 0.0_f64;
+    let mut best_start = 0_usize;
+    let mut best_end = 0_usize;
     for period in local_periods {
-        let identity_score = bounded_periodicity_score(sequence, period);
+        let (identity_score, start, end) = best_local_periodicity_score(
+            sequence,
+            period,
+            min_repeat_span,
+            minimum_viable_identity,
+        );
         let score = if identity_score < minimum_viable_identity {
             IDENTITY_WEIGHT * identity_score
         } else {
             let seed_score = modulo_periodicity_score(&refinement_positions, period, 2);
             SEED_WEIGHT * seed_score + IDENTITY_WEIGHT * identity_score
         };
-        if score > best_score || (score == best_score && (best_period == 0 || period < best_period))
+        if score > best_score
+            || (score == best_score && end - start > best_end - best_start)
+            || (score == best_score
+                && end - start == best_end - best_start
+                && (best_period == 0 || period < best_period))
         {
             best_period = period;
             best_score = score;
+            best_start = start;
+            best_end = end;
         }
     }
-    (best_period, best_score)
+    (best_period, best_score, best_start, best_end)
 }
 
 fn validate_scan_parameters(
@@ -660,8 +775,8 @@ fn validate_scan_parameters(
     Ok(())
 }
 
-fn scan_owned_sequence(
-    owned_sequence: Vec<u8>,
+#[derive(Clone, Copy)]
+struct ScanParameters {
     k: usize,
     min_period: usize,
     max_period: usize,
@@ -669,28 +784,54 @@ fn scan_owned_sequence(
     min_seed_occurrences: usize,
     min_spacing_support: usize,
     max_pairs_per_kmer: usize,
-) -> ScanResult {
-    if max_period.saturating_sub(min_period) <= DIRECT_PERIOD_SCAN_MAX_RANGE {
-        return direct_period_scan(&owned_sequence, min_period, max_period, top_periods);
+    min_repeat_span: usize,
+}
+
+fn scan_owned_sequence(owned_sequence: Vec<u8>, parameters: ScanParameters) -> ScanResult {
+    let short_max = parameters.max_period.min(SHORT_PERIOD_SCAN_MAX);
+    if parameters.min_period <= short_max {
+        let short_result = direct_period_scan(
+            &owned_sequence,
+            parameters.min_period,
+            short_max,
+            parameters.top_periods,
+            parameters.min_repeat_span,
+        );
+        if short_result.status == "accepted" {
+            return short_result;
+        }
+    }
+    let long_min_period = parameters.min_period.max(SHORT_PERIOD_SCAN_MAX + 1);
+    if long_min_period > parameters.max_period {
+        return ScanResult {
+            candidate_periods: Vec::new(),
+            spacing_support: Vec::new(),
+            best_period: 0,
+            periodicity_score: 0.0,
+            repeat_start: 0,
+            repeat_end: 0,
+            overflow_count: 0,
+            status: "no_spacing_peak".to_string(),
+        };
     }
     let (repeated_positions, overflow_count) = extract_repeated_positions(
         &owned_sequence,
-        k,
-        min_seed_occurrences,
-        max_pairs_per_kmer,
+        parameters.k,
+        parameters.min_seed_occurrences,
+        parameters.max_pairs_per_kmer,
     );
     let histogram = build_spacing_histogram(
         &repeated_positions,
-        min_period,
-        max_period,
-        max_pairs_per_kmer,
+        long_min_period,
+        parameters.max_period,
+        parameters.max_pairs_per_kmer,
     );
     let peaks = select_candidate_periods(
         &histogram,
-        min_period,
-        max_period,
-        top_periods,
-        min_spacing_support,
+        long_min_period,
+        parameters.max_period,
+        parameters.top_periods,
+        parameters.min_spacing_support,
     );
     let candidate_periods: Vec<usize> = peaks.iter().map(|(period, _)| *period).collect();
     if candidate_periods.is_empty() {
@@ -699,22 +840,27 @@ fn scan_owned_sequence(
             spacing_support: peaks,
             best_period: 0,
             periodicity_score: 0.0,
+            repeat_start: 0,
+            repeat_end: 0,
             overflow_count,
             status: "no_spacing_peak".to_string(),
         };
     }
-    let (best_period, periodicity_score) = refine_candidate_period(
+    let (best_period, periodicity_score, repeat_start, repeat_end) = refine_candidate_period(
         &owned_sequence,
         &repeated_positions,
         &candidate_periods,
-        min_period,
-        max_period,
+        long_min_period,
+        parameters.max_period,
+        parameters.min_repeat_span,
     );
     ScanResult {
         candidate_periods,
         spacing_support: peaks,
         best_period,
         periodicity_score,
+        repeat_start,
+        repeat_end,
         overflow_count,
         status: if periodicity_score >= ACCEPTANCE_SCORE {
             "accepted".to_string()
@@ -726,7 +872,7 @@ fn scan_owned_sequence(
 
 #[pyfunction]
 #[allow(clippy::too_many_arguments)]
-#[pyo3(signature = (sequence, k, min_period, max_period, top_periods, min_seed_occurrences, min_spacing_support, max_pairs_per_kmer))]
+#[pyo3(signature = (sequence, k, min_period, max_period, top_periods, min_seed_occurrences, min_spacing_support, max_pairs_per_kmer, min_repeat_span=1))]
 fn scan_read_for_periods(
     py: Python<'_>,
     sequence: &str,
@@ -737,6 +883,7 @@ fn scan_read_for_periods(
     min_seed_occurrences: usize,
     min_spacing_support: usize,
     max_pairs_per_kmer: usize,
+    min_repeat_span: usize,
 ) -> PyResult<ScanResult> {
     validate_scan_parameters(
         k,
@@ -748,23 +895,22 @@ fn scan_read_for_periods(
         max_pairs_per_kmer,
     )?;
     let owned_sequence = sequence.as_bytes().to_vec();
-    Ok(py.allow_threads(move || {
-        scan_owned_sequence(
-            owned_sequence,
-            k,
-            min_period,
-            max_period,
-            top_periods,
-            min_seed_occurrences,
-            min_spacing_support,
-            max_pairs_per_kmer,
-        )
-    }))
+    let parameters = ScanParameters {
+        k,
+        min_period,
+        max_period,
+        top_periods,
+        min_seed_occurrences,
+        min_spacing_support,
+        max_pairs_per_kmer,
+        min_repeat_span,
+    };
+    Ok(py.allow_threads(move || scan_owned_sequence(owned_sequence, parameters)))
 }
 
 #[pyfunction]
 #[allow(clippy::too_many_arguments)]
-#[pyo3(signature = (sequences, k, min_period, max_period, top_periods, min_seed_occurrences, min_spacing_support, max_pairs_per_kmer))]
+#[pyo3(signature = (sequences, k, min_period, max_period, top_periods, min_seed_occurrences, min_spacing_support, max_pairs_per_kmer, min_repeat_span=1))]
 fn scan_reads_for_periods(
     py: Python<'_>,
     sequences: Vec<String>,
@@ -775,6 +921,7 @@ fn scan_reads_for_periods(
     min_seed_occurrences: usize,
     min_spacing_support: usize,
     max_pairs_per_kmer: usize,
+    min_repeat_span: usize,
 ) -> PyResult<Vec<ScanResult>> {
     validate_scan_parameters(
         k,
@@ -789,21 +936,20 @@ fn scan_reads_for_periods(
         .into_iter()
         .map(|sequence| sequence.into_bytes())
         .collect();
+    let parameters = ScanParameters {
+        k,
+        min_period,
+        max_period,
+        top_periods,
+        min_seed_occurrences,
+        min_spacing_support,
+        max_pairs_per_kmer,
+        min_repeat_span,
+    };
     Ok(py.allow_threads(move || {
         owned_sequences
             .into_iter()
-            .map(|owned_sequence| {
-                scan_owned_sequence(
-                    owned_sequence,
-                    k,
-                    min_period,
-                    max_period,
-                    top_periods,
-                    min_seed_occurrences,
-                    min_spacing_support,
-                    max_pairs_per_kmer,
-                )
-            })
+            .map(|owned_sequence| scan_owned_sequence(owned_sequence, parameters))
             .collect()
     }))
 }
@@ -832,10 +978,12 @@ mod tests {
         let peaks = select_candidate_periods(&histogram, 20, 100, 3, 2);
         assert!(peaks[0].0.abs_diff(monomer.len()) <= 2);
         let candidates: Vec<usize> = peaks.iter().map(|(period, _)| *period).collect();
-        let (best_period, score) =
-            refine_candidate_period(&sequence, &positions, &candidates, 20, 100);
+        let (best_period, score, start, end) =
+            refine_candidate_period(&sequence, &positions, &candidates, 20, 100, 100);
         assert_eq!(best_period, monomer.len());
         assert!(score >= ACCEPTANCE_SCORE);
+        assert_eq!(start, 0);
+        assert_eq!(end, sequence.len());
     }
 
     #[test]
@@ -859,7 +1007,7 @@ mod tests {
     fn diagnostic_counter_counts_only_targets() {
         let target = "ACGTTCAGGAC".to_string();
         let mut counter = DiagnosticKmerCounter::new(11, vec![target.clone()]).unwrap();
-        counter.count_sequence("ACGTTCAGGACNACGTTCAGGAC");
+        counter.count_sequence_bytes(b"ACGTTCAGGACNACGTTCAGGAC");
         assert_eq!(counter.counts().get(&target), Some(&2));
     }
 }

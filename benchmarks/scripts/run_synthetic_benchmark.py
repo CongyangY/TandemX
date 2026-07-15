@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import os
 import re
 import subprocess
 import sys
@@ -12,6 +13,8 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+from tandemx.discover.mvp import best_local_identity, read_fasta
 
 try:
     import yaml
@@ -52,6 +55,8 @@ ACCURACY_FIELDS = [
     "estimated_read_copy_bp",
     "copy_number_relative_error",
     "locate_status",
+    "recovered_sequence_identity",
+    "matching_method",
     "notes",
 ]
 
@@ -61,6 +66,7 @@ class CommandResult:
     name: str
     runtime_seconds: float
     exit_status: int
+    peak_memory_mb: float | None
     notes: str
 
 
@@ -287,16 +293,29 @@ def build_commands(
 
 
 def run_command(name: str, command: list[str], logs_dir: Path) -> CommandResult:
+    stdout_path = logs_dir / f"{name}.stdout.log"
+    stderr_path = logs_dir / f"{name}.stderr.log"
     start = time.perf_counter()
-    completed = subprocess.run(command, check=False, text=True, capture_output=True)
+    with stdout_path.open("wt", encoding="utf-8") as stdout_handle, stderr_path.open(
+        "wt", encoding="utf-8"
+    ) as stderr_handle:
+        process = subprocess.Popen(command, text=True, stdout=stdout_handle, stderr=stderr_handle)
+        _pid, wait_status, usage = os.wait4(process.pid, 0)
+        process.returncode = os.waitstatus_to_exitcode(wait_status)
     runtime = time.perf_counter() - start
-    (logs_dir / f"{name}.stdout.log").write_text(completed.stdout, encoding="utf-8")
-    (logs_dir / f"{name}.stderr.log").write_text(completed.stderr, encoding="utf-8")
+    peak_memory_mb = usage.ru_maxrss / (1024 * 1024 if sys.platform == "darwin" else 1024)
+    stderr = stderr_path.read_text(encoding="utf-8")
     (logs_dir / f"{name}.command.txt").write_text(" ".join(command) + "\n", encoding="utf-8")
-    notes = "peak_memory_not_recorded_python_stdlib"
-    if completed.stderr.strip():
-        notes = f"{notes};stderr={completed.stderr.strip().splitlines()[-1]}"
-    return CommandResult(name=name, runtime_seconds=runtime, exit_status=completed.returncode, notes=notes)
+    notes = "peak_memory_recorded_by_wait4"
+    if stderr.strip():
+        notes = f"{notes};stderr={stderr.strip().splitlines()[-1]}"
+    return CommandResult(
+        name=name,
+        runtime_seconds=runtime,
+        exit_status=process.returncode,
+        peak_memory_mb=peak_memory_mb,
+        notes=notes,
+    )
 
 
 def summary_row(
@@ -327,7 +346,11 @@ def summary_row(
         "candidates_per_mb": discover_metrics.get("candidates_per_mb", ""),
         "reads_per_second": discover_metrics.get("reads_per_second", ""),
         "mb_per_second": discover_metrics.get("mb_per_second", ""),
-        "peak_memory_mb": "",
+        "peak_memory_mb": (
+            f"{command_result.peak_memory_mb:.3f}"
+            if command_result.peak_memory_mb is not None
+            else "NA"
+        ),
         "algorithm_mode": "spacing_prefilter" if command_result.name == "discover" else "",
         "notes": command_result.notes,
     }
@@ -385,18 +408,32 @@ def build_accuracy_rows(benchmark_id: str, scale_dir: Path) -> list[dict[str, st
     comparison_rows = read_tsv(scale_dir / "locate" / "assembly_vs_read_cn.tsv")
     copy_by_family = {row["family_id"]: row for row in copy_rows if "family_id" in row}
     status_by_family = {row["family_id"]: row.get("status", "") for row in comparison_rows if "family_id" in row}
-    recovered = [
-        (int(row["monomer_length_bp"]), row["family_id"])
+    truth_sequences = {
+        record.description.split(";", 1)[0].split("=", 1)[-1]: record.sequence
+        for record in read_fasta(scale_dir / "simulated" / "truth_monomers.fa")
+    }
+    recovered_sequences = {
+        record.description.split(";", 1)[0].split("=", 1)[-1]: record.sequence
+        for record in read_fasta(scale_dir / "discover" / "monomers.fa")
+    }
+    recovered_lengths = {
+        row["family_id"]: int(row["monomer_length_bp"])
         for row in family_rows
         if row.get("monomer_length_bp", "").isdigit()
-    ]
+    }
 
     rows = []
     for truth in truth_rows:
         expected_length = int(truth["monomer_length_bp"])
         expected_bp = float(truth["read_repeat_bp"])
-        closest = min(recovered, key=lambda item: abs(item[0] - expected_length), default=None)
-        if closest is None:
+        truth_sequence = truth_sequences.get(truth["family_id"], "")
+        matches = []
+        for family_id, sequence in recovered_sequences.items():
+            identity, overlap, _orientation = best_local_identity(truth_sequence, sequence)
+            score = identity * overlap / max(len(truth_sequence), len(sequence), 1)
+            matches.append((score, identity, -abs(len(sequence) - expected_length), family_id))
+        best_match = max(matches, default=None)
+        if best_match is None:
             rows.append(
                 {
                     "benchmark_id": benchmark_id,
@@ -407,11 +444,14 @@ def build_accuracy_rows(benchmark_id: str, scale_dir: Path) -> list[dict[str, st
                     "estimated_read_copy_bp": "",
                     "copy_number_relative_error": "",
                     "locate_status": "",
+                    "recovered_sequence_identity": "",
+                    "matching_method": "sequence_identity_length_aware",
                     "notes": "no_recovered_family",
                 }
             )
             continue
-        recovered_length, family_id = closest
+        _score, identity, _negative_length_error, family_id = best_match
+        recovered_length = recovered_lengths.get(family_id, len(recovered_sequences[family_id]))
         estimated_bp = float(copy_by_family.get(family_id, {}).get("estimated_bp", "0") or 0)
         relative_error = abs(estimated_bp - expected_bp) / expected_bp if expected_bp > 0 else 0.0
         rows.append(
@@ -424,6 +464,8 @@ def build_accuracy_rows(benchmark_id: str, scale_dir: Path) -> list[dict[str, st
                 "estimated_read_copy_bp": f"{estimated_bp:.4f}",
                 "copy_number_relative_error": f"{relative_error:.6f}",
                 "locate_status": status_by_family.get(family_id, ""),
+                "recovered_sequence_identity": f"{identity:.6f}",
+                "matching_method": "sequence_identity_length_aware",
                 "notes": "truth_used_for_benchmark_evaluation_only",
             }
         )

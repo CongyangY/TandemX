@@ -224,6 +224,19 @@ def test_missing_genome_size_and_force_resume_behavior(tmp_path: Path) -> None:
     assert resume_rows["discover"]["notes"] == "skipped_validated_resume"
     assert resume_rows["quantify"]["notes"] == "skipped_validated_resume"
 
+    reads_text = (toy / "reads.fa").read_text(encoding="utf-8")
+    first_base = reads_text.index("\n") + 1
+    replacement = "A" if reads_text[first_base] != "A" else "C"
+    (toy / "reads.fa").write_text(
+        reads_text[:first_base] + replacement + reads_text[first_base + 1 :],
+        encoding="utf-8",
+    )
+    changed = run_cli(*base_args, "--resume")
+    assert changed.returncode == 0, changed.stderr
+    changed_rows = {row["step"]: row for row in read_summary(outdir)}
+    assert changed_rows["discover"]["notes"] != "skipped_validated_resume"
+    assert changed_rows["quantify"]["notes"] != "skipped_validated_resume"
+
     forced = run_cli(*base_args, "--force")
     assert forced.returncode == 0, forced.stderr
     force_rows = read_summary(outdir)

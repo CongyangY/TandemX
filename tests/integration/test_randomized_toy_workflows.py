@@ -173,7 +173,8 @@ def test_randomized_toy_workflows_recover_supported_outputs(tmp_path: Path) -> N
         )
         assert probe_result.returncode == 0, f"seed={seed} stderr={probe_result.stderr}"
         probe_rows = parse_tsv(probe / "probes.rank.tsv")
-        assert any(float(row["probe_score"]) > 0 and row["warning"] == "" for row in probe_rows)
+        assert any(float(row["probe_score"]) > 0 for row in probe_rows)
+        assert all("heuristic_probe_score_not_experimentally_calibrated" in row["warning"] for row in probe_rows)
 
         validate_result = run_cli("validate", "--project", str(case))
         assert validate_result.returncode == 0, f"seed={seed} stderr={validate_result.stderr}"

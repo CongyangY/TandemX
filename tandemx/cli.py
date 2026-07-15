@@ -7,7 +7,6 @@ import logging
 import os
 import platform as platform_module
 import sys
-from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -171,25 +170,30 @@ def run_discover(args: argparse.Namespace) -> int:
         args.max_monomer_len,
     )
     progress = TerminalProgress(enabled=not args.no_progress)
-    progress.update(
-        ProgressSnapshot(
-            command="discover",
-            step="scan_reads",
-            extra=f"counting_inputs count_threads={args.count_threads}",
+    needs_input_count = args.enable_auto_discovery_budget and args.genome_size is None
+    count_future = None
+    progress_totals = DiscoverProgressTotals(count_done=True)
+    if needs_input_count:
+        progress.update(
+            ProgressSnapshot(
+                command="discover",
+                step="scan_reads",
+                extra=f"counting_inputs count_threads={args.count_threads}",
+            )
         )
-    )
-    count_executor = ThreadPoolExecutor(max_workers=1)
-    count_future = count_executor.submit(
-        count_sequence_records_many,
-        args.reads,
-        threads=args.count_threads,
-    )
-    progress_totals = DiscoverProgressTotals()
-    logger.info(
-        "input_count_started read_files=%s count_threads=%s mode=background",
-        len(args.reads),
-        args.count_threads,
-    )
+        stats = count_sequence_records_many(args.reads, threads=args.count_threads)
+        progress_totals.total_reads = stats.record_count
+        progress_totals.total_read_bases = stats.total_bases
+        progress_totals.count_done = True
+        logger.info(
+            "input_summary read_files=%s total_reads=%s total_bases=%s max_read_length=%s",
+            len(args.reads),
+            stats.record_count,
+            stats.total_bases,
+            stats.max_read_length,
+        )
+    else:
+        logger.info("input_count_skipped reason=not_required_for_discovery_budget")
     config = DiscoverConfig(
         reads=args.reads,
         outdir=args.outdir,
@@ -210,6 +214,7 @@ def run_discover(args: argparse.Namespace) -> int:
         seed=args.seed,
         progress_every=args.progress_every,
         chunk_size=args.chunk_size,
+        chunk_bases=args.chunk_bases,
         threads=args.threads,
         kmer_backend=args.kmer_backend,
         target_discovery_coverage=args.target_discovery_coverage,
@@ -233,8 +238,6 @@ def run_discover(args: argparse.Namespace) -> int:
     except Exception:
         progress.finish("discover", "failed", extra=f"outdir={args.outdir}")
         raise
-    finally:
-        count_executor.shutdown(wait=False, cancel_futures=True)
     progress.finish(
         "discover",
         "completed",
@@ -313,6 +316,12 @@ def run_locate(args: argparse.Namespace) -> int:
         required.append(args.copy_number)
     _require_existing_files(required)
     args.outdir.mkdir(parents=True, exist_ok=True)
+    _write_run_config(args.outdir, "locate", args, status="locate_running")
+    logger = _configure_log(args.outdir, "locate")
+    logger.info("command=tandemx locate")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=locate_running")
     density, arrays, comparisons = locate_toy_arrays(
         LocateConfig(
             assembly=args.assembly,
@@ -322,13 +331,10 @@ def run_locate(args: argparse.Namespace) -> int:
             window_size=args.window_size,
             step_size=args.step_size,
             k=args.k,
+            min_identity=args.min_identity,
         )
     )
     _write_run_config(args.outdir, "locate", args, status="locate_mvp_completed")
-    logger = _configure_log(args.outdir, "locate")
-    logger.info("command=tandemx locate")
-    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
-    logger.info("output_directory=%s", args.outdir)
     logger.info("status=locate_mvp_completed")
     logger.info("density_window_count=%s", len(density))
     logger.info("array_count=%s", len(arrays))
@@ -347,6 +353,12 @@ def run_probe(args: argparse.Namespace) -> int:
         raise ValueError("--arrays is required for probe MVP")
     _require_existing_files([monomers_path, args.assembly, args.copy_number, arrays_path])
     args.outdir.mkdir(parents=True, exist_ok=True)
+    _write_run_config(args.outdir, "probe", args, status="probe_running")
+    logger = _configure_log(args.outdir, "probe")
+    logger.info("command=tandemx probe")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=probe_running")
     candidates, signals = rank_toy_probes(
         ProbeConfig(
             monomers=monomers_path,
@@ -356,13 +368,11 @@ def run_probe(args: argparse.Namespace) -> int:
             outdir=args.outdir,
             min_len=args.min_len,
             max_len=args.max_len,
+            sodium_millimolar=args.sodium_millimolar,
+            formamide_percent=args.formamide_percent,
         )
     )
     _write_run_config(args.outdir, "probe", args, status="probe_mvp_completed")
-    logger = _configure_log(args.outdir, "probe")
-    logger.info("command=tandemx probe")
-    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
-    logger.info("output_directory=%s", args.outdir)
     logger.info("status=probe_mvp_completed")
     logger.info("probe_count=%s", len(candidates))
     logger.info("signal_count=%s", len(signals))
@@ -383,6 +393,12 @@ def run_compare(args: argparse.Namespace) -> int:
         raise ValueError("--arrays is required for compare MVP")
     _require_existing_files([args.copy_number, args.arrays])
     args.outdir.mkdir(parents=True, exist_ok=True)
+    _write_run_config(args.outdir, "compare", args, status="compare_running")
+    logger = _configure_log(args.outdir, "compare")
+    logger.info("command=tandemx compare")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=compare_running")
     comparisons = compare_toy_abundance(
         CompareConfig(
             copy_number=args.copy_number,
@@ -393,10 +409,6 @@ def run_compare(args: argparse.Namespace) -> int:
         )
     )
     _write_run_config(args.outdir, "compare", args, status="compare_mvp_completed")
-    logger = _configure_log(args.outdir, "compare")
-    logger.info("command=tandemx compare")
-    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
-    logger.info("output_directory=%s", args.outdir)
     logger.info("status=compare_mvp_completed")
     logger.info("comparison_count=%s", len(comparisons))
     logger.info("Compare MVP uses copy_number.tsv and arrays.bed for family-level abundance comparison")
@@ -413,6 +425,12 @@ def run_visualize(args: argparse.Namespace) -> int:
             required.append(optional)
     _require_existing_files(required)
     args.outdir.mkdir(parents=True, exist_ok=True)
+    _write_run_config(args.outdir, "visualize", args, status="visualize_running")
+    logger = _configure_log(args.outdir, "visualize")
+    logger.info("command=tandemx visualize")
+    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
+    logger.info("output_directory=%s", args.outdir)
+    logger.info("status=visualize_running")
     outputs = render_static_plots(
         VisualizeConfig(
             copy_number=args.copy_number,
@@ -423,10 +441,6 @@ def run_visualize(args: argparse.Namespace) -> int:
         )
     )
     _write_run_config(args.outdir, "visualize", args, status="visualize_mvp_completed")
-    logger = _configure_log(args.outdir, "visualize")
-    logger.info("command=tandemx visualize")
-    logger.info("timestamp_utc=%s", datetime.now(timezone.utc).isoformat())
-    logger.info("output_directory=%s", args.outdir)
     logger.info("status=visualize_mvp_completed")
     logger.info("plot_count=%s", len(outputs))
     print(f"tandemx visualize: wrote {len(outputs)} plot files to {args.outdir}")
@@ -546,12 +560,12 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=None,
         help=(
-            "Threads used by the background input read/base counter. "
-            "Default uses 4 threads for single-file input and can scale with "
-            "multiple read files, always capped by --threads."
+            "Threads used by the optional input read/base pre-count required only "
+            "for automatic budgeting without --genome-size; capped by --threads."
         ),
     )
-    discover.add_argument("--chunk-size", type=int, default=1000, help="Logical read chunk size reserved for future parallel/checkpoint execution.")
+    discover.add_argument("--chunk-size", type=int, default=1000, help="Maximum reads retained in one scan batch.")
+    discover.add_argument("--chunk-bases", type=int, default=8_000_000, help="Maximum sequence bases retained in one scan batch, bounding memory for unusually long reads.")
     discover.add_argument(
         "--threads",
         type=int,
@@ -622,7 +636,7 @@ def build_parser() -> argparse.ArgumentParser:
     locate.add_argument("--window-size", type=int, default=100000, help="Window size in bp for assembly repeat density summaries.")
     locate.add_argument("--step-size", type=int, default=10000, help="Step size in bp for sliding-window density summaries.")
     locate.add_argument("--k", type=int, default=21, help="K-mer size used to scan assembly for monomer evidence.")
-    locate.add_argument("--min-identity", type=float, default=0.8, help="Minimum match or alignment identity for future repeat hits.")
+    locate.add_argument("--min-identity", type=float, default=0.8, help="Minimum exact diagnostic k-mer support fraction required within a candidate array.")
     locate.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, repeat_density.bedgraph, arrays.bed, and assembly_vs_read_cn.tsv.")
     locate.set_defaults(func=run_locate)
 
@@ -638,6 +652,8 @@ def build_parser() -> argparse.ArgumentParser:
     probe.add_argument("--locations", type=_path_value, help="Backward-compatible alias for --arrays.")
     probe.add_argument("--min-len", "--min-probe-len", type=int, default=80, help="Minimum candidate probe length in bp.")
     probe.add_argument("--max-len", "--max-probe-len", type=int, default=300, help="Maximum candidate probe length in bp.")
+    probe.add_argument("--sodium-millimolar", type=float, default=50.0, help="Monovalent sodium concentration used by the long-probe melting-temperature approximation.")
+    probe.add_argument("--formamide-percent", type=float, default=0.0, help="Formamide percentage used by the long-probe melting-temperature approximation.")
     probe.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, probes.fa, probes.rank.tsv, and in_silico_fish.tsv.")
     probe.set_defaults(func=run_probe)
 

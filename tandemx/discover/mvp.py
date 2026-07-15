@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections import deque
+from collections import Counter, deque
 import hashlib
 import logging
 import random
@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 from tandemx.io.sequences import (
+    DuplicateIdTracker,
     SequenceFormatError,
     SequenceStats,
     normalize_sequence_paths,
@@ -21,18 +22,20 @@ from tandemx.io.sequences import (
     read_sequence_records_many,
 )
 from tandemx.discover.spacing import (
-    bounded_periodicity_score,
+    best_local_periodicity_score,
     build_spacing_histogram,
     canonical_kmer,
     extract_repeated_kmer_positions,
     is_low_complexity_kmer,
     modulo_periodicity_score,
     refine_candidate_period,
+    refine_candidate_period_with_interval,
     select_candidate_periods,
 )
 from tandemx.discover.rust_backend import RustBackendUnavailable, scan_read_for_periods, scan_reads_for_periods
 from tandemx.simulate.toy import reverse_complement, wrap_sequence
 from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
+from tandemx.utils.kmers import iter_canonical_kmer_codes
 from tandemx.utils.threads import effective_discover_threads
 
 
@@ -92,9 +95,15 @@ class CandidateCluster:
     score_sum: float
     low_complexity_flag: bool
     representative: CandidateRepeat
+    members: list[CandidateRepeat]
+    representative_kmers: frozenset[int]
 
     @classmethod
-    def from_candidate(cls, candidate: CandidateRepeat) -> CandidateCluster:
+    def from_candidate(
+        cls,
+        candidate: CandidateRepeat,
+        candidate_kmers: frozenset[int] | None = None,
+    ) -> CandidateCluster:
         return cls(
             period_sum=candidate.period_bp,
             candidate_count=1,
@@ -103,6 +112,12 @@ class CandidateCluster:
             score_sum=candidate.score,
             low_complexity_flag=candidate.low_complexity_flag,
             representative=candidate,
+            members=[candidate],
+            representative_kmers=(
+                candidate_kmers
+                if candidate_kmers is not None
+                else candidate_kmer_sketch(candidate.sequence)
+            ),
         )
 
     @property
@@ -117,18 +132,28 @@ class CandidateCluster:
     def mean_identity(self) -> float:
         return self.score_sum / self.candidate_count
 
-    def add(self, candidate: CandidateRepeat) -> None:
+    def add(
+        self,
+        candidate: CandidateRepeat,
+        candidate_kmers: frozenset[int] | None = None,
+    ) -> None:
         self.period_sum += candidate.period_bp
         self.candidate_count += 1
         self.read_ids.add(candidate.read_id)
         self.support_span_sum += candidate.repeat_span_bp
         self.score_sum += candidate.score
         self.low_complexity_flag = self.low_complexity_flag or candidate.low_complexity_flag
+        self.members.append(candidate)
         if (candidate.score, candidate.repeat_span_bp) > (
             self.representative.score,
             self.representative.repeat_span_bp,
         ):
             self.representative = candidate
+            self.representative_kmers = (
+                candidate_kmers
+                if candidate_kmers is not None
+                else candidate_kmer_sketch(candidate.sequence)
+            )
 
 
 @dataclass(frozen=True)
@@ -183,6 +208,7 @@ class DiscoverConfig:
     seed: int = 1
     progress_every: int = 1000
     chunk_size: int = 1000
+    chunk_bases: int = 8_000_000
     threads: int = 8
     kmer_backend: str = "python"
     target_discovery_coverage: float = DEFAULT_TARGET_DISCOVERY_COVERAGE
@@ -307,6 +333,7 @@ def discover_toy_repeats(
     candidate_tmp_path.replace(candidate_path)
     with candidate_path.open("a", encoding="utf-8") as handle:
         chunk: list[ReadScanTask] = []
+        chunk_bases = 0
         selected_reads = 0
         selected_bases = 0
 
@@ -354,6 +381,7 @@ def discover_toy_repeats(
                 )
 
         def flush_chunk(executor: ThreadPoolExecutor | None) -> None:
+            nonlocal chunk_bases
             if not chunk:
                 return
             try:
@@ -378,6 +406,7 @@ def discover_toy_repeats(
                 raise ValueError(str(exc)) from exc
             finally:
                 chunk.clear()
+                chunk_bases = 0
 
         executor_context = (
             ThreadPoolExecutor(max_workers=effective_threads)
@@ -417,7 +446,8 @@ def discover_toy_repeats(
                 selected_reads += 1
                 selected_bases += len(record.sequence)
                 chunk.append(ReadScanTask(record=record))
-                if len(chunk) >= config.chunk_size:
+                chunk_bases += len(record.sequence)
+                if len(chunk) >= config.chunk_size or chunk_bases >= config.chunk_bases:
                     flush_chunk(executor)
             flush_chunk(executor)
 
@@ -675,6 +705,25 @@ def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanRe
     if len(sequence) < config.min_read_length:
         return ReadScanResult(read_bases=len(sequence), skipped_short_reads=1)
 
+    if config.kmer_backend == "rust":
+        candidate, overflow_count = find_best_periodic_candidate_rust(
+            record,
+            min_period=config.min_monomer_len,
+            max_period=config.max_monomer_len,
+            min_repeat_span=config.min_repeat_span,
+            candidate_index=0,
+            kmer_size=config.kmer_size,
+            top_periods=config.top_periods,
+            min_seed_occurrences=config.min_seed_occurrences,
+            min_spacing_support=config.min_spacing_support,
+            max_pairs_per_kmer=config.max_pairs_per_kmer,
+        )
+        return ReadScanResult(
+            read_bases=len(sequence),
+            candidate=candidate,
+            seed_overflow_count=overflow_count,
+        )
+
     short_candidate, short_overflow_count = find_best_short_periodic_candidate_with_stats(
         record,
         min_period=config.min_monomer_len,
@@ -688,18 +737,14 @@ def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanRe
             candidate=short_candidate,
             seed_overflow_count=short_overflow_count,
         )
-
     if len(sequence) < config.kmer_size:
         return ReadScanResult(read_bases=len(sequence), skipped_short_kmer=1)
-
-    finder = (
-        find_best_periodic_candidate_rust
-        if config.kmer_backend == "rust"
-        else find_best_periodic_candidate_with_stats
-    )
-    candidate, overflow_count = finder(
+    long_min_period = max(config.min_monomer_len, SHORT_PERIOD_SCAN_MAX + 1)
+    if long_min_period > config.max_monomer_len:
+        return ReadScanResult(read_bases=len(sequence))
+    candidate, overflow_count = find_best_periodic_candidate_with_stats(
         record,
-        min_period=config.min_monomer_len,
+        min_period=long_min_period,
         max_period=config.max_monomer_len,
         min_repeat_span=config.min_repeat_span,
         candidate_index=0,
@@ -712,7 +757,7 @@ def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanRe
     return ReadScanResult(
         read_bases=len(sequence),
         candidate=candidate,
-        seed_overflow_count=short_overflow_count + overflow_count,
+        seed_overflow_count=overflow_count,
     )
 
 
@@ -747,22 +792,7 @@ def scan_discover_chunk_rust_batch(
             results[index] = ReadScanResult(read_bases=len(sequence), skipped_short_reads=1)
             continue
 
-        short_candidate, short_overflow_count = find_best_short_periodic_candidate_with_stats(
-            record,
-            min_period=config.min_monomer_len,
-            max_period=min(config.max_monomer_len, SHORT_PERIOD_SCAN_MAX),
-            min_repeat_span=config.min_repeat_span,
-            candidate_index=0,
-        )
-        if short_candidate is not None:
-            results[index] = ReadScanResult(
-                read_bases=len(sequence),
-                candidate=short_candidate,
-                seed_overflow_count=short_overflow_count,
-            )
-            continue
-
-        if len(sequence) < config.kmer_size:
+        if len(sequence) < config.kmer_size and config.min_monomer_len > SHORT_PERIOD_SCAN_MAX:
             results[index] = ReadScanResult(read_bases=len(sequence), skipped_short_kmer=1)
             continue
         if len(sequence) < min_batch_length:
@@ -784,6 +814,7 @@ def scan_discover_chunk_rust_batch(
             min_seed_occurrences=config.min_seed_occurrences,
             min_spacing_support=config.min_spacing_support,
             max_pairs_per_kmer=config.max_pairs_per_kmer,
+            min_repeat_span=config.min_repeat_span,
         )
         for (index, record, sequence), rust_result in zip(group, rust_results):
             candidate = build_candidate_from_period(
@@ -792,6 +823,8 @@ def scan_discover_chunk_rust_batch(
                 rust_result.best_period,
                 rust_result.periodicity_score,
                 candidate_index=0,
+                read_start=rust_result.repeat_start,
+                read_end=rust_result.repeat_end,
             )
             results[index] = ReadScanResult(
                 read_bases=len(sequence),
@@ -851,6 +884,8 @@ def validate_discover_config(config: DiscoverConfig) -> None:
         raise ValueError("--progress-every must be positive")
     if config.chunk_size <= 0:
         raise ValueError("--chunk-size must be positive")
+    if config.chunk_bases <= 0:
+        raise ValueError("--chunk-bases must be positive")
     if config.threads <= 0:
         raise ValueError("--threads must be positive")
     if config.kmer_backend not in {"python", "rust"}:
@@ -871,9 +906,16 @@ def read_fasta(path: Path) -> Iterable[FastaRecord]:
         raise
 
 
-def read_fasta_many(paths: Path | Sequence[Path]) -> Iterable[FastaRecord]:
+def read_fasta_many(
+    paths: Path | Sequence[Path],
+    *,
+    check_duplicate_ids_across_files: bool = True,
+) -> Iterable[FastaRecord]:
     try:
-        for record in read_sequence_records_many(paths):
+        for record in read_sequence_records_many(
+            paths,
+            check_duplicate_ids_across_files=check_duplicate_ids_across_files,
+        ):
             yield FastaRecord(
                 read_id=record.id,
                 description=record.description,
@@ -885,24 +927,23 @@ def read_fasta_many(paths: Path | Sequence[Path]) -> Iterable[FastaRecord]:
 
 def read_fasta_many_round_robin(paths: Path | Sequence[Path]) -> Iterable[FastaRecord]:
     sequence_paths = normalize_sequence_paths(paths)
-    seen_ids: set[str] = set()
-    active = deque(
-        (path, iter(read_fasta(path)))
-        for path in sequence_paths
-    )
-    while active:
-        path, iterator = active.popleft()
-        try:
-            record = next(iterator)
-        except StopIteration:
-            continue
-        if record.read_id in seen_ids:
-            raise SequenceFormatError(
-                f"Duplicate sequence id across input read files: {record.read_id}"
-            )
-        seen_ids.add(record.read_id)
-        yield record
-        active.append((path, iterator))
+    with DuplicateIdTracker() as seen_ids:
+        active = deque(
+            (path, iter(read_fasta(path)))
+            for path in sequence_paths
+        )
+        while active:
+            path, iterator = active.popleft()
+            try:
+                record = next(iterator)
+            except StopIteration:
+                continue
+            if not seen_ids.add(record.read_id):
+                raise SequenceFormatError(
+                    f"Duplicate sequence id across input read files: {record.read_id}"
+                )
+            yield record
+            active.append((path, iterator))
 
 
 def make_fasta_record(header: str, sequence_parts: Sequence[str]) -> FastaRecord:
@@ -954,11 +995,20 @@ def find_best_short_periodic_candidate_with_stats(
 
     best_period = 0
     best_score = 0.0
+    best_start = 0
+    best_end = 0
     for period in range(min_period, bounded_max_period + 1):
-        score = bounded_periodicity_score(sequence, period)
-        if (score, -period) > (best_score, -best_period):
+        score, start, end = best_local_periodicity_score(
+            sequence,
+            period,
+            min_repeat_span,
+            acceptance_score=SHORT_PERIOD_ACCEPTANCE_SCORE,
+        )
+        if (score, end - start, -period) > (best_score, best_end - best_start, -best_period):
             best_period = period
             best_score = score
+            best_start = start
+            best_end = end
 
     if best_score < SHORT_PERIOD_ACCEPTANCE_SCORE:
         return None, 0
@@ -968,6 +1018,8 @@ def find_best_short_periodic_candidate_with_stats(
         best_period,
         best_score,
         candidate_index,
+        read_start=best_start,
+        read_end=best_end,
     ), 0
 
 
@@ -1012,12 +1064,13 @@ def find_best_periodic_candidate_with_stats(
     if not candidate_periods:
         return None, overflow_count
 
-    best_period, best_score = refine_candidate_period(
+    best_period, best_score, repeat_start, repeat_end = refine_candidate_period_with_interval(
         sequence,
         repeated_positions,
         candidate_periods,
         min_period=min_period,
         max_period=bounded_max_period,
+        min_repeat_span=min_repeat_span,
     )
 
     return build_candidate_from_period(
@@ -1026,6 +1079,8 @@ def find_best_periodic_candidate_with_stats(
         best_period,
         best_score,
         candidate_index,
+        read_start=repeat_start,
+        read_end=repeat_end,
     ), overflow_count
 
 
@@ -1056,6 +1111,7 @@ def find_best_periodic_candidate_rust(
         min_seed_occurrences=min_seed_occurrences,
         min_spacing_support=min_spacing_support,
         max_pairs_per_kmer=max_pairs_per_kmer,
+        min_repeat_span=min_repeat_span,
     )
     return build_candidate_from_period(
         record,
@@ -1063,6 +1119,8 @@ def find_best_periodic_candidate_rust(
         result.best_period,
         result.periodicity_score,
         candidate_index,
+        read_start=result.repeat_start,
+        read_end=result.repeat_end,
     ), result.overflow_count
 
 
@@ -1072,12 +1130,24 @@ def build_candidate_from_period(
     best_period: int,
     best_score: float,
     candidate_index: int,
+    *,
+    read_start: int = 0,
+    read_end: int | None = None,
 ) -> CandidateRepeat | None:
     if best_period <= 0 or best_score < 0.75:
         return None
-    repeat_span = len(sequence)
+    if read_end is None:
+        read_end = len(sequence)
+    read_start = max(0, read_start)
+    read_end = min(len(sequence), read_end)
+    repeat_span = read_end - read_start
+    if repeat_span < best_period * 2:
+        return None
+    monomer = consensus_monomer(sequence[read_start:read_end], best_period)
+    if len(monomer) != best_period:
+        return None
     warnings = []
-    low_complexity = is_low_complexity(sequence[:best_period])
+    low_complexity = is_low_complexity(monomer)
     if low_complexity:
         warnings.append("low_complexity_candidate")
     if best_period < 20:
@@ -1086,9 +1156,9 @@ def build_candidate_from_period(
     return CandidateRepeat(
         read_id=record.read_id,
         candidate_id=f"TXC{candidate_index:06d}",
-        sequence=sequence[:best_period],
-        read_start=0,
-        read_end=len(sequence),
+        sequence=monomer,
+        read_start=read_start,
+        read_end=read_end,
         strand=parse_strand(record.description),
         period_bp=best_period,
         repeat_span_bp=repeat_span,
@@ -1098,6 +1168,26 @@ def build_candidate_from_period(
         confidence=confidence,
         warning=";".join(warnings),
     )
+
+
+def consensus_monomer(repeat_sequence: str, period: int) -> str:
+    """Build a deterministic majority consensus from complete units."""
+    unit_count = len(repeat_sequence) // period
+    if period <= 0 or unit_count < 2:
+        return ""
+    units = [
+        repeat_sequence[index * period : (index + 1) * period]
+        for index in range(unit_count)
+    ]
+    consensus = []
+    for offset in range(period):
+        counts = Counter(unit[offset] for unit in units if unit[offset] in "ACGT")
+        consensus.append(
+            max("ACGT", key=lambda base: (counts.get(base, 0), -"ACGT".index(base)))
+            if counts
+            else "N"
+        )
+    return orient_monomer("".join(consensus))
 
 
 def renumber_candidate(candidate: CandidateRepeat, candidate_id: str) -> CandidateRepeat:
@@ -1168,26 +1258,36 @@ def cluster_candidates(
 ) -> list[RepeatFamily]:
     clusters: list[CandidateCluster] = []
     for candidate in sorted(candidates, key=lambda item: item.period_bp):
+        candidate_kmers = candidate_kmer_sketch(candidate.sequence)
         placed = False
         for cluster in clusters:
             center = cluster.center
             tolerance = 0 if min(candidate.period_bp, center) <= SHORT_PERIOD_SCAN_MAX else period_tolerance_bp
-            if abs(candidate.period_bp - center) <= tolerance:
-                cluster.add(candidate)
+            if (
+                abs(candidate.period_bp - center) <= tolerance
+                and candidate_sequences_compatible(
+                    candidate.sequence,
+                    candidate_kmers,
+                    cluster.representative.sequence,
+                    cluster.representative_kmers,
+                )
+            ):
+                cluster.add(candidate, candidate_kmers)
                 placed = True
                 break
         if not placed:
-            clusters.append(CandidateCluster.from_candidate(candidate))
+            clusters.append(CandidateCluster.from_candidate(candidate, candidate_kmers))
 
     supported = [cluster for cluster in clusters if cluster.support_read_count >= min_support_reads]
     supported.sort(key=lambda cluster: (-cluster.support_read_count, cluster.center))
 
     families = []
     for index, cluster in enumerate(supported, start=1):
-        representative = cluster.representative
-        monomer_sequence = orient_monomer(representative.sequence)
+        dominant_period = Counter(member.period_bp for member in cluster.members).most_common(1)[0][0]
+        period_members = [member for member in cluster.members if member.period_bp == dominant_period]
+        monomer_sequence = cluster_consensus(period_members)
         mean_identity = cluster.mean_identity
-        low_complexity = cluster.low_complexity_flag
+        low_complexity = is_low_complexity(monomer_sequence)
         warning = "low_complexity_family" if low_complexity else ""
         confidence = "high" if cluster.support_read_count >= max(3, min_support_reads) and mean_identity >= 0.9 else "medium"
         families.append(
@@ -1195,7 +1295,7 @@ def cluster_candidates(
                 family_id=f"TXF{index:06d}",
                 monomer_id=f"TXM{index:06d}",
                 monomer_sequence=monomer_sequence,
-                monomer_length_bp=representative.period_bp,
+                monomer_length_bp=dominant_period,
                 support_read_count=cluster.support_read_count,
                 support_span_bp=cluster.support_span_sum,
                 mean_identity=mean_identity,
@@ -1208,8 +1308,112 @@ def cluster_candidates(
 
 
 def orient_monomer(sequence: str) -> str:
-    reverse = reverse_complement(sequence)
-    return min(sequence, reverse)
+    """Canonicalize strand and cyclic phase for tandem-repeat monomers."""
+    normalized = sequence.upper()
+    if not normalized:
+        return normalized
+    reverse = reverse_complement(normalized)
+    return min(minimal_rotation(normalized), minimal_rotation(reverse))
+
+
+def minimal_rotation(sequence: str) -> str:
+    """Return the lexicographically minimal rotation using Booth's algorithm."""
+    if not sequence:
+        return sequence
+    doubled = sequence + sequence
+    length = len(sequence)
+    left = 0
+    right = 1
+    offset = 0
+    while left < length and right < length and offset < length:
+        a = doubled[left + offset]
+        b = doubled[right + offset]
+        if a == b:
+            offset += 1
+            continue
+        if a > b:
+            left = left + offset + 1
+            if left <= right:
+                left = right + 1
+        else:
+            right = right + offset + 1
+            if right <= left:
+                right = left + 1
+        offset = 0
+    start = min(left, right)
+    return doubled[start : start + length]
+
+
+def candidate_kmer_sketch(sequence: str, k: int = 11) -> frozenset[int]:
+    if not sequence:
+        return frozenset()
+    effective_k = min(k, len(sequence))
+    circular = sequence + sequence[: effective_k - 1]
+    return frozenset(
+        code
+        for position, code in iter_canonical_kmer_codes(circular, effective_k)
+        if position < len(sequence)
+    )
+
+
+def candidate_sequences_compatible(
+    sequence_a: str,
+    kmers_a: frozenset[int],
+    sequence_b: str,
+    kmers_b: frozenset[int],
+) -> bool:
+    if not kmers_a or not kmers_b:
+        return sequence_a == sequence_b
+    shared_fraction = len(kmers_a & kmers_b) / min(len(kmers_a), len(kmers_b))
+    threshold = 0.65 if min(len(sequence_a), len(sequence_b)) < 20 else 0.35
+    return shared_fraction >= threshold
+
+
+def cluster_consensus(candidates: Sequence[CandidateRepeat]) -> str:
+    if not candidates:
+        return ""
+    template = max(candidates, key=lambda item: (item.score, item.repeat_span_bp)).sequence
+    aligned = [best_cyclic_alignment(template, candidate.sequence) for candidate in candidates]
+    consensus = []
+    for offset in range(len(template)):
+        counts = Counter(sequence[offset] for sequence in aligned if sequence[offset] in "ACGT")
+        consensus.append(
+            max("ACGT", key=lambda base: (counts.get(base, 0), -"ACGT".index(base)))
+            if counts
+            else "N"
+        )
+    return orient_monomer("".join(consensus))
+
+
+def best_cyclic_alignment(reference: str, sequence: str) -> str:
+    if len(reference) != len(sequence) or not reference:
+        return sequence[: len(reference)].ljust(len(reference), "N")
+    length = len(reference)
+    effective_k = min(9, length)
+    reference_anchor = reference[:effective_k]
+    candidate_shifts: set[tuple[str, int]] = set()
+    for oriented in (sequence, reverse_complement(sequence)):
+        doubled = oriented + oriented[: effective_k - 1]
+        start = doubled.find(reference_anchor)
+        while start >= 0 and start < length and len(candidate_shifts) < 128:
+            candidate_shifts.add((oriented, start))
+            start = doubled.find(reference_anchor, start + 1)
+        candidate_shifts.add((oriented, 0))
+    if len(candidate_shifts) <= 2 and length <= 256:
+        candidate_shifts = {
+            (oriented, shift)
+            for oriented in (sequence, reverse_complement(sequence))
+            for shift in range(length)
+        }
+    best = reference
+    best_matches = -1
+    for oriented, shift in candidate_shifts:
+        rotated = oriented[shift:] + oriented[:shift]
+        matches = sum(left == right for left, right in zip(reference, rotated))
+        if matches > best_matches or (matches == best_matches and rotated < best):
+            best_matches = matches
+            best = rotated
+    return best
 
 
 def compare_families(families: Sequence[RepeatFamily], k: int = 11) -> list[FamilySimilarity]:

@@ -80,6 +80,29 @@ Minimum computational evidence before manuscript submission:
 5. comparison with TRF, TideHunter, TRASH and RepeatExplorer2/TAREAN;
 6. reproducibility benchmark with fixed seeds and versioned configs.
 
+## Current Advantage Claims
+
+The 2026-07-15 external-tool benchmark supports the following provisional,
+scope-limited engineering claim:
+
+> On controlled single-family synthetic long-array reads, single-threaded
+> TandemX retained the same period-recovery accuracy as TRF while achieving
+> higher throughput, and used less peak memory than TideHunter.
+
+The current evidence does not support saying that TandemX is generally more
+accurate than TRF or TideHunter, always uses the least memory, or outperforms
+TRASH or TAREAN/RepeatExplorer2. TRASH and TAREAN require task-specific
+comparisons because they target assembly hierarchy/HOR annotation and
+short-read graph-based family recovery, respectively.
+
+The stronger publication-level differentiation is the integrated read-first,
+assembly-aware workflow: candidate monomer discovery, diagnostic k-mer copy
+number estimation, assembly localization, possible assembly
+under-representation checks, FISH probe prioritization, confidence labels and
+reproducible outputs. Biological utility claims for that integration still
+require independent real HiFi data, known-repeat or expert truth, and FISH or
+other orthogonal validation.
+
 ## Required Biological Case Studies
 
 Potential case-study categories:

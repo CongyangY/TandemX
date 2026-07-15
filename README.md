@@ -149,7 +149,7 @@ tandemx run \
   --kmer-backend rust
 ```
 
-Without `--assembly`, locate, compare, probe, and assembly-dependent visualization steps are recorded as skipped. `--resume` is basic output-level resume, not an intra-step checkpoint. `--force` reruns selected steps. Pipeline runs write per-step logs plus `pipeline_summary.tsv`, `pipeline_summary.json`, `output_manifest.tsv`, and `run_report.md`. Read limits are passed to both discover and quantify so copy-number depth uses the same input prefix.
+Without `--assembly`, locate, compare, probe, and assembly-dependent visualization steps are recorded as skipped. `--resume` skips a completed step only when its outputs validate and a SHA-256 fingerprint of its inputs and effective command still matches; it is not an intra-step checkpoint. `--force` reruns selected steps. Pipeline runs write per-step logs plus `pipeline_summary.tsv`, `pipeline_summary.json`, `output_manifest.tsv`, and `run_report.md`. Read limits are passed to both discover and quantify so copy-number depth uses the same input prefix.
 
 ## Where are my outputs?
 
@@ -223,7 +223,7 @@ conda activate tandemx-dev
 pytest
 ```
 
-The tests currently validate CLI help, missing-input errors, simulator reproducibility, streaming FASTA/FASTQ/gzip input behavior, toy-scale discover output behavior, toy-scale quantify behavior, toy-scale assembly localization behavior, toy-scale probe ranking behavior, output schema validation, and basic static visualization output.
+The tests validate CLI help, missing-input errors, simulator and backend reproducibility, streaming FASTA/FASTQ/gzip input behavior, local repeat boundaries, sequence-aware clustering, circular diagnostic k-mers, toy-scale quantify/localize/probe behavior, output schema validation, resume fingerprints, and static visualization output.
 
 The test suite also includes non-default toy repeat lengths, currently 421 bp and 729 bp, to check that the MVP workflow is not tied to the simulator defaults. Randomized toy workflow tests run fixed seeds `1`, `7`, `13`, `42`, and `99`; each seed generates two monomer lengths and controlled copy counts, then runs simulate, discover, quantify, locate, probe, and validate. Simulator truth files are used only for simulator checks and test assertions, not as command inputs in the analysis workflow.
 
@@ -253,7 +253,7 @@ python benchmarks/scripts/run_synthetic_benchmark.py \
   --outdir /tmp/tandemx_benchmark_tiny
 ```
 
-The runner executes `simulate -> discover -> quantify -> locate -> probe -> validate`, writes `benchmark_summary.tsv` and `accuracy_summary.tsv`, and stores per-command logs. Only the `tiny` scale is intended for pytest. Larger synthetic scales are manual tests and do not imply real 7-20 Gb production readiness.
+The runner executes `simulate -> discover -> quantify -> locate -> probe -> validate`, writes `benchmark_summary.tsv` and `accuracy_summary.tsv`, records per-command wall time and peak resident memory, and stores per-command logs. Truth matching uses sequence identity plus length rather than length alone. Only the `tiny` scale is intended for pytest. Larger synthetic scales are manual tests and do not imply real 7-20 Gb production readiness.
 
 ## Discover Pilot Controls
 
@@ -275,7 +275,7 @@ tandemx discover \
   --progress-every 1000
 ```
 
-`--reads` accepts one or more FASTA/FASTQ files, including gzip-compressed files. Multiple files are streamed in the order supplied and analyzed as one merged read set. Duplicate read IDs across input files are treated as an input error, which helps catch accidental repeated file arguments. `candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The terminal progress line refreshes in place and reports the current step, processed reads and bases, elapsed time, estimated total runtime, remaining time, reads/min and MB/min. Discover starts scanning immediately while a background task counts input reads and bases using up to `--count-threads`; once counting finishes, the same progress line gains percentage, estimated total runtime and remaining time. Use `--no-progress` for non-interactive batch logs. `--kmer-backend auto` is the default and uses Rust when the compiled extension and k-mer size are supported; use `--kmer-backend python` only for fallback/debugging. With the Rust backend, `--threads` parallelizes read-local scanning; the default request is 8 threads, capped at the smaller of 64 and half of available logical CPUs. By default discover scans the full input unless you set explicit `--max-reads/--max-read-bases` limits. If you want bounded large-input discovery, enable it explicitly with `--enable-auto-discovery-budget`; with `--genome-size`, TandemX then caps discovery to approximately `--target-discovery-coverage` genome equivalents, and with multiple files the bounded mode switches to round-robin file streaming so early stopping is less biased toward the first file. See `docs/performance.md` for parity results and scaling limits.
+`--reads` accepts one or more FASTA/FASTQ files, including gzip-compressed files. Multiple files are streamed in the order supplied and analyzed as one merged read set. Duplicate read IDs in discovery are checked exactly with a bounded in-memory tracker that spills to a temporary SQLite index. `candidate_reads.tsv` and `run.log` are created at startup and flushed during processing. The terminal progress line refreshes in place and reports the current step, processed reads and bases, elapsed time, reads/min and MB/min. TandemX avoids an otherwise wasteful full input pre-count; a synchronous count is performed only when automatic budgeting is explicitly enabled without `--genome-size`. Use `--no-progress` for non-interactive batch logs. `--kmer-backend auto` is the default and uses Rust when the compiled extension and k-mer size are supported; use `--kmer-backend python` only for fallback/debugging. With the Rust backend, `--threads` parallelizes read-local scanning; `--chunk-size` and `--chunk-bases` jointly bound each scan batch. By default discover scans the full input unless you set explicit `--max-reads/--max-read-bases` limits. If you want bounded large-input discovery, enable it explicitly with `--enable-auto-discovery-budget`; with `--genome-size`, TandemX caps discovery to approximately `--target-discovery-coverage` genome equivalents, and with multiple files the bounded mode switches to round-robin file streaming. See `docs/performance.md` for parity results and scaling limits.
 
 The default minimum period is 2 bp so short tandem repeats such as di-, tri- and heptanucleotide repeats can be reported when they span enough read sequence. Short or low-complexity candidates are flagged with warnings. Set `--min-period 20` when a run should focus only on longer satellite-like monomers.
 
