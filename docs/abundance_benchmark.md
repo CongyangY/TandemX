@@ -182,3 +182,11 @@ positives and lower precision. Full-assembly localization mean base recall was
 divergence-tolerant localizer developed on different seeds. Compact baseline,
 paired results and the accepted six-panel figure are under
 `paper/evidence/abundance_domain_shift_*`; 5401–5403 are consumed.
+
+The first corrective experiment is deliberately separate from those consumed
+seeds. `abundance_localizer_development_v1.json` predeclares seeds 5301–5303,
+an `iid_base` conversion of exact k-mer survival, threshold 0.90, and gates for
+full-assembly recall, positive-assembly precision and absent-family false calls.
+The localization-only benchmark mode skips read simulation, quantification and
+comparison because those stages are unaffected. This is a pending development
+test, not a validated new default.

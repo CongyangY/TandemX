@@ -5,12 +5,23 @@ from pathlib import Path
 from tandemx.discover.mvp import FastaRecord
 from tandemx.locate.mvp import (
     ArrayHit,
+    array_from_state,
     classify_assembly_read_ratio,
     compare_assembly_to_reads,
     covered_bp,
     merge_intervals,
     window_density,
 )
+
+
+def test_iid_base_proxy_recovers_substitution_signal_rejected_by_exact_fraction() -> None:
+    state = [100, 300, 100]
+    assert array_from_state("chr1", "f1", state, 61, 21, 0.9, False) is None
+    hit = array_from_state("chr1", "f1", state, 61, 21, 0.9, False, "iid_base")
+    assert hit is not None
+    assert hit.score == 972
+    assert "iid_base_identity_proxy_from_exact_kmers" in hit.warning
+    assert "independence_assumption_uncalibrated" in hit.warning
 
 
 def test_merge_intervals_with_gap() -> None:

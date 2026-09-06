@@ -36,6 +36,7 @@ class LocateConfig:
     step_size: int
     k: int
     min_identity: float = 0.8
+    identity_model: str = "exact_kmer_fraction"
 
 
 @dataclass(frozen=True)
@@ -89,6 +90,7 @@ def locate_toy_arrays(config: LocateConfig) -> tuple[list[DensityWindow], list[A
             config.k,
             config.min_identity,
             bool(shared_kmers),
+            config.identity_model,
         )
         if array is not None:
             current_arrays.append(array)
@@ -167,6 +169,8 @@ def validate_locate_config(config: LocateConfig) -> None:
         raise ValueError("--k must be in 1..31 for bounded-memory rolling k-mer scans")
     if not 0 < config.min_identity <= 1:
         raise ValueError("--min-identity must be in (0, 1]")
+    if config.identity_model not in {"exact_kmer_fraction", "iid_base"}:
+        raise ValueError("--identity-model must be exact_kmer_fraction or iid_base")
 
 
 def build_family_kmer_index(
@@ -205,6 +209,7 @@ def locate_record_arrays(
     shared_kmers: set[int],
     k: int,
     min_identity: float,
+    identity_model: str = "exact_kmer_fraction",
 ) -> list[ArrayHit]:
     hits: dict[str, list[tuple[int, int]]] = defaultdict(list)
     for position, code in iter_canonical_kmer_codes(record.sequence, k, filter_low_complexity=True):
@@ -225,6 +230,7 @@ def locate_record_arrays(
                 k,
                 min_identity,
                 bool(shared_kmers),
+                identity_model,
             )
             if array is not None:
                 arrays.append(array)
@@ -239,16 +245,29 @@ def array_from_state(
     k: int,
     min_identity: float,
     shared_kmers_excluded: bool,
+    identity_model: str = "exact_kmer_fraction",
 ) -> ArrayHit | None:
     start, end, hit_count = state
     min_array_bp = max(monomer_length // 2, k * 2)
     if end - start < min_array_bp:
         return None
     possible_kmers = max(1, end - start - k + 1)
-    identity_proxy = min(1.0, hit_count / possible_kmers)
+    exact_kmer_fraction = min(1.0, hit_count / possible_kmers)
+    if identity_model == "exact_kmer_fraction":
+        identity_proxy = exact_kmer_fraction
+        warnings = ["exact_kmer_identity_proxy"]
+    elif identity_model == "iid_base":
+        # Under independent substitutions, P(exact k-mer) = P(base match)^k.
+        # This explicit approximation is not an alignment identity.
+        identity_proxy = exact_kmer_fraction ** (1.0 / k)
+        warnings = [
+            "iid_base_identity_proxy_from_exact_kmers",
+            "independence_assumption_uncalibrated",
+        ]
+    else:
+        raise ValueError("Unknown identity model")
     if identity_proxy < min_identity:
         return None
-    warnings = ["exact_kmer_identity_proxy"]
     if shared_kmers_excluded:
         warnings.append("shared_family_kmers_excluded")
     return ArrayHit(

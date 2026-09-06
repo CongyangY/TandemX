@@ -224,10 +224,10 @@ BED6 plus confidence fields, 0-based half-open. This file has no header line.
 | start | integer | bp | 0-based interval start |
 | end | integer | bp | 0-based half-open interval end |
 | family_id | string | NA | Repeat family identifier |
-| score | integer | unitless | Exact diagnostic-k-mer support fraction scaled from 0 to 1000 |
+| score | integer | unitless | Selected k-mer-derived identity proxy scaled from 0 to 1000; consult `run_config.yaml` and `warning` for the model |
 | strand | string | NA | `+`, `-` or `.` |
 | confidence | string | NA | Confidence label |
-| warning | string | NA | Semicolon-separated limitations such as `exact_kmer_identity_proxy` and `shared_family_kmers_excluded` |
+| warning | string | NA | Semicolon-separated limitations such as `exact_kmer_identity_proxy`, `iid_base_identity_proxy_from_exact_kmers`, `independence_assumption_uncalibrated` and `shared_family_kmers_excluded` |
 
 ## assembly_vs_read_cn.tsv
 

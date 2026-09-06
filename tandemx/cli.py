@@ -341,6 +341,7 @@ def run_locate(args: argparse.Namespace) -> int:
             step_size=args.step_size,
             k=args.k,
             min_identity=args.min_identity,
+            identity_model=args.identity_model,
         )
     )
     _write_run_config(args.outdir, "locate", args, status="locate_mvp_completed")
@@ -649,7 +650,8 @@ def build_parser() -> argparse.ArgumentParser:
     locate.add_argument("--window-size", type=int, default=100000, help="Window size in bp for assembly repeat density summaries.")
     locate.add_argument("--step-size", type=int, default=10000, help="Step size in bp for sliding-window density summaries.")
     locate.add_argument("--k", type=int, default=21, help="K-mer size used to scan assembly for monomer evidence.")
-    locate.add_argument("--min-identity", type=float, default=0.8, help="Minimum exact diagnostic k-mer support fraction required within a candidate array.")
+    locate.add_argument("--min-identity", type=float, default=0.8, help="Minimum identity proxy required within a candidate array; its meaning is selected by --identity-model.")
+    locate.add_argument("--identity-model", choices=("exact_kmer_fraction", "iid_base"), default="exact_kmer_fraction", help="Identity proxy used to filter arrays. iid_base converts the exact k-mer fraction under an explicit independent-substitution approximation.")
     locate.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, repeat_density.bedgraph, arrays.bed, and assembly_vs_read_cn.tsv.")
     locate.set_defaults(func=run_locate)
 

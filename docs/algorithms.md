@@ -334,7 +334,7 @@ Current MVP implementation:
 3. exclude k-mers shared by multiple catalog families, then scan each assembly contig once with a rolling 2-bit encoder;
 4. merge matching k-mers online into intervals instead of retaining every hit;
 5. finalize nearby intervals for each family as scanning advances;
-6. filter very short intervals and enforce `--min-identity` as an exact diagnostic-k-mer support fraction;
+6. filter very short intervals and enforce `--min-identity` using either the default exact diagnostic-k-mer fraction or the optional assumption-limited `iid_base` proxy;
 7. write candidate arrays as 0-based half-open `arrays.bed`;
 8. compute the union of family intervals, then use prefix coverage and binary search for sliding windows so overlaps are not double counted and density remains in `[0, 1]`;
 9. write `repeat_density.bedgraph`;
@@ -344,7 +344,7 @@ MVP constraints:
 
 1. toy assemblies only;
 2. k-mer evidence only, no read mapping;
-3. `--min-identity` is a k-mer support proxy, not alignment identity or an exact per-copy placement claim;
+3. `--min-identity` is a k-mer-derived proxy, not alignment identity or an exact per-copy placement claim; `iid_base` converts an exact-k-mer fraction `f` to `f^(1/k)` under the independent-substitution relation `P(exact k-mer) = P(base match)^k`, which overlapping windows, shared-k-mer removal, indels and structured variation can violate;
 4. simple threshold classification for `possible_collapse` and `possible_overexpansion`;
 5. bigWig output is future work.
 

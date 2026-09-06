@@ -54,7 +54,7 @@ def aggregate(rows: list[dict], group_fields: list[str], kind: str) -> list[dict
     return summaries
 
 
-def run(config_path: Path, outdir: Path, split: str) -> None:
+def run(config_path: Path, outdir: Path, split: str, localization_only: bool = False) -> None:
     config = json.loads(config_path.read_text())
     seeds = [s for group in config["seeds"].values() for s in group]
     if len(set(seeds)) != len(seeds) or split not in config["seeds"]:
@@ -70,6 +70,16 @@ def run(config_path: Path, outdir: Path, split: str) -> None:
         or not 1<=config['k']<=31 or config['read_length']<1):
         raise ValueError("Invalid abundance experiment configuration")
     scenarios = challenge_scenarios(config)
+    identity_model = config.get("locate_identity_model", "exact_kmer_fraction")
+    locate_min_identity = config.get("locate_min_identity", 0.8)
+    if (
+        identity_model not in {"exact_kmer_fraction", "iid_base"}
+        or not isinstance(locate_min_identity, (int, float))
+        or isinstance(locate_min_identity, bool)
+        or not math.isfinite(locate_min_identity)
+        or not 0 < locate_min_identity <= 1
+    ):
+        raise ValueError("Invalid localization identity model or threshold")
     fragment_gap_bp = config.get("fragment_gap_bp", 0)
     if not isinstance(fragment_gap_bp, int) or isinstance(fragment_gap_bp, bool) or fragment_gap_bp < 0:
         raise ValueError("fragment_gap_bp must be a nonnegative integer")
@@ -98,6 +108,9 @@ def run(config_path: Path, outdir: Path, split: str) -> None:
                       challenge_scenarios=[dict(unit_substitution_rate=rate, array_fragments=count,
                                                 fragment_gap_bp=fragment_gap_bp)
                                            for rate, count in scenarios],
+                      locate_identity_model=identity_model,
+                      locate_min_identity=locate_min_identity,
+                      localization_only=localization_only,
                       scope=("known-catalogue conditional quantification/localization with explicit "
                              "unit-divergence and array-fragmentation factors; not discovery or empirical HiFi validation"),
                       resource_note="sequential direct-child wait4; development diagnostics, not external superiority timing")
@@ -138,19 +151,24 @@ def run(config_path: Path, outdir: Path, split: str) -> None:
             catalogue = genome_dir / "catalogue.fa"
             scenario_context = dict(
                 unit_substitution_rate=unit_rate, array_fragments=fragment_count,
-                fragment_gap_bp=fragment_gap_bp,
+                fragment_gap_bp=fragment_gap_bp, locate_identity_model=identity_model,
+                locate_min_identity=locate_min_identity,
             )
             located = []
             for variant in manifest["variants"]:
                 folder = run_dir / variant["name"] / "locate"
                 ok = execute("locate", folder, ["locate", "--assembly", str(genome_dir/f"{variant['name']}.fa"),
-                             "--catalog", str(catalogue), "--k", str(config["k"])])
+                             "--catalog", str(catalogue), "--k", str(config["k"]),
+                             "--identity-model", identity_model,
+                             "--min-identity", str(locate_min_identity)])
                 retained = read_table(genome_dir/f"{variant['name']}.truth.tsv")
                 if ok:
                     for row in score_localization(folder/"output"/"arrays.bed", retained, variant["genome_bp"]):
                         locate_scores.append(dict(seed=seed, **scenario_context,
                                                   assembly_fraction=variant["fraction"], **row))
                 located.append((variant, retained, folder/"output"/"arrays.bed", ok))
+            if localization_only:
+                continue
             for coverage in config["coverages"]:
                 for error in config["substitution_rates"]:
                     name = f"c{coverage}_e{error}"
@@ -179,7 +197,8 @@ def run(config_path: Path, outdir: Path, split: str) -> None:
                            ("comparison_summary.tsv", aggregate(compare_scores, ["unit_substitution_rate", "array_fragments", "coverage", "substitution_rate", "assembly_fraction"], "comparison"))):
         if rows:
             write_table(outdir/filename, rows, list(rows[0]))
-    validation = dict(complete=True, executions=len(receipts), successful=sum(r["exit_code"]==0 for r in receipts),
+    validation = dict(complete=True, mode="localization_only" if localization_only else "full",
+                      executions=len(receipts), successful=sum(r["exit_code"]==0 for r in receipts),
                       challenge_scenarios=len(scenarios),
                       copy_number_family_rows=len(cn_scores), localization_family_rows=len(locate_scores),
                       comparison_family_rows=len(compare_scores), scientific_acceptance="not_assumed_from_execution_success")
@@ -193,5 +212,7 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--outdir", type=Path, required=True)
     parser.add_argument("--split", choices=("development", "heldout"), default="development")
+    parser.add_argument("--localization-only", action="store_true",
+                        help="Run only assembly localization and skip read simulation, quantification and comparison.")
     args = parser.parse_args()
-    run(args.config, args.outdir, args.split)
+    run(args.config, args.outdir, args.split, args.localization_only)

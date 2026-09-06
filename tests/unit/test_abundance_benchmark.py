@@ -173,6 +173,30 @@ def test_abundance_runner_crosses_divergence_and_fragmentation_factors(tmp_path:
     }
 
 
+def test_abundance_runner_localization_only_uses_selected_identity_model(tmp_path: Path):
+    config = dict(
+        seeds={'development':[31]}, periods=[31], copies=[10], flank_bp=300,
+        unit_substitution_rates=[.05], array_fragment_counts=[1], fragment_gap_bp=0,
+        coverages=[5], read_length=100, substitution_rates=[0], assembly_fractions=[1, 0],
+        collapse_threshold=.6, k=11, timeout_seconds=30,
+        locate_identity_model='iid_base', locate_min_identity=.9,
+    )
+    config_path = tmp_path/'config.json'
+    config_path.write_text(json.dumps(config))
+    result = tmp_path/'result'
+    run(config_path, result, 'development', localization_only=True)
+    validation = json.loads((result/'validation.json').read_text())
+    assert validation['mode'] == 'localization_only'
+    assert validation['successful'] == validation['executions'] == 2
+    assert validation['localization_family_rows'] == 2
+    assert validation['copy_number_family_rows'] == 0
+    assert validation['comparison_family_rows'] == 0
+    assert not (result/'reads').exists()
+    environment = json.loads((result/'environment.json').read_text())
+    assert environment['locate_identity_model'] == 'iid_base'
+    assert environment['locate_min_identity'] == .9
+
+
 def test_frozen_multik_evaluator_replays_every_challenge_scenario(tmp_path: Path):
     config = dict(
         seeds={'development':[39], 'heldout':[40]}, periods=[41], copies=[10], flank_bp=300,
