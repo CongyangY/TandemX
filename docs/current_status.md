@@ -7,6 +7,21 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Exact multiset index for sequence-clustering candidates
+
+- Canonical circular-word multiplicities are now accumulated through the existing
+  representative index before oriented q-gram/alignment comparisons. The gate
+  implies rejection by both old oriented tests; rounding/order/assignments and
+  low-identity/short-query exhaustive paths are unchanged. Index multiplicities
+  may change memory use; no memory improvement is claimed without measurement.
+- Randomized/edge cases compare complete old/new family and membership objects
+  at five identity thresholds; pruned pairs are checked against the original
+  comparison. Full suite **296 passed in 66.88 s**. Native Rust is unchanged.
+- `replay_clustering.py` will compare old snapshot/new clustering on identical
+  serialized Mo17 candidates; rounded exported scores make this narrower than
+  full live-pipeline parity. Actual stage timing/parity and end-to-end rerun remain
+  the next checks after this source commit.
+
 ### Fixed multi-k replay and expanded discovery scoring
 
 - Source 57ee82d8c78eb9ced1be135068c8c99567ca723e is pushed to both branches;

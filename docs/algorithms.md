@@ -1,5 +1,22 @@
 # TandemX Algorithm Design
 
+Sequence clustering now accumulates canonical circular 9-mer **multiplicities**
+through its inverted representative index. For identity >.9 and query length>=20,
+it rejects length-incompatible pairs and canonical multiset overlap below the
+existing oriented q-gram bound. Collapsing a word with its reverse complement can
+only increase overlap, so a pair rejected here would fail both unchanged oriented
+tests. Integer edit-budget rounding, candidate order, witnessed alignments,
+representatives, ties and ambiguity records are preserved. Lower identity/short
+queries keep exhaustive selection. The index stores multiplicity per representative;
+its memory cost and dense-graph scaling still need real measurement.
+
+`benchmarks.scripts.replay_clustering --previous-run /path/to/completed/real_run
+--outdir /path/to/new/replay` compares original snapshot clustering with the new
+index on identical exported candidates. Exported scores are rounded, so this
+tests two algorithms on serialized evidence, not complete live-pipeline parity.
+Exact family/membership JSON, source/input hashes and diagnostic stage times are
+retained. No per-stage memory ranking is inferred from this single-process replay.
+
 The experimental [read-cluster ratio model](read_cluster_quantification.md)
 handles within-read k-mer dependence and finite read-end opportunities using
 streaming family moments. It is a Python research reference, separate from the

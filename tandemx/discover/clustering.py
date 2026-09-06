@@ -6,9 +6,9 @@ Representatives never drift and membership is not propagated transitively.
 """
 from __future__ import annotations
 
-from collections import defaultdict
+from collections import Counter, defaultdict
 import hashlib
-from math import fsum
+from math import floor, fsum
 from typing import TYPE_CHECKING, Sequence
 import csv
 from pathlib import Path
@@ -37,9 +37,37 @@ def write_membership(path: Path, rows: list[dict]) -> None:
         writer.writerows(rows)
 
 
-def _index_words(sequence: str) -> set[str]:
+def _index_words(sequence: str) -> Counter[str]:
     words = circular_words(sequence, min(9, len(sequence)))
-    return {min(word, word.translate(str.maketrans("ACGT", "TGCA"))[::-1]) for word in words}
+    result: Counter[str] = Counter()
+    for word,count in words.items():
+        result[min(word, word.translate(str.maketrans("ACGT", "TGCA"))[::-1])] += count
+    return result
+
+
+def _indexed_candidate_ids(length: int, words: Counter[str], index: dict[str, dict[int,int]],
+                           representative_lengths: list[int], minimum_identity: float) -> list[int]:
+    """Exact necessary-condition gate for the existing oriented q-gram test.
+
+    Collapsing each word/RC pair can only increase multiset overlap. Therefore
+    insufficient canonical overlap implies that both oriented comparisons would
+    fail their unchanged q-gram bound. Length decisions use identical rounding.
+    """
+    if minimum_identity <= .9 or length < 20:
+        return list(range(len(representative_lengths)))
+    thresholds: dict[int,int | None] = {}
+    shared: Counter[int] = Counter()
+    for word,count in words.items():
+        for j,other_count in index.get(word,{}).items():
+            other_length=representative_lengths[j]
+            if other_length not in thresholds:
+                size=max(length,other_length)
+                limit=floor((1-minimum_identity)*size+1e-9)
+                thresholds[other_length]=(max(0,size-min(9,length,other_length)*limit)
+                                          if abs(length-other_length)<=limit else None)
+            if thresholds[other_length] is not None:
+                shared[j]+=min(count,other_count)
+    return sorted(j for j,count in shared.items() if count>=thresholds[representative_lengths[j]])
 
 
 def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int,
@@ -67,15 +95,13 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
                      -sum(c.repeat_span_bp for c in grouped[seq]),
                      -fsum(c.score for c in grouped[seq]) / len(grouped[seq]), seq))
     representatives: list[str] = []
+    representative_lengths: list[int] = []
     members: list[list[CandidateRepeat]] = []
-    index: dict[str, set[int]] = defaultdict(set)
+    index: dict[str, dict[int,int]] = defaultdict(dict)
     assignment = {}
     for sequence in ordered:
         words = _index_words(sequence)
-        if minimum_identity <= 0.9 or len(sequence) < 20:
-            possible = range(len(representatives))
-        else:
-            possible = sorted({j for word in words for j in index.get(word, ())})
+        possible = _indexed_candidate_ids(len(sequence),words,index,representative_lengths,minimum_identity)
         compatible = []
         for j in possible:
             evidence = cyclic_merge_evidence(representatives[j], sequence, minimum_identity, backend)
@@ -89,9 +115,10 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
         else:
             j = len(representatives)
             representatives.append(sequence)
+            representative_lengths.append(len(sequence))
             members.append([])
-            for word in words:
-                index[word].add(j)
+            for word,count in words.items():
+                index[word][j]=count
             distance = sequence.count("N")
             similarity = 1 - distance / len(sequence)
         members[j].extend(grouped[sequence])

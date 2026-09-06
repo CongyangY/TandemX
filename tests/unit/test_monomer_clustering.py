@@ -121,3 +121,50 @@ def test_multiple_compatible_cluster_assignments_are_exposed():
     assert rows[-1]["compatible_cluster_count"] == 2
     assert rows[-1]["alternative_cluster_ids"]
     assert rows[-1]["warning"] == "multiple_compatible_clusters"
+
+
+def test_indexed_multiset_gate_preserves_full_legacy_clustering(monkeypatch):
+    import tandemx.discover.clustering as module
+    rng=random.Random(724035)
+    candidates=[]
+    for size in (7,19,20,21,31,61,100,171):
+        for _ in range(3):
+            founder=''.join(rng.choices('ACGT',k=size))
+            variants=[founder,founder[3:]+founder[:3],change(founder,[size//2]),founder+'A',founder[:-1],
+                      founder[:-1]+'N',founder.translate(str.maketrans('ACGT','TGCA'))[::-1]]
+            for sequence in variants:
+                candidates.append(candidate(sequence,len(candidates)))
+    for sequence in ('A'*100,'ACGT'*25,'ACGG'*25,'N'*20):
+        candidates.append(candidate(sequence,len(candidates)))
+    optimized=module._indexed_candidate_ids
+    def legacy(length,words,index,lengths,identity):
+        if identity<=.9 or length<20:return list(range(len(lengths)))
+        return sorted({j for word in words for j in index.get(word,{})})
+    for identity in (.89,.9,.900001,.95,1):
+        monkeypatch.setattr(module,'_indexed_candidate_ids',optimized)
+        observed=module.cluster_monomers(candidates,1,identity,'rust')
+        monkeypatch.setattr(module,'_indexed_candidate_ids',legacy)
+        expected=module.cluster_monomers(candidates,1,identity,'rust')
+        assert observed==expected
+
+
+def test_canonical_multiset_gate_only_removes_pairs_rejected_by_original_bound():
+    from collections import defaultdict
+    from tandemx.discover.clustering import _index_words, _indexed_candidate_ids
+    rng=random.Random(634928)
+    representatives=[''.join(rng.choices('ACGT',k=rng.choice((19,20,31,61,100)))) for _ in range(50)]
+    representatives+=['ACGT'*25,'ACGG'*25,'A'*100,'N'+'ACGT'*24]
+    index=defaultdict(dict)
+    for j,sequence in enumerate(representatives):
+        for word,n in _index_words(sequence).items():index[word][j]=n
+    removed=0
+    for query in representatives[::3]:
+        words=_index_words(query)
+        legacy={j for word in words for j in index.get(word,{})}
+        observed=set(_indexed_candidate_ids(len(query),words,index,list(map(len,representatives)),.95))
+        if len(query)>=20:
+            assert observed<=legacy
+            for j in legacy-observed:
+                assert cyclic_merge_evidence(representatives[j],query,.95,'rust') is None
+                removed+=1
+    assert removed>0

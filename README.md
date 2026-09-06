@@ -412,6 +412,9 @@ single-k baselines and fit diagnostics; public quantification is unchanged.
 The [factorial discovery evaluation](docs/factorial_discovery_benchmark.md) uses
 full observed-coordinate truth, explicit partial-fragment treatment and independent
 cyclic sequence recovery for the three read-local discovery comparators.
+Sequence clustering also uses indexed canonical-word multiplicities to reject
+pairs that fail its existing q-gram bound; assignment semantics are unchanged.
+See [algorithm details and exact replay](docs/algorithms.md) for its validation.
 
 Complete Mo17 CCS input QC now covers 407,670 reads / 5.625 Gb, with nested
 11.68 Mb, 111.51 Mb and 1.129 Gb samples and a checked 10-chromosome reference.
