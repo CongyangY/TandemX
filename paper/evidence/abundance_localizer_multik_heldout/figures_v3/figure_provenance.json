@@ -1,0 +1,62 @@
+{
+  "complete": true,
+  "development_versions_exactly_paired": true,
+  "development_and_heldout_seeds_disjoint": true,
+  "heldout_localization_gates": {
+    "full_assembly_mean_base_recall": 0.98103255749595,
+    "positive_assembly_mean_base_precision": 0.9995650428053802,
+    "absent_family_false_positive_rate": 0.0
+  },
+  "method_confusion": {
+    "single_k21": {
+      "available": 2430,
+      "unavailable": 0,
+      "TP": 875,
+      "FN": 583,
+      "FP": 12,
+      "TN": 960
+    },
+    "multik_loglinear": {
+      "available": 2430,
+      "unavailable": 0,
+      "TP": 1371,
+      "FN": 87,
+      "FP": 125,
+      "TN": 847
+    },
+    "multik_fallback_depth_rule": {
+      "available": 2430,
+      "unavailable": 0,
+      "TP": 1339,
+      "FN": 119,
+      "FP": 83,
+      "TN": 889
+    }
+  },
+  "input_sha256": {
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_development_v1/validation.json": "f0977e413656eb88e375a282935c8cd539fbd9818bce8b070d7cc95adf965f3d",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_development_v1/environment.json": "5f107363546608b15ffe04704d9970f7ce02cd371d5022daa1089b1b31ff2eed",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_development_v1/run_config.json": "71c6aed60973bd54bf23df1dbd5b46c4a3415ee791eb341aa40f71c3ab854c37",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_development_v2/validation.json": "f0977e413656eb88e375a282935c8cd539fbd9818bce8b070d7cc95adf965f3d",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_development_v2/environment.json": "95db2fc8403320a385cb5151a0acacd559225c41ea79e927f39af9282ade977d",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_development_v2/run_config.json": "2c38f1b914829142fd95e8cd3bdd7f58d0fc6d195ad71c33a7da897c2f872687",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_heldout_baseline/validation.json": "20a6b84a634f02c3338276b10e668ce806dab709ade9a081a3752b731dbb1b4a",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_heldout_baseline/environment.json": "f995f260116438f375acde307afb34fd17dc7d364e8a26b36e9b9dc38c0d8ff0",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_heldout_baseline/run_config.json": "fda2fb06084d811889455aa95d2f7c37d2e105244c25f8e7bb1e6dbde5c96cff",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_multik_heldout/validation.json": "aa190cbd8394c0169f8c5248e165c711ceae0cabf5e615bd8a4b103bec2ac6e5",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_multik_heldout/environment.json": "d62579c491d3db5d3b065bc92c51943c3be645052641ff08d03cc0e34949cda1",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_multik_heldout/run_config.json": "fda2fb06084d811889455aa95d2f7c37d2e105244c25f8e7bb1e6dbde5c96cff",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_development_v1/localization_metrics.tsv": "04863e1b3f4ff0a1eaa8ccb5e8f72d3edcdbb07fff06e67a546a9e4c7e0b263e",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_development_v2/localization_metrics.tsv": "c9c2ec4bb43617f82cc55d22a45a3d2a6bae00dd042999413f3b9ee5efebe7d6",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_heldout_baseline/localization_metrics.tsv": "a93a2187306a0408065997064bf18be2844f17d5e96eb4e1a876c62d1d6b0aa4",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_localizer_multik_heldout/comparison_metrics.tsv": "b237f02f660eb76007cf7f96623bda219208c3d40c3a466e05828ee27a1c3a2c"
+  },
+  "script_sha256": "4b9533f83f6836745b2c6166b5465a301557cd3475e23027ae81c139c70f1ae7",
+  "panel_source_sha256": "464ed0d2e3dc154c2d46a772cf8481c3e38f01dc7f9bf677823b4c3e8d851140",
+  "outputs": {
+    "localizer_validation.pdf": "4cecd5bad588a57f662c8c7f2519e3856a8414bbb836bc3ac1becb4b506559fd",
+    "localizer_validation.svg": "9faf32eed42f1fc47777d9f045d41007a1189697c6d9607906e521a1c0de5b39",
+    "localizer_validation.png": "2f931337159ccb844ff9d99735ee98e85281bdf5f108769a3aa96652adb8d1fa"
+  },
+  "interpretation": "predeclared known-catalogue substitution simulation; localization gates passed on fresh seeds; the frozen multi-k classifier trades a sensitivity gain for a higher false-positive rate; not alignment identity or biological validation"
+}

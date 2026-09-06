@@ -5,7 +5,12 @@ from pathlib import Path
 import pytest
 
 from benchmarks.challenge.schema import digest_file, write_table
-from benchmarks.scripts.archive_abundance_evidence import DETECTOR_FILES, ROOT_FILES, archive
+from benchmarks.scripts.archive_abundance_evidence import (
+    DETECTOR_FILES,
+    LOCALIZATION_ROOT_FILES,
+    ROOT_FILES,
+    archive,
+)
 
 
 def build_result(tmp_path: Path, scenario_count: int = 1) -> Path:
@@ -96,6 +101,33 @@ def test_archive_accepts_expanded_challenge_matrix(tmp_path: Path) -> None:
     outdir = tmp_path / "archive"
     archive(source, outdir)
     assert len((outdir / "resource_metrics.tsv").read_text().splitlines()) == 11
+
+
+def test_archive_accepts_localization_only_matrix(tmp_path: Path) -> None:
+    source = build_result(tmp_path, scenario_count=2)
+    validation = json.loads((source / "validation.json").read_text())
+    validation.update(
+        mode="localization_only", executions=4, successful=4,
+        copy_number_family_rows=0, comparison_family_rows=0,
+    )
+    (source / "validation.json").write_text(json.dumps(validation))
+    environment = json.loads((source / "environment.json").read_text())
+    environment["localization_only"] = True
+    (source / "environment.json").write_text(json.dumps(environment))
+    for name in set(ROOT_FILES) - set(LOCALIZATION_ROOT_FILES):
+        (source / name).unlink()
+    for path in (source / "runs").glob("**/receipt.json"):
+        if json.loads(path.read_text())["label"] != "locate":
+            path.unlink()
+    outdir = tmp_path / "archive"
+    manifest = archive(source, outdir)
+    assert len(manifest) == (
+        len(LOCALIZATION_ROOT_FILES)
+        + len(set(DETECTOR_FILES) | {"benchmarks/abundance/run.py"}) + 1
+    )
+    resources = (outdir / "resource_metrics.tsv").read_text().splitlines()
+    assert len(resources) == 5
+    assert not (outdir / "copy_number_metrics.tsv").exists()
 
 
 @pytest.mark.parametrize("fault", ["matrix", "source", "receipt", "seeds"])

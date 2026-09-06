@@ -26,7 +26,11 @@ On three fresh predeclared conditional genomes, a frozen multi-k/depth rule
 improved under-representation sensitivity from 81.48% to 85.60%, false-positive
 rate from 8.64% to 7.41% and precision from 93.40% to 94.55%. The 20×/1%-error/
 50%-retention stratum improved from 3/9 to 9/9, but one genome retained a 22.22%
-false-positive rate.
+false-positive rate. On a second predeclared divergent-array test, bounded anchor
+bridging achieved 98.10% full-assembly recall and 99.96% positive-assembly
+precision. The frozen multi-k rule raised classification sensitivity from 60.01%
+to 91.84%, while false-positive rate rose from 1.23% to 8.54% and precision fell
+from 98.65% to 94.16%.
 Exact native optimizations shortened a 1.129-Gb maize replay by 23.61% relative
 to its preceding indexed version while preserving seven output files byte for
 byte; peak memory increased 0.81%. External comparisons showed task-dependent
@@ -232,6 +236,32 @@ results identify the exact diagnostic-k-mer support filter as a primary current
 failure boundary; the consumed domain-shift seeds cannot be used to tune its
 replacement (Figure 4).
 
+We therefore separated localizer development from a second fresh validation.
+The first IID-proxy development run on seeds 5301–5303 retained high precision
+but failed its 0.95 full-assembly recall gate (0.903608), with as many as 119
+predicted fragments. A second version reused only those development seeds and
+bridged exact anchors across at most one monomer length. It passed all three
+development gates: full-assembly mean recall 0.975728, positive-assembly mean
+precision 0.999441 and zero predicted bases in 54 absent-family rows. The first
+failure was retained and the selected result hashes were frozen before any new
+seed was evaluated (Evidence E16).
+
+Commit 4e662db and its hosted Ubuntu/macOS checks preceded the one-time run of
+seeds 5501–5503. All 1,062 commands completed. Full-assembly mean base recall was
+0.981033, positive-assembly mean precision was 0.999565 and the absent-family
+false-positive rate remained 0/54. The weakest full-assembly stratum, 5%
+divergence with three segments, had mean recall 0.949274. Mean absolute relative
+localized repeat-bp error across positive assemblies was 0.024861, although one
+short-array condition reached 0.596721 (Figure 5; Supplementary Table S13).
+
+The downstream assembly/read endpoint remained a trade-off. The single-k21
+baseline produced TP/FN/FP/TN=875/583/12/960, with sensitivity 0.600137,
+false-positive rate 0.012346 and precision 0.986471. Replaying the unchanged
+multi-k/depth rule produced 1339/119/83/889: sensitivity 0.918381,
+false-positive rate 0.085391 and precision 0.941632. Thus successful localization
+did not make the older classifier uniformly better; its sensitivity gain added
+71 false positives and lowered precision.
+
 ### Eight-species file QC and reference concordance expose normalization concerns
 
 Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N/Col-0R/Ey15-2R, rice
@@ -329,10 +359,13 @@ The completed experiments identify three separable improvements: exact engineeri
 changes reduced a measured discovery run time, a conditional multi-k model
 reduced a specific copy-estimation bias, and a frozen transparent rule improved
 all three assembly-comparison confusion metrics on fresh exact-copy simulations.
-The independent domain-shift test then showed that this gain fails when
-founder-to-unit divergence reaches 3–5%, chiefly because assembly localization
-loses nearly all true repeat bases and produces many false collapse calls. None establishes that
-TandemX dominates existing tools. In the current read simulation, all three
+The independent domain-shift test then showed that this gain failed when
+founder-to-unit divergence reached 3–5%, chiefly because assembly localization
+lost nearly all true repeat bases and produced many false collapse calls. Bounded
+anchor bridging subsequently restored high localization recall on a second
+predeclared simulation, including fresh seeds, but the unchanged multi-k
+classifier exchanged substantially higher sensitivity for more false positives.
+None establishes that TandemX dominates existing tools. In the current read simulation, all three
 methods recovered every founder. TRF retained slightly higher base precision,
 and TideHunter remained faster. TRASH2 was a strong assembly baseline after
 its primary unit output was interpreted correctly. Maintaining these results
@@ -365,7 +398,7 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 447 local Python tests. Its Rust
+PyO3/Rust extension. The current source passed 449 local Python tests. Its Rust
 source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
 passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
 distributable-wheel builds.
@@ -410,6 +443,23 @@ assembly fractions. Multiple non-overlapping truth intervals were summed by
 family for copy number and assembly ratio and union-scored for localization.
 Substitutions were independent and length preserving; the design does not model
 indels, empirical satellite evolution or contig breaks.
+
+Localizer development used seeds 5301–5303 only. The IID proxy transformed an
+observed exact k-mer fraction `f` to `f^(1/k)` under an explicit independent-
+substitution approximation and applied a minimum proxy identity of 0.90. After
+the first version failed the predeclared full-assembly mean-recall gate, the
+second version allowed exact-anchor gaps up to the larger of `2k` and one monomer
+length. Its selection gates were full-assembly mean recall at least 0.95,
+positive-assembly mean precision at least 0.95 and absent-family false-positive
+rate zero. Development validation, metrics, environment and configuration hashes
+were embedded in `abundance_localizer_heldout_v1.json`; the runner re-hashed them
+and recomputed the gates before creating held-out output. The configuration and
+guard were committed and passed hosted CI before seeds 5501–5503 were executed
+once. Held-out reporting retained the same six divergence/fragmentation
+scenarios and all original coverage, read-error and assembly-retention tiers.
+Exact-k-mer IID identity is not alignment identity; overlapping k-mers,
+insertions/deletions, shared-word filtering and structured satellite variation
+violate the approximation.
 
 ### Comparator execution and scoring
 
@@ -513,6 +563,17 @@ panel values and hashes are in
 `evidence/abundance_domain_shift_multik_heldout/figures_v3`. This adverse
 known-catalogue simulation is not biological collapse truth.
 
+**Figure 5. Divergence-aware anchor bridging and fresh held-out validation.**
+Six panels show the paired failed/selected development runs, full-assembly recall,
+fragment-count error, held-out recall and repeat-bp error across assembly
+retention, and downstream classification metrics. The localizer passes all three
+predeclared aggregate gates on seeds 5501–5503. The unchanged frozen multi-k
+classifier gains sensitivity while increasing false-positive rate and lowering
+precision. Inputs, panel values, hashes and the complete legend are in
+`evidence/abundance_localizer_multik_heldout/figures_v3` and
+`evidence/abundance_localizer_multik_heldout/figure_legend.md`. This known-
+catalogue substitution simulation is not biological collapse truth.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -570,6 +631,12 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   `evidence/MorexV3_reference_qc/reference_receipt.json`.
 - Supplementary Table S12: Morex sequence-native interface resource and parity
   receipts in `evidence/Morex_115Mb_index_interface_v2`.
+- Supplementary Table S13: failed/selected localizer development, fresh held-out
+  localization, copy-number/comparison, resource and paired classifier rows in
+  `evidence/abundance_localizer_development_v1`,
+  `evidence/abundance_localizer_development_v2`,
+  `evidence/abundance_localizer_heldout_baseline` and
+  `evidence/abundance_localizer_multik_heldout`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -580,7 +647,8 @@ E10: `known_query_recovery`; E11: `abundance_heldout`;
 E12: paired `abundance_heldout_v2` and `abundance_multik_collapse_heldout`;
 E13: paired `abundance_domain_shift_heldout_baseline` and
 `abundance_domain_shift_multik_heldout`; E14: `MorexV3_reference_qc`.
-E15: `Morex_115Mb_index_interface_v2`.
+E15: `Morex_115Mb_index_interface_v2`; E16: paired localizer development and
+held-out directories listed for Supplementary Table S13.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

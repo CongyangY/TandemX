@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "mode": "full",
+  "executions": 1062,
+  "successful": 1062,
+  "challenge_scenarios": 6,
+  "copy_number_family_rows": 486,
+  "localization_family_rows": 270,
+  "comparison_family_rows": 2430,
+  "scientific_acceptance": "not_assumed_from_execution_success"
+}

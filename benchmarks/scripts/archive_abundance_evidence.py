@@ -25,6 +25,13 @@ ROOT_FILES = (
     "comparison_metrics.tsv",
     "comparison_summary.tsv",
 )
+LOCALIZATION_ROOT_FILES = (
+    "environment.json",
+    "run_config.json",
+    "validation.json",
+    "run.log",
+    "localization_metrics.tsv",
+)
 DETECTOR_FILES = (
     "benchmarks/challenge/run.py",
     "benchmarks/challenge/schema.py",
@@ -66,7 +73,7 @@ def _validate_source(environment: dict, source: Path) -> Path:
     return snapshot
 
 
-def _validate_matrix(source: Path, environment: dict, config: dict, validation: dict) -> None:
+def _validate_matrix(source: Path, environment: dict, config: dict, validation: dict) -> bool:
     split = environment.get("split")
     seeds_by_split = config.get("seeds")
     if not isinstance(seeds_by_split, dict) or split not in seeds_by_split:
@@ -84,16 +91,27 @@ def _validate_matrix(source: Path, environment: dict, config: dict, validation: 
     scenarios = challenge_scenarios(config)
     scenario_count = len(scenarios)
     family_count = len(periods)
+    mode = validation.get("mode", "full")
+    if mode not in {"full", "localization_only"}:
+        raise ValueError("Unknown abundance execution mode")
+    localization_only = mode == "localization_only"
+    if bool(environment.get("localization_only", False)) != localization_only:
+        raise ValueError("Environment and validation execution modes differ")
     expected = {
         "copy_number_family_rows": len(seeds) * scenario_count * len(coverages) * len(errors) * family_count,
         "localization_family_rows": len(seeds) * scenario_count * len(fractions) * family_count,
         "comparison_family_rows": len(seeds) * scenario_count * len(coverages) * len(errors) * len(fractions) * family_count,
     }
-    expected_executions = (
-        len(seeds) * scenario_count * len(fractions)
-        + len(seeds) * scenario_count * len(coverages) * len(errors)
-        + len(seeds) * scenario_count * len(coverages) * len(errors) * len(fractions)
-    )
+    if localization_only:
+        expected["copy_number_family_rows"] = 0
+        expected["comparison_family_rows"] = 0
+        expected_executions = len(seeds) * scenario_count * len(fractions)
+    else:
+        expected_executions = (
+            len(seeds) * scenario_count * len(fractions)
+            + len(seeds) * scenario_count * len(coverages) * len(errors)
+            + len(seeds) * scenario_count * len(coverages) * len(errors) * len(fractions)
+        )
     if (
         validation.get("complete") is not True
         or validation.get("successful") != expected_executions
@@ -104,31 +122,42 @@ def _validate_matrix(source: Path, environment: dict, config: dict, validation: 
         raise ValueError("Execution validation does not match the configured matrix")
 
     tables = {
-        "copy_number_metrics.tsv": (expected["copy_number_family_rows"], {"seed", "family_id"}),
         "localization_metrics.tsv": (expected["localization_family_rows"], {"seed", "family_id"}),
-        "comparison_metrics.tsv": (expected["comparison_family_rows"], {"seed", "family_id", "outcome"}),
-        "copy_number_summary.tsv": (scenario_count * len(coverages) * len(errors), {"coverage", "substitution_rate"}),
-        "comparison_summary.tsv": (
-            scenario_count * len(coverages) * len(errors) * len(fractions),
-            {"coverage", "substitution_rate", "assembly_fraction", "TP", "FN", "FP", "TN"},
-        ),
     }
+    if not localization_only:
+        tables.update({
+            "copy_number_metrics.tsv": (expected["copy_number_family_rows"], {"seed", "family_id"}),
+            "comparison_metrics.tsv": (expected["comparison_family_rows"], {"seed", "family_id", "outcome"}),
+            "copy_number_summary.tsv": (
+                scenario_count * len(coverages) * len(errors), {"coverage", "substitution_rate"}
+            ),
+            "comparison_summary.tsv": (
+                scenario_count * len(coverages) * len(errors) * len(fractions),
+                {"coverage", "substitution_rate", "assembly_fraction", "TP", "FN", "FP", "TN"},
+            ),
+        })
     for name, (row_count, required) in tables.items():
         rows = read_table(source / name, required)
         if len(rows) != row_count:
             raise ValueError(f"Unexpected row count in {name}")
         if "seed" in required and {int(row["seed"]) for row in rows} != set(seeds):
             raise ValueError(f"Unexpected seed set in {name}")
+    return localization_only
 
 
-def _receipt_rows(source: Path, expected: int, config: dict, split: str) -> list[dict]:
+def _receipt_rows(source: Path, expected: int, config: dict, split: str,
+                  localization_only: bool = False) -> list[dict]:
     seed_count = len(config["seeds"][split])
     scenario_count = len(challenge_scenarios(config))
     expected_labels = Counter({
         "locate": seed_count * scenario_count * len(config["assembly_fractions"]),
-        "quantify": seed_count * scenario_count * len(config["coverages"]) * len(config["substitution_rates"]),
-        "compare": seed_count * scenario_count * len(config["coverages"]) * len(config["substitution_rates"])
-        * len(config["assembly_fractions"]),
+        "quantify": 0 if localization_only else (
+            seed_count * scenario_count * len(config["coverages"]) * len(config["substitution_rates"])
+        ),
+        "compare": 0 if localization_only else (
+            seed_count * scenario_count * len(config["coverages"]) * len(config["substitution_rates"])
+            * len(config["assembly_fractions"])
+        ),
     })
     rows = []
     labels = Counter()
@@ -180,19 +209,25 @@ def _copy(origin: Path, target: Path, relative: Path) -> dict:
 def archive(source: Path, outdir: Path) -> list[dict]:
     if outdir.exists():
         raise ValueError(f"Output directory already exists: {outdir}")
-    for name in ROOT_FILES:
+    for name in ("environment.json", "run_config.json", "validation.json", "run.log"):
         if not (source / name).is_file():
             raise ValueError(f"Missing abundance evidence file: {name}")
     environment = json.loads((source / "environment.json").read_text())
     config = json.loads((source / "run_config.json").read_text())
     validation = json.loads((source / "validation.json").read_text())
     snapshot = _validate_source(environment, source)
-    _validate_matrix(source, environment, config, validation)
-    receipts = _receipt_rows(source, validation["executions"], config, environment["split"])
+    localization_only = _validate_matrix(source, environment, config, validation)
+    root_files = LOCALIZATION_ROOT_FILES if localization_only else ROOT_FILES
+    for name in root_files:
+        if not (source / name).is_file():
+            raise ValueError(f"Missing abundance evidence file: {name}")
+    receipts = _receipt_rows(
+        source, validation["executions"], config, environment["split"], localization_only
+    )
 
     outdir.mkdir(parents=True)
     manifest = []
-    for name in ROOT_FILES:
+    for name in root_files:
         relative = Path(name)
         manifest.append(_copy(source / relative, outdir / relative, relative))
     selected = sorted(set(environment["benchmark_source_sha256"]) | set(DETECTOR_FILES))

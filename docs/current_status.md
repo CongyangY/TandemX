@@ -116,12 +116,14 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 447 Python tests. The added tests cover
+- The expanded source checkout passes all 449 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
   unchanged. Four additional tests validate compact reference archiving and
   reject altered FASTA, metadata and contig totals. A further regression test
   covers the legacy helper-path receipt that initially blocked v2 archiving.
+  New checks validate localization-only compact archives and exact pairing of
+  failed development, selected development, fresh held-out and classifier rows.
 - A backward-compatible challenge extension now represents independent
   founder-to-unit substitutions and one or more interrupted same-family arrays.
   Truth scoring aggregates non-overlapping intervals and copies by family. The
@@ -149,9 +151,17 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased from 119 to 4, while 5%-divergent three-segment arrays remained the
   weakest full-assembly stratum (mean recall 0.941017). Config
   `abundance_localizer_heldout_v1.json` freezes the development hashes, unchanged
-  collapse model and untouched seeds 5501–5503. The held-out run has not started;
-  no held-out improvement claim exists yet. The freeze guard rejects changed
-  development hashes, metrics below the declared gates or overlapping seeds.
+  collapse model and then-untouched seeds 5501–5503. Commit 4e662db was pushed to
+  both branches; hosted runs 34039414153/34039420693 passed Ubuntu and macOS
+  before the seeds were consumed once. All 1,062 commands completed. Held-out
+  full-assembly recall was 0.981033, positive-assembly precision 0.999565 and
+  absent-family false-positive rate 0/54; the weakest 5%-divergent three-segment
+  stratum was 0.949274. The frozen classifier changed TP/FN/FP/TN from
+  875/583/12/960 to 1339/119/83/889: sensitivity 0.600137→0.918381, FPR
+  0.012346→0.085391 and precision 0.986471→0.941632. This validates the bounded
+  localizer under the tested model while retaining the classifier trade-off.
+  Four compact archives and the inspected six-panel Figure 5 retain all rows;
+  seeds 5501–5503 are consumed.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

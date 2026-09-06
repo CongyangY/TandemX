@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "split": "development",
+  "independent_genomes": 3,
+  "multik_read_conditions": 27,
+  "comparison_family_rows": 1215,
+  "expected_comparison_family_rows": 1215,
+  "unavailable": 35,
+  "selected_low_depth_threshold": 0.5,
+  "low_depth_cutoff": 2.0,
+  "leave_one_genome_out_folds": 3,
+  "heldout_used": false,
+  "scientific_acceptance": "not_assumed_from_execution_success"
+}

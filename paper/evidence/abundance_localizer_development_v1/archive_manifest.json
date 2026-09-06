@@ -1,0 +1,146 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/environment.json",
+    "sha256": "5f107363546608b15ffe04704d9970f7ce02cd371d5022daa1089b1b31ff2eed",
+    "bytes": 9492
+  },
+  {
+    "file": "run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/run_config.json",
+    "sha256": "71c6aed60973bd54bf23df1dbd5b46c4a3415ee791eb341aa40f71c3ab854c37",
+    "bytes": 986
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/validation.json",
+    "sha256": "f0977e413656eb88e375a282935c8cd539fbd9818bce8b070d7cc95adf965f3d",
+    "bytes": 285
+  },
+  {
+    "file": "run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/run.log",
+    "sha256": "5b95d747da926d157a06f309071b25c790ed13646ec12092a6c0bf361e00896d",
+    "bytes": 12060
+  },
+  {
+    "file": "localization_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/localization_metrics.tsv",
+    "sha256": "04863e1b3f4ff0a1eaa8ccb5e8f72d3edcdbb07fff06e67a546a9e4c7e0b263e",
+    "bytes": 21265
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/__init__.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/__init__.py",
+    "sha256": "7d0fd97e357da73dcf673b293d1db9aa5dbf2ae2622e83a075633a3f65579f1c",
+    "bytes": 84
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/discovery_truth.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/discovery_truth.py",
+    "sha256": "9c057f4ac83bbeac260187c2431b6f862aaf5425967714721dfff181d02ca344",
+    "bytes": 6301
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/evaluate.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/evaluate.py",
+    "sha256": "c3c424c333ab4d7ba206d9de10c4d0941e2fb59f18976899d3f9e36eb5d552c1",
+    "bytes": 6453
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "sha256": "9dd19d2d845f81a3bdae95327f388c0f461959ce374240149873f0c635606b57",
+    "bytes": 23074
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/run.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/run.py",
+    "sha256": "2921b9f00379ba102f83294ca8ea79c551cae141661119e2cccc58cb5b28685a",
+    "bytes": 13538
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/run_stream_quantify.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/run_stream_quantify.py",
+    "sha256": "5d70510efb738858cb4ee9529b34f3d88791cb5db3208433a73b4614a2c8ed22",
+    "bytes": 7278
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/simulate.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/simulate.py",
+    "sha256": "fbbe618acb042c7ae6e695e44fa716f5f1f98817e7de44031a0ef1a059fb7eeb",
+    "bytes": 10620
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/stream_genome.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/stream_genome.py",
+    "sha256": "4da7648bdeafa2dc27ac1719face768297ffe2bb8e32e9231e8cb08cbf6139f8",
+    "bytes": 6453
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/stream_reads.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/abundance/stream_reads.py",
+    "sha256": "b721cffb5d811a6d71ec2d0eb8c2414fad60bda8f8e36c7eaf649f41e9b45d9a",
+    "bytes": 8254
+  },
+  {
+    "file": "source_snapshot/benchmarks/challenge/run.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/challenge/run.py",
+    "sha256": "1abc5df97ae8ce1d2e5ddbc6c6cbd4cf406a846dfddf9845ae29dad37229a947",
+    "bytes": 18170
+  },
+  {
+    "file": "source_snapshot/benchmarks/challenge/schema.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/benchmarks/challenge/schema.py",
+    "sha256": "ea2d531bbc69ed4ce78c5eb8de9ccb77d17a75e0e68c4e3a9608a05316363146",
+    "bytes": 2637
+  },
+  {
+    "file": "source_snapshot/rust-core/src/lib.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/rust-core/src/lib.rs",
+    "sha256": "465c22268acc0b61a1065687b15068ae2d5d9aa16143cad434c8b62f165f84eb",
+    "bytes": 34151
+  },
+  {
+    "file": "source_snapshot/rust-core/src/weighted_words.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/rust-core/src/weighted_words.rs",
+    "sha256": "2440534f3a251288fa4b4e51e7ca833c6358743784255b49b8ae2b8325377bb3",
+    "bytes": 4221
+  },
+  {
+    "file": "source_snapshot/tandemx/cli.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/tandemx/cli.py",
+    "sha256": "962ae81aa51a4c3276d28a5399b152b5ef77f94fe6a7b5b81179fcd8d786f8b5",
+    "bytes": 39968
+  },
+  {
+    "file": "source_snapshot/tandemx/compare/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/tandemx/compare/mvp.py",
+    "sha256": "02315eea7fcafbfeedb292edd91acc1b3161806c98e392b2ad0dec387249ddbb",
+    "bytes": 9635
+  },
+  {
+    "file": "source_snapshot/tandemx/locate/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/tandemx/locate/mvp.py",
+    "sha256": "57608cc0e17e91b853d08d67c6501969b400179d4a4649bdb9693e507afcbd65",
+    "bytes": 14213
+  },
+  {
+    "file": "source_snapshot/tandemx/quantify/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/tandemx/quantify/mvp.py",
+    "sha256": "f7e75fd378721a644dbd6c030d2a413e22a5434a5b9d669c5e4c4200f3037bb5",
+    "bytes": 19510
+  },
+  {
+    "file": "source_snapshot/tandemx/utils/kmers.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/source_snapshot/tandemx/utils/kmers.py",
+    "sha256": "2bca0ce2d2a5b0ef7d628bfd2462d0f0efe24e17186b8fd371f9ee5bdb9f7174",
+    "bytes": 5048
+  },
+  {
+    "file": "resource_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v1_20260906/runs/**/receipt.json",
+    "sha256": "0f1f01f90b80fd7451866f41a333aa06cf559bf05d9ef1385ac641ca0831c026",
+    "bytes": 70833
+  }
+]

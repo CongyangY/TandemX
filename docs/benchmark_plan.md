@@ -189,11 +189,15 @@ mean precision 0.999441 and absent-family false-positive rate 0/54.
 
 `abundance_localizer_heldout_v1.json` freezes that localizer, its development
 artifact hashes, the earlier multi-k collapse rule and untouched seeds
-5501--5503. The runner re-hashes and recomputes the development gate metrics
-before any IID held-out run. Held-out results must report the complete declared
-matrix, including adverse strata, without retuning on seeds 5501--5503. This is
-a known-catalogue substitution model; exact-k-mer IID identity is not alignment
-identity or biological satellite validation.
+5501--5503. The runner re-hashed and recomputed the development gate metrics
+before the first IID held-out run. All 1,062 commands completed. Held-out
+full-assembly recall was 0.981033, positive-assembly precision was 0.999565 and
+absent-family false-positive rate was 0/54. The frozen multi-k classifier raised
+sensitivity from 0.600137 to 0.918381 while raising false-positive rate from
+0.012346 to 0.085391 and lowering precision from 0.986471 to 0.941632. The
+complete declared matrix and adverse rows are retained without retuning on
+seeds 5501--5503. This is a known-catalogue substitution model; exact-k-mer IID
+identity is not alignment identity or biological satellite validation.
 
 ## Endpoint and clustering audit (2026-09-06)
 
