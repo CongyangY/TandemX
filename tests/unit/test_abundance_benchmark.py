@@ -6,9 +6,9 @@ import pytest
 
 from benchmarks.abundance.evaluate import finite_nonnegative, score_copy_number, score_localization, score_comparison
 from benchmarks.abundance.simulate import GenomeSpec, build_genome, sample_reads
-from benchmarks.abundance.run import aggregate, run
+from benchmarks.abundance.run import aggregate, run, validate_frozen_localizer
 from benchmarks.abundance.evaluate_multik_collapse import run as run_multik_collapse
-from benchmarks.challenge.schema import read_table
+from benchmarks.challenge.schema import digest_file, read_table
 
 
 def test_uniform_sampler_reproducible_and_repeat_occupancy_matches_base_oracle(tmp_path: Path):
@@ -195,6 +195,70 @@ def test_abundance_runner_localization_only_uses_selected_identity_model(tmp_pat
     environment = json.loads((result/'environment.json').read_text())
     assert environment['locate_identity_model'] == 'iid_base'
     assert environment['locate_min_identity'] == .9
+
+
+def test_iid_heldout_requires_matching_development_evidence(tmp_path: Path):
+    development = tmp_path/'development'
+    development.mkdir()
+    rows = (
+        'assembly_fraction\tbase_recall\tbase_precision\tpredicted_assembly_bp\n'
+        '1\t0.98\t0.99\t100\n'
+        '0\t\t\t0\n'
+    )
+    (development/'localization_metrics.tsv').write_text(rows)
+    development_config = {
+        'seeds': {'development': [31]},
+        'locate_identity_model': 'iid_base',
+        'locate_min_identity': .9,
+    }
+    (development/'run_config.json').write_text(json.dumps(development_config))
+    config_hash = digest_file(development/'run_config.json')
+    (development/'validation.json').write_text(json.dumps({
+        'complete': True, 'mode': 'localization_only', 'executions': 2,
+        'successful': 2, 'localization_family_rows': 2,
+    }))
+    (development/'environment.json').write_text(json.dumps({
+        'split': 'development', 'localization_only': True,
+        'locate_identity_model': 'iid_base', 'locate_min_identity': .9,
+        'config_sha256': config_hash,
+    }))
+    model = {
+        'method': 'iid_base_exact_anchor_monomer_bridge',
+        'identity_model': 'iid_base', 'k': 21, 'min_identity': .9,
+        'array_merge_gap_rule': 'max(2*k,monomer_length)',
+        'development_seeds': [31], 'development_result': str(development),
+        'selection_gates': {
+            'full_assembly_mean_base_recall_min': .95,
+            'positive_assembly_mean_base_precision_min': .95,
+            'absent_family_false_positive_rate_max': 0,
+        },
+        'observed_development_metrics': {
+            'full_assembly_mean_base_recall': .98,
+            'positive_assembly_mean_base_precision': .99,
+            'absent_family_false_positive_rate': 0,
+        },
+    }
+    files = {
+        'development_validation_sha256': 'validation.json',
+        'development_metrics_sha256': 'localization_metrics.tsv',
+        'development_environment_sha256': 'environment.json',
+        'development_config_sha256': 'run_config.json',
+    }
+    for field, filename in files.items():
+        model[field] = digest_file(development/filename)
+    config = {
+        'seeds': {'development': [39], 'heldout': [40]}, 'k': 21,
+        'locate_identity_model': 'iid_base', 'locate_min_identity': .9,
+        'localizer_model': model,
+    }
+    assert validate_frozen_localizer(config, 'heldout') == {
+        'full_assembly_mean_base_recall': .98,
+        'positive_assembly_mean_base_precision': .99,
+        'absent_family_false_positive_rate': 0,
+    }
+    (development/'localization_metrics.tsv').write_text(rows.replace('0.98', '0.97'))
+    with pytest.raises(ValueError, match='evidence differs'):
+        validate_frozen_localizer(config, 'heldout')
 
 
 def test_frozen_multik_evaluator_replays_every_challenge_scenario(tmp_path: Path):

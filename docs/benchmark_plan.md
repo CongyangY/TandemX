@@ -178,6 +178,23 @@ After simulated benchmarks, claim only behavior under tested simulated condition
 
 After real plant and FISH benchmarks, claim biological usefulness only for tested species, datasets and validation scenarios.
 
+## Divergence-aware localization validation
+
+The first IID-proxy development run on seeds 5301--5303 failed its predeclared
+full-assembly mean base-recall gate (0.903608 < 0.95). Development v2 reused only
+those consumed development seeds, retained the 0.90 IID proxy threshold and
+bridged exact anchors across at most one monomer length. It passed the three
+development gates: full-assembly mean base recall 0.975728, positive-assembly
+mean precision 0.999441 and absent-family false-positive rate 0/54.
+
+`abundance_localizer_heldout_v1.json` freezes that localizer, its development
+artifact hashes, the earlier multi-k collapse rule and untouched seeds
+5501--5503. The runner re-hashes and recomputes the development gate metrics
+before any IID held-out run. Held-out results must report the complete declared
+matrix, including adverse strata, without retuning on seeds 5501--5503. This is
+a known-catalogue substitution model; exact-k-mer IID identity is not alignment
+identity or biological satellite validation.
+
 ## Endpoint and clustering audit (2026-09-06)
 
 Retain both strict equal-length recovery and independent cyclic edit recovery;

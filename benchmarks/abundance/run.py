@@ -25,6 +25,15 @@ from benchmarks.challenge.run import run_process, source_manifest
 from benchmarks.challenge.schema import digest_file, read_table, write_table
 
 
+FROZEN_LOCALIZER_METHOD = "iid_base_exact_anchor_monomer_bridge"
+FROZEN_LOCALIZER_FILES = {
+    "development_validation_sha256": "validation.json",
+    "development_metrics_sha256": "localization_metrics.tsv",
+    "development_environment_sha256": "environment.json",
+    "development_config_sha256": "run_config.json",
+}
+
+
 def aggregate(rows: list[dict], group_fields: list[str], kind: str) -> list[dict]:
     grouped = defaultdict(list)
     for row in rows:
@@ -54,6 +63,98 @@ def aggregate(rows: list[dict], group_fields: list[str], kind: str) -> list[dict
     return summaries
 
 
+def validate_frozen_localizer(config: dict, split: str) -> dict[str, float] | None:
+    """Verify the committed development evidence before an IID held-out run."""
+    identity_model = config.get("locate_identity_model", "exact_kmer_fraction")
+    if split != "heldout" or identity_model != "iid_base":
+        return None
+    model = config.get("localizer_model")
+    heldout_seeds = config.get("seeds", {}).get("heldout", [])
+    if (
+        not isinstance(model, dict)
+        or model.get("method") != FROZEN_LOCALIZER_METHOD
+        or model.get("identity_model") != identity_model
+        or model.get("k") != config.get("k")
+        or model.get("min_identity") != config.get("locate_min_identity")
+        or model.get("array_merge_gap_rule") != "max(2*k,monomer_length)"
+        or not isinstance(model.get("development_seeds"), list)
+        or not model["development_seeds"]
+        or set(model["development_seeds"]) & set(heldout_seeds)
+    ):
+        raise ValueError("IID held-out validation requires a disjoint frozen localizer model")
+    if any(
+        not isinstance(model.get(field), str)
+        or len(model[field]) != 64
+        or any(character not in "0123456789abcdef" for character in model[field])
+        for field in FROZEN_LOCALIZER_FILES
+    ):
+        raise ValueError("Frozen localizer evidence hashes must be lowercase SHA-256 values")
+
+    development = Path(str(model.get("development_result", ""))).expanduser()
+    if not development.is_dir():
+        raise ValueError("Frozen localizer development result is unavailable")
+    for field, filename in FROZEN_LOCALIZER_FILES.items():
+        path = development / filename
+        if not path.is_file() or digest_file(path) != model[field]:
+            raise ValueError(f"Frozen localizer evidence differs: {filename}")
+
+    validation = json.loads((development / "validation.json").read_text())
+    environment = json.loads((development / "environment.json").read_text())
+    development_config = json.loads((development / "run_config.json").read_text())
+    if (
+        validation.get("complete") is not True
+        or validation.get("mode") != "localization_only"
+        or validation.get("successful") != validation.get("executions")
+        or validation.get("localization_family_rows") <= 0
+        or environment.get("split") != "development"
+        or environment.get("localization_only") is not True
+        or environment.get("locate_identity_model") != identity_model
+        or environment.get("locate_min_identity") != config.get("locate_min_identity")
+        or environment.get("config_sha256") != model["development_config_sha256"]
+        or development_config.get("seeds", {}).get("development") != model["development_seeds"]
+        or development_config.get("locate_identity_model") != identity_model
+        or development_config.get("locate_min_identity") != config.get("locate_min_identity")
+    ):
+        raise ValueError("Frozen localizer development provenance is inconsistent")
+
+    rows = read_table(development / "localization_metrics.tsv", {
+        "assembly_fraction", "base_recall", "base_precision", "predicted_assembly_bp"
+    })
+    if len(rows) != validation["localization_family_rows"]:
+        raise ValueError("Frozen localizer metric row count differs from validation")
+    full = [row for row in rows if float(row["assembly_fraction"]) == 1.0]
+    positive = [row for row in rows if float(row["assembly_fraction"]) > 0.0]
+    absent = [row for row in rows if float(row["assembly_fraction"]) == 0.0]
+    if not full or not positive or not absent:
+        raise ValueError("Frozen localizer evidence lacks a required assembly stratum")
+    observed = {
+        "full_assembly_mean_base_recall": statistics.mean(float(row["base_recall"]) for row in full),
+        "positive_assembly_mean_base_precision": statistics.mean(float(row["base_precision"]) for row in positive),
+        "absent_family_false_positive_rate": (
+            sum(float(row["predicted_assembly_bp"]) > 0 for row in absent) / len(absent)
+        ),
+    }
+    declared = model.get("observed_development_metrics")
+    gates = model.get("selection_gates")
+    if (
+        not isinstance(declared, dict)
+        or any(
+            key not in declared
+            or not math.isclose(float(declared[key]), value, rel_tol=0, abs_tol=1e-12)
+            for key, value in observed.items()
+        )
+        or not isinstance(gates, dict)
+        or observed["full_assembly_mean_base_recall"]
+            < float(gates.get("full_assembly_mean_base_recall_min", math.inf))
+        or observed["positive_assembly_mean_base_precision"]
+            < float(gates.get("positive_assembly_mean_base_precision_min", math.inf))
+        or observed["absent_family_false_positive_rate"]
+            > float(gates.get("absent_family_false_positive_rate_max", -math.inf))
+    ):
+        raise ValueError("Frozen localizer development metrics do not satisfy the declared gates")
+    return observed
+
+
 def run(config_path: Path, outdir: Path, split: str, localization_only: bool = False) -> None:
     config = json.loads(config_path.read_text())
     seeds = [s for group in config["seeds"].values() for s in group]
@@ -80,6 +181,7 @@ def run(config_path: Path, outdir: Path, split: str, localization_only: bool = F
         or not 0 < locate_min_identity <= 1
     ):
         raise ValueError("Invalid localization identity model or threshold")
+    localizer_development_metrics = validate_frozen_localizer(config, split)
     fragment_gap_bp = config.get("fragment_gap_bp", 0)
     if not isinstance(fragment_gap_bp, int) or isinstance(fragment_gap_bp, bool) or fragment_gap_bp < 0:
         raise ValueError("fragment_gap_bp must be a nonnegative integer")
@@ -110,6 +212,7 @@ def run(config_path: Path, outdir: Path, split: str, localization_only: bool = F
                                            for rate, count in scenarios],
                       locate_identity_model=identity_model,
                       locate_min_identity=locate_min_identity,
+                      frozen_localizer_development_metrics=localizer_development_metrics,
                       localization_only=localization_only,
                       scope=("known-catalogue conditional quantification/localization with explicit "
                              "unit-divergence and array-fragmentation factors; not discovery or empirical HiFi validation"),
