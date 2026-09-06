@@ -1,0 +1,78 @@
+<RUN_SET>
+<RUN accession="ERR15194059" alias="ena-RUN-TAB-03-07-2025-14:17:32:212-14364" center_name="Leibniz Institute of Plant Genetics and Crop Plant Research">
+  <IDENTIFIERS>
+    <PRIMARY_ID>ERR15194059</PRIMARY_ID>
+    <SUBMITTER_ID namespace="Leibniz Institute of Plant Genetics and Crop Plant Research">ena-RUN-TAB-03-07-2025-14:17:32:212-14364</SUBMITTER_ID>
+  </IDENTIFIERS>
+  <TITLE>Revio sequencing</TITLE>
+  <EXPERIMENT_REF accession="ERX14599733">
+    <IDENTIFIERS>
+      <PRIMARY_ID>ERX14599733</PRIMARY_ID>
+    </IDENTIFIERS>
+  </EXPERIMENT_REF>
+  <PLATFORM>
+    <PACBIO_SMRT>
+      <INSTRUMENT_MODEL>Revio</INSTRUMENT_MODEL>
+    </PACBIO_SMRT>
+  </PLATFORM>
+  <DATA_BLOCK>
+    <FILES>
+      <FILE checksum="9554e5a03a302a55459020eb943f2b6a" checksum_method="MD5" filename="run/ERR151/ERR15194059/m84096_240416_080948_s2.hifi_reads.bc2014.bam" filetype="bam"/>
+    </FILES>
+  </DATA_BLOCK>
+  <RUN_LINKS>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMISSION</DB>
+        <ID>ERA33555319</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-STUDY</DB>
+        <ID>ERP174410</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SAMPLE</DB>
+        <ID>ERS25126485</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-FASTQ-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR15194059&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMITTED-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR15194059&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+      </XREF_LINK>
+    </RUN_LINK>
+  </RUN_LINKS>
+  <RUN_ATTRIBUTES>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-STATUS</TAG>
+      <VALUE>PUBLIC</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-FIRST-PUBLIC</TAG>
+      <VALUE>2025-07-04</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-LAST-UPDATE</TAG>
+      <VALUE>2025-07-04</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-BASE-COUNT</TAG>
+      <VALUE>77092101008</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-SPOT-COUNT</TAG>
+      <VALUE>4576975</VALUE>
+    </RUN_ATTRIBUTE>
+  </RUN_ATTRIBUTES>
+</RUN>
+</RUN_SET>

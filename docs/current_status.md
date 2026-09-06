@@ -118,7 +118,57 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   localization and false under-representation calls before modifying the model.
 - Initial independent truth/scoring/CLI checks: four passed in 1.30s. Full
   suite now passed: **240 tests in 63.67s**. Core Rust code unchanged since
-  3f2482f. Full development experiment has not yet run at this source snapshot.
+  3f2482f. Commit 8218beb2496c9d796b18833efc9a103b8e258286 was pushed to both
+  branches; GitHub run 34009300960 succeeded on Linux/macOS.
+- Full baseline at T7 `results/abundance_baseline_v1_20260906`: **177/177 command
+  executions** (15 locate, 27 quantify, 135 compare), 81 CN/45 localization/405
+  comparison family rows. Compact source tables at `paper/evidence/abundance_baseline`.
+  Intervals contain truth in only **6/81** conditions; they are k-mer spread, not
+  sampling CI. At 20x/1% substitution, mean signed CN error is -18.31%; estimator
+  minus sampling oracle is -20.08%. Error-free mean estimator-minus-oracle is
+  about -0.36% to -0.52% across coverages, but low-coverage sampling fluctuation
+  itself is large. All positive assembly base recall equals 1 in this simple
+  exact-copy setting. False under-representation calls and misses exist; see
+  every conditional row. The baseline is **not scientifically accepted**.
+
+## Real cohort, complete downloads and QC (ongoing)
+
+- User further requires real and simulated evidence with enough species/data.
+  `docs/cohort_and_qc.md` records a prospective target of 8-10 species / >=20
+  independent materials, scale ladders and primary-source QC lessons. This is
+  a project target, not claimed journal policy or achieved sample size.
+- ENA metadata for Arabidopsis, rice, maize, barley, rye and wheat is at T7
+  `data/manifests/cohort_screen_20260906`. Oat PRJEB56828 returned 285 PacBio WGS
+  run records; ERR8666127/ERR8666125 metadata retrieved. Twelve queried tables
+  are summarized with hashes in `paper/evidence/cohort_screen`. Never use
+  run/BioSample counts as biological replicate counts; wheat
+  has run-labelled BioSamples and Morex multiple cells under different IDs.
+- Complete ENA downloads started for ERR6210723 (11.074 GB) and SRR15447419
+  (5.346 GB). Inspect download_receipt.json and processes before claiming done.
+  Mo17 filename includes `_subreads`, but original experiment title explicitly
+  says CCS; initial observed Phred range is 3-93, not an accuracy validation.
+  Full biological/library QC still required. Previous prefixes remain pilots.
+- New complete-file downloader verifies size+MD5 before rename; full FASTQ QC
+  checks gzip trailer, valid records, exact archive ID uniqueness on SQLite,
+  length/N50, GC/N and reported quality distributions. Ten focused tests passed
+  in .04s including truncation, duplicate IDs, invalid resume and checksum errors.
+  These file checks do not validate species/material/coverage or molecule IDs.
+- Full suite after adding these helpers: **250 passed in 64.58s**. Dataset
+  downloads remain in progress; no full raw-read QC or final timing claimed.
+- Col-CEN v1.2 plus known issues and README downloaded at T7
+  `data/references/Col-CEN_v1.2` from pinned source abb9b614d91c8a0bbd05a199c694fb5eafb5fe30.
+  Git blob hashes, full gzip/FASTA verified; 132,081,078 bp including ChrM/ChrC.
+  SHA256 of compressed FASTA b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8.
+  Nuclear denominator/known-issue masks must be explicit in comparisons.
+- Selected ENA run/sample/experiment XML now retrieved after a transient TLS
+  retry and archived under `paper/evidence/cohort_screen/xml`. Mo17 cultivar
+  and CCS experiment title are explicit; rice is Nipponbare/AGIS-1.0; Lo7 is
+  a single diploid plant with HiFi library metadata. More general independence
+  of all libraries/specimens remains to be resolved from study supplements.
+- Col-CEN nuclear Chr1-5 sum to 131,559,676 bp, separate from ChrM/ChrC.
+- Added reviewer-relevant unitFinder (Genome Biology soybean study) to comparator
+  matrix. SRF paper's k=101 CentC rescue is now explicit; k/count sweep remains
+  required. Do not score assemblies/known-motif tools on unsupported de novo reads.
 
 ## Source, Git and storage
 

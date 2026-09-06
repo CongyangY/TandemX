@@ -66,3 +66,17 @@ Tests: `pytest -q tests/unit/test_abundance_benchmark.py` checks independent
 base-occupancy truth, reproducibility, reverse strands, circular crossings,
 unchanged flanks, score denominators, invalid values, duplicate predictions and
 a real five-command CLI workflow including complete assembly absence.
+
+## First executed baseline
+
+`results/abundance_baseline_v1_20260906` at the T7 data root used committed
+8218beb source: 177 successful commands, 81 CN observations, 45 assembly-family
+and 405 comparison-family observations. Compact evidence is in
+`paper/evidence/abundance_baseline`. Only 6/81 k-mer spread intervals contain
+genomic truth. At 20×/1% substitution, mean signed error is -18.31%; the sampling
+oracle has +1.77% mean error and estimator-minus-oracle is -20.08%. Error-free
+estimator-minus-oracle is much smaller (about -0.36% to -0.52%), while 1× random
+sampling itself produces large deviations. Both false under-representation calls
+and misses occur. Simple exact-copy localization has base recall 1 for every
+positive family. These results motivate uncertainty/error-model development;
+neither three genomes nor perfect exact-copy localization establish robustness.

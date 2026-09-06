@@ -1,0 +1,70 @@
+<EXPERIMENT_SET>
+<EXPERIMENT accession="SRX20987367" alias="NIP-hifi" center_name="SUB13641050" broker_name="NCBI">
+  <IDENTIFIERS>
+    <PRIMARY_ID>SRX20987367</PRIMARY_ID>
+    <SUBMITTER_ID namespace="SUB13641050">NIP-hifi</SUBMITTER_ID>
+  </IDENTIFIERS>
+  <TITLE>hifi of NIP</TITLE>
+  <STUDY_REF accession="SRP431856">
+    <IDENTIFIERS>
+      <PRIMARY_ID>SRP431856</PRIMARY_ID>
+      <EXTERNAL_ID namespace="BioProject">PRJNA953663</EXTERNAL_ID>
+    </IDENTIFIERS>
+  </STUDY_REF>
+  <DESIGN>
+    <DESIGN_DESCRIPTION>NIP</DESIGN_DESCRIPTION>
+    <SAMPLE_DESCRIPTOR accession="SRS18262452">
+      <IDENTIFIERS>
+        <PRIMARY_ID>SRS18262452</PRIMARY_ID>
+        <SUBMITTER_ID namespace="pda|lianguang_shang">nip-genome</SUBMITTER_ID>
+      </IDENTIFIERS>
+    </SAMPLE_DESCRIPTOR>
+    <LIBRARY_DESCRIPTOR>
+      <LIBRARY_NAME>NIP-hifi</LIBRARY_NAME>
+      <LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>
+      <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+      <LIBRARY_SELECTION>RANDOM</LIBRARY_SELECTION>
+      <LIBRARY_LAYOUT>
+        <SINGLE/>
+      </LIBRARY_LAYOUT>
+    </LIBRARY_DESCRIPTOR>
+  </DESIGN>
+  <PLATFORM>
+    <PACBIO_SMRT>
+      <INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>
+    </PACBIO_SMRT>
+  </PLATFORM>
+  <EXPERIMENT_LINKS>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SAMPLE</DB>
+        <ID>SRS18262452</ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMISSION</DB>
+        <ID>SRA1671317</ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-FASTQ-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRX20987367&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMITTED-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRX20987367&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+  </EXPERIMENT_LINKS>
+  <EXPERIMENT_ATTRIBUTES>
+    <EXPERIMENT_ATTRIBUTE>
+      <TAG>ENA-STATUS</TAG>
+      <VALUE>PUBLIC</VALUE>
+    </EXPERIMENT_ATTRIBUTE>
+  </EXPERIMENT_ATTRIBUTES>
+</EXPERIMENT>
+</EXPERIMENT_SET>

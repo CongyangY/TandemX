@@ -1,0 +1,13 @@
+{
+  "seeds": {"development": [4101, 4102, 4103], "heldout": [5101, 5102, 5103]},
+  "periods": [61, 171, 421],
+  "copies": [20, 80, 200],
+  "flank_bp": 25000,
+  "coverages": [1, 5, 20],
+  "read_length": 5000,
+  "substitution_rates": [0, 0.001, 0.01],
+  "assembly_fractions": [1, 0.75, 0.5, 0.25, 0],
+  "collapse_threshold": 0.6,
+  "k": 21,
+  "timeout_seconds": 120
+}

@@ -18,11 +18,21 @@ superior simply because its combined workflow has more commands.
 | HiCAT/HiCAT-human | Monomer/HOR organization | Prior-art and specialized analysis; human pretrained classifiers do not supply a fair plant de novo baseline | Applicability review pending |
 | StringDecomposer/NCRF | Known-motif decomposition | Candidate targeted annotation baselines, with identical supplied motif catalogues; not de novo family discovery | Applicability review pending |
 | Chorus2 | Genome-based oligo-FISH probe specificity | Review specificity and oligo constraints; unique chromosome-painting oligos and repeated satellite probes have different objectives | Official source reviewed; task-matched experiment pending |
+| unitFinder | Plant centromeric monomer discovery/decomposition in assemblies | New Genome Biology soybean study; iterative TRF/nucmer workflow, supplied chromosome and de novo/reference-assisted modes must be matched separately | Primary methods reviewed; implementation/dependency audit and experiment pending |
 
 Add or retire a comparator only with a documented scientific or reproducibility
 reason. Missing dependencies, installation failures, resource limits and version
 incompatibilities stay in the audit table. They are not zero accuracy values.
 Do not use human-trained centromere labels as plant ground truth.
+
+The SRF primary paper explicitly reports recovery of maize CentC with k=101
+after failure at k=151. Its HiFi high-count filter also depends on coverage.
+The existing k=151/ci20/ci100 toy workflow is therefore a development condition,
+not a sufficient tuned comparator. Include frozen k/count sensitivity and HOR
+decomposition endpoints before attributing misses to the method generally.
+
+The [real/simulated cohort and QC programme](cohort_and_qc.md) governs enrollment,
+data scale, true independent units, reference quality and sampling.
 
 ## Metrics to freeze before the publication test
 
@@ -75,3 +85,5 @@ Do not use human-trained centromere labels as plant ground truth.
 - [TRASH official implementation](https://github.com/vlothec/TRASH)
 - [TideHunter official implementation](https://github.com/Xinglab/TideHunter)
 - [Chorus2 official implementation](https://github.com/zhangtaolab/Chorus2)
+- [unitFinder primary Genome Biology study](https://doi.org/10.1186/s13059-025-03924-9)
+- [unitFinder official implementation](https://github.com/HuangYicheng-Bio/unitFinder)

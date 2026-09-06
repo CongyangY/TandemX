@@ -142,3 +142,15 @@ positive scenarios have 70 positive reads (two-array case: 140 arrays).
 Scientific parameters and source snapshots are fixed; six data-file hash sets
 match in every pair. Raw CPU system time remains in the source table. All
 figures preserve editable text; the PNG was visually inspected.
+
+## Abundance baseline: failures are retained
+
+`abundance_baseline/` records all conditional CN/localization/comparison scores
+from 8218beb: 177 successful commands, three independent 199.1-kb genomes, nine
+coverage/error conditions and five retained-copy assemblies. Known monomers are
+supplied, so this does not measure discovery. Only 6/81 diagnostic-k-mer spread
+intervals contain genomic truth; those intervals are not sampling confidence
+intervals. At 20× with 1% substitutions, mean signed CN error is -18.31% and
+estimator-minus-sampling-oracle is -20.08%. All raw conditions, including false
+calls/misses and 1× sampling fluctuations, are retained. See
+`docs/abundance_benchmark.md`; this baseline is not scientifically accepted.

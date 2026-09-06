@@ -1,0 +1,70 @@
+<EXPERIMENT_SET>
+<EXPERIMENT accession="SRX11746829" alias="batch2_2" center_name="SUB10131386" broker_name="NCBI">
+  <IDENTIFIERS>
+    <PRIMARY_ID>SRX11746829</PRIMARY_ID>
+    <SUBMITTER_ID namespace="SUB10131386">batch2_2</SUBMITTER_ID>
+  </IDENTIFIERS>
+  <TITLE>Mo17_Pacbio CCS_replicate 3</TITLE>
+  <STUDY_REF accession="SRP332506">
+    <IDENTIFIERS>
+      <PRIMARY_ID>SRP332506</PRIMARY_ID>
+      <EXTERNAL_ID namespace="BioProject">PRJNA751841</EXTERNAL_ID>
+    </IDENTIFIERS>
+  </STUDY_REF>
+  <DESIGN>
+    <DESIGN_DESCRIPTION>SMRTbell Express Template Prep Kit v2</DESIGN_DESCRIPTION>
+    <SAMPLE_DESCRIPTOR accession="SRS9774826">
+      <IDENTIFIERS>
+        <PRIMARY_ID>SRS9774826</PRIMARY_ID>
+        <SUBMITTER_ID namespace="pda|kaiwentan@orcid">batch2_2</SUBMITTER_ID>
+      </IDENTIFIERS>
+    </SAMPLE_DESCRIPTOR>
+    <LIBRARY_DESCRIPTOR>
+      <LIBRARY_NAME>batch2_2</LIBRARY_NAME>
+      <LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>
+      <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+      <LIBRARY_SELECTION>RANDOM</LIBRARY_SELECTION>
+      <LIBRARY_LAYOUT>
+        <SINGLE/>
+      </LIBRARY_LAYOUT>
+    </LIBRARY_DESCRIPTOR>
+  </DESIGN>
+  <PLATFORM>
+    <PACBIO_SMRT>
+      <INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>
+    </PACBIO_SMRT>
+  </PLATFORM>
+  <EXPERIMENT_LINKS>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SAMPLE</DB>
+        <ID>SRS9774826</ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMISSION</DB>
+        <ID>SRA1272532</ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-FASTQ-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRX11746829&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMITTED-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRX11746829&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+  </EXPERIMENT_LINKS>
+  <EXPERIMENT_ATTRIBUTES>
+    <EXPERIMENT_ATTRIBUTE>
+      <TAG>ENA-STATUS</TAG>
+      <VALUE>PUBLIC</VALUE>
+    </EXPERIMENT_ATTRIBUTE>
+  </EXPERIMENT_ATTRIBUTES>
+</EXPERIMENT>
+</EXPERIMENT_SET>

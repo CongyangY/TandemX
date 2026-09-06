@@ -1,0 +1,390 @@
+[
+  {
+    "accession": "ERR6210723",
+    "kind": "run",
+    "identifier": "ERR6210723",
+    "titles": [
+      "Sequel sequencing"
+    ],
+    "attributes": [],
+    "design": [],
+    "library": []
+  },
+  {
+    "accession": "ERR6210723",
+    "kind": "sample",
+    "identifier": "SAMEA8961650",
+    "titles": [
+      "Arabidopsis thaliana sample for PacBio HiFi seqencing"
+    ],
+    "attributes": [
+      [
+        "ENA-CHECKLIST",
+        "ERC000011"
+      ],
+      [
+        "ENA-FIRST-PUBLIC",
+        "2021-07-07T20:34:00Z"
+      ],
+      [
+        "organism",
+        "Arabidopsis thaliana"
+      ],
+      [
+        "ENA-LAST-UPDATE",
+        "2021-07-07T20:34:00Z"
+      ],
+      [
+        "scientific_name",
+        "Arabidopsis thaliana"
+      ],
+      [
+        "common name",
+        "thale cress"
+      ],
+      [
+        "ENA-FIRST-PUBLIC",
+        "2021-07-07"
+      ],
+      [
+        "ENA-LAST-UPDATE",
+        "2021-07-07"
+      ]
+    ],
+    "design": [],
+    "library": []
+  },
+  {
+    "accession": "ERR6210723",
+    "kind": "experiment",
+    "identifier": "ERX5845873",
+    "titles": [
+      "Sequel sequencing"
+    ],
+    "attributes": [],
+    "design": [
+      null
+    ],
+    "library": []
+  },
+  {
+    "accession": "SRR15447419",
+    "kind": "run",
+    "identifier": "SRR15447419",
+    "titles": [
+      "Sequel II sequencing; Mo17_Pacbio CCS_replicate 3"
+    ],
+    "attributes": [],
+    "design": [],
+    "library": []
+  },
+  {
+    "accession": "SRR15447419",
+    "kind": "sample",
+    "identifier": "SAMN20604744",
+    "titles": [
+      "Plant sample from Zea mays"
+    ],
+    "attributes": [
+      [
+        "replicate",
+        "39"
+      ],
+      [
+        "INSDC secondary accession",
+        "SRS9774826"
+      ],
+      [
+        "NCBI submission package",
+        "Plant.1.0"
+      ],
+      [
+        "cultivar",
+        "inbred line Mo17"
+      ],
+      [
+        "organism",
+        "Zea mays"
+      ],
+      [
+        "geo_loc_name",
+        "China:beijing"
+      ],
+      [
+        "tissue",
+        "young leaf"
+      ],
+      [
+        "age",
+        "10DAY"
+      ],
+      [
+        "BioSampleModel",
+        "Plant"
+      ],
+      [
+        "ENA-FIRST-PUBLIC",
+        "2021-11-23"
+      ],
+      [
+        "ENA-LAST-UPDATE",
+        "2021-11-23"
+      ]
+    ],
+    "design": [],
+    "library": []
+  },
+  {
+    "accession": "SRR15447419",
+    "kind": "experiment",
+    "identifier": "SRX11746829",
+    "titles": [
+      "Mo17_Pacbio CCS_replicate 3"
+    ],
+    "attributes": [],
+    "design": [
+      "SMRTbell Express Template Prep Kit v2"
+    ],
+    "library": []
+  },
+  {
+    "accession": "SRR25241090",
+    "kind": "run",
+    "identifier": "SRR25241090",
+    "titles": [
+      "Sequel II sequencing; hifi of NIP"
+    ],
+    "attributes": [],
+    "design": [],
+    "library": []
+  },
+  {
+    "accession": "SRR25241090",
+    "kind": "sample",
+    "identifier": "SAMN36368305",
+    "titles": [
+      "Plant sample from Oryza sativa Japonica Group"
+    ],
+    "attributes": [
+      [
+        "collection_date",
+        "2022-03-07"
+      ],
+      [
+        "isolate",
+        "AGIS-1.0"
+      ],
+      [
+        "INSDC secondary accession",
+        "SRS18262452"
+      ],
+      [
+        "NCBI submission package",
+        "Plant.1.0"
+      ],
+      [
+        "cultivar",
+        "Nipponbare"
+      ],
+      [
+        "organism",
+        "Oryza sativa Japonica Group"
+      ],
+      [
+        "geo_loc_name",
+        "China"
+      ],
+      [
+        "tissue",
+        "leaf"
+      ],
+      [
+        "age",
+        "15days"
+      ],
+      [
+        "BioSampleModel",
+        "Plant"
+      ],
+      [
+        "ENA-FIRST-PUBLIC",
+        "2023-12-01"
+      ],
+      [
+        "ENA-LAST-UPDATE",
+        "2023-12-01"
+      ]
+    ],
+    "design": [],
+    "library": []
+  },
+  {
+    "accession": "SRR25241090",
+    "kind": "experiment",
+    "identifier": "SRX20987367",
+    "titles": [
+      "hifi of NIP"
+    ],
+    "attributes": [],
+    "design": [
+      "NIP"
+    ],
+    "library": []
+  },
+  {
+    "accession": "ERR15194059",
+    "kind": "run",
+    "identifier": "ERR15194059",
+    "titles": [
+      "Revio sequencing"
+    ],
+    "attributes": [],
+    "design": [],
+    "library": []
+  },
+  {
+    "accession": "ERR15194059",
+    "kind": "sample",
+    "identifier": "SAMEA118635564",
+    "titles": [
+      "High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0\u00ae dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure."
+    ],
+    "attributes": [
+      [
+        "biological material ID",
+        "HiFi_Rye_Lo7_v3"
+      ],
+      [
+        "collection date",
+        "2024-04-09"
+      ],
+      [
+        "sample ID",
+        "IPK_LIMS:3280122"
+      ],
+      [
+        "sample ID",
+        "IPK_LIMS:3280123"
+      ],
+      [
+        "sample ID",
+        "IPK_LIMS:3294181"
+      ],
+      [
+        "biological material ploidy",
+        "diploid"
+      ],
+      [
+        "material source geographic location",
+        "not applicable"
+      ],
+      [
+        "growth facility",
+        "not collected"
+      ],
+      [
+        "biological\u00a0 material coordinates uncertainty",
+        "not applicable"
+      ],
+      [
+        "material source altitude",
+        "not applicable"
+      ],
+      [
+        "material source description",
+        "not applicable"
+      ],
+      [
+        "biological\u00a0 material altitude",
+        "112m"
+      ],
+      [
+        "plant structure development stage",
+        "seedling"
+      ],
+      [
+        "library type",
+        "HiFi"
+      ],
+      [
+        "biological material geographic location",
+        "Germany"
+      ],
+      [
+        "geographic location (country and/or sea)",
+        "not provided"
+      ],
+      [
+        "plant anatomical entity",
+        "leaf"
+      ],
+      [
+        "material source longitude",
+        "not applicable"
+      ],
+      [
+        "organism",
+        "Secale cereale"
+      ],
+      [
+        "biological material longitude",
+        "11,283"
+      ],
+      [
+        "checklist",
+        "BSDC00002"
+      ],
+      [
+        "sample description",
+        "High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0\u00ae dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure."
+      ],
+      [
+        "biological material latitude",
+        "51,816"
+      ],
+      [
+        "biological material preprocessing",
+        "not applicable"
+      ],
+      [
+        "sequencing date IPK",
+        "2024-04"
+      ],
+      [
+        "project name",
+        "rye Lo7 genome"
+      ],
+      [
+        "genus",
+        "Secale"
+      ],
+      [
+        "species",
+        "cereale"
+      ],
+      [
+        "material source latitude",
+        "not applicable"
+      ],
+      [
+        "age",
+        "14 days"
+      ]
+    ],
+    "design": [],
+    "library": []
+  },
+  {
+    "accession": "ERR15194059",
+    "kind": "experiment",
+    "identifier": "ERX14599733",
+    "titles": [
+      "Revio sequencing"
+    ],
+    "attributes": [],
+    "design": [
+      null
+    ],
+    "library": []
+  }
+]

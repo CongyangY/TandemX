@@ -1,0 +1,70 @@
+<EXPERIMENT_SET>
+<EXPERIMENT accession="ERX14599733" alias="ena-EXPERIMENT-TAB-03-07-2025-14:17:32:212-14363" center_name="Leibniz Institute of Plant Genetics and Crop Plant Research">
+  <IDENTIFIERS>
+    <PRIMARY_ID>ERX14599733</PRIMARY_ID>
+    <SUBMITTER_ID namespace="Leibniz Institute of Plant Genetics and Crop Plant Research">ena-EXPERIMENT-TAB-03-07-2025-14:17:32:212-14363</SUBMITTER_ID>
+  </IDENTIFIERS>
+  <TITLE>Revio sequencing</TITLE>
+  <STUDY_REF accession="ERP174410">
+    <IDENTIFIERS>
+      <PRIMARY_ID>ERP174410</PRIMARY_ID>
+      <SECONDARY_ID>PRJEB91463</SECONDARY_ID>
+    </IDENTIFIERS>
+  </STUDY_REF>
+  <DESIGN>
+    <DESIGN_DESCRIPTION/>
+    <SAMPLE_DESCRIPTOR accession="ERS25126485">
+      <IDENTIFIERS>
+        <PRIMARY_ID>ERS25126485</PRIMARY_ID>
+        <EXTERNAL_ID namespace="BioSample">SAMEA118635564</EXTERNAL_ID>
+      </IDENTIFIERS>
+    </SAMPLE_DESCRIPTOR>
+    <LIBRARY_DESCRIPTOR>
+      <LIBRARY_NAME>HiFi_294_Rye_Lo7.1048</LIBRARY_NAME>
+      <LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>
+      <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+      <LIBRARY_SELECTION>RANDOM</LIBRARY_SELECTION>
+      <LIBRARY_LAYOUT>
+        <SINGLE/>
+      </LIBRARY_LAYOUT>
+    </LIBRARY_DESCRIPTOR>
+  </DESIGN>
+  <PLATFORM>
+    <PACBIO_SMRT>
+      <INSTRUMENT_MODEL>Revio</INSTRUMENT_MODEL>
+    </PACBIO_SMRT>
+  </PLATFORM>
+  <EXPERIMENT_LINKS>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SAMPLE</DB>
+        <ID>ERS25126485</ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMISSION</DB>
+        <ID>ERA33555319</ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-FASTQ-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERX14599733&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMITTED-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERX14599733&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+  </EXPERIMENT_LINKS>
+  <EXPERIMENT_ATTRIBUTES>
+    <EXPERIMENT_ATTRIBUTE>
+      <TAG>ENA-STATUS</TAG>
+      <VALUE>PUBLIC</VALUE>
+    </EXPERIMENT_ATTRIBUTE>
+  </EXPERIMENT_ATTRIBUTES>
+</EXPERIMENT>
+</EXPERIMENT_SET>

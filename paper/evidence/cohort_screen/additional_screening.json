@@ -1,0 +1,64 @@
+[
+  {
+    "project": "PRJEB56828",
+    "metadata_url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB56828&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv",
+    "total_runs": 691,
+    "pacbio_wgs_runs": 285,
+    "nonempty_biosample_ids": 24,
+    "biosample_ids_are_not_biological_replicates": true,
+    "examples": [
+      {
+        "run_accession": "ERR10422424",
+        "sample_accession": "SAMEA111508739",
+        "sample_title": "",
+        "experiment_title": "Sequel II sequencing",
+        "base_count": "30953446829",
+        "fastq_bytes": "22956125556"
+      },
+      {
+        "run_accession": "ERR10422432",
+        "sample_accession": "SAMEA111508739",
+        "sample_title": "",
+        "experiment_title": "Sequel II sequencing",
+        "base_count": "29547202553",
+        "fastq_bytes": "23582824764"
+      }
+    ]
+  },
+  {
+    "project": "ERR8666127",
+    "metadata_url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR8666127&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv",
+    "total_runs": 1,
+    "pacbio_wgs_runs": 1,
+    "nonempty_biosample_ids": 1,
+    "biosample_ids_are_not_biological_replicates": true,
+    "examples": [
+      {
+        "run_accession": "ERR8666127",
+        "sample_accession": "SAMEA13018400",
+        "sample_title": "Col-0_6909_DNA",
+        "experiment_title": "Sequel II sequencing: Raw reads: Col-0_6909_HiFi",
+        "base_count": "17746722015",
+        "fastq_bytes": "14044296938"
+      }
+    ]
+  },
+  {
+    "project": "ERR8666125",
+    "metadata_url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR8666125&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv",
+    "total_runs": 1,
+    "pacbio_wgs_runs": 1,
+    "nonempty_biosample_ids": 1,
+    "biosample_ids_are_not_biological_replicates": true,
+    "examples": [
+      {
+        "run_accession": "ERR8666125",
+        "sample_accession": "SAMEA13018399",
+        "sample_title": "Ey15-2_9994_DNA",
+        "experiment_title": "Sequel II sequencing: Raw reads: Ey15-2_9994_HiFi",
+        "base_count": "18636790429",
+        "fastq_bytes": "17397432231"
+      }
+    ]
+  }
+]

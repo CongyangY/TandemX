@@ -1,0 +1,50 @@
+{
+  "source_commit": "abb9b614d91c8a0bbd05a199c694fb5eafb5fe30",
+  "files": [
+    {
+      "file": "Col-CEN_v1.2.fasta.gz",
+      "url": "https://raw.githubusercontent.com/schatzlab/Col-CEN/abb9b614d91c8a0bbd05a199c694fb5eafb5fe30/v1.2/Col-CEN_v1.2.fasta.gz",
+      "bytes": 38265592,
+      "git_blob_sha1": "a2d151001daf61dad227ed762c0a1e0aa5bd2dec",
+      "git_blob_verified": true,
+      "sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8"
+    },
+    {
+      "file": "issues.bed",
+      "url": "https://raw.githubusercontent.com/schatzlab/Col-CEN/abb9b614d91c8a0bbd05a199c694fb5eafb5fe30/v1.2/issues.bed",
+      "bytes": 44,
+      "git_blob_sha1": "ca9628d09d51fb7d59286da297ac2406092331ea",
+      "git_blob_verified": true,
+      "sha256": "a7319f13794c9ae0f0f4719de6e000d5f181d05dce508dcb954550cf254a9c06"
+    },
+    {
+      "file": "README.md",
+      "url": "https://raw.githubusercontent.com/schatzlab/Col-CEN/abb9b614d91c8a0bbd05a199c694fb5eafb5fe30/v1.2/README.md",
+      "bytes": 1616,
+      "git_blob_sha1": "18d9d23307a35249113a197c2d08f4e45cf1d3c0",
+      "git_blob_verified": true,
+      "sha256": "00988f40336eda13c9ce412d42149fa9e507010fcc7c9f313fe1824fafc696b2"
+    }
+  ],
+  "sequence_lengths": {
+    "Chr1": 32540122,
+    "Chr2": 22217084,
+    "Chr3": 25743512,
+    "Chr4": 21578073,
+    "Chr5": 29480885,
+    "ChrM": 366924,
+    "ChrC": 154478
+  },
+  "n_counts": {
+    "Chr1": 0,
+    "Chr2": 0,
+    "Chr3": 0,
+    "Chr4": 0,
+    "Chr5": 0,
+    "ChrM": 0,
+    "ChrC": 0
+  },
+  "gzip_trailer_checked": true,
+  "total_bp": 132081078,
+  "warning": "Includes organelles; inspect names and known issues before selecting nuclear reference"
+}

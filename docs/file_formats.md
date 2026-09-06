@@ -774,3 +774,22 @@ Performance figure `panel_source.tsv`: `panel`, `dataset`, `metric`, `variant`,
 `value`; panel C transforms the RSS ratio to percent change. All other values
 are the corresponding per-dataset median or ratio in the archived summary.
 `figure_provenance.json` records input/figure/script hashes and derived ranges.
+
+## Complete-data QC and cohort screening
+
+See [complete_data_qc.md](complete_data_qc.md) for commands and JSON receipts.
+`length_histogram.tsv`: integer `length_bp`, `read_count`.
+`base_quality_histogram.tsv`: integer `phred` (ASCII minus 33), `base_count`.
+`joint_distribution.tsv`: lower bounds `length_bin_kb` (1-kb width),
+`gc_bin_percent` (1% width, denominator includes N), `mean_quality_bin_phred`
+(5-Phred width, read quality from mean reported error probabilities), and
+`read_count`. Histograms include all validated reads/bases.
+
+Cohort `screen_summary.tsv`: queried `accession`, `metadata_rows`,
+`pacbio_wgs_run_rows`, `distinct_nonempty_biosample_ids`,
+`missing_biosample_run_rows`, sum of `reported_fastq_bytes` over those runs,
+archived `metadata_file`, `metadata_sha256`, and `warning`. PacBio+WGS alone
+does not establish HiFi. BioSample/run counts do not equal independent
+specimens. Original `screening.json` used the exploratory label `samples`,
+counting empty strings as well; explicit summary fields supersede that label
+without altering raw history.

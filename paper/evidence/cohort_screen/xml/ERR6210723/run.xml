@@ -1,0 +1,89 @@
+<RUN_SET>
+<RUN accession="ERR6210723" alias="ena-RUN-MAX PLANCK INSTITUTE FOR PLANT BREEDING RESEARCH-07-07-2021-16:20:32:188-1" center_name="MAX PLANCK INSTITUTE FOR PLANT BREEDING RESEARCH">
+  <IDENTIFIERS>
+    <PRIMARY_ID>ERR6210723</PRIMARY_ID>
+    <SUBMITTER_ID namespace="MAX PLANCK INSTITUTE FOR PLANT BREEDING RESEARCH">ena-RUN-MAX PLANCK INSTITUTE FOR PLANT BREEDING RESEARCH-07-07-2021-16:20:32:188-1</SUBMITTER_ID>
+  </IDENTIFIERS>
+  <TITLE>Sequel sequencing</TITLE>
+  <EXPERIMENT_REF accession="ERX5845873">
+    <IDENTIFIERS>
+      <PRIMARY_ID>ERX5845873</PRIMARY_ID>
+    </IDENTIFIERS>
+  </EXPERIMENT_REF>
+  <SPOT_DESCRIPTOR>
+    <SPOT_DECODE_SPEC>
+      <READ_SPEC>
+        <READ_INDEX>0</READ_INDEX>
+        <READ_LABEL>F1</READ_LABEL>
+        <READ_CLASS>Application Read</READ_CLASS>
+        <READ_TYPE>Forward</READ_TYPE>
+        <BASE_COORD>1</BASE_COORD>
+      </READ_SPEC>
+    </SPOT_DECODE_SPEC>
+  </SPOT_DESCRIPTOR>
+  <PLATFORM>
+    <PACBIO_SMRT>
+      <INSTRUMENT_MODEL>Sequel</INSTRUMENT_MODEL>
+    </PACBIO_SMRT>
+  </PLATFORM>
+  <DATA_BLOCK>
+    <FILES>
+      <FILE checksum="1e508387d181ba5ca994ae0fd0772326" checksum_method="MD5" filename="run/ERR621/ERR6210723/reads_A01.fq.gz" filetype="fastq" quality_scoring_system="phred"/>
+    </FILES>
+  </DATA_BLOCK>
+  <RUN_LINKS>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMISSION</DB>
+        <ID>ERA5185408</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-STUDY</DB>
+        <ID>ERP130372</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SAMPLE</DB>
+        <ID>ERS6644401</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-FASTQ-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR6210723&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMITTED-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR6210723&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+      </XREF_LINK>
+    </RUN_LINK>
+  </RUN_LINKS>
+  <RUN_ATTRIBUTES>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-STATUS</TAG>
+      <VALUE>PUBLIC</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-FIRST-PUBLIC</TAG>
+      <VALUE>2021-07-07</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-LAST-UPDATE</TAG>
+      <VALUE>2021-07-07</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-BASE-COUNT</TAG>
+      <VALUE>14646601458</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-SPOT-COUNT</TAG>
+      <VALUE>933904</VALUE>
+    </RUN_ATTRIBUTE>
+  </RUN_ATTRIBUTES>
+</RUN>
+</RUN_SET>

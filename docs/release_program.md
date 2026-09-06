@@ -26,11 +26,11 @@ machine-readable commands alongside results.
 
 | Gate | Required evidence | Initial state |
 | --- | --- | --- |
-| Engineering baseline | Full pytest; Rust tests and release build; output validation | 218 pytest and 6 Rust tests passed; prior checkpoint Linux/macOS CI passed; new checkpoint CI requires its own verification |
+| Engineering baseline | Full pytest; Rust tests and release build; output validation | 250 pytest passed; native core has 7 Rust tests and verified Linux/macOS CI at 8218beb; new checkpoints require their own CI |
 | Challenge benchmark | Independent seeds; indels, unit divergence, mixed families, multiple arrays, short arrays, hard negatives; strict normalization | In development |
-| Quantification | Known copy number and coverage; finite-read and error bias; catalog ambiguity; calibration/interval coverage | Pending |
-| Localization/comparison | Known array coordinates; engineered collapse levels; false collapse calls and boundary errors | Pending |
-| Real data | Public accession, source checksums, matched sample/assembly, bounded pilot then scaling; known-family recovery | Pending; old black-rye summary is not raw-read validation |
+| Quantification | Known copy number and coverage; finite-read and error bias; catalog ambiguity; calibration/interval coverage | Baseline executed; intervals contain truth in 6/81 conditions; error/uncertainty model improvement required |
+| Localization/comparison | Known array coordinates; engineered collapse levels; false collapse calls and boundary errors | Exact-copy baseline executed; false calls and misses retained; broader truth pending |
+| Real data | Public accession, source checksums, matched sample/assembly, bounded pilot then scaling; known-family recovery | Cohort/QC programme established; full Arabidopsis/Mo17 batches downloading; reference checked; not yet accepted |
 | Comparators | Expanded task-matched methods in comparator_matrix.md | TRF/TideHunter development comparison, default/tuned ULTRA pilots, SRF seven-stage development workflow; TRASH/TAREAN remain pending |
 | Innovation | Audited prior art; method ablations; held-out evaluation; AI retained only with reproducible benefit | Pending |
 | Reuse | LICENSE; CI; clean source install; toy and real-data workflows; versioned release and hashes | Pending |

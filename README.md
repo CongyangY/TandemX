@@ -375,3 +375,8 @@ The [conditional abundance experiment](docs/abundance_benchmark.md) tests copy
 number, localization and engineered assembly under-representation independently
 of de novo discovery. It measures empirical interval coverage without treating
 the existing diagnostic-k-mer spread as a calibrated confidence interval.
+Its first full baseline completed 177 commands but covered truth in only 6/81
+reported intervals; this is an identified limitation, not calibrated inference.
+The [real and simulated cohort/QC programme](docs/cohort_and_qc.md) specifies
+species/material breadth, scale ladders, full-file validation and independent
+evidence requirements. Current development/toy results do not satisfy those gates.

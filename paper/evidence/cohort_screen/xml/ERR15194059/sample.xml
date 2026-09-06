@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAMPLE_SET>
+<SAMPLE accession="SAMEA118635564" alias="Lo7_v3_HiFi">
+     <IDENTIFIERS>
+          <PRIMARY_ID>SAMEA118635564</PRIMARY_ID>
+          <SECONDARY_ID>ERS25126485</SECONDARY_ID>
+          <EXTERNAL_ID namespace="BioSample">SAMEA118635564</EXTERNAL_ID>
+     </IDENTIFIERS>
+     <TITLE>High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0® dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure.</TITLE>
+     <SAMPLE_NAME>
+          <TAXON_ID>4550</TAXON_ID>
+          <SCIENTIFIC_NAME>Secale cereale</SCIENTIFIC_NAME>
+          <COMMON_NAME>rye</COMMON_NAME>
+     </SAMPLE_NAME>
+     <DESCRIPTION>High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0® dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure.</DESCRIPTION>
+     <SAMPLE_LINKS>
+    <SAMPLE_LINK>
+        <XREF_LINK>
+            <DB>ENA-FASTQ-FILES</DB>
+            <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERS25126485&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+        </XREF_LINK>
+    </SAMPLE_LINK>
+    <SAMPLE_LINK>
+        <XREF_LINK>
+            <DB>ENA-SUBMITTED-FILES</DB>
+            <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERS25126485&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+        </XREF_LINK>
+    </SAMPLE_LINK>
+</SAMPLE_LINKS>
+<SAMPLE_ATTRIBUTES>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>biological material ID</TAG>
+               <VALUE>HiFi_Rye_Lo7_v3</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>collection date</TAG>
+               <VALUE>2024-04-09</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>sample ID</TAG>
+               <VALUE>IPK_LIMS:3280122</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>sample ID</TAG>
+               <VALUE>IPK_LIMS:3280123</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>sample ID</TAG>
+               <VALUE>IPK_LIMS:3294181</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>biological material ploidy</TAG>
+               <VALUE>diploid</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>material source geographic location</TAG>
+               <VALUE>not applicable</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>growth facility</TAG>
+               <VALUE>not collected</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>biological  material coordinates uncertainty</TAG>
+               <VALUE>not applicable</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>material source altitude</TAG>
+               <VALUE>not applicable</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>material source description</TAG>
+               <VALUE>not applicable</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>biological  material altitude</TAG>
+               <VALUE>112m</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>plant structure development stage</TAG>
+               <VALUE>seedling</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>library type</TAG>
+               <VALUE>HiFi</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>biological material geographic location</TAG>
+               <VALUE>Germany</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>geographic location (country and/or sea)</TAG>
+               <VALUE>not provided</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>plant anatomical entity</TAG>
+               <VALUE>leaf</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>material source longitude</TAG>
+               <VALUE>not applicable</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>organism</TAG>
+               <VALUE>Secale cereale</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>biological material longitude</TAG>
+               <VALUE>11,283</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>checklist</TAG>
+               <VALUE>BSDC00002</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>sample description</TAG>
+               <VALUE>High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0® dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure.</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>biological material latitude</TAG>
+               <VALUE>51,816</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>biological material preprocessing</TAG>
+               <VALUE>not applicable</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>sequencing date IPK</TAG>
+               <VALUE>2024-04</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>project name</TAG>
+               <VALUE>rye Lo7 genome</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>genus</TAG>
+               <VALUE>Secale</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>species</TAG>
+               <VALUE>cereale</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>material source latitude</TAG>
+               <VALUE>not applicable</VALUE>
+          </SAMPLE_ATTRIBUTE>
+          <SAMPLE_ATTRIBUTE>
+               <TAG>age</TAG>
+               <VALUE>14 days</VALUE>
+          </SAMPLE_ATTRIBUTE>
+     </SAMPLE_ATTRIBUTES>
+</SAMPLE>
+</SAMPLE_SET>

@@ -1,0 +1,281 @@
+[
+  {
+    "project": "PRJEB46164",
+    "total_runs": 1,
+    "pacbio_wgs": 1,
+    "samples": 1,
+    "fastq_gb": 11.074308726,
+    "examples": [
+      {
+        "run_accession": "ERR6210723",
+        "sample_accession": "SAMEA8961650",
+        "sample_title": "Arabidopsis thaliana sample for PacBio HiFi seqencing",
+        "experiment_title": "Sequel sequencing",
+        "instrument_model": "Sequel",
+        "base_count": "14646601458",
+        "fastq_bytes": "11074308726"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB46164&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  },
+  {
+    "project": "PRJNA751841",
+    "total_runs": 51,
+    "pacbio_wgs": 7,
+    "samples": 7,
+    "fastq_gb": 142.689053121,
+    "examples": [
+      {
+        "run_accession": "SRR15447415",
+        "sample_accession": "SAMN20604747",
+        "sample_title": "Plant sample from Zea mays",
+        "experiment_title": "Sequel II sequencing: Mo17_Pacbio CCS_replicate 6",
+        "instrument_model": "Sequel II",
+        "base_count": "22822023230",
+        "fastq_bytes": "23102874803"
+      },
+      {
+        "run_accession": "SRR15447418",
+        "sample_accession": "SAMN20604745",
+        "sample_title": "Plant sample from Zea mays",
+        "experiment_title": "Sequel II sequencing: Mo17_Pacbio CCS_replicate 4",
+        "instrument_model": "Sequel II",
+        "base_count": "17243536830",
+        "fastq_bytes": "17365860243"
+      },
+      {
+        "run_accession": "SRR15447419",
+        "sample_accession": "SAMN20604744",
+        "sample_title": "Plant sample from Zea mays",
+        "experiment_title": "Sequel II sequencing: Mo17_Pacbio CCS_replicate 3",
+        "instrument_model": "Sequel II",
+        "base_count": "5624644958",
+        "fastq_bytes": "5346359125"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA751841&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  },
+  {
+    "project": "PRJEB40587",
+    "total_runs": 5,
+    "pacbio_wgs": 5,
+    "samples": 5,
+    "fastq_gb": 126.289065159,
+    "examples": [
+      {
+        "run_accession": "ERR4659249",
+        "sample_accession": "SAMEA7377105",
+        "sample_title": "Morex V3 assembly Pac Bio CCS raw data",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "29396358529",
+        "fastq_bytes": "28284942187"
+      },
+      {
+        "run_accession": "ERR4659247",
+        "sample_accession": "SAMEA7377103",
+        "sample_title": "Morex V3 assembly Pac Bio CCS raw data",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "23396150961",
+        "fastq_bytes": "22774542126"
+      },
+      {
+        "run_accession": "ERR4659246",
+        "sample_accession": "SAMEA7377102",
+        "sample_title": "Morex V3 assembly Pac Bio CCS raw data",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "19525307665",
+        "fastq_bytes": "19471797271"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB40587&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  },
+  {
+    "project": "PRJEB57567",
+    "total_runs": 1472,
+    "pacbio_wgs": 1397,
+    "samples": 70,
+    "fastq_gb": 5602.968854804,
+    "examples": [
+      {
+        "run_accession": "ERR10660330",
+        "sample_accession": "SAMEA10898154",
+        "sample_title": "",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "18524652323",
+        "fastq_bytes": "17194723864"
+      },
+      {
+        "run_accession": "ERR10660331",
+        "sample_accession": "SAMEA10898154",
+        "sample_title": "",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "24389580545",
+        "fastq_bytes": "22939279318"
+      },
+      {
+        "run_accession": "ERR10660332",
+        "sample_accession": "SAMEA10898154",
+        "sample_title": "",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "19115848484",
+        "fastq_bytes": "17692587729"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB57567&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  },
+  {
+    "project": "PRJEB58554",
+    "total_runs": 31,
+    "pacbio_wgs": 25,
+    "samples": 1,
+    "fastq_gb": 332.473624792,
+    "examples": [
+      {
+        "run_accession": "ERR10694586",
+        "sample_accession": "",
+        "sample_title": "",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "13604229896",
+        "fastq_bytes": "12711843018"
+      },
+      {
+        "run_accession": "ERR10694595",
+        "sample_accession": "",
+        "sample_title": "",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "11368045113",
+        "fastq_bytes": "7235484685"
+      },
+      {
+        "run_accession": "ERR10694598",
+        "sample_accession": "",
+        "sample_title": "",
+        "experiment_title": "Sequel II sequencing",
+        "instrument_model": "Sequel II",
+        "base_count": "18968854725",
+        "fastq_bytes": "13137450356"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB58554&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  },
+  {
+    "project": "PRJEB91463",
+    "total_runs": 12,
+    "pacbio_wgs": 3,
+    "samples": 1,
+    "fastq_gb": 107.210002303,
+    "examples": [
+      {
+        "run_accession": "ERR15194058",
+        "sample_accession": "SAMEA118635564",
+        "sample_title": "High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0\u00ae dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure.",
+        "experiment_title": "Revio sequencing",
+        "instrument_model": "Revio",
+        "base_count": "94061325779",
+        "fastq_bytes": "40642914999"
+      },
+      {
+        "run_accession": "ERR15194059",
+        "sample_accession": "SAMEA118635564",
+        "sample_title": "High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0\u00ae dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure.",
+        "experiment_title": "Revio sequencing",
+        "instrument_model": "Revio",
+        "base_count": "77092101008",
+        "fastq_bytes": "29991431807"
+      },
+      {
+        "run_accession": "ERR15194060",
+        "sample_accession": "SAMEA118635564",
+        "sample_title": "High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0\u00ae dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure.",
+        "experiment_title": "Revio sequencing",
+        "instrument_model": "Revio",
+        "base_count": "95505843551",
+        "fastq_bytes": "36575655497"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB91463&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  },
+  {
+    "project": "PRJNA1062539",
+    "total_runs": 271,
+    "pacbio_wgs": 80,
+    "samples": 80,
+    "fastq_gb": 2150.792694882,
+    "examples": [
+      {
+        "run_accession": "SRR27673978",
+        "sample_accession": "SAMN39488631",
+        "sample_title": "HiFi run 39",
+        "experiment_title": "Sequel II sequencing: HiFi data of Triticum Aestivum",
+        "instrument_model": "Sequel II",
+        "base_count": "39620880265",
+        "fastq_bytes": "31470254740"
+      },
+      {
+        "run_accession": "SRR27673981",
+        "sample_accession": "SAMN39488628",
+        "sample_title": "HiFi run 36",
+        "experiment_title": "Sequel II sequencing: HiFi data of Triticum Aestivum",
+        "instrument_model": "Sequel II",
+        "base_count": "40244649475",
+        "fastq_bytes": "30287422552"
+      },
+      {
+        "run_accession": "SRR27673982",
+        "sample_accession": "SAMN39488627",
+        "sample_title": "HiFi run 35",
+        "experiment_title": "Sequel II sequencing: HiFi data of Triticum Aestivum",
+        "instrument_model": "Sequel II",
+        "base_count": "38836116551",
+        "fastq_bytes": "33804445038"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA1062539&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  },
+  {
+    "project": "PRJNA953663",
+    "total_runs": 10,
+    "pacbio_wgs": 1,
+    "samples": 1,
+    "fastq_gb": 28.649678204,
+    "examples": [
+      {
+        "run_accession": "SRR25241090",
+        "sample_accession": "SAMN36368305",
+        "sample_title": "Plant sample from Oryza sativa Japonica Group",
+        "experiment_title": "Sequel II sequencing: hifi of NIP",
+        "instrument_model": "Sequel II",
+        "base_count": "32966159623",
+        "fastq_bytes": "28649678204"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA953663&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  },
+  {
+    "project": "SRR11606869",
+    "total_runs": 1,
+    "pacbio_wgs": 1,
+    "samples": 1,
+    "fastq_gb": 41.983609719,
+    "examples": [
+      {
+        "run_accession": "SRR11606869",
+        "sample_accession": "SAMN14691542",
+        "sample_title": "Model organism or animal sample from Zea mays",
+        "experiment_title": "Sequel II sequencing: Zea mays B73: PacBio HiFi Reads FASTQ",
+        "instrument_model": "Sequel II",
+        "base_count": "48074871022",
+        "fastq_bytes": "41983609719"
+      }
+    ],
+    "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR11606869&result=read_run&fields=run_accession%2Cstudy_accession%2Csecondary_study_accession%2Csample_accession%2Cexperiment_accession%2Cscientific_name%2Csample_title%2Cexperiment_title%2Cinstrument_platform%2Cinstrument_model%2Clibrary_strategy%2Clibrary_source%2Clibrary_selection%2Cread_count%2Cbase_count%2Cfastq_ftp%2Cfastq_md5%2Cfastq_bytes&format=tsv"
+  }
+]
