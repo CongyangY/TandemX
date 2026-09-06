@@ -7,6 +7,25 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Fixed multi-k replay and expanded discovery scoring
+
+- 0aad0ab82c50f93f0c80351b3b4b3c1749c1908e pushed to both branches. Its fixed
+  k15/21/27/31 replay completed all 27 inputs, 1,485 fits and 4,455 paired method
+  rows. At 20x/2% unit divergence/high errors, mean bias changes -56.586% to
+  +1.590%; mean absolute error 56.586% to 13.529%. These are IID-development
+  results, not real-data calibration or external superiority.
+- Trade-offs retained: 66 fits have zero support at some k (63 at 1x, three at
+  5x), and two fitted positive slopes violate the simple loss model. At 20x,
+  384/495 paired absolute errors decrease, 111 increase. No sampling CI is
+  supplied and the public quantifier remains unchanged. T7 result directory:
+  `results/factorial_multik_replay_v1_20260906`.
+- New factorial discovery controller and independent truth views keep all planted
+  bases, exclude partial-fragment reads only from the declared eligible-array
+  endpoint, and use per-array consensuses with two sequence-recovery denominators.
+  Exact bounded-edlib threshold decisions match the exhaustive score on tests.
+  Source/tool/input hashes and failures are preserved. Full suite **294 passed
+  in 65.11 s**; actual three-tool factorial pilot follows this commit.
+
 ### Completed factorial inputs and conditional scoring controller
 
 - Source 6330d5625c102787c7a894822d1b3ba9599cc92d pushed to both branches;

@@ -409,6 +409,9 @@ replays; it remains separate from the default CLI pending biological calibration
 The [experimental multi-k model](docs/multik_quantification.md) tests whether
 word-survival extrapolation reduces divergence/error bias. It retains two
 single-k baselines and fit diagnostics; public quantification is unchanged.
+The [factorial discovery evaluation](docs/factorial_discovery_benchmark.md) uses
+full observed-coordinate truth, explicit partial-fragment treatment and independent
+cyclic sequence recovery for the three read-local discovery comparators.
 
 Complete Mo17 CCS input QC now covers 407,670 reads / 5.625 Gb, with nested
 11.68 Mb, 111.51 Mb and 1.129 Gb samples and a checked 10-chromosome reference.

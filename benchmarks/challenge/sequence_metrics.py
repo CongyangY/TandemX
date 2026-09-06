@@ -67,3 +67,48 @@ def score_cyclic_recovery(predictions: list[str], truth: dict[str, str], thresho
                "unmatched_distinct_consensus_count": len(sequences) - len(supported),
                "mean_best_cyclic_edit_similarity": fmean(max(row, default=0.0) for row in scores) if truth else math.nan}
     return metrics, rows
+
+
+@lru_cache(maxsize=8192)
+def cyclic_reaches_threshold(truth: str, prediction: str, threshold: float = .9) -> bool:
+    """Exact threshold decision with bounded edlib, not an approximate score.
+
+    Avoid calculating below-threshold exact identities when only recovery is
+    requested. Length bounds and early success preserve the original decision.
+    """
+    if not 0<threshold<=1 or not truth or not prediction or set((truth+prediction).upper())-set('ACGTN'):
+        raise ValueError('Require nonempty ACGTN sequences and threshold in (0,1]')
+    maximum=max(len(truth),len(prediction))
+    limit=math.floor((1-threshold+1e-12)*maximum)
+    if abs(len(truth)-len(prediction))>limit:
+        return False
+    import edlib
+    reference=truth.upper().replace('N','X')
+    prediction=prediction.upper()
+    reverse=prediction.translate(str.maketrans('ACGT','TGCA'))[::-1]
+    for strand in (prediction,reverse):
+        strand=strand.replace('N','Y')
+        for offset in range(len(strand)):
+            if edlib.align(reference,strand[offset:]+strand[:offset],mode='NW',task='distance',k=limit)['editDistance']>=0:
+                return True
+    return False
+
+
+def score_threshold_recovery(predictions: list[str], truth: dict[str,str], threshold: float=.9
+                             ) -> tuple[dict,list[dict]]:
+    if not 0<threshold<=1:
+        raise ValueError('Threshold must be in (0,1]')
+    sequences=sorted(set(canonical_monomer(s) for s in predictions if s))
+    identifiers=sorted(truth)
+    edges=[[j for j,sequence in enumerate(sequences) if cyclic_reaches_threshold(truth[name],sequence,threshold)]
+           for name in identifiers]
+    matching=maximum_matching(edges)
+    supported={j for row in edges for j in row}
+    rows=[dict(truth_id=name,recovered=int(i in matching),assigned_sequence_index=matching.get(i,'NA'),
+               threshold=threshold,criterion='exact_cyclic_levenshtein_threshold_no_below_threshold_score')
+          for i,name in enumerate(identifiers)]
+    return dict(truth_family_count=len(truth),recovered_family_count=len(matching),
+                cyclic_monomer_recall=len(matching)/len(truth) if truth else math.nan,
+                distinct_consensus_count=len(sequences),
+                homologous_consensus_fraction=len(supported)/len(sequences) if sequences else math.nan,
+                unmatched_distinct_consensus_count=len(sequences)-len(supported)),rows

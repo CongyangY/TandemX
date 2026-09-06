@@ -920,3 +920,29 @@ model estimates, never zero error. This is separate from public quantify output.
 - `inputs.tsv`: seed/condition, reads/catalogue SHA-256, observed read/base counts.
   Environment/execution/validation receipts retain source and baseline hashes,
   fixed k values, exit/timeout/resources and complete pairing checks.
+
+## Factorial discovery evaluation
+
+See [factorial_discovery_benchmark.md](factorial_discovery_benchmark.md).
+`inputs.tsv` has seed/condition/coverage/error labels, generation/condition/read/
+truth/catalogue SHA-256 fields, observed read/base counts, all/eligible segment
+counts, excluded partial/out-of-scope read count, and all/observed-eligible family
+counts. Coordinates are observed read coordinates, 0-based half-open.
+
+`summary.tsv` retains tool, seed/condition, process exit/timeout/resources, scoring
+`status`, `evaluation_seconds` and warning. Metric prefixes define populations:
+`eligible_read_*` applies the truth-only read exclusion to the documented challenge
+array/read/base endpoints; `all_input_*` keeps every planted observed base for
+union/duplicate endpoints; `all_planted_*` and `observed_eligible_*` contain family
+count, recovered count, cyclic monomer recall and distinct-consensus support.
+`all_input_prediction_count` and `predictions_on_excluded_reads` expose filtering.
+Missing failed-stage metrics are `NA`, not zero sensitivity.
+
+Per-tool `normalized_arrays.tsv` uses the standard read_id/start/end/period/
+sequence/family_id schema. `eligible_array_details.tsv` indexes the filtered
+prediction/truth lists, with matched coordinates/family and IoU. Family-recovery
+TSVs hold `truth_id`, `recovered`, `assigned_sequence_index`, `threshold` and
+`criterion`; indices refer to sorted exact canonical distinct consensuses.
+Below-threshold exact sequence identities are not calculated or reported.
+`metrics.json` uses null for undefined values. Standard source/execution/validation
+receipts and logs accompany every run.

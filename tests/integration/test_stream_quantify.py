@@ -5,6 +5,7 @@ import pytest
 from benchmarks.scripts.generate_factorial_scale import run as generate
 from benchmarks.abundance.run_stream_quantify import run
 from benchmarks.scripts.evaluate_multik_factorial import worker as multik_worker
+from benchmarks.abundance.discovery_truth import load_truth
 from benchmarks.challenge.schema import read_table
 
 
@@ -16,6 +17,11 @@ def test_factorial_quantification_runs_real_cli_with_truth_only_in_evaluator(tmp
     config_path=tmp_path/'config.json';config_path.write_text(json.dumps(config))
     dataset=tmp_path/'dataset'
     generate(config_path,histogram,dataset,6361,100000)
+    discovery_truth=load_truth(dataset,'condition_001')
+    assert len(discovery_truth.founders)==4
+    assert discovery_truth.metadata['observed_read_count']==45
+    with pytest.raises(ValueError,match='Unknown'):
+        load_truth(dataset,'condition_999')
     out=tmp_path/'evaluated';run([dataset],out,30)
     receipt=json.loads((out/'validation.json').read_text())
     assert receipt['complete'] and receipt['executions']==receipt['successful']==1
@@ -39,6 +45,8 @@ def test_factorial_quantification_runs_real_cli_with_truth_only_in_evaluator(tmp
     (dataset/'genome/catalogue.fa').write_text('changed catalogue')
     with pytest.raises(ValueError,match='hash mismatch'):
         run([dataset],tmp_path/'changed')
+    with pytest.raises(ValueError,match='hash mismatch'):
+        load_truth(dataset,'condition_001')
 
 
 def test_stream_quantifier_refuses_incomplete_or_reserved_generation(tmp_path):
