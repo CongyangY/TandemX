@@ -1,0 +1,143 @@
+[
+  {
+    "accession": "SRR28200549",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRR28200549",
+    "sha256": "913c36eb2a64f49b08150dc0a603503650c3bd8c036eb9430597e830bb2cb336",
+    "selected_fields": [
+      "<TITLE>Sequel II sequencing; HiFi data of Triticum Aestivum</TITLE>"
+    ]
+  },
+  {
+    "accession": "ERR10422482",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERR10422482",
+    "sha256": "faa0239f3c9a3978d9d9c6c195d0334c66bb7aec4ce35ec81e3d37033e2c4028",
+    "selected_fields": [
+      "<TITLE>Sequel II sequencing</TITLE>",
+      "<INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>"
+    ]
+  },
+  {
+    "accession": "ERR10422581",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERR10422581",
+    "sha256": "25b83b027767217ad744e0576409a9e21cb849d8eb8790138147413cc78d7588",
+    "selected_fields": [
+      "<TITLE>Sequel II sequencing</TITLE>",
+      "<INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>"
+    ]
+  },
+  {
+    "accession": "SRX23813612",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRX23813612",
+    "sha256": "f23c97d416db0131f726caade4189f1b5afaffbb0db0eba81932de660567879c",
+    "selected_fields": [
+      "<TITLE>HiFi data of Triticum Aestivum</TITLE>",
+      "<LIBRARY_NAME>HiFib_p1</LIBRARY_NAME>",
+      "<LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>",
+      "<LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>",
+      "<LIBRARY_SELECTION>size fractionation</LIBRARY_SELECTION>",
+      "<INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>"
+    ]
+  },
+  {
+    "accession": "ERX9950058",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX9950058",
+    "sha256": "c0c881eca2e690f823d7c06e3d49792bae86446f87d84bad2fb7cd29e9d4cd58",
+    "selected_fields": [
+      "<TITLE>Sequel II sequencing</TITLE>",
+      "<LIBRARY_NAME>panoat</LIBRARY_NAME>",
+      "<LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>",
+      "<LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>",
+      "<LIBRARY_SELECTION>RANDOM</LIBRARY_SELECTION>",
+      "<INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>"
+    ]
+  },
+  {
+    "accession": "ERX9950157",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERX9950157",
+    "sha256": "d979987e1b3ed83d231937bf5db41c12dcd7609da125b3b8cc225a5639dc30bc",
+    "selected_fields": [
+      "<TITLE>Sequel II sequencing</TITLE>",
+      "<LIBRARY_NAME>panoat</LIBRARY_NAME>",
+      "<LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>",
+      "<LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>",
+      "<LIBRARY_SELECTION>RANDOM</LIBRARY_SELECTION>",
+      "<INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>"
+    ]
+  },
+  {
+    "accession": "SRS20636216",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/SRS20636216",
+    "sha256": "49897970476b563a02bc3c0f21371678e53574638dfcebf613158bbc29271150",
+    "selected_fields": [
+      "<TITLE>HiFib run 1</TITLE>",
+      "<SAMPLE_NAME>\n          <TAXON_ID>4565</TAXON_ID>\n          <SCIENTIFIC_NAME>Triticum aestivum</SCIENTIFIC_NAME>\n          <COMMON_NAME>bread wheat</COMMON_NAME>\n     </SAMPLE_NAME>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>collection_date</TAG>\n               <VALUE>2023</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>treatment</TAG>\n               <VALUE>HiFib run 1</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>INSDC secondary accession</TAG>\n               <VALUE>SRS20636216</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>NCBI submission package</TAG>\n               <VALUE>Plant.1.0</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>cultivar</TAG>\n               <VALUE>Chinese Spring</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>organism</TAG>\n               <VALUE>Triticum aestivum</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>geo_loc_name</TAG>\n               <VALUE>China:Shandong</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>tissue</TAG>\n               <VALUE>leaf</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>age</TAG>\n               <VALUE>1.5 month</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>BioSampleModel</TAG>\n               <VALUE>Plant</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>ENA-FIRST-PUBLIC</TAG>\n               <VALUE>2024-05-29</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>ENA-LAST-UPDATE</TAG>\n               <VALUE>2024-05-29</VALUE>\n          </SAMPLE_ATTRIBUTE>"
+    ]
+  },
+  {
+    "accession": "ERS13620875",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERS13620875",
+    "sha256": "1db4feaa57dd43ca10b4782a9c82d39824e4321bc4ee07e99ca2142ce8c67ff5",
+    "selected_fields": [
+      "<SAMPLE_NAME>\n          <TAXON_ID>4499</TAXON_ID>\n          <SCIENTIFIC_NAME>Avena fatua</SCIENTIFIC_NAME>\n     </SAMPLE_NAME>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>organism</TAG>\n               <VALUE>Avena sativa subsp. fatua</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material coordinates uncertainty</TAG>\n               <VALUE>2000 m</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>collection date</TAG>\n               <VALUE>not collected</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>sample id</TAG>\n               <VALUE>IPK_LIMS:2951645</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material longitude</TAG>\n               <VALUE>-111.649000</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material ploidy</TAG>\n               <VALUE>hexaploid</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>material source geographic location</TAG>\n               <VALUE>Morocco</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>checklist</TAG>\n               <VALUE>BSDC00001</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material latitude</TAG>\n               <VALUE>40.252000</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>growth facility</TAG>\n               <VALUE>greenhouse</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>material source description</TAG>\n               <VALUE>Ouarzazate</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>project name</TAG>\n               <VALUE>PanOat</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>genus</TAG>\n               <VALUE>Avena</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>species</TAG>\n               <VALUE>fatua</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>plant structure development stage</TAG>\n               <VALUE>seedling</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material geographic location</TAG>\n               <VALUE>USA</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>accession name</TAG>\n               <VALUE>CN25955</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>geographic location (country and/or sea)</TAG>\n               <VALUE>Morocco</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>plant anatomical entity</TAG>\n               <VALUE>leaf</VALUE>\n          </SAMPLE_ATTRIBUTE>"
+    ]
+  },
+  {
+    "accession": "ERS13620877",
+    "url": "https://www.ebi.ac.uk/ena/browser/api/xml/ERS13620877",
+    "sha256": "6a2a67a5cb04c8d4a8f4d6a866513b478bdf52f204b98cf0b3fff9a1098b13b8",
+    "selected_fields": [
+      "<SAMPLE_NAME>\n          <TAXON_ID>4498</TAXON_ID>\n          <SCIENTIFIC_NAME>Avena sativa</SCIENTIFIC_NAME>\n          <COMMON_NAME>oats</COMMON_NAME>\n     </SAMPLE_NAME>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>annuality</TAG>\n               <VALUE>winter</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>organism</TAG>\n               <VALUE>Avena sativa</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material coordinates uncertainty</TAG>\n               <VALUE>2000 m</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>collection date</TAG>\n               <VALUE>not collected</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>sample id</TAG>\n               <VALUE>IPK_LIMS:2951652</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material longitude</TAG>\n               <VALUE>-111.649000</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material ploidy</TAG>\n               <VALUE>hexaploid</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>material source geographic location</TAG>\n               <VALUE>Argentina</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>checklist</TAG>\n               <VALUE>BSDC00001</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material latitude</TAG>\n               <VALUE>40.252000</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>growth facility</TAG>\n               <VALUE>greenhouse</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>year of release</TAG>\n               <VALUE>1927</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>project name</TAG>\n               <VALUE>PanOat</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>genus</TAG>\n               <VALUE>Avena</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>species</TAG>\n               <VALUE>sativa</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>plant structure development stage</TAG>\n               <VALUE>seedling</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>biological material geographic location</TAG>\n               <VALUE>USA</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>accession name</TAG>\n               <VALUE>Victoria</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>geographic location (country and/or sea)</TAG>\n               <VALUE>Argentina</VALUE>\n          </SAMPLE_ATTRIBUTE>",
+      "<SAMPLE_ATTRIBUTE>\n               <TAG>plant anatomical entity</TAG>\n               <VALUE>leaf</VALUE>\n          </SAMPLE_ATTRIBUTE>"
+    ]
+  }
+]

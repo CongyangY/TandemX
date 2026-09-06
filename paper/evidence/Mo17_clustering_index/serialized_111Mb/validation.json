@@ -1,0 +1,21 @@
+{
+  "complete": true,
+  "exact_family_and_membership_parity": true,
+  "measurements": [
+    {
+      "method": "baseline",
+      "runtime_seconds": 13.131847833981737,
+      "candidates": 8401,
+      "families": 4219,
+      "output_sha256": "dd299e270a4316c5350083761cdec378d17954cfcc26bd5f62868aa51e43adf2"
+    },
+    {
+      "method": "indexed",
+      "runtime_seconds": 5.293892875080928,
+      "candidates": 8401,
+      "families": 4219,
+      "output_sha256": "dd299e270a4316c5350083761cdec378d17954cfcc26bd5f62868aa51e43adf2"
+    }
+  ],
+  "scope": "old_and_new_algorithms_on_identical_serialized_candidates_not_full_pipeline_parity"
+}

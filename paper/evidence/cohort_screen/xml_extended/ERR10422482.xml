@@ -1,0 +1,78 @@
+<RUN_SET>
+<RUN accession="ERR10422482" alias="ena-RUN-TAB-25-10-2022-16:28:27:603-32343" center_name="Leibniz Institute of Plant Genetics and Crop Plant Research">
+  <IDENTIFIERS>
+    <PRIMARY_ID>ERR10422482</PRIMARY_ID>
+    <SUBMITTER_ID namespace="Leibniz Institute of Plant Genetics and Crop Plant Research">ena-RUN-TAB-25-10-2022-16:28:27:603-32343</SUBMITTER_ID>
+  </IDENTIFIERS>
+  <TITLE>Sequel II sequencing</TITLE>
+  <EXPERIMENT_REF accession="ERX9950058">
+    <IDENTIFIERS>
+      <PRIMARY_ID>ERX9950058</PRIMARY_ID>
+    </IDENTIFIERS>
+  </EXPERIMENT_REF>
+  <PLATFORM>
+    <PACBIO_SMRT>
+      <INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>
+    </PACBIO_SMRT>
+  </PLATFORM>
+  <DATA_BLOCK>
+    <FILES>
+      <FILE checksum="c6b91fa2570f94ebf7e8f60f46dcdce3" checksum_method="MD5" filename="run/ERR104/ERR10422482/m54336U_210323_070036.hifi_reads.fastq.gz" filetype="fastq" quality_scoring_system="phred"/>
+    </FILES>
+  </DATA_BLOCK>
+  <RUN_LINKS>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMISSION</DB>
+        <ID>ERA18547115</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-STUDY</DB>
+        <ID>ERP141793</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SAMPLE</DB>
+        <ID>ERS13620875</ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-FASTQ-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR10422482&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+      </XREF_LINK>
+    </RUN_LINK>
+    <RUN_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMITTED-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR10422482&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+      </XREF_LINK>
+    </RUN_LINK>
+  </RUN_LINKS>
+  <RUN_ATTRIBUTES>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-STATUS</TAG>
+      <VALUE>PUBLIC</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-FIRST-PUBLIC</TAG>
+      <VALUE>2025-08-05</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-LAST-UPDATE</TAG>
+      <VALUE>2025-08-05</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-BASE-COUNT</TAG>
+      <VALUE>4607919675</VALUE>
+    </RUN_ATTRIBUTE>
+    <RUN_ATTRIBUTE>
+      <TAG>ENA-SPOT-COUNT</TAG>
+      <VALUE>294090</VALUE>
+    </RUN_ATTRIBUTE>
+  </RUN_ATTRIBUTES>
+</RUN>
+</RUN_SET>

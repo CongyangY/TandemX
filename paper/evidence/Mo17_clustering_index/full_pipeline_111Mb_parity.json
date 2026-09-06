@@ -1,0 +1,50 @@
+{
+  "baseline": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_related_audit_v1_20260906/tandemx/discover",
+  "indexed": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/tandemx/discover",
+  "complete": true,
+  "files": [
+    {
+      "file": "candidate_reads.tsv",
+      "baseline_sha256": "a4539ac468c1c161cd51b5145efea240a7b843867cb4137a6decc3c842f9e184",
+      "indexed_sha256": "a4539ac468c1c161cd51b5145efea240a7b843867cb4137a6decc3c842f9e184",
+      "byte_identical": true
+    },
+    {
+      "file": "candidate_monomers.fa",
+      "baseline_sha256": "31ca2c1a85ef9ba3c967ef82348c931a018036294af1021acab0b045cb3fdf2a",
+      "indexed_sha256": "31ca2c1a85ef9ba3c967ef82348c931a018036294af1021acab0b045cb3fdf2a",
+      "byte_identical": true
+    },
+    {
+      "file": "monomers.fa",
+      "baseline_sha256": "2f0ba70c184ac64fbb1ca9731a0d73106dffb77517d8f9cc98ec6d782cf21f64",
+      "indexed_sha256": "2f0ba70c184ac64fbb1ca9731a0d73106dffb77517d8f9cc98ec6d782cf21f64",
+      "byte_identical": true
+    },
+    {
+      "file": "families.tsv",
+      "baseline_sha256": "8c0dc7d04590a85cdf071e17abfba5794c05621381d8848b877be056d7cce600",
+      "indexed_sha256": "8c0dc7d04590a85cdf071e17abfba5794c05621381d8848b877be056d7cce600",
+      "byte_identical": true
+    },
+    {
+      "file": "monomer_membership.tsv",
+      "baseline_sha256": "8cc07f37751a11ebbe628495e73ec41b677609ff1d4c1df011455d4d4c7269af",
+      "indexed_sha256": "8cc07f37751a11ebbe628495e73ec41b677609ff1d4c1df011455d4d4c7269af",
+      "byte_identical": true
+    },
+    {
+      "file": "family_similarity.tsv",
+      "baseline_sha256": "eec2c44e546984fb538f03460d2a5673b475897db7b4144bb2b2b6357affd46d",
+      "indexed_sha256": "eec2c44e546984fb538f03460d2a5673b475897db7b4144bb2b2b6357affd46d",
+      "byte_identical": true
+    },
+    {
+      "file": "family_audit_summary.json",
+      "baseline_sha256": "7ade41084be277118ccc300eb1b9291011c6a57c4d6954cd25832604df7aa505",
+      "indexed_sha256": "7ade41084be277118ccc300eb1b9291011c6a57c4d6954cd25832604df7aa505",
+      "byte_identical": true
+    }
+  ],
+  "scope": "all_seven_deterministic_discovery_data_products"
+}

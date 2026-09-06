@@ -1,0 +1,42 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/environment.json",
+    "archived": "environment.json",
+    "sha256": "3e011e84e339bd088331f973f20255feaaefb2d1fcfa5e36be8b3b71b5a82b6f"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/summary.tsv",
+    "archived": "summary.tsv",
+    "sha256": "8c29c9537cc40f2e3ef056fa98de6b2dbf7f112102158e4820d9fa48b0918fe1"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/tandemx/execution.json",
+    "archived": "tandemx/execution.json",
+    "sha256": "7684865aa523d4094c7e13b5098f8b77b0732ef0ebd346e201c4db1a8fb71a9e"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/trf/execution.json",
+    "archived": "trf/execution.json",
+    "sha256": "f2fa22ac0b8cc0ffbdcaa80fab3ce8b0c2cb94c1662bd517903a620ddf957d05"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/tidehunter/execution.json",
+    "archived": "tidehunter/execution.json",
+    "sha256": "35fd0a2e5991eb5d59c967700547b886acfa08ebc63861e2817eac2982eca13f"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/tandemx/discover/run.log",
+    "archived": "tandemx/discover/run.log",
+    "sha256": "99c3042cdd38fb60b4cd242fbd92e650c9f7af8187459418d3e506a857538375"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/tandemx/discover/discovery_summary.json",
+    "archived": "tandemx/discover/discovery_summary.json",
+    "sha256": "3ede0e51fb32504622b22a9f58165774e9153aef477244079163d8209fde708b"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/tandemx/discover/family_audit_summary.json",
+    "archived": "tandemx/discover/family_audit_summary.json",
+    "sha256": "7ade41084be277118ccc300eb1b9291011c6a57c4d6954cd25832604df7aa505"
+  }
+]

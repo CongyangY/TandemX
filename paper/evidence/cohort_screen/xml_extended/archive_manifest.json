@@ -1,0 +1,52 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/ERR10422482.xml",
+    "archived": "ERR10422482.xml",
+    "sha256": "faa0239f3c9a3978d9d9c6c195d0334c66bb7aec4ce35ec81e3d37033e2c4028"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/ERR10422581.xml",
+    "archived": "ERR10422581.xml",
+    "sha256": "25b83b027767217ad744e0576409a9e21cb849d8eb8790138147413cc78d7588"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/ERS13620875.xml",
+    "archived": "ERS13620875.xml",
+    "sha256": "1db4feaa57dd43ca10b4782a9c82d39824e4321bc4ee07e99ca2142ce8c67ff5"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/ERS13620877.xml",
+    "archived": "ERS13620877.xml",
+    "sha256": "6a2a67a5cb04c8d4a8f4d6a866513b478bdf52f204b98cf0b3fff9a1098b13b8"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/ERX9950058.xml",
+    "archived": "ERX9950058.xml",
+    "sha256": "c0c881eca2e690f823d7c06e3d49792bae86446f87d84bad2fb7cd29e9d4cd58"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/ERX9950157.xml",
+    "archived": "ERX9950157.xml",
+    "sha256": "d979987e1b3ed83d231937bf5db41c12dcd7609da125b3b8cc225a5639dc30bc"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/SRR28200549.xml",
+    "archived": "SRR28200549.xml",
+    "sha256": "913c36eb2a64f49b08150dc0a603503650c3bd8c036eb9430597e830bb2cb336"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/SRS20636216.xml",
+    "archived": "SRS20636216.xml",
+    "sha256": "49897970476b563a02bc3c0f21371678e53574638dfcebf613158bbc29271150"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/SRX23813612.xml",
+    "archived": "SRX23813612.xml",
+    "sha256": "f23c97d416db0131f726caade4189f1b5afaffbb0db0eba81932de660567879c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/manifests/cohort_screen_20260906/xml_extended/retrieval_receipt.json",
+    "archived": "retrieval_receipt.json",
+    "sha256": "c4a9ffcbd37b2920463d9e7c63123c76f3ca39af2fa2fa81a941bb598087ec48"
+  }
+]

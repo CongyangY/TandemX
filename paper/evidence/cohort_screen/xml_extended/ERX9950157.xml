@@ -1,0 +1,70 @@
+<EXPERIMENT_SET>
+<EXPERIMENT accession="ERX9950157" alias="ena-EXPERIMENT-TAB-25-10-2022-16:28:27:638-32540" center_name="Leibniz Institute of Plant Genetics and Crop Plant Research">
+  <IDENTIFIERS>
+    <PRIMARY_ID>ERX9950157</PRIMARY_ID>
+    <SUBMITTER_ID namespace="Leibniz Institute of Plant Genetics and Crop Plant Research">ena-EXPERIMENT-TAB-25-10-2022-16:28:27:638-32540</SUBMITTER_ID>
+  </IDENTIFIERS>
+  <TITLE>Sequel II sequencing</TITLE>
+  <STUDY_REF accession="ERP141793">
+    <IDENTIFIERS>
+      <PRIMARY_ID>ERP141793</PRIMARY_ID>
+      <SECONDARY_ID>PRJEB56828</SECONDARY_ID>
+    </IDENTIFIERS>
+  </STUDY_REF>
+  <DESIGN>
+    <DESIGN_DESCRIPTION/>
+    <SAMPLE_DESCRIPTOR accession="ERS13620877">
+      <IDENTIFIERS>
+        <PRIMARY_ID>ERS13620877</PRIMARY_ID>
+        <EXTERNAL_ID namespace="BioSample">SAMEA111508775</EXTERNAL_ID>
+      </IDENTIFIERS>
+    </SAMPLE_DESCRIPTOR>
+    <LIBRARY_DESCRIPTOR>
+      <LIBRARY_NAME>panoat</LIBRARY_NAME>
+      <LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>
+      <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+      <LIBRARY_SELECTION>RANDOM</LIBRARY_SELECTION>
+      <LIBRARY_LAYOUT>
+        <SINGLE/>
+      </LIBRARY_LAYOUT>
+    </LIBRARY_DESCRIPTOR>
+  </DESIGN>
+  <PLATFORM>
+    <PACBIO_SMRT>
+      <INSTRUMENT_MODEL>Sequel II</INSTRUMENT_MODEL>
+    </PACBIO_SMRT>
+  </PLATFORM>
+  <EXPERIMENT_LINKS>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SAMPLE</DB>
+        <ID>ERS13620877</ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMISSION</DB>
+        <ID>ERA18547115</ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-FASTQ-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERX9950157&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+    <EXPERIMENT_LINK>
+      <XREF_LINK>
+        <DB>ENA-SUBMITTED-FILES</DB>
+        <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERX9950157&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+      </XREF_LINK>
+    </EXPERIMENT_LINK>
+  </EXPERIMENT_LINKS>
+  <EXPERIMENT_ATTRIBUTES>
+    <EXPERIMENT_ATTRIBUTE>
+      <TAG>ENA-STATUS</TAG>
+      <VALUE>PUBLIC</VALUE>
+    </EXPERIMENT_ATTRIBUTE>
+  </EXPERIMENT_ATTRIBUTES>
+</EXPERIMENT>
+</EXPERIMENT_SET>

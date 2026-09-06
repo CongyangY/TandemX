@@ -1,0 +1,22 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_clustering_parity_v1_20260906/environment.json",
+    "archived": "environment.json",
+    "sha256": "dfb953152a605ccc04e945f4cdf4e49932aa13301108f87f617085113bb096cb"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_clustering_parity_v1_20260906/validation.json",
+    "archived": "validation.json",
+    "sha256": "cdc033437b2cf6b6849f729a055ba6946b37ac0b6d5f201b7e5efd115a845ac9"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_clustering_parity_v1_20260906/run.log",
+    "archived": "run.log",
+    "sha256": "f4c18a2e566f18b706f8663f0c8e815e039b897b56f7d11bbe2f1002c9c3e714"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_clustering_parity_v1_20260906/replay_clustering.py",
+    "archived": "replay_clustering.py",
+    "sha256": "7d821d38d60977d847e06e77e3158cd034ccbeae082f58e59e5d449ffd05746e"
+  }
+]

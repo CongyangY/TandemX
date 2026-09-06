@@ -9,6 +9,23 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ### Exact multiset index for sequence-clustering candidates
 
+- e57ae542f1d3ac50ada057a8d6155821f358fb5c pushed to both branches;
+  hosted CI 34014078933 and 34014078840 passed. Serialized Mo17 replay completed:
+  8,401 candidates, 4,219 families, all family/member values equal; stage13.132 s
+  to5.294 s. Full independent 111.506-Mb rerun also completed all three tools:
+  all seven deterministic TandemX data products byte-identical to the previous
+  related-audit run. Evidence archived in `paper/evidence/Mo17_clustering_index`.
+- Full rerun TandemX134.684 s/178.44 MiB versus previous142.919 s/155.45 MiB:
+  observed memory increased despite shorter time. TRF88.068 s/258.03 MiB and
+  TideHunter33.352 s/328.53 MiB. Concurrent jobs mean these are diagnostics;
+  no final speed/memory ranking. The 1.129-Gb old-source run is still clustering.
+- Wheat/oat run→experiment→sample XML chain archived in cohort_screen/xml_extended.
+  SRR28200549 is explicit Chinese Spring HiFi; one 19.359-GB complete batch
+  download started. Victoria oat is identified, but detailed protocol/reference
+  matching is pending; CN25955 has a taxonomy-label discrepancy and is not
+  silently treated as cultivated oat. Four full-file transfers (rice, rye, barley,
+  wheat) remain active; only Mo17 and Col-0N have full raw QC completion.
+
 - Canonical circular-word multiplicities are now accumulated through the existing
   representative index before oriented q-gram/alignment comparisons. The gate
   implies rejection by both old oriented tests; rounding/order/assignments and

@@ -10,6 +10,9 @@ samples completed TandemX/TRF/TideHunter comparisons; these are two scales of on
 batch, not independent specimens, and descriptive calls are not recall/precision.
 Col-0N 11.766-Mb three-tool pilot is also complete. Nipponbare SRR25241090,
 Lo7 ERR15194059 and Morex ERR4659246 complete downloads are under way.
+Chinese Spring SRR28200549 has now been confirmed by run/experiment/sample XML
+and its complete 19.359-GB archive file is being acquired. It is one HiFi batch,
+not the full wheat study or an independent new plant for every run ID.
 The prospective enrollment table below retains metadata-level source details;
 use the latest receipts and `current_status.md` for completed versus running work.
 Published Mo17 region evidence is documented in
@@ -66,15 +69,15 @@ Known-motif BLAST+union and TRF comparisons complement de novo tools here.
 
 | Species/material | Verified project/run or source | Current boundary |
 | --- | --- | --- |
-| Arabidopsis Col-0N / Col-CEN | PRJEB46164, ERR6210723; [official Col-CEN v1.2](https://github.com/schatzlab/Col-CEN/tree/main/v1.2) | 933,904 reads, 14,646,601,458 bases per ENA; complete 11.074 GB FASTQ download started. Prior 1,000-read prefix is engineering-only. Reference and known issues downloaded, Git-blob verified and full FASTA parsed |
+| Arabidopsis Col-0N / Col-CEN | PRJEB46164, ERR6210723; [official Col-CEN v1.2](https://github.com/schatzlab/Col-CEN/tree/main/v1.2) | Full file QC passed: 933,904 reads / 14,646,601,458 bp; whole-library nested samples completed. Pooled plants, not individual replicates. Reference and known issues verified; nuclear/organelle denominators separate |
 | Arabidopsis Col-0R / Ey15-2R | ERR8666127 / ERR8666125 from SRF Table 3 | Additional sources under metadata review; separate strain/pooling categories |
 | Rice Nipponbare | PRJNA953663, SRR25241090; [primary NCBI project](https://www.ncbi.nlm.nih.gov/bioproject/953663) | HiFi-labelled run: 32.966 Gb bases and 28.650 GB compressed in ENA; assembly/material and full files pending |
-| Maize Mo17 | PRJNA751841, seven PacBio WGS runs | 142.689 GB compressed in metadata; first full CCS-labelled batch SRR15447419 (5.346 GB, 5.625 Gb bases) downloading. A single batch is not the full published data set |
+| Maize Mo17 | PRJNA751841, seven PacBio WGS runs | First full CCS batch SRR15447419 passed QC (407,670 reads / 5.625 Gb); complete reference and whole-library samples verified. A single batch is not the full published data set |
 | Maize B73 | SRR11606869 from SRF | 48.075 Gb bases, 41.984 GB compressed in metadata; matching assembly/material review pending |
-| Barley Morex and pangenome | PRJEB40587, PRJEB57567, PRJEB58554 | Metadata retrieved; per-material enrollment and assembly versions pending. Large project totals are not a download instruction; some sample fields are empty |
+| Barley Morex and pangenome | PRJEB40587, PRJEB57567, PRJEB58554 | Morex CCS batch ERR4659246 downloading (19.472 GB compressed, 19.525 Gb bases per ENA); full QC/reference still pending. Pangenome material enrollment remains separate |
 | Rye Lo7 | PRJEB91463; [source paper](https://www.nature.com/articles/s41467-026-76753-4) | Three explicitly HiFi Revio runs, same BioSample; 107.210 GB compressed. Match Lo7 version and pooled/individual provenance before comparisons |
-| Bread wheat CS-IAAS | PRJNA1062539; [source paper](https://www.nature.com/articles/s41588-025-02137-x) | 80 PacBio WGS run records; roughly 2.151 TB compressed, exceeding a sensible single-project download here. Resolve material/batches and use a documented complete-batch subset plus within-file random sampling; don't claim whole-project coverage |
-| Oat PanOat | PRJEB56828; [source paper](https://www.nature.com/articles/s41586-025-09676-7) | HiFi subset and per-accession assembly audit under way; some published assemblies use short-read workflows |
+| Bread wheat Chinese Spring / CS-IAAS study | PRJNA1062539; [source paper](https://www.nature.com/articles/s41588-025-02137-x) | 80 PacBio WGS records are technical batches. SRR28200549 / SRX23813612 / SRS20636216 explicitly confirm HiFi, Chinese Spring, leaf and library HiFib_p1. One complete batch downloading; exact donor/assembly match and full QC remain pending |
+| Oat PanOat | PRJEB56828; [source paper](https://www.nature.com/articles/s41586-025-09676-7) | ERR10422581 / ERS13620877 confirms hexaploid A. sativa Victoria and a submitted Q20-labelled FASTQ. Detailed CCS protocol/reference matching still pending. ERR10422482 maps to CN25955, with A. fatua in ENA versus A. occidentalis in paper figure labels; retain taxonomy discrepancy and do not substitute it for cultivated oat |
 | Soybean ZH13, Jack, Wm82 | [Genome Biology source](https://doi.org/10.1186/s13059-025-03924-9); ZH13 PRJCA015269 | Data source verified in paper; files, material/version matching and accessibility still pending. New relevant comparator: unitFinder |
 
 GB means 10^9 file bytes; Gb means 10^9 sequence bases. These totals are ENA
