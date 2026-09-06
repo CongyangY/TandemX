@@ -1,0 +1,37 @@
+{
+  "complete": true,
+  "split": "heldout",
+  "evaluation_mode": "raw_single_multik_for_predeclared_blend_grid",
+  "independent_genomes": 3,
+  "challenge_scenarios": 6,
+  "multik_read_conditions": 162,
+  "comparison_family_rows": 4860,
+  "expected_comparison_family_rows": 4860,
+  "raw_comparison_family_rows": 4860,
+  "raw_comparison_metrics_sha256": "fb17284577d03478ee601c92e26eae37c2ba35bb07a9b3059512b73b6d89c53d",
+  "comparison_metrics_sha256": "fb17284577d03478ee601c92e26eae37c2ba35bb07a9b3059512b73b6d89c53d",
+  "unavailable": 90,
+  "method_confusion": {
+    "single_k21": {
+      "available": 2430,
+      "unavailable": 0,
+      "TP": 867,
+      "FN": 591,
+      "FP": 16,
+      "TN": 956
+    },
+    "multik_loglinear": {
+      "available": 2340,
+      "unavailable": 90,
+      "TP": 1350,
+      "FN": 54,
+      "FP": 144,
+      "TN": 792
+    }
+  },
+  "selected_low_depth_threshold": null,
+  "low_depth_cutoff": 2.0,
+  "leave_one_genome_out_folds": 0,
+  "heldout_used": true,
+  "scientific_acceptance": "not_assumed_from_execution_success"
+}

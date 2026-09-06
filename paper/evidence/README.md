@@ -4,6 +4,14 @@ This directory intentionally versions compact executed benchmark tables and
 editable figures. Large inputs, normalized predictions and logs are at the
 configurable data root (`/Volumes/T7/Codex/TandemX` on the originating machine).
 
+`abundance_classifier_depth_gated_validation_v1/` preserves the frozen v3
+development-to-held-out chain. Commit `62892a6` and dual-platform hosted CI
+preceded one-time use of seeds 5801-5803. The rule passed all predeclared gates:
+sensitivity increased 0.594650 to 0.653635 with unchanged FPR 0.016461 and
+precision increased 0.981880 to 0.983488. This is known-catalogue IID simulation,
+not biological validation or a universal superiority result. Figure 7 v2 is the
+accepted six-panel rendering; v1 is retained as an inspected draft.
+
 `challenge_v1_baseline/` records the discovery algorithm at Git revision
 `08e100d` using the initial challenge harness hashes in `environment.json`.
 The complete data and command logs are in `results/challenge_v1_development_20260906`

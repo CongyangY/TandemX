@@ -1,0 +1,47 @@
+panel	metric	dataset	method	seed	coverage	unit_substitution_rate	array_fragments	value	numerator	denominator
+A	failure_audit	consumed	NA	NA	NA	NA	NA	0.0	NA	NA
+A	v3_development	passed	NA	NA	NA	NA	NA	1.0	NA	NA
+A	code_+_rule	locked	NA	NA	NA	NA	NA	1.0	NA	NA
+A	fresh_held-out	passed	NA	NA	NA	NA	NA	1.0	NA	NA
+A	paired_family_conditions	NA	NA	NA	NA	NA	NA	2430.0	NA	2430
+A	low_depth_rows	NA	NA	NA	NA	NA	NA	810.0	NA	2430
+B	sensitivity_delta	Six-genome development	NA	NA	NA	NA	NA	0.06069958847736623	NA	NA
+B	false_positive_rate_delta	Six-genome development	NA	NA	NA	NA	NA	0.0	NA	NA
+B	precision_delta	Six-genome development	NA	NA	NA	NA	NA	0.001883420551465953	NA	NA
+B	sensitivity_delta	Fresh held-out	NA	NA	NA	NA	NA	0.058984910836762716	NA	NA
+B	false_positive_rate_delta	Fresh held-out	NA	NA	NA	NA	NA	0.0	NA	NA
+B	precision_delta	Fresh held-out	NA	NA	NA	NA	NA	0.001608177395056476	NA	NA
+C	TP	NA	single_k21	NA	NA	NA	NA	867.0	NA	NA
+C	FN	NA	single_k21	NA	NA	NA	NA	591.0	NA	NA
+C	FP	NA	single_k21	NA	NA	NA	NA	16.0	NA	NA
+C	TN	NA	single_k21	NA	NA	NA	NA	956.0	NA	NA
+C	TP	NA	depth_gated_blend_v3	NA	NA	NA	NA	953.0	NA	NA
+C	FN	NA	depth_gated_blend_v3	NA	NA	NA	NA	505.0	NA	NA
+C	FP	NA	depth_gated_blend_v3	NA	NA	NA	NA	16.0	NA	NA
+C	TN	NA	depth_gated_blend_v3	NA	NA	NA	NA	956.0	NA	NA
+D	sensitivity_delta	NA	NA	5801	NA	NA	NA	0.030864197530864113	NA	NA
+D	sensitivity_delta	NA	NA	5802	NA	NA	NA	0.08230452674897126	NA	NA
+D	sensitivity_delta	NA	NA	5803	NA	NA	NA	0.06378600823045266	NA	NA
+D	false_positive_rate_delta	NA	NA	5801	NA	NA	NA	0.0	NA	NA
+D	false_positive_rate_delta	NA	NA	5802	NA	NA	NA	0.0	NA	NA
+D	false_positive_rate_delta	NA	NA	5803	NA	NA	NA	0.0	NA	NA
+D	precision_delta	NA	NA	5801	NA	NA	NA	0.0	NA	NA
+D	precision_delta	NA	NA	5802	NA	NA	NA	0.0	NA	NA
+D	precision_delta	NA	NA	5803	NA	NA	NA	0.004187774400540412	NA	NA
+E	sensitivity_delta	NA	NA	NA	1	NA	NA	0.0	NA	NA
+E	sensitivity_delta	NA	NA	NA	5	NA	NA	0.07201646090534986	NA	NA
+E	sensitivity_delta	NA	NA	NA	20	NA	NA	0.1049382716049383	NA	NA
+E	false_positive_rate_delta	NA	NA	NA	1	NA	NA	0.0	NA	NA
+E	false_positive_rate_delta	NA	NA	NA	5	NA	NA	0.0	NA	NA
+E	false_positive_rate_delta	NA	NA	NA	20	NA	NA	0.0	NA	NA
+E	precision_delta	NA	NA	NA	1	NA	NA	0.0	NA	NA
+E	precision_delta	NA	NA	NA	5	NA	NA	0.0	NA	NA
+E	precision_delta	NA	NA	NA	20	NA	NA	0.0	NA	NA
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.01	1	0.9996802995436157	8.997122695892541	9
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.03	1	0.9851651200632016	8.866486080568814	9
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.05	1	0.9647842310232109	8.683058079208898	9
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.01	3	0.9979208491933783	8.981287642740405	9
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.03	3	0.980819483254067	8.827375349286603	9
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.05	3	0.9519819502078521	8.567837551870669	9
+F	positive_assembly_mean_base_precision	NA	NA	NA	NA	NA	NA	0.9996170294059242	215.91727835167964	216
+F	absent_family_false_positive_rows	NA	NA	NA	NA	NA	NA	0.0	0	54

@@ -1,0 +1,127 @@
+{
+  "complete": true,
+  "heldout": true,
+  "independent_genomes": 3,
+  "paired_family_conditions": 2430,
+  "selected_candidate": "depth_gated_blend_v3",
+  "low_depth_rows": 810,
+  "standard_depth_rows": 1620,
+  "standard_depth_fallback_rows": 0,
+  "baseline_confusion": {
+    "available": 2430,
+    "unavailable": 0,
+    "TP": 867,
+    "FN": 591,
+    "FP": 16,
+    "TN": 956,
+    "sensitivity": 0.5946502057613169,
+    "false_positive_rate": 0.01646090534979424,
+    "precision": 0.9818799546998868
+  },
+  "selected_confusion": {
+    "available": 2430,
+    "unavailable": 0,
+    "TP": 953,
+    "FN": 505,
+    "FP": 16,
+    "TN": 956,
+    "sensitivity": 0.6536351165980796,
+    "false_positive_rate": 0.01646090534979424,
+    "precision": 0.9834881320949432
+  },
+  "per_seed": {
+    "5801": {
+      "baseline": {
+        "available": 810,
+        "unavailable": 0,
+        "TP": 256,
+        "FN": 230,
+        "FP": 0,
+        "TN": 324,
+        "sensitivity": 0.5267489711934157,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      },
+      "selected": {
+        "available": 810,
+        "unavailable": 0,
+        "TP": 271,
+        "FN": 215,
+        "FP": 0,
+        "TN": 324,
+        "sensitivity": 0.5576131687242798,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      },
+      "sensitivity_delta": 0.030864197530864113,
+      "false_positive_rate_delta": 0.0,
+      "precision_delta": 0.0
+    },
+    "5802": {
+      "baseline": {
+        "available": 810,
+        "unavailable": 0,
+        "TP": 298,
+        "FN": 188,
+        "FP": 0,
+        "TN": 324,
+        "sensitivity": 0.6131687242798354,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      },
+      "selected": {
+        "available": 810,
+        "unavailable": 0,
+        "TP": 338,
+        "FN": 148,
+        "FP": 0,
+        "TN": 324,
+        "sensitivity": 0.6954732510288066,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      },
+      "sensitivity_delta": 0.08230452674897126,
+      "false_positive_rate_delta": 0.0,
+      "precision_delta": 0.0
+    },
+    "5803": {
+      "baseline": {
+        "available": 810,
+        "unavailable": 0,
+        "TP": 313,
+        "FN": 173,
+        "FP": 16,
+        "TN": 308,
+        "sensitivity": 0.6440329218106996,
+        "false_positive_rate": 0.04938271604938271,
+        "precision": 0.9513677811550152
+      },
+      "selected": {
+        "available": 810,
+        "unavailable": 0,
+        "TP": 344,
+        "FN": 142,
+        "FP": 16,
+        "TN": 308,
+        "sensitivity": 0.7078189300411523,
+        "false_positive_rate": 0.04938271604938271,
+        "precision": 0.9555555555555556
+      },
+      "sensitivity_delta": 0.06378600823045266,
+      "false_positive_rate_delta": 0.0,
+      "precision_delta": 0.004187774400540412
+    }
+  },
+  "acceptance": {
+    "full_sensitivity_delta": 0.058984910836762716,
+    "full_false_positive_rate_delta": 0.0,
+    "full_precision_delta": 0.001608177395056476,
+    "minimum_seed_sensitivity_delta": 0.030864197530864113,
+    "maximum_seed_false_positive_rate_delta": 0.0,
+    "minimum_seed_precision_delta": 0.0,
+    "passed": true
+  },
+  "comparison_metrics_sha256": "6a1a379f5b39c180a2f6cbd14f9d7cea6dbb2414f446cf4430ddb90af22b387f",
+  "selected_metrics_sha256": "8b590dbd54d40b47009e35f613df7a8cfe115cb4194053748421bee50f6cf0df",
+  "scientific_acceptance": "heldout_gate_reported_not_assumed_from_execution_success"
+}

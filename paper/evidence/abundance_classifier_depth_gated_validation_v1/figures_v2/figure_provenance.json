@@ -1,0 +1,53 @@
+{
+  "complete": true,
+  "panels": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ],
+  "selected_candidate": "depth_gated_blend_v3",
+  "development_gate_passed": true,
+  "heldout_gate_passed": true,
+  "no_heldout_fit_or_selection": true,
+  "source_rows": 46,
+  "inputs": {
+    "development_validation": {
+      "path": "../development/validation.json",
+      "sha256": "848768c1146c3c33c42ee6ccafe2169af80ceed206f687ed95e779d7b98435e8"
+    },
+    "heldout_validation": {
+      "path": "../heldout/validation.json",
+      "sha256": "78f649b9018ff99b95ea7bd42363fb419b313a3bc7a6413d49b242dad4199aee"
+    },
+    "heldout_comparison_metrics": {
+      "path": "../heldout/comparison_metrics.tsv",
+      "sha256": "6a1a379f5b39c180a2f6cbd14f9d7cea6dbb2414f446cf4430ddb90af22b387f"
+    },
+    "baseline_localization_metrics": {
+      "path": "../baseline/localization_metrics.tsv",
+      "sha256": "97636c24c31bd9a0b091d62108c8066c921ff200e7587531d101146af0607d1b"
+    }
+  },
+  "outputs": {
+    "panel_source.tsv": {
+      "sha256": "9bb720c4fdca0ff28a969e7d53aec6a4f878a214e41b1f88e9d9b848b2db0939",
+      "bytes": 3021
+    },
+    "depth_gated_validation.svg": {
+      "sha256": "5d0b4a9a0ed5d54a1bd859887ef25680f3db2682ee6fdf6e5bc70f4537454872",
+      "bytes": 60628
+    },
+    "depth_gated_validation.pdf": {
+      "sha256": "ddc81e6453202556d4800ef9c16c92b94e915c3697318af9b13fad0c2894aff3",
+      "bytes": 31818
+    },
+    "depth_gated_validation.png": {
+      "sha256": "ca8babe96c19f2cd41ecbfe61ae87d229fa465b4f39ff4ad63c7b2dbbe60d6d5",
+      "bytes": 349494
+    }
+  },
+  "warning": "known_catalogue_IID_substitution_simulation;frozen_heldout_gate_passed;no_heldout_refitting;not_biological_validation"
+}

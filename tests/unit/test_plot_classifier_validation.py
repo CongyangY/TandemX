@@ -3,6 +3,10 @@ from pathlib import Path
 
 from benchmarks.challenge.schema import digest_file, write_table
 from benchmarks.scripts.plot_classifier_validation import load_inputs
+from benchmarks.scripts.plot_depth_gated_validation import (
+    _portable_input_path,
+    load_inputs as load_depth_gated,
+)
 
 
 def _metric_row(seed: int, family: str, method: str, outcome: str) -> dict:
@@ -92,3 +96,75 @@ def test_classifier_plot_loads_failed_heldout_with_localization(tmp_path: Path) 
         assert "unpaired" in str(error)
     else:
         raise AssertionError("Unpaired classifier figure input was accepted")
+
+
+def test_depth_gated_plot_requires_passed_no_refit_chain(tmp_path: Path) -> None:
+    development = tmp_path / "development_v3"
+    baseline = tmp_path / "baseline_v3"
+    heldout = tmp_path / "heldout_v3"
+    for path in (development, baseline, heldout):
+        path.mkdir()
+    (development / "validation.json").write_text(json.dumps({
+        "complete": True,
+        "selected_candidate": "depth_gated_blend_v3",
+        "acceptance": {"passed": True},
+    }))
+    localization = [{
+        "seed": 51, "unit_substitution_rate": .03, "array_fragments": 1,
+        "assembly_fraction": 1, "family_id": "f1", "true_assembly_bp": 100,
+        "predicted_assembly_bp": 98, "overlap_bp": 98, "base_recall": .98,
+        "base_precision": 1, "fragments": 1, "truth_fragments": 1,
+    }]
+    write_table(baseline / "localization_metrics.tsv", localization, list(localization[0]))
+    (baseline / "validation.json").write_text(json.dumps({
+        "complete": True, "localization_family_rows": 1,
+    }))
+    baseline_outcomes = ("TP", "FN", "FP", "TN")
+    selected_outcomes = ("TP", "TP", "FP", "TN")
+    rows = [
+        _metric_row(51, f"f{index}", method, outcome)
+        for method, outcomes in (
+            ("single_k21", baseline_outcomes),
+            ("depth_gated_blend_v3", selected_outcomes),
+        )
+        for index, outcome in enumerate(outcomes, 1)
+    ]
+    write_table(heldout / "comparison_metrics.tsv", rows, list(rows[0]))
+    (heldout / "environment.json").write_text(json.dumps({
+        "classifier_model": "depth_gated_blend_v3",
+        "heldout_seeds": [51],
+        "no_heldout_fit_or_selection": True,
+    }))
+    (heldout / "validation.json").write_text(json.dumps({
+        "complete": True,
+        "paired_family_conditions": 4,
+        "selected_candidate": "depth_gated_blend_v3",
+        "acceptance": {"passed": True},
+        "baseline_confusion": _confusion(baseline_outcomes),
+        "selected_confusion": _confusion(selected_outcomes),
+        "comparison_metrics_sha256": digest_file(heldout / "comparison_metrics.tsv"),
+    }))
+    loaded, localizations, _, validation = load_depth_gated(
+        development, baseline, heldout
+    )
+    assert len(loaded) == 8 and len(localizations) == 1
+    assert validation["acceptance"]["passed"] is True
+    environment = json.loads((heldout / "environment.json").read_text())
+    environment["no_heldout_fit_or_selection"] = False
+    (heldout / "environment.json").write_text(json.dumps(environment))
+    try:
+        load_depth_gated(development, baseline, heldout)
+    except ValueError as error:
+        assert "passed v3" in str(error)
+    else:
+        raise AssertionError("Refitted depth-gated figure input was accepted")
+
+
+def test_depth_gated_figure_provenance_uses_portable_paths(tmp_path: Path) -> None:
+    evidence = tmp_path / "evidence"
+    outdir = evidence / "figures"
+    source = evidence / "heldout" / "validation.json"
+    outdir.mkdir(parents=True)
+    source.parent.mkdir()
+    source.write_text("{}\n")
+    assert _portable_input_path(source, outdir) == "../heldout/validation.json"

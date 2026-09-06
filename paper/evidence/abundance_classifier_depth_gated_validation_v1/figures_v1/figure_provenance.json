@@ -1,0 +1,53 @@
+{
+  "complete": true,
+  "panels": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ],
+  "selected_candidate": "depth_gated_blend_v3",
+  "development_gate_passed": true,
+  "heldout_gate_passed": true,
+  "no_heldout_fit_or_selection": true,
+  "source_rows": 46,
+  "inputs": {
+    "development_validation": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_classifier_depth_gated_validation_v1/development/validation.json",
+      "sha256": "848768c1146c3c33c42ee6ccafe2169af80ceed206f687ed95e779d7b98435e8"
+    },
+    "heldout_validation": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_classifier_depth_gated_validation_v1/heldout/validation.json",
+      "sha256": "78f649b9018ff99b95ea7bd42363fb419b313a3bc7a6413d49b242dad4199aee"
+    },
+    "heldout_comparison_metrics": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_classifier_depth_gated_validation_v1/heldout/comparison_metrics.tsv",
+      "sha256": "6a1a379f5b39c180a2f6cbd14f9d7cea6dbb2414f446cf4430ddb90af22b387f"
+    },
+    "baseline_localization_metrics": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_classifier_depth_gated_validation_v1/baseline/localization_metrics.tsv",
+      "sha256": "97636c24c31bd9a0b091d62108c8066c921ff200e7587531d101146af0607d1b"
+    }
+  },
+  "outputs": {
+    "panel_source.tsv": {
+      "sha256": "9bb720c4fdca0ff28a969e7d53aec6a4f878a214e41b1f88e9d9b848b2db0939",
+      "bytes": 3021
+    },
+    "depth_gated_validation.svg": {
+      "sha256": "85639d178f52cfed3999974bac85fd4114292955dc2fc26db5adbc578311421c",
+      "bytes": 60580
+    },
+    "depth_gated_validation.pdf": {
+      "sha256": "4482833d4c8ca45b6f43b12229c3b318426aaf2f744050de392459f2ef29c5ed",
+      "bytes": 31638
+    },
+    "depth_gated_validation.png": {
+      "sha256": "d75b3718a8d6bb1a510e6d62ebe8804135d9c9f331cd856d3cb1a4a199a60d7c",
+      "bytes": 340521
+    }
+  },
+  "warning": "known_catalogue_IID_substitution_simulation;frozen_heldout_gate_passed;no_heldout_refitting;not_biological_validation"
+}

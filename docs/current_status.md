@@ -209,16 +209,26 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   development genomes, this derived rule keeps all 39 baseline false positives,
   changes TP/FN from 1789/1127 to 1966/950, and raises precision
   0.978665→0.980549. This is post-failure development, not validation; seeds
-  5801–5803 remain untouched and reserved for a future frozen test.
+  At that point, 5801–5803 remained untouched and were reserved for a future
+  frozen test.
 - `abundance_classifier_depth_gated_heldout_v1.json` now freezes that exact v3
   rule, all five development-artifact hashes, the unchanged localizer and the
-  original held-out gates before generating any new data. The baseline runner
-  verifies the six consumed development seeds are disjoint from 5801–5803 and
-  rechecks the nine declared development deltas. The dedicated held-out
-  evaluator requires complete one-to-one single-k21/multi-k rows and applies the
-  depth gate without held-out fitting or parameter selection. All 467 Python
-  tests pass locally. No 5801–5803 output directory exists yet; run them once
-  only after this freeze commit passes hosted CI on both branches.
+  original held-out gates before generating any new data. Commit 62892a6 was
+  pushed to both branches and hosted runs 34046154395/34046160309 passed Ubuntu
+  and macOS before one-time use of 5801–5803. All 1,062 baseline commands and
+  162 multi-k conditions completed. The frozen rule changed TP/FN/FP/TN from
+  867/591/16/956 to 953/505/16/956: sensitivity 0.594650→0.653635, FPR remained
+  0.016461 and precision 0.981880→0.983488. Every seed passed the predeclared
+  sensitivity, FPR and precision guardrails; the weakest sensitivity gain was
+  0.030864. The 810 estimated-depth-below-2 rows were unchanged, gains were
+  0.072016 at nominal 5× and 0.104938 at 20×, and no standard-depth fallback
+  occurred. Full-assembly localization recall was 0.980059, positive-assembly
+  precision 0.999617 and absent-family false-positive rows 0/54. The compact
+  hash-checked archive and inspected six-panel Figure 7 v2 are in
+  `paper/evidence/abundance_classifier_depth_gated_validation_v1`. This passes
+  the frozen known-catalogue IID simulation gate, not biological validation or
+  an external-tool superiority claim. The complete Python suite passes 470
+  tests after archive and figure QA. Seeds 5801–5803 are consumed.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

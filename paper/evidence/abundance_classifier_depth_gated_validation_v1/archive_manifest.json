@@ -1,0 +1,434 @@
+[
+  {
+    "file": "baseline/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/environment.json",
+    "sha256": "6181fee90f7ac6d207782d2e298e5a24f269de015947b2e245e006db16365622",
+    "bytes": 10873
+  },
+  {
+    "file": "baseline/run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/run_config.json",
+    "sha256": "61c7f604ab7eb8910df88445c408c0d445ff2c075f9dfa91c3e51a184fa94c47",
+    "bytes": 7063
+  },
+  {
+    "file": "baseline/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/validation.json",
+    "sha256": "20a6b84a634f02c3338276b10e668ce806dab709ade9a081a3752b731dbb1b4a",
+    "bytes": 281
+  },
+  {
+    "file": "baseline/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/run.log",
+    "sha256": "c165205131053a42c1f6d9859687430b38361ec0f108360fbad6396fd0e53f44",
+    "bytes": 170334
+  },
+  {
+    "file": "baseline/copy_number_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/copy_number_metrics.tsv",
+    "sha256": "1cb3c1641c45e5ef87113da669d6ceccdc526a6374d7b032354a9a8218abea57",
+    "bytes": 108610
+  },
+  {
+    "file": "baseline/copy_number_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/copy_number_summary.tsv",
+    "sha256": "a9ed380e06f91b250ea39cdfc715e46497db04498782e8c5237f7e79f01cde85",
+    "bytes": 7703
+  },
+  {
+    "file": "baseline/localization_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/localization_metrics.tsv",
+    "sha256": "97636c24c31bd9a0b091d62108c8066c921ff200e7587531d101146af0607d1b",
+    "bytes": 21068
+  },
+  {
+    "file": "baseline/comparison_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/comparison_metrics.tsv",
+    "sha256": "32e74fdd13e0a37667b89c57c30654f81737d34a713b484327ed704d21679b31",
+    "bytes": 214840
+  },
+  {
+    "file": "baseline/comparison_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/comparison_summary.tsv",
+    "sha256": "969c74d8f13c7d1f290e0a0d953d52d115cf4696e2b2aec6e4677a29e3941faa",
+    "bytes": 12346
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/__init__.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/__init__.py",
+    "sha256": "7d0fd97e357da73dcf673b293d1db9aa5dbf2ae2622e83a075633a3f65579f1c",
+    "bytes": 84
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/discovery_truth.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/discovery_truth.py",
+    "sha256": "9c057f4ac83bbeac260187c2431b6f862aaf5425967714721dfff181d02ca344",
+    "bytes": 6301
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/evaluate.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/evaluate.py",
+    "sha256": "c3c424c333ab4d7ba206d9de10c4d0941e2fb59f18976899d3f9e36eb5d552c1",
+    "bytes": 6453
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/evaluate_blended_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/evaluate_blended_collapse.py",
+    "sha256": "d3d09b51fcf2cb13c60fff28004e23e603880dde5d184a1b1d1da3951d404f23",
+    "bytes": 16741
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/evaluate_depth_gated_classifier.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/evaluate_depth_gated_classifier.py",
+    "sha256": "d34c36b91de850d9e145e2c5d5bf2384ea2cf3629bfa0592a3952b9fd33665fd",
+    "bytes": 16406
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "sha256": "b0d254c875caaa3e49a46136a353e6cab8870cb53d1d4d86b944d31defe90d5e",
+    "bytes": 25169
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/run.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/run.py",
+    "sha256": "20a5572b6c3c735d1eb6169550de5fed54029d5f9a228a5338210d70802c95be",
+    "bytes": 34186
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/run_stream_quantify.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/run_stream_quantify.py",
+    "sha256": "5d70510efb738858cb4ee9529b34f3d88791cb5db3208433a73b4614a2c8ed22",
+    "bytes": 7278
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/select_robust_blend.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/select_robust_blend.py",
+    "sha256": "f663c824689ff5d0c65f98f73bd1594042771acc0dc4cc4af76c4dcd25eca672",
+    "bytes": 13458
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/simulate.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/simulate.py",
+    "sha256": "fbbe618acb042c7ae6e695e44fa716f5f1f98817e7de44031a0ef1a059fb7eeb",
+    "bytes": 10620
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/stream_genome.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/stream_genome.py",
+    "sha256": "4da7648bdeafa2dc27ac1719face768297ffe2bb8e32e9231e8cb08cbf6139f8",
+    "bytes": 6453
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/stream_reads.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/stream_reads.py",
+    "sha256": "b721cffb5d811a6d71ec2d0eb8c2414fad60bda8f8e36c7eaf649f41e9b45d9a",
+    "bytes": 8254
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/validate_blended_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/validate_blended_collapse.py",
+    "sha256": "636901d8c9fe47f9334c9565ac688b580bf14532707cb4d3e83367532045bfc9",
+    "bytes": 10961
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/abundance/validate_depth_gated_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/abundance/validate_depth_gated_collapse.py",
+    "sha256": "bb611fd9c329acaaeffba8cc13e67a41c0a8621795a0ee424b86bc21553c6150",
+    "bytes": 8532
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/challenge/run.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/challenge/run.py",
+    "sha256": "1abc5df97ae8ce1d2e5ddbc6c6cbd4cf406a846dfddf9845ae29dad37229a947",
+    "bytes": 18170
+  },
+  {
+    "file": "baseline/source_snapshot/benchmarks/challenge/schema.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/benchmarks/challenge/schema.py",
+    "sha256": "ea2d531bbc69ed4ce78c5eb8de9ccb77d17a75e0e68c4e3a9608a05316363146",
+    "bytes": 2637
+  },
+  {
+    "file": "baseline/source_snapshot/rust-core/src/lib.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/rust-core/src/lib.rs",
+    "sha256": "465c22268acc0b61a1065687b15068ae2d5d9aa16143cad434c8b62f165f84eb",
+    "bytes": 34151
+  },
+  {
+    "file": "baseline/source_snapshot/rust-core/src/weighted_words.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/rust-core/src/weighted_words.rs",
+    "sha256": "2440534f3a251288fa4b4e51e7ca833c6358743784255b49b8ae2b8325377bb3",
+    "bytes": 4221
+  },
+  {
+    "file": "baseline/source_snapshot/tandemx/cli.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/tandemx/cli.py",
+    "sha256": "962ae81aa51a4c3276d28a5399b152b5ef77f94fe6a7b5b81179fcd8d786f8b5",
+    "bytes": 39968
+  },
+  {
+    "file": "baseline/source_snapshot/tandemx/compare/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/tandemx/compare/mvp.py",
+    "sha256": "02315eea7fcafbfeedb292edd91acc1b3161806c98e392b2ad0dec387249ddbb",
+    "bytes": 9635
+  },
+  {
+    "file": "baseline/source_snapshot/tandemx/locate/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/tandemx/locate/mvp.py",
+    "sha256": "fc89b8ebf5ecd5f8aadf3f4e7d0a953b4d751e109abc9c26920742b60802194d",
+    "bytes": 14845
+  },
+  {
+    "file": "baseline/source_snapshot/tandemx/quantify/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/tandemx/quantify/mvp.py",
+    "sha256": "f7e75fd378721a644dbd6c030d2a413e22a5434a5b9d669c5e4c4200f3037bb5",
+    "bytes": 19510
+  },
+  {
+    "file": "baseline/source_snapshot/tandemx/utils/kmers.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/source_snapshot/tandemx/utils/kmers.py",
+    "sha256": "2bca0ce2d2a5b0ef7d628bfd2462d0f0efe24e17186b8fd371f9ee5bdb9f7174",
+    "bytes": 5048
+  },
+  {
+    "file": "baseline/resource_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/runs/**/receipt.json",
+    "sha256": "aacd346b1480da0b83eeaa68b149b388c2f9654f051d852ed710c1aea06bae79",
+    "bytes": 914481
+  },
+  {
+    "file": "baseline/archive_manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_baseline_v1_20260907/runs",
+    "sha256": "c47032e9b5cf8a9936b239bf4992f6c1cc8bc214d082f5d779c4bf2db6b83e92",
+    "bytes": 10590
+  },
+  {
+    "file": "development/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/environment.json",
+    "sha256": "88cec9bc8991aa25cea2c312a5fecf8468ce11422489c45c25813bfcf8654b86",
+    "bytes": 9006
+  },
+  {
+    "file": "development/run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/run_config.json",
+    "sha256": "163f0b0d71821975a6ef0f6714d3fbd08f5f2a06ed4dbc0c78024534cb67b682",
+    "bytes": 2716
+  },
+  {
+    "file": "development/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/validation.json",
+    "sha256": "848768c1146c3c33c42ee6ccafe2169af80ceed206f687ed95e779d7b98435e8",
+    "bytes": 7850
+  },
+  {
+    "file": "development/comparison_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/comparison_metrics.tsv",
+    "sha256": "19fcf5d5141db58bcbcfb6ac01b6e1c3cb375566555795ad433d7ee535349df3",
+    "bytes": 1853075
+  },
+  {
+    "file": "development/comparison_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/comparison_summary.tsv",
+    "sha256": "b649bc605daa548bac268c7c5298198b63223ad252e6155df674114204161e16",
+    "bytes": 36552
+  },
+  {
+    "file": "development/per_cohort_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/per_cohort_metrics.tsv",
+    "sha256": "88f51947171546b40ebb6b9a96ac5a5516a6f00414eb8a1d64c700777dcb51cc",
+    "bytes": 578
+  },
+  {
+    "file": "development/per_seed_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/per_seed_metrics.tsv",
+    "sha256": "c1c37a6eefef77ef8987e51dba1377c908570eaa976f36bd34c7948adcb04028",
+    "bytes": 1234
+  },
+  {
+    "file": "development/selection.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/selection.tsv",
+    "sha256": "b0abae035d4f6d0b1c2ba258efccb3a06544640c02e6d5c256bbd4ef930fa598",
+    "bytes": 693
+  },
+  {
+    "file": "multik/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/environment.json",
+    "sha256": "2b4b5fa75ea56393bdfca3306c34e6eaeece368534dad627be0c1417ef1b1f6b",
+    "bytes": 10145
+  },
+  {
+    "file": "multik/run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/run_config.json",
+    "sha256": "61c7f604ab7eb8910df88445c408c0d445ff2c075f9dfa91c3e51a184fa94c47",
+    "bytes": 7063
+  },
+  {
+    "file": "multik/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/validation.json",
+    "sha256": "685384c6ed882f1fffdaa21507468595d960aaddbf05ee964e968a08a2f810a1",
+    "bytes": 1052
+  },
+  {
+    "file": "multik/raw_comparison_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/raw_comparison_metrics.tsv",
+    "sha256": "fb17284577d03478ee601c92e26eae37c2ba35bb07a9b3059512b73b6d89c53d",
+    "bytes": 825559
+  },
+  {
+    "file": "multik/comparison_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/comparison_metrics.tsv",
+    "sha256": "fb17284577d03478ee601c92e26eae37c2ba35bb07a9b3059512b73b6d89c53d",
+    "bytes": 825559
+  },
+  {
+    "file": "multik/comparison_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/comparison_summary.tsv",
+    "sha256": "1bd7db35354da3a45a72448900ca8b61f6ec51786a4414c43548705c6508b1f3",
+    "bytes": 33694
+  },
+  {
+    "file": "multik/calibration.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/calibration.tsv",
+    "sha256": "73b96e354a2a1c97ba808fa2f60ba3f7d7b5e6001a0990901c11cbf48448f7fd",
+    "bytes": 213
+  },
+  {
+    "file": "heldout/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_validation_v1_20260907/environment.json",
+    "sha256": "7bed5ad05acb44775a53ea78375c466654e3ad001da89f145c5d70080061d00f",
+    "bytes": 8481
+  },
+  {
+    "file": "heldout/run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_validation_v1_20260907/run_config.json",
+    "sha256": "61c7f604ab7eb8910df88445c408c0d445ff2c075f9dfa91c3e51a184fa94c47",
+    "bytes": 7063
+  },
+  {
+    "file": "heldout/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_validation_v1_20260907/validation.json",
+    "sha256": "78f649b9018ff99b95ea7bd42363fb419b313a3bc7a6413d49b242dad4199aee",
+    "bytes": 3455
+  },
+  {
+    "file": "heldout/comparison_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_validation_v1_20260907/comparison_metrics.tsv",
+    "sha256": "6a1a379f5b39c180a2f6cbd14f9d7cea6dbb2414f446cf4430ddb90af22b387f",
+    "bytes": 923576
+  },
+  {
+    "file": "heldout/comparison_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_validation_v1_20260907/comparison_summary.tsv",
+    "sha256": "2a5c6dd3fb377f137c006bcae3efff888e68f057d05c92ebbde30d0cf7770502",
+    "bytes": 35527
+  },
+  {
+    "file": "heldout/selected_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_validation_v1_20260907/selected_metrics.tsv",
+    "sha256": "8b590dbd54d40b47009e35f613df7a8cfe115cb4194053748421bee50f6cf0df",
+    "bytes": 524299
+  },
+  {
+    "file": "heldout/per_seed_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_validation_v1_20260907/per_seed_metrics.tsv",
+    "sha256": "6cb809d6765081d79aed06334eb990d7c59fe9d15c9b715cda726bcefc8a7985",
+    "bytes": 567
+  },
+  {
+    "file": "source_snapshot/development/benchmarks/abundance/evaluate_depth_gated_classifier.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907/source_snapshot/benchmarks/abundance/evaluate_depth_gated_classifier.py",
+    "sha256": "d34c36b91de850d9e145e2c5d5bf2384ea2cf3629bfa0592a3952b9fd33665fd",
+    "bytes": 16406
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/__init__.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/__init__.py",
+    "sha256": "7d0fd97e357da73dcf673b293d1db9aa5dbf2ae2622e83a075633a3f65579f1c",
+    "bytes": 84
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/discovery_truth.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/discovery_truth.py",
+    "sha256": "9c057f4ac83bbeac260187c2431b6f862aaf5425967714721dfff181d02ca344",
+    "bytes": 6301
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/evaluate.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/evaluate.py",
+    "sha256": "c3c424c333ab4d7ba206d9de10c4d0941e2fb59f18976899d3f9e36eb5d552c1",
+    "bytes": 6453
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/evaluate_blended_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/evaluate_blended_collapse.py",
+    "sha256": "d3d09b51fcf2cb13c60fff28004e23e603880dde5d184a1b1d1da3951d404f23",
+    "bytes": 16741
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/evaluate_depth_gated_classifier.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/evaluate_depth_gated_classifier.py",
+    "sha256": "d34c36b91de850d9e145e2c5d5bf2384ea2cf3629bfa0592a3952b9fd33665fd",
+    "bytes": 16406
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/evaluate_multik_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "sha256": "b0d254c875caaa3e49a46136a353e6cab8870cb53d1d4d86b944d31defe90d5e",
+    "bytes": 25169
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/run.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/run.py",
+    "sha256": "20a5572b6c3c735d1eb6169550de5fed54029d5f9a228a5338210d70802c95be",
+    "bytes": 34186
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/run_stream_quantify.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/run_stream_quantify.py",
+    "sha256": "5d70510efb738858cb4ee9529b34f3d88791cb5db3208433a73b4614a2c8ed22",
+    "bytes": 7278
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/select_robust_blend.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/select_robust_blend.py",
+    "sha256": "f663c824689ff5d0c65f98f73bd1594042771acc0dc4cc4af76c4dcd25eca672",
+    "bytes": 13458
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/simulate.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/simulate.py",
+    "sha256": "fbbe618acb042c7ae6e695e44fa716f5f1f98817e7de44031a0ef1a059fb7eeb",
+    "bytes": 10620
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/stream_genome.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/stream_genome.py",
+    "sha256": "4da7648bdeafa2dc27ac1719face768297ffe2bb8e32e9231e8cb08cbf6139f8",
+    "bytes": 6453
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/stream_reads.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/stream_reads.py",
+    "sha256": "b721cffb5d811a6d71ec2d0eb8c2414fad60bda8f8e36c7eaf649f41e9b45d9a",
+    "bytes": 8254
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/validate_blended_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/validate_blended_collapse.py",
+    "sha256": "636901d8c9fe47f9334c9565ac688b580bf14532707cb4d3e83367532045bfc9",
+    "bytes": 10961
+  },
+  {
+    "file": "source_snapshot/multik/benchmarks/abundance/validate_depth_gated_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_multik_v1_20260907/source_snapshot/benchmarks/abundance/validate_depth_gated_collapse.py",
+    "sha256": "bb611fd9c329acaaeffba8cc13e67a41c0a8621795a0ee424b86bc21553c6150",
+    "bytes": 8532
+  },
+  {
+    "file": "source_snapshot/heldout/benchmarks/abundance/validate_depth_gated_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_heldout_validation_v1_20260907/source_snapshot/benchmarks/abundance/validate_depth_gated_collapse.py",
+    "sha256": "bb611fd9c329acaaeffba8cc13e67a41c0a8621795a0ee424b86bc21553c6150",
+    "bytes": 8532
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "development_sources": [
+    {
+      "name": "original_development",
+      "role": "preexisting_development_5601_5603",
+      "seeds": [5601, 5602, 5603],
+      "result": "paper/evidence/abundance_classifier_validation_v1/development_v1",
+      "metrics_file": "candidate_metrics.tsv",
+      "metrics_sha256": "6d752152d4dd18495d9ebce25643c624cb3e088aa29189a5c1f87cc43c944b5b",
+      "validation_sha256": "5e821c44abf200c5f72040a8a662058f3cae14765f606a58121bf3e159c097aa",
+      "environment_sha256": "f0c95c656e415951dc6b7f9694372c861f2d51bfb9256a37adb24326b6873cc1",
+      "run_config_sha256": "3210fab6555aa998b3b3d8e2271fb79cfdd4801f5d1d163af68e28945c8c8e54"
+    },
+    {
+      "name": "consumed_heldout_postmortem",
+      "role": "failed_heldout_5701_5703_now_development",
+      "seeds": [5701, 5702, 5703],
+      "result": "paper/evidence/abundance_classifier_validation_v1/heldout",
+      "metrics_file": "comparison_metrics.tsv",
+      "metrics_sha256": "860e1ec7b6551278b98864ef70c36b5f1942d48cc90a14ebad0c0d5cd40dac75",
+      "validation_sha256": "98b320e2cf39fce96a0bd14f2082f33768f827a93aaa25fee52c446423a48e29",
+      "environment_sha256": "7636f73d39ad8d86223931019cf0e9262650d24330ee38f9a4f0836d53223191",
+      "run_config_sha256": "40578a4dcbedf31f775bb40ae145d86409191c825fcb1c36040aec5d6d839fef"
+    }
+  ],
+  "reserved_future_heldout_seeds": [5801, 5802, 5803],
+  "classifier_rule": {
+    "method": "depth_gated_log_space_blend",
+    "estimated_depth_source": "single_k21_estimated_haploid_depth",
+    "low_depth_cutoff": 2.0,
+    "low_depth_strategy": {
+      "method": "single_k21",
+      "blend_alpha": 0.0,
+      "decision_threshold": 0.6
+    },
+    "standard_depth_strategy": {
+      "method": "log_space_single_multik_blend",
+      "blend_alpha": 0.5,
+      "decision_threshold": 0.5
+    },
+    "multik_k_values": [15, 21, 27, 31],
+    "unavailable_or_nonpositive_rule": "fallback_single_k21",
+    "development_acceptance_gates": {
+      "full_sensitivity_min_delta_vs_single_k21": 0.05,
+      "full_false_positive_rate_max_delta_vs_single_k21": 0.0,
+      "full_precision_min_delta_vs_single_k21": 0.0,
+      "minimum_cohort_sensitivity_min_delta_vs_single_k21": 0.05,
+      "maximum_cohort_false_positive_rate_max_delta_vs_single_k21": 0.0,
+      "minimum_cohort_precision_min_delta_vs_single_k21": 0.0,
+      "minimum_seed_sensitivity_min_delta_vs_single_k21": 0.03,
+      "maximum_seed_false_positive_rate_max_delta_vs_single_k21": 0.0,
+      "minimum_seed_precision_min_delta_vs_single_k21": 0.0
+    },
+    "warning": "rule_selected_after_failed_5701_5703_validation;all_six_seeds_are_development_for_v3;transparent_depth_gate_not_AI;requires_untouched_5801_5803_validation"
+  }
+}

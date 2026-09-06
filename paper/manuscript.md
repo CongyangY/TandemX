@@ -309,6 +309,31 @@ The 5%-divergent three-segment stratum had mean recall 0.937682, below the 0.95
 aggregate gate used for the whole matrix. Successful localization in aggregate
 therefore did not rescue classifier calibration at low read depth.
 
+Because all additional false positives in that failed test occurred at nominal
+1×, we treated 5701–5703 as consumed development evidence and specified a
+transparent depth gate before generating another split. The rule retains single
+k=21 with threshold 0.6 below estimated haploid depth 2 and uses the alpha-0.5,
+threshold-0.5 blend otherwise. Across the six consumed development genomes it
+increased sensitivity by 0.060700 with no FPR increase and a 0.001883 precision
+increase. The rule, five development-artifact hashes, unchanged localizer and
+acceptance gates were frozen in commit 62892a6; hosted Ubuntu and macOS checks
+passed before seeds 5801–5803 were generated once.
+
+The fresh held-out matrix contained 2,430 paired family conditions (Figure 7;
+Evidence E18). Single k=21 produced TP/FN/FP/TN=867/591/16/956, whereas the
+depth-gated rule produced 953/505/16/956. Sensitivity increased from 0.594650 to
+0.653635, FPR remained 0.016461 and precision increased from 0.981880 to
+0.983488. Sensitivity improved in every seed (minimum delta 0.030864), the
+maximum seed-level FPR delta was zero and the minimum seed-level precision delta
+was zero. All predeclared overall and seed-level gates passed. The 810
+estimated-depth-below-2 rows were unchanged; sensitivity gains were 0.072016 at
+nominal 5× and 0.104938 at 20×. No standard-depth multi-k fallback occurred.
+The same run gave full-assembly mean localization recall 0.980059,
+positive-assembly mean precision 0.999617 and zero predicted bases in 54 absent-
+family rows. These results establish rule transfer within the frozen known-
+catalogue IID-substitution matrix, not biological collapse accuracy or general
+superiority over external software.
+
 ### Eight-species file QC and reference concordance expose normalization concerns
 
 Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N/Col-0R/Ey15-2R, rice
@@ -537,6 +562,20 @@ precision regression overall or in the worst seed. No parameter was selected or
 refitted on held-out rows. Coverage-specific results reported after the failed
 gate are diagnostic and make these seeds development data for any future rule.
 
+Version 3 used that diagnostic only to define a new development rule: retain the
+single-k21 estimate and threshold 0.6 when the single-k21 estimated haploid depth
+was below 2; otherwise apply the already evaluated alpha-0.5 blend and threshold
+0.5. Development comprised all six consumed seeds 5601–5703, while 5801–5803
+were newly reserved. Nine full/cohort/seed development deltas, five development-
+artifact hashes and the unchanged localizer were embedded in
+`abundance_classifier_depth_gated_heldout_v1.json`. The runner checked those
+artifacts and seed disjointness before output creation. The multi-k stage emitted
+only raw paired single/multi-k rows. The final evaluator required one-to-one
+method pairs at every family-condition key, applied the frozen depth rule, and
+recorded that held-out fitting and selection were absent. The same six held-out
+criteria used above were retained. Commit 62892a6 passed hosted Ubuntu/macOS
+checks before seeds 5801–5803 were executed once.
+
 ### Comparator execution and scoring
 
 Read comparators used identical FASTA input, one thread, period scope 30–1000 bp
@@ -662,6 +701,18 @@ panel values, hashes and the complete legend are in
 stratification is post-hoc diagnosis, and the known-catalogue IID simulation is
 not biological collapse truth.
 
+**Figure 7. Fresh held-out validation of the frozen depth-gated classifier.**
+Six panels show the failure-to-refinement sequence, development and held-out
+metric deltas, held-out confusion counts, seed-specific deltas, coverage-
+specific deltas and localization recall by planted divergence and segment count.
+The rule passes all predeclared gates on untouched seeds 5801–5803: sensitivity
+increases by 0.058985, FPR is unchanged and precision increases by 0.001608.
+Inputs, panel values, hashes and the complete legend are in
+`evidence/abundance_classifier_depth_gated_validation_v1/figures_v2` and
+`evidence/abundance_classifier_depth_gated_validation_v1/figure_legend.md`.
+This known-catalogue IID substitution simulation is not biological collapse
+truth or a general comparison with external tools.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -728,6 +779,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S14: classifier development v1, seed-robust development
   v2, complete paired held-out rows, per-seed metrics, localization rows and
   command resource receipts in `evidence/abundance_classifier_validation_v1`.
+- Supplementary Table S15: six-genome depth-gated development, fresh 5801–5803
+  baseline/localization, raw multi-k pairs, selected classifier rows, per-seed
+  metrics and 1,062 command resource receipts in
+  `evidence/abundance_classifier_depth_gated_validation_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -740,7 +795,8 @@ E13: paired `abundance_domain_shift_heldout_baseline` and
 `abundance_domain_shift_multik_heldout`; E14: `MorexV3_reference_qc`.
 E15: `Morex_115Mb_index_interface_v2`; E16: paired localizer development and
 held-out directories listed for Supplementary Table S13; E17:
-`abundance_classifier_validation_v1`.
+`abundance_classifier_validation_v1`; E18:
+`abundance_classifier_depth_gated_validation_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

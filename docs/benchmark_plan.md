@@ -239,6 +239,19 @@ false positives occurred at nominal 1x; both methods had zero false positives at
 data. Seeds 5701--5703 may inform a future development rule but can never be
 reported again as independent validation for that rule.
 
+The post-failure v3 development rule therefore keeps single k=21/threshold 0.6
+below estimated haploid depth 2 and uses alpha 0.5/threshold 0.5 otherwise. It
+passed all nine full/cohort/seed development gates across the six consumed
+genomes. `abundance_classifier_depth_gated_heldout_v1.json` froze the rule,
+development hashes, unchanged localizer, seeds 5801--5803 and the same six
+overall/worst-seed held-out criteria. Commit 62892a6 and hosted runs
+34046154395/34046160309 passed before the new seeds were generated once. The
+held-out rule increased sensitivity 0.594650 to 0.653635, left FPR unchanged at
+0.016461 and increased precision 0.981880 to 0.983488. All three seeds met the
+guardrails, so the v3 classifier passes this known-catalogue IID simulation
+gate. Seeds 5801--5803 are consumed. Biological under-representation truth and
+task-matched external-tool comparisons remain separate required endpoints.
+
 ## Endpoint and clustering audit (2026-09-06)
 
 Retain both strict equal-length recovery and independent cyclic edit recovery;
