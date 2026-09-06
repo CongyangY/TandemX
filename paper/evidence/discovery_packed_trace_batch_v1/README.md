@@ -41,7 +41,9 @@ was `f734004`. Both replay environments therefore carry
 `19600369d3a41ff36975a774d3a426ad2053ebe7d89947ecda6bdd39255b9907`
 and individual source-file hashes, including the exact Rust and Python alignment
 implementations used. This warning is retained rather than rewritten after the
-fact.
+fact. The four executed alignment source files match their versions in published
+commit `a73398d`, whose work-branch/main hosted runs `34048998182` and
+`34049010825` passed Ubuntu/macOS Python, Rust and wheel jobs.
 
 Each row compares one historical baseline with one replay. Other jobs could
 affect timings, and no repeated isolated timing distribution was collected.

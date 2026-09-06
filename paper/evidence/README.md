@@ -21,7 +21,9 @@ time fell 28.75%/25.72% and peak RSS fell 23.52%/13.27%; six/seven stable
 products were byte-identical. The compact archive retains the dirty-source
 warning, exact source digest and file hashes. Each row is one historical
 baseline plus one replay, so it is engineering evidence rather than a repeated
-publication timing claim or universal external-tool superiority result.
+publication timing claim or universal external-tool superiority result. Source
+commit `a73398d` passed hosted Ubuntu/macOS Python, Rust and wheel runs
+`34048998182`/`34049010825` on the work branch and main.
 
 `challenge_v1_baseline/` records the discovery algorithm at Git revision
 `08e100d` using the initial challenge harness hashes in `environment.json`.

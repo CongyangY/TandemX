@@ -7,7 +7,7 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
-### Exact-output elastic alignment optimization (local, not yet pushed)
+### Exact-output elastic alignment optimization (published)
 
 - The native elastic alignment now packs four traceback directions per byte and
   processes all selected periods for one read through one native call, reusing a
@@ -26,10 +26,12 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   `family_audit_summary.json`, while still requiring and comparing all six core
   products. Missing core output remains an error. A compact archiver validates
   execution, input/source receipts, summary counts and product hashes.
-- Full local Python validation passed: 472 tests in 47.68 s. Rust formatting and
-  Clippy with warnings denied passed. `cargo test --release` compiled locally but
-  its test executable cannot launch because this conda environment lacks a
-  dynamic `libpython3.11.dylib`; hosted Rust CI remains the executable test gate.
+- Commit `a73398d` is on the working branch and main. Full local Python validation
+  passed: 472 tests in 47.68 s; Rust formatting and Clippy with warnings denied
+  also passed. Local `cargo test --release` compiled but could not launch because
+  this conda environment lacks dynamic `libpython3.11.dylib`. Hosted runs
+  `34048998182`/`34049010825` then passed Ubuntu/macOS Python tests, executable
+  Rust checks and wheel builds, closing that environment-specific test gap.
 
 ### Published article draft and resolved figure export checkpoint
 
