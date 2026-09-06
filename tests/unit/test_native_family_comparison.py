@@ -95,3 +95,26 @@ def test_related_index_preserves_every_non_distinct_pair_and_collapse(tmp_path, 
         assert summary['pairs_scored'] == 0
     with pytest.raises(ValueError, match='full/related'):
         write_family_audit(tmp_path/'invalid.tsv', [], k=k, backend='rust', mode='skip')
+
+
+@pytest.mark.parametrize('k', [1, 2, 11, 31, 200])
+def test_compact_audit_tokens_match_string_canonical_kmers(k):
+    from tandemx.discover.family_audit import canonical_kmer_tokens
+    rng = random.Random(953107 + k)
+    sequences = [
+        ''.join(rng.choices('ACGTN', k=size))
+        for size in (1, 2, 10, 31, 211, 400)
+    ]
+    for sequence in sequences:
+        strings = mvp.canonical_kmer_set(sequence, k)
+        encoded = canonical_kmer_tokens(sequence, k)
+        assert len(encoded) == len(strings)
+        for word in strings:
+            forward = reverse = 0
+            for base in word:
+                forward = (forward << 3) | {"A": 0, "C": 1, "G": 2, "N": 3, "T": 4}[base]
+            for base in word.translate(str.maketrans("ACGT", "TGCA"))[::-1]:
+                reverse = (reverse << 3) | {"A": 0, "C": 1, "G": 2, "N": 3, "T": 4}[base]
+            assert min(forward, reverse) in encoded
+    with pytest.raises(ValueError, match='ACGTN'):
+        canonical_kmer_tokens('ACG?', min(k, 4))

@@ -83,6 +83,9 @@ def run_process(command: list[str], stdout: Path, stderr: Path, timeout: float,
 
 
 def source_manifest(root: Path, snapshot: Path | None = None) -> dict:
+    source_scope = ("tandemx", "benchmarks/challenge", "rust-core/src", "pyproject.toml",
+                    "environment.yml", "LICENSE", "README.md", "rust-core/Cargo.toml",
+                    "rust-core/Cargo.lock")
     paths = [p for folder in (root / "tandemx", root / "benchmarks" / "challenge", root / "rust-core" / "src")
              for p in folder.rglob("*") if p.is_file() and p.suffix in {".py", ".rs", ".so", ".pyd"}]
     paths.extend(p for p in (root / "pyproject.toml", root / "environment.yml", root / "LICENSE", root / "README.md",
@@ -98,7 +101,21 @@ def source_manifest(root: Path, snapshot: Path | None = None) -> dict:
                 raise ValueError(f"Source changed while snapshotting: {path}")
     revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=False)
     commit = revision.stdout.strip() if revision.returncode == 0 else None
-    return {"git_head": commit, "revision_warning": None if commit else "not_a_git_checkout_use_source_digest", "file_hashes": hashes,
+    status = (subprocess.run(["git", "status", "--porcelain", "--untracked-files=all", "--", *source_scope],
+                             cwd=root, capture_output=True, text=True, check=False)
+              if commit else None)
+    tracked_result = (subprocess.run(["git", "ls-files", "-z", "--", *source_scope], cwd=root,
+                                     capture_output=True, check=False)
+                      if commit else None)
+    tracked = (set(tracked_result.stdout.decode().rstrip("\0").split("\0"))
+               if tracked_result and tracked_result.returncode == 0 and tracked_result.stdout else set())
+    untracked_snapshot_files = sorted(set(hashes) - tracked) if commit else []
+    dirty = (bool(status and status.returncode == 0 and status.stdout.strip())
+             or bool(status and status.returncode != 0) or bool(untracked_snapshot_files))
+    revision_warning = ("not_a_git_checkout_use_source_digest" if not commit else
+                        "worktree_differs_from_git_head_use_source_digest" if dirty else None)
+    return {"git_head": commit, "revision_warning": revision_warning, "file_hashes": hashes,
+            "git_untracked_snapshot_files": untracked_snapshot_files,
             "source_snapshot": str(snapshot) if snapshot else None,
             "source_digest": hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest()}
 

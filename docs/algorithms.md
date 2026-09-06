@@ -2,8 +2,10 @@
 
 For `backend=rust`, the representative candidate gate now uses an injective
 ACGTN word encoding and native exact multiplicity accumulation. Python remains
-the reference gate. Identical rounding and fixed representatives preserve the
-existing alignment and membership decisions; no biological threshold changed.
+the reference gate. Complete monomer sequences now cross the native boundary,
+so circular word counting no longer creates a Python string `Counter` for every
+candidate. Identical rounding and fixed representatives preserve the existing
+alignment and membership decisions; no biological threshold changed.
 See the native-index ablation in `clustering_resource_replay.md`. Measured
 performance remains separate from algorithmic equivalence.
 

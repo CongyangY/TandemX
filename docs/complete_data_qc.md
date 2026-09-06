@@ -116,9 +116,11 @@ The [original FASTA record](https://doi.ipk-gatersleben.de/DOI/b2f47dfb-47ff-411
 publishes SHA-256 `54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb437c1`.
 The script archives the source metadata and pins that file/checksum under DOI
 10.5447/ipk/2021/3 (CC BY 4.0). A 4.5-GB transfer cap bounds the original,
-uncompressed FASTA. Chunked transfers are supported; resume requires the exact
-HTTP range, and access-denied responses are not retried. No failed partial is
-renamed or silently discarded. Full streaming FASTA QC rechecks the pinned SHA,
+uncompressed FASTA. An acknowledged exact HTTP range is used when available.
+When the official server ignores Range, the downloader compares its full-response
+prefix byte-for-byte with the retained partial before appending the suffix.
+Access-denied responses are not retried. No failed partial is renamed or silently
+discarded. Full streaming FASTA QC rechecks the pinned SHA,
 contig/ambiguity counts and structural validity. `reference_receipt.json` marks
 completion only after these checks. Matching cultivar/study does not establish
 identical donor DNA or precise satellite copy truth.

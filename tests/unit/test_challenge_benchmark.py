@@ -3,6 +3,7 @@
 import json
 import math
 import os
+import subprocess
 import sys
 from dataclasses import replace
 from pathlib import Path
@@ -158,11 +159,39 @@ def test_source_snapshot_preserves_dirty_or_unversioned_code(tmp_path):
     assert (snapshot / "tandemx" / "sample.py").read_text() == "value = 42\n"
     assert manifest["file_hashes"]["tandemx/sample.py"]
     assert manifest["git_head"] is None
+    assert manifest["revision_warning"] == "not_a_git_checkout_use_source_digest"
     run = run_process([sys.executable, "-c", "from tandemx.sample import value; print(value)"],
                       tmp_path / "out", tmp_path / "err", 5,
                       {**os.environ, "PYTHONPATH": str(snapshot)}, snapshot)
     assert run["exit_code"] == 0, (tmp_path / "err").read_text()
     assert (tmp_path / "out").read_text().strip() == "42"
+
+
+def test_source_manifest_marks_tracked_source_changes_against_git_head(tmp_path):
+    root = tmp_path / "repo"
+    source = root / "tandemx" / "sample.py"
+    source.parent.mkdir(parents=True)
+    source.write_text("value = 1\n")
+    subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+    subprocess.run(["git", "add", "tandemx/sample.py"], cwd=root, check=True)
+    subprocess.run([
+        "git", "-c", "user.name=TandemX test", "-c", "user.email=test@example.invalid",
+        "commit", "-q", "-m", "fixture"
+    ], cwd=root, check=True)
+    clean = source_manifest(root)
+    assert clean["git_head"]
+    assert clean["revision_warning"] is None
+    source.write_text("value = 2\n")
+    dirty = source_manifest(root)
+    assert dirty["git_head"] == clean["git_head"]
+    assert dirty["revision_warning"] == "worktree_differs_from_git_head_use_source_digest"
+    source.write_text("value = 1\n")
+    (root / ".gitignore").write_text("*.so\n")
+    native = root / "tandemx" / "generated.so"
+    native.write_bytes(b"native build")
+    generated = source_manifest(root)
+    assert generated["revision_warning"] == "worktree_differs_from_git_head_use_source_digest"
+    assert generated["git_untracked_snapshot_files"] == ["tandemx/generated.so"]
 
 
 def test_process_failure_and_timeout_are_observable(tmp_path: Path) -> None:

@@ -68,6 +68,27 @@ The completed native ablation is in `paper/evidence/Mo17_native_index`: identica
 outputs,218.015→164.312 clustering seconds,250.22→259.63 MiB child peak. Time
 decreased while memory increased in this diagnostic; no universal win is claimed.
 
+## Sequence-native index interface
+
+The Rust path accepts each complete canonicalized monomer sequence and computes
+the same circular canonical ACGTN word multiplicities inside the native index.
+This removes the former per-candidate Python string `Counter` and Python-to-Rust
+word-list conversion. The Python word interface remains available as a frozen
+reference adapter; candidate thresholds, representative order, alignments and
+membership outputs are unchanged.
+
+```bash
+python -m benchmarks.scripts.replay_clustering_isolated \
+  --candidate-run /path/to/completed/real_comparison \
+  --native-interface-ablation \
+  --outdir /path/to/new/interface_replay --timeout 3600
+```
+
+The two fresh children are labelled `word_bridge` and `sequence_native`.
+`validation.json` must report complete execution and exact payload-hash parity.
+The fixed-order single repetition is an engineering diagnostic; publication
+timing still requires shuffled repeated runs under isolated acquisition load.
+
 ## Full live-pipeline replay and profiling
 
 ```bash

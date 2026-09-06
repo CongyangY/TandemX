@@ -9,16 +9,17 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ### Published article draft and resolved figure export checkpoint
 
-- 438d078 is pushed to main and working branch. Both hosted CI runs
-  34023168171/34023165293 passed; earlier d2aa4d6 runs 34021933081/34021929197
-  also passed. Latest local suite 405 passed; native 13 tests/clippy/fmt unchanged.
+- 4aafb00 is pushed to main and working branch. Both hosted CI runs
+  34027553506/34027544312 passed; earlier 438d078 runs
+  34023168171/34023165293 also passed. The committed checkpoint has 405 local
+  Python tests passing; native 13-test/clippy/fmt checkpoint also passed.
 - The temporary automatic-review usage error is resolved. Subsequent Git reviews
   succeeded; a read-only source diff proved the figure update only changes the
   legend/whitespace, and retry through the original approval channel succeeded.
   `factorial_joint_multik/figures_v2` is exported, visually inspected and archived
   locally: 101 editable SVG texts, no raster nodes, source TSV byte-identical to
-  version 1. Version 1 remains retained. Figure/doc updates await the next commit.
-- The initial manuscript and explicit readiness audit are published in 438d078.
+  version 1. Version 1 remains retained. Figure/doc updates are published in 4aafb00.
+- The initial manuscript and explicit readiness audit are published in 4aafb00.
   This is a development draft, not a completed paper or software release.
 - Col-0R and Ey15-2R full QC and compact archives passed. They add two included
   Arabidopsis libraries/materials, not two species. The cohort table now contains
@@ -59,6 +60,19 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   genomic HiFi. Wild soybean YSD56 `SRR28726931` provides 44,193,089,411 HiFi
   bases from the same leaf BioSample as ONT support; its checksum-bounded complete
   download is active. This is an eighth species only after complete-file QC.
+- After 4aafb00, sequence-native exact clustering indexing and compact integer/
+  32-bit-array family-audit postings are under local validation. The Morex
+  115-Mb fixed-order interface diagnostic retained exact complete-output parity
+  and measured 13.280→11.620 clustering seconds and 65.375→61.531 MiB child RSS;
+  it ran with acquisition load and has a superseded provenance-warning defect,
+  so it is not publication timing. `source_manifest` now marks tracked changes
+  and generated native binaries that differ from `git_head`. The original YSD56
+  transfer failed at 19,152,111,724 bytes with an SSL EOF, resumed from that
+  partial, and then passed the exact ENA byte/MD5 checks; complete-file QC is
+  active and soybean is not yet admitted to the cohort. The IPK server ignores
+  MorexV3 Range requests; a tested byte-identical prefix fallback is prepared
+  before resuming the retained 2.126-GB partial. Current local validation is
+  412 Python tests, 15 Rust tests, Clippy `-D warnings` and Rust formatting.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

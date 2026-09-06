@@ -215,6 +215,34 @@ def test_native_index_candidates_equal_python_multisets_across_lengths_and_thres
 
 
 @pytest.mark.skipif(not rust_backend_available(), reason='compiled extension unavailable')
+def test_sequence_native_index_matches_python_word_index_with_ambiguity_and_rotations():
+    from tandemx.discover.clustering import _append_index, _index_words, _indexed_candidate_ids
+    from tandemx.discover.rust_backend import RustRepresentativeIndex
+    rng = random.Random(562109)
+    representatives = [
+        ''.join(rng.choices('ACGTN', k=rng.choice((1, 7, 9, 20, 21, 61, 171))))
+        for _ in range(90)
+    ]
+    representatives += ['A' * 40, 'ACGTN' * 20, 'TN' * 31]
+    native = RustRepresentativeIndex()
+    python_index = {}
+    lengths = []
+    for identifier, sequence in enumerate(representatives):
+        words = _index_words(sequence)
+        assert native.append_sequence(sequence) == identifier
+        _append_index(python_index, words, identifier)
+        lengths.append(len(sequence))
+    queries = representatives[::4] + [
+        sequence[1:] + sequence[:1] for sequence in representatives[1::5]
+    ]
+    for identity in (.9, .900001, .95, .99, 1.0):
+        for sequence in queries:
+            assert native.candidates_sequence(sequence, identity) == _indexed_candidate_ids(
+                len(sequence), _index_words(sequence), python_index, lengths, identity
+            )
+
+
+@pytest.mark.skipif(not rust_backend_available(), reason='compiled extension unavailable')
 def test_native_index_rejects_malformed_state_and_invalid_queries_without_mutation():
     from tandemx import _rust_core
     index = _rust_core.RepresentativeIndex()

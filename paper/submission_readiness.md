@@ -16,7 +16,7 @@ have **not** been achieved.
 | Probe performance | Computational prioritization framework | Specificity calibration and independent published/new experimental concordance; no fabricated FISH rate |
 | Novelty/AI | Explicit prior-art comparison; no unsupported AI claim | Establish reproducible added value and ablations; AI only if independently useful |
 | Software quality | 405 local Python tests and 13 native tests at latest verified checkpoints | Production defaults, clean install/release verification, workflow portability and complete command validation |
-| GitHub/reuse | 438d078 pushed to main and working branch; hosted CI passed; current update passes the full local suite | Current figure/QC/comparator/source-query code and evidence need the next verified commit/push |
+| GitHub/reuse | 4aafb00 pushed to main and working branch; both hosted CI runs passed; committed checkpoint has 405 local tests passing | Current clustering/audit performance work needs full validation, evidence archive and the next verified commit/push |
 
 On 6 September 2026 an initial T7 figure-v2 render was rejected because the
 automatic review service reached its usage limit. Later Git operations passed

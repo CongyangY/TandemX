@@ -33,6 +33,20 @@ class RustRepresentativeIndex:
     def candidates(self, length: int, words: dict[str, int], minimum_identity: float) -> list[int]:
         return self._index.candidates(length, list(words.items()), minimum_identity)
 
+    def append_sequence(self, sequence: str) -> int:
+        if not hasattr(self._index, "append_sequence"):
+            raise RustBackendUnavailable(
+                "Rust extension lacks sequence-native representative indexing; reinstall TandemX"
+            )
+        return self._index.append_sequence(sequence)
+
+    def candidates_sequence(self, sequence: str, minimum_identity: float) -> list[int]:
+        if not hasattr(self._index, "candidates_sequence"):
+            raise RustBackendUnavailable(
+                "Rust extension lacks sequence-native representative indexing; reinstall TandemX"
+            )
+        return self._index.candidates_sequence(sequence, minimum_identity)
+
 
 @dataclass(frozen=True)
 class RustScanResult:

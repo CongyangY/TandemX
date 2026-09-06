@@ -120,8 +120,8 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
     index: dict[str, array] = {}
     assignment = {}
     for sequence in ordered:
-        words = _index_words(sequence)
-        possible = (native_index.candidates(len(sequence), words, minimum_identity) if native_index is not None
+        words = None if native_index is not None else _index_words(sequence)
+        possible = (native_index.candidates_sequence(sequence, minimum_identity) if native_index is not None
                     else _indexed_candidate_ids(len(sequence), words, index, representative_lengths, minimum_identity))
         compatible = []
         for j in possible:
@@ -140,7 +140,7 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
             members.append([])
             if native_index is None:
                 _append_index(index, words, j)
-            elif native_index.append(len(sequence), words) != j:
+            elif native_index.append_sequence(sequence) != j:
                 raise RuntimeError("Native representative index lost insertion order")
             distance = sequence.count("N")
             similarity = 1 - distance / len(sequence)

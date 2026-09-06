@@ -28,7 +28,7 @@ def test_sha_download_and_exact_resume(tmp_path, monkeypatch):
     assert module.download_sha256('https://example.org/reference', path, sha, 100)['transfer'] == 'existing_reverified'
 
 
-@pytest.mark.parametrize('fault', ['ignored_range', 'wrong_range', 'checksum', 'budget', 'forbidden'])
+@pytest.mark.parametrize('fault', ['wrong_range', 'checksum', 'budget', 'forbidden'])
 def test_sha_download_failures_preserve_partial_and_do_not_publish(tmp_path, monkeypatch, fault):
     content = b'ACGTN'
     path = tmp_path/'reference.fa'
@@ -47,6 +47,29 @@ def test_sha_download_failures_preserve_partial_and_do_not_publish(tmp_path, mon
     with pytest.raises((ValueError, HTTPError)):
         module.download_sha256('https://example.org/reference', path, sha, 4 if fault == 'budget' else 100)
     assert not path.exists() and len(calls) == 1
+
+
+def test_ignored_range_uses_only_a_verified_full_response_prefix(tmp_path, monkeypatch):
+    content = b'>chr1\nACGTN\n'
+    path = tmp_path/'reference.fa'
+    partial = path.with_suffix('.fa.partial')
+    partial.write_bytes(content[:7])
+    monkeypatch.setattr(module, 'urlopen', lambda request, timeout: Response(content, 200))
+    result = module.download_sha256(
+        'https://example.org/reference', path, hashlib.sha256(content).hexdigest(), 100
+    )
+    assert result['transfer'] == 'downloaded_complete_after_verified_prefix'
+    assert path.read_bytes() == content and not partial.exists()
+
+    path.unlink()
+    partial.write_bytes(content[:7])
+    corrupted = b'X' + content[1:]
+    monkeypatch.setattr(module, 'urlopen', lambda request, timeout: Response(corrupted, 200))
+    with pytest.raises(ValueError, match='prefix differs'):
+        module.download_sha256(
+            'https://example.org/reference', path, hashlib.sha256(content).hexdigest(), 100
+        )
+    assert partial.read_bytes() == content[:7] and not path.exists()
 
 
 def test_complete_partial_is_reverified_without_network(tmp_path, monkeypatch):

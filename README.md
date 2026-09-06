@@ -435,6 +435,9 @@ Sequence clustering uses compact exact postings; an
 outputs and child-process resources before interpreting memory improvements.
 The Rust backend also evaluates this exact candidate gate natively; its Python
 reference and identical-alignment ablation remain available for parity checks.
+The native path now receives complete monomer sequences and builds circular word
+counts in Rust; a dedicated word-bridge comparison requires exact full-output
+parity before any resource change is interpreted.
 Small [source-backed repeat queries](docs/known_monomer_sources.md) retain
 accession versions, donor materials and monomer/clone distinctions for later
 biological checks; they are not a complete recall truth set.

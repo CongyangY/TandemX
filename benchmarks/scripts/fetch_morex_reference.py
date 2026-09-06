@@ -34,6 +34,7 @@ def download_sha256(url: str, path: Path, expected_sha256: str, max_bytes: int) 
         if not 0 < path.stat().st_size <= max_bytes or digest_file(path) != expected_sha256:
             raise ValueError('Existing reference differs from the pinned source')
         return dict(bytes=path.stat().st_size, sha256=expected_sha256, transfer='existing_reverified')
+    transfer = 'downloaded_complete'
     for attempt in range(1, 6):
         offset = partial.stat().st_size if partial.exists() else 0
         if offset > max_bytes:
@@ -51,8 +52,16 @@ def download_sha256(url: str, path: Path, expected_sha256: str, max_bytes: int) 
             with urlopen(request, timeout=60) as response:
                 if response.status not in {200, 206}:
                     raise ValueError(f'Unexpected reference response: {response.status}')
-                if offset and response.status != 206:
-                    raise ValueError('Server ignored resume range; partial retained')
+                if offset and response.status == 200:
+                    # Some publication repositories ignore Range. Retain local
+                    # progress only after the complete response prefix is proven
+                    # byte-identical to the partial already on disk.
+                    with partial.open('rb') as existing:
+                        while expected := existing.read(1024*1024):
+                            observed = response.read(len(expected))
+                            if observed != expected:
+                                raise ValueError('Full-response prefix differs from partial; partial retained')
+                    transfer = 'downloaded_complete_after_verified_prefix'
                 if response.status == 206 and not response.headers.get('Content-Range', '').startswith(f'bytes {offset}-'):
                     raise ValueError('Incorrect reference resume range')
                 with partial.open('ab' if offset else 'wb') as handle:
@@ -65,7 +74,7 @@ def download_sha256(url: str, path: Path, expected_sha256: str, max_bytes: int) 
             if not offset or sha.hexdigest() != expected_sha256:
                 raise ValueError('Reference SHA-256 differs from the published source; partial retained')
             partial.rename(path)
-            return dict(bytes=offset, sha256=expected_sha256, transfer='downloaded_complete')
+            return dict(bytes=offset, sha256=expected_sha256, transfer=transfer)
         except (OSError, http.client.HTTPException) as exc:
             with path.with_name(path.name+'.transfer.log').open('a') as log:
                 log.write(f'attempt={attempt}\tbytes={offset}\terror={exc}\n')

@@ -1040,6 +1040,11 @@ clustering seconds, output and clustering-source hashes. `validation.json` keeps
 each command, child exit/timeout, wall/CPU/peak RSS, worker metrics and exact
 payload-hash parity, plus `complete`/`error`. Stage seconds exclude input loading
 and serialization; child wall/RSS includes them. Failed comparisons are retained.
+Native-interface ablations use `word_bridge.json` and `sequence_native.json`;
+their receipts identify the index interface. `environment.json` records whether
+the source snapshot differs from `git_head`, including generated native files
+that are hashed and copied but not tracked by Git. In that case the source digest
+and per-file hashes, rather than the commit alone, identify executed code.
 
 ### Disk-backed real benchmark evaluation
 
@@ -1066,6 +1071,9 @@ byte budget and source hashes. `reference_receipt.json` records `complete`,
 transfer bytes/hash/state, full FASTA QC, plan/script/parser hashes and a material
 matching warning. Transfer/QC errors keep `complete=false` and `error`; an
 incomplete `.partial` file is not a reference release.
+If the official server ignores Range, the downloader rereads and compares the
+entire response prefix against the retained partial before appending any suffix;
+the receipt labels this `downloaded_complete_after_verified_prefix`.
 
 ### Curated repeat-query source records
 

@@ -26,6 +26,26 @@ def worker(candidates: Path, module_path: Path, output: Path, index_backend: str
         # both variants keep the identical native alignment kernel and source.
         import tandemx.discover.rust_backend as native
         native.RustRepresentativeIndex = lambda: None
+    elif index_backend == 'word_bridge':
+        import tandemx.discover.clustering as clustering
+        import tandemx.discover.rust_backend as native
+        native_index_class = native.RustRepresentativeIndex
+
+        class WordBridge:
+            """Reproduce the former Python-string/native-word interface exactly."""
+
+            def __init__(self):
+                self._index = native_index_class()
+
+            def append_sequence(self, sequence: str) -> int:
+                words = clustering._index_words(sequence)
+                return self._index.append(len(sequence), words)
+
+            def candidates_sequence(self, sequence: str, minimum_identity: float) -> list[int]:
+                words = clustering._index_words(sequence)
+                return self._index.candidates(len(sequence), words, minimum_identity)
+
+        native.RustRepresentativeIndex = WordBridge
     started = time.perf_counter()
     families, membership = module.cluster_monomers(rows, 1, .95, 'rust')
     elapsed = time.perf_counter()-started
@@ -40,7 +60,8 @@ def worker(candidates: Path, module_path: Path, output: Path, index_backend: str
     return result
 
 
-def replay(candidate_run: Path, baseline_run: Path | None, outdir: Path, timeout: float = 3600) -> dict:
+def replay(candidate_run: Path, baseline_run: Path | None, outdir: Path, timeout: float = 3600,
+           interface_ablation: bool = False) -> dict:
     root = Path(__file__).resolve().parents[2]
     candidate_run, outdir = candidate_run.resolve(), outdir.resolve()
     # Clustering is the only core source allowed to differ. This also fixes native
@@ -73,8 +94,11 @@ def replay(candidate_run: Path, baseline_run: Path | None, outdir: Path, timeout
     shutil.copyfile(package, outdir/'source_snapshot/benchmarks/__init__.py')
     helpers['benchmarks/__init__.py'] = digest_file(package)
     folder = candidate_run/'tandemx/discover'
+    comparison = ('historical_clustering_source' if baseline_run else
+                  'native_sequence_interface_ablation' if interface_ablation else
+                  'native_index_ablation_identical_alignment')
     environment.update(baseline_run=str(baseline_run) if baseline_run else None, candidate_run=str(candidate_run),
-                       comparison='historical_clustering_source' if baseline_run else 'native_index_ablation_identical_alignment',
+                       comparison=comparison,
                        baseline_clustering_sha256=digest_file(snapshot/'tandemx/discover/clustering.py'),
                        helper_hashes=helpers,
                        input_hashes={name: digest_file(folder/name) for name in ('candidate_reads.tsv', 'candidate_monomers.fa')},
@@ -85,6 +109,9 @@ def replay(candidate_run: Path, baseline_run: Path | None, outdir: Path, timeout
     try:
         variants = ([('baseline', snapshot/'tandemx/discover/clustering.py', None),
                      ('current', outdir/'source_snapshot/tandemx/discover/clustering.py', None)] if baseline_run else
+                    [('word_bridge', snapshot/'tandemx/discover/clustering.py', 'word_bridge'),
+                     ('sequence_native', snapshot/'tandemx/discover/clustering.py', 'sequence_native')]
+                    if interface_ablation else
                     [('python_index', snapshot/'tandemx/discover/clustering.py', 'python'),
                      ('native_index', snapshot/'tandemx/discover/clustering.py', 'native')])
         for label, module_path, index_backend in variants:
@@ -118,16 +145,22 @@ if __name__ == '__main__':
     parser.add_argument('--baseline-run', type=Path)
     parser.add_argument('--native-index-ablation', action='store_true',
                         help='Compare Python and native index gates with identical current native alignments')
+    parser.add_argument('--native-interface-ablation', action='store_true',
+                        help='Compare the former Python-word bridge with sequence-native indexing')
     parser.add_argument('--outdir', type=Path)
     parser.add_argument('--timeout', type=float, default=3600)
     parser.add_argument('--worker-candidates', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('--worker-module', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('--worker-output', type=Path, help=argparse.SUPPRESS)
-    parser.add_argument('--worker-index', choices=('python', 'native'), help=argparse.SUPPRESS)
+    parser.add_argument('--worker-index', choices=('python', 'native', 'word_bridge', 'sequence_native'),
+                        help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.worker_candidates and args.worker_module and args.worker_output:
         worker(args.worker_candidates, args.worker_module, args.worker_output, args.worker_index)
-    elif args.candidate_run and args.outdir and bool(args.baseline_run) != args.native_index_ablation:
-        replay(args.candidate_run, args.baseline_run, args.outdir, args.timeout)
+    elif (args.candidate_run and args.outdir
+          and sum((bool(args.baseline_run), args.native_index_ablation,
+                   args.native_interface_ablation)) == 1):
+        replay(args.candidate_run, args.baseline_run, args.outdir, args.timeout,
+               args.native_interface_ablation)
     else:
-        parser.error('Require candidate run, new output directory and exactly one of baseline run or native index ablation')
+        parser.error('Require candidate run, new output directory and exactly one comparison mode')

@@ -1,7 +1,8 @@
 """Stream the exhaustive representative audit without retaining distinct pairs."""
 from __future__ import annotations
 
-from collections import Counter, defaultdict
+from array import array
+from collections import Counter
 from dataclasses import replace
 import json
 import logging
@@ -12,6 +13,29 @@ if TYPE_CHECKING:
     from tandemx.discover.mvp import RepeatFamily, FamilySimilarity
 
 
+_TOKEN_BASE = {"A": 0, "C": 1, "G": 2, "N": 3, "T": 4}
+_TOKEN_COMPLEMENT = {"A": 4, "C": 2, "G": 1, "N": 3, "T": 0}
+
+
+def canonical_kmer_tokens(sequence: str, k: int) -> set[int]:
+    """Encode exact canonical ACGTN k-mers without retaining Python strings."""
+    if k <= 0 or len(sequence) < k:
+        return set()
+    normalized = sequence.upper()
+    if any(base not in _TOKEN_BASE for base in normalized):
+        raise ValueError("Family representatives must contain only ACGTN bases")
+    mask = (1 << (3 * k)) - 1
+    reverse_shift = 3 * (k - 1)
+    forward = reverse = 0
+    tokens = set()
+    for index, base in enumerate(normalized):
+        forward = ((forward << 3) | _TOKEN_BASE[base]) & mask
+        reverse = (reverse >> 3) | (_TOKEN_COMPLEMENT[base] << reverse_shift)
+        if index + 1 >= k:
+            tokens.add(min(forward, reverse))
+    return tokens
+
+
 def related_pair_candidates(families: Sequence[RepeatFamily], k: int, backend: str):
     """Exact upper-bound filter for the current redundancy rules, not a sketch.
 
@@ -19,13 +43,16 @@ def related_pair_candidates(families: Sequence[RepeatFamily], k: int, backend: s
     counts exact intersections; identity/overlap set to one is an upper bound.
     Only one representative's candidate-counter is retained at a time.
     """
-    from tandemx.discover.mvp import canonical_kmer_set, classify_family_relationship, compare_family_pair
+    from tandemx.discover.mvp import classify_family_relationship, compare_family_pair
 
-    kmers = [canonical_kmer_set(f.monomer_sequence, k) for f in families]
-    postings = defaultdict(list)
+    kmers = [canonical_kmer_tokens(f.monomer_sequence, k) for f in families]
+    postings: dict[int, array] = {}
     for index, words in enumerate(kmers):
         for word in words:
-            postings[word].append(index)
+            posting = postings.get(word)
+            if posting is None:
+                posting = postings[word] = array("I")
+            posting.append(index)
     for index, words in enumerate(kmers):
         shared_counts = Counter(other for word in words for other in postings[word] if other > index)
         for other, shared in sorted(shared_counts.items()):
