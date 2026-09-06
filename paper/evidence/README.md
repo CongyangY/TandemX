@@ -194,12 +194,18 @@ compatibility checks and the explicit mixed-region/base-truth distinction.
 `Nipponbare_input_qc/`, `Morex_input_qc/`, `Lo7_input_qc/`,
 `ChineseSpring_input_qc/`, `Victoria_input_qc/`, `Col0R_input_qc/` and
 `Ey15R_input_qc/` extend complete-file QC and seed6101 nested sampling.
-`YSD56_input_qc/` adds exact acquisition and complete-file QC; its seed6101
-sampling is active. Together with Mo17 and Col-0N, the included cohort is ten
+`YSD56_input_qc/` adds exact acquisition, complete-file QC and a completed
+seed6101 sampling ladder. Together with Mo17 and Col-0N, the included cohort is ten
 libraries from eight reported species (14,937,608 reads; 262,731,255,175 bp).
 These are validated files and technical sampling strata, not independent
 biological replicates or accuracy truth. Large FASTQ/ID products remain at the
 recorded T7 data root.
+
+`MorexV3_reference_qc/` archives the original IPK source page, pinned plan,
+completion receipt and a manifest that rechecks the external 4.30-GB FASTA.
+Eight unique FASTA records contain 4,225,605,719 bases and the file matches the
+published SHA-256. The FASTA remains outside Git. This is file integrity and
+sequence-content QC, not identical-donor or satellite copy-number truth.
 
 `factorial_multik_replay/` and `factorial_joint_multik/` retain the complete
 three-genome, 27-condition conditional copy-estimation and joint-read interval

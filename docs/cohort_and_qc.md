@@ -14,7 +14,9 @@ libraries; the largest nested samples range from 1.109 Gb for Victoria to
 while compact plans, receipts and distributions are archived with paper evidence.
 Mo17 comparison includes 1.129 Gb, with all three methods successful; its seven
 TandemX products are identical before/after dictionary-index optimization. All
-real-call metrics remain descriptive. Morex reference acquisition remains active.
+real-call metrics remain descriptive. The original-IPK MorexV3 pseudomolecule
+FASTA now matches its published SHA-256 and passed streaming FASTA QC; raw and
+reference donor identity and satellite-array truth remain unresolved.
 YSD56 wild-soybean HiFi passed exact download, full-file QC and deterministic
 whole-library nested sampling; no accuracy inference has been made.
 The prospective enrollment table below retains metadata-level source details;
@@ -85,7 +87,7 @@ Known-motif BLAST+union and TRF comparisons complement de novo tools here.
 | Rice Nipponbare | PRJNA953663, SRR25241090; [reference audit](nipponbare_reference.md) | Complete 32.966-Gb FASTQ QC and GCA_034140825.1 reference QC passed. Raw/assembly sample dates differ; exact donor match unresolved. chr9 rDNA model sequence excluded from exact copy truth |
 | Maize Mo17 | PRJNA751841, seven PacBio WGS runs | First full CCS batch SRR15447419 passed QC (407,670 reads / 5.625 Gb); complete reference and whole-library samples verified. A single batch is not the full published data set |
 | Maize B73 | SRR11606869 from SRF | 48.075 Gb bases, 41.984 GB compressed in metadata; matching assembly/material review pending |
-| Barley Morex and pangenome | PRJEB40587, PRJEB57567, PRJEB58554 | ERR4659246 complete 19.525-Gb FASTQ QC and nested sampling through 10.745 Gb passed; original MorexV3 reference downloading. Pangenome material enrollment remains separate |
+| Barley Morex and pangenome | PRJEB40587, PRJEB57567, PRJEB58554; MorexV3 DOI 10.5447/ipk/2021/3 | ERR4659246 complete 19.525-Gb FASTQ QC and nested sampling through 10.745 Gb passed. The original MorexV3 FASTA matches the published SHA-256; eight records contain 4,225,605,719 bases. Same-study context is not identical-donor or exact satellite-copy truth. Pangenome material enrollment remains separate |
 | Rye Lo7 | PRJEB91463; [source paper](https://www.nature.com/articles/s41467-026-76753-4) | One of three HiFi Revio technical runs, ERR15194059, passed complete 77.092-Gb FASTQ QC; seed6101 nested sampling completed through 42.360 Gb. Single diploid Lo7 plant is explicit; version-matched reference still needed |
 | Bread wheat Chinese Spring / CS-IAAS study | PRJNA1062539; [source paper](https://www.nature.com/articles/s41588-025-02137-x) | SRR28200549 passed complete QC at 1,500,000 reads/24.954 Gb; seed6101 nested sampling completed through 11.215 Gb. The study's 80 PacBio WGS records are technical batches. Exact donor/assembly matching remains unresolved |
 | Oat PanOat | PRJEB56828; [source paper](https://www.nature.com/articles/s41586-025-09676-7) | Victoria ERR10422581 passed complete QC at 398,850 reads/7.346 Gb; seed6101 sampling completed through 1.109 Gb. Raw SAMEA111508775 and assembly GCA_947311595 are source-supported. ERR10422482/CN25955 has A. fatua in ENA versus A. occidentalis in paper figure labels; retain the discrepancy and do not substitute it for cultivated oat |

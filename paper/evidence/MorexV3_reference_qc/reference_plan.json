@@ -1,0 +1,11 @@
+{
+  "filename": "Barley_MorexV3_pseudomolecules.fasta",
+  "landing_url": "https://doi.ipk-gatersleben.de/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/b6e6a2e5-2746-4522-8465-019c8f56df7f/1",
+  "url": "https://doi.ipk-gatersleben.de/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/b6e6a2e5-2746-4522-8465-019c8f56df7f/1/DOWNLOAD",
+  "expected_sha256": "54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb437c1",
+  "max_bytes": 4500000000,
+  "doi": "10.5447/ipk/2021/3",
+  "license": "CC BY 4.0",
+  "metadata_sha256": "8a01314b575f4ea8447c98e6e433ac1a88f5272867456d9a4b2b4432ff11f9bb",
+  "script_sha256": "ae8645c5d283a5430cdd668dd0788293f318958640c7bb6a186f5b9cfa8a44d7"
+}

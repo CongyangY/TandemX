@@ -50,7 +50,11 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   TideHunter 566.196/580.375. TandemX was 20.74% faster than TRF but took
   3.37-fold TideHunter's wall time and used 3.19-fold TRF's peak RSS. The compact
   14-file archive matches T7 source hashes. This is an unfavourable concurrent
-  diagnostic, not an isolated ranking. Morex reference acquisition remains active.
+  diagnostic, not an isolated ranking. The original IPK MorexV3 pseudomolecule
+  FASTA is now complete: the 4,296,032,540-byte file matches the published
+  SHA-256, and streaming QC found eight records and 4,225,605,719 sequence bases.
+  Compact provenance is archived; same-study context does not establish an
+  identical read/reference donor or satellite copy truth.
 - Two six-panel figure families passed source/hash and visual QA. Cross-cohort
   input-QC version 2 reconciles 10 libraries/8 species/14,937,608 reads/
   262,731,255,175 bp and has 110 editable SVG text nodes with no raster node.
@@ -110,10 +114,11 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 438 Python tests. The added tests cover
+- The expanded source checkout passes all 442 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
-  unchanged.
+  unchanged. Four additional tests validate compact reference archiving and
+  reject altered FASTA, metadata and contig totals.
 - A backward-compatible challenge extension now represents independent
   founder-to-unit substitutions and one or more interrupted same-family arrays.
   Truth scoring aggregates non-overlapping intervals and copies by family. The

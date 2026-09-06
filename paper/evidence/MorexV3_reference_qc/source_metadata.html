@@ -1,0 +1,646 @@
+<html lang="en">
+<head>
+
+    <title>e!DAL - PGP Repository - Barley_MorexV3_pseudomolecules.fasta</title>
+
+   	<meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png"  href="https://doi.ipk-gatersleben.de:443/LOGO/edal_icon.png"/>
+	
+	<link rel="stylesheet" href="https://doi.ipk-gatersleben.de:443/CSS/content.css" />
+	
+
+	<meta name="DC.Title" content="Barley_MorexV3_pseudomolecules.fasta">
+	<meta name="DC.Identifier" content="https://doi.org/10.5447/ipk/2021/3"> 
+	<meta name="DC.Publisher" content="e!DAL - Plant Genomics and Phenomics Research Data Repository (PGP), IPK Gatersleben, Seeland OT Gatersleben, Corrensstraße 3, 06466, Germany">
+	<meta name="DC.Language" content="en"> 
+	<meta name="DC.Description"	content="DNA sequence file in FASTA format for chromosomal pseudomolecules of barley (Hordeum vulgare) cv. Morex. This is the third release (Morex V3) of the Morex genome sequence assembly. Primary contig assembly from PacBio Hifi reads was done with HiCanu [doi:10.1101/gr.263566.120]. Contigs were scaffolded with Bionano data and arranged into chromosomal pseudomolecules with Hi-C data using the TRITEX pipeline [doi:10.1186/s13059-019-1899-5]. An AGP file specifying the placement of sequence scaffolds in the pseudomolecules is provided. The folder 'gene_annotation' holds the structural gene annotation of the Morex V3 assembly: gene models in GFF3 format, their functional descriptions as well as coding and protein sequences of high- and low-confidence genes. The folder 'repeat annotation' contains GFF files specifying the positions of transposable elements and tandem repeats. A table with the approximate centromere positions is found in the folder 'centromere_positions'. Annotation and data management were supported by the de.NBI grant (www.denbi.de) of the German Federal Ministry of Education and Research (031A536).">
+	<meta name="DC.Type" content="TEXT">
+	<meta name="DC.Format" content="text/plain">
+	<meta name="DC.Rights" content="CC BY 4.0 (Creative Commons Attribution)"> 
+	<meta name="DC.Creator"	content="Mascher, Martin (Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany)">
+	<meta name="DC.Contributor"	content="Jenkins, Jerry (HudsonAlpha Institute for Biotechnology, 601 Genome Way Northwest, Huntsville, AL 35806, United States)">
+	<meta name="DC.Contributor"	content="Lux, Thomas (Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany)">
+	<meta name="DC.Contributor"	content="Ens, Jennifer (University of Saskatchewan, Saskatoon, S7N 5A8, Canada)">
+	<meta name="DC.Contributor"	content="Gundlach, Heidrun (Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany)">
+	<meta name="DC.Contributor"	content="Tulpova, Zuzana (Institute of Experimental Botany of the Czech Academy of Sciences, Centre of the Region Hana for Biotechnological and Agricultural Research, Olomouc, 779 00, Czech Republic)">
+	<meta name="DC.Contributor"	content="Scholz, Uwe (Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany)">
+	<meta name="DC.Contributor"	content="Mayer, Klaus (Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany)">
+	<meta name="DC.Contributor"	content="Spannagl, Manuel (Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany)">
+	<meta name="DC.Contributor"	content="Pozniak, Curtis (University of Saskatchewan, Saskatoon, S7N 5A8, Canada)">
+	<meta name="DC.Contributor"	content="Simkova, Hana (Institute of Experimental Botany of the Czech Academy of Sciences, Centre of the Region Hana for Biotechnological and Agricultural Research, Olomouc, 779 00, Czech Republic)">
+	<meta name="DC.Contributor"	content="Moscou, Matthew (The Sainsbury Laboratory, University of East Anglia, Norwich, NR4 7UK, United Kingdom)">
+	<meta name="DC.Contributor"	content="Schmutz, Jeremy (HudsonAlpha Institute for Biotechnology, 601 Genome Way Northwest, Huntsville, AL 35806, United States)">
+	<meta name="DC.Contributor"	content="Stein, Nils (Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany)">
+	<meta name="DC.Subject"	content="barley">
+	<meta name="DC.Subject"	content="Hordeum vulgare">
+	<meta name="DC.Subject"	content="genome sequence assembly">
+	<meta name="DC.Subject"	content="long read sequencing">
+	<meta name="DC.Subject"	content="reference genome">
+	<meta name="DC.Subject"	content="gene annotation">
+	<meta name="DC.Subject"	content="transposable elements">
+				
+		<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//webstats.ipk-gatersleben.de/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '15']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+	
+</head>
+<body>
+
+<div id="grid-container"> 
+
+		<script type ="application/ld+json">
+		{
+			"@context":"http://schema.org",
+			"@type":"Dataset",
+	        "http://purl.org/dc/terms/conformsTo": {
+    			"@type": "CreativeWork",
+    			"@id": "https://bioschemas.org/profiles/Dataset/1.0-RELEASE"
+  			},
+			"@id":"https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/b6e6a2e5-2746-4522-8465-019c8f56df7f/1",
+			"datePublished":"Thu Jan 28 09:16:57 CET 2021",
+			"name":"Barley_MorexV3_pseudomolecules.fasta",
+			"license":"https://creativecommons.org/licenses/by/4.0/legalcode",			
+			"publisher":{
+				"@type":"Organization",
+				"name":"e!DAL - Plant Genomics and Phenomics Research Data Repository (PGP), IPK Gatersleben, Seeland OT Gatersleben, Corrensstraße 3, 06466, Germany"
+			},
+			"description":"DNA sequence file in FASTA format for chromosomal pseudomolecules of barley (Hordeum vulgare) cv. Morex. This is the third release (Morex V3) of the Morex genome sequence assembly. Primary contig assembly from PacBio Hifi reads was done with HiCanu [doi:10.1101/gr.263566.120]. Contigs were scaffolded with Bionano data and arranged into chromosomal pseudomolecules with Hi-C data using the TRITEX pipeline [doi:10.1186/s13059-019-1899-5]. An AGP file specifying the placement of sequence scaffolds in the pseudomolecules is provided. The folder 'gene_annotation' holds the structural gene annotation of the Morex V3 assembly: gene models in GFF3 format, their functional descriptions as well as coding and protein sequences of high- and low-confidence genes. The folder 'repeat annotation' contains GFF files specifying the positions of transposable elements and tandem repeats. A table with the approximate centromere positions is found in the folder 'centromere_positions'. Annotation and data management were supported by the de.NBI grant (www.denbi.de) of the German Federal Ministry of Education and Research (031A536).",
+			"keywords":"barley, Hordeum vulgare, genome sequence assembly, long read sequencing, reference genome, gene annotation, transposable elements",
+			"inLanguage":"en",
+			"author":[
+					{	
+						"@type":"Person",
+						"name":"Martin Mascher",
+			 			"givenName":"Martin",
+			 			"familyName":"Mascher",
+			 			"address":{
+			 				"@type": "PostalAddress",
+			 				"postalCode": "06466",
+			 				"streetAddress":"Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3",
+			 				"addressCountry":"Germany"
+			 			}
+,
+			 			"@id":"https://orcid.org/0000-0001-6373-6013",
+  						"identifier": {
+	    					"@type": "PropertyValue",
+	    					"propertyID": "orcid",
+	    					"value": "0000-0001-6373-6013"
+ 						}
+					}
+ ,					{	
+						"@type":"Person",
+						"name":"Jerry Jenkins",
+			 			"givenName":"Jerry",
+			 			"familyName":"Jenkins",
+			 			"address":"HudsonAlpha Institute for Biotechnology, 601 Genome Way Northwest, Huntsville, AL 35806, United States" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Thomas Lux",
+			 			"givenName":"Thomas",
+			 			"familyName":"Lux",
+			 			"address":"Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Jennifer Ens",
+			 			"givenName":"Jennifer",
+			 			"familyName":"Ens",
+			 			"address":"University of Saskatchewan, Saskatoon, S7N 5A8, Canada" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Heidrun Gundlach",
+			 			"givenName":"Heidrun",
+			 			"familyName":"Gundlach",
+			 			"address":"Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Zuzana Tulpova",
+			 			"givenName":"Zuzana",
+			 			"familyName":"Tulpova",
+			 			"address":"Institute of Experimental Botany of the Czech Academy of Sciences, Centre of the Region Hana for Biotechnological and Agricultural Research, Olomouc, 779 00, Czech Republic" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Uwe Scholz",
+			 			"givenName":"Uwe",
+			 			"familyName":"Scholz",
+			 			"address":"Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Klaus Mayer",
+			 			"givenName":"Klaus",
+			 			"familyName":"Mayer",
+			 			"address":"Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Manuel Spannagl",
+			 			"givenName":"Manuel",
+			 			"familyName":"Spannagl",
+			 			"address":"Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Curtis Pozniak",
+			 			"givenName":"Curtis",
+			 			"familyName":"Pozniak",
+			 			"address":"University of Saskatchewan, Saskatoon, S7N 5A8, Canada" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Hana Simkova",
+			 			"givenName":"Hana",
+			 			"familyName":"Simkova",
+			 			"address":"Institute of Experimental Botany of the Czech Academy of Sciences, Centre of the Region Hana for Biotechnological and Agricultural Research, Olomouc, 779 00, Czech Republic" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Matthew Moscou",
+			 			"givenName":"Matthew",
+			 			"familyName":"Moscou",
+			 			"address":"The Sainsbury Laboratory, University of East Anglia, Norwich, NR4 7UK, United Kingdom" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Jeremy Schmutz",
+			 			"givenName":"Jeremy",
+			 			"familyName":"Schmutz",
+			 			"address":"HudsonAlpha Institute for Biotechnology, 601 Genome Way Northwest, Huntsville, AL 35806, United States" 
+					}
+,					{	
+						"@type":"Person",
+						"name":"Nils Stein",
+			 			"givenName":"Nils",
+			 			"familyName":"Stein",
+			 			"address":"Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany" 
+					}
+ 		 	],
+		 	"creator":[
+					{	
+						"@type":"Person",
+						"name":"Martin Mascher",
+			 			"givenName":"Martin",
+			 			"familyName":"Mascher",
+			 			"address":"Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany" 
+					}
+ 		 	],
+		 	"contributor":[
+					{	
+						"@type":"Person",
+			 			"givenName":"Jerry",
+			 			"familyName":"Jenkins",
+			 			"address":"HudsonAlpha Institute for Biotechnology, 601 Genome Way Northwest, Huntsville, AL 35806, United States" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Thomas",
+			 			"familyName":"Lux",
+			 			"address":"Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Jennifer",
+			 			"familyName":"Ens",
+			 			"address":"University of Saskatchewan, Saskatoon, S7N 5A8, Canada" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Heidrun",
+			 			"familyName":"Gundlach",
+			 			"address":"Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Zuzana",
+			 			"familyName":"Tulpova",
+			 			"address":"Institute of Experimental Botany of the Czech Academy of Sciences, Centre of the Region Hana for Biotechnological and Agricultural Research, Olomouc, 779 00, Czech Republic" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Uwe",
+			 			"familyName":"Scholz",
+			 			"address":"Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Klaus",
+			 			"familyName":"Mayer",
+			 			"address":"Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Manuel",
+			 			"familyName":"Spannagl",
+			 			"address":"Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Curtis",
+			 			"familyName":"Pozniak",
+			 			"address":"University of Saskatchewan, Saskatoon, S7N 5A8, Canada" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Hana",
+			 			"familyName":"Simkova",
+			 			"address":"Institute of Experimental Botany of the Czech Academy of Sciences, Centre of the Region Hana for Biotechnological and Agricultural Research, Olomouc, 779 00, Czech Republic" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Matthew",
+			 			"familyName":"Moscou",
+			 			"address":"The Sainsbury Laboratory, University of East Anglia, Norwich, NR4 7UK, United Kingdom" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Jeremy",
+			 			"familyName":"Schmutz",
+			 			"address":"HudsonAlpha Institute for Biotechnology, 601 Genome Way Northwest, Huntsville, AL 35806, United States" 
+					}
+,					{	
+						"@type":"Person",
+			 			"givenName":"Nils",
+			 			"familyName":"Stein",
+			 			"address":"Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany" 
+					}
+ 		 	]
+		}
+		</script>		
+		<script type ="application/ld+json">
+ 			{
+		       "@context":"http://schema.org",
+		       "@type":"Taxon",
+		       "@id":"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=info&id=4513",
+		       "dct:conformsTo":"https://bioschemas.org/profiles/Taxon/0.6-RELEASE",
+		       "name":"Hordeum spontaneum",
+		       "taxonRank":"species",
+		       "parentTaxon":"Hordeum",
+		       "dwc:vernacularName":"barley"
+			}
+  		 	</script>
+		
+ <header>
+        <nav>
+            <div class="container-fluid">
+                <div class="row header">
+                    <div class="col my-auto"><a target="_blank" href="http://edal.ipk-gatersleben.de"><img id="logo-edal" src="https://doi.ipk-gatersleben.de:443/LOGO/edal_logo.png" /></a></div>
+                    <div id="edal-detail-title-long" class="col-auto text-center my-auto">e!DAL - Plant Genomics & Phenomics Research Data Repository</div>
+                    <div id="edal-detail-title-short" class="col-auto text-center my-auto">e!DAL - PGP Repository</div>
+					<div class="col text-right pt-1"><a target="_blank" href="https://www.ipk-gatersleben.de"><img id="logo-ipk" src="https://doi.ipk-gatersleben.de:443/LOGO/ipk_logo.jpg" /></a></div>
+                </div>
+            </div>
+        </nav>
+ </header> 
+    <div id="controls" class="pt-2 pb-2">
+        <div class="px-3 clearfix" id="edal-detail-quote-wrapper">
+            <div id="edal-detail-quote-container">
+            </div>
+        </div>
+    </div> 
+
+
+    <div id="grid-container-content" style="overflow-y: auto;padding-bottom:20px;">
+
+        <div class="container-fluid mt-2 px-4">
+            <div class="row">
+                <div class="col">
+
+                    <div class="card">
+                        <div class="card-body p-3 pb-1">
+
+                            <p class="my-0">
+                                <span style="font-weight:500;">Citation:</span>
+									<a target="_blank" href ="https://commons.datacite.org/doi.org/10.5447/ipk/2021/3">M. Mascher (2020-10-13): Pseudomolecules and annotation of the third version of the reference genome sequence assembly of barley cv. Morex [Morex V3]. 
+												DOI:10.5447/ipk/2021/3
+										 </a>
+                            </p>
+                              <div class="my-0 mt-2">
+			                    <a href="https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/7eb2707b-d447-425c-be7a-fe3f1fae67cb/2/BIBTEX" class="btn btn-outline-primary btn-sm" role="button"><span class="oi oi-data-transfer-download"></span>  BibTeX</a>
+			                    <a href="https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/7eb2707b-d447-425c-be7a-fe3f1fae67cb/2/RIS" class="btn btn-outline-primary btn-sm" role="button"><span class="oi oi-data-transfer-download"></span>  RIS</a>
+			                   <!--  <a href="https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/7eb2707b-d447-425c-be7a-fe3f1fae67cb/2/RDFXML" class="btn btn-outline-primary btn-sm" role="button"><span class="oi oi-data-transfer-download"></span>  RDF/XML</a>
+			                    <a href="https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/7eb2707b-d447-425c-be7a-fe3f1fae67cb/2/RDFTURTLE" class="btn btn-outline-primary btn-sm" role="button"><span class="oi oi-data-transfer-download"></span>  RDF/Turtle</a> -->
+			                    <a href="https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/7eb2707b-d447-425c-be7a-fe3f1fae67cb/2/TEXT" class="btn btn-outline-primary btn-sm" role="button"><span class="oi oi-data-transfer-download"></span>  Text</a>
+			                    <a href="https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/7eb2707b-d447-425c-be7a-fe3f1fae67cb/2/SCHEMA" class="btn btn-outline-primary btn-sm" role="button"><span class="oi oi-data-transfer-download"></span>  JSON-LD</a>               	
+            				</div>
+                            <p class="my-0 mt-2">
+                                <span style="font-weight:500;">Abstract: </span>DNA sequence file in FASTA format for chromosomal pseudomolecules of barley (Hordeum vulgare) cv. Morex. This is the third release (Morex V3) of the Morex genome sequence assembly. Primary contig assembly from PacBio Hifi reads was done with HiCanu [doi:10.1101/gr.263566.120]. Contigs were scaffolded with Bionano data and arranged into chromosomal pseudomolecules with Hi-C data using the TRITEX pipeline [doi:10.1186/s13059-019-1899-5]. An AGP file specifying the placement of sequence scaffolds in the pseudomolecules is provided. The folder 'gene_annotation' holds the structural gene annotation of the Morex V3 assembly: gene models in GFF3 format, their functional descriptions as well as coding and protein sequences of high- and low-confidence genes. The folder 'repeat annotation' contains GFF files specifying the positions of transposable elements and tandem repeats. A table with the approximate centromere positions is found in the folder 'centromere_positions'. Annotation and data management were supported by the de.NBI grant (www.denbi.de) of the German Federal Ministry of Education and Research (031A536).
+                            </p>
+
+                            <p class="my-0 mt-2">
+                                <span style="font-weight:500;">License: </span><a href="#"><a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0 (Creative Commons Attribution)</a></a>
+                            </p>
+
+                            <p class="my-0 mt-2">
+	                                <span style="font-weight:500;">DOI:</span>  
+									10.5447/ipk/2021/3
+                            </p>
+                             <p class="my-0 mt-2">
+                                <span style="font-weight:500;">Content: </span>3 Directories 16 Files (4.9 GB)
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card mt-2">
+                        <div class="card-body p-3">
+                            <h6>Files</h6>
+							<div id="edal-detail-loading-animation">
+                                <i class="fa fa-refresh fa-spin"></i> Loading, please wait!
+                            </div>
+                            <div id="edal-detail-path">
+                                //mascher@IPK-GATERSLEBEN.DE/Pseudomolecules and annotation of the third version of the reference genome sequence assembly of barley cv. Morex [Morex V3]/Barley_MorexV3_pseudomolecules.fasta
+                            </div>
+
+							<div id="edal-detail-directory-up">
+								<a
+									href="https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/7eb2707b-d447-425c-be7a-fe3f1fae67cb/2/">Up to parent directory</a>
+							</div>
+                                                        
+                            <div id="edal-detail-directory-table-wrapper" class="edal-detail-directory-table-wrapper">
+                                <table id="edal-detail-directory-table"></table>
+                            </div>
+
+                            <a href="https://doi.ipk-gatersleben.de:443/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/b6e6a2e5-2746-4522-8465-019c8f56df7f/1/DOWNLOAD" target="_blank" role="button" class="mt-3 btn btn-outline-primary btn-sm"><span class="oi oi-data-transfer-download" title="icon name" aria-hidden="true"></span> Download</a>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mt-2" id="edal-metadata-details">
+                <div class="col">
+                    <div class="card p-3">
+                        <h6>Metadata</h6>
+                        <div class="container-fluid p-0">
+                            <div class="row">
+                                <div class="col-lg">
+                                    <table class="table table-bordered table-sm">	<tr>
+		<td width="120px"><a href="http://purl.org/dc/elements/1.1/contributor">CONTRIBUTOR:</a></td>	
+		<td>	
+			<div id="edal-contributor-short">
+						Jerry Jenkins,   
+			
+						Thomas Lux,   
+			
+						Jennifer Ens,   
+			
+						Heidrun Gundlach,   
+			
+						Zuzana Tulpova,   
+			
+						Uwe Scholz,   
+			
+						Klaus Mayer,   
+			
+						Manuel Spannagl,   
+			
+						Curtis Pozniak,   
+			
+						Hana Simkova,   
+			
+						Matthew Moscou,   
+			
+						Jeremy Schmutz,   
+			
+						Nils Stein  
+			
+				<a id="edal-contributor-show-full" href="#">[Show full information]</a></div>
+			<div id="edal-contributor-long" style="display:none;">
+						Jerry Jenkins, HudsonAlpha Institute for Biotechnology, 601 Genome Way Northwest, Huntsville, AL 35806, United States
+						, <a href="https://orcid.org/0000-0002-7943-3997" target="_blank">0000-0002-7943-3997</a>
+; <br/>	
+						Thomas Lux, Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany
+						, <a href="https://orcid.org/0000-0002-5543-1911" target="_blank">0000-0002-5543-1911</a>
+; <br/>	
+						Jennifer Ens, University of Saskatchewan, Saskatoon, S7N 5A8, Canada
+						, <a href="https://orcid.org/0000-0003-2663-1006" target="_blank">0000-0003-2663-1006</a>
+; <br/>	
+						Heidrun Gundlach, Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany
+						, <a href="https://orcid.org/0000-0002-6757-0943" target="_blank">0000-0002-6757-0943</a>
+; <br/>	
+						Zuzana Tulpova, Institute of Experimental Botany of the Czech Academy of Sciences, Centre of the Region Hana for Biotechnological and Agricultural Research, Olomouc, 779 00, Czech Republic
+						, <a href="https://orcid.org/0000-0002-4403-9367" target="_blank">0000-0002-4403-9367</a>
+; <br/>	
+						Uwe Scholz, Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany
+						, <a href="https://orcid.org/0000-0001-6113-3518" target="_blank">0000-0001-6113-3518</a>
+; <br/>	
+						Klaus Mayer, Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany
+						, <a href="https://orcid.org/0000-0001-6484-1077" target="_blank">0000-0001-6484-1077</a>
+; <br/>	
+						Manuel Spannagl, Helmholtz Center Munich German Research Center for Environmental Health, Neuherberg, 85764, Germany
+						, <a href="https://orcid.org/0000-0003-0701-7035" target="_blank">0000-0003-0701-7035</a>
+; <br/>	
+						Curtis Pozniak, University of Saskatchewan, Saskatoon, S7N 5A8, Canada
+						, <a href="https://orcid.org/0000-0002-7536-3856" target="_blank">0000-0002-7536-3856</a>
+; <br/>	
+						Hana Simkova, Institute of Experimental Botany of the Czech Academy of Sciences, Centre of the Region Hana for Biotechnological and Agricultural Research, Olomouc, 779 00, Czech Republic
+						, <a href="https://orcid.org/0000-0003-4159-7619" target="_blank">0000-0003-4159-7619</a>
+; <br/>	
+						Matthew Moscou, The Sainsbury Laboratory, University of East Anglia, Norwich, NR4 7UK, United Kingdom
+						, <a href="https://orcid.org/0000-0003-2098-6818" target="_blank">0000-0003-2098-6818</a>
+; <br/>	
+						Jeremy Schmutz, HudsonAlpha Institute for Biotechnology, 601 Genome Way Northwest, Huntsville, AL 35806, United States
+						, <a href="https://orcid.org/0000-0001-8062-9172" target="_blank">0000-0001-8062-9172</a>
+; <br/>	
+						Nils Stein, Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany
+						, <a href="https://orcid.org/0000-0003-3011-8731" target="_blank">0000-0003-3011-8731</a>
+<br/>	
+	       		<a id="edal-contributor-hide-full" href="#">[Hide full information]</a>
+	       	</div>
+       	</td>
+	</tr>
+	<tr>
+		<td width="120px"><a href="http://purl.org/dc/elements/1.1/creator">CREATOR:</a></td>	
+		<td>	
+			<div id="edal-creator-short">
+						Martin Mascher  
+			
+				<a id="edal-creator-show-full" href="#">[Show full information]</a></div>
+			<div id="edal-creator-long" style="display:none;">
+						Martin Mascher, Leibniz Institute of Plant Genetics and Crop Plant Research (IPK), Seeland OT Gatersleben, Corrensstrasse 3, 06466, Germany
+						, <a href="https://orcid.org/0000-0001-6373-6013" target="_blank">0000-0001-6373-6013</a>
+<br/>	
+	       		<a id="edal-creator-hide-full" href="#">[Hide full information]</a>
+	       	</div>
+       	</td>
+	</tr>
+	<tr>
+		<td width="120px"><a href="http://purl.org/dc/elements/1.1/publisher">PUBLISHER:</a></td>
+		<td>
+		e!DAL - Plant Genomics and Phenomics Research Data Repository (PGP), IPK Gatersleben, Seeland OT Gatersleben, Corrensstraße 3, 06466, Germany
+		</td>
+	</tr>
+	<tr>
+		<td width="120px"><a href="http://purl.org/dc/elements/1.1/size">SIZE:</a></td>
+		<td>
+		4 GB
+		</td>
+	</tr>
+	<tr>
+		<td width="120px"><a href="http://purl.org/dc/elements/1.1/subject">SUBJECT:</a></td>
+		<td>
+		barley, Hordeum vulgare, genome sequence assembly, long read sequencing, reference genome, gene annotation, transposable elements
+		</td>
+	</tr>
+</table>
+                                </div>
+                                <div class="col-lg">
+                                    <table class="table table-bordered table-sm"><tr>
+	<td width="120px">
+		<a
+			href="http://purl.org/dc/elements/1.1/checksum">CHECKSUM:</a>
+	</td>
+	<td>
+		SHA-256 : 54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb437c1
+	</td>
+</tr>
+<tr>
+	<td width="120px">
+		<a
+			href="http://purl.org/dc/elements/1.1/coverage">COVERAGE:</a>
+	</td>
+	<td>
+		none
+	</td>
+</tr>
+<tr>
+	<td width="120px">
+		<a
+			href="http://purl.org/dc/elements/1.1/date">DATE:</a>
+	</td>
+	<td>
+		Event: event<br/>CREATED:  TimePoint: Tue Oct 13 16:22:13 CEST 2020<br/>UPDATED:  TimePoint: Tue Oct 13 16:22:14 CEST 2020<br/>
+	</td>
+</tr>
+<tr>
+	<td width="120px">
+		<a
+			href="http://purl.org/dc/elements/1.1/format">FORMAT:</a>
+	</td>
+	<td>
+		text/plain
+	</td>
+</tr>
+<tr>
+	<td width="120px">
+		<a
+			href="http://purl.org/dc/elements/1.1/language">LANGUAGE:</a>
+	</td>
+	<td>
+		en
+	</td>
+</tr>
+<tr>
+	<td width="120px">
+		<a
+			href="http://purl.org/dc/elements/1.1/relation">RELATION:</a>
+	</td>
+	<td>
+		none
+	</td>
+</tr>
+<tr>
+	<td width="120px">
+		<a
+			href="http://purl.org/dc/elements/1.1/source">SOURCE:</a>
+	</td>
+	<td>
+		none
+	</td>
+</tr>
+	</table>
+                                </div>
+                            </div>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+             <div class="row mt-2">
+                <div class="col">
+                    <div class="card p-1">
+                        <div class="container-fluid p-0" style=" text-align:center;">
+                             Revision: 1 - CreationDate: Tue Oct 13 16:22:13 CEST 2020 - RevisionDate: Tue Oct 13 16:25:02 CEST 2020                           
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer class="footer">
+        <div>
+            <span class="text-muted">
+					The Leibniz Institute of Plant Genetics and Crop Plant Research (IPK) Gatersleben is committed for maintaining this DOI to resolve to a persistent content page providing metadata describing the data			
+</span>
+        </div>
+    </footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script>
+    $(function () { 
+        $('#edal-contributor-show-full').click(function(event) {
+            event.preventDefault();
+            $('#edal-contributor-long').show();
+            $('#edal-contributor-short').hide();
+        });
+        $('#edal-contributor-hide-full').click(function(event) {
+            event.preventDefault();
+            $('#edal-contributor-long').hide();
+            $('#edal-contributor-short').show();
+        });
+         $('#edal-creator-show-full').click(function(event) {
+            event.preventDefault();
+            $('#edal-creator-long').show();
+            $('#edal-creator-short').hide();
+        });
+        $('#edal-creator-hide-full').click(function(event) {
+            event.preventDefault();
+            $('#edal-creator-long').hide();
+            $('#edal-creator-short').show();
+        });
+		$("#edal-detail-loading-animation").hide();
+        
+        var tbl_wrapper_height = $('#edal-detail-directory-table').height();
+        if (tbl_wrapper_height < 250) {
+            $('#edal-detail-directory-table-wrapper').addClass('scrollbarfix');
+        } else {
+            $('#edal-detail-directory-table-wrapper').removeClass('scrollbarfix');
+        }
+    });
+</script>
+
+</body>
+</html>

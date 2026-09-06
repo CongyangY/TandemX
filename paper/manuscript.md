@@ -287,6 +287,14 @@ These results therefore measure selected source-query recovery and expose a
 family-representation boundary; they do not provide complete real-family recall,
 false-negative rates or donor-specific truth.
 
+The original IPK MorexV3 pseudomolecule FASTA was also acquired with its
+published SHA-256 fixed in advance. The 4,296,032,540-byte file matched that
+checksum; streaming QC found eight unique records and 4,225,605,719 sequence
+bases, including 1,353,994 `N` bases and no other ambiguity codes (Evidence E14).
+This verifies file identity and parseable reference content. Same-cultivar study
+context does not establish an identical raw-read donor or exact satellite copy
+truth.
+
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
 In the larger sample, 7,554/7,557 reads mapped and primary query spans covered
@@ -350,7 +358,7 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 438 local Python tests. Its Rust
+PyO3/Rust extension. The current source passed 442 local Python tests. Its Rust
 source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
 passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
 distributable-wheel builds.
@@ -551,6 +559,8 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S10: all domain-shift baseline, localization, paired
   frozen-rule and panel-source rows in `evidence/abundance_domain_shift_heldout_baseline`
   and `evidence/abundance_domain_shift_multik_heldout`.
+- Supplementary Table S11: MorexV3 contig lengths and base counts in
+  `evidence/MorexV3_reference_qc/reference_receipt.json`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -560,7 +570,7 @@ E8: `multispecies_real_diagnostics`; E9: `reference_mapping_diagnostics`;
 E10: `known_query_recovery`; E11: `abundance_heldout`;
 E12: paired `abundance_heldout_v2` and `abundance_multik_collapse_heldout`;
 E13: paired `abundance_domain_shift_heldout_baseline` and
-`abundance_domain_shift_multik_heldout`.
+`abundance_domain_shift_multik_heldout`; E14: `MorexV3_reference_qc`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

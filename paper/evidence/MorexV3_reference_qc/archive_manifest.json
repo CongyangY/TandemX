@@ -1,0 +1,37 @@
+{
+  "complete": true,
+  "archived_files": [
+    {
+      "file": "source_metadata.html",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/MorexV3_IPK_2021_3/source_metadata.html",
+      "sha256": "8a01314b575f4ea8447c98e6e433ac1a88f5272867456d9a4b2b4432ff11f9bb",
+      "bytes": 33673
+    },
+    {
+      "file": "reference_plan.json",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/MorexV3_IPK_2021_3/reference_plan.json",
+      "sha256": "7c993f1c5aa2a7d6d75f6ac7a095afe1688da73dcff449931dec1c14d2565f59",
+      "bytes": 669
+    },
+    {
+      "file": "reference_receipt.json",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/MorexV3_IPK_2021_3/reference_receipt.json",
+      "sha256": "e1b4cb6c444412ced88125cb59575048bb2f41c30e7db03462852b3e37b8c7ab",
+      "bytes": 3097
+    }
+  ],
+  "external_reference": {
+    "filename": "Barley_MorexV3_pseudomolecules.fasta",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/MorexV3_IPK_2021_3/Barley_MorexV3_pseudomolecules.fasta",
+    "sha256": "54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb437c1",
+    "bytes": 4296032540,
+    "copied_to_repository": false
+  },
+  "qc": {
+    "contig_count": 8,
+    "total_bases": 4225605719,
+    "n_bases": 1353994,
+    "other_ambiguous_bases": 0
+  },
+  "warning": "same_cultivar_study_context_not_verified_identical_donor_or_satellite_copy_truth"
+}

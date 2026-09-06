@@ -1,0 +1,120 @@
+{
+  "complete": true,
+  "scope": "original_published_MorexV3_pseudomolecules",
+  "plan_sha256": "7c993f1c5aa2a7d6d75f6ac7a095afe1688da73dcff449931dec1c14d2565f59",
+  "script_sha256": "e9152fb6f67f9831a59776935ad3eaf24f5feb6c628ba92be3d061befdf4aab3",
+  "qc_script_sha256": "c729a8262100117718a56eb00c1814ea5649e440d452e138edbe5a452de897ef",
+  "parser_sha256": "9b0d190c449ed707a9de2e8c009a34f1bbd54e6b2c6a23c91d8c8f63ff61a2e0",
+  "warning": "same_cultivar_study_context_not_verified_identical_donor_or_satellite_copy_truth",
+  "transfer": {
+    "bytes": 4296032540,
+    "sha256": "54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb437c1",
+    "transfer": "downloaded_complete_after_verified_prefix"
+  },
+  "qc": {
+    "complete": true,
+    "contig_count": 8,
+    "total_bases": 4225605719,
+    "n_bases": 1353994,
+    "other_ambiguous_bases": 0,
+    "base_counts": {
+      "G": 939120472,
+      "T": 1174128911,
+      "C": 939180582,
+      "A": 1171821760,
+      "N": 1353994
+    },
+    "input_sha256": "54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb437c1",
+    "contigs": [
+      {
+        "contig": "chr1H",
+        "length_bp": 516505932,
+        "base_counts": {
+          "G": 114611053,
+          "T": 143569640,
+          "C": 114589365,
+          "A": 143597530,
+          "N": 138344
+        }
+      },
+      {
+        "contig": "chr2H",
+        "length_bp": 665585731,
+        "base_counts": {
+          "A": 184834881,
+          "C": 147835254,
+          "T": 184897840,
+          "G": 147922088,
+          "N": 95668
+        }
+      },
+      {
+        "contig": "chr3H",
+        "length_bp": 621516506,
+        "base_counts": {
+          "G": 137812863,
+          "A": 172440884,
+          "C": 137913725,
+          "T": 173051416,
+          "N": 297618
+        }
+      },
+      {
+        "contig": "chr4H",
+        "length_bp": 610333535,
+        "base_counts": {
+          "A": 168869127,
+          "T": 169427104,
+          "G": 135880427,
+          "C": 135619160,
+          "N": 537717
+        }
+      },
+      {
+        "contig": "chr5H",
+        "length_bp": 588218686,
+        "base_counts": {
+          "C": 130879112,
+          "G": 130811092,
+          "A": 163009104,
+          "T": 163468635,
+          "N": 50743
+        }
+      },
+      {
+        "contig": "chr6H",
+        "length_bp": 561794515,
+        "base_counts": {
+          "G": 124833313,
+          "C": 124931048,
+          "A": 155725830,
+          "T": 156117641,
+          "N": 186683
+        }
+      },
+      {
+        "contig": "chr7H",
+        "length_bp": 632540561,
+        "base_counts": {
+          "C": 140366342,
+          "G": 140389618,
+          "A": 175752504,
+          "T": 176013102,
+          "N": 18995
+        }
+      },
+      {
+        "contig": "chrUn",
+        "length_bp": 29110253,
+        "base_counts": {
+          "C": 7046576,
+          "A": 7591900,
+          "G": 6860018,
+          "T": 7583533,
+          "N": 28226
+        }
+      }
+    ],
+    "biological_qc": "file content only; assembly completeness and satellite copy truth not established"
+  }
+}
