@@ -1,0 +1,18 @@
+2026-09-06 13:21:41,911 INFO command=tandemx discover
+2026-09-06 13:21:41,911 INFO timestamp_utc=2026-09-06T05:21:41.911141+00:00
+2026-09-06 13:21:41,911 INFO output_directory=/Volumes/T7/Codex/TandemX/results/factorial_discovery_s6301_5x_v1_20260906/runs/s6301/condition_004/tandemx/discover
+2026-09-06 13:21:41,911 INFO status=discover_running
+2026-09-06 13:21:41,911 INFO algorithm_mode=elastic_self_alignment kmer_backend=rust min_period=30 max_period=1000
+2026-09-06 13:21:41,911 INFO input_count_skipped reason=not_required_for_discovery_budget
+2026-09-06 13:21:41,912 INFO scan_threads requested=1 effective=1 parallel=false parallel_files=false backend=rust
+2026-09-06 13:21:58,483 INFO progress processed_reads=1000 processed_bases=13884637 candidate_reads=285 elapsed_seconds=16.571 reads_per_second=60.346 mb_per_second=0.838 estimated_remaining_seconds=unknown
+2026-09-06 13:22:14,013 INFO progress processed_reads=2000 processed_bases=27674184 candidate_reads=563 elapsed_seconds=32.101 reads_per_second=62.303 mb_per_second=0.862 estimated_remaining_seconds=unknown
+2026-09-06 13:22:30,117 INFO progress processed_reads=3000 processed_bases=41431355 candidate_reads=849 elapsed_seconds=48.206 reads_per_second=62.233 mb_per_second=0.859 estimated_remaining_seconds=unknown
+2026-09-06 13:22:32,180 INFO progress processed_reads=3619 processed_bases=50002457 candidate_reads=1050 elapsed_seconds=50.268 reads_per_second=71.994 mb_per_second=0.995 estimated_remaining_seconds=unknown
+2026-09-06 13:22:32,180 INFO filter_summary skipped_short_reads=0 skipped_short_kmer=0 skipped_low_complexity=0 seed_overflow_count=3355
+2026-09-06 13:22:32,301 INFO family_audit mode=related backend=rust families=56 possible_pairs=1540
+2026-09-06 13:22:32,319 INFO family_audit scored_pairs=1 emitted_pairs=1 related_pairs=1 retained_collapse_pairs=0
+2026-09-06 13:22:32,330 INFO status=discover_mvp_completed
+2026-09-06 13:22:32,330 INFO candidate_count=1050
+2026-09-06 13:22:32,330 INFO family_count=56
+2026-09-06 13:22:32,330 INFO Discover MVP supports toy-scale FASTA/FASTQ input, including gzip-compressed files

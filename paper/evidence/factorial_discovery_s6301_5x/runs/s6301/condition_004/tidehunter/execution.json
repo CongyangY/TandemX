@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/TideHunter",
+    "-t",
+    "1",
+    "-f",
+    "2",
+    "-p",
+    "30",
+    "-P",
+    "1000",
+    "-m",
+    "30",
+    "-c",
+    "2",
+    "-o",
+    "/Volumes/T7/Codex/TandemX/results/factorial_discovery_s6301_5x_v1_20260906/runs/s6301/condition_004/tidehunter/tidehunter.tsv",
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1/reads/condition_004/reads.fa"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 14.434204459190369,
+  "peak_rss_mib": 345.171875,
+  "cpu_user_seconds": 11.884917,
+  "cpu_system_seconds": 2.486798,
+  "timed_out": false
+}

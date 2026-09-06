@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "input_conditions": 27,
+  "family_conditions": 1485,
+  "paired_method_rows": 4455,
+  "k_values": [
+    15,
+    21,
+    27,
+    31
+  ],
+  "heldout_used": false,
+  "scientific_acceptance": "not_assumed_from_execution_success"
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/trf",
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1/reads/condition_006/reads.fa",
+    "2",
+    "7",
+    "7",
+    "80",
+    "10",
+    "50",
+    "1000",
+    "-ngs",
+    "-h"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 81.78566304105334,
+  "peak_rss_mib": 228.3125,
+  "cpu_user_seconds": 79.177554,
+  "cpu_system_seconds": 1.679244,
+  "timed_out": false
+}

@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+    "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/source_snapshot/benchmarks/scripts/evaluate_multik_factorial.py",
+    "--baseline",
+    "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906",
+    "--worker"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 192.175176249817,
+  "peak_rss_mib": 162.359375,
+  "cpu_user_seconds": 189.932683,
+  "cpu_system_seconds": 0.716719,
+  "timed_out": false
+}

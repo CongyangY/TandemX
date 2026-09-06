@@ -9,6 +9,25 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ### Fixed multi-k replay and expanded discovery scoring
 
+- Source 57ee82d8c78eb9ced1be135068c8c99567ca723e is pushed to both branches;
+  hosted CI 34013737329 passed. All six factorial discovery executions/scorings
+  completed for source6301, 5x clean/high-error conditions (~50 Mb each).
+  All methods recover55/55 founders and eligible array recall1. High-error
+  array precision: TandemX1, TRF.698867, TideHunter.920175; base precision remains
+  .999952/.999988/.996805, respectively. Duplicate penalties are not wrong bases.
+  TandemX50.706/58.898 s, TRF46.873/81.786 s, TideHunter14.434/17.137 s;
+  concurrent-job timing diagnostics only. Compact evidence archived in
+  `paper/evidence/factorial_discovery_s6301_5x`; no family-recall advantage here.
+- Multi-k replay source tables and receipts are archived at
+  `paper/evidence/factorial_multik_replay`. Six-panel PDF/SVG/PNG inspected;
+  SVG has116 editable text elements and zero images after vector heatmap export.
+  All input/output/script hashes verified; per-panel source and detailed legend
+  retained. Initial raster heatmap draft is preserved under `/private/tmp` only.
+- Mo17 1.129-Gb sourceb53a193 run scanned81,775 reads in1,269.837 s, producing
+  85,663 candidate intervals; clustering is still running. Do not infer total
+  runtime/family count/success before its completion receipt. Next scaling target
+  is the repeated per-pair q-gram construction/selection in sequence clustering.
+
 - 0aad0ab82c50f93f0c80351b3b4b3c1749c1908e pushed to both branches. Its fixed
   k15/21/27/31 replay completed all 27 inputs, 1,485 fits and 4,455 paired method
   rows. At 20x/2% unit divergence/high errors, mean bias changes -56.586% to

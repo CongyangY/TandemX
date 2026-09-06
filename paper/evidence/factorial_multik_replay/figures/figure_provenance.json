@@ -1,0 +1,16 @@
+{
+  "script_sha256": "aea86ace34b561d997d579c310e5ded7a31e59ba28a8c221e183ea8ab2186b74",
+  "input_sha256": {
+    "paper/evidence/factorial_multik_replay/metrics.tsv": "cb4a7d7ea377dbb7edb7ed4aa5d90301d199f1498be4a54663704db0b3cbc166",
+    "paper/evidence/factorial_multik_replay/estimates.tsv": "b3ac538db3bc215520f99c61f6c8ad0496c3a8b810b04e2db7dc009d6405939f",
+    "paper/evidence/factorial_multik_replay/validation.json": "1df88f849609eef6334083412c48defeb994efbe6085d24f6bd5c40dee1a17b5",
+    "paper/evidence/factorial_quantification_baseline/copy_number_metrics.tsv": "2d3a6d9128685ddcb1da79cb4cfd962efda60ed8b426261b0e83636191ce4d90"
+  },
+  "output_sha256": {
+    "factorial_quantification.svg": "e9940aeb325c089a47dfc1fab7115937fde0f3a36acbde0aa129106cbe84b665",
+    "factorial_quantification.pdf": "d4c8e0e8eb8df9323595e5e49d104831268f120bfb6413d936d27194c2e4fc4c",
+    "factorial_quantification.png": "f4f248a8662d02476e86f437d61b80d63a4d24394dc7fe65092b3cf629d9b143",
+    "panel_source.tsv": "08df411959f938e623c0cbeb0f0da4f497a02798d35659be1cfadabb3bb74666"
+  },
+  "interpretation": "development_diagnostic_not_final_paper_or_external_superiority"
+}

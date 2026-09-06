@@ -1,0 +1,57 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/environment.json",
+    "archived": "environment.json",
+    "sha256": "7ee8fa8c6e118a40d70979afaf0d29c3a4857153c3b3cbbaadfd3249d3289708"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/estimates.tsv",
+    "archived": "estimates.tsv",
+    "sha256": "b3ac538db3bc215520f99c61f6c8ad0496c3a8b810b04e2db7dc009d6405939f"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/execution.json",
+    "archived": "execution.json",
+    "sha256": "1845658e7de4d8c7908916dd3ed4f7c34a0adcf8e3643c01805d75a41fdfe018"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/inputs.tsv",
+    "archived": "inputs.tsv",
+    "sha256": "c372e67f714ca42ac77e3ab48a51961a6e88b3ab2a0f5b4a4bcb76885013afc6"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/metrics.tsv",
+    "archived": "metrics.tsv",
+    "sha256": "cb4a7d7ea377dbb7edb7ed4aa5d90301d199f1498be4a54663704db0b3cbc166"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/per_k.tsv",
+    "archived": "per_k.tsv",
+    "sha256": "e48f17c7721386c27fbfb1d1442ac67c85237c055a3a895bcc332bd801fbb2f5"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/stderr.log",
+    "archived": "stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/stdout.log",
+    "archived": "stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/summary.tsv",
+    "archived": "summary.tsv",
+    "sha256": "992dbdb3530cae7b098b6cb5cc501550c4f2d81f950578071bde20d4cda67003"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/validation.json",
+    "archived": "validation.json",
+    "sha256": "1df88f849609eef6334083412c48defeb994efbe6085d24f6bd5c40dee1a17b5"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_multik_replay_v1_20260906/worker.log",
+    "archived": "worker.log",
+    "sha256": "59f0143d8882588171351f0cbf9427d0002b0eaeded02ab943776d6c242b1725"
+  }
+]
