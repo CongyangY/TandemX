@@ -1,0 +1,23 @@
+2026-09-06 13:06:40,051 INFO command=tandemx quantify
+2026-09-06 13:06:40,051 INFO timestamp_utc=2026-09-06T05:06:40.051519+00:00
+2026-09-06 13:06:40,051 INFO output_directory=/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/output
+2026-09-06 13:06:40,051 INFO status=quantify_running
+2026-09-06 13:06:40,051 INFO algorithm_mode=diagnostic_kmer_counting kmer_backend=rust k=21
+2026-09-06 13:06:40,300 INFO progress processed_reads=1000 processed_bases=13885006 elapsed_seconds=0.184 reads_per_second=5424.499 mb_per_second=75.319 estimated_remaining_seconds=unknown
+2026-09-06 13:06:40,600 INFO progress processed_reads=2000 processed_bases=27674203 elapsed_seconds=0.484 reads_per_second=4129.819 mb_per_second=57.145 estimated_remaining_seconds=unknown
+2026-09-06 13:06:40,902 INFO progress processed_reads=3000 processed_bases=41431364 elapsed_seconds=0.786 reads_per_second=3816.413 mb_per_second=52.706 estimated_remaining_seconds=unknown
+2026-09-06 13:06:41,201 INFO progress processed_reads=4000 processed_bases=55243266 elapsed_seconds=1.085 reads_per_second=3685.114 mb_per_second=50.894 estimated_remaining_seconds=unknown
+2026-09-06 13:06:41,499 INFO progress processed_reads=5000 processed_bases=68962159 elapsed_seconds=1.383 reads_per_second=3616.501 mb_per_second=49.880 estimated_remaining_seconds=unknown
+2026-09-06 13:06:41,799 INFO progress processed_reads=6000 processed_bases=82801274 elapsed_seconds=1.683 reads_per_second=3564.924 mb_per_second=49.197 estimated_remaining_seconds=unknown
+2026-09-06 13:06:42,101 INFO progress processed_reads=7000 processed_bases=96545218 elapsed_seconds=1.985 reads_per_second=3526.849 mb_per_second=48.643 estimated_remaining_seconds=unknown
+2026-09-06 13:06:42,399 INFO progress processed_reads=8000 processed_bases=110321130 elapsed_seconds=2.283 reads_per_second=3503.832 mb_per_second=48.318 estimated_remaining_seconds=unknown
+2026-09-06 13:06:42,700 INFO progress processed_reads=9000 processed_bases=124208867 elapsed_seconds=2.584 reads_per_second=3483.049 mb_per_second=48.070 estimated_remaining_seconds=unknown
+2026-09-06 13:06:43,002 INFO progress processed_reads=10000 processed_bases=138061247 elapsed_seconds=2.886 reads_per_second=3464.964 mb_per_second=47.838 estimated_remaining_seconds=unknown
+2026-09-06 13:06:43,303 INFO progress processed_reads=11000 processed_bases=151906818 elapsed_seconds=3.187 reads_per_second=3451.647 mb_per_second=47.666 estimated_remaining_seconds=unknown
+2026-09-06 13:06:43,604 INFO progress processed_reads=12000 processed_bases=165775374 elapsed_seconds=3.488 reads_per_second=3440.230 mb_per_second=47.525 estimated_remaining_seconds=unknown
+2026-09-06 13:06:43,906 INFO progress processed_reads=13000 processed_bases=179624849 elapsed_seconds=3.790 reads_per_second=3429.833 mb_per_second=47.391 estimated_remaining_seconds=unknown
+2026-09-06 13:06:44,205 INFO progress processed_reads=14000 processed_bases=193376077 elapsed_seconds=4.089 reads_per_second=3424.198 mb_per_second=47.297 estimated_remaining_seconds=unknown
+2026-09-06 13:06:44,354 INFO progress processed_reads=14475 processed_bases=200007665 elapsed_seconds=4.238 reads_per_second=3415.418 mb_per_second=47.192 estimated_remaining_seconds=unknown
+2026-09-06 13:06:44,399 INFO status=quantify_mvp_completed
+2026-09-06 13:06:44,399 INFO family_count=55
+2026-09-06 13:06:44,399 INFO Quantify MVP supports toy-scale FASTA/FASTQ read input, including gzip-compressed files

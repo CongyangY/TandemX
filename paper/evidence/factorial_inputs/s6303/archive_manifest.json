@@ -1,0 +1,87 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/generation_receipt.json",
+    "archived": "generation_receipt.json",
+    "sha256": "89c26621f6245bd126a0e174d9e6ddcf9809dd296f8335b42536bbdff27d2608"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/run_config.json",
+    "archived": "run_config.json",
+    "sha256": "fd778c77c42d0791145f2a7c8fc6ca2d48ae1f28c300e526661266eba9302032"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/length_histogram.tsv",
+    "archived": "length_histogram.tsv",
+    "sha256": "49c605030d1ae5f72f4f43884a454751de0fc602064d616b560a56d479b165e7"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/generation.log",
+    "archived": "generation.log",
+    "sha256": "2910782d5e76d94cc929c33d1e99541a1806ab3440af2bed51dbe4d0c23a325f"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/genome/manifest.json",
+    "archived": "genome/manifest.json",
+    "sha256": "7615d0e81f0b0f63c59f236a1b3c6a32f9611bf7a9193011e6e7ed8b963c1d2f"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/genome/truth_copy_number.tsv",
+    "archived": "genome/truth_copy_number.tsv",
+    "sha256": "1aa195183662414083c19972d5ff423ca1078092e45818e025ba5fb1bfe9efb8"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/genome/catalogue.fa",
+    "archived": "genome/catalogue.fa",
+    "sha256": "7386ec4d207da3c557af83989206942c6c91396f3f32d4d01bac2fe48c22ac3b"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/genome/genome_index.json",
+    "archived": "genome/genome_index.json",
+    "sha256": "3bc2ae985f983b0c14a4488c6f4a61e356d0ab05d47d4550ecdc2731a41d999c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_001/manifest.json",
+    "archived": "reads/condition_001/manifest.json",
+    "sha256": "88de3684ab431326b9225fdbe4f2c0eb56f772389759cd977f59476394635f0c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_002/manifest.json",
+    "archived": "reads/condition_002/manifest.json",
+    "sha256": "c4471e393469405ec14ed1719802cb77a774ad0f8f2cca25a2e6c4d9584f93b4"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_003/manifest.json",
+    "archived": "reads/condition_003/manifest.json",
+    "sha256": "9e72dcf2f60559880e93f0525e17f4e4b3d308c1970a400bc0e680ba3ebcb8b3"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_004/manifest.json",
+    "archived": "reads/condition_004/manifest.json",
+    "sha256": "250051dbe3d83d63d796eaeb6b7248e1b63d5e1414b5767977898b2a13e5d2b9"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_005/manifest.json",
+    "archived": "reads/condition_005/manifest.json",
+    "sha256": "2e606829d731f8218231238b23644347b69f28cfd231296c19718c208333e6b0"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_006/manifest.json",
+    "archived": "reads/condition_006/manifest.json",
+    "sha256": "ca71c270c3564a69a6d020b8de4647f286ee5b551198b7dba94fd8ec7acb3fda"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_007/manifest.json",
+    "archived": "reads/condition_007/manifest.json",
+    "sha256": "3067a9d9b8d4b14d87d0ee478ced0ffdd19415961aec3bee092b31fe815b65c6"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_008/manifest.json",
+    "archived": "reads/condition_008/manifest.json",
+    "sha256": "f9dea06da639bc1567653e1a0ed7e19153e12248b93bc6e6ac7bb26f7f20503f"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1/reads/condition_009/manifest.json",
+    "archived": "reads/condition_009/manifest.json",
+    "sha256": "31837e56c578b59d709f321cf44adea3695f5e58f307668c0f1d02e880fad6c8"
+  }
+]

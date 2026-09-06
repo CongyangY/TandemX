@@ -1,0 +1,31 @@
+{
+  "seed": 6301,
+  "condition_id": "condition_001",
+  "command": [
+    "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+    "-m",
+    "tandemx.cli",
+    "quantify",
+    "--reads",
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1/reads/condition_001/reads.fa",
+    "--catalog",
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1/genome/catalogue.fa",
+    "--genome-size",
+    "10000000",
+    "--k",
+    "21",
+    "--kmer-backend",
+    "rust",
+    "--no-progress",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_001/output"
+  ],
+  "reads_sha256": "44ff9c228cf4275c4a20c3bd597b7ff2ce279c7e7a6ebc6ab37b8934279aa5c4",
+  "catalogue_sha256": "1403ef95b9a67ec3e786c38cf46528487910d95d9e8ec887688957871cc121cb",
+  "exit_code": 0,
+  "runtime_seconds": 1.287032457999885,
+  "peak_rss_mib": 51.328125,
+  "cpu_user_seconds": 0.38339599999999996,
+  "cpu_system_seconds": 0.023568,
+  "timed_out": false
+}

@@ -406,6 +406,9 @@ whole inputs and retain reproducible read IDs, achieved sizes and distributions.
 The [experimental read-cluster model](docs/read_cluster_quantification.md)
 replaces within-k-mer spread by a read-level sampling calculation in development
 replays; it remains separate from the default CLI pending biological calibration.
+The [experimental multi-k model](docs/multik_quantification.md) tests whether
+word-survival extrapolation reduces divergence/error bias. It retains two
+single-k baselines and fit diagnostics; public quantification is unchanged.
 
 Complete Mo17 CCS input QC now covers 407,670 reads / 5.625 Gb, with nested
 11.68 Mb, 111.51 Mb and 1.129 Gb samples and a checked 10-chromosome reference.

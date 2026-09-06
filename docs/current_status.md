@@ -9,6 +9,23 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ### Completed factorial inputs and conditional scoring controller
 
+- Source 6330d5625c102787c7a894822d1b3ba9599cc92d pushed to both branches;
+  hosted CI 34013149414 and 34013149482 passed. All 27 factorial quantification
+  commands now finished, producing 1,485 rows. Only 77 native k-mer spreads
+  contain truth; at 20x/2% biological divergence/high read errors mean bias is
+  -56.586%. All baseline rows/commands/configs are archived, not scientifically
+  accepted. Three complete simulated input metadata bundles are also archived.
+- Experimental `multik.py` and fixed k15/21/27/31 paired replay are implemented
+  separately from public quantify. Independent naive counting, Rust/Python parity,
+  multiplicity/ambiguity/invalid-input and small actual replay checks passed.
+  Mean k21 and original median k21 are retained as ablations. No sampling interval
+  or AI novelty is claimed. Actual large replay follows the tested source commit.
+  Full suite after these changes: **291 passed in 65.20 s**.
+- Col-0N completed pilot receipts are archived at `paper/evidence/Col0N_real_pilot`.
+  Morex gap-analysis primary methods now establish the relevant HiFi/ONT/Illumina,
+  optical-map, CENH3 and FISH evidence path. CentIER is added as a task-matched
+  assembly centromere-region comparator; not yet installed/run.
+
 - All three 10-Mb development genomes (6301/6302/6303) finished generation,
   each with 55 planted families and nine read conditions. Observed read bases:
   780,054,525 / 780,064,624 / 780,060,539 (total 2,340,179,688). Receipts under

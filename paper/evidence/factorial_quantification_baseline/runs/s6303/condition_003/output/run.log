@@ -1,0 +1,9 @@
+2026-09-06 13:07:12,518 INFO command=tandemx quantify
+2026-09-06 13:07:12,518 INFO timestamp_utc=2026-09-06T05:07:12.518086+00:00
+2026-09-06 13:07:12,518 INFO output_directory=/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_003/output
+2026-09-06 13:07:12,518 INFO status=quantify_running
+2026-09-06 13:07:12,518 INFO algorithm_mode=diagnostic_kmer_counting kmer_backend=rust k=21
+2026-09-06 13:07:12,784 INFO progress processed_reads=727 processed_bases=10006539 elapsed_seconds=0.200 reads_per_second=3638.136 mb_per_second=50.076 estimated_remaining_seconds=unknown
+2026-09-06 13:07:12,846 INFO status=quantify_mvp_completed
+2026-09-06 13:07:12,846 INFO family_count=55
+2026-09-06 13:07:12,846 INFO Quantify MVP supports toy-scale FASTA/FASTQ read input, including gzip-compressed files

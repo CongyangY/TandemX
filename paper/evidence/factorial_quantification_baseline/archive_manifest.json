@@ -1,0 +1,837 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/environment.json",
+    "archived": "environment.json",
+    "sha256": "c023be9945ba2412ddaa475751492e53dfa931a4cc4da66a9e490b2efb8b6d48"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/validation.json",
+    "archived": "validation.json",
+    "sha256": "7e6187f709de8b2bf87a7399b154438396b95f7c0a174d63a534ff99a9da4b94"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/copy_number_metrics.tsv",
+    "archived": "copy_number_metrics.tsv",
+    "sha256": "2d3a6d9128685ddcb1da79cb4cfd962efda60ed8b426261b0e83636191ce4d90"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/copy_number_summary.tsv",
+    "archived": "copy_number_summary.tsv",
+    "sha256": "79ab42027194b024b7d253617763fc997cf6ef6595d3acebd1d8630ee362a5c9"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/run.log",
+    "archived": "run.log",
+    "sha256": "bd7517376b6ffa44f1799daa5df7dc77cf3b26dd8102f6abd0e9ed41bfef81e4"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_001/stdout.log",
+    "archived": "runs/s6301/condition_001/stdout.log",
+    "sha256": "6c00b73bdaf5a09f15ae495e6e68dc5d2010b634e6335710ff0a396a18036acf"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_001/stderr.log",
+    "archived": "runs/s6301/condition_001/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_001/execution.json",
+    "archived": "runs/s6301/condition_001/execution.json",
+    "sha256": "d4156368b37cdc9f2fa6bc61239e156ef22ac737ebba3a8ecb28030c85e12a60"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_001/output/run_config.yaml",
+    "archived": "runs/s6301/condition_001/output/run_config.yaml",
+    "sha256": "8844d7dad178bdec38c9f1da7d2ea5f5806719c2c3ba0dc326bb37d22a38b44d"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_001/output/run.log",
+    "archived": "runs/s6301/condition_001/output/run.log",
+    "sha256": "b99cdefa2b4c91b04a6f8e336bdd88ed378e5be9e0b9cc66e90c8038e2ff8b43"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_001/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_001/output/copy_number.tsv",
+    "sha256": "81a9f863110a390633c31535d414a5ecb55407ef93a06542b9d9f856e577b4e6"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_002/stdout.log",
+    "archived": "runs/s6301/condition_002/stdout.log",
+    "sha256": "39e4be02f9781ddb702fcfcfcca87136815677c1215ac251264cae8e62742c4c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_002/stderr.log",
+    "archived": "runs/s6301/condition_002/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_002/execution.json",
+    "archived": "runs/s6301/condition_002/execution.json",
+    "sha256": "4e22e916524456c0620f6e97e0d9506e9a5bf707c2d7238585a1f73e76a40c58"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_002/output/run_config.yaml",
+    "archived": "runs/s6301/condition_002/output/run_config.yaml",
+    "sha256": "90ec5868d519763063c95d8a32560dfbfefadf6bdc0144c9023f7b81301d1a8e"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_002/output/run.log",
+    "archived": "runs/s6301/condition_002/output/run.log",
+    "sha256": "9f71637c7e409b37fbf0e2f2c64dfaeeccbf0f22dd62dec29ba0c09fc74245a0"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_002/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_002/output/copy_number.tsv",
+    "sha256": "1502893c68ae9691c773b5ee9f347a7ff39df935ebc99778bce1a5602365d43c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_003/stdout.log",
+    "archived": "runs/s6301/condition_003/stdout.log",
+    "sha256": "77c2fb2f699a6c7f80933afd68dab8d5a83fd2dc342d6858715900a0b3380d89"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_003/stderr.log",
+    "archived": "runs/s6301/condition_003/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_003/execution.json",
+    "archived": "runs/s6301/condition_003/execution.json",
+    "sha256": "25bb21ec24e198ce10163da1c05b09baa19025af3ccf65145e9617646a1c93ca"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_003/output/run_config.yaml",
+    "archived": "runs/s6301/condition_003/output/run_config.yaml",
+    "sha256": "cd737cca832dcbc32ab14556572e7d1aa0f4faba4efb92f2a13370dab3d3a5ae"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_003/output/run.log",
+    "archived": "runs/s6301/condition_003/output/run.log",
+    "sha256": "995aa06aae514209c3c7b06e59f41dcdde9aa5bcca26ebb7c378a0d478fcc1b9"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_003/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_003/output/copy_number.tsv",
+    "sha256": "d895ce1d0ce41d4e3d87bab07cc06dc2737d508b30ef0952ae041bd79c0ab5cf"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_004/stdout.log",
+    "archived": "runs/s6301/condition_004/stdout.log",
+    "sha256": "6fe4d680c4b5efcccb0e9faf9a34fe3bcf97023ed4e7836e57d37398713394b7"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_004/stderr.log",
+    "archived": "runs/s6301/condition_004/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_004/execution.json",
+    "archived": "runs/s6301/condition_004/execution.json",
+    "sha256": "bf8758dd455e92532a58b8b0fef759391248cb8127a751a6da5f52a47aadd154"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_004/output/run_config.yaml",
+    "archived": "runs/s6301/condition_004/output/run_config.yaml",
+    "sha256": "7adc17a6a8c6500d18c53223c22622b83819e42d5304c182149a1f3df7f856e5"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_004/output/run.log",
+    "archived": "runs/s6301/condition_004/output/run.log",
+    "sha256": "2679a43754c33560c9a455d0f0f9b2ddbb2adbb868d48388466d151d3e387b23"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_004/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_004/output/copy_number.tsv",
+    "sha256": "858b3288b090c6d5b0dc20a252e0cb81a2019dd1dcd353df3ccfa28716193e94"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_005/stdout.log",
+    "archived": "runs/s6301/condition_005/stdout.log",
+    "sha256": "4ec599961c88384569a2e64789f2eaa87838008aec203e31341662967ce60e2a"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_005/stderr.log",
+    "archived": "runs/s6301/condition_005/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_005/execution.json",
+    "archived": "runs/s6301/condition_005/execution.json",
+    "sha256": "cd11d17d6630884df4565f87aa9aaa78438d116357611ff9de775d4d2df0a12e"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_005/output/run_config.yaml",
+    "archived": "runs/s6301/condition_005/output/run_config.yaml",
+    "sha256": "327dda68f83b99c32d215333f3daf71e10ce64437b5e6b2ea39a79da85939601"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_005/output/run.log",
+    "archived": "runs/s6301/condition_005/output/run.log",
+    "sha256": "6ea07731ca9b55ccab797835cbcf47ae5ec3009398934242d38c6efdcc60f071"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_005/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_005/output/copy_number.tsv",
+    "sha256": "5a02f7d7ddc19d1830245860bbf892f618145538a7f7f6133b36d267d0e351b6"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_006/stdout.log",
+    "archived": "runs/s6301/condition_006/stdout.log",
+    "sha256": "1e4d379c00a9e13201257af4e2cf48f72c1a1015d99c054a85b00d61734c948d"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_006/stderr.log",
+    "archived": "runs/s6301/condition_006/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_006/execution.json",
+    "archived": "runs/s6301/condition_006/execution.json",
+    "sha256": "b62f88562bde1a04ea7b59b53eab47166e495001df4750e1cd67bc344beca523"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_006/output/run_config.yaml",
+    "archived": "runs/s6301/condition_006/output/run_config.yaml",
+    "sha256": "f3aa431d3109b7f323e000b0cbd1e7edbedae01d336dca17dca1d661b02fd8db"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_006/output/run.log",
+    "archived": "runs/s6301/condition_006/output/run.log",
+    "sha256": "3e867fe605bab2ee3c675ac53bb15e5b60a3dc10667db7b8350888308fcd0386"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_006/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_006/output/copy_number.tsv",
+    "sha256": "f8c764ca025af4dafaf0f8ea84d899d7fcfd200e67822cd0601d4a9e6c467de7"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_007/stdout.log",
+    "archived": "runs/s6301/condition_007/stdout.log",
+    "sha256": "d9f6e1b6fdf86ff763d6fa09d5c6d07ee319e04cbe6dd436fc2ebb71a634f54a"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_007/stderr.log",
+    "archived": "runs/s6301/condition_007/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_007/execution.json",
+    "archived": "runs/s6301/condition_007/execution.json",
+    "sha256": "238731c1021ddab414d4c384a7d6564e275a8a184258787fb3ea0f84808d6747"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_007/output/run_config.yaml",
+    "archived": "runs/s6301/condition_007/output/run_config.yaml",
+    "sha256": "a9df90d0535554c3daa4368e61935d06c2df3acd9adfe14d231ed343c0451050"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_007/output/run.log",
+    "archived": "runs/s6301/condition_007/output/run.log",
+    "sha256": "06711ecc29ed9e357b3738f171c88e58709fe94397fba866278a5af81d1cf608"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_007/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_007/output/copy_number.tsv",
+    "sha256": "80497eb9be07922cdd8ae0424db2e09cbd12f563dd333622f4babed6c34c7241"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/stdout.log",
+    "archived": "runs/s6301/condition_008/stdout.log",
+    "sha256": "e93e2962b3035468d20df4be2f4c41d37717a65f4e3c9e600bc5f71d407e525a"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/stderr.log",
+    "archived": "runs/s6301/condition_008/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/execution.json",
+    "archived": "runs/s6301/condition_008/execution.json",
+    "sha256": "dd98bf8a804035837dc00ae2be90a8bfcca39a2feab1ae5b92d35a7a1ecb5933"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/output/run_config.yaml",
+    "archived": "runs/s6301/condition_008/output/run_config.yaml",
+    "sha256": "d4dc6809981abe72e07ecb2ea2ef6fac6c44c393835784ee64deb4d4e5f151c3"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/output/run.log",
+    "archived": "runs/s6301/condition_008/output/run.log",
+    "sha256": "a103e07f6a8e0f73fd5c877bada150ce6154f3cbf1148cfbed251c3e871c8f67"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_008/output/copy_number.tsv",
+    "sha256": "34aa3e7d6000521a2f96b3681a3c31d1567d427df676f797cbd4b9a896cf9aff"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_009/stdout.log",
+    "archived": "runs/s6301/condition_009/stdout.log",
+    "sha256": "dbeaa1c49e389d73e5c323aad519b88b0ddd71ec98a1046b71ad8f208f668458"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_009/stderr.log",
+    "archived": "runs/s6301/condition_009/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_009/execution.json",
+    "archived": "runs/s6301/condition_009/execution.json",
+    "sha256": "76e160f1c73851f0674d371c22b2008eab3f508588ed83a2efe9fecc800a1232"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_009/output/run_config.yaml",
+    "archived": "runs/s6301/condition_009/output/run_config.yaml",
+    "sha256": "5521a1da4ac2106815218906592476c534ffff9ca9e5727c522d891f1416dfdb"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_009/output/run.log",
+    "archived": "runs/s6301/condition_009/output/run.log",
+    "sha256": "3e0c799755c2de35d57319f2709df95592f220f7639c57880adc6c2290aa459b"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_009/output/copy_number.tsv",
+    "archived": "runs/s6301/condition_009/output/copy_number.tsv",
+    "sha256": "33bba89c0892d96f44124f4626b50f22ea4f6976a1d8df247b151e16469f15da"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_001/stdout.log",
+    "archived": "runs/s6302/condition_001/stdout.log",
+    "sha256": "78ac0ab481e48da91c1f0ee0c18a2d9d7bc7729dd2e52528da69b73403d0eb34"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_001/stderr.log",
+    "archived": "runs/s6302/condition_001/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_001/execution.json",
+    "archived": "runs/s6302/condition_001/execution.json",
+    "sha256": "0b253b79ed5e9c482b35f4846059f0402b36f8be43f6367b6fb37368dc194438"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_001/output/run_config.yaml",
+    "archived": "runs/s6302/condition_001/output/run_config.yaml",
+    "sha256": "57df6b5a2795b382d1d5f418f63fb3cddc59159b5334b95da70e27f337ee2ab2"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_001/output/run.log",
+    "archived": "runs/s6302/condition_001/output/run.log",
+    "sha256": "f78bd4833107d83881430d58b0de534264a4aabe7eff37a848179ec9c5ccb779"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_001/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_001/output/copy_number.tsv",
+    "sha256": "02f398d653a411601dfd8cb689dc5438170152a27acacb014086584a9669d0c0"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_002/stdout.log",
+    "archived": "runs/s6302/condition_002/stdout.log",
+    "sha256": "f69da8f2f7e1c84606fbb79aa20a3ec89853ce83b42c09741ef708dca6ca632d"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_002/stderr.log",
+    "archived": "runs/s6302/condition_002/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_002/execution.json",
+    "archived": "runs/s6302/condition_002/execution.json",
+    "sha256": "5900e1c8d29e046b1d3424659cd9a20ca60e8899fa7b659d011c6811f243e893"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_002/output/run_config.yaml",
+    "archived": "runs/s6302/condition_002/output/run_config.yaml",
+    "sha256": "2a64fe40bc4ac75dcf992a5b8969f5028d4262b732cd3186cd574deccdc1c2a6"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_002/output/run.log",
+    "archived": "runs/s6302/condition_002/output/run.log",
+    "sha256": "f1f8fdba37a124c7812532909c345f44ac0926d25255968096514f3ee050b0b6"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_002/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_002/output/copy_number.tsv",
+    "sha256": "2403786f3e800083c2947db5412f38c1f68d07e19b4a2d5e9fb8470a7ae2e0c3"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_003/stdout.log",
+    "archived": "runs/s6302/condition_003/stdout.log",
+    "sha256": "5f7f19825cc097af1ea6a237a2e262bbebe57d46af33fd9aafa6438a18639960"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_003/stderr.log",
+    "archived": "runs/s6302/condition_003/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_003/execution.json",
+    "archived": "runs/s6302/condition_003/execution.json",
+    "sha256": "3735c28fe4ea5e893921205bf395e828c37dbf50cfaa8fb9afaa320f763a5a93"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_003/output/run_config.yaml",
+    "archived": "runs/s6302/condition_003/output/run_config.yaml",
+    "sha256": "55a7e8f9f4f51aa73b3ce0f7e979d01c7d2c36e2152a5b2a6c638072fe9497cd"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_003/output/run.log",
+    "archived": "runs/s6302/condition_003/output/run.log",
+    "sha256": "6a0e48d34310cca1542595ee84011f39a5a63073dcab39ca38e7ccfd2143d5ed"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_003/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_003/output/copy_number.tsv",
+    "sha256": "1f81ba955ae2340f437eaf22d6d32a7d47b5f9b07182bf9cdfbb70970823cf74"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_004/stdout.log",
+    "archived": "runs/s6302/condition_004/stdout.log",
+    "sha256": "a1f9986a24b9de59b3eb26e59d8e12fbbf4a9bf2b86ea9283ee189b1cd5cebc7"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_004/stderr.log",
+    "archived": "runs/s6302/condition_004/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_004/execution.json",
+    "archived": "runs/s6302/condition_004/execution.json",
+    "sha256": "a475905bbbc049ef86cebf81f92b8a0b1476823082493b491e2010651b52aecf"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_004/output/run_config.yaml",
+    "archived": "runs/s6302/condition_004/output/run_config.yaml",
+    "sha256": "9b4d40adc72124d8310f68582a17c6cdd8e6664f1d9748047565b92adcb82302"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_004/output/run.log",
+    "archived": "runs/s6302/condition_004/output/run.log",
+    "sha256": "413f0419ebe62a8e5cce643aa0ab96530cfbbc01376e7a1527bd889920ff2ed8"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_004/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_004/output/copy_number.tsv",
+    "sha256": "736a6977bf08d9ec9070bec3434217ab909057175dc871e8783db1ec721af921"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_005/stdout.log",
+    "archived": "runs/s6302/condition_005/stdout.log",
+    "sha256": "dd9c8081423ba1cd446f2e4bd5a4f8ba9548bc64f4643e5b96ed883dc4070558"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_005/stderr.log",
+    "archived": "runs/s6302/condition_005/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_005/execution.json",
+    "archived": "runs/s6302/condition_005/execution.json",
+    "sha256": "d4ce1619c9e223305a482004d2920ab22e6d11ba10aeaf20396dc946412f6a61"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_005/output/run_config.yaml",
+    "archived": "runs/s6302/condition_005/output/run_config.yaml",
+    "sha256": "b67a670c3f0da3e5cc24935846c2833b6c35319df5051981a7e8f6baa3127c14"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_005/output/run.log",
+    "archived": "runs/s6302/condition_005/output/run.log",
+    "sha256": "88d1b92cfdc0223c3341274aef367d13c3f0c78abeb1352a2ef84ab224347759"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_005/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_005/output/copy_number.tsv",
+    "sha256": "e8394b50333f582d14e2ef253d2b25bdca5964860fb4c662bf8e207795b38bdc"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_006/stdout.log",
+    "archived": "runs/s6302/condition_006/stdout.log",
+    "sha256": "5b51f8af35da88286a7125ac0c0ebe11d4ee03d987963b349736de8ee0f6bb84"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_006/stderr.log",
+    "archived": "runs/s6302/condition_006/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_006/execution.json",
+    "archived": "runs/s6302/condition_006/execution.json",
+    "sha256": "c0283bc4673ff19259f2dd4bf4c58cba6d6624853d76cd785009c09469f38041"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_006/output/run_config.yaml",
+    "archived": "runs/s6302/condition_006/output/run_config.yaml",
+    "sha256": "8b8c7e20b375af6b874735f42572007e0a61404a193199014713df8aba9b7402"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_006/output/run.log",
+    "archived": "runs/s6302/condition_006/output/run.log",
+    "sha256": "0bdf07beba68216a31d713ff51cecd7b3e0da5465ea093ba4387f49137e1aafd"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_006/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_006/output/copy_number.tsv",
+    "sha256": "911f796e81027cdc4e863d8855b5c28627de43f333eb077406cc78a58d84dde1"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_007/stdout.log",
+    "archived": "runs/s6302/condition_007/stdout.log",
+    "sha256": "0a52c426d727a7da7a4afeabd15de4db9ad0af2839e451b15766b3472746972a"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_007/stderr.log",
+    "archived": "runs/s6302/condition_007/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_007/execution.json",
+    "archived": "runs/s6302/condition_007/execution.json",
+    "sha256": "b18afe8b6eecb1d1d354207adc0b55bf98bb9595d486e708b86abf467f98e72d"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_007/output/run_config.yaml",
+    "archived": "runs/s6302/condition_007/output/run_config.yaml",
+    "sha256": "d5df3f47b85c6a935f360f7790f21d513e59674b24529917d32d83538f1ba1ac"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_007/output/run.log",
+    "archived": "runs/s6302/condition_007/output/run.log",
+    "sha256": "9b7ac8feca351a26a60ee763847cd8ba3646817236917502260f0b00142e55cf"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_007/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_007/output/copy_number.tsv",
+    "sha256": "fca0fe5b81857f0a90afa8cf500ab7b9f3d518c4fa4fe91036f23aa485c638e6"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_008/stdout.log",
+    "archived": "runs/s6302/condition_008/stdout.log",
+    "sha256": "7c48dd1a14aac8d6ffbc0ad7dcd3b6cea1afe35608168894f64bbec1c51971f7"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_008/stderr.log",
+    "archived": "runs/s6302/condition_008/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_008/execution.json",
+    "archived": "runs/s6302/condition_008/execution.json",
+    "sha256": "623be38a34208eb3ac8a1a92388942ccd0aebf58ac7e32da21ca89d5738a81d8"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_008/output/run_config.yaml",
+    "archived": "runs/s6302/condition_008/output/run_config.yaml",
+    "sha256": "b17f58c2ada6bf876c96b98a78fe1f12b79866ca780a9691fa220777bbdc0181"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_008/output/run.log",
+    "archived": "runs/s6302/condition_008/output/run.log",
+    "sha256": "39185166095244edeb3331594f33dc677e3c235cac10b529d9159e33b0c2b359"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_008/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_008/output/copy_number.tsv",
+    "sha256": "850a31a4733d67180d07ff89b5528d2da2c358a942d5fcc669aedb796658053f"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_009/stdout.log",
+    "archived": "runs/s6302/condition_009/stdout.log",
+    "sha256": "a08b3d949b59227c2d205281ea8776e6e3a828d1eed9d7d3fbfe809feb492bfb"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_009/stderr.log",
+    "archived": "runs/s6302/condition_009/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_009/execution.json",
+    "archived": "runs/s6302/condition_009/execution.json",
+    "sha256": "28d7c1c0c87b2d1a7a1f56e46a15c1305659cb378f9e7935b7117c1b4a92279d"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_009/output/run_config.yaml",
+    "archived": "runs/s6302/condition_009/output/run_config.yaml",
+    "sha256": "ba275cd495be94d60e3a1ef53986da1a777fc37f98e019dd23f70b67df8b000c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_009/output/run.log",
+    "archived": "runs/s6302/condition_009/output/run.log",
+    "sha256": "70a2a7d6dc34529300591f8e36194f7c207e743ffb74d53f53e55df0e1629e93"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6302/condition_009/output/copy_number.tsv",
+    "archived": "runs/s6302/condition_009/output/copy_number.tsv",
+    "sha256": "dfa9ff0b576d8b9b4c9b230676e19152ab52d5529e44ac6102b7df68eb18b9d9"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_001/stdout.log",
+    "archived": "runs/s6303/condition_001/stdout.log",
+    "sha256": "693d256f70b56b9f2e7dd6c6b6998efd0af268d27481fee3d9812d0dc68d4f10"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_001/stderr.log",
+    "archived": "runs/s6303/condition_001/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_001/execution.json",
+    "archived": "runs/s6303/condition_001/execution.json",
+    "sha256": "f6fd18ee9299feb306fdb942c8c4aefabf113673e2466fd538cba488de791939"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_001/output/run_config.yaml",
+    "archived": "runs/s6303/condition_001/output/run_config.yaml",
+    "sha256": "56fdc6482bccc4d97a78da9d5dc87553f4dc7dce28363088e7f22e0d58758422"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_001/output/run.log",
+    "archived": "runs/s6303/condition_001/output/run.log",
+    "sha256": "dc89bada0329747e6719266df29a835709d46da047f94a315c1cc90add30c1b5"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_001/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_001/output/copy_number.tsv",
+    "sha256": "1a3305089298ec83cf55d329bc7fa917ab4bcea49495ba775600b04bb04f0c27"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_002/stdout.log",
+    "archived": "runs/s6303/condition_002/stdout.log",
+    "sha256": "575bb4f9077f9f7c9df5e73699749831371b6404c5c92db2053533855772e46a"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_002/stderr.log",
+    "archived": "runs/s6303/condition_002/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_002/execution.json",
+    "archived": "runs/s6303/condition_002/execution.json",
+    "sha256": "5f32d5961abcb9da3e42ed64fb7722ecc205b734c53d54eae5dbc5396d4f1f0c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_002/output/run_config.yaml",
+    "archived": "runs/s6303/condition_002/output/run_config.yaml",
+    "sha256": "dfc09057b88a243530868d723063ae7a8e233f35198457eb190ccb38a54f4089"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_002/output/run.log",
+    "archived": "runs/s6303/condition_002/output/run.log",
+    "sha256": "aeaab5ddb16719250c16843884d395d5aae217541d184411c8ac13bad48fb9b6"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_002/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_002/output/copy_number.tsv",
+    "sha256": "f509b44e25a10ed7f74fde8ce33ed3541b7e03d6c4b6b5ba3c274731a8116202"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_003/stdout.log",
+    "archived": "runs/s6303/condition_003/stdout.log",
+    "sha256": "b97eeffde1dda014bc8de1723bb17a09a29b9b5f92ab97499f18c5ba75ca7032"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_003/stderr.log",
+    "archived": "runs/s6303/condition_003/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_003/execution.json",
+    "archived": "runs/s6303/condition_003/execution.json",
+    "sha256": "21d7a20319968e8295d2afd5c3a3b14fb55596a033c67b3a0cd2acdf6a7350a0"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_003/output/run_config.yaml",
+    "archived": "runs/s6303/condition_003/output/run_config.yaml",
+    "sha256": "341c32db3dfef8811499afbb5338f5d1715221456c307f78dc0db02ffdc11f14"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_003/output/run.log",
+    "archived": "runs/s6303/condition_003/output/run.log",
+    "sha256": "d178b7bd013d5d10d610e5141f2476ccda27a5da622168e850ebefa1ca30e946"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_003/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_003/output/copy_number.tsv",
+    "sha256": "c1d04d6cb39a2ce1d7bca6a7fa837f383f56828e6f8153939186c80ae2021e8e"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_004/stdout.log",
+    "archived": "runs/s6303/condition_004/stdout.log",
+    "sha256": "869c1c060471a96fe180953c47af426ff6d029b3979b5e3e7254d2a3486e33ff"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_004/stderr.log",
+    "archived": "runs/s6303/condition_004/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_004/execution.json",
+    "archived": "runs/s6303/condition_004/execution.json",
+    "sha256": "fac5b69422c4ae1fe5b5a9868900dfde5f014e182c37d9ae9b23e0657e186552"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_004/output/run_config.yaml",
+    "archived": "runs/s6303/condition_004/output/run_config.yaml",
+    "sha256": "cb9cab93ace97dc0ab03c88476726dbb74e2ba52f9ea317704c5521eca352647"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_004/output/run.log",
+    "archived": "runs/s6303/condition_004/output/run.log",
+    "sha256": "7c2e36227a6d79add9f34a7b44c6ddae6a0e3203bba3d49dd5506d2272236539"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_004/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_004/output/copy_number.tsv",
+    "sha256": "f4b2acf8c250cdfb1de2fd34624baf69cf08b78b25a5b38c5d99053029d869e2"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_005/stdout.log",
+    "archived": "runs/s6303/condition_005/stdout.log",
+    "sha256": "4e38ca277e9b70707a0b735fd370835bc8c613d5a89593b46820292805c586f5"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_005/stderr.log",
+    "archived": "runs/s6303/condition_005/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_005/execution.json",
+    "archived": "runs/s6303/condition_005/execution.json",
+    "sha256": "d3e14930405863b2225f606d01c3b5cf297b04e55551d4027d4219250c34b40e"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_005/output/run_config.yaml",
+    "archived": "runs/s6303/condition_005/output/run_config.yaml",
+    "sha256": "ba3caae714918e706828d15d0e74e5fd4ef6f52f7ec9bbce1ca624d18f166a79"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_005/output/run.log",
+    "archived": "runs/s6303/condition_005/output/run.log",
+    "sha256": "7a3190935099a5782e45e46faf28382d51d1a4e7ae8cad90a4df6a23e30ea1f1"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_005/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_005/output/copy_number.tsv",
+    "sha256": "6f635bacbaac547e520ccf0efaf9defe6a71c564357be2f5e4d10d64f48f6b92"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_006/stdout.log",
+    "archived": "runs/s6303/condition_006/stdout.log",
+    "sha256": "0f4052a596954e3e7c264eeb712bcb4a2de6eba927c265029af0e302f1f53ab9"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_006/stderr.log",
+    "archived": "runs/s6303/condition_006/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_006/execution.json",
+    "archived": "runs/s6303/condition_006/execution.json",
+    "sha256": "5ed0d1e50f29d587a8d9eb07da2b1d959ff4e0482065435d22c3efe9d17a9d91"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_006/output/run_config.yaml",
+    "archived": "runs/s6303/condition_006/output/run_config.yaml",
+    "sha256": "6fb17235b8dd54d48bbcc4457c4bff1d9db649c4fb8ac3db61e97acc83cb8d18"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_006/output/run.log",
+    "archived": "runs/s6303/condition_006/output/run.log",
+    "sha256": "785dc2da7aeff1d647b98bc4579093d341abe46fdad1fd2b890e6b12e4dffe54"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_006/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_006/output/copy_number.tsv",
+    "sha256": "85e1412f66868b91582497158802de6a8671101a58a2b3e3b285ca3805e47380"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_007/stdout.log",
+    "archived": "runs/s6303/condition_007/stdout.log",
+    "sha256": "342102825e864dee91afdc3e383e6825cdd6ee5b9430020818e04591504fd827"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_007/stderr.log",
+    "archived": "runs/s6303/condition_007/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_007/execution.json",
+    "archived": "runs/s6303/condition_007/execution.json",
+    "sha256": "3137560f7e0bf65842adcd226df2577eb7b830b0ce5fb713727eae0e4f4af8a8"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_007/output/run_config.yaml",
+    "archived": "runs/s6303/condition_007/output/run_config.yaml",
+    "sha256": "c7be1b0bf2e80c188cc8b8d79a56fc6976b8cb2eddad00c2ada48af0f5e94849"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_007/output/run.log",
+    "archived": "runs/s6303/condition_007/output/run.log",
+    "sha256": "f0eef676ba2bb04e866f90d94b45d58853b2ff43482a213af02af895c71afb41"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_007/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_007/output/copy_number.tsv",
+    "sha256": "d41553e109a888ab6ee70c1c10096184cc0c96466b872178cbf2858697473729"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_008/stdout.log",
+    "archived": "runs/s6303/condition_008/stdout.log",
+    "sha256": "031da38d57667175b487cf8fc947120732f334f37de7d45dd1f748d2582cfed2"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_008/stderr.log",
+    "archived": "runs/s6303/condition_008/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_008/execution.json",
+    "archived": "runs/s6303/condition_008/execution.json",
+    "sha256": "d72ed4ff5b5a279c78bc760d166098a69f1358831db6d9afd6829d1cda3e76ad"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_008/output/run_config.yaml",
+    "archived": "runs/s6303/condition_008/output/run_config.yaml",
+    "sha256": "80802eddca1c0320626cda3fa6b409dc221c6e151b637faf409e405ccf48cf2c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_008/output/run.log",
+    "archived": "runs/s6303/condition_008/output/run.log",
+    "sha256": "71b6e056cab371a7762ad9ca27e46b85e62bd4308bd5879dbf5560849f6a8659"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_008/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_008/output/copy_number.tsv",
+    "sha256": "d4e8c42af00ae36fbd96190803d37d67253c940676c6333655c6f971eceea41b"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_009/stdout.log",
+    "archived": "runs/s6303/condition_009/stdout.log",
+    "sha256": "2b44d84fe2c9d5f045b6c7cb33ff8640b01c5f4a2832a4edf7b00c33137254e7"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_009/stderr.log",
+    "archived": "runs/s6303/condition_009/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_009/execution.json",
+    "archived": "runs/s6303/condition_009/execution.json",
+    "sha256": "958d49ba2c4256b6deafb25f117e415e6a30fba6f8815a612a783693370f4574"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_009/output/run_config.yaml",
+    "archived": "runs/s6303/condition_009/output/run_config.yaml",
+    "sha256": "bee4dd0d7bb9258807c39ad3113d7e78632d67f7b75d4802630a49c3a66a50b2"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_009/output/run.log",
+    "archived": "runs/s6303/condition_009/output/run.log",
+    "sha256": "d33718bafc23d41265df98c2f1cb769628868e81b5e513be7d8c9423b6e7ddc1"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6303/condition_009/output/copy_number.tsv",
+    "archived": "runs/s6303/condition_009/output/copy_number.tsv",
+    "sha256": "b9d615466760e324a1d40bf3869989dfbf4bfcf3c4427adbed58dbd0397843eb"
+  }
+]

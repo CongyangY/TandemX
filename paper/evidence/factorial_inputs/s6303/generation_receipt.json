@@ -1,0 +1,120 @@
+{
+  "complete": true,
+  "seed": 6303,
+  "split": "development",
+  "source_sha256": {
+    "benchmarks/scripts/generate_factorial_scale.py": "dd71752e732c857c59b6677dd31f15226b4c2c42b8206fd74a84680e1714bf1f",
+    "benchmarks/abundance/stream_genome.py": "4da7648bdeafa2dc27ac1719face768297ffe2bb8e32e9231e8cb08cbf6139f8",
+    "benchmarks/abundance/stream_reads.py": "b721cffb5d811a6d71ec2d0eb8c2414fad60bda8f8e36c7eaf649f41e9b45d9a",
+    "benchmarks/challenge/simulate.py": "22dfb3645ff6d31019474f1d6fd86f47eb6a8a4f61f456a5cc999ee62eb33368",
+    "benchmarks/challenge/schema.py": "0adbe1eb303f57c226fdeae3a86d5acb89caf77208278d5868cd68256f2c7c37"
+  },
+  "config_sha256": "fd778c77c42d0791145f2a7c8fc6ca2d48ae1f28c300e526661266eba9302032",
+  "histogram_sha256": "49c605030d1ae5f72f4f43884a454751de0fc602064d616b560a56d479b165e7",
+  "worst_case_sequence_base_budget": 1310535005,
+  "family_count": 55,
+  "genome_bp": 10000000,
+  "conditions_completed": [
+    {
+      "condition_id": "condition_001",
+      "coverage": 1,
+      "label": "error_free",
+      "substitution_rate": 0,
+      "insertion_rate": 0,
+      "deletion_rate": 0,
+      "read_count": 727,
+      "total_bases": 10007189,
+      "manifest_sha256": "88de3684ab431326b9225fdbe4f2c0eb56f772389759cd977f59476394635f0c"
+    },
+    {
+      "condition_id": "condition_002",
+      "coverage": 1,
+      "label": "iid_low_indel",
+      "substitution_rate": 0.001,
+      "insertion_rate": 0.001,
+      "deletion_rate": 0.001,
+      "read_count": 727,
+      "total_bases": 10007307,
+      "manifest_sha256": "c4471e393469405ec14ed1719802cb77a774ad0f8f2cca25a2e6c4d9584f93b4"
+    },
+    {
+      "condition_id": "condition_003",
+      "coverage": 1,
+      "label": "iid_high_indel",
+      "substitution_rate": 0.01,
+      "insertion_rate": 0.005,
+      "deletion_rate": 0.005,
+      "read_count": 727,
+      "total_bases": 10006539,
+      "manifest_sha256": "9e72dcf2f60559880e93f0525e17f4e4b3d308c1970a400bc0e680ba3ebcb8b3"
+    },
+    {
+      "condition_id": "condition_004",
+      "coverage": 5,
+      "label": "error_free",
+      "substitution_rate": 0,
+      "insertion_rate": 0,
+      "deletion_rate": 0,
+      "read_count": 3626,
+      "total_bases": 50004458,
+      "manifest_sha256": "250051dbe3d83d63d796eaeb6b7248e1b63d5e1414b5767977898b2a13e5d2b9"
+    },
+    {
+      "condition_id": "condition_005",
+      "coverage": 5,
+      "label": "iid_low_indel",
+      "substitution_rate": 0.001,
+      "insertion_rate": 0.001,
+      "deletion_rate": 0.001,
+      "read_count": 3626,
+      "total_bases": 50004787,
+      "manifest_sha256": "2e606829d731f8218231238b23644347b69f28cfd231296c19718c208333e6b0"
+    },
+    {
+      "condition_id": "condition_006",
+      "coverage": 5,
+      "label": "iid_high_indel",
+      "substitution_rate": 0.01,
+      "insertion_rate": 0.005,
+      "deletion_rate": 0.005,
+      "read_count": 3626,
+      "total_bases": 50003123,
+      "manifest_sha256": "ca71c270c3564a69a6d020b8de4647f286ee5b551198b7dba94fd8ec7acb3fda"
+    },
+    {
+      "condition_id": "condition_007",
+      "coverage": 20,
+      "label": "error_free",
+      "substitution_rate": 0,
+      "insertion_rate": 0,
+      "deletion_rate": 0,
+      "read_count": 14510,
+      "total_bases": 200008831,
+      "manifest_sha256": "3067a9d9b8d4b14d87d0ee478ced0ffdd19415961aec3bee092b31fe815b65c6"
+    },
+    {
+      "condition_id": "condition_008",
+      "coverage": 20,
+      "label": "iid_low_indel",
+      "substitution_rate": 0.001,
+      "insertion_rate": 0.001,
+      "deletion_rate": 0.001,
+      "read_count": 14510,
+      "total_bases": 200009994,
+      "manifest_sha256": "f9dea06da639bc1567653e1a0ed7e19153e12248b93bc6e6ac7bb26f7f20503f"
+    },
+    {
+      "condition_id": "condition_009",
+      "coverage": 20,
+      "label": "iid_high_indel",
+      "substitution_rate": 0.01,
+      "insertion_rate": 0.005,
+      "deletion_rate": 0.005,
+      "read_count": 14510,
+      "total_bases": 200008311,
+      "manifest_sha256": "31837e56c578b59d709f321cf44adea3695f5e58f307668c0f1d02e880fad6c8"
+    }
+  ],
+  "heldout_used": false,
+  "warning": "one_simulated_genome_not_an_independent_plant;factorial_conditions_share_genome_and_read_starts"
+}

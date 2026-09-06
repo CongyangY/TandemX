@@ -4,6 +4,9 @@ The experimental [read-cluster ratio model](read_cluster_quantification.md)
 handles within-read k-mer dependence and finite read-end opportunities using
 streaming family moments. It is a Python research reference, separate from the
 default quantify estimator, with explicit missing intervals for sparse support.
+The separate [multi-k attenuation prototype](multik_quantification.md) fits
+word-survival trends across fixed k values, with mean-k21 and native-median
+ablations. It does not infer sampling intervals from correlated k values.
 Full-file [QC and nested sampling](complete_data_qc.md) support unbiased selection
 within included libraries and record the limits of library/material sampling.
 

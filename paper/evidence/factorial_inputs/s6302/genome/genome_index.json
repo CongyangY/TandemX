@@ -1,0 +1,7 @@
+{
+  "contig": "chr_sim",
+  "length": 10000000,
+  "offset": 9,
+  "line_bases": 80,
+  "line_bytes": 81
+}

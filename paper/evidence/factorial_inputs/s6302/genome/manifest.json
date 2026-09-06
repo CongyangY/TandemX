@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "generator": "streamed_factorial_genome_v1",
+  "seed": 6302,
+  "genome_bp": 10000000,
+  "background_gc": 0.45,
+  "array_specs": [
+    {
+      "family_id": "f001",
+      "period": 61,
+      "copies": 20,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f002",
+      "period": 61,
+      "copies": 20,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f003",
+      "period": 61,
+      "copies": 20,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f004",
+      "period": 61,
+      "copies": 20,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f005",
+      "period": 61,
+      "copies": 20,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f006",
+      "period": 61,
+      "copies": 20,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f007",
+      "period": 61,
+      "copies": 80,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f008",
+      "period": 61,
+      "copies": 80,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f009",
+      "period": 61,
+      "copies": 80,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f010",
+      "period": 61,
+      "copies": 80,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f011",
+      "period": 61,
+      "copies": 80,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f012",
+      "period": 61,
+      "copies": 80,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f013",
+      "period": 61,
+      "copies": 200,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f014",
+      "period": 61,
+      "copies": 200,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f015",
+      "period": 61,
+      "copies": 200,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f016",
+      "period": 61,
+      "copies": 200,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f017",
+      "period": 61,
+      "copies": 200,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f018",
+      "period": 61,
+      "copies": 200,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f019",
+      "period": 171,
+      "copies": 20,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f020",
+      "period": 171,
+      "copies": 20,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f021",
+      "period": 171,
+      "copies": 20,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f022",
+      "period": 171,
+      "copies": 20,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f023",
+      "period": 171,
+      "copies": 20,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f024",
+      "period": 171,
+      "copies": 20,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f025",
+      "period": 171,
+      "copies": 80,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f026",
+      "period": 171,
+      "copies": 80,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f027",
+      "period": 171,
+      "copies": 80,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f028",
+      "period": 171,
+      "copies": 80,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f029",
+      "period": 171,
+      "copies": 80,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f030",
+      "period": 171,
+      "copies": 80,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f031",
+      "period": 171,
+      "copies": 200,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f032",
+      "period": 171,
+      "copies": 200,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f033",
+      "period": 171,
+      "copies": 200,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f034",
+      "period": 171,
+      "copies": 200,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f035",
+      "period": 171,
+      "copies": 200,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f036",
+      "period": 171,
+      "copies": 200,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f037",
+      "period": 421,
+      "copies": 20,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f038",
+      "period": 421,
+      "copies": 20,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f039",
+      "period": 421,
+      "copies": 20,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f040",
+      "period": 421,
+      "copies": 20,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f041",
+      "period": 421,
+      "copies": 20,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f042",
+      "period": 421,
+      "copies": 20,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f043",
+      "period": 421,
+      "copies": 80,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f044",
+      "period": 421,
+      "copies": 80,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f045",
+      "period": 421,
+      "copies": 80,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f046",
+      "period": 421,
+      "copies": 80,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f047",
+      "period": 421,
+      "copies": 80,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f048",
+      "period": 421,
+      "copies": 80,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f049",
+      "period": 421,
+      "copies": 200,
+      "gc": 0.3,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f050",
+      "period": 421,
+      "copies": 200,
+      "gc": 0.3,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f051",
+      "period": 421,
+      "copies": 200,
+      "gc": 0.5,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f052",
+      "period": 421,
+      "copies": 200,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "f053",
+      "period": 421,
+      "copies": 200,
+      "gc": 0.7,
+      "unit_substitution_rate": 0
+    },
+    {
+      "family_id": "f054",
+      "period": 421,
+      "copies": 200,
+      "gc": 0.7,
+      "unit_substitution_rate": 0.02
+    },
+    {
+      "family_id": "megabase_171",
+      "period": 171,
+      "copies": 6000,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.01
+    }
+  ],
+  "warning": "IID_background_haploid_independent_unit_substitutions_not_real_plant_genome",
+  "script_sha256": "4da7648bdeafa2dc27ac1719face768297ffe2bb8e32e9231e8cb08cbf6139f8",
+  "files": {
+    "genome.fa": "a57d0a5cc1c19af931b59778d099fac55048337bc342f93f6a2a6f44ceed8cd5",
+    "genome_index.json": "3bc2ae985f983b0c14a4488c6f4a61e356d0ab05d47d4550ecdc2731a41d999c",
+    "catalogue.fa": "98edbba7f63b7f3aa6184bee7d0a60425f01fc7ec10691bc0ea1f2dfa14b7bfa",
+    "truth_copy_number.tsv": "4fdfbd7f2b583d18963a8ef7747870f9de07da97607c4139be88c2140459c0d9"
+  }
+}

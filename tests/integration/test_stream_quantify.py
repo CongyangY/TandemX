@@ -4,6 +4,7 @@ import pytest
 
 from benchmarks.scripts.generate_factorial_scale import run as generate
 from benchmarks.abundance.run_stream_quantify import run
+from benchmarks.scripts.evaluate_multik_factorial import worker as multik_worker
 from benchmarks.challenge.schema import read_table
 
 
@@ -25,6 +26,14 @@ def test_factorial_quantification_runs_real_cli_with_truth_only_in_evaluator(tmp
     command=json.loads((out/'runs/s6361/condition_001/execution.json').read_text())['command']
     assert '--genome-size' in command and '--catalog' in command
     assert not any('truth_copy' in arg or 'sampling.tsv' in arg or 'substitution' in arg for arg in command)
+    replay=tmp_path/'multik';replay.mkdir()
+    multik_worker(out,replay)
+    replay_receipt=json.loads((replay/'validation.json').read_text())
+    assert replay_receipt['complete'] and replay_receipt['family_conditions']==4
+    assert replay_receipt['paired_method_rows']==12 and not replay_receipt['heldout_used']
+    assert len(read_table(replay/'per_k.tsv'))==16
+    assert {r['method'] for r in read_table(replay/'metrics.tsv')}=={
+        'native_median_k21','mean_k21_exposure','multik_loglinear'}
     with pytest.raises(ValueError,match='unique'):
         run([dataset,dataset],tmp_path/'duplicate')
     (dataset/'genome/catalogue.fa').write_text('changed catalogue')

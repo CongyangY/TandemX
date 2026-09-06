@@ -894,3 +894,29 @@ The conditional scorer `benchmarks.abundance.run_stream_quantify` writes:
   limits; `validation.json` records completed/successful executions, independent
   simulated genomes and scored family conditions. Scientific acceptance is not
   inferred from exit status. `run.log` records each attempted execution.
+
+## Experimental multi-k replay
+
+See [multik_quantification.md](multik_quantification.md). `NA` represents missing
+model estimates, never zero error. This is separate from public quantify output.
+
+- `estimates.tsv`: `seed`, `condition_id`, `family_id`, `monomer_length`,
+  `extrapolated_copy_number`, `uncorrected_mean_k21`, `log_slope_per_base`,
+  `effective_word_loss_probability` (only for nonpositive slopes),
+  `max_absolute_log_residual`, `leave_one_k_out_log_range`, `status`, `warning`.
+  Loss combines divergence/error/model effects; it is not measured read accuracy.
+- `per_k.tsv`: seed/condition/family plus `k`, `diagnostic_kmer_count`,
+  `total_exposure`, `valid_windows`, `mean_corrected_count`,
+  `uncorrected_copy_number`. Counts are corrected for founder word multiplicity;
+  ambiguous-base opportunities remain in exposure.
+- `metrics.tsv`: seed/condition/family, coverage/error/divergence/period/GC/scope
+  strata, `method` (`native_median_k21`, `mean_k21_exposure`, `multik_loglinear`),
+  `truth_copies`, `sampling_oracle_copy_estimate`, `estimate`,
+  `signed_relative_error`, `absolute_relative_error`,
+  `estimator_minus_sampling_oracle`, `status`, `warning`. No sampling CI is supplied.
+- `summary.tsv`: method/coverage/error/divergence/scope groups, total
+  `family_conditions`, `estimates_available`, mean signed/absolute error, median
+  absolute error and mean estimator-minus-oracle; means use available estimates.
+- `inputs.tsv`: seed/condition, reads/catalogue SHA-256, observed read/base counts.
+  Environment/execution/validation receipts retain source and baseline hashes,
+  fixed k values, exit/timeout/resources and complete pairing checks.

@@ -19,6 +19,7 @@ superior simply because its combined workflow has more commands.
 | StringDecomposer/NCRF | Known-motif decomposition | Candidate targeted annotation baselines, with identical supplied motif catalogues; not de novo family discovery | Applicability review pending |
 | Chorus2 | Genome-based oligo-FISH probe specificity | Review specificity and oligo constraints; unique chromosome-painting oligos and repeated satellite probes have different objectives | Official source reviewed; task-matched experiment pending |
 | unitFinder | Plant centromeric monomer discovery/decomposition in assemblies | New Genome Biology soybean study; iterative TRF/nucmer workflow, supplied chromosome and de novo/reference-assisted modes must be matched separately | Primary methods reviewed; implementation/dependency audit and experiment pending |
+| CentIER | Assembly centromere-region prediction using repeats, retrotransposons and k-mer features | Plant Communications method; optional annotation/Hi-C inputs require matched evidence. Region prediction is distinct from read-first monomer recovery | Official source reviewed; dependency/build and matched-region experiment pending |
 
 Add or retire a comparator only with a documented scientific or reproducibility
 reason. Missing dependencies, installation failures, resource limits and version
@@ -87,3 +88,4 @@ data scale, true independent units, reference quality and sampling.
 - [Chorus2 official implementation](https://github.com/zhangtaolab/Chorus2)
 - [unitFinder primary Genome Biology study](https://doi.org/10.1186/s13059-025-03924-9)
 - [unitFinder official implementation](https://github.com/HuangYicheng-Bio/unitFinder)
+- [CentIER official implementation](https://github.com/simon19891216/CentIER)

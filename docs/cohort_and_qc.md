@@ -8,7 +8,8 @@ Latest completed inputs: full Mo17 batch SRR15447419 (5.625 Gb) and Col-0N
 ERR6210723 (14.647 Gb) passed file QC. Mo17 seeded nested 11.681/111.506-Mb
 samples completed TandemX/TRF/TideHunter comparisons; these are two scales of one
 batch, not independent specimens, and descriptive calls are not recall/precision.
-Nipponbare SRR25241090 and Lo7 ERR15194059 complete downloads are under way.
+Col-0N 11.766-Mb three-tool pilot is also complete. Nipponbare SRR25241090,
+Lo7 ERR15194059 and Morex ERR4659246 complete downloads are under way.
 The prospective enrollment table below retains metadata-level source details;
 use the latest receipts and `current_status.md` for completed versus running work.
 Published Mo17 region evidence is documented in
@@ -50,6 +51,16 @@ dropout and organellar contamination. The [Genome Research sequencing-bias
 study](https://genome.cshlp.org/highwire_display/entity_view/node/1046439/full)
 motivates explicit read initiation, length and quality diagnostics near repeats;
 its Drosophila findings are not assumed to hold identically in plants.
+
+[MorexV3 gap analysis](https://onlinelibrary.wiley.com/doi/10.1111/pbi.13816)
+provides an especially relevant orthogonal case: HiFi/ONT/Illumina, optical maps,
+CENH3 and FISH were compared with pseudomolecules. Its methods resolve the raw
+projects as PRJEB40587/40588/31444 and reference PRJEB40589. Repeat quantities
+are method-dependent estimates, not exact truth labels. Preserve cpDNA correction,
+genome-size uncertainty, chrUn versus pseudomolecule content and differences
+between technical read batches. The paper uses HvT01 X16095.1:1–118; its 120-bp
+5S gene marker is not a complete intergenic-spacer-containing 5S repeat unit.
+Known-motif BLAST+union and TRF comparisons complement de novo tools here.
 
 ## Verified source entry points and current state
 

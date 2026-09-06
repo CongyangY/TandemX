@@ -1,0 +1,8 @@
+{
+  "complete": true,
+  "executions": 27,
+  "successful": 27,
+  "independent_simulated_genomes": 3,
+  "copy_number_family_conditions": 1485,
+  "scientific_acceptance": "not_assumed_from_successful_execution"
+}

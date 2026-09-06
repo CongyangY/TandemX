@@ -1,0 +1,38 @@
+command: "tandemx quantify"
+subcommand: "quantify"
+version: "0.1.0"
+timestamp_utc: "2026-09-06T05:06:44.396845+00:00"
+cwd: "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/source_snapshot"
+argv:
+  - "quantify"
+  - "--reads"
+  - "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1/reads/condition_008/reads.fa"
+  - "--catalog"
+  - "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1/genome/catalogue.fa"
+  - "--genome-size"
+  - "10000000"
+  - "--k"
+  - "21"
+  - "--kmer-backend"
+  - "rust"
+  - "--no-progress"
+  - "--outdir"
+  - "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/output"
+python_version: "3.11.15"
+platform: "macOS-14.4.1-arm64-arm-64bit"
+status: "quantify_mvp_completed"
+parameters:
+  catalogue: "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1/genome/catalogue.fa"
+  command: "quantify"
+  genome_size: 10000000
+  haploid_depth: null
+  k: 21
+  kmer_backend: "rust"
+  max_read_bases: null
+  max_reads: null
+  monomers: null
+  no_progress: true
+  outdir: "/Volumes/T7/Codex/TandemX/results/factorial_quantification_baseline_v1_20260906/runs/s6301/condition_008/output"
+  progress_every: 1000
+  reads:
+    - "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1/reads/condition_008/reads.fa"
