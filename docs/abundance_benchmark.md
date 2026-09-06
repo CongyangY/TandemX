@@ -148,3 +148,20 @@ they do not establish divergent-array, unknown-catalogue, empirical HiFi or
 biological under-representation performance. All 5201–5203 seeds are consumed.
 Compact paired archives are `paper/evidence/abundance_heldout_v2` and
 `paper/evidence/abundance_multik_collapse_heldout`.
+
+## Predeclared divergence and fragmentation extension
+
+`benchmarks/configs/abundance_domain_shift_v1.json` defines a second frozen-rule
+validation with unused seeds 5401–5403. It crosses 1%, 3% and 5% independent
+founder-to-unit substitutions with one or three same-family array segments.
+Three-segment arrays contain 500-bp independently generated interruptions, which
+are longer than the localization merger allowance. Each assembly fraction keeps
+the same deterministic prefix of unit variants and regenerates exact interval
+truth. The original coverage, read-error and five retention levels are retained.
+
+This experiment evaluates domain shift of the already frozen multi-k/depth rule;
+it does not recalibrate on the new factors. Substitutions are independent and
+length preserving, and fragmentation represents interrupted same-chromosome
+arrays rather than contig breaks, graph assemblies or empirical satellite
+evolution. The configuration and implementation must be committed and pass CI
+before the 5401–5403 baseline is executed. Those seeds are then single use.

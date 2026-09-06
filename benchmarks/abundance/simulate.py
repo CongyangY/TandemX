@@ -24,22 +24,78 @@ class GenomeSpec:
     copies: tuple[int, ...] = (20, 80, 200)
     flank_bp: int = 25000
     max_genome_bp: int = 2000000
+    unit_substitution_rate: float = 0.0
+    array_fragments: int = 1
+    fragment_gap_bp: int = 0
 
     def validate(self) -> None:
         if not self.periods or len(self.periods) != len(self.copies):
             raise ValueError("Need one copy count per period")
         if any(p < 2 for p in self.periods) or any(c < 2 for c in self.copies) or self.flank_bp < 1:
             raise ValueError("Periods/copies must be >=2; flanks must be positive")
-        size = (len(self.periods) + 1) * self.flank_bp + sum(p*c for p, c in zip(self.periods, self.copies))
+        if (
+            not math.isfinite(self.unit_substitution_rate)
+            or not 0 <= self.unit_substitution_rate < 1
+            or self.array_fragments < 1
+            or self.fragment_gap_bp < 0
+        ):
+            raise ValueError("Invalid unit-divergence or array-fragmentation settings")
+        gaps = len(self.periods) * (self.array_fragments - 1) * self.fragment_gap_bp
+        size = ((len(self.periods) + 1) * self.flank_bp
+                + sum(p*c for p, c in zip(self.periods, self.copies)) + gaps)
         if size > self.max_genome_bp:
             raise ValueError("Genome exceeds the explicit bounded-simulation memory limit")
+
+
+def _copy_sequence(founder: str, rate: float, rng: random.Random) -> str:
+    if rate == 0:
+        return founder
+    bases = list(founder)
+    for index, base in enumerate(bases):
+        if rng.random() < rate:
+            bases[index] = rng.choice(DNA.replace(base, ""))
+    return "".join(bases)
+
+
+def _split_copies(copies: int, fragments: int) -> list[int]:
+    if copies == 0:
+        return []
+    used = min(copies, fragments)
+    quotient, remainder = divmod(copies, used)
+    return [quotient + (index < remainder) for index in range(used)]
+
+
+def challenge_scenarios(config: dict) -> list[tuple[float, int]]:
+    unit_rates = config.get("unit_substitution_rates", [0.0])
+    fragment_counts = config.get("array_fragment_counts", [1])
+    if (
+        not unit_rates or len(set(unit_rates)) != len(unit_rates)
+        or any(not math.isfinite(rate) or not 0 <= rate < 1 for rate in unit_rates)
+        or not fragment_counts or len(set(fragment_counts)) != len(fragment_counts)
+        or any(not isinstance(count, int) or isinstance(count, bool) or count < 1
+               for count in fragment_counts)
+    ):
+        raise ValueError("Invalid unit-divergence or array-fragmentation matrix")
+    return [(float(rate), count) for rate in unit_rates for count in fragment_counts]
+
+
+def scenario_directory(base: Path, scenario_index: int, scenarios: list[tuple[float, int]],
+                       config: dict) -> Path:
+    explicit = "unit_substitution_rates" in config or "array_fragment_counts" in config
+    if len(scenarios) == 1 and scenarios[0] == (0.0, 1) and not explicit:
+        return base
+    return base / f"scenario_{scenario_index:03d}"
 
 
 def build_genome(spec: GenomeSpec, fraction: float = 1.0) -> tuple[str, dict[str, str], list[dict]]:
     spec.validate()
     if not math.isfinite(fraction) or not 0 <= fraction <= 2:
         raise ValueError("Assembly copy fraction must be in [0,2]")
-    size = (len(spec.periods)+1)*spec.flank_bp + sum(p*math.floor(c*fraction+.5) for p,c in zip(spec.periods,spec.copies))
+    retained_copies = [math.floor(c*fraction+.5) for c in spec.copies]
+    fragment_counts = [min(copies, spec.array_fragments) if copies else 0 for copies in retained_copies]
+    size = ((len(spec.periods)+1)*spec.flank_bp
+            + sum(p*c for p,c in zip(spec.periods,retained_copies))
+            + sum(max(0, count-1)*spec.fragment_gap_bp for count in fragment_counts))
     if size > spec.max_genome_bp:
         raise ValueError("Assembly exceeds the explicit bounded-simulation memory limit")
     rng = random.Random(spec.seed)
@@ -47,14 +103,38 @@ def build_genome(spec: GenomeSpec, fraction: float = 1.0) -> tuple[str, dict[str
     # All monomers/flanks are generated before truncating arrays: assembly versions
     # have identical backgrounds and differ only in planted copy counts.
     flanks = ["".join(rng.choices(DNA, k=spec.flank_bp)) for _ in range(len(monomers) + 1)]
+    fragment_gaps = {
+        family: ["".join(rng.choices(DNA, k=spec.fragment_gap_bp))
+                 for _ in range(spec.array_fragments - 1)]
+        for family in monomers
+    }
     parts, truth, position = [flanks[0]], [], len(flanks[0])
     for i, (family, sequence) in enumerate(monomers.items()):
-        copies = math.floor(spec.copies[i] * fraction + .5)
-        end = position + copies * len(sequence)
-        truth.append(dict(chrom="chr_sim", family_id=family, start=position, end=end,
-                          period=len(sequence), copies=copies, repeat_bp=end-position))
-        parts.extend([sequence * copies, flanks[i+1]])
-        position = end + len(flanks[i+1])
+        copies = retained_copies[i]
+        copy_rng = random.Random((spec.seed + 1) * 1_000_003 + (i + 1) * 104_729)
+        variants = [_copy_sequence(sequence, spec.unit_substitution_rate, copy_rng)
+                    for _ in range(copies)]
+        counts = _split_copies(copies, spec.array_fragments)
+        if not counts:
+            truth.append(dict(chrom="chr_sim", family_id=family, array_index=1,
+                              start=position, end=position, period=len(sequence),
+                              copies=0, repeat_bp=0))
+        offset = 0
+        for fragment_index, fragment_copies in enumerate(counts, 1):
+            fragment = "".join(variants[offset:offset+fragment_copies])
+            start, end = position, position + len(fragment)
+            truth.append(dict(chrom="chr_sim", family_id=family, array_index=fragment_index,
+                              start=start, end=end, period=len(sequence),
+                              copies=fragment_copies, repeat_bp=end-start))
+            parts.append(fragment)
+            position = end
+            offset += fragment_copies
+            if fragment_index < len(counts):
+                gap = fragment_gaps[family][fragment_index-1]
+                parts.append(gap)
+                position += len(gap)
+        parts.append(flanks[i+1])
+        position += len(flanks[i+1])
     return "".join(parts), monomers, truth
 
 

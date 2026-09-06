@@ -7,6 +7,32 @@ from pathlib import Path
 from benchmarks.challenge.schema import read_table
 
 
+def truth_by_family(truth: list[dict]) -> dict[str, dict]:
+    grouped: dict[str, dict] = {}
+    for row in truth:
+        family = row["family_id"]
+        period = int(row["period"])
+        start, end = int(row["start"]), int(row["end"])
+        if period <= 0 or start > end or int(row["repeat_bp"]) != end-start:
+            raise ValueError("Invalid truth interval")
+        record = grouped.setdefault(family, dict(
+            family_id=family, period=period, copies=0, repeat_bp=0, intervals=[]
+        ))
+        if record["period"] != period:
+            raise ValueError("One family cannot have multiple truth periods")
+        record["copies"] += int(row["copies"])
+        record["repeat_bp"] += int(row["repeat_bp"])
+        if end > start:
+            record["intervals"].append((start, end))
+    if not grouped:
+        raise ValueError("Truth must contain at least one family")
+    for record in grouped.values():
+        record["intervals"] = union(record["intervals"])
+        if sum(end-start for start, end in record["intervals"]) != record["repeat_bp"]:
+            raise ValueError("Overlapping truth intervals within a family")
+    return grouped
+
+
 def finite_nonnegative(value: str, field: str) -> float:
     result = float(value)
     if not math.isfinite(result) or result < 0:
@@ -17,18 +43,19 @@ def finite_nonnegative(value: str, field: str) -> float:
 def score_copy_number(path: Path, truth: list[dict], sampling: dict) -> list[dict]:
     observed = read_table(path, {"family_id", "estimated_copy_number", "copy_number_interval_low", "copy_number_interval_high"})
     by_family = {r["family_id"]: r for r in observed}
-    if len(by_family) != len(observed) or set(by_family) != {r["family_id"] for r in truth}:
+    expected = truth_by_family(truth)
+    if len(by_family) != len(observed) or set(by_family) != set(expected):
         raise ValueError("Copy-number families differ from supplied known catalogue")
     scores = []
-    for row in truth:
-        value = by_family[row["family_id"]]
+    for family_id, row in expected.items():
+        value = by_family[family_id]
         est, lo, hi = [finite_nonnegative(value[f], f) for f in
                        ("estimated_copy_number", "copy_number_interval_low", "copy_number_interval_high")]
         if lo > hi:
             raise ValueError("Reversed copy-number interval")
         copies = int(row["copies"])
-        oracle = sampling["sampled_repeat_bp"][row["family_id"]] / int(row["period"]) / sampling["actual_base_coverage"]
-        scores.append(dict(family_id=row["family_id"], truth_copies=copies, estimate=est,
+        oracle = sampling["sampled_repeat_bp"][family_id] / int(row["period"]) / sampling["actual_base_coverage"]
+        scores.append(dict(family_id=family_id, truth_copies=copies, estimate=est,
                            signed_relative_error=(est-copies)/copies, absolute_relative_error=abs(est-copies)/copies,
                            interval_low=lo, interval_high=hi, interval_contains_truth=lo<=copies<=hi,
                            interval_relative_width=(hi-lo)/copies, sampling_oracle_copy_estimate=oracle,
@@ -49,7 +76,8 @@ def union(intervals: list[tuple[int, int]]) -> list[tuple[int, int]]:
 
 
 def score_localization(path: Path, truth: list[dict], genome_bp: int) -> list[dict]:
-    predictions = {r["family_id"]: [] for r in truth}
+    expected = truth_by_family(truth)
+    predictions = {family_id: [] for family_id in expected}
     for line in path.read_text().splitlines():
         fields = line.split("\t")
         if len(fields) < 4 or fields[0] != "chr_sim" or fields[3] not in predictions:
@@ -59,26 +87,31 @@ def score_localization(path: Path, truth: list[dict], genome_bp: int) -> list[di
             raise ValueError("Invalid assembly prediction coordinates")
         predictions[fields[3]].append((start, end))
     rows = []
-    for record in truth:
-        spans = union(predictions[record["family_id"]])
+    for family_id, record in expected.items():
+        spans = union(predictions[family_id])
         bp = sum(b-a for a,b in spans)
-        overlap = sum(max(0,min(b,int(record["end"]))-max(a,int(record["start"]))) for a,b in spans)
-        expected = int(record["repeat_bp"])
-        rows.append(dict(family_id=record["family_id"], true_assembly_bp=expected, predicted_assembly_bp=bp,
-                         overlap_bp=overlap, base_recall=overlap/expected if expected else None,
-                         base_precision=overlap/bp if bp else None, fragments=len(spans)))
+        overlap = sum(max(0, min(pred_end, truth_end)-max(pred_start, truth_start))
+                      for pred_start, pred_end in spans
+                      for truth_start, truth_end in record["intervals"])
+        true_bp = int(record["repeat_bp"])
+        rows.append(dict(family_id=family_id, true_assembly_bp=true_bp, predicted_assembly_bp=bp,
+                         overlap_bp=overlap, base_recall=overlap/true_bp if true_bp else None,
+                         base_precision=overlap/bp if bp else None, fragments=len(spans),
+                         truth_fragments=len(record["intervals"])))
     return rows
 
 
 def score_comparison(path: Path, truth: list[dict], assembly_truth: list[dict], threshold: float=.6) -> list[dict]:
     observed = read_table(path, {"family_id", "assembly_read_ratio", "status"})
     by_family = {r["family_id"]: r for r in observed}
-    full = {r["family_id"]: r for r in truth}
+    full = truth_by_family(truth)
+    assembly = truth_by_family(assembly_truth)
     if len(by_family) != len(observed) or set(by_family) != set(full):
         raise ValueError("Comparison families differ from known catalogue")
+    if set(assembly) != set(full):
+        raise ValueError("Assembly truth families differ from full truth")
     result = []
-    for row in assembly_truth:
-        family = row["family_id"]
+    for family, row in assembly.items():
         ratio = int(row["repeat_bp"]) / int(full[family]["repeat_bp"])
         status = by_family[family]["status"]
         # 'reads_only' is a separate observed absence category. Report an explicit

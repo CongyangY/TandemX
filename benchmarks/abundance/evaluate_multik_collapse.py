@@ -11,6 +11,7 @@ import shutil
 
 from benchmarks.challenge.run import source_manifest
 from benchmarks.challenge.schema import digest_file, read_table, write_table
+from benchmarks.abundance.simulate import challenge_scenarios, scenario_directory
 from tandemx.compare.mvp import classify_assembly_read_ratio
 from tandemx.discover.mvp import read_fasta
 from tandemx.quantify.multik import DEFAULT_K_VALUES, estimate_multik
@@ -77,16 +78,18 @@ def score_estimate(
 def summarize(rows: list[dict]) -> list[dict]:
     grouped: dict[tuple, list[dict]] = defaultdict(list)
     for row in rows:
-        grouped[(row["method"], row["coverage"], row["substitution_rate"],
-                 row["assembly_fraction"])].append(row)
+        grouped[(row["method"], row.get("unit_substitution_rate", 0.0),
+                 row.get("array_fragments", 1),
+                 row["coverage"], row["substitution_rate"], row["assembly_fraction"])].append(row)
     result = []
     for keys, group in sorted(grouped.items()):
         counts = Counter(row["outcome"] for row in group)
         available = sum(row["outcome"] != "NA" for row in group)
         tp, fn, fp, tn = (counts[key] for key in ("TP", "FN", "FP", "TN"))
         result.append(dict(
-            method=keys[0], coverage=keys[1], substitution_rate=keys[2],
-            assembly_fraction=keys[3], family_observations=len(group), available=available,
+            method=keys[0], unit_substitution_rate=keys[1], array_fragments=keys[2],
+            coverage=keys[3], substitution_rate=keys[4], assembly_fraction=keys[5],
+            family_observations=len(group), available=available,
             unavailable=counts["NA"], TP=tp, FN=fn, FP=fp, TN=tn,
             sensitivity=tp / (tp + fn) if tp + fn else "NA",
             false_positive_rate=fp / (fp + tn) if fp + tn else "NA",
@@ -208,17 +211,23 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
     threshold = float(config["collapse_threshold"])
     if not 0 < threshold < 1:
         raise ValueError("Invalid collapse threshold")
+    scenarios = challenge_scenarios(config)
+    fragment_gap_bp = config.get("fragment_gap_bp", 0)
 
     baseline_rows = read_table(previous / "copy_number_metrics.tsv", {
         "seed", "coverage", "substitution_rate", "family_id", "estimate"
     })
     baseline = {
-        (int(row["seed"]), float(row["coverage"]), float(row["substitution_rate"]), row["family_id"]):
+        (int(row["seed"]), float(row.get("unit_substitution_rate", 0)),
+         int(row.get("array_fragments", 1)), float(row["coverage"]),
+         float(row["substitution_rate"]), row["family_id"]):
         float(row["estimate"])
         for row in baseline_rows
     }
     locations = {
-        (int(row["seed"]), float(row["assembly_fraction"]), row["family_id"]):
+        (int(row["seed"]), float(row.get("unit_substitution_rate", 0)),
+         int(row.get("array_fragments", 1)), float(row["assembly_fraction"]),
+         row["family_id"]):
         float(row["predicted_assembly_bp"])
         for row in read_table(previous / "localization_metrics.tsv", {
             "seed", "assembly_fraction", "family_id", "predicted_assembly_bp"
@@ -229,8 +238,10 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
         "truth_assembly_read_ratio", "truth_underrepresented"
     })
     truth = {
-        (int(row["seed"]), float(row["coverage"]), float(row["substitution_rate"]),
-         float(row["assembly_fraction"]), row["family_id"]): row
+        (int(row["seed"]), float(row.get("unit_substitution_rate", 0)),
+         int(row.get("array_fragments", 1)), float(row["coverage"]),
+         float(row["substitution_rate"]), float(row["assembly_fraction"]),
+         row["family_id"]): row
         for row in truth_rows
     }
     if len(baseline) != prior_validation["copy_number_family_rows"] or len(truth) != prior_validation["comparison_family_rows"]:
@@ -255,6 +266,9 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
         previous_environment_sha256=digest_file(previous / "environment.json"),
         previous_config_sha256=digest_file(previous / "run_config.json"),
         split=split,
+        challenge_scenarios=[dict(unit_substitution_rate=rate, array_fragments=count,
+                                  fragment_gap_bp=fragment_gap_bp)
+                             for rate, count in scenarios],
         methods=list(METHODS),
         k_values=list(DEFAULT_K_VALUES),
         collapse_threshold=threshold,
@@ -268,78 +282,99 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
     rows = []
     multik_conditions = 0
     for seed in seeds:
-        genome_dir = previous / "genomes" / f"s{seed}"
-        genome_manifest = json.loads((genome_dir / "manifest.json").read_text())
-        for name in ("catalogue.fa", "truth_copy_number.tsv"):
-            if digest_file(genome_dir / name) != genome_manifest["files"][name]:
-                raise ValueError(f"Prior genome input differs: s{seed}/{name}")
-        catalogue = list(read_monomer_fasta(genome_dir / "catalogue.fa"))
-        periods = {record.family_id: len(record.sequence) for record in catalogue}
-        for coverage in config["coverages"]:
-            for error in config["substitution_rates"]:
-                reads_dir = previous / "reads" / f"s{seed}" / f"c{coverage}_e{error}"
-                read_manifest = json.loads((reads_dir / "manifest.json").read_text())
-                if digest_file(reads_dir / "reads.fa") != read_manifest["files"]["reads.fa"]:
-                    raise ValueError("Prior read input hash differs")
-                result = estimate_multik(
-                    (record.sequence for record in read_fasta(reads_dir / "reads.fa")),
-                    catalogue,
-                    int(genome_manifest["genome_bp"]),
-                    backend=backend,
-                )
-                multik_conditions += 1
-                by_family = {row["family_id"]: row for row in result.estimates}
-                if set(by_family) != set(periods):
-                    raise ValueError("Multi-k families differ from the prior catalogue")
-                native_rows = read_table(
-                    previous / "runs" / f"s{seed}" / f"c{coverage}_e{error}"
-                    / "quantify" / "output" / "copy_number.tsv",
-                    {"family_id", "estimated_copy_number", "haploid_depth"},
-                )
-                native = {row["family_id"]: row for row in native_rows}
-                if set(native) != set(periods):
-                    raise ValueError("Prior single-k output families differ from the catalogue")
-                if any(
-                    float(native[family_id]["estimated_copy_number"])
-                    != baseline[(int(seed), float(coverage), float(error), family_id)]
-                    for family_id in periods
-                ):
-                    raise ValueError("Prior root and native single-k estimates differ")
-                for fraction in config["assembly_fractions"]:
-                    for family_id, period in periods.items():
-                        key = (int(seed), float(coverage), float(error), float(fraction), family_id)
-                        truth_row = truth[key]
-                        context = dict(
-                            seed=seed, coverage=coverage, substitution_rate=error,
-                            assembly_fraction=fraction, family_id=family_id,
-                            truth_assembly_read_ratio=float(truth_row["truth_assembly_read_ratio"]),
-                            truth_underrepresented=truth_row["truth_underrepresented"],
-                            assembly_predicted_bp=locations[(int(seed), float(fraction), family_id)],
-                            period=period,
-                            estimated_haploid_depth=float(native[family_id]["haploid_depth"]),
-                        )
-                        for method, estimate, fit_status in (
-                            ("single_k21", baseline[(int(seed), float(coverage), float(error), family_id)],
-                             "single_k_baseline"),
-                            ("multik_loglinear", by_family[family_id]["extrapolated_copy_number"],
-                             by_family[family_id]["status"]),
-                        ):
-                            scored = score_estimate(
-                                family_id=family_id,
+        for scenario_index, (unit_rate, fragment_count) in enumerate(scenarios, 1):
+            genome_dir = scenario_directory(
+                previous / "genomes" / f"s{seed}", scenario_index, scenarios, config
+            )
+            run_dir = scenario_directory(
+                previous / "runs" / f"s{seed}", scenario_index, scenarios, config
+            )
+            reads_root = scenario_directory(
+                previous / "reads" / f"s{seed}", scenario_index, scenarios, config
+            )
+            genome_manifest = json.loads((genome_dir / "manifest.json").read_text())
+            spec = genome_manifest.get("spec", {})
+            if (float(spec.get("unit_substitution_rate", 0)) != unit_rate
+                    or int(spec.get("array_fragments", 1)) != fragment_count
+                    or int(spec.get("fragment_gap_bp", 0)) != fragment_gap_bp):
+                raise ValueError("Prior genome scenario differs from configuration")
+            for name in ("catalogue.fa", "truth_copy_number.tsv"):
+                if digest_file(genome_dir / name) != genome_manifest["files"][name]:
+                    raise ValueError(f"Prior genome input differs: s{seed}/{name}")
+            catalogue = list(read_monomer_fasta(genome_dir / "catalogue.fa"))
+            periods = {record.family_id: len(record.sequence) for record in catalogue}
+            for coverage in config["coverages"]:
+                for error in config["substitution_rates"]:
+                    reads_dir = reads_root / f"c{coverage}_e{error}"
+                    read_manifest = json.loads((reads_dir / "manifest.json").read_text())
+                    if digest_file(reads_dir / "reads.fa") != read_manifest["files"]["reads.fa"]:
+                        raise ValueError("Prior read input hash differs")
+                    result = estimate_multik(
+                        (record.sequence for record in read_fasta(reads_dir / "reads.fa")),
+                        catalogue,
+                        int(genome_manifest["genome_bp"]),
+                        backend=backend,
+                    )
+                    multik_conditions += 1
+                    by_family = {row["family_id"]: row for row in result.estimates}
+                    if set(by_family) != set(periods):
+                        raise ValueError("Multi-k families differ from the prior catalogue")
+                    native_rows = read_table(
+                        run_dir / f"c{coverage}_e{error}" / "quantify" / "output" / "copy_number.tsv",
+                        {"family_id", "estimated_copy_number", "haploid_depth"},
+                    )
+                    native = {row["family_id"]: row for row in native_rows}
+                    if set(native) != set(periods):
+                        raise ValueError("Prior single-k output families differ from the catalogue")
+                    if any(
+                        float(native[family_id]["estimated_copy_number"])
+                        != baseline[(int(seed), unit_rate, fragment_count,
+                                     float(coverage), float(error), family_id)]
+                        for family_id in periods
+                    ):
+                        raise ValueError("Prior root and native single-k estimates differ")
+                    for fraction in config["assembly_fractions"]:
+                        for family_id, period in periods.items():
+                            key = (int(seed), unit_rate, fragment_count, float(coverage),
+                                   float(error), float(fraction), family_id)
+                            truth_row = truth[key]
+                            context = dict(
+                                seed=seed, unit_substitution_rate=unit_rate,
+                                array_fragments=fragment_count, fragment_gap_bp=fragment_gap_bp,
+                                coverage=coverage, substitution_rate=error,
+                                assembly_fraction=fraction, family_id=family_id,
+                                truth_assembly_read_ratio=float(truth_row["truth_assembly_read_ratio"]),
+                                truth_underrepresented=truth_row["truth_underrepresented"],
+                                assembly_predicted_bp=locations[(int(seed), unit_rate,
+                                                                 fragment_count, float(fraction),
+                                                                 family_id)],
                                 period=period,
-                                estimate=estimate,
-                                assembly_bp=context["assembly_predicted_bp"],
-                                truth_ratio=context["truth_assembly_read_ratio"],
-                                threshold=threshold,
-                                method=method,
-                                fit_status=fit_status,
+                                estimated_haploid_depth=float(native[family_id]["haploid_depth"]),
                             )
-                            scored.pop("family_id")
-                            rows.append({**context, **scored})
+                            for method, estimate, fit_status in (
+                                ("single_k21", baseline[(int(seed), unit_rate, fragment_count,
+                                                         float(coverage), float(error), family_id)],
+                                 "single_k_baseline"),
+                                ("multik_loglinear", by_family[family_id]["extrapolated_copy_number"],
+                                 by_family[family_id]["status"]),
+                            ):
+                                scored = score_estimate(
+                                    family_id=family_id,
+                                    period=period,
+                                    estimate=estimate,
+                                    assembly_bp=context["assembly_predicted_bp"],
+                                    truth_ratio=context["truth_assembly_read_ratio"],
+                                    threshold=threshold,
+                                    method=method,
+                                    fit_status=fit_status,
+                                )
+                                scored.pop("family_id")
+                                rows.append({**context, **scored})
     pairs_by_key: dict[tuple, dict[str, dict]] = defaultdict(dict)
     for row in rows:
-        key = (row["seed"], row["coverage"], row["substitution_rate"],
-               row["assembly_fraction"], row["family_id"])
+        key = (row["seed"], row["unit_substitution_rate"], row["array_fragments"],
+               row["coverage"], row["substitution_rate"], row["assembly_fraction"],
+               row["family_id"])
         pairs_by_key[key][row["method"]] = row
     pairs = list(pairs_by_key.values())
     if any(set(pair) != {"single_k21", "multik_loglinear"} for pair in pairs):
@@ -387,6 +422,7 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
         complete=len(rows) == expected,
         split=split,
         independent_genomes=len(seeds),
+        challenge_scenarios=len(scenarios),
         multik_read_conditions=multik_conditions,
         comparison_family_rows=len(rows),
         expected_comparison_family_rows=expected,
