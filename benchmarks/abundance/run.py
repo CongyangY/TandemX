@@ -41,6 +41,14 @@ FROZEN_CLASSIFIER_FILES = {
     "development_environment_sha256": "environment.json",
     "development_config_sha256": "run_config.json",
 }
+FROZEN_DEPTH_GATED_CLASSIFIER_METHOD = "depth_gated_log_space_blend"
+FROZEN_DEPTH_GATED_CLASSIFIER_FILES = {
+    "development_validation_sha256": "validation.json",
+    "development_selection_sha256": "selection.tsv",
+    "development_metrics_sha256": "comparison_metrics.tsv",
+    "development_environment_sha256": "environment.json",
+    "development_config_sha256": "run_config.json",
+}
 
 
 def aggregate(rows: list[dict], group_fields: list[str], kind: str) -> list[dict]:
@@ -164,12 +172,161 @@ def validate_frozen_localizer(config: dict, split: str) -> dict[str, float] | No
     return observed
 
 
+def _validate_frozen_depth_gated_classifier(config: dict, model: dict) -> dict[str, float]:
+    """Verify post-failure depth-gated development before a new held-out run."""
+    raw_rule = config.get("classifier_development_rule")
+    heldout_seeds = config.get("seeds", {}).get("heldout", [])
+    development_seeds = model.get("development_seeds")
+    if (
+        not isinstance(raw_rule, dict)
+        or raw_rule.get("method") != FROZEN_CLASSIFIER_METHOD
+        or raw_rule.get("alpha_grid") != [0, 0.25, 0.5, 0.75, 1]
+        or raw_rule.get("decision_threshold_grid") != [0.45, 0.5, 0.55, 0.6]
+        or raw_rule.get("multik_k_values") != [15, 21, 27, 31]
+        or raw_rule.get("unavailable_or_nonpositive_rule") != "fallback_single_k21"
+        or model.get("method") != FROZEN_DEPTH_GATED_CLASSIFIER_METHOD
+        or model.get("selection_method") != "post_failed_heldout_coverage_diagnostic"
+        or model.get("estimated_depth_source") != "single_k21_estimated_haploid_depth"
+        or model.get("low_depth_cutoff") != 2.0
+        or model.get("low_depth_strategy") != {
+            "method": "single_k21", "blend_alpha": 0.0, "decision_threshold": 0.6
+        }
+        or model.get("standard_depth_strategy") != {
+            "method": "log_space_single_multik_blend",
+            "blend_alpha": 0.5,
+            "decision_threshold": 0.5,
+        }
+        or model.get("k_values") != [15, 21, 27, 31]
+        or model.get("fallback_rule") != "fallback_single_k21"
+        or not isinstance(development_seeds, list) or len(development_seeds) != 6
+        or len(set(development_seeds)) != 6
+        or not isinstance(heldout_seeds, list) or len(heldout_seeds) != 3
+        or len(set(heldout_seeds)) != 3
+        or set(development_seeds) & set(heldout_seeds)
+    ):
+        raise ValueError("Held-out comparison requires a disjoint frozen depth-gated model")
+    if any(
+        not isinstance(model.get(field), str)
+        or len(model[field]) != 64
+        or any(character not in "0123456789abcdef" for character in model[field])
+        for field in FROZEN_DEPTH_GATED_CLASSIFIER_FILES
+    ):
+        raise ValueError("Frozen depth-gated evidence hashes must be lowercase SHA-256 values")
+
+    development = Path(str(model.get("development_result", ""))).expanduser()
+    if not development.is_dir():
+        raise ValueError("Frozen depth-gated development result is unavailable")
+    for field, filename in FROZEN_DEPTH_GATED_CLASSIFIER_FILES.items():
+        path = development / filename
+        if not path.is_file() or digest_file(path) != model[field]:
+            raise ValueError(f"Frozen depth-gated evidence differs: {filename}")
+
+    validation = json.loads((development / "validation.json").read_text())
+    environment = json.loads((development / "environment.json").read_text())
+    development_config = json.loads((development / "run_config.json").read_text())
+    development_rule = development_config.get("classifier_rule")
+    selection = read_table(development / "selection.tsv", {
+        "candidate_id", "method", "low_depth_cutoff", "low_depth_method",
+        "low_depth_blend_alpha", "low_depth_decision_threshold", "standard_method",
+        "standard_blend_alpha", "standard_decision_threshold", "passed",
+    })
+    configured_development = config.get("seeds", {}).get("development")
+    source_seeds = [
+        seed for source in development_config.get("development_sources", [])
+        for seed in source.get("seeds", [])
+    ]
+    if (
+        validation.get("complete") is not True
+        or validation.get("development_only") is not True
+        or validation.get("post_failed_heldout_refinement") is not True
+        or validation.get("selected_candidate") != "depth_gated_blend_v3"
+        or validation.get("consumed_development_seeds") != development_seeds
+        or validation.get("reserved_future_heldout_seeds") != heldout_seeds
+        or validation.get("acceptance", {}).get("passed") is not True
+        or validation.get("comparison_metrics_sha256")
+            != model["development_metrics_sha256"]
+        or validation.get("selection_sha256")
+            != model["development_selection_sha256"]
+        or environment.get("consumed_development_seeds") != development_seeds
+        or environment.get("reserved_future_heldout_seeds") != heldout_seeds
+        or environment.get("config_sha256") != model["development_config_sha256"]
+        or development_config.get("reserved_future_heldout_seeds") != heldout_seeds
+        or sorted(source_seeds) != sorted(development_seeds)
+        or configured_development != development_seeds
+        or not isinstance(development_rule, dict)
+        or development_rule.get("method") != model["method"]
+        or development_rule.get("estimated_depth_source")
+            != model["estimated_depth_source"]
+        or development_rule.get("low_depth_cutoff") != model["low_depth_cutoff"]
+        or development_rule.get("low_depth_strategy") != model["low_depth_strategy"]
+        or development_rule.get("standard_depth_strategy")
+            != model["standard_depth_strategy"]
+        or development_rule.get("multik_k_values") != model["k_values"]
+        or development_rule.get("unavailable_or_nonpositive_rule")
+            != model["fallback_rule"]
+        or len(selection) != 1
+        or selection[0]["candidate_id"] != "depth_gated_blend_v3"
+        or selection[0]["method"] != model["method"]
+        or not math.isclose(float(selection[0]["low_depth_cutoff"]), 2.0,
+                            rel_tol=0, abs_tol=1e-12)
+        or selection[0]["low_depth_method"] != "single_k21"
+        or not math.isclose(float(selection[0]["low_depth_blend_alpha"]), 0.0,
+                            rel_tol=0, abs_tol=1e-12)
+        or not math.isclose(float(selection[0]["low_depth_decision_threshold"]), 0.6,
+                            rel_tol=0, abs_tol=1e-12)
+        or selection[0]["standard_method"] != "log_space_single_multik_blend"
+        or not math.isclose(float(selection[0]["standard_blend_alpha"]), 0.5,
+                            rel_tol=0, abs_tol=1e-12)
+        or not math.isclose(float(selection[0]["standard_decision_threshold"]), 0.5,
+                            rel_tol=0, abs_tol=1e-12)
+        or selection[0]["passed"].lower() not in {"true", "1"}
+    ):
+        raise ValueError("Frozen depth-gated development provenance is inconsistent")
+
+    metric_names = (
+        "full_sensitivity_delta", "full_false_positive_rate_delta",
+        "full_precision_delta", "minimum_cohort_sensitivity_delta",
+        "maximum_cohort_false_positive_rate_delta", "minimum_cohort_precision_delta",
+        "minimum_seed_sensitivity_delta", "maximum_seed_false_positive_rate_delta",
+        "minimum_seed_precision_delta",
+    )
+    observed = {name: float(validation["acceptance"][name]) for name in metric_names}
+    declared = model.get("observed_development_metrics")
+    gates = model.get("selection_gates")
+    if (
+        not isinstance(declared, dict) or set(declared) != set(observed)
+        or any(not math.isclose(float(declared[key]), value, rel_tol=0, abs_tol=1e-12)
+               for key, value in observed.items())
+        or not isinstance(gates, dict) or set(gates) != set(observed)
+        or observed["full_sensitivity_delta"] < float(gates["full_sensitivity_delta"])
+        or observed["full_false_positive_rate_delta"]
+            > float(gates["full_false_positive_rate_delta"])
+        or observed["full_precision_delta"] < float(gates["full_precision_delta"])
+        or observed["minimum_cohort_sensitivity_delta"]
+            < float(gates["minimum_cohort_sensitivity_delta"])
+        or observed["maximum_cohort_false_positive_rate_delta"]
+            > float(gates["maximum_cohort_false_positive_rate_delta"])
+        or observed["minimum_cohort_precision_delta"]
+            < float(gates["minimum_cohort_precision_delta"])
+        or observed["minimum_seed_sensitivity_delta"]
+            < float(gates["minimum_seed_sensitivity_delta"])
+        or observed["maximum_seed_false_positive_rate_delta"]
+            > float(gates["maximum_seed_false_positive_rate_delta"])
+        or observed["minimum_seed_precision_delta"]
+            < float(gates["minimum_seed_precision_delta"])
+    ):
+        raise ValueError("Frozen depth-gated metrics do not satisfy declared gates")
+    return observed
+
+
 def validate_frozen_classifier(config: dict, split: str) -> dict[str, float] | None:
-    """Verify robust development evidence before creating classifier held-out output."""
+    """Verify classifier development evidence before creating held-out output."""
     rule = config.get("classifier_development_rule")
     model = config.get("classifier_model")
     if split != "heldout" or rule is None and model is None:
         return None
+    if isinstance(model, dict) and model.get("method") == FROZEN_DEPTH_GATED_CLASSIFIER_METHOD:
+        return _validate_frozen_depth_gated_classifier(config, model)
     heldout_seeds = config.get("seeds", {}).get("heldout", [])
     if (
         not isinstance(rule, dict)

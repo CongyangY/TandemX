@@ -210,6 +210,15 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   changes TP/FN from 1789/1127 to 1966/950, and raises precision
   0.978665→0.980549. This is post-failure development, not validation; seeds
   5801–5803 remain untouched and reserved for a future frozen test.
+- `abundance_classifier_depth_gated_heldout_v1.json` now freezes that exact v3
+  rule, all five development-artifact hashes, the unchanged localizer and the
+  original held-out gates before generating any new data. The baseline runner
+  verifies the six consumed development seeds are disjoint from 5801–5803 and
+  rechecks the nine declared development deltas. The dedicated held-out
+  evaluator requires complete one-to-one single-k21/multi-k rows and applies the
+  depth gate without held-out fitting or parameter selection. All 467 Python
+  tests pass locally. No 5801–5803 output directory exists yet; run them once
+  only after this freeze commit passes hosted CI on both branches.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

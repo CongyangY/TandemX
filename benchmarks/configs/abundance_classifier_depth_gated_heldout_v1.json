@@ -1,0 +1,152 @@
+{
+  "seeds": {
+    "development": [5601, 5602, 5603, 5701, 5702, 5703],
+    "heldout": [5801, 5802, 5803]
+  },
+  "periods": [61, 171, 421],
+  "copies": [20, 80, 200],
+  "flank_bp": 25000,
+  "unit_substitution_rates": [0.01, 0.03, 0.05],
+  "array_fragment_counts": [1, 3],
+  "fragment_gap_bp": 500,
+  "coverages": [1, 5, 20],
+  "read_length": 5000,
+  "substitution_rates": [0, 0.001, 0.01],
+  "assembly_fractions": [1, 0.75, 0.5, 0.25, 0],
+  "collapse_threshold": 0.6,
+  "k": 21,
+  "locate_identity_model": "iid_base",
+  "locate_min_identity": 0.9,
+  "timeout_seconds": 120,
+  "localizer_model": {
+    "method": "iid_base_exact_anchor_monomer_bridge",
+    "identity_model": "iid_base",
+    "k": 21,
+    "min_identity": 0.9,
+    "array_merge_gap_rule": "max(2*k,monomer_length)",
+    "development_seeds": [5301, 5302, 5303],
+    "development_result": "/Volumes/T7/Codex/TandemX/results/abundance_localizer_development_v2_20260906",
+    "development_validation_sha256": "f0977e413656eb88e375a282935c8cd539fbd9818bce8b070d7cc95adf965f3d",
+    "development_metrics_sha256": "c9c2ec4bb43617f82cc55d22a45a3d2a6bae00dd042999413f3b9ee5efebe7d6",
+    "development_environment_sha256": "95db2fc8403320a385cb5151a0acacd559225c41ea79e927f39af9282ade977d",
+    "development_config_sha256": "2c38f1b914829142fd95e8cd3bdd7f58d0fc6d195ad71c33a7da897c2f872687",
+    "selection_gates": {
+      "full_assembly_mean_base_recall_min": 0.95,
+      "positive_assembly_mean_base_precision_min": 0.95,
+      "absent_family_false_positive_rate_max": 0.0
+    },
+    "observed_development_metrics": {
+      "full_assembly_mean_base_recall": 0.9757281535740102,
+      "positive_assembly_mean_base_precision": 0.9994410311465689,
+      "absent_family_false_positive_rate": 0.0
+    },
+    "warning": "frozen_before_classifier_heldout_seeds;exact_kmer_iid_proxy_is_not_alignment_identity;not_biological_validation"
+  },
+  "classifier_development_rule": {
+    "method": "log_space_single_multik_blend",
+    "alpha_grid": [0, 0.25, 0.5, 0.75, 1],
+    "decision_threshold_grid": [0.45, 0.5, 0.55, 0.6],
+    "multik_k_values": [15, 21, 27, 31],
+    "unavailable_or_nonpositive_rule": "fallback_single_k21",
+    "baseline_anchor": {
+      "alpha": 0,
+      "decision_threshold": 0.6
+    },
+    "selection_constraints": {
+      "false_positive_rate_max_delta_vs_single_k21": 0.0,
+      "precision_min_delta_vs_single_k21": 0.0
+    },
+    "selection_objective": "raw_single_multik_pair_generation_only",
+    "development_acceptance_gates": {
+      "full_sensitivity_min_delta_vs_single_k21": 0.05,
+      "full_false_positive_rate_max_delta_vs_single_k21": 0.0,
+      "full_precision_min_delta_vs_single_k21": 0.0,
+      "leave_one_seed_out_selection_consistent": true,
+      "cross_validated_sensitivity_min_delta_vs_single_k21": 0.03,
+      "cross_validated_false_positive_rate_max_delta_vs_single_k21": 0.0,
+      "cross_validated_precision_min_delta_vs_single_k21": 0.0
+    },
+    "warning": "original_grid_schema_retained_only_to_emit_raw_single_k21_and_multik_loglinear_rows;no_heldout_selection"
+  },
+  "classifier_model": {
+    "method": "depth_gated_log_space_blend",
+    "selection_method": "post_failed_heldout_coverage_diagnostic",
+    "estimated_depth_source": "single_k21_estimated_haploid_depth",
+    "low_depth_cutoff": 2.0,
+    "low_depth_strategy": {
+      "method": "single_k21",
+      "blend_alpha": 0.0,
+      "decision_threshold": 0.6
+    },
+    "standard_depth_strategy": {
+      "method": "log_space_single_multik_blend",
+      "blend_alpha": 0.5,
+      "decision_threshold": 0.5
+    },
+    "k_values": [15, 21, 27, 31],
+    "fallback_rule": "fallback_single_k21",
+    "development_seeds": [5601, 5602, 5603, 5701, 5702, 5703],
+    "development_result": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_depth_gated_development_v3_20260907",
+    "development_validation_sha256": "848768c1146c3c33c42ee6ccafe2169af80ceed206f687ed95e779d7b98435e8",
+    "development_selection_sha256": "b0abae035d4f6d0b1c2ba258efccb3a06544640c02e6d5c256bbd4ef930fa598",
+    "development_metrics_sha256": "19fcf5d5141db58bcbcfb6ac01b6e1c3cb375566555795ad433d7ee535349df3",
+    "development_environment_sha256": "88cec9bc8991aa25cea2c312a5fecf8468ce11422489c45c25813bfcf8654b86",
+    "development_config_sha256": "163f0b0d71821975a6ef0f6714d3fbd08f5f2a06ed4dbc0c78024534cb67b682",
+    "selection_gates": {
+      "full_sensitivity_delta": 0.05,
+      "full_false_positive_rate_delta": 0.0,
+      "full_precision_delta": 0.0,
+      "minimum_cohort_sensitivity_delta": 0.05,
+      "maximum_cohort_false_positive_rate_delta": 0.0,
+      "minimum_cohort_precision_delta": 0.0,
+      "minimum_seed_sensitivity_delta": 0.03,
+      "maximum_seed_false_positive_rate_delta": 0.0,
+      "minimum_seed_precision_delta": 0.0
+    },
+    "observed_development_metrics": {
+      "full_sensitivity_delta": 0.06069958847736623,
+      "full_false_positive_rate_delta": 0.0,
+      "full_precision_delta": 0.001883420551465953,
+      "minimum_cohort_sensitivity_delta": 0.058984910836762716,
+      "maximum_cohort_false_positive_rate_delta": 0.0,
+      "minimum_cohort_precision_delta": 0.0010580878608253963,
+      "minimum_seed_sensitivity_delta": 0.04526748971193417,
+      "maximum_seed_false_positive_rate_delta": 0.0,
+      "minimum_seed_precision_delta": 0.0
+    },
+    "failed_predecessor": {
+      "heldout_result": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_validation_v1_20260906",
+      "validation_sha256": "98b320e2cf39fce96a0bd14f2082f33768f827a93aaa25fee52c446423a48e29",
+      "failed_gates": [
+        "full_false_positive_rate_delta",
+        "full_precision_delta",
+        "maximum_seed_false_positive_rate_delta",
+        "minimum_seed_precision_delta"
+      ]
+    },
+    "warning": "selected_after_failed_5701_5703_validation;all_5601_5703_are_development;frozen_before_5801_5803;transparent_rule_not_AI;not_biological_validation"
+  },
+  "heldout_rule": {
+    "primary_localization_gates": {
+      "full_assembly_mean_base_recall_min": 0.95,
+      "positive_assembly_mean_base_precision_min": 0.95,
+      "absent_family_false_positive_rate_max": 0.0
+    },
+    "primary_classifier_gates": {
+      "full_sensitivity_min_delta_vs_single_k21": 0.05,
+      "full_false_positive_rate_max_delta_vs_single_k21": 0.0,
+      "full_precision_min_delta_vs_single_k21": 0.0,
+      "minimum_seed_sensitivity_min_delta_vs_single_k21": 0.03,
+      "maximum_seed_false_positive_rate_max_delta_vs_single_k21": 0.0,
+      "minimum_seed_precision_min_delta_vs_single_k21": 0.0
+    },
+    "report_without_posthoc_selection": [
+      "TP_FN_FP_TN_and_sensitivity_FPR_precision_overall_and_by_seed",
+      "metrics_by_divergence_fragmentation_coverage_error_and_retention",
+      "low_depth_and_multi_k_fallback_counts",
+      "localization_recall_precision_fragmentation_and_bp_error",
+      "runtime_peak_rss_and_disk_usage"
+    ],
+    "warning": "seeds_5801_5803_must_remain_untouched_until_this_configuration_guard_evaluator_and_tests_are_committed_and_both_GitHub_branches_pass_CI"
+  }
+}
