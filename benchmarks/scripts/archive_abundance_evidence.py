@@ -11,6 +11,7 @@ import re
 import shutil
 
 from benchmarks.challenge.schema import digest_file, read_table, write_table
+from benchmarks.abundance.simulate import challenge_scenarios
 
 
 ROOT_FILES = (
@@ -80,21 +81,24 @@ def _validate_matrix(source: Path, environment: dict, config: dict, validation: 
     coverages = _positive_unique(config.get("coverages"), "coverages")
     errors = _positive_unique(config.get("substitution_rates"), "substitution rates")
     fractions = _positive_unique(config.get("assembly_fractions"), "assembly fractions")
+    scenarios = challenge_scenarios(config)
+    scenario_count = len(scenarios)
     family_count = len(periods)
     expected = {
-        "copy_number_family_rows": len(seeds) * len(coverages) * len(errors) * family_count,
-        "localization_family_rows": len(seeds) * len(fractions) * family_count,
-        "comparison_family_rows": len(seeds) * len(coverages) * len(errors) * len(fractions) * family_count,
+        "copy_number_family_rows": len(seeds) * scenario_count * len(coverages) * len(errors) * family_count,
+        "localization_family_rows": len(seeds) * scenario_count * len(fractions) * family_count,
+        "comparison_family_rows": len(seeds) * scenario_count * len(coverages) * len(errors) * len(fractions) * family_count,
     }
     expected_executions = (
-        len(seeds) * len(fractions)
-        + len(seeds) * len(coverages) * len(errors)
-        + len(seeds) * len(coverages) * len(errors) * len(fractions)
+        len(seeds) * scenario_count * len(fractions)
+        + len(seeds) * scenario_count * len(coverages) * len(errors)
+        + len(seeds) * scenario_count * len(coverages) * len(errors) * len(fractions)
     )
     if (
         validation.get("complete") is not True
         or validation.get("successful") != expected_executions
         or validation.get("executions") != expected_executions
+        or validation.get("challenge_scenarios", 1) != scenario_count
         or any(validation.get(key) != value for key, value in expected.items())
     ):
         raise ValueError("Execution validation does not match the configured matrix")
@@ -103,9 +107,9 @@ def _validate_matrix(source: Path, environment: dict, config: dict, validation: 
         "copy_number_metrics.tsv": (expected["copy_number_family_rows"], {"seed", "family_id"}),
         "localization_metrics.tsv": (expected["localization_family_rows"], {"seed", "family_id"}),
         "comparison_metrics.tsv": (expected["comparison_family_rows"], {"seed", "family_id", "outcome"}),
-        "copy_number_summary.tsv": (len(coverages) * len(errors), {"coverage", "substitution_rate"}),
+        "copy_number_summary.tsv": (scenario_count * len(coverages) * len(errors), {"coverage", "substitution_rate"}),
         "comparison_summary.tsv": (
-            len(coverages) * len(errors) * len(fractions),
+            scenario_count * len(coverages) * len(errors) * len(fractions),
             {"coverage", "substitution_rate", "assembly_fraction", "TP", "FN", "FP", "TN"},
         ),
     }
@@ -119,10 +123,11 @@ def _validate_matrix(source: Path, environment: dict, config: dict, validation: 
 
 def _receipt_rows(source: Path, expected: int, config: dict, split: str) -> list[dict]:
     seed_count = len(config["seeds"][split])
+    scenario_count = len(challenge_scenarios(config))
     expected_labels = Counter({
-        "locate": seed_count * len(config["assembly_fractions"]),
-        "quantify": seed_count * len(config["coverages"]) * len(config["substitution_rates"]),
-        "compare": seed_count * len(config["coverages"]) * len(config["substitution_rates"])
+        "locate": seed_count * scenario_count * len(config["assembly_fractions"]),
+        "quantify": seed_count * scenario_count * len(config["coverages"]) * len(config["substitution_rates"]),
+        "compare": seed_count * scenario_count * len(config["coverages"]) * len(config["substitution_rates"])
         * len(config["assembly_fractions"]),
     })
     rows = []

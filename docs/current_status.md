@@ -110,7 +110,7 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 435 Python tests. The added tests cover
+- The expanded source checkout passes all 437 Python tests. The added tests cover
   compact multi-k evidence integrity, paired figure inputs and clean Morex
   recovery while retaining a divergent partial. Rust source is unchanged.
 - A backward-compatible challenge extension now represents independent
@@ -118,8 +118,11 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   Truth scoring aggregates non-overlapping intervals and copies by family. The
   predeclared configuration crosses 1/3/5% unit divergence with one/three array
   segments on unused held-out seeds 5401–5403, retaining the frozen 4101–4103
-  model hashes and all original coverage/error/retention levels. It has not been
-  executed; commit and CI precede single-use held-out execution.
+  model hashes and all original coverage/error/retention levels. Commit c15dad7
+  passed hosted Ubuntu/macOS CI before seeds 5401–5403 were consumed once. The
+  baseline completed all 1,062 commands and produced 486 copy-number, 270
+  localization and 2,430 comparison rows. Frozen multi-k evaluation remains
+  pending; no domain-shift performance claim is made from execution alone.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

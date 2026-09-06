@@ -165,3 +165,9 @@ length preserving, and fragmentation represents interrupted same-chromosome
 arrays rather than contig breaks, graph assemblies or empirical satellite
 evolution. The configuration and implementation must be committed and pass CI
 before the 5401–5403 baseline is executed. Those seeds are then single use.
+
+After commit `c15dad7` passed hosted Ubuntu and macOS CI, the baseline consumed
+5401–5403 once. All 1,062 commands completed, producing 486 copy-number rows,
+270 localization rows and 2,430 comparison rows across the six challenge
+scenarios. Execution success does not establish performance; the frozen multi-k
+evaluation and paired adverse-stratum analysis remain required.

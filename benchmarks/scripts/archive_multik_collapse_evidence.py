@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 
 from benchmarks.challenge.schema import digest_file, read_table
+from benchmarks.abundance.simulate import challenge_scenarios
 
 
 METHODS = ("single_k21", "multik_loglinear", "multik_fallback_depth_rule")
@@ -106,15 +107,41 @@ def _validate_rows(source: Path, config: dict, validation: dict) -> list[dict]:
     development = {str(seed) for seed in config.get("seeds", {}).get("development", [])}
     if not heldout or not development or heldout & development or {row["seed"] for row in rows} != heldout:
         raise ValueError("Development and held-out seed semantics differ")
+    scenarios = challenge_scenarios(config)
+    observed_scenarios = {
+        (float(row.get("unit_substitution_rate", 0)), int(row.get("array_fragments", 1)))
+        for row in rows
+    }
+    if (
+        observed_scenarios != set(scenarios)
+        or validation.get("challenge_scenarios", 1) != len(scenarios)
+    ):
+        raise ValueError("Challenge scenario matrix differs from the frozen configuration")
+    factors = (
+        config.get("coverages"), config.get("substitution_rates"),
+        config.get("assembly_fractions"), config.get("periods"),
+    )
+    if any(not isinstance(values, list) or not values for values in factors):
+        raise ValueError("Frozen evaluation configuration is incomplete")
+    expected_per_method = (
+        len(heldout) * len(scenarios) * len(config["coverages"])
+        * len(config["substitution_rates"]) * len(config["assembly_fractions"])
+        * len(config["periods"])
+    )
     by_method = {method: [row for row in rows if row["method"] == method] for method in METHODS}
-    if set(row["method"] for row in rows) != set(METHODS) or len({len(group) for group in by_method.values()}) != 1:
+    if (
+        set(row["method"] for row in rows) != set(METHODS)
+        or {len(group) for group in by_method.values()} != {expected_per_method}
+    ):
         raise ValueError("Method rows are missing or unbalanced")
     keys = {
-        method: {(row["seed"], row["coverage"], row["substitution_rate"],
+        method: {(row["seed"], row.get("unit_substitution_rate", "0"),
+                  row.get("array_fragments", "1"), row["coverage"], row["substitution_rate"],
                   row["assembly_fraction"], row["family_id"]) for row in group}
         for method, group in by_method.items()
     }
-    if len({frozenset(value) for value in keys.values()}) != 1:
+    if (len({frozenset(value) for value in keys.values()}) != 1
+            or any(len(value) != expected_per_method for value in keys.values())):
         raise ValueError("Methods do not evaluate identical conditions")
     if _confusion(rows) != validation.get("method_confusion"):
         raise ValueError("Validation confusion counts differ from the metric rows")
