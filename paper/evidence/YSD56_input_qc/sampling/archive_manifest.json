@@ -1,0 +1,62 @@
+[
+  {
+    "file": "sampling_plan.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sampling_plan.json",
+    "sha256": "691a8b0ca6960e447a6b747b3475314265062ecc13ab35328113a2c1cfc755d7",
+    "bytes": 895
+  },
+  {
+    "file": "sampling_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sampling_receipt.json",
+    "sha256": "9dc741f7d2187af5bf1647700582c4b6e34c0d28a68e67ab71267dca13938826",
+    "bytes": 3231
+  },
+  {
+    "file": "sample_001.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_001.length_histogram.tsv",
+    "sha256": "fd2f3463e16d8139914c6a7ec9d1f835018045b89c53539f6817b3a726f70e80",
+    "bytes": 5925
+  },
+  {
+    "file": "sample_001.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_001.joint_distribution.tsv",
+    "sha256": "71b7f80fe84be5e7193eeb0596beda70975e6070b6e6ef57481b24342b69f18e",
+    "bytes": 6114
+  },
+  {
+    "file": "sample_002.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_002.length_histogram.tsv",
+    "sha256": "b50f06e096c3e9456b46eafc69eca25def3520b5d0b0a0e218ca9acee1e58177",
+    "bytes": 47631
+  },
+  {
+    "file": "sample_002.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_002.joint_distribution.tsv",
+    "sha256": "f40b59a0410dcbeb795f1307f299c1de74fda6ac80ecdd4a677e76edb095bfd4",
+    "bytes": 19662
+  },
+  {
+    "file": "sample_003.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_003.length_histogram.tsv",
+    "sha256": "6e171272e76ce0dbad3a318a4a0105dc2135944b33c2a2b59aee8103715f4d05",
+    "bytes": 161937
+  },
+  {
+    "file": "sample_003.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_003.joint_distribution.tsv",
+    "sha256": "2dfda25b6b0a8c19fcd01a498d493e4fb8a9eab93578b28c982bb6fd62c27921",
+    "bytes": 37748
+  },
+  {
+    "file": "sample_004.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_004.length_histogram.tsv",
+    "sha256": "a694ca17acc6d2e741e56015138ab7b0910584ab5cad5fc50b0456beb97161af",
+    "bytes": 260516
+  },
+  {
+    "file": "sample_004.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_004.joint_distribution.tsv",
+    "sha256": "48f3fa121e584e4d865b778f5b815d0a7403053f42d657be689c35a78b03508d",
+    "bytes": 59791
+  }
+]

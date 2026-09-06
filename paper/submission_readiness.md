@@ -16,7 +16,7 @@ have **not** been achieved.
 | Probe performance | Computational prioritization framework | Specificity calibration and independent published/new experimental concordance; no fabricated FISH rate |
 | Novelty/AI | Explicit prior-art comparison; no unsupported AI claim | Establish reproducible added value and ablations; AI only if independently useful |
 | Software quality | Current source passes 431 Python tests; unchanged 1231743 Rust source passed 15 tests, Clippy and formatting in hosted CI | Production defaults, clean install/release verification, workflow portability and complete command validation |
-| GitHub/reuse | 1231743 pushed to main and working branch; both hosted CI runs passed; held-out configuration was frozen before execution | New held-out results, YSD56 QC and figure v2 need the next verified commit/push |
+| GitHub/reuse | b85a266 pushed to main and working branch; held-out validation, YSD56 full QC and figure v2 are published; both hosted CI runs passed | YSD56 sampling evidence needs the next verified commit/push; clean release, portability and archive deposition remain pending |
 
 On 6 September 2026 an initial T7 figure-v2 render was rejected because the
 automatic review service reached its usage limit. Later Git operations passed

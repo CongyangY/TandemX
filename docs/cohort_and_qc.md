@@ -8,15 +8,15 @@ Full-file QC passed for ten included libraries across eight species: Mo17,
 Col-0N, Col-0R, Ey15-2R, Nipponbare, Morex, Lo7, Chinese Spring, Victoria and
 YSD56. Together they contain 14,937,608 reads and 262,731,255,175 bp. These are
 file-QC records, not ten independent specimens or eight completed biological
-accuracy validations. Seed6101 whole-library sampling is complete for nine
-libraries and active for YSD56; the completed largest nested samples range from
-1.109 Gb for Victoria to 42.360 Gb for Lo7. FASTQ and ID products remain on T7,
+accuracy validations. Seed6101 whole-library sampling is complete for all ten
+libraries; the largest nested samples range from 1.109 Gb for Victoria to
+42.360 Gb for Lo7. FASTQ and ID products remain on T7,
 while compact plans, receipts and distributions are archived with paper evidence.
 Mo17 comparison includes 1.129 Gb, with all three methods successful; its seven
 TandemX products are identical before/after dictionary-index optimization. All
 real-call metrics remain descriptive. Morex reference acquisition remains active.
-YSD56 wild-soybean HiFi passed exact download and full-file QC; its deterministic
-whole-library nested sampling is active and no accuracy inference has been made.
+YSD56 wild-soybean HiFi passed exact download, full-file QC and deterministic
+whole-library nested sampling; no accuracy inference has been made.
 The prospective enrollment table below retains metadata-level source details;
 use the latest receipts and `current_status.md` for completed versus running work.
 Published Mo17 region evidence is documented in
@@ -90,7 +90,7 @@ Known-motif BLAST+union and TRF comparisons complement de novo tools here.
 | Bread wheat Chinese Spring / CS-IAAS study | PRJNA1062539; [source paper](https://www.nature.com/articles/s41588-025-02137-x) | SRR28200549 passed complete QC at 1,500,000 reads/24.954 Gb; seed6101 nested sampling completed through 11.215 Gb. The study's 80 PacBio WGS records are technical batches. Exact donor/assembly matching remains unresolved |
 | Oat PanOat | PRJEB56828; [source paper](https://www.nature.com/articles/s41586-025-09676-7) | Victoria ERR10422581 passed complete QC at 398,850 reads/7.346 Gb; seed6101 sampling completed through 1.109 Gb. Raw SAMEA111508775 and assembly GCA_947311595 are source-supported. ERR10422482/CN25955 has A. fatua in ENA versus A. occidentalis in paper figure labels; retain the discrepancy and do not substitute it for cultivated oat |
 | Soybean ZH13, Jack, Wm82 | [Genome Biology source](https://doi.org/10.1186/s13059-025-03924-9); ZH13 PRJCA015269 | Data source verified in paper; files, material/version matching and accessibility still pending. New relevant comparator: unitFinder |
-| Wild soybean YSD56 | PRJNA1095640, SRR28726931; [source study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12350797/); assembly GCA_040083835.1 | Exact ENA size/MD5/SHA-256 and full gzip/FASTQ QC passed: 2,617,227 reads/44.193 Gb, no duplicate IDs. Seed6101 nested sampling uses the exact 1,008,523,555-bp assembly denominator and is active. Cultivated and wild soybean remain distinct species/material strata; file QC is not donor or accuracy validation |
+| Wild soybean YSD56 | PRJNA1095640, SRR28726931; [source study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12350797/); assembly GCA_040083835.1 | Exact ENA size/MD5/SHA-256 and full gzip/FASTQ QC passed: 2,617,227 reads/44.193 Gb, no duplicate IDs. Seed6101 nested sampling completed at 11.670 Mb/0.0116×, 110.438 Mb/0.1095×, 1.099 Gb/1.0897× and 11.050 Gb/10.9570× using the exact 1,008,523,555-bp assembly denominator. Cultivated and wild soybean remain distinct species/material strata; file QC and nominal total-base coverage are not donor, nuclear-depth or accuracy validation |
 
 GB means 10^9 file bytes; Gb means 10^9 sequence bases. These totals are ENA
 metadata observations, not downloaded or QC-passed amounts. Metadata snapshots

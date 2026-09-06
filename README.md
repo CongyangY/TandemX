@@ -453,8 +453,8 @@ are checked against the Python reference and real-pipeline byte-parity replay.
 The [complete-data acquisition guide](docs/complete_data_qc.md) also provides
 official-checksum-pinned MorexV3 reference acquisition from the IPK publication.
 Ten included HiFi libraries from eight reported plant species now have complete
-file QC. Seed6101 whole-library nested samples are complete for nine libraries
-and active for YSD56; exact totals and evidence boundaries are in
+file QC and seed6101 whole-library nested sampling. YSD56 contributes nested
+11.670-Mb, 110.438-Mb, 1.099-Gb and 11.050-Gb samples; exact totals and evidence boundaries are in
 [the cohort table](paper/tables/input_cohort.tsv).
 [Published Mo17 regions](docs/published_mo17_regions.md)
 retain the original spreadsheet, source cells, assembly-coordinate checks and

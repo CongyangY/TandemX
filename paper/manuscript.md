@@ -219,8 +219,12 @@ These are ten included libraries from eight reported species, not eight complete
 biological accuracy validations. Several accessions represent one technical batch of a
 larger study. Col-0N and Ey15-2R derive from pooled plants, whereas Col-0R is
 reported as a single plant. These units are not interchangeable replicates. Nested samples preserve
-whole-library selection and exact read IDs. Nine sampling ladders are complete;
-YSD56 sampling remains active (Figures S1–S3; Evidence E7).
+whole-library selection and exact read IDs. All ten sampling ladders are complete.
+The YSD56 ladder contains 11.670-Mb, 110.438-Mb, 1.099-Gb and 11.050-Gb
+samples, corresponding to nominal total-base coverages of 0.0116×, 0.1095×,
+1.0897× and 10.9570× against the 1,008,523,555-bp assembly denominator
+(Figures S1–S3; Evidence E7). These ratios are sampling denominators, not
+measured nuclear depth.
 
 Whole-library random-sample comparator diagnostics on Morex, Nipponbare,
 Victoria, Chinese Spring and Lo7 successfully normalized all three read-tool

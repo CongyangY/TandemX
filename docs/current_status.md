@@ -9,8 +9,9 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ### Published article draft and resolved figure export checkpoint
 
-- 1231743 is pushed to main and working branch. Both hosted CI runs
-  34031712723/34031704058 passed; earlier f16596b runs
+- b85a266 is pushed to main and working branch. Both hosted CI runs
+  34033024599/34033018828 passed; earlier 1231743 runs
+  34031712723/34031704058 and f16596b runs
   34029886116/34029873822 also passed. The committed checkpoint has 426 local
   Python tests; unchanged native source last passed 15 tests, Clippy `-D warnings`
   and formatting.
@@ -25,8 +26,10 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 - Col-0R, Ey15-2R and YSD56 full QC and compact archives passed. Col-0R/Ey15-2R
   add libraries/materials, while YSD56 adds wild soybean as an eighth reported
   species. The cohort table now contains ten libraries/eight species, 14,937,608
-  reads and 262,731,255,175 bp. Nine seed6101 whole-file sampling ladders are
-  complete and YSD56 sampling is active. Col-0R contains 11.708/115.753/1,156.486/
+  reads and 262,731,255,175 bp. All ten seed6101 whole-file sampling ladders are
+  complete. YSD56 contains 11.670/110.438/1,099.010/11,050.418-Mb nested samples
+  (0.0116×/0.1095×/1.0897×/10.9570× nominal total-base coverage against the
+  1,008,523,555-bp assembly denominator). Col-0R contains 11.708/115.753/1,156.486/
   10,643.552-Mb nested samples; Ey15-2R contains 11.698/113.336/1,119.054/
   10,627.736-Mb samples. Compact plans, receipts and distribution tables are
   archived locally; sample FASTQ and ID files remain on T7.
@@ -63,7 +66,8 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   genomic HiFi. Wild soybean YSD56 `SRR28726931` provides 44,193,089,411 HiFi
   bases from the same leaf BioSample as ONT support. Exact ENA size/MD5/SHA-256,
   gzip/FASTQ structure, expected counts and zero duplicate IDs passed. Seed6101
-  nested sampling against the 1,008,523,555-bp assembly denominator is active.
+  nested sampling against the 1,008,523,555-bp assembly denominator completed;
+  all four ID hashes, row counts and nested-set relationships were rechecked.
 - f16596b publishes sequence-native exact clustering indexing and compact integer/
   32-bit-array family-audit postings. The Morex
   115-Mb fixed-order interface diagnostic retained exact complete-output parity
