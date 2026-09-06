@@ -1,0 +1,239 @@
+"""Optional wrapper around TandemX's compiled read-local discovery backend."""
+
+from __future__ import annotations
+
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Sequence
+
+
+class RustBackendUnavailable(RuntimeError):
+    """Raised when the optional compiled extension cannot be imported."""
+
+
+RUST_MAX_KMER_SIZE = 31
+
+
+class RustRepresentativeIndex:
+    """Exact candidate gate with compact native postings; no alignment decisions."""
+
+    def __init__(self) -> None:
+        try:
+            from tandemx import _rust_core
+        except ImportError as exc:
+            raise RustBackendUnavailable("Rebuild the Rust extension for the representative index") from exc
+        if not hasattr(_rust_core, "RepresentativeIndex"):
+            raise RustBackendUnavailable("Rust extension lacks the representative index; reinstall TandemX")
+        self._index = _rust_core.RepresentativeIndex()
+
+    def append(self, length: int, words: dict[str, int]) -> int:
+        return self._index.append(length, list(words.items()))
+
+    def candidates(self, length: int, words: dict[str, int], minimum_identity: float) -> list[int]:
+        return self._index.candidates(length, list(words.items()), minimum_identity)
+
+    def append_sequence(self, sequence: str) -> int:
+        if not hasattr(self._index, "append_sequence"):
+            raise RustBackendUnavailable(
+                "Rust extension lacks sequence-native representative indexing; reinstall TandemX"
+            )
+        return self._index.append_sequence(sequence)
+
+    def candidates_sequence(self, sequence: str, minimum_identity: float) -> list[int]:
+        if not hasattr(self._index, "candidates_sequence"):
+            raise RustBackendUnavailable(
+                "Rust extension lacks sequence-native representative indexing; reinstall TandemX"
+            )
+        return self._index.candidates_sequence(sequence, minimum_identity)
+
+
+@dataclass(frozen=True)
+class RustScanResult:
+    candidate_periods: tuple[int, ...]
+    spacing_support: tuple[tuple[int, int], ...]
+    best_period: int
+    periodicity_score: float
+    repeat_start: int
+    repeat_end: int
+    overflow_count: int
+    status: str
+
+
+@dataclass(frozen=True)
+class RustSequenceStats:
+    record_count: int
+    total_bases: int
+    max_read_length: int
+
+
+def rust_backend_available() -> bool:
+    try:
+        from tandemx import _rust_core  # noqa: F401
+    except ImportError:
+        return False
+    return True
+
+
+def ungapped_family_identity(a: str, b: str) -> tuple[float, int, str]:
+    """Exact legacy all-offset audit; separate from circular gapped clustering."""
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable("Rebuild the Rust extension for native family comparison") from exc
+    if not hasattr(_rust_core, "ungapped_family_identity"):
+        raise RustBackendUnavailable("Rust extension lacks family comparison; reinstall TandemX")
+    return _rust_core.ungapped_family_identity(a, b)
+
+
+def seed_spacing_histogram(sequence: str, k: int, min_period: int, max_period: int,
+                           min_seed_occurrences: int, max_pairs_per_kmer: int) -> tuple[dict[int, int], int]:
+    """Native bounded histogram, without executing the legacy refiner."""
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable("Rebuild the Rust extension for native seed histograms") from exc
+    if not hasattr(_rust_core, "seed_spacing_histogram"):
+        raise RustBackendUnavailable("Rust extension lacks native seed histograms; reinstall TandemX")
+    pairs, overflow = _rust_core.seed_spacing_histogram(sequence, k, min_period, max_period,
+                                                       min_seed_occurrences, max_pairs_per_kmer)
+    return dict(pairs), overflow
+
+
+def scan_read_for_periods(
+    sequence: str,
+    *,
+    k: int,
+    min_period: int,
+    max_period: int,
+    top_periods: int,
+    min_seed_occurrences: int,
+    min_spacing_support: int,
+    max_pairs_per_kmer: int,
+    min_repeat_span: int = 1,
+) -> RustScanResult:
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable(
+            "Rust backend is unavailable. Install from the repository with "
+            "`pip install -e .` or run `maturin develop`."
+        ) from exc
+
+    result = _rust_core.scan_read_for_periods(
+        sequence,
+        k,
+        min_period,
+        max_period,
+        top_periods,
+        min_seed_occurrences,
+        min_spacing_support,
+        max_pairs_per_kmer,
+        min_repeat_span,
+    )
+    return RustScanResult(
+        candidate_periods=tuple(result.candidate_periods),
+        spacing_support=tuple(tuple(item) for item in result.spacing_support),
+        best_period=result.best_period,
+        periodicity_score=result.periodicity_score,
+        repeat_start=result.repeat_start,
+        repeat_end=result.repeat_end,
+        overflow_count=result.overflow_count,
+        status=result.status,
+    )
+
+
+def scan_reads_for_periods(
+    sequences: Sequence[str],
+    *,
+    k: int,
+    min_period: int,
+    max_period: int,
+    top_periods: int,
+    min_seed_occurrences: int,
+    min_spacing_support: int,
+    max_pairs_per_kmer: int,
+    min_repeat_span: int = 1,
+) -> tuple[RustScanResult, ...]:
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable(
+            "Rust backend is unavailable. Install from the repository with "
+            "`pip install -e .` or run `maturin develop`."
+        ) from exc
+
+    results = _rust_core.scan_reads_for_periods(
+        list(sequences),
+        k,
+        min_period,
+        max_period,
+        top_periods,
+        min_seed_occurrences,
+        min_spacing_support,
+        max_pairs_per_kmer,
+        min_repeat_span,
+    )
+    return tuple(
+        RustScanResult(
+            candidate_periods=tuple(result.candidate_periods),
+            spacing_support=tuple(tuple(item) for item in result.spacing_support),
+            best_period=result.best_period,
+            periodicity_score=result.periodicity_score,
+            repeat_start=result.repeat_start,
+            repeat_end=result.repeat_end,
+            overflow_count=result.overflow_count,
+            status=result.status,
+        )
+        for result in results
+    )
+
+
+class RustDiagnosticKmerCounter:
+    """Small target-only counter; this is not a global k-mer counting backend."""
+
+    def __init__(self, k: int, targets: set[str]) -> None:
+        try:
+            from tandemx import _rust_core
+        except ImportError as exc:
+            raise RustBackendUnavailable(
+                "Rust backend is unavailable. Install from the repository with "
+                "`pip install -e .` or run `maturin develop`."
+            ) from exc
+        self._counter = _rust_core.DiagnosticKmerCounter(k, sorted(targets))
+
+    def count_sequence(self, sequence: str) -> None:
+        self._counter.count_sequence(sequence)
+
+    def count_sequences(self, sequences: Sequence[str]) -> None:
+        if sequences:
+            self._counter.count_sequences(list(sequences))
+
+    def counts(self) -> dict[str, int]:
+        return dict(self._counter.counts())
+
+
+def count_sequence_paths_stats(paths: Sequence[Path], *, threads: int) -> RustSequenceStats:
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable(
+            "Rust backend is unavailable. Install from the repository with "
+            "`pip install -e .` or run `maturin develop`."
+        ) from exc
+    path_list = list(paths)
+    worker_count = max(1, min(threads, len(path_list)))
+
+    def count_one(path: Path):
+        return _rust_core.count_sequence_file_stats(str(path))
+
+    if worker_count == 1:
+        stats = [count_one(path) for path in path_list]
+    else:
+        with ThreadPoolExecutor(max_workers=worker_count) as executor:
+            stats = list(executor.map(count_one, path_list))
+    return RustSequenceStats(
+        record_count=sum(item.record_count for item in stats),
+        total_bases=sum(item.total_bases for item in stats),
+        max_read_length=max((item.max_read_length for item in stats), default=0),
+    )

@@ -207,6 +207,12 @@ Eight unique FASTA records contain 4,225,605,719 bases and the file matches the
 published SHA-256. The FASTA remains outside Git. This is file integrity and
 sequence-content QC, not identical-donor or satellite copy-number truth.
 
+`Morex_115Mb_index_interface_v2/` contains the compact clean-source replay of
+the Python word bridge and sequence-native Rust interface on 7,094 fixed Morex
+candidates. Complete 4,380-family payloads are byte-identical. The one-run time
+and RSS reductions are favourable engineering diagnostics; fixed order and
+native build-artifact provenance prevent a publication timing claim.
+
 `factorial_multik_replay/` and `factorial_joint_multik/` retain the complete
 three-genome, 27-condition conditional copy-estimation and joint-read interval
 experiments, including missing fits, intervals without truth and conditions in

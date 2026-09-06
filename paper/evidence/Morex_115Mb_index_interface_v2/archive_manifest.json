@@ -1,0 +1,86 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/environment.json",
+    "sha256": "2b22b7d42b9a6aa94037e17243aa81a8f2ef5dc0922d28a28ba8bed6688e7552",
+    "bytes": 8161
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/validation.json",
+    "sha256": "0df033c61260aee5584fe4913a868e8cfd4ce3bec2686902f9c92162116bc775",
+    "bytes": 2557
+  },
+  {
+    "file": "word_bridge.receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/word_bridge.receipt.json",
+    "sha256": "aa4c42d1f1bc062c5360b0999c4d2eb258a63d55c6768cc5227cd12d16ef90b6",
+    "bytes": 317
+  },
+  {
+    "file": "word_bridge.stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/word_bridge.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "word_bridge.stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/word_bridge.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "sequence_native.receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/sequence_native.receipt.json",
+    "sha256": "bbdf152dca65522e9c4f1eb607de30a226359f5553bfbef9b2312f2870a67109",
+    "bytes": 321
+  },
+  {
+    "file": "sequence_native.stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/sequence_native.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "sequence_native.stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/sequence_native.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "source_snapshot/benchmarks/__init__.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/source_snapshot/benchmarks/__init__.py",
+    "sha256": "00a62f60e46ede21292a431a28be4464749253be804413542571db919aa2f3bb",
+    "bytes": 73
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/replay_clustering_isolated.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/source_snapshot/benchmarks/scripts/replay_clustering_isolated.py",
+    "sha256": "3dd84bcf5ce78ba00e1443b04cd763b6dc67147764c1f8a102ff7fb5911279af",
+    "bytes": 9600
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/replay_clustering.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/source_snapshot/benchmarks/scripts/replay_clustering.py",
+    "sha256": "9e57a75632de2438188e4983ed023ff387180a838835eb601cd3352b29da09e8",
+    "bytes": 4863
+  },
+  {
+    "file": "source_snapshot/tandemx/discover/clustering.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/source_snapshot/tandemx/discover/clustering.py",
+    "sha256": "f53676f2929c024548d436649c69f80abd51a17df107c90faf2f0333419c6d70",
+    "bytes": 10174
+  },
+  {
+    "file": "source_snapshot/tandemx/discover/rust_backend.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/source_snapshot/tandemx/discover/rust_backend.py",
+    "sha256": "2a723489cf19c2a6621c5a47ffd1de2124dade21d0ab4be053a3e456acc72f82",
+    "bytes": 8379
+  },
+  {
+    "file": "source_snapshot/rust-core/src/representative_index.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_index_interface_v2_20260906/source_snapshot/rust-core/src/representative_index.rs",
+    "sha256": "0b7ad7a87a888bae56771c25db711e5d9a54b77b508beea512f2a681b4bf8f46",
+    "bytes": 12212
+  }
+]

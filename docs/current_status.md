@@ -74,19 +74,21 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   all four ID hashes, row counts and nested-set relationships were rechecked.
 - f16596b publishes sequence-native exact clustering indexing and compact integer/
   32-bit-array family-audit postings. The Morex
-  115-Mb fixed-order interface diagnostic retained exact complete-output parity
-  and measured 13.280→11.620 clustering seconds and 65.375→61.531 MiB child RSS;
-  it ran with acquisition load and has a superseded provenance-warning defect,
-  so it is not publication timing. `source_manifest` now marks tracked changes
-  and generated native binaries that differ from `git_head`. The original YSD56
+  115-Mb v1 fixed-order interface diagnostic retained exact complete-output
+  parity but ran with acquisition load. A post-acquisition v2 at committed source
+  `a10c309` again produced identical 4,380-family payloads: sequence-native versus
+  word-bridge clustering was 12.198 versus 13.611 s and peak child RSS was
+  58.047 versus 61.203 MiB. The 10.38% time and 5.16% RSS reductions are one
+  fixed-order diagnostic, not publication timing. Its generic revision warning
+  identifies only the two ignored local native build artifacts and retains their
+  exact hashes; tracked source is represented by the commit and source digest.
+  The original YSD56
   transfer failed at 19,152,111,724 bytes with an SSL EOF, resumed from that
   partial, and then passed exact ENA byte/MD5 and complete-file QC checks; the
   failure/resume history remains in the receipt. The IPK server ignores
-  MorexV3 Range requests. Its current full response matches the retained
-  2.126-GB partial for the first MiB but differs later, so the old partial was
-  preserved and no reference was published. A tested clean-sibling recovery now
-  records the first mismatch and old hash, then requires the full official
-  SHA-256 before canonical rename and FASTA QC; rerun follows its source commit.
+  MorexV3 Range requests. The successful rerun proved the retained 2.126-GB
+  prefix against the new full response before appending the suffix, then required
+  the official SHA-256 before canonical rename and FASTA QC.
 - The predeclared conditional-abundance held-out seeds 5101–5103 were executed
   once with the unchanged configuration and f16596b source: 177/177 commands,
   81 copy-number, 45 localization and 405 comparison family rows. Across 243
@@ -114,11 +116,12 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 442 Python tests. The added tests cover
+- The expanded source checkout passes all 443 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
   unchanged. Four additional tests validate compact reference archiving and
-  reject altered FASTA, metadata and contig totals.
+  reject altered FASTA, metadata and contig totals. A further regression test
+  covers the legacy helper-path receipt that initially blocked v2 archiving.
 - A backward-compatible challenge extension now represents independent
   founder-to-unit substitutions and one or more interrupted same-family arrays.
   Truth scoring aggregates non-overlapping intervals and copies by family. The

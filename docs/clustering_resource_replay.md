@@ -92,6 +92,14 @@ After a valid replay, compact evidence can be copied without the duplicate full
 payloads using `python -m benchmarks.scripts.archive_clustering_replay_evidence`;
 the archiver rechecks payload parity and every frozen source hash before copying.
 
+The clean-source Morex 115-Mb v2 diagnostic at commit `a10c309` reused 7,094
+fixed candidates and returned 4,380 byte-identical families for both interfaces.
+Clustering time decreased from 13.610636 to 12.198283 s (10.38%), child wall
+time from 13.895589 to 12.473152 s (10.24%) and peak child RSS from 61.203125
+to 58.046875 MiB (5.16%). The generic revision warning lists only two ignored
+local native build artifacts, whose hashes are retained. One fixed-order run is
+an engineering diagnostic; randomized repeated timing is still required.
+
 ## Full live-pipeline replay and profiling
 
 ```bash

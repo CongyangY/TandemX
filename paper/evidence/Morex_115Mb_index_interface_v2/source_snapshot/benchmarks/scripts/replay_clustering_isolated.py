@@ -84,12 +84,11 @@ def replay(candidate_run: Path, baseline_run: Path | None, outdir: Path, timeout
     helpers = {}
     for name in ('replay_clustering_isolated.py', 'replay_clustering.py'):
         src = Path(__file__).with_name(name)
-        relative = Path('benchmarks/scripts')/name
-        dst = outdir/'source_snapshot'/relative
+        dst = outdir/'source_snapshot/benchmarks/scripts'/name
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(src, dst)
-        helpers[relative.as_posix()] = digest_file(dst)
-        if helpers[relative.as_posix()] != digest_file(src):
+        helpers[name] = digest_file(dst)
+        if helpers[name] != digest_file(src):
             raise ValueError('Replay helper changed during snapshot')
     package = root/'benchmarks/__init__.py'
     shutil.copyfile(package, outdir/'source_snapshot/benchmarks/__init__.py')

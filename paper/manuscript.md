@@ -89,6 +89,13 @@ changes are reported because this is a speed improvement, not an all-resource
 improvement. Concurrent workload and combined code changes limit causal
 attribution of the timing difference (Table 3; Evidence E1).
 
+In a narrower exact-output interface ablation on 7,094 fixed Morex candidates,
+passing complete sequences into the native index rather than Python word lists
+produced the same 4,380-family payload. Clustering time decreased from 13.611 to
+12.198 s and peak child RSS from 61.203 to 58.047 MiB (Evidence E15). This was
+one fixed-order run with local native build artifacts, so the magnitude is an
+engineering diagnostic rather than a final performance estimate.
+
 ### Comparator conclusions depend on the measured endpoint
 
 In a 5× read simulation from one 10-Mb development genome, TandemX, TRF and
@@ -358,7 +365,7 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 442 local Python tests. Its Rust
+PyO3/Rust extension. The current source passed 443 local Python tests. Its Rust
 source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
 passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
 distributable-wheel builds.
@@ -561,6 +568,8 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   and `evidence/abundance_domain_shift_multik_heldout`.
 - Supplementary Table S11: MorexV3 contig lengths and base counts in
   `evidence/MorexV3_reference_qc/reference_receipt.json`.
+- Supplementary Table S12: Morex sequence-native interface resource and parity
+  receipts in `evidence/Morex_115Mb_index_interface_v2`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -571,6 +580,7 @@ E10: `known_query_recovery`; E11: `abundance_heldout`;
 E12: paired `abundance_heldout_v2` and `abundance_multik_collapse_heldout`;
 E13: paired `abundance_domain_shift_heldout_baseline` and
 `abundance_domain_shift_multik_heldout`; E14: `MorexV3_reference_qc`.
+E15: `Morex_115Mb_index_interface_v2`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

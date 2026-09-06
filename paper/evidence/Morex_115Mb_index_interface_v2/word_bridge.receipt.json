@@ -1,0 +1,8 @@
+{
+  "candidate_count": 7094,
+  "family_count": 4380,
+  "clustering_seconds": 13.610635791905224,
+  "output_sha256": "fdf2aec2d91863e24015430f67d5803c7607b62a0632a12f51ac5bd7c71dd5c8",
+  "clustering_source_sha256": "f53676f2929c024548d436649c69f80abd51a17df107c90faf2f0333419c6d70",
+  "index_backend": "word_bridge"
+}

@@ -60,6 +60,19 @@ def test_archive_validates_payloads_sources_and_excludes_large_json(tmp_path):
         archive(source, outdir)
 
 
+def test_archive_accepts_legacy_helper_basenames_with_exact_hashes(tmp_path):
+    source = build_replay(tmp_path)
+    path = source / "environment.json"
+    environment = json.loads(path.read_text())
+    environment["helper_hashes"] = {
+        name.rsplit("/", 1)[-1] if name.startswith("benchmarks/scripts/") else name: value
+        for name, value in environment["helper_hashes"].items()
+    }
+    path.write_text(json.dumps(environment))
+    manifest = archive(source, tmp_path / "archive")
+    assert len(manifest) == 2 + 3 * len(LABELS) + len(SOURCE_FILES)
+
+
 @pytest.mark.parametrize("fault", ["incomplete", "payload", "source"])
 def test_archive_rejects_incomplete_or_changed_evidence(tmp_path, fault):
     source = build_replay(tmp_path)

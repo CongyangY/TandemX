@@ -45,8 +45,14 @@ def archive(source: Path, outdir: Path) -> list[dict]:
         if not path.is_file() or digest_file(path) != expected:
             raise ValueError(f"Frozen source differs: {relative}")
     for relative, expected in environment.get("helper_hashes", {}).items():
-        path = snapshot / relative
-        if not path.is_file() or digest_file(path) != expected:
+        candidates = [snapshot / relative]
+        if Path(relative).parent == Path("."):
+            # Early receipts used only the basename although the helper was
+            # copied under benchmarks/scripts. Accept that recorded layout
+            # without weakening the hash check.
+            candidates.append(snapshot / "benchmarks" / "scripts" / relative)
+        matches = [path for path in candidates if path.is_file()]
+        if len(matches) != 1 or digest_file(matches[0]) != expected:
             raise ValueError(f"Frozen helper differs: {relative}")
 
     relative_paths = [Path("environment.json"), Path("validation.json")]
