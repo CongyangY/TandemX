@@ -3,6 +3,8 @@ import math
 from benchmarks.abundance.evaluate_multik_collapse import (
     _frozen_model,
     calibration_rows,
+    complete_method_rows,
+    evaluation_methods,
     score_estimate,
     summarize,
 )
@@ -101,3 +103,30 @@ def test_heldout_model_requires_exact_predeclared_semantics() -> None:
         pass
     else:
         raise AssertionError("undeclared held-out threshold accepted")
+
+
+def test_classifier_grid_skips_legacy_hybrid_without_inspecting_results() -> None:
+    assert evaluation_methods({}) == (
+        "single_k21", "multik_loglinear", "multik_fallback_depth_rule"
+    )
+    config = {"classifier_development_rule": {
+        "method": "log_space_single_multik_blend",
+    }}
+    assert evaluation_methods(config) == ("single_k21", "multik_loglinear")
+    config["classifier_development_rule"]["method"] = "posthoc_method"
+    try:
+        evaluation_methods(config)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("undeclared classifier mode accepted")
+
+    raw = [{"method": "single_k21"}, {"method": "multik_loglinear"}]
+    completed, threshold, calibration = complete_method_rows(
+        raw, [], evaluation_methods({"classifier_development_rule": {
+            "method": "log_space_single_multik_blend",
+        }}), "development", [1, 2, 3], {}
+    )
+    assert completed == raw
+    assert threshold is None
+    assert calibration == []

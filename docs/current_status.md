@@ -116,7 +116,7 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 451 Python tests. The added tests cover
+- The expanded source checkout passes all 452 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
   unchanged. Four additional tests validate compact reference archiving and
@@ -167,7 +167,14 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   and leaves 5701–5703 untouched. It limits selection to 20 transparent
   log-space single/multi-k blends and thresholds, requires no worse FPR or
   precision than single k=21, and adds full-development and leave-one-seed-out
-  acceptance gates. No result from these seeds exists yet.
+  acceptance gates. The full 1,062-command baseline completed with all commands
+  successful and the frozen config SHA-256 `3210fab6555a...c8c8e54`.
+- The first 5601–5603 multi-k execution exposed a workflow failure after all 162
+  estimates had been computed: the shared evaluator attempted the older hybrid
+  calibration before writing paired inputs, and no legacy threshold met its FP
+  constraint. The partial result is retained on T7. The recovery patch makes the
+  predeclared blend-grid mode explicit and checkpoints raw paired rows before any
+  optional calibration; candidate definitions and acceptance gates are unchanged.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

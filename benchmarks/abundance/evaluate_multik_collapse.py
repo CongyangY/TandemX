@@ -19,8 +19,25 @@ from tandemx.quantify.mvp import read_monomer_fasta
 
 
 METHODS = ("single_k21", "multik_loglinear", "multik_fallback_depth_rule")
+RAW_METHODS = METHODS[:2]
 LOW_DEPTH_CUTOFF = 2.0
 LOW_DEPTH_THRESHOLD_GRID = (0.45, 0.475, 0.5, 0.525, 0.55, 0.575, 0.6)
+CALIBRATION_FIELDS = (
+    "fold", "training_seeds", "evaluation_seeds", "low_depth_cutoff",
+    "selected_low_depth_threshold", "standard_depth_threshold",
+    "baseline_TP", "baseline_FN", "baseline_FP", "baseline_TN",
+    "calibrated_TP", "calibrated_FN", "calibrated_FP", "calibrated_TN",
+)
+
+
+def evaluation_methods(config: dict) -> tuple[str, ...]:
+    """Select the predeclared output mode without inspecting benchmark outcomes."""
+    rule = config.get("classifier_development_rule")
+    if rule is None:
+        return METHODS
+    if not isinstance(rule, dict) or rule.get("method") != "log_space_single_multik_blend":
+        raise ValueError("Invalid classifier development rule")
+    return RAW_METHODS
 
 
 def score_estimate(
@@ -190,6 +207,46 @@ def _frozen_model(config: dict) -> float:
     return float(threshold)
 
 
+def complete_method_rows(
+    rows: list[dict],
+    pairs: list[dict[str, dict]],
+    methods: tuple[str, ...],
+    split: str,
+    seeds: list[int],
+    config: dict,
+) -> tuple[list[dict], float | None, list[dict]]:
+    """Add the legacy hybrid only when it belongs to the declared method set."""
+    completed = list(rows)
+    if methods == RAW_METHODS:
+        return completed, None, []
+    if methods != METHODS:
+        raise ValueError("Unexpected multi-k method set")
+    if split == "development":
+        selected_threshold, calibration = calibration_rows(pairs, seeds)
+    else:
+        selected_threshold = _frozen_model(config)
+        calibration = []
+    completed.extend(_hybrid_row(pair, selected_threshold) for pair in pairs)
+    if split == "heldout":
+        baseline_counts = Counter(pair["single_k21"]["outcome"] for pair in pairs)
+        calibrated_counts = Counter(row["outcome"] for row in completed
+                                    if row["method"] == "multik_fallback_depth_rule")
+        model = config["collapse_model"]
+        calibration.append(dict(
+            fold="predeclared_heldout_validation",
+            training_seeds=",".join(map(str, model["calibration_seeds"])),
+            evaluation_seeds=",".join(map(str, seeds)),
+            low_depth_cutoff=LOW_DEPTH_CUTOFF,
+            selected_low_depth_threshold=selected_threshold,
+            standard_depth_threshold=0.6,
+            baseline_TP=baseline_counts["TP"], baseline_FN=baseline_counts["FN"],
+            baseline_FP=baseline_counts["FP"], baseline_TN=baseline_counts["TN"],
+            calibrated_TP=calibrated_counts["TP"], calibrated_FN=calibrated_counts["FN"],
+            calibrated_FP=calibrated_counts["FP"], calibrated_TN=calibrated_counts["TN"],
+        ))
+    return completed, selected_threshold, calibration
+
+
 def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "development") -> None:
     previous = previous.resolve()
     prior_validation = json.loads((previous / "validation.json").read_text())
@@ -213,6 +270,7 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
         raise ValueError("Invalid collapse threshold")
     scenarios = challenge_scenarios(config)
     fragment_gap_bp = config.get("fragment_gap_bp", 0)
+    methods = evaluation_methods(config)
 
     baseline_rows = read_table(previous / "copy_number_metrics.tsv", {
         "seed", "coverage", "substitution_rate", "family_id", "estimate"
@@ -269,10 +327,12 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
         challenge_scenarios=[dict(unit_substitution_rate=rate, array_fragments=count,
                                   fragment_gap_bp=fragment_gap_bp)
                              for rate, count in scenarios],
-        methods=list(METHODS),
+        methods=list(methods),
         k_values=list(DEFAULT_K_VALUES),
         collapse_threshold=threshold,
-        scope=("development_known_catalogue_point_estimate_calibration"
+        scope=("predeclared_single_multik_inputs_for_classifier_grid"
+               if methods == RAW_METHODS else
+               "development_known_catalogue_point_estimate_calibration"
                if split == "development" else
                "predeclared_heldout_known_catalogue_point_estimate_validation"),
     )
@@ -379,33 +439,15 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
     pairs = list(pairs_by_key.values())
     if any(set(pair) != {"single_k21", "multik_loglinear"} for pair in pairs):
         raise ValueError("Incomplete paired single-k/multi-k results")
-    if split == "development":
-        selected_threshold, calibration = calibration_rows(pairs, [int(seed) for seed in seeds])
-    else:
-        selected_threshold = _frozen_model(config)
-        calibration = []
-    rows.extend(_hybrid_row(pair, selected_threshold) for pair in pairs)
-    if split == "heldout":
-        baseline_counts = Counter(pair["single_k21"]["outcome"] for pair in pairs)
-        calibrated_counts = Counter(row["outcome"] for row in rows
-                                    if row["method"] == "multik_fallback_depth_rule")
-        model = config["collapse_model"]
-        calibration.append(dict(
-            fold="predeclared_heldout_validation",
-            training_seeds=",".join(map(str, model["calibration_seeds"])),
-            evaluation_seeds=",".join(map(str, seeds)),
-            low_depth_cutoff=LOW_DEPTH_CUTOFF,
-            selected_low_depth_threshold=selected_threshold,
-            standard_depth_threshold=0.6,
-            baseline_TP=baseline_counts["TP"], baseline_FN=baseline_counts["FN"],
-            baseline_FP=baseline_counts["FP"], baseline_TN=baseline_counts["TN"],
-            calibrated_TP=calibrated_counts["TP"], calibrated_FN=calibrated_counts["FN"],
-            calibrated_FP=calibrated_counts["FP"], calibrated_TN=calibrated_counts["TN"],
-        ))
-    expected = prior_validation["comparison_family_rows"] * len(METHODS)
+    raw_path = outdir / "raw_comparison_metrics.tsv"
+    write_table(raw_path, rows, list(rows[0]))
+    rows, selected_threshold, calibration = complete_method_rows(
+        rows, pairs, methods, split, [int(seed) for seed in seeds], config
+    )
+    expected = prior_validation["comparison_family_rows"] * len(methods)
     summaries = summarize(rows)
     method_confusion = {}
-    for method in METHODS:
+    for method in methods:
         counts = Counter(row["outcome"] for row in rows if row["method"] == method)
         method_confusion[method] = {
             "available": sum(counts[name] for name in ("TP", "FN", "FP", "TN")),
@@ -417,20 +459,26 @@ def run(previous: Path, outdir: Path, backend: str = "rust", split: str = "devel
         }
     write_table(outdir / "comparison_metrics.tsv", rows, list(rows[0]))
     write_table(outdir / "comparison_summary.tsv", summaries, list(summaries[0]))
-    write_table(outdir / "calibration.tsv", calibration, list(calibration[0]))
+    write_table(outdir / "calibration.tsv", calibration, list(CALIBRATION_FIELDS))
     validation = dict(
         complete=len(rows) == expected,
         split=split,
+        evaluation_mode=("raw_single_multik_for_predeclared_blend_grid"
+                         if methods == RAW_METHODS else "legacy_hybrid_calibration"),
         independent_genomes=len(seeds),
         challenge_scenarios=len(scenarios),
         multik_read_conditions=multik_conditions,
         comparison_family_rows=len(rows),
         expected_comparison_family_rows=expected,
+        raw_comparison_family_rows=len(pairs) * len(RAW_METHODS),
+        raw_comparison_metrics_sha256=digest_file(raw_path),
+        comparison_metrics_sha256=digest_file(outdir / "comparison_metrics.tsv"),
         unavailable=sum(row["outcome"] == "NA" for row in rows),
         method_confusion=method_confusion,
         selected_low_depth_threshold=selected_threshold,
         low_depth_cutoff=LOW_DEPTH_CUTOFF,
-        leave_one_genome_out_folds=len(seeds) if split == "development" else 0,
+        leave_one_genome_out_folds=(len(seeds)
+                                    if split == "development" and methods == METHODS else 0),
         heldout_used=split == "heldout",
         scientific_acceptance="not_assumed_from_execution_success",
     )

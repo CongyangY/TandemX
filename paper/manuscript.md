@@ -398,7 +398,7 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 451 local Python tests. Its Rust
+PyO3/Rust extension. The current source passed 452 local Python tests. Its Rust
 source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
 passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
 distributable-wheel builds.

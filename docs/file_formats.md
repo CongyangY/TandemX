@@ -807,6 +807,15 @@ records split semantics, source/input hashes, row completeness, the frozen model
 and method-level confusion counts. Execution success is separate from scientific
 acceptance.
 
+When the config contains the predeclared `log_space_single_multik_blend`
+classifier-development rule, this evaluator writes only the paired `single_k21`
+and `multik_loglinear` inputs; the legacy low-depth hybrid is outside that grid
+and is not fitted. `calibration.tsv` is then header-only and `validation.json`
+uses `evaluation_mode=raw_single_multik_for_predeclared_blend_grid`.
+`raw_comparison_metrics.tsv` is written before any downstream calibration so a
+later selection failure does not discard completed multi-k estimates. Both raw
+and final comparison-table hashes are recorded in `validation.json`.
+
 `archive_multik_collapse_evidence.py` accepts only the predeclared held-out
 scope. It re-derives method confusion counts from paired condition keys, rejects
 seed overlap or method imbalance, verifies the source digest and selected source

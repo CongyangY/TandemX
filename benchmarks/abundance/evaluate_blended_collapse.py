@@ -177,8 +177,12 @@ def run(previous: Path, outdir: Path) -> None:
     if (
         validation.get("complete") is not True
         or validation.get("split") != "development"
+        or validation.get("evaluation_mode") != "raw_single_multik_for_predeclared_blend_grid"
         or environment.get("split") != "development"
         or digest_file(previous / "run_config.json") != environment.get("previous_config_sha256")
+        or digest_file(previous / "comparison_metrics.tsv")
+            != validation.get("comparison_metrics_sha256")
+        or set(validation.get("method_confusion", {})) != {BASELINE, MULTIK}
         or len(development_seeds) != 3
         or len(set(development_seeds)) != 3
         or not heldout_seeds
