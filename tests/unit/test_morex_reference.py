@@ -95,3 +95,26 @@ def test_fetch_archives_metadata_and_checks_fasta_to_completion(tmp_path, monkey
     assert result['qc']['input_sha256'] == sha
     monkeypatch.setattr(module, 'urlopen', lambda *a, **kw: pytest.fail('Unexpected network'))
     assert module.fetch(tmp_path/'reference')['complete']
+
+
+def test_fetch_recovers_cleanly_without_overwriting_divergent_partial(tmp_path, monkeypatch):
+    content = b'>chr1\nACGTN\n>chrUn\nRY\n'
+    sha = hashlib.sha256(content).hexdigest()
+    monkeypatch.setattr(module, 'EXPECTED_SHA256', sha)
+    outdir = tmp_path/'reference'
+    outdir.mkdir()
+    partial = outdir/(module.FILENAME+'.partial')
+    partial.write_bytes(b'X'+content[1:7])
+
+    def response(request, timeout):
+        if isinstance(request, str):
+            return Response((sha+' '+module.FILENAME).encode())
+        return Response(content)
+
+    monkeypatch.setattr(module, 'urlopen', response)
+    result = module.fetch(outdir)
+    assert result['complete'] and (outdir/module.FILENAME).read_bytes() == content
+    assert partial.read_bytes() == b'X'+content[1:7]
+    assert result['transfer']['recovery'] == 'clean_download_after_divergent_partial'
+    assert result['preserved_divergent_partial']['first_difference_offset'] == 0
+    assert result['preserved_divergent_partial']['sha256'] == hashlib.sha256(partial.read_bytes()).hexdigest()

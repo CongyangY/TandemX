@@ -1,0 +1,37 @@
+{
+  "accession": "SRR28726931",
+  "metadata": {
+    "run_accession": "SRR28726931",
+    "study_accession": "PRJNA1095640",
+    "sample_accession": "SAMN40909152",
+    "secondary_sample_accession": "SRS21057302",
+    "experiment_accession": "SRX24293034",
+    "scientific_name": "Glycine soja",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Revio",
+    "library_name": "YSD56_HiFi",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "read_count": "2617227",
+    "base_count": "44193089411",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR287/031/SRR28726931/SRR28726931_subreads.fastq.gz",
+    "fastq_md5": "bcec44c711a45dd7dd22784e0da7cccd",
+    "fastq_bytes": "21866640310",
+    "submitted_ftp": "",
+    "submitted_format": "",
+    "experiment_title": "Revio sequencing: YSD56 HiFi sequencing",
+    "sample_title": "YSD56_leaf"
+  },
+  "metadata_sha256": "3883ffc3919a0cfd35be2029df82b7dd4d7689c9a349b3c8e8e5d157699fec93",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR287/031/SRR28726931/SRR28726931_subreads.fastq.gz",
+      "filename": "SRR28726931_subreads.fastq.gz",
+      "expected_md5": "bcec44c711a45dd7dd22784e0da7cccd",
+      "expected_bytes": 21866640310
+    }
+  ],
+  "max_download_gb": 22.0,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b"
+}

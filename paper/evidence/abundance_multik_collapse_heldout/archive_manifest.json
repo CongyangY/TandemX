@@ -1,0 +1,116 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/environment.json",
+    "sha256": "830ad7b38af021523d4c7edd85615cb26a01438daa341e3a5591b27a232fc481",
+    "bytes": 8834
+  },
+  {
+    "file": "run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/run_config.json",
+    "sha256": "68d5be9905c6b3087ce595208bf949479d9fcf1055fb75f29d746b3964df853f",
+    "bytes": 1220
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/validation.json",
+    "sha256": "a0f4c14857af1aba930d668f3a095a9e0035200cba97d32e84cbdad2b450fcc9",
+    "bytes": 864
+  },
+  {
+    "file": "comparison_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/comparison_metrics.tsv",
+    "sha256": "9c74dd3444ba2c221b135a643bfd2ca977a137f9cef9646ef5ba842f312d914d",
+    "bytes": 207695
+  },
+  {
+    "file": "comparison_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/comparison_summary.tsv",
+    "sha256": "afe8e7e3c015e9a1be67fdf66aa1c3add83a33b20a26e25659c7c498a6554440",
+    "bytes": 8378
+  },
+  {
+    "file": "calibration.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/calibration.tsv",
+    "sha256": "687325b6ef444f8584942f21dab21e63a941eccb3bb147f6fd2d8bff4e67da28",
+    "bytes": 315
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "sha256": "e3b15019626e3d4d7b316613ffd72ee9e6920184b79b0fda59a610eef605840d",
+    "bytes": 20562
+  },
+  {
+    "file": "source_snapshot/tandemx/compare/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/source_snapshot/tandemx/compare/mvp.py",
+    "sha256": "02315eea7fcafbfeedb292edd91acc1b3161806c98e392b2ad0dec387249ddbb",
+    "bytes": 9635
+  },
+  {
+    "file": "source_snapshot/tandemx/quantify/multik.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/source_snapshot/tandemx/quantify/multik.py",
+    "sha256": "dce04beff64d7caa8fef1df5a9523141799c6fbcbd3f73b4ed4f36168accef57",
+    "bytes": 8650
+  },
+  {
+    "file": "source_snapshot/tandemx/quantify/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/source_snapshot/tandemx/quantify/mvp.py",
+    "sha256": "f7e75fd378721a644dbd6c030d2a413e22a5434a5b9d669c5e4c4200f3037bb5",
+    "bytes": 19510
+  },
+  {
+    "file": "source_snapshot/tandemx/utils/kmers.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/source_snapshot/tandemx/utils/kmers.py",
+    "sha256": "2bca0ce2d2a5b0ef7d628bfd2462d0f0efe24e17186b8fd371f9ee5bdb9f7174",
+    "bytes": 5048
+  },
+  {
+    "file": "source_snapshot/rust-core/src/lib.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/source_snapshot/rust-core/src/lib.rs",
+    "sha256": "465c22268acc0b61a1065687b15068ae2d5d9aa16143cad434c8b62f165f84eb",
+    "bytes": 34151
+  },
+  {
+    "file": "source_snapshot/rust-core/src/weighted_words.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_heldout_v1_20260906/source_snapshot/rust-core/src/weighted_words.rs",
+    "sha256": "2440534f3a251288fa4b4e51e7ca833c6358743784255b49b8ae2b8325377bb3",
+    "bytes": 4221
+  },
+  {
+    "file": "calibration_source/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_development_v2_20260906/validation.json",
+    "sha256": "d1649a1348e0abd8e758ee79645947aa1f75b260afe6d12fdace03e704ffa1fd",
+    "bytes": 398
+  },
+  {
+    "file": "calibration_source/calibration.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_development_v2_20260906/calibration.tsv",
+    "sha256": "109b7e208facf7aa9bea3e127a4739291d3d956b72fde8a6ce7051df30f414c2",
+    "bytes": 496
+  },
+  {
+    "file": "calibration_source/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_multik_collapse_development_v2_20260906/environment.json",
+    "sha256": "2debcdc00ab56a8a2e7848b4a3a1e4c8fdc3fad0b50bee67fedd905c53e25103",
+    "bytes": 8873
+  },
+  {
+    "file": "baseline_receipt/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_heldout_v2_20260906/validation.json",
+    "sha256": "0d28486664312676fdd0695887263cdd2e30835f599f8dcb9f35a4fa72467a1c",
+    "bytes": 230
+  },
+  {
+    "file": "baseline_receipt/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_heldout_v2_20260906/environment.json",
+    "sha256": "2354b9dd1893d55781b94a96790f11a4d63045c4eccb093a5ac4ee782577529b",
+    "bytes": 8635
+  },
+  {
+    "file": "baseline_receipt/run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_heldout_v2_20260906/run_config.json",
+    "sha256": "68d5be9905c6b3087ce595208bf949479d9fcf1055fb75f29d746b3964df853f",
+    "bytes": 1220
+  }
+]

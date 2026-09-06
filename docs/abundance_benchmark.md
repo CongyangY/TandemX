@@ -123,6 +123,28 @@ the hybrid had 203/40/3/159. Sensitivity increased from 0.802469 to 0.835391,
 false-positive rate decreased from 0.043210 to 0.018519 and precision increased
 from 0.965347 to 0.985437. Multi-k alone had 35 unavailable rows, so its
 conditional metrics are not a complete-method comparison. This is calibration,
-not validation. `benchmarks/configs/abundance_v2.json` freezes the rule, the
+not validation. `benchmarks/configs/abundance_v2.json` froze the rule, the
 calibration hashes and untouched held-out seeds 5201–5203 before their one-time
-execution.
+execution from committed source 1231743.
+
+## Frozen-rule validation on fresh seeds
+
+Both hosted CI runs for 1231743 passed before the new matrix was run. The first
+and only 5201–5203 baseline completed 177/177 commands. The original k=21 rule
+had TP/FN/FP/TN=198/45/14/148: sensitivity 0.814815, false-positive rate
+0.086420 and precision 0.933962. Applying the frozen rule without fitting on
+these rows changed the counts to 208/35/12/150: sensitivity 0.855967,
+false-positive rate 0.074074 and precision 0.945455. Each seed gained true
+positives without gaining false positives, although seed 5202 retained 12 false
+positives and a 0.222222 false-positive rate.
+
+At 20×/1% substitutions/50% retention, sensitivity improved from 3/9 to 9/9.
+At 1× in complete-assembly controls, false calls decreased from five to three
+of 27 family conditions. The gain was not uniform: at 1× with 0% or 0.1%
+substitutions and 50% retention, sensitivity decreased from 6/9 to 4/9 in each
+stratum. The multi-k-only arm had 15 unavailable rows. These
+results validate this narrow decision rule on fresh exact-copy simulations;
+they do not establish divergent-array, unknown-catalogue, empirical HiFi or
+biological under-representation performance. All 5201–5203 seeds are consumed.
+Compact paired archives are `paper/evidence/abundance_heldout_v2` and
+`paper/evidence/abundance_multik_collapse_heldout`.

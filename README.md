@@ -452,9 +452,10 @@ Native elastic alignment now rolls score/peak rows in place; full tracebacks
 are checked against the Python reference and real-pipeline byte-parity replay.
 The [complete-data acquisition guide](docs/complete_data_qc.md) also provides
 official-checksum-pinned MorexV3 reference acquisition from the IPK publication.
-Nine included HiFi libraries from seven reported plant species now have complete
-file QC and seed6101 whole-library nested samples; exact totals and evidence
-boundaries are in [the cohort table](paper/tables/input_cohort.tsv).
+Ten included HiFi libraries from eight reported plant species now have complete
+file QC. Seed6101 whole-library nested samples are complete for nine libraries
+and active for YSD56; exact totals and evidence boundaries are in
+[the cohort table](paper/tables/input_cohort.tsv).
 [Published Mo17 regions](docs/published_mo17_regions.md)
 retain the original spreadsheet, source cells, assembly-coordinate checks and
 the distinction between a mixed repeat region and base-level satellite truth.

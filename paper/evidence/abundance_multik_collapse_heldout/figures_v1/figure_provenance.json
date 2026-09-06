@@ -1,0 +1,51 @@
+{
+  "complete": true,
+  "methods": [
+    "single_k21",
+    "multik_fallback_depth_rule"
+  ],
+  "paired_conditions": 405,
+  "fresh_seeds": [
+    "5201",
+    "5202",
+    "5203"
+  ],
+  "input_sha256": {
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_multik_collapse_heldout/comparison_metrics.tsv": "9c74dd3444ba2c221b135a643bfd2ca977a137f9cef9646ef5ba842f312d914d",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_multik_collapse_heldout/validation.json": "a0f4c14857af1aba930d668f3a095a9e0035200cba97d32e84cbdad2b450fcc9"
+  },
+  "script_sha256": "fb0054a69c64bdba04937d6b1cd90f60d77c479b1598b0e53c7bc14f2078073a",
+  "panel_source_sha256": "adb5adc85b8127372822b7e7d4b0b57a182d10bf6ea5fd474934d4d0939539f3",
+  "outputs": {
+    "collapse_validation.pdf": "0a669d572a27bd1dd7e460875d05d9940b7778c325db8b233eb6f7a440cbbc08",
+    "collapse_validation.svg": "f7c5c5a8997648c694fb32460e0f0f03ed4a71a5fe614e3ae65576de284c5bb2",
+    "collapse_validation.png": "9daea7e1e29c4fa59170af3d9d97af6e69ce7a9b272693bec01dd7502aa36cc3"
+  },
+  "interpretation": "predeclared exact-copy known-catalogue simulation; not biological collapse truth",
+  "validation_method_confusion": {
+    "single_k21": {
+      "available": 405,
+      "unavailable": 0,
+      "TP": 198,
+      "FN": 45,
+      "FP": 14,
+      "TN": 148
+    },
+    "multik_loglinear": {
+      "available": 390,
+      "unavailable": 15,
+      "TP": 213,
+      "FN": 21,
+      "FP": 15,
+      "TN": 141
+    },
+    "multik_fallback_depth_rule": {
+      "available": 405,
+      "unavailable": 0,
+      "TP": 208,
+      "FN": 35,
+      "FP": 12,
+      "TN": 150
+    }
+  }
+}

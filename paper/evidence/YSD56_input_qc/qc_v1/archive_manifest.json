@@ -1,0 +1,26 @@
+[
+  {
+    "file": "qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/qc_v1/qc.json",
+    "sha256": "bf971238c41b68488c7cbbe2ddc5e81c4b1a624ca42bc655d323debebebbffb8",
+    "bytes": 914
+  },
+  {
+    "file": "length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/qc_v1/length_histogram.tsv",
+    "sha256": "f3d6da3da7b441c328594c5c5bbc34ad9fe2ace73949212dce538ba36a934ff2",
+    "bytes": 323825
+  },
+  {
+    "file": "joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/qc_v1/joint_distribution.tsv",
+    "sha256": "e67296e4ef8230761a391ffb92d3a85a20d0c676cd4302d1b7c1213320fcb66f",
+    "bytes": 73770
+  },
+  {
+    "file": "base_quality_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/qc_v1/base_quality_histogram.tsv",
+    "sha256": "0828fd41a92ffb41006b19b3ab7ca6956f5601ba04acd1104c0fea3845ff8b11",
+    "bytes": 121
+  }
+]

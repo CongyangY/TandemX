@@ -18,14 +18,15 @@ read errors, fixed multi-k extrapolation reduced mean absolute relative
 copy-number error from 56.59% for the median-k21 baseline to 13.53%. A joint-read
 sampling calculation retained dependence across k values: at 20×, 424 of 495
 family conditions supported intervals, of which 401 contained truth (94.58%).
-Low-coverage missingness remained substantial. File-level QC covered 218.538 Gb
-in nine libraries across seven reported plant species. Reference concordance in a 118.497-Mb
+Low-coverage missingness remained substantial. File-level QC covered 262.731 Gb
+in ten libraries across eight reported plant species. Reference concordance in a 118.497-Mb
 Arabidopsis subset identified 22.19% of input bases with organellar primary
 alignment spans, highlighting a potential total-library normalization bias.
-On three predeclared conditional held-out genomes, the unchanged assembly/read
-rule had 85.60% under-representation sensitivity, 4.94% false-positive rate and
-96.30% precision, but sensitivity was only 2/9 for 50%-retained arrays at
-20× with 1% substitutions.
+On three fresh predeclared conditional genomes, a frozen multi-k/depth rule
+improved under-representation sensitivity from 81.48% to 85.60%, false-positive
+rate from 8.64% to 7.41% and precision from 93.40% to 94.55%. The 20×/1%-error/
+50%-retention stratum improved from 3/9 to 9/9, but one genome retained a 22.22%
+false-positive rate.
 Exact native optimizations shortened a 1.129-Gb maize replay by 23.61% relative
 to its preceding indexed version while preserving seven output files byte for
 byte; peak memory increased 0.81%. External comparisons showed task-dependent
@@ -167,7 +168,7 @@ these fractions are descriptive; genome-specific summaries are retained
 (Figure 2; Evidence E6). The interval excludes extrapolation bias, genome-size
 uncertainty, catalogue error and biological pooling.
 
-### Held-out conditional tests expose failure modes in assembly comparison
+### Held-out conditional tests expose failure modes and validate a frozen correction
 
 The predeclared seeds 5101–5103 were used once after the original conditional
 comparison settings were frozen. Each 199.1-kb genome contained three exact-copy
@@ -187,19 +188,39 @@ finite-read sampling, but do not uniquely assign cause. The aggregate metrics
 do not support a robust general collapse claim, and the consumed seeds cannot
 be used to tune a revised model.
 
-### Seven-species file QC and reference concordance expose normalization concerns
+We therefore calibrated a transparent rule only on earlier development seeds
+4101–4103. It used k=15/21/27/31 extrapolation when available, fell back to k=21
+otherwise, and changed the decision threshold from 0.6 to 0.5 only below
+observed haploid depth 2. All three leave-one-genome-out development folds
+selected 0.5. The rule, calibration hashes and fresh seeds 5201–5203 were
+committed in 1231743; both hosted CI runs passed before one-time execution.
+
+On the fresh 405-condition matrix, the original rule yielded TP/FN/FP/TN=
+198/45/14/148 and the frozen rule yielded 208/35/12/150 (Evidence E12).
+Sensitivity improved from 81.48% to 85.60%, false-positive rate from 8.64% to
+7.41% and precision from 93.40% to 94.55%. Every seed gained true positives
+without gaining false positives, but seed 5202 retained 12 false positives.
+The 20×/1%-error/50%-retention stratum improved from 3/9 to 9/9; 1× complete-
+assembly false calls decreased from five to three of 27. However, 1×/0 or 0.1%-
+error/50%-retention sensitivity decreased from 6/9 to 4/9 in each stratum.
+Multi-k alone had 15
+unavailable rows. This supports the frozen rule under this narrow exact-copy
+model, not a general or biological collapse claim (Figure 3).
+
+### Eight-species file QC and reference concordance expose normalization concerns
 
 Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N/Col-0R/Ey15-2R, rice
-Nipponbare, barley Morex, rye Lo7, wheat Chinese Spring and oat Victoria passed
-source checksum and full-file validation, totalling 218,538,165,764 bp in
-12,320,381 reads (Table 1).
+Nipponbare, barley Morex, rye Lo7, wheat Chinese Spring, oat Victoria and wild
+soybean YSD56 passed source checksum and full-file validation, totalling
+262,731,255,175 bp in 14,937,608 reads (Table 1).
 Checks covered record structure, gzip integrity, exact duplicate archive IDs,
 length distributions, GC/N content and reported base-quality distributions.
-These are nine included libraries from seven reported species, not seven completed biological
-accuracy validations. Several accessions represent one technical batch of a
+These are ten included libraries from eight reported species, not eight completed
+biological accuracy validations. Several accessions represent one technical batch of a
 larger study. Col-0N and Ey15-2R derive from pooled plants, whereas Col-0R is
 reported as a single plant. These units are not interchangeable replicates. Nested samples preserve
-whole-library selection and exact read IDs (Figures S1–S3; Evidence E7).
+whole-library selection and exact read IDs. Nine sampling ladders are complete;
+YSD56 sampling remains active (Figures S1–S3; Evidence E7).
 
 Whole-library random-sample comparator diagnostics on Morex, Nipponbare,
 Victoria, Chinese Spring and Lo7 successfully normalized all three read-tool
@@ -267,9 +288,10 @@ and reference BioSamples also differ; exact donor identity remains unresolved.
 
 ## Discussion
 
-The completed experiments identify two separable improvements: exact engineering
-changes reduced a measured discovery run time, and a conditional multi-k model
-reduced a specific copy-estimation bias. Neither result establishes that
+The completed experiments identify three separable improvements: exact engineering
+changes reduced a measured discovery run time, a conditional multi-k model
+reduced a specific copy-estimation bias, and a frozen transparent rule improved
+all three assembly-comparison confusion metrics on fresh simulations. None establishes that
 TandemX dominates existing tools. In the current read simulation, all three
 methods recovered every founder. TRF retained slightly higher base precision,
 and TideHunter remained faster. TRASH2 was a strong assembly baseline after
@@ -303,9 +325,10 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 426 Python tests. Rust source was
-unchanged from the published f16596b checkpoint, which passed 15 Rust tests,
-formatting and clippy with warnings denied; both f16596b hosted CI runs passed.
+PyO3/Rust extension. The current source passed 431 local Python tests. Its Rust
+source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
+passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
+distributable-wheel builds.
 Per-run manifests and compact evidence archives preserve
 the exact source, input and output hashes used for each result and take
 precedence over a manuscript-level version label.
@@ -331,6 +354,13 @@ actual integer-copy assembly/genome ratio below 0.6; native `possible_collapse`
 or `reads_only` status was positive. The unchanged matrix was run once, after
 which these seeds were marked consumed. It supplies a known catalogue and omits
 indels, unit divergence, ploidy and empirical sequencing bias.
+
+Development seeds 4101–4103 then calibrated a fixed multi-k/depth decision rule.
+The predeclared model and calibration artifact hashes were committed before
+fresh seeds 5201–5203 were executed once. Held-out evaluation accepted only the
+frozen k values, depth cutoff, thresholds, fallback rule and calibration hashes;
+it did not search thresholds. Every method was scored on identical assembly,
+coverage, error and family keys. Multi-k unavailable values remained explicit.
 
 ### Comparator execution and scoring
 
@@ -416,6 +446,14 @@ The exact panel legend is in `evidence/factorial_joint_multik/README.md`.
 The inspected version 2 layout moves the panel-A legend clear of the data;
 its source rows are identical to version 1.
 
+**Figure 3. Predeclared conditional assembly-comparison validation.** Six panels
+show the fresh three-genome design, overall sensitivity/false-positive rate/
+precision, confusion counts, per-seed sensitivity and false-positive rates, and
+baseline-to-frozen-rule sensitivity across nine 50%-retention coverage/error
+strata. The heatmap includes the two adverse 1× cells. Inputs, panel values and
+hashes are in `evidence/abundance_multik_collapse_heldout/figures_v2`. These are
+exact-copy known-catalogue simulations, not biological collapse truth.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -425,11 +463,11 @@ with pooled-material and reported-quality limits, in
 
 **Figure S3. Cross-cohort input QC.** Six panels show validated sequence volume,
 median and N50 read length, whole-file GC fraction, and row-normalized read
-length, per-read GC and reported mean-quality distributions for nine complete
-libraries from seven reported plant species. The final bins include values at or
+length, per-read GC and reported mean-quality distributions for ten complete
+libraries from eight reported plant species. The final bins include values at or
 beyond the labelled bound. Reported quality is not empirical accuracy, and the
 libraries are not interchangeable biological replicates. Source rows and hashes
-are in `evidence/multispecies_input_qc/figures_v1`.
+are in `evidence/multispecies_input_qc/figures_v2`.
 
 **Figure S4. One-thread real-read comparator diagnostics.** Six panels show wall
 time, throughput, peak RSS, paired wall-time and RSS ratios to TRF, and called-
@@ -444,7 +482,7 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 
 ## Tables and evidence index
 
-- Table 1: nine-library, seven-species input/QC table in `tables/input_cohort.tsv`.
+- Table 1: ten-library, eight-species input/QC table in `tables/input_cohort.tsv`.
 - Table 2: executed six-run read comparison in
   `evidence/factorial_discovery_s6301_5x/summary.tsv`; scope/denominators in its README.
 - Table 3: exact 1.129-Gb replay in `evidence/Mo17_alignment_workspace/full_1129Mb/validation.json`
@@ -460,17 +498,20 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S6: selected historical-query recovery, threshold
   sensitivity and actual consensus provenance in `evidence/known_query_recovery`.
 - Supplementary Table S7: cross-cohort QC and real-diagnostic panel sources in
-  `evidence/multispecies_input_qc/figures_v1` and
+  `evidence/multispecies_input_qc/figures_v2` and
   `evidence/multispecies_real_diagnostics/figures_v2`.
 - Supplementary Table S8: all held-out conditional copy-number, localization,
   comparison and per-command resource rows in `evidence/abundance_heldout`.
+- Supplementary Table S9: fresh paired baseline/frozen-rule comparison rows in
+  `evidence/abundance_multik_collapse_heldout`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
 E5: `factorial_multik_replay`; E6: `factorial_joint_multik`;
-E7: nine `*_input_qc` directories and their source manifests;
+E7: ten `*_input_qc` directories and their source manifests;
 E8: `multispecies_real_diagnostics`; E9: `reference_mapping_diagnostics`;
-E10: `known_query_recovery`; E11: `abundance_heldout`.
+E10: `known_query_recovery`; E11: `abundance_heldout`;
+E12: paired `abundance_heldout_v2` and `abundance_multik_collapse_heldout`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

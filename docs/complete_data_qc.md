@@ -118,9 +118,12 @@ The script archives the source metadata and pins that file/checksum under DOI
 10.5447/ipk/2021/3 (CC BY 4.0). A 4.5-GB transfer cap bounds the original,
 uncompressed FASTA. An acknowledged exact HTTP range is used when available.
 When the official server ignores Range, the downloader compares its full-response
-prefix byte-for-byte with the retained partial before appending the suffix.
-Access-denied responses are not retried. No failed partial is renamed or silently
-discarded. Full streaming FASTA QC rechecks the pinned SHA,
+prefix byte-for-byte with the retained partial before appending the suffix. If
+that prefix differs, the receipt records the first differing byte and retained
+partial hash, keeps the old partial untouched and downloads a clean sibling from
+byte zero. The clean file is published under the canonical name only after the
+official full-file SHA-256 passes. Access-denied responses are not retried. No
+failed partial is silently discarded. Full streaming FASTA QC rechecks the pinned SHA,
 contig/ambiguity counts and structural validity. `reference_receipt.json` marks
 completion only after these checks. Matching cultivar/study does not establish
 identical donor DNA or precise satellite copy truth.

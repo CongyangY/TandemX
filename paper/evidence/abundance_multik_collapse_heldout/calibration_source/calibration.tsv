@@ -1,0 +1,5 @@
+fold	training_seeds	evaluation_seeds	low_depth_cutoff	selected_low_depth_threshold	standard_depth_threshold	baseline_TP	baseline_FN	baseline_FP	baseline_TN	calibrated_TP	calibrated_FN	calibrated_FP	calibrated_TN
+full_development	4101,4102,4103	4101,4102,4103	2.0	0.5	0.6	195	48	7	155	203	40	3	159
+leave_s4101_out	4102,4103	4101	2.0	0.5	0.6	60	21	0	54	63	18	0	54
+leave_s4102_out	4101,4103	4102	2.0	0.5	0.6	64	17	2	52	66	15	0	54
+leave_s4103_out	4101,4102	4103	2.0	0.5	0.6	71	10	5	49	74	7	3	51

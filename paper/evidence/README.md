@@ -163,6 +163,16 @@ All positive exact-copy localization rows had base recall 1, but 20×/1%-error
 50%-retention sensitivity was only 2/9. The compact archive revalidates source,
 configuration, matrix dimensions and all receipts; these seeds are now consumed.
 
+`abundance_heldout_v2/` records the fresh 5201–5203 baseline that was configured,
+committed and pushed before its first execution. All 177 commands completed. The
+original k=21 rule had TP/FN/FP/TN=198/45/14/148. The paired
+`abundance_multik_collapse_heldout/` archive applies the frozen development rule
+without held-out fitting and changes these counts to 208/35/12/150: sensitivity
+0.814815→0.855967, false-positive rate 0.086420→0.074074 and precision
+0.933962→0.945455. It preserves 15 unavailable multi-k-only rows, seed-5202
+false positives and all exact calibration/baseline/source hashes. This remains
+small known-catalogue exact-copy simulation evidence, not biological validation.
+
 `read_cluster_replay/` adds the non-default read-sampling reference model replay
 from 6f29db5: 81 point estimates, 33 available intervals, 24 covering truth and
 48 unavailable. Mutation-dependent CN underestimation remains. This is not
@@ -183,11 +193,13 @@ compatibility checks and the explicit mixed-region/base-truth distinction.
 
 `Nipponbare_input_qc/`, `Morex_input_qc/`, `Lo7_input_qc/`,
 `ChineseSpring_input_qc/`, `Victoria_input_qc/`, `Col0R_input_qc/` and
-`Ey15R_input_qc/` extend complete-file QC and seed6101 nested sampling. Together
-with Mo17 and Col-0N, the included cohort is nine libraries from seven reported
-species (12,320,381 reads; 218,538,165,764 bp). These are validated files and
-technical sampling strata, not independent biological replicates or accuracy
-truth. Large FASTQ/ID products remain at the recorded T7 data root.
+`Ey15R_input_qc/` extend complete-file QC and seed6101 nested sampling.
+`YSD56_input_qc/` adds exact acquisition and complete-file QC; its seed6101
+sampling is active. Together with Mo17 and Col-0N, the included cohort is ten
+libraries from eight reported species (14,937,608 reads; 262,731,255,175 bp).
+These are validated files and technical sampling strata, not independent
+biological replicates or accuracy truth. Large FASTQ/ID products remain at the
+recorded T7 data root.
 
 `factorial_multik_replay/` and `factorial_joint_multik/` retain the complete
 three-genome, 27-condition conditional copy-estimation and joint-read interval
@@ -202,10 +214,11 @@ final isolated resource ranking is implied. `reference_mapping_diagnostics/`
 contains the separate Col-CEN and Nipponbare alignment audits with reference-
 content, donor-matching and organellar-denominator limits.
 
-`multispecies_input_qc/` contains the inspected six-panel cross-cohort input
-figure, exact panel source and output/input hashes for all nine included
-libraries. It visualizes complete-file data volume, read length, GC and reported
-quality; it does not measure empirical read accuracy or biological replication.
+`multispecies_input_qc/figures_v2` contains the current inspected six-panel
+cross-cohort input figure, exact panel source and output/input hashes for all ten
+included libraries. It visualizes complete-file data volume, read length, GC and
+reported quality; it does not measure empirical read accuracy or biological
+replication. The nine-library v1 render remains as history.
 
 `known_repeat_sources/` records exact source accessions and curated historical
 repeat queries. `known_query_recovery/` scores those selected sequences against

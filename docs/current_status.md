@@ -9,10 +9,11 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ### Published article draft and resolved figure export checkpoint
 
-- f16596b is pushed to main and working branch. Both hosted CI runs
-  34029886116/34029873822 passed; earlier 4aafb00 runs
-  34027553506/34027544312 also passed. The committed checkpoint has 412 local
-  Python tests and 15 native tests passing; Clippy `-D warnings` and fmt passed.
+- 1231743 is pushed to main and working branch. Both hosted CI runs
+  34031712723/34031704058 passed; earlier f16596b runs
+  34029886116/34029873822 also passed. The committed checkpoint has 426 local
+  Python tests; unchanged native source last passed 15 tests, Clippy `-D warnings`
+  and formatting.
 - The temporary automatic-review usage error is resolved. Subsequent Git reviews
   succeeded; a read-only source diff proved the figure update only changes the
   legend/whitespace, and retry through the original approval channel succeeded.
@@ -21,10 +22,11 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   version 1. Version 1 remains retained. Figure/doc updates are published in 4aafb00.
 - The initial manuscript and explicit readiness audit are published in 4aafb00.
   This is a development draft, not a completed paper or software release.
-- Col-0R and Ey15-2R full QC and compact archives passed. They add two included
-  Arabidopsis libraries/materials, not two species. The cohort table now contains
-  nine libraries/seven species, 12,320,381 reads and 218,538,165,764 bp. Seed6101
-  whole-file sampling also completed. Col-0R contains 11.708/115.753/1,156.486/
+- Col-0R, Ey15-2R and YSD56 full QC and compact archives passed. Col-0R/Ey15-2R
+  add libraries/materials, while YSD56 adds wild soybean as an eighth reported
+  species. The cohort table now contains ten libraries/eight species, 14,937,608
+  reads and 262,731,255,175 bp. Nine seed6101 whole-file sampling ladders are
+  complete and YSD56 sampling is active. Col-0R contains 11.708/115.753/1,156.486/
   10,643.552-Mb nested samples; Ey15-2R contains 11.698/113.336/1,119.054/
   10,627.736-Mb samples. Compact plans, receipts and distribution tables are
   archived locally; sample FASTQ and ID files remain on T7.
@@ -46,9 +48,10 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   3.37-fold TideHunter's wall time and used 3.19-fold TRF's peak RSS. The compact
   14-file archive matches T7 source hashes. This is an unfavourable concurrent
   diagnostic, not an isolated ranking. Morex reference acquisition remains active.
-- Two new six-panel figures passed source/hash and visual QA. Cross-cohort input
-  QC reconciles 9 libraries/7 species/12,320,381 reads/218,538,165,764 bp and
-  has 106 editable SVG text nodes with no raster node. Real diagnostic version 2
+- Two six-panel figure families passed source/hash and visual QA. Cross-cohort
+  input-QC version 2 reconciles 10 libraries/8 species/14,937,608 reads/
+  262,731,255,175 bp and has 110 editable SVG text nodes with no raster node.
+  Its PDF was re-rendered and visually inspected. Real diagnostic version 2
   contains 10 nested inputs/5 materials, 78 editable texts and no raster node;
   version 1 is retained as a rejected legend-overlap layout with byte-identical
   panel source. The manuscript now includes Figures S3-S4 and Tables S6-S7.
@@ -58,8 +61,9 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 - Soybean source curation distinguishes inaccessible ZH13 GSA records, a Wm82
   assembly project with no ENA read rows, and Jack project RNA-seq from usable
   genomic HiFi. Wild soybean YSD56 `SRR28726931` provides 44,193,089,411 HiFi
-  bases from the same leaf BioSample as ONT support; its checksum-bounded complete
-  download is active. This is an eighth species only after complete-file QC.
+  bases from the same leaf BioSample as ONT support. Exact ENA size/MD5/SHA-256,
+  gzip/FASTQ structure, expected counts and zero duplicate IDs passed. Seed6101
+  nested sampling against the 1,008,523,555-bp assembly denominator is active.
 - f16596b publishes sequence-native exact clustering indexing and compact integer/
   32-bit-array family-audit postings. The Morex
   115-Mb fixed-order interface diagnostic retained exact complete-output parity
@@ -68,10 +72,13 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   so it is not publication timing. `source_manifest` now marks tracked changes
   and generated native binaries that differ from `git_head`. The original YSD56
   transfer failed at 19,152,111,724 bytes with an SSL EOF, resumed from that
-  partial, and then passed the exact ENA byte/MD5 checks; complete-file QC is
-  active and soybean is not yet admitted to the cohort. The IPK server ignores
-  MorexV3 Range requests; a tested byte-identical prefix fallback is prepared
-  before resuming the retained 2.126-GB partial.
+  partial, and then passed exact ENA byte/MD5 and complete-file QC checks; the
+  failure/resume history remains in the receipt. The IPK server ignores
+  MorexV3 Range requests. Its current full response matches the retained
+  2.126-GB partial for the first MiB but differs later, so the old partial was
+  preserved and no reference was published. A tested clean-sibling recovery now
+  records the first mismatch and old hash, then requires the full official
+  SHA-256 before canonical rename and FASTA QC; rerun follows its source commit.
 - The predeclared conditional-abundance held-out seeds 5101–5103 were executed
   once with the unchanged configuration and f16596b source: 177/177 commands,
   81 copy-number, 45 localization and 405 comparison family rows. Across 243
@@ -88,11 +95,20 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   0.043210→0.018519 and precision 0.965347→0.985437. All three leave-one-genome-
   out folds selected the low-depth threshold 0.5; multi-k alone was unavailable
   for 35 rows. This is development evidence only. Config `abundance_v2.json`
-  freezes the rule and calibration hashes with untouched seeds 5201–5203; that
-  one-time independent execution has not started at this checkpoint.
-- This source checkout passes the complete 426-test Python suite. Rust source is
-  unchanged from f16596b, whose 15 native tests, Clippy and formatting checks
-  passed; hosted CI for the new evidence checkpoint remains to be run.
+  froze the rule and calibration hashes with untouched seeds 5201–5203.
+- After 1231743 and both CI runs passed, the 5201–5203 matrix was run once. All
+  177 baseline commands and 27 multi-k conditions completed. The frozen rule
+  changed TP/FN/FP/TN from 198/45/14/148 to 208/35/12/150, sensitivity
+  0.814815→0.855967, false-positive rate 0.086420→0.074074 and precision
+  0.933962→0.945455. Each seed improved TP without increasing FP, but seed 5202
+  retained 12 FP; the multi-k-only arm had 15 unavailable rows. At
+  20×/1%-error/50% retention, recall improved 3/9→9/9; 1× complete-control FP
+  decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
+  6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
+  frozen calibration files and baseline receipts. These seeds are consumed.
+- The expanded source checkout passes all 431 Python tests. The added tests cover
+  compact multi-k evidence integrity, paired figure inputs and clean Morex
+  recovery while retaining a divergent partial. Rust source is unchanged.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

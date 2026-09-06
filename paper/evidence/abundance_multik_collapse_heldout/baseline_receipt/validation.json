@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "executions": 177,
+  "successful": 177,
+  "copy_number_family_rows": 81,
+  "localization_family_rows": 45,
+  "comparison_family_rows": 405,
+  "scientific_acceptance": "not_assumed_from_execution_success"
+}

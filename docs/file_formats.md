@@ -807,6 +807,14 @@ records split semantics, source/input hashes, row completeness, the frozen model
 and method-level confusion counts. Execution success is separate from scientific
 acceptance.
 
+`archive_multik_collapse_evidence.py` accepts only the predeclared held-out
+scope. It re-derives method confusion counts from paired condition keys, rejects
+seed overlap or method imbalance, verifies the source digest and selected source
+files, and checks the frozen development calibration and baseline receipt hashes.
+The compact archive includes the six root outputs, selected source snapshot,
+three calibration files and three baseline receipts. `archive_manifest.json`
+records source paths, bytes and SHA-256 for every archived file.
+
 Performance figure `panel_source.tsv`: `panel`, `dataset`, `metric`, `variant`,
 `value`; panel C transforms the RSS ratio to percent change. All other values
 are the corresponding per-dataset median or ratio in the archived summary.
@@ -1099,7 +1107,11 @@ matching warning. Transfer/QC errors keep `complete=false` and `error`; an
 incomplete `.partial` file is not a reference release.
 If the official server ignores Range, the downloader rereads and compares the
 entire response prefix against the retained partial before appending any suffix;
-the receipt labels this `downloaded_complete_after_verified_prefix`.
+the receipt labels this `downloaded_complete_after_verified_prefix`. A divergent
+prefix is retained with its bytes, SHA-256 and first-difference offset while a
+separate clean partial starts at byte zero. Only an official-SHA-matching clean
+file is renamed to the canonical FASTA; its recovery label is
+`clean_download_after_divergent_partial`.
 
 ### Curated repeat-query source records
 

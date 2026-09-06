@@ -21,6 +21,18 @@ EXPECTED_SHA256 = '54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb43
 MAX_BYTES = 4_500_000_000
 
 
+class DivergentPartialError(ValueError):
+    """The server ignored Range and no longer matches the retained partial."""
+
+    def __init__(self, first_difference_offset: int, partial_sha256: str):
+        super().__init__(
+            f'Full-response prefix differs from partial at byte {first_difference_offset}; '
+            'partial retained'
+        )
+        self.first_difference_offset = first_difference_offset
+        self.partial_sha256 = partial_sha256
+
+
 def download_sha256(url: str, path: Path, expected_sha256: str, max_bytes: int) -> dict:
     """Bound a chunked transfer and verify source SHA before renaming.
 
@@ -56,11 +68,18 @@ def download_sha256(url: str, path: Path, expected_sha256: str, max_bytes: int) 
                     # Some publication repositories ignore Range. Retain local
                     # progress only after the complete response prefix is proven
                     # byte-identical to the partial already on disk.
+                    compared = 0
                     with partial.open('rb') as existing:
                         while expected := existing.read(1024*1024):
                             observed = response.read(len(expected))
                             if observed != expected:
-                                raise ValueError('Full-response prefix differs from partial; partial retained')
+                                difference = next(
+                                    (index for index, pair in enumerate(zip(expected, observed))
+                                     if pair[0] != pair[1]),
+                                    min(len(expected), len(observed)),
+                                )
+                                raise DivergentPartialError(compared + difference, sha.hexdigest())
+                            compared += len(expected)
                     transfer = 'downloaded_complete_after_verified_prefix'
                 if response.status == 206 and not response.headers.get('Content-Range', '').startswith(f'bytes {offset}-'):
                     raise ValueError('Incorrect reference resume range')
@@ -111,8 +130,26 @@ def fetch(outdir: Path) -> dict:
                    parser_sha256=digest_file(Path(__file__).with_name('fastq_stream.py')),
                    warning='same_cultivar_study_context_not_verified_identical_donor_or_satellite_copy_truth')
     try:
-        receipt['transfer'] = download_sha256(plan['url'], outdir/FILENAME, EXPECTED_SHA256, MAX_BYTES)
-        receipt['qc'] = reference_qc(outdir/FILENAME)
+        reference = outdir/FILENAME
+        try:
+            receipt['transfer'] = download_sha256(plan['url'], reference, EXPECTED_SHA256, MAX_BYTES)
+        except DivergentPartialError as exc:
+            partial = reference.with_name(reference.name+'.partial')
+            receipt['preserved_divergent_partial'] = {
+                'path': str(partial.resolve()),
+                'bytes': partial.stat().st_size,
+                'sha256': exc.partial_sha256,
+                'first_difference_offset': exc.first_difference_offset,
+            }
+            clean = reference.with_name(reference.name+'.clean')
+            clean_transfer = download_sha256(plan['url'], clean, EXPECTED_SHA256, MAX_BYTES)
+            clean.rename(reference)
+            receipt['transfer'] = {
+                **clean_transfer,
+                'recovery': 'clean_download_after_divergent_partial',
+                'divergent_partial_retained': str(partial.resolve()),
+            }
+        receipt['qc'] = reference_qc(reference)
         if receipt['qc']['input_sha256'] != EXPECTED_SHA256:
             raise ValueError('Reference changed between download verification and FASTA QC')
         receipt['complete'] = True
