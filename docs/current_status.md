@@ -7,6 +7,26 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Completed factorial inputs and conditional scoring controller
+
+- All three 10-Mb development genomes (6301/6302/6303) finished generation,
+  each with 55 planted families and nine read conditions. Observed read bases:
+  780,054,525 / 780,064,624 / 780,060,539 (total 2,340,179,688). Receipts under
+  T7 `data/simulated/factorial_scale_sSEED_v1` are complete. These remain three
+  controlled IID-background genomes, not three species or 165 plants.
+- New `benchmarks.abundance.run_stream_quantify` uses only observed reads,
+  founder catalogue, fixed genome size and k=21 in the public estimator; source
+  occupancy/error metadata remain evaluation-only. It checks hashes, preserves
+  failures and compares per-family bias and native k-mer spread to truth.
+  Actual scoring is next. Full suite **288 passed in 64.69 s**.
+- Col-0N 11.766-Mb related-audit pilot completed all tools: TandemX 17.520 s /
+  89.47 MiB, TRF 12.981 s / 125.34 MiB, TideHunter 4.247 s / 254.58 MiB.
+  Counts/coverage remain descriptive; these concurrent-job resource values are
+  not final timing rankings. The Mo17 1.129-Gb pilot is still running.
+- Complete-file downloads for Nipponbare, Lo7 and Morex continue; only Mo17 and
+  Col-0N have completed full raw-file QC. Morex ERR4659246 is one technical CCS
+  batch from PRJEB40587, not an independent five-plant cohort.
+
 ### Factorial scale generator and completed related-audit verification
 
 - Full suite: **286 passed in 62.58 s**. New generator writes indexed FASTA

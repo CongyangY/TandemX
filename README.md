@@ -393,8 +393,10 @@ reported intervals; this is an identified limitation, not calibrated inference.
 The [streamed factorial simulator](docs/factorial_scale_simulation.md) adds a
 10-Mb source-genome design, 54 crossed length/copy/GC/divergence cells and a
 1.026-Mb array, with empirical read lengths and explicit source/observed indel
-coordinates. It generates development inputs independently of detector code;
-its inputs still require actual software scoring before an accuracy claim.
+coordinates. It generates development inputs independently of detector code.
+Its conditional scoring controller executes the public quantifier, verifies input
+hashes and reports every family's bias, sampling-oracle difference and k-mer
+spread coverage. Supplied founder catalogues isolate quantification from discovery.
 The [real and simulated cohort/QC programme](docs/cohort_and_qc.md) specifies
 species/material breadth, scale ladders, full-file validation and independent
 evidence requirements. Current development/toy results do not satisfy those gates.

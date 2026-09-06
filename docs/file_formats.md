@@ -874,3 +874,23 @@ All genomic and read coordinates below are 0-based, half-open.
   = source bases + insertions - deletions. Sequence only, no synthetic quality
   scores. The controller records completed condition IDs and refuses reserved
   seeds or requests above the declared worst-case sequence-base budget.
+
+The conditional scorer `benchmarks.abundance.run_stream_quantify` writes:
+
+- `copy_number_metrics.tsv`: `seed`, `condition_id`, requested source `coverage`,
+  `error_model`, sequencing `substitution_rate`, `insertion_rate`, `deletion_rate`,
+  biological `unit_substitution_rate`, `period`, `requested_gc`, `founder_gc`,
+  `array_scope` (`factorial` or `megabase`), actual `source_coverage`,
+  `observed_coverage`, `read_count`, `total_bases`, and the previously documented
+  conditional copy-number score fields (`family_id`, planted copies, estimate,
+  signed/absolute errors, k-mer spread bounds, oracle and spread interpretation).
+- `copy_number_summary.tsv`: group keys `coverage`, `error_model`,
+  `unit_substitution_rate`, `array_scope`, with `family_observations` and the
+  conditional-abundance summary statistics above. Counts are correlated family
+  conditions, not independent plants.
+- `runs/sSEED/condition_ID/execution.json`: exact command, input hashes, exit,
+  timeout and resource measurements; `output/` contains unmodified public CLI
+  products. `environment.json` holds source/dataset provenance and interpretation
+  limits; `validation.json` records completed/successful executions, independent
+  simulated genomes and scored family conditions. Scientific acceptance is not
+  inferred from exit status. `run.log` records each attempted execution.

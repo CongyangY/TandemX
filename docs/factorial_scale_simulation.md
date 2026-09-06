@@ -59,3 +59,36 @@ with `reads.fa`, `sampling.tsv`, `truth_read_segments.tsv`, `manifest.json`;
 root source snapshot, config/histogram copies, `generation.log` and a completion
 receipt with per-condition hashes. Later scores must retain condition labels
 and these hashes, including when a method fails.
+
+## Conditional copy-number scoring
+
+After generation, run the actual public quantifier with the known founder
+catalogue and fixed source genome size. This isolates abundance from discovery:
+it is not a de novo family-recall experiment. Only observed reads, catalogue,
+genome size and k=21 enter the estimator; planted copy counts, source occupancy
+and error probabilities are evaluator-only inputs.
+
+```bash
+conda run --no-capture-output -n tandemx-dev python -m benchmarks.abundance.run_stream_quantify \
+  --datasets /path/to/factorial_s6301 /path/to/factorial_s6302 /path/to/factorial_s6303 \
+  --outdir /path/to/new/factorial_quantification --timeout 900
+pytest -q tests/integration/test_stream_quantify.py
+```
+
+The controller verifies generation/condition receipts, catalogue/truth and read
+hashes; it refuses incomplete, repeated-seed or held-out datasets. It snapshots
+software, retains commands, stdout/stderr and direct-child resource measurements,
+and requires every execution to finish successfully. Failures stay missing and
+are not assigned zero errors. `copy_number_metrics.tsv` retains every family,
+seed, requested coverage, error model, biological divergence, period and GC.
+`copy_number_summary.tsv` groups by coverage, error, divergence and megabase-array
+scope. These are descriptive means across correlated family conditions; they
+are not independent biological-replicate confidence intervals.
+
+The evaluator separates signed/absolute error against planted copies from
+estimator-minus-source-sampling-oracle error. The oracle divides actually sampled
+source repeat bases by founder length and actual source coverage. The estimator
+sees observed read lengths; indel-altered exposure is recorded separately.
+Native 10th–90th percentile diagnostic-k-mer bounds remain a within-k-mer spread,
+not a calibrated sampling confidence interval. Resource measurements made during
+data acquisition and other jobs are development diagnostics, not final rankings.
