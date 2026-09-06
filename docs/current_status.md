@@ -116,7 +116,7 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 459 Python tests. The added tests cover
+- The expanded source checkout passes all 462 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
   unchanged. Four additional tests validate compact reference archiving and
@@ -201,6 +201,15 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   precision 0.999631 and 0/54 absent-family false-positive rows. A compact
   evidence chain and inspected six-panel Figure 6 retain the result. Seeds
   5701–5703 are now consumed and cannot be retested as independent validation.
+- Post-hoc stratification showed that the added false positives were confined to
+  nominal 1×. Config `abundance_classifier_depth_gated_development_v3.json`
+  therefore declares a transparent development hypothesis before any new seed
+  is touched: use the unchanged single-k21/0.6 decision below estimated depth 2,
+  and the alpha-0.5/threshold-0.5 blend otherwise. On the six now-consumed
+  development genomes, this derived rule keeps all 39 baseline false positives,
+  changes TP/FN from 1789/1127 to 1966/950, and raises precision
+  0.978665→0.980549. This is post-failure development, not validation; seeds
+  5801–5803 remain untouched and reserved for a future frozen test.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 
