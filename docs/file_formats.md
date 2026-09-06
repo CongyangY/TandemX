@@ -827,6 +827,16 @@ confusion counts, per-seed counts, gate values and the reserved held-out seeds.
 These files are development refinement evidence and do not constitute held-out
 validation.
 
+`validate_blended_collapse.py` applies exactly one hash-frozen blend to paired
+held-out `single_k21` and `multik_loglinear` rows. It writes both methods to
+`comparison_metrics.tsv`, stratified method summaries to
+`comparison_summary.tsv`, overall seed/method confusion metrics to
+`per_seed_metrics.tsv`, and every frozen-model row to `selected_metrics.tsv`.
+Its `validation.json` records overall and per-seed TP/FN/FP/TN, sensitivity,
+FPR, precision, metric deltas, fallback count, output hashes and the Boolean
+predeclared held-out gate result. Execution completeness remains separate from
+scientific acceptance.
+
 `archive_multik_collapse_evidence.py` accepts only the predeclared held-out
 scope. It re-derives method confusion counts from paired condition keys, rejects
 seed overlap or method imbalance, verifies the source digest and selected source

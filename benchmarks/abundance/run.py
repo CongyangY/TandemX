@@ -32,6 +32,15 @@ FROZEN_LOCALIZER_FILES = {
     "development_environment_sha256": "environment.json",
     "development_config_sha256": "run_config.json",
 }
+FROZEN_CLASSIFIER_METHOD = "log_space_single_multik_blend"
+FROZEN_CLASSIFIER_FILES = {
+    "development_validation_sha256": "validation.json",
+    "development_selection_sha256": "selection.tsv",
+    "development_candidate_summary_sha256": "candidate_robust_summary.tsv",
+    "development_selected_metrics_sha256": "selected_metrics.tsv",
+    "development_environment_sha256": "environment.json",
+    "development_config_sha256": "run_config.json",
+}
 
 
 def aggregate(rows: list[dict], group_fields: list[str], kind: str) -> list[dict]:
@@ -155,6 +164,109 @@ def validate_frozen_localizer(config: dict, split: str) -> dict[str, float] | No
     return observed
 
 
+def validate_frozen_classifier(config: dict, split: str) -> dict[str, float] | None:
+    """Verify robust development evidence before creating classifier held-out output."""
+    rule = config.get("classifier_development_rule")
+    model = config.get("classifier_model")
+    if split != "heldout" or rule is None and model is None:
+        return None
+    heldout_seeds = config.get("seeds", {}).get("heldout", [])
+    if (
+        not isinstance(rule, dict)
+        or rule.get("method") != FROZEN_CLASSIFIER_METHOD
+        or rule.get("alpha_grid") != [0, 0.25, 0.5, 0.75, 1]
+        or rule.get("decision_threshold_grid") != [0.45, 0.5, 0.55, 0.6]
+        or rule.get("multik_k_values") != [15, 21, 27, 31]
+        or rule.get("unavailable_or_nonpositive_rule") != "fallback_single_k21"
+        or not isinstance(model, dict)
+        or model.get("method") != FROZEN_CLASSIFIER_METHOD
+        or model.get("selection_method") != "seed_robust_minimax"
+        or model.get("k_values") != [15, 21, 27, 31]
+        or model.get("fallback_rule") != "fallback_single_k21"
+        or model.get("blend_alpha") not in rule["alpha_grid"]
+        or model.get("decision_threshold") not in rule["decision_threshold_grid"]
+        or not isinstance(model.get("development_seeds"), list)
+        or not model["development_seeds"]
+        or set(model["development_seeds"]) & set(heldout_seeds)
+    ):
+        raise ValueError("Held-out comparison requires a disjoint frozen classifier model")
+    if any(
+        not isinstance(model.get(field), str)
+        or len(model[field]) != 64
+        or any(character not in "0123456789abcdef" for character in model[field])
+        for field in FROZEN_CLASSIFIER_FILES
+    ):
+        raise ValueError("Frozen classifier evidence hashes must be lowercase SHA-256 values")
+
+    development = Path(str(model.get("development_result", ""))).expanduser()
+    if not development.is_dir():
+        raise ValueError("Frozen classifier development result is unavailable")
+    for field, filename in FROZEN_CLASSIFIER_FILES.items():
+        path = development / filename
+        if not path.is_file() or digest_file(path) != model[field]:
+            raise ValueError(f"Frozen classifier evidence differs: {filename}")
+
+    validation = json.loads((development / "validation.json").read_text())
+    environment = json.loads((development / "environment.json").read_text())
+    development_config = json.loads((development / "run_config.json").read_text())
+    selection = read_table(development / "selection.tsv", {
+        "candidate_id", "blend_alpha", "decision_threshold", "selection_method"
+    })
+    candidate_id = f"blend_a{float(model['blend_alpha']):g}_t{float(model['decision_threshold']):g}"
+    if (
+        validation.get("complete") is not True
+        or validation.get("development_only") is not True
+        or validation.get("selected_candidate") != candidate_id
+        or validation.get("development_seeds") != model["development_seeds"]
+        or validation.get("reserved_heldout_seeds") != heldout_seeds
+        or validation.get("acceptance", {}).get("passed") is not True
+        or environment.get("development_seeds") != model["development_seeds"]
+        or environment.get("reserved_heldout_seeds") != heldout_seeds
+        or environment.get("config_sha256") != model["development_config_sha256"]
+        or development_config.get("development_seeds") != model["development_seeds"]
+        or development_config.get("reserved_heldout_seeds") != heldout_seeds
+        or len(selection) != 1
+        or selection[0]["candidate_id"] != candidate_id
+        or not math.isclose(float(selection[0]["blend_alpha"]),
+                            float(model["blend_alpha"]), rel_tol=0, abs_tol=1e-12)
+        or not math.isclose(float(selection[0]["decision_threshold"]),
+                            float(model["decision_threshold"]), rel_tol=0, abs_tol=1e-12)
+        or selection[0]["selection_method"] != model["selection_method"]
+    ):
+        raise ValueError("Frozen classifier development provenance is inconsistent")
+
+    observed = {
+        key: float(validation["acceptance"][key]) for key in (
+            "minimum_seed_sensitivity_delta", "maximum_seed_false_positive_rate_delta",
+            "minimum_seed_precision_delta", "full_sensitivity_delta",
+            "full_false_positive_rate_delta", "full_precision_delta",
+        )
+    }
+    declared = model.get("observed_development_metrics")
+    gates = model.get("selection_gates")
+    if (
+        not isinstance(declared, dict)
+        or set(declared) != set(observed)
+        or any(not math.isclose(float(declared[key]), value, rel_tol=0, abs_tol=1e-12)
+               for key, value in observed.items())
+        or not isinstance(gates, dict)
+        or observed["minimum_seed_sensitivity_delta"]
+            < float(gates.get("minimum_seed_sensitivity_delta", math.inf))
+        or observed["maximum_seed_false_positive_rate_delta"]
+            > float(gates.get("maximum_seed_false_positive_rate_delta", -math.inf))
+        or observed["minimum_seed_precision_delta"]
+            < float(gates.get("minimum_seed_precision_delta", math.inf))
+        or observed["full_sensitivity_delta"]
+            < float(gates.get("full_sensitivity_delta", math.inf))
+        or observed["full_false_positive_rate_delta"]
+            > float(gates.get("full_false_positive_rate_delta", -math.inf))
+        or observed["full_precision_delta"]
+            < float(gates.get("full_precision_delta", math.inf))
+    ):
+        raise ValueError("Frozen classifier development metrics do not satisfy declared gates")
+    return observed
+
+
 def run(config_path: Path, outdir: Path, split: str, localization_only: bool = False) -> None:
     config = json.loads(config_path.read_text())
     seeds = [s for group in config["seeds"].values() for s in group]
@@ -182,6 +294,7 @@ def run(config_path: Path, outdir: Path, split: str, localization_only: bool = F
     ):
         raise ValueError("Invalid localization identity model or threshold")
     localizer_development_metrics = validate_frozen_localizer(config, split)
+    classifier_development_metrics = validate_frozen_classifier(config, split)
     fragment_gap_bp = config.get("fragment_gap_bp", 0)
     if not isinstance(fragment_gap_bp, int) or isinstance(fragment_gap_bp, bool) or fragment_gap_bp < 0:
         raise ValueError("fragment_gap_bp must be a nonnegative integer")
@@ -213,6 +326,7 @@ def run(config_path: Path, outdir: Path, split: str, localization_only: bool = F
                       locate_identity_model=identity_model,
                       locate_min_identity=locate_min_identity,
                       frozen_localizer_development_metrics=localizer_development_metrics,
+                      frozen_classifier_development_metrics=classifier_development_metrics,
                       localization_only=localization_only,
                       scope=("known-catalogue conditional quantification/localization with explicit "
                              "unit-divergence and array-fragmentation factors; not discovery or empirical HiFi validation"),

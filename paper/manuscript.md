@@ -277,7 +277,13 @@ therefore failed; this is a development failure, not held-out validation.
 A second development selector was frozen after this failure. It requires each
 development genome separately to preserve baseline FPR and precision, then
 maximizes the minimum genome-level sensitivity gain. Its inputs and source
-hashes are fixed, while seeds 5701–5703 remain untouched. This post-v1
+hashes are fixed. It selected alpha 0.5 and threshold 0.5, yielding
+TP/FN/FP/TN=1002/456/7/965. Relative to k=21, the worst genome-level sensitivity
+gain was 0.076132, the maximum FPR delta was zero and the minimum precision delta
+was 0.001558. Full-development deltas were +0.088477 sensitivity, -0.003086 FPR
+and +0.004387 precision. All six development gates passed. The localizer and
+classifier parameters and evidence hashes were then embedded in a held-out
+configuration while seeds 5701–5703 remained untouched. This post-v1
 refinement cannot itself establish generalization.
 
 ### Eight-species file QC and reference concordance expose normalization concerns
@@ -420,7 +426,7 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 453 local Python tests. Its Rust
+PyO3/Rust extension. The current source passed 456 local Python tests. Its Rust
 source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
 passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
 distributable-wheel builds.

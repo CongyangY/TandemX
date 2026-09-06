@@ -218,6 +218,17 @@ FPR and precision in each seed and overall. This transparent minimax selector is
 not an AI model or independent evidence; no reserved seed may be used until its
 selected parameters and complete hashes are committed and pass hosted CI.
 
+The robust selector chose alpha 0.5 and decision threshold 0.5. Its worst
+seed-level sensitivity gain was 0.076132; maximum seed-level FPR delta was zero
+and minimum seed-level precision delta was 0.001558. Full-development sensitivity
+increased by 0.088477, FPR decreased by 0.003086 and precision increased by
+0.004387. `abundance_classifier_heldout_v1.json` freezes this result, the selected
+localizer and untouched seeds 5701--5703. Before output creation the runner must
+re-hash both development artifacts and recompute their declared gates. Held-out
+classifier acceptance requires full sensitivity gain at least 0.05, every-seed
+gain at least 0.03, and no FPR or precision regression either overall or in the
+worst seed.
+
 ## Endpoint and clustering audit (2026-09-06)
 
 Retain both strict equal-length recovery and independent cyclic edit recovery;

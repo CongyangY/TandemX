@@ -6,7 +6,12 @@ import pytest
 
 from benchmarks.abundance.evaluate import finite_nonnegative, score_copy_number, score_localization, score_comparison
 from benchmarks.abundance.simulate import GenomeSpec, build_genome, sample_reads
-from benchmarks.abundance.run import aggregate, run, validate_frozen_localizer
+from benchmarks.abundance.run import (
+    aggregate,
+    run,
+    validate_frozen_classifier,
+    validate_frozen_localizer,
+)
 from benchmarks.abundance.evaluate_multik_collapse import run as run_multik_collapse
 from benchmarks.challenge.schema import digest_file, read_table
 
@@ -259,6 +264,81 @@ def test_iid_heldout_requires_matching_development_evidence(tmp_path: Path):
     (development/'localization_metrics.tsv').write_text(rows.replace('0.98', '0.97'))
     with pytest.raises(ValueError, match='evidence differs'):
         validate_frozen_localizer(config, 'heldout')
+
+
+def test_classifier_heldout_requires_matching_robust_evidence(tmp_path: Path):
+    development = tmp_path/'classifier_development'
+    development.mkdir()
+    development_config = {
+        'development_seeds': [31], 'reserved_heldout_seeds': [40],
+    }
+    (development/'run_config.json').write_text(json.dumps(development_config))
+    config_hash = digest_file(development/'run_config.json')
+    metrics = {
+        'minimum_seed_sensitivity_delta': .08,
+        'maximum_seed_false_positive_rate_delta': 0,
+        'minimum_seed_precision_delta': .01,
+        'full_sensitivity_delta': .1,
+        'full_false_positive_rate_delta': -.01,
+        'full_precision_delta': .02,
+    }
+    (development/'validation.json').write_text(json.dumps({
+        'complete': True, 'development_only': True,
+        'development_seeds': [31], 'reserved_heldout_seeds': [40],
+        'selected_candidate': 'blend_a0.5_t0.5',
+        'acceptance': {**metrics, 'passed': True},
+    }))
+    (development/'environment.json').write_text(json.dumps({
+        'development_seeds': [31], 'reserved_heldout_seeds': [40],
+        'config_sha256': config_hash,
+    }))
+    (development/'selection.tsv').write_text(
+        'candidate_id\tblend_alpha\tdecision_threshold\tselection_method\n'
+        'blend_a0.5_t0.5\t0.5\t0.5\tseed_robust_minimax\n'
+    )
+    (development/'candidate_robust_summary.tsv').write_text('candidate_id\nblend_a0.5_t0.5\n')
+    (development/'selected_metrics.tsv').write_text('seed\n31\n')
+    model = {
+        'method': 'log_space_single_multik_blend',
+        'selection_method': 'seed_robust_minimax',
+        'blend_alpha': .5, 'decision_threshold': .5,
+        'k_values': [15, 21, 27, 31], 'fallback_rule': 'fallback_single_k21',
+        'development_seeds': [31], 'development_result': str(development),
+        'selection_gates': {
+            'minimum_seed_sensitivity_delta': .05,
+            'maximum_seed_false_positive_rate_delta': 0,
+            'minimum_seed_precision_delta': 0,
+            'full_sensitivity_delta': .05,
+            'full_false_positive_rate_delta': 0,
+            'full_precision_delta': 0,
+        },
+        'observed_development_metrics': metrics,
+    }
+    files = {
+        'development_validation_sha256': 'validation.json',
+        'development_selection_sha256': 'selection.tsv',
+        'development_candidate_summary_sha256': 'candidate_robust_summary.tsv',
+        'development_selected_metrics_sha256': 'selected_metrics.tsv',
+        'development_environment_sha256': 'environment.json',
+        'development_config_sha256': 'run_config.json',
+    }
+    for field, filename in files.items():
+        model[field] = digest_file(development/filename)
+    config = {
+        'seeds': {'development': [31], 'heldout': [40]},
+        'classifier_development_rule': {
+            'method': 'log_space_single_multik_blend',
+            'alpha_grid': [0, .25, .5, .75, 1],
+            'decision_threshold_grid': [.45, .5, .55, .6],
+            'multik_k_values': [15, 21, 27, 31],
+            'unavailable_or_nonpositive_rule': 'fallback_single_k21',
+        },
+        'classifier_model': model,
+    }
+    assert validate_frozen_classifier(config, 'heldout') == metrics
+    (development/'selected_metrics.tsv').write_text('seed\n32\n')
+    with pytest.raises(ValueError, match='evidence differs'):
+        validate_frozen_classifier(config, 'heldout')
 
 
 def test_frozen_multik_evaluator_replays_every_challenge_scenario(tmp_path: Path):
