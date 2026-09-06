@@ -7,6 +7,7 @@ Representatives never drift and membership is not propagated transitively.
 from __future__ import annotations
 
 from collections import Counter, defaultdict
+from array import array
 import hashlib
 from math import floor, fsum
 from typing import TYPE_CHECKING, Sequence
@@ -45,7 +46,19 @@ def _index_words(sequence: str) -> Counter[str]:
     return result
 
 
-def _indexed_candidate_ids(length: int, words: Counter[str], index: dict[str, dict[int,int]],
+def _append_index(index: dict[str, array], words: Counter[str], representative_id: int) -> None:
+    """Store each (representative, multiplicity) in one exact unsigned 64-bit word."""
+    if not 0 <= representative_id <= 0xFFFFFFFF or any(not 0 < n <= 0xFFFFFFFF for n in words.values()):
+        raise ValueError('Representative index and word multiplicities must fit unsigned 32-bit fields')
+    prefix = representative_id << 32
+    for word, count in words.items():
+        postings = index.get(word)
+        if postings is None:
+            postings = index[word] = array('Q')
+        postings.append(prefix | count)
+
+
+def _indexed_candidate_ids(length: int, words: Counter[str], index: dict[str, array],
                            representative_lengths: list[int], minimum_identity: float) -> list[int]:
     """Exact necessary-condition gate for the existing oriented q-gram test.
 
@@ -58,7 +71,8 @@ def _indexed_candidate_ids(length: int, words: Counter[str], index: dict[str, di
     thresholds: dict[int,int | None] = {}
     shared: Counter[int] = Counter()
     for word,count in words.items():
-        for j,other_count in index.get(word,{}).items():
+        for packed in index.get(word, ()):
+            j, other_count = packed >> 32, packed & 0xFFFFFFFF
             other_length=representative_lengths[j]
             if other_length not in thresholds:
                 size=max(length,other_length)
@@ -97,7 +111,7 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
     representatives: list[str] = []
     representative_lengths: list[int] = []
     members: list[list[CandidateRepeat]] = []
-    index: dict[str, dict[int,int]] = defaultdict(dict)
+    index: dict[str, array] = {}
     assignment = {}
     for sequence in ordered:
         words = _index_words(sequence)
@@ -117,12 +131,13 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
             representatives.append(sequence)
             representative_lengths.append(len(sequence))
             members.append([])
-            for word,count in words.items():
-                index[word][j]=count
+            _append_index(index, words, j)
             distance = sequence.count("N")
             similarity = 1 - distance / len(sequence)
         members[j].extend(grouped[sequence])
         assignment[sequence] = (j, distance, similarity, [item[0] for item in compatible if item[0] != j])
+    # The index is no longer needed while building family/member output objects.
+    del index
     support = [len({c.read_id for c in group}) for group in members]
     retained = sorted((j for j in range(len(members)) if support[j] >= minimum_support),
                       key=lambda j: (-support[j], -sum(c.repeat_span_bp for c in members[j]), representatives[j]))

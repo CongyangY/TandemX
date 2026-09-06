@@ -7,6 +7,23 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Compact clustering storage checkpoint
+
+- Representative postings now store exact ID/multiplicity pairs in contiguous
+  uint64 arrays and release the index before output construction. Alignment,
+  candidate thresholds, ordering and membership rules are unchanged. Out-of-range
+  fields fail, never wrap. Existing exhaustive/gated parity tests still pass.
+- New isolated replay checks every other core/native source hash and runs both
+  implementations in fresh children from frozen snapshots. It retains entire
+  output hashes, command/resource receipts and serialized-score precision limits.
+  Its toy source-isolation/parity/failure test passed. Full suite **322 passed in
+  69.82 s**. Actual85,663-candidate memory/parity replay follows this source commit;
+  no measured compact-index improvement is claimed yet.
+- RiceSRR25241090 complete transfer passed source size/MD5 and SHA-256
+  7bc90f777c995268d81f6f39d2baf9ed7c6fb123bcad0964930b7cfaeaa6b16d.
+  Full32.966-Gb FASTQ QC is running. Rye/barley/wheat transfers and Morex reference
+  acquisition remain active; inspect receipts before claiming completion.
+
 ### Disk-backed real-input evaluator
 
 - Source8ff7ab6 pushed to both branches; CI34014817881 and34014817815 passed.

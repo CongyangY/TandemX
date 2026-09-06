@@ -139,7 +139,7 @@ def test_indexed_multiset_gate_preserves_full_legacy_clustering(monkeypatch):
     optimized=module._indexed_candidate_ids
     def legacy(length,words,index,lengths,identity):
         if identity<=.9 or length<20:return list(range(len(lengths)))
-        return sorted({j for word in words for j in index.get(word,{})})
+        return sorted({packed >> 32 for word in words for packed in index.get(word,())})
     for identity in (.89,.9,.900001,.95,1):
         monkeypatch.setattr(module,'_indexed_candidate_ids',optimized)
         observed=module.cluster_monomers(candidates,1,identity,'rust')
@@ -149,18 +149,17 @@ def test_indexed_multiset_gate_preserves_full_legacy_clustering(monkeypatch):
 
 
 def test_canonical_multiset_gate_only_removes_pairs_rejected_by_original_bound():
-    from collections import defaultdict
-    from tandemx.discover.clustering import _index_words, _indexed_candidate_ids
+    from tandemx.discover.clustering import _index_words, _indexed_candidate_ids, _append_index
     rng=random.Random(634928)
     representatives=[''.join(rng.choices('ACGT',k=rng.choice((19,20,31,61,100)))) for _ in range(50)]
     representatives+=['ACGT'*25,'ACGG'*25,'A'*100,'N'+'ACGT'*24]
-    index=defaultdict(dict)
+    index={}
     for j,sequence in enumerate(representatives):
-        for word,n in _index_words(sequence).items():index[word][j]=n
+        _append_index(index, _index_words(sequence), j)
     removed=0
     for query in representatives[::3]:
         words=_index_words(query)
-        legacy={j for word in words for j in index.get(word,{})}
+        legacy={packed >> 32 for word in words for packed in index.get(word,())}
         observed=set(_indexed_candidate_ids(len(query),words,index,list(map(len,representatives)),.95))
         if len(query)>=20:
             assert observed<=legacy
@@ -168,3 +167,19 @@ def test_canonical_multiset_gate_only_removes_pairs_rejected_by_original_bound()
                 assert cyclic_merge_evidence(representatives[j],query,.95,'rust') is None
                 removed+=1
     assert removed>0
+
+
+def test_packed_index_retains_ids_counts_order_and_32bit_boundaries():
+    from collections import Counter
+    from tandemx.discover.clustering import _append_index
+    index = {}
+    _append_index(index, Counter({'ACGT': 7, 'TGCA': 2}), 0)
+    _append_index(index, Counter({'ACGT': 0xFFFFFFFF}), 0xFFFFFFFF)
+    assert index['ACGT'].itemsize == 8
+    assert [(v >> 32, v & 0xFFFFFFFF) for v in index['ACGT']] == [(0, 7), (0xFFFFFFFF, 0xFFFFFFFF)]
+    assert list(index['TGCA']) == [2]
+    original = {word: values.tobytes() for word, values in index.items()}
+    for identifier, count in [(-1, 1), (0x100000000, 1), (1, 0), (1, -1), (1, 0x100000000)]:
+        with pytest.raises(ValueError, match='32-bit'):
+            _append_index(index, Counter({'ACGT': count}), identifier)
+        assert {word: values.tobytes() for word, values in index.items()} == original

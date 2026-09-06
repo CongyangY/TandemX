@@ -947,6 +947,17 @@ Below-threshold exact sequence identities are not calculated or reported.
 `metrics.json` uses null for undefined values. Standard source/execution/validation
 receipts and logs accompany every run.
 
+### Isolated clustering replay
+
+`replay_clustering_isolated.py` writes `environment.json` with exact input,
+core/helper source and baseline hashes, frozen snapshots and the precision/resource
+scope. `baseline.json` / `packed.json` contain complete sorted-key family and
+membership payloads. Their `.receipt.json` files record candidate/family counts,
+clustering seconds, output and clustering-source hashes. `validation.json` keeps
+each command, child exit/timeout, wall/CPU/peak RSS, worker metrics and exact
+payload-hash parity, plus `complete`/`error`. Stage seconds exclude input loading
+and serialization; child wall/RSS includes them. Failed comparisons are retained.
+
 ### Disk-backed real benchmark evaluation
 
 `run_real_comparators.py` defaults to `--evaluation-backend disk` and records the

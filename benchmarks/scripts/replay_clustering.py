@@ -17,6 +17,20 @@ from tandemx.discover.clustering import cluster_monomers
 from tandemx.discover.mvp import CandidateRepeat
 
 
+def load_candidates(folder: Path) -> list[CandidateRepeat]:
+    """Read serialized monomer candidates, keeping original exported precision."""
+    sequences={name.split(';')[0].split('=',1)[1]:seq for name,seq in read_fasta(folder/'candidate_monomers.fa').items()}
+    candidates=[]
+    records=read_table(folder/'candidate_reads.tsv')
+    if {r['candidate_id'] for r in records}!=sequences.keys() or len(records)!=len(sequences):
+        raise ValueError('Candidate sequence/table IDs differ or repeat')
+    for row in records:
+        candidates.append(CandidateRepeat(row['read_id'],row['candidate_id'],sequences[row['candidate_id']],
+            int(row['read_start']),int(row['read_end']),row['strand'],int(row['period_bp']),int(row['repeat_span_bp']),
+            float(row['unit_count']),float(row['score']),row['low_complexity_flag']=='true',row['confidence'],row['warning']))
+    return candidates
+
+
 def run(previous_run: Path, outdir: Path) -> None:
     previous_run=previous_run.resolve();outdir=outdir.resolve()
     old=previous_run/'source_snapshot/tandemx/discover/clustering.py'
@@ -28,15 +42,7 @@ def run(previous_run: Path, outdir: Path) -> None:
     if digest_file(root/'tandemx/discover/distance.py')!=digest_file(previous_run/'source_snapshot/tandemx/discover/distance.py'):
         raise ValueError('Distance implementation changed; cannot isolate indexing')
     folder=previous_run/'tandemx/discover'
-    sequences={name.split(';')[0].split('=',1)[1]:seq for name,seq in read_fasta(folder/'candidate_monomers.fa').items()}
-    candidates=[]
-    records=read_table(folder/'candidate_reads.tsv')
-    if {r['candidate_id'] for r in records}!=sequences.keys() or len(records)!=len(sequences):
-        raise ValueError('Candidate sequence/table IDs differ or repeat')
-    for row in records:
-        candidates.append(CandidateRepeat(row['read_id'],row['candidate_id'],sequences[row['candidate_id']],
-            int(row['read_start']),int(row['read_end']),row['strand'],int(row['period_bp']),int(row['repeat_span_bp']),
-            float(row['unit_count']),float(row['score']),row['low_complexity_flag']=='true',row['confidence'],row['warning']))
+    candidates=load_candidates(folder)
     outdir.mkdir(parents=True,exist_ok=False)
     provenance=source_manifest(root,outdir/'source_snapshot')
     target=outdir/'replay_clustering.py';shutil.copyfile(__file__,target)

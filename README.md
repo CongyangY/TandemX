@@ -424,6 +424,9 @@ sample sequences and preserves native outputs; call counts are not accuracy.
 Its default disk-backed evaluator streams read validation, native calls and
 interval unions beyond the old 100,000-read controller cap. Exact replay and
 large-input preparation checks are documented separately from tool performance.
+Sequence clustering uses compact exact postings; an
+[isolated replay](docs/clustering_resource_replay.md) compares complete membership
+outputs and child-process resources before interpreting memory improvements.
 The [complete-data acquisition guide](docs/complete_data_qc.md) also provides
 official-checksum-pinned MorexV3 reference acquisition from the IPK publication.
 The complete Col-0N FASTQ also passed QC (933,904 reads, 14.647 Gb); full-library

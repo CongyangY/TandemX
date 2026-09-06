@@ -1,5 +1,13 @@
 # TandemX Algorithm Design
 
+Representative postings now use contiguous 64-bit items with exact 32-bit ID and
+multiplicity fields instead of one Python dictionary per word. Their numerical
+meaning and all candidate selection/alignment rules are unchanged; oversized
+fields fail explicitly. The index is released before constructing output records.
+See [isolated resource replay](clustering_resource_replay.md) for source-matched,
+fresh-process parity and memory checks. No whole-pipeline speed/memory claim
+follows from compact storage alone.
+
 Real-input benchmark normalization now defaults to a disk-backed read-length and
 interval index (`benchmarks/scripts/real_disk.py`). Native adapters yield rows;
 coordinate validation and interval unions preserve the previous endpoint, call
