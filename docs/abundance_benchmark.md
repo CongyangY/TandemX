@@ -171,3 +171,14 @@ After commit `c15dad7` passed hosted Ubuntu and macOS CI, the baseline consumed
 270 localization rows and 2,430 comparison rows across the six challenge
 scenarios. Execution success does not establish performance; the frozen multi-k
 evaluation and paired adverse-stratum analysis remain required.
+
+The frozen evaluation completed 162 multi-k read conditions and 7,290 method
+rows without rerunning the baseline. Baseline sensitivity/FPR/precision were
+0.843621/0.643004/0.663073; the frozen hybrid yielded
+0.866255/0.682099/0.655763. Its sensitivity gain came with 38 additional false
+positives and lower precision. Full-assembly localization mean base recall was
+0.754905/0.692814 for one/three segments at 1% divergence, 0.000793 for both at
+3%, and zero at 5%. This is a failed domain-transfer test that motivates a
+divergence-tolerant localizer developed on different seeds. Compact baseline,
+paired results and the accepted six-panel figure are under
+`paper/evidence/abundance_domain_shift_*`; 5401–5403 are consumed.

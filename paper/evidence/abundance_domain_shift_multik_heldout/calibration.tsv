@@ -1,0 +1,2 @@
+fold	training_seeds	evaluation_seeds	low_depth_cutoff	selected_low_depth_threshold	standard_depth_threshold	baseline_TP	baseline_FN	baseline_FP	baseline_TN	calibrated_TP	calibrated_FN	calibrated_FP	calibrated_TN
+predeclared_heldout_validation	4101,4102,4103	5401,5402,5403	2.0	0.5	0.6	1230	228	625	347	1263	195	663	309

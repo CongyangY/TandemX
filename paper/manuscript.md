@@ -207,6 +207,24 @@ Multi-k alone had 15
 unavailable rows. This supports the frozen rule under this narrow exact-copy
 model, not a general or biological collapse claim (Figure 3).
 
+We next applied the unchanged rule to a predeclared domain-shift matrix with
+fresh seeds 5401–5403. The matrix crossed 1%, 3% and 5% independent
+founder-to-unit substitutions with one or three same-family array segments,
+while retaining the original coverage, read-error and assembly-retention tiers.
+All 1,062 baseline commands completed before multi-k replay. Across 2,430 paired
+family conditions, baseline TP/FN/FP/TN were 1230/228/625/347 and frozen-rule
+counts were 1263/195/663/309 (Evidence E13). Sensitivity increased from 84.36%
+to 86.63%, but false-positive rate increased from 64.30% to 68.21% and precision
+decreased from 66.31% to 65.58%. Thus the exact-copy gain did not transfer.
+
+Full-assembly localization mean base recall decreased from 0.754905/0.692814
+for one/three segments at 1% unit divergence to 0.000793 for both structures at
+3% and zero at 5%. Under 3–5% divergence, scenario-level false-positive rates
+were 85.80–88.89% for the baseline and 88.89% for the frozen rule. These adverse
+results identify the exact diagnostic-k-mer support filter as a primary current
+failure boundary; the consumed domain-shift seeds cannot be used to tune its
+replacement (Figure 4).
+
 ### Eight-species file QC and reference concordance expose normalization concerns
 
 Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N/Col-0R/Ey15-2R, rice
@@ -295,7 +313,10 @@ and reference BioSamples also differ; exact donor identity remains unresolved.
 The completed experiments identify three separable improvements: exact engineering
 changes reduced a measured discovery run time, a conditional multi-k model
 reduced a specific copy-estimation bias, and a frozen transparent rule improved
-all three assembly-comparison confusion metrics on fresh simulations. None establishes that
+all three assembly-comparison confusion metrics on fresh exact-copy simulations.
+The independent domain-shift test then showed that this gain fails when
+founder-to-unit divergence reaches 3–5%, chiefly because assembly localization
+loses nearly all true repeat bases and produces many false collapse calls. None establishes that
 TandemX dominates existing tools. In the current read simulation, all three
 methods recovered every founder. TRF retained slightly higher base precision,
 and TideHunter remained faster. TRASH2 was a strong assembly baseline after
@@ -329,7 +350,7 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 431 local Python tests. Its Rust
+PyO3/Rust extension. The current source passed 438 local Python tests. Its Rust
 source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
 passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
 distributable-wheel builds.
@@ -365,6 +386,15 @@ fresh seeds 5201–5203 were executed once. Held-out evaluation accepted only th
 frozen k values, depth cutoff, thresholds, fallback rule and calibration hashes;
 it did not search thresholds. Every method was scored on identical assembly,
 coverage, error and family keys. Multi-k unavailable values remained explicit.
+
+The domain-shift extension used fresh seeds 5401–5403 and the same frozen model.
+It crossed unit substitution rates 0.01/0.03/0.05 with one or three array
+segments separated by 500-bp independent sequence, plus all original coverage,
+read-error and retention tiers. Copy variants were deterministic prefixes across
+assembly fractions. Multiple non-overlapping truth intervals were summed by
+family for copy number and assembly ratio and union-scored for localization.
+Substitutions were independent and length preserving; the design does not model
+indels, empirical satellite evolution or contig breaks.
 
 ### Comparator execution and scoring
 
@@ -458,6 +488,16 @@ strata. The heatmap includes the two adverse 1× cells. Inputs, panel values and
 hashes are in `evidence/abundance_multik_collapse_heldout/figures_v2`. These are
 exact-copy known-catalogue simulations, not biological collapse truth.
 
+**Figure 4. Frozen-rule failure under unit divergence and interrupted arrays.**
+Six panels show the predeclared domain-shift design, aggregate classification
+metrics, confusion counts, sensitivity and false-positive rate by unit
+divergence and structure, and full-assembly localization recall. The frozen
+rule gains sensitivity while increasing false positives and lowering precision;
+at 3–5% divergence, localization recall approaches or reaches zero. Inputs,
+panel values and hashes are in
+`evidence/abundance_domain_shift_multik_heldout/figures_v3`. This adverse
+known-catalogue simulation is not biological collapse truth.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -508,6 +548,9 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   comparison and per-command resource rows in `evidence/abundance_heldout`.
 - Supplementary Table S9: fresh paired baseline/frozen-rule comparison rows in
   `evidence/abundance_multik_collapse_heldout`.
+- Supplementary Table S10: all domain-shift baseline, localization, paired
+  frozen-rule and panel-source rows in `evidence/abundance_domain_shift_heldout_baseline`
+  and `evidence/abundance_domain_shift_multik_heldout`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -515,7 +558,9 @@ E5: `factorial_multik_replay`; E6: `factorial_joint_multik`;
 E7: ten `*_input_qc` directories and their source manifests;
 E8: `multispecies_real_diagnostics`; E9: `reference_mapping_diagnostics`;
 E10: `known_query_recovery`; E11: `abundance_heldout`;
-E12: paired `abundance_heldout_v2` and `abundance_multik_collapse_heldout`.
+E12: paired `abundance_heldout_v2` and `abundance_multik_collapse_heldout`;
+E13: paired `abundance_domain_shift_heldout_baseline` and
+`abundance_domain_shift_multik_heldout`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

@@ -1,0 +1,57 @@
+{
+  "complete": true,
+  "methods": [
+    "single_k21",
+    "multik_fallback_depth_rule"
+  ],
+  "paired_conditions": 2430,
+  "unit_substitution_rates": [
+    0.01,
+    0.03,
+    0.05
+  ],
+  "array_fragment_counts": [
+    1,
+    3
+  ],
+  "input_sha256": {
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_domain_shift_multik_heldout/comparison_metrics.tsv": "46657526e95882c1da44db0264c2568d361bd9a741e0762e75531d0f292b55c1",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_domain_shift_multik_heldout/validation.json": "9b8fabf969677533cb73728b6ef0254c17b666b12ccb1b3da3accb75fe247b97",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_domain_shift_heldout_baseline/localization_metrics.tsv": "365e5b13f4e4785cd57b2d6dd4ac94b737976dae82c5feec5d70ca250e3152c1",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/abundance_domain_shift_heldout_baseline/validation.json": "e9b4b46efb5d6e4552846391d1b3bd9e7f7532f86a6b26032dcc2da50b75b4da"
+  },
+  "script_sha256": "68e648c934e0366be4bb839c4f6a6893a28c562b00fb18b9cf9ee4b93868d27f",
+  "panel_source_sha256": "fe82d18dd4054890920763e1e4e3cf9fe839d67fd35ea0f0b5d718ad6b11ea25",
+  "outputs": {
+    "domain_shift_validation.pdf": "0005ef0304b557d3556e38e707bf7cb59f465fb49b4964cbe02d27c07d743387",
+    "domain_shift_validation.svg": "c43a7dd4fde293151df5131513c91eb4e0ee1490a5425df2eeb909a3eb450d81",
+    "domain_shift_validation.png": "876fe01c2e759c84237a493fb1190406fbc184da77a337085dc1263cf7185f3a"
+  },
+  "validation_method_confusion": {
+    "single_k21": {
+      "available": 2430,
+      "unavailable": 0,
+      "TP": 1230,
+      "FN": 228,
+      "FP": 625,
+      "TN": 347
+    },
+    "multik_loglinear": {
+      "available": 2160,
+      "unavailable": 270,
+      "TP": 1278,
+      "FN": 18,
+      "FP": 673,
+      "TN": 191
+    },
+    "multik_fallback_depth_rule": {
+      "available": 2430,
+      "unavailable": 0,
+      "TP": 1263,
+      "FN": 195,
+      "FP": 663,
+      "TN": 309
+    }
+  },
+  "interpretation": "predeclared domain-shift known-catalogue simulation; increased sensitivity accompanied by higher false-positive rate; not biological collapse truth"
+}

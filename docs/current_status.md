@@ -110,9 +110,10 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 437 Python tests. The added tests cover
-  compact multi-k evidence integrity, paired figure inputs and clean Morex
-  recovery while retaining a divergent partial. Rust source is unchanged.
+- The expanded source checkout passes all 438 Python tests. The added tests cover
+  compact multi-k evidence integrity, exact pairing in the domain-shift figure,
+  and clean Morex recovery while retaining a divergent partial. Rust source is
+  unchanged.
 - A backward-compatible challenge extension now represents independent
   founder-to-unit substitutions and one or more interrupted same-family arrays.
   Truth scoring aggregates non-overlapping intervals and copies by family. The
@@ -121,8 +122,12 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   model hashes and all original coverage/error/retention levels. Commit c15dad7
   passed hosted Ubuntu/macOS CI before seeds 5401–5403 were consumed once. The
   baseline completed all 1,062 commands and produced 486 copy-number, 270
-  localization and 2,430 comparison rows. Frozen multi-k evaluation remains
-  pending; no domain-shift performance claim is made from execution alone.
+  localization and 2,430 comparison rows. Frozen multi-k replay completed 162
+  read conditions and 7,290 method rows. Sensitivity rose 0.843621→0.866255,
+  but false-positive rate rose 0.643004→0.682099 and precision fell
+  0.663073→0.655763. Full-assembly localization mean recall was 0.000793 at 3%
+  divergence and zero at 5%. Compact paired evidence and an inspected six-panel
+  figure retain the failure; seeds 5401–5403 are consumed and cannot tune the fix.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 
