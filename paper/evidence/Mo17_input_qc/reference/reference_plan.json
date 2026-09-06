@@ -1,0 +1,41 @@
+{
+  "accession": "GCA_022117705.1",
+  "ftp_directory": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/117/705/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly/",
+  "metadata": {
+    "dataset_report.json": {
+      "url": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_022117705.1/dataset_report",
+      "bytes": 2415,
+      "sha256": "c1161ea25fc719cc5505416b4b1a695c57953d9af218392e905fe4da4156621a"
+    },
+    "md5checksums.txt": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/117/705/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly/md5checksums.txt",
+      "bytes": 4378,
+      "sha256": "8f2550846c3a7034d7bcc03b0c761f055702b3c7cb75eb8e365c9d548080fe9f"
+    },
+    "GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_assembly_report.txt": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/117/705/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_assembly_report.txt",
+      "bytes": 2020,
+      "sha256": "91c22a23ee02c0c5773f90e0289614bbfb253b006a259a00654b646c64f26cd2"
+    },
+    "GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_assembly_stats.txt": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/117/705/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_assembly_stats.txt",
+      "bytes": 17262,
+      "sha256": "be74e8b3eacb5cebe764f34dcfa1e0b523ebe4792fa62298d0e93bdf3675fb47"
+    },
+    "GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_fcs_report.txt": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/117/705/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_fcs_report.txt",
+      "bytes": 392,
+      "sha256": "904e9f33b92a4ed8ba4ccc693d0a8e939926f18f2b7ece37cb867435061f4c6b"
+    }
+  },
+  "source_paper": "https://doi.org/10.1038/s41588-023-01419-6",
+  "expected_total_bases": 2178604320,
+  "expected_contigs": 10,
+  "source_script_sha256": "70e35520775d1b8f0d73025cf1e89205041ef4e344a6ecf38746562aea307a78",
+  "file": {
+    "filename": "GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_genomic.fna.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/117/705/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_genomic.fna.gz",
+    "expected_bytes": 645529558,
+    "expected_md5": "98b17477eb92144393bc3682e0c5e4dc"
+  }
+}

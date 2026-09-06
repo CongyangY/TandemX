@@ -1,0 +1,23 @@
+{
+  "inputs": {
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/qc/qc.json": "5d8e6b388a27f40714d5f82bd3c38613da72f1507122f3d353beffcbf7f90b93",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/sampling/sampling_receipt.json": "fe111e8b3553fd9773653c1088a494b5503a132fe718a4a252c652496ce29525",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/sampling/sampling_plan.json": "905f2ce15b62e343bb009cf701846daa5c0b1b1994e58661174a57ad04dad2e4",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/qc/length_histogram.tsv": "49c605030d1ae5f72f4f43884a454751de0fc602064d616b560a56d479b165e7",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/qc/joint_distribution.tsv": "e7b1b631b8edb0091d7c2d3fb0758a02376503172d53eb792937043618958d7f",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/sampling/sample_001.length_histogram.tsv": "5662d072165702b9134197bccafb77e4013e6aa15ec5e2716fa083177977552e",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/sampling/sample_001.joint_distribution.tsv": "1141eddeceed935b94f1c107848094d063a25992e11ab81352d9a414c7c9c13d",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/sampling/sample_002.length_histogram.tsv": "2f92bf19f51dba06ad76d5b941231e096273a1a0a1ef35fe0d624903a3100308",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/sampling/sample_002.joint_distribution.tsv": "32adccd9850941d5f461ea09f2f97b7386b1fe85b3ee49cd25d6160023e668ba",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/sampling/sample_003.length_histogram.tsv": "2426e8cea4806eace041e4e2359607ffbaa426a9e91ad177211627ed2d77ddba",
+    "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/Mo17_input_qc/sampling/sample_003.joint_distribution.tsv": "d4dbaee5e1de4a5c7f3555f3899fbd6ad77455daf03170f5c6489640629d6395"
+  },
+  "source_sha256": "5d0ede3334d3dcc9b490b6f24bccd54225a7ee62931741649a0e9e7f7e114ddb",
+  "script_sha256": "d67c50103028f96c61ee792546d6ecb599f54ce15f9e787abe898bf6c97dba06",
+  "outputs": {
+    "input_qc.pdf": "7a831a5ee90437f2f2725903dc5034387a492e790ff9facd9bfade598980b670",
+    "input_qc.svg": "a6b04d11fb033bb22151ba98a29745abfc685407da2361a0adc0f8b5f5cb16b4",
+    "input_qc.png": "f8a8589c0b1f34d453eb83c10858a0a6097c07c4bb3480f500ee797ac29ed28d"
+  },
+  "interpretation": "QC of one complete included library; samples are not biological replicates"
+}

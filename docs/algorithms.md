@@ -7,6 +7,10 @@ default quantify estimator, with explicit missing intervals for sparse support.
 Full-file [QC and nested sampling](complete_data_qc.md) support unbiased selection
 within included libraries and record the limits of library/material sampling.
 
+The [real-input comparator pilot](real_comparator_pilot.md) verifies selected
+FASTQ hashes, converts identical inputs for all tools and reports descriptive
+interval unions. It does not use cross-tool agreement as biological truth.
+
 This document describes current MVP algorithms and planned future algorithms. The repository currently implements the toy simulator, toy-scale `discover`, `quantify`, `locate`, `probe`, and `visualize` MVPs. The default workflow is de novo: reads are passed to `tandemx discover`, and its output catalog is reused by downstream commands.
 
 ## Candidate Periodic k-mer Discovery

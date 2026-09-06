@@ -1,0 +1,39 @@
+# Assembly name:  Zm-Mo17-REFERENCE-CAU-T2T-assembly
+# Organism name:  Zea mays (maize)
+# Infraspecific name:  cultivar=Mo17-2021
+# Taxid:          4577
+# BioSample:      SAMN20854702
+# BioProject:     PRJNA751841
+# Submitter:      China Agriculture University
+# Date:           2022-02-10
+# Assembly type:  haploid
+# Release type:   major
+# Assembly level: Complete Genome
+# Genome representation: full
+# WGS project:    JAIRCI01
+# Assembly method: NextDenovo v. 2.2-beta.0; Hifiasm v. 0.7
+# Expected final version: yes
+# Genome coverage: 200.0x
+# Sequencing technology: Oxford Nanopore PromethION; PacBio
+# GenBank assembly accession: GCA_022117705.1
+#
+## Assembly-Units:
+## GenBank Unit Accession	RefSeq Unit Accession	Assembly-Unit name
+## GCA_022117715.1		Primary Assembly
+#
+# Ordered by chromosome/plasmid; the chromosomes/plasmids are followed by
+# unlocalized scaffolds.
+# Unplaced scaffolds are listed at the end.
+# RefSeq is equal or derived from GenBank object.
+#
+# Sequence-Name	Sequence-Role	Assigned-Molecule	Assigned-Molecule-Location/Type	GenBank-Accn	Relationship	RefSeq-Accn	Assembly-Unit	Sequence-Length	UCSC-style-name
+chr1	assembled-molecule	1	Chromosome	CM039150.1	<>	na	Primary Assembly	307335809	na
+chr2	assembled-molecule	2	Chromosome	CM039151.1	<>	na	Primary Assembly	247431027	na
+chr3	assembled-molecule	3	Chromosome	CM039152.1	<>	na	Primary Assembly	242843974	na
+chr4	assembled-molecule	4	Chromosome	CM039153.1	<>	na	Primary Assembly	251128394	na
+chr5	assembled-molecule	5	Chromosome	CM039154.1	<>	na	Primary Assembly	220303002	na
+chr6	assembled-molecule	6	Chromosome	CM039155.1	<>	na	Primary Assembly	201729004	na
+chr7	assembled-molecule	7	Chromosome	CM039156.1	<>	na	Primary Assembly	181266306	na
+chr8	assembled-molecule	8	Chromosome	CM039157.1	<>	na	Primary Assembly	208583295	na
+chr9	assembled-molecule	9	Chromosome	CM039158.1	<>	na	Primary Assembly	168156889	na
+chr10	assembled-molecule	10	Chromosome	CM039159.1	<>	na	Primary Assembly	149826620	na

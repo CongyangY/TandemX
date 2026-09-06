@@ -386,3 +386,9 @@ whole inputs and retain reproducible read IDs, achieved sizes and distributions.
 The [experimental read-cluster model](docs/read_cluster_quantification.md)
 replaces within-k-mer spread by a read-level sampling calculation in development
 replays; it remains separate from the default CLI pending biological calibration.
+
+Complete Mo17 CCS input QC now covers 407,670 reads / 5.625 Gb, with nested
+11.68 Mb, 111.51 Mb and 1.129 Gb samples and a checked 10-chromosome reference.
+Source receipts and a four-panel QC figure are in `paper/evidence/Mo17_input_qc`.
+The [real-input comparator pilot](docs/real_comparator_pilot.md) uses identical
+sample sequences and preserves native outputs; call counts are not accuracy.

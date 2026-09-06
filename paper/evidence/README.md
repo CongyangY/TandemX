@@ -154,3 +154,14 @@ intervals. At 20× with 1% substitutions, mean signed CN error is -18.31% and
 estimator-minus-sampling-oracle is -20.08%. All raw conditions, including false
 calls/misses and 1× sampling fluctuations, are retained. See
 `docs/abundance_benchmark.md`; this baseline is not scientifically accepted.
+
+`read_cluster_replay/` adds the non-default read-sampling reference model replay
+from 6f29db5: 81 point estimates, 33 available intervals, 24 covering truth and
+48 unavailable. Mutation-dependent CN underestimation remains. This is not
+calibrated real-data inference or a new default quantifier.
+
+`Mo17_input_qc/` contains complete CCS-file QC, seeded nested sampling receipts,
+raw histogram source data, a four-panel editable figure and verified metadata
+for the 10-chromosome Mo17 T2T reference. Exact study/cultivar context does not
+establish identical DNA donors. One included technical batch and its nested
+samples are not independent biological replicates or the whole published dataset.

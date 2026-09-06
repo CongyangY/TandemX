@@ -172,6 +172,40 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Source, Git and storage
 
+### Completed Mo17 input and read-cluster replay
+
+- Commit 6f29db5bc3a77db834239d38e91925f80e6b6018 pushed to both branches;
+  GitHub run 34010445317 passed Linux/macOS. Full suite after adding reference
+  QC and real-input adapter checks: **270 passed in 62.62s**.
+- SRR15447419 full QC passed: 407,670 reads / 5,624,644,958 bases; N50 13,968 bp,
+  median 13,455 bp, GC .4592192482, N=0, exact duplicate archive IDs=0. Reported
+  mean error probability .0028814411 is not empirical accuracy.
+- Seed6101 whole-file hash sampling finished at T7
+  `data/subsets/SRR15447419_seed6101_v1`: .002 = 840 reads / 11,680,888 bp;
+  .02 = 8,084 / 111,505,681 bp; .2 = 81,775 / 1,128,793,699 bp. All source/ID/
+  FASTQ hashes recorded. These are nested technical subsets, not extra plants.
+- NCBI Mo17 T2T GCA_022117705.1 downloaded/full FASTA verified at
+  `data/references/Mo17_T2T_GCA_022117705.1`: 645,529,558 compressed bytes,
+  MD5 98b17477eb92144393bc3682e0c5e4dc, 10 contigs/2,178,604,320 bp, no ambiguity.
+  NCBI report maps CM039150.1..CM039159.1 to chr1..chr10. Same-study/cultivar
+  context is established; identical donor/extraction and identity to the alternate
+  MaizeGDB release are not. CyVerse verification page / MaizeGDB403 prompted use
+  of the separately public paper-linked NCBI record.
+- Compact receipts/histograms/reference reports in `paper/evidence/Mo17_input_qc`;
+  final four-panel `figures_checked/input_qc.pdf`/SVG visually inspected. SVG
+  70 text elements, zero images. The initial cramped-caption figure was removed.
+- Read-cluster replay completed on all 27 development inputs / 81 family rows:
+  33 intervals available, 24 contain truth, 48 missing for inadequate support.
+  At 20x/1% substitutions mean CN bias remains -17.97%, estimator-minus-oracle
+  -19.74%. Archive `paper/evidence/read_cluster_replay`; no calibration or
+  production quantifier acceptance. Held-out abundance seeds unused.
+- New `run_real_comparators.py` verifies identical selected FASTA for elastic
+  TandemX/TRF/TideHunter, retains raw/normalized intervals and explicit failures.
+  It is capped at 100,000 reads and records descriptive observations only;
+  inspect T7 runs before claiming an actual comparison completed.
+- ERR6210723 full download now completed; full QC is the next step. Check the
+  current receipt/process rather than older download-in-progress notes below.
+
 ### Read-cluster and sampling implementation checkpoint
 
 - Commit 10bedca453a3e24f5065bf1f6b30c0d6578b9aa2 was pushed to both branches;

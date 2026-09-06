@@ -76,3 +76,23 @@ depth. Empty subsets have an explicit status, zero counts and missing distributi
 statistics; they cannot be presented as tested positive data. Seeds assess
 sampling stability, not extra plants. Missing libraries and library-selection
 bias remain unresolved by uniform sampling of included files.
+
+The versioned Mo17 reference has a dedicated reproducible acquisition command:
+
+```bash
+python -m benchmarks.scripts.fetch_mo17_reference \
+  --outdir /path/to/data/references/Mo17_T2T_GCA_022117705.1
+python -m benchmarks.scripts.plot_complete_qc \
+  --qcdir /path/to/full/qc --samplesdir /path/to/samples \
+  --outdir /path/to/new/figure --label 'Mo17 CCS: SRR15447419'
+pytest -q tests/unit/test_reference_qc.py
+```
+
+The reference command pins GCA_022117705.1, verifies its PRJNA751841 project,
+archives NCBI metadata/checksums, limits compressed FASTA to 1 GB, resumes an
+existing download plan and verifies source MD5 plus all contigs/base totals.
+FASTA is consumed line by line with bounded lines; complete chromosomes are not
+kept in RAM. Duplicate/empty IDs, malformed sequence and truncation fail. IUPAC
+ambiguities are counted explicitly. Reference identity and zero Ns alone do not
+prove every satellite copy correct. Mo17 library and assembly share cultivar and
+study context; exact donor/extraction identity remains unresolved.

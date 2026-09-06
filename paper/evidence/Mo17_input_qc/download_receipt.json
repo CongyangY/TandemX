@@ -1,0 +1,50 @@
+{
+  "accession": "SRR15447419",
+  "metadata": {
+    "run_accession": "SRR15447419",
+    "study_accession": "PRJNA751841",
+    "secondary_study_accession": "SRP332506",
+    "sample_accession": "SAMN20604744",
+    "experiment_accession": "SRX11746829",
+    "scientific_name": "Zea mays",
+    "sample_title": "Plant sample from Zea mays",
+    "experiment_title": "Sequel II sequencing: Mo17_Pacbio CCS_replicate 3",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Sequel II",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "library_selection": "RANDOM",
+    "read_count": "407670",
+    "base_count": "5624644958",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR154/019/SRR15447419/SRR15447419_subreads.fastq.gz",
+    "fastq_md5": "7d25a15f3faa9ce4bd2bed9789e394d8",
+    "fastq_bytes": "5346359125"
+  },
+  "metadata_sha256": "e248ac1cbe24cbd12799ad5a86ec7b4386024a5f94d20b394375904a412ec63c",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR154/019/SRR15447419/SRR15447419_subreads.fastq.gz",
+      "filename": "SRR15447419_subreads.fastq.gz",
+      "expected_md5": "7d25a15f3faa9ce4bd2bed9789e394d8",
+      "expected_bytes": 5346359125
+    }
+  ],
+  "max_download_gb": 6.0,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b",
+  "completed_files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR154/019/SRR15447419/SRR15447419_subreads.fastq.gz",
+      "filename": "SRR15447419_subreads.fastq.gz",
+      "expected_md5": "7d25a15f3faa9ce4bd2bed9789e394d8",
+      "expected_bytes": 5346359125,
+      "bytes": 5346359125,
+      "md5": "7d25a15f3faa9ce4bd2bed9789e394d8",
+      "sha256": "3047df8fc93cd0c87d03b968ad702a95a2edf6ae3474d92b08350827d847f05c",
+      "source_md5_verified": true,
+      "transfer": "downloaded_complete"
+    }
+  ],
+  "complete": true,
+  "fastq_qc_status": "not_run"
+}

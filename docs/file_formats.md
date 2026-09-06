@@ -822,3 +822,12 @@ and boundaries. This does not modify the public `copy_number.tsv` schema.
   error, `mean_estimator_minus_oracle`, `conditional_interval_coverage` and
   `mean_available_interval_relative_width`. Conditional coverage never includes
   unavailable intervals; their explicit count must accompany the result.
+
+Real discovery pilot files are defined in
+[real_comparator_pilot.md](real_comparator_pilot.md). Its observed call/base fields
+are not recall/precision. Complete-input figure `panel_source.tsv` contains
+`panel`, `dataset`, `metric`, `x`, `value`, `read_count`: A-C are length/GC/quality
+histogram or cumulative probabilities; D is observed/expected Gb with dataset
+index x. Figure provenance records all input/output/source hashes. Reference
+receipts store contig names, exact lengths and per-base/ambiguity counts; the
+original NCBI assembly report defines chromosome naming equivalence.

@@ -5,3 +5,5 @@ paper/evidence/**/*.svg -text -whitespace
 # Compiler excerpts and unified patch context are immutable provenance bytes.
 paper/evidence/comparator_builds/*.log -text whitespace=-blank-at-eol
 paper/evidence/comparator_builds/*.patch -text -whitespace
+# NCBI report bytes include source CRLF; retain them for MD5/SHA verification.
+paper/evidence/Mo17_input_qc/reference/*.txt -text whitespace=cr-at-eol
