@@ -155,6 +155,14 @@ estimator-minus-sampling-oracle is -20.08%. All raw conditions, including false
 calls/misses and 1× sampling fluctuations, are retained. See
 `docs/abundance_benchmark.md`; this baseline is not scientifically accepted.
 
+`abundance_heldout/` records the first and only execution of the predeclared
+5101–5103 conditional seeds on source f16596b. All 177 commands completed. Across
+243 positive and 162 control family conditions, TP/FN/FP/TN were 208/35/8/154;
+sensitivity was 0.855967, false-positive rate 0.049383 and precision 0.962963.
+All positive exact-copy localization rows had base recall 1, but 20×/1%-error
+50%-retention sensitivity was only 2/9. The compact archive revalidates source,
+configuration, matrix dimensions and all receipts; these seeds are now consumed.
+
 `read_cluster_replay/` adds the non-default read-sampling reference model replay
 from 6f29db5: 81 point estimates, 33 available intervals, 24 covering truth and
 48 unavailable. Mutation-dependent CN underestimation remains. This is not

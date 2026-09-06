@@ -786,6 +786,27 @@ Root `validation.json` counts completed executions and emitted score rows; its
 execution success does not establish scientific acceptance. Original failed
 receipts remain present and are not represented as zero accuracy.
 
+`archive_abundance_evidence.py` rechecks the configured split, disjoint seed
+groups, all expected matrix dimensions, root-table row counts, full detector and
+benchmark source hashes, and every successful execution receipt before copying
+compact evidence. It also writes `resource_metrics.tsv`: `receipt`, its
+`receipt_sha256`, `label`, `runtime_seconds`, direct-child `peak_rss_mib`,
+`cpu_user_seconds`, `cpu_system_seconds` and exact `command_json`. The archive
+manifest covers all copied source/results plus this generated resource table.
+
+`evaluate_multik_collapse.py` writes `comparison_metrics.tsv` with one row per
+method and original comparison row. It retains simulation context, period,
+observed haploid depth, assembly bases, read/assembly estimates, ratio, status,
+binary call, outcome, fit status and the applied decision threshold.
+`comparison_summary.tsv` reports TP/FN/FP/TN, sensitivity, false-positive rate,
+precision and estimate availability by method and stratum. Development runs write
+cross-validation folds and the selected transparent rule to `calibration.tsv`;
+held-out runs accept only the exactly frozen model in the input config and write
+one `predeclared_heldout_validation` row without fitting. `validation.json`
+records split semantics, source/input hashes, row completeness, the frozen model
+and method-level confusion counts. Execution success is separate from scientific
+acceptance.
+
 Performance figure `panel_source.tsv`: `panel`, `dataset`, `metric`, `variant`,
 `value`; panel C transforms the RSS ratio to percent change. All other values
 are the corresponding per-dataset median or ratio in the archived summary.
@@ -1045,6 +1066,11 @@ their receipts identify the index interface. `environment.json` records whether
 the source snapshot differs from `git_head`, including generated native files
 that are hashed and copied but not tracked by Git. In that case the source digest
 and per-file hashes, rather than the commit alone, identify executed code.
+`archive_clustering_replay_evidence.py` first rechecks both complete payloads,
+receipts, frozen source/helper hashes and exact parity. Its compact archive keeps
+`environment.json`, `validation.json`, child receipts/logs, selected replay/core
+source files and `archive_manifest.json`; the two large payload JSON files and
+complete source snapshot remain in the external result directory.
 
 ### Disk-backed real benchmark evaluation
 

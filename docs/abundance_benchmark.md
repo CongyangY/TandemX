@@ -30,9 +30,11 @@ divergence, coverage bias or unknown background homology is represented yet.
 
 Each genome is one independent simulation realization. Coverage/error/assembly
 conditions reuse that genome; its three families and technical runs must not be
-treated as independent biological replicates. Held-out seeds 5101–5103 remain
-unused until method/settings are frozen. The initial design confounds founder
-length and copy count; a factorial extension is required for separate effects.
+treated as independent biological replicates. Held-out seeds 5101–5103 were
+reserved until the method/settings were frozen and were used once in the
+held-out execution described below. They are now consumed and must not be used
+for tuning. The initial design confounds founder length and copy count; a
+factorial extension is required for separate effects.
 
 ## Endpoints and controls
 
@@ -86,3 +88,41 @@ the fixed length/copy pairing, raises each source genome to 10 Mb, adds variable
 GC and biological divergence, a megabase array, empirical read lengths and
 indel-aware observed-coordinate truth. This is an additional controlled model;
 the original baseline and its uncertainty failures remain evidence.
+
+## First held-out execution
+
+The unchanged configuration was executed once on seeds 5101–5103 using source
+`f16596b`; all 177 commands completed. Across 243 positive under-representation
+and 162 control family conditions, TP/FN/FP/TN were 208/35/8/154, giving
+sensitivity 0.855967, false-positive rate 0.049383 and precision 0.962963.
+All 36 positive assembly/family localization rows had base recall 1.0, with
+minimum base precision 0.996732. These exact-copy arrays make localization an
+easy conditional control rather than representative biological validation.
+
+At 20× with 1% substitutions, sensitivity for 50%-retained arrays fell to 2/9.
+At 1×, the fully retained control produced one false call in each error tier.
+The aggregate therefore does not justify a robust collapse claim. The compact
+archive `paper/evidence/abundance_heldout` contains every metric, verified source
+and configuration hashes, a manifest and resource rows reconstructed from all
+177 validated receipts. A revised model requires development-only work and a
+newly predeclared independent seed set.
+
+## Development-only multi-k decision calibration
+
+The completed development matrix for seeds 4101–4103 was reused without
+rerunning its original single-k quantification or localization commands.
+`evaluate_multik_collapse.py` recomputed only k=15/21/27/31 read evidence and
+compared the original k=21 decision, a multi-k log-linear estimate and a
+transparent hybrid. The frozen rule uses the multi-k estimate when available,
+falls back to k=21 otherwise, and lowers the ratio decision threshold from 0.6
+to 0.5 only when observed haploid depth is below 2.0. All three leave-one-genome-
+out development folds selected 0.5 independently.
+
+On the development rows, the original decision had TP/FN/FP/TN=195/48/7/155;
+the hybrid had 203/40/3/159. Sensitivity increased from 0.802469 to 0.835391,
+false-positive rate decreased from 0.043210 to 0.018519 and precision increased
+from 0.965347 to 0.985437. Multi-k alone had 35 unavailable rows, so its
+conditional metrics are not a complete-method comparison. This is calibration,
+not validation. `benchmarks/configs/abundance_v2.json` freezes the rule, the
+calibration hashes and untouched held-out seeds 5201–5203 before their one-time
+execution.

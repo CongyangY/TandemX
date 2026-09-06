@@ -22,6 +22,10 @@ Low-coverage missingness remained substantial. File-level QC covered 218.538 Gb
 in nine libraries across seven reported plant species. Reference concordance in a 118.497-Mb
 Arabidopsis subset identified 22.19% of input bases with organellar primary
 alignment spans, highlighting a potential total-library normalization bias.
+On three predeclared conditional held-out genomes, the unchanged assembly/read
+rule had 85.60% under-representation sensitivity, 4.94% false-positive rate and
+96.30% precision, but sensitivity was only 2/9 for 50%-retained arrays at
+20× with 1% substitutions.
 Exact native optimizations shortened a 1.129-Gb maize replay by 23.61% relative
 to its preceding indexed version while preserving seven output files byte for
 byte; peak memory increased 0.81%. External comparisons showed task-dependent
@@ -163,6 +167,26 @@ these fractions are descriptive; genome-specific summaries are retained
 (Figure 2; Evidence E6). The interval excludes extrapolation bias, genome-size
 uncertainty, catalogue error and biological pooling.
 
+### Held-out conditional tests expose failure modes in assembly comparison
+
+The predeclared seeds 5101–5103 were used once after the original conditional
+comparison settings were frozen. Each 199.1-kb genome contained three exact-copy
+arrays, and the supplied catalogue isolated read quantification, localization
+and the fixed 0.6 assembly/read-ratio rule from de novo discovery. All 177
+commands completed. Across 243 positive retained-copy conditions and 162
+controls, TP/FN/FP/TN were 208/35/8/154, corresponding to sensitivity 85.60%,
+false-positive rate 4.94% and precision 96.30% (Evidence E11).
+
+All 36 nonzero assembly/family localization conditions had base recall 1.0 and
+minimum base precision 0.996732. Comparison errors therefore arose after this
+simple exact-copy localization control. At 20× with 1% substitutions, the
+50%-retention condition recovered only 2/9 positives; at 1×, each error tier
+produced one false call for a fully retained assembly. These observations are
+consistent with the measured error-dependent copy-number underestimation and
+finite-read sampling, but do not uniquely assign cause. The aggregate metrics
+do not support a robust general collapse claim, and the consumed seeds cannot
+be used to tune a revised model.
+
 ### Seven-species file QC and reference concordance expose normalization concerns
 
 Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N/Col-0R/Ey15-2R, rice
@@ -266,8 +290,8 @@ has not replaced the public quantification default.
 The current biological evidence is incomplete. Additional species and materials
 must be evaluated with documented technical/biological replication, true
 genomic depth rather than file size alone, and relevant hard negatives.
-Matched-donor evidence, known repeat-family recovery, independent collapse
-validation and probe/FISH concordance are necessary before biological
+Matched-donor evidence, known repeat-family recovery, collapse validation beyond
+exact simulated arrays and probe/FISH concordance are necessary before biological
 under-representation or experimental-success claims. Multi-gigabase files have
 been acquired and sampled, but complete production-scale discovery across the
 cohort and isolated cross-platform resource comparisons remain outstanding.
@@ -279,9 +303,10 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The latest completed local Python suite comprises 405
-tests; the last native checkpoint passed 13 Rust tests, formatting and clippy
-with warnings denied. Per-run manifests and compact evidence archives preserve
+PyO3/Rust extension. The current source passed 426 Python tests. Rust source was
+unchanged from the published f16596b checkpoint, which passed 15 Rust tests,
+formatting and clippy with warnings denied; both f16596b hosted CI runs passed.
+Per-run manifests and compact evidence archives preserve
 the exact source, input and output hashes used for each result and take
 precedence over a manuscript-level version label.
 Public inputs and reuse paths are described in the repository documentation.
@@ -297,6 +322,15 @@ circular starts and random strand. Error tiers were error-free, 0.001 each for
 substitution/insertion/deletion, or 0.01/0.005/0.005, respectively. Coverage/error
 conditions shared their source genome and read-start design. They are technical
 conditions, not independent species. Held-out seeds 7301–7303 were not used.
+
+The separate conditional assembly experiment used three previously reserved
+seeds 5101–5103, periods 61/171/421 bp, copy counts 20/80/200 and five assemblies
+retaining 100/75/50/25/0% of each exact array. Uniform circular 5-kb reads crossed
+1/5/20× coverage and 0/0.1/1% substitutions. Under-representation truth was an
+actual integer-copy assembly/genome ratio below 0.6; native `possible_collapse`
+or `reads_only` status was positive. The unchanged matrix was run once, after
+which these seeds were marked consumed. It supplies a known catalogue and omits
+indels, unit divergence, ploidy and empirical sequencing bias.
 
 ### Comparator execution and scoring
 
@@ -428,13 +462,15 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S7: cross-cohort QC and real-diagnostic panel sources in
   `evidence/multispecies_input_qc/figures_v1` and
   `evidence/multispecies_real_diagnostics/figures_v2`.
+- Supplementary Table S8: all held-out conditional copy-number, localization,
+  comparison and per-command resource rows in `evidence/abundance_heldout`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
 E5: `factorial_multik_replay`; E6: `factorial_joint_multik`;
 E7: nine `*_input_qc` directories and their source manifests;
 E8: `multispecies_real_diagnostics`; E9: `reference_mapping_diagnostics`;
-E10: `known_query_recovery`.
+E10: `known_query_recovery`; E11: `abundance_heldout`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

@@ -9,10 +9,10 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ### Published article draft and resolved figure export checkpoint
 
-- 4aafb00 is pushed to main and working branch. Both hosted CI runs
-  34027553506/34027544312 passed; earlier 438d078 runs
-  34023168171/34023165293 also passed. The committed checkpoint has 405 local
-  Python tests passing; native 13-test/clippy/fmt checkpoint also passed.
+- f16596b is pushed to main and working branch. Both hosted CI runs
+  34029886116/34029873822 passed; earlier 4aafb00 runs
+  34027553506/34027544312 also passed. The committed checkpoint has 412 local
+  Python tests and 15 native tests passing; Clippy `-D warnings` and fmt passed.
 - The temporary automatic-review usage error is resolved. Subsequent Git reviews
   succeeded; a read-only source diff proved the figure update only changes the
   legend/whitespace, and retry through the original approval channel succeeded.
@@ -60,8 +60,8 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   genomic HiFi. Wild soybean YSD56 `SRR28726931` provides 44,193,089,411 HiFi
   bases from the same leaf BioSample as ONT support; its checksum-bounded complete
   download is active. This is an eighth species only after complete-file QC.
-- After 4aafb00, sequence-native exact clustering indexing and compact integer/
-  32-bit-array family-audit postings are under local validation. The Morex
+- f16596b publishes sequence-native exact clustering indexing and compact integer/
+  32-bit-array family-audit postings. The Morex
   115-Mb fixed-order interface diagnostic retained exact complete-output parity
   and measured 13.280→11.620 clustering seconds and 65.375→61.531 MiB child RSS;
   it ran with acquisition load and has a superseded provenance-warning defect,
@@ -71,8 +71,28 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   partial, and then passed the exact ENA byte/MD5 checks; complete-file QC is
   active and soybean is not yet admitted to the cohort. The IPK server ignores
   MorexV3 Range requests; a tested byte-identical prefix fallback is prepared
-  before resuming the retained 2.126-GB partial. Current local validation is
-  412 Python tests, 15 Rust tests, Clippy `-D warnings` and Rust formatting.
+  before resuming the retained 2.126-GB partial.
+- The predeclared conditional-abundance held-out seeds 5101–5103 were executed
+  once with the unchanged configuration and f16596b source: 177/177 commands,
+  81 copy-number, 45 localization and 405 comparison family rows. Across 243
+  positive and 162 control comparisons, TP/FN/FP/TN=208/35/8/154 (sensitivity
+  0.855967, false-positive rate 0.049383, precision 0.962963). All 36 positive
+  exact-copy localization rows had base recall 1.0, but 20×/1%-error 50%-retention
+  sensitivity was only 2/9 and 1× full assemblies produced one false call per
+  error tier. The compact verified archive is `paper/evidence/abundance_heldout`;
+  these seeds are consumed and cannot be used to tune the next model.
+- A development-only multi-k/depth decision calibration reused the completed
+  4101–4103 inputs without rerunning the original k=21 or localization commands.
+  The transparent hybrid changed TP/FN/FP/TN from 195/48/7/155 to
+  203/40/3/159, sensitivity 0.802469→0.835391, false-positive rate
+  0.043210→0.018519 and precision 0.965347→0.985437. All three leave-one-genome-
+  out folds selected the low-depth threshold 0.5; multi-k alone was unavailable
+  for 35 rows. This is development evidence only. Config `abundance_v2.json`
+  freezes the rule and calibration hashes with untouched seeds 5201–5203; that
+  one-time independent execution has not started at this checkpoint.
+- This source checkout passes the complete 426-test Python suite. Rust source is
+  unchanged from f16596b, whose 15 native tests, Clippy and formatting checks
+  passed; hosted CI for the new evidence checkpoint remains to be run.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

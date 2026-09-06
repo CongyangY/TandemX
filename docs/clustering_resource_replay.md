@@ -88,6 +88,9 @@ The two fresh children are labelled `word_bridge` and `sequence_native`.
 `validation.json` must report complete execution and exact payload-hash parity.
 The fixed-order single repetition is an engineering diagnostic; publication
 timing still requires shuffled repeated runs under isolated acquisition load.
+After a valid replay, compact evidence can be copied without the duplicate full
+payloads using `python -m benchmarks.scripts.archive_clustering_replay_evidence`;
+the archiver rechecks payload parity and every frozen source hash before copying.
 
 ## Full live-pipeline replay and profiling
 
