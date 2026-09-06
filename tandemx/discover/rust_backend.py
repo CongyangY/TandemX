@@ -42,6 +42,17 @@ def rust_backend_available() -> bool:
     return True
 
 
+def ungapped_family_identity(a: str, b: str) -> tuple[float, int, str]:
+    """Exact legacy all-offset audit; separate from circular gapped clustering."""
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable("Rebuild the Rust extension for native family comparison") from exc
+    if not hasattr(_rust_core, "ungapped_family_identity"):
+        raise RustBackendUnavailable("Rust extension lacks family comparison; reinstall TandemX")
+    return _rust_core.ungapped_family_identity(a, b)
+
+
 def seed_spacing_histogram(sequence: str, k: int, min_period: int, max_period: int,
                            min_seed_occurrences: int, max_pairs_per_kmer: int) -> tuple[dict[int, int], int]:
     """Native bounded histogram, without executing the legacy refiner."""

@@ -7,6 +7,27 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Real-input family-audit bottleneck (latest checkpoint)
+
+- Commit 3d3201a0a168f5a36eea3f06b0a473576c42c962 is pushed to both branches;
+  GitHub CI 34011141035 passed Linux/macOS. Mo17 real pilot completed all three
+  tools on the same 840 reads / 11,680,888 bp. T7 result directory:
+  `results/Mo17_complete_random_11Mb_pilot_v1_20260906`. Wall seconds / RSS MiB:
+  TandemX 258.829 / 168.58; TRF 11.859 / 194.72; TideHunter 3.508 / 147.80.
+  Calls/union coverage are descriptive, not accuracy. Concurrent QC occurred.
+- Scanning took 14.514 s; 599 representatives then incurred 179,101 pair
+  comparisons. New native ungapped audit, cached representative k-mer sets and
+  streamed pair table preserve Python values/order and optional collapse.
+  Quadratic output/time and candidate/warning state remain scaling limits.
+- Checks: **273 pytest passed in 65.43 s**, 8 Rust tests passed, clippy passed.
+  Exact parity tests cover randomized scores, ties, table bytes and warnings.
+  Native extension installed in `tandemx-dev` with explicit `--no-user`.
+  Rerun the identical real input after this source commit; no measured speedup
+  from the new audit is claimed yet.
+- ERR6210723 full FASTQ QC is ongoing. Rice SRR25241090 and rye ERR15194059
+  complete transfers started, budgets 30/31 GB respectively; inspect receipts
+  before claiming completion. Three Lo7 batches still represent one plant.
+
 - New `distance.py` and `clustering.py`, with a Rust bounded global edit-distance
   kernel, implement explicit operational monomer clusters. Elastic `auto` now
   selects sequence clustering at 95%; legacy discovery/default is unchanged.

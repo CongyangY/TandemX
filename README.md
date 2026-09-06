@@ -371,6 +371,13 @@ median wall time in all 16 scenarios (1.20–4.45× speedup); peak RSS changed b
 observations, not superiority to external tools. Raw pairs and the four-panel
 figure are in `paper/evidence/native_seed_paired`.
 
+Discovery also uses the selected backend for the exhaustive representative-pair
+audit. Native ungapped comparisons preserve the Python audit's values and tie
+rules; each representative's k-mer set is built once and pair rows are streamed
+to `family_similarity.tsv`. The audit is still quadratic in catalogue size.
+It is a redundancy heuristic, separate from gapped circular sequence clustering.
+See [algorithms](docs/algorithms.md#representative-pair-redundancy-audit).
+
 The [conditional abundance experiment](docs/abundance_benchmark.md) tests copy
 number, localization and engineered assembly under-representation independently
 of de novo discovery. It measures empirical interval coverage without treating

@@ -116,6 +116,12 @@ a catalog-quality check that helps identify possible redundant monomers,
 higher-order units, partial duplicates, or related families. Known repeats are
 not used.
 
+All `F*(F-1)/2` distinct pairs are emitted in catalogue order. A `.partial`
+file during execution is incomplete; the final filename is atomically replaced
+after the audit. Python and Rust use the same values and tie rules. This remains
+an ungapped redundancy heuristic, including historical equality of ambiguous
+characters; it must not be substituted for the gapped circular clustering score.
+
 | Field | Type | Unit | Description |
 |---|---|---:|---|
 | family_a | string | NA | First family identifier |

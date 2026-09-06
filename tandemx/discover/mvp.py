@@ -534,8 +534,12 @@ def discover_toy_repeats(
         config,
         totals,
     )
-    similarities = compare_families(families, k=config.kmer_size)
-    families = annotate_family_redundancy(families, similarities)
+    from tandemx.discover.family_audit import write_family_audit
+    families, redundant_pairs = write_family_audit(
+        config.outdir / "family_similarity.tsv", families, k=config.kmer_size,
+        backend=config.kmer_backend, keep_redundant=config.collapse_redundant_families,
+        logger=logger,
+    )
     update_discover_terminal_progress(
         progress,
         "write_outputs",
@@ -547,9 +551,8 @@ def discover_toy_repeats(
     )
     write_monomers(config.outdir / "monomers.fa", families)
     write_families(config.outdir / "families.tsv", families)
-    write_family_similarity(config.outdir / "family_similarity.tsv", similarities)
     if config.collapse_redundant_families:
-        collapsed_families, collapse_records = collapse_redundant_families(families, similarities)
+        collapsed_families, collapse_records = collapse_redundant_families(families, redundant_pairs)
         write_monomers(config.outdir / "collapsed_monomers.fa", collapsed_families)
         write_families(config.outdir / "collapsed_families.tsv", collapsed_families)
         write_family_collapse(config.outdir / "family_collapse.tsv", collapse_records)
@@ -1484,18 +1487,25 @@ def best_cyclic_alignment(reference: str, sequence: str) -> str:
     return best
 
 
-def compare_families(families: Sequence[RepeatFamily], k: int = 11) -> list[FamilySimilarity]:
+def compare_families(families: Sequence[RepeatFamily], k: int = 11, backend: str = "python") -> list[FamilySimilarity]:
     """Compare representative monomers to flag possible family redundancy."""
-    similarities: list[FamilySimilarity] = []
+    return list(iter_family_similarities(families, k, backend))
+
+
+def iter_family_similarities(families: Sequence[RepeatFamily], k: int = 11,
+                            backend: str = "python") -> Iterable[FamilySimilarity]:
+    # A representative's sketch is independent of its partner; build it once.
+    kmers = [canonical_kmer_set(family.monomer_sequence, k) for family in families]
     for index, family_a in enumerate(families):
-        for family_b in families[index + 1 :]:
-            similarities.append(compare_family_pair(family_a, family_b, k=k))
-    return similarities
+        for other in range(index + 1, len(families)):
+            yield compare_family_pair(family_a, families[other], k=k, backend=backend,
+                                      _kmers=(kmers[index], kmers[other]))
 
 
-def compare_family_pair(family_a: RepeatFamily, family_b: RepeatFamily, k: int = 11) -> FamilySimilarity:
-    kmers_a = canonical_kmer_set(family_a.monomer_sequence, k)
-    kmers_b = canonical_kmer_set(family_b.monomer_sequence, k)
+def compare_family_pair(family_a: RepeatFamily, family_b: RepeatFamily, k: int = 11,
+                        backend: str = "python", *, _kmers: tuple[set[str], set[str]] | None = None) -> FamilySimilarity:
+    kmers_a, kmers_b = _kmers if _kmers is not None else (
+        canonical_kmer_set(family_a.monomer_sequence, k), canonical_kmer_set(family_b.monomer_sequence, k))
     shared = len(kmers_a & kmers_b)
     union = len(kmers_a | kmers_b)
     kmer_jaccard = shared / union if union else 0.0
@@ -1503,6 +1513,7 @@ def compare_family_pair(family_a: RepeatFamily, family_b: RepeatFamily, k: int =
     identity, overlap, orientation = best_local_identity(
         family_a.monomer_sequence,
         family_b.monomer_sequence,
+        backend=backend,
     )
     shorter = max(1, min(family_a.monomer_length_bp, family_b.monomer_length_bp))
     longer = max(family_a.monomer_length_bp, family_b.monomer_length_bp)
@@ -1539,8 +1550,15 @@ def canonical_kmer_set(sequence: str, k: int) -> set[str]:
     return {canonical_kmer(sequence[index : index + k]) for index in range(len(sequence) - k + 1)}
 
 
-def best_local_identity(sequence_a: str, sequence_b: str) -> tuple[float, int, str]:
+def best_local_identity(sequence_a: str, sequence_b: str, backend: str = "python") -> tuple[float, int, str]:
     """Return the best ungapped local identity over both orientations."""
+    if not sequence_a or not sequence_b:
+        raise ValueError("Need nonempty representative sequences")
+    if backend == "rust":
+        from tandemx.discover.rust_backend import ungapped_family_identity
+        return ungapped_family_identity(sequence_a, sequence_b)
+    if backend != "python":
+        raise ValueError("Family comparison backend must be python or rust")
     min_overlap = min(50, len(sequence_a), len(sequence_b))
     best_identity = 0.0
     best_overlap = 0

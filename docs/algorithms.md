@@ -181,6 +181,30 @@ Native comparisons release the GIL and use band-width memory; comparisons above
 grows with the number of candidates. This does not establish production-scale
 memory bounds for whole libraries.
 
+## Representative-pair redundancy audit
+
+After clustering, `family_similarity.tsv` examines every distinct pair in stable
+catalogue order. Cache each representative's canonical k-mer set once; the
+selected Python/Rust backend then computes the same all-offset ungapped local
+identity on both strands, with minimum overlap `min(50, len(a), len(b))`. Ties
+prefer greater overlap and then the first orientation/offset. This historical
+heuristic counts equal ambiguous characters as matches; it is not the gapped
+circular clustering identity (which penalizes N), nor a homology truth label.
+
+Rows stream to a `.partial` file that is renamed only after a successful audit.
+Retain related-pair warnings, and only the `likely_redundant` edges when optional
+collapse is requested. This avoids retaining every pair and constructing a full
+output string in memory. It does not eliminate quadratic time/output size or the
+potentially growing warning/related-edge state. The native kernel releases the
+GIL. Randomized/edge Python parity checks cover scores, overlaps, orientation,
+table bytes, warning order and optional collapse. Rebuild the extension before
+running this version; a stale extension fails explicitly.
+
+The first complete-library Mo17 random pilot exposed this bottleneck: 840 reads
+scanned in 14.514 s, followed by 179,101 pair comparisons for 599 families; total
+TandemX wall time was 258.829 s. That observation predates this optimization.
+The identical real input must be rerun before assigning a measured speedup.
+
 ## Diagnostic k-mer Copy-number Calibration
 
 MVP goal: estimate repeat family copy number from diagnostic k-mer depth on toy reads using a repeat catalog discovered upstream.

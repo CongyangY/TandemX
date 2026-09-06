@@ -39,3 +39,12 @@ outputs. Wall/RSS here are engineering diagnostics: downloads can overlap and
 controller memory is excluded. Publication timings require isolated repeated
 runs, full aggregate resource accounting, fixed tuning budgets and independent
 accuracy evidence.
+
+The first Mo17 whole-library random sample (840 reads / 11,680,888 bp) completed
+all three tools at T7 `results/Mo17_complete_random_11Mb_pilot_v1_20260906`.
+Wall times were 258.829 s TandemX, 11.859 s TRF and 3.508 s TideHunter; respective
+RSS values were 168.58, 194.72 and 147.80 MiB. This unfavorable TandemX timing is
+retained. Read scanning took 14.514 s; the subsequent 599-family exhaustive audit
+was the main bottleneck. Concurrent QC makes these diagnostic measurements.
+Native/streamed audit optimization must be rerun against the same sample and all
+six discovery data files checked for exact equality before reporting its effect.
