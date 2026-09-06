@@ -38,7 +38,9 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   but the 111.506-Mb run changed 100.039 to 96.913 s while peak RSS increased
   154.766 to 164.063 MiB. A narrower scratch-only revision changed the 11.681-Mb
   run 12.361 to 12.479 s while RSS decreased 62.484 to 60.922 MiB. Both are
-  metric tradeoffs, so the source was restored to the `a73398d` alignment core.
+  metric tradeoffs, so commit `e760471` restored the `a73398d` alignment core.
+  Its work-branch/main hosted runs `34050266939`/`34050278620` passed
+  Ubuntu/macOS Python, Rust and wheel jobs.
   Failed-attempt results remain on T7 under
   `Mo17_11Mb_alignment_workspace_replay_v2_20260907`,
   `Mo17_111Mb_alignment_workspace_replay_v2_20260907` and
