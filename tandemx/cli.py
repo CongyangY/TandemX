@@ -152,6 +152,9 @@ def _prepare_deferred_run(
 
 
 def run_discover(args: argparse.Namespace) -> int:
+    from tandemx.discover.clustering import resolve_clustering_method
+
+    args.resolved_clustering_method = resolve_clustering_method(args.clustering_method, args.discovery_method)
     args.threads = resolve_discover_threads(args.threads)
     args.count_threads = resolve_count_threads(args.count_threads, args.threads, len(args.reads))
     args.kmer_backend = resolve_kmer_backend(args.kmer_backend, args.kmer_size)
@@ -224,6 +227,8 @@ def run_discover(args: argparse.Namespace) -> int:
         enable_auto_discovery_budget=args.enable_auto_discovery_budget,
         collapse_redundant_families=args.collapse_redundant_families,
         discovery_method=args.discovery_method,
+        clustering_method=args.clustering_method,
+        cluster_identity=args.cluster_identity,
     )
     try:
         candidates, families = discover_toy_repeats(
@@ -549,6 +554,8 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--kmer-size", type=int, default=11, help="Canonical seed k-mer size for spacing prefiltering.")
     discover.add_argument("--top-periods", type=int, default=5, help="Maximum spacing peaks refined per read.")
     discover.add_argument("--discovery-method", choices=("legacy", "elastic"), default="legacy", help="legacy: fixed-offset single-array baseline; elastic: experimental indel-aware multiple-array alignment and consensus.")
+    discover.add_argument("--clustering-method", choices=("auto", "legacy", "sequence"), default="auto", help="auto: sequence clusters for elastic, historical clustering for legacy; override for ablation.")
+    discover.add_argument("--cluster-identity", type=float, default=0.95, help="Minimum circular global edit similarity to a fixed observed cluster representative; sequence clustering only.")
     discover.add_argument("--min-seed-occurrences", type=int, default=2, help="Minimum within-read occurrences required for a seed k-mer.")
     discover.add_argument("--min-spacing-support", type=int, default=2, help="Minimum repeated-seed support required for a spacing peak.")
     discover.add_argument("--max-pairs-per-kmer", type=int, default=100, help="Maximum adjacent position pairs retained per seed k-mer.")

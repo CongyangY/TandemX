@@ -231,10 +231,19 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
     },
 }
 
+TSV_SCHEMAS["monomer_membership.tsv"] = {
+    "required": {"read_id", "candidate_id", "cluster_id", "family_id", "representative_sha256",
+                 "edit_distance_upper_bound", "similarity_lower_bound", "minimum_cluster_identity",
+                 "compatible_cluster_count", "alternative_cluster_ids", "status", "warning"},
+    "numeric": {"edit_distance_upper_bound", "similarity_lower_bound", "minimum_cluster_identity", "compatible_cluster_count"},
+    "status": {"assigned", "below_minimum_support", "unresolved_sequence"},
+}
+
 ALLOW_EMPTY_TSV_RECORDS = {"family_similarity.tsv", "family_collapse.tsv"}
 
 
 FASTA_HEADER_PATTERNS = {
+    "candidate_monomers.fa": re.compile(r"^candidate_id=[^;]+;read_id=[^;]+;length_bp=\d+$"),
     "monomers.fa": re.compile(r"^family_id=[^;]+;monomer_id=[^;]+;length_bp=\d+;confidence=[^;]+$"),
     "collapsed_monomers.fa": re.compile(r"^family_id=[^;]+;monomer_id=[^;]+;length_bp=\d+;confidence=[^;]+$"),
     "probes.fa": re.compile(r"^probe_id=[^;]+;family_id=[^;]+;length_bp=\d+;probe_score=[0-9.]+;confidence=[^;]+$"),

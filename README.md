@@ -32,6 +32,9 @@ important indel-boundary and multiple-array limitations; see
 [benchmarks/README.md](benchmarks/README.md). An opt-in indel-aware multiple-array
 method is now available for validation (`--discovery-method elastic`); the
 original method remains available as `legacy` and is still the default.
+Elastic mode now uses explicit circular edit-similarity monomer clusters
+(default 95%), with original candidate sequences and assignment evidence retained.
+These clusters do not define biological family ancestry.
 The broader comparator and multi-metric contract is in
 [docs/comparator_matrix.md](docs/comparator_matrix.md). These results do not establish
 production readiness or a universal advantage over external tools.
@@ -100,6 +103,8 @@ tandemx validate --project /tmp/tandemx-elastic
 ```
 
 See [examples/toy/elastic.md](examples/toy/elastic.md) for its evidence and limits.
+`--clustering-method legacy` preserves the previous clustering for ablation;
+`--cluster-identity` controls sequence resolution.
 
 After activating `tandemx-dev` and installing TandemX in editable mode, run:
 
@@ -338,3 +343,14 @@ python benchmarks/scripts/run_pipeline_benchmark.py \
   --max-reads 100000 \
   --profile
 ```
+
+### Independent benchmark sequence evaluation
+
+The benchmark extra pins the small native `edlib==1.3.9.post1` dependency for an
+independent global edit-distance evaluator; TandemX discovery does not call it.
+It is included in the development environment and test/benchmark extras:
+`pip install -e '.[test,benchmark]'`. The evaluator exhausts rotations and strands
+and is tested against a separate dynamic-programming reference. Both the original
+strict equal-length endpoint and the added indel-aware endpoint are reported.
+Union-of-interval coverage separates duplicated/harmonic calls from incorrectly
+labelled bases. See [benchmark definitions](docs/file_formats.md#challenge-measurements).

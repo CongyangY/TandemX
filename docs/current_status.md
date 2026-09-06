@@ -5,6 +5,38 @@ The user has authorized autonomous development and GitHub updates toward mature
 software and a full evidence-backed paper (multi-panel figures and supplement).
 The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
+## Sequence-clustering and scoring checkpoint (current)
+
+- New `distance.py` and `clustering.py`, with a Rust bounded global edit-distance
+  kernel, implement explicit operational monomer clusters. Elastic `auto` now
+  selects sequence clustering at 95%; legacy discovery/default is unchanged.
+  Fixed observed representatives, no transitive merges, unique-read support,
+  candidate FASTA and membership/ambiguity/support-filter audit are documented.
+- `edlib==1.3.9.post1` installed inside `tandemx-dev`, pinned in the benchmark
+  extra/environment. It is an independent benchmark evaluator, not detector code.
+  Cyclic edit similarity exhausts query rotations/strands; independent DP and
+  edlib comparisons test both the scorer and new cluster acceptance/rejection.
+- Added period-independent union coverage and duplicated-base metrics. Old raw
+  call and strict length endpoints remain visible. Re-scoring archive:
+  `results/independent_rescore_v1_20260906` under T7. It predates the subsequent
+  config-aware rescorer update; all these source configurations used IoU 0.5.
+  ULTRA clean strict recovery 0 becomes cyclic recovery 1; tuned indel4 cyclic
+  recovery remains 0. TRF indel4 raw array precision .5556 coexists with base
+  union precision .999714. Do not interpret duplicate penalties as wrong bases.
+- macOS CI for a5aaa50 failed two multi-array tests because they requested two
+  threads above the runner's one-thread cap; Ubuntu passed. The tests now obey
+  `discover_thread_limit()` while retaining repeated-run comparison. Hosted CI
+  for this new checkpoint still needs verification after push.
+- Initial local checks: 230 pytest passed in 59.50s, 7 Rust tests passed, clippy
+  and fmt passed. Focused final clustering/CLI/rescoring checks: 16 passed.
+  Final full suite: **231 passed in 60.12s**. Toy simulate/discover/validate
+  succeeded with 29 candidate sequences, membership records and two families.
+- `benchmarks/configs/sequence_clustering_v1.yaml` is ready for explicit 95%
+  operational clustering, with three repetitions. Actual full rerun is pending;
+  do not yet claim the earlier 2/3 validation recovery is corrected. Held-out
+  3101/3102/3103 remain unused. Candidate evidence supports a future comparison
+  at matched per-array output granularity instead of catalog versus raw calls.
+
 ## Source, Git and storage
 
 - Source: `/Users/ycy/Codex/Sofw/TandemX`; GitHub `https://github.com/CongyangY/TandemX`.

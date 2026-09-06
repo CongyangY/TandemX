@@ -11,6 +11,7 @@ import hashlib
 import json
 import logging
 import math
+import importlib.metadata
 import os
 import platform
 import random
@@ -27,6 +28,7 @@ import yaml
 
 from .adapters import build_command, parse_arrays, read_fasta
 from .evaluate import score_arrays, score_families
+from .sequence_metrics import score_cyclic_recovery
 from .schema import ArrayRecord, digest_file, read_table, write_table
 from .simulate import Scenario, generate_dataset
 
@@ -147,6 +149,7 @@ def run_suite(config_path: Path, outdir: Path, split: str, selected: list[str] |
                                 capture_output=True, text=True, timeout=10, check=False)
         versions[tool] = {"exit_code": result.returncode, "self_report": (result.stdout + result.stderr)[:4000]}
     manifest.update({"config_sha256": digest_file(config_path), "python": sys.version, "platform": platform.platform(),
+                     "independent_evaluator": {"edlib": importlib.metadata.version("edlib")},
                      "executables": {t: {"path": p, "sha256": digest_file(Path(p))} for t, p in executables.items()},
                      "tool_versions": versions, "memory_method": "wait4 direct child ru_maxrss", "threads": 1, "split": split,
                      "family_recovery_source": "TandemX final catalog; other tools per-array consensuses",
@@ -174,6 +177,10 @@ def run_suite(config_path: Path, outdir: Path, split: str, selected: list[str] |
                                                     min_period, max_period, min_span)
                     if tool == "tandemx" and "discovery_method" in config:
                         command.extend(["--discovery-method", str(config["discovery_method"])])
+                    if tool == "tandemx":
+                        for key in ("clustering_method", "cluster_identity"):
+                            if key in config:
+                                command.extend(["--" + key.replace("_", "-"), str(config[key])])
                     if tool == "ultra":
                         for key, flag in (("window_size", "--win_size"), ("windows", "--windows")):
                             if key in ultra_options:
@@ -197,8 +204,10 @@ def run_suite(config_path: Path, outdir: Path, split: str, selected: list[str] |
                             sequences = (list(read_fasta(output.parent / "monomers.fa").values()) if tool == "tandemx"
                                          else [r.sequence for r in predictions])
                             families, family_rows = score_families(sequences, observed_families)
+                            cyclic_metrics, cyclic_rows = score_cyclic_recovery(sequences, observed_families)
                             row.update(metrics)
                             row.update(families)
+                            row.update(cyclic_metrics)
                             norm = [asdict(r) for r in sorted(predictions, key=lambda r: (r.read_id, r.start, r.end, r.period, r.sequence))]
                             row["prediction_sha256"] = hashlib.sha256(json.dumps(norm, sort_keys=True).encode()).hexdigest()
                             row["catalog_sha256"] = hashlib.sha256(json.dumps(sorted(set(sequences))).encode()).hexdigest()
@@ -206,6 +215,8 @@ def run_suite(config_path: Path, outdir: Path, split: str, selected: list[str] |
                             write_table(run / "matches.tsv", matches, list(matches[0]) if matches else ["prediction_index", "status"])
                             write_table(run / "family_recovery.tsv", family_rows,
                                         list(family_rows[0]) if family_rows else ["family_id", "recovered", "criterion"])
+                            write_table(run / "cyclic_monomer_recovery.tsv", cyclic_rows,
+                                        list(cyclic_rows[0]) if cyclic_rows else ["truth_id", "recovered", "criterion"])
                         except (OSError, ValueError, KeyError, IndexError) as error:
                             row["status"], row["error"] = "invalid_output", str(error)
                     raw.append(row)
@@ -230,7 +241,9 @@ def summarize(raw: list[dict]) -> list[dict]:
         groups.setdefault((row["scenario"], row["dataset_id"], row["tool"]), []).append(row)
     result = []
     metric_names = ["array_recall", "array_precision", "array_f1", "read_detection_recall", "read_detection_precision",
-                    "negative_read_call_rate", "sequence_family_recall", "matched_period_mae_bp", "matched_boundary_mae_bp"]
+                    "negative_read_call_rate", "sequence_family_recall", "matched_period_mae_bp", "matched_boundary_mae_bp",
+                    "cyclic_monomer_recall", "homologous_consensus_fraction", "mean_best_cyclic_edit_similarity",
+                    "base_union_recall", "base_union_precision", "base_union_f1", "duplicate_bp_fraction"]
     for (scenario, dataset, tool), rows in sorted(groups.items()):
         good = [r for r in rows if r["status"] == "ok"]
         valid = len(good) == len(rows)
@@ -240,7 +253,7 @@ def summarize(raw: list[dict]) -> list[dict]:
                "deterministic": deterministic if len(rows) > 1 else "not_tested_single_run",
                "median_runtime_seconds": statistics.median(r["runtime_seconds"] for r in good) if valid else "NA",
                "median_peak_rss_mib": statistics.median(r["peak_rss_mib"] for r in good) if valid else "NA"}
-        row.update({name: good[0][name] if valid and deterministic else "NA" for name in metric_names})
+        row.update({name: good[0].get(name, "NA") if valid and deterministic else "NA" for name in metric_names})
         result.append(row)
     return result
 

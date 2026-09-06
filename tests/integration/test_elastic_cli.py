@@ -8,6 +8,7 @@ import pytest
 
 from tandemx.discover.rust_backend import rust_backend_available
 from tandemx.io.validators import validate_project
+from tandemx.utils.threads import discover_thread_limit
 
 
 @pytest.mark.parametrize("backend", ["python", "rust"])
@@ -21,8 +22,8 @@ def test_multi_array_cli_outputs_are_deterministic_and_valid(tmp_path, backend):
     reads = tmp_path / "reads.fa"
     reads.write_text("".join(f">r{i}\n{read}\n" for i in range(6)))
     artifacts = []
-    for threads in [1, 2]:
-        out = tmp_path / str(threads)
+    for replicate, threads in enumerate([1, min(2, discover_thread_limit())]):
+        out = tmp_path / str(replicate)
         result = subprocess.run([sys.executable, "-m", "tandemx.cli", "run", "--reads", str(reads),
             "--outdir", str(out), "--steps", "discover,validate", "--min-period", "30", "--max-period", "120",
             "--discovery-method", "elastic", "--kmer-backend", backend, "--threads", str(threads)],
@@ -39,8 +40,13 @@ def test_multi_array_cli_outputs_are_deterministic_and_valid(tmp_path, backend):
         assert summary["family_count"] == 2
         families = list(csv.DictReader((folder / "families.tsv").open(), delimiter="\t"))
         assert all("uncalibrated_confidence" in row["warning"] for row in families)
+        members = list(csv.DictReader((folder / "monomer_membership.tsv").open(), delimiter="\t"))
+        assert len(members) == 12
+        assert all(row["status"] == "assigned" and float(row["similarity_lower_bound"]) >= 0.95 for row in members)
+        assert (folder / "candidate_monomers.fa").read_text().count(">candidate_id=") == 12
         assert validate_project(folder)
         assert 'discovery_method: "elastic"' in (folder / "run_config.yaml").read_text()
         artifacts.append([(folder / name).read_bytes() for name in
-                          ["candidate_reads.tsv", "monomers.fa", "families.tsv", "family_similarity.tsv"]])
+                          ["candidate_reads.tsv", "candidate_monomers.fa", "monomer_membership.tsv",
+                           "monomers.fa", "families.tsv", "family_similarity.tsv"]])
     assert artifacts[0] == artifacts[1]

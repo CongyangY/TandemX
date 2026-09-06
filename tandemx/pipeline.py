@@ -65,6 +65,8 @@ class PipelineConfig:
     force: bool
     profile: bool
     discovery_method: str = "legacy"
+    clustering_method: str = "auto"
+    cluster_identity: float = 0.95
 
 
 @dataclass(frozen=True)
@@ -126,6 +128,10 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--top-periods", type=int, default=5)
     parser.add_argument("--discovery-method", choices=("legacy", "elastic"), default="legacy",
                         help="Discovery algorithm; elastic enables experimental indel-aware multiple arrays.")
+    parser.add_argument("--clustering-method", choices=("auto", "legacy", "sequence"), default="auto",
+                        help="auto uses sequence clusters for elastic discovery; override for ablation.")
+    parser.add_argument("--cluster-identity", type=float, default=0.95,
+                        help="Minimum circular edit similarity for sequence clustering.")
     parser.add_argument(
         "--threads",
         type=int,
@@ -174,6 +180,8 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         force=args.force,
         profile=args.profile,
         discovery_method=args.discovery_method,
+        clustering_method=args.clustering_method,
+        cluster_identity=args.cluster_identity,
     )
 
 
@@ -200,6 +208,10 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
             config.kmer_backend,
             "--discovery-method",
             config.discovery_method,
+            "--clustering-method",
+            config.clustering_method,
+            "--cluster-identity",
+            str(config.cluster_identity),
             "--min-period",
             str(config.min_period),
             "--max-period",
@@ -316,7 +328,8 @@ def resolve_kmer_backend(requested: str) -> str:
 def expected_outputs(config: PipelineConfig, step: str) -> tuple[Path, ...]:
     output_dir = config.outdir / step
     outputs = {
-        "discover": (output_dir / "candidate_reads.tsv", output_dir / "monomers.fa", output_dir / "families.tsv"),
+        "discover": (output_dir / "candidate_reads.tsv", output_dir / "candidate_monomers.fa",
+                     output_dir / "monomers.fa", output_dir / "families.tsv"),
         "quantify": (output_dir / "copy_number.tsv",),
         "locate": (output_dir / "repeat_density.bedgraph", output_dir / "arrays.bed", output_dir / "assembly_vs_read_cn.tsv"),
         "compare": (output_dir / "assembly_vs_read_cn.tsv",),
@@ -324,6 +337,10 @@ def expected_outputs(config: PipelineConfig, step: str) -> tuple[Path, ...]:
         "visualize": (output_dir / "catalogue_summary.svg", output_dir / "catalogue_summary.pdf"),
         "validate": (),
     }
+    if step == "discover":
+        from tandemx.discover.clustering import resolve_clustering_method
+        if resolve_clustering_method(config.clustering_method, config.discovery_method) == "sequence":
+            return (*outputs[step], output_dir / "monomer_membership.tsv")
     return outputs[step]
 
 

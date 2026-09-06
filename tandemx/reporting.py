@@ -36,6 +36,8 @@ MANIFEST_FIELDS = (
 OUTPUT_SPECS = {
     "discover": (
         ("candidate_reads", "discover/candidate_reads.tsv", "Read-local tandem repeat candidates.", "family review"),
+        ("candidate_monomers", "discover/candidate_monomers.fa", "Original read-local candidate consensus sequences.", "sequence evidence review"),
+        ("monomer_membership", "discover/monomer_membership.tsv", "Sequence cluster assignment and ambiguity; sequence clustering only.", "cluster review"),
         ("monomer_catalog", "discover/monomers.fa", "Discovered representative monomer sequences.", "quantify,locate,probe,visualize"),
         ("family_catalog", "discover/families.tsv", "Discovered repeat family summary.", "interpretation"),
         ("family_similarity", "discover/family_similarity.tsv", "Pairwise monomer similarity and redundancy flags.", "catalog review"),
@@ -77,6 +79,7 @@ PIPELINE_OUTPUT_SPECS = (
 )
 OPTIONAL_OUTPUT_TYPES = {
     "collapsed_monomer_catalog",
+    "monomer_membership",
     "collapsed_family_catalog",
     "family_collapse",
     "repeat_annotation",

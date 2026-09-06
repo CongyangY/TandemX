@@ -219,6 +219,8 @@ class DiscoverConfig:
     enable_auto_discovery_budget: bool = False
     collapse_redundant_families: bool = False
     discovery_method: str = "legacy"
+    clustering_method: str = "auto"
+    cluster_identity: float = 0.95
 
 
 @dataclass(frozen=True)
@@ -267,6 +269,8 @@ def discover_toy_repeats(
         config.outdir / "collapsed_families.tsv",
         config.outdir / "collapsed_monomers.fa",
         config.outdir / "family_collapse.tsv",
+        config.outdir / "candidate_monomers.fa",
+        config.outdir / "monomer_membership.tsv",
     ):
         stale_path.unlink(missing_ok=True)
 
@@ -506,7 +510,19 @@ def discover_toy_repeats(
         config,
         totals,
     )
-    families = cluster_candidates(candidates, config.min_support_reads)
+    from tandemx.discover.clustering import cluster_monomers, resolve_clustering_method, write_membership
+    from urllib.parse import quote
+
+    with (config.outdir / "candidate_monomers.fa").open("w", encoding="utf-8") as handle:
+        for candidate in candidates:
+            handle.write(f">candidate_id={candidate.candidate_id};read_id={quote(candidate.read_id, safe='')};"
+                         f"length_bp={len(candidate.sequence)}\n{candidate.sequence}\n")
+    if resolve_clustering_method(config.clustering_method, config.discovery_method) == "sequence":
+        families, membership = cluster_monomers(candidates, config.min_support_reads,
+                                                config.cluster_identity, config.kmer_backend)
+        write_membership(config.outdir / "monomer_membership.tsv", membership)
+    else:
+        families = cluster_candidates(candidates, config.min_support_reads)
     if not families:
         logger.info("discovery_result=no_families minimum_support=%s", config.min_support_reads)
     update_discover_terminal_progress(
@@ -893,6 +909,11 @@ def split_read_scan_tasks(
 
 
 def validate_discover_config(config: DiscoverConfig) -> None:
+    from tandemx.discover.clustering import resolve_clustering_method
+
+    resolve_clustering_method(config.clustering_method, config.discovery_method)
+    if not 0 < config.cluster_identity <= 1:
+        raise ValueError("--cluster-identity must be in (0,1]")
     if config.discovery_method not in {"legacy", "elastic"}:
         raise ValueError("--discovery-method must be legacy or elastic")
     if config.min_monomer_len <= 0:

@@ -119,6 +119,7 @@ def score_arrays(predicted: list[ArrayRecord], truth: list[ArrayRecord],
                                                      for i, j in matched.items()) if matched else math.nan,
         "warning": "planted_truth;conditional_errors_on_matches;wilson_intervals_are_descriptive",
     }
+    metrics.update(score_base_coverage(predicted, truth))
     for name, numerator, denominator in (("array_recall", tp, len(truth)),
                                          ("array_precision", tp, len(predicted)),
                                          ("negative_read_call_rate", read_fp, len(negative_reads))):
@@ -132,6 +133,41 @@ def score_arrays(predicted: list[ArrayRecord], truth: list[ArrayRecord],
                         "iou": interval_iou(p, target) if target else 0.0,
                         "status": "matched" if target else "unmatched"})
     return metrics, details
+
+
+def _union_intervals(records: list[ArrayRecord]) -> dict[str, list[tuple[int, int]]]:
+    merged: dict[str, list[tuple[int, int]]] = defaultdict(list)
+    for record in sorted(records, key=lambda r: (r.read_id, r.start, r.end)):
+        intervals = merged[record.read_id]
+        if intervals and record.start <= intervals[-1][1]:
+            intervals[-1] = (intervals[-1][0], max(intervals[-1][1], record.end))
+        else:
+            intervals.append((record.start, record.end))
+    return merged
+
+
+def score_base_coverage(predicted: list[ArrayRecord], truth: list[ArrayRecord]) -> dict:
+    """Base-level union endpoints, independent of period and duplicate reports."""
+    p, t = _union_intervals(predicted), _union_intervals(truth)
+    p_bases = sum(end - start for intervals in p.values() for start, end in intervals)
+    t_bases = sum(end - start for intervals in t.values() for start, end in intervals)
+    intersection = 0
+    for read_id in p.keys() & t.keys():
+        a, b = p[read_id], t[read_id]
+        i = j = 0
+        while i < len(a) and j < len(b):
+            intersection += max(0, min(a[i][1], b[j][1]) - max(a[i][0], b[j][0]))
+            if a[i][1] < b[j][1]:
+                i += 1
+            else:
+                j += 1
+    raw_bases = sum(r.end - r.start for r in predicted)
+    return {"base_union_recall": ratio(intersection, t_bases),
+            "base_union_precision": ratio(intersection, p_bases),
+            "base_union_f1": ratio(2 * intersection, t_bases + p_bases),
+            "predicted_union_bp": p_bases, "truth_union_bp": t_bases,
+            "duplicated_prediction_bp": raw_bases - p_bases,
+            "duplicate_bp_fraction": ratio(raw_bases - p_bases, raw_bases)}
 
 
 def score_families(predicted_sequences: list[str], truth_families: dict[str, str],

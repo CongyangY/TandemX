@@ -12,7 +12,7 @@ pytest tests/unit/test_elastic_discovery.py tests/integration/test_elastic_cli.p
 ```
 
 Inputs are FASTA/FASTQ reads (optionally gzip). Outputs are `candidate_reads.tsv`,
-`monomers.fa`, `families.tsv`, `family_similarity.tsv`, `discovery_summary.json`,
+`candidate_monomers.fa`, `monomer_membership.tsv`, `monomers.fa`, `families.tsv`, `family_similarity.tsv`, `discovery_summary.json`,
 `run.log` and `run_config.yaml`. A valid negative result can contain no candidates.
 See [field definitions](../../docs/file_formats.md) and
 [algorithm](../../docs/algorithms.md#elastic-read-local-discovery-experimental).
@@ -32,3 +32,10 @@ python -m benchmarks.challenge.run --config benchmarks/configs/elastic_developme
 The output directory must be new/empty. Single-run metrics are measured accuracy;
 they do not demonstrate runtime variability or deterministic repetitions. Use
 separate validation/held-out splits only as specified in the evaluation plan.
+
+By default elastic mode uses sequence clustering at 95% circular edit similarity.
+The membership table preserves below-support and ambiguous assignments. Re-run
+into a different directory with `--clustering-method legacy` for the historical
+clusterer, or `--cluster-identity 0.98` for a finer operational resolution. Compare
+these outputs as a sensitivity analysis, not as evidence of separate ancestry.
+`run` accepts both options and includes them in resume fingerprints.

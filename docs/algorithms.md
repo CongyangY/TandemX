@@ -104,14 +104,15 @@ mode remains the default pending independent evaluation and resource profiling.
    to two deterministic rounds of banded global alignment and majority voting,
    including insertions and deletions. This is an observed-unit consensus, not
    ancestral sequence inference or full partial-order assembly.
-7. Canonicalize strand/rotation and apply the existing sequence-aware family
-   clustering. `period_bp` is consensus length; a differing median aligned offset
+7. Canonicalize strand/rotation and, by default in elastic mode, apply the
+   operational sequence clustering described below. `period_bp` is consensus length; a differing median aligned offset
    is retained in `warning`. `score` is matches divided by all aligned columns,
    including gaps. Confidence labels remain uncalibrated.
 
 The independent Python reference and Rust kernels are tested for identical
 alignment paths and consensus. Rust releases the GIL during alignment; seed
-preparation and family clustering currently remain in Python. Each trace is
+preparation and cluster orchestration remain in Python; bounded edit comparison
+also has a Rust kernel. Each trace is
 limited to 32 million cells and fails explicitly if exceeded. Peak trace space
 is O(read_length × band_width), plus read-local alignment pairs; no whole read
 collection or genome is loaded for the alignment. Candidate/family state still
@@ -121,6 +122,48 @@ Development findings are archived separately from the baseline; both rejected
 first attempts and corrected results remain available. Perfect recovery on
 development seed 1101 is not a held-out accuracy or speed claim. The expanded
 comparator/metric contract is in [comparator_matrix.md](comparator_matrix.md).
+
+## Operational monomer clustering (experimental)
+
+`--clustering-method auto` selects `sequence` for elastic discovery and the
+historical `legacy` clusterer for legacy discovery. Either can be requested
+explicitly for ablation. `--cluster-identity 0.95` is an operational sequence
+resolution, not a universal definition of a biological satellite family.
+
+Exact canonical candidate sequences are grouped and ordered by distinct-read
+support, total supporting span, mean read-local alignment identity, then sequence.
+Each group is compared to **fixed observed representatives** in abundance order.
+Circular global unit-cost edit similarity must be at least the configured value:
+`1 - edit_distance / max(lengths)`. Both strands and every rotation of the query
+are eligible. Matches require known A/C/G/T bases; N is never matching evidence.
+Length difference and shared circular q-gram counts provide necessary-condition
+rejections. Seed-supported rotations are tried first; a thresholded, banded
+Python/Rust global edit distance verifies a merge. Every remaining rotation is
+tried before rejecting pairs that pass the q-gram bound. Acceptance can stop at
+its first valid witness: reported distance is an **upper bound** and similarity
+a **lower bound**, not a claim to the optimal alignment.
+
+Representatives do not drift and clustering is not transitive. When multiple
+existing clusters pass, choose the highest witnessed similarity, then earlier
+representative rank; preserve the alternatives. Thus this is not an all-pairs
+nearest-neighbour assignment. Keep clusters meeting distinct-read support;
+several arrays from one read count as one supporting read. The observed consensus
+representative is used as the output monomer, avoiding cross-read consensus
+chimeras. Broader families can contain several operational monomer clusters.
+
+`candidate_monomers.fa` preserves every read-local candidate sequence even when
+its cluster fails support filtering. `monomer_membership.tsv` records assignment,
+representative hash, similarity bound, alternatives and support-filter fate.
+Candidates with an N fraction above the allowed edit fraction remain unassigned
+with `unresolved_sequence`; they are retained in the candidate FASTA. Lower N
+fractions remain penalized, including comparison with a representative itself.
+Confidence labels are heuristic and uncalibrated. Optional historical redundancy
+collapse is a separate output and must not replace this evidence silently.
+
+Native comparisons release the GIL and use band-width memory; comparisons above
+32 million potential cells fail explicitly. Candidate and cluster state still
+grows with the number of candidates. This does not establish production-scale
+memory bounds for whole libraries.
 
 ## Diagnostic k-mer Copy-number Calibration
 

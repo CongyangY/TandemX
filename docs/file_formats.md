@@ -647,3 +647,70 @@ first headers, and `source_full_file_md5_verified=false` for prefix extraction.
 No complete-library checksum claim is made. `ena_run.xml` and `ena_sample.xml`
 preserve retrieved public metadata. Partial extraction failures retain a
 `.partial` file and never emit a successful subset receipt.
+
+## Candidate sequence and monomer assignment evidence
+
+`discover/candidate_monomers.fa` is emitted by both discovery methods. Headers:
+`>candidate_id=TXC000001;read_id=<percent-escaped-read-ID>;length_bp=<length>`.
+Sequences are the original read-local consensuses, prior to between-read
+clustering. Each ID joins exactly one `candidate_reads.tsv` row. Read IDs are
+percent-encoded to preserve delimiters. Empty output requires a verified
+zero-candidate completion receipt.
+
+`discover/monomer_membership.tsv` is emitted only by sequence clustering:
+
+| Field | Definition |
+| --- | --- |
+| read_id, candidate_id | Input read and read-local candidate identifiers |
+| cluster_id | Internal operational cluster, TXG-prefixed; NA for unresolved sequence |
+| family_id | Retained output TXF cluster, or NA when not retained |
+| representative_sha256 | SHA-256 of canonical representative sequence bytes; NA if unresolved |
+| edit_distance_upper_bound | Integer edit count of a valid witnessed comparison; not necessarily minimum |
+| similarity_lower_bound | 1 minus witnessed edits divided by the larger length, in [0,1] |
+| minimum_cluster_identity | Configured operational similarity threshold, in (0,1] |
+| compatible_cluster_count | Number of eligible existing clusters at assignment, or 1 for a new cluster, 0 if unresolved |
+| alternative_cluster_ids | Semicolon-separated additional eligible clusters, or empty |
+| status | assigned, below_minimum_support, or unresolved_sequence |
+| warning | multiple_compatible_clusters, ambiguous_bases_not_clustered, or empty |
+
+For unresolved candidates, edit upper bound is candidate length and similarity
+lower bound is zero, with no comparison claimed. Internal cluster IDs and output
+family IDs have separate rankings. `families.tsv` warnings identify operational
+clusters, the similarity threshold, observed representatives and uncalibrated
+confidence. `run_config.yaml` records requested and resolved clustering methods.
+The completion receipt hashes both new files when present. A header-only
+membership file is valid only with a verified zero-candidate receipt.
+
+## Added independent challenge endpoints
+
+All rates below are fractions (0–1); undefined denominators remain NaN in TSV,
+null in JSON. Failures remain unavailable and are never replaced with zeros.
+
+- `base_union_recall`, `base_union_precision`, `base_union_f1`: shared base pairs
+  divided by the union of truth, union of predictions, or their harmonic mean.
+  Intervals are merged per read first; this endpoint ignores repeat period.
+- `predicted_union_bp`, `truth_union_bp`: per-read union lengths summed across
+  reads. `duplicated_prediction_bp`: sum of raw predicted interval lengths minus
+  predicted union. `duplicate_bp_fraction`: duplicated/raw predicted bases.
+- `cyclic_monomer_recall`: maximum one-to-one matching at >=0.90 cyclic global
+  unit-cost edit similarity to planted monomers. Every rotation and both strands
+  are searched by independent edlib; N never matches N. A single consensus
+  cannot recover two distinct planted monomers. This is a sequence recovery
+  endpoint, not independently inferred family taxonomy.
+- `distinct_consensus_count`: exact canonical distinct prediction sequences.
+  `homologous_consensus_fraction`: proportion matching any planted monomer;
+  multiple variants can match one truth, so this is not family precision.
+  `unmatched_distinct_consensus_count` counts the remainder.
+- `mean_best_cyclic_edit_similarity`: mean best similarity per planted monomer,
+  irrespective of one-to-one assignment.
+- `cyclic_monomer_recovery.tsv`: truth_id, best_cyclic_edit_similarity, recovered
+  (0/1), assigned_sequence_index (canonical sorted 0-based index or NA), criterion.
+  With no truth the empty header is truth_id,recovered,criterion.
+
+`benchmarks/scripts/rescore_challenge.py` emits `rescored_metrics.tsv` plus
+`provenance.json` and a source snapshot. It re-evaluates first-repetition archived
+outputs, retaining source_run, scenario, seed, tool and original_status; it does
+not rerun tools or measure new runtime. Original failures remain NA. Input files,
+original configuration, scoring script and source snapshots are hash recorded.
+Challenge configuration also accepts clustering_method and cluster_identity for
+TandemX-only ablations. Other tool commands do not receive these settings.

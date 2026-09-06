@@ -7,7 +7,8 @@ import json
 from pathlib import Path
 
 FILES = ("candidate_reads.tsv", "families.tsv", "monomers.fa", "family_similarity.tsv")
-OPTIONAL_FILES = ("collapsed_families.tsv", "collapsed_monomers.fa", "family_collapse.tsv")
+OPTIONAL_FILES = ("collapsed_families.tsv", "collapsed_monomers.fa", "family_collapse.tsv",
+                  "candidate_monomers.fa", "monomer_membership.tsv")
 
 
 def file_sha256(path: Path) -> str:
@@ -36,7 +37,8 @@ def write_discovery_summary(outdir: Path, processed_reads: int, processed_bases:
 
 def verified_empty_output(path: Path) -> bool:
     """Accept only an explicit completed zero-result receipt and intact outputs."""
-    if path.name not in {"candidate_reads.tsv", "families.tsv", "monomers.fa", "collapsed_families.tsv", "collapsed_monomers.fa"}:
+    if path.name not in {"candidate_reads.tsv", "families.tsv", "monomers.fa", "collapsed_families.tsv", "collapsed_monomers.fa",
+                         "candidate_monomers.fa", "monomer_membership.tsv"}:
         return False
     receipt = path.parent / "discovery_summary.json"
     if not receipt.is_file():
@@ -47,7 +49,7 @@ def verified_empty_output(path: Path) -> bool:
                 or summary["family_count"] != 0 or summary["processed_reads"] < 1
                 or summary["processed_bases"] < 1 or summary["candidate_count"] < 0):
             return False
-        if path.name == "candidate_reads.tsv" and summary["candidate_count"] != 0:
+        if path.name in {"candidate_reads.tsv", "candidate_monomers.fa", "monomer_membership.tsv"} and summary["candidate_count"] != 0:
             return False
         names = (*FILES, path.name) if path.name in OPTIONAL_FILES else FILES
         return all(file_sha256(path.parent / name) == summary["output_sha256"][name] for name in names)

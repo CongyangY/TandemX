@@ -268,3 +268,28 @@ The runner records wall-clock runtime and per-process peak resident memory with 
 ## Interpretation
 
 Synthetic benchmark results are engineering signals for runtime, output validity and toy accuracy. They do not validate TandemX for 7-20 Gb plant genome production analysis.
+
+## Sequence clustering and independent endpoint audit
+
+`sequence_clustering_v1.yaml` fixes elastic discovery, operational sequence
+clustering at 95% similarity, and three technical repetitions. Development and
+validation seeds are reused explicitly for diagnosing earlier errors; they are
+not fresh held-out evidence. The preset does not redefine planted truth labels.
+
+The benchmark now adds independent edlib cyclic global edit similarity and
+period-independent union-of-interval coverage. Strict equal-length sequence
+recovery and raw call precision remain visible. This distinguishes small length
+errors from missing sequence, and redundant calls from wrong genomic bases.
+The benchmark extra and environment pin edlib 1.3.9.post1; the detector does not
+use it. Example re-scoring of an archived completed suite:
+
+```bash
+python -m benchmarks.scripts.rescore_challenge --runs /path/to/completed-run \
+  --outdir /path/to/new-rescore-directory
+```
+
+The rescorer selects first-repetition archived predictions and preserves failure
+states, configurations and input hashes. It does not update original outputs or
+supply new tool timings. `cyclic_monomer_recall` uses TandemX's final catalogue
+and other tools' per-array consensuses; these are different output granularities.
+Candidate FASTA evidence now permits a further matched per-array consensus study.
