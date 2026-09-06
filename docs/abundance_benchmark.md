@@ -80,3 +80,9 @@ sampling itself produces large deviations. Both false under-representation calls
 and misses occur. Simple exact-copy localization has base recall 1 for every
 positive family. These results motivate uncertainty/error-model development;
 neither three genomes nor perfect exact-copy localization establish robustness.
+
+The next [streamed factorial experiment](factorial_scale_simulation.md) removes
+the fixed length/copy pairing, raises each source genome to 10 Mb, adds variable
+GC and biological divergence, a megabase array, empirical read lengths and
+indel-aware observed-coordinate truth. This is an additional controlled model;
+the original baseline and its uncertainty failures remain evidence.

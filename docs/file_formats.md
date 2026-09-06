@@ -847,3 +847,30 @@ histogram or cumulative probabilities; D is observed/expected Gb with dataset
 index x. Figure provenance records all input/output/source hashes. Reference
 receipts store contig names, exact lengths and per-base/ambiguity counts; the
 original NCBI assembly report defines chromosome naming equivalence.
+
+Published region extraction fields, source cells and coordinate-inference rules
+are defined in [published_mo17_regions.md](published_mo17_regions.md). These
+records are mixed regions, not complete satellite-base truth.
+
+## Streamed factorial simulation
+
+See [factorial_scale_simulation.md](factorial_scale_simulation.md).
+All genomic and read coordinates below are 0-based, half-open.
+
+- `genome_index.json`: contig, length, sequence byte offset, line bases/bytes;
+  valid only for the hash-verified single-contig fixed-width `genome.fa`.
+- `truth_copy_number.tsv`: `chrom`, `family_id`, `start`, `end`, `period`,
+  `copies`, `repeat_bp`, `requested_gc`, `founder_gc`,
+  `unit_substitution_rate`, `observed_unit_substitutions`, `founder_sha256`.
+  Copy count is planted ancestral-unit count despite same-length substitutions.
+- `sampling.tsv`: `read_id`, `genome_start`, `source_length`, `observed_length`,
+  `strand`. A read may wrap the circular source; lengths and starts precede errors.
+- `truth_read_segments.tsv`: `read_id`, observed `start/end`, `period`,
+  `family_id`, `sampled_source_repeat_bp`, `at_least_two_source_units`.
+  Partial segments are retained; the Boolean is not a guarantee of detectability.
+- Genome/read manifests record parameters, input/script/output hashes, realized
+  biological/sequencing substitutions, insertions/deletions, sampled repeat
+  bases and separate source/observed coverage. Error counts obey observed bases
+  = source bases + insertions - deletions. Sequence only, no synthetic quality
+  scores. The controller records completed condition IDs and refuses reserved
+  seeds or requests above the declared worst-case sequence-base budget.

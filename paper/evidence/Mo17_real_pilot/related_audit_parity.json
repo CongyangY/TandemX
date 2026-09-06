@@ -1,0 +1,35 @@
+{
+  "primary_files": [
+    {
+      "filename": "candidate_reads.tsv",
+      "sha256": "a4539ac468c1c161cd51b5145efea240a7b843867cb4137a6decc3c842f9e184",
+      "byte_identical": true
+    },
+    {
+      "filename": "candidate_monomers.fa",
+      "sha256": "31ca2c1a85ef9ba3c967ef82348c931a018036294af1021acab0b045cb3fdf2a",
+      "byte_identical": true
+    },
+    {
+      "filename": "monomers.fa",
+      "sha256": "2f0ba70c184ac64fbb1ca9731a0d73106dffb77517d8f9cc98ec6d782cf21f64",
+      "byte_identical": true
+    },
+    {
+      "filename": "families.tsv",
+      "sha256": "8c0dc7d04590a85cdf071e17abfba5794c05621381d8848b877be056d7cce600",
+      "byte_identical": true
+    },
+    {
+      "filename": "monomer_membership.tsv",
+      "sha256": "8cc07f37751a11ebbe628495e73ec41b677609ff1d4c1df011455d4d4c7269af",
+      "byte_identical": true
+    }
+  ],
+  "full_pair_rows": 8897871,
+  "related_rows": 4595,
+  "all_related_rows_byte_identical": true,
+  "all_primary_files_byte_identical": true,
+  "full_table_sha256": "27cd0bb5761b76ad1a35bec371200e4cd4b10c66d51b78a6a3b0a275a3472195",
+  "related_table_sha256": "eec2c44e546984fb538f03460d2a5673b475897db7b4144bb2b2b6357affd46d"
+}

@@ -1,0 +1,19 @@
+{
+  "method": "blake2b_128_read_bernoulli_v1",
+  "seed": 6101,
+  "namespace": "ERR6210723",
+  "fractions": [
+    "0.0008",
+    "0.008",
+    "0.08",
+    "0.36"
+  ],
+  "source_path": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/ERR6210723.fastq.gz",
+  "expected_input_sha256": "79dd524760b6db4eb9d44db5a4776a25dd4b72e80b24186213e92ea83f264c25",
+  "qc_receipt_sha256": "d080363cd4cd4d06b3adec84e7031a9d708e3e7807f5069fd9db75e1f909a290",
+  "genome_size_denominator": 131559676,
+  "script_sha256": "5c3c59fdebea9e44b2bfa6d263c2faf41bf9611550d0d31ddefeafddd6a68719",
+  "parser_sha256": "9b0d190c449ed707a9de2e8c009a34f1bbd54e6b2c6a23c91d8c8f63ff61a2e0",
+  "uncertainty": "Independent read inclusion, not fixed bases or independent specimens; library bias persists",
+  "coverage_note": "Total selected bases / supplied size is nominal coverage, not measured nuclear depth"
+}

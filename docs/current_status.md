@@ -7,6 +7,28 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Factorial scale generator and completed related-audit verification
+
+- Full suite: **286 passed in 62.58 s**. New generator writes indexed FASTA
+  with bounded memory and samples empirical lengths with independent error
+  events/source coordinates. Config `factorial_scale_v1.json`: 10-Mb genome,
+  54 length/copy/GC/divergence cells plus one 1.026-Mb array, nine coverage/error
+  conditions. Development 6301/6302/6303; 7301/7302/7303 refused/reserved. Tiny
+  independent base-mask, mutation-event, random-access and controller tests passed.
+  Actual 10-Mb generation and scoring are next; no large-simulation result yet.
+- Mo17 111.506-Mb exact-related audit completed with 9e0b87f source. TandemX
+  142.919 s / 155.45 MiB; TRF 83.620 s / 210.84 MiB; TideHunter 32.653 s /
+  269.34 MiB. All five main files and all 4,595 non-distinct rows match full mode
+  byte-for-byte. 10,471 pairs scored out of 8,897,871 possible, audit about .69 s.
+  Receipt and full-table streaming parity check are archived in the real pilot.
+  These remain one-run diagnostics, not isolated performance rankings.
+- Col-0N complete-library sampling finished: 752 / 7,557 / 74,600 / 336,613
+  reads, 11,765,868 / 118,496,530 / 1,170,032,165 / 5,280,163,009 bp.
+  All full-source hashes and exact IDs retained. `Col0N_input_qc/figures/input_qc.pdf`
+  has four panels; PNG inspected, SVG 77 editable text elements / zero images,
+  all input/output provenance hashes reverified. These are nested technical
+  samples of pooled Col-0N, not independent plants or corrected nuclear depth.
+
 ### Complete-file QC, real scaling and exact-related audit (newest)
 
 - 762618dc9728973da8219af27c09b658c521bf15 pushed to both branches;

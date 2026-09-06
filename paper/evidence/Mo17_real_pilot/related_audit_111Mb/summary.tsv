@@ -1,0 +1,4 @@
+tool	exit_code	runtime_seconds	peak_rss_mib	cpu_user_seconds	cpu_system_seconds	timed_out	observed_in_scope_calls	observed_positive_reads	observed_union_bp	observed_union_base_fraction	normalization	warning
+tidehunter	0	32.653375833062455	269.34375	29.408183	3.2067579999999998	False	11571	5673	3705112	0.033228011046360945	ok	descriptive_real_input_pilot_no_accuracy_truth_no_resource_ranking
+tandemx	0	142.91929695894942	155.453125	141.12212	0.7623219999999999	False	8401	5073	2809095	0.025192393560647373	ok	descriptive_real_input_pilot_no_accuracy_truth_no_resource_ranking
+trf	0	83.62011395790614	210.84375	80.786034	2.744027	False	10938	4573	2511467	0.022523220139788212	ok	descriptive_real_input_pilot_no_accuracy_truth_no_resource_ranking

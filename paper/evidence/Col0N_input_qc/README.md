@@ -13,3 +13,14 @@ of Col-0R. Biological identity, organellar content, coverage bias and reference
 uncertainty require downstream evidence. Full-library hash sampling is separate
 from this completed file QC. See `archive_manifest.json` for byte-preserved source
 receipts and histograms. Raw reads remain under the T7 data root.
+
+Seed6101 nested full-library sampling completed: fractions .0008/.008/.08/.36
+gave 752 / 7,557 / 74,600 / 336,613 reads, with 11,765,868 / 118,496,530 /
+1,170,032,165 / 5,280,163,009 bases. Exact FASTQ/ID hashes and distributions are
+in `subsets/`; raw sequences and ID lists remain on T7. The final subset is about
+40 nominal nuclear genome equivalents using 131,559,676 bp. Organellar content
+has not been removed, so this is not measured nuclear depth.
+
+Four-panel `figures/input_qc.pdf` and editable SVG show length, GC, reported
+quality and observed/expected sampling volume. PNG visually inspected. Every
+point/curve is linked to source histograms; these are not independent specimens.

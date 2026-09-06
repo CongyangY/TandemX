@@ -1,0 +1,25 @@
+{
+  "inputs": {
+    "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/qc_v1/qc.json": "d080363cd4cd4d06b3adec84e7031a9d708e3e7807f5069fd9db75e1f909a290",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sampling_receipt.json": "e6603d242addc44493e400340d6ec669c56c5ec135b280e9192659ed66266c9c",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sampling_plan.json": "346e36afa9e95a950b0d29d096e5eebcf14f35274315b544b17f9525dd0418ed",
+    "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/qc_v1/length_histogram.tsv": "b5f42cea1ad62be8a64a0d2f4d77afc68fa536da8b8467cb935f5c8998b88905",
+    "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/qc_v1/joint_distribution.tsv": "9f39d11ff0b307ee9e93759f632d5772770dab7a409f9ea52d5de9d5e4e58686",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_001.length_histogram.tsv": "25e11a66868df5e50f8d4b16d495bb52d9591faabc32de3c5e7c3781fa56ce0d",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_001.joint_distribution.tsv": "a716bac52aeed15ca9b9636e4b1742d329afa3a9cebd90193a51913a545c80a8",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_002.length_histogram.tsv": "3ac632b02174f8a248c0b72085f0ace25b7803df55d87839a5c05fa288f70e55",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_002.joint_distribution.tsv": "287cd69ff432f6f1d1dce911314aa302b83ccac616d7c6310eaee9a5046fec34",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_003.length_histogram.tsv": "c1e3bade35074721a6b9f1513ae452d3a948da82b53a88c5805116d22ad25960",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_003.joint_distribution.tsv": "95175824b401fbf8f353764c676a96bd6958853dd9cfdca6987b61dfa92d1b07",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_004.length_histogram.tsv": "9d411337dee565c01ae720e0d85d1d6f70d4fc2fb25f4981da4438650cdac541",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_004.joint_distribution.tsv": "4fee63cde30ab8744239e419909d48262e97a79e60186c329a171c767a67623a"
+  },
+  "source_sha256": "ca6b52f5a454c296f4af66ee8f8fe3e338e86fa4b6ce3bca56af97b985b91df3",
+  "script_sha256": "d67c50103028f96c61ee792546d6ecb599f54ce15f9e787abe898bf6c97dba06",
+  "outputs": {
+    "input_qc.pdf": "05e38751076ee63ed4c803ca651b55a3c40debe48d5cdaf4ea8f96684015ca6f",
+    "input_qc.svg": "8ca8910a42da0d2e34933ce8b996253b57cd7a3151d51be0fe40c05473caa50a",
+    "input_qc.png": "6ae7eda5be1438b6ead56e8bb925d8a0396e0114b595d86b484e19ac97250016"
+  },
+  "interpretation": "QC of one complete included library; samples are not biological replicates"
+}

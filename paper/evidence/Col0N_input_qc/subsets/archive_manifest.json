@@ -1,0 +1,52 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sampling_plan.json",
+    "name": "sampling_plan.json",
+    "sha256": "346e36afa9e95a950b0d29d096e5eebcf14f35274315b544b17f9525dd0418ed"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sampling_receipt.json",
+    "name": "sampling_receipt.json",
+    "sha256": "e6603d242addc44493e400340d6ec669c56c5ec135b280e9192659ed66266c9c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_001.length_histogram.tsv",
+    "name": "sample_001.length_histogram.tsv",
+    "sha256": "25e11a66868df5e50f8d4b16d495bb52d9591faabc32de3c5e7c3781fa56ce0d"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_001.joint_distribution.tsv",
+    "name": "sample_001.joint_distribution.tsv",
+    "sha256": "a716bac52aeed15ca9b9636e4b1742d329afa3a9cebd90193a51913a545c80a8"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_002.length_histogram.tsv",
+    "name": "sample_002.length_histogram.tsv",
+    "sha256": "3ac632b02174f8a248c0b72085f0ace25b7803df55d87839a5c05fa288f70e55"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_002.joint_distribution.tsv",
+    "name": "sample_002.joint_distribution.tsv",
+    "sha256": "287cd69ff432f6f1d1dce911314aa302b83ccac616d7c6310eaee9a5046fec34"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_003.length_histogram.tsv",
+    "name": "sample_003.length_histogram.tsv",
+    "sha256": "c1e3bade35074721a6b9f1513ae452d3a948da82b53a88c5805116d22ad25960"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_003.joint_distribution.tsv",
+    "name": "sample_003.joint_distribution.tsv",
+    "sha256": "95175824b401fbf8f353764c676a96bd6958853dd9cfdca6987b61dfa92d1b07"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_004.length_histogram.tsv",
+    "name": "sample_004.length_histogram.tsv",
+    "sha256": "9d411337dee565c01ae720e0d85d1d6f70d4fc2fb25f4981da4438650cdac541"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_004.joint_distribution.tsv",
+    "name": "sample_004.joint_distribution.tsv",
+    "sha256": "4fee63cde30ab8744239e419909d48262e97a79e60186c329a171c767a67623a"
+  }
+]
