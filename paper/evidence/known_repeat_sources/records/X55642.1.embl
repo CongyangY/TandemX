@@ -1,0 +1,52 @@
+ID   X55642; SV 1; linear; genomic DNA; STD; PLN; 358 BP.
+XX
+AC   X55642;
+XX
+DT   29-JUL-2002 (Rel. 72, Created)
+DT   29-JUL-2002 (Rel. 72, Last updated, Version 1)
+XX
+DE   O.sativa DNA for tandem repeat
+XX
+KW   satellite DNA.
+XX
+OS   Oryza sativa (rice)
+OC   Eukaryota; Viridiplantae; Streptophyta; Embryophyta; Tracheophyta;
+OC   Spermatophyta; Magnoliopsida; Liliopsida; Poales; Poaceae; BOP clade;
+OC   Oryzoideae; Oryzeae; Oryzinae; Oryza.
+XX
+RN   [1]
+RP   1-358
+RA   Delseny M.;
+RT   ;
+RL   Submitted (18-SEP-1990) to the INSDC.
+RL   Delseny M., Laboratoire de Physiologie Vegetale, Universite de Perpignon,
+RL   Avenue de Villeneuve, 66025 Perpignan Cedex, France.
+XX
+RN   [2]
+RA   De Kochko A., Kiefer M.C., Cordesse F., Reddy A.S., Delseny M.;
+RT   "Distribution and organisation of a 358 bp tandem repetitive sequence
+RT   amongst the Oryzae";
+RL   Unpublished.
+XX
+DR   MD5; 1b271c520a06efd80d99806cdf18a89a.
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..358
+FT                   /organism="Oryza sativa"
+FT                   /strain="Cigalon variety"
+FT                   /sub_strain="japonica"
+FT                   /mol_type="genomic DNA"
+FT                   /tissue_type="leaves"
+FT                   /db_xref="taxon:4530"
+FT   repeat_region   1..358
+FT                   /rpt_type=TANDEM
+XX
+SQ   Sequence 358 BP; 94 A; 74 C; 101 G; 89 T; 0 other;
+     gaattctgtg caaattaaaa ccttgataac tttgccttcc ggtcatggaa tcgagctagg        60
+     ttttttttta cggctgcaga atcacgggcc tcaccataga gagactggat ttggagagtt       120
+     ggacccccag agatttttct agaaattact taccataggc cacgaagcag cggttgcttc       180
+     ggcgaaacgt cgaatatctg agggtccaca actggttttc aacgagctgg ttagtatagg       240
+     gaaggcacat aggacgttaa ggtggatagc ttagacgatg tcggtgtcaa gcgcgtcgac       300
+     taaccgcgcc gttaaggtag gctggcgggc gcgacactag aatgcagatg gagaattc         358
+//

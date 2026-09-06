@@ -983,3 +983,21 @@ byte budget and source hashes. `reference_receipt.json` records `complete`,
 transfer bytes/hash/state, full FASTA QC, plan/script/parser hashes and a material
 matching warning. Transfer/QC errors keep `complete=false` and `error`; an
 incomplete `.partial` file is not a reference release.
+
+### Curated repeat-query source records
+
+`source_units.tsv` has one row per accession: `known_id`, exact `accession`,
+`source_length`, 1-based inclusive `start1`/`end1` (NA if excluded), official
+`sequence_md5`, `species`, deposited `material`, `role`, source `evidence` URL,
+`boundary`, full-sequence `source_sha256`, original `embl_sha256`/`fasta_sha256`,
+`included_monomer`, derived `monomer_length`/`monomer_sha256` (NA if excluded),
+and `warning`. `known_monomers.fa` contains only included queries with accession
+and extraction coordinates in each header. `curation_receipt.json` identifies
+source/query counts, curator/retrieval/output hashes, completion and scope.
+These coordinates concern the small deposited record, not the test assembly.
+
+Native-index ablations retain the isolated replay schema and add `comparison`
+to the environment and `index_backend` (`python`/`native`) to each worker receipt.
+Both variants use the same source/native binary and native alignment. Historical
+source comparisons use `source_default`; earlier storage replays predate this
+field and labelled the current variant `packed`.

@@ -957,6 +957,7 @@ fn scan_reads_for_periods(
 mod distance;
 mod elastic;
 mod family_compare;
+mod representative_index;
 mod spacing;
 
 #[pymodule]
@@ -964,6 +965,7 @@ fn _rust_core(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<SequenceStatsResult>()?;
     module.add_class::<ScanResult>()?;
     module.add_class::<DiagnosticKmerCounter>()?;
+    module.add_class::<representative_index::RepresentativeIndex>()?;
     module.add_function(wrap_pyfunction!(count_sequence_file_stats, module)?)?;
     module.add_function(wrap_pyfunction!(scan_read_for_periods, module)?)?;
     module.add_function(wrap_pyfunction!(scan_reads_for_periods, module)?)?;

@@ -34,3 +34,32 @@ results remain explicit. No JSON payloads are merged into the parent's memory.
 This stage diagnostic separates source representation changes from input
 changes. It does not establish full discovery-pipeline parity, three-repetition
 isolated timing, external-tool superiority or new biological inference.
+
+## Native exact candidate gate
+
+The Rust backend now keeps compact `(u32 ID, u32 multiplicity)` postings behind
+an injective encoding of 1–9-base ACGTN keys. Query overlap accumulation happens
+in Rust, with thresholds cached by representative length and only touched sums
+reset. The Python gate remains the reference. Input words must be unique and
+their counts must sum to sequence length; malformed appends fail before index
+mutation. Order, rounding, N treatment, exhaustive paths, alignment, tie-breaking
+and family rules are unchanged. Rebuild an older extension before using Rust;
+missing native capabilities fail explicitly.
+
+```bash
+python -m benchmarks.scripts.replay_clustering_isolated \
+  --candidate-run /path/to/completed/1Gb_real_comparison \
+  --native-index-ablation --outdir /path/to/new/native_gate_replay
+```
+
+This separate mode freezes one current source/native snapshot for both children.
+Only the Python-index worker disables creation of the native index, invoking the
+retained Python gate while preserving native alignment. Receipts identify this
+controlled child-only ablation. It does not relax the historical source-comparison
+preflight: old baselines with different native or other core files still fail.
+Full payload hashes must agree. Actual resource benefits require completed runs.
+
+The earlier 85,663-candidate Python storage replay is archived under
+`paper/evidence/Mo17_compact_clustering`: 31.44% lower child peak RSS but 15.86%
+longer clustering time, exact complete-output parity. That run predates the
+native gate; its trade-off must not be attributed to the new implementation.

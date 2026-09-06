@@ -1,0 +1,38 @@
+{
+  "AF078922.1.embl": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/AF078922.1.embl",
+    "sha256": "427c36d5b67436ea1e4b50df34b24e406074b4791fd94ce2f84b6417948b013e"
+  },
+  "retrieval_receipt.json": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/retrieval_receipt.json",
+    "sha256": "d1569f7ec9cc156c50cfd70f0dbead312932a753d47afe8c6e161596d3b0845a"
+  },
+  "AF078922.1.fasta": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/AF078922.1.fasta",
+    "sha256": "9bf86b94753e83585725b7d31e47c24a561685df033a39a8b985f4e068e63d81"
+  },
+  "AF058902.1.embl": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/AF058902.1.embl",
+    "sha256": "ddf26dd4e95ed75b3fe51c7214c837e55fd193d9fb61b80e7e9b8f03be328e2e"
+  },
+  "AF058902.1.fasta": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/AF058902.1.fasta",
+    "sha256": "aef59f258afd0dd23c6bb518c4d346b0a9bbe77f514c0ef9d007492871913619"
+  },
+  "X16095.1.embl": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/X16095.1.embl",
+    "sha256": "952a0ffe3a6378ce429041a9b57a23f315521c153ec2bd9cc5642b7b859ca8c1"
+  },
+  "X16095.1.fasta": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/X16095.1.fasta",
+    "sha256": "2a502abd11817e4fc6fb99bafffbbedfc07e2348d765e6bcd7cb13f212880fd2"
+  },
+  "X55642.1.embl": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/X55642.1.embl",
+    "sha256": "b9211969da6f38ba6c2dc01b93553316d3c1f77c1ab074c8c8295fbef2439d9c"
+  },
+  "X55642.1.fasta": {
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/primary_records_v1_20260906/X55642.1.fasta",
+    "sha256": "abbbde0bdeef603d10831ad299f646295711ae5f825682e43e12c8759b82c59f"
+  }
+}

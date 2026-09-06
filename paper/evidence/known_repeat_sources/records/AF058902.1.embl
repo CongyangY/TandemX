@@ -1,0 +1,64 @@
+ID   AF058902; SV 1; linear; genomic DNA; STD; PLN; 639 BP.
+XX
+AC   AF058902;
+XX
+DT   20-JUL-1998 (Rel. 56, Created)
+DT   06-JAN-1999 (Rel. 58, Last updated, Version 2)
+XX
+DE   Oryza sativa subsp. indica tandem centromeric repeat family RCS2.
+XX
+KW   .
+XX
+OS   Oryza sativa Indica Group (long-grained rice)
+OC   Eukaryota; Viridiplantae; Streptophyta; Embryophyta; Tracheophyta;
+OC   Spermatophyta; Magnoliopsida; Liliopsida; Poales; Poaceae; BOP clade;
+OC   Oryzoideae; Oryzeae; Oryzinae; Oryza; Oryza sativa.
+XX
+RN   [1]
+RP   1-639
+RX   DOI; 10.1073/pnas.95.14.8135.
+RX   PUBMED; 9653153.
+RA   Dong F., Miller J.T., Jackson S.A., Wang G.L., Ronald P.C., Jiang J.;
+RT   "Rice (Oryza sativa) centromeric regions consist of complex DNA";
+RL   Proc. Natl. Acad. Sci. U.S.A. 95(14):8135-8140(1998).
+XX
+RN   [2]
+RP   1-639
+RA   Dong F., Miller J.T., Jackson S.A., Wang G., Ronald P.C., Jiang J.;
+RT   ;
+RL   Submitted (10-APR-1998) to the INSDC.
+RL   Horticulture, U of Wisconsin, 1575 Linden Drive, Madison, WI 53706, USA
+XX
+DR   MD5; 6a0b60272c10e2daf0ac0286418e2d9a.
+DR   EuropePMC; PMC20942; 9653153.
+DR   EuropePMC; PMC3485330; 23119066.
+XX
+CC   Jiang, J. PNAS 93, 14210-14213.
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..639
+FT                   /organism="Oryza sativa Indica Group"
+FT                   /map="centromere"
+FT                   /sub_species="indica"
+FT                   /strain="IR-BB21"
+FT                   /mol_type="genomic DNA"
+FT                   /db_xref="taxon:39946"
+FT   repeat_region   1..639
+FT                   /rpt_family="RCS2"
+FT                   /rpt_type=TANDEM
+FT                   /note="centromeric repeat"
+XX
+SQ   Sequence 639 BP; 185 A; 109 C; 152 G; 193 T; 0 other;
+     gatcttttct actggaatca aaatgttcaa aaaatgccaa aacatgattt ttggacatat        60
+     tggagtgtat tgggtgcatt catggcaaaa actcactccg tgattcgcgc ggcgaacttt       120
+     tgtcaattaa tgccaatatt gggacacgag ggtgcgatgt tttctactgg aatcaaaaag       180
+     ttcaaaaaga gccaaaacat gatttttgga catattggag tgtattgggg tgcgttcgtg       240
+     gcaaaactca cttcgtgatt cgcgcggcga acttttgtca tttaatgcca atatgtgcat       300
+     acacgagaga gtgcgatgtt attctactgg aatcaaaaag ttcaaaaaga gccaaaacat       360
+     gatttttgga catattggag tgtattgggt gcgttcgtgg caaaactcac ttcgtgattc       420
+     gcgcggcgaa cttttgtcaa ttaattccaa tatgtgcata ttttggccca aagtgttgcg       480
+     atgttattaa tcggaatgaa aaagttcaaa aggcaccaaa acatgatttt ttgacatatt       540
+     ggagtgtatt gggtgcgttc gtgggaaaaa ctcacttcgt gattcgcgcg gcgaactttt       600
+     gtcatttaat gccaatattg gcacagcgac gggtgcgat                              639
+//

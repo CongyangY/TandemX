@@ -29,6 +29,10 @@ def test_isolated_replay_runs_frozen_children_and_rejects_changed_baseline(tmp_p
     result = replay(previous, previous, tmp_path/'result', 60)
     assert result['complete'] and result['exact_output_parity']
     assert all(r['candidate_count'] == 3 and r['family_count'] == 2 and r['peak_rss_mib'] > 0 for r in result['measurements'])
+    ablation = replay(previous, None, tmp_path/'ablation', 60)
+    assert ablation['complete'] and ablation['exact_output_parity']
+    assert [r['index_backend'] for r in ablation['measurements']] == ['python', 'native']
+    assert ablation['measurements'][0]['clustering_source_sha256'] == ablation['measurements'][1]['clustering_source_sha256']
     (previous/'source_snapshot/tandemx/discover/distance.py').write_text('changed')
     with pytest.raises(ValueError, match='snapshot changed'):
         replay(previous, previous, tmp_path/'invalid', 60)

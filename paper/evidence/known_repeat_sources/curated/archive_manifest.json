@@ -1,0 +1,20 @@
+[
+  {
+    "file": "curation_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/curated_queries_v1_20260906/curation_receipt.json",
+    "sha256": "a6e999d6b58ec6c737d0c3ce54f29a3132e4caa901439c6ac06fc560c22c283e",
+    "bytes": 571
+  },
+  {
+    "file": "known_monomers.fa",
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/curated_queries_v1_20260906/known_monomers.fa",
+    "sha256": "ce5238ebae2025e255e66abd3c29f33d3629f48b7206819c3c3c0e47021d5ae4",
+    "bytes": 806
+  },
+  {
+    "file": "source_units.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/known_repeats/curated_queries_v1_20260906/source_units.tsv",
+    "sha256": "0d8cf66850b12d9340c12517e2e94f827965ba4a0641c3443aef69ae7f1f614b",
+    "bytes": 2440
+  }
+]

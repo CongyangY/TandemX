@@ -1,0 +1,69 @@
+{
+  "retrieved_utc": "2026-09-06T05:51:01.093392+00:00",
+  "records": [
+    {
+      "accession": "AF078922.1",
+      "format": "embl",
+      "url": "https://www.ebi.ac.uk/ena/browser/api/embl/AF078922.1?download=true",
+      "bytes": 1929,
+      "sha256": "427c36d5b67436ea1e4b50df34b24e406074b4791fd94ce2f84b6417948b013e",
+      "file": "AF078922.1.embl"
+    },
+    {
+      "accession": "AF078922.1",
+      "format": "fasta",
+      "url": "https://www.ebi.ac.uk/ena/browser/api/fasta/AF078922.1?download=true",
+      "bytes": 243,
+      "sha256": "9bf86b94753e83585725b7d31e47c24a561685df033a39a8b985f4e068e63d81",
+      "file": "AF078922.1.fasta"
+    },
+    {
+      "accession": "AF058902.1",
+      "format": "embl",
+      "url": "https://www.ebi.ac.uk/ena/browser/api/embl/AF058902.1?download=true",
+      "bytes": 2633,
+      "sha256": "ddf26dd4e95ed75b3fe51c7214c837e55fd193d9fb61b80e7e9b8f03be328e2e",
+      "file": "AF058902.1.embl"
+    },
+    {
+      "accession": "AF058902.1",
+      "format": "fasta",
+      "url": "https://www.ebi.ac.uk/ena/browser/api/fasta/AF058902.1?download=true",
+      "bytes": 741,
+      "sha256": "aef59f258afd0dd23c6bb518c4d346b0a9bbe77f514c0ef9d007492871913619",
+      "file": "AF058902.1.fasta"
+    },
+    {
+      "accession": "X16095.1",
+      "format": "embl",
+      "url": "https://www.ebi.ac.uk/ena/browser/api/embl/X16095.1?download=true",
+      "bytes": 1784,
+      "sha256": "952a0ffe3a6378ce429041a9b57a23f315521c153ec2bd9cc5642b7b859ca8c1",
+      "file": "X16095.1.embl"
+    },
+    {
+      "accession": "X16095.1",
+      "format": "fasta",
+      "url": "https://www.ebi.ac.uk/ena/browser/api/fasta/X16095.1?download=true",
+      "bytes": 279,
+      "sha256": "2a502abd11817e4fc6fb99bafffbbedfc07e2348d765e6bcd7cb13f212880fd2",
+      "file": "X16095.1.fasta"
+    },
+    {
+      "accession": "X55642.1",
+      "format": "embl",
+      "url": "https://www.ebi.ac.uk/ena/browser/api/embl/X55642.1?download=true",
+      "bytes": 1876,
+      "sha256": "b9211969da6f38ba6c2dc01b93553316d3c1f77c1ab074c8c8295fbef2439d9c",
+      "file": "X55642.1.embl"
+    },
+    {
+      "accession": "X55642.1",
+      "format": "fasta",
+      "url": "https://www.ebi.ac.uk/ena/browser/api/fasta/X55642.1?download=true",
+      "bytes": 416,
+      "sha256": "abbbde0bdeef603d10831ad299f646295711ae5f825682e43e12c8759b82c59f",
+      "file": "X55642.1.fasta"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+ID   AF078922; SV 1; linear; genomic DNA; STD; PLN; 156 BP.
+XX
+AC   AF078922;
+XX
+DT   05-OCT-1998 (Rel. 57, Created)
+DT   30-OCT-1998 (Rel. 57, Last updated, Version 2)
+XX
+DE   Zea mays centromeric repeat CentC-156a, complete sequence.
+XX
+KW   .
+XX
+OS   Zea mays
+OC   Eukaryota; Viridiplantae; Streptophyta; Embryophyta; Tracheophyta;
+OC   Spermatophyta; Magnoliopsida; Liliopsida; Poales; Poaceae; PACMAD clade;
+OC   Panicoideae; Andropogonodae; Andropogoneae; Tripsacinae; Zea.
+XX
+RN   [1]
+RP   1-156
+RX   DOI; 10.1073/pnas.95.22.13073.
+RX   PUBMED; 9789043.
+RA   Ananiev E.V., Phillips R.L., Rines H.W.;
+RT   "Chromosome-specific molecular organization of maize (Zea mays L.)
+RT   centromeric regions";
+RL   Proc. Natl. Acad. Sci. U.S.A. 95(22):13073-13078(1998).
+XX
+RN   [2]
+RP   1-156
+RA   Ananiev E.V., Rines H.W., Phillips R.L.;
+RT   ;
+RL   Submitted (20-JUL-1998) to the INSDC.
+RL   Agronomy and Plant Genetics, University of Minnesota, 1991 Buford Circle,
+RL   St. Paul, MN 55108, USA
+XX
+DR   MD5; 81f1c7ff0d4424fafd5cab475cb9a438.
+DR   EuropePMC; PMC2816676; 20140237.
+DR   EuropePMC; PMC311155; 11591643.
+DR   EuropePMC; PMC3492167; 22834676.
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..156
+FT                   /organism="Zea mays"
+FT                   /chromosome="9"
+FT                   /map="centromere"
+FT                   /cultivar="Seneca 60"
+FT                   /mol_type="genomic DNA"
+FT                   /db_xref="taxon:4577"
+FT   repeat_region   1..156
+FT                   /rpt_family="CentC"
+FT                   /rpt_type=TANDEM
+FT                   /note="CentC-156a"
+XX
+SQ   Sequence 156 BP; 44 A; 34 C; 41 G; 37 T; 0 other;
+     ggttccggtg gcaaaaactc gtgctttgta tgcaccccga cacccgtttt cggaatgggt        60
+     gacgtgtgac aacgaaattg cgcgaaacca ccccaaacat gagttttgta cctaaagtag       120
+     tggattgggc atgttcgttg cgaaaaacga agaaat                                 156
+//

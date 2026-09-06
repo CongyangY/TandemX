@@ -1,0 +1,52 @@
+ID   X16095; SV 1; linear; genomic DNA; STD; PLN; 208 BP.
+XX
+AC   X16095;
+XX
+DT   09-JAN-1990 (Rel. 22, Created)
+DT   25-JUL-1990 (Rel. 24, Last updated, Version 1)
+XX
+DE   Barley relic DNA HVT01, tandemly repeated seq
+XX
+KW   repetitive sequence; tandem repeat.
+XX
+OS   Hordeum vulgare
+OC   Eukaryota; Viridiplantae; Streptophyta; Embryophyta; Tracheophyta;
+OC   Spermatophyta; Magnoliopsida; Liliopsida; Poales; Poaceae; BOP clade;
+OC   Pooideae; Triticodae; Triticeae; Hordeinae; Hordeum.
+XX
+RN   [1]
+RP   1-208
+RA   Milshina N.V.;
+RT   ;
+RL   Submitted (14-AUG-1989) to the INSDC.
+RL   Milshina N.V., Institute of General Genetics , USSR Academy of Sciences,
+RL   117809  GSP-1, Moscow   B-333   Gubkin St 3, U S S R.
+XX
+RN   [2]
+RP   1-208
+RA   Belostotsky D.A., Milshina N.V., Ananiev E.V.;
+RT   "Characterisation of relic DNA from barley genome.";
+RL   Theor Appl Genet 0:0(1989).
+XX
+DR   MD5; 3a1d13f9b033234d3889a1d7837c8d9d.
+DR   EuropePMC; PMC5192494; 27929398.
+DR   GrainGenes; X16095; X16095.
+XX
+CC   Data kindly reviewed (27-APR-1990) by Mil'shina N.V.
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   source          1..208
+FT                   /organism="Hordeum vulgare"
+FT                   /strain="c.v. Donetsky A."
+FT                   /mol_type="genomic DNA"
+FT                   /db_xref="taxon:4513"
+FT   misc_feature    1..118
+FT                   /note="repeat monomer"
+XX
+SQ   Sequence 208 BP; 41 A; 52 C; 50 G; 65 T; 0 other;
+     cgaaactcgc atttttggcc tattctggct agttctgcat gctattgctc actgattttg        60
+     gatcccgctg cgatccgaac gttttgggga accccggggg ccggttacgg gaactcttca       120
+     aaactcgcag ttttggccta ctccagccaa ttttgtatgc tattagtcaa tgattttggg       180
+     tcccgctatg aaccaaacgt ttcgggat                                          208
+//

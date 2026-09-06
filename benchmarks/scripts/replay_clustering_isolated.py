@@ -16,11 +16,16 @@ from benchmarks.challenge.schema import digest_file
 from benchmarks.scripts.replay_clustering import load_candidates
 
 
-def worker(candidates: Path, module_path: Path, output: Path) -> dict:
+def worker(candidates: Path, module_path: Path, output: Path, index_backend: str | None = None) -> dict:
     rows = load_candidates(candidates)
     spec = importlib.util.spec_from_file_location('isolated_clustering', module_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    if index_backend == 'python':
+        # Controlled child-only ablation: use the retained Python gate while
+        # both variants keep the identical native alignment kernel and source.
+        import tandemx.discover.rust_backend as native
+        native.RustRepresentativeIndex = lambda: None
     started = time.perf_counter()
     families, membership = module.cluster_monomers(rows, 1, .95, 'rust')
     elapsed = time.perf_counter()-started
@@ -29,27 +34,32 @@ def worker(candidates: Path, module_path: Path, output: Path) -> dict:
         json.dump(dict(families=[asdict(f) for f in families], membership=membership),
                   handle, sort_keys=True, separators=(',', ':'))
     result = dict(candidate_count=len(rows), family_count=len(families), clustering_seconds=elapsed,
-                  output_sha256=digest_file(output), clustering_source_sha256=digest_file(module_path))
+                  output_sha256=digest_file(output), clustering_source_sha256=digest_file(module_path),
+                  index_backend=index_backend or 'source_default')
     output.with_suffix('.receipt.json').write_text(json.dumps(result, indent=2)+'\n')
     return result
 
 
-def replay(candidate_run: Path, baseline_run: Path, outdir: Path, timeout: float = 3600) -> dict:
+def replay(candidate_run: Path, baseline_run: Path | None, outdir: Path, timeout: float = 3600) -> dict:
     root = Path(__file__).resolve().parents[2]
-    candidate_run, baseline_run, outdir = candidate_run.resolve(), baseline_run.resolve(), outdir.resolve()
-    old = json.loads((baseline_run/'environment.json').read_text())
-    snapshot = baseline_run/'source_snapshot'
+    candidate_run, outdir = candidate_run.resolve(), outdir.resolve()
     # Clustering is the only core source allowed to differ. This also fixes native
     # kernels, distance rules, dataclasses, orientation and low-complexity helpers.
-    for relative, expected in old['file_hashes'].items():
-        if not relative.startswith(('tandemx/', 'rust-core/')):
-            continue
-        if digest_file(snapshot/relative) != expected:
-            raise ValueError('Baseline source snapshot changed: '+relative)
-        if relative != 'tandemx/discover/clustering.py' and digest_file(root/relative) != expected:
-            raise ValueError('A different core module changed: '+relative)
+    if baseline_run is not None:
+        baseline_run = baseline_run.resolve()
+        old = json.loads((baseline_run/'environment.json').read_text())
+        snapshot = baseline_run/'source_snapshot'
+        for relative, expected in old['file_hashes'].items():
+            if not relative.startswith(('tandemx/', 'rust-core/')):
+                continue
+            if digest_file(snapshot/relative) != expected:
+                raise ValueError('Baseline source snapshot changed: '+relative)
+            if relative != 'tandemx/discover/clustering.py' and digest_file(root/relative) != expected:
+                raise ValueError('A different core module changed: '+relative)
     outdir.mkdir(parents=True, exist_ok=False)
     environment = source_manifest(root, outdir/'source_snapshot')
+    if baseline_run is None:
+        snapshot = outdir/'source_snapshot'
     helpers = {}
     for name in ('replay_clustering_isolated.py', 'replay_clustering.py'):
         src = Path(__file__).with_name(name)
@@ -63,7 +73,8 @@ def replay(candidate_run: Path, baseline_run: Path, outdir: Path, timeout: float
     shutil.copyfile(package, outdir/'source_snapshot/benchmarks/__init__.py')
     helpers['benchmarks/__init__.py'] = digest_file(package)
     folder = candidate_run/'tandemx/discover'
-    environment.update(baseline_run=str(baseline_run), candidate_run=str(candidate_run),
+    environment.update(baseline_run=str(baseline_run) if baseline_run else None, candidate_run=str(candidate_run),
+                       comparison='historical_clustering_source' if baseline_run else 'native_index_ablation_identical_alignment',
                        baseline_clustering_sha256=digest_file(snapshot/'tandemx/discover/clustering.py'),
                        helper_hashes=helpers,
                        input_hashes={name: digest_file(folder/name) for name in ('candidate_reads.tsv', 'candidate_monomers.fa')},
@@ -72,12 +83,16 @@ def replay(candidate_run: Path, baseline_run: Path, outdir: Path, timeout: float
     (outdir/'environment.json').write_text(json.dumps(environment, indent=2)+'\n')
     result = dict(complete=False, measurements=[], exact_output_parity=False)
     try:
-        variants = [('baseline', snapshot/'tandemx/discover/clustering.py'),
-                    ('packed', outdir/'source_snapshot/tandemx/discover/clustering.py')]
-        for label, module_path in variants:
+        variants = ([('baseline', snapshot/'tandemx/discover/clustering.py', None),
+                     ('current', outdir/'source_snapshot/tandemx/discover/clustering.py', None)] if baseline_run else
+                    [('python_index', snapshot/'tandemx/discover/clustering.py', 'python'),
+                     ('native_index', snapshot/'tandemx/discover/clustering.py', 'native')])
+        for label, module_path, index_backend in variants:
             output = outdir/(label+'.json')
             command = [sys.executable, '-m', 'benchmarks.scripts.replay_clustering_isolated',
                        '--worker-candidates', str(folder), '--worker-module', str(module_path), '--worker-output', str(output)]
+            if index_backend:
+                command += ['--worker-index', index_backend]
             measured = run_process(command, outdir/(label+'.stdout.log'), outdir/(label+'.stderr.log'), timeout,
                                    {**os.environ, 'PYTHONPATH': str(outdir/'source_snapshot')}, outdir/'source_snapshot')
             entry = dict(label=label, command=command, **measured)
@@ -101,15 +116,18 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--candidate-run', type=Path)
     parser.add_argument('--baseline-run', type=Path)
+    parser.add_argument('--native-index-ablation', action='store_true',
+                        help='Compare Python and native index gates with identical current native alignments')
     parser.add_argument('--outdir', type=Path)
     parser.add_argument('--timeout', type=float, default=3600)
     parser.add_argument('--worker-candidates', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('--worker-module', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('--worker-output', type=Path, help=argparse.SUPPRESS)
+    parser.add_argument('--worker-index', choices=('python', 'native'), help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.worker_candidates and args.worker_module and args.worker_output:
-        worker(args.worker_candidates, args.worker_module, args.worker_output)
-    elif args.candidate_run and args.baseline_run and args.outdir:
+        worker(args.worker_candidates, args.worker_module, args.worker_output, args.worker_index)
+    elif args.candidate_run and args.outdir and bool(args.baseline_run) != args.native_index_ablation:
         replay(args.candidate_run, args.baseline_run, args.outdir, args.timeout)
     else:
-        parser.error('Require candidate run, baseline run and a new output directory')
+        parser.error('Require candidate run, new output directory and exactly one of baseline run or native index ablation')

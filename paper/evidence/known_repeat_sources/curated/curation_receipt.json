@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "source_records": 4,
+  "included_monomers": 3,
+  "script_sha256": "5f0c6b16d2347feff78714c9656b8061cf027fe2703501c57b7309102d241279",
+  "retrieval_receipt_sha256": "d1569f7ec9cc156c50cfd70f0dbead312932a753d47afe8c6e161596d3b0845a",
+  "files": {
+    "known_monomers.fa": "ce5238ebae2025e255e66abd3c29f33d3629f48b7206819c3c3c0e47021d5ae4",
+    "source_units.tsv": "0d8cf66850b12d9340c12517e2e94f827965ba4a0641c3443aef69ae7f1f614b"
+  },
+  "boundary": "three_source_units_not_complete_plant_repeat_truth;source_cultivars_differ_from_test_materials"
+}

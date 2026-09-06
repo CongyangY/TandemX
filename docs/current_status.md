@@ -7,6 +7,27 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Native candidate gate and known-source curation
+
+- Source9d6ace8 CI34015330952/34015330671 passed. Its completed85,663-candidate
+  storage replay has exact28,586-family/member output parity: dictionary172.420 s
+  /361.50 MiB versus packed199.764 s/247.86 MiB. Both31.44% lower RSS and15.86%
+  longer clustering time are archived in `paper/evidence/Mo17_compact_clustering`.
+- New native exact index keeps the Python gate as reference; no thresholds or
+  alignment rules change.11 Rust tests, clippy and20 focused Python tests passed.
+  The isolated runner now offers an identical-alignment native-index ablation;
+  actual85,663-candidate replay follows this source checkpoint. Full suite330
+  passed in77.00 s; editable native rebuild stayed inside tandemx-dev.
+- Four original ENA record pairs are archived under known_repeat_sources. The
+  curator validated exact versions/MD5/bases/materials and extracted three queries;
+  639-bp CentO cloneAF058902 is excluded. Cross-cultivar and native unit-boundary
+  limits are explicit. Actual bank/receipt archived in known_repeat_sources/curated.
+  No actual known-repeat matching result yet.
+- Isolated ARM64 R4.4.3 TRASH/TRASH2 image built successfully; offline preflight
+  and native-output validation follow. No actual comparator success claimed yet.
+  Rice/Lo7/Morex full FASTQ QC, ChineseSpring download, Morex reference acquisition
+  and indexed1.129-Gb Mo17 comparison remain active; inspect receipts.
+
 ### Compact clustering storage checkpoint
 
 - Representative postings now store exact ID/multiplicity pairs in contiguous

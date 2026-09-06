@@ -15,6 +15,25 @@ class RustBackendUnavailable(RuntimeError):
 RUST_MAX_KMER_SIZE = 31
 
 
+class RustRepresentativeIndex:
+    """Exact candidate gate with compact native postings; no alignment decisions."""
+
+    def __init__(self) -> None:
+        try:
+            from tandemx import _rust_core
+        except ImportError as exc:
+            raise RustBackendUnavailable("Rebuild the Rust extension for the representative index") from exc
+        if not hasattr(_rust_core, "RepresentativeIndex"):
+            raise RustBackendUnavailable("Rust extension lacks the representative index; reinstall TandemX")
+        self._index = _rust_core.RepresentativeIndex()
+
+    def append(self, length: int, words: dict[str, int]) -> int:
+        return self._index.append(length, list(words.items()))
+
+    def candidates(self, length: int, words: dict[str, int], minimum_identity: float) -> list[int]:
+        return self._index.candidates(length, list(words.items()), minimum_identity)
+
+
 @dataclass(frozen=True)
 class RustScanResult:
     candidate_periods: tuple[int, ...]

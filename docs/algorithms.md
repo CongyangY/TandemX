@@ -1,5 +1,17 @@
 # TandemX Algorithm Design
 
+For `backend=rust`, the representative candidate gate now uses an injective
+ACGTN word encoding and native exact multiplicity accumulation. Python remains
+the reference gate. Identical rounding and fixed representatives preserve the
+existing alignment and membership decisions; no biological threshold changed.
+See the native-index ablation in `clustering_resource_replay.md`. Measured
+performance remains separate from algorithmic equivalence.
+
+Source-backed repeat queries are curated by accession/version, complete-record
+checksums, species/material and explicit monomer coordinates. Multiunit clones
+are excluded from monomer scoring. These post hoc queries are not a complete
+truth catalogue; see `known_monomer_sources.md`.
+
 Representative postings now use contiguous 64-bit items with exact 32-bit ID and
 multiplicity fields instead of one Python dictionary per word. Their numerical
 meaning and all candidate selection/alignment rules are unchanged; oversized

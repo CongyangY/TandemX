@@ -1,0 +1,50 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_compact_clustering_replay_v1_20260906/environment.json",
+    "sha256": "de8a22ce1f0fcf4b318116c2e427ec00aa5cc923fc482fc6db92ced0546a7eb1",
+    "bytes": 7483
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_compact_clustering_replay_v1_20260906/validation.json",
+    "sha256": "92ee2b47c1ffc008a283af905ac94cd92a7c8e2a44cd32b041943ac2cba5acef",
+    "bytes": 2404
+  },
+  {
+    "file": "baseline.receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_compact_clustering_replay_v1_20260906/baseline.receipt.json",
+    "sha256": "c05178b2b0c6b75cd6b06cc3f9c60ea9eac5e6508072d512dd23647faf443283",
+    "bytes": 285
+  },
+  {
+    "file": "packed.receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_compact_clustering_replay_v1_20260906/packed.receipt.json",
+    "sha256": "7c529e5b56cd1bbf2ec5b2dd3859572a332b894f1eb9c2a9c05e59dcca395586",
+    "bytes": 285
+  },
+  {
+    "file": "baseline.stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_compact_clustering_replay_v1_20260906/baseline.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "baseline.stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_compact_clustering_replay_v1_20260906/baseline.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "packed.stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_compact_clustering_replay_v1_20260906/packed.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "packed.stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_compact_clustering_replay_v1_20260906/packed.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+]

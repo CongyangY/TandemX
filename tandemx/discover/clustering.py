@@ -91,6 +91,12 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
 
     if not 0 < minimum_identity <= 1 or minimum_support < 1:
         raise ValueError("Need cluster identity in (0,1] and positive support")
+    if backend not in {"python", "rust"}:
+        raise ValueError("Clustering backend must be python or rust")
+    native_index = None
+    if backend == "rust":
+        from tandemx.discover.rust_backend import RustRepresentativeIndex
+        native_index = RustRepresentativeIndex()
     grouped: dict[str, list[CandidateRepeat]] = defaultdict(list)
     unresolved = []
     for candidate in candidates:
@@ -115,7 +121,8 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
     assignment = {}
     for sequence in ordered:
         words = _index_words(sequence)
-        possible = _indexed_candidate_ids(len(sequence),words,index,representative_lengths,minimum_identity)
+        possible = (native_index.candidates(len(sequence), words, minimum_identity) if native_index is not None
+                    else _indexed_candidate_ids(len(sequence), words, index, representative_lengths, minimum_identity))
         compatible = []
         for j in possible:
             evidence = cyclic_merge_evidence(representatives[j], sequence, minimum_identity, backend)
@@ -131,13 +138,16 @@ def cluster_monomers(candidates: Sequence[CandidateRepeat], minimum_support: int
             representatives.append(sequence)
             representative_lengths.append(len(sequence))
             members.append([])
-            _append_index(index, words, j)
+            if native_index is None:
+                _append_index(index, words, j)
+            elif native_index.append(len(sequence), words) != j:
+                raise RuntimeError("Native representative index lost insertion order")
             distance = sequence.count("N")
             similarity = 1 - distance / len(sequence)
         members[j].extend(grouped[sequence])
         assignment[sequence] = (j, distance, similarity, [item[0] for item in compatible if item[0] != j])
     # The index is no longer needed while building family/member output objects.
-    del index
+    del index, native_index
     support = [len({c.read_id for c in group}) for group in members]
     retained = sorted((j for j in range(len(members)) if support[j] >= minimum_support),
                       key=lambda j: (-support[j], -sum(c.repeat_span_bp for c in members[j]), representatives[j]))

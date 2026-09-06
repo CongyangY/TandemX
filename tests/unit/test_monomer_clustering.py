@@ -137,6 +137,12 @@ def test_indexed_multiset_gate_preserves_full_legacy_clustering(monkeypatch):
     for sequence in ('A'*100,'ACGT'*25,'ACGG'*25,'N'*20):
         candidates.append(candidate(sequence,len(candidates)))
     optimized=module._indexed_candidate_ids
+    original_comparison = module.cyclic_merge_evidence
+    # Compare the native index to Python gates while using identical native
+    # alignment kernels on both sides; monkeypatching the unused Python gate
+    # alone would no longer exercise the reference implementation.
+    monkeypatch.setattr(module, 'cyclic_merge_evidence',
+                        lambda a, b, identity, backend: original_comparison(a, b, identity, 'rust'))
     def legacy(length,words,index,lengths,identity):
         if identity<=.9 or length<20:return list(range(len(lengths)))
         return sorted({packed >> 32 for word in words for packed in index.get(word,())})
@@ -144,7 +150,7 @@ def test_indexed_multiset_gate_preserves_full_legacy_clustering(monkeypatch):
         monkeypatch.setattr(module,'_indexed_candidate_ids',optimized)
         observed=module.cluster_monomers(candidates,1,identity,'rust')
         monkeypatch.setattr(module,'_indexed_candidate_ids',legacy)
-        expected=module.cluster_monomers(candidates,1,identity,'rust')
+        expected=module.cluster_monomers(candidates,1,identity,'python')
         assert observed==expected
 
 
@@ -183,3 +189,49 @@ def test_packed_index_retains_ids_counts_order_and_32bit_boundaries():
         with pytest.raises(ValueError, match='32-bit'):
             _append_index(index, Counter({'ACGT': count}), identifier)
         assert {word: values.tobytes() for word, values in index.items()} == original
+
+
+@pytest.mark.skipif(not rust_backend_available(), reason='compiled extension unavailable')
+def test_native_index_candidates_equal_python_multisets_across_lengths_and_thresholds():
+    from tandemx.discover.clustering import _append_index, _index_words, _indexed_candidate_ids
+    from tandemx.discover.rust_backend import RustRepresentativeIndex
+    rng = random.Random(357209)
+    representatives = [''.join(rng.choices('ACGTN', k=rng.choice((1,7,19,20,21,31,61,100,171,999))))
+                       for _ in range(70)]
+    representatives += ['A'*100, 'ACGT'*25, 'N'*20, 'A'*999]
+    queries = representatives + [s[1:]+s[:1] for s in representatives]
+    queries += [s[:-1]+'A' for s in representatives]
+    index, native, lengths = {}, RustRepresentativeIndex(), []
+    for j, sequence in enumerate(representatives):
+        words = _index_words(sequence)
+        assert native.append(len(sequence), words) == j
+        _append_index(index, words, j)
+        lengths.append(len(sequence))
+    for identity in (.01, .89, .9, .900001, .95, .99, 1.0):
+        for sequence in queries:
+            words = _index_words(sequence)
+            assert native.candidates(len(sequence), words, identity) == _indexed_candidate_ids(
+                len(sequence), words, index, lengths, identity)
+
+
+@pytest.mark.skipif(not rust_backend_available(), reason='compiled extension unavailable')
+def test_native_index_rejects_malformed_state_and_invalid_queries_without_mutation():
+    from tandemx import _rust_core
+    index = _rust_core.RepresentativeIndex()
+    words = [('AAAAAAAAA', 20)]
+    assert index.append(20, words) == 0
+    for length, invalid in [(0, []), (20, [('A', 20)]), (20, [('AAAAAAAAA', 19)]),
+                            (20, [('AAAAAAAAA', 10), ('AAAAAAAAA', 10)]),
+                            (20, [('AAAAAAAAA', 0)]), (20, [('AAAAAAAA?', 20)])]:
+        with pytest.raises(ValueError):
+            index.append(length, invalid)
+        assert index.candidates(20, words, .95) == [0]
+    for identity in (0, 1.1, float('nan'), float('inf')):
+        with pytest.raises(ValueError):
+            index.candidates(20, words, identity)
+    with pytest.raises(OverflowError):
+        index.append(0x100000000, [('AAAAAAAAA', 0x100000000)])
+    assert index.append(20, [('CCCCCCCCC', 20)]) == 1
+    assert index.candidates(20, words, .95) == [0]
+    with pytest.raises(ValueError, match='backend'):
+        cluster_monomers([], 1, backend='typo')
