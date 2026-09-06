@@ -1,0 +1,52 @@
+{
+  "complete": true,
+  "tool": "trash",
+  "input_sha256": "4c1f8bc38793f8a0b0e9d5989244cae94de045e667695e7eb5112996e6149d2d",
+  "native_file": "all.repeats.from.assembly.fa.csv",
+  "native_sha256": "c06ec94702aee8bfceadafd1d6599f71484ebca8bd2e4eb5a3dd74cf923ea1d8",
+  "script_sha256": "0baf730daff8d18fdad336a4668ed384796f76e380dd439c9b8bb1c7d86b6245",
+  "table_sha256": "59f8a949b858933b7fab42b3bddd2e76e56529e03c41744e1dca529a1fd0c56e",
+  "rows": [
+    {
+      "offset_from_native_1based": -2,
+      "monomer_rows": 355,
+      "width_discrepancies": 0,
+      "forward_matches": 0,
+      "strand_adjusted_matches": 0,
+      "outside_reference": 0
+    },
+    {
+      "offset_from_native_1based": -1,
+      "monomer_rows": 355,
+      "width_discrepancies": 0,
+      "forward_matches": 144,
+      "strand_adjusted_matches": 355,
+      "outside_reference": 0
+    },
+    {
+      "offset_from_native_1based": 0,
+      "monomer_rows": 355,
+      "width_discrepancies": 0,
+      "forward_matches": 0,
+      "strand_adjusted_matches": 0,
+      "outside_reference": 0
+    },
+    {
+      "offset_from_native_1based": 1,
+      "monomer_rows": 355,
+      "width_discrepancies": 0,
+      "forward_matches": 0,
+      "strand_adjusted_matches": 0,
+      "outside_reference": 0
+    },
+    {
+      "offset_from_native_1based": 2,
+      "monomer_rows": 355,
+      "width_discrepancies": 0,
+      "forward_matches": 0,
+      "strand_adjusted_matches": 0,
+      "outside_reference": 0
+    }
+  ],
+  "scope": "small_control_coordinate_diagnosis;no_automatic_correction_or_biological_accuracy"
+}

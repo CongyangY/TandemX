@@ -432,6 +432,10 @@ reference and identical-alignment ablation remain available for parity checks.
 Small [source-backed repeat queries](docs/known_monomer_sources.md) retain
 accession versions, donor materials and monomer/clone distinctions for later
 biological checks; they are not a complete recall truth set.
+The [optional TRASH/TRASH2 comparator container](benchmarks/containers/trash/README.md)
+supports offline, version-pinned assembly controls and explicit native-coordinate
+auditing. Its successful author-example runs are installation checks, not a
+completed plant comparison.
 The [complete-data acquisition guide](docs/complete_data_qc.md) also provides
 official-checksum-pinned MorexV3 reference acquisition from the IPK publication.
 The complete Col-0N FASTQ also passed QC (933,904 reads, 14.647 Gb); full-library

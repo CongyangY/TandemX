@@ -7,6 +7,38 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Five completed full-file QCs and tested comparator execution
+
+- Source4ae8ca8 pushed to both branches; CI34016167100/34016167099 passed.
+  Native index ablation completed on85,663 actual candidates,28,586 families,
+  exact entire-payload parity. Python218.015 s/250.22 MiB versus native164.312 s/
+  259.63 MiB:24.63% shorter clustering but3.76% higher child peak. Archived in
+  `paper/evidence/Mo17_native_index`; no all-metric superiority claim.
+- Full111.506-Mb live-pipeline replay with source4ae8ca8 also has all seven
+  products byte-identical. cProfile shows native banded self-alignment123.8 s
+  of151.1 s total; this is the next hotspot. Profiling adds overhead. Old-source
+  indexed1.129-Gb comparison completed all3 tools, TX1625.65 s/691.50 MiB,
+  TRF1073.00 s/321.12 MiB, TideHunter337.43 s/425.66 MiB. All seven TX outputs
+  equal the previous1.129-Gb run. Both result sets retain unfavorable rankings.
+- Full FASTQ QC now passed for5 species/materials: Mo17, Col-0N, Nipponbare
+  (1,785,885 reads/32.966 Gb), Morex(896,701/19.525 Gb), Lo7(4,576,975/77.092 Gb).
+  Their compact receipts/histograms are archived. These are file-integrity and
+  distribution checks, not complete biological QC. Rice/Morex/Lo7 seed6101
+  whole-library size ladders are running. Wheat full download passed and QC is
+  active. Victoria oat, Col-0R and Ey15-2R full downloads have started.
+- Original PanOat supplement confirms Victoria HiFi +Hi-C, exact raw sample
+  SAMEA111508775 and assemblyPRJEB56706/GCA_947311595. Selected source cells and
+  reviewer/QC lessons archived; Iso-Seq counts are excluded from genomic depth.
+- TRASH1/2 offline author-example execution completed in the pinned ARM64
+  container. The initial Docker startup timeouts are retained; their delayed
+  empty containers were explicitly removed. Native monomer-sequence audits
+  identify TRASH1's systematic-1bp offset(355/355) versus TRASH2 standard1-based
+  agreement(360/360). These are installation/coordinate controls on an author
+  human example, not plant benchmarks. No silent tool-output correction.
+- New container runner, small-control coordinate audit and full-pipeline replay
+  are tested. Full Python suite336 passed in75.65 s; native code unchanged since
+  the11-test Rust/clippy/fmt checkpoint. Ongoing profiles/runs freeze source.
+
 ### Native candidate gate and known-source curation
 
 - Source9d6ace8 CI34015330952/34015330671 passed. Its completed85,663-candidate

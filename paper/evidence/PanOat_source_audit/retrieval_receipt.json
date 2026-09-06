@@ -1,0 +1,19 @@
+{
+  "source": "https://doi.org/10.1038/s41586-025-09676-7",
+  "license": "CC-BY-4.0;retain original attribution",
+  "utc": "2026-09-06T07:30:54.699508+00:00",
+  "files": [
+    {
+      "file": "supplementary_tables.xlsx",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-025-09676-7/MediaObjects/41586_2025_9676_MOESM4_ESM.xlsx",
+      "bytes": 5092644,
+      "sha256": "3274c58c38e2b395d39e369b93e26490bf7dcdaf157997290b101856e604794d"
+    },
+    {
+      "file": "peer_review.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-025-09676-7/MediaObjects/41586_2025_9676_MOESM3_ESM.pdf",
+      "bytes": 1335645,
+      "sha256": "44648a286dd04d57ce675c12052f6eebc54098e0ae04ea43f7a3e42dd43476b0"
+    }
+  ]
+}

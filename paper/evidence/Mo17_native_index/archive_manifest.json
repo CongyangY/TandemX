@@ -1,0 +1,50 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/environment.json",
+    "sha256": "b2bbf14b9b32d7fadde7ca27281c074baf4abe545e31bb5f31fea9b8cec134d1",
+    "bytes": 7562
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/validation.json",
+    "sha256": "4be7cac6e8283a1b640474e1c9981b37ec9e00ae1470766d04986111e52f6afe",
+    "bytes": 2546
+  },
+  {
+    "file": "python_index.receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/python_index.receipt.json",
+    "sha256": "f011ee77a7a6a5edd5dd687879ba1d38f35430e44273d12fe518b8cc9d50f18c",
+    "bytes": 314
+  },
+  {
+    "file": "native_index.receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/native_index.receipt.json",
+    "sha256": "fa991f20a997fa6eea4d1afdd86f7c100e00c576e556d55597e1befa1f491a7d",
+    "bytes": 314
+  },
+  {
+    "file": "python_index.stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/python_index.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "python_index.stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/python_index.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "native_index.stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/native_index.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "native_index.stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/native_index.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+]

@@ -4,19 +4,27 @@ Updated 2026-09-06 following the user's explicit requirement for substantial
 real data, simulations, taxonomic breadth and literature-informed QC. This is
 the prospective design and acquisition record, **not completed validation**.
 
-Latest completed inputs: full Mo17 batch SRR15447419 (5.625 Gb) and Col-0N
-ERR6210723 (14.647 Gb) passed file QC. Mo17 seeded nested 11.681/111.506-Mb
-samples completed TandemX/TRF/TideHunter comparisons; these are two scales of one
-batch, not independent specimens, and descriptive calls are not recall/precision.
-Col-0N 11.766-Mb three-tool pilot is also complete. Nipponbare SRR25241090,
-Lo7 ERR15194059 and Morex ERR4659246 complete downloads are under way.
-Chinese Spring SRR28200549 has now been confirmed by run/experiment/sample XML
-and its complete 19.359-GB archive file is being acquired. It is one HiFi batch,
-not the full wheat study or an independent new plant for every run ID.
+Full-file QC passed for Mo17 SRR15447419 (5.625 Gb), Col-0N ERR6210723
+(14.647 Gb), Nipponbare SRR25241090 (32.966 Gb) and Morex ERR4659246
+(19.525 Gb), and Lo7 ERR15194059 (77.092 Gb). These are five materials/species
+with file QC, not five completed biological accuracy validations. Chinese Spring's full
+19.359-GB compressed archive passed transfer checks and its24.954-Gb FASTQ QC
+has started. Whole-file seed6101 rice/Morex10-Mb to10-Gb and Lo7 up-to40-Gb sampling is active.
+Mo17 comparison now includes1.129 Gb, with all three methods successful; its
+seven TandemX products are identical before/after dictionary-index optimization.
+All real-call metrics remain descriptive. Victoria oat, Col-0R single-plant and
+Ey15-2R pooled-plant complete downloads have started to broaden species/materials.
 The prospective enrollment table below retains metadata-level source details;
 use the latest receipts and `current_status.md` for completed versus running work.
 Published Mo17 region evidence is documented in
 [published_mo17_regions.md](published_mo17_regions.md).
+
+The [PanOat primary-source audit](../paper/evidence/PanOat_source_audit/README.md)
+now verifies Victoria's HiFi method, exact raw sample and assembly project from
+the original supplement. Its Iso-Seq yields are explicitly excluded from genomic
+coverage. Public reviewer comments motivate clear sample units, alternative
+quantification under homoeolog ambiguity, model diagnostics and biological cases
+that directly test the resource. They do not impose a universal sample-size rule.
 
 ## Scope and independent units
 

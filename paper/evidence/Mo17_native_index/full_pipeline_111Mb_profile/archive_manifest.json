@@ -1,0 +1,56 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/environment.json",
+    "sha256": "1fa7678f1d4c65537ebd39c705bd4e5cd9bb453ad311c51f353bde45a4bceb5f",
+    "bytes": 7822
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/validation.json",
+    "sha256": "839ccc70c0f69261ed151d43d08c5bdbe805072e6b63964a03e53f6d0c23bc65",
+    "bytes": 2949
+  },
+  {
+    "file": "replay_discovery.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/replay_discovery.py",
+    "sha256": "091ae2b7aad308d93009db6da0b5fa20edb335bb254379f00fc15d2c6a500e6f",
+    "bytes": 4465
+  },
+  {
+    "file": "stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/stdout.log",
+    "sha256": "381574cbeb5f993fabd70055c3c5a4310ed1785f8433d7456cb20c753ba0b95c",
+    "bytes": 148
+  },
+  {
+    "file": "stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "discover/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/discover/run_config.yaml",
+    "sha256": "7adbfbd96bb1f94f8a411eebaaaf334b674c7f550ab78125fd96115493625c16",
+    "bytes": 2004
+  },
+  {
+    "file": "discover/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/discover/run.log",
+    "sha256": "d6e1b0d0b63ca23e8a553833bd5edb0c480e3c978f2176a48b1ecb271300d1ed",
+    "bytes": 3147
+  },
+  {
+    "file": "discover/discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/discover/discovery_summary.json",
+    "sha256": "3ede0e51fb32504622b22a9f58165774e9153aef477244079163d8209fde708b",
+    "bytes": 870
+  },
+  {
+    "file": "discover/family_audit_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_native_index_profile_v1_20260906/discover/family_audit_summary.json",
+    "sha256": "7ade41084be277118ccc300eb1b9291011c6a57c4d6954cd25832604df7aa505",
+    "bytes": 392
+  }
+]

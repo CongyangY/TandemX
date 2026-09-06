@@ -1,0 +1,88 @@
+{
+  "Id": "sha256:50ff2f2af62681892295d76ddd79b8c87a06135455ffe0e79f1c81dc07939243",
+  "RepoTags": [
+    "tandemx-comparators:trash-r443-time-20260906"
+  ],
+  "RepoDigests": [],
+  "Parent": "",
+  "Comment": "buildkit.dockerfile.v0",
+  "Created": "2026-09-06T06:19:01.631085126Z",
+  "DockerVersion": "",
+  "Author": "",
+  "Config": {
+    "Hostname": "",
+    "Domainname": "",
+    "User": "",
+    "AttachStdin": false,
+    "AttachStdout": false,
+    "AttachStderr": false,
+    "Tty": false,
+    "OpenStdin": false,
+    "StdinOnce": false,
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "R_VERSION=4.4.3",
+      "R_HOME=/usr/local/lib/R",
+      "TZ=Etc/UTC",
+      "CRAN=https://p3m.dev/cran/__linux__/noble/2025-04-10",
+      "LANG=en_US.UTF-8",
+      "DEBIAN_FRONTEND=noninteractive",
+      "MAKEFLAGS=-j2"
+    ],
+    "Cmd": [
+      "Rscript",
+      "--version"
+    ],
+    "ArgsEscaped": true,
+    "Image": "",
+    "Volumes": null,
+    "WorkingDir": "/work",
+    "Entrypoint": null,
+    "OnBuild": null,
+    "Labels": {
+      "org.opencontainers.image.authors": "Carl Boettiger <cboettig@ropensci.org>",
+      "org.opencontainers.image.base.name": "docker.io/library/ubuntu:noble",
+      "org.opencontainers.image.description": "Reproducible builds to fixed version of R",
+      "org.opencontainers.image.licenses": "GPL-2.0-or-later",
+      "org.opencontainers.image.ref.name": "ubuntu",
+      "org.opencontainers.image.revision": "c0ab9c6258faba7cc82259848149b83586104c67",
+      "org.opencontainers.image.source": "https://github.com/rocker-org/rocker-versioned2",
+      "org.opencontainers.image.title": "rocker/r-ver",
+      "org.opencontainers.image.vendor": "Rocker Project",
+      "org.opencontainers.image.version": "R-4.4.3"
+    }
+  },
+  "Architecture": "arm64",
+  "Os": "linux",
+  "Size": 1643657881,
+  "GraphDriver": {
+    "Data": {
+      "LowerDir": "/var/lib/docker/overlay2/mrqszboj7kzd676t1u165ofgw/diff:/var/lib/docker/overlay2/tmubvzyvcixbgcw31vd59en6c/diff:/var/lib/docker/overlay2/n3phcfc258b3oqap4fl7f6elo/diff:/var/lib/docker/overlay2/a1ap8vd44r83p9sczfz8ckapo/diff:/var/lib/docker/overlay2/0b01gkyrbyibj0kk79agk4jwd/diff:/var/lib/docker/overlay2/6263f469004e8c5b2ce2bede234c76083985e97453e0535c4ad0e6516f182c71/diff:/var/lib/docker/overlay2/b5bb8136415267239b2a5e0e81b65fd443908ff8989d016000a3f2ad645ea68f/diff:/var/lib/docker/overlay2/71d6c6e2f0d731bbec910df05270c4198d46e48cb290d0b22d5c59c2a914e073/diff:/var/lib/docker/overlay2/e803f51402f58186b427e4db927b073aaa2fbb8c1ff0822233ecf5f6af4d0362/diff:/var/lib/docker/overlay2/06b79156a70b39fde3bc1e4636ee67443f9049daf331ab2419bad271a5bfe314/diff:/var/lib/docker/overlay2/4c65f2ba065b092c1df2eebd2869642805b4eeec8a165419b87af5711aa8106a/diff:/var/lib/docker/overlay2/7b27653b849dcca11a9ece335ef6d34a3d217e587a411d0307befc50aed3467a/diff",
+      "MergedDir": "/var/lib/docker/overlay2/amw3yyrmg35no7qcxofqre013/merged",
+      "UpperDir": "/var/lib/docker/overlay2/amw3yyrmg35no7qcxofqre013/diff",
+      "WorkDir": "/var/lib/docker/overlay2/amw3yyrmg35no7qcxofqre013/work"
+    },
+    "Name": "overlay2"
+  },
+  "RootFS": {
+    "Type": "layers",
+    "Layers": [
+      "sha256:e5dae71ade4390c09123a86ada6c9bc64ac469d0495acae5b2216a627395050c",
+      "sha256:78300296cbc54668f39918957bfcef3829491e487bdd17e6d470eb2155bd66aa",
+      "sha256:7721ce938a8ef48582ddfca508f5e0d3ebc7f337190f017d84588ce3d50a2763",
+      "sha256:6d0c08b38fb46bda3ab5450adbfe0831870ae5566966ae339ab505dac010c61e",
+      "sha256:2b3e703440e7eb474e1dbdab968108c9b9f18ecce8a14e877c793ae077db014b",
+      "sha256:18c29d2dad688b051745b16eeb45b6cb656dc73c5edca27975926d20c8a620b6",
+      "sha256:97df5e7cbca2b677b94bef20a3b1db6bbc195c53231c0caa0e2971f194c8811e",
+      "sha256:e0d13d16823c508a0af08fd5fc39291477343fb04aa84490587728e90904dbf9",
+      "sha256:035e68046483ff5449e84ddb38efd2ea8af09da84018e3de8cbe849ddf43d32c",
+      "sha256:ebdcd12dc9cf6df446a7d4f61e1bd67acd23dd098aaf1d136a965005e3d23c52",
+      "sha256:71c83308827d9d1c2bb816bcc3aeae6e2dad2ba90ac493d6119fdefa2789960c",
+      "sha256:361703a001b5e2f3533102e0897ba448f334eba282e36c09842c23f78f8c7cab",
+      "sha256:20e758eacd18b8f58da3235ebd6fb2ccee670c7dadacbbfc727614dd3d9e1db1"
+    ]
+  },
+  "Metadata": {
+    "LastTagTime": "2026-09-06T06:19:01.64952321Z"
+  }
+}

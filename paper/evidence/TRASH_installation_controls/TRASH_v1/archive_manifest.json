@@ -1,0 +1,38 @@
+[
+  {
+    "file": "execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_offline_author_example_v1_20260906/execution.json",
+    "sha256": "ab7b509d16e4cdca4e3aefe8a6397fc5e15890d766298ea6c944cb899b67acea",
+    "bytes": 2229
+  },
+  {
+    "file": "image_inspect.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_offline_author_example_v1_20260906/image_inspect.json",
+    "sha256": "93c5744f9b4717e898294860c194e47a104b71a455c3d0b8732fefdd67222652",
+    "bytes": 4312
+  },
+  {
+    "file": "input_qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_offline_author_example_v1_20260906/input_qc.json",
+    "sha256": "76e534095906cf563f7029de50b86fa5f14767608819ab068d7eb7e613d30dfa",
+    "bytes": 607
+  },
+  {
+    "file": "run_trash_container.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_offline_author_example_v1_20260906/run_trash_container.py",
+    "sha256": "8d2219896418b17f8ba667cd582351000dc9c6600c98f968805a1f0890528988",
+    "bytes": 7777
+  },
+  {
+    "file": "stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_offline_author_example_v1_20260906/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_offline_author_example_v1_20260906/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+]

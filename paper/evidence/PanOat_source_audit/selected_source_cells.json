@@ -1,0 +1,5243 @@
+{
+  "source_sha256": "3274c58c38e2b395d39e369b93e26490bf7dcdaf157997290b101856e604794d",
+  "source_url": "https://doi.org/10.1038/s41586-025-09676-7",
+  "reader": "bundled openpyxl;read_only;data_only;no workbook changes",
+  "selected_cells": {
+    "Table S1": [
+      [
+        {
+          "cell": "A1",
+          "value": "Supplementary Table S1. Assembly statistics and genotype characteristics"
+        }
+      ],
+      [
+        {
+          "cell": "A3",
+          "value": "Genotype"
+        },
+        {
+          "cell": "B3",
+          "value": "Species"
+        },
+        {
+          "cell": "C3",
+          "value": "ploidy"
+        },
+        {
+          "cell": "D3",
+          "value": "Method"
+        },
+        {
+          "cell": "E3",
+          "value": "Assembly Size (bp)"
+        },
+        {
+          "cell": "F3",
+          "value": "N50 (bp)"
+        },
+        {
+          "cell": "G3",
+          "value": "N90 (bp)"
+        },
+        {
+          "cell": "H3",
+          "value": "Pseudomolecule Size (bp)"
+        },
+        {
+          "cell": "I3",
+          "value": "Sequences in Pseudomolecules"
+        },
+        {
+          "cell": "J3",
+          "value": "Size chrUn (bp)"
+        },
+        {
+          "cell": "K3",
+          "value": "# unanchored sequences"
+        },
+        {
+          "cell": "L3",
+          "value": "RNA-Seq and IsoSeq"
+        },
+        {
+          "cell": "M3",
+          "value": "Part of orthologous framework"
+        },
+        {
+          "cell": "N3",
+          "value": "Origin/Location"
+        },
+        {
+          "cell": "O3",
+          "value": "Type of oat"
+        },
+        {
+          "cell": "P3",
+          "value": "Genome sequence published in"
+        },
+        {
+          "cell": "Q3",
+          "value": "Genotype characteristics"
+        },
+        {
+          "cell": "R3",
+          "value": "Reference*"
+        }
+      ],
+      [
+        {
+          "cell": "A4",
+          "value": "Gehl"
+        },
+        {
+          "cell": "B4",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C4",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D4",
+          "value": "TRITEX + guided HiC"
+        },
+        {
+          "cell": "E4",
+          "value": 11247380637
+        },
+        {
+          "cell": "F4",
+          "value": 886603
+        },
+        {
+          "cell": "G4",
+          "value": 36594
+        },
+        {
+          "cell": "H4",
+          "value": 10132730079
+        },
+        {
+          "cell": "I4",
+          "value": 39114
+        },
+        {
+          "cell": "J4",
+          "value": 1118559858
+        },
+        {
+          "cell": "K4",
+          "value": 273724
+        },
+        {
+          "cell": "L4",
+          "value": "+"
+        },
+        {
+          "cell": "M4",
+          "value": "+"
+        },
+        {
+          "cell": "N4",
+          "value": "AAFC Ottawa, Canada"
+        },
+        {
+          "cell": "O4",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P4",
+          "value": "-"
+        },
+        {
+          "cell": "Q4",
+          "value": "Naked oat adapted to Canada with low trichomes, uniform kernels with minimal crease. \"Rice of the prairies\""
+        },
+        {
+          "cell": "R4",
+          "value": "https://active.inspection.gc.ca/english/plaveg/pbrpov/cropreport/oat/app00005999e.shtml"
+        }
+      ],
+      [
+        {
+          "cell": "A5",
+          "value": "AAC Nicolas"
+        },
+        {
+          "cell": "B5",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C5",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D5",
+          "value": "TRITEX + guided HiC"
+        },
+        {
+          "cell": "E5",
+          "value": 11392646681
+        },
+        {
+          "cell": "F5",
+          "value": 898596
+        },
+        {
+          "cell": "G5",
+          "value": 284774
+        },
+        {
+          "cell": "H5",
+          "value": 10266876199
+        },
+        {
+          "cell": "I5",
+          "value": 39647
+        },
+        {
+          "cell": "J5",
+          "value": 1129733082
+        },
+        {
+          "cell": "K5",
+          "value": 283108
+        },
+        {
+          "cell": "L5",
+          "value": "+"
+        },
+        {
+          "cell": "M5",
+          "value": "+"
+        },
+        {
+          "cell": "N5",
+          "value": "AAFC Ottawa, Canada"
+        },
+        {
+          "cell": "O5",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P5",
+          "value": "-"
+        },
+        {
+          "cell": "Q5",
+          "value": "High yield and adaptation to Eastern Canada, common parent in many crosses"
+        },
+        {
+          "cell": "R5",
+          "value": "https://cdnsciencepub.com/doi/10.1139/cjps-2016-0088"
+        }
+      ],
+      [
+        {
+          "cell": "A6",
+          "value": "PI 258586"
+        },
+        {
+          "cell": "B6",
+          "value": "A. byzantina"
+        },
+        {
+          "cell": "C6",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D6",
+          "value": "TRITEX + Dovetail Omni-C"
+        },
+        {
+          "cell": "E6",
+          "value": 12798801913
+        },
+        {
+          "cell": "F6",
+          "value": 1000000
+        },
+        {
+          "cell": "G6",
+          "value": 284774
+        },
+        {
+          "cell": "H6",
+          "value": 11399335897
+        },
+        {
+          "cell": "I6",
+          "value": 44
+        },
+        {
+          "cell": "J6",
+          "value": 1399468316
+        },
+        {
+          "cell": "K6",
+          "value": 532759
+        },
+        {
+          "cell": "L6",
+          "value": "-"
+        },
+        {
+          "cell": "M6",
+          "value": "+"
+        },
+        {
+          "cell": "N6",
+          "value": "Azerbaijan (donor to USDA, but likely of US origin via VIR collection)"
+        },
+        {
+          "cell": "O6",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P6",
+          "value": "-"
+        },
+        {
+          "cell": "Q6",
+          "value": "Selected as representative of red oat diversity"
+        },
+        {
+          "cell": "R6",
+          "value": "https://npgsweb.ars-grin.gov/gringlobal/accessiondetail?id=1197128"
+        }
+      ],
+      [
+        {
+          "cell": "A7",
+          "value": "BYU209"
+        },
+        {
+          "cell": "B7",
+          "value": "A. insularis"
+        },
+        {
+          "cell": "C7",
+          "value": "CCDD"
+        },
+        {
+          "cell": "D7",
+          "value": "PacBio CLR + HiC"
+        },
+        {
+          "cell": "E7",
+          "value": 7255642786
+        },
+        {
+          "cell": "F7",
+          "value": 5157017
+        },
+        {
+          "cell": "G7",
+          "value": 719638
+        },
+        {
+          "cell": "H7",
+          "value": 6924077245
+        },
+        {
+          "cell": "I7",
+          "value": 2621
+        },
+        {
+          "cell": "J7",
+          "value": 332216341
+        },
+        {
+          "cell": "K7",
+          "value": 3902
+        },
+        {
+          "cell": "L7",
+          "value": "+"
+        },
+        {
+          "cell": "M7",
+          "value": "+"
+        },
+        {
+          "cell": "N7",
+          "value": "Tunisia"
+        },
+        {
+          "cell": "O7",
+          "value": "Wild oat"
+        },
+        {
+          "cell": "P7",
+          "value": "https://doi.org/10.1038/s41586-022-04732-y"
+        },
+        {
+          "cell": "Q7",
+          "value": "Tunisian origin: Original 4x CCDD donor; rearrangements in hexaploidization process;"
+        },
+        {
+          "cell": "R7",
+          "value": "https://doi.org/10.1038/s41586-022-04732-y"
+        }
+      ],
+      [
+        {
+          "cell": "A8",
+          "value": "Sang"
+        },
+        {
+          "cell": "B8",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C8",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D8",
+          "value": "NRGene + Hi-C"
+        },
+        {
+          "cell": "E8",
+          "value": 10959045696
+        },
+        {
+          "cell": "F8",
+          "value": 11500154
+        },
+        {
+          "cell": "G8",
+          "value": 1480400
+        },
+        {
+          "cell": "H8",
+          "value": 10270447441
+        },
+        {
+          "cell": "I8",
+          "value": 1676
+        },
+        {
+          "cell": "J8",
+          "value": 688763755
+        },
+        {
+          "cell": "K8",
+          "value": 531684
+        },
+        {
+          "cell": "L8",
+          "value": "+"
+        },
+        {
+          "cell": "M8",
+          "value": "+"
+        },
+        {
+          "cell": "N8",
+          "value": "Sweden"
+        },
+        {
+          "cell": "O8",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P8",
+          "value": "https://doi.org/10.1038/s41586-022-04732-y"
+        },
+        {
+          "cell": "Q8",
+          "value": "A culturally significant white-hulled Swedish milling variety"
+        },
+        {
+          "cell": "R8",
+          "value": "https://doi.org/10.1038/s41586-022-04732-y; https://oatnews.org/oatnews_pdfs/Vol_27_1976.pdf"
+        }
+      ],
+      [
+        {
+          "cell": "A9",
+          "value": "Park"
+        },
+        {
+          "cell": "B9",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C9",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D9",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E9",
+          "value": 10887697785
+        },
+        {
+          "cell": "F9",
+          "value": 23646748
+        },
+        {
+          "cell": "G9",
+          "value": 5332688
+        },
+        {
+          "cell": "H9",
+          "value": 10774618181
+        },
+        {
+          "cell": "I9",
+          "value": 928
+        },
+        {
+          "cell": "J9",
+          "value": 113170304
+        },
+        {
+          "cell": "K9",
+          "value": 1362
+        },
+        {
+          "cell": "L9",
+          "value": "+"
+        },
+        {
+          "cell": "M9",
+          "value": "+"
+        },
+        {
+          "cell": "N9",
+          "value": "Aberdeen, Idaho"
+        },
+        {
+          "cell": "O9",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P9",
+          "value": "-"
+        },
+        {
+          "cell": "Q9",
+          "value": "Originated at the Branch Experiment Station, Aberdeen, Idaho. The first cross was made by Harland Stevens in 1942. This line can be easily grown in tissue culture."
+        },
+        {
+          "cell": "R9",
+          "value": "https://acsess.onlinelibrary.wiley.com/doi/epdf/10.2134/agronj1958.00021962005000110022x"
+        }
+      ],
+      [
+        {
+          "cell": "A10",
+          "value": "Delfin"
+        },
+        {
+          "cell": "B10",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C10",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D10",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E10",
+          "value": 10844175015
+        },
+        {
+          "cell": "F10",
+          "value": 30222133
+        },
+        {
+          "cell": "G10",
+          "value": 6664808
+        },
+        {
+          "cell": "H10",
+          "value": 10720046176
+        },
+        {
+          "cell": "I10",
+          "value": 788
+        },
+        {
+          "cell": "J10",
+          "value": 124205539
+        },
+        {
+          "cell": "K10",
+          "value": 1592
+        },
+        {
+          "cell": "L10",
+          "value": "+"
+        },
+        {
+          "cell": "M10",
+          "value": "+"
+        },
+        {
+          "cell": "N10",
+          "value": "Germany"
+        },
+        {
+          "cell": "O10",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P10",
+          "value": "-"
+        },
+        {
+          "cell": "Q10",
+          "value": "Modern cultivar of Nordsaat Saatzucht (Germany), released 2016, with high yield potential and introgression from A. eriantha including powdery mildew resistance gene PM7"
+        },
+        {
+          "cell": "R10",
+          "value": "https://www.scandinavia.saaten-union.com/index.cfm/action/varieties/cul/561/v/4595.html"
+        }
+      ],
+      [
+        {
+          "cell": "A11",
+          "value": "HiFi"
+        },
+        {
+          "cell": "B11",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C11",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D11",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E11",
+          "value": 10947932187
+        },
+        {
+          "cell": "F11",
+          "value": 32969942
+        },
+        {
+          "cell": "G11",
+          "value": 7766205
+        },
+        {
+          "cell": "H11",
+          "value": 10738823075
+        },
+        {
+          "cell": "I11",
+          "value": 612
+        },
+        {
+          "cell": "J11",
+          "value": 209168212
+        },
+        {
+          "cell": "K11",
+          "value": 2039
+        },
+        {
+          "cell": "L11",
+          "value": "+"
+        },
+        {
+          "cell": "M11",
+          "value": "+"
+        },
+        {
+          "cell": "N11",
+          "value": "NDSU, Fargo, North Dakota"
+        },
+        {
+          "cell": "O11",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P11",
+          "value": "-"
+        },
+        {
+          "cell": "Q11",
+          "value": "High B-glucan, Pg13, Pc91, bred at NDSU with parentage from Amagalon"
+        },
+        {
+          "cell": "R11",
+          "value": "https://acsess.onlinelibrary.wiley.com/doi/10.2135/cropsci2005.003"
+        }
+      ],
+      [
+        {
+          "cell": "A12",
+          "value": "Victoria"
+        },
+        {
+          "cell": "B12",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C12",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D12",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E12",
+          "value": 10732944064
+        },
+        {
+          "cell": "F12",
+          "value": 41475042
+        },
+        {
+          "cell": "G12",
+          "value": 11158200
+        },
+        {
+          "cell": "H12",
+          "value": 10608881087
+        },
+        {
+          "cell": "I12",
+          "value": 555
+        },
+        {
+          "cell": "J12",
+          "value": 124116377
+        },
+        {
+          "cell": "K12",
+          "value": 2518
+        },
+        {
+          "cell": "L12",
+          "value": "+"
+        },
+        {
+          "cell": "M12",
+          "value": "+"
+        },
+        {
+          "cell": "N12",
+          "value": "Argentina"
+        },
+        {
+          "cell": "O12",
+          "value": "Landrace"
+        },
+        {
+          "cell": "P12",
+          "value": "-"
+        },
+        {
+          "cell": "Q12",
+          "value": "Historical importance in Med-winter oat breeding; simultaneous disease resistance (Puccinia coronata) + susceptibility (Cochliobolus victoriae); horizontal resistance Visually selected in Uruguay by Alberto Boerger as a mix of similar genotypes."
+        },
+        {
+          "cell": "R12",
+          "value": "https://babel.hathitrust.org/cgi/pt?id=uva.x030347142&view=1up&seq=1; https://oatnews.org/oatnews_pdfs/2018etc/Oat_History_Identification_and_Classific.pdf"
+        }
+      ],
+      [
+        {
+          "cell": "A13",
+          "value": "CN 58138 "
+        },
+        {
+          "cell": "B13",
+          "value": "A. longiglumis"
+        },
+        {
+          "cell": "C13",
+          "value": "AA"
+        },
+        {
+          "cell": "D13",
+          "value": "PacBio CLR + HiC"
+        },
+        {
+          "cell": "E13",
+          "value": 3723815909
+        },
+        {
+          "cell": "F13",
+          "value": 42552144
+        },
+        {
+          "cell": "G13",
+          "value": 5221678
+        },
+        {
+          "cell": "H13",
+          "value": 3671893295
+        },
+        {
+          "cell": "I13",
+          "value": 317
+        },
+        {
+          "cell": "J13",
+          "value": 52010114
+        },
+        {
+          "cell": "K13",
+          "value": 566
+        },
+        {
+          "cell": "L13",
+          "value": "+"
+        },
+        {
+          "cell": "M13",
+          "value": "+"
+        },
+        {
+          "cell": "N13",
+          "value": "Algeria"
+        },
+        {
+          "cell": "O13",
+          "value": "Wild oat"
+        },
+        {
+          "cell": "P13",
+          "value": "https://doi.org/10.1038/s41586-022-04732-y"
+        },
+        {
+          "cell": "Q13",
+          "value": "Algerian origin: Closely related to original diploid A-genome donor; rearrangements in natural hexaploidization process; gene expression changes via neofunctionalization, subfunctionalization, etc."
+        },
+        {
+          "cell": "R13",
+          "value": "https://pgrc-rpc.agr.gc.ca/gringlobal/accessiondetail?id=57466; https://doi.org/10.1038/s41586-022-04732-y"
+        }
+      ],
+      [
+        {
+          "cell": "A14",
+          "value": "OT380"
+        },
+        {
+          "cell": "B14",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C14",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D14",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E14",
+          "value": 10616194052
+        },
+        {
+          "cell": "F14",
+          "value": 48353208
+        },
+        {
+          "cell": "G14",
+          "value": 10132162
+        },
+        {
+          "cell": "H14",
+          "value": 10482056367
+        },
+        {
+          "cell": "I14",
+          "value": 561
+        },
+        {
+          "cell": "J14",
+          "value": 134472885
+        },
+        {
+          "cell": "K14",
+          "value": 2813
+        },
+        {
+          "cell": "L14",
+          "value": "-"
+        },
+        {
+          "cell": "M14",
+          "value": "+"
+        },
+        {
+          "cell": "N14",
+          "value": "Saskatchewan, Canada"
+        },
+        {
+          "cell": "O14",
+          "value": "Breeding line"
+        },
+        {
+          "cell": "P14",
+          "value": "-"
+        },
+        {
+          "cell": "Q14",
+          "value": "Carries unique 6C/1D translocation"
+        },
+        {
+          "cell": "R14",
+          "value": "-"
+        }
+      ],
+      [
+        {
+          "cell": "A15",
+          "value": "PI 182478"
+        },
+        {
+          "cell": "B15",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C15",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D15",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E15",
+          "value": 10919320608
+        },
+        {
+          "cell": "F15",
+          "value": 49981117
+        },
+        {
+          "cell": "G15",
+          "value": 6542492
+        },
+        {
+          "cell": "H15",
+          "value": 10680783912
+        },
+        {
+          "cell": "I15",
+          "value": 740
+        },
+        {
+          "cell": "J15",
+          "value": 238162296
+        },
+        {
+          "cell": "K15",
+          "value": 3745
+        },
+        {
+          "cell": "L15",
+          "value": "+"
+        },
+        {
+          "cell": "M15",
+          "value": "+"
+        },
+        {
+          "cell": "N15",
+          "value": "Turkey"
+        },
+        {
+          "cell": "O15",
+          "value": "Landrace"
+        },
+        {
+          "cell": "P15",
+          "value": "-"
+        },
+        {
+          "cell": "Q15",
+          "value": "Turkish hulless landrace"
+        },
+        {
+          "cell": "R15",
+          "value": "https://npgsweb.ars-grin.gov/gringlobal/accessiondetail?id=1157835"
+        }
+      ],
+      [
+        {
+          "cell": "A16",
+          "value": "H\u00e2tives des Alpes "
+        },
+        {
+          "cell": "B16",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C16",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D16",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E16",
+          "value": 10964486785
+        },
+        {
+          "cell": "F16",
+          "value": 52287396
+        },
+        {
+          "cell": "G16",
+          "value": 9413413
+        },
+        {
+          "cell": "H16",
+          "value": 10816372671
+        },
+        {
+          "cell": "I16",
+          "value": 549
+        },
+        {
+          "cell": "J16",
+          "value": 148166914
+        },
+        {
+          "cell": "K16",
+          "value": 2262
+        },
+        {
+          "cell": "L16",
+          "value": "+"
+        },
+        {
+          "cell": "M16",
+          "value": "+"
+        },
+        {
+          "cell": "N16",
+          "value": "Switzerland"
+        },
+        {
+          "cell": "O16",
+          "value": "Landrace"
+        },
+        {
+          "cell": "P16",
+          "value": "-"
+        },
+        {
+          "cell": "Q16",
+          "value": "Swiss landrace"
+        },
+        {
+          "cell": "R16",
+          "value": "https://www.swissnationalgenebank.ch/media/attachments/9_Hative_des_Alpes_Variety_Sheet.pdf"
+        }
+      ],
+      [
+        {
+          "cell": "A17",
+          "value": "Bannister"
+        },
+        {
+          "cell": "B17",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C17",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D17",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E17",
+          "value": 10780775837
+        },
+        {
+          "cell": "F17",
+          "value": 55674514
+        },
+        {
+          "cell": "G17",
+          "value": 8781401
+        },
+        {
+          "cell": "H17",
+          "value": 10597625717
+        },
+        {
+          "cell": "I17",
+          "value": 599
+        },
+        {
+          "cell": "J17",
+          "value": 183207920
+        },
+        {
+          "cell": "K17",
+          "value": 4702
+        },
+        {
+          "cell": "L17",
+          "value": "+"
+        },
+        {
+          "cell": "M17",
+          "value": "+"
+        },
+        {
+          "cell": "N17",
+          "value": "Australia"
+        },
+        {
+          "cell": "O17",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P17",
+          "value": "-"
+        },
+        {
+          "cell": "Q17",
+          "value": "Australian cultivar , tested as WAOAT2354, dual-purpose variety for both grain and hays, released in 2012, still the largest grown oat variety in Australia, semidwarf type, carrying 2A/2C translocation, CCN Res, lower B-gluc, MS bacterial blight, RLL Sus."
+        },
+        {
+          "cell": "R17",
+          "value": "https://www.agric.wa.gov.au/grains-research-development/bannister-milling-quality-oat-western-australia"
+        }
+      ],
+      [
+        {
+          "cell": "A18",
+          "value": "Bingo"
+        },
+        {
+          "cell": "B18",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C18",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D18",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E18",
+          "value": 10821144154
+        },
+        {
+          "cell": "F18",
+          "value": 57954594
+        },
+        {
+          "cell": "G18",
+          "value": 10695734
+        },
+        {
+          "cell": "H18",
+          "value": 10645382417
+        },
+        {
+          "cell": "I18",
+          "value": 510
+        },
+        {
+          "cell": "J18",
+          "value": 175810637
+        },
+        {
+          "cell": "K18",
+          "value": 4296
+        },
+        {
+          "cell": "L18",
+          "value": "+"
+        },
+        {
+          "cell": "M18",
+          "value": "+"
+        },
+        {
+          "cell": "N18",
+          "value": "Poland"
+        },
+        {
+          "cell": "O18",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P18",
+          "value": "-"
+        },
+        {
+          "cell": "Q18",
+          "value": "Polish modern spring cultivar released 2009, commercially successful in Central Europe; very high yielding, wide adaptability, low hull content, high thousend grain weight"
+        },
+        {
+          "cell": "R18",
+          "value": "https://hr-strzelce.pl/bingo/"
+        }
+      ],
+      [
+        {
+          "cell": "A19",
+          "value": "OT3098"
+        },
+        {
+          "cell": "B19",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C19",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D19",
+          "value": "PacBio HiFi"
+        },
+        {
+          "cell": "E19",
+          "value": 10856540940
+        },
+        {
+          "cell": "F19",
+          "value": 61061032
+        },
+        {
+          "cell": "G19",
+          "value": 13055047
+        },
+        {
+          "cell": "H19",
+          "value": 10781826216
+        },
+        {
+          "cell": "I19",
+          "value": 84
+        },
+        {
+          "cell": "J19",
+          "value": 57299793
+        },
+        {
+          "cell": "L19",
+          "value": "+"
+        },
+        {
+          "cell": "M19",
+          "value": "+"
+        },
+        {
+          "cell": "N19",
+          "value": "Saskatchewan, Canada (Crop Development Centre, University of Saskatchewan)"
+        },
+        {
+          "cell": "O19",
+          "value": "Breeding line"
+        },
+        {
+          "cell": "P19",
+          "value": "https://wheat.pw.usda.gov/GG3/sites/default/files/hot_topics_files/PepsiCo_OT3098_v2_genome_release_April_2021.pdf"
+        },
+        {
+          "cell": "Q19",
+          "value": "Breeding line that is high in protein and milling yield, resistance to diseases like crown rust and smut, and good yield potential in a short plant stature (Crop Development Centre, University of Saskatchewan, Canada)"
+        },
+        {
+          "cell": "R19",
+          "value": "https://wheat.pw.usda.gov/GG3/sites/default/files/hot_topics_files/PepsiCo_OT3098_v2_genome_release_April_2021.pdf"
+        }
+      ],
+      [
+        {
+          "cell": "A20",
+          "value": "Rhapsody"
+        },
+        {
+          "cell": "B20",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C20",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D20",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E20",
+          "value": 10670131586
+        },
+        {
+          "cell": "F20",
+          "value": 60738688
+        },
+        {
+          "cell": "G20",
+          "value": 12700325
+        },
+        {
+          "cell": "H20",
+          "value": 10543304313
+        },
+        {
+          "cell": "I20",
+          "value": 475
+        },
+        {
+          "cell": "J20",
+          "value": 126872673
+        },
+        {
+          "cell": "K20",
+          "value": 2325
+        },
+        {
+          "cell": "L20",
+          "value": "+"
+        },
+        {
+          "cell": "M20",
+          "value": "+"
+        },
+        {
+          "cell": "N20",
+          "value": "UK (Aberystwyth)"
+        },
+        {
+          "cell": "O20",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P20",
+          "value": "-"
+        },
+        {
+          "cell": "Q20",
+          "value": "Modern high yielding winter oat cultivar from IBERS (UK) with mildew resistance from PC54 (A. sterilis)"
+        },
+        {
+          "cell": "R20",
+          "value": "https://oats.agricrops.org/varieties/view/Rhapsody"
+        }
+      ],
+      [
+        {
+          "cell": "A21",
+          "value": "Lion"
+        },
+        {
+          "cell": "B21",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C21",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D21",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E21",
+          "value": 10742268269
+        },
+        {
+          "cell": "F21",
+          "value": 62947445
+        },
+        {
+          "cell": "G21",
+          "value": 12756014
+        },
+        {
+          "cell": "H21",
+          "value": 10635678224
+        },
+        {
+          "cell": "I21",
+          "value": 458
+        },
+        {
+          "cell": "J21",
+          "value": 106633745
+        },
+        {
+          "cell": "K21",
+          "value": 1916
+        },
+        {
+          "cell": "L21",
+          "value": "+"
+        },
+        {
+          "cell": "M21",
+          "value": "+"
+        },
+        {
+          "cell": "N21",
+          "value": "Germany"
+        },
+        {
+          "cell": "O21",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P21",
+          "value": "-"
+        },
+        {
+          "cell": "Q21",
+          "value": "Modern cultivar of Nordsaat Saatzucht (Germany), released 2018, with a breakthrough for low hull content, combined with good agronomic properties"
+        },
+        {
+          "cell": "R21",
+          "value": "https://www.scandinavia.saaten-union.com/index.cfm/action/varieties/cul/561/v/4602.html"
+        }
+      ],
+      [
+        {
+          "cell": "A22",
+          "value": "Bilby"
+        },
+        {
+          "cell": "B22",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C22",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D22",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E22",
+          "value": 10797078610
+        },
+        {
+          "cell": "F22",
+          "value": 78088540
+        },
+        {
+          "cell": "G22",
+          "value": 14494110
+        },
+        {
+          "cell": "H22",
+          "value": 10648435232
+        },
+        {
+          "cell": "I22",
+          "value": 444
+        },
+        {
+          "cell": "J22",
+          "value": 148685678
+        },
+        {
+          "cell": "K22",
+          "value": 3435
+        },
+        {
+          "cell": "L22",
+          "value": "+"
+        },
+        {
+          "cell": "M22",
+          "value": "+"
+        },
+        {
+          "cell": "N22",
+          "value": "Australia"
+        },
+        {
+          "cell": "O22",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P22",
+          "value": "-"
+        },
+        {
+          "cell": "Q22",
+          "value": "Australian cultivar, tested as 06204-16, early-medium spring type, dwarf milling oat variety, CCN Sus, high B-gluc, MR bacterial blight, RLL Res, low screenings, high groat %."
+        },
+        {
+          "cell": "R22",
+          "value": "https://barenbrug.com.au/files/6/7/8/1/3/HS939_BilbyOats_TechSheets_WA_web_FA.pdf"
+        }
+      ],
+      [
+        {
+          "cell": "A23",
+          "value": "Leggett"
+        },
+        {
+          "cell": "B23",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C23",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D23",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E23",
+          "value": 10979380765
+        },
+        {
+          "cell": "F23",
+          "value": 78372766
+        },
+        {
+          "cell": "G23",
+          "value": 15167104
+        },
+        {
+          "cell": "H23",
+          "value": 10811325237
+        },
+        {
+          "cell": "I23",
+          "value": 445
+        },
+        {
+          "cell": "J23",
+          "value": 168097928
+        },
+        {
+          "cell": "K23",
+          "value": 2803
+        },
+        {
+          "cell": "L23",
+          "value": "-"
+        },
+        {
+          "cell": "M23",
+          "value": "-"
+        },
+        {
+          "cell": "N23",
+          "value": "AAFC CRC, Canada"
+        },
+        {
+          "cell": "O23",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P23",
+          "value": "-"
+        },
+        {
+          "cell": "Q23",
+          "value": "Pedigree: OT294/Pc94. Canadian milling oat cultivar, Pc94 carrier from A. strigosa, adapted to western Canada. "
+        },
+        {
+          "cell": "R23",
+          "value": "https://cdnsciencepub.com/doi/pdf/10.4141/CJPS06030"
+        }
+      ],
+      [
+        {
+          "cell": "A24",
+          "value": "CN 25955"
+        },
+        {
+          "cell": "B24",
+          "value": "A. occidentalis"
+        },
+        {
+          "cell": "C24",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D24",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E24",
+          "value": 10860399908
+        },
+        {
+          "cell": "F24",
+          "value": 92532825
+        },
+        {
+          "cell": "G24",
+          "value": 18536602
+        },
+        {
+          "cell": "H24",
+          "value": 10739296889
+        },
+        {
+          "cell": "I24",
+          "value": 388
+        },
+        {
+          "cell": "J24",
+          "value": 121139719
+        },
+        {
+          "cell": "K24",
+          "value": 2428
+        },
+        {
+          "cell": "L24",
+          "value": "-"
+        },
+        {
+          "cell": "M24",
+          "value": "+"
+        },
+        {
+          "cell": "N24",
+          "value": "Morocco (Ouarzazate)"
+        },
+        {
+          "cell": "O24",
+          "value": "Wild oat"
+        },
+        {
+          "cell": "P24",
+          "value": "-"
+        },
+        {
+          "cell": "Q24",
+          "value": "CN 25955 A. Occidentalis from the Trans-Atlas region of Morocco, carrying two 1A/1C interchanges"
+        },
+        {
+          "cell": "R24",
+          "value": "https://pgrc-rpc.agr.gc.ca/gringlobal/accessiondetail?id=22583"
+        }
+      ],
+      [
+        {
+          "cell": "A25",
+          "value": "GMI423"
+        },
+        {
+          "cell": "B25",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C25",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D25",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E25",
+          "value": 10999479000
+        },
+        {
+          "cell": "F25",
+          "value": 96200970
+        },
+        {
+          "cell": "G25",
+          "value": 16923338
+        },
+        {
+          "cell": "H25",
+          "value": 10751791029
+        },
+        {
+          "cell": "I25",
+          "value": 340
+        },
+        {
+          "cell": "J25",
+          "value": 247719871
+        },
+        {
+          "cell": "K25",
+          "value": 5898
+        },
+        {
+          "cell": "L25",
+          "value": "+"
+        },
+        {
+          "cell": "M25",
+          "value": "+"
+        },
+        {
+          "cell": "N25",
+          "value": "Minneapolis, USA"
+        },
+        {
+          "cell": "O25",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P25",
+          "value": "-"
+        },
+        {
+          "cell": "Q25",
+          "value": "Researched General Mills line from breeding program"
+        },
+        {
+          "cell": "R25",
+          "value": "-"
+        }
+      ],
+      [
+        {
+          "cell": "A26",
+          "value": "FM13"
+        },
+        {
+          "cell": "B26",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C26",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D26",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E26",
+          "value": 10813572652
+        },
+        {
+          "cell": "F26",
+          "value": 108743826
+        },
+        {
+          "cell": "G26",
+          "value": 21761584
+        },
+        {
+          "cell": "H26",
+          "value": 10692738066
+        },
+        {
+          "cell": "I26",
+          "value": 364
+        },
+        {
+          "cell": "J26",
+          "value": 120868886
+        },
+        {
+          "cell": "K26",
+          "value": 2740
+        },
+        {
+          "cell": "L26",
+          "value": "+"
+        },
+        {
+          "cell": "M26",
+          "value": "+"
+        },
+        {
+          "cell": "N26",
+          "value": "Spain"
+        },
+        {
+          "cell": "O26",
+          "value": "Landrace"
+        },
+        {
+          "cell": "P26",
+          "value": "-"
+        },
+        {
+          "cell": "Q26",
+          "value": "Spanish landrace with unique allele diversity and good adaptation to Mediterranean environments"
+        },
+        {
+          "cell": "R26",
+          "value": "-"
+        }
+      ],
+      [
+        {
+          "cell": "A27",
+          "value": "GS7"
+        },
+        {
+          "cell": "B27",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C27",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D27",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E27",
+          "value": 10953043066
+        },
+        {
+          "cell": "F27",
+          "value": 112977080
+        },
+        {
+          "cell": "G27",
+          "value": 32196081
+        },
+        {
+          "cell": "H27",
+          "value": 10866338224
+        },
+        {
+          "cell": "I27",
+          "value": 207
+        },
+        {
+          "cell": "J27",
+          "value": 86723442
+        },
+        {
+          "cell": "K27",
+          "value": 2249
+        },
+        {
+          "cell": "L27",
+          "value": "+"
+        },
+        {
+          "cell": "M27",
+          "value": "+"
+        },
+        {
+          "cell": "N27",
+          "value": "Aberdeen, Idaho"
+        },
+        {
+          "cell": "O27",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P27",
+          "value": "-"
+        },
+        {
+          "cell": "Q27",
+          "value": "First hexaploid sequencing candidate. Western US adaptation, bred at USDA Aberdeen"
+        },
+        {
+          "cell": "R27",
+          "value": "-"
+        }
+      ],
+      [
+        {
+          "cell": "A28",
+          "value": "AC Morgan"
+        },
+        {
+          "cell": "B28",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C28",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D28",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E28",
+          "value": 10710794730
+        },
+        {
+          "cell": "F28",
+          "value": 117844920
+        },
+        {
+          "cell": "G28",
+          "value": 21205566
+        },
+        {
+          "cell": "H28",
+          "value": 10614295366
+        },
+        {
+          "cell": "I28",
+          "value": 366
+        },
+        {
+          "cell": "J28",
+          "value": 96533864
+        },
+        {
+          "cell": "K28",
+          "value": 1664
+        },
+        {
+          "cell": "L28",
+          "value": "-"
+        },
+        {
+          "cell": "M28",
+          "value": "-"
+        },
+        {
+          "cell": "N28",
+          "value": "AAFC Lacombe, Canada"
+        },
+        {
+          "cell": "O28",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P28",
+          "value": "-"
+        },
+        {
+          "cell": "Q28",
+          "value": "Pedigree:OT526/OT763. Canadian milling oat cultivar, very high yield, excellent straw strength, adapted to western Canada."
+        },
+        {
+          "cell": "R28",
+          "value": "https://cdnsciencepub.com/doi/10.4141/P00-075"
+        }
+      ],
+      [
+        {
+          "cell": "A29",
+          "value": "Amagalon"
+        },
+        {
+          "cell": "B29",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C29",
+          "value": "AA + CCDD resynthesized A. longiglumis + A. magna"
+        },
+        {
+          "cell": "D29",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E29",
+          "value": 11436952069
+        },
+        {
+          "cell": "F29",
+          "value": 118307911
+        },
+        {
+          "cell": "G29",
+          "value": 25232305
+        },
+        {
+          "cell": "H29",
+          "value": 11254815813
+        },
+        {
+          "cell": "I29",
+          "value": 371
+        },
+        {
+          "cell": "J29",
+          "value": 182171256
+        },
+        {
+          "cell": "K29",
+          "value": 3795
+        },
+        {
+          "cell": "L29",
+          "value": "+"
+        },
+        {
+          "cell": "M29",
+          "value": "+"
+        },
+        {
+          "cell": "N29",
+          "value": "University of Minnesota, USA"
+        },
+        {
+          "cell": "O29",
+          "value": "Synthetic oat"
+        },
+        {
+          "cell": "P29",
+          "value": "-"
+        },
+        {
+          "cell": "Q29",
+          "value": "Synthetic hexaploid A. magna (CCDD) x A. longiglumis (AA). Developed at USDA St. Paul. Used in breeding as the source for Pc91.  "
+        },
+        {
+          "cell": "R29",
+          "value": "https://doi.org/10.2135/cropsci1984.0011183X002400060064x"
+        }
+      ],
+      [
+        {
+          "cell": "A30",
+          "value": "Clintland 60"
+        },
+        {
+          "cell": "B30",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C30",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D30",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E30",
+          "value": 11029142569
+        },
+        {
+          "cell": "F30",
+          "value": 146843466
+        },
+        {
+          "cell": "G30",
+          "value": 32025443
+        },
+        {
+          "cell": "H30",
+          "value": 10764905719
+        },
+        {
+          "cell": "I30",
+          "value": 154
+        },
+        {
+          "cell": "J30",
+          "value": 264250150
+        },
+        {
+          "cell": "K30",
+          "value": 2161
+        },
+        {
+          "cell": "L30",
+          "value": "+"
+        },
+        {
+          "cell": "M30",
+          "value": "+"
+        },
+        {
+          "cell": "N30",
+          "value": "Purdue, Indiana"
+        },
+        {
+          "cell": "O30",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P30",
+          "value": "-"
+        },
+        {
+          "cell": "Q30",
+          "value": "Purdue line - caries many rust genes, midseason, good straw strength, medium height, contributes to many pedigrees"
+        },
+        {
+          "cell": "R30",
+          "value": "https://acsess.onlinelibrary.wiley.com/doi/10.2135/cropsci1978.0011183X001800020049x"
+        }
+      ],
+      [
+        {
+          "cell": "A31",
+          "value": "Aslak"
+        },
+        {
+          "cell": "B31",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C31",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D31",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E31",
+          "value": 10859773845
+        },
+        {
+          "cell": "F31",
+          "value": 152113317
+        },
+        {
+          "cell": "G31",
+          "value": 35678055
+        },
+        {
+          "cell": "H31",
+          "value": 10781791362
+        },
+        {
+          "cell": "I31",
+          "value": 177
+        },
+        {
+          "cell": "J31",
+          "value": 77998083
+        },
+        {
+          "cell": "K31",
+          "value": 894
+        },
+        {
+          "cell": "L31",
+          "value": "+"
+        },
+        {
+          "cell": "M31",
+          "value": "+"
+        },
+        {
+          "cell": "N31",
+          "value": "Finland"
+        },
+        {
+          "cell": "O31",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P31",
+          "value": "-"
+        },
+        {
+          "cell": "Q31",
+          "value": "Genetics of in vitro culturability and regenerability, doubled haploid"
+        },
+        {
+          "cell": "R31",
+          "value": "http://doi.org/10.1007/s11240-004-1560-0; https://cdnsciencepub.com/doi/full/10.1139/G08-040"
+        }
+      ],
+      [
+        {
+          "cell": "A32",
+          "value": "TN1 (PI412441)"
+        },
+        {
+          "cell": "B32",
+          "value": "A. sterilis"
+        },
+        {
+          "cell": "C32",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D32",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E32",
+          "value": 10884880415
+        },
+        {
+          "cell": "F32",
+          "value": 165082787
+        },
+        {
+          "cell": "G32",
+          "value": 47877086
+        },
+        {
+          "cell": "H32",
+          "value": 10826687142
+        },
+        {
+          "cell": "I32",
+          "value": 116
+        },
+        {
+          "cell": "J32",
+          "value": 58202773
+        },
+        {
+          "cell": "K32",
+          "value": 905
+        },
+        {
+          "cell": "L32",
+          "value": "-"
+        },
+        {
+          "cell": "M32",
+          "value": "+"
+        },
+        {
+          "cell": "N32",
+          "value": "Turkey (40.0167, 32.4333)"
+        },
+        {
+          "cell": "O32",
+          "value": "Wild oat"
+        },
+        {
+          "cell": "Q32",
+          "value": "Selected to represent potential cultivar progenitor from Turkish sterilis"
+        },
+        {
+          "cell": "R32",
+          "value": "https://npgsweb.ars-grin.gov/gringlobal/accessiondetail?id=1311215"
+        }
+      ],
+      [
+        {
+          "cell": "A33",
+          "value": "Williams"
+        },
+        {
+          "cell": "B33",
+          "value": "A. sativa"
+        },
+        {
+          "cell": "C33",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D33",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E33",
+          "value": 11107743028
+        },
+        {
+          "cell": "F33",
+          "value": 200341358
+        },
+        {
+          "cell": "G33",
+          "value": 53866678
+        },
+        {
+          "cell": "H33",
+          "value": 10820180463
+        },
+        {
+          "cell": "I33",
+          "value": 98
+        },
+        {
+          "cell": "J33",
+          "value": 287570265
+        },
+        {
+          "cell": "K33",
+          "value": 2717
+        },
+        {
+          "cell": "L33",
+          "value": "-"
+        },
+        {
+          "cell": "M33",
+          "value": "-"
+        },
+        {
+          "cell": "N33",
+          "value": "Australia"
+        },
+        {
+          "cell": "O33",
+          "value": "Cultivar"
+        },
+        {
+          "cell": "P33",
+          "value": "-"
+        },
+        {
+          "cell": "Q33",
+          "value": "Australian cultivar, tested as WAOAT2332, medium-spring type, mid-tall dual purpose variety for both hay and grain, higher beta-glucan than Bannister"
+        },
+        {
+          "cell": "R33",
+          "value": "https://www.agric.wa.gov.au/oats/williams-milling-quality-oat-western-australia?nopaging=1"
+        }
+      ],
+      [
+        {
+          "cell": "A34",
+          "value": "TN4 (PI412487)"
+        },
+        {
+          "cell": "B34",
+          "value": "A. sterilis"
+        },
+        {
+          "cell": "C34",
+          "value": "AACCDD"
+        },
+        {
+          "cell": "D34",
+          "value": "PacBio HiFi + HiC"
+        },
+        {
+          "cell": "E34",
+          "value": 11059807656
+        },
+        {
+          "cell": "F34",
+          "value": 273089457
+        },
+        {
+          "cell": "G34",
+          "value": 72921866
+        },
+        {
+          "cell": "H34",
+          "value": 11016139881
+        },
+        {
+          "cell": "I34",
+          "value": 94
+        },
+        {
+          "cell": "J34",
+          "value": 43675075
+        },
+        {
+          "cell": "K34",
+          "value": 1016
+        },
+        {
+          "cell": "L34",
+          "value": "-"
+        },
+        {
+          "cell": "M34",
+          "value": "+"
+        },
+        {
+          "cell": "N34",
+          "value": "Turkey (37.6833, 37.7833)"
+        },
+        {
+          "cell": "O34",
+          "value": "Wild oat"
+        },
+        {
+          "cell": "Q34",
+          "value": "Selected from Turkish sterilis as remote from cultivar progenitors"
+        },
+        {
+          "cell": "R34",
+          "value": "https://npgsweb.ars-grin.gov/gringlobal/accessiondetail?id=1311261"
+        }
+      ],
+      [
+        {
+          "cell": "A35",
+          "value": "BYU132/CN 19328"
+        },
+        {
+          "cell": "B35",
+          "value": "A. eriantha"
+        },
+        {
+          "cell": "C35",
+          "value": "CC"
+        },
+        {
+          "cell": "D35",
+          "value": "PacBio + Illumina + HiC"
+        },
+        {
+          "cell": "L35",
+          "value": "-"
+        },
+        {
+          "cell": "M35",
+          "value": "+"
+        },
+        {
+          "cell": "N35",
+          "value": "Algeria"
+        },
+        {
+          "cell": "O35",
+          "value": "Wild oat"
+        },
+        {
+          "cell": "P35",
+          "value": "https://doi.org/10.1186/s12915-019-0712-y"
+        },
+        {
+          "cell": "Q35",
+          "value": "Wild oat from Algeria used by Maughan, et al., 2019"
+        },
+        {
+          "cell": "R35",
+          "value": "https://pgrc-rpc.agr.gc.ca/gringlobal/accessiondetail?id=31540; https://doi.org/10.1186/s12915-019-0712-y"
+        }
+      ],
+      [
+        {
+          "cell": "A36",
+          "value": "Cc7277"
+        },
+        {
+          "cell": "B36",
+          "value": "A. atlantica"
+        },
+        {
+          "cell": "C36",
+          "value": "AA"
+        },
+        {
+          "cell": "D36",
+          "value": "PacBio + Illumina + HiC"
+        },
+        {
+          "cell": "L36",
+          "value": "-"
+        },
+        {
+          "cell": "M36",
+          "value": "+"
+        },
+        {
+          "cell": "O36",
+          "value": "Wild oat"
+        },
+        {
+          "cell": "P36",
+          "value": "https://doi.org/10.1186/s12915-019-0712-y"
+        },
+        {
+          "cell": "Q36",
+          "value": "Accession M73  which was collected 13 km north of Ounagha, Morocco."
+        },
+        {
+          "cell": "R36",
+          "value": "https://doi.org/10.1186/s12915-019-0712-y"
+        }
+      ],
+      [
+        {
+          "cell": "A38",
+          "value": "*More pedigree data at:"
+        },
+        {
+          "cell": "B38",
+          "value": "https://oat.triticeaetoolbox.org/"
+        }
+      ]
+    ],
+    "Table S20": [
+      [
+        {
+          "cell": "A1",
+          "value": "Supplementary Table S17. PanOat ENA project IDs for Pacbio, Illumina, HiC, RNA-Seq and Iso-Seq raw data and complete pseudomolecule assemblies"
+        }
+      ],
+      [
+        {
+          "cell": "D3",
+          "value": "Raw data"
+        },
+        {
+          "cell": "L3",
+          "value": "RNA-Seq/Iso-Seq"
+        },
+        {
+          "cell": "Q3",
+          "value": "Assembly"
+        }
+      ],
+      [
+        {
+          "cell": "A4",
+          "value": "Category"
+        },
+        {
+          "cell": "B4",
+          "value": "Name"
+        },
+        {
+          "cell": "C4",
+          "value": "Alternative Name "
+        },
+        {
+          "cell": "D4",
+          "value": "Project"
+        },
+        {
+          "cell": "E4",
+          "value": "samea Hi-C"
+        },
+        {
+          "cell": "F4",
+          "value": "samea HiFi"
+        },
+        {
+          "cell": "G4",
+          "value": "SAMEA MP6"
+        },
+        {
+          "cell": "H4",
+          "value": "SAMEA MP9"
+        },
+        {
+          "cell": "I4",
+          "value": "SAMEA PE450"
+        },
+        {
+          "cell": "J4",
+          "value": "SAMEA 10X"
+        },
+        {
+          "cell": "K4",
+          "value": "SAMEA Omni-C"
+        },
+        {
+          "cell": "L4",
+          "value": "Project"
+        },
+        {
+          "cell": "M4",
+          "value": "Iso-Seq SAMEA"
+        },
+        {
+          "cell": "N4",
+          "value": "#Reads HiFi (IsoSeq)"
+        },
+        {
+          "cell": "O4",
+          "value": "HiFi Yield (bp) - IsoSeq"
+        },
+        {
+          "cell": "P4",
+          "value": "RNA-Seq SAMEA"
+        },
+        {
+          "cell": "Q4",
+          "value": "Project"
+        },
+        {
+          "cell": "R4",
+          "value": "GCA"
+        },
+        {
+          "cell": "S4",
+          "value": "SAMEA ID assembly"
+        },
+        {
+          "cell": "T4",
+          "value": "chromosomes"
+        },
+        {
+          "cell": "U4",
+          "value": "unplaced contigs"
+        }
+      ],
+      [
+        {
+          "cell": "A5",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B5",
+          "value": "Amagalon"
+        },
+        {
+          "cell": "D5",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E5",
+          "value": "SAMEA111508728"
+        },
+        {
+          "cell": "F5",
+          "value": "SAMEA111508727"
+        },
+        {
+          "cell": "G5",
+          "value": "-"
+        },
+        {
+          "cell": "H5",
+          "value": "-"
+        },
+        {
+          "cell": "I5",
+          "value": "-"
+        },
+        {
+          "cell": "J5",
+          "value": "-"
+        },
+        {
+          "cell": "K5",
+          "value": "-"
+        },
+        {
+          "cell": "L5",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M5",
+          "value": "SAMEA112124378"
+        },
+        {
+          "cell": "N5",
+          "value": 2558501
+        },
+        {
+          "cell": "O5",
+          "value": 5375639681
+        },
+        {
+          "cell": "P5",
+          "value": "SAMEA112124401-SAMEA112124417"
+        },
+        {
+          "cell": "Q5",
+          "value": "PRJEB56704"
+        },
+        {
+          "cell": "R5",
+          "value": "GCA_947310255"
+        },
+        {
+          "cell": "S5",
+          "value": "SAMEA111562835"
+        },
+        {
+          "cell": "T5",
+          "value": "OX371328-OX371348"
+        },
+        {
+          "cell": "U5",
+          "value": "CAMZKA010000001-CAMZKA010003795"
+        }
+      ],
+      [
+        {
+          "cell": "A6",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B6",
+          "value": "Aslak"
+        },
+        {
+          "cell": "D6",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E6",
+          "value": "SAMEA111508730"
+        },
+        {
+          "cell": "F6",
+          "value": "SAMEA111508729"
+        },
+        {
+          "cell": "G6",
+          "value": "-"
+        },
+        {
+          "cell": "H6",
+          "value": "-"
+        },
+        {
+          "cell": "I6",
+          "value": "-"
+        },
+        {
+          "cell": "J6",
+          "value": "-"
+        },
+        {
+          "cell": "K6",
+          "value": "-"
+        },
+        {
+          "cell": "L6",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M6",
+          "value": "SAMEA112124379"
+        },
+        {
+          "cell": "N6",
+          "value": 3320120
+        },
+        {
+          "cell": "O6",
+          "value": 6310294334
+        },
+        {
+          "cell": "P6",
+          "value": "SAMEA112124418-SAMEA112124435"
+        },
+        {
+          "cell": "Q6",
+          "value": "PRJEB56717"
+        },
+        {
+          "cell": "R6",
+          "value": "GCA_947310285"
+        },
+        {
+          "cell": "S6",
+          "value": "SAMEA111562836"
+        },
+        {
+          "cell": "T6",
+          "value": "OX371349-OX371369"
+        },
+        {
+          "cell": "U6",
+          "value": "CAMZKB010000001-CAMZKB010000894"
+        }
+      ],
+      [
+        {
+          "cell": "A7",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B7",
+          "value": "A. occidentalis CN25955"
+        },
+        {
+          "cell": "D7",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E7",
+          "value": "SAMEA111508732"
+        },
+        {
+          "cell": "F7",
+          "value": "SAMEA111508731"
+        },
+        {
+          "cell": "G7",
+          "value": "-"
+        },
+        {
+          "cell": "H7",
+          "value": "-"
+        },
+        {
+          "cell": "I7",
+          "value": "-"
+        },
+        {
+          "cell": "J7",
+          "value": "-"
+        },
+        {
+          "cell": "K7",
+          "value": "-"
+        },
+        {
+          "cell": "L7",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M7",
+          "value": "-"
+        },
+        {
+          "cell": "P7",
+          "value": "-"
+        },
+        {
+          "cell": "Q7",
+          "value": "PRJEB56713"
+        },
+        {
+          "cell": "R7",
+          "value": "GCA_947310975"
+        },
+        {
+          "cell": "S7",
+          "value": "SAMEA111562837"
+        },
+        {
+          "cell": "T7",
+          "value": "OX371391-OX371411"
+        },
+        {
+          "cell": "U7",
+          "value": "CAMZKD010000001-CAMZKD010002428"
+        }
+      ],
+      [
+        {
+          "cell": "A8",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B8",
+          "value": "A. sterilis TN1"
+        },
+        {
+          "cell": "C8",
+          "value": "AGK009-AGK014, AGK016"
+        },
+        {
+          "cell": "D8",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E8",
+          "value": "SAMEA111508734"
+        },
+        {
+          "cell": "F8",
+          "value": "SAMEA111508733"
+        },
+        {
+          "cell": "G8",
+          "value": "-"
+        },
+        {
+          "cell": "H8",
+          "value": "-"
+        },
+        {
+          "cell": "I8",
+          "value": "-"
+        },
+        {
+          "cell": "J8",
+          "value": "-"
+        },
+        {
+          "cell": "K8",
+          "value": "-"
+        },
+        {
+          "cell": "L8",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M8",
+          "value": "-"
+        },
+        {
+          "cell": "P8",
+          "value": "-"
+        },
+        {
+          "cell": "Q8",
+          "value": "PRJEB56716"
+        },
+        {
+          "cell": "R8",
+          "value": "GCA_947313225"
+        },
+        {
+          "cell": "S8",
+          "value": "SAMEA111562838"
+        },
+        {
+          "cell": "T8",
+          "value": "OX371859-OX371879"
+        },
+        {
+          "cell": "U8",
+          "value": "CAMZNF010000001-CAMZNF010000905"
+        }
+      ],
+      [
+        {
+          "cell": "A9",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B9",
+          "value": "A. sterilis TN4"
+        },
+        {
+          "cell": "C9",
+          "value": "AGK017, AGK018"
+        },
+        {
+          "cell": "D9",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E9",
+          "value": "SAMEA111508736"
+        },
+        {
+          "cell": "F9",
+          "value": "SAMEA111508735"
+        },
+        {
+          "cell": "G9",
+          "value": "-"
+        },
+        {
+          "cell": "H9",
+          "value": "-"
+        },
+        {
+          "cell": "I9",
+          "value": "-"
+        },
+        {
+          "cell": "J9",
+          "value": "-"
+        },
+        {
+          "cell": "K9",
+          "value": "-"
+        },
+        {
+          "cell": "L9",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M9",
+          "value": "-"
+        },
+        {
+          "cell": "P9",
+          "value": "SAMEA112124818,SAMEA112124823,SAMEA112124824"
+        },
+        {
+          "cell": "Q9",
+          "value": "PRJEB56722"
+        },
+        {
+          "cell": "R9",
+          "value": "GCA_947313515"
+        },
+        {
+          "cell": "S9",
+          "value": "SAMEA111562839"
+        },
+        {
+          "cell": "T9",
+          "value": "OX371838-OX371858"
+        },
+        {
+          "cell": "U9",
+          "value": "CAMZNE010000001-CAMZNE010001016"
+        }
+      ],
+      [
+        {
+          "cell": "A10",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B10",
+          "value": "Bannister"
+        },
+        {
+          "cell": "D10",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E10",
+          "value": "SAMEA111508738"
+        },
+        {
+          "cell": "F10",
+          "value": "SAMEA111508737"
+        },
+        {
+          "cell": "G10",
+          "value": "-"
+        },
+        {
+          "cell": "H10",
+          "value": "-"
+        },
+        {
+          "cell": "I10",
+          "value": "-"
+        },
+        {
+          "cell": "J10",
+          "value": "-"
+        },
+        {
+          "cell": "K10",
+          "value": "-"
+        },
+        {
+          "cell": "L10",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M10",
+          "value": "SAMEA112124382"
+        },
+        {
+          "cell": "N10",
+          "value": 2513574
+        },
+        {
+          "cell": "O10",
+          "value": 5401913575
+        },
+        {
+          "cell": "P10",
+          "value": "SAMEA112124454-SAMEA112124471"
+        },
+        {
+          "cell": "Q10",
+          "value": "PRJEB56712"
+        },
+        {
+          "cell": "R10",
+          "value": "GCA_947310875"
+        },
+        {
+          "cell": "S10",
+          "value": "SAMEA111562840"
+        },
+        {
+          "cell": "T10",
+          "value": "OX371370-OX371390"
+        },
+        {
+          "cell": "U10",
+          "value": "CAMZKC010000001-CAMZKC010004702"
+        }
+      ],
+      [
+        {
+          "cell": "A11",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B11",
+          "value": "Bilby"
+        },
+        {
+          "cell": "D11",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E11",
+          "value": "SAMEA111508740"
+        },
+        {
+          "cell": "F11",
+          "value": "SAMEA111508739"
+        },
+        {
+          "cell": "G11",
+          "value": "-"
+        },
+        {
+          "cell": "H11",
+          "value": "-"
+        },
+        {
+          "cell": "I11",
+          "value": "-"
+        },
+        {
+          "cell": "J11",
+          "value": "-"
+        },
+        {
+          "cell": "K11",
+          "value": "-"
+        },
+        {
+          "cell": "L11",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M11",
+          "value": "SAMEA112124383"
+        },
+        {
+          "cell": "N11",
+          "value": 2045659
+        },
+        {
+          "cell": "O11",
+          "value": 3472232932
+        },
+        {
+          "cell": "P11",
+          "value": "SAMEA112124490-SAMEA112124507"
+        },
+        {
+          "cell": "Q11",
+          "value": "PRJEB56709"
+        },
+        {
+          "cell": "R11",
+          "value": "GCA_947311775"
+        },
+        {
+          "cell": "S11",
+          "value": "SAMEA111562841"
+        },
+        {
+          "cell": "T11",
+          "value": "OX371499-OX371519"
+        },
+        {
+          "cell": "U11",
+          "value": "CAMZMF010000001-CAMZMF010003435"
+        }
+      ],
+      [
+        {
+          "cell": "A12",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B12",
+          "value": "Bingo"
+        },
+        {
+          "cell": "D12",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E12",
+          "value": "SAMEA111508742"
+        },
+        {
+          "cell": "F12",
+          "value": "SAMEA111508741"
+        },
+        {
+          "cell": "G12",
+          "value": "-"
+        },
+        {
+          "cell": "H12",
+          "value": "-"
+        },
+        {
+          "cell": "I12",
+          "value": "-"
+        },
+        {
+          "cell": "J12",
+          "value": "-"
+        },
+        {
+          "cell": "K12",
+          "value": "-"
+        },
+        {
+          "cell": "L12",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M12",
+          "value": "SAMEA112124384"
+        },
+        {
+          "cell": "N12",
+          "value": 2316808
+        },
+        {
+          "cell": "O12",
+          "value": 5050610213
+        },
+        {
+          "cell": "P12",
+          "value": "SAMEA112124508-SAMEA112124525"
+        },
+        {
+          "cell": "Q12",
+          "value": "PRJEB56700"
+        },
+        {
+          "cell": "R12",
+          "value": "GCA_947311525"
+        },
+        {
+          "cell": "S12",
+          "value": "SAMEA111562842"
+        },
+        {
+          "cell": "T12",
+          "value": "OX371583-OX371603"
+        },
+        {
+          "cell": "U12",
+          "value": "CAMZMM010000001-CAMZMM010004296"
+        }
+      ],
+      [
+        {
+          "cell": "A13",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B13",
+          "value": "Clintland60"
+        },
+        {
+          "cell": "D13",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E13",
+          "value": "SAMEA111508744"
+        },
+        {
+          "cell": "F13",
+          "value": "SAMEA111508743"
+        },
+        {
+          "cell": "G13",
+          "value": "-"
+        },
+        {
+          "cell": "H13",
+          "value": "-"
+        },
+        {
+          "cell": "I13",
+          "value": "-"
+        },
+        {
+          "cell": "J13",
+          "value": "-"
+        },
+        {
+          "cell": "K13",
+          "value": "-"
+        },
+        {
+          "cell": "L13",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M13",
+          "value": "SAMEA112124385"
+        },
+        {
+          "cell": "N13",
+          "value": 2103969
+        },
+        {
+          "cell": "O13",
+          "value": 3891886963
+        },
+        {
+          "cell": "P13",
+          "value": "SAMEA112124543-SAMEA112124560"
+        },
+        {
+          "cell": "Q13",
+          "value": "PRJEB56718"
+        },
+        {
+          "cell": "R13",
+          "value": "GCA_947311085"
+        },
+        {
+          "cell": "S13",
+          "value": "SAMEA111562843"
+        },
+        {
+          "cell": "T13",
+          "value": "OX371625-OX371645"
+        },
+        {
+          "cell": "U13",
+          "value": "CAMZMQ010000001-CAMZMQ010002161"
+        }
+      ],
+      [
+        {
+          "cell": "A14",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B14",
+          "value": "Delfin"
+        },
+        {
+          "cell": "D14",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E14",
+          "value": "SAMEA111508746"
+        },
+        {
+          "cell": "F14",
+          "value": "SAMEA111508745"
+        },
+        {
+          "cell": "G14",
+          "value": "-"
+        },
+        {
+          "cell": "H14",
+          "value": "-"
+        },
+        {
+          "cell": "I14",
+          "value": "-"
+        },
+        {
+          "cell": "J14",
+          "value": "-"
+        },
+        {
+          "cell": "K14",
+          "value": "-"
+        },
+        {
+          "cell": "L14",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M14",
+          "value": "SAMEA112124386"
+        },
+        {
+          "cell": "N14",
+          "value": 2852622
+        },
+        {
+          "cell": "O14",
+          "value": 5819760480
+        },
+        {
+          "cell": "P14",
+          "value": "SAMEA112124561-SAMEA112124578"
+        },
+        {
+          "cell": "Q14",
+          "value": "PRJEB56707"
+        },
+        {
+          "cell": "R14",
+          "value": "GCA_947311555"
+        },
+        {
+          "cell": "S14",
+          "value": "SAMEA111562844"
+        },
+        {
+          "cell": "T14",
+          "value": "OX371646-OX371666"
+        },
+        {
+          "cell": "U14",
+          "value": "CAMZMR010000001-CAMZMR010001592"
+        }
+      ],
+      [
+        {
+          "cell": "A15",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B15",
+          "value": "FM13"
+        },
+        {
+          "cell": "D15",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E15",
+          "value": "SAMEA111508748"
+        },
+        {
+          "cell": "F15",
+          "value": "SAMEA111508747"
+        },
+        {
+          "cell": "G15",
+          "value": "-"
+        },
+        {
+          "cell": "H15",
+          "value": "-"
+        },
+        {
+          "cell": "I15",
+          "value": "-"
+        },
+        {
+          "cell": "J15",
+          "value": "-"
+        },
+        {
+          "cell": "K15",
+          "value": "-"
+        },
+        {
+          "cell": "L15",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M15",
+          "value": "SAMEA112124387"
+        },
+        {
+          "cell": "N15",
+          "value": 2972081
+        },
+        {
+          "cell": "O15",
+          "value": 5627172318
+        },
+        {
+          "cell": "P15",
+          "value": "SAMEA112124579-SAMEA112124596"
+        },
+        {
+          "cell": "Q15",
+          "value": "PRJEB56703"
+        },
+        {
+          "cell": "R15",
+          "value": "GCA_947311355"
+        },
+        {
+          "cell": "S15",
+          "value": "SAMEA111562845"
+        },
+        {
+          "cell": "T15",
+          "value": "OX371415-OX371435"
+        },
+        {
+          "cell": "U15",
+          "value": "CAMZMB010000001-CAMZMB010002740"
+        }
+      ],
+      [
+        {
+          "cell": "A16",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B16",
+          "value": "Gehl"
+        },
+        {
+          "cell": "D16",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E16",
+          "value": "SAMEA111508752"
+        },
+        {
+          "cell": "F16",
+          "value": "-"
+        },
+        {
+          "cell": "G16",
+          "value": "-"
+        },
+        {
+          "cell": "H16",
+          "value": "SAMEA111508749"
+        },
+        {
+          "cell": "I16",
+          "value": "SAMEA111508750"
+        },
+        {
+          "cell": "J16",
+          "value": "SAMEA111508751"
+        },
+        {
+          "cell": "K16",
+          "value": "-"
+        },
+        {
+          "cell": "L16",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M16",
+          "value": "SAMEA112124388"
+        },
+        {
+          "cell": "N16",
+          "value": 820925
+        },
+        {
+          "cell": "O16",
+          "value": 1893351474
+        },
+        {
+          "cell": "P16",
+          "value": "SAMEA112124633-SAMEA112124650"
+        },
+        {
+          "cell": "Q16",
+          "value": "PRJEB56720"
+        },
+        {
+          "cell": "R16",
+          "value": "GCA_947311365"
+        },
+        {
+          "cell": "S16",
+          "value": "SAMEA111562846"
+        },
+        {
+          "cell": "T16",
+          "value": "OX371667-OX371687"
+        },
+        {
+          "cell": "U16",
+          "value": "CAMZMS010000001-CAMZMS010271418"
+        }
+      ],
+      [
+        {
+          "cell": "A17",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B17",
+          "value": "GMI423"
+        },
+        {
+          "cell": "D17",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E17",
+          "value": "SAMEA111508754"
+        },
+        {
+          "cell": "F17",
+          "value": "SAMEA111508753"
+        },
+        {
+          "cell": "G17",
+          "value": "-"
+        },
+        {
+          "cell": "H17",
+          "value": "-"
+        },
+        {
+          "cell": "I17",
+          "value": "-"
+        },
+        {
+          "cell": "J17",
+          "value": "-"
+        },
+        {
+          "cell": "K17",
+          "value": "-"
+        },
+        {
+          "cell": "L17",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M17",
+          "value": "SAMEA112124389"
+        },
+        {
+          "cell": "N17",
+          "value": 2073931
+        },
+        {
+          "cell": "O17",
+          "value": 5133444386
+        },
+        {
+          "cell": "P17",
+          "value": "SAMEA112124597-SAMEA112124614"
+        },
+        {
+          "cell": "Q17",
+          "value": "PRJEB56711"
+        },
+        {
+          "cell": "R17",
+          "value": "GCA_947311235"
+        },
+        {
+          "cell": "S17",
+          "value": "SAMEA111562847"
+        },
+        {
+          "cell": "T17",
+          "value": "OX371520-OX371540"
+        },
+        {
+          "cell": "U17",
+          "value": "CAMZMG010000001-CAMZMG010005898"
+        }
+      ],
+      [
+        {
+          "cell": "A18",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B18",
+          "value": "GS7"
+        },
+        {
+          "cell": "D18",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E18",
+          "value": "SAMEA111508756"
+        },
+        {
+          "cell": "F18",
+          "value": "SAMEA111508755"
+        },
+        {
+          "cell": "G18",
+          "value": "-"
+        },
+        {
+          "cell": "H18",
+          "value": "-"
+        },
+        {
+          "cell": "I18",
+          "value": "-"
+        },
+        {
+          "cell": "J18",
+          "value": "-"
+        },
+        {
+          "cell": "K18",
+          "value": "-"
+        },
+        {
+          "cell": "L18",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M18",
+          "value": "SAMEA112124390"
+        },
+        {
+          "cell": "N18",
+          "value": 4801976
+        },
+        {
+          "cell": "O18",
+          "value": 7705845000
+        },
+        {
+          "cell": "P18",
+          "value": "SAMEA112124615-SAMEA112124632"
+        },
+        {
+          "cell": "Q18",
+          "value": "PRJEB56719"
+        },
+        {
+          "cell": "R18",
+          "value": "GCA_947311915"
+        },
+        {
+          "cell": "S18",
+          "value": "SAMEA111562848"
+        },
+        {
+          "cell": "T18",
+          "value": "OX371730-OX371750"
+        },
+        {
+          "cell": "U18",
+          "value": "CAMZNC010000001-CAMZNC010002249"
+        }
+      ],
+      [
+        {
+          "cell": "A19",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B19",
+          "value": "H\u00e2tives des Alpes "
+        },
+        {
+          "cell": "D19",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E19",
+          "value": "SAMEA111508758"
+        },
+        {
+          "cell": "F19",
+          "value": "SAMEA111508757"
+        },
+        {
+          "cell": "G19",
+          "value": "-"
+        },
+        {
+          "cell": "H19",
+          "value": "-"
+        },
+        {
+          "cell": "I19",
+          "value": "-"
+        },
+        {
+          "cell": "J19",
+          "value": "-"
+        },
+        {
+          "cell": "K19",
+          "value": "-"
+        },
+        {
+          "cell": "L19",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M19",
+          "value": "SAMEA112124391"
+        },
+        {
+          "cell": "N19",
+          "value": 3106659
+        },
+        {
+          "cell": "O19",
+          "value": 5975940463
+        },
+        {
+          "cell": "P19",
+          "value": "SAMEA112124651-SAMEA112124668"
+        },
+        {
+          "cell": "Q19",
+          "value": "PRJEB56710"
+        },
+        {
+          "cell": "R19",
+          "value": "GCA_947311225"
+        },
+        {
+          "cell": "S19",
+          "value": "SAMEA111562849"
+        },
+        {
+          "cell": "T19",
+          "value": "OX371457-OX371477"
+        },
+        {
+          "cell": "U19",
+          "value": "CAMZMD010000001-CAMZMD010002262"
+        }
+      ],
+      [
+        {
+          "cell": "A20",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B20",
+          "value": "HiFi"
+        },
+        {
+          "cell": "D20",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E20",
+          "value": "SAMEA111508760"
+        },
+        {
+          "cell": "F20",
+          "value": "SAMEA111508759"
+        },
+        {
+          "cell": "G20",
+          "value": "-"
+        },
+        {
+          "cell": "H20",
+          "value": "-"
+        },
+        {
+          "cell": "I20",
+          "value": "-"
+        },
+        {
+          "cell": "J20",
+          "value": "-"
+        },
+        {
+          "cell": "K20",
+          "value": "-"
+        },
+        {
+          "cell": "L20",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M20",
+          "value": "SAMEA112124392"
+        },
+        {
+          "cell": "N20",
+          "value": 2177940
+        },
+        {
+          "cell": "O20",
+          "value": 3943047131
+        },
+        {
+          "cell": "P20",
+          "value": "SAMEA112124669-SAMEA112124686"
+        },
+        {
+          "cell": "Q20",
+          "value": "PRJEB56721"
+        },
+        {
+          "cell": "R20",
+          "value": "GCA_947311165"
+        },
+        {
+          "cell": "S20",
+          "value": "SAMEA111562850"
+        },
+        {
+          "cell": "T20",
+          "value": "OX371562-OX371582"
+        },
+        {
+          "cell": "U20",
+          "value": "CAMZMI010000001-CAMZMI010002039"
+        }
+      ],
+      [
+        {
+          "cell": "A21",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B21",
+          "value": "Lion"
+        },
+        {
+          "cell": "D21",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E21",
+          "value": "SAMEA111508762"
+        },
+        {
+          "cell": "F21",
+          "value": "SAMEA111508761"
+        },
+        {
+          "cell": "G21",
+          "value": "-"
+        },
+        {
+          "cell": "H21",
+          "value": "-"
+        },
+        {
+          "cell": "I21",
+          "value": "-"
+        },
+        {
+          "cell": "J21",
+          "value": "-"
+        },
+        {
+          "cell": "K21",
+          "value": "-"
+        },
+        {
+          "cell": "L21",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M21",
+          "value": "SAMEA112124393"
+        },
+        {
+          "cell": "N21",
+          "value": 1104497
+        },
+        {
+          "cell": "O21",
+          "value": 2623298360
+        },
+        {
+          "cell": "P21",
+          "value": "SAMEA112124687-SAMEA112124704"
+        },
+        {
+          "cell": "Q21",
+          "value": "PRJEB56701"
+        },
+        {
+          "cell": "R21",
+          "value": "GCA_947311155"
+        },
+        {
+          "cell": "S21",
+          "value": "SAMEA111562851"
+        },
+        {
+          "cell": "T21",
+          "value": "OX371541-OX371561"
+        },
+        {
+          "cell": "U21",
+          "value": "CAMZMH010000001-CAMZMH010001916"
+        }
+      ],
+      [
+        {
+          "cell": "A22",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B22",
+          "value": "Nicolas"
+        },
+        {
+          "cell": "D22",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E22",
+          "value": "SAMEA111508766"
+        },
+        {
+          "cell": "F22",
+          "value": "-"
+        },
+        {
+          "cell": "G22",
+          "value": "-"
+        },
+        {
+          "cell": "H22",
+          "value": "SAMEA111508763"
+        },
+        {
+          "cell": "I22",
+          "value": "SAMEA111508764"
+        },
+        {
+          "cell": "J22",
+          "value": "SAMEA111508765"
+        },
+        {
+          "cell": "K22",
+          "value": "-"
+        },
+        {
+          "cell": "L22",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M22",
+          "value": "SAMEA112124394"
+        },
+        {
+          "cell": "N22",
+          "value": 1824698
+        },
+        {
+          "cell": "O22",
+          "value": 4032394279
+        },
+        {
+          "cell": "P22",
+          "value": "SAMEA112124705-SAMEA112124722"
+        },
+        {
+          "cell": "Q22",
+          "value": "PRJEB56708"
+        },
+        {
+          "cell": "R22",
+          "value": "GCA_947311135"
+        },
+        {
+          "cell": "S22",
+          "value": "SAMEA111562852"
+        },
+        {
+          "cell": "T22",
+          "value": "OX371688-OX371708"
+        },
+        {
+          "cell": "U22",
+          "value": "CAMZMT010000001-CAMZMT010280875"
+        }
+      ],
+      [
+        {
+          "cell": "A23",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B23",
+          "value": "OT380"
+        },
+        {
+          "cell": "D23",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E23",
+          "value": "SAMEA111508768"
+        },
+        {
+          "cell": "F23",
+          "value": "SAMEA111508767"
+        },
+        {
+          "cell": "G23",
+          "value": "-"
+        },
+        {
+          "cell": "H23",
+          "value": "-"
+        },
+        {
+          "cell": "I23",
+          "value": "-"
+        },
+        {
+          "cell": "J23",
+          "value": "-"
+        },
+        {
+          "cell": "K23",
+          "value": "-"
+        },
+        {
+          "cell": "L23",
+          "value": "-"
+        },
+        {
+          "cell": "M23",
+          "value": "-"
+        },
+        {
+          "cell": "P23",
+          "value": "-"
+        },
+        {
+          "cell": "Q23",
+          "value": "PRJEB56705"
+        },
+        {
+          "cell": "R23",
+          "value": "GCA_947311925"
+        },
+        {
+          "cell": "S23",
+          "value": "SAMEA111562853"
+        },
+        {
+          "cell": "T23",
+          "value": "OX371709-OX371729"
+        },
+        {
+          "cell": "U23",
+          "value": "CAMZNB010000001-CAMZNB010002813"
+        }
+      ],
+      [
+        {
+          "cell": "A24",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B24",
+          "value": "Park"
+        },
+        {
+          "cell": "D24",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E24",
+          "value": "SAMEA111508770"
+        },
+        {
+          "cell": "F24",
+          "value": "SAMEA111508769"
+        },
+        {
+          "cell": "G24",
+          "value": "-"
+        },
+        {
+          "cell": "H24",
+          "value": "-"
+        },
+        {
+          "cell": "I24",
+          "value": "-"
+        },
+        {
+          "cell": "J24",
+          "value": "-"
+        },
+        {
+          "cell": "K24",
+          "value": "-"
+        },
+        {
+          "cell": "L24",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M24",
+          "value": "SAMEA112124396"
+        },
+        {
+          "cell": "N24",
+          "value": 4399416
+        },
+        {
+          "cell": "O24",
+          "value": 7340129109
+        },
+        {
+          "cell": "P24",
+          "value": "SAMEA112124759-SAMEA112124776"
+        },
+        {
+          "cell": "Q24",
+          "value": "PRJEB56714"
+        },
+        {
+          "cell": "R24",
+          "value": "GCA_947311345"
+        },
+        {
+          "cell": "S24",
+          "value": "SAMEA111562854"
+        },
+        {
+          "cell": "T24",
+          "value": "OX371478-OX371498"
+        },
+        {
+          "cell": "U24",
+          "value": "CAMZME010000001-CAMZME010001362"
+        }
+      ],
+      [
+        {
+          "cell": "A25",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B25",
+          "value": "PI182478"
+        },
+        {
+          "cell": "D25",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E25",
+          "value": "SAMEA111508772"
+        },
+        {
+          "cell": "F25",
+          "value": "SAMEA111508771"
+        },
+        {
+          "cell": "G25",
+          "value": "-"
+        },
+        {
+          "cell": "H25",
+          "value": "-"
+        },
+        {
+          "cell": "I25",
+          "value": "-"
+        },
+        {
+          "cell": "J25",
+          "value": "-"
+        },
+        {
+          "cell": "K25",
+          "value": "-"
+        },
+        {
+          "cell": "L25",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M25",
+          "value": "SAMEA112124397"
+        },
+        {
+          "cell": "N25",
+          "value": 4112313
+        },
+        {
+          "cell": "O25",
+          "value": 6797855720
+        },
+        {
+          "cell": "P25",
+          "value": "SAMEA112124741-SAMEA112124758"
+        },
+        {
+          "cell": "Q25",
+          "value": "PRJEB56715"
+        },
+        {
+          "cell": "R25",
+          "value": "GCA_947312425"
+        },
+        {
+          "cell": "S25",
+          "value": "SAMEA111562855"
+        },
+        {
+          "cell": "T25",
+          "value": "OX371751-OX371771"
+        },
+        {
+          "cell": "U25",
+          "value": "CAMZND010000001-CAMZND010003745"
+        }
+      ],
+      [
+        {
+          "cell": "A26",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B26",
+          "value": "Rhapsody"
+        },
+        {
+          "cell": "D26",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E26",
+          "value": "SAMEA111508774"
+        },
+        {
+          "cell": "F26",
+          "value": "SAMEA111508773"
+        },
+        {
+          "cell": "G26",
+          "value": "-"
+        },
+        {
+          "cell": "H26",
+          "value": "-"
+        },
+        {
+          "cell": "I26",
+          "value": "-"
+        },
+        {
+          "cell": "J26",
+          "value": "-"
+        },
+        {
+          "cell": "K26",
+          "value": "-"
+        },
+        {
+          "cell": "L26",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M26",
+          "value": "SAMEA112124398"
+        },
+        {
+          "cell": "N26",
+          "value": 4325445
+        },
+        {
+          "cell": "O26",
+          "value": 7607839011
+        },
+        {
+          "cell": "P26",
+          "value": "SAMEA112124777-SAMEA112124794"
+        },
+        {
+          "cell": "Q26",
+          "value": "PRJEB56702"
+        },
+        {
+          "cell": "R26",
+          "value": "GCA_947311295"
+        },
+        {
+          "cell": "S26",
+          "value": "SAMEA111562856"
+        },
+        {
+          "cell": "T26",
+          "value": "OX371604-OX371624"
+        },
+        {
+          "cell": "U26",
+          "value": "CAMZMP010000001-CAMZMP010002325"
+        }
+      ],
+      [
+        {
+          "cell": "A27",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B27",
+          "value": "Victoria"
+        },
+        {
+          "cell": "D27",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E27",
+          "value": "SAMEA111508776"
+        },
+        {
+          "cell": "F27",
+          "value": "SAMEA111508775"
+        },
+        {
+          "cell": "G27",
+          "value": "-"
+        },
+        {
+          "cell": "H27",
+          "value": "-"
+        },
+        {
+          "cell": "I27",
+          "value": "-"
+        },
+        {
+          "cell": "J27",
+          "value": "-"
+        },
+        {
+          "cell": "K27",
+          "value": "-"
+        },
+        {
+          "cell": "L27",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M27",
+          "value": "SAMEA112124400"
+        },
+        {
+          "cell": "N27",
+          "value": 2088242
+        },
+        {
+          "cell": "O27",
+          "value": 5304711905
+        },
+        {
+          "cell": "P27",
+          "value": "SAMEA112124795-SAMEA112124812"
+        },
+        {
+          "cell": "Q27",
+          "value": "PRJEB56706"
+        },
+        {
+          "cell": "R27",
+          "value": "GCA_947311595"
+        },
+        {
+          "cell": "S27",
+          "value": "SAMEA111562857"
+        },
+        {
+          "cell": "T27",
+          "value": "OX371436-OX371456"
+        },
+        {
+          "cell": "U27",
+          "value": "CAMZMC010000001-CAMZMC010002518"
+        }
+      ],
+      [
+        {
+          "cell": "A28",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B28",
+          "value": "Leggett"
+        },
+        {
+          "cell": "D28",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E28",
+          "value": "SAMEA113461808"
+        },
+        {
+          "cell": "F28",
+          "value": "SAMEA113462261"
+        },
+        {
+          "cell": "G28",
+          "value": "-"
+        },
+        {
+          "cell": "H28",
+          "value": "-"
+        },
+        {
+          "cell": "I28",
+          "value": "-"
+        },
+        {
+          "cell": "J28",
+          "value": "-"
+        },
+        {
+          "cell": "K28",
+          "value": "-"
+        },
+        {
+          "cell": "L28",
+          "value": "-"
+        },
+        {
+          "cell": "M28",
+          "value": "-"
+        },
+        {
+          "cell": "N28",
+          "value": "-"
+        },
+        {
+          "cell": "O28",
+          "value": "-"
+        },
+        {
+          "cell": "P28",
+          "value": "-"
+        },
+        {
+          "cell": "Q28",
+          "value": "PRJEB62638"
+        },
+        {
+          "cell": "R28",
+          "value": "GCA_951802355"
+        },
+        {
+          "cell": "S28",
+          "value": "SAMEA113462261"
+        },
+        {
+          "cell": "T28",
+          "value": "OX637760-OX637780"
+        },
+        {
+          "cell": "U28",
+          "value": "CATOQA010000001-CATOQA010002803"
+        }
+      ],
+      [
+        {
+          "cell": "A29",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B29",
+          "value": "Morgan"
+        },
+        {
+          "cell": "D29",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E29",
+          "value": "SAMEA113461807"
+        },
+        {
+          "cell": "F29",
+          "value": "SAMEA113462260"
+        },
+        {
+          "cell": "G29",
+          "value": "-"
+        },
+        {
+          "cell": "H29",
+          "value": "-"
+        },
+        {
+          "cell": "I29",
+          "value": "-"
+        },
+        {
+          "cell": "J29",
+          "value": "-"
+        },
+        {
+          "cell": "K29",
+          "value": "-"
+        },
+        {
+          "cell": "L29",
+          "value": "-"
+        },
+        {
+          "cell": "M29",
+          "value": "-"
+        },
+        {
+          "cell": "N29",
+          "value": "-"
+        },
+        {
+          "cell": "O29",
+          "value": "-"
+        },
+        {
+          "cell": "P29",
+          "value": "-"
+        },
+        {
+          "cell": "Q29",
+          "value": "PRJEB62639"
+        },
+        {
+          "cell": "R29",
+          "value": "GCA_951802365"
+        },
+        {
+          "cell": "S29",
+          "value": "SAMEA113462260"
+        },
+        {
+          "cell": "T29",
+          "value": "OX637718-OX637738"
+        },
+        {
+          "cell": "U29",
+          "value": "CATOPY010000001-CATOPY010001664"
+        }
+      ],
+      [
+        {
+          "cell": "A30",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B30",
+          "value": "Williams"
+        },
+        {
+          "cell": "D30",
+          "value": "PRJEB56828"
+        },
+        {
+          "cell": "E30",
+          "value": "SAMEA113461809"
+        },
+        {
+          "cell": "F30",
+          "value": "SAMEA113462259"
+        },
+        {
+          "cell": "G30",
+          "value": "-"
+        },
+        {
+          "cell": "H30",
+          "value": "-"
+        },
+        {
+          "cell": "I30",
+          "value": "-"
+        },
+        {
+          "cell": "J30",
+          "value": "-"
+        },
+        {
+          "cell": "K30",
+          "value": "-"
+        },
+        {
+          "cell": "L30",
+          "value": "-"
+        },
+        {
+          "cell": "M30",
+          "value": "-"
+        },
+        {
+          "cell": "N30",
+          "value": "-"
+        },
+        {
+          "cell": "O30",
+          "value": "-"
+        },
+        {
+          "cell": "P30",
+          "value": "-"
+        },
+        {
+          "cell": "Q30",
+          "value": "PRJEB62640"
+        },
+        {
+          "cell": "R30",
+          "value": "GCA_951802345"
+        },
+        {
+          "cell": "S30",
+          "value": "SAMEA113462259"
+        },
+        {
+          "cell": "T30",
+          "value": "OX637739-OX637759"
+        },
+        {
+          "cell": "U30",
+          "value": "CATOPZ010000001-CATOPZ010002717"
+        }
+      ],
+      [
+        {
+          "cell": "A31",
+          "value": "PanOat"
+        },
+        {
+          "cell": "B31",
+          "value": "A. byzantina PI258586"
+        },
+        {
+          "cell": "D31",
+          "value": "PRJEB45067"
+        },
+        {
+          "cell": "E31",
+          "value": "-"
+        },
+        {
+          "cell": "F31",
+          "value": "-"
+        },
+        {
+          "cell": "G31",
+          "value": "SAMEA8792933"
+        },
+        {
+          "cell": "H31",
+          "value": "SAMEA8792932"
+        },
+        {
+          "cell": "I31",
+          "value": "SAMEA8792931"
+        },
+        {
+          "cell": "J31",
+          "value": "-"
+        },
+        {
+          "cell": "K31",
+          "value": "SAMEA8792934"
+        },
+        {
+          "cell": "L31",
+          "value": "-"
+        },
+        {
+          "cell": "M31",
+          "value": "-"
+        },
+        {
+          "cell": "N31",
+          "value": "-"
+        },
+        {
+          "cell": "O31",
+          "value": "-"
+        },
+        {
+          "cell": "P31",
+          "value": "-"
+        },
+        {
+          "cell": "Q31",
+          "value": "PRJEB45067"
+        },
+        {
+          "cell": "R31",
+          "value": "GCA_910574625"
+        },
+        {
+          "cell": "S31",
+          "value": "SAMEA8792935"
+        },
+        {
+          "cell": "T31",
+          "value": "OU342357-OU342377"
+        },
+        {
+          "cell": "U31",
+          "value": "CAJTXI010000001-CAJTXI010532759"
+        }
+      ],
+      [
+        {
+          "cell": "A32",
+          "value": "Pepsico"
+        },
+        {
+          "cell": "B32",
+          "value": "OT3098"
+        },
+        {
+          "cell": "D32",
+          "value": "PRJEB76239"
+        },
+        {
+          "cell": "E32",
+          "value": "-"
+        },
+        {
+          "cell": "F32",
+          "value": "-"
+        },
+        {
+          "cell": "G32",
+          "value": "-"
+        },
+        {
+          "cell": "H32",
+          "value": "-"
+        },
+        {
+          "cell": "I32",
+          "value": "-"
+        },
+        {
+          "cell": "J32",
+          "value": "-"
+        },
+        {
+          "cell": "K32",
+          "value": "-"
+        },
+        {
+          "cell": "L32",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M32",
+          "value": "SAMEA112124395"
+        },
+        {
+          "cell": "N32",
+          "value": 4057597
+        },
+        {
+          "cell": "O32",
+          "value": 6933552477
+        },
+        {
+          "cell": "P32",
+          "value": "SAMEA112124723-SAMEA112124740"
+        },
+        {
+          "cell": "Q32",
+          "value": "-"
+        },
+        {
+          "cell": "R32",
+          "value": "-"
+        },
+        {
+          "cell": "S32",
+          "value": "-"
+        },
+        {
+          "cell": "T32",
+          "value": "-"
+        },
+        {
+          "cell": "U32",
+          "value": "-"
+        }
+      ],
+      [
+        {
+          "cell": "A33",
+          "value": "Kamal et al. 2022"
+        },
+        {
+          "cell": "B33",
+          "value": "Sang"
+        },
+        {
+          "cell": "D33",
+          "value": "PRJEB43668"
+        },
+        {
+          "cell": "E33",
+          "value": "SAMEA8245881"
+        },
+        {
+          "cell": "F33",
+          "value": "-"
+        },
+        {
+          "cell": "G33",
+          "value": "-"
+        },
+        {
+          "cell": "H33",
+          "value": "-"
+        },
+        {
+          "cell": "I33",
+          "value": "-"
+        },
+        {
+          "cell": "J33",
+          "value": "-"
+        },
+        {
+          "cell": "K33",
+          "value": "-"
+        },
+        {
+          "cell": "L33",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M33",
+          "value": "SAMEA112124399"
+        },
+        {
+          "cell": "N33",
+          "value": 1690078
+        },
+        {
+          "cell": "O33",
+          "value": 4464965951
+        },
+        {
+          "cell": "P33",
+          "value": "SAMEA112124472-SAMEA112124489"
+        },
+        {
+          "cell": "Q33",
+          "value": "PRJEB44810"
+        },
+        {
+          "cell": "R33",
+          "value": "GCA_910574605"
+        },
+        {
+          "cell": "S33",
+          "value": "SAMEA8245881"
+        },
+        {
+          "cell": "T33",
+          "value": "OU342378-OU342398"
+        },
+        {
+          "cell": "U33",
+          "value": "CAJTXJ010000001-CAJTXJ010529760"
+        }
+      ],
+      [
+        {
+          "cell": "A34",
+          "value": "Kamal et al. 2022"
+        },
+        {
+          "cell": "B34",
+          "value": "A. insularis BYU209"
+        },
+        {
+          "cell": "D34",
+          "value": "PRJEB43670"
+        },
+        {
+          "cell": "E34",
+          "value": "SAMEA8245879"
+        },
+        {
+          "cell": "F34",
+          "value": "-"
+        },
+        {
+          "cell": "G34",
+          "value": "-"
+        },
+        {
+          "cell": "H34",
+          "value": "-"
+        },
+        {
+          "cell": "I34",
+          "value": "-"
+        },
+        {
+          "cell": "J34",
+          "value": "-"
+        },
+        {
+          "cell": "K34",
+          "value": "-"
+        },
+        {
+          "cell": "L34",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M34",
+          "value": "SAMEA112124380"
+        },
+        {
+          "cell": "N34",
+          "value": 2561012
+        },
+        {
+          "cell": "O34",
+          "value": 4913720643
+        },
+        {
+          "cell": "P34",
+          "value": "SAMEA112124436-SAMEA112124453"
+        },
+        {
+          "cell": "Q34",
+          "value": "PRJEB45088"
+        },
+        {
+          "cell": "R34",
+          "value": "GCA_910574615"
+        },
+        {
+          "cell": "S34",
+          "value": "SAMEA8245879"
+        },
+        {
+          "cell": "T34",
+          "value": "OU342338-OU342351"
+        },
+        {
+          "cell": "U34",
+          "value": "CAJTIW010000001-CAJTIW010006523"
+        }
+      ],
+      [
+        {
+          "cell": "A35",
+          "value": "Kamal et al. 2022"
+        },
+        {
+          "cell": "B35",
+          "value": "A. longiglumis CN58138"
+        },
+        {
+          "cell": "D35",
+          "value": "PRJEB43669"
+        },
+        {
+          "cell": "E35",
+          "value": "SAMEA8245880"
+        },
+        {
+          "cell": "F35",
+          "value": "-"
+        },
+        {
+          "cell": "G35",
+          "value": "-"
+        },
+        {
+          "cell": "H35",
+          "value": "-"
+        },
+        {
+          "cell": "I35",
+          "value": "-"
+        },
+        {
+          "cell": "J35",
+          "value": "-"
+        },
+        {
+          "cell": "K35",
+          "value": "-"
+        },
+        {
+          "cell": "L35",
+          "value": "PRJEB57570"
+        },
+        {
+          "cell": "M35",
+          "value": "SAMEA112124381"
+        },
+        {
+          "cell": "N35",
+          "value": 2027149
+        },
+        {
+          "cell": "O35",
+          "value": 3972874755
+        },
+        {
+          "cell": "P35",
+          "value": "SAMEA112124526-SAMEA112124542"
+        },
+        {
+          "cell": "Q35",
+          "value": "PRJEB45087"
+        },
+        {
+          "cell": "R35",
+          "value": "GCA_910589755"
+        },
+        {
+          "cell": "S35",
+          "value": "SAMN12344156"
+        },
+        {
+          "cell": "T35",
+          "value": "OU342747-OU342753"
+        },
+        {
+          "cell": "U35",
+          "value": "CAJUXK010000001-CAJUXK010000883"
+        }
+      ],
+      [
+        {
+          "cell": "A36",
+          "value": "Maughan et al. 2019"
+        },
+        {
+          "cell": "B36",
+          "value": "A. atlantica CC7277"
+        },
+        {
+          "cell": "D36",
+          "value": "-"
+        },
+        {
+          "cell": "E36",
+          "value": "-"
+        },
+        {
+          "cell": "F36",
+          "value": "-"
+        },
+        {
+          "cell": "G36",
+          "value": "-"
+        },
+        {
+          "cell": "H36",
+          "value": "-"
+        },
+        {
+          "cell": "I36",
+          "value": "-"
+        },
+        {
+          "cell": "J36",
+          "value": "-"
+        },
+        {
+          "cell": "K36",
+          "value": "-"
+        },
+        {
+          "cell": "L36",
+          "value": "-"
+        },
+        {
+          "cell": "M36",
+          "value": "-"
+        },
+        {
+          "cell": "P36",
+          "value": "-"
+        },
+        {
+          "cell": "Q36",
+          "value": "PRJEB45085"
+        },
+        {
+          "cell": "R36",
+          "value": "GCA_910589765"
+        },
+        {
+          "cell": "S36",
+          "value": "SAMN11962365"
+        },
+        {
+          "cell": "T36",
+          "value": "OU342733-OU342739"
+        },
+        {
+          "cell": "U36",
+          "value": "CAJUWN010000001-CAJUWN010002188"
+        }
+      ],
+      [
+        {
+          "cell": "A37",
+          "value": "Maughan et al. 2019"
+        },
+        {
+          "cell": "B37",
+          "value": "A. eriantha BYU132"
+        },
+        {
+          "cell": "D37",
+          "value": "-"
+        },
+        {
+          "cell": "E37",
+          "value": "-"
+        },
+        {
+          "cell": "F37",
+          "value": "-"
+        },
+        {
+          "cell": "G37",
+          "value": "-"
+        },
+        {
+          "cell": "H37",
+          "value": "-"
+        },
+        {
+          "cell": "I37",
+          "value": "-"
+        },
+        {
+          "cell": "J37",
+          "value": "-"
+        },
+        {
+          "cell": "K37",
+          "value": "-"
+        },
+        {
+          "cell": "L37",
+          "value": "-"
+        },
+        {
+          "cell": "M37",
+          "value": "-"
+        },
+        {
+          "cell": "P37",
+          "value": "-"
+        },
+        {
+          "cell": "Q37",
+          "value": "PRJEB45086"
+        },
+        {
+          "cell": "R37",
+          "value": "GCA_910589775"
+        },
+        {
+          "cell": "S37",
+          "value": "SAMN11962392"
+        },
+        {
+          "cell": "T37",
+          "value": "OU342740-OU342746"
+        },
+        {
+          "cell": "U37",
+          "value": "CAJUXJ010000001-CAJUXJ010002645"
+        }
+      ]
+    ]
+  }
+}

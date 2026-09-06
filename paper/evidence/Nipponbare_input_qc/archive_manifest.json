@@ -1,0 +1,32 @@
+[
+  {
+    "file": "download_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR25241090_complete/download_receipt.json",
+    "sha256": "04586e449537b30ee539870c8d53032db2a2aa0c0bd164515b468dfb9292d66c",
+    "bytes": 1967
+  },
+  {
+    "file": "qc_v1/qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR25241090_complete/qc_v1/qc.json",
+    "sha256": "1f7b1f70d97566aae5c1a67badde692446ea06e223889c34cc459ed7bc0c07f5",
+    "bytes": 917
+  },
+  {
+    "file": "qc_v1/length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR25241090_complete/qc_v1/length_histogram.tsv",
+    "sha256": "39f346b1fc5f8bc717de6a6d5f905b6fd84ae79805bfe1f12aa1a0e9651db5e8",
+    "bytes": 383127
+  },
+  {
+    "file": "qc_v1/base_quality_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR25241090_complete/qc_v1/base_quality_histogram.tsv",
+    "sha256": "0eb59cf815fbd5641da5f6595d2abf7be19b360cedaf86d70c8008c9b1ee080b",
+    "bytes": 1279
+  },
+  {
+    "file": "qc_v1/joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/SRR25241090_complete/qc_v1/joint_distribution.tsv",
+    "sha256": "3aa553a6db0654a8c309e523f64b56635f7342b865035dcd24d8908044c40a72",
+    "bytes": 103785
+  }
+]

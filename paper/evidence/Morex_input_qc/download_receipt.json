@@ -1,0 +1,50 @@
+{
+  "accession": "ERR4659246",
+  "metadata": {
+    "run_accession": "ERR4659246",
+    "study_accession": "PRJEB40587",
+    "secondary_study_accession": "ERP124240",
+    "sample_accession": "SAMEA7377102",
+    "experiment_accession": "ERX4582062",
+    "scientific_name": "Hordeum vulgare subsp. vulgare",
+    "sample_title": "Morex V3 assembly Pac Bio CCS raw data",
+    "experiment_title": "Sequel II sequencing",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Sequel II",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "library_selection": "RANDOM",
+    "read_count": "896701",
+    "base_count": "19525307665",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/ERR465/006/ERR4659246/ERR4659246.fastq.gz",
+    "fastq_md5": "146e11137a563f98e43a5dbae556aef4",
+    "fastq_bytes": "19471797271"
+  },
+  "metadata_sha256": "816e6a60196e433a57ec86003e9c8ad3cb500a77d7910385c300c1a47d515cc7",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/ERR465/006/ERR4659246/ERR4659246.fastq.gz",
+      "filename": "ERR4659246.fastq.gz",
+      "expected_md5": "146e11137a563f98e43a5dbae556aef4",
+      "expected_bytes": 19471797271
+    }
+  ],
+  "max_download_gb": 20.0,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b",
+  "completed_files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/ERR465/006/ERR4659246/ERR4659246.fastq.gz",
+      "filename": "ERR4659246.fastq.gz",
+      "expected_md5": "146e11137a563f98e43a5dbae556aef4",
+      "expected_bytes": 19471797271,
+      "bytes": 19471797271,
+      "md5": "146e11137a563f98e43a5dbae556aef4",
+      "sha256": "4e6916c802b914140bd6c5eda418db89a06c29fad68d389a38a28117c0cd9f79",
+      "source_md5_verified": true,
+      "transfer": "downloaded_complete"
+    }
+  ],
+  "complete": true,
+  "fastq_qc_status": "not_run"
+}

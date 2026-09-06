@@ -1,0 +1,49 @@
+{
+  "complete": true,
+  "old": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/discover",
+  "new": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/tandemx/discover",
+  "files": [
+    {
+      "file": "candidate_reads.tsv",
+      "old_sha256": "94e51e4a8e81625d7d958247b62fe931ea937b7a1078f539d536a6a848ab034a",
+      "new_sha256": "94e51e4a8e81625d7d958247b62fe931ea937b7a1078f539d536a6a848ab034a",
+      "byte_identical": true
+    },
+    {
+      "file": "candidate_monomers.fa",
+      "old_sha256": "eec5f36de5a4ce6292786d17ac4ee41b770865d54b5a700f9a4858842f9e7408",
+      "new_sha256": "eec5f36de5a4ce6292786d17ac4ee41b770865d54b5a700f9a4858842f9e7408",
+      "byte_identical": true
+    },
+    {
+      "file": "monomers.fa",
+      "old_sha256": "3031bdca1614e9f41944019297d04be760e85b363c6b7fce5bf3214e2d71f954",
+      "new_sha256": "3031bdca1614e9f41944019297d04be760e85b363c6b7fce5bf3214e2d71f954",
+      "byte_identical": true
+    },
+    {
+      "file": "families.tsv",
+      "old_sha256": "bec1ad640e86b77118d2e2cb890ba8a619ead3f29da9ea1cbcb4428e3f034f79",
+      "new_sha256": "bec1ad640e86b77118d2e2cb890ba8a619ead3f29da9ea1cbcb4428e3f034f79",
+      "byte_identical": true
+    },
+    {
+      "file": "monomer_membership.tsv",
+      "old_sha256": "439bd08c8d5e02f683b42a9103d507e018fdc6ecbece2c10fdb774504a1c6838",
+      "new_sha256": "439bd08c8d5e02f683b42a9103d507e018fdc6ecbece2c10fdb774504a1c6838",
+      "byte_identical": true
+    },
+    {
+      "file": "family_similarity.tsv",
+      "old_sha256": "e88c0263c73c214f080d9067ee98594c09c4e0dca42120aa94121597506e57db",
+      "new_sha256": "e88c0263c73c214f080d9067ee98594c09c4e0dca42120aa94121597506e57db",
+      "byte_identical": true
+    },
+    {
+      "file": "family_audit_summary.json",
+      "old_sha256": "4506577e450077709ae28491f3f339d66fd8baeeb7143d727e996f8d49c95244",
+      "new_sha256": "4506577e450077709ae28491f3f339d66fd8baeeb7143d727e996f8d49c95244",
+      "byte_identical": true
+    }
+  ]
+}

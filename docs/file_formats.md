@@ -1001,3 +1001,28 @@ to the environment and `index_backend` (`python`/`native`) to each worker receip
 Both variants use the same source/native binary and native alignment. Historical
 source comparisons use `source_default`; earlier storage replays predate this
 field and labelled the current variant `packed`.
+
+### TRASH comparator execution and coordinate controls
+
+The container runner retains `image_inspect.json`, `input_qc.json`, its exact
+source, stdout/stderr, original `native/` products and `container_provenance/`
+package/version/hash records. `execution.json` has the immutable image ID,
+command, input/helper hashes, host-client resource record, container exit/OOM
+state, Linux command resource record, cgroup memory peak in bytes, native product
+hashes and explicit completion/error/cleanup state. Startup failure has no
+inference success; GNU time resource parsing failures remain `resource_error`.
+`native/linux_time.tsv` reports elapsed/user/system seconds, maximum RSS KiB,
+and exit code. GNU time may also retain a nonzero-exit status line. Cgroup peak
+includes cache and is not interchangeable with maximum RSS.
+
+`coordinate_offsets.tsv` reports native1-based offsets-2..2, total monomer rows,
+width discrepancies, forward/strand-adjusted exact sequence matches, and
+out-of-reference extractions. The control-only audit preserves original tables
+and writes source/input/output hashes in `audit_receipt.json`; it does not apply
+automatic correction or calculate biological recall/precision.
+
+`replay_discovery.py` writes a frozen environment plus `validation.json` with
+command, child execution, profile flag and all seven expected/observed product
+hashes and equality flags. Profile mode additionally creates `discovery.prof`.
+Any changed input/baseline product, tool failure or output mismatch leaves
+`complete=false` and a concrete error.

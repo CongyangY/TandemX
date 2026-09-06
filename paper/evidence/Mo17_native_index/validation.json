@@ -1,0 +1,62 @@
+{
+  "complete": true,
+  "measurements": [
+    {
+      "label": "python_index",
+      "command": [
+        "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+        "-m",
+        "benchmarks.scripts.replay_clustering_isolated",
+        "--worker-candidates",
+        "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/discover",
+        "--worker-module",
+        "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/source_snapshot/tandemx/discover/clustering.py",
+        "--worker-output",
+        "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/python_index.json",
+        "--worker-index",
+        "python"
+      ],
+      "exit_code": 0,
+      "runtime_seconds": 220.08861500001512,
+      "peak_rss_mib": 250.21875,
+      "cpu_user_seconds": 214.171008,
+      "cpu_system_seconds": 1.133622,
+      "timed_out": false,
+      "candidate_count": 85663,
+      "family_count": 28586,
+      "clustering_seconds": 218.01493958407082,
+      "output_sha256": "f0d1e88a78345707bcca3c40c948b7050a474e6b8201966543e1693b731b7039",
+      "clustering_source_sha256": "4c94cec2375732ca49c2bde517a3f12ae4950a5c27f97574f2bf801185914c3c",
+      "index_backend": "python"
+    },
+    {
+      "label": "native_index",
+      "command": [
+        "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+        "-m",
+        "benchmarks.scripts.replay_clustering_isolated",
+        "--worker-candidates",
+        "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/discover",
+        "--worker-module",
+        "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/source_snapshot/tandemx/discover/clustering.py",
+        "--worker-output",
+        "/Volumes/T7/Codex/TandemX/results/Mo17_1Gb_native_index_replay_v1_20260906/native_index.json",
+        "--worker-index",
+        "native"
+      ],
+      "exit_code": 0,
+      "runtime_seconds": 166.19302212516777,
+      "peak_rss_mib": 259.625,
+      "cpu_user_seconds": 162.385155,
+      "cpu_system_seconds": 0.896948,
+      "timed_out": false,
+      "candidate_count": 85663,
+      "family_count": 28586,
+      "clustering_seconds": 164.31247658305801,
+      "output_sha256": "f0d1e88a78345707bcca3c40c948b7050a474e6b8201966543e1693b731b7039",
+      "clustering_source_sha256": "4c94cec2375732ca49c2bde517a3f12ae4950a5c27f97574f2bf801185914c3c",
+      "index_backend": "native"
+    }
+  ],
+  "exact_output_parity": true
+}

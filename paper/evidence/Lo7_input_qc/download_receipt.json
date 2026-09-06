@@ -1,0 +1,50 @@
+{
+  "accession": "ERR15194059",
+  "metadata": {
+    "run_accession": "ERR15194059",
+    "study_accession": "PRJEB91463",
+    "secondary_study_accession": "ERP174410",
+    "sample_accession": "SAMEA118635564",
+    "experiment_accession": "ERX14599733",
+    "scientific_name": "Secale cereale",
+    "sample_title": "High molecular weight (HMW) DNA was extracted from a single Lo7 plant using the MACHEREY-NAGEL NucleoBond HMW DNA kit, following the manufacturer's protocol. The extracted HMW DNA was quality-controlled for concentration using the Qubit 2.0\u00ae dsDNA HS assay (Invitrogen, Waltham, USA) and for fragment size distribution using the Agilent Femto Pulse System (Agilent Technologies, Santa Clara, USA). For HiFi sequencing, the HMW DNA was fragmented into ~20 kb fragments using a Megaruptor 3 device (Diagenode) at speed setting 30. HiFi SMRTbell libraries were then prepared following the Pacific Biosciences SMRTbell Express Template Prep Kit 3.0 protocol. The final libraries were size-selected within a narrow 17-20 kb range using the SageELF system with a 0.75% Agarose Gel Cassette (Sage Science), following the manufacturer's guidelines. HiFi circular consensus sequencing (CCS) reads were generated using the PacBio Revio platform (Pacific Biosciences) in accordance with the standard operating procedure.",
+    "experiment_title": "Revio sequencing",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Revio",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "library_selection": "RANDOM",
+    "read_count": "4576975",
+    "base_count": "77092101008",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/ERR151/059/ERR15194059/ERR15194059.fastq.gz",
+    "fastq_md5": "4d111007d4bea046a4fc55843c9c5351",
+    "fastq_bytes": "29991431807"
+  },
+  "metadata_sha256": "b03cb6c61f8a3dddf81550e340fbc12a30d2df8f6ed355f3d162308010ba0468",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/ERR151/059/ERR15194059/ERR15194059.fastq.gz",
+      "filename": "ERR15194059.fastq.gz",
+      "expected_md5": "4d111007d4bea046a4fc55843c9c5351",
+      "expected_bytes": 29991431807
+    }
+  ],
+  "max_download_gb": 31.0,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b",
+  "completed_files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/ERR151/059/ERR15194059/ERR15194059.fastq.gz",
+      "filename": "ERR15194059.fastq.gz",
+      "expected_md5": "4d111007d4bea046a4fc55843c9c5351",
+      "expected_bytes": 29991431807,
+      "bytes": 29991431807,
+      "md5": "4d111007d4bea046a4fc55843c9c5351",
+      "sha256": "fe04dec3b8f218d823370386b3265353c8c1316c3e1e13d744f9e34cc2079f17",
+      "source_md5_verified": true,
+      "transfer": "downloaded_complete"
+    }
+  ],
+  "complete": true,
+  "fastq_qc_status": "not_run"
+}

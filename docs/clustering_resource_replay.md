@@ -63,3 +63,22 @@ The earlier 85,663-candidate Python storage replay is archived under
 `paper/evidence/Mo17_compact_clustering`: 31.44% lower child peak RSS but 15.86%
 longer clustering time, exact complete-output parity. That run predates the
 native gate; its trade-off must not be attributed to the new implementation.
+
+The completed native ablation is in `paper/evidence/Mo17_native_index`: identical
+outputs,218.015→164.312 clustering seconds,250.22→259.63 MiB child peak. Time
+decreased while memory increased in this diagnostic; no universal win is claimed.
+
+## Full live-pipeline replay and profiling
+
+```bash
+python -m benchmarks.scripts.replay_discovery \
+  --previous-run /path/to/completed/real_comparison \
+  --outdir /path/to/new/full_replay --profile
+pytest -q tests/integration/test_discovery_replay.py
+```
+
+This command checks the baseline input hash and successful discovery receipt,
+freezes current source, preserves original CLI settings, and compares all seven
+deterministic products using live candidate scores. Changed inputs or any product
+disagreement fail explicitly. Optional cProfile output identifies hotspots but
+adds overhead, so profiled resources cannot be used as unprofiled speed rankings.

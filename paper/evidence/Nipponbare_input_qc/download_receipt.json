@@ -1,0 +1,50 @@
+{
+  "accession": "SRR25241090",
+  "metadata": {
+    "run_accession": "SRR25241090",
+    "study_accession": "PRJNA953663",
+    "secondary_study_accession": "SRP431856",
+    "sample_accession": "SAMN36368305",
+    "experiment_accession": "SRX20987367",
+    "scientific_name": "Oryza sativa Japonica Group",
+    "sample_title": "Plant sample from Oryza sativa Japonica Group",
+    "experiment_title": "Sequel II sequencing: hifi of NIP",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Sequel II",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "library_selection": "RANDOM",
+    "read_count": "1785885",
+    "base_count": "32966159623",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR252/090/SRR25241090/SRR25241090_subreads.fastq.gz",
+    "fastq_md5": "00d3f9813c194e0d5df4b547265babac",
+    "fastq_bytes": "28649678204"
+  },
+  "metadata_sha256": "5e066ed94ba5a13b0caa433ecec17a516efc9f54f09475b474890c4465168d5d",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR252/090/SRR25241090/SRR25241090_subreads.fastq.gz",
+      "filename": "SRR25241090_subreads.fastq.gz",
+      "expected_md5": "00d3f9813c194e0d5df4b547265babac",
+      "expected_bytes": 28649678204
+    }
+  ],
+  "max_download_gb": 30.0,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b",
+  "completed_files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR252/090/SRR25241090/SRR25241090_subreads.fastq.gz",
+      "filename": "SRR25241090_subreads.fastq.gz",
+      "expected_md5": "00d3f9813c194e0d5df4b547265babac",
+      "expected_bytes": 28649678204,
+      "bytes": 28649678204,
+      "md5": "00d3f9813c194e0d5df4b547265babac",
+      "sha256": "7bc90f777c995268d81f6f39d2baf9ed7c6fb123bcad0964930b7cfaeaa6b16d",
+      "source_md5_verified": true,
+      "transfer": "downloaded_complete"
+    }
+  ],
+  "complete": true,
+  "fastq_qc_status": "not_run"
+}

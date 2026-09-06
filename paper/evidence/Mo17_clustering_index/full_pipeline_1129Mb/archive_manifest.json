@@ -1,0 +1,56 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/environment.json",
+    "sha256": "439676fc3f58c345f7523b27ac3aadf138a43900349d043312961cbf2d5b0d32",
+    "bytes": 8647
+  },
+  {
+    "file": "summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/summary.tsv",
+    "sha256": "aee3cf81acac3cb586c62e3e85cdd1146e58c651cec301a3c22c5f6db47dfc73",
+    "bytes": 739
+  },
+  {
+    "file": "tandemx/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/tandemx/execution.json",
+    "sha256": "376a4bb8ccb4510c4edcbdb0bf9105573c013c62e15913566bda75ec68953547",
+    "bytes": 974
+  },
+  {
+    "file": "tandemx/discover/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/tandemx/discover/run_config.yaml",
+    "sha256": "e8b32973d715e407ac5ea35c0a4d115d8c5f74787530bac78a33f5c875be9611",
+    "bytes": 2052
+  },
+  {
+    "file": "tandemx/discover/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/tandemx/discover/run.log",
+    "sha256": "7c7d774d9c22811742c88002688d8dfb4725704869109b5ace7b0beac3e1c865",
+    "bytes": 19118
+  },
+  {
+    "file": "tandemx/discover/discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/tandemx/discover/discovery_summary.json",
+    "sha256": "a2c5edc2c95d2f49461f938f7bdf4dc59089b4bc26a2a42c5079c915624a6d2f",
+    "bytes": 874
+  },
+  {
+    "file": "tandemx/discover/family_audit_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/tandemx/discover/family_audit_summary.json",
+    "sha256": "4506577e450077709ae28491f3f339d66fd8baeeb7143d727e996f8d49c95244",
+    "bytes": 404
+  },
+  {
+    "file": "tidehunter/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/tidehunter/execution.json",
+    "sha256": "ea9554c507f02ae35253fbad57f56ed0820d96ba1df6b1291134aa00fca1d46f",
+    "bytes": 627
+  },
+  {
+    "file": "trf/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/trf/execution.json",
+    "sha256": "d6f45fcc4f4cba4dbf55d8217472fefb66732ed62c46f91407ac4feab185339a",
+    "bytes": 458
+  }
+]

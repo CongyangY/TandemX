@@ -1,0 +1,116 @@
+[
+  {
+    "file": "execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/execution.json",
+    "sha256": "d081ef76113c3953a913839ec8be66637c637b76a269c1bde5ff0a691a1bc9fe",
+    "bytes": 2774
+  },
+  {
+    "file": "image_inspect.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/image_inspect.json",
+    "sha256": "93c5744f9b4717e898294860c194e47a104b71a455c3d0b8732fefdd67222652",
+    "bytes": 4312
+  },
+  {
+    "file": "input_qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/input_qc.json",
+    "sha256": "76e534095906cf563f7029de50b86fa5f14767608819ab068d7eb7e613d30dfa",
+    "bytes": 607
+  },
+  {
+    "file": "run_trash_container.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/run_trash_container.py",
+    "sha256": "8d2219896418b17f8ba667cd582351000dc9c6600c98f968805a1f0890528988",
+    "bytes": 7777
+  },
+  {
+    "file": "stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/stdout.log",
+    "sha256": "dd9da6c59de4059aaf65d5f7136a9ccc1065d099ab58f5aaa773685acb7237c4",
+    "bytes": 3223
+  },
+  {
+    "file": "stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "coordinate_audit_v1/coordinate_offsets.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/coordinate_audit_v1/coordinate_offsets.tsv",
+    "sha256": "ae623dc4191b56c66fe46a4ac07bdf0e41b0d3f058e6172a3b6aa3fc5c5c1513",
+    "bytes": 199
+  },
+  {
+    "file": "coordinate_audit_v1/audit_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/coordinate_audit_v1/audit_receipt.json",
+    "sha256": "6b89dfab0edacd1bca35f37f4ccea5a4781f28b18fadf222f80c4ccaa6c52c28",
+    "bytes": 1575
+  },
+  {
+    "file": "container_provenance/R_packages.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/container_provenance/R_packages.tsv",
+    "sha256": "9262036f6e061d0f4afbe8d21396a22afbd11c0aad41c5ada9d6526b93a62ccb",
+    "bytes": 3911
+  },
+  {
+    "file": "container_provenance/R_sessionInfo.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/container_provenance/R_sessionInfo.txt",
+    "sha256": "e97ba540fa6d308e40c187617d7b9b16290e368999e9cdf79dd9059567f5a11e",
+    "bytes": 2055
+  },
+  {
+    "file": "container_provenance/debian_packages.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/container_provenance/debian_packages.tsv",
+    "sha256": "35efd94e25abd8c44d30299432bb003ed350929b6c5dce0637578ca55e373686",
+    "bytes": 10597
+  },
+  {
+    "file": "container_provenance/package_archives.sha256",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/container_provenance/package_archives.sha256",
+    "sha256": "17e6b5e965964aaa4e892d32178a33ae643c8ba3a70630b38a8af3430f36a2bb",
+    "bytes": 5328
+  },
+  {
+    "file": "container_provenance/trash2_commit.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/container_provenance/trash2_commit.txt",
+    "sha256": "d57b9ffb8ce6013033665036cad21260718a82054e1993441d4fe62cd2b4c17b",
+    "bytes": 41
+  },
+  {
+    "file": "container_provenance/trash_commit.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/container_provenance/trash_commit.txt",
+    "sha256": "2e5e4407169dc3c1e244f8d15030444572236fd2cb5926f61aaf163b0a47a406",
+    "bytes": 41
+  },
+  {
+    "file": "native/assembly.fa_arrays.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/native/assembly.fa_arrays.csv",
+    "sha256": "a60d6333bebd3beaabb92baecff5cafeef75b40adf06f8344ba956ac5dcbe4ab",
+    "bytes": 2797
+  },
+  {
+    "file": "native/assembly.fa_repeats.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/native/assembly.fa_repeats.csv",
+    "sha256": "9183b37cd83c1f9dc63add50f983fd2a0a112163d6ad1831f059a59540c7eca3",
+    "bytes": 30444
+  },
+  {
+    "file": "native/assembly.fa_repeats_with_seq.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/native/assembly.fa_repeats_with_seq.csv",
+    "sha256": "01f59d76aebaac87f15d630cce98413102cadcc96f1c8f083c2b1bbd7c70d90c",
+    "bytes": 92267
+  },
+  {
+    "file": "native/linux_time.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/native/linux_time.tsv",
+    "sha256": "6709432d27255f9566f7970dd5658912fbce9067061e924af9a9dd5fbf62dd0c",
+    "bytes": 91
+  },
+  {
+    "file": "native/cgroup_memory_peak_bytes.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906/native/cgroup_memory_peak_bytes.txt",
+    "sha256": "0a2ee97868fa593e623cea186daec21c91a5aff27ac57a1af1805caa2bbc0e3b",
+    "bytes": 10
+  }
+]

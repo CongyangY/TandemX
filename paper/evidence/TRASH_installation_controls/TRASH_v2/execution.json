@@ -1,0 +1,82 @@
+{
+  "complete": true,
+  "tool": "trash",
+  "command": [
+    "docker",
+    "run",
+    "--name",
+    "tandemx-benchmark-03ebec47feb4461c90e0fdb113f0cfe1",
+    "--network",
+    "none",
+    "--cpus",
+    "1",
+    "--memory",
+    "8g",
+    "--mount",
+    "type=bind,source=/Volumes/T7/Codex/TandemX/tools/src/TRASH/example_run/CP068268_39050443_39150442.fa,target=/input/assembly.fa,readonly",
+    "--mount",
+    "type=bind,source=/Volumes/T7/Codex/TandemX/results/TRASH_offline_author_example_v2_20260906/native,target=/output",
+    "-w",
+    "/work",
+    "sha256:50ff2f2af62681892295d76ddd79b8c87a06135455ffe0e79f1c81dc07939243",
+    "bash",
+    "-c",
+    "printf 'elapsed_seconds\\tmax_rss_kib\\tuser_seconds\\tsystem_seconds\\texit_code\\n' > /output/linux_time.tsv\n/usr/bin/time -a -o /output/linux_time.tsv -f '%e\\t%M\\t%U\\t%S\\t%x' \"$@\"\ncode=$?\ncat /sys/fs/cgroup/memory.peak > /output/cgroup_memory_peak_bytes.txt\nexit \"$code\"\n",
+    "tandemx-measure",
+    "bash",
+    "/opt/TRASH/TRASH_run.sh",
+    "/input/assembly.fa",
+    "--def",
+    "--o",
+    "/output",
+    "--par",
+    "1",
+    "--randomseed",
+    "6101"
+  ],
+  "image_id": "sha256:50ff2f2af62681892295d76ddd79b8c87a06135455ffe0e79f1c81dc07939243",
+  "script_sha256": "8d2219896418b17f8ba667cd582351000dc9c6600c98f968805a1f0890528988",
+  "input_sha256": "4c1f8bc38793f8a0b0e9d5989244cae94de045e667695e7eb5112996e6149d2d",
+  "platform": "linux/arm64",
+  "scope": "native_default_assembly_annotation;one_core;no_HOR;no_accuracy_scoring",
+  "resource_note": "Linux GNU time max RSS is not sum of concurrent processes; cgroup peak includes cache; host Docker client is separate",
+  "host_docker_client": {
+    "exit_code": 0,
+    "runtime_seconds": 36.19712245790288,
+    "peak_rss_mib": 24.9375,
+    "cpu_user_seconds": 0.014352,
+    "cpu_system_seconds": 0.012499,
+    "timed_out": false
+  },
+  "container_state": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-09-06T07:29:07.234817795Z",
+    "FinishedAt": "2026-09-06T07:29:43.198311423Z"
+  },
+  "linux_command": {
+    "elapsed_seconds": 35.87,
+    "max_rss_kib": 459560.0,
+    "user_seconds": 34.25,
+    "system_seconds": 0.54,
+    "exit_code": 0.0,
+    "peak_rss_mib": 448.7890625
+  },
+  "cgroup_memory_peak_bytes": 456355840,
+  "native_products": {
+    "all.repeats.from.assembly.fa.csv": "c06ec94702aee8bfceadafd1d6599f71484ebca8bd2e4eb5a3dd74cf923ea1d8",
+    "Summary.of.repetitive.regions.assembly.fa.csv": "8a60f534aafc5c54915d9f80dd80a0e3bfa04e17bdbf5b0090da5b278e9d3d82"
+  },
+  "cleanup": {
+    "exit_code": 0,
+    "stdout": "tandemx-benchmark-03ebec47feb4461c90e0fdb113f0cfe1\n",
+    "stderr": ""
+  }
+}
