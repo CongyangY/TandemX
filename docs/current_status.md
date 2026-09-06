@@ -76,6 +76,28 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   passed: **233 tests in 62.93s**. Core Rust files are unchanged since fd656b6.
   The final figure/SRF evidence checkpoint still needs its hosted CI after push.
 
+## Native seed-histogram optimization
+
+- Commit cf2ebd5ce5d485f31f4ceba3190bf1d68bfcb1a5 (SRF/figure evidence) was
+  pushed to both branches; GitHub run 34008566906 completed successfully.
+- A cProfile run on 100 low-indel reads is at T7
+  `results/profiling_20260906/indel_01pct.prof`. It measured 2.069s including
+  profiler overhead: Python extraction/histogram 1.018s cumulative, native
+  self-alignment .703s. These are diagnostic profile values, not ranking timings.
+- Elastic Rust mode now reuses the existing native extraction/histogram functions,
+  exposed independently of the legacy refiner in `rust-core/src/spacing.rs`.
+  Python is unchanged as the reference. Exact histogram/overflow parity covers
+  376 randomized/edge parameter combinations plus explicit invalid-input checks.
+  The native vector is bounded by read length plus bin-rounding slack even if
+  the requested maximum period is huge. The GIL is released for seed processing.
+- Current checks: 235 tests passed in 62.25s; 7 Rust tests, clippy and fmt passed.
+  Added paired-performance gate test passed separately after that full run.
+- New `compare_discovery_snapshots.py` will compare frozen old/new sources on the
+  same datasets with shuffled order, repeated timings, RSS, user/system CPU and
+  byte equality of all six discovery outputs. It is not yet run at this snapshot;
+  do not claim a speedup until measured. It must run without concurrent local
+  tests, profiler or compilation. Final publication superiority is still unproven.
+
 ## Source, Git and storage
 
 - Source: `/Users/ycy/Codex/Sofw/TandemX`; GitHub `https://github.com/CongyangY/TandemX`.

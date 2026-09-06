@@ -76,7 +76,11 @@ Future work:
 uses the same input-only discovery contract and downstream schemas. The legacy
 mode remains the default pending independent evaluation and resource profiling.
 
-1. Select distinct supported spacing bands from bounded per-read seeds. Nearby
+1. Select distinct supported spacing bands from bounded per-read seeds. Rust mode
+   now reuses the native bounded seed extractor and spacing histogram already
+   used by the legacy kernel; Python remains an independent reference. Returned
+   histogram counts and overflow counts are tested for exact equality, including
+   pair caps, Ns, low complexity, reverse complements and short-period-only scans. Nearby
    peaks covered by an existing band do not consume another `--top-periods` slot.
    Short periods 2–19 are scanned directly when requested.
 2. Align a read to itself around each positive offset. Band half-width is
@@ -111,8 +115,9 @@ mode remains the default pending independent evaluation and resource profiling.
 
 The independent Python reference and Rust kernels are tested for identical
 alignment paths and consensus. Rust releases the GIL during alignment; seed
-preparation and cluster orchestration remain in Python; bounded edit comparison
-also has a Rust kernel. Each trace is
+histogram construction, local/global alignment and bounded edit comparison
+release the GIL in native Rust. Period selection, consensus voting and cluster
+orchestration remain in Python. Each trace is
 limited to 32 million cells and fails explicitly if exceeded. Peak trace space
 is O(read_length × band_width), plus read-local alignment pairs; no whole read
 collection or genome is loaded for the alignment. Candidate/family state still

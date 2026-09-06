@@ -359,3 +359,9 @@ The expanded SRF comparison executes the documented KMC-to-abundance workflow,
 including input counting and mapping. See [SRF workflow evidence and scope](docs/srf_workflow.md)
 for pinned tools, recorded compatibility patches, independent count checks,
 empty-count handling, native versus normalized outputs, and measured costs.
+
+Elastic discovery in Rust mode now constructs the bounded seed histogram natively
+as well as aligning repeat copies. The Python reference retains the same counting
+and capping rules. Rebuild the extension when updating: `pip install -e .`.
+Paired source-snapshot comparisons check all six discovery outputs byte-for-byte
+before treating a timing improvement as an equivalent-output optimization.

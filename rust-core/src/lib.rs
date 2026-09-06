@@ -956,6 +956,7 @@ fn scan_reads_for_periods(
 
 mod distance;
 mod elastic;
+mod spacing;
 
 #[pymodule]
 fn _rust_core(module: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -968,6 +969,7 @@ fn _rust_core(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_function(wrap_pyfunction!(elastic::banded_self_align, module)?)?;
     module.add_function(wrap_pyfunction!(elastic::global_align_ops, module)?)?;
     module.add_function(wrap_pyfunction!(distance::bounded_edit_distance, module)?)?;
+    module.add_function(wrap_pyfunction!(spacing::seed_spacing_histogram, module)?)?;
     Ok(())
 }
 

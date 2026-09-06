@@ -68,8 +68,13 @@ def discover_elastic_arrays(sequence: str, *, min_period: int, max_period: int,
     if min_period > max_period or len(sequence) < min_span:
         return [], 0
     short_periods = list(range(min_period, min(19, max_period) + 1))
-    positions, overflow = extract_repeated_kmer_positions(sequence, k, min_seed_occurrences, max_pairs_per_kmer)
-    histogram = build_spacing_histogram(positions, max(20, min_period), max_period, max_pairs_per_kmer)
+    if backend == "rust":
+        from tandemx.discover.rust_backend import seed_spacing_histogram
+        histogram, overflow = seed_spacing_histogram(sequence, k, max(20, min_period), max_period,
+                                                     min_seed_occurrences, max_pairs_per_kmer)
+    else:
+        positions, overflow = extract_repeated_kmer_positions(sequence, k, min_seed_occurrences, max_pairs_per_kmer)
+        histogram = build_spacing_histogram(positions, max(20, min_period), max_period, max_pairs_per_kmer)
     periods = short_periods + select_alignment_periods(histogram, top_periods, min_spacing_support)
     hits = []
     for period in periods:

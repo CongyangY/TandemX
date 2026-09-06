@@ -67,6 +67,7 @@ def run_process(command: list[str], stdout: Path, stderr: Path, timeout: float,
                     break
                 time.sleep(0.02)
             peak = usage.ru_maxrss / (1024 * 1024 if sys.platform == "darwin" else 1024)
+            user_cpu, system_cpu = usage.ru_utime, usage.ru_stime
         else:  # pragma: no cover - publication benchmarks require a Unix host
             try:
                 process.wait(timeout=timeout)
@@ -75,8 +76,10 @@ def run_process(command: list[str], stdout: Path, stderr: Path, timeout: float,
                 process.kill()
                 process.wait()
             peak = math.nan
+            user_cpu = system_cpu = math.nan
     return {"exit_code": process.returncode, "runtime_seconds": time.perf_counter() - start,
-            "peak_rss_mib": peak, "timed_out": timed_out}
+            "peak_rss_mib": peak, "cpu_user_seconds": user_cpu, "cpu_system_seconds": system_cpu,
+            "timed_out": timed_out}
 
 
 def source_manifest(root: Path, snapshot: Path | None = None) -> dict:

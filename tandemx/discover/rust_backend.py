@@ -42,6 +42,20 @@ def rust_backend_available() -> bool:
     return True
 
 
+def seed_spacing_histogram(sequence: str, k: int, min_period: int, max_period: int,
+                           min_seed_occurrences: int, max_pairs_per_kmer: int) -> tuple[dict[int, int], int]:
+    """Native bounded histogram, without executing the legacy refiner."""
+    try:
+        from tandemx import _rust_core
+    except ImportError as exc:
+        raise RustBackendUnavailable("Rebuild the Rust extension for native seed histograms") from exc
+    if not hasattr(_rust_core, "seed_spacing_histogram"):
+        raise RustBackendUnavailable("Rust extension lacks native seed histograms; reinstall TandemX")
+    pairs, overflow = _rust_core.seed_spacing_histogram(sequence, k, min_period, max_period,
+                                                       min_seed_occurrences, max_pairs_per_kmer)
+    return dict(pairs), overflow
+
+
 def scan_read_for_periods(
     sequence: str,
     *,

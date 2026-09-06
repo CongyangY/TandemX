@@ -726,3 +726,21 @@ was explicitly skipped, and no native catalogue is fabricated. Normalized zero
 predictions in that state are conditional on the configured k/count filter.
 Raw native BED/FASTA/abundance files retain upstream formats, including headerless
 native tables; TandemX-normalized TSV files always have a header.
+
+## Paired discovery performance experiments
+
+`benchmarks/scripts/compare_discovery_snapshots.py` saves complete baseline/new
+source snapshots, input hashes, commands, per-file output hashes, raw_runs.tsv,
+summary.tsv and validation.json. Each dataset has randomized execution order and
+at least two repetitions. It compares six discovery data files, excluding
+run-specific timestamps/logs. Failure or any output difference fails the paired
+gate. `speedup_baseline_over_native` is the ratio of median wall times;
+`rss_ratio_native_over_baseline` is the ratio of median RSS. Ratios remain
+measured diagnostics even if output equivalence fails, with the failed gate
+clearly recorded. These are same-tool optimizations, not external-tool rankings.
+
+The process measurement helper now also emits cpu_user_seconds and
+cpu_system_seconds from wait4. They are absent in earlier records and unavailable
+on non-wait4 platforms. raw_runs.tsv includes these values; paired summaries
+report baseline/native medians. Sampling, compiler builds and profilers must not
+run concurrently with the timing experiment.
