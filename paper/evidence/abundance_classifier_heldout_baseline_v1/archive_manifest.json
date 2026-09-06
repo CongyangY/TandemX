@@ -1,0 +1,188 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/environment.json",
+    "sha256": "61b4bf83d718eb69c280d148c28c6263ef86f7b6f1dddf5c3e0d63f0204a0f46",
+    "bytes": 10462
+  },
+  {
+    "file": "run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/run_config.json",
+    "sha256": "40578a4dcbedf31f775bb40ae145d86409191c825fcb1c36040aec5d6d839fef",
+    "bytes": 6462
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/validation.json",
+    "sha256": "20a6b84a634f02c3338276b10e668ce806dab709ade9a081a3752b731dbb1b4a",
+    "bytes": 281
+  },
+  {
+    "file": "run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/run.log",
+    "sha256": "79266db306ee7d9e0e5d56da1ae4f4f7c2f0b2138a98ecd4606fffd1cdb4bf10",
+    "bytes": 157590
+  },
+  {
+    "file": "copy_number_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/copy_number_metrics.tsv",
+    "sha256": "aa884ede7fcbbe1d1d18f466fa20a860321380a6169ea6583eefc4b7c4473bdd",
+    "bytes": 109858
+  },
+  {
+    "file": "copy_number_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/copy_number_summary.tsv",
+    "sha256": "f88312a44e2ee98df85be30e94c5eba0ac81b898b2db5e6802719c34b264ecea",
+    "bytes": 7691
+  },
+  {
+    "file": "localization_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/localization_metrics.tsv",
+    "sha256": "29fc0f90f0c048f8452f45d92e030431a87d984a837ea9d5445fa0e4caf931f8",
+    "bytes": 20550
+  },
+  {
+    "file": "comparison_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/comparison_metrics.tsv",
+    "sha256": "80247910fdcd46e49dbe45cbd0722d1350be0c4a0572c832dbaaffc899a87ec7",
+    "bytes": 214663
+  },
+  {
+    "file": "comparison_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/comparison_summary.tsv",
+    "sha256": "1fdf4f1e573c72d116b81feac18dbdde2686575d77bf3433fb3ee38d469ac708",
+    "bytes": 11771
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/__init__.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/__init__.py",
+    "sha256": "7d0fd97e357da73dcf673b293d1db9aa5dbf2ae2622e83a075633a3f65579f1c",
+    "bytes": 84
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/discovery_truth.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/discovery_truth.py",
+    "sha256": "9c057f4ac83bbeac260187c2431b6f862aaf5425967714721dfff181d02ca344",
+    "bytes": 6301
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/evaluate.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/evaluate.py",
+    "sha256": "c3c424c333ab4d7ba206d9de10c4d0941e2fb59f18976899d3f9e36eb5d552c1",
+    "bytes": 6453
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/evaluate_blended_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/evaluate_blended_collapse.py",
+    "sha256": "d3d09b51fcf2cb13c60fff28004e23e603880dde5d184a1b1d1da3951d404f23",
+    "bytes": 16741
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/evaluate_multik_collapse.py",
+    "sha256": "b0d254c875caaa3e49a46136a353e6cab8870cb53d1d4d86b944d31defe90d5e",
+    "bytes": 25169
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/run.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/run.py",
+    "sha256": "f06ac1b3ba47b85c09baa58725297958afd4dbdb5f424418dbe1b5c908392fdf",
+    "bytes": 25272
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/run_stream_quantify.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/run_stream_quantify.py",
+    "sha256": "5d70510efb738858cb4ee9529b34f3d88791cb5db3208433a73b4614a2c8ed22",
+    "bytes": 7278
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/select_robust_blend.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/select_robust_blend.py",
+    "sha256": "f663c824689ff5d0c65f98f73bd1594042771acc0dc4cc4af76c4dcd25eca672",
+    "bytes": 13458
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/simulate.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/simulate.py",
+    "sha256": "fbbe618acb042c7ae6e695e44fa716f5f1f98817e7de44031a0ef1a059fb7eeb",
+    "bytes": 10620
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/stream_genome.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/stream_genome.py",
+    "sha256": "4da7648bdeafa2dc27ac1719face768297ffe2bb8e32e9231e8cb08cbf6139f8",
+    "bytes": 6453
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/stream_reads.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/stream_reads.py",
+    "sha256": "b721cffb5d811a6d71ec2d0eb8c2414fad60bda8f8e36c7eaf649f41e9b45d9a",
+    "bytes": 8254
+  },
+  {
+    "file": "source_snapshot/benchmarks/abundance/validate_blended_collapse.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/abundance/validate_blended_collapse.py",
+    "sha256": "636901d8c9fe47f9334c9565ac688b580bf14532707cb4d3e83367532045bfc9",
+    "bytes": 10961
+  },
+  {
+    "file": "source_snapshot/benchmarks/challenge/run.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/challenge/run.py",
+    "sha256": "1abc5df97ae8ce1d2e5ddbc6c6cbd4cf406a846dfddf9845ae29dad37229a947",
+    "bytes": 18170
+  },
+  {
+    "file": "source_snapshot/benchmarks/challenge/schema.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/benchmarks/challenge/schema.py",
+    "sha256": "ea2d531bbc69ed4ce78c5eb8de9ccb77d17a75e0e68c4e3a9608a05316363146",
+    "bytes": 2637
+  },
+  {
+    "file": "source_snapshot/rust-core/src/lib.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/rust-core/src/lib.rs",
+    "sha256": "465c22268acc0b61a1065687b15068ae2d5d9aa16143cad434c8b62f165f84eb",
+    "bytes": 34151
+  },
+  {
+    "file": "source_snapshot/rust-core/src/weighted_words.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/rust-core/src/weighted_words.rs",
+    "sha256": "2440534f3a251288fa4b4e51e7ca833c6358743784255b49b8ae2b8325377bb3",
+    "bytes": 4221
+  },
+  {
+    "file": "source_snapshot/tandemx/cli.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/tandemx/cli.py",
+    "sha256": "962ae81aa51a4c3276d28a5399b152b5ef77f94fe6a7b5b81179fcd8d786f8b5",
+    "bytes": 39968
+  },
+  {
+    "file": "source_snapshot/tandemx/compare/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/tandemx/compare/mvp.py",
+    "sha256": "02315eea7fcafbfeedb292edd91acc1b3161806c98e392b2ad0dec387249ddbb",
+    "bytes": 9635
+  },
+  {
+    "file": "source_snapshot/tandemx/locate/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/tandemx/locate/mvp.py",
+    "sha256": "fc89b8ebf5ecd5f8aadf3f4e7d0a953b4d751e109abc9c26920742b60802194d",
+    "bytes": 14845
+  },
+  {
+    "file": "source_snapshot/tandemx/quantify/mvp.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/tandemx/quantify/mvp.py",
+    "sha256": "f7e75fd378721a644dbd6c030d2a413e22a5434a5b9d669c5e4c4200f3037bb5",
+    "bytes": 19510
+  },
+  {
+    "file": "source_snapshot/tandemx/utils/kmers.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/source_snapshot/tandemx/utils/kmers.py",
+    "sha256": "2bca0ce2d2a5b0ef7d628bfd2462d0f0efe24e17186b8fd371f9ee5bdb9f7174",
+    "bytes": 5048
+  },
+  {
+    "file": "resource_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_heldout_baseline_v1_20260906/runs/**/receipt.json",
+    "sha256": "48d506a53dce3b8226a02dce0c5e67481d45dc57f0ee9a2baa1db3f20cef2517",
+    "bytes": 875877
+  }
+]

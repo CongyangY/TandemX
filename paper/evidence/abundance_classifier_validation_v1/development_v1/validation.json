@@ -1,0 +1,54 @@
+{
+  "complete": true,
+  "development_only": true,
+  "independent_development_genomes": 3,
+  "reserved_heldout_genomes": 3,
+  "paired_family_conditions": 2430,
+  "candidate_models": 20,
+  "candidate_family_rows": 48600,
+  "selected_candidate": "blend_a0.75_t0.45",
+  "baseline_confusion": {
+    "available": 2430,
+    "unavailable": 0,
+    "TP": 873,
+    "FN": 585,
+    "FP": 10,
+    "TN": 962,
+    "sensitivity": 0.5987654320987654,
+    "false_positive_rate": 0.0102880658436214,
+    "precision": 0.9886749716874292
+  },
+  "selected_confusion": {
+    "available": 2430,
+    "unavailable": 0,
+    "TP": 1042,
+    "FN": 416,
+    "FP": 8,
+    "TN": 964,
+    "sensitivity": 0.7146776406035665,
+    "false_positive_rate": 0.00823045267489712,
+    "precision": 0.9923809523809524
+  },
+  "cross_validated_confusion": {
+    "available": 2430,
+    "unavailable": 0,
+    "TP": 1049,
+    "FN": 409,
+    "FP": 21,
+    "TN": 951,
+    "sensitivity": 0.7194787379972565,
+    "false_positive_rate": 0.021604938271604937,
+    "precision": 0.9803738317757009
+  },
+  "acceptance": {
+    "full_sensitivity_delta": 0.1159122085048011,
+    "full_false_positive_rate_delta": -0.002057613168724279,
+    "full_precision_delta": 0.0037059806935231254,
+    "leave_one_seed_out_selection_consistent": false,
+    "cross_validated_sensitivity_delta": 0.12071330589849105,
+    "cross_validated_false_positive_rate_delta": 0.011316872427983538,
+    "cross_validated_precision_delta": -0.008301139911728317,
+    "passed": false
+  },
+  "scientific_acceptance": "development_gate_reported_not_assumed_from_execution_success"
+}

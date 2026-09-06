@@ -1,0 +1,40 @@
+panel	metric	dataset	method	seed	coverage	unit_substitution_rate	array_fragments	value	numerator	denominator
+A	development_v1	failed	NA	NA	NA	NA	NA	0.0	NA	NA
+A	development_v2	passed	NA	NA	NA	NA	NA	1.0	NA	NA
+A	code_+_model	frozen	NA	NA	NA	NA	NA	1.0	NA	NA
+A	held-out	failed	NA	NA	NA	NA	NA	0.0	NA	NA
+B	sensitivity_delta	Development v2	NA	NA	NA	NA	NA	0.08847736625514402	NA	NA
+B	false_positive_rate_delta	Development v2	NA	NA	NA	NA	NA	-0.0030864197530864196	NA	NA
+B	precision_delta	Development v2	NA	NA	NA	NA	NA	0.004387466370053383	NA	NA
+B	sensitivity_delta	Held-out	NA	NA	NA	NA	NA	0.08779149519890261	NA	NA
+B	false_positive_rate_delta	Held-out	NA	NA	NA	NA	NA	0.016460905349794237	NA	NA
+B	precision_delta	Held-out	NA	NA	NA	NA	NA	-0.010634483361756097	NA	NA
+C	sensitivity	NA	single_k21	NA	NA	NA	NA	0.6282578875171467	NA	NA
+C	false_positive_rate	NA	single_k21	NA	NA	NA	NA	0.029835390946502057	NA	NA
+C	precision	NA	single_k21	NA	NA	NA	NA	0.9693121693121693	NA	NA
+C	sensitivity	NA	blend_a0.5_t0.5	NA	NA	NA	NA	0.7160493827160493	NA	NA
+C	false_positive_rate	NA	blend_a0.5_t0.5	NA	NA	NA	NA	0.046296296296296294	NA	NA
+C	precision	NA	blend_a0.5_t0.5	NA	NA	NA	NA	0.9586776859504132	NA	NA
+D	sensitivity_delta	NA	NA	5701	NA	NA	NA	0.06995884773662553	NA	NA
+D	sensitivity_delta	NA	NA	5702	NA	NA	NA	0.10082304526748975	NA	NA
+D	sensitivity_delta	NA	NA	5703	NA	NA	NA	0.09259259259259256	NA	NA
+D	false_positive_rate_delta	NA	NA	5701	NA	NA	NA	0.009259259259259259	NA	NA
+D	false_positive_rate_delta	NA	NA	5702	NA	NA	NA	0.0	NA	NA
+D	false_positive_rate_delta	NA	NA	5703	NA	NA	NA	0.040123456790123455	NA	NA
+D	precision_delta	NA	NA	5701	NA	NA	NA	-0.004203336398266089	NA	NA
+D	precision_delta	NA	NA	5702	NA	NA	NA	0.0	NA	NA
+D	precision_delta	NA	NA	5703	NA	NA	NA	-0.025985013294657966	NA	NA
+E	sensitivity_delta	NA	NA	NA	1	NA	NA	0.0864197530864198	NA	NA
+E	sensitivity_delta	NA	NA	NA	5	NA	NA	0.09465020576131689	NA	NA
+E	sensitivity_delta	NA	NA	NA	20	NA	NA	0.08230452674897126	NA	NA
+E	false_positive_rate_delta	NA	NA	NA	1	NA	NA	0.04938271604938273	NA	NA
+E	false_positive_rate_delta	NA	NA	NA	5	NA	NA	0.0	NA	NA
+E	false_positive_rate_delta	NA	NA	NA	20	NA	NA	0.0	NA	NA
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.01	1	0.9924783024132824	297127.0	297300.0
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.03	1	0.9907438390586114	297071.0	297300.0
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.05	1	0.9521515971220751	296465.0	297300.0
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.01	3	0.9891945686061396	297011.0	297300.0
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.03	3	0.9808977708430918	296836.0	297300.0
+F	full_assembly_mean_base_recall	NA	NA	NA	NA	0.05	3	0.9376819415091325	295914.0	297300.0
+F	positive_assembly_mean_base_precision	NA	NA	NA	NA	NA	NA	0.9996309451338645	216	216
+F	absent_family_false_positive_rows	NA	NA	NA	NA	NA	NA	0.0	0	54

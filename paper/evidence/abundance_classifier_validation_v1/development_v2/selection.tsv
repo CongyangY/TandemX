@@ -1,0 +1,2 @@
+candidate_id	blend_alpha	decision_threshold	minimum_seed_sensitivity_delta	maximum_seed_false_positive_rate_delta	minimum_seed_precision_delta	full_sensitivity	full_false_positive_rate	full_precision	full_sensitivity_delta	full_false_positive_rate_delta	full_precision_delta	eligible	selection_method
+blend_a0.5_t0.5	0.5	0.5	0.07613168724279828	0.0	0.0015584415584415368	0.6872427983539094	0.00720164609053498	0.9930624380574826	0.08847736625514402	-0.0030864197530864196	0.004387466370053383	True	seed_robust_minimax

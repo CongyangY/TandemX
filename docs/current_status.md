@@ -1,6 +1,6 @@
 # TandemX current status and handoff
 
-Updated 2026-09-06. Read completely after `AGENTS.md`, then verify Git/tests.
+Updated 2026-09-07. Read completely after `AGENTS.md`, then verify Git/tests.
 The user has authorized autonomous development and GitHub updates toward mature
 software and a full evidence-backed paper (multi-panel figures and supplement).
 The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
@@ -116,7 +116,7 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 456 Python tests. The added tests cover
+- The expanded source checkout passes all 459 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
   unchanged. Four additional tests validate compact reference archiving and
@@ -189,10 +189,18 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   delta 0 and minimum seed precision delta 0.001558; full deltas were +0.088477,
   -0.003086 and +0.004387, respectively.
 - `abundance_classifier_heldout_v1.json` freezes the v2 classifier and selected
-  localizer hashes with untouched seeds 5701–5703. Both guards re-hash and
-  recompute development gates before output creation. Held-out gates require
-  overall and every-seed sensitivity gains while preserving FPR and precision;
-  no held-out result exists yet.
+  localizer hashes. Both guards re-hashed and recomputed development gates before
+  output creation; commit 300e48d and hosted runs 34043678448/34043693408 passed
+  before seeds 5701–5703 were consumed once. All 1,062 baseline commands and 162
+  multi-k conditions completed. The frozen blend changed TP/FN/FP/TN from
+  916/542/29/943 to 1044/414/45/927: sensitivity 0.628258→0.716049, FPR
+  0.029835→0.046296 and precision 0.969312→0.958678. Overall and worst-seed FPR/
+  precision gates failed; seed 5703 had FPR delta +0.040123 and precision delta
+  -0.025985. All 16 additional false positives occurred at nominal 1×. The same
+  baseline had full-assembly localization recall 0.973858, positive-assembly
+  precision 0.999631 and 0/54 absent-family false-positive rows. A compact
+  evidence chain and inspected six-panel Figure 6 retain the result. Seeds
+  5701–5703 are now consumed and cannot be retested as independent validation.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

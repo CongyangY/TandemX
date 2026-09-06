@@ -229,6 +229,16 @@ classifier acceptance requires full sensitivity gain at least 0.05, every-seed
 gain at least 0.03, and no FPR or precision regression either overall or in the
 worst seed.
 
+Commit 300e48d and both hosted checks passed before one-time execution of
+5701--5703. All 1,062 baseline commands and 162 multi-k conditions completed.
+The frozen blend increased sensitivity 0.628258 to 0.716049, but FPR increased
+0.029835 to 0.046296 and precision decreased 0.969312 to 0.958678. It therefore
+failed the predeclared overall and worst-seed FPR/precision gates. All 16 added
+false positives occurred at nominal 1x; both methods had zero false positives at
+5x and 20x. This coverage result is a post-hoc diagnosis on consumed held-out
+data. Seeds 5701--5703 may inform a future development rule but can never be
+reported again as independent validation for that rule.
+
 ## Endpoint and clustering audit (2026-09-06)
 
 Retain both strict equal-length recovery and independent cyclic edit recovery;

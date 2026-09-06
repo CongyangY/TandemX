@@ -1,0 +1,35 @@
+{
+  "development_seeds": [5601, 5602, 5603],
+  "reserved_heldout_seeds": [5701, 5702, 5703],
+  "candidate_source": {
+    "result": "/Volumes/T7/Codex/TandemX/results/abundance_classifier_blend_development_v1_20260906",
+    "validation_sha256": "5e821c44abf200c5f72040a8a662058f3cae14765f606a58121bf3e159c097aa",
+    "candidate_metrics_sha256": "6d752152d4dd18495d9ebce25643c624cb3e088aa29189a5c1f87cc43c944b5b",
+    "candidate_summary_sha256": "797774117fca5b11efd8a24628d39e026657b52f61ef6b5e7c685d6aff7bf849",
+    "selection_sha256": "1653a6819e7dfad4c467ac51b1c7fca7af64a530a3f590fd777be576d641b992",
+    "environment_sha256": "f0c95c656e415951dc6b7f9694372c861f2d51bfb9256a37adb24326b6873cc1",
+    "run_config_sha256": "3210fab6555aa998b3b3d8e2271fb79cfdd4801f5d1d163af68e28945c8c8e54"
+  },
+  "candidate_grid": {
+    "alpha": [0, 0.25, 0.5, 0.75, 1],
+    "decision_threshold": [0.45, 0.5, 0.55, 0.6]
+  },
+  "selection_rule": {
+    "method": "seed_robust_minimax",
+    "baseline_candidate": "blend_a0_t0.6",
+    "constraints": {
+      "per_seed_false_positive_rate_max_delta": 0.0,
+      "per_seed_precision_min_delta": 0.0
+    },
+    "selection_objective": "maximize_minimum_seed_sensitivity_delta_then_full_sensitivity_then_minimize_maximum_seed_fpr_delta_then_maximize_minimum_seed_precision_delta_then_minimize_alpha_then_threshold",
+    "acceptance_gates": {
+      "minimum_seed_sensitivity_delta": 0.05,
+      "maximum_seed_false_positive_rate_delta": 0.0,
+      "minimum_seed_precision_delta": 0.0,
+      "full_sensitivity_delta": 0.05,
+      "full_false_positive_rate_delta": 0.0,
+      "full_precision_delta": 0.0
+    },
+    "warning": "post_v1_development_refinement_on_consumed_seeds_5601_5603;selection_is_not_independent_validation;heldout_seeds_5701_5703_remain_untouched;transparent_minimax_rule_not_AI"
+  }
+}

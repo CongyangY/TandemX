@@ -1,6 +1,6 @@
 # TandemX: read-level evidence and sampling uncertainty for plant satellite repeat analysis
 
-**Evidence-backed development manuscript, 6 September 2026.** Author information
+**Evidence-backed development manuscript, 7 September 2026.** Author information
 is not assigned. This draft contains completed results, with unresolved release
 and biological-validation requirements listed in `submission_readiness.md`.
 It is not a submission-ready manuscript or a claim of universal superiority.
@@ -30,7 +30,10 @@ false-positive rate. On a second predeclared divergent-array test, bounded ancho
 bridging achieved 98.10% full-assembly recall and 99.96% positive-assembly
 precision. The frozen multi-k rule raised classification sensitivity from 60.01%
 to 91.84%, while false-positive rate rose from 1.23% to 8.54% and precision fell
-from 98.65% to 94.16%.
+from 98.65% to 94.16%. A subsequent seed-robust blend was frozen before three
+additional genomes were evaluated. It increased sensitivity from 62.83% to
+71.60%, but false-positive rate increased from 2.98% to 4.63% and precision
+decreased from 96.93% to 95.87%, failing the predeclared held-out gates.
 Exact native optimizations shortened a 1.129-Gb maize replay by 23.61% relative
 to its preceding indexed version while preserving seven output files byte for
 byte; peak memory increased 0.81%. External comparisons showed task-dependent
@@ -286,6 +289,26 @@ classifier parameters and evidence hashes were then embedded in a held-out
 configuration while seeds 5701–5703 remained untouched. This post-v1
 refinement cannot itself establish generalization.
 
+Commit 300e48d and its hosted Ubuntu/macOS checks passed before seeds 5701–5703
+were used once. Across 2,430 paired family conditions, single k=21 produced
+TP/FN/FP/TN=916/542/29/943 and the frozen blend produced 1044/414/45/927
+(Figure 6; Evidence E17). Sensitivity increased from 0.628258 to 0.716049, but
+false-positive rate increased from 0.029835 to 0.046296 and precision decreased
+from 0.969312 to 0.958678. Seed 5703 had the largest adverse changes: FPR rose
+by 0.040123 and precision fell by 0.025985. The overall and worst-seed FPR and
+precision gates therefore failed. All 16 additional false positives occurred at
+nominal 1× coverage; at 5× and 20× both methods had zero false positives while
+the blend improved sensitivity by 0.094650 and 0.082305. This stratification is
+a post-hoc diagnosis on consumed held-out data, not evidence that a revised rule
+has passed independent validation.
+
+The same 5701–5703 baseline retained the frozen localizer behavior at aggregate
+level. Full-assembly mean base recall was 0.973858, positive-assembly mean base
+precision was 0.999631 and no predicted bases occurred in 54 absent-family rows.
+The 5%-divergent three-segment stratum had mean recall 0.937682, below the 0.95
+aggregate gate used for the whole matrix. Successful localization in aggregate
+therefore did not rescue classifier calibration at low read depth.
+
 ### Eight-species file QC and reference concordance expose normalization concerns
 
 Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N/Col-0R/Ey15-2R, rice
@@ -392,7 +415,10 @@ classifier exchanged substantially higher sensitivity for more false positives.
 Separate classifier-development data then showed that a pooled blend could
 improve aggregate sensitivity, FPR and precision while failing seed-level
 stability. This prompted a minimax development selector that treats every seed
-as a guardrail, but its independent performance is not yet known.
+as a guardrail. Its independent test failed despite a sensitivity gain: all
+additional false positives occurred at 1×, and the held-out FPR and precision
+regressed overall and in the worst seed. This shows that seed-level robustness
+within three development genomes was insufficient to guarantee transfer.
 None establishes that TandemX dominates existing tools. In the current read simulation, all three
 methods recovered every founder. TRF retained slightly higher base precision,
 and TideHunter remained faster. TRASH2 was a strong assembly baseline after
@@ -426,7 +452,7 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 456 local Python tests. Its Rust
+PyO3/Rust extension. The current source passed 459 local Python tests. Its Rust
 source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
 passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
 distributable-wheel builds.
@@ -501,7 +527,15 @@ version 2 retained the same candidates but required the constraints within each
 seed and ranked eligible candidates by minimum seed-level sensitivity gain,
 then full sensitivity, worst seed FPR delta, worst seed precision delta, alpha
 and threshold. Version 2 is explicitly development refinement and must be
-frozen before any reserved seed is evaluated.
+frozen before any reserved seed is evaluated. The selected alpha 0.5 and
+threshold 0.5, localizer hashes and both development gates were embedded in the
+held-out configuration. The runner re-hashed and recomputed both gates before
+creating any output, and commit 300e48d passed hosted Ubuntu/macOS checks before
+seeds 5701–5703 were used. Held-out acceptance required an overall sensitivity
+gain of at least 0.05, a gain of at least 0.03 in every seed, and no FPR or
+precision regression overall or in the worst seed. No parameter was selected or
+refitted on held-out rows. Coverage-specific results reported after the failed
+gate are diagnostic and make these seeds development data for any future rule.
 
 ### Comparator execution and scoring
 
@@ -616,6 +650,18 @@ precision. Inputs, panel values, hashes and the complete legend are in
 `evidence/abundance_localizer_multik_heldout/figure_legend.md`. This known-
 catalogue substitution simulation is not biological collapse truth.
 
+**Figure 6. Frozen seed-robust classifier development and held-out failure.**
+Six panels show the frozen evaluation sequence, development-to-held-out metric
+deltas, held-out aggregate metrics, seed-specific deltas, coverage-specific
+trade-offs and localization recall by divergence and planted segment count. The
+blend improves sensitivity, but increases held-out false-positive rate and
+lowers precision; all additional false positives occur at nominal 1×. Inputs,
+panel values, hashes and the complete legend are in
+`evidence/abundance_classifier_validation_v1/figures_v2` and
+`evidence/abundance_classifier_validation_v1/figure_legend.md`. Coverage
+stratification is post-hoc diagnosis, and the known-catalogue IID simulation is
+not biological collapse truth.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -679,6 +725,9 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   `evidence/abundance_localizer_development_v2`,
   `evidence/abundance_localizer_heldout_baseline` and
   `evidence/abundance_localizer_multik_heldout`.
+- Supplementary Table S14: classifier development v1, seed-robust development
+  v2, complete paired held-out rows, per-seed metrics, localization rows and
+  command resource receipts in `evidence/abundance_classifier_validation_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -690,7 +739,8 @@ E12: paired `abundance_heldout_v2` and `abundance_multik_collapse_heldout`;
 E13: paired `abundance_domain_shift_heldout_baseline` and
 `abundance_domain_shift_multik_heldout`; E14: `MorexV3_reference_qc`.
 E15: `Morex_115Mb_index_interface_v2`; E16: paired localizer development and
-held-out directories listed for Supplementary Table S13.
+held-out directories listed for Supplementary Table S13; E17:
+`abundance_classifier_validation_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 
