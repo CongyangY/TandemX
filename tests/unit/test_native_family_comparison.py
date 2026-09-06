@@ -66,3 +66,32 @@ def test_streaming_audit_preserves_table_warning_order_and_optional_collapse(tmp
             assert mvp.collapse_redundant_families(observed, pairs) == mvp.collapse_redundant_families(expected_families, expected)
     assert write_family_audit(tmp_path/'empty.tsv', [], k=11, backend='rust') == ([], [])
     assert (tmp_path/'empty.tsv').read_text() == mvp.family_similarity_header()+'\n'
+
+
+@pytest.mark.parametrize('k', [1, 11, 31, 200])
+def test_related_index_preserves_every_non_distinct_pair_and_collapse(tmp_path, k):
+    import json
+    from tandemx.discover.family_audit import write_family_audit
+    rng = random.Random(6204)
+    sequences = []
+    for _ in range(8):
+        a = ''.join(rng.choices('ACGT', k=rng.choice([31, 50, 71, 100])))
+        sequences += [a, a+a, reverse_complement(a), a[:20]+'A'+a[21:], a[:len(a)//2]]
+    sequences += ['N'*80, 'N'*100, 'A'*120, 'A'*160]
+    families = [RepeatFamily(f'f{i}', f'm{i}', s, len(s), 1, len(s), .9, False, 'medium', 'initial')
+                for i, s in enumerate(sequences)]
+    full = compare_families(families, k, 'rust')
+    expected = [p for p in full if p.relationship != 'distinct']
+    mvp.write_family_similarity(tmp_path/'expected.tsv', expected)
+    annotated, collapse = write_family_audit(tmp_path/'related.tsv', families, k=k, backend='rust', mode='related', keep_redundant=True)
+    assert (tmp_path/'related.tsv').read_bytes() == (tmp_path/'expected.tsv').read_bytes()
+    assert annotated == mvp.annotate_family_redundancy(families, full)
+    assert mvp.collapse_redundant_families(annotated, collapse) == mvp.collapse_redundant_families(annotated, full)
+    summary = json.loads((tmp_path/'family_audit_summary.json').read_text())
+    assert summary['related_pairs'] == summary['emitted_pairs'] == len(expected)
+    assert summary['omitted_distinct_pairs'] == len(full)-len(expected)
+    assert summary['possible_pairs'] == summary['pairs_scored']+summary['pairs_pruned_by_kmer_gate']
+    if k == 200:
+        assert summary['pairs_scored'] == 0
+    with pytest.raises(ValueError, match='full/related'):
+        write_family_audit(tmp_path/'invalid.tsv', [], k=k, backend='rust', mode='skip')

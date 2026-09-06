@@ -66,6 +66,7 @@ class PipelineConfig:
     profile: bool
     discovery_method: str = "legacy"
     clustering_method: str = "auto"
+    family_audit: str = "full"
     cluster_identity: float = 0.95
 
 
@@ -132,6 +133,8 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
                         help="auto uses sequence clusters for elastic discovery; override for ablation.")
     parser.add_argument("--cluster-identity", type=float, default=0.95,
                         help="Minimum circular edit similarity for sequence clustering.")
+    parser.add_argument("--family-audit", choices=("full", "related"), default="full",
+                        help="Emit every representative pair or only all non-distinct pairs with exact pruning.")
     parser.add_argument(
         "--threads",
         type=int,
@@ -182,6 +185,7 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         discovery_method=args.discovery_method,
         clustering_method=args.clustering_method,
         cluster_identity=args.cluster_identity,
+        family_audit=args.family_audit,
     )
 
 
@@ -212,6 +216,8 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
             config.clustering_method,
             "--cluster-identity",
             str(config.cluster_identity),
+            "--family-audit",
+            config.family_audit,
             "--min-period",
             str(config.min_period),
             "--max-period",
@@ -329,7 +335,8 @@ def expected_outputs(config: PipelineConfig, step: str) -> tuple[Path, ...]:
     output_dir = config.outdir / step
     outputs = {
         "discover": (output_dir / "candidate_reads.tsv", output_dir / "candidate_monomers.fa",
-                     output_dir / "monomers.fa", output_dir / "families.tsv"),
+                     output_dir / "monomers.fa", output_dir / "families.tsv",
+                     output_dir / "family_similarity.tsv", output_dir / "family_audit_summary.json"),
         "quantify": (output_dir / "copy_number.tsv",),
         "locate": (output_dir / "repeat_density.bedgraph", output_dir / "arrays.bed", output_dir / "assembly_vs_read_cn.tsv"),
         "compare": (output_dir / "assembly_vs_read_cn.tsv",),

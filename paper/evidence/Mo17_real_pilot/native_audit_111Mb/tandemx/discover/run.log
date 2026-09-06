@@ -1,0 +1,200 @@
+2026-09-06 12:32:22,796 INFO command=tandemx discover
+2026-09-06 12:32:22,796 INFO timestamp_utc=2026-09-06T04:32:22.796658+00:00
+2026-09-06 12:32:22,796 INFO output_directory=/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/tandemx/discover
+2026-09-06 12:32:22,796 INFO status=discover_running
+2026-09-06 12:32:22,796 INFO algorithm_mode=elastic_self_alignment kmer_backend=rust min_period=30 max_period=1000
+2026-09-06 12:32:22,796 INFO input_count_skipped reason=not_required_for_discovery_budget
+2026-09-06 12:32:22,798 INFO scan_threads requested=1 effective=1 parallel=false parallel_files=false backend=rust
+2026-09-06 12:32:41,712 INFO progress processed_reads=1000 processed_bases=13612937 candidate_reads=1110 elapsed_seconds=18.913 reads_per_second=52.873 mb_per_second=0.720 estimated_remaining_seconds=unknown
+2026-09-06 12:32:59,783 INFO progress processed_reads=2000 processed_bases=27335247 candidate_reads=2078 elapsed_seconds=36.985 reads_per_second=54.076 mb_per_second=0.739 estimated_remaining_seconds=unknown
+2026-09-06 12:33:18,169 INFO progress processed_reads=3000 processed_bases=41178214 candidate_reads=3113 elapsed_seconds=55.371 reads_per_second=54.180 mb_per_second=0.744 estimated_remaining_seconds=unknown
+2026-09-06 12:33:27,478 INFO progress processed_reads=4000 processed_bases=54952758 candidate_reads=4162 elapsed_seconds=64.680 reads_per_second=61.843 mb_per_second=0.850 estimated_remaining_seconds=unknown
+2026-09-06 12:33:45,781 INFO progress processed_reads=5000 processed_bases=68906968 candidate_reads=5178 elapsed_seconds=82.983 reads_per_second=60.254 mb_per_second=0.830 estimated_remaining_seconds=unknown
+2026-09-06 12:34:03,683 INFO progress processed_reads=6000 processed_bases=82725503 candidate_reads=6228 elapsed_seconds=100.885 reads_per_second=59.473 mb_per_second=0.820 estimated_remaining_seconds=unknown
+2026-09-06 12:34:21,791 INFO progress processed_reads=7000 processed_bases=96623571 candidate_reads=7282 elapsed_seconds=118.993 reads_per_second=58.827 mb_per_second=0.812 estimated_remaining_seconds=unknown
+2026-09-06 12:34:30,332 INFO progress processed_reads=8000 processed_bases=110342505 candidate_reads=8306 elapsed_seconds=127.534 reads_per_second=62.729 mb_per_second=0.865 estimated_remaining_seconds=unknown
+2026-09-06 12:34:30,332 INFO progress processed_reads=8084 processed_bases=111505681 candidate_reads=8401 elapsed_seconds=127.534 reads_per_second=63.387 mb_per_second=0.874 estimated_remaining_seconds=unknown
+2026-09-06 12:34:30,332 INFO filter_summary skipped_short_reads=0 skipped_short_kmer=0 skipped_low_complexity=0 seed_overflow_count=46
+2026-09-06 12:34:44,511 INFO family_audit backend=rust families=4219 exhaustive_pairs=8897871
+2026-09-06 12:34:45,145 INFO family_audit compared_pairs=50000 total_pairs=8897871
+2026-09-06 12:34:45,672 INFO family_audit compared_pairs=100000 total_pairs=8897871
+2026-09-06 12:34:46,423 INFO family_audit compared_pairs=150000 total_pairs=8897871
+2026-09-06 12:34:46,941 INFO family_audit compared_pairs=200000 total_pairs=8897871
+2026-09-06 12:34:47,475 INFO family_audit compared_pairs=250000 total_pairs=8897871
+2026-09-06 12:34:48,020 INFO family_audit compared_pairs=300000 total_pairs=8897871
+2026-09-06 12:34:48,849 INFO family_audit compared_pairs=350000 total_pairs=8897871
+2026-09-06 12:34:49,479 INFO family_audit compared_pairs=400000 total_pairs=8897871
+2026-09-06 12:34:50,112 INFO family_audit compared_pairs=450000 total_pairs=8897871
+2026-09-06 12:34:50,768 INFO family_audit compared_pairs=500000 total_pairs=8897871
+2026-09-06 12:34:51,518 INFO family_audit compared_pairs=550000 total_pairs=8897871
+2026-09-06 12:34:52,080 INFO family_audit compared_pairs=600000 total_pairs=8897871
+2026-09-06 12:34:52,553 INFO family_audit compared_pairs=650000 total_pairs=8897871
+2026-09-06 12:34:53,069 INFO family_audit compared_pairs=700000 total_pairs=8897871
+2026-09-06 12:34:53,651 INFO family_audit compared_pairs=750000 total_pairs=8897871
+2026-09-06 12:34:54,172 INFO family_audit compared_pairs=800000 total_pairs=8897871
+2026-09-06 12:34:54,649 INFO family_audit compared_pairs=850000 total_pairs=8897871
+2026-09-06 12:34:55,441 INFO family_audit compared_pairs=900000 total_pairs=8897871
+2026-09-06 12:34:56,178 INFO family_audit compared_pairs=950000 total_pairs=8897871
+2026-09-06 12:34:56,721 INFO family_audit compared_pairs=1000000 total_pairs=8897871
+2026-09-06 12:34:57,296 INFO family_audit compared_pairs=1050000 total_pairs=8897871
+2026-09-06 12:34:57,822 INFO family_audit compared_pairs=1100000 total_pairs=8897871
+2026-09-06 12:34:58,301 INFO family_audit compared_pairs=1150000 total_pairs=8897871
+2026-09-06 12:34:58,767 INFO family_audit compared_pairs=1200000 total_pairs=8897871
+2026-09-06 12:34:59,700 INFO family_audit compared_pairs=1250000 total_pairs=8897871
+2026-09-06 12:35:00,868 INFO family_audit compared_pairs=1300000 total_pairs=8897871
+2026-09-06 12:35:01,534 INFO family_audit compared_pairs=1350000 total_pairs=8897871
+2026-09-06 12:35:02,301 INFO family_audit compared_pairs=1400000 total_pairs=8897871
+2026-09-06 12:35:02,979 INFO family_audit compared_pairs=1450000 total_pairs=8897871
+2026-09-06 12:35:03,662 INFO family_audit compared_pairs=1500000 total_pairs=8897871
+2026-09-06 12:35:04,281 INFO family_audit compared_pairs=1550000 total_pairs=8897871
+2026-09-06 12:35:04,907 INFO family_audit compared_pairs=1600000 total_pairs=8897871
+2026-09-06 12:35:05,509 INFO family_audit compared_pairs=1650000 total_pairs=8897871
+2026-09-06 12:35:06,103 INFO family_audit compared_pairs=1700000 total_pairs=8897871
+2026-09-06 12:35:06,653 INFO family_audit compared_pairs=1750000 total_pairs=8897871
+2026-09-06 12:35:07,223 INFO family_audit compared_pairs=1800000 total_pairs=8897871
+2026-09-06 12:35:07,757 INFO family_audit compared_pairs=1850000 total_pairs=8897871
+2026-09-06 12:35:08,311 INFO family_audit compared_pairs=1900000 total_pairs=8897871
+2026-09-06 12:35:08,850 INFO family_audit compared_pairs=1950000 total_pairs=8897871
+2026-09-06 12:35:09,362 INFO family_audit compared_pairs=2000000 total_pairs=8897871
+2026-09-06 12:35:09,849 INFO family_audit compared_pairs=2050000 total_pairs=8897871
+2026-09-06 12:35:10,349 INFO family_audit compared_pairs=2100000 total_pairs=8897871
+2026-09-06 12:35:10,828 INFO family_audit compared_pairs=2150000 total_pairs=8897871
+2026-09-06 12:35:11,325 INFO family_audit compared_pairs=2200000 total_pairs=8897871
+2026-09-06 12:35:11,810 INFO family_audit compared_pairs=2250000 total_pairs=8897871
+2026-09-06 12:35:12,275 INFO family_audit compared_pairs=2300000 total_pairs=8897871
+2026-09-06 12:35:12,737 INFO family_audit compared_pairs=2350000 total_pairs=8897871
+2026-09-06 12:35:13,202 INFO family_audit compared_pairs=2400000 total_pairs=8897871
+2026-09-06 12:35:13,659 INFO family_audit compared_pairs=2450000 total_pairs=8897871
+2026-09-06 12:35:14,225 INFO family_audit compared_pairs=2500000 total_pairs=8897871
+2026-09-06 12:35:15,823 INFO family_audit compared_pairs=2550000 total_pairs=8897871
+2026-09-06 12:35:17,959 INFO family_audit compared_pairs=2600000 total_pairs=8897871
+2026-09-06 12:35:19,916 INFO family_audit compared_pairs=2650000 total_pairs=8897871
+2026-09-06 12:35:21,620 INFO family_audit compared_pairs=2700000 total_pairs=8897871
+2026-09-06 12:35:23,336 INFO family_audit compared_pairs=2750000 total_pairs=8897871
+2026-09-06 12:35:24,980 INFO family_audit compared_pairs=2800000 total_pairs=8897871
+2026-09-06 12:35:26,566 INFO family_audit compared_pairs=2850000 total_pairs=8897871
+2026-09-06 12:35:27,799 INFO family_audit compared_pairs=2900000 total_pairs=8897871
+2026-09-06 12:35:29,025 INFO family_audit compared_pairs=2950000 total_pairs=8897871
+2026-09-06 12:35:30,195 INFO family_audit compared_pairs=3000000 total_pairs=8897871
+2026-09-06 12:35:31,218 INFO family_audit compared_pairs=3050000 total_pairs=8897871
+2026-09-06 12:35:32,217 INFO family_audit compared_pairs=3100000 total_pairs=8897871
+2026-09-06 12:35:33,188 INFO family_audit compared_pairs=3150000 total_pairs=8897871
+2026-09-06 12:35:34,270 INFO family_audit compared_pairs=3200000 total_pairs=8897871
+2026-09-06 12:35:35,032 INFO family_audit compared_pairs=3250000 total_pairs=8897871
+2026-09-06 12:35:35,900 INFO family_audit compared_pairs=3300000 total_pairs=8897871
+2026-09-06 12:35:36,690 INFO family_audit compared_pairs=3350000 total_pairs=8897871
+2026-09-06 12:35:37,431 INFO family_audit compared_pairs=3400000 total_pairs=8897871
+2026-09-06 12:35:38,170 INFO family_audit compared_pairs=3450000 total_pairs=8897871
+2026-09-06 12:35:38,870 INFO family_audit compared_pairs=3500000 total_pairs=8897871
+2026-09-06 12:35:39,589 INFO family_audit compared_pairs=3550000 total_pairs=8897871
+2026-09-06 12:35:40,238 INFO family_audit compared_pairs=3600000 total_pairs=8897871
+2026-09-06 12:35:40,880 INFO family_audit compared_pairs=3650000 total_pairs=8897871
+2026-09-06 12:35:41,493 INFO family_audit compared_pairs=3700000 total_pairs=8897871
+2026-09-06 12:35:42,171 INFO family_audit compared_pairs=3750000 total_pairs=8897871
+2026-09-06 12:35:42,837 INFO family_audit compared_pairs=3800000 total_pairs=8897871
+2026-09-06 12:35:43,478 INFO family_audit compared_pairs=3850000 total_pairs=8897871
+2026-09-06 12:35:44,124 INFO family_audit compared_pairs=3900000 total_pairs=8897871
+2026-09-06 12:35:44,789 INFO family_audit compared_pairs=3950000 total_pairs=8897871
+2026-09-06 12:35:45,344 INFO family_audit compared_pairs=4000000 total_pairs=8897871
+2026-09-06 12:35:45,955 INFO family_audit compared_pairs=4050000 total_pairs=8897871
+2026-09-06 12:35:46,619 INFO family_audit compared_pairs=4100000 total_pairs=8897871
+2026-09-06 12:35:47,283 INFO family_audit compared_pairs=4150000 total_pairs=8897871
+2026-09-06 12:35:47,967 INFO family_audit compared_pairs=4200000 total_pairs=8897871
+2026-09-06 12:35:48,631 INFO family_audit compared_pairs=4250000 total_pairs=8897871
+2026-09-06 12:35:49,248 INFO family_audit compared_pairs=4300000 total_pairs=8897871
+2026-09-06 12:35:49,842 INFO family_audit compared_pairs=4350000 total_pairs=8897871
+2026-09-06 12:35:50,418 INFO family_audit compared_pairs=4400000 total_pairs=8897871
+2026-09-06 12:35:51,032 INFO family_audit compared_pairs=4450000 total_pairs=8897871
+2026-09-06 12:35:51,624 INFO family_audit compared_pairs=4500000 total_pairs=8897871
+2026-09-06 12:35:52,207 INFO family_audit compared_pairs=4550000 total_pairs=8897871
+2026-09-06 12:35:52,788 INFO family_audit compared_pairs=4600000 total_pairs=8897871
+2026-09-06 12:35:53,350 INFO family_audit compared_pairs=4650000 total_pairs=8897871
+2026-09-06 12:35:53,881 INFO family_audit compared_pairs=4700000 total_pairs=8897871
+2026-09-06 12:35:54,400 INFO family_audit compared_pairs=4750000 total_pairs=8897871
+2026-09-06 12:35:54,911 INFO family_audit compared_pairs=4800000 total_pairs=8897871
+2026-09-06 12:35:55,404 INFO family_audit compared_pairs=4850000 total_pairs=8897871
+2026-09-06 12:35:55,932 INFO family_audit compared_pairs=4900000 total_pairs=8897871
+2026-09-06 12:35:56,458 INFO family_audit compared_pairs=4950000 total_pairs=8897871
+2026-09-06 12:35:56,989 INFO family_audit compared_pairs=5000000 total_pairs=8897871
+2026-09-06 12:35:57,521 INFO family_audit compared_pairs=5050000 total_pairs=8897871
+2026-09-06 12:35:58,072 INFO family_audit compared_pairs=5100000 total_pairs=8897871
+2026-09-06 12:35:58,569 INFO family_audit compared_pairs=5150000 total_pairs=8897871
+2026-09-06 12:35:59,055 INFO family_audit compared_pairs=5200000 total_pairs=8897871
+2026-09-06 12:35:59,563 INFO family_audit compared_pairs=5250000 total_pairs=8897871
+2026-09-06 12:36:00,077 INFO family_audit compared_pairs=5300000 total_pairs=8897871
+2026-09-06 12:36:00,557 INFO family_audit compared_pairs=5350000 total_pairs=8897871
+2026-09-06 12:36:01,014 INFO family_audit compared_pairs=5400000 total_pairs=8897871
+2026-09-06 12:36:01,481 INFO family_audit compared_pairs=5450000 total_pairs=8897871
+2026-09-06 12:36:01,971 INFO family_audit compared_pairs=5500000 total_pairs=8897871
+2026-09-06 12:36:02,444 INFO family_audit compared_pairs=5550000 total_pairs=8897871
+2026-09-06 12:36:02,932 INFO family_audit compared_pairs=5600000 total_pairs=8897871
+2026-09-06 12:36:03,399 INFO family_audit compared_pairs=5650000 total_pairs=8897871
+2026-09-06 12:36:03,883 INFO family_audit compared_pairs=5700000 total_pairs=8897871
+2026-09-06 12:36:04,466 INFO family_audit compared_pairs=5750000 total_pairs=8897871
+2026-09-06 12:36:04,932 INFO family_audit compared_pairs=5800000 total_pairs=8897871
+2026-09-06 12:36:05,406 INFO family_audit compared_pairs=5850000 total_pairs=8897871
+2026-09-06 12:36:05,869 INFO family_audit compared_pairs=5900000 total_pairs=8897871
+2026-09-06 12:36:06,330 INFO family_audit compared_pairs=5950000 total_pairs=8897871
+2026-09-06 12:36:06,764 INFO family_audit compared_pairs=6000000 total_pairs=8897871
+2026-09-06 12:36:07,206 INFO family_audit compared_pairs=6050000 total_pairs=8897871
+2026-09-06 12:36:07,642 INFO family_audit compared_pairs=6100000 total_pairs=8897871
+2026-09-06 12:36:08,072 INFO family_audit compared_pairs=6150000 total_pairs=8897871
+2026-09-06 12:36:08,512 INFO family_audit compared_pairs=6200000 total_pairs=8897871
+2026-09-06 12:36:08,942 INFO family_audit compared_pairs=6250000 total_pairs=8897871
+2026-09-06 12:36:09,375 INFO family_audit compared_pairs=6300000 total_pairs=8897871
+2026-09-06 12:36:09,796 INFO family_audit compared_pairs=6350000 total_pairs=8897871
+2026-09-06 12:36:10,229 INFO family_audit compared_pairs=6400000 total_pairs=8897871
+2026-09-06 12:36:10,644 INFO family_audit compared_pairs=6450000 total_pairs=8897871
+2026-09-06 12:36:11,050 INFO family_audit compared_pairs=6500000 total_pairs=8897871
+2026-09-06 12:36:11,465 INFO family_audit compared_pairs=6550000 total_pairs=8897871
+2026-09-06 12:36:11,865 INFO family_audit compared_pairs=6600000 total_pairs=8897871
+2026-09-06 12:36:12,273 INFO family_audit compared_pairs=6650000 total_pairs=8897871
+2026-09-06 12:36:12,681 INFO family_audit compared_pairs=6700000 total_pairs=8897871
+2026-09-06 12:36:13,096 INFO family_audit compared_pairs=6750000 total_pairs=8897871
+2026-09-06 12:36:13,503 INFO family_audit compared_pairs=6800000 total_pairs=8897871
+2026-09-06 12:36:13,941 INFO family_audit compared_pairs=6850000 total_pairs=8897871
+2026-09-06 12:36:14,403 INFO family_audit compared_pairs=6900000 total_pairs=8897871
+2026-09-06 12:36:14,832 INFO family_audit compared_pairs=6950000 total_pairs=8897871
+2026-09-06 12:36:15,242 INFO family_audit compared_pairs=7000000 total_pairs=8897871
+2026-09-06 12:36:15,638 INFO family_audit compared_pairs=7050000 total_pairs=8897871
+2026-09-06 12:36:16,038 INFO family_audit compared_pairs=7100000 total_pairs=8897871
+2026-09-06 12:36:16,467 INFO family_audit compared_pairs=7150000 total_pairs=8897871
+2026-09-06 12:36:16,867 INFO family_audit compared_pairs=7200000 total_pairs=8897871
+2026-09-06 12:36:17,252 INFO family_audit compared_pairs=7250000 total_pairs=8897871
+2026-09-06 12:36:17,638 INFO family_audit compared_pairs=7300000 total_pairs=8897871
+2026-09-06 12:36:18,023 INFO family_audit compared_pairs=7350000 total_pairs=8897871
+2026-09-06 12:36:18,402 INFO family_audit compared_pairs=7400000 total_pairs=8897871
+2026-09-06 12:36:18,777 INFO family_audit compared_pairs=7450000 total_pairs=8897871
+2026-09-06 12:36:19,163 INFO family_audit compared_pairs=7500000 total_pairs=8897871
+2026-09-06 12:36:19,536 INFO family_audit compared_pairs=7550000 total_pairs=8897871
+2026-09-06 12:36:19,897 INFO family_audit compared_pairs=7600000 total_pairs=8897871
+2026-09-06 12:36:20,261 INFO family_audit compared_pairs=7650000 total_pairs=8897871
+2026-09-06 12:36:20,632 INFO family_audit compared_pairs=7700000 total_pairs=8897871
+2026-09-06 12:36:20,998 INFO family_audit compared_pairs=7750000 total_pairs=8897871
+2026-09-06 12:36:21,380 INFO family_audit compared_pairs=7800000 total_pairs=8897871
+2026-09-06 12:36:21,741 INFO family_audit compared_pairs=7850000 total_pairs=8897871
+2026-09-06 12:36:22,107 INFO family_audit compared_pairs=7900000 total_pairs=8897871
+2026-09-06 12:36:22,470 INFO family_audit compared_pairs=7950000 total_pairs=8897871
+2026-09-06 12:36:22,832 INFO family_audit compared_pairs=8000000 total_pairs=8897871
+2026-09-06 12:36:23,195 INFO family_audit compared_pairs=8050000 total_pairs=8897871
+2026-09-06 12:36:23,543 INFO family_audit compared_pairs=8100000 total_pairs=8897871
+2026-09-06 12:36:23,894 INFO family_audit compared_pairs=8150000 total_pairs=8897871
+2026-09-06 12:36:24,237 INFO family_audit compared_pairs=8200000 total_pairs=8897871
+2026-09-06 12:36:24,603 INFO family_audit compared_pairs=8250000 total_pairs=8897871
+2026-09-06 12:36:24,948 INFO family_audit compared_pairs=8300000 total_pairs=8897871
+2026-09-06 12:36:25,285 INFO family_audit compared_pairs=8350000 total_pairs=8897871
+2026-09-06 12:36:25,614 INFO family_audit compared_pairs=8400000 total_pairs=8897871
+2026-09-06 12:36:25,949 INFO family_audit compared_pairs=8450000 total_pairs=8897871
+2026-09-06 12:36:26,278 INFO family_audit compared_pairs=8500000 total_pairs=8897871
+2026-09-06 12:36:26,603 INFO family_audit compared_pairs=8550000 total_pairs=8897871
+2026-09-06 12:36:26,929 INFO family_audit compared_pairs=8600000 total_pairs=8897871
+2026-09-06 12:36:27,266 INFO family_audit compared_pairs=8650000 total_pairs=8897871
+2026-09-06 12:36:27,598 INFO family_audit compared_pairs=8700000 total_pairs=8897871
+2026-09-06 12:36:27,914 INFO family_audit compared_pairs=8750000 total_pairs=8897871
+2026-09-06 12:36:28,232 INFO family_audit compared_pairs=8800000 total_pairs=8897871
+2026-09-06 12:36:28,544 INFO family_audit compared_pairs=8850000 total_pairs=8897871
+2026-09-06 12:36:29,128 INFO family_audit completed_pairs=8897871 retained_collapse_pairs=0
+2026-09-06 12:36:30,014 INFO status=discover_mvp_completed
+2026-09-06 12:36:30,014 INFO candidate_count=8401
+2026-09-06 12:36:30,014 INFO family_count=4219
+2026-09-06 12:36:30,014 INFO Discover MVP supports toy-scale FASTA/FASTQ input, including gzip-compressed files

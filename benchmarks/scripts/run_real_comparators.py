@@ -59,7 +59,10 @@ def describe_arrays(arrays, lengths: dict[str, int]) -> dict:
                 observed_union_bp=covered, observed_union_base_fraction=covered/sum(lengths.values()))
 
 
-def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path, timeout: float) -> None:
+def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path, timeout: float,
+        family_audit: str = 'full') -> None:
+    if family_audit not in {'full', 'related'}:
+        raise ValueError('Unknown TandemX family-audit policy')
     outdir = outdir.resolve()
     outdir.mkdir(parents=True, exist_ok=False)
     sample, lengths = prepare_input(receipt.resolve(), sample_id, outdir/'reads.fa')
@@ -79,6 +82,7 @@ def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path
     manifest.update(input=sample, tool_paths=tools, tool_hashes={t: digest_file(Path(p)) for t, p in tools.items()},
                     tool_order=order, scope=dict(min_period=30, max_period=1000, min_span=100),
                     repetitions=1, threads=1, timeout_per_tool_seconds=timeout,
+                    tandemx_family_audit=family_audit,
                     runner_sha256=digest_file(Path(__file__)), parser_sha256=digest_file(Path(__file__).with_name('fastq_stream.py')),
                     accuracy='not_assessed_without_curated_independent_truth',
                     resources='direct-child wait4; excludes controller; acquisition may overlap; not publication ranking')
@@ -91,6 +95,7 @@ def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path
         if tool == 'tandemx':
             command[0:1] = [sys.executable, '-m', 'tandemx.cli']
             command += ['--discovery-method', 'elastic', '--clustering-method', 'sequence', '--cluster-identity', '.95']
+            command += ['--family-audit', family_audit]
         measured = run_process(command, output if tool == 'trf' else folder/'stdout.log', folder/'stderr.log', timeout,
                                {**os.environ, 'PYTHONPATH': str(snapshot)} if tool == 'tandemx' else None,
                                snapshot if tool == 'tandemx' else folder)
@@ -120,5 +125,6 @@ if __name__ == '__main__':
     parser.add_argument('--trf', type=Path, required=True)
     parser.add_argument('--tidehunter', type=Path, required=True)
     parser.add_argument('--timeout', type=float, default=900)
+    parser.add_argument('--family-audit', choices=('full', 'related'), default='full')
     args = parser.parse_args()
-    run(args.sampling_receipt, args.sample_id, args.outdir, args.trf, args.tidehunter, args.timeout)
+    run(args.sampling_receipt, args.sample_id, args.outdir, args.trf, args.tidehunter, args.timeout, args.family_audit)

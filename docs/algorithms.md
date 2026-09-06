@@ -202,8 +202,26 @@ running this version; a stale extension fails explicitly.
 
 The first complete-library Mo17 random pilot exposed this bottleneck: 840 reads
 scanned in 14.514 s, followed by 179,101 pair comparisons for 599 families; total
-TandemX wall time was 258.829 s. That observation predates this optimization.
-The identical real input must be rerun before assigning a measured speedup.
+TandemX wall time was 258.829 s. Native/streamed audit rerun took 17.348 s and
+81.70 MiB RSS versus 168.58 MiB initially; all six outputs were byte-identical.
+These single runs overlapped acquisition/QC and are diagnostic, not final ranking.
+
+`--family-audit related` builds an inverted index of exact canonical k-mer sets.
+For one representative at a time, count intersections with later representatives
+in stable order. All existing non-distinct rules require a nonzero intersection.
+Evaluate the rules with identity/overlap fractions set to one: if even this upper
+bound is distinct, ungapped alignment cannot produce a related pair. Otherwise
+compute the ordinary exact alignment, and emit only actual non-distinct pairs.
+There is no approximate sketch or sequence-identity cutoff added to this filter.
+Changing relationship rules requires rechecking this monotonicity condition.
+
+The primary catalogue, its warnings and optional collapse remain identical to
+full mode. The pair table intentionally omits distinct rows and has a companion
+`family_audit_summary.json` with possible/scored/pruned/emitted counts. The full
+mode remains default. Index and candidate state grow with the catalogue; highly
+similar catalogues can still require quadratic work/output. Empty catalogues
+write a header-only table and a zero-count receipt. This mode does not change
+read-local detection or gapped sequence clustering.
 
 ## Diagnostic k-mer Copy-number Calibration
 

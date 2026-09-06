@@ -1,0 +1,40 @@
+{
+  "checked_cells": 2033,
+  "compared_readers": [
+    "artifact-tool XLSX import",
+    "standard-library ZIP/XML literal extractor"
+  ],
+  "selected_sheets": [
+    "4",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12"
+  ],
+  "all_values_equal": true,
+  "comparisons": [
+    {
+      "source": "/Volumes/T7/Codex/TandemX/data/curated/Mo17_2023_supplement/41588_2023_1419_MOESM4_ESM.xlsx",
+      "archived": "41588_2023_1419_MOESM4_ESM.xlsx",
+      "sha256": "863da22bbc8fa3170035f966f6ced723e418e81541fda96de0e5cc9355569e1d"
+    },
+    {
+      "source": "/Volumes/T7/Codex/TandemX/data/curated/Mo17_2023_supplement/source.json",
+      "archived": "source.json",
+      "sha256": "c11351a26b2143bc03771bacb0b5c1d4a4384c20c1aa84df8d4e7c839a898ab8"
+    },
+    {
+      "source": "/Volumes/T7/Codex/TandemX/data/curated/Mo17_2023_supplement/regions_v1/published_regions.tsv",
+      "archived": "regions_v1/published_regions.tsv",
+      "sha256": "54148ce8f96246bd56dc3d93571beaf17897b46deb4d12f0037090d3a46482c6"
+    },
+    {
+      "source": "/Volumes/T7/Codex/TandemX/data/curated/Mo17_2023_supplement/regions_v1/curation_receipt.json",
+      "archived": "regions_v1/curation_receipt.json",
+      "sha256": "4bffffce3507aebf64b00ac711495877dc6a16dd630f57d081032c464e34933b"
+    }
+  ]
+}

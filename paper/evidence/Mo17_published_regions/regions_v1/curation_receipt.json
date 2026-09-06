@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "source_sha256": "863da22bbc8fa3170035f966f6ced723e418e81541fda96de0e5cc9355569e1d",
+  "source_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41588-023-01419-6/MediaObjects/41588_2023_1419_MOESM4_ESM.xlsx",
+  "report_sha256": "91c22a23ee02c0c5773f90e0289614bbfb253b006a259a00654b646c64f26cd2",
+  "script_sha256": "11fa52853cea7c83526532a90b8eaa58752c0b3fe07414f7926d3b0b8acb5228",
+  "counts": {
+    "satellite_region": 64,
+    "rDNA_region": 2,
+    "ChIP_defined_centromere": 10,
+    "telomere_region": 20
+  },
+  "source_total_bases": 2178604320,
+  "all_ten_chromosome_end_coordinates_match_reference": true,
+  "source_start_coordinate_zero_in_table12": true,
+  "coordinate_origin": "inferred from size arithmetic and telomeres; retain raw values",
+  "excluded": "Table13 has mixed size arithmetic; not normalized",
+  "warning": "Numeric coordinate compatibility does not establish assembly byte identity or donor identity",
+  "output_sha256": "54148ce8f96246bd56dc3d93571beaf17897b46deb4d12f0037090d3a46482c6"
+}

@@ -229,6 +229,7 @@ def run_discover(args: argparse.Namespace) -> int:
         discovery_method=args.discovery_method,
         clustering_method=args.clustering_method,
         cluster_identity=args.cluster_identity,
+        family_audit=args.family_audit,
     )
     try:
         candidates, families = discover_toy_repeats(
@@ -556,6 +557,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--discovery-method", choices=("legacy", "elastic"), default="legacy", help="legacy: fixed-offset single-array baseline; elastic: experimental indel-aware multiple-array alignment and consensus.")
     discover.add_argument("--clustering-method", choices=("auto", "legacy", "sequence"), default="auto", help="auto: sequence clusters for elastic, historical clustering for legacy; override for ablation.")
     discover.add_argument("--cluster-identity", type=float, default=0.95, help="Minimum circular global edit similarity to a fixed observed cluster representative; sequence clustering only.")
+    discover.add_argument("--family-audit", choices=("full", "related"), default="full", help="full: emit every pair; related: exact k-mer gate and emit all non-distinct pairs only, preserving catalogue warnings/collapse.")
     discover.add_argument("--min-seed-occurrences", type=int, default=2, help="Minimum within-read occurrences required for a seed k-mer.")
     discover.add_argument("--min-spacing-support", type=int, default=2, help="Minimum repeated-seed support required for a spacing peak.")
     discover.add_argument("--max-pairs-per-kmer", type=int, default=100, help="Maximum adjacent position pairs retained per seed k-mer.")

@@ -165,3 +165,10 @@ raw histogram source data, a four-panel editable figure and verified metadata
 for the 10-chromosome Mo17 T2T reference. Exact study/cultivar context does not
 establish identical DNA donors. One included technical batch and its nested
 samples are not independent biological replicates or the whole published dataset.
+
+`Mo17_real_pilot/` preserves three completed three-tool comparisons, including
+the original slow audit and exact six-file native parity. The larger input is
+111.506 Mb, not a completed whole-library or plant-genome benchmark.
+`Col0N_input_qc/` contains the complete 14.647-Gb input QC. `Mo17_published_regions/`
+contains the original paper supplement and 96 extracted regions, with coordinate
+compatibility checks and the explicit mixed-region/base-truth distinction.

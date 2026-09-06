@@ -1,0 +1,32 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/download_plan.json",
+    "archived": "download_plan.json",
+    "sha256": "5804f51bca7d1748e18e995dc8b4bf6e78b6b69b810b355d04e60ddd47a8074e"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/download_receipt.json",
+    "archived": "download_receipt.json",
+    "sha256": "0db8694c4c8758897acc636ae7c951b6e2ac4551bbd350a3702392cf7c80072c"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/qc_v1/qc.json",
+    "archived": "qc_v1/qc.json",
+    "sha256": "d080363cd4cd4d06b3adec84e7031a9d708e3e7807f5069fd9db75e1f909a290"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/qc_v1/base_quality_histogram.tsv",
+    "archived": "qc_v1/base_quality_histogram.tsv",
+    "sha256": "9dcc6db189c4a3b9875a5c059d1b8844573a4ffd2a4062740208e41e7c8735b1"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/qc_v1/joint_distribution.tsv",
+    "archived": "qc_v1/joint_distribution.tsv",
+    "sha256": "9f39d11ff0b307ee9e93759f632d5772770dab7a409f9ea52d5de9d5e4e58686"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_complete/qc_v1/length_histogram.tsv",
+    "archived": "qc_v1/length_histogram.tsv",
+    "sha256": "b5f42cea1ad62be8a64a0d2f4d77afc68fa536da8b8467cb935f5c8998b88905"
+  }
+]

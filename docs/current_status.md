@@ -7,6 +7,43 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Complete-file QC, real scaling and exact-related audit (newest)
+
+- 762618dc9728973da8219af27c09b658c521bf15 pushed to both branches;
+  GitHub CI 34011654703 passed. Native-audit rerun on identical Mo17 840 reads
+  completed in 17.348 s / 81.70 MiB versus baseline 258.829 s / 168.58 MiB;
+  all six data files byte-identical. Repeated external calls remained faster.
+- Next 8,084 reads / 111,505,681 bp completed all three tools: TandemX
+  247.539 s / 165.47 MiB; TRF 87.493 s / 212.52 MiB; TideHunter 34.115 s /
+  324.36 MiB. Scanning 127.534 s; 4,219 families produce 8,897,871 pair rows.
+  Compact evidence is at `paper/evidence/Mo17_real_pilot`. All these single-run
+  resource values are diagnostic during acquisition, not publication ranking.
+- New opt-in `--family-audit related` on discover/run uses an exact inverted
+  k-mer index and a monotone upper bound on existing rules. It emits all
+  non-distinct pairs, preserving catalogue/warnings/collapse; full remains
+  default. Audit receipt counts scored/pruned/omitted pairs and is hashed by
+  the completion receipt. Dense catalogues can remain quadratic. Unit/CLI checks
+  verify related rows against full results, both modes' main files, empty sketches,
+  ambiguous sequences and pipeline propagation. **281 pytest passed in 65.14 s**.
+  Native code unchanged since the previous 8-test Rust/clippy/fmt checkpoint.
+  Real rerun still needed after this source commit.
+- ERR6210723 complete QC passed: 933,904 reads / 14,646,601,458 bp, N50 15,663,
+  median 15,514, GC .3676189867, N=0, duplicate archive IDs=0. Reported mean
+  error .0015386005 is not empirical accuracy. Archive `paper/evidence/Col0N_input_qc`.
+  Whole-library fractions .0008/.008/.08/.36 seed6101 are being generated;
+  inspect T7 `data/subsets/ERR6210723_seed6101_v1/sampling_receipt.json` for completion.
+  Last fraction targets approximately 40 nominal nuclear genome equivalents.
+- Original Mo17 supplement downloaded and independently read. `curate_mo17_regions.py`
+  extracts 64 satellite / 2 rDNA / 10 CENH3-centromere / 20 telomere regions,
+  preserving raw coordinates and composition. All ten chromosome ends and
+  genome size match the NCBI reference numerically. Half-open origin is inferred,
+  not explicitly labelled; Table13's mixed size arithmetic is excluded. Two
+  readers agreed on 2,033 selected cells. `paper/evidence/Mo17_published_regions`
+  retains original XLSX and sources; these mixed regions are not base-level truth.
+- Rice and Lo7 complete downloads continue under T7 raw data; inspect receipts.
+  There are still only two completed raw-file QC libraries, not a validated
+  eight-species cohort. No complete manuscript or production release exists.
+
 ### Real-input family-audit bottleneck (latest checkpoint)
 
 - Commit 3d3201a0a168f5a36eea3f06b0a473576c42c962 is pushed to both branches;

@@ -116,11 +116,21 @@ a catalog-quality check that helps identify possible redundant monomers,
 higher-order units, partial duplicates, or related families. Known repeats are
 not used.
 
-All `F*(F-1)/2` distinct pairs are emitted in catalogue order. A `.partial`
+In default `--family-audit full`, all `F*(F-1)/2` pairs are emitted in catalogue order. A `.partial`
 file during execution is incomplete; the final filename is atomically replaced
 after the audit. Python and Rust use the same values and tie rules. This remains
 an ungapped redundancy heuristic, including historical equality of ambiguous
 characters; it must not be substituted for the gapped circular clustering score.
+`--family-audit related` emits every non-distinct pair only, in the same order,
+with identical values. Missing pair rows in that mode are distinct under the
+current heuristic; they are not untested biological negatives.
+
+`family_audit_summary.json` records `schema_version`, `complete`, `mode`,
+`backend`, `family_count`, `possible_pairs`, `pairs_scored` (exact ungapped
+comparisons), `pairs_pruned_by_kmer_gate` (provably distinct without alignment),
+`emitted_pairs`, `related_pairs`, `omitted_distinct_pairs`, and `warning`.
+Possible = scored + pruned; possible = emitted + omitted. Full mode has no
+pruned/omitted pairs. The discovery completion receipt hashes this audit receipt.
 
 | Field | Type | Unit | Description |
 |---|---|---:|---|

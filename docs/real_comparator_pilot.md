@@ -48,3 +48,17 @@ retained. Read scanning took 14.514 s; the subsequent 599-family exhaustive audi
 was the main bottleneck. Concurrent QC makes these diagnostic measurements.
 Native/streamed audit optimization must be rerun against the same sample and all
 six discovery data files checked for exact equality before reporting its effect.
+
+That rerun completed: all six outputs byte-identical, TandemX 17.348 s / 81.70
+MiB, TRF 12.019 s / 165.17 MiB, TideHunter 3.644 s / 155.03 MiB. The 111.506-Mb
+sample (8,084 reads) then completed: TandemX 247.539 s / 165.47 MiB, TRF 87.493 s
+/ 212.52 MiB, TideHunter 34.115 s / 324.36 MiB. Single executions are engineering
+diagnostics; the input subsets are nested. All values and source snapshots are
+retained at `paper/evidence/Mo17_real_pilot` and the T7 result directories.
+
+At 111 Mb, 4,219 representatives caused 8,897,871 exhaustive pair rows. For the
+optional exact-related audit, add `--family-audit related` to the pilot command.
+The runner records this non-default policy in the command and environment.
+Compare five primary data files byte-for-byte and compare the related table to
+the full table's non-distinct rows. Do not demand full table byte equality after
+explicitly changing its row policy, or hide the omitted-distinct-pair count.

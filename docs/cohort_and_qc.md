@@ -4,6 +4,16 @@ Updated 2026-09-06 following the user's explicit requirement for substantial
 real data, simulations, taxonomic breadth and literature-informed QC. This is
 the prospective design and acquisition record, **not completed validation**.
 
+Latest completed inputs: full Mo17 batch SRR15447419 (5.625 Gb) and Col-0N
+ERR6210723 (14.647 Gb) passed file QC. Mo17 seeded nested 11.681/111.506-Mb
+samples completed TandemX/TRF/TideHunter comparisons; these are two scales of one
+batch, not independent specimens, and descriptive calls are not recall/precision.
+Nipponbare SRR25241090 and Lo7 ERR15194059 complete downloads are under way.
+The prospective enrollment table below retains metadata-level source details;
+use the latest receipts and `current_status.md` for completed versus running work.
+Published Mo17 region evidence is documented in
+[published_mo17_regions.md](published_mo17_regions.md).
+
 ## Scope and independent units
 
 The development target is **8–10 plant species and at least 20 independent

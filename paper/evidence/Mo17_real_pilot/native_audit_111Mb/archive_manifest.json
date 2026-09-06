@@ -1,0 +1,37 @@
+[
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/summary.tsv",
+    "archived": "summary.tsv",
+    "sha256": "5422781975f988114ee963ace9c36c17b38da7c76a0f54f7bd11e1c0776c03d1"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/environment.json",
+    "archived": "environment.json",
+    "sha256": "e3a9d11498c73a40a5a03d41ac827f0def3527ad9838fb078c3befd1f62e7803"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/tandemx/execution.json",
+    "archived": "tandemx/execution.json",
+    "sha256": "4309acbe541d18c2140c1f0aa7fdd75d6a06886193fe5cfb36c4423f777cd384"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/trf/execution.json",
+    "archived": "trf/execution.json",
+    "sha256": "3bd8f169195db2b7e9ac05e3c11c2b9c2812c4201763e89552d9990721453573"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/tidehunter/execution.json",
+    "archived": "tidehunter/execution.json",
+    "sha256": "5ab86db8a1b1e4228010be2f390b9f5343c54e7764f25b32c56a96c69bd11232"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/tandemx/discover/run.log",
+    "archived": "tandemx/discover/run.log",
+    "sha256": "0ed1eb7fb1444ec18ad07581d26886be1746823b3aba819938019088e721e715"
+  },
+  {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/tandemx/discover/discovery_summary.json",
+    "archived": "tandemx/discover/discovery_summary.json",
+    "sha256": "71e14741bb60897f340863c50886adf1e31e5dcecb7c00c20c08ef2d5253de4b"
+  }
+]

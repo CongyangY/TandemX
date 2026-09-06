@@ -221,6 +221,7 @@ class DiscoverConfig:
     discovery_method: str = "legacy"
     clustering_method: str = "auto"
     cluster_identity: float = 0.95
+    family_audit: str = "full"
 
 
 @dataclass(frozen=True)
@@ -538,7 +539,7 @@ def discover_toy_repeats(
     families, redundant_pairs = write_family_audit(
         config.outdir / "family_similarity.tsv", families, k=config.kmer_size,
         backend=config.kmer_backend, keep_redundant=config.collapse_redundant_families,
-        logger=logger,
+        logger=logger, mode=config.family_audit,
     )
     update_discover_terminal_progress(
         progress,
@@ -915,6 +916,8 @@ def validate_discover_config(config: DiscoverConfig) -> None:
     from tandemx.discover.clustering import resolve_clustering_method
 
     resolve_clustering_method(config.clustering_method, config.discovery_method)
+    if config.family_audit not in {"full", "related"}:
+        raise ValueError("--family-audit must be full or related")
     if not 0 < config.cluster_identity <= 1:
         raise ValueError("--cluster-identity must be in (0,1]")
     if config.discovery_method not in {"legacy", "elastic"}:

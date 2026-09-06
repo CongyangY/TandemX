@@ -8,7 +8,7 @@ from pathlib import Path
 
 FILES = ("candidate_reads.tsv", "families.tsv", "monomers.fa", "family_similarity.tsv")
 OPTIONAL_FILES = ("collapsed_families.tsv", "collapsed_monomers.fa", "family_collapse.tsv",
-                  "candidate_monomers.fa", "monomer_membership.tsv")
+                  "candidate_monomers.fa", "monomer_membership.tsv", "family_audit_summary.json")
 
 
 def file_sha256(path: Path) -> str:

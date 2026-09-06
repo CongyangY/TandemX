@@ -1,0 +1,35 @@
+{
+  "accession": "ERR6210723",
+  "metadata": {
+    "run_accession": "ERR6210723",
+    "study_accession": "PRJEB46164",
+    "secondary_study_accession": "ERP130372",
+    "sample_accession": "SAMEA8961650",
+    "experiment_accession": "ERX5845873",
+    "scientific_name": "Arabidopsis thaliana",
+    "sample_title": "Arabidopsis thaliana sample for PacBio HiFi seqencing",
+    "experiment_title": "Sequel sequencing",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Sequel",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "library_selection": "RANDOM",
+    "read_count": "933904",
+    "base_count": "14646601458",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/ERR621/003/ERR6210723/ERR6210723.fastq.gz",
+    "fastq_md5": "1c3975507759784cc15e6c921170dd10",
+    "fastq_bytes": "11074308726"
+  },
+  "metadata_sha256": "606c21cb7a9386547dcc62c8428eecbe8a980e793c0c46acde3f09e446a59016",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/ERR621/003/ERR6210723/ERR6210723.fastq.gz",
+      "filename": "ERR6210723.fastq.gz",
+      "expected_md5": "1c3975507759784cc15e6c921170dd10",
+      "expected_bytes": 11074308726
+    }
+  ],
+  "max_download_gb": 12.0,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b"
+}

@@ -377,6 +377,11 @@ rules; each representative's k-mer set is built once and pair rows are streamed
 to `family_similarity.tsv`. The audit is still quadratic in catalogue size.
 It is a redundancy heuristic, separate from gapped circular sequence clustering.
 See [algorithms](docs/algorithms.md#representative-pair-redundancy-audit).
+For larger catalogues, `discover` and `run` accept `--family-audit related`.
+An exact k-mer intersection bound skips pairs that cannot satisfy the existing
+rules and emits every non-distinct pair. Catalogue, warning and collapse semantics
+are preserved; omitted distinct pairs and scored counts are explicit in
+`family_audit_summary.json`. The default remains `full` for compatibility.
 
 The [conditional abundance experiment](docs/abundance_benchmark.md) tests copy
 number, localization and engineered assembly under-representation independently
@@ -399,3 +404,7 @@ Complete Mo17 CCS input QC now covers 407,670 reads / 5.625 Gb, with nested
 Source receipts and a four-panel QC figure are in `paper/evidence/Mo17_input_qc`.
 The [real-input comparator pilot](docs/real_comparator_pilot.md) uses identical
 sample sequences and preserves native outputs; call counts are not accuracy.
+The complete Col-0N FASTQ also passed QC (933,904 reads, 14.647 Gb); full-library
+random sampling is under way. [Published Mo17 regions](docs/published_mo17_regions.md)
+retain the original spreadsheet, source cells, assembly-coordinate checks and
+the distinction between a mixed repeat region and base-level satellite truth.
