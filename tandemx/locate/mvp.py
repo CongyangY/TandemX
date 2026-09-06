@@ -95,6 +95,9 @@ def locate_toy_arrays(config: LocateConfig) -> tuple[list[DensityWindow], list[A
         if array is not None:
             current_arrays.append(array)
 
+    def merge_gap(family_id: str) -> int:
+        return array_merge_gap(monomer_lengths[family_id], config.k, config.identity_model)
+
     def finish_record() -> None:
         nonlocal current_arrays
         if current_id is None:
@@ -141,7 +144,7 @@ def locate_toy_arrays(config: LocateConfig) -> tuple[list[DensityWindow], list[A
             state = active.get(family_id)
             if state is None:
                 active[family_id] = [position, position + config.k, 1]
-            elif position <= state[1] + config.k * 2:
+            elif position <= state[1] + merge_gap(family_id):
                 state[1] = position + config.k
                 state[2] += 1
             else:
@@ -220,7 +223,10 @@ def locate_record_arrays(
     monomer_lengths = {monomer.family_id: len(monomer.sequence) for monomer in monomers}
     arrays: list[ArrayHit] = []
     for family_id in sorted(indexed_families):
-        intervals = merge_intervals(hits.get(family_id, ()), max_gap=k * 2)
+        intervals = merge_intervals(
+            hits.get(family_id, ()),
+            max_gap=array_merge_gap(monomer_lengths[family_id], k, identity_model),
+        )
         for start, end, hit_count in intervals:
             array = array_from_state(
                 record.read_id,
@@ -263,6 +269,7 @@ def array_from_state(
         warnings = [
             "iid_base_identity_proxy_from_exact_kmers",
             "independence_assumption_uncalibrated",
+            "monomer_length_gap_bridge",
         ]
     else:
         raise ValueError("Unknown identity model")
@@ -280,6 +287,15 @@ def array_from_state(
         confidence="medium",
         warning=";".join(warnings),
     )
+
+
+def array_merge_gap(monomer_length: int, k: int, identity_model: str) -> int:
+    """Return the unhit gap allowed while joining one family's k-mer anchors."""
+    if identity_model == "exact_kmer_fraction":
+        return k * 2
+    if identity_model == "iid_base":
+        return max(k * 2, monomer_length)
+    raise ValueError("Unknown identity model")
 
 
 def family_hit_intervals(sequence: str, monomer: MonomerRecord, k: int) -> list[tuple[int, int]]:

@@ -184,9 +184,13 @@ paired results and the accepted six-panel figure are under
 `paper/evidence/abundance_domain_shift_*`; 5401–5403 are consumed.
 
 The first corrective experiment is deliberately separate from those consumed
-seeds. `abundance_localizer_development_v1.json` predeclares seeds 5301–5303,
-an `iid_base` conversion of exact k-mer survival, threshold 0.90, and gates for
-full-assembly recall, positive-assembly precision and absent-family false calls.
-The localization-only benchmark mode skips read simulation, quantification and
-comparison because those stages are unaffected. This is a pending development
-test, not a validated new default.
+held-out seeds. `abundance_localizer_development_v1.json` used 5301–5303, an
+`iid_base` conversion of exact k-mer survival and threshold 0.90. Its 90/90
+localization-only commands completed, skipping unaffected read simulation,
+quantification and comparison. Positive-assembly mean precision was 0.999435 and
+the absent-family false-positive rate was zero, but full-assembly mean recall was
+0.903608 and failed the predeclared 0.95 gate. The failure was extensive anchor
+fragmentation at 5% divergence, not threshold rejection. Development v2 reuses
+only these development seeds and permits a one-monomer unhit gap; the original
+500-bp planted interruptions remain beyond that bound. It is not a validated new
+default.

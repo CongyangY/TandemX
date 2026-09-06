@@ -5,6 +5,7 @@ from pathlib import Path
 from tandemx.discover.mvp import FastaRecord
 from tandemx.locate.mvp import (
     ArrayHit,
+    array_merge_gap,
     array_from_state,
     classify_assembly_read_ratio,
     compare_assembly_to_reads,
@@ -22,6 +23,15 @@ def test_iid_base_proxy_recovers_substitution_signal_rejected_by_exact_fraction(
     assert hit.score == 972
     assert "iid_base_identity_proxy_from_exact_kmers" in hit.warning
     assert "independence_assumption_uncalibrated" in hit.warning
+
+
+def test_iid_base_gap_bridge_is_bounded_to_one_monomer() -> None:
+    assert array_merge_gap(61, 21, "exact_kmer_fraction") == 42
+    assert array_merge_gap(61, 21, "iid_base") == 61
+    assert merge_intervals([(0, 21), (81, 102)], max_gap=array_merge_gap(61, 21, "iid_base")) == [
+        (0, 102, 2),
+    ]
+    assert len(merge_intervals([(0, 21), (83, 104)], max_gap=array_merge_gap(61, 21, "iid_base"))) == 2
 
 
 def test_merge_intervals_with_gap() -> None:

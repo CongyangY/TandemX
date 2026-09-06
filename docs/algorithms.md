@@ -332,7 +332,7 @@ Current MVP implementation:
 1. stream assembly FASTA in bounded sequence chunks and retain `k-1` bases across chunk boundaries so cross-chunk k-mers and coordinates remain exact;
 2. enumerate circular, non-low-complexity canonical k-mers and build one code-to-family index;
 3. exclude k-mers shared by multiple catalog families, then scan each assembly contig once with a rolling 2-bit encoder;
-4. merge matching k-mers online into intervals instead of retaining every hit;
+4. merge matching k-mers online into intervals instead of retaining every hit; the default permits a `2k` unhit gap, while `iid_base` permits at most one monomer length to bridge mutation-broken anchors;
 5. finalize nearby intervals for each family as scanning advances;
 6. filter very short intervals and enforce `--min-identity` using either the default exact diagnostic-k-mer fraction or the optional assumption-limited `iid_base` proxy;
 7. write candidate arrays as 0-based half-open `arrays.bed`;
@@ -344,7 +344,7 @@ MVP constraints:
 
 1. toy assemblies only;
 2. k-mer evidence only, no read mapping;
-3. `--min-identity` is a k-mer-derived proxy, not alignment identity or an exact per-copy placement claim; `iid_base` converts an exact-k-mer fraction `f` to `f^(1/k)` under the independent-substitution relation `P(exact k-mer) = P(base match)^k`, which overlapping windows, shared-k-mer removal, indels and structured variation can violate;
+3. `--min-identity` is a k-mer-derived proxy, not alignment identity or an exact per-copy placement claim; `iid_base` converts an exact-k-mer fraction `f` to `f^(1/k)` under the independent-substitution relation `P(exact k-mer) = P(base match)^k`, which overlapping windows, shared-k-mer removal, indels and structured variation can violate; its one-monomer gap bridge can join nearby homologous tracts and is reported in each array warning;
 4. simple threshold classification for `possible_collapse` and `possible_overexpansion`;
 5. bigWig output is future work.
 

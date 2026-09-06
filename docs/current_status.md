@@ -116,7 +116,7 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 445 Python tests. The added tests cover
+- The expanded source checkout passes all 446 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
   unchanged. Four additional tests validate compact reference archiving and
@@ -136,12 +136,15 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   0.663073→0.655763. Full-assembly localization mean recall was 0.000793 at 3%
   divergence and zero at 5%. Compact paired evidence and an inspected six-panel
   figure retain the failure; seeds 5401–5403 are consumed and cannot tune the fix.
-- An optional `iid_base` localizer now converts exact k-mer survival to an
-  assumption-limited base-match proxy while preserving the legacy default. The
-  0.90 threshold and explicit recall/precision/absent-family gates are committed
-  for development seeds 5301–5303. A localization-only runner avoids repeating
-  unaffected read simulation and quantification. No improvement is claimed until
-  that independent development run completes.
+- The first `iid_base` localization-only development run consumed 5301–5303
+  without repeating read simulation or quantification. All 90 commands completed.
+  Positive-assembly precision was 0.999435 and all 54 absent-family rows had zero
+  predicted bases, but full-assembly recall was 0.903608 and failed the declared
+  0.95 gate. At 5% divergence, long arrays split into as many as 119 predictions.
+  Development v2 retains the 0.90 proxy threshold and allows exact anchors to
+  bridge at most one monomer length; 500-bp planted interruptions remain outside
+  that bound. The reused development seeds and v1 failure are explicit. No
+  held-out improvement claim exists yet.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 
