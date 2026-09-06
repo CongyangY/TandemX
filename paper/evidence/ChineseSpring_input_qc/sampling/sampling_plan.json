@@ -1,0 +1,19 @@
+{
+  "method": "blake2b_128_read_bernoulli_v1",
+  "seed": 6101,
+  "namespace": "SRR28200549",
+  "fractions": [
+    "0.0005",
+    "0.005",
+    "0.05",
+    "0.45"
+  ],
+  "source_path": "/Volumes/T7/Codex/TandemX/data/raw/SRR28200549_complete/SRR28200549_subreads.fastq.gz",
+  "expected_input_sha256": "951766fc974ed199bd173e184dcde8847a6a709bd8c707629b3ce3e07900532a",
+  "qc_receipt_sha256": "c4f50e67ab8f12dcd6decd25d2c0fc02dd146a48866c90c7a35e4c0d52b21fed",
+  "genome_size_denominator": null,
+  "script_sha256": "5c3c59fdebea9e44b2bfa6d263c2faf41bf9611550d0d31ddefeafddd6a68719",
+  "parser_sha256": "9b0d190c449ed707a9de2e8c009a34f1bbd54e6b2c6a23c91d8c8f63ff61a2e0",
+  "uncertainty": "Independent read inclusion, not fixed bases or independent specimens; library bias persists",
+  "coverage_note": "Total selected bases / supplied size is nominal coverage, not measured nuclear depth"
+}

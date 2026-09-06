@@ -1,0 +1,62 @@
+[
+  {
+    "file": "sampling_plan.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sampling_plan.json",
+    "sha256": "79a5c30819cfef7d84e2c929aef167c25caae06035a187a8c8d4c61b2ef329e7",
+    "bytes": 886
+  },
+  {
+    "file": "sampling_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sampling_receipt.json",
+    "sha256": "f0744b9a6156be50b38a32c9c183933a4298095d46ec50cdf8a5500352d281c6",
+    "bytes": 3161
+  },
+  {
+    "file": "sample_001.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sample_001.length_histogram.tsv",
+    "sha256": "2ebe59e96c7a2d447cdf1888702f1a01e36a82146f27f5e24bde450aa119c140",
+    "bytes": 6690
+  },
+  {
+    "file": "sample_001.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sample_001.joint_distribution.tsv",
+    "sha256": "102996e508177bbfdf0a9322fd2c288e2655b29f46d019f7c6554311a7c31af4",
+    "bytes": 5655
+  },
+  {
+    "file": "sample_002.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sample_002.length_histogram.tsv",
+    "sha256": "134b08c16ef95370cb80957bea9dbf9055718afbcb713bbc07657592626b4658",
+    "bytes": 47032
+  },
+  {
+    "file": "sample_002.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sample_002.joint_distribution.tsv",
+    "sha256": "e30324d8484113431b8dfb88c44d253bfd577cdf9f7d69c1903287316f803452",
+    "bytes": 16720
+  },
+  {
+    "file": "sample_003.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sample_003.length_histogram.tsv",
+    "sha256": "efa9b9496a75bfc51d12bb6f92d322c5734c0548d0420f0e3ae89e6312fd8f95",
+    "bytes": 120820
+  },
+  {
+    "file": "sample_003.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sample_003.joint_distribution.tsv",
+    "sha256": "80b015758e70c5446d8121bcae1a06bdfa0e1efb724afe211230e44fabc839da",
+    "bytes": 32809
+  },
+  {
+    "file": "sample_004.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sample_004.length_histogram.tsv",
+    "sha256": "988972ed0fe57c5108837c7052adbc8b63fbe72ca805b7a08d2ab7b9854a5f13",
+    "bytes": 189809
+  },
+  {
+    "file": "sample_004.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR28200549_seed6101_v1/sample_004.joint_distribution.tsv",
+    "sha256": "abc69767637953ff707c47c8659fe0465f7bf78f152f9610f7c3d7933d917f20",
+    "bytes": 57953
+  }
+]

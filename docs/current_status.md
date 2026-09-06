@@ -7,6 +7,51 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Completed interval calibration and reference-concordance QC (local, not pushed)
+
+- Source d2aa4d6 was pushed to both branches. Hosted CI34021933081/34021929197
+  was last observed in progress; no success claim yet. New reference-QC code
+  and tests remain uncommitted. Full suite389 passed in86.59 s; Rust unchanged
+  since the13-test/clippy/fmt checkpoint. Plot layout change after tests is
+  documentation/visualization only; its second render did not execute.
+- Frozen d2aa4d6 joint-read replay completed all27 conditions/1,485 family
+  conditions in287.624 s/182.109 MiB. Points agree with the previous multi-k
+  model. Intervals available/covering truth:1×9/9;5×66/60;20×424/401, each with
+  495 total conditions. Overall499 available,920 insufficient support,66 no
+  finite fit. Conditional20× coverage94.58%, availability85.66%; no unconditional
+  95% calibration claim. Complete source tables and six-panel diagnostic SVG/
+  PDF/PNG are archived locally in `factorial_joint_multik`.99 editable SVG texts,
+  no raster nodes. Panel A legend overlap remains a layout issue in version1.
+- Reference-mapping QC uses strict disk-backed PAF/CIGAR validation, preserves
+  unmapped denominators and missing MAPQ, excludes deletions from target coverage,
+  and reports primary organelle/other-reference query spans and their overlap.
+  Col-0N controls completed at11.766 Mb and118.497 Mb. Larger sample maps7,554/
+  7,557 reads;26,290,920 query bp (22.1871%) have organellar primary spans,
+  with4,936 bp overlapping other-reference spans. This raises a concrete total-
+  library normalization concern, not a proven22.2% copy-number bias/correction.
+  Archives include exact development helper snapshots under `reference_mapping_diagnostics`.
+- Wheat whole-file sampling completed through11.215 Gb; receipts archived in
+  `ChineseSpring_input_qc/sampling`. Victoria11.361-Mb three-tool pilot completed
+  (TX16.827 s/122.97 MiB, TRF44.997/165.78, TideHunter11.097/257.20).
+  Victoria110.203-Mb run completed:TX164.738 s/250.45 MiB, TRF362.689/176.72,
+  TideHunter81.982/621.45. Both Victoria sizes are archived locally. TX uses
+  more RSS than TRF in this larger oat sample; do not imply a universal memory gain.
+  Lo7 sampling, Morex reference transfer and Col-0R/Ey15-2R full QC remain active.
+- Automatic approval review rejected the requested T7 figure-v2 render because
+  the review service hit its usage limit (tool reported next reset Sep13,
+  2026 11:23 AM; timezone not stated). It did not execute. Do not bypass that
+  rejection through an alternative route. Unaffected read-only checks and local
+  evidence/code writes continue. Git commit/push and new T7 writes requiring
+  review await restored review availability; user authorization already exists.
+  This is not scientific completion and does not justify abandoning the goal.
+
+- An evidence-backed article draft now exists at `paper/manuscript.md`, with
+  abstract/background/results/discussion/methods, existing multipanel figures,
+  complete source-table links and a source-derived seven-species Table1. All
+  seven input rows and cited local evidence paths were checked. This draft is
+  explicitly incomplete; `paper/submission_readiness.md` retains every major
+  scientific/release requirement. These files remain local and uncommitted.
+
 ### Joint-read uncertainty, complete TRASH evaluation and seven-species file QC
 
 - Previous9fbd7a0 is pushed to main and the working branch; hosted

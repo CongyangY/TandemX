@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/trf",
+    "/Volumes/T7/Codex/TandemX/results/Victoria_random_110Mb_v1_20260906/reads.fa",
+    "2",
+    "7",
+    "7",
+    "80",
+    "10",
+    "50",
+    "1000",
+    "-ngs",
+    "-h"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 362.6890194171574,
+  "peak_rss_mib": 176.71875,
+  "cpu_user_seconds": 353.826991,
+  "cpu_system_seconds": 3.222034,
+  "timed_out": false
+}

@@ -1,0 +1,70 @@
+{
+  "tandemx/execution.json": {
+    "sha256": "982e8343a4f90138f835e868fa97c77181c9cbc18c15dbe3c5fa48efa60e170b",
+    "bytes": 934
+  },
+  "tandemx/normalized_arrays.tsv": {
+    "sha256": "f0cf7d0f9dc3c0f8231d74aa279bdb1e6aa1022bac7096657498366dbb6ad2fb",
+    "bytes": 247551
+  },
+  "tandemx/discover/run_config.yaml": {
+    "sha256": "f36f023d89af5a3c93668770a78afcebb9b99a624db8fd9cc170b38f43bf5076",
+    "bytes": 1942
+  },
+  "tandemx/discover/candidate_monomers.fa": {
+    "sha256": "db62632c4e6ae97220def378afd7548ed5691dce04c9ea4c7691e285d204236e",
+    "bytes": 1612345
+  },
+  "tandemx/discover/candidate_reads.tsv": {
+    "sha256": "980cab77167cf2ac690ba01c74a163481b8e78df6cc9711dbb8f75272796f5e3",
+    "bytes": 1028032
+  },
+  "tandemx/discover/monomer_membership.tsv": {
+    "sha256": "24277be8217bb5689b172960a5c95ccc0e8012dd1e8fe0c6b2fabfbd1365e902",
+    "bytes": 994921
+  },
+  "tandemx/discover/family_audit_summary.json": {
+    "sha256": "3b135a5251b1a4a3a49fc0c504a2c0e25d4dbaee0f7997215ca43996d2dd3f0f",
+    "bytes": 398
+  },
+  "tandemx/discover/family_similarity.tsv": {
+    "sha256": "054fbdd7dee74fe38128bc27cac9c50e012861ff7029c6f078e71abe91a3f4ce",
+    "bytes": 15370145
+  },
+  "tandemx/discover/monomers.fa": {
+    "sha256": "442e82425aa9ff6f8f0b0c46274e88cbaa86dcb447421cfd10fbcf90f44763be",
+    "bytes": 1218033
+  },
+  "tandemx/discover/families.tsv": {
+    "sha256": "adbba31c19aa8f10e863373b09087fc4ed6248be771550c851f6df34731b822f",
+    "bytes": 8386738
+  },
+  "tandemx/discover/discovery_summary.json": {
+    "sha256": "4e1475cca884ee389cb08fd32243456a107612108f194bd6e5a10f284746e726",
+    "bytes": 870
+  },
+  "trf/trf.txt": {
+    "sha256": "6ba8f5e9a47bd7b8ee8996ab0a711432ffd8a24e995d01f3e3a4327821f28c48",
+    "bytes": 36467626
+  },
+  "trf/execution.json": {
+    "sha256": "7965f491a67e91b83de152d6f5e00e9893991fd0022272ce1b389ce23aca8ff9",
+    "bytes": 436
+  },
+  "trf/normalized_arrays.tsv": {
+    "sha256": "489d9eedaa58680212e568145f68df418c2e05a649fc3b89a28e8feaa9a26a40",
+    "bytes": 2674045
+  },
+  "tidehunter/tidehunter.tsv": {
+    "sha256": "7190e1e67d16d8da6eb3bad0f53b82d1c63e7050b4a8f597bc73e7cc1f776290",
+    "bytes": 4494900
+  },
+  "tidehunter/execution.json": {
+    "sha256": "cfd466e8ba7a75af4e2c4b64b8dbe7bfe66ba213efa67b164123e92263d081f0",
+    "bytes": 591
+  },
+  "tidehunter/normalized_arrays.tsv": {
+    "sha256": "04a5eae315425dad1e059e0e227b7238f059685b28115dd411bbbb99740365f2",
+    "bytes": 3143740
+  }
+}

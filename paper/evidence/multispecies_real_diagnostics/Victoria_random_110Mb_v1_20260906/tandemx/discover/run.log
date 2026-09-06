@@ -1,0 +1,23 @@
+2026-09-06 16:33:49,105 INFO command=tandemx discover
+2026-09-06 16:33:49,105 INFO timestamp_utc=2026-09-06T08:33:49.105774+00:00
+2026-09-06 16:33:49,105 INFO output_directory=/Volumes/T7/Codex/TandemX/results/Victoria_random_110Mb_v1_20260906/tandemx/discover
+2026-09-06 16:33:49,105 INFO status=discover_running
+2026-09-06 16:33:49,105 INFO algorithm_mode=elastic_self_alignment kmer_backend=rust min_period=30 max_period=1000
+2026-09-06 16:33:49,105 INFO input_count_skipped reason=not_required_for_discovery_budget
+2026-09-06 16:33:49,106 INFO scan_threads requested=1 effective=1 parallel=false parallel_files=false backend=rust
+2026-09-06 16:34:16,290 INFO progress processed_reads=1000 processed_bases=18504616 candidate_reads=1174 elapsed_seconds=27.183 reads_per_second=36.787 mb_per_second=0.681 estimated_remaining_seconds=unknown
+2026-09-06 16:34:33,692 INFO progress processed_reads=2000 processed_bases=36981050 candidate_reads=2395 elapsed_seconds=44.586 reads_per_second=44.858 mb_per_second=0.829 estimated_remaining_seconds=unknown
+2026-09-06 16:34:52,518 INFO progress processed_reads=3000 processed_bases=55418680 candidate_reads=3612 elapsed_seconds=63.411 reads_per_second=47.310 mb_per_second=0.874 estimated_remaining_seconds=unknown
+2026-09-06 16:35:23,452 INFO progress processed_reads=4000 processed_bases=73902057 candidate_reads=4719 elapsed_seconds=94.345 reads_per_second=42.398 mb_per_second=0.783 estimated_remaining_seconds=unknown
+2026-09-06 16:35:43,530 INFO progress processed_reads=5000 processed_bases=92383456 candidate_reads=5803 elapsed_seconds=114.422 reads_per_second=43.698 mb_per_second=0.807 estimated_remaining_seconds=unknown
+2026-09-06 16:36:01,377 INFO progress processed_reads=5972 processed_bases=110202741 candidate_reads=6906 elapsed_seconds=132.269 reads_per_second=45.151 mb_per_second=0.833 estimated_remaining_seconds=unknown
+2026-09-06 16:36:01,377 INFO filter_summary skipped_short_reads=0 skipped_short_kmer=0 skipped_low_complexity=0 seed_overflow_count=10740
+2026-09-06 16:36:25,535 INFO family_audit mode=related backend=rust families=4695 possible_pairs=11019165
+2026-09-06 16:36:27,784 INFO family_audit compared_pairs=50000 total_pairs=11019165
+2026-09-06 16:36:30,859 INFO family_audit compared_pairs=100000 total_pairs=11019165
+2026-09-06 16:36:33,177 INFO family_audit compared_pairs=150000 total_pairs=11019165
+2026-09-06 16:36:33,553 INFO family_audit scored_pairs=156167 emitted_pairs=70368 related_pairs=70368 retained_collapse_pairs=0
+2026-09-06 16:36:33,609 INFO status=discover_mvp_completed
+2026-09-06 16:36:33,609 INFO candidate_count=6906
+2026-09-06 16:36:33,609 INFO family_count=4695
+2026-09-06 16:36:33,609 INFO Discover MVP supports toy-scale FASTA/FASTQ input, including gzip-compressed files

@@ -1,0 +1,87 @@
+{
+  "complete": true,
+  "contig_count": 7,
+  "total_bases": 132081078,
+  "n_bases": 0,
+  "other_ambiguous_bases": 0,
+  "base_counts": {
+    "T": 42095729,
+    "A": 42112738,
+    "C": 23971833,
+    "G": 23900778
+  },
+  "input_sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8",
+  "contigs": [
+    {
+      "contig": "Chr1",
+      "length_bp": 32540122,
+      "base_counts": {
+        "T": 10343113,
+        "A": 10495141,
+        "C": 5783652,
+        "G": 5918216
+      }
+    },
+    {
+      "contig": "Chr2",
+      "length_bp": 22217084,
+      "base_counts": {
+        "T": 7139371,
+        "A": 7032809,
+        "C": 4102837,
+        "G": 3942067
+      }
+    },
+    {
+      "contig": "Chr3",
+      "length_bp": 25743512,
+      "base_counts": {
+        "A": 8179407,
+        "C": 4714797,
+        "T": 8173276,
+        "G": 4676032
+      }
+    },
+    {
+      "contig": "Chr4",
+      "length_bp": 21578073,
+      "base_counts": {
+        "G": 3847835,
+        "T": 6906992,
+        "A": 6806916,
+        "C": 4016330
+      }
+    },
+    {
+      "contig": "Chr5",
+      "length_bp": 29480885,
+      "base_counts": {
+        "A": 9447455,
+        "C": 5243060,
+        "T": 9382921,
+        "G": 5407449
+      }
+    },
+    {
+      "contig": "ChrM",
+      "length_bp": 366924,
+      "base_counts": {
+        "G": 81609,
+        "A": 102464,
+        "T": 100190,
+        "C": 82661
+      }
+    },
+    {
+      "contig": "ChrC",
+      "length_bp": 154478,
+      "base_counts": {
+        "A": 48546,
+        "T": 49866,
+        "G": 27570,
+        "C": 28496
+      }
+    }
+  ],
+  "biological_qc": "file content only; assembly completeness and satellite copy truth not established"
+}

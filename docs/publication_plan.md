@@ -1,6 +1,9 @@
 # TandemX Publication Plan
 
-This document lists evidence needed before targeting different journals. It does not imply that the current skeleton has produced any result.
+This document lists evidence gates for different publication aims. Completed
+development results now support an [article draft](../paper/manuscript.md),
+but the [submission audit](../paper/submission_readiness.md) records substantial
+scientific, figure, release and reproducibility work still required.
 
 ## Bioinformatics
 
@@ -82,18 +85,21 @@ Minimum computational evidence before manuscript submission:
 
 ## Current Advantage Claims
 
-The 2026-07-15 external-tool benchmark supports the following provisional,
-scope-limited engineering claim:
-
-> On controlled single-family synthetic long-array reads, single-threaded
-> TandemX retained the same period-recovery accuracy as TRF while achieving
-> higher throughput, and used less peak memory than TideHunter.
+The September2026 evidence supports conditional copy-estimation improvement
+and exact engineering speedups, with explicit losses/limits. Multi-k absolute
+error at20× with2% unit divergence/high read error decreased from56.59% to13.53%
+in the three-genome development stratum. At20×,424/495 family conditions had
+joint-read intervals;401/424 contained truth. The1.129-Gb native replay was
+23.61% faster than its preceding indexed version with identical seven products,
+but observed RSS increased0.81%. No isolated resource ranking is established.
 
 The current evidence does not support saying that TandemX is generally more
 accurate than TRF or TideHunter, always uses the least memory, or outperforms
-TRASH or TAREAN/RepeatExplorer2. TRASH and TAREAN require task-specific
-comparisons because they target assembly hierarchy/HOR annotation and
-short-read graph-based family recovery, respectively.
+TRASH or TAREAN/RepeatExplorer2. All three read tools recovered55/55 founders
+in the tested factorial read conditions; TideHunter remained faster and TRF
+retained slightly higher base precision. Actual task-specific TRASH1/2 assembly
+comparisons now exist and preserve native unit/consensus alternatives. TAREAN
+and further applicable tools still require their own input-compatible evaluation.
 
 The stronger publication-level differentiation is the integrated read-first,
 assembly-aware workflow: candidate monomer discovery, diagnostic k-mer copy

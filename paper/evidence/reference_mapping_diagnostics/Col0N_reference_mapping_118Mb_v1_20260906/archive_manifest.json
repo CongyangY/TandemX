@@ -1,0 +1,80 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/environment.json",
+    "sha256": "b51f8facdf46dc157ad499ded10dc8585f9a4af225690aae6cb08f523bdb77a6",
+    "bytes": 9165
+  },
+  {
+    "file": "reference_qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/reference_qc.json",
+    "sha256": "5705d80b74f34c9779ee536eb71c5672eecb5062220482b6d9587f74d2be3060",
+    "bytes": 1698
+  },
+  {
+    "file": "minimap2.stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/minimap2.stderr.log",
+    "sha256": "f28be1641a899b564bd69324f1a16c590958be35689300898d956fdc66e76272",
+    "bytes": 993
+  },
+  {
+    "file": "execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/execution.json",
+    "sha256": "77690016771a74be66462fe08ddffc70a175c5690c61fa386f9298e50a452219",
+    "bytes": 588
+  },
+  {
+    "file": "read_mapping.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/read_mapping.tsv",
+    "sha256": "105cc60a3bdb71259117484178b5f128b0ff4343691ac2fd5098125a8b4e92d8",
+    "bytes": 480627
+  },
+  {
+    "file": "composition_mapping.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/composition_mapping.tsv",
+    "sha256": "f9ffc924d5ad3e4caac6719979a5fcd9de71f4e6116a4768b904182977c798fa",
+    "bytes": 1143
+  },
+  {
+    "file": "reference_mapping.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/reference_mapping.tsv",
+    "sha256": "80dae706a8c9389acbd8b22e27d6c7457d8183c2eef0b194992f5638b69a77ee",
+    "bytes": 909
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/validation.json",
+    "sha256": "96628591470092764e9b89bc1e8535f26abe1a37a999e019da21a346f72a4be8",
+    "bytes": 1574
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/run_reference_mapping.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/source_snapshot/benchmarks/scripts/run_reference_mapping.py",
+    "sha256": "b238439d6ea2e13755a0de7cca21a0cf8543866ecf8387d65a664f44fbde587c",
+    "bytes": 5767
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/reference_mapping_qc.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/source_snapshot/benchmarks/scripts/reference_mapping_qc.py",
+    "sha256": "73aa68b571e54e31f6413829e97d11b7292dd59abda4f3c7a26196dff4740023",
+    "bytes": 11279
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/qc_reference_fasta.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/source_snapshot/benchmarks/scripts/qc_reference_fasta.py",
+    "sha256": "c729a8262100117718a56eb00c1814ea5649e440d452e138edbe5a452de897ef",
+    "bytes": 2286
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/fastq_stream.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/source_snapshot/benchmarks/scripts/fastq_stream.py",
+    "sha256": "9b0d190c449ed707a9de2e8c009a34f1bbd54e6b2c6a23c91d8c8f63ff61a2e0",
+    "bytes": 2702
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/real_disk.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_reference_mapping_118Mb_v1_20260906/source_snapshot/benchmarks/scripts/real_disk.py",
+    "sha256": "98bc22118544efd1c6ceeec5664308dc8b1adc68ca189c7a6fb0e94961de9287",
+    "bytes": 6722
+  }
+]

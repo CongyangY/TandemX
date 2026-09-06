@@ -1,0 +1,12 @@
+[M::mm_idx_gen::1.965*0.89] collected minimizers
+[M::mm_idx_gen::2.672*0.91] sorted minimizers
+[M::main::2.672*0.91] loaded/built the index for 7 target sequence(s)
+[M::mm_mapopt_update::2.750*0.92] mid_occ = 70
+[M::mm_idx_stat] kmer size: 19; skip: 19; is_hpc: 0; #seq: 7
+[M::mm_idx_stat::2.811*0.92] distinct minimizers: 10871650 (95.43% are singletons); average occurrences: 1.224; average spacing: 9.930; total length: 132081078
+[M::worker_pipeline::21.800*0.98] mapped 3188 sequences
+[M::worker_pipeline::41.224*0.98] mapped 3189 sequences
+[M::worker_pipeline::48.789*0.98] mapped 1180 sequences
+[M::main] Version: 2.31-r1302
+[M::main] CMD: /Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2 -x map-hifi -c --cs=short --secondary=yes -N 5 -t 1 -K 50M -I 3G /Volumes/T7/Codex/TandemX/data/references/Col-CEN_v1.2/Col-CEN_v1.2.fasta.gz /Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_002.fastq.gz
+[M::main] Real time: 48.807 sec; CPU: 47.735 sec; Peak RSS: 1.261 GB

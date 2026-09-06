@@ -945,6 +945,43 @@ numbers are `NA`; Boolean coverage is also `NA` if no interval exists.
   result hashes, exit/resources, fixed k/support guard, pairing completion and
   held-out exclusion. Execution success alone is not scientific acceptance.
 
+## Reference mapping QC
+
+The manuscript's `paper/tables/input_cohort.tsv` uses `reported_species`,
+`reported_material`, `run_accession`, `read_count`, `total_bases`,
+`median_read_length`, `read_n50`, `gc_fraction`, `n_fraction`,
+`exact_duplicate_read_ids`, `raw_sha256`, `qc_receipt`, `qc_receipt_sha256`
+and `warning`. Lengths/counts are exact file-derived values; species/material
+labels are source metadata. This table is not a biological-validation outcome.
+
+See [reference_mapping_qc.md](reference_mapping_qc.md). `alignments.paf` is
+unchanged native0-based, half-open minimap2 output; `mapping.sqlite` is scratch.
+
+- `read_mapping.tsv`: `read_id`, `length_bp`, `gc_bin_5pct`,
+  `max_purine_pyrimidine_bin_5pct` (integer bin indices0–19),
+  `any_alignment_span_bp`, `primary_span_bp`, `primary_mapq20_span_bp`
+  (per-read query unions), `primary_rows`, `secondary_rows`,
+  `organelle_primary_rows`; `primary_organelle_span_bp`,
+  `primary_other_reference_span_bp` and `primary_compartment_overlap_bp`.
+  The last is organelle span plus other span minus total primary span.
+  Unmapped reads have zero spans/counts.
+- `composition_mapping.tsv`: `dimension`, `bin_start_percent`,
+  `bin_end_percent`; sums of `read_count`, `total_bases`, `any_mapped_reads`,
+  `primary_mapped_reads`, `primary_mapq20_reads`, the three span fields above,
+  `organelle_primary_reads` and the three compartment span fields above.
+  Counts are per dimension, not independent data.
+- `reference_mapping.tsv`: `contig`, `reference_length_bp`, `compartment`
+  (`organelle` explicitly declared or `other_reference`); primary and MAPQ20
+  `aligned_target_bases`, `reference_union_bp`, `aligned_base_depth` fields.
+  Prefixes are `primary_` and `mapq20_`. Depth is the sum of CIGAR-aligned
+  target M/= /X blocks divided by contig length; it is not unique-copy depth.
+- `environment.json`: source/helper/input hashes, exact command, native version,
+  declared organelle list and limits. `reference_qc.json` retains full reference
+  sequence totals. `execution.json` retains exit/time/RSS/CPU/timeout.
+- `validation.json`: `complete`, exact query totals/hash, native alignment
+  rows/types, all-read summary counts, mapped fractions and output hashes.
+  Failed validation records `error`; partial PAF is not an accuracy result.
+
 ## Factorial discovery evaluation
 
 See [factorial_discovery_benchmark.md](factorial_discovery_benchmark.md).

@@ -1,0 +1,15 @@
+{
+  "complete": true,
+  "input_conditions": 27,
+  "family_conditions": 1485,
+  "point_estimates_agree_previous": true,
+  "k_values": [
+    15,
+    21,
+    27,
+    31
+  ],
+  "minimum_effective_reads": 20,
+  "heldout_used": false,
+  "scientific_acceptance": "requires_stratified_coverage_review_not_assumed"
+}

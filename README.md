@@ -412,6 +412,9 @@ single-k baselines and fit diagnostics; public quantification is unchanged.
 The [joint-read uncertainty extension](docs/joint_multik_uncertainty.md) retains
 cross-k read dependence for a conditional sampling interval, with explicit
 sparse-support failures and a separate development coverage-calibration runner.
+The [reference-concordance QC](docs/reference_mapping_qc.md) validates native
+HiFi alignments, preserves unmapped-read denominators and separates query spans,
+CIGAR-aligned reference coverage, organellar context and composition summaries.
 The [factorial discovery evaluation](docs/factorial_discovery_benchmark.md) uses
 full observed-coordinate truth, explicit partial-fragment treatment and independent
 cyclic sequence recovery for the three read-local discovery comparators.

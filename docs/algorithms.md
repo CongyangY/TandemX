@@ -57,6 +57,8 @@ cross-k moments through the fitted intercept; its approximate interval requires
 independent reads and does not include extrapolation or catalogue bias.
 Full-file [QC and nested sampling](complete_data_qc.md) support unbiased selection
 within included libraries and record the limits of library/material sampling.
+The [reference-mapping QC](reference_mapping_qc.md) adds a disk-backed PAF audit
+and CIGAR-based coverage summaries; mapping concordance is not accuracy truth.
 
 The [real-input comparator pilot](real_comparator_pilot.md) verifies selected
 FASTQ hashes, converts identical inputs for all tools and reports descriptive

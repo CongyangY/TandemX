@@ -1,0 +1,15 @@
+2026-09-06 16:28:23,328 INFO command=tandemx discover
+2026-09-06 16:28:23,328 INFO timestamp_utc=2026-09-06T08:28:23.328450+00:00
+2026-09-06 16:28:23,328 INFO output_directory=/Volumes/T7/Codex/TandemX/results/Victoria_random_11Mb_v1_20260906/tandemx/discover
+2026-09-06 16:28:23,328 INFO status=discover_running
+2026-09-06 16:28:23,328 INFO algorithm_mode=elastic_self_alignment kmer_backend=rust min_period=30 max_period=1000
+2026-09-06 16:28:23,328 INFO input_count_skipped reason=not_required_for_discovery_budget
+2026-09-06 16:28:23,329 INFO scan_threads requested=1 effective=1 parallel=false parallel_files=false backend=rust
+2026-09-06 16:28:38,600 INFO progress processed_reads=615 processed_bases=11361028 candidate_reads=779 elapsed_seconds=15.270 reads_per_second=40.274 mb_per_second=0.744 estimated_remaining_seconds=unknown
+2026-09-06 16:28:38,600 INFO filter_summary skipped_short_reads=0 skipped_short_kmer=0 skipped_low_complexity=0 seed_overflow_count=1272
+2026-09-06 16:28:39,536 INFO family_audit mode=related backend=rust families=628 possible_pairs=196878
+2026-09-06 16:28:39,888 INFO family_audit scored_pairs=5775 emitted_pairs=3072 related_pairs=3072 retained_collapse_pairs=0
+2026-09-06 16:28:39,899 INFO status=discover_mvp_completed
+2026-09-06 16:28:39,899 INFO candidate_count=779
+2026-09-06 16:28:39,900 INFO family_count=628
+2026-09-06 16:28:39,900 INFO Discover MVP supports toy-scale FASTA/FASTQ input, including gzip-compressed files

@@ -1,0 +1,98 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/environment.json",
+    "sha256": "10d23ee7d885314097991b30936d5301caf395e67d10b372c3bc6a2b5d68a49d",
+    "bytes": 7563
+  },
+  {
+    "file": "stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/metrics.tsv",
+    "sha256": "3ac25c51f9f7e5834dcf83454ba256fdd1984f7b0285c83cbaa91af14f55996c",
+    "bytes": 654587
+  },
+  {
+    "file": "per_k.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/per_k.tsv",
+    "sha256": "39156fef59b8b5c59069ff62d580f84c2fa29a3219c2313262a68425996e7dee",
+    "bytes": 508082
+  },
+  {
+    "file": "inputs.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/inputs.tsv",
+    "sha256": "5df34c2ca569431ef17b9aefdd559e25dcc328b2e8a5989e7ff5b3f1c634cf58",
+    "bytes": 7487
+  },
+  {
+    "file": "summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/summary.tsv",
+    "sha256": "1475b9832ea5259da4ee41793c7ed5a7db83ad37a5a16879ebc0b9c17cbdd1eb",
+    "bytes": 12624
+  },
+  {
+    "file": "worker.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/worker.log",
+    "sha256": "59f0143d8882588171351f0cbf9427d0002b0eaeded02ab943776d6c242b1725",
+    "bytes": 837
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/validation.json",
+    "sha256": "58efa250c8eaa73d2a8c5aae06da2903d7bd55cbc50df48855037c897d4de66e",
+    "bytes": 308
+  },
+  {
+    "file": "execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/execution.json",
+    "sha256": "3efab92d95324afd2c631ca29bde6240f42dc1a17c270ed499e0c3485b39356f",
+    "bytes": 613
+  },
+  {
+    "file": "figures_v1/joint_uncertainty.pdf",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v1/joint_uncertainty.pdf",
+    "sha256": "d521d4d8b3e2520b5959f39c763a935fe4aac4583c91eec2367317ed22397cce",
+    "bytes": 45111
+  },
+  {
+    "file": "figures_v1/joint_uncertainty.svg",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v1/joint_uncertainty.svg",
+    "sha256": "5d3a1d91dee4d31f1c31dea6c468b6711c1ec636ed32041794531a84c7e58e69",
+    "bytes": 233915
+  },
+  {
+    "file": "figures_v1/joint_uncertainty.png",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v1/joint_uncertainty.png",
+    "sha256": "d9eac6e7d022ab8fc5b7a302bd9aac1b5cab073d384704d79e3f55daa817d21c",
+    "bytes": 239284
+  },
+  {
+    "file": "figures_v1/source_data.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v1/source_data.tsv",
+    "sha256": "3ac25c51f9f7e5834dcf83454ba256fdd1984f7b0285c83cbaa91af14f55996c",
+    "bytes": 654587
+  },
+  {
+    "file": "figures_v1/plot_joint_uncertainty.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v1/plot_joint_uncertainty.py",
+    "sha256": "bcc48220831f2c9b4d73b7cce83a0ade3cdd597e4af89db06609c35e87550ac4",
+    "bytes": 6994
+  },
+  {
+    "file": "figures_v1/figure_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v1/figure_receipt.json",
+    "sha256": "d1db264c1bcab42cb44254938831b96b0b286bfebdc7c9221583afdea509a9a2",
+    "bytes": 991
+  }
+]

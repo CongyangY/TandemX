@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+    "-x",
+    "map-hifi",
+    "-c",
+    "--cs=short",
+    "--secondary=yes",
+    "-N",
+    "5",
+    "-t",
+    "1",
+    "-K",
+    "50M",
+    "-I",
+    "3G",
+    "/Volumes/T7/Codex/TandemX/data/references/Col-CEN_v1.2/Col-CEN_v1.2.fasta.gz",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_002.fastq.gz"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 48.84010916692205,
+  "peak_rss_mib": 1291.5625,
+  "cpu_user_seconds": 47.145115,
+  "cpu_system_seconds": 0.597529,
+  "timed_out": false
+}

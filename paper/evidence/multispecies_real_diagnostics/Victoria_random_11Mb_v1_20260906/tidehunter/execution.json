@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/TideHunter",
+    "-t",
+    "1",
+    "-f",
+    "2",
+    "-p",
+    "30",
+    "-P",
+    "1000",
+    "-m",
+    "30",
+    "-c",
+    "2",
+    "-o",
+    "/Volumes/T7/Codex/TandemX/results/Victoria_random_11Mb_v1_20260906/tidehunter/tidehunter.tsv",
+    "/Volumes/T7/Codex/TandemX/results/Victoria_random_11Mb_v1_20260906/reads.fa"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 11.096758082974702,
+  "peak_rss_mib": 257.203125,
+  "cpu_user_seconds": 10.224709,
+  "cpu_system_seconds": 0.603314,
+  "timed_out": false
+}
