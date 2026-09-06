@@ -1,0 +1,33 @@
+benchmark_id: ultra_pilot_v1
+repetitions: 1
+timeout_seconds: 180
+period_range:
+- 30
+- 1000
+minimum_span_bp: 100
+minimum_iou: 0.5
+seeds:
+  development:
+  - 1101
+  validation:
+  - 2101
+  heldout:
+  - 3101
+  - 3102
+  - 3103
+tools:
+  ultra: /Volumes/T7/Codex/TandemX/tools/build/ULTRA/ultra
+scenarios:
+- name: clean_171
+  period: 171
+  copies: 12
+  read_count: 10
+- name: indel_4pct
+  insertion_rate: 0.02
+  deletion_rate: 0.02
+  read_count: 10
+ultra_options:
+  window_size: 5000
+  windows: 1
+selected_split: development
+selected_scenarios: null

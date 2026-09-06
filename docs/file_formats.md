@@ -40,7 +40,9 @@ path argument is rejected and duplicates within each file remain invalid.
 
 Produced by: `tandemx discover`
 
-This is a de novo discovery output used as the repeat catalog for downstream commands.
+This is a table of read-local evidence. Downstream catalogue arguments use
+`monomers.fa`; this table itself contains no monomer sequence.
+`read_id` may occur on several rows in elastic mode; `candidate_id` is unique.
 
 | Field | Type | Unit | Description |
 |---|---|---:|---|
@@ -49,13 +51,19 @@ This is a de novo discovery output used as the repeat catalog for downstream com
 | read_start | integer | bp | 0-based start in read |
 | read_end | integer | bp | 0-based half-open end in read |
 | strand | string | NA | `+`, `-` or `.` |
-| period_bp | integer | bp | Estimated repeat period |
+| period_bp | integer | bp | Estimated period; observed-unit consensus length in elastic mode |
 | repeat_span_bp | integer | bp | Length of candidate repeat span |
 | unit_count | float | copies | Approximate repeat unit count |
-| score | float | unitless | Internal candidate score |
+| score | float | unitless | Legacy: weighted seed/shifted-identity score. Elastic: matches / alignment columns including gaps |
 | low_complexity_flag | boolean | NA | Whether candidate is low complexity |
 | confidence | string | NA | `high`, `medium` or `low` |
 | warning | string | NA | Semicolon-separated warnings or empty, such as `short_period_candidate` or `low_complexity_candidate` |
+
+Elastic warnings include `elastic_alignment`, `uncalibrated_confidence`,
+`consensus_units=N` (at most 32 sampled observed units), and
+`alignment_median_offset=N` when that offset differs from consensus length.
+Neither the confidence label nor the composition filter is a calibrated
+probability. Coordinates are read-local estimates, not assembly placements.
 
 ## monomers.fa
 
@@ -88,7 +96,7 @@ Produced by: `tandemx discover`
 | gc_fraction | float | fraction | GC fraction from 0 to 1 |
 | support_read_count | integer | reads | Number of supporting reads |
 | support_span_bp | integer | bp | Total supporting read span |
-| mean_identity | float | fraction | Mean candidate-to-consensus identity |
+| mean_identity | float | fraction | Historical field name: arithmetic mean of candidate scores, not a fresh candidate-to-family alignment. Elastic scores are adjacent-copy alignment identities; legacy scores also include seed support |
 | low_complexity_flag | boolean | NA | Whether family is low complexity |
 | confidence | string | NA | Confidence label |
 | warning | string | NA | Semicolon-separated warnings or empty, such as `low_complexity_family` |
@@ -97,6 +105,7 @@ Families with possible sequence-level redundancy are not automatically removed i
 the MVP. Instead, `warning` may include labels such as
 `possible_higher_order_or_partial:TXF000001-TXF000004`; inspect
 `family_similarity.tsv` before collapsing or excluding a monomer.
+Elastic families retain `uncalibrated_confidence` in their warning field.
 
 ## family_similarity.tsv
 
@@ -605,11 +614,27 @@ successful-run accuracy aggregates.
 platform and measurement method. Each execution has `command.json`, logs and
 `receipt.json`; `validation.json` records completion and success/failure counts.
 
+New runs also save `source_snapshot/` with the actual Python/Rust source, native
+extensions and build metadata, verifying each copy against its source hash.
+TandemX subprocesses load this snapshot through PYTHONPATH and use it as their
+working directory, preventing a checkout in the current directory from taking
+import precedence. Early development
+v1/v2 and validation runs recorded hashes only; their intermediate dirty source
+is not a complete archived release. Final publication runs require a committed
+revision and the full snapshot. External tools retain executable hashes and
+separate pinned-source/build provenance.
+
+The suite optionally records `discovery_method` (`legacy` or `elastic`) and
+`ultra_options` (`window_size`, `windows`, `tune`, `tune_indel`). ULTRA rows use
+`tool=ultra`; buffer/tuning configurations are separate suites with separate
+receipts. Its normalized `predictions.tsv` uses the same half-open ArrayRecord
+schema. Unresolved consensus symbols are N; missing consensus is an empty string.
+
 ## Figure source data and ENA subsets
 
 `heatmap_source.tsv`: `panel`, `scenario`, `tool`, `seed`, `metric`, `value`,
 `source_dataset`. `interval_source.tsv`: `track`, `read_id`, `start`, `end`,
-`period`, `source` (relative source-table path). `figure_provenance.json` ties
+`period`, `source` (source-table path; newer multi-run figures use absolute paths). `figure_provenance.json` ties
 the figure to the input table hashes and documents evidence limits.
 
 `ena_metadata.tsv` preserves ENA's requested columns: `run_accession`,

@@ -1,5 +1,35 @@
 # TandemX Benchmarks
 
+## Expanded evaluation
+
+The comparator contract now includes ULTRA and plans task-matched SRF, TRASH,
+TAREAN and specialized annotation/probe comparisons; see
+[comparator_matrix.md](../docs/comparator_matrix.md). Adding a method to that
+contract does not mean it has been benchmarked.
+
+`elastic_development_v1.yaml` runs the experimental elastic algorithm on the
+same development distributions without external dependencies. Both first and
+corrected development attempts are retained on T7. Use the actual source digest
+in `environment.json`, not the config filename alone, to identify an experiment.
+
+ULTRA is supported by the strict challenge adapter. Build the official source
+locally (no system install is required), set its executable under `tools.ultra`,
+and keep that source revision and build commands in provenance. Optional
+`ultra_options` are `window_size` and `windows` (positive integers) and `tune`
+and `tune_indel` (booleans). This permits bounded buffers and a separately
+reported tuned run. Model defaults are otherwise retained. The same maximum
+period/minimum span apply, and minimum-period filtering is applied to outputs.
+ULTRA's documented TSV coordinates are already zero-based half-open; `*` in
+consensus becomes N and `.` is missing consensus, never invented sequence.
+Tuning occurs inside the timed command and its cost is retained.
+
+The first ULTRA feasibility pilot uses only ten reads per scenario; it must not
+be compared directly with 100-read timing or memory rows from the main challenge.
+Its bounded 5000-base window/one-window queue are documented settings based on
+the observable 5000-base input-read length, not repeat truth. The upstream default
+at max period 1000 advertises about 4.09 GB of buffer memory; both settings and
+actual measured peak memory must be distinguished.
+
 ## Challenge benchmark and public-data pilot
 
 Development release smoke check (inside `tandemx-dev`):

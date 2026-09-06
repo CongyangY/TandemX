@@ -1,0 +1,21 @@
+[
+  "/Volumes/T7/Codex/TandemX/tools/build/ULTRA/ultra",
+  "-t",
+  "1",
+  "-p",
+  "1000",
+  "--min_length",
+  "100",
+  "--max_consensus",
+  "1000",
+  "--tsv",
+  "-o",
+  "/Volumes/T7/Codex/TandemX/results/ultra_tuned_pilot_v1_20260906/runs/clean_171_s1101/ultra/rep1/ultra.tsv",
+  "/Volumes/T7/Codex/TandemX/results/ultra_tuned_pilot_v1_20260906/datasets/clean_171_s1101/reads.fa",
+  "--win_size",
+  "5000",
+  "--windows",
+  "1",
+  "--tune",
+  "--tune_indel"
+]

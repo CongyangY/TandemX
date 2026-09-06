@@ -29,7 +29,11 @@ The expanded research/release programme is tracked in [docs/release_program.md](
 It includes an independent challenge benchmark and public-data provenance, with
 development and held-out seeds separated. Current development benchmarks expose
 important indel-boundary and multiple-array limitations; see
-[benchmarks/README.md](benchmarks/README.md). These results do not establish
+[benchmarks/README.md](benchmarks/README.md). An opt-in indel-aware multiple-array
+method is now available for validation (`--discovery-method elastic`); the
+original method remains available as `legacy` and is still the default.
+The broader comparator and multi-metric contract is in
+[docs/comparator_matrix.md](docs/comparator_matrix.md). These results do not establish
 production readiness or a universal advantage over external tools.
 
 The first implementation target is a toy-scale MVP. It should run on small simulated data and should not claim support for real 7-20 Gb plant genomes until benchmarked.
@@ -85,6 +89,17 @@ tandemx annotate-repeats --help
 ```
 
 ## Quick Start: Toy Workflow
+
+To exercise the experimental elastic discovery method after creating toy data:
+
+```bash
+tandemx simulate toy --outdir /tmp/tandemx-toy
+tandemx discover --reads /tmp/tandemx-toy/reads.fa --outdir /tmp/tandemx-elastic \
+  --discovery-method elastic --kmer-backend rust --threads 1
+tandemx validate --project /tmp/tandemx-elastic
+```
+
+See [examples/toy/elastic.md](examples/toy/elastic.md) for its evidence and limits.
 
 After activating `tandemx-dev` and installing TandemX in editable mode, run:
 

@@ -218,6 +218,7 @@ class DiscoverConfig:
     auto_discovery_max_bases: int = DEFAULT_AUTO_DISCOVERY_MAX_BASES
     enable_auto_discovery_budget: bool = False
     collapse_redundant_families: bool = False
+    discovery_method: str = "legacy"
 
 
 @dataclass(frozen=True)
@@ -233,6 +234,7 @@ class ReadScanResult:
     skipped_short_kmer: int = 0
     skipped_low_complexity: int = 0
     seed_overflow_count: int = 0
+    additional_candidates: tuple[CandidateRepeat, ...] = ()
 
 
 @dataclass
@@ -354,9 +356,10 @@ def discover_toy_repeats(
             skipped_short_kmer += result.skipped_short_kmer
             skipped_low_complexity += result.skipped_low_complexity
             seed_overflow_count += result.seed_overflow_count
-            if result.candidate is not None:
+            found = (() if result.candidate is None else (result.candidate,)) + result.additional_candidates
+            for found_candidate in found:
                 candidate = renumber_candidate(
-                    result.candidate,
+                    found_candidate,
                     f"TXC{len(candidates) + 1:06d}",
                 )
                 candidates.append(candidate)
@@ -707,6 +710,9 @@ def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanRe
     if len(sequence) < config.min_read_length:
         return ReadScanResult(read_bases=len(sequence), skipped_short_reads=1)
 
+    if config.discovery_method == "elastic":
+        return scan_elastic_read(task, config)
+
     if config.kmer_backend == "rust":
         candidate, overflow_count = find_best_periodic_candidate_rust(
             record,
@@ -767,9 +773,44 @@ def scan_discover_chunk(
     tasks: Sequence[ReadScanTask],
     config: DiscoverConfig,
 ) -> list[ReadScanResult]:
-    if config.kmer_backend == "rust":
+    if config.kmer_backend == "rust" and config.discovery_method == "legacy":
         return scan_discover_chunk_rust(tasks, config)
     return [scan_discover_read(task, config) for task in tasks]
+
+
+def scan_elastic_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanResult:
+    from tandemx.discover.elastic import discover_elastic_arrays
+
+    record = task.record
+    if len(record.sequence) < config.kmer_size and config.min_monomer_len > SHORT_PERIOD_SCAN_MAX:
+        return ReadScanResult(read_bases=len(record.sequence), skipped_short_kmer=1)
+    arrays, overflow = discover_elastic_arrays(
+        record.sequence, min_period=config.min_monomer_len, max_period=config.max_monomer_len,
+        min_span=config.min_repeat_span, k=config.kmer_size, top_periods=config.top_periods,
+        min_seed_occurrences=config.min_seed_occurrences, min_spacing_support=config.min_spacing_support,
+        max_pairs_per_kmer=config.max_pairs_per_kmer, backend=config.kmer_backend,
+    )
+    candidates = []
+    for hit, consensus, units in arrays:
+        consensus = orient_monomer(consensus)
+        low_complexity = is_low_complexity(consensus)
+        warnings = ["elastic_alignment", "uncalibrated_confidence", f"consensus_units={units}"]
+        if low_complexity:
+            warnings.append("low_complexity_candidate")
+        if hit.period != len(consensus):
+            warnings.append(f"alignment_median_offset={hit.period}")
+        candidates.append(CandidateRepeat(
+            read_id=record.read_id, candidate_id="TXC000000", sequence=consensus,
+            read_start=hit.start, read_end=hit.end, strand=parse_strand(record.description),
+            period_bp=len(consensus), repeat_span_bp=hit.end - hit.start,
+            unit_count=(hit.end - hit.start) / len(consensus), score=hit.identity,
+            low_complexity_flag=low_complexity,
+            confidence="high" if hit.identity >= 0.9 and not low_complexity else "medium",
+            warning=";".join(warnings),
+        ))
+    return ReadScanResult(read_bases=len(record.sequence),
+                          candidate=candidates[0] if candidates else None,
+                          additional_candidates=tuple(candidates[1:]), seed_overflow_count=overflow)
 
 
 def scan_discover_chunk_rust(
@@ -852,6 +893,8 @@ def split_read_scan_tasks(
 
 
 def validate_discover_config(config: DiscoverConfig) -> None:
+    if config.discovery_method not in {"legacy", "elastic"}:
+        raise ValueError("--discovery-method must be legacy or elastic")
     if config.min_monomer_len <= 0:
         raise ValueError("--min-period must be positive")
     if config.max_monomer_len < config.min_monomer_len:
@@ -1291,6 +1334,8 @@ def cluster_candidates(
         mean_identity = cluster.mean_identity
         low_complexity = is_low_complexity(monomer_sequence)
         warning = "low_complexity_family" if low_complexity else ""
+        if any("uncalibrated_confidence" in member.warning.split(";") for member in cluster.members):
+            warning = ";".join(filter(None, (warning, "uncalibrated_confidence")))
         confidence = "high" if cluster.support_read_count >= max(3, min_support_reads) and mean_identity >= 0.9 else "medium"
         families.append(
             RepeatFamily(

@@ -42,13 +42,15 @@ def json_safe(value):
     return None if isinstance(value, float) and not math.isfinite(value) else value
 
 
-def run_process(command: list[str], stdout: Path, stderr: Path, timeout: float) -> dict:
+def run_process(command: list[str], stdout: Path, stderr: Path, timeout: float,
+                environment: dict[str, str] | None = None, working_directory: Path | None = None) -> dict:
     if timeout <= 0:
         raise ValueError("Timeout must be positive")
     start = time.perf_counter()
     timed_out = False
     with stdout.open("w") as out, stderr.open("w") as err:
-        process = subprocess.Popen(command, stdout=out, stderr=err, start_new_session=True)
+        process = subprocess.Popen(command, stdout=out, stderr=err, start_new_session=True,
+                                   env=environment, cwd=working_directory)
         if hasattr(os, "wait4"):
             while True:
                 pid, status, usage = os.wait4(process.pid, os.WNOHANG)
@@ -75,13 +77,24 @@ def run_process(command: list[str], stdout: Path, stderr: Path, timeout: float) 
             "peak_rss_mib": peak, "timed_out": timed_out}
 
 
-def source_manifest(root: Path) -> dict:
+def source_manifest(root: Path, snapshot: Path | None = None) -> dict:
     paths = [p for folder in (root / "tandemx", root / "benchmarks" / "challenge", root / "rust-core" / "src")
              for p in folder.rglob("*") if p.is_file() and p.suffix in {".py", ".rs", ".so", ".pyd"}]
+    paths.extend(p for p in (root / "pyproject.toml", root / "environment.yml", root / "LICENSE", root / "README.md",
+                            root / "rust-core" / "Cargo.toml", root / "rust-core" / "Cargo.lock") if p.is_file())
     hashes = {str(p.relative_to(root)): digest_file(p) for p in sorted(paths)}
+    if snapshot is not None:
+        snapshot.mkdir(parents=True, exist_ok=False)
+        for path in paths:
+            target = snapshot / path.relative_to(root)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, target)
+            if digest_file(target) != hashes[str(path.relative_to(root))]:
+                raise ValueError(f"Source changed while snapshotting: {path}")
     revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=False)
     commit = revision.stdout.strip() if revision.returncode == 0 else None
     return {"git_head": commit, "revision_warning": None if commit else "not_a_git_checkout_use_source_digest", "file_hashes": hashes,
+            "source_snapshot": str(snapshot) if snapshot else None,
             "source_digest": hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest()}
 
 
@@ -93,8 +106,17 @@ def run_suite(config_path: Path, outdir: Path, split: str, selected: list[str] |
         raise FileExistsError(f"Choose a new empty output directory: {outdir}")
     if split not in config["seeds"]:
         raise ValueError(f"Unknown split: {split}")
-    if set(config["tools"]) - {"tandemx", "trf", "tidehunter"}:
+    if set(config["tools"]) - {"tandemx", "trf", "tidehunter", "ultra"}:
         raise ValueError("Unsupported comparator in this array-level benchmark")
+    ultra_options = config.get("ultra_options", {})
+    if set(ultra_options) - {"window_size", "windows", "tune", "tune_indel"}:
+        raise ValueError("Unsupported ULTRA option")
+    for key in ("window_size", "windows"):
+        if key in ultra_options and (type(ultra_options[key]) is not int or ultra_options[key] < 1):
+            raise ValueError(f"ULTRA {key} must be a positive integer")
+    for key in ("tune", "tune_indel"):
+        if key in ultra_options and type(ultra_options[key]) is not bool:
+            raise ValueError(f"ULTRA {key} must be boolean")
     executables = {}
     for tool, value in config["tools"].items():
         resolved = shutil.which(value) or str((root / value).resolve())
@@ -117,16 +139,18 @@ def run_suite(config_path: Path, outdir: Path, split: str, selected: list[str] |
     LOGGER.setLevel(logging.INFO)
     (outdir / "run_config.yaml").write_text(yaml.safe_dump({**config, "selected_split": split,
                                                           "selected_scenarios": selected}, sort_keys=False))
-    manifest = source_manifest(root)
+    manifest = source_manifest(root, outdir / "source_snapshot")
     versions = {}
     for tool, executable in executables.items():
-        result = subprocess.run([executable, "--version" if tool == "tandemx" else "-v"],
+        version_arg = "--version" if tool == "tandemx" else "-h" if tool == "ultra" else "-v"
+        result = subprocess.run([executable, version_arg],
                                 capture_output=True, text=True, timeout=10, check=False)
         versions[tool] = {"exit_code": result.returncode, "self_report": (result.stdout + result.stderr)[:4000]}
     manifest.update({"config_sha256": digest_file(config_path), "python": sys.version, "platform": platform.platform(),
                      "executables": {t: {"path": p, "sha256": digest_file(Path(p))} for t, p in executables.items()},
                      "tool_versions": versions, "memory_method": "wait4 direct child ru_maxrss", "threads": 1, "split": split,
-                     "family_recovery_source": "TandemX final catalog; TRF and TideHunter per-array consensuses"})
+                     "family_recovery_source": "TandemX final catalog; other tools per-array consensuses",
+                     "tandemx_execution_source": "source_snapshot via PYTHONPATH and working directory"})
     (outdir / "environment.json").write_text(json.dumps(manifest, indent=2) + "\n")
     raw: list[dict] = []
     min_period, max_period = config["period_range"]
@@ -148,11 +172,22 @@ def run_suite(config_path: Path, outdir: Path, split: str, selected: list[str] |
                     run.mkdir(parents=True)
                     command, output = build_command(tool, executables[tool], dataset / "reads.fa", run,
                                                     min_period, max_period, min_span)
+                    if tool == "tandemx" and "discovery_method" in config:
+                        command.extend(["--discovery-method", str(config["discovery_method"])])
+                    if tool == "ultra":
+                        for key, flag in (("window_size", "--win_size"), ("windows", "--windows")):
+                            if key in ultra_options:
+                                command.extend([flag, str(ultra_options[key])])
+                        for key in ("tune", "tune_indel"):
+                            if ultra_options.get(key):
+                                command.append("--" + key)
                     (run / "command.json").write_text(json.dumps(command, indent=2) + "\n")
                     row = {"scenario": scenario.name, "dataset_id": dataset_id, "seed": seed, "split": split,
                            "tool": tool, "repetition": repetition, "total_bases": generated["total_bases"],
                            **run_process(command, output if tool == "trf" else run / "stdout.log", run / "stderr.log",
-                                         config["timeout_seconds"])}
+                                         config["timeout_seconds"],
+                                         {**os.environ, "PYTHONPATH": str(outdir / "source_snapshot")} if tool == "tandemx" else None,
+                                         outdir / "source_snapshot" if tool == "tandemx" else None)}
                     row["status"] = "failed" if row["exit_code"] or row["timed_out"] else "ok"
                     row["error"] = ""
                     if row["status"] == "ok":

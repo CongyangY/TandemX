@@ -164,7 +164,8 @@ def run_discover(args: argparse.Namespace) -> int:
     logger.info("output_directory=%s", args.outdir)
     logger.info("status=discover_running")
     logger.info(
-        "algorithm_mode=spacing_prefilter kmer_backend=%s min_period=%s max_period=%s",
+        "algorithm_mode=%s kmer_backend=%s min_period=%s max_period=%s",
+        "spacing_prefilter" if args.discovery_method == "legacy" else "elastic_self_alignment",
         args.kmer_backend,
         args.min_monomer_len,
         args.max_monomer_len,
@@ -222,6 +223,7 @@ def run_discover(args: argparse.Namespace) -> int:
         auto_discovery_max_bases=args.auto_discovery_max_bases,
         enable_auto_discovery_budget=args.enable_auto_discovery_budget,
         collapse_redundant_families=args.collapse_redundant_families,
+        discovery_method=args.discovery_method,
     )
     try:
         candidates, families = discover_toy_repeats(
@@ -546,6 +548,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--min-read-length", type=int, default=1, help="Skip reads shorter than this length in bp; set explicitly for real-read pilots.")
     discover.add_argument("--kmer-size", type=int, default=11, help="Canonical seed k-mer size for spacing prefiltering.")
     discover.add_argument("--top-periods", type=int, default=5, help="Maximum spacing peaks refined per read.")
+    discover.add_argument("--discovery-method", choices=("legacy", "elastic"), default="legacy", help="legacy: fixed-offset single-array baseline; elastic: experimental indel-aware multiple-array alignment and consensus.")
     discover.add_argument("--min-seed-occurrences", type=int, default=2, help="Minimum within-read occurrences required for a seed k-mer.")
     discover.add_argument("--min-spacing-support", type=int, default=2, help="Minimum repeated-seed support required for a spacing peak.")
     discover.add_argument("--max-pairs-per-kmer", type=int, default=100, help="Maximum adjacent position pairs retained per seed k-mer.")

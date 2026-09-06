@@ -1,0 +1,17 @@
+scenario	dataset_id	tool	seed	split	successful_runs	attempted_runs	deterministic	median_runtime_seconds	median_peak_rss_mib	array_recall	array_precision	array_f1	read_detection_recall	read_detection_precision	negative_read_call_rate	sequence_family_recall	matched_period_mae_bp	matched_boundary_mae_bp
+at_rich_control	at_rich_control_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.642436542082578	35.484375	NA	0.0	0.0	NA	0.0	0.03	NA	NA	NA
+clean_171	clean_171_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.5474919581320137	37.953125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.3214285714285714
+clean_421	clean_421_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.1355462081264704	32.53125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	0.9928571428571429
+clean_60	clean_60_s1101	tandemx	1101	development	1	1	not_tested_single_run	0.9665391251910478	32.75	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.4928571428571429
+clean_729	clean_729_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.2378568751737475	31.53125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.1857142857142857
+dispersed_control	dispersed_control_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.039308541920036	33.421875	NA	NA	NA	NA	NA	0.0	NA	NA	NA
+divergent_units	divergent_units_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.5031637500505894	32.203125	0.9857142857142858	0.9857142857142858	0.9857142857142858	1.0	1.0	0.0	1.0	0.014492753623188406	2.9420289855072466
+indel_01pct	indel_01pct_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.5325464170891792	35.125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.5642857142857143
+indel_1pct	indel_1pct_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.5516160000115633	35.4375	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.4642857142857142
+indel_4pct	indel_4pct_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.537493292009458	34.921875	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.12857142857142856	1.7428571428571429
+low_complexity_control	low_complexity_control_s1101	tandemx	1101	development	1	1	not_tested_single_run	0.6350621250458062	24.015625	NA	NA	NA	NA	NA	0.0	NA	NA	NA
+related_families	related_families_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.5278340419754386	31.765625	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.4285714285714286
+short_arrays	short_arrays_s1101	tandemx	1101	development	1	1	not_tested_single_run	0.847787959035486	27.609375	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.2214285714285715
+substitution_1pct	substitution_1pct_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.5668551251292229	33.828125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.6
+substitution_5pct	substitution_5pct_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.540241332957521	35.609375	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.014285714285714285	1.9642857142857142
+two_arrays	two_arrays_s1101	tandemx	1101	development	1	1	not_tested_single_run	1.81948033394292	34.203125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.65

@@ -2,15 +2,16 @@
 
 import json
 import math
+import os
 import sys
 from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
-from benchmarks.challenge.adapters import build_command, parse_tidehunter, parse_trf, read_fasta
+from benchmarks.challenge.adapters import build_command, parse_tidehunter, parse_trf, parse_ultra, read_fasta
 from benchmarks.challenge.evaluate import circular_identity, maximum_matching, score_arrays, score_families, wilson_interval
-from benchmarks.challenge.run import run_process, summarize
+from benchmarks.challenge.run import run_process, summarize, source_manifest
 from benchmarks.challenge.schema import ArrayRecord, read_table
 from benchmarks.challenge.simulate import Scenario, generate_dataset, mutate, reverse_complement
 
@@ -116,12 +117,42 @@ def test_strict_external_parsers_and_one_based_conversion(tmp_path: Path) -> Non
 
 
 def test_commands_never_receive_truth(tmp_path: Path) -> None:
-    for tool in ("tandemx", "trf", "tidehunter"):
+    for tool in ("tandemx", "trf", "tidehunter", "ultra"):
         command, _ = build_command(tool, tool, tmp_path / "reads.fa", tmp_path, 30, 1000, 100)
         assert not any("truth" in value for value in command)
         if tool == "tandemx":
             assert command[command.index("--min-repeat-span") + 1] == "100"
             assert command[command.index("--threads") + 1] == "1"
+
+
+def test_ultra_half_open_coordinates_and_unknown_consensus(tmp_path):
+    path = tmp_path / "ultra.tsv"
+    path.write_text("SeqID\tStart\tEnd\tPeriod\tScore\tConsensus\n"
+                    "r\t100\t600\t5\t12.5\tACG*A\n"
+                    "s\t0\t100\t10\t10\t.\n")
+    assert parse_ultra(path) == [ArrayRecord("r", 100, 600, 5, "ACGNA"), ArrayRecord("s", 0, 100, 10)]
+    path.write_text("bad\tformat\n")
+    with pytest.raises(ValueError):
+        parse_ultra(path)
+
+
+def test_source_snapshot_preserves_dirty_or_unversioned_code(tmp_path):
+    root = tmp_path / "source"
+    (root / "tandemx").mkdir(parents=True)
+    (root / "tandemx" / "__init__.py").write_text("")
+    source = root / "tandemx" / "sample.py"
+    source.write_text("value = 42\n")
+    snapshot = tmp_path / "snapshot"
+    manifest = source_manifest(root, snapshot)
+    source.write_text("value = 43\n")
+    assert (snapshot / "tandemx" / "sample.py").read_text() == "value = 42\n"
+    assert manifest["file_hashes"]["tandemx/sample.py"]
+    assert manifest["git_head"] is None
+    run = run_process([sys.executable, "-c", "from tandemx.sample import value; print(value)"],
+                      tmp_path / "out", tmp_path / "err", 5,
+                      {**os.environ, "PYTHONPATH": str(snapshot)}, snapshot)
+    assert run["exit_code"] == 0, (tmp_path / "err").read_text()
+    assert (tmp_path / "out").read_text().strip() == "42"
 
 
 def test_process_failure_and_timeout_are_observable(tmp_path: Path) -> None:

@@ -8,9 +8,10 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 ## Source, Git and storage
 
 - Source: `/Users/ycy/Codex/Sofw/TandemX`; GitHub `https://github.com/CongyangY/TandemX`.
-- Entry branch: `codex/publish-current-progress`, HEAD `08e100d`. Entry remote
-  main verified as `b9ef30a`. SSH remote access works with sandbox escalation.
-  Recheck current revisions rather than assuming entry values are current.
+- Active branch: `codex/publish-current-progress`. Previous checkpoint `f4bb14f`
+  was verified on both GitHub main and the working branch. This document ships
+  with the next tested checkpoint; inspect `git log` for its exact revision.
+  SSH remote access works with sandbox escalation.
 - `.codex/` is user-owned: never stage/delete it. Ignore caches/generated runs.
 - New data/results: `/Volumes/T7/Codex/TandemX`, mounted with ~1.6 TiB free on
   entry. Source and `tandemx-dev` remain on internal disk.
@@ -35,8 +36,70 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 5. Four-panel development diagnostic with editable SVG/PDF and source tables,
    selectively versioned in `paper/evidence`. It is not a finished paper.
 
+## Elastic checkpoint (2026-09-06)
+
+- User explicitly requires broader reviewer-relevant comparators and improvement
+  across speed, memory, accuracy and other metrics. `docs/comparator_matrix.md`
+  records task matching, all metrics and the no-cherry-picking contract.
+- New opt-in `--discovery-method elastic` in both `discover` and `run`; legacy
+  remains default for now. Separate Python reference and Rust banded local
+  alignment/global consensus kernels; multiple arrays per read; composition
+  filter; support-based unit template; explicit uncalibrated confidence.
+- New modules: `tandemx/discover/{alignment,consensus,elastic}.py`,
+  `rust-core/src/elastic.rs`. Array identity includes gap columns. No AI claim.
+- At data root, `results/elastic_development_v1_20260906` retains the first
+  attempt: 3 AT-rich false-positive reads and one divergent consensus-length
+  error. `elastic_development_v2_20260906` corrects both: all 13 positive
+  scenarios at array recall/precision and family recovery 1.0; three 100-read
+  negative datasets have no calls. Both runs have one repetition/seed 1101.
+- `results/elastic_validation_v1_20260906`: 48/48 successful runs, seed 2101,
+  three identical-output repetitions per scenario. Array recall/precision 1.0
+  throughout; no negative calls. **Related-family recovery is 2/3**: clustering
+  merged two distinct related monomers. Other family endpoints are 1.0. This
+  is the immediate algorithmic deficit; do not claim complete validation.
+- The family failure is at `runs/related_families_s2101/tandemx/rep1` in that
+  validation directory. `families.tsv` contains only two 171-bp families with
+  38 and 32 supporting reads. Existing `candidate_sequences_compatible` uses
+  a shared-sketch threshold; an alignment-based family criterion is needed.
+- ULTRA v1.2.2 built locally at `tools/build/ULTRA/ultra` under T7. Upstream
+  source `tools/src/ULTRA`, commit `99418b9eb396aaaf59e4b793a481b4c7aa8a8104`.
+  Provenance: `provenance/ultra_build_20260906.json`. No system package install.
+  Default model and automatic indel-aware tuning pilots both ran on 10 reads,
+  clean_171 and indel_4pct. Native streaming buffers set to 5000 bases and one
+  queued window, based on observed read length. Default resource estimate at
+  period1000 was 4.09GB; measured bounded pilot peaks ~421 MiB.
+- `results/ultra_pilot_v1_20260906`: clean array recall 1.0, indel4% 3/7.
+  `results/ultra_tuned_pilot_v1_20260906`: both array recall/precision 1.0;
+  166.58/176.81 sec including 18 grid settings plus shuffles. Strict equal-length
+  family recovery is zero even on clean reads; consensuses differ by ~1 bp.
+  **Add an independent gapped/circular homology endpoint before interpreting
+  this as missing families.** Do not compare 10-read resource rows to 100-read
+  runs. Future comparisons need default, tuning cost and frozen tuned inference.
+- Four-panel baseline/elastic development figure and source tables archived in
+  `paper/evidence/elastic_development_corrected`; no raster SVG elements,
+  225 editable text elements. PNG inspected. Validation failures are archived
+  separately and explicitly described in `paper/evidence/README.md`.
+- Early elastic runs have source hashes but no complete dirty source snapshot;
+  they are diagnostic only. Updated runner snapshots Python/Rust/native/build
+  files, verifies copied hashes, and runs TandemX with snapshot PYTHONPATH and
+  working directory. Final publication runs require a committed source revision.
+
 ## Checks
 
+- Latest elastic/ULTRA/snapshot checkpoint: **218 pytest passed in 60.63 s**;
+  6 Rust tests passed, clippy `-D warnings` and fmt check passed. Earlier
+  217-test runs preceded the final snapshot import-isolation test.
+- The documented elastic toy tutorial executed simulate/discover/validate with
+  exit 0 and two emitted families. Final snapshot/cwd benchmark smoke on T7:
+  `results/elastic_snapshot_cwd_smoke_20260906`, three successful, deterministic
+  validation indel4% runs; read-local array recall/precision and family recovery 1.
+  The emitted run config confirms cwd is the archived source snapshot.
+- The prior development wheel below predates elastic; no newer release-wheel
+  validation or production release is claimed by this checkpoint.
+
+- Previous checkpoint `f4bb14f`: GitHub CI run 34005639588 verified successful
+  on both Linux and macOS (source install, pytest, Rust checks and wheel build).
+  This does not cover the newer elastic checkpoint until its own CI completes.
 - Entry: 170 pytest passed in 60.09 s.
 - Expanded suite: 200 passed in 59.01 s; after stale-output cleanup the complete
   suite passed again (200 tests in 58.55 s). Focused pipeline regression: 9 passed.
@@ -100,10 +163,20 @@ reuse assembly-alignment BAMs from other projects as raw reads.
 
 ## Next critical work
 
-1. Commit/push tested code and evidence; inspect hosted CI. Do not stage `.codex/`.
-2. Fix indel-sensitive boundaries and multiple arrays per read with an ablatable
-   baseline and Python/Rust parity. Candidate consensus can survive when full
-   array boundaries fail; panel d and `matches.tsv` provide concrete examples.
+0. Inspect this checkpoint's GitHub CI after commit/push. The active
+   source includes elastic + ULTRA + snapshot runner; never stage `.codex/`.
+   Then fix sequence-family over-merging, add gapped family-recovery metrics
+   independent of the TandemX implementation, and extend the challenge beyond
+   the original fixed periods/GC/seeds. Held-out 3101/3102/3103 remain unused.
+   Define monomer variants versus broader sequence families explicitly; do not
+   silently tune a similarity cutoff to match arbitrary simulator labels.
+
+
+1. Keep meaningful source/tests/documentation checkpoints on GitHub; source
+   snapshots are now available for subsequent benchmark runs.
+2. Elastic now addresses indel boundaries/multiple arrays in development and
+   validation, with parity tests; investigate remaining family clustering and
+   runtime costs before making it the default.
 3. Development/validation seeds first, then freeze settings and use held-out
    3101/3102/3103. Add more independent families/seeds for publication inference.
 4. Add coverage/error/copy-number and engineered assembly-collapse experiments,
@@ -113,7 +186,7 @@ reuse assembly-alignment BAMs from other projects as raw reads.
 6. SRF family/abundance, TRASH assembly, and applicable TAREAN short-read workflow
    comparisons remain unrun. Docker CLI is present but daemon not running.
    TRASH needs R dependencies; TRASH 2 also needs mafft/nhmmer. No new comparator
-   installation has been completed. Keep incompatible task metrics separate.
+   installation except ULTRA has been completed. Keep incompatible task metrics separate.
 7. Prior art: SRF already supports accurate-read satellite discovery/abundance.
    Optional AI requires transparent baselines, held-out evaluation, ablation,
    calibration and domain-shift evidence; do not add an AI label for novelty.

@@ -954,6 +954,8 @@ fn scan_reads_for_periods(
     }))
 }
 
+mod elastic;
+
 #[pymodule]
 fn _rust_core(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<SequenceStatsResult>()?;
@@ -962,6 +964,8 @@ fn _rust_core(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_function(wrap_pyfunction!(count_sequence_file_stats, module)?)?;
     module.add_function(wrap_pyfunction!(scan_read_for_periods, module)?)?;
     module.add_function(wrap_pyfunction!(scan_reads_for_periods, module)?)?;
+    module.add_function(wrap_pyfunction!(elastic::banded_self_align, module)?)?;
+    module.add_function(wrap_pyfunction!(elastic::global_align_ops, module)?)?;
     Ok(())
 }
 

@@ -1,0 +1,17 @@
+scenario	dataset_id	tool	seed	split	successful_runs	attempted_runs	deterministic	median_runtime_seconds	median_peak_rss_mib	array_recall	array_precision	array_f1	read_detection_recall	read_detection_precision	negative_read_call_rate	sequence_family_recall	matched_period_mae_bp	matched_boundary_mae_bp
+at_rich_control	at_rich_control_s2101	tandemx	2101	validation	3	3	True	1.6521942089311779	35.109375	NA	NA	NA	NA	NA	0.0	NA	NA	NA
+clean_171	clean_171_s2101	tandemx	2101	validation	3	3	True	1.5643549580127	34.78125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.4785714285714286
+clean_421	clean_421_s2101	tandemx	2101	validation	3	3	True	1.1868428750894964	33.515625	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.1214285714285714
+clean_60	clean_60_s2101	tandemx	2101	validation	3	3	True	0.8759611248970032	28.796875	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.0857142857142856
+clean_729	clean_729_s2101	tandemx	2101	validation	3	3	True	1.3096844169776887	32.1875	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.6214285714285714
+dispersed_control	dispersed_control_s2101	tandemx	2101	validation	3	3	True	1.015885999891907	32.640625	NA	NA	NA	NA	NA	0.0	NA	NA	NA
+divergent_units	divergent_units_s2101	tandemx	2101	validation	3	3	True	1.571088874945417	36.609375	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	2.4357142857142855
+indel_01pct	indel_01pct_s2101	tandemx	2101	validation	3	3	True	1.5994211670476943	36.1875	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.8428571428571427
+indel_1pct	indel_1pct_s2101	tandemx	2101	validation	3	3	True	1.5995769170112908	31.921875	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	2.085714285714286
+indel_4pct	indel_4pct_s2101	tandemx	2101	validation	3	3	True	1.5755610831547529	35.53125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.18571428571428572	2.092857142857143
+low_complexity_control	low_complexity_control_s2101	tandemx	2101	validation	3	3	True	0.6380554579664022	23.921875	NA	NA	NA	NA	NA	0.0	NA	NA	NA
+related_families	related_families_s2101	tandemx	2101	validation	3	3	True	1.5507567501626909	34.703125	1.0	1.0	1.0	1.0	1.0	0.0	0.6666666666666666	0.0	1.7571428571428571
+short_arrays	short_arrays_s2101	tandemx	2101	validation	3	3	True	0.834558041067794	30.03125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.6642857142857144
+substitution_1pct	substitution_1pct_s2101	tandemx	2101	validation	3	3	True	1.5756894168443978	35.078125	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.4214285714285715
+substitution_5pct	substitution_5pct_s2101	tandemx	2101	validation	3	3	True	1.6031806671526283	36.390625	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.7142857142857142
+two_arrays	two_arrays_s2101	tandemx	2101	validation	3	3	True	1.890222833957523	34.90625	1.0	1.0	1.0	1.0	1.0	0.0	1.0	0.0	1.2964285714285715

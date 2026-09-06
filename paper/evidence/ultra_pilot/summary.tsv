@@ -1,0 +1,3 @@
+scenario	dataset_id	tool	seed	split	successful_runs	attempted_runs	deterministic	median_runtime_seconds	median_peak_rss_mib	array_recall	array_precision	array_f1	read_detection_recall	read_detection_precision	negative_read_call_rate	sequence_family_recall	matched_period_mae_bp	matched_boundary_mae_bp
+clean_171	clean_171_s1101	ultra	1101	development	1	1	not_tested_single_run	4.522955916123465	421.265625	1.0	1.0	1.0	1.0	1.0	0.0	0.0	1.0	11.785714285714286
+indel_4pct	indel_4pct_s1101	ultra	1101	development	1	1	not_tested_single_run	4.713964415946975	421.390625	0.42857142857142855	0.23076923076923078	0.3	1.0	1.0	0.0	0.0	0.3333333333333333	220.16666666666666

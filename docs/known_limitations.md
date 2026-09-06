@@ -64,6 +64,30 @@ Rust scan threads; this does not make every downstream step parallel.
 
 ## Development challenge findings (2026-09-06)
 
+An opt-in `--discovery-method elastic` now supports indel-aware local alignment,
+observed-unit consensus and multiple arrays per read. Legacy remains the default
+and the baseline below remains archived. In the corrected elastic development
+run (seed 1101), all 13 positive scenarios recovered all planted arrays and all
+three families; three 100-read negative scenarios yielded no calls. This follows
+an initial elastic attempt with three AT-rich false-positive reads and one
+incorrect consensus length; those failed development results are retained too.
+The corrected metrics are development performance, not held-out evidence.
+
+Separate validation seed 2101 (48/48 successful runs, three repetitions per
+scenario) retained perfect array recall/precision and zero negative-control
+calls, but recovered only two of three sequence families in `related_families`.
+The existing sketch-based clustering merged two distinct related monomers.
+This failure is retained and requires method improvement; the final held-out
+seeds 3101/3102/3103 have not been used.
+
+The composition filter is heuristic, boundaries can include chance-matching
+flank bases, consensus samples at most 32 observed units, and local traces are
+capped at 32 million cells. Natural family divergence, long arrays, close array
+transitions and genome-wide false discovery require broader validation. Neither
+mode currently supplies calibrated detection probabilities. Retaining legacy
+provides a reproducible algorithm ablation, not a recommended workaround for
+indel-rich data.
+
 The independent planted-array benchmark at development seed 1101 found full
 array recall on clean and substitution-only scenarios but serious loss of
 interval recall under indels (0.70 at 0.1% total indels, 0.0286 at 1%, and 0 at

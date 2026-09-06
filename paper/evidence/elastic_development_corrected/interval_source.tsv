@@ -1,0 +1,7 @@
+track	read_id	start	end	period	source
+Planted truth	r0000001	1474	3522	171	/Volumes/T7/Codex/TandemX/results/challenge_v1_development_20260906/datasets/indel_1pct_s1101/truth_arrays.tsv
+TX legacy	r0000001	1557	1897	170	/Volumes/T7/Codex/TandemX/results/challenge_v1_development_20260906/runs/indel_1pct_s1101/tandemx/rep1/predictions.tsv
+TRF	r0000001	1474	3522	171	/Volumes/T7/Codex/TandemX/results/challenge_v1_development_20260906/runs/indel_1pct_s1101/trf/rep1/predictions.tsv
+TRF	r0000001	1474	3522	341	/Volumes/T7/Codex/TandemX/results/challenge_v1_development_20260906/runs/indel_1pct_s1101/trf/rep1/predictions.tsv
+TideHunter	r0000001	1474	3522	171	/Volumes/T7/Codex/TandemX/results/challenge_v1_development_20260906/runs/indel_1pct_s1101/tidehunter/rep1/predictions.tsv
+TX elastic	r0000001	1474	3522	171	/Volumes/T7/Codex/TandemX/results/elastic_development_v2_20260906/runs/indel_1pct_s1101/tandemx/rep1/predictions.tsv

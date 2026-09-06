@@ -45,6 +45,19 @@ def parse_tidehunter(path: Path) -> list[ArrayRecord]:
     return arrays
 
 
+def parse_ultra(path: Path) -> list[ArrayRecord]:
+    """ULTRA 1.2.2 TSV: start/end are already zero-based half-open.
+
+    Verified against upstream TabFileWriter.cpp (start + repeatLength). An
+    unresolved '*' is represented by N; '.' denotes a missing consensus. Neither
+    can be counted as a correct known base in family recovery.
+    """
+    rows = read_table(path, {"SeqID", "Start", "End", "Period", "Consensus"})
+    return [ArrayRecord(r["SeqID"], int(r["Start"]), int(r["End"]), int(r["Period"]),
+                        "" if r["Consensus"] == "." else r["Consensus"].upper().replace("*", "N"))
+            for r in rows]
+
+
 def read_fasta(path: Path) -> dict[str, str]:
     sequences: dict[str, str] = {}
     name = ""
@@ -68,7 +81,7 @@ def read_fasta(path: Path) -> dict[str, str]:
 
 
 def parse_arrays(tool: str, path: Path, min_period: int, max_period: int, min_span: int) -> list[ArrayRecord]:
-    parser = {"tandemx": parse_tandemx, "trf": parse_trf, "tidehunter": parse_tidehunter}[tool]
+    parser = {"tandemx": parse_tandemx, "trf": parse_trf, "tidehunter": parse_tidehunter, "ultra": parse_ultra}[tool]
     return [r for r in parser(path) if min_period <= r.period <= max_period and r.end - r.start >= min_span]
 
 
@@ -86,4 +99,8 @@ def build_command(tool: str, executable: str, reads: Path, outdir: Path,
         output = outdir / "tidehunter.tsv"
         return [executable, "-t", "1", "-f", "2", "-p", str(min_period), "-P", str(max_period),
                 "-m", str(min_period), "-c", "2", "-o", str(output), str(reads)], output
+    if tool == "ultra":
+        output = outdir / "ultra.tsv"
+        return [executable, "-t", "1", "-p", str(max_period), "--min_length", str(min_span),
+                "--max_consensus", str(max_period), "--tsv", "-o", str(output), str(reads)], output
     raise ValueError(f"Unknown tool: {tool}")

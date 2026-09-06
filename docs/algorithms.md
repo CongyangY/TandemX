@@ -24,7 +24,7 @@ consensuses. No family precision is inferred from catalog size or length alone.
 
 MVP goal: identify simple candidate tandem repeat monomers de novo from toy HiFi-like sequence reads.
 
-Current MVP implementation:
+Default `--discovery-method legacy` implementation (retained for ablation):
 
 1. stream FASTA or FASTQ reads, including gzip-compressed inputs;
 2. apply `--max-reads`, `--max-read-bases`, reproducible `--sample-rate`, minimum length filters and the automatic large-input discovery budget when enabled;
@@ -69,6 +69,58 @@ Future work:
 2. strand-aware consensus refinement;
 3. multiprocessing or distributed chunk processing for non-Rust backends;
 4. uncertainty modeling for ambiguous monomer periods.
+
+## Elastic read-local discovery (experimental)
+
+`discover` and `run` accept `--discovery-method elastic`. This opt-in method
+uses the same input-only discovery contract and downstream schemas. The legacy
+mode remains the default pending independent evaluation and resource profiling.
+
+1. Select distinct supported spacing bands from bounded per-read seeds. Nearby
+   peaks covered by an existing band do not consume another `--top-periods` slot.
+   Short periods 2–19 are scanned directly when requested.
+2. Align a read to itself around each positive offset. Band half-width is
+   `min(period-1, max(3, ceil(0.08*period)))`. A diagonal pair scores +2 for a
+   match, -3 for a mismatch; each gap base costs 4. Ambiguous bases break paths.
+   A path resets at score <=0 or a drawdown >40 from its own peak. This is a
+   banded, drawdown-pruned local alignment heuristic, not an exact unbounded
+   Smith-Waterman optimum.
+3. Trace candidate local paths in descending score order. Require alignment
+   identity >=0.75, the configured span, and a comparison span >=0.8 times the
+   median aligned offset. The minimum alignment score is
+   `max(min(40,min_span), ceil(0.7*max(period,min_span-period)))`.
+4. Filter composition-driven matches using `(identity-q)/(1-q) >=0.7`, where
+   `q=sum(f_b^2)` from A/C/G/T frequencies in the local interval. All-one-base
+   intervals fail this filter. This score is not a calibrated probability and
+   does not account for dinucleotide dependence or local-hit selection.
+5. Keep multiple spatially distinct arrays. If two hits overlap by at least
+   half of the shorter interval, keep the higher total alignment score, then
+   longer span, then smaller period. This suppresses redundant harmonic calls;
+   it does not establish that an array has no higher-order organization.
+6. Follow aligned adjacent-copy coordinates to cut approximate unit boundaries.
+   Omit short terminal fragments; a terminal segment within 10% of the median
+   offset can be included. Use at most 32 evenly spaced observed units. Select
+   a median-length template with high cross-unit 7-mer support, then perform up
+   to two deterministic rounds of banded global alignment and majority voting,
+   including insertions and deletions. This is an observed-unit consensus, not
+   ancestral sequence inference or full partial-order assembly.
+7. Canonicalize strand/rotation and apply the existing sequence-aware family
+   clustering. `period_bp` is consensus length; a differing median aligned offset
+   is retained in `warning`. `score` is matches divided by all aligned columns,
+   including gaps. Confidence labels remain uncalibrated.
+
+The independent Python reference and Rust kernels are tested for identical
+alignment paths and consensus. Rust releases the GIL during alignment; seed
+preparation and family clustering currently remain in Python. Each trace is
+limited to 32 million cells and fails explicitly if exceeded. Peak trace space
+is O(read_length × band_width), plus read-local alignment pairs; no whole read
+collection or genome is loaded for the alignment. Candidate/family state still
+grows across reads and is a separate production-scale limitation.
+
+Development findings are archived separately from the baseline; both rejected
+first attempts and corrected results remain available. Perfect recovery on
+development seed 1101 is not a held-out accuracy or speed claim. The expanded
+comparator/metric contract is in [comparator_matrix.md](comparator_matrix.md).
 
 ## Diagnostic k-mer Copy-number Calibration
 

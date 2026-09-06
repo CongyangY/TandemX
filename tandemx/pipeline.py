@@ -64,6 +64,7 @@ class PipelineConfig:
     resume: bool
     force: bool
     profile: bool
+    discovery_method: str = "legacy"
 
 
 @dataclass(frozen=True)
@@ -123,6 +124,8 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--min-period", type=int, default=2)
     parser.add_argument("--max-period", type=int, default=2000)
     parser.add_argument("--top-periods", type=int, default=5)
+    parser.add_argument("--discovery-method", choices=("legacy", "elastic"), default="legacy",
+                        help="Discovery algorithm; elastic enables experimental indel-aware multiple arrays.")
     parser.add_argument(
         "--threads",
         type=int,
@@ -170,6 +173,7 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         resume=args.resume,
         force=args.force,
         profile=args.profile,
+        discovery_method=args.discovery_method,
     )
 
 
@@ -194,6 +198,8 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
             str(discover_dir),
             "--kmer-backend",
             config.kmer_backend,
+            "--discovery-method",
+            config.discovery_method,
             "--min-period",
             str(config.min_period),
             "--max-period",

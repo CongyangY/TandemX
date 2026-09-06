@@ -5,6 +5,13 @@ scope; it does not retrospectively validate production or biological claims.
 Target outlets are Genome Research, Genome Biology and Plant Communications;
 journal suitability depends on the resulting evidence, not an acceptance promise.
 
+User clarification, 2026-09-06: expand comparators beyond the initial three and
+actively improve speed, memory, accuracy and additional relevant metrics.
+Multi-metric superiority is a development objective; it is not an assumed result.
+A deficit triggers diagnosis, method improvement and a new frozen evaluation.
+Do not redefine the benchmark or omit a strong comparator to hide a deficit.
+See [comparator scope and measurement contract](comparator_matrix.md).
+
 ## Storage and provenance
 
 Source checkout: `/Users/ycy/Codex/Sofw/TandemX`. Data and result root on this
@@ -19,12 +26,12 @@ machine-readable commands alongside results.
 
 | Gate | Required evidence | Initial state |
 | --- | --- | --- |
-| Engineering baseline | Full pytest; Rust tests and release build; output validation | 170 pytest passed in 60.09 s on 2026-09-06; Rust recheck pending |
+| Engineering baseline | Full pytest; Rust tests and release build; output validation | 218 pytest and 6 Rust tests passed; prior checkpoint Linux/macOS CI passed; new checkpoint CI requires its own verification |
 | Challenge benchmark | Independent seeds; indels, unit divergence, mixed families, multiple arrays, short arrays, hard negatives; strict normalization | In development |
 | Quantification | Known copy number and coverage; finite-read and error bias; catalog ambiguity; calibration/interval coverage | Pending |
 | Localization/comparison | Known array coordinates; engineered collapse levels; false collapse calls and boundary errors | Pending |
 | Real data | Public accession, source checksums, matched sample/assembly, bounded pilot then scaling; known-family recovery | Pending; old black-rye summary is not raw-read validation |
-| Comparators | TRF/TideHunter at array level; SRF at family/abundance level; TRASH at assembly level; TAREAN at short-read workflow level | Existing simple TRF/TideHunter benchmark only |
+| Comparators | Expanded task-matched methods in comparator_matrix.md | TRF/TideHunter development comparison and default/tuned ULTRA pilots; SRF/TRASH/TAREAN remain pending |
 | Innovation | Audited prior art; method ablations; held-out evaluation; AI retained only with reproducible benefit | Pending |
 | Reuse | LICENSE; CI; clean source install; toy and real-data workflows; versioned release and hashes | Pending |
 | Paper | Abstract, background, results, methods, discussion; multi-panel figures; tables, supplement, source data and references | Pending |

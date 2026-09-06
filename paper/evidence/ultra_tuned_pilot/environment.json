@@ -1,0 +1,71 @@
+{
+  "git_head": "f4bb14fdb216fdced76cec227a1ae0f268d112fc",
+  "revision_warning": null,
+  "file_hashes": {
+    "benchmarks/challenge/__init__.py": "75f411d6ad51f444233b444efc3191ed03bea981498f9e28cc4775522a1b9e53",
+    "benchmarks/challenge/adapters.py": "61760ab75d71cba292d722cd51c474e4aeca0866dff50c7f47dcb65842c5dea8",
+    "benchmarks/challenge/evaluate.py": "547fc2992070152207122f162a112d8aed72aa49f51d620b1f4e1b0624069029",
+    "benchmarks/challenge/run.py": "5a77489072e9a74b47369f46e86f021166a0f5df2b9d6ee4dadcf10f6edc6414",
+    "benchmarks/challenge/schema.py": "0adbe1eb303f57c226fdeae3a86d5acb89caf77208278d5868cd68256f2c7c37",
+    "benchmarks/challenge/simulate.py": "22dfb3645ff6d31019474f1d6fd86f47eb6a8a4f61f456a5cc999ee62eb33368",
+    "rust-core/src/elastic.rs": "d2c54b34f8484a469fd5dd9686664ddd0369c3fe3a0da736fc6edd207c4c8400",
+    "rust-core/src/lib.rs": "ec2ff5c0cc0a6f37663a2016c622a23fa032778c86d1edbb43d1c272b3833b88",
+    "tandemx/__init__.py": "9cc4e66a64feb439361ba5919aa2be679df76b7cfe5753fb6b10e6d40f271e43",
+    "tandemx/_rust_core.cpython-310-darwin.so": "8e912d88f491ba1a418f9bacab210134872db7927e04cec598d9c97e92392ab1",
+    "tandemx/_rust_core.cpython-311-darwin.so": "672344433b4269bbfaa3c7bbeff46bb1daa39aee57a1b28962ab0d4ed838cdfc",
+    "tandemx/annotation.py": "59b9fb7cb3ebb57177aaf0f7823b607115046873cdeba3a59299d9e6c560d2a2",
+    "tandemx/cli.py": "db3260bbf4fa2031c43f139d81958ce59d929bcb6dd33e984decc18a3eb88ead",
+    "tandemx/compare/__init__.py": "bd42f487e1a679eee9af71a912fbed0622cf917ba5ef4867dfe5d649b87493f6",
+    "tandemx/compare/mvp.py": "02315eea7fcafbfeedb292edd91acc1b3161806c98e392b2ad0dec387249ddbb",
+    "tandemx/discover/__init__.py": "efa7e14d1800b77f75c1c5f8764470b25a040345960f77ee05ce8d2cf7fd7895",
+    "tandemx/discover/alignment.py": "eafc88935843bda412b5f86d4de29fda9e3fc3c453bea968aa4253313a88c7b9",
+    "tandemx/discover/consensus.py": "6afa077151b9d5a0a30fe2113d15fb09c93dcec505f66debe08e6021b6b3df44",
+    "tandemx/discover/elastic.py": "040a289fb5cbf42840078058fd3da42fd21f71f9b1b6bf1df3aa8c1fd90d4b7a",
+    "tandemx/discover/mvp.py": "c0bd0e0115331a0c2aed8700156c31c47371e261572e222a4c89606bc71d3a7f",
+    "tandemx/discover/rust_backend.py": "3b8d0804ab637466fb7385aedeab4da7d4d78ec077a30236e65b501bb37d628d",
+    "tandemx/discover/spacing.py": "a62065719e198fc66d825f81316a9f4b881f15b26435df87a00b6bfef391f926",
+    "tandemx/discover/status.py": "199bbdb06539afc8def84a09c3dccd195d66c825f265206f952eebc7405b3d67",
+    "tandemx/io/__init__.py": "bf30851b522a3dda2669763a036bd3f52a29533d5751eb88b3f22702c21e0139",
+    "tandemx/io/sequences.py": "1f7501cdcf2c8b31822ddc1a97ed031eee038026c9a1173d840357c8e8225295",
+    "tandemx/io/validators.py": "a4784b44ab8936407b1689818b17f08f80c838c9af2628a9d625b44a4f128720",
+    "tandemx/locate/__init__.py": "c5c99d8f56b52ed8c8868412e668e29de3605e427018a894c54a8d7a898e8afb",
+    "tandemx/locate/mvp.py": "92b54ea3fce9048812feb4ad96c3e80ae95bc51642a639d447df9b5ab0179179",
+    "tandemx/pipeline.py": "07cea09bb45b723c8b2bec86136ba7251053ba39374916864dde7d3e5b591200",
+    "tandemx/probe/__init__.py": "dce847b9e126d1e1d98423224414570b040ea5fb08e82179f8432f0bbe225769",
+    "tandemx/probe/mvp.py": "3ae28201eba0c4091417f0f1a702100bcdf9f38c5ffd4ca3fa0a31cb230ff2ee",
+    "tandemx/quantify/__init__.py": "eb4e6a76db06c5dcad964befdbb188930e228b32527bb11e2f580d1c63f098fc",
+    "tandemx/quantify/mvp.py": "f7e75fd378721a644dbd6c030d2a413e22a5434a5b9d669c5e4c4200f3037bb5",
+    "tandemx/reporting.py": "e20f295f1a83c596696d285915c7454d7afaf9f5d8c42225fb50d10bb8b88019",
+    "tandemx/run_compare.py": "4e0fbd654e3ab947a800dcc5e13bd25281c08664dfde311976a31d782743280c",
+    "tandemx/sensitivity.py": "d7aa9490b78f4e64f1aa3a0d8b38c8dc14cb95a88466b3f99f7c2ddf2d6388de",
+    "tandemx/simulate/__init__.py": "6658de068c15187a53de78809dd274795e968e27cb18e7e8ef2606ddfe7ade03",
+    "tandemx/simulate/toy.py": "7794a22ed6941136d1001b87a6e3a3e744fd6c673e9132944d1eb201c5cc517f",
+    "tandemx/utils/__init__.py": "70aeaf7a75179a8f2fb3f6ba9b93d8f272ce18b0f0e2b1c4b4022ccd6c8ee944",
+    "tandemx/utils/kmers.py": "2bca0ce2d2a5b0ef7d628bfd2462d0f0efe24e17186b8fd371f9ee5bdb9f7174",
+    "tandemx/utils/progress.py": "545a0176e684996083b2505b7154749f0d555972afd9ad51abfaf31ccd0d5acd",
+    "tandemx/utils/threads.py": "1548f1189f5d8b3c29b60f09698b80de2b8ada0f1de9aa529f7187c36bfd8b44",
+    "tandemx/visualize/__init__.py": "22ada5f92dd4a34ffe31f4b8fc6e36ac4cbb6f55bb3b910ffd36e2dc110a6fb1",
+    "tandemx/visualize/discover_catalog.py": "87bf1caa44a0c1c50d392f367eeb29abe1a007ebe19e851c20379a14d7c0c72d",
+    "tandemx/visualize/mvp.py": "5142eab21ea1a6a715d0e940dd5945a2372650f88e1923e2103ebf8581d961e1"
+  },
+  "source_digest": "dbdf129b435893c491d293a02c3e47b944d8bab3b3e94f363d9251df4891a439",
+  "config_sha256": "757ca3e02c31c890851876e5425abfce9e1ee5bb8b087c6b6ef189ba9d087c16",
+  "python": "3.11.15 | packaged by conda-forge | (main, Mar  5 2026, 16:59:26) [Clang 19.1.7 ]",
+  "platform": "macOS-14.4.1-arm64-arm-64bit",
+  "executables": {
+    "ultra": {
+      "path": "/Volumes/T7/Codex/TandemX/tools/build/ULTRA/ultra",
+      "sha256": "575a5af4702eb1038dd3ec3713077ffd475f38c3ff353f8954e967e192037fa5"
+    }
+  },
+  "tool_versions": {
+    "ultra": {
+      "exit_code": 0,
+      "self_report": "\n=================================================\n(U)ltra (L)ocates (T)andemly (R)epetitive (A)reas\n     Daniel R. Olson and Travis J. Wheeler\n                 Version 1.2.2\n     Use '--cite' for citation instructions\n=================================================\n\nUsage: /Volumes/T7/Codex/TandemX/tools/build/ULTRA/ultra [OPTIONS] [input_file]\n\nPositionals:\n  input_file TEXT             DNA FASTA input file\n\nOptions:\n  -h,--help                   Print this help message and exit\n\n\nInput:\n  -r,--read_all               Read entire input file into memory (disables streaming input)\n\n\nOutput:\n  -o,--out TEXT               Output file path\n  --disable_streaming_out     Disables streaming output; no output will be created until all analysis has been completed\n  -c,--show_counts            Output #copies, #substitutions, #insertions, #deletions\n  --pval                      Use p-values instead of scores in BED output\n  --pval_loc                  The exponential location used for converting scores to p-values.\n  --pval_scale                The exponential scale used for converting scores to p-values\n  --tsv                       Use TSV output format\n  --json                      Use JSON output format\n  --bed                       Use BED output format\n  --max_consensus INT [1000000] \n                              The maximum length of consensus pattern to include in output\n  --show_seq                  Output repetitive region\n  --show_delta                Show positional score deltas in JSON output\n  --show_trace                Show Viterbi trace in JSON output\n  --show_wid                  Show sequence window IDs in JSON output\n  --show_logo                 Show logo numbers in JSON output\n  --hs,--hide_settings        Do not output settings\n  --suppress                  Do not output BED or JSON annotation\n  --disable_summary           Disable summary statistics\n  --fdr                       Estimate the False Discovery rate (runtime will be twice as long)\n\n\nMasking:\n  --mask TEXT                 File path to save a masked FASTA\n  --nmask                     Use n masking instead of case masking\n\n\nSystem:\n  -t,--threads INT [1]        Number of threads to use\n  --win_size INT              Manually set sequence window size\n  --overlap INT               Manually set sequence window overlap size\n  --windows INT [1024]        Number of sequence windows to store at once\n  --mem                       Display memory requirements for current settings and exit\n\n\nFilter:\n  -s,--score FLOAT [-100.0]   Minimum reportable repeat score\n  --min_length UINT [10]      Minimum reportable repeat length\n  --min_unit UINT [2]         Minimum reportable number of repeat units\n\n\nParameter Tuning:\n  --tune                      Tune parameters using a small search grid before running (see README)\n  --tune_medium               Tune parameters before running (see README)\n  --tune_large                Tune parameters using a larger search grid before running (see README)\n  --tune_file TEXT            Use custom parameter search during tuning (see README)\n  --tune_indel                Enable indels while tuning\n  --tune_fdr FLOAT [0.05]     FDR to be tuned against (see README)\n  --tune_only                 Tune parameters and don't run (see README)\n\n\nModel:\n  -p,--period UINT [100]      Maximum detectable repeat period\n  -i,--inserts UINT [10]      Maximum number of insertion states\n  -d,--deletes UINT [10]      Maximum number of deletion states\n\n\nProbabilities:\n  --at FLOAT [0.5]            Expected AT content\n  --acgt FLOAT x 4            Expected frequency of A C G T\n  -m,--match FLOAT [0.7]      Expected conservation in repeats\n  --decay FLOAT [0.85]        Decay penalty applied to repetitive states\n  --nr FLOAT [0.01]           Probability of a repeat starting\n  --rn FLOAT [0.05]           Probability of a repeat stopping\n  --ri FLOAT [0.02]           Probability of an insertion occurring\n  --rd FLOAT [0.02]           Probability of a deletion occ"
+    }
+  },
+  "memory_method": "wait4 direct child ru_maxrss",
+  "threads": 1,
+  "split": "development",
+  "family_recovery_source": "TandemX final catalog; other tools per-array consensuses"
+}

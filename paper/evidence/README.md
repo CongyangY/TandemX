@@ -14,6 +14,46 @@ Timing is exploratory because other development activity overlapped.
 `negative_control_fix/` records nine successful post-fix TandemX runs with zero
 calls on the same three negative datasets. It tests zero-result handling only.
 
+## Elastic development checkpoint
+
+- `elastic_development_initial/`: first elastic attempt, 16/16 successful
+  executions, but three AT-rich negative reads were called and one divergent
+  array consensus had an incorrect length. These are retained failures of the
+  method, not discarded inconvenient datasets.
+- `elastic_development_corrected/`: same inputs after composition correction
+  and support-based consensus-template selection. All 13 positive scenarios had
+  array recall/precision and strict family recovery 1.0; all 300 negative reads
+  yielded zero calls. This is one development seed with one run per scenario.
+- `elastic_validation/`: seed 2101, 48/48 runs completed with matching output
+  digests across three repetitions. Array recall/precision were 1.0 throughout,
+  but related-family recovery was **2/3**, because two related monomers were
+  merged. Other family-recovery scenarios scored 1.0; negative controls had no
+  calls. These results must accompany, not be hidden by, the development figure.
+- `ultra_pilot/`: ULTRA 1.2.2, pinned source/build provenance, two ten-read
+  feasibility scenarios. This is a different input size from the main challenge.
+  It is not a head-to-head resource comparison. Strict equal-length family
+  recovery can fail on a one-base consensus-length error; a complementary
+  independent indel-aware homology endpoint is required before paper claims.
+- `ultra_tuned_pilot/`: the same ten-read inputs with upstream `--tune
+  --tune_indel`. Both scenarios reached array recall/precision 1.0. Total times
+  were 166.58 and 176.81 s, including 18 parameter settings and shuffled-input
+  checks; these are not final annotation-only timings. The tuned competitor's
+  recovery is retained alongside its less accurate default pilot. Strict
+  equal-length family recovery was 0.0 for both; inspect the actual consensuses
+  and add a gapped homology metric before interpreting that as missing families.
+
+These early runs preserve full source/executable hashes but not the complete
+intermediate dirty source. They are diagnostics, not frozen release benchmarks.
+The updated runner snapshots source/build inputs and loads the TandemX snapshot;
+the final publication experiments must use committed sources and fresh runs.
+
+The corrected four-panel figure uses identical input-file hashes for legacy,
+TRF, TideHunter and elastic. Panels a–c use the definitions below; panel d adds
+the recovered elastic interval on the same original failure example. Baseline
+rows have three timing repetitions and elastic rows have one. Resource timings
+are not shown because concurrent development makes them exploratory. The
+validation failure above is not part of this single-seed development heatmap.
+
 ## Four-panel caption
 
 **Development challenge benchmark.** a, One-to-one array recall on 13 positive

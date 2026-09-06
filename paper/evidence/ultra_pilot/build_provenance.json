@@ -1,0 +1,21 @@
+{
+  "tool": "ULTRA",
+  "version": "1.2.2",
+  "repository": "https://github.com/TravisWheelerLab/ULTRA",
+  "git_head": "99418b9eb396aaaf59e4b793a481b4c7aa8a8104",
+  "executable": "/Volumes/T7/Codex/TandemX/tools/build/ULTRA/ultra",
+  "executable_sha256": "575a5af4702eb1038dd3ec3713077ffd475f38c3ff353f8954e967e192037fa5",
+  "build": [
+    "conda run -n tandemx-dev cmake -S <source> -B <build> -DCMAKE_BUILD_TYPE=Release",
+    "conda run -n tandemx-dev cmake --build <build> --parallel 4"
+  ],
+  "compiler": "AppleClang 15.0.0.15000309",
+  "system_install": false,
+  "license_sha256": "b4b9c6180f07cb414088ea797ae6c9be55a6f44e5909bff6ad33827d7171ac91",
+  "default_advertised_memory_bytes_at_max_period_1000": 4394208000,
+  "pilot_options": {
+    "window_size": 5000,
+    "windows": 1
+  },
+  "resource_scope": "10-read pilot, not directly comparable to 100-read benchmark; other tasks overlapped timings"
+}
