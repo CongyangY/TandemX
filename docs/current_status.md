@@ -9,6 +9,21 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ### Disk-backed real-input evaluator
 
+- Source8ff7ab6 pushed to both branches; CI34014817881 and34014817815 passed.
+  Completed Mo17111.506-Mb evaluator replay preserves all three normalized TSVs
+  byte-for-byte and all metrics (4.117 s /43.33 MiB). Col-0N5.280-Gb /336,613-read
+  preparation-only stress check completed (161.180 s /54.59 MiB); this is not a
+  discovery benchmark. Compact receipts: `paper/evidence/disk_evaluation_replay`.
+- Old-source Mo171.129-Gb comparison is now complete: TandemX1930.701 s /
+  710.59 MiB; TRF1019.346 s /323.52 MiB; TideHunter326.372 s /390.55 MiB.
+  All unfavorable values retained in `Mo17_real_pilot/Mo17_1129Mb_related_audit`.
+  Indexed-clustering1.129-Gb rerun started with8ff7ab6 and disk evaluator;
+  not yet complete. Concurrent jobs mean all resource values are diagnostics.
+- New Morex original-IPK reference downloader pins published SHA-256, archives
+  source metadata and requires complete streaming FASTA QC. Its full4-GB-class
+  transfer started; no reference-QC completion yet. Full suite **320 passed in
+  68.06 s**; original/native core unchanged since8ff7ab6.
+
 - Default real comparator evaluation now streams FASTQ/native rows into SQLite;
   read IDs and intervals are not retained in Python dictionaries/lists. The
   100,000-read cap remains only for the optional memory reference backend.

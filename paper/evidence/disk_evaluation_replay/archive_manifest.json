@@ -1,0 +1,42 @@
+{
+  "Mo17_111Mb_disk_normalization_v1_20260906/replay_receipt.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_disk_normalization_v1_20260906/replay_receipt.json",
+    "sha256": "2484e38f6ee87bbe5d0c96acc203a14d69217bbbad72cca9f022e836b252df3e"
+  },
+  "Mo17_111Mb_disk_normalization_v1_20260906/environment.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_disk_normalization_v1_20260906/environment.json",
+    "sha256": "2508566549d5cb23258d972be6c3fa6de8e7711fc7b4d043ed3071b2b91e1219"
+  },
+  "Mo17_111Mb_disk_normalization_v1_20260906/execution.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/disk_normalization_driver_v1_20260906/Mo17_111Mb_disk_normalization_v1_20260906.execution.json",
+    "sha256": "6cd2e0448ebc1eb3775aa05cf627d57038b8bf1c919e7daec87645b7e11dab91"
+  },
+  "Mo17_111Mb_disk_normalization_v1_20260906/stdout.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/disk_normalization_driver_v1_20260906/Mo17_111Mb_disk_normalization_v1_20260906.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "Mo17_111Mb_disk_normalization_v1_20260906/stderr.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/disk_normalization_driver_v1_20260906/Mo17_111Mb_disk_normalization_v1_20260906.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "Col0N_5Gb_disk_preparation_v1_20260906/replay_receipt.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_5Gb_disk_preparation_v1_20260906/replay_receipt.json",
+    "sha256": "feea1ad378f94ad4068bd5fd83b2ed0e6a23b9d165a35a88e049c222ac4d8d99"
+  },
+  "Col0N_5Gb_disk_preparation_v1_20260906/environment.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Col0N_5Gb_disk_preparation_v1_20260906/environment.json",
+    "sha256": "77e70a48309b140948570bea6f9e12ed2a7b1bfd7f6979cacb70e6623b885ff2"
+  },
+  "Col0N_5Gb_disk_preparation_v1_20260906/execution.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/disk_normalization_driver_v1_20260906/Col0N_5Gb_disk_preparation_v1_20260906.execution.json",
+    "sha256": "8f185bf1d1f80ae0f8a514369ae0cc7e0ea829244f136d73b0054e14df2cc83a"
+  },
+  "Col0N_5Gb_disk_preparation_v1_20260906/stdout.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/disk_normalization_driver_v1_20260906/Col0N_5Gb_disk_preparation_v1_20260906.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "Col0N_5Gb_disk_preparation_v1_20260906/stderr.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/disk_normalization_driver_v1_20260906/Col0N_5Gb_disk_preparation_v1_20260906.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

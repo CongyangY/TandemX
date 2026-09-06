@@ -1,0 +1,54 @@
+{
+  "environment.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/environment.json",
+    "sha256": "e3c422618f3d399eebe72a27a0ee7361b29b311ca02729f12ed4b560d326de39"
+  },
+  "summary.tsv": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/summary.tsv",
+    "sha256": "8c066488ab32fe78c1afd8123fc63874daa107d22c1d408d96eeb9dbd3a41c37"
+  },
+  "tandemx/execution.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/execution.json",
+    "sha256": "8de892717ccec8dc7bcf3867c4758dccd04197df41319df5d0f06d69d38c5f5f"
+  },
+  "tandemx/stderr.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tandemx/stdout.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/stdout.log",
+    "sha256": "999901ef4b6bb209f68d318aa4b91602904a586ec78a39539a9a3ce88359eb27"
+  },
+  "trf/execution.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/trf/execution.json",
+    "sha256": "821af87e3055d258081e2a378e360f6c45e398ed9af76ab0ca5af804614c8afd"
+  },
+  "trf/stderr.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/trf/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tidehunter/execution.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tidehunter/execution.json",
+    "sha256": "e0e832f2fecc3405ce20699780a2ad9e9645b1461548258a274aab0dedf81d88"
+  },
+  "tidehunter/stderr.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tidehunter/stderr.log",
+    "sha256": "c7e8c97e3be7e42fffd1e176042aae7ed1e508e7ddd9399645ad5eaef514f03a"
+  },
+  "tidehunter/stdout.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tidehunter/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tandemx/discover/run.log": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/discover/run.log",
+    "sha256": "496fbb3739e9669825891875691e90ab86809961e1f92c93a055254b8c126bcf"
+  },
+  "tandemx/discover/run_config.yaml": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/discover/run_config.yaml",
+    "sha256": "4f92cd605fb5ec656c724f3180f95b93be22c2d570b0c47d5cfb6ec4549a4cdc"
+  },
+  "tandemx/discover/family_audit_summary.json": {
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_related_audit_v1_20260906/tandemx/discover/family_audit_summary.json",
+    "sha256": "4506577e450077709ae28491f3f339d66fd8baeeb7143d727e996f8d49c95244"
+  }
+}

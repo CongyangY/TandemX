@@ -96,3 +96,22 @@ kept in RAM. Duplicate/empty IDs, malformed sequence and truncation fail. IUPAC
 ambiguities are counted explicitly. Reference identity and zero Ns alone do not
 prove every satellite copy correct. Mo17 library and assembly share cultivar and
 study context; exact donor/extraction identity remains unresolved.
+
+MorexV3 can be acquired directly from its original IPK publication:
+
+```bash
+python -m benchmarks.scripts.fetch_morex_reference \
+  --outdir /path/to/data/references/MorexV3_IPK_2021_3
+pytest -q tests/unit/test_morex_reference.py
+```
+
+The [original FASTA record](https://doi.ipk-gatersleben.de/DOI/b2f47dfb-47ff-4114-89ae-bad8dcc515a1/b6e6a2e5-2746-4522-8465-019c8f56df7f/1)
+publishes SHA-256 `54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb437c1`.
+The script archives the source metadata and pins that file/checksum under DOI
+10.5447/ipk/2021/3 (CC BY 4.0). A 4.5-GB transfer cap bounds the original,
+uncompressed FASTA. Chunked transfers are supported; resume requires the exact
+HTTP range, and access-denied responses are not retried. No failed partial is
+renamed or silently discarded. Full streaming FASTA QC rechecks the pinned SHA,
+contig/ambiguity counts and structural validity. `reference_receipt.json` marks
+completion only after these checks. Matching cultivar/study does not establish
+identical donor DNA or precise satellite copy truth.

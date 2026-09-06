@@ -965,3 +965,10 @@ entry per tool with descriptive metrics, `byte_identical`, `metrics_identical`,
 native/normalized hashes and normalization seconds. `complete=false` plus
 `error` preserves failure; preparation-only runs have no normalized tool rows.
 It is evaluator validation, not a new discovery or accuracy measurement.
+
+`fetch_morex_reference.py` retains `source_metadata.html` and a `reference_plan.json`
+with original DOI/license, exact file/landing/download URLs, official SHA-256,
+byte budget and source hashes. `reference_receipt.json` records `complete`,
+transfer bytes/hash/state, full FASTA QC, plan/script/parser hashes and a material
+matching warning. Transfer/QC errors keep `complete=false` and `error`; an
+incomplete `.partial` file is not a reference release.

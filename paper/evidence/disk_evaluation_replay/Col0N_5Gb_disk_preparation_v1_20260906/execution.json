@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+    "-m",
+    "benchmarks.scripts.replay_real_normalization",
+    "--sampling-receipt",
+    "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sampling_receipt.json",
+    "--sample-id",
+    "sample_004",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/Col0N_5Gb_disk_preparation_v1_20260906"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 161.18045887514018,
+  "peak_rss_mib": 54.59375,
+  "cpu_user_seconds": 148.370722,
+  "cpu_system_seconds": 1.927408,
+  "timed_out": false
+}

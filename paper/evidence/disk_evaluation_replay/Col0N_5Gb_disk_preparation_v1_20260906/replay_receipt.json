@@ -1,0 +1,30 @@
+{
+  "complete": true,
+  "sample_id": "sample_004",
+  "sampling_receipt": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sampling_receipt.json",
+  "previous_run": null,
+  "normalized_tools": [],
+  "warning": "evaluator_check_only_no_new_discovery_or_accuracy_result",
+  "input": {
+    "sample_id": "sample_004",
+    "inclusion_probability": "0.36",
+    "hash_threshold": "122501652091537846846814858675436556124",
+    "read_count": 336613,
+    "total_bases": 5280163009,
+    "expected_read_count": 336205.44,
+    "expected_total_bases": 5272776524.88,
+    "nominal_total_base_coverage": 40.135117153982655,
+    "read_n50": 15662,
+    "median_length": 15515,
+    "gc_fraction": 0.3676487429822074,
+    "n_fraction": 0.0,
+    "mean_reported_error_probability": 0.0015410572712530174,
+    "status": "ok",
+    "fastq_sha256": "2d73e89cdd5a74b0ff6f2bcce89404886d7d380d4d568d2c53c1980776831d99",
+    "ids_sha256": "bc745f8e0723433308b8c222f48f22b9db08643f66a423ca0c1bff2fbffb0d73",
+    "sampling_receipt_sha256": "e6603d242addc44493e400340d6ec669c56c5ec135b280e9192659ed66266c9c",
+    "fasta_sha256": "9236a04c04acd1902292794199d55d3efc73d13070a655e695a1752a7819e5e0"
+  },
+  "input_preparation_seconds": 160.9617168328259,
+  "total_seconds": 160.9617213329766
+}
