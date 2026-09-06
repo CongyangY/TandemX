@@ -148,6 +148,12 @@ mode remains the default pending independent evaluation and resource profiling.
    A path resets at score <=0 or a drawdown >40 from its own peak. This is a
    banded, drawdown-pruned local alignment heuristic, not an exact unbounded
    Smith-Waterman optimum.
+   The native kernel updates score and path-peak rows in place, left to right:
+   the current band and its right neighbour still hold the previous row, while
+   the left neighbour already holds the current row. Rejected cells are reset;
+   the inactive right tail is cleared after the last upward dependency is used.
+   This removes per-row allocations without changing scores, tie order, traceback
+   or acceptance rules. Differential tests check complete paths against Python.
 3. Trace candidate local paths in descending score order. Require alignment
    identity >=0.75, the configured span, and a comparison span >=0.8 times the
    median aligned offset. The minimum alignment score is

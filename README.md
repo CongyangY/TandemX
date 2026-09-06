@@ -436,6 +436,11 @@ The [optional TRASH/TRASH2 comparator container](benchmarks/containers/trash/REA
 supports offline, version-pinned assembly controls and explicit native-coordinate
 auditing. Its successful author-example runs are installation checks, not a
 completed plant comparison.
+The independent factorial assembly evaluator reports array, sequence-recovery
+and unit-base coverage separately, including explicit coordinate/period
+sensitivity. See [the comparator evaluation guide](docs/trash_evaluation.md).
+Native elastic alignment now rolls score/peak rows in place; full tracebacks
+are checked against the Python reference and real-pipeline byte-parity replay.
 The [complete-data acquisition guide](docs/complete_data_qc.md) also provides
 official-checksum-pinned MorexV3 reference acquisition from the IPK publication.
 The complete Col-0N FASTQ also passed QC (933,904 reads, 14.647 Gb); full-library

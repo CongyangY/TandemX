@@ -23,14 +23,16 @@ fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i
     let mut directions = vec![0_u8; (n + 1) * width];
     let mut previous = vec![0_i32; width];
     let mut previous_peak = vec![0_i32; width];
-    // Traverse bands left to right in place: b and b+1 still hold the previous
-    // row, while b-1 already holds this row. Every rejected cell is reset, and
-    // the inactive tail is reset only after its old value can feed the last up
-    // edge. Thus no full-row allocation, copy, or second pair of buffers is needed.
+    // Reuse the row workspace. Clearing before every row preserves path breaks
+    // at ambiguous bases, x-drop rejections and the narrowing right boundary.
+    let mut current = vec![0_i32; width];
+    let mut current_peak = vec![0_i32; width];
     let mut endpoints = Vec::new();
     let minimum_score = (40.min(min_span) as i32)
         .max((0.7 * period.max(min_span.saturating_sub(period)) as f64).ceil() as i32);
     for i in 1..=n - lowest {
+        current.fill(0);
+        current_peak.fill(0);
         let mut row_best = (0, 0);
         let left = sequence[i - 1];
         let active_width = if b"ACGT".contains(&left) {
@@ -41,8 +43,6 @@ fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i
         for b in 0..active_width {
             let j = i + lowest + b;
             if !b"ACGT".contains(&sequence[j - 1]) {
-                previous[b] = 0;
-                previous_peak[b] = 0;
                 continue;
             }
             let mut score = previous[b] + if left == sequence[j - 1] { 2 } else { -3 };
@@ -53,18 +53,16 @@ fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i
                 direction = 2;
                 peak = previous_peak[b + 1];
             }
-            if b > 0 && previous[b - 1] - 4 > score {
-                score = previous[b - 1] - 4;
+            if b > 0 && current[b - 1] - 4 > score {
+                score = current[b - 1] - 4;
                 direction = 3;
-                peak = previous_peak[b - 1];
+                peak = current_peak[b - 1];
             }
             if score <= 0 || peak - score > x_drop {
-                previous[b] = 0;
-                previous_peak[b] = 0;
                 continue;
             }
-            previous[b] = score;
-            previous_peak[b] = peak.max(score);
+            current[b] = score;
+            current_peak[b] = peak.max(score);
             directions[i * width + b] = direction;
             if score > row_best.0 {
                 row_best = (score, b);
@@ -73,8 +71,8 @@ fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i
         if row_best.0 >= minimum_score {
             endpoints.push((row_best.0, i, row_best.1));
         }
-        previous[active_width..].fill(0);
-        previous_peak[active_width..].fill(0);
+        std::mem::swap(&mut previous, &mut current);
+        std::mem::swap(&mut previous_peak, &mut current_peak);
     }
     endpoints.sort_unstable_by_key(|&(score, i, b)| (-score, i, b));
     let mut hits: Vec<Hit> = Vec::new();

@@ -9,3 +9,4 @@ paper/evidence/comparator_builds/*.patch -text -whitespace
 paper/evidence/Mo17_input_qc/reference/*.txt -text whitespace=cr-at-eol
 # Preserve original comparator logs/session reports and native CSV bytes.
 paper/evidence/TRASH_installation_controls/** -text -whitespace
+paper/evidence/Nipponbare_input_qc/reference/** -text -whitespace

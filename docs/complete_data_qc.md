@@ -3,6 +3,13 @@
 Run inside `tandemx-dev`; store full data/SQLite indexes at the chosen data root.
 No filtering is applied. Biological QC: [cohort_and_qc.md](cohort_and_qc.md).
 
+For other versioned GenBank assemblies, `fetch_ncbi_reference.py` resolves the
+exact GCA version from the official NCBI directory listing, requires the expected
+BioProject, archives source metadata/checksums and applies an explicit compressed
+size budget before transfer. It verifies the complete FASTA totals and retains
+missing optional FCS metadata. A resume must match the existing plan and archived
+metadata hashes. See the [Nipponbare example and reference limits](nipponbare_reference.md).
+
 ```bash
 python -m benchmarks.scripts.fetch_ena_complete \
   --metadata ena_metadata.tsv --accession ERR6210723 \

@@ -1,0 +1,50 @@
+[
+  {
+    "file": "GCA_034140825.1_AGIS1.0_assembly_report.txt",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/GCA_034140825.1_AGIS1.0_assembly_report.txt",
+    "sha256": "735bafb522ef7b39e4e5188c483a20fe67010b21150fdd27350f42cd9be5ff36",
+    "bytes": 2645
+  },
+  {
+    "file": "GCA_034140825.1_AGIS1.0_assembly_stats.txt",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/GCA_034140825.1_AGIS1.0_assembly_stats.txt",
+    "sha256": "1860c6efc34266978e86548a3c3ab2bc218a9afede6880343e02478ab25c00f0",
+    "bytes": 19636
+  },
+  {
+    "file": "GCA_034140825.1_AGIS1.0_fcs_report.txt",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/GCA_034140825.1_AGIS1.0_fcs_report.txt",
+    "sha256": "1819eff1e695e95b86637167923e7a70820fe4111380eb28d3decc32473f30cf",
+    "bytes": 432
+  },
+  {
+    "file": "assembly_directory.html",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/assembly_directory.html",
+    "sha256": "a825b838d9f71975a6fb3631604cb6c69b224dbbdb3c52e1d4358d53b44a781e",
+    "bytes": 549
+  },
+  {
+    "file": "dataset_report.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/dataset_report.json",
+    "sha256": "8b07a87c6e92efdc4b24b5c41d6b77f0270ce37ef5fe822426bc6deeab23f565",
+    "bytes": 2784
+  },
+  {
+    "file": "md5checksums.txt",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/md5checksums.txt",
+    "sha256": "0588df3592f456d7ce7f8ef2d10774e9ab11c99a90f9d7ba537ced47e01aba2f",
+    "bytes": 521
+  },
+  {
+    "file": "reference_plan.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/reference_plan.json",
+    "sha256": "0360a7c95b4c47c79487c3ba93b4717b9ab70266a35af345102d50cf5d70b2a0",
+    "bytes": 2349
+  },
+  {
+    "file": "reference_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/reference_receipt.json",
+    "sha256": "f3c68e152aa8f99056f891b7c7ab35ec221a002e7f2a75f8b96d8feb80927671",
+    "bytes": 4271
+  }
+]

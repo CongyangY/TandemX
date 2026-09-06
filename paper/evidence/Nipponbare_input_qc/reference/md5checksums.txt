@@ -1,0 +1,7 @@
+a7a4e1b64c5b2c0451cdf75cff391b1d  ./annotation_hashes.txt
+80730abc3362c048fd7fb16654206681  ./GCA_034140825.1_AGIS1.0_assembly_report.txt
+d214c857ce08543dac76a31215cc1a84  ./GCA_034140825.1_AGIS1.0_assembly_stats.txt
+ad7f844acb04fdced479dd8b86e744e4  ./GCA_034140825.1_AGIS1.0_fcs_report.txt
+cc46dd73404115c517f93cd2b652a22d  ./GCA_034140825.1_AGIS1.0_feature_count.txt
+42d5f3d974df16275a8986b287592fef  ./GCA_034140825.1_AGIS1.0_genomic.fna.gz
+4769153e5002550c81f6bd61bbbe0c04  ./GCA_034140825.1_AGIS1.0_genomic.gbff.gz

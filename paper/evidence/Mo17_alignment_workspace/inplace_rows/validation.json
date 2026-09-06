@@ -1,0 +1,86 @@
+{
+  "complete": true,
+  "command": [
+    "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+    "-m",
+    "cProfile",
+    "-o",
+    "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_inplace_alignment_rows_profile_v1_20260906/discovery.prof",
+    "-m",
+    "tandemx.cli",
+    "discover",
+    "--reads",
+    "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/reads.fa",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_inplace_alignment_rows_profile_v1_20260906/discover",
+    "--min-period",
+    "30",
+    "--max-period",
+    "1000",
+    "--min-repeat-span",
+    "100",
+    "--min-support-reads",
+    "1",
+    "--min-read-length",
+    "1",
+    "--kmer-backend",
+    "rust",
+    "--threads",
+    "1",
+    "--no-progress",
+    "--discovery-method",
+    "elastic",
+    "--clustering-method",
+    "sequence",
+    "--cluster-identity",
+    ".95",
+    "--family-audit",
+    "related"
+  ],
+  "profile": true,
+  "execution": {
+    "exit_code": 0,
+    "runtime_seconds": 124.86047654086724,
+    "peak_rss_mib": 184.21875,
+    "cpu_user_seconds": 118.74127,
+    "cpu_system_seconds": 2.229012,
+    "timed_out": false
+  },
+  "products": {
+    "candidate_reads.tsv": {
+      "expected_sha256": "a4539ac468c1c161cd51b5145efea240a7b843867cb4137a6decc3c842f9e184",
+      "observed_sha256": "a4539ac468c1c161cd51b5145efea240a7b843867cb4137a6decc3c842f9e184",
+      "byte_identical": true
+    },
+    "candidate_monomers.fa": {
+      "expected_sha256": "31ca2c1a85ef9ba3c967ef82348c931a018036294af1021acab0b045cb3fdf2a",
+      "observed_sha256": "31ca2c1a85ef9ba3c967ef82348c931a018036294af1021acab0b045cb3fdf2a",
+      "byte_identical": true
+    },
+    "monomers.fa": {
+      "expected_sha256": "2f0ba70c184ac64fbb1ca9731a0d73106dffb77517d8f9cc98ec6d782cf21f64",
+      "observed_sha256": "2f0ba70c184ac64fbb1ca9731a0d73106dffb77517d8f9cc98ec6d782cf21f64",
+      "byte_identical": true
+    },
+    "families.tsv": {
+      "expected_sha256": "8c0dc7d04590a85cdf071e17abfba5794c05621381d8848b877be056d7cce600",
+      "observed_sha256": "8c0dc7d04590a85cdf071e17abfba5794c05621381d8848b877be056d7cce600",
+      "byte_identical": true
+    },
+    "monomer_membership.tsv": {
+      "expected_sha256": "8cc07f37751a11ebbe628495e73ec41b677609ff1d4c1df011455d4d4c7269af",
+      "observed_sha256": "8cc07f37751a11ebbe628495e73ec41b677609ff1d4c1df011455d4d4c7269af",
+      "byte_identical": true
+    },
+    "family_similarity.tsv": {
+      "expected_sha256": "eec2c44e546984fb538f03460d2a5673b475897db7b4144bb2b2b6357affd46d",
+      "observed_sha256": "eec2c44e546984fb538f03460d2a5673b475897db7b4144bb2b2b6357affd46d",
+      "byte_identical": true
+    },
+    "family_audit_summary.json": {
+      "expected_sha256": "7ade41084be277118ccc300eb1b9291011c6a57c4d6954cd25832604df7aa505",
+      "observed_sha256": "7ade41084be277118ccc300eb1b9291011c6a57c4d6954cd25832604df7aa505",
+      "byte_identical": true
+    }
+  }
+}

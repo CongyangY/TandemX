@@ -1026,3 +1026,36 @@ command, child execution, profile flag and all seven expected/observed product
 hashes and equality flags. Profile mode additionally creates `discovery.prof`.
 Any changed input/baseline product, tool failure or output mismatch leaves
 `complete=false` and a concrete error.
+
+### Factorial assembly comparator evaluation
+
+`score_trash_factorial.py` consumes a generated `genome/` directory and a complete
+container run. It verifies all source/native hashes before and after evaluation.
+`evaluation.json` records parameters, source/input hashes, seed, completion/errors
+and the following TSV hashes. This development evaluator retains at most100,000
+interval records and10 MB of truth/catalogue input; it never loads the genome.
+
+- `region_metrics.tsv`: `coordinate_policy` is TRASH1 `window_grid` (native
+  zero-based inclusive window converted to half-open) or `r_extraction` (native
+  R one-based inclusive extraction, with its start=0 special case); TRASH2 uses
+  `one_based`. `period_source` is either `native_peak` or `consensus_length`.
+  Both alternatives use the previously documented array and cyclic-recovery
+  metrics. `raw_region_count` and `excluded_scope_count` show the effect of the
+  fixed30–1000-bp period and100-bp span scope. One chromosome is not a read-level
+  negative-control experiment, so read-level metrics are omitted.
+- Each policy directory contains `normalized_arrays.tsv`, `array_details.tsv`
+  and `family_recovery.tsv`, with the existing independent evaluator schemas.
+- `unit_coordinate_audit.tsv`: offsets−2..2 from native1-based coordinates,
+  `monomer_rows`, `width_discrepancies`, `strand_adjusted_matches` and
+  `outside_reference`; exact sequence checks use bounded fixed-FASTA seeks.
+- `unit_coverage_metrics.tsv`: explicit `offset_from_native_1based` (TRASH1 0
+  and−1, TRASH2 0), `status`, `warning`, `unit_count` and base-union metrics.
+  Unit width is not an inferred array period; units never enter array/family
+  recall. An invalid sensitivity policy is unavailable, never silently clipped
+  or scored as zero accuracy. Native CSVs remain unchanged.
+
+The generic NCBI reference downloader writes `reference_plan.json` with exact
+GCA version/BioProject, official directory, archived metadata hashes, byte/MD5
+expectations and explicit transfer budget. `reference_receipt.json` retains
+complete/error state, transfer and streaming FASTA QC, plan/source hashes.
+Optional FCS metadata absent from the official manifest is explicitly unavailable.

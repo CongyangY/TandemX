@@ -88,6 +88,28 @@ def test_native_reference_parity_and_reverse_complement():
     assert a == b
 
 
+@pytest.mark.skipif(not rust_backend_available(), reason="compiled extension unavailable")
+@pytest.mark.parametrize("seed", range(4))
+@pytest.mark.parametrize("period", [1, 7, 31, 67])
+def test_native_reused_rows_match_reference_across_path_breaks(seed, period):
+    """Check entire tracebacks, including rejected paths and stale row hazards."""
+    rng = random.Random(9000 + seed + period)
+    unit = "".join(rng.choices("ACGT", k=period))
+    bases = list(unit * 7)
+    for index in range(seed, len(bases), 13):
+        bases[index] = rng.choice("ACGTNRY")
+    bases[len(bases) // 2:len(bases) // 2] = list("NryN" if seed % 2 else "ACG")
+    read = sequence(seed + 100, 23) + "".join(bases) + sequence(seed + 200, 19)
+    if seed % 2:
+        read = read.lower()
+    for band in sorted({0, min(4, period - 1), period - 1}):
+        for x_drop in (1, 40):
+            expected = banded_self_align(read, period, max(2, period * 2),
+                                         band=band, x_drop=x_drop)
+            assert banded_self_align(read, period, max(2, period * 2), band=band,
+                                     x_drop=x_drop, backend="rust") == expected
+
+
 @pytest.mark.parametrize("reference,query", [("", ""), ("A", ""), ("", "AC"),
     ("ACGTACGT", "ACGTTACGT"), ("ACGTACGT", "ACTACGT"), ("AGCGATTCGAT", "AGGATTCAAT")])
 def test_global_alignment_consumes_both_sequences(reference, query):

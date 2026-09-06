@@ -7,6 +7,33 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Exact native alignment workspace and assembly-evaluation checkpoint
+
+- Source99c0c66 pushed to both branches; CI34019743265/34019743319 passed.
+  New in-place score/peak rows preserve every Python-reference traceback in
+  30 focused tests. Full Python suite363 passed in94.10 s;11 Rust tests,
+  clippy-Dwarnings and formatting passed. Only tandemx-dev was rebuilt.
+- Actual111.506-Mb Mo17 profiles preserve all seven complete products. Original
+  native alignment123.803 s/full151.262 s/174.75 MiB; reused rows104.134 s/
+  139.015 s/173.36 MiB; final in-place93.374 s/124.860 s/184.22 MiB.
+  Exact uncommitted-development source snapshots/hashes archived in
+  `paper/evidence/Mo17_alignment_workspace`; both speed improvement and higher
+  observed RSS are retained. Concurrent profiles are not final timing rankings.
+- TRASH/TRASH2 are executing default de novo annotation on the same10-Mb
+  factorial genome(s6301). The tested evaluator separates region matches,
+  cyclic founder recovery and actual monomer-base union; TRASH1 window-grid/R
+  extraction and native-peak/consensus-length alternatives are explicit. No
+  benchmark completion or accuracy is yet claimed; inspect run receipts.
+- Morex whole-file seed6101 sampling completed:572/5294/53715/493503 reads,
+  12,542,086/115,272,341/1,169,928,427/10,744,915,847 bp. Receipts and distribution
+  tables archived under `Morex_input_qc/sampling`. Rice/Lo7 sampling remains active.
+- Nipponbare original GCA_034140825.1 reference acquisition and full FASTA QC
+  completed; compact evidence archived under `Nipponbare_input_qc/reference`.
+  The generic exact-version/official-MD5 downloader is tested. GCF differs by
+  added MT/Pltd/B1; raw and assembly BioSamples differ in age/date; exact donor
+  match is unresolved. Paper's chr9 rDNA model sequence is excluded from exact
+  copy truth. See `docs/nipponbare_reference.md`. Other transfers/QCs still run.
+
 ### Five completed full-file QCs and tested comparator execution
 
 - Source4ae8ca8 pushed to both branches; CI34016167100/34016167099 passed.

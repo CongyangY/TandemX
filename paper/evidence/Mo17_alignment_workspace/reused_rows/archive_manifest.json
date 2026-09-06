@@ -1,0 +1,62 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/environment.json",
+    "sha256": "4736b16387afc5004ce2efd4fe0e1305565ecc2db44c97f7546421ca4e07b6ec",
+    "bytes": 7831
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/validation.json",
+    "sha256": "158021d2dea4647848745c4e5d5b23d25c0ee9a031d054404b9afa8cadf19b31",
+    "bytes": 2961
+  },
+  {
+    "file": "replay_discovery.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/replay_discovery.py",
+    "sha256": "091ae2b7aad308d93009db6da0b5fa20edb335bb254379f00fc15d2c6a500e6f",
+    "bytes": 4465
+  },
+  {
+    "file": "stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/stdout.log",
+    "sha256": "c41ce802733c154b596714634305fe63c6a0cd0821b15497e894d64496b9f034",
+    "bytes": 157
+  },
+  {
+    "file": "stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "discover/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/discover/run_config.yaml",
+    "sha256": "dbbfd538add3a75920f685d371fa6088a21337fe7e9f471ecaa6354d6daa5b2f",
+    "bytes": 2031
+  },
+  {
+    "file": "discover/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/discover/run.log",
+    "sha256": "e1c03a667a320479014797d294200c96e6abf82e57ee1ac72863e8345584506a",
+    "bytes": 3155
+  },
+  {
+    "file": "discover/discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/discover/discovery_summary.json",
+    "sha256": "3ede0e51fb32504622b22a9f58165774e9153aef477244079163d8209fde708b",
+    "bytes": 870
+  },
+  {
+    "file": "discover/family_audit_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/discover/family_audit_summary.json",
+    "sha256": "7ade41084be277118ccc300eb1b9291011c6a57c4d6954cd25832604df7aa505",
+    "bytes": 392
+  },
+  {
+    "file": "source_snapshot/rust-core/src/elastic.rs",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_reused_alignment_rows_profile_v1_20260906/source_snapshot/rust-core/src/elastic.rs",
+    "sha256": "1356870c1ab7ff2dfbbca39b88d26682ec1496a86d51672f01c033dc2400052a",
+    "bytes": 8949
+  }
+]

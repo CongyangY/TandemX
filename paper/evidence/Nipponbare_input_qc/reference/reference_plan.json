@@ -1,0 +1,49 @@
+{
+  "accession": "GCA_034140825.1",
+  "bioproject": "PRJNA953663",
+  "source_paper": "https://doi.org/10.1016/j.molp.2023.08.003",
+  "max_bytes": 300000000,
+  "ftp_directory": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/034/140/825/GCA_034140825.1_AGIS1.0/",
+  "metadata": {
+    "dataset_report.json": {
+      "url": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_034140825.1/dataset_report",
+      "bytes": 2784,
+      "sha256": "8b07a87c6e92efdc4b24b5c41d6b77f0270ce37ef5fe822426bc6deeab23f565"
+    },
+    "assembly_directory.html": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/034/140/825/",
+      "bytes": 549,
+      "sha256": "a825b838d9f71975a6fb3631604cb6c69b224dbbdb3c52e1d4358d53b44a781e"
+    },
+    "md5checksums.txt": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/034/140/825/GCA_034140825.1_AGIS1.0/md5checksums.txt",
+      "bytes": 521,
+      "sha256": "0588df3592f456d7ce7f8ef2d10774e9ab11c99a90f9d7ba537ced47e01aba2f"
+    },
+    "GCA_034140825.1_AGIS1.0_assembly_report.txt": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/034/140/825/GCA_034140825.1_AGIS1.0/GCA_034140825.1_AGIS1.0_assembly_report.txt",
+      "bytes": 2645,
+      "sha256": "735bafb522ef7b39e4e5188c483a20fe67010b21150fdd27350f42cd9be5ff36"
+    },
+    "GCA_034140825.1_AGIS1.0_assembly_stats.txt": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/034/140/825/GCA_034140825.1_AGIS1.0/GCA_034140825.1_AGIS1.0_assembly_stats.txt",
+      "bytes": 19636,
+      "sha256": "1860c6efc34266978e86548a3c3ab2bc218a9afede6880343e02478ab25c00f0"
+    },
+    "GCA_034140825.1_AGIS1.0_fcs_report.txt": {
+      "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/034/140/825/GCA_034140825.1_AGIS1.0/GCA_034140825.1_AGIS1.0_fcs_report.txt",
+      "bytes": 432,
+      "sha256": "1819eff1e695e95b86637167923e7a70820fe4111380eb28d3decc32473f30cf"
+    }
+  },
+  "unavailable_optional_metadata": {},
+  "created_utc": "2026-09-06T07:53:29.424307+00:00",
+  "expected_total_bases": 385710679,
+  "expected_contigs": 12,
+  "file": {
+    "filename": "GCA_034140825.1_AGIS1.0_genomic.fna.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/034/140/825/GCA_034140825.1_AGIS1.0/GCA_034140825.1_AGIS1.0_genomic.fna.gz",
+    "expected_bytes": 120079535,
+    "expected_md5": "42d5f3d974df16275a8986b287592fef"
+  }
+}
