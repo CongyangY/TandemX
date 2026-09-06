@@ -10,7 +10,9 @@ preceded one-time use of seeds 5801-5803. The rule passed all predeclared gates:
 sensitivity increased 0.594650 to 0.653635 with unchanged FPR 0.016461 and
 precision increased 0.981880 to 0.983488. This is known-catalogue IID simulation,
 not biological validation or a universal superiority result. Figure 7 v2 is the
-accepted six-panel rendering; v1 is retained as an inspected draft.
+accepted six-panel rendering; v1 is retained as an inspected draft. Evidence
+commit `3b21825` passed hosted Ubuntu/macOS Python, Rust and wheel runs
+`34047548628`/`34047562996` on the work branch and main.
 
 `challenge_v1_baseline/` records the discovery algorithm at Git revision
 `08e100d` using the initial challenge harness hashes in `environment.json`.

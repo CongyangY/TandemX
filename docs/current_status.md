@@ -208,8 +208,8 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   and the alpha-0.5/threshold-0.5 blend otherwise. On the six now-consumed
   development genomes, this derived rule keeps all 39 baseline false positives,
   changes TP/FN from 1789/1127 to 1966/950, and raises precision
-  0.978665→0.980549. This is post-failure development, not validation; seeds
-  At that point, 5801–5803 remained untouched and were reserved for a future
+  0.978665→0.980549. This is post-failure development, not validation. At that
+  point, seeds 5801–5803 remained untouched and were reserved for a future
   frozen test.
 - `abundance_classifier_depth_gated_heldout_v1.json` now freezes that exact v3
   rule, all five development-artifact hashes, the unchanged localizer and the
@@ -228,12 +228,14 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   `paper/evidence/abundance_classifier_depth_gated_validation_v1`. This passes
   the frozen known-catalogue IID simulation gate, not biological validation or
   an external-tool superiority claim. The complete Python suite passes 470
-  tests after archive and figure QA. Seeds 5801–5803 are consumed.
+  tests after archive and figure QA. Evidence commit 3b21825 passed hosted
+  Ubuntu/macOS Python, Rust and wheel runs 34047548628/34047562996 on the work
+  branch and main. Seeds 5801–5803 are consumed.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 
-- Source d2aa4d6 was pushed to both branches. Hosted CI34021933081/34021929197
-  was last observed in progress; no success claim yet. New reference-QC code
+- Source d2aa4d6 was pushed to both branches. Hosted CI 34021933081/34021929197
+  passed on main and the work branch. New reference-QC code
   and tests remain uncommitted. Full suite389 passed in86.59 s; Rust unchanged
   since the13-test/clippy/fmt checkpoint. Plot layout change after tests is
   documentation/visualization only; its second render did not execute.
