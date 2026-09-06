@@ -3,6 +3,7 @@ import csv
 import pytest
 
 from benchmarks.challenge.trash_adapters import ARRAY_FILES, UNIT_FILES, iter_regions, iter_units, iter_unit_extents
+from benchmarks.challenge.trash_adapters import region_catalogue
 
 
 def write_csv(path, rows):
@@ -74,3 +75,35 @@ def test_unit_extent_uses_native_membership_and_preserves_internal_gaps(tmp_path
         handle.write(','.join(units[0])+'\n')
     with pytest.raises(ValueError, match='without observed'):
         list(iter_unit_extents(tmp_path))
+
+
+def test_fractional_native_period_is_preserved_not_rounded_or_dropped(tmp_path):
+    from benchmarks.challenge.evaluate import score_arrays
+    from benchmarks.challenge.schema import ArrayRecord
+    row = dict(start=0, end=999, **{'fasta.name': 'chrA', 'most.freq.value.N': '171.5',
+                                   'consensus.primary': 'ACGTA'})
+    path = tmp_path/ARRAY_FILES['trash']
+    write_csv(path, [row])
+    native = list(iter_regions(tmp_path, 'trash', 'window_grid'))
+    assert native[0].period == 171.5
+    metrics, _ = score_arrays(native, [ArrayRecord('chrA', 0, 1000, 171)], {'chrA': 1000})
+    assert metrics['matched_period_mae_bp'] == .5
+    for invalid in ['nan', 'inf', '-1', '0']:
+        write_csv(path, [{**row, 'most.freq.value.N': invalid}])
+        with pytest.raises(ValueError, match='period'):
+            list(iter_regions(tmp_path, 'trash', 'window_grid'))
+
+
+def test_secondary_consensus_is_retained_with_explicit_missing_and_scope_counts(tmp_path):
+    rows = [{'consensus.primary': 'ACGTA'*7, 'consensus.secondary': 'GCTAA'*8},
+            {'consensus.primary': 'ACG', 'consensus.secondary': 'NA'}]
+    path = tmp_path/ARRAY_FILES['trash']
+    write_csv(path, rows)
+    seq, counts = region_catalogue(tmp_path, 'trash', True)
+    assert seq == ['ACGTA'*7, 'GCTAA'*8]
+    assert counts == dict(native_region_count=2, secondary_missing_regions=1,
+                          excluded_sequence_length_count=1, in_scope_native_sequences=2)
+    assert region_catalogue(tmp_path, 'trash')[0] == ['ACGTA'*7]
+    write_csv(path, [{**rows[0], 'consensus.secondary': 'ACRY'}])
+    with pytest.raises(ValueError, match='DNA'):
+        region_catalogue(tmp_path, 'trash', True)

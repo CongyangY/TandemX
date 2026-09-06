@@ -1,5 +1,17 @@
 # TRASH assembly evaluation
 
+Native period fields can be fractional: the completed10-Mb TRASH1 run emits
+171.5 for one region. The adapter retains this value for period-tolerance and
+error calculations. It neither rounds the estimate nor omits the native row.
+TRASH1 also exports secondary consensus sequences. A separate native-catalogue
+endpoint reports primary-only and primary-plus-secondary recovery, using each
+sequence's30–1000-bp length rather than its region's inferred periodicity.
+This keeps family recovery distinct from array/period accuracy; both endpoints
+remain visible. Missing secondary sequences are explicitly counted.
+Nonfinite/nonpositive values still fail. The initial integer-parser failure
+receipt remains on disk; a new evaluation directory records the corrected
+parser's replay of the unchanged native outputs.
+
 Use the pinned [container recipe](../benchmarks/containers/trash/README.md) and
 the same independently generated assembly for both versions. Author-example
 installation controls and read-based comparisons are distinct experiments.

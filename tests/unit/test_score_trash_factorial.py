@@ -30,7 +30,7 @@ def test_independent_fixture_scoring_coordinates_and_tamper_rejection(tmp_path, 
     native.mkdir(parents=True)
     if tool == 'trash':
         arrays = [dict(start=start+1, end=end, **{'fasta.name': 'chr_sim',
-                  'most.freq.value.N': 31, 'consensus.primary': sequence})]
+                  'most.freq.value.N': 31, 'consensus.primary': sequence, 'consensus.secondary': 'NA'})]
         units = [dict(start=start+i*31+2, end=start+(i+1)*31+1, width=31,
                       strand='+', seq=sequence, **{'seq.name': 'chr_sim'}) for i in range(6)]
     else:

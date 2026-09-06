@@ -52,6 +52,9 @@ default quantify estimator, with explicit missing intervals for sparse support.
 The separate [multi-k attenuation prototype](multik_quantification.md) fits
 word-survival trends across fixed k values, with mean-k21 and native-median
 ablations. It does not infer sampling intervals from correlated k values.
+The [joint-read extension](joint_multik_uncertainty.md) propagates read-level
+cross-k moments through the fitted intercept; its approximate interval requires
+independent reads and does not include extrapolation or catalogue bias.
 Full-file [QC and nested sampling](complete_data_qc.md) support unbiased selection
 within included libraries and record the limits of library/material sampling.
 

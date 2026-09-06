@@ -1,0 +1,101 @@
+2026-09-06 15:58:50,954 INFO command=tandemx discover
+2026-09-06 15:58:50,954 INFO timestamp_utc=2026-09-06T07:58:50.954864+00:00
+2026-09-06 15:58:50,954 INFO output_directory=/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/discover
+2026-09-06 15:58:50,954 INFO status=discover_running
+2026-09-06 15:58:50,954 INFO algorithm_mode=elastic_self_alignment kmer_backend=rust min_period=30 max_period=1000
+2026-09-06 15:58:50,955 INFO input_count_skipped reason=not_required_for_discovery_budget
+2026-09-06 15:58:50,955 INFO scan_threads requested=1 effective=1 parallel=false parallel_files=false backend=rust
+2026-09-06 15:59:06,713 INFO progress processed_reads=1000 processed_bases=13595801 candidate_reads=1013 elapsed_seconds=15.758 reads_per_second=63.461 mb_per_second=0.863 estimated_remaining_seconds=unknown
+2026-09-06 15:59:22,010 INFO progress processed_reads=2000 processed_bases=27085383 candidate_reads=2046 elapsed_seconds=31.055 reads_per_second=64.403 mb_per_second=0.872 estimated_remaining_seconds=unknown
+2026-09-06 15:59:37,847 INFO progress processed_reads=3000 processed_bases=40651916 candidate_reads=3125 elapsed_seconds=46.891 reads_per_second=63.978 mb_per_second=0.867 estimated_remaining_seconds=unknown
+2026-09-06 15:59:45,037 INFO progress processed_reads=4000 processed_bases=54140962 candidate_reads=4104 elapsed_seconds=54.081 reads_per_second=73.964 mb_per_second=1.001 estimated_remaining_seconds=unknown
+2026-09-06 15:59:59,635 INFO progress processed_reads=5000 processed_bases=67689317 candidate_reads=5158 elapsed_seconds=68.678 reads_per_second=72.803 mb_per_second=0.986 estimated_remaining_seconds=unknown
+2026-09-06 16:00:14,529 INFO progress processed_reads=6000 processed_bases=81272607 candidate_reads=6122 elapsed_seconds=83.573 reads_per_second=71.794 mb_per_second=0.972 estimated_remaining_seconds=unknown
+2026-09-06 16:00:21,754 INFO progress processed_reads=7000 processed_bases=94981281 candidate_reads=7155 elapsed_seconds=90.798 reads_per_second=77.094 mb_per_second=1.046 estimated_remaining_seconds=unknown
+2026-09-06 16:00:36,454 INFO progress processed_reads=8000 processed_bases=108662804 candidate_reads=8222 elapsed_seconds=105.497 reads_per_second=75.831 mb_per_second=1.030 estimated_remaining_seconds=unknown
+2026-09-06 16:00:51,898 INFO progress processed_reads=9000 processed_bases=122464436 candidate_reads=9298 elapsed_seconds=120.941 reads_per_second=74.416 mb_per_second=1.013 estimated_remaining_seconds=unknown
+2026-09-06 16:01:07,596 INFO progress processed_reads=10000 processed_bases=136168716 candidate_reads=10372 elapsed_seconds=136.639 reads_per_second=73.185 mb_per_second=0.997 estimated_remaining_seconds=unknown
+2026-09-06 16:01:15,080 INFO progress processed_reads=11000 processed_bases=149897107 candidate_reads=11426 elapsed_seconds=144.123 reads_per_second=76.324 mb_per_second=1.040 estimated_remaining_seconds=unknown
+2026-09-06 16:01:29,532 INFO progress processed_reads=12000 processed_bases=163553458 candidate_reads=12508 elapsed_seconds=158.575 reads_per_second=75.674 mb_per_second=1.031 estimated_remaining_seconds=unknown
+2026-09-06 16:01:44,573 INFO progress processed_reads=13000 processed_bases=177369578 candidate_reads=13535 elapsed_seconds=173.616 reads_per_second=74.878 mb_per_second=1.022 estimated_remaining_seconds=unknown
+2026-09-06 16:01:51,727 INFO progress processed_reads=14000 processed_bases=191150109 candidate_reads=14616 elapsed_seconds=180.770 reads_per_second=77.447 mb_per_second=1.057 estimated_remaining_seconds=unknown
+2026-09-06 16:02:06,478 INFO progress processed_reads=15000 processed_bases=205122932 candidate_reads=15662 elapsed_seconds=195.521 reads_per_second=76.718 mb_per_second=1.049 estimated_remaining_seconds=unknown
+2026-09-06 16:02:20,865 INFO progress processed_reads=16000 processed_bases=218858167 candidate_reads=16679 elapsed_seconds=209.908 reads_per_second=76.224 mb_per_second=1.043 estimated_remaining_seconds=unknown
+2026-09-06 16:02:35,757 INFO progress processed_reads=17000 processed_bases=232680534 candidate_reads=17714 elapsed_seconds=224.799 reads_per_second=75.623 mb_per_second=1.035 estimated_remaining_seconds=unknown
+2026-09-06 16:02:43,073 INFO progress processed_reads=18000 processed_bases=246467219 candidate_reads=18762 elapsed_seconds=232.115 reads_per_second=77.548 mb_per_second=1.062 estimated_remaining_seconds=unknown
+2026-09-06 16:02:57,425 INFO progress processed_reads=19000 processed_bases=260355282 candidate_reads=19827 elapsed_seconds=246.467 reads_per_second=77.089 mb_per_second=1.056 estimated_remaining_seconds=unknown
+2026-09-06 16:03:12,128 INFO progress processed_reads=20000 processed_bases=274303062 candidate_reads=20886 elapsed_seconds=261.171 reads_per_second=76.578 mb_per_second=1.050 estimated_remaining_seconds=unknown
+2026-09-06 16:03:19,759 INFO progress processed_reads=21000 processed_bases=288175915 candidate_reads=21956 elapsed_seconds=268.801 reads_per_second=78.125 mb_per_second=1.072 estimated_remaining_seconds=unknown
+2026-09-06 16:03:34,872 INFO progress processed_reads=22000 processed_bases=302150109 candidate_reads=23039 elapsed_seconds=283.914 reads_per_second=77.488 mb_per_second=1.064 estimated_remaining_seconds=unknown
+2026-09-06 16:03:49,858 INFO progress processed_reads=23000 processed_bases=315936990 candidate_reads=24070 elapsed_seconds=298.900 reads_per_second=76.949 mb_per_second=1.057 estimated_remaining_seconds=unknown
+2026-09-06 16:04:03,990 INFO progress processed_reads=24000 processed_bases=329801995 candidate_reads=25171 elapsed_seconds=313.032 reads_per_second=76.670 mb_per_second=1.054 estimated_remaining_seconds=unknown
+2026-09-06 16:04:11,192 INFO progress processed_reads=25000 processed_bases=343625230 candidate_reads=26249 elapsed_seconds=320.233 reads_per_second=78.068 mb_per_second=1.073 estimated_remaining_seconds=unknown
+2026-09-06 16:04:26,286 INFO progress processed_reads=26000 processed_bases=357470555 candidate_reads=27302 elapsed_seconds=335.327 reads_per_second=77.536 mb_per_second=1.066 estimated_remaining_seconds=unknown
+2026-09-06 16:04:41,248 INFO progress processed_reads=27000 processed_bases=371504722 candidate_reads=28379 elapsed_seconds=350.290 reads_per_second=77.079 mb_per_second=1.061 estimated_remaining_seconds=unknown
+2026-09-06 16:04:56,795 INFO progress processed_reads=28000 processed_bases=385452603 candidate_reads=29425 elapsed_seconds=365.836 reads_per_second=76.537 mb_per_second=1.054 estimated_remaining_seconds=unknown
+2026-09-06 16:05:04,566 INFO progress processed_reads=29000 processed_bases=399285942 candidate_reads=30471 elapsed_seconds=373.608 reads_per_second=77.622 mb_per_second=1.069 estimated_remaining_seconds=unknown
+2026-09-06 16:05:20,282 INFO progress processed_reads=30000 processed_bases=413012641 candidate_reads=31441 elapsed_seconds=389.323 reads_per_second=77.057 mb_per_second=1.061 estimated_remaining_seconds=unknown
+2026-09-06 16:05:35,816 INFO progress processed_reads=31000 processed_bases=426842916 candidate_reads=32534 elapsed_seconds=404.857 reads_per_second=76.570 mb_per_second=1.054 estimated_remaining_seconds=unknown
+2026-09-06 16:05:50,156 INFO progress processed_reads=32000 processed_bases=440756761 candidate_reads=33593 elapsed_seconds=419.197 reads_per_second=76.336 mb_per_second=1.051 estimated_remaining_seconds=unknown
+2026-09-06 16:05:57,790 INFO progress processed_reads=33000 processed_bases=454554949 candidate_reads=34624 elapsed_seconds=426.831 reads_per_second=77.314 mb_per_second=1.065 estimated_remaining_seconds=unknown
+2026-09-06 16:06:13,122 INFO progress processed_reads=34000 processed_bases=468414786 candidate_reads=35694 elapsed_seconds=442.163 reads_per_second=76.895 mb_per_second=1.059 estimated_remaining_seconds=unknown
+2026-09-06 16:06:28,688 INFO progress processed_reads=35000 processed_bases=482351399 candidate_reads=36769 elapsed_seconds=457.728 reads_per_second=76.465 mb_per_second=1.054 estimated_remaining_seconds=unknown
+2026-09-06 16:06:36,435 INFO progress processed_reads=36000 processed_bases=496166271 candidate_reads=37763 elapsed_seconds=465.476 reads_per_second=77.340 mb_per_second=1.066 estimated_remaining_seconds=unknown
+2026-09-06 16:06:51,795 INFO progress processed_reads=37000 processed_bases=509967068 candidate_reads=38864 elapsed_seconds=480.835 reads_per_second=76.949 mb_per_second=1.061 estimated_remaining_seconds=unknown
+2026-09-06 16:07:06,595 INFO progress processed_reads=38000 processed_bases=523750998 candidate_reads=39854 elapsed_seconds=495.635 reads_per_second=76.669 mb_per_second=1.057 estimated_remaining_seconds=unknown
+2026-09-06 16:07:21,025 INFO progress processed_reads=39000 processed_bases=537721493 candidate_reads=40950 elapsed_seconds=510.065 reads_per_second=76.461 mb_per_second=1.054 estimated_remaining_seconds=unknown
+2026-09-06 16:07:28,219 INFO progress processed_reads=40000 processed_bases=551597535 candidate_reads=42039 elapsed_seconds=517.259 reads_per_second=77.331 mb_per_second=1.066 estimated_remaining_seconds=unknown
+2026-09-06 16:07:42,738 INFO progress processed_reads=41000 processed_bases=565334972 candidate_reads=43083 elapsed_seconds=531.778 reads_per_second=77.100 mb_per_second=1.063 estimated_remaining_seconds=unknown
+2026-09-06 16:07:57,288 INFO progress processed_reads=42000 processed_bases=579145249 candidate_reads=44108 elapsed_seconds=546.327 reads_per_second=76.877 mb_per_second=1.060 estimated_remaining_seconds=unknown
+2026-09-06 16:08:11,745 INFO progress processed_reads=43000 processed_bases=593061618 candidate_reads=45121 elapsed_seconds=560.785 reads_per_second=76.678 mb_per_second=1.058 estimated_remaining_seconds=unknown
+2026-09-06 16:08:18,884 INFO progress processed_reads=44000 processed_bases=606980261 candidate_reads=46189 elapsed_seconds=567.924 reads_per_second=77.475 mb_per_second=1.069 estimated_remaining_seconds=unknown
+2026-09-06 16:08:33,993 INFO progress processed_reads=45000 processed_bases=620848909 candidate_reads=47258 elapsed_seconds=583.032 reads_per_second=77.183 mb_per_second=1.065 estimated_remaining_seconds=unknown
+2026-09-06 16:08:50,345 INFO progress processed_reads=46000 processed_bases=634660123 candidate_reads=48318 elapsed_seconds=599.384 reads_per_second=76.745 mb_per_second=1.059 estimated_remaining_seconds=unknown
+2026-09-06 16:09:11,988 INFO progress processed_reads=47000 processed_bases=648634488 candidate_reads=49376 elapsed_seconds=621.027 reads_per_second=75.681 mb_per_second=1.044 estimated_remaining_seconds=unknown
+2026-09-06 16:09:19,499 INFO progress processed_reads=48000 processed_bases=662496407 candidate_reads=50468 elapsed_seconds=628.538 reads_per_second=76.368 mb_per_second=1.054 estimated_remaining_seconds=unknown
+2026-09-06 16:09:34,448 INFO progress processed_reads=49000 processed_bases=676511348 candidate_reads=51542 elapsed_seconds=643.487 reads_per_second=76.148 mb_per_second=1.051 estimated_remaining_seconds=unknown
+2026-09-06 16:09:49,829 INFO progress processed_reads=50000 processed_bases=690406591 candidate_reads=52533 elapsed_seconds=658.868 reads_per_second=75.888 mb_per_second=1.048 estimated_remaining_seconds=unknown
+2026-09-06 16:09:57,473 INFO progress processed_reads=51000 processed_bases=704230962 candidate_reads=53525 elapsed_seconds=666.511 reads_per_second=76.518 mb_per_second=1.057 estimated_remaining_seconds=unknown
+2026-09-06 16:10:13,167 INFO progress processed_reads=52000 processed_bases=718073129 candidate_reads=54596 elapsed_seconds=682.206 reads_per_second=76.223 mb_per_second=1.053 estimated_remaining_seconds=unknown
+2026-09-06 16:10:29,041 INFO progress processed_reads=53000 processed_bases=731866999 candidate_reads=55660 elapsed_seconds=698.079 reads_per_second=75.923 mb_per_second=1.048 estimated_remaining_seconds=unknown
+2026-09-06 16:10:43,864 INFO progress processed_reads=54000 processed_bases=745807924 candidate_reads=56680 elapsed_seconds=712.902 reads_per_second=75.747 mb_per_second=1.046 estimated_remaining_seconds=unknown
+2026-09-06 16:10:52,105 INFO progress processed_reads=55000 processed_bases=759784349 candidate_reads=57748 elapsed_seconds=721.144 reads_per_second=76.268 mb_per_second=1.054 estimated_remaining_seconds=unknown
+2026-09-06 16:11:07,883 INFO progress processed_reads=56000 processed_bases=773622734 candidate_reads=58822 elapsed_seconds=736.921 reads_per_second=75.992 mb_per_second=1.050 estimated_remaining_seconds=unknown
+2026-09-06 16:11:23,653 INFO progress processed_reads=57000 processed_bases=787398036 candidate_reads=59876 elapsed_seconds=752.691 reads_per_second=75.728 mb_per_second=1.046 estimated_remaining_seconds=unknown
+2026-09-06 16:11:38,404 INFO progress processed_reads=58000 processed_bases=801131964 candidate_reads=60914 elapsed_seconds=767.442 reads_per_second=75.576 mb_per_second=1.044 estimated_remaining_seconds=unknown
+2026-09-06 16:11:46,166 INFO progress processed_reads=59000 processed_bases=815037052 candidate_reads=61958 elapsed_seconds=775.204 reads_per_second=76.109 mb_per_second=1.051 estimated_remaining_seconds=unknown
+2026-09-06 16:12:01,373 INFO progress processed_reads=60000 processed_bases=828845848 candidate_reads=62993 elapsed_seconds=790.410 reads_per_second=75.910 mb_per_second=1.049 estimated_remaining_seconds=unknown
+2026-09-06 16:12:16,192 INFO progress processed_reads=61000 processed_bases=842848717 candidate_reads=63995 elapsed_seconds=805.229 reads_per_second=75.755 mb_per_second=1.047 estimated_remaining_seconds=unknown
+2026-09-06 16:12:31,214 INFO progress processed_reads=62000 processed_bases=856784011 candidate_reads=65139 elapsed_seconds=820.251 reads_per_second=75.587 mb_per_second=1.045 estimated_remaining_seconds=unknown
+2026-09-06 16:12:39,932 INFO progress processed_reads=63000 processed_bases=870662944 candidate_reads=66164 elapsed_seconds=828.970 reads_per_second=75.998 mb_per_second=1.050 estimated_remaining_seconds=unknown
+2026-09-06 16:12:57,219 INFO progress processed_reads=64000 processed_bases=884441234 candidate_reads=67229 elapsed_seconds=846.256 reads_per_second=75.627 mb_per_second=1.045 estimated_remaining_seconds=unknown
+2026-09-06 16:13:12,424 INFO progress processed_reads=65000 processed_bases=898340064 candidate_reads=68287 elapsed_seconds=861.461 reads_per_second=75.453 mb_per_second=1.043 estimated_remaining_seconds=unknown
+2026-09-06 16:13:20,174 INFO progress processed_reads=66000 processed_bases=912246838 candidate_reads=69378 elapsed_seconds=869.211 reads_per_second=75.931 mb_per_second=1.050 estimated_remaining_seconds=unknown
+2026-09-06 16:13:35,097 INFO progress processed_reads=67000 processed_bases=926104984 candidate_reads=70450 elapsed_seconds=884.134 reads_per_second=75.780 mb_per_second=1.047 estimated_remaining_seconds=unknown
+2026-09-06 16:13:49,959 INFO progress processed_reads=68000 processed_bases=939947720 candidate_reads=71501 elapsed_seconds=898.983 reads_per_second=75.641 mb_per_second=1.046 estimated_remaining_seconds=unknown
+2026-09-06 16:14:05,171 INFO progress processed_reads=69000 processed_bases=953765215 candidate_reads=72541 elapsed_seconds=914.189 reads_per_second=75.477 mb_per_second=1.043 estimated_remaining_seconds=unknown
+2026-09-06 16:14:12,300 INFO progress processed_reads=70000 processed_bases=967642386 candidate_reads=73573 elapsed_seconds=921.316 reads_per_second=75.978 mb_per_second=1.050 estimated_remaining_seconds=unknown
+2026-09-06 16:14:26,985 INFO progress processed_reads=71000 processed_bases=981465103 candidate_reads=74626 elapsed_seconds=935.999 reads_per_second=75.855 mb_per_second=1.049 estimated_remaining_seconds=unknown
+2026-09-06 16:14:41,624 INFO progress processed_reads=72000 processed_bases=995196787 candidate_reads=75652 elapsed_seconds=950.637 reads_per_second=75.739 mb_per_second=1.047 estimated_remaining_seconds=unknown
+2026-09-06 16:14:56,172 INFO progress processed_reads=73000 processed_bases=1008914460 candidate_reads=76746 elapsed_seconds=965.185 reads_per_second=75.633 mb_per_second=1.045 estimated_remaining_seconds=unknown
+2026-09-06 16:15:03,490 INFO progress processed_reads=74000 processed_bases=1022717213 candidate_reads=77779 elapsed_seconds=972.503 reads_per_second=76.092 mb_per_second=1.052 estimated_remaining_seconds=unknown
+2026-09-06 16:15:18,026 INFO progress processed_reads=75000 processed_bases=1036509725 candidate_reads=78806 elapsed_seconds=987.039 reads_per_second=75.985 mb_per_second=1.050 estimated_remaining_seconds=unknown
+2026-09-06 16:15:32,516 INFO progress processed_reads=76000 processed_bases=1050143355 candidate_reads=79825 elapsed_seconds=1001.528 reads_per_second=75.884 mb_per_second=1.049 estimated_remaining_seconds=unknown
+2026-09-06 16:15:40,000 INFO progress processed_reads=77000 processed_bases=1063867078 candidate_reads=80802 elapsed_seconds=1009.013 reads_per_second=76.312 mb_per_second=1.054 estimated_remaining_seconds=unknown
+2026-09-06 16:15:54,640 INFO progress processed_reads=78000 processed_bases=1077496484 candidate_reads=81826 elapsed_seconds=1023.652 reads_per_second=76.198 mb_per_second=1.053 estimated_remaining_seconds=unknown
+2026-09-06 16:16:09,264 INFO progress processed_reads=79000 processed_bases=1090949609 candidate_reads=82824 elapsed_seconds=1038.276 reads_per_second=76.088 mb_per_second=1.051 estimated_remaining_seconds=unknown
+2026-09-06 16:16:16,735 INFO progress processed_reads=80000 processed_bases=1104673517 candidate_reads=83872 elapsed_seconds=1045.747 reads_per_second=76.500 mb_per_second=1.056 estimated_remaining_seconds=unknown
+2026-09-06 16:16:31,183 INFO progress processed_reads=81000 processed_bases=1118281195 candidate_reads=84868 elapsed_seconds=1060.195 reads_per_second=76.401 mb_per_second=1.055 estimated_remaining_seconds=unknown
+2026-09-06 16:16:38,427 INFO progress processed_reads=81775 processed_bases=1128793699 candidate_reads=85663 elapsed_seconds=1067.439 reads_per_second=76.609 mb_per_second=1.057 estimated_remaining_seconds=unknown
+2026-09-06 16:16:38,427 INFO filter_summary skipped_short_reads=0 skipped_short_kmer=0 skipped_low_complexity=0 seed_overflow_count=559
+2026-09-06 16:19:15,109 INFO family_audit mode=related backend=rust families=28586 possible_pairs=408565405
+2026-09-06 16:19:19,348 INFO family_audit compared_pairs=50000 total_pairs=408565405
+2026-09-06 16:19:21,976 INFO family_audit compared_pairs=100000 total_pairs=408565405
+2026-09-06 16:19:25,000 INFO family_audit compared_pairs=150000 total_pairs=408565405
+2026-09-06 16:19:28,252 INFO family_audit compared_pairs=200000 total_pairs=408565405
+2026-09-06 16:19:31,409 INFO family_audit compared_pairs=250000 total_pairs=408565405
+2026-09-06 16:19:32,361 INFO family_audit scored_pairs=259411 emitted_pairs=100287 related_pairs=100287 retained_collapse_pairs=0
+2026-09-06 16:19:32,573 INFO status=discover_mvp_completed
+2026-09-06 16:19:32,573 INFO candidate_count=85663
+2026-09-06 16:19:32,573 INFO family_count=28586
+2026-09-06 16:19:32,573 INFO Discover MVP supports toy-scale FASTA/FASTQ input, including gzip-compressed files

@@ -20,3 +20,14 @@ concurrent downloads/QC/container jobs, not isolated resource comparisons or
 external-tool superiority. RSS fluctuation does not establish a memory gain.
 Both intermediate and final profiles are retained, including unfavorable values.
 Binary/profile hashes are recorded; the binaries and `.prof` files stay on T7.
+
+The committed96fd5dc full1,128,793,699-bp replay subsequently completed in
+1,241.876 s with697.109 MiB peak RSS, without profiling. All seven full products
+are byte-identical to the prior indexed run (85,663 candidates,28,586 families).
+The prior dictionary-indexed run took1,625.652 s/691.500 MiB: elapsed time is
+23.61% shorter and observed peak RSS0.81% higher. This comparison includes both
+the native clustering-index and alignment-row changes, so it does not isolate
+the alignment change alone. Compared with the older1,930.701-s run, time is
+35.68% shorter. The newer TandemX run still exceeds the prior TRF/TideHunter
+times on this input. These concurrent, nonrandomized development timings remain
+diagnostic. Receipts and seven-product parity are archived in `full_1129Mb`.

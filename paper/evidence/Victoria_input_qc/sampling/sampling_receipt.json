@@ -1,0 +1,63 @@
+{
+  "complete": true,
+  "source_sha256": "116bc62711ff6de969b7ed34b30a8e21b5e6bc4fcd5c8c5d194525e9bff4022e",
+  "source_read_count": 398850,
+  "source_total_bases": 7346159178,
+  "plan_sha256": "999e35a0cacf454cffdc177018420def8da90c1577d56b37d7bbe3cf7e64509c",
+  "samples": [
+    {
+      "sample_id": "sample_001",
+      "inclusion_probability": "0.0015",
+      "hash_threshold": "510423550381407695195061911147652317",
+      "read_count": 615,
+      "total_bases": 11361028,
+      "expected_read_count": 598.275,
+      "expected_total_bases": 11019238.767,
+      "nominal_total_base_coverage": null,
+      "read_n50": 18242,
+      "median_length": 18088,
+      "gc_fraction": 0.44065493017005153,
+      "n_fraction": 0.0,
+      "mean_reported_error_probability": 0.0023456384844218335,
+      "status": "ok",
+      "fastq_sha256": "a311701b0b60f3b7da682fb4acf093a3ac804c06644aa8ad9daed131c6a215ff",
+      "ids_sha256": "c5df286699f5041501afc55fcce9e1ccdd56ad4fbfca2c95768978bc236b32ac"
+    },
+    {
+      "sample_id": "sample_002",
+      "inclusion_probability": "0.015",
+      "hash_threshold": "5104235503814076951950619111476523171",
+      "read_count": 5972,
+      "total_bases": 110202741,
+      "expected_read_count": 5982.75,
+      "expected_total_bases": 110192387.67,
+      "nominal_total_base_coverage": null,
+      "read_n50": 18307,
+      "median_length": 18135,
+      "gc_fraction": 0.44191180326449414,
+      "n_fraction": 0.0,
+      "mean_reported_error_probability": 0.0024066459625778493,
+      "status": "ok",
+      "fastq_sha256": "38c0c3f1182a18e7d40f91bd4129408933207e84687b70515ab78f27f850f8e7",
+      "ids_sha256": "c4fd57cb7fe27883f8429604d9550084c40119ba3063f8037a02730d9a0a52c8"
+    },
+    {
+      "sample_id": "sample_003",
+      "inclusion_probability": "0.15",
+      "hash_threshold": "51042355038140769519506191114765231718",
+      "read_count": 60215,
+      "total_bases": 1109305135,
+      "expected_read_count": 59827.5,
+      "expected_total_bases": 1101923876.7,
+      "nominal_total_base_coverage": null,
+      "read_n50": 18300,
+      "median_length": 18139,
+      "gc_fraction": 0.4417076190673182,
+      "n_fraction": 0.0,
+      "mean_reported_error_probability": 0.0024043985691696427,
+      "status": "ok",
+      "fastq_sha256": "9a838804a4984c92d3d35b45f14c8df1a212dcc57bc377d13482cb1efdbe89b8",
+      "ids_sha256": "10b43ae18341080ece7b493dcaa709726a4450d23a3dedc2faa8682310a532bc"
+    }
+  ]
+}

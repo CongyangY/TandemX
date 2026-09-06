@@ -1,0 +1,35 @@
+{
+  "accession": "ERR10422581",
+  "metadata": {
+    "run_accession": "ERR10422581",
+    "study_accession": "PRJEB56828",
+    "secondary_study_accession": "ERP141793",
+    "sample_accession": "SAMEA111508775",
+    "experiment_accession": "ERX9950157",
+    "scientific_name": "Avena sativa",
+    "sample_title": "",
+    "experiment_title": "Sequel II sequencing",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Sequel II",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "library_selection": "RANDOM",
+    "read_count": "398850",
+    "base_count": "7346159178",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/ERR104/081/ERR10422581/ERR10422581.fastq.gz",
+    "fastq_md5": "783eaba6ed6861ebc62abdde71fd1c85",
+    "fastq_bytes": "6980726507"
+  },
+  "metadata_sha256": "a886d87836bbb0f24db52029b9c9a2ded140369a1b35eaa707d607a157d4f12a",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/ERR104/081/ERR10422581/ERR10422581.fastq.gz",
+      "filename": "ERR10422581.fastq.gz",
+      "expected_md5": "783eaba6ed6861ebc62abdde71fd1c85",
+      "expected_bytes": 6980726507
+    }
+  ],
+  "max_download_gb": 7.1,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b"
+}

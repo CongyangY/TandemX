@@ -1,0 +1,50 @@
+[
+  {
+    "file": "sampling_plan.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR10422581_seed6101_v1/sampling_plan.json",
+    "sha256": "999e35a0cacf454cffdc177018420def8da90c1577d56b37d7bbe3cf7e64509c",
+    "bytes": 865
+  },
+  {
+    "file": "sampling_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR10422581_seed6101_v1/sampling_receipt.json",
+    "sha256": "4ce52899c05d456ab38208f001c903af86212f43f25a9cab1c59ea7783fa0c49",
+    "bytes": 2437
+  },
+  {
+    "file": "sample_001.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR10422581_seed6101_v1/sample_001.length_histogram.tsv",
+    "sha256": "0181e7ed30298d221d8fb3ea9fd8c1981f79eebd91eb3e268137ffe5a737ebfd",
+    "bytes": 5230
+  },
+  {
+    "file": "sample_001.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR10422581_seed6101_v1/sample_001.joint_distribution.tsv",
+    "sha256": "05a1bfb9d58c5578c66b0559e78af504c7da919e0abe62969621711af7cce465",
+    "bytes": 3375
+  },
+  {
+    "file": "sample_002.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR10422581_seed6101_v1/sample_002.length_histogram.tsv",
+    "sha256": "739efa854020bb43f87ea3b2e0d65a32c4a684d82f46ebd9ded36d365afc6505",
+    "bytes": 33999
+  },
+  {
+    "file": "sample_002.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR10422581_seed6101_v1/sample_002.joint_distribution.tsv",
+    "sha256": "666333da62558ee30cc604ee4d139b175b72486083a6aace2eac6be167fdae27",
+    "bytes": 8057
+  },
+  {
+    "file": "sample_003.length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR10422581_seed6101_v1/sample_003.length_histogram.tsv",
+    "sha256": "5c2ad0dcb0c9c71857d13cd96d4346af187082f76a68a76fc57f73048de1de00",
+    "bytes": 77419
+  },
+  {
+    "file": "sample_003.joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR10422581_seed6101_v1/sample_003.joint_distribution.tsv",
+    "sha256": "d95882dc6114a04ae2b3cfe6c410f4b8bd9eda5f353bfe15afe514702097b5ff",
+    "bytes": 14855
+  }
+]

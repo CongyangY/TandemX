@@ -8,6 +8,7 @@ to array windows. TRASH2 arrays and monomers use one-based inclusive positions.
 from __future__ import annotations
 
 import csv
+import math
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -60,7 +61,13 @@ def iter_regions(native: Path, tool: str, coordinates: str, period_source: str =
         consensus = row[sequence].upper()
         if consensus in {'', 'NA'}:
             raise ValueError('Unresolved native array consensus; do not omit its row')
-        size = int(row[period]) if period_source == 'native_peak' else len(consensus)
+        # Native TRASH1 may emit a fractional periodicity (e.g.171.5).
+        # Preserve it for tolerance/error scoring rather than round or drop.
+        size = float(row[period]) if period_source == 'native_peak' else len(consensus)
+        if not math.isfinite(size) or size < 1:
+            raise ValueError('Invalid native array period')
+        if size == int(size):
+            size = int(size)
         yield ArrayRecord(row[identifier], start, end, size, consensus)
 
 
@@ -79,6 +86,39 @@ def iter_units(native: Path, tool: str, offset: int = 0) -> Iterator[ArrayRecord
         if a < 1 or b < a or width != b-a+1 or row['strand'] not in {'+', '-'}:
             raise ValueError('Invalid native monomer width/strand/coordinates')
         yield ArrayRecord(row[identifier], a-1+offset, b+offset, width)
+
+
+def region_catalogue(native: Path, tool: str, include_secondary: bool = False) -> tuple[list[str], dict]:
+    """Native representative bank independent of inferred period accuracy.
+
+    TRASH1 exposes both primary and secondary consensus sequences. Preserve
+    both endpoints; do not treat an alternative native sequence as absent.
+    """
+    if tool not in ARRAY_FILES or include_secondary and tool != 'trash':
+        raise ValueError('Unsupported native consensus policy')
+    primary = 'consensus.primary' if tool == 'trash' else 'representative'
+    fields = {primary, 'consensus.secondary'} if include_secondary else {primary}
+    sequences = []
+    rows = missing = excluded = 0
+    for row in csv_records(native/ARRAY_FILES[tool], fields):
+        rows += 1
+        if rows > 100_000:
+            raise ValueError('Development catalogue region-count limit exceeded')
+        for field in [primary] + (['consensus.secondary'] if include_secondary else []):
+            sequence = row[field].upper()
+            if sequence in {'', 'NA'}:
+                if field == primary:
+                    raise ValueError('Unresolved primary consensus')
+                missing += 1
+                continue
+            if set(sequence)-set('ACGTN'):
+                raise ValueError('Invalid native consensus DNA')
+            if 30 <= len(sequence) <= 1000:
+                sequences.append(sequence)
+            else:
+                excluded += 1
+    return sequences, dict(native_region_count=rows, secondary_missing_regions=missing,
+                           excluded_sequence_length_count=excluded, in_scope_native_sequences=len(sequences))
 
 
 def iter_unit_extents(native: Path, period_source: str = 'native_peak') -> Iterator[ArrayRecord]:

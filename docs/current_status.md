@@ -7,6 +7,41 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Joint-read uncertainty, complete TRASH evaluation and seven-species file QC
+
+- Previous9fbd7a0 is pushed to main and the working branch; hosted
+  CI34021111743/34021111471 passed. New joint-read multi-k research API preserves
+  the point model but estimates sampling variance from full read-level cross-k
+  moments. Sparse Rust counts match a naive word oracle through k31; Python/
+  Rust collectors and batching agree with the existing point estimator. An
+  identical-read regression prevents spurious tiny intervals from cancellation.
+  Native13 tests, formatting and clippy-Dwarnings passed; only tandemx-dev rebuilt.
+  Full Python suite after the joint and native-consensus changes:381 passed
+  in82.51 s. No public quantification default changed.
+  Actual27-condition coverage calibration is prepared but not yet run here.
+- Committed96fd5dc Mo17 full1.129-Gb replay completed:1,241.876 s/697.109 MiB;
+  all seven complete products are byte-identical to the prior indexed run.
+  Time decreased23.61% from1,625.652 s, peak RSS increased0.81%. This includes
+  native clustering and alignment changes and remains slower than prior
+  TRF/TideHunter runs. Archive: `Mo17_alignment_workspace/full_1129Mb`.
+- TRASH1 default10-Mb s6301 run completed in2,299.44 s/513.227 MiB. All11,257
+  native units match the reference with audited−1bp offset. Unit-base precision
+  0.99937075/recall0.99270646. Primary family recovery43/55; including native
+  secondary consensus48/55. Period+region matching26/55 is distinct from base
+  recall. Fractional native period171.5 is preserved, not rounded or omitted;
+  the first failed integer-parser receipt and later evaluations remain archived
+  under `TRASH_factorial_s6301`. No cross-input/platform speed ranking.
+- Morex115.272-Mb three-tool diagnostic completed:TX159.600 s/173.03 MiB,
+  TRF274.546/179.00, TideHunter60.409/489.81. Added compact source/native-hash
+  evidence under `multispecies_real_diagnostics`; real accuracy remains unscored.
+- Victoria complete file QC passed:398,850 reads/7,346,159,178 bp,
+  median18,137/N5018,295, no N or duplicate archive IDs. This raises completed
+  file QC to7 species, not7 biological accuracy validations. Whole-library
+  seed6101 samples completed:11.361/110.203/1109.305 Mb. Raw/QC/sampling evidence
+  archived in `Victoria_input_qc`. Col-0R and Ey15-2R complete downloads passed
+  source MD5; full-file QC now runs. Lo7/wheat sampling and Morex reference
+  transfer remain active; exact status must be checked on disk.
+
 ### TRASH2 truth evaluation and six-species file QC
 
 - Source96fd5dc pushed to both branches; CI34020558074/34020558009 passed. Full suite

@@ -1,0 +1,344 @@
+[
+  {
+    "file": "execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/execution.json",
+    "sha256": "0f3bb354612a5aa9ac1545821f90f1487b2d84fb48c15ce61401e98d13f25345",
+    "bytes": 2801
+  },
+  {
+    "file": "run_trash_container.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/run_trash_container.py",
+    "sha256": "2cdea0be59a10c1fdfee74b76c415a2d4fec89a4bfde37e00ccbd18467644fa2",
+    "bytes": 8424
+  },
+  {
+    "file": "input_qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/input_qc.json",
+    "sha256": "fd8f0d8e68464b85de5d50d013a2acb55b9e52851fe27065655afaeeff35e047",
+    "bytes": 608
+  },
+  {
+    "file": "image_inspect.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/image_inspect.json",
+    "sha256": "a9c890201c2ede44d72f69587dd49de981344bbcb4a8882c07d960cad44888da",
+    "bytes": 4731
+  },
+  {
+    "file": "stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/stdout.log",
+    "sha256": "b9bd495f3a92cb3a04b1ce03c823cde246f1de2a434078e66d976972d3ea485e",
+    "bytes": 4748
+  },
+  {
+    "file": "stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "native/linux_time.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/native/linux_time.tsv",
+    "sha256": "453b9c91dcb5770bc5c5ca992e133d3486e94b4374fa26f41e67323a42161e82",
+    "bytes": 96
+  },
+  {
+    "file": "native/Summary.of.repetitive.regions.assembly.fa.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/native/Summary.of.repetitive.regions.assembly.fa.csv",
+    "sha256": "1a1cee28c0edf2ed9508849a42798b0b3e5141d5ed28d1391a1ec3c57a5f0c03",
+    "bytes": 27121
+  },
+  {
+    "file": "native/temp.all.repeats.from.assembly.fa.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/native/temp.all.repeats.from.assembly.fa.csv",
+    "sha256": "d8728f0044634c8176bcddbae6685c2da1cb3382c427cbdc9e0ea2710845a56f",
+    "bytes": 2770250
+  },
+  {
+    "file": "native/all.repeats.from.assembly.fa.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/native/all.repeats.from.assembly.fa.csv",
+    "sha256": "5a1426a1da7bc2c3a537080dc077c1891634ea9efb35ecfb7ed9370e3c61f61d",
+    "bytes": 2882890
+  },
+  {
+    "file": "native/cgroup_memory_peak_bytes.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/native/cgroup_memory_peak_bytes.txt",
+    "sha256": "ccb278d356bb7f45fad95cb8ba300c3db90a7918e871e740493edf0485357094",
+    "bytes": 10
+  },
+  {
+    "file": "container_provenance/R_packages.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/container_provenance/R_packages.tsv",
+    "sha256": "9262036f6e061d0f4afbe8d21396a22afbd11c0aad41c5ada9d6526b93a62ccb",
+    "bytes": 3911
+  },
+  {
+    "file": "container_provenance/R_sessionInfo.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/container_provenance/R_sessionInfo.txt",
+    "sha256": "e97ba540fa6d308e40c187617d7b9b16290e368999e9cdf79dd9059567f5a11e",
+    "bytes": 2055
+  },
+  {
+    "file": "container_provenance/debian_packages.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/container_provenance/debian_packages.tsv",
+    "sha256": "35efd94e25abd8c44d30299432bb003ed350929b6c5dce0637578ca55e373686",
+    "bytes": 10597
+  },
+  {
+    "file": "container_provenance/package_archives.sha256",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/container_provenance/package_archives.sha256",
+    "sha256": "17e6b5e965964aaa4e892d32178a33ae643c8ba3a70630b38a8af3430f36a2bb",
+    "bytes": 5328
+  },
+  {
+    "file": "container_provenance/trash2_commit.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/container_provenance/trash2_commit.txt",
+    "sha256": "d57b9ffb8ce6013033665036cad21260718a82054e1993441d4fe62cd2b4c17b",
+    "bytes": 41
+  },
+  {
+    "file": "container_provenance/trash_commit.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/container_provenance/trash_commit.txt",
+    "sha256": "2e5e4407169dc3c1e244f8d15030444572236fd2cb5926f61aaf163b0a47a406",
+    "bytes": 41
+  },
+  {
+    "file": "evaluation_v1/score_trash_factorial.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v1/score_trash_factorial.py",
+    "sha256": "a304afd5117bd90f46abb21d596ae37183aa2515974f599acd95143feb93a890",
+    "bytes": 10454
+  },
+  {
+    "file": "evaluation_v1/unit_coordinate_audit.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v1/unit_coordinate_audit.tsv",
+    "sha256": "46568587d6ec56400f1d5f105a95a5a4a1adcbf09fd719b80838e02641ee02f6",
+    "bytes": 183
+  },
+  {
+    "file": "evaluation_v1/evaluation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v1/evaluation.json",
+    "sha256": "4f5fbad484df00f17b55428503d9924b2100eae4940626c19f98415edb61f51c",
+    "bytes": 9164
+  },
+  {
+    "file": "evaluation_v2/score_trash_factorial.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/score_trash_factorial.py",
+    "sha256": "a304afd5117bd90f46abb21d596ae37183aa2515974f599acd95143feb93a890",
+    "bytes": 10454
+  },
+  {
+    "file": "evaluation_v2/unit_coordinate_audit.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/unit_coordinate_audit.tsv",
+    "sha256": "46568587d6ec56400f1d5f105a95a5a4a1adcbf09fd719b80838e02641ee02f6",
+    "bytes": 183
+  },
+  {
+    "file": "evaluation_v2/region_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/region_metrics.tsv",
+    "sha256": "6335dd6b48d01c389fd99c67db5f756a1724e5abda67b674af104dbbe19e38aa",
+    "bytes": 2213
+  },
+  {
+    "file": "evaluation_v2/unit_coverage_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/unit_coverage_metrics.tsv",
+    "sha256": "8dce8753f5e23f4796854e0d77695501901099600fa6a1050b65d8c2fa9cd0f0",
+    "bytes": 462
+  },
+  {
+    "file": "evaluation_v2/evaluation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/evaluation.json",
+    "sha256": "1616065ef49452a31e24ebd27f020e87a8b79ae3eb521c6a29dedd698864b607",
+    "bytes": 17122
+  },
+  {
+    "file": "evaluation_v2/window_grid__native_peak/normalized_arrays.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/window_grid__native_peak/normalized_arrays.tsv",
+    "sha256": "0c5091f93520507334fae37afe182f4ae95f149e0d46ed4ae88c047f00d29bb7",
+    "bytes": 13510
+  },
+  {
+    "file": "evaluation_v2/window_grid__native_peak/array_details.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/window_grid__native_peak/array_details.tsv",
+    "sha256": "60025440125a22ce30bb04a7839f76b093320ca1e31b342c3c9ba768c2069dde",
+    "bytes": 2960
+  },
+  {
+    "file": "evaluation_v2/window_grid__native_peak/family_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/window_grid__native_peak/family_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  },
+  {
+    "file": "evaluation_v2/window_grid__consensus_length/normalized_arrays.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/window_grid__consensus_length/normalized_arrays.tsv",
+    "sha256": "56c375753ded2aa6ee2249d7eae5e8d84cf090cca006bc1c208e3cae12ceb2bd",
+    "bytes": 13508
+  },
+  {
+    "file": "evaluation_v2/window_grid__consensus_length/array_details.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/window_grid__consensus_length/array_details.tsv",
+    "sha256": "f2ea5949a1796f8fe7229935cf6f120fe79eae146a078f40dfd11a2e8a1aa95d",
+    "bytes": 2958
+  },
+  {
+    "file": "evaluation_v2/window_grid__consensus_length/family_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/window_grid__consensus_length/family_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  },
+  {
+    "file": "evaluation_v2/r_extraction__native_peak/normalized_arrays.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/r_extraction__native_peak/normalized_arrays.tsv",
+    "sha256": "ea815697423441549b18ed5e645691f4cc74e13c900a3b85c8e44216d6f63d73",
+    "bytes": 13510
+  },
+  {
+    "file": "evaluation_v2/r_extraction__native_peak/array_details.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/r_extraction__native_peak/array_details.tsv",
+    "sha256": "2a7e9f8d1e4aa0ae923695a4b419053c592f2b9a23c4575b0cfbf3513814389b",
+    "bytes": 2960
+  },
+  {
+    "file": "evaluation_v2/r_extraction__native_peak/family_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/r_extraction__native_peak/family_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  },
+  {
+    "file": "evaluation_v2/r_extraction__consensus_length/normalized_arrays.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/r_extraction__consensus_length/normalized_arrays.tsv",
+    "sha256": "90ceed11c971618e650adb3e1f07e09fcf00c4beacd2a95f5b5d25138034d71b",
+    "bytes": 13508
+  },
+  {
+    "file": "evaluation_v2/r_extraction__consensus_length/array_details.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/r_extraction__consensus_length/array_details.tsv",
+    "sha256": "90e6a98beac2e19ac472067730d26c0f39b59b9f8f4782d91ed206d31eb8d4d1",
+    "bytes": 2958
+  },
+  {
+    "file": "evaluation_v2/r_extraction__consensus_length/family_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v2/r_extraction__consensus_length/family_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  },
+  {
+    "file": "evaluation_v3/score_trash_factorial.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/score_trash_factorial.py",
+    "sha256": "9c716c385d9614c55913c0a8de6c6e47a7a39d051474a4e4b5d1a94d5eee4f45",
+    "bytes": 11365
+  },
+  {
+    "file": "evaluation_v3/unit_coordinate_audit.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/unit_coordinate_audit.tsv",
+    "sha256": "46568587d6ec56400f1d5f105a95a5a4a1adcbf09fd719b80838e02641ee02f6",
+    "bytes": 183
+  },
+  {
+    "file": "evaluation_v3/region_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/region_metrics.tsv",
+    "sha256": "6335dd6b48d01c389fd99c67db5f756a1724e5abda67b674af104dbbe19e38aa",
+    "bytes": 2213
+  },
+  {
+    "file": "evaluation_v3/catalogue_primary_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/catalogue_primary_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  },
+  {
+    "file": "evaluation_v3/catalogue_primary_and_secondary_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/catalogue_primary_and_secondary_recovery.tsv",
+    "sha256": "2d2fd963b2d1d09484845d966f9b673af2d2cde2d2639641905585e9b4d34626",
+    "bytes": 4191
+  },
+  {
+    "file": "evaluation_v3/catalogue_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/catalogue_metrics.tsv",
+    "sha256": "c07917987d16c84d4f36aaa88caa2d64938a0154a71f95252b7857c15cc0e913",
+    "bytes": 651
+  },
+  {
+    "file": "evaluation_v3/unit_coverage_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/unit_coverage_metrics.tsv",
+    "sha256": "8dce8753f5e23f4796854e0d77695501901099600fa6a1050b65d8c2fa9cd0f0",
+    "bytes": 462
+  },
+  {
+    "file": "evaluation_v3/evaluation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/evaluation.json",
+    "sha256": "692b24823f0a5a3a8cb9d0a44cbd252ed666e692b57d44bed2002324ca2bac36",
+    "bytes": 18676
+  },
+  {
+    "file": "evaluation_v3/window_grid__native_peak/normalized_arrays.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/window_grid__native_peak/normalized_arrays.tsv",
+    "sha256": "0c5091f93520507334fae37afe182f4ae95f149e0d46ed4ae88c047f00d29bb7",
+    "bytes": 13510
+  },
+  {
+    "file": "evaluation_v3/window_grid__native_peak/array_details.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/window_grid__native_peak/array_details.tsv",
+    "sha256": "60025440125a22ce30bb04a7839f76b093320ca1e31b342c3c9ba768c2069dde",
+    "bytes": 2960
+  },
+  {
+    "file": "evaluation_v3/window_grid__native_peak/family_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/window_grid__native_peak/family_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  },
+  {
+    "file": "evaluation_v3/window_grid__consensus_length/normalized_arrays.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/window_grid__consensus_length/normalized_arrays.tsv",
+    "sha256": "56c375753ded2aa6ee2249d7eae5e8d84cf090cca006bc1c208e3cae12ceb2bd",
+    "bytes": 13508
+  },
+  {
+    "file": "evaluation_v3/window_grid__consensus_length/array_details.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/window_grid__consensus_length/array_details.tsv",
+    "sha256": "f2ea5949a1796f8fe7229935cf6f120fe79eae146a078f40dfd11a2e8a1aa95d",
+    "bytes": 2958
+  },
+  {
+    "file": "evaluation_v3/window_grid__consensus_length/family_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/window_grid__consensus_length/family_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  },
+  {
+    "file": "evaluation_v3/r_extraction__native_peak/normalized_arrays.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/r_extraction__native_peak/normalized_arrays.tsv",
+    "sha256": "ea815697423441549b18ed5e645691f4cc74e13c900a3b85c8e44216d6f63d73",
+    "bytes": 13510
+  },
+  {
+    "file": "evaluation_v3/r_extraction__native_peak/array_details.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/r_extraction__native_peak/array_details.tsv",
+    "sha256": "2a7e9f8d1e4aa0ae923695a4b419053c592f2b9a23c4575b0cfbf3513814389b",
+    "bytes": 2960
+  },
+  {
+    "file": "evaluation_v3/r_extraction__native_peak/family_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/r_extraction__native_peak/family_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  },
+  {
+    "file": "evaluation_v3/r_extraction__consensus_length/normalized_arrays.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/r_extraction__consensus_length/normalized_arrays.tsv",
+    "sha256": "90ceed11c971618e650adb3e1f07e09fcf00c4beacd2a95f5b5d25138034d71b",
+    "bytes": 13508
+  },
+  {
+    "file": "evaluation_v3/r_extraction__consensus_length/array_details.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/r_extraction__consensus_length/array_details.tsv",
+    "sha256": "90e6a98beac2e19ac472067730d26c0f39b59b9f8f4782d91ed206d31eb8d4d1",
+    "bytes": 2958
+  },
+  {
+    "file": "evaluation_v3/r_extraction__consensus_length/family_recovery.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH_factorial_s6301_10Mb_v1_20260906/evaluation_v3/r_extraction__consensus_length/family_recovery.tsv",
+    "sha256": "cd704cc39f0d81a58ce8cffdf0e5a22e6cec626ee37f8540a6f0663b897bdf2a",
+    "bytes": 4188
+  }
+]

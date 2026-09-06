@@ -921,6 +921,30 @@ model estimates, never zero error. This is separate from public quantify output.
   Environment/execution/validation receipts retain source and baseline hashes,
   fixed k values, exit/timeout/resources and complete pairing checks.
 
+## Experimental joint-read multi-k calibration
+
+See [joint_multik_uncertainty.md](joint_multik_uncertainty.md). All missing
+numbers are `NA`; Boolean coverage is also `NA` if no interval exists.
+
+- `metrics.tsv`: `seed`, `condition_id`, `family_id`, `estimated_copy_number`,
+  `log_sampling_variance`, `sampling_interval_low`, `sampling_interval_high`,
+  `minimum_effective_reads` (minimum observed (sum Y)²/sum Y² over k),
+  `positive_reads_by_k` (comma-separated counts in fixed increasing k order),
+  `fit_status`, `interval_status`, `warning`; strata `coverage`, `error_model`,
+  `unit_substitution_rate`, `array_scope`, `period`; `truth_copies`,
+  `truth_covered` (inclusive bounds), `relative_interval_width=(high-low)/truth`,
+  and `signed_relative_error=(estimate-truth)/truth`.
+- `per_k.tsv` and `inputs.tsv`: same point/exposure and hash/count fields as
+  the multi-k replay above; inputs also retain collector ambiguity/model warnings.
+- `summary.tsv`: groups by seed/coverage/error/divergence/scope; total
+  `family_conditions`, `intervals_available`, `truth_covered`,
+  `conditional_coverage_fraction=covered/available` (NA when none available),
+  `available_and_covering_fraction=covered/all`, `mean_relative_interval_width`
+  over available intervals, and a dependent-family `warning`.
+- JSON environment/execution/validation receipts retain source and previous
+  result hashes, exit/resources, fixed k/support guard, pairing completion and
+  held-out exclusion. Execution success alone is not scientific acceptance.
+
 ## Factorial discovery evaluation
 
 See [factorial_discovery_benchmark.md](factorial_discovery_benchmark.md).
@@ -1004,6 +1028,15 @@ field and labelled the current variant `packed`.
 
 ### TRASH comparator execution and coordinate controls
 
+Native catalogue sensitivity tables: `catalogue_metrics.tsv` contains
+`consensus_policy` (`primary`, `primary_and_secondary` for TRASH1),
+`native_region_count`, `secondary_missing_regions`,
+`excluded_sequence_length_count`, `in_scope_native_sequences`, cyclic family
+recovery/count/fraction fields and an explicit scope warning. Sequence length
+30–1000 bp determines eligibility independently of predicted period.
+`catalogue_POLICY_recovery.tsv` retains truth ID, recovered Boolean, assigned
+native sequence index, threshold and matching criterion for every true family.
+
 The container runner retains `image_inspect.json`, `input_qc.json`, its exact
 source, stdout/stderr, original `native/` products and `container_provenance/`
 package/version/hash records. `execution.json` has the immutable image ID,
@@ -1045,6 +1078,8 @@ interval records and10 MB of truth/catalogue input; it never loads the genome.
   zero-based inclusive window converted to half-open) or `r_extraction` (native
   R one-based inclusive extraction, with its start=0 special case); TRASH2 uses
   `one_based`. `period_source` is either `native_peak` or `consensus_length`.
+  Native periodicities can be fractional (TRASH1 emitted171.5 in the factorial
+  run); retain these decimals for tolerance and error scoring, without rounding.
   Both alternatives use the previously documented array and cyclic-recovery
   metrics. `raw_region_count` and `excluded_scope_count` show the effect of the
   fixed30–1000-bp period and100-bp span scope. One chromosome is not a read-level

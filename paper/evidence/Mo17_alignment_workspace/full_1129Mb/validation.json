@@ -1,0 +1,82 @@
+{
+  "complete": true,
+  "command": [
+    "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+    "-m",
+    "tandemx.cli",
+    "discover",
+    "--reads",
+    "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_1Gb_indexed_clustering_v1_20260906/reads.fa",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/discover",
+    "--min-period",
+    "30",
+    "--max-period",
+    "1000",
+    "--min-repeat-span",
+    "100",
+    "--min-support-reads",
+    "1",
+    "--min-read-length",
+    "1",
+    "--kmer-backend",
+    "rust",
+    "--threads",
+    "1",
+    "--no-progress",
+    "--discovery-method",
+    "elastic",
+    "--clustering-method",
+    "sequence",
+    "--cluster-identity",
+    ".95",
+    "--family-audit",
+    "related"
+  ],
+  "profile": false,
+  "execution": {
+    "exit_code": 0,
+    "runtime_seconds": 1241.8763283751905,
+    "peak_rss_mib": 697.109375,
+    "cpu_user_seconds": 1188.183733,
+    "cpu_system_seconds": 18.324001,
+    "timed_out": false
+  },
+  "products": {
+    "candidate_reads.tsv": {
+      "expected_sha256": "94e51e4a8e81625d7d958247b62fe931ea937b7a1078f539d536a6a848ab034a",
+      "observed_sha256": "94e51e4a8e81625d7d958247b62fe931ea937b7a1078f539d536a6a848ab034a",
+      "byte_identical": true
+    },
+    "candidate_monomers.fa": {
+      "expected_sha256": "eec5f36de5a4ce6292786d17ac4ee41b770865d54b5a700f9a4858842f9e7408",
+      "observed_sha256": "eec5f36de5a4ce6292786d17ac4ee41b770865d54b5a700f9a4858842f9e7408",
+      "byte_identical": true
+    },
+    "monomers.fa": {
+      "expected_sha256": "3031bdca1614e9f41944019297d04be760e85b363c6b7fce5bf3214e2d71f954",
+      "observed_sha256": "3031bdca1614e9f41944019297d04be760e85b363c6b7fce5bf3214e2d71f954",
+      "byte_identical": true
+    },
+    "families.tsv": {
+      "expected_sha256": "bec1ad640e86b77118d2e2cb890ba8a619ead3f29da9ea1cbcb4428e3f034f79",
+      "observed_sha256": "bec1ad640e86b77118d2e2cb890ba8a619ead3f29da9ea1cbcb4428e3f034f79",
+      "byte_identical": true
+    },
+    "monomer_membership.tsv": {
+      "expected_sha256": "439bd08c8d5e02f683b42a9103d507e018fdc6ecbece2c10fdb774504a1c6838",
+      "observed_sha256": "439bd08c8d5e02f683b42a9103d507e018fdc6ecbece2c10fdb774504a1c6838",
+      "byte_identical": true
+    },
+    "family_similarity.tsv": {
+      "expected_sha256": "e88c0263c73c214f080d9067ee98594c09c4e0dca42120aa94121597506e57db",
+      "observed_sha256": "e88c0263c73c214f080d9067ee98594c09c4e0dca42120aa94121597506e57db",
+      "byte_identical": true
+    },
+    "family_audit_summary.json": {
+      "expected_sha256": "4506577e450077709ae28491f3f339d66fd8baeeb7143d727e996f8d49c95244",
+      "observed_sha256": "4506577e450077709ae28491f3f339d66fd8baeeb7143d727e996f8d49c95244",
+      "byte_identical": true
+    }
+  }
+}

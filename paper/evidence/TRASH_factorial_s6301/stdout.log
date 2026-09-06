@@ -1,0 +1,232 @@
+/opt/TRASH
+TRASH will be run with /input/assembly.fa --def --o /output --par 1 --randomseed 6101 arguments
+[1] "start"
+[1] "2026-09-06 07:43:37 UTC"
+[1] "attaching function from: /opt/TRASH/src/fn_circos.R"
+[1] "attaching function from: /opt/TRASH/src/fn_consensus_N.R"
+[1] "attaching function from: /opt/TRASH/src/fn_draw_scaffold_repeat_plots.R"
+[1] "attaching function from: /opt/TRASH/src/fn_edit_distance.R"
+[1] "attaching function from: /opt/TRASH/src/fn_export_gff.R"
+[1] "attaching function from: /opt/TRASH/src/fn_extract_all_repeats.R"
+[1] "attaching function from: /opt/TRASH/src/fn_extract_kmers.R"
+[1] "attaching function from: /opt/TRASH/src/fn_hash_and_reverse.R"
+[1] "attaching function from: /opt/TRASH/src/fn_HOR_wrapper.R"
+[1] "attaching function from: /opt/TRASH/src/fn_kmer_compare.R"
+[1] "attaching function from: /opt/TRASH/src/fn_movav.R"
+[1] "attaching function from: /opt/TRASH/src/fn_new_distance_N.R"
+[1] "attaching function from: /opt/TRASH/src/fn_plot_edit.R"
+[1] "attaching function from: /opt/TRASH/src/fn_plot_rep.R"
+[1] "attaching function from: /opt/TRASH/src/fn_repeat_identifier.R"
+[1] "attaching function from: /opt/TRASH/src/fn_repetitiveness.R"
+[1] "attaching function from: /opt/TRASH/src/fn_rev_comp_string.R"
+[1] "/usr/local/lib/R/site-library"
+[1] "/input/assembly.fa"
+[1] "Currently registered parallel backend name, version and cores"
+[1] "doParallelMC"
+[1] "1.0.17"
+[1] 1
+[1] "Sequences to analyse:"
+    file.name fasta.name
+2 assembly.fa    chr_sim
+[1] "2026-09-06 07:43:40 UTC"
+[1] "Working on sequence 1"
+[1] "Repeat Identification new"
+[1] "/output"
+[1] "assembly.fa"
+[[1]]
+NULL
+
+          used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells 3033015 162.0    5501658 293.9  5501658 293.9
+Vcells 7905121  60.4   21468864 163.8 21468707 163.8
+[1] "Finished working on sequence 1"
+[1] "2026-09-06 08:21:52 UTC"
+[1] "saving repeats"
+[1] "/output"
+[1] "./assembly.fa_out/Regions_assembly.fa_chr_sim.csv"
+[1] "start extract repeats from assembly.fa"
+[1] "saving regions no:"
+[1] 49
+[1] "save region:"
+[1] 1
+[1] 80
+[1] "save region:"
+[1] 2
+[1] 80
+[1] "save region:"
+[1] 3
+[1] 80
+[1] "save region:"
+[1] 4
+[1] 80
+[1] "save region:"
+[1] 5
+[1] 80
+[1] "save region:"
+[1] 6
+[1] 200
+[1] "save region:"
+[1] 7
+[1] 200
+[1] "save region:"
+[1] 8
+[1] 198
+[1] "save region:"
+[1] 9
+[1] 200
+[1] "save region:"
+[1] 10
+[1] 199
+[1] "save region:"
+[1] 11
+[1] 200
+[1] "save region:"
+[1] 12
+[1] 19
+[1] "save region:"
+[1] 13
+[1] 20
+[1] "save region:"
+[1] 14
+[1] 21
+[1] "save region:"
+[1] 15
+[1] 19
+[1] "save region:"
+[1] 16
+[1] 21
+[1] "save region:"
+[1] 17
+[1] 21
+[1] "save region:"
+[1] 18
+[1] 79
+[1] "save region:"
+[1] 19
+[1] 79
+[1] "save region:"
+[1] 20
+[1] 80
+[1] "save region:"
+[1] 21
+[1] 80
+[1] "save region:"
+[1] 22
+[1] 80
+[1] "save region:"
+[1] 23
+[1] 80
+[1] "save region:"
+[1] 24
+[1] 200
+[1] "save region:"
+[1] 25
+[1] 198
+[1] "save region:"
+[1] 26
+[1] 200
+[1] "save region:"
+[1] 27
+[1] 199
+[1] "save region:"
+[1] 28
+[1] 200
+[1] "save region:"
+[1] 29
+[1] 199
+[1] "save region:"
+[1] 30
+[1] 20
+[1] "save region:"
+[1] 31
+[1] 19
+[1] "save region:"
+[1] 32
+[1] 19
+[1] "save region:"
+[1] 33
+[1] 19
+[1] "save region:"
+[1] 34
+[1] 18
+[1] "save region:"
+[1] 35
+[1] 18
+[1] "save region:"
+[1] 36
+[1] 79
+[1] "save region:"
+[1] 37
+[1] 79
+[1] "save region:"
+[1] 38
+[1] 80
+[1] "save region:"
+[1] 39
+[1] 80
+[1] "save region:"
+[1] 40
+[1] 79
+[1] "save region:"
+[1] 41
+[1] 80
+[1] "save region:"
+[1] 42
+[1] 199
+[1] "save region:"
+[1] 43
+[1] 200
+[1] "save region:"
+[1] 44
+[1] 199
+[1] "save region:"
+[1] 45
+[1] 200
+[1] "save region:"
+[1] 46
+[1] 199
+[1] "save region:"
+[1] 47
+[1] 199
+[1] "save region:"
+[1] 48
+[1] 6000
+[1] "save region:"
+[1] 49
+[1] 79
+[1] "Export gff function"
+[1] "read repeats"
+[1] "wrtiting repeats"
+[1] "finished saving"
+[1] "edit distance"
+[1] "Available classes: "
+[1] "no classes assigned to the repeats to calculate edit distance, stopping edit distance calculation"
+          used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells 3035320 162.2    5501658 293.9  5501658 293.9
+Vcells 7917277  60.5   21468864 163.8 21468707 163.8
+[1] "Available classes: NA"
+          used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells 3042415 162.5    5501658 293.9  5501658 293.9
+Vcells 7935984  60.6   21468864 163.8 21468707 163.8
+[1] "plotting"
+[1] "circos"
+[1] "identify chromosomes"
+[1] "Identify main peaks"
+[1] "Merge peaks"
+[1] "export data"
+[1] "Circos Plotting"
+[1] "set sectors"
+[1] "generate circos plot"
+[1] "1"
+[1] "2"
+[1] "3"
+[1] "4"
+[1] "5"
+[1] "genomic track"
+[1] "leftover repeats"
+[1] "assembly.fa plots done"
+[1] "finished plotting"
+[1] "TRASH finished, exiting"
+          used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells 3086512 164.9    5501658 293.9  5501658 293.9
+Vcells 8039712  61.4   21468864 163.8 21468707 163.8

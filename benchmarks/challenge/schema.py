@@ -17,12 +17,14 @@ class ArrayRecord:
     read_id: str
     start: int
     end: int
-    period: int
+    period: int | float
     sequence: str = ""
     family_id: str = ""
 
     def __post_init__(self) -> None:
-        if not self.read_id or self.start < 0 or self.end <= self.start or self.period < 1:
+        if (not self.read_id or self.start < 0 or self.end <= self.start
+                or isinstance(self.period, bool) or not isinstance(self.period, (int, float))
+                or not math.isfinite(self.period) or self.period < 1):
             raise ValueError(f"Invalid array record: {self}")
         if self.sequence and set(self.sequence.upper()) - set("ACGTN"):
             raise ValueError("Array consensus must contain only ACGTN")

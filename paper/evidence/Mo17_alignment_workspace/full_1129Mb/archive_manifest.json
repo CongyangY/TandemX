@@ -1,0 +1,56 @@
+[
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/validation.json",
+    "sha256": "1a3ca1b29fc86b3dc1302f21cb1847c6a2db2cfd6afc0c10d984ba3fd1d4bee4",
+    "bytes": 2806
+  },
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/environment.json",
+    "sha256": "887b1398e949e9c7d937a1ecdf98661aa41da969510db344a59ed0cd68c93040",
+    "bytes": 7933
+  },
+  {
+    "file": "replay_discovery.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/replay_discovery.py",
+    "sha256": "091ae2b7aad308d93009db6da0b5fa20edb335bb254379f00fc15d2c6a500e6f",
+    "bytes": 4465
+  },
+  {
+    "file": "stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/stdout.log",
+    "sha256": "0659356b3d1f20f3f629cc476cc52cab258114a006115b572682471f8cd9c9db",
+    "bytes": 148
+  },
+  {
+    "file": "stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "discover/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/discover/run_config.yaml",
+    "sha256": "55ae3d5885f9044cd2e3e12a275262b8c911405054f662140d15149513a4a3ac",
+    "bytes": 1994
+  },
+  {
+    "file": "discover/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/discover/run.log",
+    "sha256": "2114f0eb6cbcfe15ac3831e4583c928e7af745637aa6579affb2d1337eb83631",
+    "bytes": 19076
+  },
+  {
+    "file": "discover/discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/discover/discovery_summary.json",
+    "sha256": "a2c5edc2c95d2f49461f938f7bdf4dc59089b4bc26a2a42c5079c915624a6d2f",
+    "bytes": 874
+  },
+  {
+    "file": "discover/family_audit_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_1129Mb_inplace_alignment_v1_20260906/discover/family_audit_summary.json",
+    "sha256": "4506577e450077709ae28491f3f339d66fd8baeeb7143d727e996f8d49c95244",
+    "bytes": 404
+  }
+]
