@@ -109,7 +109,7 @@ Metrics:
 
 | Metric | Unit | Definition |
 |---|---:|---|
-| known_family_recovery | fraction | Known repeat families recovered |
+| selected_source_query_recovery | fraction | Source-backed repeat queries recovered from actual consensus outputs; call this known-family recall only when independent same-material presence and a declared family denominator support it |
 | known_location_consistency | qualitative | Agreement with published chromosomal localization |
 | runtime_sec | seconds | Wall-clock runtime |
 | peak_memory_mb | MB | Peak resident memory |

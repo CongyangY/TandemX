@@ -1,0 +1,5 @@
+material	tool	prediction_unit	query_id	query_length	recovered	matched_consensus_length	matched_cyclic_edit_similarity	matched_consensus_sha256	matched_source_occurrence_count	matched_source_examples	supported_distinct_consensus_count	best_supported_cyclic_edit_similarity	best_supported_consensus_length	best_supported_consensus_sha256	best_supported_source_occurrence_count	best_supported_source_examples	threshold	evidence_boundary
+Morex	tandemx	family_catalog	HvT01_X16095_1_1_118	118	0	NA	NA	NA	NA	NA	0	NA	NA	NA	NA	NA	0.95	HvT01_X16095_Donetsky_A_not_Morex_threshold_sensitivity_only
+Morex	tandemx_candidates	family_catalog	HvT01_X16095_1_1_118	118	0	NA	NA	NA	NA	NA	0	NA	NA	NA	NA	NA	0.95	HvT01_X16095_Donetsky_A_not_Morex_threshold_sensitivity_only
+Morex	tidehunter	array_consensus	HvT01_X16095_1_1_118	118	0	NA	NA	NA	NA	NA	0	NA	NA	NA	NA	NA	0.95	HvT01_X16095_Donetsky_A_not_Morex_threshold_sensitivity_only
+Morex	trf	array_consensus	HvT01_X16095_1_1_118	118	0	NA	NA	NA	NA	NA	0	NA	NA	NA	NA	NA	0.95	HvT01_X16095_Donetsky_A_not_Morex_threshold_sensitivity_only

@@ -5,7 +5,7 @@ import pytest
 from benchmarks.challenge.schema import ArrayRecord
 from benchmarks.scripts.qc_complete_fastq import qc
 from benchmarks.scripts.sample_complete_fastq import sample
-from benchmarks.scripts.run_real_comparators import prepare_input, describe_arrays
+from benchmarks.scripts.run_real_comparators import prepare_input, describe_arrays, run
 
 
 def test_real_input_conversion_retains_identical_sequence_and_checks_receipt(tmp_path):
@@ -33,3 +33,9 @@ def test_descriptive_union_is_not_duplicate_base_accuracy():
         describe_arrays([ArrayRecord('a', 0, 13, 3)], {'a': 12})
     with pytest.raises(ValueError, match='unknown'):
         describe_arrays([ArrayRecord('c', 0, 2, 1)], {'a': 12})
+
+
+def test_real_comparator_rejects_invalid_thread_budget(tmp_path):
+    with pytest.raises(ValueError, match='Threads'):
+        run(tmp_path/'receipt.json', 'sample_001', tmp_path/'out', tmp_path/'trf',
+            tmp_path/'tidehunter', 1, threads=0)

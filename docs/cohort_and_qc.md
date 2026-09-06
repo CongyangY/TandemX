@@ -4,18 +4,19 @@ Updated 2026-09-06 following the user's explicit requirement for substantial
 real data, simulations, taxonomic breadth and literature-informed QC. This is
 the prospective design and acquisition record, **not completed validation**.
 
-Full-file QC passed for Mo17 SRR15447419 (5.625 Gb), Col-0N ERR6210723
-(14.647 Gb), Nipponbare SRR25241090 (32.966 Gb) and Morex ERR4659246
-(19.525 Gb), Lo7 ERR15194059 (77.092 Gb) and Chinese Spring SRR28200549
-(24.954 Gb). These are six materials/species with file QC, not six completed
-biological accuracy validations. Whole-file seed6101 rice/Morex sampling through
-10 Gb completed; wheat and Lo7 up-to40-Gb sampling remain active.
-Mo17 comparison now includes1.129 Gb, with all three methods successful; its
-seven TandemX products are identical before/after dictionary-index optimization.
-All real-call metrics remain descriptive. Victoria oat completed transfer checks
-and started full QC; Col-0R single-plant and Ey15-2R pooled-plant downloads remain
-active to broaden species/materials. New Morex and rice comparisons include
-uniform whole-file samples, not archive-order prefixes.
+Full-file QC passed for nine included libraries across seven species: Mo17,
+Col-0N, Col-0R, Ey15-2R, Nipponbare, Morex, Lo7, Chinese Spring and Victoria.
+Together they contain 12,320,381 reads and 218,538,165,764 bp. These are file-QC
+records, not nine independent specimens or seven completed biological accuracy
+validations. Seed6101 whole-library sampling is complete for every included
+library; the largest current nested samples range from 1.109 Gb for Victoria to
+42.360 Gb for Lo7. FASTQ and ID products remain on T7, while compact plans,
+receipts and distributions are archived with the paper evidence.
+Mo17 comparison includes 1.129 Gb, with all three methods successful; its seven
+TandemX products are identical before/after dictionary-index optimization. All
+real-call metrics remain descriptive. Morex reference acquisition and the first
+1.170-Gb current-source comparison remain active. YSD56 wild-soybean HiFi is a
+prospective eighth species and remains excluded pending checksum and full-file QC.
 The prospective enrollment table below retains metadata-level source details;
 use the latest receipts and `current_status.md` for completed versus running work.
 Published Mo17 region evidence is documented in
@@ -80,15 +81,16 @@ Known-motif BLAST+union and TRF comparisons complement de novo tools here.
 | Species/material | Verified project/run or source | Current boundary |
 | --- | --- | --- |
 | Arabidopsis Col-0N / Col-CEN | PRJEB46164, ERR6210723; [official Col-CEN v1.2](https://github.com/schatzlab/Col-CEN/tree/main/v1.2) | Full file QC passed: 933,904 reads / 14,646,601,458 bp; whole-library nested samples completed. Pooled plants, not individual replicates. Reference and known issues verified; nuclear/organelle denominators separate |
-| Arabidopsis Col-0R / Ey15-2R | ERR8666127 / ERR8666125 from SRF Table 3 | Additional sources under metadata review; separate strain/pooling categories |
+| Arabidopsis Col-0R / Ey15-2R | ERR8666127 / ERR8666125 from SRF Table 3 | Complete-file QC passed: 17.747/18.637 Gb. Seed6101 nested sampling completed through 10.644/10.628 Gb. Col-0R is reported as one plant; Ey15-2R is pooled. These are two libraries/materials, not species or interchangeable replicates |
 | Rice Nipponbare | PRJNA953663, SRR25241090; [reference audit](nipponbare_reference.md) | Complete 32.966-Gb FASTQ QC and GCA_034140825.1 reference QC passed. Raw/assembly sample dates differ; exact donor match unresolved. chr9 rDNA model sequence excluded from exact copy truth |
 | Maize Mo17 | PRJNA751841, seven PacBio WGS runs | First full CCS batch SRR15447419 passed QC (407,670 reads / 5.625 Gb); complete reference and whole-library samples verified. A single batch is not the full published data set |
 | Maize B73 | SRR11606869 from SRF | 48.075 Gb bases, 41.984 GB compressed in metadata; matching assembly/material review pending |
 | Barley Morex and pangenome | PRJEB40587, PRJEB57567, PRJEB58554 | ERR4659246 complete 19.525-Gb FASTQ QC and nested sampling through 10.745 Gb passed; original MorexV3 reference downloading. Pangenome material enrollment remains separate |
-| Rye Lo7 | PRJEB91463; [source paper](https://www.nature.com/articles/s41467-026-76753-4) | One of three HiFi Revio technical runs, ERR15194059, passed complete 77.092-Gb FASTQ QC; whole-library sampling active. Single diploid Lo7 plant is explicit; version-matched reference still needed |
-| Bread wheat Chinese Spring / CS-IAAS study | PRJNA1062539; [source paper](https://www.nature.com/articles/s41588-025-02137-x) | 80 PacBio WGS records are technical batches. SRR28200549 / SRX23813612 / SRS20636216 explicitly confirm HiFi, Chinese Spring, leaf and library HiFib_p1. One complete batch downloading; exact donor/assembly match and full QC remain pending |
-| Oat PanOat | PRJEB56828; [source paper](https://www.nature.com/articles/s41586-025-09676-7) | Original supplement confirms Victoria HiFi, raw SAMEA111508775 and assembly GCA_947311595. ERR10422581 download active. ERR10422482/CN25955 has A. fatua in ENA versus A. occidentalis in paper figure labels; retain taxonomy discrepancy and do not substitute it for cultivated oat |
+| Rye Lo7 | PRJEB91463; [source paper](https://www.nature.com/articles/s41467-026-76753-4) | One of three HiFi Revio technical runs, ERR15194059, passed complete 77.092-Gb FASTQ QC; seed6101 nested sampling completed through 42.360 Gb. Single diploid Lo7 plant is explicit; version-matched reference still needed |
+| Bread wheat Chinese Spring / CS-IAAS study | PRJNA1062539; [source paper](https://www.nature.com/articles/s41588-025-02137-x) | SRR28200549 passed complete QC at 1,500,000 reads/24.954 Gb; seed6101 nested sampling completed through 11.215 Gb. The study's 80 PacBio WGS records are technical batches. Exact donor/assembly matching remains unresolved |
+| Oat PanOat | PRJEB56828; [source paper](https://www.nature.com/articles/s41586-025-09676-7) | Victoria ERR10422581 passed complete QC at 398,850 reads/7.346 Gb; seed6101 sampling completed through 1.109 Gb. Raw SAMEA111508775 and assembly GCA_947311595 are source-supported. ERR10422482/CN25955 has A. fatua in ENA versus A. occidentalis in paper figure labels; retain the discrepancy and do not substitute it for cultivated oat |
 | Soybean ZH13, Jack, Wm82 | [Genome Biology source](https://doi.org/10.1186/s13059-025-03924-9); ZH13 PRJCA015269 | Data source verified in paper; files, material/version matching and accessibility still pending. New relevant comparator: unitFinder |
+| Wild soybean YSD56 | PRJNA1095640, SRR28726931; [source study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12350797/) | Official ENA metadata identifies 44.193-Gb genomic HiFi WGS and same-leaf ONT support; complete 21.867-GB FASTQ download active. Do not include until checksum and full-file QC pass; cultivated and wild soybean remain distinct species/material strata |
 
 GB means 10^9 file bytes; Gb means 10^9 sequence bases. These totals are ENA
 metadata observations, not downloaded or QC-passed amounts. Metadata snapshots

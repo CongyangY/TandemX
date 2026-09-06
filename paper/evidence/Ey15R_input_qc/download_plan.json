@@ -1,0 +1,35 @@
+{
+  "accession": "ERR8666125",
+  "metadata": {
+    "run_accession": "ERR8666125",
+    "study_accession": "PRJEB50694",
+    "secondary_study_accession": "ERP135313",
+    "sample_accession": "SAMEA13018399",
+    "experiment_accession": "ERX8331480",
+    "scientific_name": "Arabidopsis thaliana",
+    "sample_title": "Ey15-2_9994_DNA",
+    "experiment_title": "Sequel II sequencing: Raw reads: Ey15-2_9994_HiFi",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Sequel II",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "library_selection": "RANDOM",
+    "read_count": "837586",
+    "base_count": "18636790429",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/ERR866/005/ERR8666125/ERR8666125.fastq.gz",
+    "fastq_md5": "e9e5c1cd82e175bb8cd9583bf372aff6",
+    "fastq_bytes": "17397432231"
+  },
+  "metadata_sha256": "79b1025e643dc76938a838a0aa26dc43cdc12bc7494d26e84ebd512789af7035",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/ERR866/005/ERR8666125/ERR8666125.fastq.gz",
+      "filename": "ERR8666125.fastq.gz",
+      "expected_md5": "e9e5c1cd82e175bb8cd9583bf372aff6",
+      "expected_bytes": 17397432231
+    }
+  ],
+  "max_download_gb": 17.5,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b"
+}

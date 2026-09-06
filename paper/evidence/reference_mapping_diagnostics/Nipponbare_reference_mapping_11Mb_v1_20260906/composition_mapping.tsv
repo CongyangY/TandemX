@@ -1,0 +1,10 @@
+dimension	bin_start_percent	bin_end_percent	read_count	total_bases	any_mapped_reads	primary_mapped_reads	primary_mapq20_reads	any_alignment_span_bp	primary_span_bp	primary_mapq20_span_bp	organelle_primary_reads	primary_organelle_span_bp	primary_other_reference_span_bp	primary_compartment_overlap_bp
+gc	30	35	2	20445	2	2	1	20445	20445	16952	0	0	20445	0
+gc	35	40	109	1903156	109	109	105	1903109	1903109	1847824	0	0	1903109	0
+gc	40	45	335	6270823	335	335	331	6261385	6261385	6185126	0	0	6261385	0
+gc	45	50	143	2619366	143	143	142	2619238	2619238	2602946	0	0	2619238	0
+gc	50	55	28	434764	28	28	27	434764	434764	418265	0	0	434764	0
+gc	55	60	5	92412	5	5	5	92409	92409	92409	0	0	92409	0
+gc	60	65	4	77050	4	4	0	77050	77050	0	0	0	77050	0
+max_purine_pyrimidine	50	55	622	11368265	622	622	608	11358649	11358649	11117264	0	0	11358649	0
+max_purine_pyrimidine	55	60	4	49751	4	4	3	49751	49751	46258	0	0	49751	0

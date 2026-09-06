@@ -818,6 +818,28 @@ above. The plan stores exact integer thresholds; the receipt defines probability
 expected/observed read and base totals, hashes, and nominal total-base coverage.
 An empty random sample has zero counts and JSON null distribution statistics.
 
+`python -m benchmarks.scripts.archive_sampling_evidence` creates a compact,
+reviewable evidence copy only after validating a complete receipt, matching plan
+hash, unique sample IDs, completed sample status and histogram totals. Its
+`archive_manifest.json` records each copied file's source path, SHA-256 and byte
+size. The archive contains the plan, receipt and each sample's length/joint TSV;
+large FASTQs and lossless ID tables remain at the T7 data root.
+
+`python -m benchmarks.scripts.archive_fastq_qc_evidence` validates a completed,
+gzip-checked, duplicate-free full-file QC receipt and reconciles the read/base
+denominators in all three distribution tables before copying them. Its archive
+contains `qc.json`, length, joint GC/quality and base-quality histograms plus a
+source/hash/byte manifest. The raw FASTQ and disk-backed ID index are excluded.
+
+`python -m benchmarks.scripts.archive_real_comparator_evidence` accepts only a
+three-tool real-read result whose summary has one successful, non-timeout,
+normalized row for TandemX, TRF and TideHunter and whose environment preserves
+the no-independent-truth accuracy boundary. The compact archive contains the
+environment, summary, execution receipts, logs and TandemX run summaries/config;
+reads, native call sets, normalized intervals, evaluation database and source
+snapshot remain at their hashed T7 location. `archive_manifest.json` records
+the source path, SHA-256 and bytes for every copied file.
+
 ## Experimental read-cluster replay
 
 See [read_cluster_quantification.md](read_cluster_quantification.md) for formulas
@@ -1057,6 +1079,34 @@ and extraction coordinates in each header. `curation_receipt.json` identifies
 source/query counts, curator/retrieval/output hashes, completion and scope.
 These coordinates concern the small deposited record, not the test assembly.
 
+### Cross-tool source-query recovery tables
+
+`evaluate_known_repeats_across_tools.py` writes `known_query_summary.tsv`,
+`known_query_details.tsv` and `evaluation_receipt.json`. The evaluator reads
+actual TandemX family FASTA records and normalized per-array consensus sequences
+from other tools. It canonicalizes rotations and reverse complements, removes
+exact duplicate consensus sequences and applies global cyclic Levenshtein
+similarity at the declared threshold.
+
+`known_query_summary.tsv` contains `material`, `tool`, `prediction_unit`, source
+and nonempty row counts, distinct and length-compatible consensus counts,
+selected/recovered query counts, `selected_query_recall`,
+`homologous_consensus_fraction`, `threshold` and `warning`.
+`known_query_details.tsv` contains one tool/query row with query length, recovery
+status, deterministic one-to-one assignment fields, count of threshold-supported
+distinct consensuses, the independently best supported similarity/sequence hash,
+source occurrence counts, up to five source-record examples, threshold and the
+supplied evidence boundary.
+Missing matches are `NA`. The receipt hashes every input,
+output and the evaluator. `family_catalog` and `array_consensus` are distinct
+prediction units; their consensus counts and homologous fractions are not
+directly comparable as precision.
+
+This endpoint is deliberately named selected source-query recovery. Unless
+same-donor presence has been established independently, it is not genome-wide
+family recall, a false-negative rate, array-coordinate accuracy or evidence that
+unmatched consensus sequences are false positives.
+
 Native-index ablations retain the isolated replay schema and add `comparison`
 to the environment and `index_backend` (`python`/`native`) to each worker receipt.
 Both variants use the same source/native binary and native alignment. Historical
@@ -1099,9 +1149,11 @@ automatic correction or calculate biological recall/precision.
 
 `replay_discovery.py` writes a frozen environment plus `validation.json` with
 command, child execution, profile flag and all seven expected/observed product
-hashes and equality flags. Profile mode additionally creates `discovery.prof`.
-Any changed input/baseline product, tool failure or output mismatch leaves
-`complete=false` and a concrete error.
+hashes and equality flags. An optional `--threads` override changes only the
+declared discover thread budget; `baseline_threads` and `replay_threads` are
+recorded, and byte parity remains mandatory. Profile mode additionally creates
+`discovery.prof`. Any changed input/baseline product, tool failure or output
+mismatch leaves `complete=false` and a concrete error.
 
 ### Factorial assembly comparator evaluation
 

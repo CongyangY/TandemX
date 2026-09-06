@@ -1,0 +1,38 @@
+[
+  {
+    "file": "download_plan.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666127_complete/download_plan.json",
+    "sha256": "bc4dd2218bff94e2c7627e3fac4cc83b9df32e1b378499d881af0694253ec9f2",
+    "bytes": 1328
+  },
+  {
+    "file": "download_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666127_complete/download_receipt.json",
+    "sha256": "9f7793499507a144dd86759571fb86b6986ab428c291dad12e2c95b4d4048db3",
+    "bytes": 1887
+  },
+  {
+    "file": "qc_v1/qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666127_complete/qc_v1/qc.json",
+    "sha256": "f4fc68f0b24da95ccd009fe034ade5367e364a5d7c240e8ac49f4922d361d0fa",
+    "bytes": 916
+  },
+  {
+    "file": "qc_v1/length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666127_complete/qc_v1/length_histogram.tsv",
+    "sha256": "bacd0602c1b7152408809d8f6eb7c389f61f2add4cee529a3f8862cecf77300c",
+    "bytes": 319429
+  },
+  {
+    "file": "qc_v1/base_quality_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666127_complete/qc_v1/base_quality_histogram.tsv",
+    "sha256": "8a914492b81ed2c26c006e619df851104607531d1a4aab0c3c396ff193292397",
+    "bytes": 1259
+  },
+  {
+    "file": "qc_v1/joint_distribution.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666127_complete/qc_v1/joint_distribution.tsv",
+    "sha256": "c5d6e4282f546b2e6fa92f687dfbe1fa30705739bd675d20b5cb3bc40ca01949",
+    "bytes": 95296
+  }
+]

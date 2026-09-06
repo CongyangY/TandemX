@@ -1,0 +1,10 @@
+[M::mm_idx_gen::4.308*0.99] collected minimizers
+[M::mm_idx_gen::6.468*0.99] sorted minimizers
+[M::main::6.468*0.99] loaded/built the index for 12 target sequence(s)
+[M::mm_mapopt_update::6.767*0.99] mid_occ = 205
+[M::mm_idx_stat] kmer size: 19; skip: 19; is_hpc: 0; #seq: 12
+[M::mm_idx_stat::6.984*0.99] distinct minimizers: 26985432 (91.29% are singletons); average occurrences: 1.446; average spacing: 9.885; total length: 385710679
+[M::worker_pipeline::13.217*0.99] mapped 626 sequences
+[M::main] Version: 2.31-r1302
+[M::main] CMD: /Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2 -x map-hifi -c --cs=short --secondary=yes -N 5 -t 1 -K 50M -I 3G /Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/GCA_034140825.1_AGIS1.0_genomic.fna.gz /Volumes/T7/Codex/TandemX/data/subsets/SRR25241090_seed6101_v1/sample_001.fastq.gz
+[M::main] Real time: 13.254 sec; CPU: 13.167 sec; Peak RSS: 2.653 GB

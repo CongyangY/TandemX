@@ -1,10 +1,10 @@
 # Table 1. Included complete raw HiFi libraries
 
-`input_cohort.tsv` is derived from the completed, archived QC receipts for seven
-reported species/materials. It contains exact run IDs, read/base totals, length
+`input_cohort.tsv` is derived from completed, archived QC receipts for nine
+included libraries from seven reported species. It contains exact run IDs, read/base totals, length
 statistics, GC/N summaries, duplicate archive-ID counts, raw-file SHA-256 and
 the source QC receipt/hash for each row. Total included sequence is
-182,154,653,320 bp. Values describe these included files, not complete studies,
+218,538,165,764 bp in 12,320,381 reads. Values describe these included files, not complete studies,
 independent biological replicates or true nuclear sequencing coverage.
 
 The species/material labels come from the curated source records; no taxonomic

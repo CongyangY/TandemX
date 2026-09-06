@@ -18,8 +18,8 @@ read errors, fixed multi-k extrapolation reduced mean absolute relative
 copy-number error from 56.59% for the median-k21 baseline to 13.53%. A joint-read
 sampling calculation retained dependence across k values: at 20×, 424 of 495
 family conditions supported intervals, of which 401 contained truth (94.58%).
-Low-coverage missingness remained substantial. File-level QC covered 182.155 Gb
-across seven reported plant species. Reference concordance in a 118.497-Mb
+Low-coverage missingness remained substantial. File-level QC covered 218.538 Gb
+in nine libraries across seven reported plant species. Reference concordance in a 118.497-Mb
 Arabidopsis subset identified 22.19% of input bases with organellar primary
 alignment spans, highlighting a potential total-library normalization bias.
 Exact native optimizations shortened a 1.129-Gb maize replay by 23.61% relative
@@ -165,29 +165,60 @@ uncertainty, catalogue error and biological pooling.
 
 ### Seven-species file QC and reference concordance expose normalization concerns
 
-Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N, rice
+Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N/Col-0R/Ey15-2R, rice
 Nipponbare, barley Morex, rye Lo7, wheat Chinese Spring and oat Victoria passed
-source checksum and full-file validation, totalling 182,154,653,320 bp (Table 1).
+source checksum and full-file validation, totalling 218,538,165,764 bp in
+12,320,381 reads (Table 1).
 Checks covered record structure, gzip integrity, exact duplicate archive IDs,
 length distributions, GC/N content and reported base-quality distributions.
-These are seven reported species/materials, not seven completed biological
+These are nine included libraries from seven reported species, not seven completed biological
 accuracy validations. Several accessions represent one technical batch of a
-larger study, and Col-0N derives from pooled plants. Nested samples preserve
-whole-library selection and exact read IDs (Figures S1–S2; Evidence E7).
+larger study. Col-0N and Ey15-2R derive from pooled plants, whereas Col-0R is
+reported as a single plant. These units are not interchangeable replicates. Nested samples preserve
+whole-library selection and exact read IDs (Figures S1–S3; Evidence E7).
 
-Whole-library comparator pilots on Morex and Nipponbare, and the completed
-11.361-Mb Victoria pilot, successfully normalized all three read-tool outputs.
-TandemX was faster than TRF and slower than TideHunter in these observations,
-with lower measured RSS than both. More calls or more covered bases do not
+Whole-library random-sample comparator diagnostics on Morex, Nipponbare,
+Victoria, Chinese Spring and Lo7 successfully normalized all three read-tool
+outputs. TandemX was faster than TRF and slower than TideHunter in these
+observations. Its measured RSS was often lower at smaller inputs but this did
+not persist across larger samples. More calls or more covered bases do not
 establish greater accuracy without independent truth. The 1.129-Gb maize
 experiment also showed that smaller-input rankings cannot be extrapolated
-to larger genomes (Evidence E8).
+to larger inputs (Evidence E8).
 
-The subsequently completed110.203-Mb Victoria run provides a further resource
-counterexample: TandemX used250.453 MiB versus176.719 MiB for TRF and621.453 MiB
-for TideHunter. Its elapsed time was164.738 s versus362.689 and81.982 s,
+The subsequently completed 110.203-Mb Victoria run provides a further resource
+counterexample: TandemX used 250.453 MiB versus 176.719 MiB for TRF and 621.453 MiB
+for TideHunter. Its elapsed time was 164.738 s versus 362.689 and 81.982 s,
 respectively. Thus its memory advantage in the smaller oat input did not hold
 against TRF in this larger nested sample.
+
+The 126.731-Mb Chinese Spring comparison completed in 139.529 s/223.828 MiB
+for TandemX, 332.287 s/311.938 MiB for TRF and 48.230 s/413.500 MiB for
+TideHunter. All three methods also completed the 11.640-Mb Lo7 control.
+These are concurrent development diagnostics with one repetition; their resource
+observations do not replace isolated scaling experiments or biological accuracy
+(Figure S4).
+
+The 1.170-Gb Morex diagnostic completed in 1909.525 s/913.891 MiB for TandemX,
+2409.145 s/286.172 MiB for TRF and 566.196 s/580.375 MiB for TideHunter.
+TandemX was 20.74% faster than TRF, but used 3.19-fold its peak RSS and required
+3.37-fold the TideHunter wall time; it also used 1.57-fold the TideHunter peak
+RSS. This is a concrete current deficit rather than evidence of multi-metric
+superiority. The scan and clustering stages remain optimization targets.
+
+Post hoc sequence checks used actual consensus outputs and one historical query
+per material. At 90% cyclic global edit similarity, all three tools recovered
+CentC from the 111-Mb Mo17 input and Rice358 from the 114-Mb Nipponbare input.
+TandemX's best family representatives had similarities 0.9872 and 0.9358,
+respectively. In Morex, TRF and TideHunter recovered an HvT01-like 118-bp
+consensus at 0.9068, as did TandemX's candidate stage, whereas the corresponding
+TandemX family representative was 0.8983 and fell below the threshold. At 0.89
+all methods/stages recovered it and at 0.95 none did (Evidence E10).
+
+The three historical queries derive from materials other than the test donors.
+These results therefore measure selected source-query recovery and expose a
+family-representation boundary; they do not provide complete real-family recall,
+false-negative rates or donor-specific truth.
 
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
@@ -203,6 +234,12 @@ from total-library exposure. It does not establish an exact 22.2% copy-number
 bias or justify automatically discarding all organelle-aligned reads. Integrated
 organellar sequences, uncertain placements, genotype/reference differences
 and sequence-dependent sampling require additional evaluation.
+
+In a separate 11.418-Mb Nipponbare control, 626/626 reads had primary mappings,
+611 had primary MAPQ 20–254 alignments and primary query spans covered 99.9158%
+of input bases. This exact GCA reference contains no organellar contigs, so zero
+reported organelle mappings cannot establish absence of organellar reads. Raw
+and reference BioSamples also differ; exact donor identity remains unresolved.
 
 ## Discussion
 
@@ -242,12 +279,11 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The latest completed local Python suite comprises 389
+PyO3/Rust extension. The latest completed local Python suite comprises 405
 tests; the last native checkpoint passed 13 Rust tests, formatting and clippy
-with warnings denied. Git d2aa4d6 records the completed joint-read estimator
-and comparator evidence. Later reference-QC code uses separately archived
-development source hashes and is not represented as that commit's exact code.
-Per-run manifests take precedence over a manuscript-level version label.
+with warnings denied. Per-run manifests and compact evidence archives preserve
+the exact source, input and output hashes used for each result and take
+precedence over a manuscript-level version label.
 Public inputs and reuse paths are described in the repository documentation.
 
 ### Independent simulation and split discipline
@@ -340,10 +376,11 @@ retained. Gains and worse-performing conditions are shown together.
 
 **Figure 2. Joint-read sampling intervals and explicit unavailable estimates.**
 Six panels show availability, seed-specific conditional coverage, divergence/
-error strata,20× point estimates, interval width against effective support and
+error strata, 20× point estimates, interval width against effective support and
 missingness by abundance. Dashed lines in coverage panels denote nominal 95%.
 The exact panel legend is in `evidence/factorial_joint_multik/README.md`.
-The archived version 1 layout is diagnostic; its panel-A legend needs repositioning.
+The inspected version 2 layout moves the panel-A legend clear of the data;
+its source rows are identical to version 1.
 
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
@@ -352,12 +389,28 @@ with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 with pooled-material and reported-quality limits, in
 `evidence/Col0N_input_qc/figures`. These plots do not establish biological truth.
 
+**Figure S3. Cross-cohort input QC.** Six panels show validated sequence volume,
+median and N50 read length, whole-file GC fraction, and row-normalized read
+length, per-read GC and reported mean-quality distributions for nine complete
+libraries from seven reported plant species. The final bins include values at or
+beyond the labelled bound. Reported quality is not empirical accuracy, and the
+libraries are not interchangeable biological replicates. Source rows and hashes
+are in `evidence/multispecies_input_qc/figures_v1`.
+
+**Figure S4. One-thread real-read comparator diagnostics.** Six panels show wall
+time, throughput, peak RSS, paired wall-time and RSS ratios to TRF, and called-
+base fraction across ten nested inputs from five materials. Lines connect nested
+sizes only within a material/tool. These single executions overlapped acquisition
+work and are not final isolated rankings. Called-base fraction is output extent,
+not accuracy. The inspected version 2 and source rows are in
+`evidence/multispecies_real_diagnostics/figures_v2`.
+
 Additional method, biological validation and resource-scaling multi-panel
 figures remain required; their absence is tracked in `submission_readiness.md`.
 
 ## Tables and evidence index
 
-- Table 1: complete seven-species input/QC table in `tables/input_cohort.tsv`.
+- Table 1: nine-library, seven-species input/QC table in `tables/input_cohort.tsv`.
 - Table 2: executed six-run read comparison in
   `evidence/factorial_discovery_s6301_5x/summary.tsv`; scope/denominators in its README.
 - Table 3: exact 1.129-Gb replay in `evidence/Mo17_alignment_workspace/full_1129Mb/validation.json`
@@ -370,12 +423,18 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   coordinate-audit tables in the corresponding evidence directories.
 - Supplementary Table S5: per-read, composition and reference-mapping summaries
   in `evidence/reference_mapping_diagnostics`.
+- Supplementary Table S6: selected historical-query recovery, threshold
+  sensitivity and actual consensus provenance in `evidence/known_query_recovery`.
+- Supplementary Table S7: cross-cohort QC and real-diagnostic panel sources in
+  `evidence/multispecies_input_qc/figures_v1` and
+  `evidence/multispecies_real_diagnostics/figures_v2`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
 E5: `factorial_multik_replay`; E6: `factorial_joint_multik`;
-E7: seven `*_input_qc` directories and their source manifests;
-E8: `multispecies_real_diagnostics`; E9: `reference_mapping_diagnostics`.
+E7: nine `*_input_qc` directories and their source manifests;
+E8: `multispecies_real_diagnostics`; E9: `reference_mapping_diagnostics`;
+E10: `known_query_recovery`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

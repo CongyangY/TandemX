@@ -1,0 +1,86 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/environment.json",
+    "sha256": "b3bf72eef1c81dd52fb2dd317eba6fdbeac6f9f5cf9c42d75c95c1310ed0a7ad",
+    "bytes": 9163
+  },
+  {
+    "file": "summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/summary.tsv",
+    "sha256": "d1c810130e6e0b7fbe190462e5ecc497569a2dd2e248481f6e1c08ef77747ac4",
+    "bytes": 741
+  },
+  {
+    "file": "tandemx/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tandemx/execution.json",
+    "sha256": "4b0e7468d11f51fdbfe7a864e3f62a785de411a27f45f78c232267c5ed5dc92d",
+    "bytes": 951
+  },
+  {
+    "file": "tandemx/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tandemx/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tandemx/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tandemx/stdout.log",
+    "sha256": "76e960acfb275a7f925eb27be06869e2a2666b6a20ffecf31eb5d13cde107137",
+    "bytes": 148
+  },
+  {
+    "file": "trf/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/trf/execution.json",
+    "sha256": "a989f4ba2aa6caf21123188e06aa32a7d30aee142b2364193211e8848b8b2298",
+    "bytes": 438
+  },
+  {
+    "file": "trf/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/trf/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tidehunter/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tidehunter/execution.json",
+    "sha256": "035e945d5819276e8743e8643df7b06e53033dd137f05321e3df769fa88649d1",
+    "bytes": 600
+  },
+  {
+    "file": "tidehunter/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tidehunter/stderr.log",
+    "sha256": "f2556f4e2d261610dfc78e200a5858ab7096ce7df5d599fe7f046f2cf868e234",
+    "bytes": 64
+  },
+  {
+    "file": "tidehunter/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tidehunter/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tandemx/discover/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tandemx/discover/run_config.yaml",
+    "sha256": "9d2ef6392ce984d578b422a35ece0679451744c1502d88718d304a93283524ae",
+    "bytes": 1962
+  },
+  {
+    "file": "tandemx/discover/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tandemx/discover/run.log",
+    "sha256": "e0f9e114b84f82ba538e8ef4937d87578c79b8432fe52358ff51afc0066546ab",
+    "bytes": 1469
+  },
+  {
+    "file": "tandemx/discover/discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tandemx/discover/discovery_summary.json",
+    "sha256": "6bd36956614714e2b873c2537feaaa37414d743ac179223d667191c8b6466a06",
+    "bytes": 866
+  },
+  {
+    "file": "tandemx/discover/family_audit_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_12Mb_v1_20260906/tandemx/discover/family_audit_summary.json",
+    "sha256": "84435dfa7539266e952b1948900f4cea1d6e8c7ad82a0b51119ede1d7645293e",
+    "bytes": 384
+  }
+]

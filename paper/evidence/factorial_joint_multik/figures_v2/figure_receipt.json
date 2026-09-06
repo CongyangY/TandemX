@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "inputs": {
+    "metrics.tsv": "3ac25c51f9f7e5834dcf83454ba256fdd1984f7b0285c83cbaa91af14f55996c",
+    "validation.json": "58efa250c8eaa73d2a8c5aae06da2903d7bd55cbc50df48855037c897d4de66e",
+    "inputs.tsv": "5df34c2ca569431ef17b9aefdd559e25dcc328b2e8a5989e7ff5b3f1c634cf58"
+  },
+  "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906",
+  "panels": 6,
+  "script_sha256": "9933ddbe33eb58ef1e5090d642985de59138c22b09571c754e89ea7c905b6331",
+  "files": {
+    "joint_uncertainty.pdf": "7a55cc987cc415bba7847def17c4ec754867b5cc1406714edda6921a4b0737ec",
+    "joint_uncertainty.svg": "0308fe79556073935c9cf14df49e66fbbc1aefdfaab8c0f8e45bebbb83b9885e",
+    "joint_uncertainty.png": "09a5aabe33e55cb00fc84d2af8c5e49e694c89c1ddc88958ef7fce2456dab52e",
+    "source_data.tsv": "3ac25c51f9f7e5834dcf83454ba256fdd1984f7b0285c83cbaa91af14f55996c",
+    "plot_joint_uncertainty.py": "9933ddbe33eb58ef1e5090d642985de59138c22b09571c754e89ea7c905b6331"
+  }
+}

@@ -61,11 +61,13 @@ def describe_arrays(arrays, lengths: dict[str, int]) -> dict:
 
 
 def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path, timeout: float,
-        family_audit: str = 'full', evaluation_backend: str = 'disk') -> None:
+        family_audit: str = 'full', evaluation_backend: str = 'disk', threads: int = 1) -> None:
     if family_audit not in {'full', 'related'}:
         raise ValueError('Unknown TandemX family-audit policy')
     if evaluation_backend not in {'memory', 'disk'}:
         raise ValueError('Unknown real-input evaluation backend')
+    if not isinstance(threads, int) or not 1 <= threads <= 64:
+        raise ValueError('Threads must be an integer in [1,64]')
     outdir = outdir.resolve()
     outdir.mkdir(parents=True, exist_ok=False)
     if evaluation_backend == 'disk':
@@ -88,7 +90,9 @@ def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path
     random.Random(6101).shuffle(order)
     manifest.update(input=sample, tool_paths=tools, tool_hashes={t: digest_file(Path(p)) for t, p in tools.items()},
                     tool_order=order, scope=dict(min_period=30, max_period=1000, min_span=100),
-                    repetitions=1, threads=1, timeout_per_tool_seconds=timeout,
+                    repetitions=1, threads=threads,
+                    thread_policy='requested threads apply to TandemX and TideHunter; TRF command is single-threaded',
+                    timeout_per_tool_seconds=timeout,
                     tandemx_family_audit=family_audit,
                     evaluation_backend=evaluation_backend,
                     evaluator_sha256=digest_file(Path(__file__).with_name('real_disk.py')),
@@ -101,7 +105,7 @@ def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path
     for tool in order:
         folder = outdir/tool
         folder.mkdir()
-        command, output = build_command(tool, tools[tool], outdir/'reads.fa', folder, 30, 1000, 100)
+        command, output = build_command(tool, tools[tool], outdir/'reads.fa', folder, 30, 1000, 100, threads)
         if tool == 'tandemx':
             command[0:1] = [sys.executable, '-m', 'tandemx.cli']
             command += ['--discovery-method', 'elastic', '--clustering-method', 'sequence', '--cluster-identity', '.95']
@@ -142,6 +146,8 @@ if __name__ == '__main__':
     parser.add_argument('--family-audit', choices=('full', 'related'), default='full')
     parser.add_argument('--evaluation-backend', choices=('disk', 'memory'), default='disk',
                         help='Disk-backed normalization is default; memory backend retains the 100000-read pilot cap')
+    parser.add_argument('--threads', type=int, default=1,
+                        help='Threads for TandemX and TideHunter; TRF remains single-threaded')
     args = parser.parse_args()
     run(args.sampling_receipt, args.sample_id, args.outdir, args.trf, args.tidehunter, args.timeout,
-        args.family_audit, args.evaluation_backend)
+        args.family_audit, args.evaluation_backend, args.threads)

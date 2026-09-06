@@ -1,0 +1,36 @@
+{
+  "complete": true,
+  "read_count": 626,
+  "total_bases": 11418016,
+  "fastq_sha256": "70ef8ad6347f8754cb4b6c4ba2c75a5c337c8d8ce73aa58b3803112fcbbd63e9",
+  "alignment_rows": 705,
+  "alignment_types": {
+    "P": 639,
+    "S": 66
+  },
+  "summary": {
+    "read_count": 626,
+    "total_bases": 11418016,
+    "any_mapped_reads": 626,
+    "primary_mapped_reads": 626,
+    "primary_mapq20_reads": 611,
+    "any_alignment_span_bp": 11408400,
+    "primary_span_bp": 11408400,
+    "primary_mapq20_span_bp": 11163522,
+    "organelle_primary_reads": 0,
+    "primary_organelle_span_bp": 0,
+    "primary_other_reference_span_bp": 11408400,
+    "primary_compartment_overlap_bp": 0,
+    "any_mapped_read_fraction": 1.0,
+    "primary_mapq20_read_fraction": 0.9760383386581469,
+    "primary_query_span_fraction": 0.9991578221645512,
+    "warning": "alignment_concordance_not_accuracy_truth;unmapped_is_not_proven_contamination;mapq20_not_unique_copy_proof;secondary_output_is_capped;composition_association_not_empirical_sequencing_bias"
+  },
+  "outputs": {
+    "alignments.paf": "beb3f030715a5a7103ca757830b5d20485b2597a885ec0574c4a9d5669277fd1",
+    "read_mapping.tsv": "17f9af36e0260add90a349ee96c0ff78176096d33fc0fb3cc4d6a98042d82603",
+    "composition_mapping.tsv": "aa2dea1a431136858d10574906de74b0f1b9d892e42385aeb69ed0de1ffa6a5f",
+    "reference_mapping.tsv": "d7b4d3ffa7be4cf745bed04387e3075b7a8e7792590480fd74de5dce35cd854e"
+  },
+  "evidence_limit": "unmapped_not_proven_contamination;reference_collapse_and_donor_divergence_unresolved"
+}

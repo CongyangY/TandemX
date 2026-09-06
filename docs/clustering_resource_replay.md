@@ -73,12 +73,14 @@ decreased while memory increased in this diagnostic; no universal win is claimed
 ```bash
 python -m benchmarks.scripts.replay_discovery \
   --previous-run /path/to/completed/real_comparison \
-  --outdir /path/to/new/full_replay --profile
+  --outdir /path/to/new/full_replay --threads 4
 pytest -q tests/integration/test_discovery_replay.py
 ```
 
 This command checks the baseline input hash and successful discovery receipt,
-freezes current source, preserves original CLI settings, and compares all seven
-deterministic products using live candidate scores. Changed inputs or any product
-disagreement fail explicitly. Optional cProfile output identifies hotspots but
-adds overhead, so profiled resources cannot be used as unprofiled speed rankings.
+freezes current source, preserves original CLI settings except an explicitly
+requested thread budget, and compares all seven deterministic products using live
+candidate scores. The environment records baseline and replay thread counts.
+Changed inputs or any product disagreement fail explicitly. Optional `--profile`
+identifies hotspots but adds overhead, so profiled resources cannot be used as
+unprofiled speed rankings.

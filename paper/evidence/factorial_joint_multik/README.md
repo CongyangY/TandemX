@@ -30,8 +30,8 @@ sampling intervals are not yet a production guarantee for real plant data.
 
 ## Six-panel figure legend
 
-`figures_v1/joint_uncertainty.pdf` and `.svg` contain six panels with the exact
-plotted data in `source_data.tsv`; the SVG has99 editable text nodes and no
+`figures_v2/joint_uncertainty.pdf` and `.svg` contain six panels with the exact
+plotted data in `source_data.tsv`; the SVG has101 editable text nodes and no
 raster image nodes. A, interval availability, sparse read support and missing
 fits across495 family conditions per coverage. B, conditional truth coverage
 for each independent genome; dashed line is nominal95%. C,20× conditional
@@ -41,9 +41,11 @@ dashed line is identity. E, interval width relative to truth against minimum
 effective reads across k. F, interval missingness by planted abundance and
 coverage. These panels describe the fixed conditional development model.
 
-The PNG was visually inspected. Panel A's legend overlaps the bars in this
-diagnostic version; a source layout adjustment is prepared, but its second
-render was rejected by automatic approval because the review service reached
-its usage limit. That render did not execute. This is an archived diagnostic,
-not a final publication layout. The first render and its exact source remain
-unchanged; source snapshots and hashes distinguish them from the current script.
+Both PNG versions were visually inspected. Version2 moves panel A's legend
+into reserved white space without changing any source rows; the source TSVs
+are byte-identical. The first version remains archived. An initial attempt to
+render version2 was rejected when the automatic review service hit a usage
+limit; subsequent Git reviews succeeded, a read-only diff confirmed the
+layout-only change, and a retry through the same approval route succeeded.
+The refusal was not bypassed. These remain development diagnostic figures;
+final publication acceptance requires the broader scientific validation.

@@ -24,17 +24,17 @@ machine-readable commands alongside results.
 
 ## Acceptance gates
 
-| Gate | Required evidence | Initial state |
+| Gate | Required evidence | Current evidence |
 | --- | --- | --- |
-| Engineering baseline | Full pytest; Rust tests and release build; output validation | 250 pytest passed; native core has 7 Rust tests and verified Linux/macOS CI at 8218beb; new checkpoints require their own CI |
-| Challenge benchmark | Independent seeds; indels, unit divergence, mixed families, multiple arrays, short arrays, hard negatives; strict normalization | In development |
-| Quantification | Known copy number and coverage; finite-read and error bias; catalog ambiguity; calibration/interval coverage | Baseline executed; intervals contain truth in 6/81 conditions; error/uncertainty model improvement required |
-| Localization/comparison | Known array coordinates; engineered collapse levels; false collapse calls and boundary errors | Exact-copy baseline executed; false calls and misses retained; broader truth pending |
-| Real data | Public accession, source checksums, matched sample/assembly, bounded pilot then scaling; known-family recovery | Cohort/QC programme established; full Arabidopsis/Mo17 batches downloading; reference checked; not yet accepted |
-| Comparators | Expanded task-matched methods in comparator_matrix.md | TRF/TideHunter development comparison, default/tuned ULTRA pilots, SRF seven-stage development workflow; TRASH/TAREAN remain pending |
-| Innovation | Audited prior art; method ablations; held-out evaluation; AI retained only with reproducible benefit | Pending |
-| Reuse | LICENSE; CI; clean source install; toy and real-data workflows; versioned release and hashes | Pending |
-| Paper | Abstract, background, results, methods, discussion; multi-panel figures; tables, supplement, source data and references | Pending |
+| Engineering baseline | Full pytest; Rust tests and release build; output validation | 405 Python tests passed; last native checkpoint passed 13 Rust tests, fmt and clippy; prior hosted CI passed; current commit/CI pending |
+| Challenge benchmark | Independent seeds; indels, unit divergence, mixed families, multiple arrays, short arrays, hard negatives; strict normalization | Development and separate validation seeds executed; related-family merge failure retained; held-out publication seeds remain unused |
+| Quantification | Known copy number and coverage; finite-read and error bias; catalog ambiguity; calibration/interval coverage | Three-genome/27-condition multi-k and joint-read experiments complete; 20× conditional interval coverage 94.58% with explicit missingness; held-out/real calibration pending |
+| Localization/comparison | Known array coordinates; engineered collapse levels; false collapse calls and boundary errors | Exact-copy and TRASH1/2 simulated endpoints executed; engineered collapse sensitivity/specificity and biological truth remain pending |
+| Real data | Public accession, source checksums, matched sample/assembly, bounded pilot then scaling; known-family recovery | Nine complete libraries across seven species and 218.538 Gb passed full-file QC/sampling; ten real diagnostics and selected historical-query recovery executed; donor-matched truth pending |
+| Comparators | Expanded task-matched methods in comparator_matrix.md | TRF, TideHunter, ULTRA, SRF and TRASH1/2 executed at task-specific stages; unitFinder and other applicable assembly/genotyping tools remain pending |
+| Innovation | Audited prior art; method ablations; held-out evaluation; AI retained only with reproducible benefit | Exact speed/representation ablations and current deficits documented; held-out generalization and any useful learned calibration remain pending |
+| Reuse | LICENSE; CI; clean source install; toy and real-data workflows; versioned release and hashes | Source install/toy workflows and compact evidence exist; clean release, portability matrix and archive deposition remain pending |
+| Paper | Abstract, background, results, methods, discussion; multi-panel figures; tables, supplement, source data and references | Evidence-backed draft plus four six-panel figures and source tables exist; scientific completion, final bibliography/metadata and biological validation remain pending |
 
 ## Benchmark discipline
 

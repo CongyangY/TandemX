@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+    "-x",
+    "map-hifi",
+    "-c",
+    "--cs=short",
+    "--secondary=yes",
+    "-N",
+    "5",
+    "-t",
+    "1",
+    "-K",
+    "50M",
+    "-I",
+    "3G",
+    "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/GCA_034140825.1_AGIS1.0_genomic.fna.gz",
+    "/Volumes/T7/Codex/TandemX/data/subsets/SRR25241090_seed6101_v1/sample_001.fastq.gz"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 13.308003707788885,
+  "peak_rss_mib": 2717.03125,
+  "cpu_user_seconds": 12.692917,
+  "cpu_system_seconds": 0.478753,
+  "timed_out": false
+}

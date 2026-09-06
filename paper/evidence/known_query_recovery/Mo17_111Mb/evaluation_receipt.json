@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "material": "Mo17",
+  "selected_query_ids": [
+    "CentC_AF078922_1"
+  ],
+  "threshold": 0.9,
+  "known_fasta": "/Volumes/T7/Codex/TandemX/data/known_repeats/curated_queries_v1_20260906/known_monomers.fa",
+  "known_fasta_sha256": "ce5238ebae2025e255e66abd3c29f33d3629f48b7206819c3c3c0e47021d5ae4",
+  "prediction_inputs": {
+    "tandemx": {
+      "path": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/tandemx/discover/monomers.fa",
+      "sha256": "2f0ba70c184ac64fbb1ca9731a0d73106dffb77517d8f9cc98ec6d782cf21f64",
+      "prediction_unit": "family_catalog",
+      "source_rows": 4219
+    },
+    "tandemx_candidates": {
+      "path": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/tandemx/discover/candidate_monomers.fa",
+      "sha256": "31ca2c1a85ef9ba3c967ef82348c931a018036294af1021acab0b045cb3fdf2a",
+      "prediction_unit": "family_catalog",
+      "source_rows": 8401
+    },
+    "tidehunter": {
+      "path": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/tidehunter/normalized_arrays.tsv",
+      "sha256": "df802117afdfc616e1b6f94a82b7adf919a0c5b5e381e84107e6be43c12dd0ff",
+      "prediction_unit": "array_consensus",
+      "source_rows": 11571
+    },
+    "trf": {
+      "path": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_native_audit_v1_20260906/trf/normalized_arrays.tsv",
+      "sha256": "fdcc53740ee328b6011b54a8116a94b9a90c4f9c30d928b3662f6860357c04f9",
+      "prediction_unit": "array_consensus",
+      "source_rows": 10938
+    }
+  },
+  "script_sha256": "97261e3c86b1d6c6aa4e9f62496ce2e234511b8a4979e8e3f93c409443b1c0e3",
+  "outputs": {
+    "known_query_summary.tsv": "d4ec65644ba9cd54932bbcbf3c5ba501ea4d43aa8a113864978a27c761d6f498",
+    "known_query_details.tsv": "d4283252bfbe095e2a25d8b778a261e092c0779752edb4e9245cdcbf045b8d73"
+  },
+  "evidence_boundary": "CentC_AF078922_Seneca60_not_Mo17_source_query_only_miss_not_false_negative",
+  "interpretation": "selected source-query sequence recovery only; not verified donor presence, genome-wide family recall, family precision or array-coordinate accuracy"
+}

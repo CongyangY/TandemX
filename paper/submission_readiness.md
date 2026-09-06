@@ -7,21 +7,20 @@ have **not** been achieved.
 | Requirement | Evidence now | Remaining work |
 | --- | --- | --- |
 | Complete article sections | `manuscript.md` contains abstract, background, results, discussion, methods, legends and references | Scientific completion, editorial revision, full bibliography, author/funding/declaration metadata |
-| Multi-panel figures | Existing six-panel quantification and interval figures; two four-panel QC figures | Fix interval-panel-A legend; final method, comparative scaling and biological figures; visual/source QA of final package |
-| Tables and source data | Seven-species input table; complete per-condition and native comparison tables | Final numbered standalone tables, workbook/package and manuscript cross-reference audit |
-| Real and simulated testing | Three independent factorial genomes/27 conditions; seven full library QCs; several real comparator diagnostics | Held-out genomes/families, broader species/material replication, hard negatives, true biological recall and multiple large-input runs |
-| Fair comparators | TRF/TideHunter executed; TRASH1/2 task-specific evaluations; native alternatives/failed parsing retained | Further applicable tools, controlled sensitivity settings and isolated same-platform resource comparisons |
+| Multi-panel figures | Four inspected six-panel figures for quantification, intervals, cross-cohort QC and real-input diagnostics; two four-panel single-library QC figures | Final method, isolated repeated comparative scaling and biological-validation figures; visual/source QA of final package |
+| Tables and source data | Nine-library/seven-species input table; complete per-condition and native comparison tables | Final numbered standalone tables, workbook/package and manuscript cross-reference audit |
+| Real and simulated testing | Three independent factorial genomes/27 conditions; nine full library QCs across seven species; several real comparator diagnostics | Held-out genomes/families, broader species/material replication, hard negatives, true biological recall and multiple large-input runs |
+| Fair comparators | TRF/TideHunter executed; TRASH1/2 task-specific evaluations; real source-query recovery and threshold sensitivity; native alternatives/failed parsing retained | Further applicable tools, donor-matched truth, controlled sensitivity settings and isolated same-platform resource comparisons |
 | Quantification | Improved conditional point estimation; joint sampling coverage/missingness | Nuclear-depth normalization, real background specificity, catalogue uncertainty, ploidy and held-out calibration |
 | Assembly interpretation | References and source issues audited; preliminary comparison modules | Independent engineered-collapse and biological under-representation validation; donor matching |
 | Probe performance | Computational prioritization framework | Specificity calibration and independent published/new experimental concordance; no fabricated FISH rate |
 | Novelty/AI | Explicit prior-art comparison; no unsupported AI claim | Establish reproducible added value and ablations; AI only if independently useful |
-| Software quality |389 local Python tests and13 native tests at latest verified checkpoints | Production defaults, clean install/release verification, workflow portability and complete command validation |
-| GitHub/reuse |d2aa4d6 pushed to main and working branch; earlier CI checkpoints verified | New local mapping/manuscript/evidence changes need commit/push; latest hosted CI status needs confirmation |
+| Software quality | 405 local Python tests and 13 native tests at latest verified checkpoints | Production defaults, clean install/release verification, workflow portability and complete command validation |
+| GitHub/reuse | 438d078 pushed to main and working branch; hosted CI passed; current update passes the full local suite | Current figure/QC/comparator/source-query code and evidence need the next verified commit/push |
 
-On 6 September 2026 automatic approval rejected the T7 figure-v2 render because
-the review service reached its usage limit. The render did not execute. Existing
-jobs continue; read-only checks and local source/evidence preparation are
-unaffected. Do not bypass that refusal. User authorization for project Git/T7
-work already exists, but approval-service availability must be restored before
-dependent actions proceed. This temporary service issue is separate from the
-substantial scientific and release work that still remains.
+On 6 September 2026 an initial T7 figure-v2 render was rejected because the
+automatic review service reached its usage limit. Later Git operations passed
+review. After a read-only diff established the layout-only change and verified
+that the destination was new, a retry through the same approval channel passed
+and version2 was rendered and inspected. The transient service issue is resolved;
+the substantial scientific and release work above still remains.

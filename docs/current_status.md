@@ -7,6 +7,59 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Published article draft and resolved figure export checkpoint
+
+- 438d078 is pushed to main and working branch. Both hosted CI runs
+  34023168171/34023165293 passed; earlier d2aa4d6 runs 34021933081/34021929197
+  also passed. Latest local suite 405 passed; native 13 tests/clippy/fmt unchanged.
+- The temporary automatic-review usage error is resolved. Subsequent Git reviews
+  succeeded; a read-only source diff proved the figure update only changes the
+  legend/whitespace, and retry through the original approval channel succeeded.
+  `factorial_joint_multik/figures_v2` is exported, visually inspected and archived
+  locally: 101 editable SVG texts, no raster nodes, source TSV byte-identical to
+  version 1. Version 1 remains retained. Figure/doc updates await the next commit.
+- The initial manuscript and explicit readiness audit are published in 438d078.
+  This is a development draft, not a completed paper or software release.
+- Col-0R and Ey15-2R full QC and compact archives passed. They add two included
+  Arabidopsis libraries/materials, not two species. The cohort table now contains
+  nine libraries/seven species, 12,320,381 reads and 218,538,165,764 bp. Seed6101
+  whole-file sampling also completed. Col-0R contains 11.708/115.753/1,156.486/
+  10,643.552-Mb nested samples; Ey15-2R contains 11.698/113.336/1,119.054/
+  10,627.736-Mb samples. Compact plans, receipts and distribution tables are
+  archived locally; sample FASTQ and ID files remain on T7.
+- Chinese Spring 12.698/126.731-Mb and Lo7 11.640-Mb three-tool comparisons are
+  complete and locally archived. At 126.731 Mb, TandemX used 139.529 s/223.828 MiB,
+  TRF 332.287/311.938 and TideHunter 48.230/413.500. Nipponbare 11.418-Mb reference
+  QC is also archived: 626/626 primary-mapped reads, 611 primary MAPQ 20+, primary
+  span fraction 0.999158. This GCA reference lacks organelles, so zero organelle
+  counts are a reference-content limit, not evidence of no organellar reads.
+- A new cross-tool evaluator records actual consensus provenance and exact cyclic
+  edit recovery. At 90%, Mo17 CentC and Nipponbare Rice358 queries are recovered
+  by all three tools. Morex HvT01 is recovered by TRF/TideHunter and TandemX's
+  candidate stage, while the final TandemX representative is 0.8983. The
+  0.89/0.90/0.95 sweep identifies a threshold/family-representation boundary,
+  not donor-matched false-negative truth. Code, tests and evidence are local.
+- The frozen-438d078 Morex 1.169928-Gb three-tool run completed and normalized
+  all outputs. TandemX used 1909.525 s/913.891 MiB, TRF 2409.145/286.172 and
+  TideHunter 566.196/580.375. TandemX was 20.74% faster than TRF but took
+  3.37-fold TideHunter's wall time and used 3.19-fold TRF's peak RSS. The compact
+  14-file archive matches T7 source hashes. This is an unfavourable concurrent
+  diagnostic, not an isolated ranking. Morex reference acquisition remains active.
+- Two new six-panel figures passed source/hash and visual QA. Cross-cohort input
+  QC reconciles 9 libraries/7 species/12,320,381 reads/218,538,165,764 bp and
+  has 106 editable SVG text nodes with no raster node. Real diagnostic version 2
+  contains 10 nested inputs/5 materials, 78 editable texts and no raster node;
+  version 1 is retained as a rejected legend-overlap layout with byte-identical
+  panel source. The manuscript now includes Figures S3-S4 and Tables S6-S7.
+- Tested compact archivers now cover complete FASTQ QC, whole-file sampling and
+  successful three-tool real diagnostics. The full-discovery parity replayer can
+  override only the thread budget and still requires all seven products to match.
+- Soybean source curation distinguishes inaccessible ZH13 GSA records, a Wm82
+  assembly project with no ENA read rows, and Jack project RNA-seq from usable
+  genomic HiFi. Wild soybean YSD56 `SRR28726931` provides 44,193,089,411 HiFi
+  bases from the same leaf BioSample as ONT support; its checksum-bounded complete
+  download is active. This is an eighth species only after complete-file QC.
+
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 
 - Source d2aa4d6 was pushed to both branches. Hosted CI34021933081/34021929197

@@ -1,0 +1,15 @@
+2026-09-06 17:02:24,543 INFO command=tandemx discover
+2026-09-06 17:02:24,543 INFO timestamp_utc=2026-09-06T09:02:24.543505+00:00
+2026-09-06 17:02:24,543 INFO output_directory=/Volumes/T7/Codex/TandemX/results/Lo7_random_11Mb_v1_20260906/tandemx/discover
+2026-09-06 17:02:24,543 INFO status=discover_running
+2026-09-06 17:02:24,543 INFO algorithm_mode=elastic_self_alignment kmer_backend=rust min_period=30 max_period=1000
+2026-09-06 17:02:24,543 INFO input_count_skipped reason=not_required_for_discovery_budget
+2026-09-06 17:02:24,544 INFO scan_threads requested=1 effective=1 parallel=false parallel_files=false backend=rust
+2026-09-06 17:02:37,201 INFO progress processed_reads=693 processed_bases=11639976 candidate_reads=671 elapsed_seconds=12.657 reads_per_second=54.751 mb_per_second=0.920 estimated_remaining_seconds=unknown
+2026-09-06 17:02:37,201 INFO filter_summary skipped_short_reads=0 skipped_short_kmer=0 skipped_low_complexity=0 seed_overflow_count=191
+2026-09-06 17:02:37,372 INFO family_audit mode=related backend=rust families=496 possible_pairs=122760
+2026-09-06 17:02:37,427 INFO family_audit scored_pairs=165 emitted_pairs=118 related_pairs=118 retained_collapse_pairs=0
+2026-09-06 17:02:37,435 INFO status=discover_mvp_completed
+2026-09-06 17:02:37,435 INFO candidate_count=671
+2026-09-06 17:02:37,435 INFO family_count=496
+2026-09-06 17:02:37,436 INFO Discover MVP supports toy-scale FASTA/FASTQ input, including gzip-compressed files

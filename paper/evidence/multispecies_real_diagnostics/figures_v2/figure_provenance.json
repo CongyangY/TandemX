@@ -1,0 +1,74 @@
+{
+  "complete": true,
+  "run_count": 10,
+  "material_count": 5,
+  "tools": [
+    "tandemx",
+    "trf",
+    "tidehunter"
+  ],
+  "materials": {
+    "ChineseSpring_random_12Mb_v1_20260906": "Chinese Spring",
+    "ChineseSpring_random_126Mb_v1_20260906": "Chinese Spring",
+    "Lo7_random_11Mb_v1_20260906": "Lo7",
+    "Morex_random_12Mb_v1_20260906": "Morex",
+    "Morex_random_115Mb_v1_20260906": "Morex",
+    "Morex_random_1169Mb_v1_20260906": "Morex",
+    "Nipponbare_random_11Mb_v1_20260906": "Nipponbare",
+    "Nipponbare_random_114Mb_v1_20260906": "Nipponbare",
+    "Victoria_random_11Mb_v1_20260906": "Victoria",
+    "Victoria_random_110Mb_v1_20260906": "Victoria"
+  },
+  "design": "one thread, one execution, nested whole-library random samples; concurrent development diagnostics",
+  "accuracy": "not_assessed_without_curated_independent_truth",
+  "run_archives": {
+    "ChineseSpring_random_12Mb_v1_20260906": {
+      "material": "Chinese Spring",
+      "archive_manifest_sha256": "589e56aec11d9e4bbfdd53552cda1388ea4a777cedc42540ff67b679b60728cc"
+    },
+    "ChineseSpring_random_126Mb_v1_20260906": {
+      "material": "Chinese Spring",
+      "archive_manifest_sha256": "2ea1ccd165802f88137ec7daebdb3c9863bee126ea9be6b0ed1ce5f312aeeacd"
+    },
+    "Lo7_random_11Mb_v1_20260906": {
+      "material": "Lo7",
+      "archive_manifest_sha256": "5539b2a42753e69774fdc6b153ce923245867b6d3c64a1fc58bd6335c08aef61"
+    },
+    "Morex_random_12Mb_v1_20260906": {
+      "material": "Morex",
+      "archive_manifest_sha256": "9eba02f3d43a38db6adf998aed71c73e17e7221c97b8c7903b4779b95860ec11"
+    },
+    "Morex_random_115Mb_v1_20260906": {
+      "material": "Morex",
+      "archive_manifest_sha256": "47aa2931ff72b22a31d5f104d327d117e5d7386c870311f3a1fb489aae9107ec"
+    },
+    "Morex_random_1169Mb_v1_20260906": {
+      "material": "Morex",
+      "archive_manifest_sha256": "dd56084c0260757b99c7c7c32066b86087d95ec8d6ef48aab072938b3c6702e1"
+    },
+    "Nipponbare_random_11Mb_v1_20260906": {
+      "material": "Nipponbare",
+      "archive_manifest_sha256": "5c03a3290e32c95c4669d35b4abe22b7e9c84f6061ba5a351a5e2570b097eec0"
+    },
+    "Nipponbare_random_114Mb_v1_20260906": {
+      "material": "Nipponbare",
+      "archive_manifest_sha256": "3fbb1c929b2fa3aaf74fd91c74de4680d7f01e3f76d95e8b0b74eb38fa88a2e5"
+    },
+    "Victoria_random_11Mb_v1_20260906": {
+      "material": "Victoria",
+      "archive_manifest_sha256": "94668c8ca1d4093f4aced1fc3a232ad78395512112c89beecfc6684c0ecac1d0"
+    },
+    "Victoria_random_110Mb_v1_20260906": {
+      "material": "Victoria",
+      "archive_manifest_sha256": "b03b448bc37b3ddb5cfdf0240b752a5864c125730fe216d59733b228496c4e65"
+    }
+  },
+  "source_sha256": "f7b4d1ac13b28c2c544ddb8a81949975c7cf17ad9513173032b5ed92f66af9e9",
+  "script_sha256": "4397263920f846fd4a18dd8c6a8797ff7f2b4740495211659f33cef4ee323e33",
+  "outputs": {
+    "real_comparator_diagnostics.pdf": "5dcb986ef9c2f46d48e17dd0fe3ed38a70dafde313540f4fa6bc470e14f70997",
+    "real_comparator_diagnostics.svg": "fae38967834b6cc032fef80c70683a068c8bf99344fe500e010cb3a3ea8b2164",
+    "real_comparator_diagnostics.png": "20b0c4c3d52c0cfd9b93f31abbf368fe96cfe44d291785c64304d2cc70fcac86"
+  },
+  "interpretation": "resource and output-extent diagnostics; not an accuracy or final performance ranking"
+}

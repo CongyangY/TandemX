@@ -1,0 +1,757 @@
+panel	run_accession	reported_species	reported_material	metric	bin_lower_bound	bin_label	value	read_count	library_read_count
+A	ERR6210723	Arabidopsis thaliana	Col-0N	total_bases_Gb	NA	NA	14.646601458	933904	933904
+A	ERR8666127	Arabidopsis thaliana	Col-0R	total_bases_Gb	NA	NA	17.746722015	982810	982810
+A	ERR8666125	Arabidopsis thaliana	Ey15-2R	total_bases_Gb	NA	NA	18.636790429	837586	837586
+A	ERR10422581	Avena sativa	Victoria	total_bases_Gb	NA	NA	7.346159178	398850	398850
+A	ERR4659246	Hordeum vulgare	Morex	total_bases_Gb	NA	NA	19.525307665	896701	896701
+A	SRR25241090	Oryza sativa	Nipponbare	total_bases_Gb	NA	NA	32.966159623	1785885	1785885
+A	ERR15194059	Secale cereale	Lo7	total_bases_Gb	NA	NA	77.092101008	4576975	4576975
+A	SRR28200549	Triticum aestivum	Chinese Spring	total_bases_Gb	NA	NA	24.95367943	1500000	1500000
+A	SRR15447419	Zea mays	Mo17	total_bases_Gb	NA	NA	5.624644958	407670	407670
+B	ERR6210723	Arabidopsis thaliana	Col-0N	median_read_length_kb	NA	NA	15.514	933904	933904
+B	ERR6210723	Arabidopsis thaliana	Col-0N	read_n50_kb	NA	NA	15.663	933904	933904
+B	ERR8666127	Arabidopsis thaliana	Col-0R	median_read_length_kb	NA	NA	16.635	982810	982810
+B	ERR8666127	Arabidopsis thaliana	Col-0R	read_n50_kb	NA	NA	18.027	982810	982810
+B	ERR8666125	Arabidopsis thaliana	Ey15-2R	median_read_length_kb	NA	NA	21.506	837586	837586
+B	ERR8666125	Arabidopsis thaliana	Ey15-2R	read_n50_kb	NA	NA	22.587	837586	837586
+B	ERR10422581	Avena sativa	Victoria	median_read_length_kb	NA	NA	18.137	398850	398850
+B	ERR10422581	Avena sativa	Victoria	read_n50_kb	NA	NA	18.295	398850	398850
+B	ERR4659246	Hordeum vulgare	Morex	median_read_length_kb	NA	NA	21.499	896701	896701
+B	ERR4659246	Hordeum vulgare	Morex	read_n50_kb	NA	NA	21.875	896701	896701
+B	SRR25241090	Oryza sativa	Nipponbare	median_read_length_kb	NA	NA	17.489	1785885	1785885
+B	SRR25241090	Oryza sativa	Nipponbare	read_n50_kb	NA	NA	19.159	1785885	1785885
+B	ERR15194059	Secale cereale	Lo7	median_read_length_kb	NA	NA	16.757	4576975	4576975
+B	ERR15194059	Secale cereale	Lo7	read_n50_kb	NA	NA	16.896	4576975	4576975
+B	SRR28200549	Triticum aestivum	Chinese Spring	median_read_length_kb	NA	NA	15.985	1500000	1500000
+B	SRR28200549	Triticum aestivum	Chinese Spring	read_n50_kb	NA	NA	16.579	1500000	1500000
+B	SRR15447419	Zea mays	Mo17	median_read_length_kb	NA	NA	13.455	407670	407670
+B	SRR15447419	Zea mays	Mo17	read_n50_kb	NA	NA	13.968	407670	407670
+C	ERR6210723	Arabidopsis thaliana	Col-0N	gc_percent	NA	NA	36.761898672808144	933904	933904
+C	ERR8666127	Arabidopsis thaliana	Col-0R	gc_percent	NA	NA	37.391799276459224	982810	982810
+C	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_percent	NA	NA	37.14611328798132	837586	837586
+C	ERR10422581	Avena sativa	Victoria	gc_percent	NA	NA	44.171793264673525	398850	398850
+C	ERR4659246	Hordeum vulgare	Morex	gc_percent	NA	NA	44.277742785570595	896701	896701
+C	SRR25241090	Oryza sativa	Nipponbare	gc_percent	NA	NA	43.50196698069298	1785885	1785885
+C	ERR15194059	Secale cereale	Lo7	gc_percent	NA	NA	45.57489262402384	4576975	4576975
+C	SRR28200549	Triticum aestivum	Chinese Spring	gc_percent	NA	NA	45.957071918672156	1500000	1500000
+C	SRR15447419	Zea mays	Mo17	gc_percent	NA	NA	45.92192481991678	407670	407670
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	0	0	0.0011489403621785536	1073	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	2000	2000	0.000591067176069489	552	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	4000	4000	0.002551654131473899	2383	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	6000	6000	0.006922553067552982	6465	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	8000	8000	0.004485471740136031	4189	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	10000	10000	0.0022336342921756413	2086	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	12000	12000	0.04591799585396358	42883	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	14000	14000	0.5583764498278195	521470	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	16000	16000	0.28838831400229575	269327	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	18000	18000	0.08300103650910585	77515	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	20000	20000	0.005813231338552999	5429	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	22000	22000	8.244958796621494e-05	77	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	24000	24000	4.283095478764413e-06	4	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	26000	26000	2.2486251263513167e-05	21	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	28000	28000	0.00012742209049324126	119	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	30000	30000	0.00013705905532046121	128	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	32000	32000	9.208655279343487e-05	86	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	34000	34000	5.5680241223937366e-05	52	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	36000	36000	3.747708543918861e-05	35	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	38000	38000	7.4954170878377225e-06	7	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	40000	40000	3.2123216090733095e-06	3	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	42000	42000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	44000	44000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	46000	46000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	48000	48000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	50000	50000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	52000	52000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	54000	54000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	56000	56000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	58000	58000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	60000	60000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	62000	62000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	64000	64000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	66000	66000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	68000	68000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	70000	70000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	72000	72000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	74000	74000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	76000	76000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	78000	78000	0.0	0	933904
+D	ERR6210723	Arabidopsis thaliana	Col-0N	length_histogram	80000	at_least_80000	0.0	0	933904
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	0	0	6.71543838585281e-05	66	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	2000	2000	0.00040190881248664543	395	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	4000	4000	0.001051067856452417	1033	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	6000	6000	0.0005952320387460445	585	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	8000	8000	0.001010368229871491	993	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	10000	10000	0.015916606465135683	15643	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	12000	12000	0.19715306112066422	193764	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	14000	14000	0.22472807561990618	220865	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	16000	16000	0.1672520629623223	164377	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	18000	18000	0.11975559874238154	117697	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	20000	20000	0.08514260131663293	83679	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	22000	22000	0.06007977126809862	59047	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	24000	24000	0.04209257130065832	41369	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	26000	26000	0.02915721248257547	28656	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	28000	28000	0.01967216450789064	19334	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	30000	30000	0.013049317772509438	12825	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	32000	32000	0.008543869110000915	8397	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	34000	34000	0.005386595577985572	5294	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	36000	36000	0.0034228385954558865	3364	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	38000	38000	0.0021519927554664686	2115	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	40000	40000	0.0012738983119829875	1252	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	42000	42000	0.0008638495741801568	849	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	44000	44000	0.0004965354442872987	488	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	46000	46000	0.0003032122180278996	298	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	48000	48000	0.0001516061090139498	149	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	50000	50000	0.00011497644509111629	113	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	52000	52000	7.122434651662072e-05	70	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	54000	54000	4.273460790997242e-05	42	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	56000	56000	2.747224794212513e-05	27	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	58000	58000	1.4244869303324142e-05	14	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	60000	60000	5.087453322615765e-06	5	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	62000	62000	3.052471993569459e-06	3	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	64000	64000	2.034981329046306e-06	2	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	66000	66000	0.0	0	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	68000	68000	0.0	0	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	70000	70000	0.0	0	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	72000	72000	0.0	0	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	74000	74000	0.0	0	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	76000	76000	0.0	0	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	78000	78000	0.0	0	982810
+D	ERR8666127	Arabidopsis thaliana	Col-0R	length_histogram	80000	at_least_80000	0.0	0	982810
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	0	0	0.00029608899862223104	248	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	2000	2000	0.00016834092260376845	141	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	4000	4000	9.790039470573768e-05	82	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	6000	6000	7.879787866559375e-05	66	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	8000	8000	0.00011222728173584563	94	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	10000	10000	0.0007760397141308474	650	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	12000	12000	0.008189009844959204	6859	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	14000	14000	0.05347152411812041	44787	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	16000	16000	0.1325941455563966	111059	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	18000	18000	0.17319057386345998	145062	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	20000	20000	0.17136628358162626	143534	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	22000	22000	0.14538089223076794	121769	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	24000	24000	0.11085906402447032	92854	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	26000	26000	0.07750726492563152	64919	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	28000	28000	0.05104789239552714	42757	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	30000	30000	0.03197880575845346	26785	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	32000	32000	0.019328164510868138	16189	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	34000	34000	0.011313465124775247	9476	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	36000	36000	0.0063300962528026975	5302	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	38000	38000	0.0032187739527642536	2696	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	40000	40000	0.0015759575733118748	1320	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	42000	42000	0.0006876905774451818	576	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	44000	44000	0.00025788396654194314	216	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	46000	46000	0.00010745165272580965	90	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	48000	48000	4.1786753837814866e-05	35	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	50000	50000	1.4326887030107953e-05	12	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	52000	52000	4.775629010035984e-06	4	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	54000	54000	2.387814505017992e-06	2	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	56000	56000	2.387814505017992e-06	2	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	58000	58000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	60000	60000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	62000	62000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	64000	64000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	66000	66000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	68000	68000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	70000	70000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	72000	72000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	74000	74000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	76000	76000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	78000	78000	0.0	0	837586
+D	ERR8666125	Arabidopsis thaliana	Ey15-2R	length_histogram	80000	at_least_80000	0.0	0	837586
+D	ERR10422581	Avena sativa	Victoria	length_histogram	0	0	0.0001980694496677949	79	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	2000	2000	8.273787138021812e-05	33	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	4000	4000	8.775228782750407e-05	35	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	6000	6000	0.00012536041118214867	50	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	8000	8000	0.0004337470226902344	173	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	10000	10000	0.001221010404914128	487	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	12000	12000	0.0021386486147674565	853	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	14000	14000	0.023522627554218377	9382	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	16000	16000	0.4385307759809452	174908	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	18000	18000	0.35580042622539804	141911	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	20000	20000	0.1435577284693494	57258	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	22000	22000	0.03171869123730726	12651	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	24000	24000	0.0025272658894321173	1008	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	26000	26000	5.014416447285947e-05	20	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	28000	28000	5.014416447285947e-06	2	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	30000	30000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	32000	32000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	34000	34000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	36000	36000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	38000	38000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	40000	40000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	42000	42000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	44000	44000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	46000	46000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	48000	48000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	50000	50000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	52000	52000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	54000	54000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	56000	56000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	58000	58000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	60000	60000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	62000	62000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	64000	64000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	66000	66000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	68000	68000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	70000	70000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	72000	72000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	74000	74000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	76000	76000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	78000	78000	0.0	0	398850
+D	ERR10422581	Avena sativa	Victoria	length_histogram	80000	at_least_80000	0.0	0	398850
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	0	0	0.0011308117198486451	1014	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	2000	2000	0.003215118528918781	2883	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	4000	4000	0.004592389213349824	4118	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	6000	6000	0.007152885967563324	6414	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	8000	8000	0.0028504484772516143	2556	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	10000	10000	0.001935985350746793	1736	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	12000	12000	0.0017408255371634469	1561	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	14000	14000	0.0025069672053449257	2248	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	16000	16000	0.01574660895883912	14120	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	18000	18000	0.2021866820712813	181301	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	20000	20000	0.3293873877691672	295362	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	22000	22000	0.21326395309027202	191234	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	24000	24000	0.11671449011431904	104658	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	26000	26000	0.058817822217216216	52742	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	28000	28000	0.02880558848490188	25830	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	30000	30000	0.009909657734294933	8886	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	32000	32000	4.2377559520955146e-05	38	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	34000	34000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	36000	36000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	38000	38000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	40000	40000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	42000	42000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	44000	44000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	46000	46000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	48000	48000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	50000	50000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	52000	52000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	54000	54000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	56000	56000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	58000	58000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	60000	60000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	62000	62000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	64000	64000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	66000	66000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	68000	68000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	70000	70000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	72000	72000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	74000	74000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	76000	76000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	78000	78000	0.0	0	896701
+D	ERR4659246	Hordeum vulgare	Morex	length_histogram	80000	at_least_80000	0.0	0	896701
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	0	0	0.0017677510030041127	3157	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	2000	2000	0.0035802977235376296	6394	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	4000	4000	0.004033854363522847	7204	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	6000	6000	0.0039526621255008025	7059	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	8000	8000	0.006397388409668036	11425	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	10000	10000	0.041997105076754665	75002	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	12000	12000	0.15353788177850197	274201	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	14000	14000	0.16649504307388213	297341	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	16000	16000	0.15634993294641034	279223	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	18000	18000	0.13115738135434252	234232	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	20000	20000	0.10094882929191969	180283	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	22000	22000	0.07347281599879052	131214	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	24000	24000	0.05245018576224113	93670	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	26000	26000	0.03687135509845259	65848	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	28000	28000	0.02564274855323831	45795	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	30000	30000	0.017310185146300013	30914	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	32000	32000	0.01114797425366135	19909	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	34000	34000	0.006583850583884181	11758	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	36000	36000	0.003478947412627353	6213	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	38000	38000	0.0016641609062173657	2972	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	40000	40000	0.000684254585261649	1222	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	42000	42000	0.0002950917892249501	527	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	44000	44000	0.00010359009678674718	185	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	46000	46000	4.367582459116909e-05	78	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	48000	48000	1.8478233480879228e-05	33	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	50000	50000	8.959143505880837e-06	16	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	52000	52000	3.359678814705314e-06	6	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	54000	54000	1.679839407352657e-06	3	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	56000	56000	5.599464691175523e-07	1	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	58000	58000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	60000	60000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	62000	62000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	64000	64000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	66000	66000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	68000	68000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	70000	70000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	72000	72000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	74000	74000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	76000	76000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	78000	78000	0.0	0	1785885
+D	SRR25241090	Oryza sativa	Nipponbare	length_histogram	80000	at_least_80000	0.0	0	1785885
+D	ERR15194059	Secale cereale	Lo7	length_histogram	0	0	6.095729166097696e-05	279	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	2000	2000	0.00014529246937114578	665	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	4000	4000	0.00021280430852255037	974	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	6000	6000	0.0005901277590548343	2701	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	8000	8000	0.001442218932810426	6601	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	10000	10000	0.0008354863201131752	3824	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	12000	12000	0.022229966298701654	101746	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	14000	14000	0.2710458326733268	1240570	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	16000	16000	0.48392442606743535	2214910	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	18000	18000	0.19034405912201838	871200	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	20000	20000	0.026525598239011575	121407	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	22000	22000	0.0024275859055380464	11111	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	24000	24000	0.00016888884033668526	773	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	26000	26000	2.6655159794405692e-05	122	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	28000	28000	8.957881570251094e-06	41	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	30000	30000	3.058788828866227e-06	14	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	32000	32000	5.025153075994516e-06	23	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	34000	34000	1.310909498085526e-06	6	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	36000	36000	6.55454749042763e-07	3	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	38000	38000	4.369698326951753e-07	2	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	40000	40000	4.369698326951753e-07	2	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	42000	42000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	44000	44000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	46000	46000	2.1848491634758765e-07	1	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	48000	48000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	50000	50000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	52000	52000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	54000	54000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	56000	56000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	58000	58000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	60000	60000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	62000	62000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	64000	64000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	66000	66000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	68000	68000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	70000	70000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	72000	72000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	74000	74000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	76000	76000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	78000	78000	0.0	0	4576975
+D	ERR15194059	Secale cereale	Lo7	length_histogram	80000	at_least_80000	0.0	0	4576975
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	0	0	8.866666666666666e-05	133	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	2000	2000	0.00011866666666666667	178	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	4000	4000	0.000284	426	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	6000	6000	0.000764	1146	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	8000	8000	0.001702	2553	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	10000	10000	0.004039333333333333	6059	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	12000	12000	0.195892	293838	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	14000	14000	0.29893733333333333	448406	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	16000	16000	0.21617333333333333	324260	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	18000	18000	0.13757733333333333	206366	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	20000	20000	0.07926933333333333	118904	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	22000	22000	0.04047133333333333	60707	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	24000	24000	0.016898	25347	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	26000	26000	0.005664666666666667	8497	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	28000	28000	0.001538	2307	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	30000	30000	0.000406	609	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	32000	32000	8.066666666666667e-05	121	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	34000	34000	4.4666666666666664e-05	67	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	36000	36000	1.8e-05	27	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	38000	38000	1.2666666666666667e-05	19	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	40000	40000	8e-06	12	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	42000	42000	6.666666666666667e-06	10	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	44000	44000	3.3333333333333333e-06	5	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	46000	46000	2e-06	3	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	48000	48000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	50000	50000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	52000	52000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	54000	54000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	56000	56000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	58000	58000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	60000	60000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	62000	62000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	64000	64000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	66000	66000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	68000	68000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	70000	70000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	72000	72000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	74000	74000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	76000	76000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	78000	78000	0.0	0	1500000
+D	SRR28200549	Triticum aestivum	Chinese Spring	length_histogram	80000	at_least_80000	0.0	0	1500000
+D	SRR15447419	Zea mays	Mo17	length_histogram	0	0	0.000608335173056639	248	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	2000	2000	0.0007775897171732038	317	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	4000	4000	0.00036058576790050774	147	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	6000	6000	0.0014030956410822479	572	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	8000	8000	0.014349841783795718	5850	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	10000	10000	0.25441656241567934	103718	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	12000	12000	0.3055755880982167	124574	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	14000	14000	0.23166777050065004	94444	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	16000	16000	0.12932028356268552	52720	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	18000	18000	0.0459194937081463	18720	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	20000	20000	0.011732528761007678	4783	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	22000	22000	0.002803738317757009	1143	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	24000	24000	0.0007187185713935291	293	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	26000	26000	0.0002526553339711041	103	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	28000	28000	5.8871145779674735e-05	24	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	30000	30000	1.962371525989158e-05	8	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	32000	32000	9.81185762994579e-06	4	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	34000	34000	4.905928814972895e-06	2	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	36000	36000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	38000	38000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	40000	40000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	42000	42000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	44000	44000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	46000	46000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	48000	48000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	50000	50000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	52000	52000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	54000	54000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	56000	56000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	58000	58000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	60000	60000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	62000	62000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	64000	64000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	66000	66000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	68000	68000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	70000	70000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	72000	72000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	74000	74000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	76000	76000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	78000	78000	0.0	0	407670
+D	SRR15447419	Zea mays	Mo17	length_histogram	80000	at_least_80000	0.0	0	407670
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	20	20	8.566190957528826e-06	8	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	22	22	9.636964827219928e-06	9	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	24	24	3.854785930887971e-05	36	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	26	26	0.0007880895680926519	736	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	28	28	0.014078534838698625	13148	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	30	30	0.04897719679967106	45740	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	32	32	0.14740915554489542	137666	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	34	34	0.26082552382257707	243586	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	36	36	0.2644533056930905	246974	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	38	38	0.13355548321883193	124728	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	40	40	0.04024396511847042	37584	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	42	42	0.028175272833181997	26313	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	44	44	0.02922463122547928	27293	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	46	46	0.004469410132090665	4174	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	48	48	0.00041867258304922135	391	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	50	50	0.01155150850622762	10788	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	52	52	0.015554061231132964	14526	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	54	54	5.889256283301067e-05	55	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	56	56	3.105244222104199e-05	29	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	58	58	1.3920060305984341e-05	13	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	60	60	1.1778512566602135e-05	11	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	62	62	3.3193989960424195e-05	31	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	64	64	1.7132381915057652e-05	16	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	66	66	2.5698572872586476e-05	24	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	68	68	2.462779900289537e-05	23	933904
+E	ERR6210723	Arabidopsis thaliana	Col-0N	gc_histogram	70	at_least_70	2.1415477393822065e-06	2	933904
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	20	20	6.104943987138918e-06	6	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	22	22	1.017490664523153e-05	10	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	24	24	4.4769589239018734e-05	44	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	26	26	0.0008618145928511106	847	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	28	28	0.00972314079018325	9556	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	30	30	0.04414790244299509	43389	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	32	32	0.12727688973453669	125089	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	34	34	0.23873586959839643	234632	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	36	36	0.295297158148574	290221	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	38	38	0.14799096468289905	145447	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	40	40	0.03690438640225476	36270	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	42	42	0.021487367853399945	21118	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	44	44	0.015275587346486095	15013	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	46	46	0.0035947945177602996	3533	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	48	48	0.0013817523224224418	1358	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	50	50	0.018515277622327814	18197	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	52	52	0.029510281743165008	29003	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	54	54	0.0008394297982316012	825	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	56	56	0.0011813066615113806	1161	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	58	58	0.0013278253172027148	1305	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	60	60	0.001189446586827566	1169	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	62	62	0.0013746298877707797	1351	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	64	64	0.00129730059726702	1275	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	66	66	0.0009401613740193934	924	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	68	68	0.00045990578036446514	452	982810
+E	ERR8666127	Arabidopsis thaliana	Col-0R	gc_histogram	70	at_least_70	0.0006257567586817391	615	982810
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	20	20	3.5817217575269883e-06	3	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	22	22	1.6714701535125947e-05	14	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	24	24	5.133801185788683e-05	43	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	26	26	0.000304446349389794	255	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	28	28	0.004877111126499249	4085	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	30	30	0.03049119732182725	25539	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	32	32	0.12986845529891855	108776	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	34	34	0.25593192818409094	214365	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	36	36	0.3041395152258992	254743	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	38	38	0.1487429350538333	124585	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	40	40	0.0397606932303071	33303	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	42	42	0.02226278853753525	18647	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	44	44	0.017497904692771845	14656	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	46	46	0.0026612192658425522	2229	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	48	48	0.00022803628522921827	191	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	50	50	0.009415152593285942	7886	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	52	52	0.032198484692915114	26969	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	54	54	0.00011819681799839061	99	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	56	56	0.00020177032567402035	169	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	58	58	0.00028414992609714106	238	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	60	60	0.00024594489401685317	206	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	62	62	0.00020415814017903832	171	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	64	64	0.00016595310809875045	139	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	66	66	0.00013968714854355253	117	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	68	68	7.641006416057575e-05	64	837586
+E	ERR8666125	Arabidopsis thaliana	Ey15-2R	gc_histogram	70	at_least_70	0.00011222728173584563	94	837586
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	20	20	2.5072082236429736e-06	1	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	22	22	0.0	0	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	24	24	7.521624670928921e-06	3	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	26	26	0.0	0	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	28	28	5.014416447285947e-06	2	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	30	30	1.2536041118214868e-05	5	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	32	32	6.0172997367431366e-05	24	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	34	34	0.00206593957628181	824	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	36	36	0.013749529898458067	5484	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	38	38	0.07859596339475994	31348	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	40	40	0.19617400025072082	78244	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	42	42	0.2380870001253604	94961	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	44	44	0.20174752413187916	80467	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	46	46	0.12837407546696752	51202	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	48	48	0.07325560987840041	29218	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	50	50	0.037389996239187664	14913	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	52	52	0.018079478500689482	7211	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	54	54	0.009251598345242572	3690	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	56	56	0.002306631565751536	920	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	58	58	0.000661902971041745	264	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	60	60	0.00016547574276043624	66	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	62	62	0.0	0	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	64	64	0.0	0	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	66	66	5.014416447285947e-06	2	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	68	68	2.5072082236429736e-06	1	398850
+E	ERR10422581	Avena sativa	Victoria	gc_histogram	70	at_least_70	0.0	0	398850
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	20	20	0.0	0	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	22	22	0.0	0	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	24	24	2.230397869523955e-06	2	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	26	26	4.46079573904791e-06	4	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	28	28	1.5612785086667686e-05	14	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	30	30	0.00010259830199810194	92	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	32	32	0.0005865946396848002	526	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	34	34	0.005183444648773672	4648	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	36	36	0.009075488931092973	8138	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	38	38	0.022425535379128607	20109	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	40	40	0.13074815350936378	117242	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	42	42	0.3269406413062994	293168	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	44	44	0.28655482708282914	256954	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	46	46	0.13186669804093004	118245	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	48	48	0.05314703563395156	47657	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	50	50	0.018143171469642613	16269	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	52	52	0.005697551357698943	5109	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	54	54	0.007730559015770028	6932	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	56	56	0.001092894956066738	980	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	58	58	0.0004761899451433644	427	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	60	60	8.140952223762435e-05	73	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	62	62	5.910554354238481e-05	53	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	64	64	4.46079573904791e-05	40	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	66	66	1.784318295619164e-05	16	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	68	68	1.1151989347619776e-06	1	896701
+E	ERR4659246	Hordeum vulgare	Morex	gc_histogram	70	at_least_70	2.230397869523955e-06	2	896701
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	20	20	5.599464691175523e-07	1	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	22	22	1.1198929382351047e-06	2	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	24	24	4.479571752940419e-06	8	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	26	26	1.1198929382351047e-05	20	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	28	28	5.039518222057971e-05	90	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	30	30	0.00025085601816466344	448	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	32	32	0.001577369203504145	2817	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	34	34	0.006268040775301881	11194	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	36	36	0.04133412845731948	73818	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	38	38	0.11388359272853515	203383	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	40	40	0.2158649633095076	385510	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	42	42	0.2407355456818328	429926	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	44	44	0.17497655224160572	312488	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	46	46	0.09693625289422331	173117	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	48	48	0.049335203554540186	88107	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	50	50	0.024584449726606138	43905	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	52	52	0.01207692544592737	21568	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	54	54	0.005930393054423997	10591	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	56	56	0.003292485238411208	5880	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	58	58	0.0017319144289805895	3093	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	60	60	0.006960694557600293	12431	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	62	62	0.004060171847571372	7251	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	64	64	7.783255920733977e-05	139	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	66	66	2.6317484048524962e-05	47	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	68	68	1.623844760440902e-05	29	1785885
+E	SRR25241090	Oryza sativa	Nipponbare	gc_histogram	70	at_least_70	1.2318822320586151e-05	22	1785885
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	20	20	0.0	0	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	22	22	1.0924245817379383e-06	5	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	24	24	2.1848491634758765e-07	1	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	26	26	3.932728494256578e-06	18	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	28	28	1.6386368726069075e-05	75	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	30	30	7.778063021974121e-05	356	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	32	32	0.0009567454486860864	4379	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	34	34	0.008834874562347403	40437	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	36	36	0.018878189197013312	86405	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	38	38	0.015095559840287527	69092	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	40	40	0.07574609867871247	346688	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	42	42	0.21009225525592776	961587	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	44	44	0.26047247363160164	1192176	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	46	46	0.2014843865216655	922189	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	48	48	0.10607508234150285	485503	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	50	50	0.04670333571846034	213760	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	52	52	0.027281774534490575	124868	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	54	54	0.018664729433741718	85428	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	56	56	0.007609829636386478	34830	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	58	58	0.0016974093151044085	7769	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	60	60	0.0002595600806209341	1188	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	62	62	3.845334527717543e-05	176	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	64	64	8.30242682120833e-06	38	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	66	66	1.5293944144331136e-06	7	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	68	68	0.0	0	4576975
+E	ERR15194059	Secale cereale	Lo7	gc_histogram	70	at_least_70	0.0	0	4576975
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	20	20	1.4e-05	21	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	22	22	2.666666666666667e-06	4	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	24	24	1.2666666666666667e-05	19	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	26	26	2.2e-05	33	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	28	28	5.2e-05	78	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	30	30	0.0004966666666666666	745	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	32	32	0.0009526666666666667	1429	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	34	34	0.00468	7020	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	36	36	0.010840666666666667	16261	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	38	38	0.026076	39114	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	40	40	0.08538666666666667	128080	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	42	42	0.17136066666666666	257041	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	44	44	0.23220266666666667	348304	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	46	46	0.21100666666666668	316510	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	48	48	0.13	195000	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	50	50	0.06460666666666667	96910	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	52	52	0.03050133333333333	45752	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	54	54	0.015356666666666666	23035	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	56	56	0.010624666666666666	15937	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	58	58	0.003376	5064	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	60	60	0.0012853333333333334	1928	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	62	62	0.0006573333333333333	986	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	64	64	0.000448	672	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	66	66	3.4666666666666665e-05	52	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	68	68	3.3333333333333333e-06	5	1500000
+E	SRR28200549	Triticum aestivum	Chinese Spring	gc_histogram	70	at_least_70	0.0	0	1500000
+E	SRR15447419	Zea mays	Mo17	gc_histogram	20	20	0.0	0	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	22	22	0.0	0	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	24	24	0.0	0	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	26	26	2.4529644074864474e-06	1	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	28	28	0.0	0	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	30	30	9.075968307699856e-05	37	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	32	32	0.0030416758652831947	1240	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	34	34	0.014680991978806388	5985	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	36	36	0.02798341796060539	11408	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	38	38	0.0269139254789413	10972	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	40	40	0.08496087521770058	34636	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	42	42	0.22619520690754777	92213	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	44	44	0.2255402654107489	91946	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	46	46	0.1288174258591508	52515	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	48	48	0.08086197169279073	32965	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	50	50	0.057737876223416	23538	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	52	52	0.04057203129982584	16540	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	54	54	0.027632644050334828	11265	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	56	56	0.0199818480633846	8146	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	58	58	0.019535408541222068	7964	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	60	60	0.0110407927980965	4501	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	62	62	0.004071920916427503	1660	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	64	64	0.0003262442661956975	133	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	66	66	4.905928814972895e-06	2	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	68	68	2.4529644074864474e-06	1	407670
+E	SRR15447419	Zea mays	Mo17	gc_histogram	70	at_least_70	4.905928814972895e-06	2	407670
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	0	0	0.0	0	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	5	5	0.0	0	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	10	10	0.0	0	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	15	15	0.0	0	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	20	20	0.16002608405146568	149449	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	25	25	0.19632531823399407	183349	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	30	30	0.2775842056571125	259237	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	35	35	0.27279356336411453	254763	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	40	40	0.07504946975277973	70089	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	45	45	0.010476451541057754	9784	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	50	50	0.0027850828350665592	2601	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	55	55	0.001265654713974884	1182	933904
+F	ERR6210723	Arabidopsis thaliana	Col-0N	quality_histogram	60	at_least_60	0.003694169850434306	3450	933904
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	0	0	0.0	0	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	5	5	0.0	0	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	10	10	0.0	0	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	15	15	0.00013227378638800988	130	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	20	20	0.17991473428231297	176822	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	25	25	0.19910257323389058	195680	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	30	30	0.21646096397065556	212740	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	35	35	0.2115393616263571	207903	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	40	40	0.13021031532035693	127972	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	45	45	0.037888299874848645	37237	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	50	50	0.012571097160183555	12355	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	55	55	0.005639950753451837	5543	982810
+F	ERR8666127	Arabidopsis thaliana	Col-0R	quality_histogram	60	at_least_60	0.006540429991554827	6428	982810
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	0	0	0.0	0	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	5	5	0.0	0	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	10	10	0.0	0	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	15	15	0.0	0	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	20	20	0.2708283089736457	226842	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	25	25	0.3308149849687077	277086	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	30	30	0.26243275317400244	219810	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	35	35	0.10869451017567151	91041	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	40	40	0.021874768680469826	18322	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	45	45	0.0035709765922544074	2991	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	50	50	0.0009622892455222508	806	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	55	55	0.00030922197839983	259	837586
+F	ERR8666125	Arabidopsis thaliana	Ey15-2R	quality_histogram	60	at_least_60	0.0005121862113263593	429	837586
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	0	0	0.0	0	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	5	5	0.0	0	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	10	10	0.0	0	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	15	15	0.0	0	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	20	20	0.2650219380719569	105704	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	25	25	0.3442647611884167	137310	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	30	30	0.2788968283815971	111238	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	35	35	0.09976181521875392	39790	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	40	40	0.010808574652124859	4311	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	45	45	0.000852450796038611	340	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	50	50	0.00015043249341857841	60	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	55	55	5.515858092014542e-05	22	398850
+F	ERR10422581	Avena sativa	Victoria	quality_histogram	60	at_least_60	0.000188040616773223	75	398850
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	0	0	0.0	0	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	5	5	0.0	0	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	10	10	0.0	0	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	15	15	0.0	0	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	20	20	0.2745586321415946	246197	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	25	25	0.3814426436459868	342040	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	30	30	0.2718118971652758	243734	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	35	35	0.058473225746374764	52433	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	40	40	0.005015049609624613	4497	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	45	45	0.0016270752458177253	1459	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	50	50	0.0010761669720453083	965	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	55	55	0.000792906442615766	711	896701
+F	ERR4659246	Hordeum vulgare	Morex	quality_histogram	60	at_least_60	0.005202403030664625	4665	896701
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	0	0	0.0	0	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	5	5	0.0	0	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	10	10	0.0	0	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	15	15	0.0	0	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	20	20	0.2204677232856539	393730	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	25	25	0.2370147013945467	423281	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	30	30	0.23793917301505976	424932	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	35	35	0.18655176565120374	333160	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	40	40	0.08319628643501681	148579	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	45	45	0.01981314586325547	35384	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	50	50	0.00641698653608715	11460	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	55	55	0.0028333291337348148	5060	1785885
+F	SRR25241090	Oryza sativa	Nipponbare	quality_histogram	60	at_least_60	0.005766888685441672	10299	1785885
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	0	0	0.0	0	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	5	5	0.0	0	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	10	10	0.000614598069685764	2813	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	15	15	0.07944024164431748	363596	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	20	20	0.17240338870105254	789086	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	25	25	0.19876468628297073	909741	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	30	30	0.26209516110531517	1199603	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	35	35	0.2865501777921007	1311533	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	40	40	0.00013174640455759535	603	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	45	45	0.0	0	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	50	50	0.0	0	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	55	55	0.0	0	4576975
+F	ERR15194059	Secale cereale	Lo7	quality_histogram	60	at_least_60	0.0	0	4576975
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	0	0	0.0	0	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	5	5	0.0	0	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	10	10	0.0	0	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	15	15	0.0	0	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	20	20	0.175394	263091	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	25	25	0.188524	282786	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	30	30	0.216468	324702	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	35	35	0.23476866666666665	352153	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	40	40	0.136132	204198	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	45	45	0.033628	50442	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	50	50	0.009522	14283	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	55	55	0.0034473333333333335	5171	1500000
+F	SRR28200549	Triticum aestivum	Chinese Spring	quality_histogram	60	at_least_60	0.002116	3174	1500000
+F	SRR15447419	Zea mays	Mo17	quality_histogram	0	0	0.0	0	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	5	5	0.0	0	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	10	10	0.0	0	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	15	15	0.0	0	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	20	20	0.3423013712071038	139546	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	25	25	0.31784286310005644	129575	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	30	30	0.22560404248534355	91972	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	35	35	0.0901538008683494	36753	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	40	40	0.01938823067677288	7904	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	45	45	0.003071111438173032	1252	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	50	50	0.0008364608629528786	341	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	55	55	0.0003360561238256433	137	407670
+F	SRR15447419	Zea mays	Mo17	quality_histogram	60	at_least_60	0.000466063237422425	190	407670

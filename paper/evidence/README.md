@@ -172,3 +172,35 @@ the original slow audit and exact six-file native parity. The larger input is
 `Col0N_input_qc/` contains the complete 14.647-Gb input QC. `Mo17_published_regions/`
 contains the original paper supplement and 96 extracted regions, with coordinate
 compatibility checks and the explicit mixed-region/base-truth distinction.
+
+`Nipponbare_input_qc/`, `Morex_input_qc/`, `Lo7_input_qc/`,
+`ChineseSpring_input_qc/`, `Victoria_input_qc/`, `Col0R_input_qc/` and
+`Ey15R_input_qc/` extend complete-file QC and seed6101 nested sampling. Together
+with Mo17 and Col-0N, the included cohort is nine libraries from seven reported
+species (12,320,381 reads; 218,538,165,764 bp). These are validated files and
+technical sampling strata, not independent biological replicates or accuracy
+truth. Large FASTQ/ID products remain at the recorded T7 data root.
+
+`factorial_multik_replay/` and `factorial_joint_multik/` retain the complete
+three-genome, 27-condition conditional copy-estimation and joint-read interval
+experiments, including missing fits, intervals without truth and conditions in
+which the multi-k estimate is worse. Version 2 of the joint-read figure changes
+layout only and preserves the version-1 source rows.
+
+`multispecies_real_diagnostics/` contains compact one-thread TandemX/TRF/
+TideHunter execution receipts from whole-library random samples. It preserves
+calls and called-base extent as descriptive outputs; no real accuracy truth or
+final isolated resource ranking is implied. `reference_mapping_diagnostics/`
+contains the separate Col-CEN and Nipponbare alignment audits with reference-
+content, donor-matching and organellar-denominator limits.
+
+`multispecies_input_qc/` contains the inspected six-panel cross-cohort input
+figure, exact panel source and output/input hashes for all nine included
+libraries. It visualizes complete-file data volume, read length, GC and reported
+quality; it does not measure empirical read accuracy or biological replication.
+
+`known_repeat_sources/` records exact source accessions and curated historical
+repeat queries. `known_query_recovery/` scores those selected sequences against
+actual tool consensus outputs, including the Morex TandemX family-representation
+miss at the 0.90 threshold. It is source-query recovery rather than donor-matched
+genome-wide family recall or prediction precision.

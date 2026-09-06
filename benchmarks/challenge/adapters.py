@@ -104,21 +104,24 @@ def iter_arrays(tool: str, path: Path, min_period: int, max_period: int, min_spa
 
 
 def build_command(tool: str, executable: str, reads: Path, outdir: Path,
-                  min_period: int, max_period: int, min_span: int) -> tuple[list[str], Path]:
+                  min_period: int, max_period: int, min_span: int,
+                  threads: int = 1) -> tuple[list[str], Path]:
+    if not isinstance(threads, int) or not 1 <= threads <= 64:
+        raise ValueError("Threads must be an integer in [1,64]")
     if tool == "tandemx":
         output = outdir / "discover" / "candidate_reads.tsv"
         return [executable, "discover", "--reads", str(reads), "--outdir", str(output.parent),
                 "--min-period", str(min_period), "--max-period", str(max_period),
                 "--min-repeat-span", str(min_span), "--min-support-reads", "1", "--min-read-length", "1",
-                "--kmer-backend", "rust", "--threads", "1", "--no-progress"], output
+                "--kmer-backend", "rust", "--threads", str(threads), "--no-progress"], output
     if tool == "trf":
         return [executable, str(reads), "2", "7", "7", "80", "10", "50", str(max_period), "-ngs", "-h"], outdir / "trf.txt"
     if tool == "tidehunter":
         output = outdir / "tidehunter.tsv"
-        return [executable, "-t", "1", "-f", "2", "-p", str(min_period), "-P", str(max_period),
+        return [executable, "-t", str(threads), "-f", "2", "-p", str(min_period), "-P", str(max_period),
                 "-m", str(min_period), "-c", "2", "-o", str(output), str(reads)], output
     if tool == "ultra":
         output = outdir / "ultra.tsv"
-        return [executable, "-t", "1", "-p", str(max_period), "--min_length", str(min_span),
+        return [executable, "-t", str(threads), "-p", str(max_period), "--min_length", str(min_span),
                 "--max_consensus", str(max_period), "--tsv", "-o", str(output), str(reads)], output
     raise ValueError(f"Unknown tool: {tool}")

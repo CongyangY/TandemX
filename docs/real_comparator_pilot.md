@@ -16,12 +16,14 @@ Neither mode is the final performance runner.
 conda run --no-capture-output -n tandemx-dev python -m benchmarks.scripts.run_real_comparators \
   --sampling-receipt /path/to/samples/sampling_receipt.json \
   --sample-id sample_001 --outdir /path/to/new/pilot \
-  --trf /path/to/trf --tidehunter /path/to/TideHunter --timeout 900
+  --trf /path/to/trf --tidehunter /path/to/TideHunter --timeout 900 --threads 1
 pytest -q tests/unit/test_real_comparator_inputs.py tests/unit/test_real_disk.py
 ```
 
-This first workflow runs elastic/sequence-clustering TandemX, TRF and TideHunter
-at one thread, one repetition and fixed shuffled order. The common evaluation
+This workflow runs elastic/sequence-clustering TandemX, TRF and TideHunter at
+one repetition and fixed shuffled order. `--threads` is recorded and passed to
+TandemX and TideHunter; TRF's command remains single-threaded, so multi-thread
+scaling is reported separately from equal-one-thread comparisons. The common evaluation
 range is 30–1000 bp period and at least 100 bp called span. Native outputs are
 preserved, including out-of-range calls. This does not test long rDNA units or
 arbitrary higher-order structures, nor replace broader SRF/ULTRA/TRASH and other

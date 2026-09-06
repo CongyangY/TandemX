@@ -1,0 +1,50 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_reference_mapping_11Mb_v1_20260906/environment.json",
+    "sha256": "a1bb3fe73aa16dca0e2caf8e260a5036de910b732eec7feaf5df8ab87fc12d85",
+    "bytes": 9218
+  },
+  {
+    "file": "reference_qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_reference_mapping_11Mb_v1_20260906/reference_qc.json",
+    "sha256": "590b2ab22b34b4c0d197b8c4cf5a2cded54a226dcf2fe06f76b677c214d31499",
+    "bytes": 2717
+  },
+  {
+    "file": "minimap2.stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_reference_mapping_11Mb_v1_20260906/minimap2.stderr.log",
+    "sha256": "2bfbae4997db60e503b32960580b5eaca38d95aa311938aebbacd8d32d05cab1",
+    "bytes": 920
+  },
+  {
+    "file": "execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_reference_mapping_11Mb_v1_20260906/execution.json",
+    "sha256": "16b64bee5bbbd689083b912c1bd4d15956164b175ff5b0d866f2c022e6af9eba",
+    "bytes": 627
+  },
+  {
+    "file": "read_mapping.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_reference_mapping_11Mb_v1_20260906/read_mapping.tsv",
+    "sha256": "17f9af36e0260add90a349ee96c0ff78176096d33fc0fb3cc4d6a98042d82603",
+    "bytes": 41080
+  },
+  {
+    "file": "composition_mapping.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_reference_mapping_11Mb_v1_20260906/composition_mapping.tsv",
+    "sha256": "aa2dea1a431136858d10574906de74b0f1b9d892e42385aeb69ed0de1ffa6a5f",
+    "bytes": 907
+  },
+  {
+    "file": "reference_mapping.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_reference_mapping_11Mb_v1_20260906/reference_mapping.tsv",
+    "sha256": "d7b4d3ffa7be4cf745bed04387e3075b7a8e7792590480fd74de5dce35cd854e",
+    "bytes": 1492
+  },
+  {
+    "file": "validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_reference_mapping_11Mb_v1_20260906/validation.json",
+    "sha256": "9bcaab9ff977fac420ddc2a73aaf841547dadc6fda196e295925ffb2f823852c",
+    "bytes": 1533
+  }
+]

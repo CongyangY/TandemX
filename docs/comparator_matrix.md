@@ -18,6 +18,9 @@ superior simply because its combined workflow has more commands.
 | RepeatExplorer2/TAREAN | Satellite clustering and abundance from short reads | Separate matched short-read evaluation if suitable reads exist; no artificial failure on unsupported HiFi input | Not yet run |
 | HiCAT/HiCAT-human | Monomer/HOR organization | Prior-art and specialized analysis; human pretrained classifiers do not supply a fair plant de novo baseline | Applicability review pending |
 | StringDecomposer/NCRF | Known-motif decomposition | Candidate targeted annotation baselines, with identical supplied motif catalogues; not de novo family discovery | Applicability review pending |
+| TandemTools | Long-read mapping, polishing and quality assessment for assembled extra-long tandem repeats | Apply to engineered assembly errors or candidate arrays after target coordinates exist; it is not a de novo monomer-discovery baseline | Applicability review pending |
+| RaMA | Pairwise alignment of centromere assemblies and higher-order-repeat structure | Relevant to assembly-structure concordance and alignment resource use; it does not discover read-level families or estimate whole-sample copy number | Applicability review pending |
+| TRsv | Reference-anchored tandem-repeat CNV plus SV/indel calling from long-read alignments | Non-human mode requires a user-supplied repeat BED/unit catalogue; compare only on known-locus CNV tests, not de novo satellite discovery | Applicability review pending |
 | Chorus2 | Genome-based oligo-FISH probe specificity | Review specificity and oligo constraints; unique chromosome-painting oligos and repeated satellite probes have different objectives | Official source reviewed; task-matched experiment pending |
 | unitFinder | Plant centromeric monomer discovery/decomposition in assemblies | New Genome Biology soybean study; iterative TRF/nucmer workflow, supplied chromosome and de novo/reference-assisted modes must be matched separately | Primary methods reviewed; implementation/dependency audit and experiment pending |
 | CentIER | Assembly centromere-region prediction using repeats, retrotransposons and k-mer features | Plant Communications method; optional annotation/Hi-C inputs require matched evidence. Region prediction is distinct from read-first monomer recovery | Official source reviewed; dependency/build and matched-region experiment pending |
@@ -32,6 +35,15 @@ after failure at k=151. Its HiFi high-count filter also depends on coverage.
 The existing k=151/ci20/ci100 toy workflow is therefore a development condition,
 not a sufficient tuned comparator. Include frozen k/count sensitivity and HOR
 decomposition endpoints before attributing misses to the method generally.
+
+The current unitFinder README defines a chromosome-by-chromosome assembly
+workflow built around iterative TRF calls, nucmer grouping (`-c 10 -l 10`),
+cross-chromosome merging and a separate reference-assisted `--cen` pass. Its
+published example also includes manual concatenation, script-format edits and
+Clustal Omega steps. A reproducible comparison must therefore freeze the exact
+repository state, containerize every external dependency and scripted edit, and
+measure de novo and supplied-reference modes separately. Dependency and manual
+post-processing time cannot be omitted from end-to-end resource results.
 
 The [real/simulated cohort and QC programme](cohort_and_qc.md) governs enrollment,
 data scale, true independent units, reference quality and sampling.
@@ -87,6 +99,9 @@ data scale, true independent units, reference quality and sampling.
 - [TRASH official implementation](https://github.com/vlothec/TRASH)
 - [TideHunter official implementation](https://github.com/Xinglab/TideHunter)
 - [Chorus2 official implementation](https://github.com/zhangtaolab/Chorus2)
+- [TandemTools paper](https://doi.org/10.1093/bioinformatics/btaa440) and [official implementation](https://github.com/ablab/TandemTools)
+- [RaMA Genome Research paper](https://doi.org/10.1101/gr.279763.124) and [official implementation](https://github.com/pinglu-zhang/RaMA)
+- [TRsv Genome Biology paper](https://doi.org/10.1186/s13059-025-03718-z) and [official implementation](https://github.com/stat-lab/TRsv)
 - [unitFinder primary Genome Biology study](https://doi.org/10.1186/s13059-025-03924-9)
 - [unitFinder official implementation](https://github.com/HuangYicheng-Bio/unitFinder)
 - [CentIER official implementation](https://github.com/simon19891216/CentIER)

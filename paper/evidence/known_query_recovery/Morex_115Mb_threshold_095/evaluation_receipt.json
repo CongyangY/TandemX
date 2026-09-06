@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "material": "Morex",
+  "selected_query_ids": [
+    "HvT01_X16095_1_1_118"
+  ],
+  "threshold": 0.95,
+  "known_fasta": "/Volumes/T7/Codex/TandemX/data/known_repeats/curated_queries_v1_20260906/known_monomers.fa",
+  "known_fasta_sha256": "ce5238ebae2025e255e66abd3c29f33d3629f48b7206819c3c3c0e47021d5ae4",
+  "prediction_inputs": {
+    "tandemx": {
+      "path": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_v1_20260906/tandemx/discover/monomers.fa",
+      "sha256": "d97b2d8e4548e06051b03f5f9c484acd3ea7cd80d092271e63e9ac273d8bc87f",
+      "prediction_unit": "family_catalog",
+      "source_rows": 4380
+    },
+    "tandemx_candidates": {
+      "path": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_v1_20260906/tandemx/discover/candidate_monomers.fa",
+      "sha256": "b69faba75a723fd54105eb1c80bcb2055bd0242df0c84b11bd1ab878cd1e85ed",
+      "prediction_unit": "family_catalog",
+      "source_rows": 7094
+    },
+    "tidehunter": {
+      "path": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_v1_20260906/tidehunter/normalized_arrays.tsv",
+      "sha256": "812e0ac84670403f9745af4a28210cbe34fbaa8b7001041d9a860125d4b3538b",
+      "prediction_unit": "array_consensus",
+      "source_rows": 12740
+    },
+    "trf": {
+      "path": "/Volumes/T7/Codex/TandemX/results/Morex_random_115Mb_v1_20260906/trf/normalized_arrays.tsv",
+      "sha256": "a41731c3ecf576d6f575db1aede29c3f116cad4ae8921a40d460cfe8a5cb79e0",
+      "prediction_unit": "array_consensus",
+      "source_rows": 9217
+    }
+  },
+  "script_sha256": "97261e3c86b1d6c6aa4e9f62496ce2e234511b8a4979e8e3f93c409443b1c0e3",
+  "outputs": {
+    "known_query_summary.tsv": "9de4139e79d8b7a0103e1bc01f6cc0c10b547550eda191464756416856216cbf",
+    "known_query_details.tsv": "efa32b5f5efac8d2956bd50efcbb382d3e0644e20aa950a7a82a367a5b0bf251"
+  },
+  "evidence_boundary": "HvT01_X16095_Donetsky_A_not_Morex_threshold_sensitivity_only",
+  "interpretation": "selected source-query sequence recovery only; not verified donor presence, genome-wide family recall, family precision or array-coordinate accuracy"
+}

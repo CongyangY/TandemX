@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/trf",
+    "/Volumes/T7/Codex/TandemX/results/Morex_random_1169Mb_v1_20260906/reads.fa",
+    "2",
+    "7",
+    "7",
+    "80",
+    "10",
+    "50",
+    "1000",
+    "-ngs",
+    "-h"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 2409.1452522920445,
+  "peak_rss_mib": 286.171875,
+  "cpu_user_seconds": 2369.338993,
+  "cpu_system_seconds": 18.375424,
+  "timed_out": false
+}

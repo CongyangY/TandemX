@@ -1,4 +1,4 @@
-# Observed Col-0N reference concordance and compartment context
+# Observed reference concordance and compartment context
 
 Whole-library seed6101 subsets of ERR6210723 were aligned to the independently
 checked Col-CEN v1.2 reference, including ChrM and ChrC. Native minimap2
@@ -41,3 +41,12 @@ are archived because the compartment-span fields were added between controls.
 PAF and SQLite stay at the exact T7 paths in the receipts; output hashes enable
 verification. File/mapping QC does not establish family recall, FISH success,
 assembly completeness or contamination status.
+
+The Nipponbare 11.418-Mb control used frozen438d078 and the exact checked
+GCA_034140825.1 reference. All626 reads had primary alignments;611 had primary
+MAPQ20–254 alignments. Primary span union was11,408,400 of11,418,016 bp
+(99.9158%). The native output contained639 primary and66 secondary rows.
+No organellar contigs are present in this GCA assembly, so its zero organellar
+counts cannot establish absence of organellar reads. The matching cultivar/
+project does not resolve different raw/reference BioSample dates and ages.
+This control supplies reference concordance only, not validated nuclear depth.

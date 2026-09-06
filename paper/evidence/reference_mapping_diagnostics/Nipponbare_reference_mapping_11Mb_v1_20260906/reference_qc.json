@@ -1,0 +1,137 @@
+{
+  "complete": true,
+  "contig_count": 12,
+  "total_bases": 385710679,
+  "n_bases": 0,
+  "other_ambiguous_bases": 0,
+  "base_counts": {
+    "C": 84246207,
+    "T": 108455567,
+    "A": 108625519,
+    "G": 84383386
+  },
+  "input_sha256": "cbe51d6615380bb441b7cf531ebc0ae58f498bc7982d2db07c549376a7638270",
+  "contigs": [
+    {
+      "contig": "CP132235.1",
+      "length_bp": 43929697,
+      "base_counts": {
+        "C": 9598579,
+        "T": 12361818,
+        "A": 12374001,
+        "G": 9595299
+      }
+    },
+    {
+      "contig": "CP132236.1",
+      "length_bp": 36447916,
+      "base_counts": {
+        "C": 7884960,
+        "T": 10333990,
+        "A": 10340427,
+        "G": 7888539
+      }
+    },
+    {
+      "contig": "CP132237.1",
+      "length_bp": 37399924,
+      "base_counts": {
+        "C": 8167636,
+        "T": 10533403,
+        "A": 10528247,
+        "G": 8170638
+      }
+    },
+    {
+      "contig": "CP132238.1",
+      "length_bp": 36078568,
+      "base_counts": {
+        "C": 7973734,
+        "T": 10045584,
+        "A": 10076224,
+        "G": 7983026
+      }
+    },
+    {
+      "contig": "CP132239.1",
+      "length_bp": 30400764,
+      "base_counts": {
+        "A": 8505911,
+        "C": 6667091,
+        "T": 8531517,
+        "G": 6696245
+      }
+    },
+    {
+      "contig": "CP132240.1",
+      "length_bp": 32122276,
+      "base_counts": {
+        "C": 6991953,
+        "T": 9054937,
+        "A": 9055796,
+        "G": 7019590
+      }
+    },
+    {
+      "contig": "CP132241.1",
+      "length_bp": 29936421,
+      "base_counts": {
+        "C": 6489652,
+        "T": 8468500,
+        "A": 8454411,
+        "G": 6523858
+      }
+    },
+    {
+      "contig": "CP132242.1",
+      "length_bp": 28605474,
+      "base_counts": {
+        "A": 8101154,
+        "C": 6199908,
+        "T": 8105812,
+        "G": 6198600
+      }
+    },
+    {
+      "contig": "CP132243.1",
+      "length_bp": 27474823,
+      "base_counts": {
+        "C": 6272093,
+        "T": 7326826,
+        "A": 7476169,
+        "G": 6399735
+      }
+    },
+    {
+      "contig": "CP132244.1",
+      "length_bp": 23931887,
+      "base_counts": {
+        "T": 6765490,
+        "C": 5224016,
+        "A": 6748225,
+        "G": 5194156
+      }
+    },
+    {
+      "contig": "CP132245.1",
+      "length_bp": 31111469,
+      "base_counts": {
+        "A": 8896209,
+        "C": 6694752,
+        "T": 8874708,
+        "G": 6645800
+      }
+    },
+    {
+      "contig": "CP132246.1",
+      "length_bp": 28271460,
+      "base_counts": {
+        "T": 8052982,
+        "A": 8068745,
+        "C": 6081833,
+        "G": 6067900
+      }
+    }
+  ],
+  "biological_qc": "file content only; assembly completeness and satellite copy truth not established"
+}

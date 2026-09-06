@@ -33,3 +33,22 @@ and FASTA bases must agree; the 118-bp extraction must match the source feature.
 It writes `known_monomers.fa`, `source_units.tsv` and `curation_receipt.json` to
 a new directory. Failed source validation produces no curated bank. No motif
 matching result or completed accuracy assessment is implied by curation alone.
+
+Actual consensus outputs from multiple tools can be evaluated with the same
+independent cyclic edit-distance criterion:
+
+```bash
+python -m benchmarks.scripts.evaluate_known_repeats_across_tools \
+  --known /path/to/known_monomers.fa \
+  --query-id HvT01_X16095_1_1_118 \
+  --catalog tandemx=/path/to/tandemx/monomers.fa \
+  --consensus-table trf=/path/to/trf/normalized_arrays.tsv \
+  --consensus-table tidehunter=/path/to/tidehunter/normalized_arrays.tsv \
+  --material Morex \
+  --evidence-boundary "HvT01 donor differs from Morex" \
+  --outdir /path/to/new/evaluation
+```
+
+The output is source-query recovery only. The command does not establish that
+the historical sequence is present unchanged in the tested material, and it
+does not interpret unmatched predictions as false positives.

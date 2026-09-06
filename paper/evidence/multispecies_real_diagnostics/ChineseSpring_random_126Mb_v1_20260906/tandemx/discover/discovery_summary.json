@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "processed_reads": 7633,
+  "processed_bases": 126730796,
+  "candidate_count": 8607,
+  "family_count": 5440,
+  "warning": "none",
+  "output_sha256": {
+    "candidate_reads.tsv": "ff9c3d0beb191b92839705d28dc88a1669a2b09f2e48c4b3c01a76c8aaf989b9",
+    "families.tsv": "de94be67d8faee6d12e7198b42c1e9ad60306bc9b271dcad814bd986a1b1a5f4",
+    "monomers.fa": "62a31a67a43becdfdc9f8c71641135f4685131133ecb54270059034101d50147",
+    "family_similarity.tsv": "3fa74b07fda722f1c395d19d9694d75510b968c9032527760e1e8e04f8f406b1",
+    "candidate_monomers.fa": "7c24f1c023867fc1115295225eea00d937056f726002b3c72241b477f422884b",
+    "monomer_membership.tsv": "9ce2cc12ddf2cc558397e390f15a19411d9cbb624bf357cf47f2e21c0d363f46",
+    "family_audit_summary.json": "c0d8ee1d84a54a4756a994e3065395e95eb27baf613929850f58b3754912efbf"
+  }
+}

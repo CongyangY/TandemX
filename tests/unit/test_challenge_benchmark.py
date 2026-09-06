@@ -124,6 +124,16 @@ def test_commands_never_receive_truth(tmp_path: Path) -> None:
             assert command[command.index("--min-repeat-span") + 1] == "100"
             assert command[command.index("--threads") + 1] == "1"
 
+    threaded = {
+        tool: build_command(tool, tool, tmp_path / "reads.fa", tmp_path, 30, 1000, 100, 4)[0]
+        for tool in ("tandemx", "tidehunter", "ultra")
+    }
+    assert threaded["tandemx"][threaded["tandemx"].index("--threads") + 1] == "4"
+    assert threaded["tidehunter"][threaded["tidehunter"].index("-t") + 1] == "4"
+    assert threaded["ultra"][threaded["ultra"].index("-t") + 1] == "4"
+    with pytest.raises(ValueError, match="Threads"):
+        build_command("tandemx", "tandemx", tmp_path / "reads.fa", tmp_path, 30, 1000, 100, 0)
+
 
 def test_ultra_half_open_coordinates_and_unknown_consensus(tmp_path):
     path = tmp_path / "ultra.tsv"

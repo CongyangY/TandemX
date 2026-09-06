@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/trf",
+    "/Volumes/T7/Codex/TandemX/results/ChineseSpring_random_126Mb_v1_20260906/reads.fa",
+    "2",
+    "7",
+    "7",
+    "80",
+    "10",
+    "50",
+    "1000",
+    "-ngs",
+    "-h"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 332.2874159999192,
+  "peak_rss_mib": 311.9375,
+  "cpu_user_seconds": 318.464592,
+  "cpu_system_seconds": 5.304102,
+  "timed_out": false
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "file": "joint_uncertainty.pdf",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v2/joint_uncertainty.pdf",
+    "sha256": "7a55cc987cc415bba7847def17c4ec754867b5cc1406714edda6921a4b0737ec",
+    "bytes": 45153
+  },
+  {
+    "file": "joint_uncertainty.svg",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v2/joint_uncertainty.svg",
+    "sha256": "0308fe79556073935c9cf14df49e66fbbc1aefdfaab8c0f8e45bebbb83b9885e",
+    "bytes": 234924
+  },
+  {
+    "file": "joint_uncertainty.png",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v2/joint_uncertainty.png",
+    "sha256": "09a5aabe33e55cb00fc84d2af8c5e49e694c89c1ddc88958ef7fce2456dab52e",
+    "bytes": 240293
+  },
+  {
+    "file": "source_data.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v2/source_data.tsv",
+    "sha256": "3ac25c51f9f7e5834dcf83454ba256fdd1984f7b0285c83cbaa91af14f55996c",
+    "bytes": 654587
+  },
+  {
+    "file": "plot_joint_uncertainty.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v2/plot_joint_uncertainty.py",
+    "sha256": "9933ddbe33eb58ef1e5090d642985de59138c22b09571c754e89ea7c905b6331",
+    "bytes": 7040
+  },
+  {
+    "file": "figure_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/factorial_joint_multik_v1_20260906/figures_v2/figure_receipt.json",
+    "sha256": "5948e5a8812cbb86df134c0700c336fdbf332c6413fb5ae09ae23ef6ce9e69cf",
+    "bytes": 991
+  }
+]
