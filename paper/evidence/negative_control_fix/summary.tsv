@@ -1,0 +1,4 @@
+scenario	dataset_id	tool	seed	split	successful_runs	attempted_runs	deterministic	median_runtime_seconds	median_peak_rss_mib	array_recall	array_precision	array_f1	read_detection_recall	read_detection_precision	negative_read_call_rate	sequence_family_recall	matched_period_mae_bp	matched_boundary_mae_bp
+at_rich_control	at_rich_control_s1101	tandemx	1101	development	3	3	True	0.2635310001205653	24.640625	NA	NA	NA	NA	NA	0.0	NA	NA	NA
+dispersed_control	dispersed_control_s1101	tandemx	1101	development	3	3	True	0.28696916601620615	25.484375	NA	NA	NA	NA	NA	0.0	NA	NA	NA
+low_complexity_control	low_complexity_control_s1101	tandemx	1101	development	3	3	True	0.126802499871701	24.3125	NA	NA	NA	NA	NA	0.0	NA	NA	NA

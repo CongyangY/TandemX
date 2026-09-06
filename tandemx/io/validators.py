@@ -6,6 +6,8 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+from tandemx.discover.status import verified_empty_output
+
 
 class ValidationError(ValueError):
     """Raised when a TandemX output file does not match its schema."""
@@ -285,7 +287,7 @@ def validate_tsv(path: Path, schema: dict[str, set[str]]) -> ValidationResult:
             if "status" in index and "status" in schema and fields[index["status"]] not in schema["status"]:
                 raise ValidationError(f"{path} line {line_number} has invalid status: {fields[index['status']]}")
             record_count += 1
-    if record_count == 0 and path.name not in ALLOW_EMPTY_TSV_RECORDS:
+    if record_count == 0 and path.name not in ALLOW_EMPTY_TSV_RECORDS and not verified_empty_output(path):
         raise ValidationError(f"TSV file has no records: {path}")
     return ValidationResult(path=path, record_count=record_count)
 
@@ -381,7 +383,7 @@ def validate_tandemx_fasta(path: Path, pattern: re.Pattern[str]) -> ValidationRe
                 if record_count == 0:
                     raise ValidationError(f"{path} line {line_number} has sequence before first FASTA header")
                 current_has_sequence = True
-    if record_count == 0:
+    if record_count == 0 and not verified_empty_output(path):
         raise ValidationError(f"FASTA file is empty: {path}")
     if current_header is not None and not current_has_sequence:
         raise ValidationError(f"{path} has a header without sequence: {current_header}")

@@ -254,6 +254,21 @@ The immediate goal is to create a clean, testable, publication-oriented MVP that
 
 ## Codex session memory
 
+### Expanded user mandate (2026-09-06)
+
+The user has explicitly expanded work beyond the original toy MVP: develop a
+reusable research software release, fair tool comparisons and a complete
+evidence-backed manuscript with multi-panel main/supplementary figures and
+tables, targeting Genome Research, Genome Biology or Plant Communications.
+The user authorizes autonomous problem solving and Git/GitHub updates. Keep the
+scientific boundaries above. AI is optional and requires independent validation
+and ablations; do not add it merely as a novelty label. See
+`docs/release_program.md` for acceptance gates and `docs/current_status.md` for
+verified progress. Data/results should live under `/Volumes/T7/Codex/TandemX`
+on this machine; source and `tandemx-dev` can remain on the internal disk.
+Small explicitly selected paper/source-data artifacts may be versioned. Do not
+claim a mature paper or production software until the associated gates pass.
+
 These repository-level instructions are the persistent project memory for Codex.
 At the start of every new Codex conversation in this repository:
 

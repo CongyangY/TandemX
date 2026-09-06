@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Please cite this software and record the exact commit used. A manuscript is in development."
+title: "TandemX: read-first, assembly-aware tandem repeat analysis"
+type: software
+authors:
+  - name: "TandemX contributors"
+repository-code: "https://github.com/CongyangY/TandemX"
+license: MIT
+version: 0.1.0

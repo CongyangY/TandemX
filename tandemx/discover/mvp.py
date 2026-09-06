@@ -13,6 +13,8 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Iterable, Sequence
 
+from tandemx.discover.status import write_discovery_summary
+
 from tandemx.io.sequences import (
     DuplicateIdTracker,
     SequenceFormatError,
@@ -256,6 +258,7 @@ def discover_toy_repeats(
     candidate_path = config.outdir / "candidate_reads.tsv"
     candidate_tmp_path = candidate_path.with_suffix(candidate_path.suffix + ".tmp")
     for stale_path in (
+        config.outdir / "discovery_summary.json",
         config.outdir / "monomers.fa",
         config.outdir / "families.tsv",
         config.outdir / "family_similarity.tsv",
@@ -480,15 +483,16 @@ def discover_toy_repeats(
         )
 
     if not candidates:
+        if processed_reads == 0:
+            raise ValueError("No reads selected by the configured sampling or base limits")
         if processed_reads and skipped_short_kmer == processed_reads:
             raise ValueError(
                 f"No reads were long enough for --kmer-size {config.kmer_size}; "
                 f"processed {processed_reads} reads"
             )
-        raise ValueError(
-            "No tandem repeat candidates found after k-mer spacing prefilter; "
-            f"processed {processed_reads} reads"
-        )
+        if skipped_short_reads == processed_reads:
+            raise ValueError(f"No reads passed --min-read-length; processed {processed_reads} reads")
+        logger.info("discovery_result=no_candidates processed_reads=%s", processed_reads)
 
     update_discover_terminal_progress(
         progress,
@@ -501,10 +505,7 @@ def discover_toy_repeats(
     )
     families = cluster_candidates(candidates, config.min_support_reads)
     if not families:
-        raise ValueError(
-            "No repeat families passed the minimum support threshold; "
-            "try lowering --min-support-reads for toy data or check the reads"
-        )
+        logger.info("discovery_result=no_families minimum_support=%s", config.min_support_reads)
     update_discover_terminal_progress(
         progress,
         "compare_families",
@@ -533,6 +534,7 @@ def discover_toy_repeats(
         write_monomers(config.outdir / "collapsed_monomers.fa", collapsed_families)
         write_families(config.outdir / "collapsed_families.tsv", collapsed_families)
         write_family_collapse(config.outdir / "family_collapse.tsv", collapse_records)
+    write_discovery_summary(config.outdir, processed_reads, processed_bases, len(candidates), len(families))
     return candidates, families
 
 

@@ -243,8 +243,9 @@ def run_discover(args: argparse.Namespace) -> int:
         "completed",
         extra=f"candidates={len(candidates):,} families={len(families):,} outdir={args.outdir}",
     )
-    _write_run_config(args.outdir, "discover", args, status="discover_mvp_completed")
-    logger.info("status=discover_mvp_completed")
+    status = "discover_mvp_completed" if families else "discover_no_families"
+    _write_run_config(args.outdir, "discover", args, status=status)
+    logger.info("status=%s", status)
     logger.info("candidate_count=%s", len(candidates))
     logger.info("family_count=%s", len(families))
     logger.info("Discover MVP supports toy-scale FASTA/FASTQ input, including gzip-compressed files")

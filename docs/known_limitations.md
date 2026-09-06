@@ -31,7 +31,7 @@ Reasons:
 1. read processing is streaming at the parser layer but the algorithms are not optimized for large inputs;
 2. read-local seed spacing can use Rust, but global k-mer counting and downstream large-scale algorithms are not production backends;
 3. assembly scanning is simple and not indexed;
-4. monomer clustering is period-based and not robust to related repeat families;
+4. sequence-aware monomer clustering remains insufficiently validated across related natural repeat families;
 5. copy-number calibration depends on user-provided or rough haploid depth;
 6. localization uses k-mer evidence, not alignments;
 7. probe specificity is a heuristic, not a validated hybridization model.
@@ -51,9 +51,31 @@ An optional guided mode using user-supplied known-repeat FASTA files may be adde
 
 The synthetic benchmark harness can measure tiny and manual scale runs, but it does not make the MVP suitable for real 7-20 Gb production analysis. Real data should be limited to pilot subsets until chunking, resumable execution, memory reporting and external benchmarks are implemented.
 
-Discover now provides incremental candidates and progress logs, but it remains single-process. `--chunk-size` does not yet provide checkpoint/resume behavior. The Python backend is suitable for toy and staged subset tests; the Rust backend makes larger real-read pilots practical but does not address clustering memory, restartability, full-dataset resource reporting or downstream scaling.
+Discover provides incremental candidates, bounded read batches and progress logs.
+Rust read-local scanning can use multiple threads; the Python scan remains GIL
+limited. `--chunk-size` does not provide intra-step checkpoint/resume. Candidate
+clustering still retains state that can grow with the number of candidates.
+Neither the Rust backend nor parser streaming establishes full-workflow scaling.
 
-`tandemx run --resume` operates between commands only. It validates expected output files before skipping a step, but it does not resume a partially processed FASTQ, fingerprint inputs, or detect that an upstream file changed after a downstream result was written. `--threads` is recorded and currently must be 1.
+`tandemx run --resume` operates between commands only. It validates outputs and
+SHA-256 fingerprints of input files and effective commands before skipping a
+step. It does not resume a partially processed FASTQ. Discover accepts multiple
+Rust scan threads; this does not make every downstream step parallel.
+
+## Development challenge findings (2026-09-06)
+
+The independent planted-array benchmark at development seed 1101 found full
+array recall on clean and substitution-only scenarios but serious loss of
+interval recall under indels (0.70 at 0.1% total indels, 0.0286 at 1%, and 0 at
+4%, requiring IoU >=0.5 and the declared period tolerance). The one-candidate
+model recovered half of the arrays in two-array reads. These are **array**
+metrics: sequence-supported family recovery can remain high when array
+boundaries are incomplete. The baseline is retained for algorithm development.
+
+The old discovery command also exited with an error on valid negative controls.
+This behavior has been repaired: completed zero results now have a validated
+receipt and pipeline dependencies are explicitly skipped. This repair does not
+resolve the indel or multiple-array algorithm limitations.
 
 Quantify's in-process counters retain only catalogue-derived diagnostic k-mers, which avoids all-read distinct-k-mer memory growth. This is appropriate for toy and bounded pilot runs; it is not a substitute for KMC, meryl, Jellyfish, or production-scale coverage calibration.
 

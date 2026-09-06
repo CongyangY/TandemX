@@ -4,6 +4,24 @@ This document describes current MVP algorithms and planned future algorithms. Th
 
 ## Candidate Periodic k-mer Discovery
 
+Valid nonempty input with no candidates or no families above the support
+threshold now produces a completed zero-result run. A `discovery_summary.json`
+receipt records processed input counts, zero output counts and output SHA-256
+hashes. Validation allows empty discovery tables/catalogs only against an intact
+receipt. Empty/malformed reads and a selection that processes no reads remain
+errors. Pipeline dependencies are skipped with an explicit no-family reason.
+
+The challenge evaluation is independent of these analysis algorithms. Array
+true positives require the same read, interval IoU >=0.5 and period error <=
+max(2 bp, rounded 2% of the truth period), using maximum-cardinality one-to-one
+matching. Read detection ignores exact period/boundaries and is a separate
+endpoint. Family recovery uses one-to-one matching between distinct, strand/
+rotation-canonical predicted consensuses and truth monomers, with equal length
+and exhaustive circular ungapped identity >=0.90. Unequal-length consensuses
+fail this deliberately strict endpoint; it is not an indel-aware homology test.
+TandemX is scored from its final catalog, and per-array finders from their
+consensuses. No family precision is inferred from catalog size or length alone.
+
 MVP goal: identify simple candidate tandem repeat monomers de novo from toy HiFi-like sequence reads.
 
 Current MVP implementation:

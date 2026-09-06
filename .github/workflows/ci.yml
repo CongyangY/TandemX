@@ -1,0 +1,44 @@
+name: Source validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: conda-incubator/setup-miniconda@v4
+        with:
+          miniforge-version: latest
+          activate-environment: tandemx-dev
+          environment-file: environment.yml
+          run-init: "false"
+          remove-profiles: "false"
+      - name: Install source release build
+        run: conda run --no-capture-output -n tandemx-dev python -m pip install --no-build-isolation -e '.[test,benchmark]'
+      - name: Python tests
+        run: conda run --no-capture-output -n tandemx-dev python -m pytest -q
+      - name: Rust checks
+        run: |
+          conda run --no-capture-output -n tandemx-dev bash -c '
+            set -e
+            export DYLD_FALLBACK_LIBRARY_PATH="${CONDA_PREFIX}/lib:${DYLD_FALLBACK_LIBRARY_PATH:-}"
+            cargo test --manifest-path rust-core/Cargo.toml
+            cargo clippy --manifest-path rust-core/Cargo.toml -- -D warnings
+            cargo fmt --manifest-path rust-core/Cargo.toml --check
+          '
+      - name: Build distributable wheel
+        run: conda run --no-capture-output -n tandemx-dev maturin build --release --interpreter python --out dist

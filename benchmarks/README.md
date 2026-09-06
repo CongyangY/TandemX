@@ -1,5 +1,79 @@
 # TandemX Benchmarks
 
+## Challenge benchmark and public-data pilot
+
+Development release smoke check (inside `tandemx-dev`):
+
+```bash
+maturin build --release --interpreter python --out dist
+python benchmarks/scripts/verify_wheel.py \
+  --wheel dist/<wheel-for-your-platform>.whl --outdir /tmp/tandemx-wheel-verification
+```
+
+The verification installs without dependencies into a temporary target, confirms
+Python and Rust import from that target, and runs all seven toy workflow steps.
+It writes per-command logs and `wheel_validation.json` containing wheel SHA-256,
+interpreter, commands/exit codes, import locations, validated steps and scope.
+Platform-specific wheel validation does not establish cross-platform readiness.
+
+Run development experiments from the repository root inside `tandemx-dev`:
+
+```bash
+python -m benchmarks.challenge.run \
+  --config benchmarks/configs/challenge_v1.yaml \
+  --split development \
+  --outdir /Volumes/T7/Codex/TandemX/results/challenge_development
+```
+
+Choose any empty writable output directory on another machine. Use `--scenarios
+clean_171 indel_1pct two_arrays` for a smaller experiment. TRF/TideHunter executable
+paths are configurable; the checked-in paths use the pre-existing local comparison
+environment. TandemX resolves from the active `tandemx-dev` PATH. No truth file is
+passed to any finder. The 16 scenarios include substitutions, insertions/deletions,
+divergent units, related families, short/multiple arrays and negative controls.
+The zero-result CLI behavior was fixed after the first development baseline;
+retain the baseline's nine failed TandemX negative-control runs as failures.
+
+`development`, `validation` and `heldout` use disjoint seeds. Once a seed or family
+is used for tuning it is no longer held-out evidence. All three tools receive the
+same FASTA and period limits. Normalized output uses 0-based half-open coordinates
+and a common minimum span. TRF's overlapping/harmonic predictions remain visible
+and unmatched duplicate calls count against raw array precision. This is **raw
+call precision**, not a post-merged nonredundant annotation score.
+
+The runner records subprocess commands, input/source/executable hashes, timeout
+and exit status, direct-child peak RSS, interval matches and final-catalog family
+recovery. Run failures or malformed outputs receive `NA`, never a fabricated zero
+recall. Timing repetitions are not biological replicates. Use isolated, frozen
+runs for publication runtime comparisons. The first development run was used
+alongside other development checks, so its timings are exploratory.
+
+After completion, render the four-panel diagnostic with:
+
+```bash
+python -m benchmarks.scripts.plot_challenge_benchmark \
+  --run /Volumes/T7/Codex/TandemX/results/challenge_development \
+  --outdir /Volumes/T7/Codex/TandemX/results/challenge_development/figures
+```
+
+Its PDF/SVG/PNG, panel source tables and checksum receipt are developmental
+diagnostics. The figure does not claim a final benchmark or general superiority.
+
+Retrieve a bounded, public Arabidopsis pilot (Python 3.11 as in `tandemx-dev`):
+
+```bash
+python benchmarks/scripts/fetch_ena_subset.py \
+  --accession ERR6210723 --read-count 1000 \
+  --outdir /Volumes/T7/Codex/TandemX/data/raw/ERR6210723_prefix1000
+```
+
+The downloader limits compressed bytes, validates complete FASTQ records, writes
+FASTA, and saves ENA run/sample metadata plus a subset SHA-256 receipt. It reads
+a prefix, not a random library sample; the remote full-file MD5 and gzip trailer
+are explicitly **not verified** for this bounded extraction. Do not use the
+prefix to claim unbiased whole-genome abundance. See [file formats](../docs/file_formats.md)
+and [release programme](../docs/release_program.md).
+
 This directory contains synthetic benchmark configuration and runner scripts for measuring the toy-scale TandemX MVP before any real large-genome analysis.
 
 ## External Tool Comparison

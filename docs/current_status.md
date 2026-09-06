@@ -1,152 +1,124 @@
-# TandemX Current Status and Codex Handoff
+# TandemX current status and handoff
 
-Last updated: 2026-07-15
+Updated 2026-09-06. Read completely after `AGENTS.md`, then verify Git/tests.
+The user has authorized autonomous development and GitHub updates toward mature
+software and a full evidence-backed paper (multi-panel figures and supplement).
+The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
-This file is the durable handoff for a new Codex conversation. Read it after
-`AGENTS.md`, then verify the live repository state before making changes.
+## Source, Git and storage
 
-## Repository and Git state
+- Source: `/Users/ycy/Codex/Sofw/TandemX`; GitHub `https://github.com/CongyangY/TandemX`.
+- Entry branch: `codex/publish-current-progress`, HEAD `08e100d`. Entry remote
+  main verified as `b9ef30a`. SSH remote access works with sandbox escalation.
+  Recheck current revisions rather than assuming entry values are current.
+- `.codex/` is user-owned: never stage/delete it. Ignore caches/generated runs.
+- New data/results: `/Volumes/T7/Codex/TandemX`, mounted with ~1.6 TiB free on
+  entry. Source and `tandemx-dev` remain on internal disk.
+- 553 legacy output files (120,621,151 bytes) copied and SHA-256 verified at
+  `results/legacy_20260715`. Manifest: `provenance/legacy_copy_manifest.json`.
+  Originals preserved. Existing comparator binaries remain in `.conda-benchmark`.
 
-- GitHub repository: `https://github.com/CongyangY/TandemX`
-- Default branch: `main`
-- Current publication branch: `codex/publish-current-progress`
-- Draft pull request: `https://github.com/CongyangY/TandemX/pull/1`
-- Baseline on GitHub before this handoff: `b9ef30a`
-- Local implementation commits included in the publication branch:
-  - `ac4b7f8 Optimize streaming algorithms and strengthen validation`
-  - `1941c6e Make external benchmarks publication-ready`
-- `.codex/` is a user-owned, untracked local directory. Do not stage or delete it.
-- Benchmark outputs under `benchmarks/results/` are reproducible local artifacts
-  and are intentionally ignored by Git unless a future task explicitly selects
-  a small publication artifact for version control.
-- SSH-based Git push works. The local GitHub CLI token reported as invalid on
-  2026-07-15; use the connected GitHub integration or re-authenticate `gh` before
-  relying on CLI API commands.
+## Implemented this session
 
-At the start of a new session, run:
+1. Modular independent challenge simulator/adapters/evaluator/runner in
+   `benchmarks/challenge/`: disjoint development/validation/held-out seeds,
+   16 scenarios, one-to-one array matching, separate read/array/sequence-family
+   metrics, strict errors/timeouts and source/input/executable/resource records.
+2. Bounded ENA prefix downloader with validation, metadata and subset checksum.
+3. Valid negative discovery now succeeds with `discovery_summary.json`, empty
+   catalog and header-only tables. Validation requires the receipt's hashes.
+   Empty/malformed input still fails. Pipeline dependencies explicitly skip;
+   forced/resumed negative reruns remove stale expected positive outputs.
+4. LICENSE, CITATION.cff, declared existing visualization/benchmark dependencies
+   and Linux/macOS conda CI. Check hosted CI after push; configuration alone is
+   not evidence of a hosted test pass.
+5. Four-panel development diagnostic with editable SVG/PDF and source tables,
+   selectively versioned in `paper/evidence`. It is not a finished paper.
 
-```bash
-git status -sb
-git log --oneline --decorate -8
-git diff --check
-```
+## Checks
 
-Do not assume that the branch or commit identifiers above are still current
-without checking them.
+- Entry: 170 pytest passed in 60.09 s.
+- Expanded suite: 200 passed in 59.01 s; after stale-output cleanup the complete
+  suite passed again (200 tests in 58.55 s). Focused pipeline regression: 9 passed.
+- Rust: 4 tests passed; clippy `-D warnings` and fmt check passed.
+  macOS cargo tests need `DYLD_FALLBACK_LIBRARY_PATH` pointing to
+  `/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib`.
+- Editable install `pip install --no-build-isolation -e '.[test,benchmark]'`
+  succeeded in `tandemx-dev`.
+- Maturin requires explicit `--interpreter` (use env `sys.executable`), otherwise
+  it selected system Python 3.13 despite conda activation. Do not distribute an
+  unvalidated auto-selected wheel. The explicit Python 3.11 macOS ARM64 wheel
+  passed temporary-target installation, Python/Rust import-origin checks and all
+  seven toy workflow steps. Receipt at data root:
+  `releases/development_20260906/verification_cp311/wheel_validation.json`.
+  Wheel SHA-256: `e872da439d9b8a8e11c24ab47fdacb5c14340bb5fc6dd85926a4652a60407460`.
+- Diagnostic SVG verified: zero raster image elements, 182 editable text nodes.
+  Full PNG visually checked; panels linked to source-table SHA-256 hashes.
 
-## Implemented progress
+## Actual development benchmark
 
-The current MVP is an end-to-end, read-first and assembly-aware tandem-repeat
-workflow. It provides simulation, de novo discovery, diagnostic k-mer copy-number
-estimation, assembly localization, read-versus-assembly comparison, FISH probe
-ranking, visualization, validation, and the combined `tandemx run` workflow.
+Full run: `/Volumes/T7/Codex/TandemX/results/challenge_v1_development_20260906`.
+144 attempts (16 scenarios x 3 tools x 3 repetitions), 135 successes and 9
+pre-fix TandemX errors on negative controls. Runner correctly returned nonzero;
+all rows, logs and failures were retained. Do not relabel old failures after a fix.
 
-The two latest implementation commits add the following material changes:
+| Scenario, seed 1101 | TandemX array recall | TRF | TideHunter |
+| --- | ---: | ---: | ---: |
+| Clean/substitution-only | 1.0 | 1.0 | 1.0 |
+| 0.1% total indels | 0.7000 | 1.0 | 1.0 |
+| 1% total indels | 0.02857 | 1.0 | 1.0 |
+| 4% total indels | 0 | 1.0 | 1.0 |
+| Two arrays per read | 0.5 | 1.0 | 1.0 |
 
-1. Streaming and bounded-memory sequence processing, incremental output, and
-   reduced retention of read-level state.
-2. Faster candidate-period generation and refinement in discovery.
-3. Python/Rust behavior parity checks and stable deterministic ordering.
-4. Stronger input/output validation, empty-input handling, reverse-complement
-   coverage, reproducibility coverage, and clearer warnings.
-5. A fair external comparison harness for TandemX, TRF, and TideHunter with an
-   explicit one-thread policy, direct-child peak RSS measurement, repeated runs,
-   dataset and prediction SHA-256 hashes, runtime variability, and normalized
-   accuracy metrics.
-6. A reproducible analysis script and notebook/report package for the external
-   benchmark.
+These are interval-aware **array** metrics (IoU >=0.5 plus period tolerance).
+TandemX still recovered all three families at 1% indels and one of three at 4%.
+Inspect per-read matches before changing period inference: much of the failure
+is incomplete boundaries. The one-candidate-per-read model explains 50% recall
+for two arrays. Raw overlapping/harmonic calls count against comparator precision.
+Timings are developmental because source checks and a separate real-read pilot
+overlapped; publication timing must be isolated with frozen code/settings.
 
-The detailed MVP command and output inventory remains in `docs/mvp_status.md`.
-Algorithm descriptions and benchmark protocol are in `docs/algorithms.md` and
-`docs/benchmark_plan.md`.
+Fix run: `results/negative_control_fix_20260906` at the data root. All 9 TandemX
+reruns succeeded with zero calls on the same three negative datasets. Recall
+with no positive/family denominator remains NA. No held-out seed has been used.
 
-## Validation completed
+## Real data obtained
 
-All checks below completed successfully before this handoff:
+`data/raw/ERR6210723_prefix1000` at the data root: 1,000 Arabidopsis reads,
+15,666,956 bases; FASTA size 15,710,688 bytes. SHA-256:
+`4adca195ae3587c52bf503751fd82fe68ae755fe15c7d10f3c09d2d1a1a2305f`.
+Source project PRJEB46164, run ERR6210723, sample SAMEA8961650. The study
+identifies HiFi reads; ENA reports Sequel. Full remote FASTQ is 11,074,308,726
+bytes; its MD5 and gzip trailer are **not verified** for this prefix extraction.
+Prefix sampling does not establish unbiased library abundance.
 
-- Python: 170 pytest tests passed in 60.19 seconds.
-- Rust: 4 tests passed.
-- Rust `clippy` passed with warnings treated as errors.
-- Rust formatting check passed.
-- Python byte-code compilation passed.
-- External comparison: all 45 runs completed successfully
-  (5 datasets x 3 tools x 3 repetitions).
-- Every normalized prediction file was deterministic across repetitions.
-- Benchmark analysis package validation passed. HTML browser verification was
-  structural/semantic only because a usable headless browser was unavailable;
-  this is a report-rendering limitation, not a benchmark-computation failure.
+Baseline: `results/ERR6210723_prefix1000_baseline/discover`: 320 candidates,
+213 families, min-support=1, periods 30-1000, minimum span 100, one Rust thread.
+Top family: 177 bp, 23 supporting reads. No known-repeat, abundance or collapse
+validation has been established. Raw black-rye reads remain unavailable; do not
+reuse assembly-alignment BAMs from other projects as raw reads.
 
-Use the `tandemx-dev` conda environment for source tests. The external benchmark
-also requires the documented TRF and TideHunter executables. Commands are in
-`benchmarks/README.md`.
+## Next critical work
 
-## External benchmark findings
+1. Commit/push tested code and evidence; inspect hosted CI. Do not stage `.codex/`.
+2. Fix indel-sensitive boundaries and multiple arrays per read with an ablatable
+   baseline and Python/Rust parity. Candidate consensus can survive when full
+   array boundaries fail; panel d and `matches.tsv` provide concrete examples.
+3. Development/validation seeds first, then freeze settings and use held-out
+   3101/3102/3103. Add more independent families/seeds for publication inference.
+4. Add coverage/error/copy-number and engineered assembly-collapse experiments,
+   calibrated uncertainty and independently tested probe specificity.
+5. Expand real plant validation with matched assemblies and curated repeats;
+   measure resources on bounded inputs before larger datasets.
+6. SRF family/abundance, TRASH assembly, and applicable TAREAN short-read workflow
+   comparisons remain unrun. Docker CLI is present but daemon not running.
+   TRASH needs R dependencies; TRASH 2 also needs mafft/nhmmer. No new comparator
+   installation has been completed. Keep incompatible task metrics separate.
+7. Prior art: SRF already supports accurate-read satellite discovery/abundance.
+   Optional AI requires transparent baselines, held-out evaluation, ablation,
+   calibration and domain-shift evidence; do not add an AI label for novelty.
+8. Complete release/reuse and manuscript gates as evidence permits. No complete
+   manuscript, final comparative study or production-scale release exists yet.
 
-The controlled comparison used the same existing FASTA inputs, one thread per
-tool, three repetitions, and the median runtime. Tested versions were TandemX
-0.1.0 release build, TRF 4.10.0-rc.2, and TideHunter 1.5.5.
-
-On the 2.5-10 Mb benchmark inputs:
-
-- TandemX was 1.84-4.19 times faster than TRF.
-- TandemX was 1.52-4.78 times faster than TideHunter.
-- TandemX used less peak memory than TideHunter on all five datasets.
-- Memory relative to TRF was mixed: TRF used less on four small/medium inputs,
-  while TandemX used 12.2% less on the 10 Mb input.
-- TandemX and TRF both achieved macro recall 1.0, precision 1.0, false-positive
-  rate 0, and monomer-length MAE 0 on these synthetic datasets.
-- TideHunter achieved macro recall 1.0, precision 0.998405,
-  false-positive rate 0.0048, and monomer-length MAE 0.000533.
-
-These results support a scoped publication claim: TandemX has a throughput
-advantage on the tested data while integrating read-based abundance, assembly
-representation, and probe prioritization in one reproducible workflow. They do
-not support a claim of universal accuracy or memory superiority over every tandem
-repeat finder.
-
-Local reproducible results are under:
-
-```text
-benchmarks/results/external_tool_comparison_20260715/
-├── summary.tsv
-├── raw_runs.tsv
-├── dataset_manifest.tsv
-├── environment.json
-└── analysis/
-    ├── pairwise_comparison.tsv
-    ├── macro_accuracy.tsv
-    ├── analysis_validation.json
-    ├── tandemx_external_tool_analysis.ipynb
-    └── report.html
-```
-
-## Data boundary and unresolved evidence gap
-
-The repository contains a previous result summary for the black-rye analysis
-(164 families and 568,482 supporting reads), but no corresponding raw black-rye
-FASTQ/FASTA was found during the latest audit. Therefore the real-data comparison
-cannot yet be rerun from raw reads, and those summary counts must not be presented
-as an independently reproduced external-tool benchmark.
-
-If the raw data become available, preserve them outside Git, record checksums and
-provenance, and run the same fixed-input, fixed-thread, repeated benchmark design.
-
-## Recommended next work
-
-1. Review the checks and diff in draft pull request #1, then merge it into `main`
-   when it is ready.
-2. Obtain or locate the raw real-data reads and run TandemX, TRF, TideHunter, and
-   where practical TRASH on identical bounded subsets.
-3. Add truth-controlled noisy simulations covering substitutions, indels,
-   fragmented arrays, nested repeats, reverse complements, and negative controls.
-4. Measure scaling beyond 10 Mb and add multi-process/chunked execution only after
-   profiling identifies the dominant remaining bottlenecks.
-5. Treat RepeatExplorer2/TAREAN as a workflow-level comparison rather than a
-   drop-in per-read finder; document differences in inputs and biological claims.
-
-## New-session rule
-
-A new Codex session must not repeat completed optimization work merely because it
-lacks chat history. It should first read this file, inspect the two implementation
-commits, verify the current tests and artifacts, and continue from the recommended
-next work or the user's newest instruction.
+The objective remains active; a development wheel or toy run does not meet the
+user's mature-software and mature-paper endpoint.

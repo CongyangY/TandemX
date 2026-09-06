@@ -528,3 +528,97 @@ The MVP writes SVG and PDF files. SVG text should remain editable where matplotl
 | assembly_vs_read.pdf | PDF | PDF version of assembly-vs-read plot |
 | in_silico_fish.svg | SVG | Toy ideogram-like predicted signal plot |
 | in_silico_fish.pdf | PDF | PDF version of in silico FISH plot |
+# Research/release additions (2026-09-06)
+
+All new benchmark TSVs have a header. `NA` denotes an unavailable/undefined
+measurement (including zero denominators); JSON uses `null`. Coordinates below
+are 0-based and half-open, including normalized TRF/TideHunter output.
+
+## Discovery completion
+
+`discovery_summary.json`: `schema_version`, `status` (`completed` or
+`no_families`), `processed_reads`, `processed_bases`, `candidate_count`,
+`family_count`, `warning`, and `output_sha256` keyed by output filename.
+It is written only after successful analysis. Zero-result `families.tsv` and
+`candidate_reads.tsv` retain their original headers; `monomers.fa` is empty.
+They validate only when receipt counts and hashes permit the corresponding
+empty output. `run_config.yaml` status is `discover_no_families` for this case.
+Pipeline summary `notes=skipped_no_discovered_families` means dependent analysis
+was not performed, with `output_validated=false`.
+
+## Challenge datasets and predictions
+
+- `truth_reads.tsv`: `read_id` (neutral identifier), `length_bp` (observed
+  post-error length), `truth_positive` (0/1 planted array), `strand` (+/-),
+  `negative_kind` (`NA`, `random`, `at_rich`, `dispersed`, `low_complexity`).
+- `truth_arrays.tsv` and normalized `predictions.tsv`: `read_id`, `start`,
+  `end`, `period` (bp), `sequence` (consensus, empty if not in source format),
+  `family_id` (truth family or empty for unassigned predictions).
+- `manifest.json`: scenario parameters, seed, actual reads/bases/array counts,
+  generator description, warning, per-file sizes and SHA-256 hashes.
+- `truth_monomers.fa`: `>truth_fN` identifiers; strictly evaluation input only.
+- `matches.tsv`: `prediction_index` (0-based normalized prediction index),
+  `read_id`, `start`, `end`, `period`, `matched_truth_index` (0-based or NA),
+  `truth_family_id`, `iou`, `status` (`matched`/`unmatched`). An empty table may
+  contain only its `prediction_index,status` header.
+- `family_recovery.tsv`: `family_id`, `best_identity` (best circular identity),
+  `recovered` (0/1 one-to-one assignment), `assigned_sequence_index` (0-based in
+  sorted distinct canonical consensuses or NA), `criterion`. With no truth
+  families its empty header is `family_id,recovered,criterion`.
+
+## Challenge measurements
+
+`raw_runs.tsv` has one row per scenario x seed x tool x repetition:
+
+- Identification: `scenario`, `dataset_id`, `seed`, `split`, `tool`,
+  `repetition`, `total_bases`.
+- Execution: `exit_code`, `runtime_seconds`, `peak_rss_mib` (MiB, direct child
+  only), `timed_out`, `status` (`ok`, `failed`, `invalid_output`), `error`.
+- Arrays: `truth_array_count`, `predicted_array_count`, `matched_array_count`,
+  `array_recall` = matched/truth, `array_precision` = matched/predicted,
+  `array_f1` = 2*matched/(truth+predicted).
+- Reads: `read_detection_recall` = called positive reads/positive reads,
+  `read_detection_precision` = called positive reads/called reads,
+  `negative_read_count`, `false_positive_read_count`,
+  `negative_read_call_rate` = called negative reads/negative reads. These are
+  planted-truth endpoints; incidental natural patterns in negative controls
+  are not independently curated biological false positives.
+- Errors: `matched_period_mae_bp` and `matched_boundary_mae_bp` (mean of start
+  and end errors), both conditional on successfully matched arrays.
+- Descriptive Wilson 95% intervals: `array_recall_ci_low/high`,
+  `array_precision_ci_low/high`, `negative_read_call_rate_ci_low/high`.
+  Arrays within a read and reads within a family are correlated; these are
+  not confidence intervals across independent genomes or simulation seeds.
+- Families: `truth_family_count`, `recovered_family_count`,
+  `sequence_family_recall` = recovered/truth, `family_criterion`.
+- Audit: `warning`, `prediction_sha256`, `catalog_sha256`.
+
+`summary.tsv` groups scenario/dataset/tool with `seed`, `split`,
+`successful_runs`, `attempted_runs`, `deterministic`, `median_runtime_seconds`,
+`median_peak_rss_mib` and the above unqualified accuracy/error fields. Accuracy
+is retained only when all attempted runs succeed and their predictions agree.
+A single run has `deterministic=not_tested_single_run`. Failure rows never enter
+successful-run accuracy aggregates.
+
+`run_config.yaml` records the full effective suite and selected split/scenarios;
+`environment.json` records source and executable hashes, Git HEAD, Python,
+platform and measurement method. Each execution has `command.json`, logs and
+`receipt.json`; `validation.json` records completion and success/failure counts.
+
+## Figure source data and ENA subsets
+
+`heatmap_source.tsv`: `panel`, `scenario`, `tool`, `seed`, `metric`, `value`,
+`source_dataset`. `interval_source.tsv`: `track`, `read_id`, `start`, `end`,
+`period`, `source` (relative source-table path). `figure_provenance.json` ties
+the figure to the input table hashes and documents evidence limits.
+
+`ena_metadata.tsv` preserves ENA's requested columns: `run_accession`,
+`sample_accession`, `scientific_name`, `instrument_model`, `read_count`,
+`base_count`, `fastq_ftp`, `fastq_md5`, `fastq_bytes`. These describe the full
+remote archive, not the extracted subset. `subset_receipt.json` separately
+records the accession, retrieval UTC, URLs, sampling method, requested/observed
+read counts and bases, downloaded compressed bytes and cap, output size/SHA-256,
+first headers, and `source_full_file_md5_verified=false` for prefix extraction.
+No complete-library checksum claim is made. `ena_run.xml` and `ena_sample.xml`
+preserve retrieved public metadata. Partial extraction failures retain a
+`.partial` file and never emit a successful subset receipt.

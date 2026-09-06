@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Sequence, TextIO
 
 from tandemx.discover.rust_backend import rust_backend_available
+from tandemx.discover.status import has_verified_empty_catalog
 from tandemx.io.validators import ValidationError, validate_project
 from tandemx.reporting import write_output_manifest, write_run_report
 from tandemx.utils.threads import DEFAULT_DISCOVER_THREADS, discover_thread_limit, resolve_discover_threads
@@ -530,6 +531,27 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
 
     for step in config.steps:
         start_time = utc_now()
+        if step not in {"discover", "validate"} and has_verified_empty_catalog(config.outdir / "discover"):
+            existing = [path for path in expected_outputs(config, step) if path.exists()]
+            if existing and not (config.force or config.resume):
+                records.append(make_record(
+                    config, run_id, step, start_time=start_time, end_time=utc_now(),
+                    runtime_seconds=0.0, exit_status=2, output_validated=False,
+                    notes="output_exists_use_force_or_resume",
+                ))
+                finalize_run_outputs(config, records)
+                return records, 2
+            # A forced/resumed negative rerun must not expose stale positive results.
+            for path in existing:
+                path.unlink()
+            record = make_record(
+                config, run_id, step, start_time=start_time, end_time=utc_now(),
+                runtime_seconds=0.0, exit_status=0, output_validated=False,
+                notes="skipped_no_discovered_families",
+            )
+            records.append(record)
+            write_summaries(config, records)
+            continue
         if config.assembly is None and step in ASSEMBLY_STEPS:
             record = make_record(
                 config,

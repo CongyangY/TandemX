@@ -1,0 +1,4 @@
+# Preserve archived data bytes (including standard CSV CRLF and empty TSV fields).
+paper/evidence/**/*.tsv -text whitespace=-blank-at-eol
+# Matplotlib SVG path separators legitimately include trailing whitespace.
+paper/evidence/**/*.svg -text -whitespace

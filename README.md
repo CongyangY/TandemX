@@ -25,6 +25,13 @@ This repository currently contains a toy dataset simulator, toy-scale `discover`
 
 No production-scale tandem repeat discovery, copy-number estimation, assembly localization, assembly/read comparison, probe scoring, or visualization algorithm is available yet.
 
+The expanded research/release programme is tracked in [docs/release_program.md](docs/release_program.md).
+It includes an independent challenge benchmark and public-data provenance, with
+development and held-out seeds separated. Current development benchmarks expose
+important indel-boundary and multiple-array limitations; see
+[benchmarks/README.md](benchmarks/README.md). These results do not establish
+production readiness or a universal advantage over external tools.
+
 The first implementation target is a toy-scale MVP. It should run on small simulated data and should not claim support for real 7-20 Gb plant genomes until benchmarked.
 
 ## Development Environment
@@ -39,6 +46,10 @@ pytest
 ```
 
 `environment.yml` includes Rust and maturin to build the optional compiled read-local discovery backend. No production global k-mer counter is bundled.
+The package declares Matplotlib for its existing SVG/PDF commands; benchmark
+scripts additionally use PyYAML (`pip install -e '.[benchmark]'`). Both are already
+included in `environment.yml`. The GitHub workflow tests source installation in
+`tandemx-dev` on Linux and macOS; a configured workflow is not a completed CI run.
 
 ## Install
 
@@ -209,6 +220,13 @@ This post hoc check does not pass known repeats to `tandemx discover` and does n
 `tandemx discover --collapse-redundant-families` is optional and off by default. When enabled, it writes `collapsed_families.tsv`, `collapsed_monomers.fa`, and `family_collapse.tsv`, but only collapses pairs classified as `likely_redundant`. Pairs labelled `possible_higher_order_or_partial` are retained and should be reviewed; TandemX does not claim they are definitely redundant or definitely higher-order repeats.
 
 ## Tests
+
+Valid reads with no families passing the configured filters produce a successful
+`discover` run with an empty catalog, header-only tables, and a checksum-backed
+`discovery_summary.json`. `tandemx run` records dependent commands as
+`skipped_no_discovered_families`; `validate` accepts zero results only when this
+completion receipt and output checksums agree. Malformed/empty sequence input
+still fails. An arbitrary empty catalog is not accepted by downstream commands.
 
 ```bash
 pytest

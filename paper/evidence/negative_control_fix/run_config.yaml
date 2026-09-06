@@ -1,0 +1,25 @@
+benchmark_id: negative_control_regression
+repetitions: 3
+timeout_seconds: 30
+period_range:
+- 30
+- 1000
+minimum_span_bp: 100
+minimum_iou: 0.5
+seeds:
+  development:
+  - 1101
+tools:
+  tandemx: tandemx
+scenarios:
+- name: dispersed_control
+  positive_fraction: 0.0
+  negative_kind: dispersed
+- name: at_rich_control
+  positive_fraction: 0.0
+  negative_kind: at_rich
+- name: low_complexity_control
+  positive_fraction: 0.0
+  negative_kind: low_complexity
+selected_split: development
+selected_scenarios: null

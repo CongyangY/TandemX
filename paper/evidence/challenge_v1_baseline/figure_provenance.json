@@ -1,0 +1,16 @@
+{
+  "run_directory": "/Volumes/T7/Codex/TandemX/results/challenge_v1_development_20260906",
+  "seed": 1101,
+  "figure_type": "development_diagnostic_not_final_method_benchmark",
+  "source_sha256": {
+    "summary.tsv": "094d02b35cc3e4094770999696bc976dee002c4ba539c1b288cbad6ec918ea8e",
+    "raw_runs.tsv": "22640e6b85f6b111c476b488f766e9ff4bbc07690e25c4afdc806ffa73168bd7",
+    "datasets/indel_1pct_s1101/truth_arrays.tsv": "2e359772d17c3a5b54634eb17ae32527f54d6a21eebc91fda30d71ab1b127775",
+    "runs/indel_1pct_s1101/tandemx/rep1/predictions.tsv": "a91841b52973d887892b70b35e0537267cc00f8983982934c2f5d016c46ac183",
+    "runs/indel_1pct_s1101/trf/rep1/predictions.tsv": "27f1d23ce4877172b96b9333c642450c1c1cbf5d827b8bb7b8f9ebcec0013a0d",
+    "runs/indel_1pct_s1101/tidehunter/rep1/predictions.tsv": "ae8bfde3dfbe3c443e9c99d693c7e1f721eade16b31b8c55830991e818f0d989"
+  },
+  "panel_count": 4,
+  "svg_editable_text": true,
+  "warning": "one_development_seed;repetitions_are_not_independent_datasets;negative_controls_not_shown_in_this_figure"
+}
