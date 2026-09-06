@@ -3,13 +3,13 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-import gzip
 import json
 import math
 from pathlib import Path
 import sqlite3
 
 from benchmarks.challenge.schema import digest_file, write_table
+from benchmarks.scripts.fastq_stream import hashed_fastq, records
 
 
 def length_quantile(histogram: Counter[int], fraction: float, weighted: bool=False) -> int:
@@ -40,29 +40,14 @@ def qc(path: Path, outdir: Path, expected_reads: int | None=None, expected_bases
     ids.execute('PRAGMA cache_size=-16384')
     ids.execute('CREATE TABLE ids (name BLOB PRIMARY KEY) WITHOUT ROWID')
     count=total=0
-    opener=gzip.open if path.suffix=='.gz' else open
-    # Bounded individual lines; a pathological read is rejected explicitly.
-    limit=5000002
     try:
-        with opener(path,'rb') as handle:
-            while header := handle.readline(limit):
-                lines=[header,handle.readline(limit),handle.readline(limit),handle.readline(limit)]
-                if any(not line or len(line)>=limit for line in lines):
-                    raise ValueError(f'Incomplete or oversized FASTQ record {count+1}')
-                header,seq,plus,quality=[line.rstrip(b'\r\n') for line in lines]
-                if (not header.startswith(b'@') or not plus.startswith(b'+') or not seq
-                    or len(seq)!=len(quality) or set(seq.upper())-set(b'ACGTN')
-                    or min(quality)<33 or max(quality)>126):
-                    raise ValueError(f'Invalid FASTQ record {count+1}')
-                identifier=header[1:].split()[0] if header[1:].split() else b''
-                if not identifier:
-                    raise ValueError('Empty FASTQ identifier')
+        with hashed_fastq(path) as (handle, input_digest):
+            for record in records(handle):
+                seq, quality, identifier = record.sequence, record.quality, record.identifier
                 try:
                     ids.execute('INSERT INTO ids VALUES (?)',(identifier,))
                 except sqlite3.IntegrityError as exc:
                     raise ValueError(f'Duplicate FASTQ identifier: {identifier!r}') from exc
-                if plus[1:] and plus[1:].split()[0] != identifier:
-                    raise ValueError('FASTQ plus identifier does not match header')
                 count+=1;total+=len(seq)
                 seq_counts=Counter(seq.upper()); q_counts=Counter(quality)
                 lengths[len(seq)]+=1; bases.update(seq_counts);qualities.update(q_counts)
@@ -88,7 +73,8 @@ def qc(path: Path, outdir: Path, expected_reads: int | None=None, expected_bases
                     gc_fraction=(bases[ord('G')]+bases[ord('C')])/total,n_fraction=bases[ord('N')]/total,
                     mean_reported_error_probability=mean_error,phred_from_mean_reported_error=-10*math.log10(mean_error),
                     quality_note='Phred+33 reported base-quality probabilities, not empirically measured read accuracy',
-                    input_sha256=digest_file(path),script_sha256=digest_file(Path(__file__)),
+                    input_sha256=input_digest.hexdigest(),script_sha256=digest_file(Path(__file__)),
+                    parser_sha256=digest_file(Path(__file__).with_name('fastq_stream.py')),
                     biological_qc='species/material/ploidy/background contamination/mapping bias not established by file QC')
         write_table(outdir/'length_histogram.tsv', [dict(length_bp=l,read_count=n) for l,n in sorted(lengths.items())],['length_bp','read_count'])
         write_table(outdir/'base_quality_histogram.tsv',[dict(phred=q-33,base_count=n) for q,n in sorted(qualities.items())],['phred','base_count'])

@@ -41,3 +41,38 @@ mean Phred. These scores are not empirically measured accuracy or automatic CN
 correction factors. `read_ids.sqlite` is retained; archive-renamed IDs cannot
 establish independence of source molecules. Reference FASTA QC is separate;
 nuclear/organellar denominators and known assembly issues remain explicit.
+
+## Reproducible nested whole-file sampling
+
+```bash
+python -m benchmarks.scripts.sample_complete_fastq \
+  --fastq /path/to/data/ERR6210723_complete/ERR6210723.fastq.gz \
+  --qc-receipt /path/to/data/ERR6210723_complete/qc/qc.json \
+  --outdir /path/to/new/samples --namespace ERR6210723 --seed 6101 \
+  --fractions 0.001 0.01 0.1 --genome-size 131559676
+pytest -q tests/unit/test_complete_sampling.py
+```
+
+Sampling requires successful full-file QC and scans every record through EOF,
+recomputing compressed-file SHA-256 and observed totals in the same pass. A
+mismatch fails and leaves `.partial` files. The shared bounded parser also
+hashes QC input during parsing, avoiding a second raw-file scan. Caller and
+parser hashes are recorded.
+
+A seeded, library-namespace-specific BLAKE2b 128-bit primary-read-ID digest is
+compared with integer fraction thresholds. Reads have equal inclusion probability
+regardless of sequence/length/quality/repeat status. QC has already checked exact
+ID uniqueness. Input order cannot change membership. Higher fractions include
+lower ones for the same seed/namespace; output order follows the source.
+Fractions are Bernoulli probabilities, not exact base/read counts. Whole reads
+are retained. Up to 12 fractions share a scan. Use a stable accession namespace.
+
+Deterministic gzip output preserves reads/qualities with LF line endings. Each
+subset has an ID/hash/length TSV, length and joint length/GC/quality histograms.
+`sampling_plan.json` records source/QC/scripts and assumptions; the receipt
+records expected and observed read/base totals, hashes, N50, GC/N, reported error
+probability and nominal bases/genome size. This ratio is not measured nuclear
+depth. Empty subsets have an explicit status, zero counts and missing distribution
+statistics; they cannot be presented as tested positive data. Seeds assess
+sampling stability, not extra plants. Missing libraries and library-selection
+bias remain unresolved by uniform sampling of included files.

@@ -793,3 +793,32 @@ does not establish HiFi. BioSample/run counts do not equal independent
 specimens. Original `screening.json` used the exploratory label `samples`,
 counting empty strings as well; explicit summary fields supersede that label
 without altering raw history.
+
+Whole-file sampling produces `sample_NNN.fastq.gz` plus `.ids.tsv` columns
+`read_id_hex` (lossless hexadecimal primary ID bytes), `hash128_hex` (32 hex
+digits), `length_bp`. Numeric suffixes follow ascending inclusion probability.
+Subset `.length_histogram.tsv` and `.joint_distribution.tsv` use the QC fields
+above. The plan stores exact integer thresholds; the receipt defines probability,
+expected/observed read and base totals, hashes, and nominal total-base coverage.
+An empty random sample has zero counts and JSON null distribution statistics.
+
+## Experimental read-cluster replay
+
+See [read_cluster_quantification.md](read_cluster_quantification.md) for formulas
+and boundaries. This does not modify the public `copy_number.tsv` schema.
+
+- `estimates.tsv`: `seed`, `coverage`, `substitution_rate`, `family_id`,
+  `diagnostic_kmer_count`, `estimated_copy_number`, `sampling_standard_error`,
+  `sampling_interval_low/high`, `positive_reads`, `effective_positive_reads`,
+  `interval_status`, `warning`. Missing numerical estimates/intervals are `NA`.
+- `metrics.tsv`: context/family, `truth_copies`, `estimate`, signed and absolute
+  relative error, `sampling_oracle_copy_estimate`, `estimator_minus_sampling_oracle`,
+  Boolean `interval_available`, `interval_contains_truth` (NA if unavailable),
+  `interval_relative_width`, `interval_status`.
+- `inputs.tsv`: context, read/catalogue/truth/sampling SHA256, observed
+  `read_count`, `total_bases`, and k-mer opportunity `total_exposure`.
+- `summary.tsv`: coverage/error groups, `total_family_conditions`,
+  `estimates_available`, `intervals_available/unavailable`, mean signed/absolute
+  error, `mean_estimator_minus_oracle`, `conditional_interval_coverage` and
+  `mean_available_interval_relative_width`. Conditional coverage never includes
+  unavailable intervals; their explicit count must accompany the result.

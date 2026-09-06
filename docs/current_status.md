@@ -172,6 +172,34 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Source, Git and storage
 
+### Read-cluster and sampling implementation checkpoint
+
+- Commit 10bedca453a3e24f5065bf1f6b30c0d6578b9aa2 was pushed to both branches;
+  GitHub run 34009894957 completed successfully on Linux/macOS.
+- New shared bounded FASTQ parser computes raw SHA256 while parsing, including
+  multiple gzip members and trailers. QC no longer needs a second hash scan.
+- New `sample_complete_fastq.py` requires full QC, checks exact source hash/totals
+  and creates nested seeded read-ID hash samples, deterministic gzip, ID audit,
+  length/GC/quality histograms and explicit empty-sample status. Order-independent
+  membership, reproducible bytes, missing/changed QC, truncation and denominator
+  checks passed. Sampling is within included files, not a whole-study claim.
+- `tandemx/quantify/read_moments.py` is a non-default Python research model:
+  multiplicity-weighted mean target counts / read k-mer opportunities, with
+  independent-read ratio SE. It keeps only family moments. Sparse/zero evidence
+  has no claimed calibrated interval; error/library/genome-size bias is unresolved.
+- Six read-model tests pass, including independent naive counts, residual formula,
+  Bernoulli-model coverage, independent-genome replay and held-out/hash rejection.
+  This is not empirical plant calibration. `evaluate_read_moments.py` snapshots
+  source for a development replay of all prior abundance inputs; inspect results
+  before claiming any improvement. Held-out abundance seeds remain unused.
+- XML source files' executable bits were removed; their content is unchanged.
+- Full Python suite passed: **260 tests in 66.02s**. Native code unchanged.
+- SRR15447419 complete download finished: 5,346,359,125 bytes, source MD5
+  7d25a15f3faa9ce4bd2bed9789e394d8, SHA256
+  3047df8fc93cd0c87d03b968ad702a95a2edf6ae3474d92b08350827d847f05c.
+  Full QC started against 407,670 records / 5,624,644,958 bases; inspect
+  `data/raw/SRR15447419_complete/qc_v1/qc.json` before claiming QC passed.
+
 - Source: `/Users/ycy/Codex/Sofw/TandemX`; GitHub `https://github.com/CongyangY/TandemX`.
 - Active branch: `codex/publish-current-progress`. Previous checkpoint `f4bb14f`
   was verified on both GitHub main and the working branch. This document ships

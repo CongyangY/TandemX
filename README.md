@@ -380,3 +380,9 @@ reported intervals; this is an identified limitation, not calibrated inference.
 The [real and simulated cohort/QC programme](docs/cohort_and_qc.md) specifies
 species/material breadth, scale ladders, full-file validation and independent
 evidence requirements. Current development/toy results do not satisfy those gates.
+
+[Complete FASTQ QC and nested hash sampling](docs/complete_data_qc.md) verify
+whole inputs and retain reproducible read IDs, achieved sizes and distributions.
+The [experimental read-cluster model](docs/read_cluster_quantification.md)
+replaces within-k-mer spread by a read-level sampling calculation in development
+replays; it remains separate from the default CLI pending biological calibration.
