@@ -32,6 +32,17 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   this conda environment lacks dynamic `libpython3.11.dylib`. Hosted runs
   `34048998182`/`34049010825` then passed Ubuntu/macOS Python tests, executable
   Rust checks and wheel builds, closing that environment-specific test gap.
+- Follow-up workspace reuse was tested and rejected rather than folded into the
+  reported optimization. Commit `9e10b9c` passed hosted runs
+  `34049804480`/`34049815693`, and all replay products remained byte-identical,
+  but the 111.506-Mb run changed 100.039 to 96.913 s while peak RSS increased
+  154.766 to 164.063 MiB. A narrower scratch-only revision changed the 11.681-Mb
+  run 12.361 to 12.479 s while RSS decreased 62.484 to 60.922 MiB. Both are
+  metric tradeoffs, so the source was restored to the `a73398d` alignment core.
+  Failed-attempt results remain on T7 under
+  `Mo17_11Mb_alignment_workspace_replay_v2_20260907`,
+  `Mo17_111Mb_alignment_workspace_replay_v2_20260907` and
+  `Mo17_11Mb_alignment_scratch_replay_v3_20260907`.
 
 ### Published article draft and resolved figure export checkpoint
 

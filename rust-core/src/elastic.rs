@@ -26,25 +26,7 @@ fn get_direction(directions: &[u8], index: usize) -> u8 {
     (directions[index >> 2] >> ((index & 3) * 2)) & 3
 }
 
-#[derive(Default)]
-struct AlignmentWorkspace {
-    directions: Vec<u8>,
-    previous: Vec<i32>,
-    previous_peak: Vec<i32>,
-    endpoints: Vec<(i32, usize, usize)>,
-    claimed: Vec<bool>,
-    pairs: Vec<(usize, usize)>,
-    offsets: Vec<usize>,
-}
-
-fn align_with_workspace(
-    sequence: &[u8],
-    period: usize,
-    min_span: usize,
-    band: usize,
-    x_drop: i32,
-    workspace: &mut AlignmentWorkspace,
-) -> Vec<Hit> {
+fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i32) -> Vec<Hit> {
     let n = sequence.len();
     let width = 2 * band + 1;
     let lowest = period - band;
@@ -52,23 +34,14 @@ fn align_with_workspace(
         return Vec::new();
     }
     let trace_cells = (n + 1) * width;
-    let trace_bytes = trace_cells.div_ceil(4);
-    workspace.directions.resize(trace_bytes, 0);
-    workspace.directions[..trace_bytes].fill(0);
-    workspace.previous.resize(width, 0);
-    workspace.previous[..width].fill(0);
-    workspace.previous_peak.resize(width, 0);
-    workspace.previous_peak[..width].fill(0);
-    workspace.endpoints.clear();
-    workspace.claimed.resize(n + 1, false);
-    workspace.claimed[..=n].fill(false);
-    let directions = &mut workspace.directions[..trace_bytes];
-    let previous = &mut workspace.previous[..width];
-    let previous_peak = &mut workspace.previous_peak[..width];
+    let mut directions = vec![0_u8; trace_cells.div_ceil(4)];
+    let mut previous = vec![0_i32; width];
+    let mut previous_peak = vec![0_i32; width];
     // Traverse bands left to right in place: b and b+1 still hold the previous
     // row, while b-1 already holds this row. Every rejected cell is reset, and
     // the inactive tail is reset only after its old value can feed the last up
     // edge. Thus no full-row allocation, copy, or second pair of buffers is needed.
+    let mut endpoints = Vec::new();
     let minimum_score = (40.min(min_span) as i32)
         .max((0.7 * period.max(min_span.saturating_sub(period)) as f64).ceil() as i32);
     for i in 1..=n - lowest {
@@ -106,32 +79,31 @@ fn align_with_workspace(
             }
             previous[b] = score;
             previous_peak[b] = peak.max(score);
-            set_direction(directions, i * width + b, direction);
+            set_direction(&mut directions, i * width + b, direction);
             if score > row_best.0 {
                 row_best = (score, b);
             }
         }
         if row_best.0 >= minimum_score {
-            workspace.endpoints.push((row_best.0, i, row_best.1));
+            endpoints.push((row_best.0, i, row_best.1));
         }
         previous[active_width..].fill(0);
         previous_peak[active_width..].fill(0);
     }
-    workspace
-        .endpoints
-        .sort_unstable_by_key(|&(score, i, b)| (-score, i, b));
+    endpoints.sort_unstable_by_key(|&(score, i, b)| (-score, i, b));
     let mut hits: Vec<Hit> = Vec::new();
-    for &(score, endpoint, end_band) in &workspace.endpoints {
-        if workspace.claimed[endpoint] {
+    let mut claimed = vec![false; n + 1];
+    for (score, endpoint, end_band) in endpoints {
+        if claimed[endpoint] {
             continue;
         }
         let mut i = endpoint;
         let mut b = end_band as isize;
         let end = i + lowest + end_band;
-        workspace.pairs.clear();
+        let mut pairs = Vec::new();
         let (mut matches, mut columns, mut gaps) = (0, 0, 0);
         while i > 0 && b >= 0 && b < width as isize {
-            let direction = get_direction(directions, i * width + b as usize);
+            let direction = get_direction(&directions, i * width + b as usize);
             if direction == 0 {
                 break;
             }
@@ -139,7 +111,7 @@ fn align_with_workspace(
             columns += 1;
             match direction {
                 1 => {
-                    workspace.pairs.push((i - 1, j - 1));
+                    pairs.push((i - 1, j - 1));
                     matches += usize::from(sequence[i - 1] == sequence[j - 1]);
                     i -= 1;
                 }
@@ -154,16 +126,13 @@ fn align_with_workspace(
                 }
             }
         }
-        if workspace.pairs.is_empty() || (matches as f64 / columns as f64) < 0.75 {
+        if pairs.is_empty() || (matches as f64 / columns as f64) < 0.75 {
             continue;
         }
-        workspace.pairs.reverse();
-        workspace.offsets.clear();
-        workspace
-            .offsets
-            .extend(workspace.pairs.iter().map(|&(left, right)| right - left));
-        workspace.offsets.sort_unstable();
-        let measured = workspace.offsets[(workspace.offsets.len() - 1) / 2];
+        pairs.reverse();
+        let mut offsets: Vec<usize> = pairs.iter().map(|&(l, r)| r - l).collect();
+        offsets.sort_unstable();
+        let measured = offsets[(offsets.len() - 1) / 2];
         if end - i < min_span || ((endpoint - i) as f64) < 0.8 * measured as f64 {
             continue;
         }
@@ -173,23 +142,11 @@ fn align_with_workspace(
         {
             continue;
         }
-        let pairs = std::mem::take(&mut workspace.pairs);
         hits.push((i, end, measured, matches, columns, gaps, score, pairs));
-        workspace.claimed[i..=end].fill(true);
+        claimed[i..=end].fill(true);
     }
     hits.sort_unstable_by_key(|h| (h.0, h.1, h.2));
     hits
-}
-
-fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i32) -> Vec<Hit> {
-    align_with_workspace(
-        sequence,
-        period,
-        min_span,
-        band,
-        x_drop,
-        &mut AlignmentWorkspace::default(),
-    )
 }
 
 fn validate_alignment_parameters(
@@ -250,12 +207,9 @@ pub fn banded_self_align_many(
     }
     let sequence = sequence.as_bytes().to_ascii_uppercase();
     Ok(py.allow_threads(move || {
-        let mut workspace = AlignmentWorkspace::default();
         period_bands
             .into_iter()
-            .flat_map(|(period, band)| {
-                align_with_workspace(&sequence, period, min_span, band, x_drop, &mut workspace)
-            })
+            .flat_map(|(period, band)| align(&sequence, period, min_span, band, x_drop))
             .collect()
     }))
 }
