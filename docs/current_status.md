@@ -116,7 +116,7 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 449 Python tests. The added tests cover
+- The expanded source checkout passes all 451 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
   unchanged. Four additional tests validate compact reference archiving and
@@ -162,6 +162,12 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   localizer under the tested model while retaining the classifier trade-off.
   Four compact archives and the inspected six-panel Figure 5 retain all rows;
   seeds 5501–5503 are consumed.
+- The next classifier experiment is predeclared before data generation. Config
+  `abundance_classifier_development_v1.json` reserves 5601–5603 for development
+  and leaves 5701–5703 untouched. It limits selection to 20 transparent
+  log-space single/multi-k blends and thresholds, requires no worse FPR or
+  precision than single k=21, and adds full-development and leave-one-seed-out
+  acceptance gates. No result from these seeds exists yet.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 

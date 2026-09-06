@@ -15,8 +15,8 @@ have **not** been achieved.
 | Assembly interpretation | The 5401–5403 failure was followed by a predeclared 5501–5503 validation: bounded bridging passed aggregate localization gates, but the unchanged classifier traded sensitivity 60.01%→91.84% for FPR 1.23%→8.54% and precision 98.65%→94.16% | Calibrate classification independently of the consumed localizer seeds; biological under-representation and donor-matched validation remain unresolved |
 | Probe performance | Computational prioritization framework | Specificity calibration and independent published/new experimental concordance; no fabricated FISH rate |
 | Novelty/AI | Explicit prior-art comparison; no unsupported AI claim | Establish reproducible added value and ablations; AI only if independently useful |
-| Software quality | Current source passes 449 Python tests; unchanged Rust source passed 15 tests, Clippy and formatting; 4e662db passed hosted Ubuntu/macOS CI | Hosted CI for the evidence/archive revision; production defaults, clean install/release verification, workflow portability and complete command validation |
-| GitHub/reuse | b85a266 pushed to main and working branch; held-out validation, YSD56 full QC and figure v2 are published; both hosted CI runs passed | YSD56 sampling evidence needs the next verified commit/push; clean release, portability and archive deposition remain pending |
+| Software quality | Current source passes 451 Python tests; unchanged Rust source passed 15 tests, Clippy and formatting; 97f2c9c passed hosted Ubuntu/macOS CI | Hosted CI for the classifier-development pre-registration; production defaults, clean install/release verification, workflow portability and complete command validation |
+| GitHub/reuse | 97f2c9c pushed to main and working branch; held-out localizer validation, YSD56 full QC and figure evidence are published; both hosted CI runs passed | Classifier pre-registration needs the next verified commit/push; clean release, portability and archive deposition remain pending |
 
 On 6 September 2026 an initial T7 figure-v2 render was rejected because the
 automatic review service reached its usage limit. Later Git operations passed

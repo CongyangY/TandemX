@@ -199,6 +199,17 @@ complete declared matrix and adverse rows are retained without retuning on
 seeds 5501--5503. This is a known-catalogue substitution model; exact-k-mer IID
 identity is not alignment identity or biological satellite validation.
 
+The next classifier development is predeclared in
+`abundance_classifier_development_v1.json`. Seeds 5601--5603 are development
+data; 5701--5703 are reserved and must remain untouched until a selected rule is
+frozen. The candidate set is a 5-by-4 grid of log-space single/multi-k blends
+and decision thresholds. Selection maximizes sensitivity only among candidates
+with no worse false-positive rate or precision than single k=21, with fixed
+tie-breakers and leave-one-seed-out stability gates. The alpha-zero, threshold-
+0.6 candidate exactly anchors the current baseline. This transparent experiment
+is not an AI model and must be retained as a failed development result if its
+predeclared gates are not met.
+
 ## Endpoint and clustering audit (2026-09-06)
 
 Retain both strict equal-length recovery and independent cyclic edit recovery;

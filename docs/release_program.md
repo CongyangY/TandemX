@@ -26,7 +26,7 @@ machine-readable commands alongside results.
 
 | Gate | Required evidence | Current evidence |
 | --- | --- | --- |
-| Engineering baseline | Full pytest; Rust tests and release build; output validation | Current source passes all 449 Python tests; unchanged Rust source passed 15 tests, fmt and clippy; both 4e662db hosted CI runs passed on Ubuntu and macOS; the evidence/archive revision awaits its hosted checkpoint |
+| Engineering baseline | Full pytest; Rust tests and release build; output validation | Current source passes all 451 Python tests; unchanged Rust source passed 15 tests, fmt and clippy; both 97f2c9c hosted CI runs passed on Ubuntu and macOS; the classifier-development pre-registration awaits its hosted checkpoint |
 | Challenge benchmark | Independent seeds; indels, unit divergence, mixed families, multiple arrays, short arrays, hard negatives; strict normalization | Development and separate validation seeds executed; related-family merge failure retained; held-out publication seeds remain unused |
 | Quantification | Known copy number and coverage; finite-read and error bias; catalog ambiguity; calibration/interval coverage | Three-genome/27-condition multi-k and joint-read experiments complete; 20× conditional interval coverage 94.58% with explicit missingness; held-out/real calibration pending |
 | Localization/comparison | Known array coordinates; engineered collapse levels; false collapse calls and boundary errors | After the 5401–5403 failure, bounded anchor bridging passed fresh 5501–5503 localization gates (full recall 0.9810, positive precision 0.9996, absent FP 0/54); the unchanged classifier gained sensitivity 0.6001→0.9184 but FPR rose 0.0123→0.0854 and precision fell 0.9865→0.9416; biological truth remains absent |
