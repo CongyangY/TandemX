@@ -1,0 +1,22 @@
+[
+  {
+    "k": 17,
+    "command": [
+      "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc",
+      "-fm",
+      "-k17",
+      "-t1",
+      "-m1",
+      "-sm",
+      "-ci1",
+      "-cs100000",
+      "/Volumes/T7/Codex/TandemX/tools/validation/kmc_20260906/reads.fa",
+      "/Volumes/T7/Codex/TandemX/tools/validation/kmc_20260906/17/counts",
+      "/Volumes/T7/Codex/TandemX/tools/validation/kmc_20260906/17/tmp"
+    ],
+    "exit_code": 1,
+    "runtime_seconds": 0.07599029201082885,
+    "peak_rss_mib": 22.65625,
+    "timed_out": false
+  }
+]

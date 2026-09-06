@@ -1,0 +1,23 @@
+{
+  "input_sha256": {
+    "/Volumes/T7/Codex/TandemX/results/independent_rescore_v1_20260906/rescored_metrics.tsv": "d739706bf5e787f989fc00ff20bcf363d0ed00d5b9fb10a82206098521d3e3a0",
+    "/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/summary.tsv": "bba53edd75e1d5e4e45706ebb8cfe23d891385a03b539ea007879717b96c8c26",
+    "/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/datasets/related_families_s2101/reads.fa": "3556f3abd089181f65bae7a8c00ad0738c1346c09d50858167c1391ce4938c54",
+    "/Volumes/T7/Codex/TandemX/results/elastic_validation_v1_20260906/datasets/related_families_s2101/reads.fa": "3556f3abd089181f65bae7a8c00ad0738c1346c09d50858167c1391ce4938c54",
+    "/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover/candidate_reads.tsv": "8de92d028109e3174fa0b546c6124b34c9abf97b8e0cb146ae5c48b845cd6729",
+    "/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover/candidate_monomers.fa": "6910e30c817991b3846e5b8998ca2c2f3b5c985dea03c5c4afd082ec173dbe85",
+    "/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover/monomers.fa": "c17219cd9dfbcce80bd422414e83143a41d89b9a5a688cab771c184e7e9e72b5",
+    "/Volumes/T7/Codex/TandemX/results/elastic_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover/monomers.fa": "562d84b382647cdf0fe922ce870e985feb9b7ba4c4f0e49a223d0be99ac6cd73",
+    "/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/datasets/related_families_s2101/truth_monomers.fa": "6cdf914591d45b8b1bc39d54f716e438338161f7ff2cfc84bf61f56400b0a6a7"
+  },
+  "script_sha256": "a92cdd6573e9aa27dcdb3b4f64008258bbae3dadb286ba1b1d37be3d64f903ba",
+  "source_commit": "fd656b6a9171710a25ef48aa5b8b038a3d0537aa",
+  "sensitivity_replay": "rounded exported TSV scores; default catalogue equality verified",
+  "limits": "first-repetition sequences; three-repeat validation digests agree; reused development/validation seeds",
+  "outputs": {
+    "sequence_audit.pdf": "48706b27f7a0e0f19bc08ccd76bc728b59361085b12dea8753ecc7a58624c883",
+    "sequence_audit.svg": "6f38ae0c453a4a74dd48739b2fbfd04953eb0835de6b5d3efde6dad30f0672e5",
+    "sequence_audit.png": "dfe02d53e6e4f6dc8df7f354d9d4b4b5e8ecc151db6801bec96f0518d26b0c72",
+    "panel_source.tsv": "fec6b67bd7db6ec55ad53df17c334d1e8808b66d22e8005b4686fe1da1f6f9c6"
+  }
+}

@@ -177,3 +177,21 @@ After toy benchmarks, claim only that the toy workflow runs and produces documen
 After simulated benchmarks, claim only behavior under tested simulated conditions.
 
 After real plant and FISH benchmarks, claim biological usefulness only for tested species, datasets and validation scenarios.
+
+## Endpoint and clustering audit (2026-09-06)
+
+Retain both strict equal-length recovery and independent cyclic edit recovery;
+small consensus indels are not automatically missing families. Report raw array
+precision together with period-independent base unions and duplicate-base burden.
+The 95% operational monomer-cluster threshold is a declared sequence resolution;
+its sensitivity sweep is separate from the 90% planted-sequence recovery endpoint.
+Seed 2101 was inspected during repair and cannot be presented as untouched test
+performance. Seeds 3101/3102/3103 remain unused.
+
+SRF requires its whole KMC/count-dump/circle-assembly/elongation/minimap2/filter/
+abundance workflow to be measured. Preliminary ci100 and ci20 settings are an
+illustrative README preset and a lower-count sensitivity setting; the synthetic
+library has no known average genome coverage. Record both, including no-catalogue
+outcomes. Native higher-order units must remain available and cannot be called
+false monomers simply because they exceed a period-restricted score. A dedicated
+HOR decomposition endpoint is still needed before interpreting that difference.

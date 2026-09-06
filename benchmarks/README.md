@@ -293,3 +293,13 @@ states, configurations and input hashes. It does not update original outputs or
 supply new tool timings. `cyclic_monomer_recall` uses TandemX's final catalogue
 and other tools' per-array consensuses; these are different output granularities.
 Candidate FASTA evidence now permits a further matched per-array consensus study.
+
+## SRF catalogue and abundance workflow
+
+The pilot runner is `python -m benchmarks.scripts.run_srf_pilot`; it executes seven
+native stages rather than timing only graph construction. All original failures
+are retained. A disclosed guard identifies empty successful KMC dumps and skips
+SRF's empty-input assertion without creating a fake native FASTA. The task and
+platform scope, parameters and measurements are in [docs/srf_workflow.md](../docs/srf_workflow.md).
+An SRF output may be a higher-order repeat; out-of-period motifs remain preserved.
+Minimal-monomer recovery alone does not establish absence of its constituent units.

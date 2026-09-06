@@ -1,0 +1,15 @@
+{
+  "dataset": "divergent_units_s1101",
+  "minimum_count": 20,
+  "status": "failed",
+  "workflow_wall_seconds": 1.7615021672099829,
+  "external_stage_wall_seconds": 1.7594066250603646,
+  "maximum_external_stage_peak_rss_mib": 49.3125,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "094a050b6445363e34653f4e13b8adc1b954462dcb810c2b547fa6df471e858c",
+  "total_input_bases": 500000,
+  "k": 151,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1312581,
+  "warning": "illustrative_readme_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

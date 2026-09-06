@@ -1,0 +1,11 @@
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++17 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_CLI/kmc.cpp -o kmc_CLI/kmc.o
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++17 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/mem_disk_file.cpp -o kmc_core/mem_disk_file.o
+In file included from kmc_core/mem_disk_file.cpp:11:
+In file included from kmc_core/mem_disk_file.h:14:
+kmc_core/defs.h:112:10: fatal error: 'ext/algorithm' file not found
+#include <ext/algorithm>
+         ^~~~~~~~~~~~~~~
+1 error generated.
+make: *** [kmc_core/mem_disk_file.o] Error 1
+make: *** Waiting for unfinished jobs....
+ERROR conda.cli.main_run:execute(124): `conda run make -j2 kmc kmc_dump CC=clang++ STATIC_CFLAGS=-pthread STATIC_LFLAGS=-pthread LIB_ZLIB=/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib/libz.dylib CFLAGS=-Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++17 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include` failed. (See above for error)

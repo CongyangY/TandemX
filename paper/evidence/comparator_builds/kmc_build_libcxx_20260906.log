@@ -1,0 +1,1483 @@
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/mem_disk_file.cpp -o kmc_core/mem_disk_file.o
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/rev_byte.cpp -o kmc_core/rev_byte.o
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/bkb_writer.cpp -o kmc_core/bkb_writer.o
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/cpu_info.cpp -o kmc_core/cpu_info.o
+In file included from kmc_core/bkb_writer.cpp:11:
+In file included from kmc_core/bkb_writer.h:14:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/bkb_writer.cpp:11:
+In file included from kmc_core/bkb_writer.h:14:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+In file included from kmc_core/bkb_writer.cpp:11:
+In file included from kmc_core/bkb_writer.h:14:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/bkb_reader.cpp -o kmc_core/bkb_reader.o
+In file included from kmc_core/bkb_writer.cpp:11:
+In file included from kmc_core/bkb_writer.h:14:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+In file included from kmc_core/bkb_reader.cpp:11:
+In file included from kmc_core/bkb_reader.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/bkb_reader.cpp:11:
+In file included from kmc_core/bkb_reader.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+4 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/fastq_reader.cpp -o kmc_core/fastq_reader.o
+In file included from kmc_core/bkb_reader.cpp:11:
+In file included from kmc_core/bkb_reader.h:15:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+In file included from kmc_core/bkb_reader.cpp:11:
+In file included from kmc_core/bkb_reader.h:15:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+In file included from kmc_core/fastq_reader.cpp:12:
+In file included from kmc_core/fastq_reader.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+4 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/timer.cpp -o kmc_core/timer.o
+In file included from kmc_core/fastq_reader.cpp:12:
+In file included from kmc_core/fastq_reader.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/develop.cpp -o kmc_core/develop.o
+In file included from kmc_core/fastq_reader.cpp:12:
+In file included from kmc_core/fastq_reader.h:15:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+kmc_core/fastq_reader.cpp:886:14: warning: variable 'number_of_lines_to_skip' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+                                else if (readed_lines == 3)
+                                         ^~~~~~~~~~~~~~~~~
+kmc_core/fastq_reader.cpp:896:31: note: uninitialized use occurs here
+                                CleanUpAfterLongFastqRead(number_of_lines_to_skip);
+                                                          ^~~~~~~~~~~~~~~~~~~~~~~
+kmc_core/fastq_reader.cpp:886:10: note: remove the 'if' if its condition is always true
+                                else if (readed_lines == 3)
+                                     ^~~~~~~~~~~~~~~~~~~~~~
+kmc_core/fastq_reader.cpp:883:35: note: initialize the variable 'number_of_lines_to_skip' to silence this warning
+                                uint32 number_of_lines_to_skip;
+                                                              ^
+                                                               = 0
+In file included from kmc_core/fastq_reader.cpp:12:
+In file included from kmc_core/fastq_reader.h:15:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+In file included from kmc_core/fastq_reader.cpp:12:
+kmc_core/fastq_reader.h:28:9: warning: private field 'in_buffer' is not used [-Wunused-private-field]
+        uchar* in_buffer;
+               ^
+kmc_core/fastq_reader.h:159:19: warning: private field 'stats_part_queue' is not used [-Wunused-private-field]
+        CStatsPartQueue *stats_part_queue;
+                         ^
+In file included from kmc_core/develop.cpp:3:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/develop.cpp:3:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+In file included from kmc_core/develop.cpp:3:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+7 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/kb_completer.cpp -o kmc_core/kb_completer.o
+In file included from kmc_core/develop.cpp:3:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+4 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/kb_storer.cpp -o kmc_core/kb_storer.o
+In file included from kmc_core/kb_completer.cpp:12:
+In file included from kmc_core/kb_completer.h:14:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/kb_completer.cpp:12:
+In file included from kmc_core/kb_completer.h:14:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+In file included from kmc_core/kb_completer.cpp:12:
+In file included from kmc_core/kb_completer.h:14:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+In file included from kmc_core/kb_storer.cpp:12:
+In file included from kmc_core/kb_storer.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/kb_storer.cpp:12:
+In file included from kmc_core/kb_storer.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+In file included from kmc_core/kb_storer.cpp:12:
+In file included from kmc_core/kb_storer.h:15:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+In file included from kmc_core/kb_completer.cpp:12:
+In file included from kmc_core/kb_completer.h:14:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+In file included from kmc_core/kb_storer.cpp:12:
+In file included from kmc_core/kb_storer.h:15:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+4 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/kmer.cpp -o kmc_core/kmer.o
+4 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/splitter.cpp -o kmc_core/splitter.o
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/kb_collector.cpp -o kmc_core/kb_collector.o
+In file included from kmc_core/splitter.cpp:11:
+In file included from kmc_core/splitter.h:16:
+In file included from kmc_core/kb_collector.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/splitter.cpp:11:
+In file included from kmc_core/splitter.h:16:
+In file included from kmc_core/kb_collector.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+In file included from kmc_core/splitter.cpp:11:
+In file included from kmc_core/splitter.h:16:
+In file included from kmc_core/kb_collector.h:15:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+In file included from kmc_core/kb_collector.cpp:11:
+In file included from kmc_core/kb_collector.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/kb_collector.cpp:11:
+In file included from kmc_core/kb_collector.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+kmc_core/splitter.cpp:44:7: warning: array subscript is of type 'char' [-Wchar-subscripts]
+        codes['A'] = codes['a'] = 0;
+             ^~~~
+kmc_core/splitter.cpp:44:20: warning: array subscript is of type 'char' [-Wchar-subscripts]
+        codes['A'] = codes['a'] = 0;
+                          ^~~~
+kmc_core/splitter.cpp:45:7: warning: array subscript is of type 'char' [-Wchar-subscripts]
+        codes['C'] = codes['c'] = 1;
+             ^~~~
+kmc_core/splitter.cpp:45:20: warning: array subscript is of type 'char' [-Wchar-subscripts]
+        codes['C'] = codes['c'] = 1;
+                          ^~~~
+kmc_core/splitter.cpp:46:7: warning: array subscript is of type 'char' [-Wchar-subscripts]
+        codes['G'] = codes['g'] = 2;
+             ^~~~
+kmc_core/splitter.cpp:46:20: warning: array subscript is of type 'char' [-Wchar-subscripts]
+        codes['G'] = codes['g'] = 2;
+                          ^~~~
+kmc_core/splitter.cpp:47:7: warning: array subscript is of type 'char' [-Wchar-subscripts]
+        codes['T'] = codes['t'] = 3;
+             ^~~~
+kmc_core/splitter.cpp:47:20: warning: array subscript is of type 'char' [-Wchar-subscripts]
+        codes['T'] = codes['t'] = 3;
+                          ^~~~
+In file included from kmc_core/kb_collector.cpp:11:
+In file included from kmc_core/kb_collector.h:15:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+In file included from kmc_core/splitter.cpp:11:
+In file included from kmc_core/splitter.h:16:
+In file included from kmc_core/kb_collector.h:15:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+In file included from kmc_core/splitter.cpp:11:
+kmc_core/splitter.h:182:17: warning: private field 'bpq' is not used [-Wunused-private-field]
+        CBinPartQueue* bpq;
+                       ^
+In file included from kmc_core/kb_collector.cpp:11:
+In file included from kmc_core/kb_collector.h:15:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+4 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/kmc_runner.cpp -o kmc_core/kmc_runner.o
+13 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -c kmc_core/raduls_neon.cpp -o kmc_core/raduls_neon.o
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/raduls_neon.cpp:12:
+In file included from kmc_core/raduls_impl.h:24:
+In file included from kmc_core/first_dispatch.h:13:
+kmc_core/queues.h:593:3: warning: 'random_shuffle<std::__wrap_iter<int *>>' is deprecated [-Wdeprecated-declarations]
+                random_shuffle(random_bins.begin(), random_bins.end());
+                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/shuffle.h:96:23: note: 'random_shuffle<std::__wrap_iter<int *>>' has been explicitly marked deprecated here
+_LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_IN_CXX14 void
+                      ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1031:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX14'
+#    define _LIBCPP_DEPRECATED_IN_CXX14 _LIBCPP_DEPRECATED
+                                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:1010:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+#      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+                                                ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:15:
+In file included from kmc_core/params.h:16:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+In file included from kmc_core/raduls_neon.cpp:12:
+In file included from kmc_core/raduls_impl.h:24:
+In file included from kmc_core/first_dispatch.h:13:
+kmc_core/queues.h:1805:36: warning: lambda capture 'lut_size' is not used [-Wunused-lambda-capture]
+                cv_push.wait(lck, [this, bin_id, lut_size]{return curr_id == bin_id || allow_next; });
+                                               ~~^~~~~~~~
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:15:
+In file included from kmc_core/params.h:17:
+kmc_core/s_mapper.h:189:12: warning: variable 'in_current' set but not used [-Wunused-but-set-variable]
+                                uint32 in_current = 0;
+                                       ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:45:
+In file included from kmc_core/binary_reader.h:19:
+In file included from kmc_core/../kmc_api/kmc_file.h:15:
+kmc_core/../kmc_api/kmer_api.h:271:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['A'] = num_codes['a'] = 0;
+                                 ^~~~
+kmc_core/../kmc_api/kmer_api.h:271:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['A'] = num_codes['a'] = 0;
+                                                  ^~~~
+kmc_core/../kmc_api/kmer_api.h:272:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['C'] = num_codes['c'] = 1;
+                                 ^~~~
+kmc_core/../kmc_api/kmer_api.h:272:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['C'] = num_codes['c'] = 1;
+                                                  ^~~~
+kmc_core/../kmc_api/kmer_api.h:273:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['G'] = num_codes['g'] = 2;
+                                 ^~~~
+kmc_core/../kmc_api/kmer_api.h:273:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['G'] = num_codes['g'] = 2;
+                                                  ^~~~
+kmc_core/../kmc_api/kmer_api.h:274:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['T'] = num_codes['t'] = 3;
+                                 ^~~~
+kmc_core/../kmc_api/kmer_api.h:274:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['T'] = num_codes['t'] = 3;
+                                                  ^~~~
+In file included from kmc_core/kmc_runner.cpp:12:
+kmc_core/kmc.h:1731:9: warning: variable 'stat_n_plus_x_recs' set but not used [-Wunused-but-set-variable]
+        uint64 stat_n_plus_x_recs, stat_n_recs, stat_n_recs_tmp, stat_n_plus_x_recs_tmp;
+               ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:668:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        output_packs_desc.splice(output_packs_desc.end(), move(ptr->GetPacks()));
+                                                                          ^
+                                                                          std::
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<1>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<1>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<1>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<1>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CWKmerBinSorter<1>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 14 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:919:21: note: in instantiation of function template specialization 'std::allocator_traits<std::allocator<CExceptionAwareThread>>::construct<CExceptionAwareThread, std::reference_wrapper<CWKmerBinSorter<1>>, void>' requested here
+    __alloc_traits::construct(this->__alloc(), std::__to_address(__tx.__pos_),
+                    ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:1678:9: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::__construct_one_at_end<std::reference_wrapper<CWKmerBinSorter<1>>>' requested here
+        __construct_one_at_end(std::forward<_Args>(__args)...);
+        ^
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<1>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<1>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:103:17: note: in instantiation of member function 'CKMC<1>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:649:32: note: in instantiation of member function 'CSubArrayDescGenerator<1>::CSubArrayDescGenerator' requested here
+                CSubArrayDescGenerator<SIZE> sub_array_desc_generator(kmer_len, n_parts, sub_array_descs, buffer, cutoff_min, rec_len, kxmer_counters, n_kxmer_counters, n_threads);
+                                             ^
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<1>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<1>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<1>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<1>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 15 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:919:21: note: in instantiation of function template specialization 'std::allocator_traits<std::allocator<CExceptionAwareThread>>::construct<CExceptionAwareThread, std::reference_wrapper<CWKmerBinSorter<1>>, void>' requested here
+    __alloc_traits::construct(this->__alloc(), std::__to_address(__tx.__pos_),
+                    ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:1678:9: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::__construct_one_at_end<std::reference_wrapper<CWKmerBinSorter<1>>>' requested here
+        __construct_one_at_end(std::forward<_Args>(__args)...);
+        ^
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<1>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<1>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:103:17: note: in instantiation of member function 'CKMC<1>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+kmc_core/kxmer_set.h:304:10: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                desc = move(data.front());
+                       ^
+                       std::
+kmc_core/kxmer_set.h:572:35: note: in instantiation of member function 'CSubArrayDescGenerator<1>::GetNext' requested here
+                while (sub_array_desc_generator.GetNext(desc, out_start))
+                                                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CKXmerMerger<1>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::reference_wrapper<CKXmerMerger<1>>::operator()<>' requested here
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind.h:292:27: note: in instantiation of function template specialization 'std::__apply_functor<std::reference_wrapper<CKXmerMerger<1>>, std::tuple<>, std::tuple<>>' requested here
+            return _VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                          ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::__bind<std::reference_wrapper<CKXmerMerger<1>>>::operator()<>' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:193:26: note: (skipping 33 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+        return _Invoker::__call(__f_.first(),
+                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:919:21: note: in instantiation of function template specialization 'std::allocator_traits<std::allocator<CExceptionAwareThread>>::construct<CExceptionAwareThread, std::reference_wrapper<CWKmerBinSorter<1>>, void>' requested here
+    __alloc_traits::construct(this->__alloc(), std::__to_address(__tx.__pos_),
+                    ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:1678:9: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::__construct_one_at_end<std::reference_wrapper<CWKmerBinSorter<1>>>' requested here
+        __construct_one_at_end(std::forward<_Args>(__args)...);
+        ^
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<1>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<1>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:103:17: note: in instantiation of member function 'CKMC<1>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:668:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        output_packs_desc.splice(output_packs_desc.end(), move(ptr->GetPacks()));
+                                                                          ^
+                                                                          std::
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<8>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<8>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<8>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<8>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CWKmerBinSorter<8>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 15 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:1678:9: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::__construct_one_at_end<std::reference_wrapper<CWKmerBinSorter<8>>>' requested here
+        __construct_one_at_end(std::forward<_Args>(__args)...);
+        ^
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<8>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<8>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<8>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:649:32: note: in instantiation of member function 'CSubArrayDescGenerator<8>::CSubArrayDescGenerator' requested here
+                CSubArrayDescGenerator<SIZE> sub_array_desc_generator(kmer_len, n_parts, sub_array_descs, buffer, cutoff_min, rec_len, kxmer_counters, n_kxmer_counters, n_threads);
+                                             ^
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<8>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<8>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<8>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<8>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 16 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:1678:9: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::__construct_one_at_end<std::reference_wrapper<CWKmerBinSorter<8>>>' requested here
+        __construct_one_at_end(std::forward<_Args>(__args)...);
+        ^
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<8>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<8>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<8>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+kmc_core/kxmer_set.h:304:10: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                desc = move(data.front());
+                       ^
+                       std::
+kmc_core/kxmer_set.h:572:35: note: in instantiation of member function 'CSubArrayDescGenerator<8>::GetNext' requested here
+                while (sub_array_desc_generator.GetNext(desc, out_start))
+                                                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CKXmerMerger<8>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::reference_wrapper<CKXmerMerger<8>>::operator()<>' requested here
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind.h:292:27: note: in instantiation of function template specialization 'std::__apply_functor<std::reference_wrapper<CKXmerMerger<8>>, std::tuple<>, std::tuple<>>' requested here
+            return _VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                          ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::__bind<std::reference_wrapper<CKXmerMerger<8>>>::operator()<>' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:193:26: note: (skipping 34 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+        return _Invoker::__call(__f_.first(),
+                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector:1678:9: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::__construct_one_at_end<std::reference_wrapper<CWKmerBinSorter<8>>>' requested here
+        __construct_one_at_end(std::forward<_Args>(__args)...);
+        ^
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<8>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<8>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<8>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:668:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        output_packs_desc.splice(output_packs_desc.end(), move(ptr->GetPacks()));
+                                                                          ^
+                                                                          std::
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<7>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<7>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<7>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<7>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CWKmerBinSorter<7>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 16 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<7>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<7>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<7>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:649:32: note: in instantiation of member function 'CSubArrayDescGenerator<7>::CSubArrayDescGenerator' requested here
+                CSubArrayDescGenerator<SIZE> sub_array_desc_generator(kmer_len, n_parts, sub_array_descs, buffer, cutoff_min, rec_len, kxmer_counters, n_kxmer_counters, n_threads);
+                                             ^
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<7>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<7>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<7>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<7>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 17 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<7>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<7>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<7>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+kmc_core/kxmer_set.h:304:10: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                desc = move(data.front());
+                       ^
+                       std::
+kmc_core/kxmer_set.h:572:35: note: in instantiation of member function 'CSubArrayDescGenerator<7>::GetNext' requested here
+                while (sub_array_desc_generator.GetNext(desc, out_start))
+                                                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CKXmerMerger<7>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::reference_wrapper<CKXmerMerger<7>>::operator()<>' requested here
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind.h:292:27: note: in instantiation of function template specialization 'std::__apply_functor<std::reference_wrapper<CKXmerMerger<7>>, std::tuple<>, std::tuple<>>' requested here
+            return _VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                          ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::__bind<std::reference_wrapper<CKXmerMerger<7>>>::operator()<>' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:193:26: note: (skipping 35 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+        return _Invoker::__call(__f_.first(),
+                         ^
+kmc_core/kmc.h:1583:19: note: in instantiation of function template specialization 'std::vector<CExceptionAwareThread>::emplace_back<std::reference_wrapper<CWKmerBinSorter<7>>>' requested here
+                sorters_threads.emplace_back(std::ref(*w_sorters[i].get()));
+                                ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<7>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<7>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:668:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        output_packs_desc.splice(output_packs_desc.end(), move(ptr->GetPacks()));
+                                                                          ^
+                                                                          std::
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<6>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<6>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<6>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<6>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CWKmerBinSorter<6>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 17 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<6>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<6>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:649:32: note: in instantiation of member function 'CSubArrayDescGenerator<6>::CSubArrayDescGenerator' requested here
+                CSubArrayDescGenerator<SIZE> sub_array_desc_generator(kmer_len, n_parts, sub_array_descs, buffer, cutoff_min, rec_len, kxmer_counters, n_kxmer_counters, n_threads);
+                                             ^
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<6>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<6>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<6>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<6>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 18 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<6>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<6>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+kmc_core/kxmer_set.h:304:10: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                desc = move(data.front());
+                       ^
+                       std::
+kmc_core/kxmer_set.h:572:35: note: in instantiation of member function 'CSubArrayDescGenerator<6>::GetNext' requested here
+                while (sub_array_desc_generator.GetNext(desc, out_start))
+                                                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CKXmerMerger<6>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::reference_wrapper<CKXmerMerger<6>>::operator()<>' requested here
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind.h:292:27: note: in instantiation of function template specialization 'std::__apply_functor<std::reference_wrapper<CKXmerMerger<6>>, std::tuple<>, std::tuple<>>' requested here
+            return _VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                          ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::__bind<std::reference_wrapper<CKXmerMerger<6>>>::operator()<>' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:193:26: note: (skipping 36 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+        return _Invoker::__call(__f_.first(),
+                         ^
+kmc_core/kmc.h:1822:15: note: in instantiation of member function 'CKMC<6>::ProcessStage2_impl' requested here
+                res = this->ProcessStage2_impl();
+                            ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<6>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:668:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        output_packs_desc.splice(output_packs_desc.end(), move(ptr->GetPacks()));
+                                                                          ^
+                                                                          std::
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<5>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<5>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<5>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<5>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CWKmerBinSorter<5>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 18 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<5>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:649:32: note: in instantiation of member function 'CSubArrayDescGenerator<5>::CSubArrayDescGenerator' requested here
+                CSubArrayDescGenerator<SIZE> sub_array_desc_generator(kmer_len, n_parts, sub_array_descs, buffer, cutoff_min, rec_len, kxmer_counters, n_kxmer_counters, n_threads);
+                                             ^
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<5>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<5>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<5>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<5>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 19 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<5>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+kmc_core/kxmer_set.h:304:10: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                desc = move(data.front());
+                       ^
+                       std::
+kmc_core/kxmer_set.h:572:35: note: in instantiation of member function 'CSubArrayDescGenerator<5>::GetNext' requested here
+                while (sub_array_desc_generator.GetNext(desc, out_start))
+                                                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CKXmerMerger<5>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::reference_wrapper<CKXmerMerger<5>>::operator()<>' requested here
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind.h:292:27: note: in instantiation of function template specialization 'std::__apply_functor<std::reference_wrapper<CKXmerMerger<5>>, std::tuple<>, std::tuple<>>' requested here
+            return _VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                          ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::__bind<std::reference_wrapper<CKXmerMerger<5>>>::operator()<>' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:193:26: note: (skipping 37 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+        return _Invoker::__call(__f_.first(),
+                         ^
+kmc_core/kmc_runner.cpp:62:17: note: in instantiation of member function 'CKMC<5>::ProcessStage2' requested here
+                                return kmc->ProcessStage2();
+                                            ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:668:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        output_packs_desc.splice(output_packs_desc.end(), move(ptr->GetPacks()));
+                                                                          ^
+                                                                          std::
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<4>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<4>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<4>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<4>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CWKmerBinSorter<4>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 19 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:649:32: note: in instantiation of member function 'CSubArrayDescGenerator<4>::CSubArrayDescGenerator' requested here
+                CSubArrayDescGenerator<SIZE> sub_array_desc_generator(kmer_len, n_parts, sub_array_descs, buffer, cutoff_min, rec_len, kxmer_counters, n_kxmer_counters, n_threads);
+                                             ^
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<4>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<4>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<4>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<4>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 20 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+kmc_core/kxmer_set.h:304:10: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                desc = move(data.front());
+                       ^
+                       std::
+kmc_core/kxmer_set.h:572:35: note: in instantiation of member function 'CSubArrayDescGenerator<4>::GetNext' requested here
+                while (sub_array_desc_generator.GetNext(desc, out_start))
+                                                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CKXmerMerger<4>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::reference_wrapper<CKXmerMerger<4>>::operator()<>' requested here
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind.h:292:27: note: in instantiation of function template specialization 'std::__apply_functor<std::reference_wrapper<CKXmerMerger<4>>, std::tuple<>, std::tuple<>>' requested here
+            return _VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                          ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::__bind<std::reference_wrapper<CKXmerMerger<4>>>::operator()<>' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:193:26: note: (skipping 38 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+        return _Invoker::__call(__f_.first(),
+                         ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:668:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        output_packs_desc.splice(output_packs_desc.end(), move(ptr->GetPacks()));
+                                                                          ^
+                                                                          std::
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<3>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<3>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<3>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<3>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CWKmerBinSorter<3>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 20 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:649:32: note: in instantiation of member function 'CSubArrayDescGenerator<3>::CSubArrayDescGenerator' requested here
+                CSubArrayDescGenerator<SIZE> sub_array_desc_generator(kmer_len, n_parts, sub_array_descs, buffer, cutoff_min, rec_len, kxmer_counters, n_kxmer_counters, n_threads);
+                                             ^
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<3>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<3>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<3>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<3>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 21 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+kmc_core/kxmer_set.h:304:10: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                desc = move(data.front());
+                       ^
+                       std::
+kmc_core/kxmer_set.h:572:35: note: in instantiation of member function 'CSubArrayDescGenerator<3>::GetNext' requested here
+                while (sub_array_desc_generator.GetNext(desc, out_start))
+                                                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CKXmerMerger<3>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::reference_wrapper<CKXmerMerger<3>>::operator()<>' requested here
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind.h:292:27: note: in instantiation of function template specialization 'std::__apply_functor<std::reference_wrapper<CKXmerMerger<3>>, std::tuple<>, std::tuple<>>' requested here
+            return _VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                          ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::__bind<std::reference_wrapper<CKXmerMerger<3>>>::operator()<>' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:193:26: note: (skipping 39 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+        return _Invoker::__call(__f_.first(),
+                         ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:668:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        output_packs_desc.splice(output_packs_desc.end(), move(ptr->GetPacks()));
+                                                                          ^
+                                                                          std::
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<2>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<2>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<2>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<2>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CWKmerBinSorter<2>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 21 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:275:14: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                        data.push(move(current));
+                                  ^
+                                  std::
+kmc_core/kxmer_set.h:649:32: note: in instantiation of member function 'CSubArrayDescGenerator<2>::CSubArrayDescGenerator' requested here
+                CSubArrayDescGenerator<SIZE> sub_array_desc_generator(kmer_len, n_parts, sub_array_descs, buffer, cutoff_min, rec_len, kxmer_counters, n_kxmer_counters, n_threads);
+                                             ^
+kmc_core/kb_sorter.h:990:28: note: in instantiation of member function 'CKXmerSetMultiThreaded<2>::Process' requested here
+                        kxmer_set_multithreaded.Process(without_output, output_type);
+                                                ^
+kmc_core/kb_sorter.h:1290:3: note: in instantiation of member function 'CKmerBinSorter<2>::CompactKxmers' requested here
+                CompactKxmers();
+                ^
+kmc_core/kb_sorter.h:231:3: note: in instantiation of member function 'CKmerBinSorter<2>::Compact' requested here
+                Compact();
+                ^
+kmc_core/kb_sorter.h:1321:7: note: in instantiation of member function 'CKmerBinSorter<2>::ProcessBins' requested here
+        kbs->ProcessBins();
+             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: (skipping 22 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:30:
+In file included from kmc_core/kb_sorter.h:33:
+kmc_core/kxmer_set.h:282:13: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                data.push(move(sub_array_desc_copy));           
+                          ^
+                          std::
+kmc_core/kxmer_set.h:304:10: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+                desc = move(data.front());
+                       ^
+                       std::
+kmc_core/kxmer_set.h:572:35: note: in instantiation of member function 'CSubArrayDescGenerator<2>::GetNext' requested here
+                while (sub_array_desc_generator.GetNext(desc, out_start))
+                                                ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of member function 'CKXmerMerger<2>::operator()' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::reference_wrapper<CKXmerMerger<2>>::operator()<>' requested here
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind.h:292:27: note: in instantiation of function template specialization 'std::__apply_functor<std::reference_wrapper<CKXmerMerger<2>>, std::tuple<>, std::tuple<>>' requested here
+            return _VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                          ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h:340:25: note: in instantiation of function template specialization 'std::__bind<std::reference_wrapper<CKXmerMerger<2>>>::operator()<>' requested here
+               { return static_cast<_Fp&&>(__f)(static_cast<_Args&&>(__args)...); }
+                        ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:193:26: note: (skipping 40 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
+        return _Invoker::__call(__f_.first(),
+                         ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<4>::ProcessStage2' requested here
+                                return app_1->ProcessStage2(stage2Params);
+                                              ^
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<5>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<6>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:65:19: note: in instantiation of member function 'KMC::CApplication<7>::ProcessStage2' requested here
+kmc_core/kmc_runner.cpp:424:16: note: in instantiation of member function 'KMC::CApplication<8>::ProcessStage2' requested here
+                        return app->ProcessStage2(stage2Params);
+                                    ^
+In file included from kmc_core/kmc_runner.cpp:12:
+In file included from kmc_core/kmc.h:15:
+In file included from kmc_core/params.h:21:
+kmc_core/libs/ntHash/ntHashWrapper.h:110:7: warning: private field 'convert' is not used [-Wunused-private-field]
+        char convert[256] = {
+             ^
+2 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_api/mmer.cpp -o kmc_api/mmer.o
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_api/kmc_file.cpp -o kmc_api/kmc_file.o
+In file included from kmc_api/kmc_file.cpp:12:
+In file included from kmc_api/kmc_file.h:15:
+kmc_api/kmer_api.h:271:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['A'] = num_codes['a'] = 0;
+                                 ^~~~
+kmc_api/kmer_api.h:271:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['A'] = num_codes['a'] = 0;
+                                                  ^~~~
+kmc_api/kmer_api.h:272:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['C'] = num_codes['c'] = 1;
+                                 ^~~~
+kmc_api/kmer_api.h:272:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['C'] = num_codes['c'] = 1;
+                                                  ^~~~
+kmc_api/kmer_api.h:273:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['G'] = num_codes['g'] = 2;
+                                 ^~~~
+kmc_api/kmer_api.h:273:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['G'] = num_codes['g'] = 2;
+                                                  ^~~~
+kmc_api/kmer_api.h:274:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['T'] = num_codes['t'] = 3;
+                                 ^~~~
+kmc_api/kmer_api.h:274:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['T'] = num_codes['t'] = 3;
+                                                  ^~~~
+8 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_api/kmer_api.cpp -o kmc_api/kmer_api.o
+In file included from kmc_api/kmer_api.cpp:11:
+kmc_api/kmer_api.h:271:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['A'] = num_codes['a'] = 0;
+                                 ^~~~
+kmc_api/kmer_api.h:271:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['A'] = num_codes['a'] = 0;
+                                                  ^~~~
+kmc_api/kmer_api.h:272:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['C'] = num_codes['c'] = 1;
+                                 ^~~~
+kmc_api/kmer_api.h:272:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['C'] = num_codes['c'] = 1;
+                                                  ^~~~
+kmc_api/kmer_api.h:273:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['G'] = num_codes['g'] = 2;
+                                 ^~~~
+kmc_api/kmer_api.h:273:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['G'] = num_codes['g'] = 2;
+                                                  ^~~~
+kmc_api/kmer_api.h:274:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['T'] = num_codes['t'] = 3;
+                                 ^~~~
+kmc_api/kmer_api.h:274:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['T'] = num_codes['t'] = 3;
+                                                  ^~~~
+8 warnings generated.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_core/kff_writer.cpp -o kmc_core/kff_writer.o
+cd 3rd_party/cloudflare; ./configure; make libz.a
+Checking for shared library support...
+No shared library support; try without defining CC and CFLAGS
+Building static library libz.a version 1.2.8 with clang++.
+Checking for off64_t... No.
+Checking for fseeko... Yes.
+Checking for strerror... Yes.
+Checking for unistd.h... Yes.
+Checking for stdarg.h... Yes.
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+Checking for vsnprintf() in stdio.h... Yes.
+Checking for return value of vsnprintf()... Yes.
+Checking for attribute(visibility) support... No.
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include   -c -o adler32.o adler32.c
+clang: warning: treating 'c' input as 'c++' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+adler32.c:69:23: error: unknown type name 'adler'
+uLong ZEXPORT adler32(adler, buf, len)
+                      ^
+adler32.c:69:30: error: unknown type name 'buf'
+uLong ZEXPORT adler32(adler, buf, len)
+                             ^
+adler32.c:69:35: error: unknown type name 'len'
+uLong ZEXPORT adler32(adler, buf, len)
+                                  ^
+adler32.c:69:39: error: expected ';' after top level declarator
+uLong ZEXPORT adler32(adler, buf, len)
+                                      ^
+                                      ;
+adler32.c:73:1: error: expected unqualified-id
+{
+^
+adler32.c:145:30: error: use of undeclared identifier 'adler1'; did you mean 'adler'?
+local uLong adler32_combine_(adler1, adler2, len2)
+                             ^~~~~~
+                             adler
+adler32.c:70:11: note: 'adler' declared here
+    uLong adler;
+          ^
+adler32.c:145:13: error: redefinition of 'adler32_combine_' as different kind of symbol
+local uLong adler32_combine_(adler1, adler2, len2)
+            ^
+adler32.c:12:13: note: previous definition is here
+local uLong adler32_combine_ OF((uLong adler1, uLong adler2, z_off64_t len2));
+            ^
+adler32.c:145:38: error: use of undeclared identifier 'adler2'
+local uLong adler32_combine_(adler1, adler2, len2)
+                                     ^
+adler32.c:145:46: error: use of undeclared identifier 'len2'
+local uLong adler32_combine_(adler1, adler2, len2)
+                                             ^
+adler32.c:145:51: error: expected ';' after top level declarator
+local uLong adler32_combine_(adler1, adler2, len2)
+                                                  ^
+                                                  ;
+adler32.c:149:1: error: expected unqualified-id
+{
+^
+adler32.c:174:15: error: redefinition of 'adler32_combine' as different kind of symbol
+uLong ZEXPORT adler32_combine(adler1, adler2, len2)
+              ^
+./zlib.h:1730:26: note: previous definition is here
+   ZEXTERN uLong ZEXPORT adler32_combine OF((uLong, uLong, z_off_t));
+                         ^
+adler32.c:174:52: error: expected ';' after top level declarator
+uLong ZEXPORT adler32_combine(adler1, adler2, len2)
+                                                   ^
+                                                   ;
+adler32.c:175:11: error: redefinition of 'adler1'
+    uLong adler1;
+          ^
+adler32.c:146:11: note: previous definition is here
+    uLong adler1;
+          ^
+adler32.c:176:11: error: redefinition of 'adler2'
+    uLong adler2;
+          ^
+adler32.c:147:11: note: previous definition is here
+    uLong adler2;
+          ^
+adler32.c:177:13: error: redefinition of 'len2'
+    z_off_t len2;
+            ^
+adler32.c:148:15: note: previous definition is here
+    z_off64_t len2;
+              ^
+adler32.c:178:1: error: expected unqualified-id
+{
+^
+adler32.c:182:15: error: redefinition of 'adler32_combine64' as different kind of symbol
+uLong ZEXPORT adler32_combine64(adler1, adler2, len2)
+              ^
+./zutil.h:174:27: note: previous definition is here
+    ZEXTERN uLong ZEXPORT adler32_combine64 OF((uLong, uLong, z_off_t));
+                          ^
+adler32.c:182:54: error: expected ';' after top level declarator
+uLong ZEXPORT adler32_combine64(adler1, adler2, len2)
+                                                     ^
+                                                     ;
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+make[1]: *** [adler32.o] Error 1
+make: *** [/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib/libz.dylib] Error 2
+make: *** Waiting for unfinished jobs....
+47 warnings generated.
+ERROR conda.cli.main_run:execute(124): `conda run make -j2 kmc kmc_dump CC=clang++ STATIC_CFLAGS=-pthread STATIC_LFLAGS=-pthread LIB_ZLIB=/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib/libz.dylib CFLAGS=-Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include` failed. (See above for error)

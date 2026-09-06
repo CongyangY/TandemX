@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "workflow_wall_seconds": 2.017618249868974,
+  "external_stage_wall_seconds": 2.005662292474881,
+  "maximum_external_stage_peak_rss_mib": 50.875,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "dbae9574482222e54196052fb73c5890668439fa4bf7946e20bbb0e34d7dad48",
+  "total_input_bases": 500000,
+  "k": 151,
+  "minimum_count": 100,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1637406,
+  "stages": [
+    {
+      "stage": "count",
+      "exit_code": 0,
+      "runtime_seconds": 1.6625562910921872,
+      "peak_rss_mib": 50.875,
+      "timed_out": false
+    },
+    {
+      "stage": "dump",
+      "exit_code": 0,
+      "runtime_seconds": 0.07393816718831658,
+      "peak_rss_mib": 24.296875,
+      "timed_out": false
+    },
+    {
+      "stage": "assemble",
+      "exit_code": 0,
+      "runtime_seconds": 0.02704066690057516,
+      "peak_rss_mib": 1.09375,
+      "timed_out": false
+    },
+    {
+      "stage": "elongate",
+      "exit_code": 0,
+      "runtime_seconds": 0.02759187505580485,
+      "peak_rss_mib": 9.9375,
+      "timed_out": false
+    },
+    {
+      "stage": "map",
+      "exit_code": 0,
+      "runtime_seconds": 0.15278729214332998,
+      "peak_rss_mib": 3.546875,
+      "timed_out": false
+    },
+    {
+      "stage": "filter",
+      "exit_code": 0,
+      "runtime_seconds": 0.03140925010666251,
+      "peak_rss_mib": 18.65625,
+      "timed_out": false
+    },
+    {
+      "stage": "abundance",
+      "exit_code": 0,
+      "runtime_seconds": 0.030338749988004565,
+      "peak_rss_mib": 10.34375,
+      "timed_out": false
+    }
+  ],
+  "skipped_stages": [],
+  "warning": "illustrative_readme_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

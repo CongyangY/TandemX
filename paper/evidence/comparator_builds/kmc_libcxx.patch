@@ -1,0 +1,28 @@
+diff --git a/kmc_api/kmer_defs.h b/kmc_api/kmer_defs.h
+index 3adc2f5..19b8b1e 100644
+--- a/kmc_api/kmer_defs.h
++++ b/kmc_api/kmer_defs.h
+@@ -34,7 +34,7 @@
+ 
+ 
+ 	#include <stdio.h>
+-	#include <ext/algorithm>
++	#include <algorithm>
+ 	#include <iostream>
+ 
+ #else
+diff --git a/kmc_core/defs.h b/kmc_core/defs.h
+index 1c511c8..37562b2 100644
+--- a/kmc_core/defs.h
++++ b/kmc_core/defs.h
+@@ -109,8 +109,8 @@ using uint64 = uint64_t;
+ #include <string.h>
+ 
+ #include <stdio.h>
+-#include <ext/algorithm>
+-using __gnu_cxx::copy_n;
++#include <algorithm>
++using std::copy_n;
+ 
+ #endif
+ 

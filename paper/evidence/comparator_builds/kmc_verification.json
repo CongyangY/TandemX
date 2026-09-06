@@ -1,0 +1,81 @@
+{
+  "results": [
+    {
+      "k": 17,
+      "command": [
+        "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc",
+        "-fm",
+        "-k17",
+        "-t1",
+        "-m2",
+        "-sm",
+        "-ci1",
+        "-cs100000",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/reads.fa",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/17/counts",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/17/tmp"
+      ],
+      "exit_code": 0,
+      "runtime_seconds": 1.2492440829519182,
+      "peak_rss_mib": 31.109375,
+      "timed_out": false
+    },
+    {
+      "k": 17,
+      "command": [
+        "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc_dump",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/17/counts",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/17/counts.tsv"
+      ],
+      "exit_code": 0,
+      "runtime_seconds": 0.7750963750295341,
+      "peak_rss_mib": 28.015625,
+      "timed_out": false,
+      "exact_count_agreement": true,
+      "distinct_kmers": 1185,
+      "total_kmers": 5494
+    },
+    {
+      "k": 151,
+      "command": [
+        "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc",
+        "-fm",
+        "-k151",
+        "-t1",
+        "-m2",
+        "-sm",
+        "-ci1",
+        "-cs100000",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/reads.fa",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/151/counts",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/151/tmp"
+      ],
+      "exit_code": 0,
+      "runtime_seconds": 1.6921192081645131,
+      "peak_rss_mib": 32.8125,
+      "timed_out": false
+    },
+    {
+      "k": 151,
+      "command": [
+        "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc_dump",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/151/counts",
+        "/Volumes/T7/Codex/TandemX/tools/validation/kmc_m2_20260906/151/counts.tsv"
+      ],
+      "exit_code": 0,
+      "runtime_seconds": 0.07247891696169972,
+      "peak_rss_mib": 24.421875,
+      "timed_out": false,
+      "exact_count_agreement": true,
+      "distinct_kmers": 1051,
+      "total_kmers": 4690
+    }
+  ],
+  "input_sha256": "d5076a25b0c45e283cc86bdb850730bf592673e554ec23862fa0afaa07768fbf",
+  "executable_sha256": {
+    "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc": "1f15325c3789bf1264d2d00206f890bca6cab6542f9c57acf1ec4ca6ad8ca623",
+    "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc_dump": "30778139e3b6411fdded29918e2bfff90624eb2282fe7b30a13dd38d2beefcc5"
+  },
+  "script_sha256": "9d741e8796916a22e7107ae27f3368526e2e26b62f9d85ccff6efc474170c061",
+  "complete": true
+}

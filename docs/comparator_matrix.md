@@ -13,7 +13,7 @@ superior simply because its combined workflow has more commands.
 | TideHunter | Read-local repeat consensus and intervals | Strong long-read comparator; retain recommended settings and matched period range | Development benchmark executed |
 | ULTRA | Genomic tandem-repeat annotation | Indel-aware probabilistic baseline; default and documented tuning configurations, including tuning cost | v1.2.2 built; default and tuned ten-read pilots completed |
 | TRASH | Assembly tandem arrays and monomers | Plant/large-genome relevance; matched assembly or synthetic sequence endpoints | Source reviewed; not yet run |
-| SRF | De novo satellite families, units/HORs and abundance | Essential read-first novelty comparator; include k-mer construction and abundance mapping in pipeline cost | Source reviewed; not yet run |
+| SRF | De novo satellite families, units/HORs and abundance | Essential read-first novelty comparator; include k-mer construction and abundance mapping in pipeline cost | Four-run pilot and 32-run development suite complete; native failures and explicit empty-count guard outcomes both retained |
 | RepeatExplorer2/TAREAN | Satellite clustering and abundance from short reads | Separate matched short-read evaluation if suitable reads exist; no artificial failure on unsupported HiFi input | Not yet run |
 | HiCAT/HiCAT-human | Monomer/HOR organization | Prior-art and specialized analysis; human pretrained classifiers do not supply a fair plant de novo baseline | Applicability review pending |
 | StringDecomposer/NCRF | Known-motif decomposition | Candidate targeted annotation baselines, with identical supplied motif catalogues; not de novo family discovery | Applicability review pending |
@@ -71,6 +71,7 @@ Do not use human-trained centromere labels as plant ground truth.
 - [ULTRA official implementation and tuning](https://github.com/TravisWheelerLab/ULTRA)
 - [ULTRA 2024 paper](https://doi.org/10.1093/bioadv/vbae149)
 - [SRF official implementation](https://github.com/lh3/srf)
+- [SRF Genome Research paper (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10760446/)
 - [TRASH official implementation](https://github.com/vlothec/TRASH)
 - [TideHunter official implementation](https://github.com/Xinglab/TideHunter)
 - [Chorus2 official implementation](https://github.com/zhangtaolab/Chorus2)

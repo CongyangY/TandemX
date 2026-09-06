@@ -1,0 +1,18 @@
+{
+  "tool": "SRF",
+  "source_url": "https://github.com/lh3/srf",
+  "commit": "e54ca8c8eccf6b1f19428b0f862f2c90575290a0",
+  "command": [
+    "make",
+    "-j2",
+    "CC=clang",
+    "CFLAGS=-O3 -Wall"
+  ],
+  "exit_code": 0,
+  "build_seconds": 0.19346541701816022,
+  "environment": "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev",
+  "compiler": "Apple clang version 15.0.0 (clang-1500.3.9.4)\nTarget: arm64-apple-darwin23.4.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "log": "/Volumes/T7/Codex/TandemX/provenance/srf_build_20260906.log",
+  "executable": "/Volumes/T7/Codex/TandemX/tools/src/srf/srf",
+  "sha256": "e66758122e1b2b99c8bdcc8f80f5caa2374a6d45d321772a9fc0ed01bdda55d1"
+}

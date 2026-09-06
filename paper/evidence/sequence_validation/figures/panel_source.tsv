@@ -1,0 +1,61 @@
+panel	item	metric	value	source
+A	Default: clean_171	sequence_family_recall	0.0	ultra_pilot_v1_20260906
+A	Default: clean_171	cyclic_monomer_recall	1.0	ultra_pilot_v1_20260906
+A	Default: indel_4pct	sequence_family_recall	0.0	ultra_pilot_v1_20260906
+A	Default: indel_4pct	cyclic_monomer_recall	1.0	ultra_pilot_v1_20260906
+A	Tuned: clean_171	sequence_family_recall	0.0	ultra_tuned_pilot_v1_20260906
+A	Tuned: clean_171	cyclic_monomer_recall	1.0	ultra_tuned_pilot_v1_20260906
+A	Tuned: indel_4pct	sequence_family_recall	0.0	ultra_tuned_pilot_v1_20260906
+A	Tuned: indel_4pct	cyclic_monomer_recall	0.0	ultra_tuned_pilot_v1_20260906
+B	indel_1pct	array_precision	0.5384615384615384	challenge_v1_development_20260906
+B	indel_1pct	base_union_precision	0.9996032464187768	challenge_v1_development_20260906
+B	indel_4pct	array_precision	0.5555555555555556	challenge_v1_development_20260906
+B	indel_4pct	base_union_precision	0.9997144210409005	challenge_v1_development_20260906
+B	indel_01pct	array_precision	0.813953488372093	challenge_v1_development_20260906
+B	indel_01pct	base_union_precision	0.9996242145039284	challenge_v1_development_20260906
+B	clean_171	array_precision	1.0	challenge_v1_development_20260906
+B	clean_171	base_union_precision	0.9995755074773314	challenge_v1_development_20260906
+B	clean_421	array_precision	1.0	challenge_v1_development_20260906
+B	clean_421	base_union_precision	0.9997328504853216	challenge_v1_development_20260906
+B	clean_60	array_precision	1.0	challenge_v1_development_20260906
+B	clean_60	base_union_precision	0.999539894334354	challenge_v1_development_20260906
+B	clean_729	array_precision	1.0	challenge_v1_development_20260906
+B	clean_729	base_union_precision	0.999791016313789	challenge_v1_development_20260906
+B	divergent_units	array_precision	1.0	challenge_v1_development_20260906
+B	divergent_units	base_union_precision	0.9998046302627723	challenge_v1_development_20260906
+B	related_families	array_precision	1.0	challenge_v1_development_20260906
+B	related_families	base_union_precision	0.9996659428762318	challenge_v1_development_20260906
+B	short_arrays	array_precision	1.0	challenge_v1_development_20260906
+B	short_arrays	base_union_precision	0.9988317757009346	challenge_v1_development_20260906
+B	substitution_1pct	array_precision	1.0	challenge_v1_development_20260906
+B	substitution_1pct	base_union_precision	0.9996311375578523	challenge_v1_development_20260906
+B	substitution_5pct	array_precision	1.0	challenge_v1_development_20260906
+B	substitution_5pct	base_union_precision	0.9997701661768188	challenge_v1_development_20260906
+B	two_arrays	array_precision	1.0	challenge_v1_development_20260906
+B	two_arrays	base_union_precision	0.9994207617765393	challenge_v1_development_20260906
+C	90	operational_cluster_count	2	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	91	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	92	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	93	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	94	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	95	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	96	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	97	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	98	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	99	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+C	100	operational_cluster_count	3	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f1/Old 1	cyclic_edit_similarity	0.9064327485380117	/Volumes/T7/Codex/TandemX/results/elastic_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f1/Old 2	cyclic_edit_similarity	0.8888888888888888	/Volumes/T7/Codex/TandemX/results/elastic_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f1/New 1	cyclic_edit_similarity	0.8888888888888888	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f1/New 2	cyclic_edit_similarity	0.9064327485380117	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f1/New 3	cyclic_edit_similarity	1.0	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f2/Old 1	cyclic_edit_similarity	1.0	/Volumes/T7/Codex/TandemX/results/elastic_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f2/Old 2	cyclic_edit_similarity	0.8187134502923976	/Volumes/T7/Codex/TandemX/results/elastic_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f2/New 1	cyclic_edit_similarity	0.8187134502923976	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f2/New 2	cyclic_edit_similarity	1.0	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f2/New 3	cyclic_edit_similarity	0.9064327485380117	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f3/Old 1	cyclic_edit_similarity	0.8187134502923976	/Volumes/T7/Codex/TandemX/results/elastic_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f3/Old 2	cyclic_edit_similarity	1.0	/Volumes/T7/Codex/TandemX/results/elastic_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f3/New 1	cyclic_edit_similarity	1.0	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f3/New 2	cyclic_edit_similarity	0.8187134502923976	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover
+D	truth_f3/New 3	cyclic_edit_similarity	0.8888888888888888	/Volumes/T7/Codex/TandemX/results/sequence_clustering_validation_v1_20260906/runs/related_families_s2101/tandemx/rep1/discover

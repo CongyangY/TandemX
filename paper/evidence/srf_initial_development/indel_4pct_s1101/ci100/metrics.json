@@ -1,0 +1,15 @@
+{
+  "dataset": "indel_4pct_s1101",
+  "minimum_count": 100,
+  "status": "failed",
+  "workflow_wall_seconds": 1.765762124909088,
+  "external_stage_wall_seconds": 1.759366542333737,
+  "maximum_external_stage_peak_rss_mib": 49.6875,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "36b9a7c2b50100da5b5685977efc5e98a2166a0ee31a1f1c8ff1b069dc503c36",
+  "total_input_bases": 499946,
+  "k": 151,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1312558,
+  "warning": "illustrative_readme_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

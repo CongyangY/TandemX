@@ -1,0 +1,37 @@
+{
+  "status": "no_eligible_kmers",
+  "workflow_wall_seconds": 1.7343306669499725,
+  "external_stage_wall_seconds": 1.7324929989408702,
+  "maximum_external_stage_peak_rss_mib": 46.171875,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "ad546af0a64233fcdb6cce230c1648d0242ed414ef70e7bdcb8044d20ae11db1",
+  "total_input_bases": 500000,
+  "k": 151,
+  "minimum_count": 20,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1312327,
+  "stages": [
+    {
+      "stage": "count",
+      "exit_code": 0,
+      "runtime_seconds": 1.6628534579649568,
+      "peak_rss_mib": 46.171875,
+      "timed_out": false
+    },
+    {
+      "stage": "dump",
+      "exit_code": 0,
+      "runtime_seconds": 0.0696395409759134,
+      "peak_rss_mib": 24.0,
+      "timed_out": false
+    }
+  ],
+  "skipped_stages": [
+    "assemble",
+    "elongate",
+    "map",
+    "filter",
+    "abundance"
+  ],
+  "warning": "illustrative_readme_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

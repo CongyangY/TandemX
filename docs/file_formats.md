@@ -714,3 +714,15 @@ not rerun tools or measure new runtime. Original failures remain NA. Input files
 original configuration, scoring script and source snapshots are hash recorded.
 Challenge configuration also accepts clustering_method and cluster_identity for
 TandemX-only ablations. Other tool commands do not receive these settings.
+
+## SRF workflow comparison outputs
+
+See [srf_workflow.md](srf_workflow.md#measurements-and-files) for native field
+semantics and all workflow receipt fields. The normalized predictions.tsv uses
+the challenge ArrayRecord header. SRF workflow status is ok, no_catalogue,
+no_eligible_kmers, or failed. The latter has unavailable accuracy; no_eligible_kmers
+means the count stage completed with an observed empty dump, native graph assembly
+was explicitly skipped, and no native catalogue is fabricated. Normalized zero
+predictions in that state are conditional on the configured k/count filter.
+Raw native BED/FASTA/abundance files retain upstream formats, including headerless
+native tables; TandemX-normalized TSV files always have a header.

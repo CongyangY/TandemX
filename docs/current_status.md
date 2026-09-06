@@ -25,17 +25,56 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   union precision .999714. Do not interpret duplicate penalties as wrong bases.
 - macOS CI for a5aaa50 failed two multi-array tests because they requested two
   threads above the runner's one-thread cap; Ubuntu passed. The tests now obey
-  `discover_thread_limit()` while retaining repeated-run comparison. Hosted CI
-  for this new checkpoint still needs verification after push.
+  `discover_thread_limit()` while retaining repeated-run comparison. Hosted CI run 34007602407 for fd656b6 passed on both Linux and macOS,
+  including source installation, pytest, Rust checks and wheel build.
 - Initial local checks: 230 pytest passed in 59.50s, 7 Rust tests passed, clippy
   and fmt passed. Focused final clustering/CLI/rescoring checks: 16 passed.
   Final full suite: **231 passed in 60.12s**. Toy simulate/discover/validate
   succeeded with 29 candidate sequences, membership records and two families.
 - `benchmarks/configs/sequence_clustering_v1.yaml` is ready for explicit 95%
-  operational clustering, with three repetitions. Actual full rerun is pending;
-  do not yet claim the earlier 2/3 validation recovery is corrected. Held-out
+  operational clustering, with three repetitions. Full rerun at `results/sequence_clustering_validation_v1_20260906`: 48
+  successes, identical repeated outputs, all 13 positive scenarios at array
+  recall/precision and cyclic monomer recall 1.0, zero calls on the three
+  100-read negative datasets. Related-monomer recovery is corrected to 3/3. Held-out
   3101/3102/3103 remain unused. Candidate evidence supports a future comparison
   at matched per-array output granularity instead of catalog versus raw calls.
+
+## Broader comparator and figure checkpoint
+
+- Source fd656b6a9171710a25ef48aa5b8b038a3d0537aa was pushed to both main and the
+  working branch. Its CI is verified above. Current added scripts/evidence/docs
+  form the next checkpoint; inspect Git for its exact final revision.
+- Four-panel sequence audit finalized at
+  `paper/evidence/sequence_validation/figures/sequence_audit.pdf` (also SVG).
+  All values have source rows/hashes; final SVG has 95 text elements, zero image
+  elements. PNG inspected; PDF opened in the app (queued). Resolution sensitivity
+  gives two clusters at 90% and three at 91–100% for the same 70 exported candidates.
+  Default 95% replay equals the actual catalogue; no biological family claim.
+- SRF, KMC, minimap2 and k8 are available under T7 `tools/src`. Pinned commits,
+  native hashes, full build logs and KMC compatibility patch are archived in
+  `paper/evidence/comparator_builds`. KMC k=17/151 counts agree with an independent
+  Counter on bounded N/RC/multiline examples. KMC's actual minimum -m is 2, not 1.
+  See `docs/srf_workflow.md` for exact provenance and the mixed incremental build
+  caveat; clean rebuild is needed for final publication benchmarks.
+- `results/srf_workflow_pilot_v1_20260906`: four successful seven-stage runs,
+  clean171/indel0.1%, ci100/ci20, seed1101, 100 reads each. Array and monomer recall
+  1; base union recall about .951/.947. Workflow wall time 1.92–1.96s, maximum
+  sequential native-stage RSS 48.1–51.4MiB, one repetition only. These are
+  developmental observations, not paired superiority or biological CN evidence.
+- `results/srf_workflow_development_v1_20260906`: all 16 scenarios x ci100/ci20,
+  17 successful catalogues, four successful no-catalogue outcomes, 11 native SRF
+  empty-count assertions. Original failures remain NA and are archived.
+- `results/srf_workflow_empty_guard_v1_20260906`: full rerun with a disclosed
+  workflow guard, 17 ok, four no_catalogue, 11 no_eligible_kmers, zero process
+  failures. Empty dumps skip native SRF and create no fake FASTA. At ci20 all
+  positives except divergent_units, indel4% and substitution5% recover all units;
+  those three have zero eligible 151-mers at the count threshold. All negative
+  controls have zero in-scope calls. Higher-order motifs outside 30–1000 bp are
+  preserved; no HOR decomposition or equally budgeted tuning is claimed.
+- New scripts: plot_sequence_audit.py, prepare_kmc_libcxx.py, verify_kmc.py and
+  run_srf_pilot.py. SRF parser/empty-guard unit checks were added. Full pytest
+  passed: **233 tests in 62.93s**. Core Rust files are unchanged since fd656b6.
+  The final figure/SRF evidence checkpoint still needs its hosted CI after push.
 
 ## Source, Git and storage
 
@@ -195,14 +234,13 @@ reuse assembly-alignment BAMs from other projects as raw reads.
 
 ## Next critical work
 
-0. Inspect this checkpoint's GitHub CI after commit/push. The active
-   source includes elastic + ULTRA + snapshot runner; never stage `.codex/`.
-   Then fix sequence-family over-merging, add gapped family-recovery metrics
-   independent of the TandemX implementation, and extend the challenge beyond
-   the original fixed periods/GC/seeds. Held-out 3101/3102/3103 remain unused.
-   Define monomer variants versus broader sequence families explicitly; do not
-   silently tune a similarity cutoff to match arbitrary simulator labels.
-
+0. Verify this checkpoint's hosted CI after pushing. Sequence clustering and
+   independent gapped/union endpoints are now implemented and tested; do not redo
+   the earlier completed fix. Next expand independent distributions, matched
+   per-array consensus scoring, performance profiling and task-matched abundance/
+   copy-number evaluation. SRF high-k misses on highly mutated inputs require a
+   broader parameter sensitivity study, not a claim of general inferiority.
+   Held-out 3101/3102/3103 remain unused.
 
 1. Keep meaningful source/tests/documentation checkpoints on GitHub; source
    snapshots are now available for subsequent benchmark runs.
@@ -215,10 +253,9 @@ reuse assembly-alignment BAMs from other projects as raw reads.
    calibrated uncertainty and independently tested probe specificity.
 5. Expand real plant validation with matched assemblies and curated repeats;
    measure resources on bounded inputs before larger datasets.
-6. SRF family/abundance, TRASH assembly, and applicable TAREAN short-read workflow
-   comparisons remain unrun. Docker CLI is present but daemon not running.
-   TRASH needs R dependencies; TRASH 2 also needs mafft/nhmmer. No new comparator
-   installation except ULTRA has been completed. Keep incompatible task metrics separate.
+6. SRF family/abundance development workflows now ran as described above. TRASH
+   assembly and applicable TAREAN short-read workflow comparisons remain unrun. Docker CLI is present but daemon not running.
+   TRASH needs R dependencies; TRASH 2 also needs mafft/nhmmer. ULTRA, SRF, KMC, k8 and minimap2 comparator dependencies are now available. Keep incompatible task metrics separate.
 7. Prior art: SRF already supports accurate-read satellite discovery/abundance.
    Optional AI requires transparent baselines, held-out evaluation, ablation,
    calibration and domain-shift evidence; do not add an AI label for novelty.

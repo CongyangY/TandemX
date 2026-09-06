@@ -1,0 +1,15 @@
+{
+  "dataset": "short_arrays_s1101",
+  "minimum_count": 100,
+  "status": "failed",
+  "workflow_wall_seconds": 1.7925666249357164,
+  "external_stage_wall_seconds": 1.7862680819816887,
+  "maximum_external_stage_peak_rss_mib": 46.34375,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "31e5e1c67ae81e0114181038fa1780c97adfa0ce1963e8a01a65fff1833ac530",
+  "total_input_bases": 500000,
+  "k": 151,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1312568,
+  "warning": "illustrative_readme_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

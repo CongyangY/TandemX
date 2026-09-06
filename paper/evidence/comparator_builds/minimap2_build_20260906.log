@@ -1,0 +1,25 @@
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon main.c -o main.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon kthread.c -o kthread.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon kalloc.c -o kalloc.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon misc.c -o misc.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon bseq.c -o bseq.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon sketch.c -o sketch.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon sdust.c -o sdust.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon options.c -o options.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon index.c -o index.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon lchain.c -o lchain.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon align.c -o align.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon hit.c -o hit.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon seed.c -o seed.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon jump.c -o jump.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon map.c -o map.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon format.c -o format.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon pe.c -o pe.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon esterr.c -o esterr.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon splitidx.c -o splitidx.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC  -Isse2neon ksw2_ll_sse.c -o ksw2_ll_sse.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC -DKSW_SSE2_ONLY -D__SSE2__  -Isse2neon ksw2_extz2_sse.c -o ksw2_extz2_neon.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC -DKSW_SSE2_ONLY -D__SSE2__  -Isse2neon ksw2_extd2_sse.c -o ksw2_extd2_neon.o
+clang -c -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char -DHAVE_KALLOC -DKSW_SSE2_ONLY -D__SSE2__  -Isse2neon ksw2_exts2_sse.c -o ksw2_exts2_neon.o
+ar -csru libminimap2.a kthread.o kalloc.o misc.o bseq.o sketch.o sdust.o options.o index.o lchain.o align.o hit.o seed.o jump.o map.o format.o pe.o esterr.o splitidx.o ksw2_ll_sse.o ksw2_extz2_neon.o ksw2_extd2_neon.o ksw2_exts2_neon.o
+clang -g -Wall -O2 -Wc++-compat  -D_FILE_OFFSET_BITS=64 -fsigned-char main.o -o minimap2 -L. -lminimap2 -lm -lz -lpthread

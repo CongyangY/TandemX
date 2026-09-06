@@ -2,3 +2,6 @@
 paper/evidence/**/*.tsv -text whitespace=-blank-at-eol
 # Matplotlib SVG path separators legitimately include trailing whitespace.
 paper/evidence/**/*.svg -text -whitespace
+# Compiler excerpts and unified patch context are immutable provenance bytes.
+paper/evidence/comparator_builds/*.log -text whitespace=-blank-at-eol
+paper/evidence/comparator_builds/*.patch -text -whitespace

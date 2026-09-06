@@ -1,0 +1,15 @@
+{
+  "dataset": "at_rich_control_s1101",
+  "minimum_count": 20,
+  "status": "failed",
+  "workflow_wall_seconds": 1.7509274589829147,
+  "external_stage_wall_seconds": 1.7484972507227212,
+  "maximum_external_stage_peak_rss_mib": 50.5,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "693adc4ea6868dcee3ae1f06283d876615204968426e030767d688791f553704",
+  "total_input_bases": 500000,
+  "k": 151,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1312543,
+  "warning": "illustrative_readme_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

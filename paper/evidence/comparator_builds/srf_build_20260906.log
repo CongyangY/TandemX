@@ -1,0 +1,2 @@
+clang -c -O3 -Wall   srf.c -o srf.o
+clang -O3 -Wall srf.o -o srf -lz

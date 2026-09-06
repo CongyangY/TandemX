@@ -1,0 +1,15 @@
+{
+  "dataset": "substitution_5pct_s1101",
+  "minimum_count": 100,
+  "status": "failed",
+  "workflow_wall_seconds": 1.7978789159096777,
+  "external_stage_wall_seconds": 1.7918441260699183,
+  "maximum_external_stage_peak_rss_mib": 47.640625,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "ad546af0a64233fcdb6cce230c1648d0242ed414ef70e7bdcb8044d20ae11db1",
+  "total_input_bases": 500000,
+  "k": 151,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1312599,
+  "warning": "illustrative_readme_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

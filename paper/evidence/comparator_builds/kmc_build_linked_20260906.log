@@ -1,0 +1,37 @@
+mkdir -p include
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_dump/nc_utils.cpp -o kmc_dump/nc_utils.o
+cp kmc_core/kmc_runner.h include/kmc_runner.h
+mkdir -p bin
+ar rcs bin/libkmc_core.a kmc_core/mem_disk_file.o kmc_core/rev_byte.o kmc_core/bkb_writer.o kmc_core/cpu_info.o kmc_core/bkb_reader.o kmc_core/fastq_reader.o kmc_core/timer.o kmc_core/develop.o kmc_core/kb_completer.o kmc_core/kb_storer.o kmc_core/kmer.o kmc_core/splitter.o kmc_core/kb_collector.o kmc_core/kmc_runner.o kmc_core/raduls_neon.o kmc_api/mmer.o kmc_api/kmc_file.o kmc_api/kmer_api.o kmc_core/kff_writer.o
+clang++ -Wall -O3 -fsigned-char -march=armv8.4-a -pthread -std=c++14 -I/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/include -I 3rd_party/cloudflare -c kmc_dump/kmc_dump.cpp -o kmc_dump/kmc_dump.o
+In file included from kmc_dump/kmc_dump.cpp:15:
+In file included from kmc_dump/../kmc_api/kmc_file.h:15:
+kmc_dump/../kmc_api/kmer_api.h:271:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['A'] = num_codes['a'] = 0;
+                                 ^~~~
+kmc_dump/../kmc_api/kmer_api.h:271:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['A'] = num_codes['a'] = 0;
+                                                  ^~~~
+kmc_dump/../kmc_api/kmer_api.h:272:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['C'] = num_codes['c'] = 1;
+                                 ^~~~
+kmc_dump/../kmc_api/kmer_api.h:272:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['C'] = num_codes['c'] = 1;
+                                                  ^~~~
+kmc_dump/../kmc_api/kmer_api.h:273:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['G'] = num_codes['g'] = 2;
+                                 ^~~~
+kmc_dump/../kmc_api/kmer_api.h:273:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['G'] = num_codes['g'] = 2;
+                                                  ^~~~
+kmc_dump/../kmc_api/kmer_api.h:274:13: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['T'] = num_codes['t'] = 3;
+                                 ^~~~
+kmc_dump/../kmc_api/kmer_api.h:274:30: warning: array subscript is of type 'char' [-Wchar-subscripts]
+                        num_codes['T'] = num_codes['t'] = 3;
+                                                  ^~~~
+mkdir -p bin
+clang++ -lm -pthread -O3 -std=c++14 -Wl,-rpath,/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib -o bin/kmc kmc_CLI/kmc.o bin/libkmc_core.a /opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib/libz.1.3.2.dylib
+8 warnings generated.
+mkdir -p bin
+clang++ -lm -pthread -O3 -std=c++14 -Wl,-rpath,/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib -o bin/kmc_dump kmc_dump/nc_utils.o kmc_dump/kmc_dump.o kmc_api/mmer.o kmc_api/kmc_file.o kmc_api/kmer_api.o

@@ -354,3 +354,8 @@ and is tested against a separate dynamic-programming reference. Both the origina
 strict equal-length endpoint and the added indel-aware endpoint are reported.
 Union-of-interval coverage separates duplicated/harmonic calls from incorrectly
 labelled bases. See [benchmark definitions](docs/file_formats.md#challenge-measurements).
+
+The expanded SRF comparison executes the documented KMC-to-abundance workflow,
+including input counting and mapping. See [SRF workflow evidence and scope](docs/srf_workflow.md)
+for pinned tools, recorded compatibility patches, independent count checks,
+empty-count handling, native versus normalized outputs, and measured costs.

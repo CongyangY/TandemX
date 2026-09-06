@@ -1,0 +1,4 @@
+family_id	monomer_id	monomer_length_bp	consensus_md5	gc_fraction	support_read_count	support_span_bp	mean_identity	low_complexity_flag	confidence	warning
+TXF000001	TXM000001	171	6550e939a15c128e18049de2f7d9e9d4	0.4561	32	65714	0.9998	false	high	operational_monomer_cluster;observed_consensus_representative;uncalibrated_confidence;cluster_identity=0.95
+TXF000002	TXM000002	171	9d674a59181366a03a5ef1ac8a45c8d3	0.5029	26	53475	0.9992	false	high	operational_monomer_cluster;observed_consensus_representative;uncalibrated_confidence;cluster_identity=0.95
+TXF000003	TXM000003	171	d3cf5fc60e3bce96213af6a59e09aa7e	0.4912	12	24697	0.9990	false	high	operational_monomer_cluster;observed_consensus_representative;uncalibrated_confidence;cluster_identity=0.95
