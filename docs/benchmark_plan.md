@@ -199,16 +199,24 @@ complete declared matrix and adverse rows are retained without retuning on
 seeds 5501--5503. This is a known-catalogue substitution model; exact-k-mer IID
 identity is not alignment identity or biological satellite validation.
 
-The next classifier development is predeclared in
-`abundance_classifier_development_v1.json`. Seeds 5601--5603 are development
-data; 5701--5703 are reserved and must remain untouched until a selected rule is
-frozen. The candidate set is a 5-by-4 grid of log-space single/multi-k blends
-and decision thresholds. Selection maximizes sensitivity only among candidates
-with no worse false-positive rate or precision than single k=21, with fixed
-tie-breakers and leave-one-seed-out stability gates. The alpha-zero, threshold-
-0.6 candidate exactly anchors the current baseline. This transparent experiment
-is not an AI model and must be retained as a failed development result if its
-predeclared gates are not met.
+Classifier development v1 was predeclared in
+`abundance_classifier_development_v1.json`. Seeds 5601--5603 are consumed
+development data; 5701--5703 remain reserved. The 5-by-4 grid crossed log-space
+single/multi-k blends and decision thresholds, with alpha-zero/threshold-0.6 as
+the exact k=21 anchor. The full-development choice improved sensitivity, FPR and
+precision, but the three leave-one-seed-out folds selected different candidates;
+cross-validated FPR increased and precision decreased. The failed gate is
+retained rather than reinterpreted as validation.
+
+`abundance_classifier_robust_selection_v2.json` freezes a post-v1 development
+refinement and all source-result hashes. Eligibility now requires every
+development seed separately to have no worse FPR or precision than its k=21
+baseline. Selection maximizes the minimum seed-level sensitivity gain before
+applying fixed aggregate and parameter tie-breakers. The development acceptance
+gate requires at least a 0.05 sensitivity gain in the worst seed while preserving
+FPR and precision in each seed and overall. This transparent minimax selector is
+not an AI model or independent evidence; no reserved seed may be used until its
+selected parameters and complete hashes are committed and pass hosted CI.
 
 ## Endpoint and clustering audit (2026-09-06)
 

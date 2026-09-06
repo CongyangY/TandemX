@@ -816,6 +816,17 @@ uses `evaluation_mode=raw_single_multik_for_predeclared_blend_grid`.
 later selection failure does not discard completed multi-k estimates. Both raw
 and final comparison-table hashes are recorded in `validation.json`.
 
+`select_robust_blend.py` consumes the frozen development candidate grid and a
+separate hash-pinned selection config. `candidate_robust_summary.tsv` has one
+row per candidate with alpha, threshold, minimum seed sensitivity delta,
+maximum seed FPR delta, minimum seed precision delta, full-development metrics
+and deltas, and Boolean eligibility. `selection.tsv` records the selected row
+and selection method; `selected_metrics.tsv` retains every corresponding family
+condition. `validation.json` records source completeness, baseline and selected
+confusion counts, per-seed counts, gate values and the reserved held-out seeds.
+These files are development refinement evidence and do not constitute held-out
+validation.
+
 `archive_multik_collapse_evidence.py` accepts only the predeclared held-out
 scope. It re-derives method confusion counts from paired condition keys, rejects
 seed overlap or method imbalance, verifies the source digest and selected source

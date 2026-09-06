@@ -262,6 +262,24 @@ false-positive rate 0.085391 and precision 0.941632. Thus successful localizatio
 did not make the older classifier uniformly better; its sensitivity gain added
 71 false positives and lowered precision.
 
+We next separated classifier development from the consumed localizer validation.
+The predeclared seeds 5601–5603 used the same six divergence/fragmentation
+scenarios and produced 2,430 paired family conditions. Single k=21 yielded
+TP/FN/FP/TN=873/585/10/962. Among 20 log-space single/multi-k blends and
+decision thresholds, the pooled selector chose alpha 0.75 and threshold 0.45,
+yielding 1042/416/8/964. Sensitivity increased from 0.598765 to 0.714678, FPR
+decreased from 0.010288 to 0.008230 and precision increased from 0.988675 to
+0.992381. However, all three leave-one-seed-out training folds selected
+different parameters. Their combined held-back predictions had FPR 0.021605
+and precision 0.980374. The predeclared stability, FPR and precision gates
+therefore failed; this is a development failure, not held-out validation.
+
+A second development selector was frozen after this failure. It requires each
+development genome separately to preserve baseline FPR and precision, then
+maximizes the minimum genome-level sensitivity gain. Its inputs and source
+hashes are fixed, while seeds 5701–5703 remain untouched. This post-v1
+refinement cannot itself establish generalization.
+
 ### Eight-species file QC and reference concordance expose normalization concerns
 
 Complete archived FASTQ files from maize Mo17, Arabidopsis Col-0N/Col-0R/Ey15-2R, rice
@@ -365,6 +383,10 @@ lost nearly all true repeat bases and produced many false collapse calls. Bounde
 anchor bridging subsequently restored high localization recall on a second
 predeclared simulation, including fresh seeds, but the unchanged multi-k
 classifier exchanged substantially higher sensitivity for more false positives.
+Separate classifier-development data then showed that a pooled blend could
+improve aggregate sensitivity, FPR and precision while failing seed-level
+stability. This prompted a minimax development selector that treats every seed
+as a guardrail, but its independent performance is not yet known.
 None establishes that TandemX dominates existing tools. In the current read simulation, all three
 methods recovered every founder. TRF retained slightly higher base precision,
 and TideHunter remained faster. TRASH2 was a strong assembly baseline after
@@ -398,7 +420,7 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 452 local Python tests. Its Rust
+PyO3/Rust extension. The current source passed 453 local Python tests. Its Rust
 source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
 passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
 distributable-wheel builds.
@@ -460,6 +482,20 @@ scenarios and all original coverage, read-error and assembly-retention tiers.
 Exact-k-mer IID identity is not alignment identity; overlapping k-mers,
 insertions/deletions, shared-word filtering and structured satellite variation
 violate the approximation.
+
+Classifier development used seeds 5601–5603 and reserved 5701–5703. For each
+paired family condition, candidate read copy number was the log-space blend
+`exp((1-alpha) log(C21) + alpha log(Cmulti))`, with fallback to k=21 when a
+multi-k estimate was unavailable or either input was nonpositive. Alpha values
+0, 0.25, 0.5, 0.75 and 1 crossed decision thresholds 0.45, 0.5, 0.55 and 0.6;
+alpha 0 with threshold 0.6 was the exact baseline anchor. Version 1 selected
+maximum sensitivity subject to pooled FPR and precision constraints and tested
+parameter stability in leave-one-seed-out folds. After that gate failed,
+version 2 retained the same candidates but required the constraints within each
+seed and ranked eligible candidates by minimum seed-level sensitivity gain,
+then full sensitivity, worst seed FPR delta, worst seed precision delta, alpha
+and threshold. Version 2 is explicitly development refinement and must be
+frozen before any reserved seed is evaluated.
 
 ### Comparator execution and scoring
 

@@ -116,7 +116,7 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   decreased 5→3/27. At 1×/0 or 0.1% error/50% retention, recall worsened
   6/9→4/9 in each stratum. The validated compact archives preserve all adverse rows,
   frozen calibration files and baseline receipts. These seeds are consumed.
-- The expanded source checkout passes all 452 Python tests. The added tests cover
+- The expanded source checkout passes all 453 Python tests. The added tests cover
   compact multi-k evidence integrity, exact pairing in the domain-shift figure,
   and clean Morex recovery while retaining a divergent partial. Rust source is
   unchanged. Four additional tests validate compact reference archiving and
@@ -175,6 +175,17 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   constraint. The partial result is retained on T7. The recovery patch makes the
   predeclared blend-grid mode explicit and checkpoints raw paired rows before any
   optional calibration; candidate definitions and acceptance gates are unchanged.
+- The recovered paired table contains 4,860 rows and 45 explicit multi-k
+  unavailable observations. Classifier development v1 completed and failed its
+  scientific gate: the pooled choice improved sensitivity 0.598765→0.714678,
+  FPR 0.010288→0.008230 and precision 0.988675→0.992381, but selection differed
+  among all three leave-one-seed-out folds. Cross-validated FPR rose to 0.021605
+  and precision fell to 0.980374.
+- Robust selection v2 is frozen as a post-v1 development refinement in
+  `abundance_classifier_robust_selection_v2.json`. It requires FPR and precision
+  preservation within every development seed and maximizes the worst seed-level
+  sensitivity gain. The source hashes and 5701–5703 reservation are embedded;
+  no v2 selection output or held-out result exists yet.
 
 ### Completed interval calibration and reference-concordance QC (local, not pushed)
 
