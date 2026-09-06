@@ -31,7 +31,7 @@ machine-readable commands alongside results.
 | Quantification | Known copy number and coverage; finite-read and error bias; catalog ambiguity; calibration/interval coverage | Pending |
 | Localization/comparison | Known array coordinates; engineered collapse levels; false collapse calls and boundary errors | Pending |
 | Real data | Public accession, source checksums, matched sample/assembly, bounded pilot then scaling; known-family recovery | Pending; old black-rye summary is not raw-read validation |
-| Comparators | Expanded task-matched methods in comparator_matrix.md | TRF/TideHunter development comparison and default/tuned ULTRA pilots; SRF/TRASH/TAREAN remain pending |
+| Comparators | Expanded task-matched methods in comparator_matrix.md | TRF/TideHunter development comparison, default/tuned ULTRA pilots, SRF seven-stage development workflow; TRASH/TAREAN remain pending |
 | Innovation | Audited prior art; method ablations; held-out evaluation; AI retained only with reproducible benefit | Pending |
 | Reuse | LICENSE; CI; clean source install; toy and real-data workflows; versioned release and hashes | Pending |
 | Paper | Abstract, background, results, methods, discussion; multi-panel figures; tables, supplement, source data and references | Pending |

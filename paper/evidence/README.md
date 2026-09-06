@@ -122,3 +122,23 @@ count settings, no technical repetitions and no tuned k-mer-length sweep. A
 higher-order unit is not automatically a missing constituent monomer. SRF's
 native abundance estimates are based on mapped sequence, not validated biological
 copy number. See `docs/srf_workflow.md` for all workflow and build caveats.
+
+## Native seed processing: paired development performance
+
+`native_seed_paired/` retains 96 successful executions of frozen old/new sources
+on 16 identical seed-2101 datasets, three repetitions each and shuffled pair
+order. All six discovery data files are byte-identical. Old code uses Python
+seed processing; new code is 3f2482f. The per-dataset speedup range is 1.200–4.447
+(median 1.371); positive scenarios range 1.200–1.657. RSS changes range -13.09%
+to +2.03%, with six increases. This is not a claim of an all-metric gain or an
+external competitor comparison. Reused synthetic inputs and technical timing
+repetitions do not establish generalization or biological uncertainty.
+
+Four-panel caption: A, median wall time for both implementations in all 16
+scenarios. B, ratio of baseline to native median wall time. C, percent change
+in median peak RSS, including increases (orange). D, median user CPU time.
+Each input has 100 reads and three repeated executions per implementation;
+positive scenarios have 70 positive reads (two-array case: 140 arrays).
+Scientific parameters and source snapshots are fixed; six data-file hash sets
+match in every pair. Raw CPU system time remains in the source table. All
+figures preserve editable text; the PNG was visually inspected.

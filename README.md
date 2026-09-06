@@ -365,3 +365,13 @@ as well as aligning repeat copies. The Python reference retains the same countin
 and capping rules. Rebuild the extension when updating: `pip install -e .`.
 Paired source-snapshot comparisons check all six discovery outputs byte-for-byte
 before treating a timing improvement as an equivalent-output optimization.
+The executed 96-run development comparison preserved all six outputs and reduced
+median wall time in all 16 scenarios (1.20–4.45× speedup); peak RSS changed by
+-13.09% to +2.03%, including increases in six scenarios. These are same-tool
+observations, not superiority to external tools. Raw pairs and the four-panel
+figure are in `paper/evidence/native_seed_paired`.
+
+The [conditional abundance experiment](docs/abundance_benchmark.md) tests copy
+number, localization and engineered assembly under-representation independently
+of de novo discovery. It measures empirical interval coverage without treating
+the existing diagnostic-k-mer spread as a calibrated confidence interval.

@@ -1,0 +1,25 @@
+{
+  "input_sha256": {
+    "summary.tsv": "b46d7d2a70514e21346fd51948b0d041b613514b8d0d048b31c1a13e96e46096",
+    "raw_runs.tsv": "bb9e8909e71502a226ce0e2136b5b9b4c597da157f5db5b39ea3d0769b9aec5d",
+    "validation.json": "849383f907d5570df7a206837203df1bd281e9b95ecd8b347c55a6210bcde360",
+    "environment.json": "2eec12f5164bfc6fc372051f43ae4d64717e7bccb0744180aeff3d0600a6da31"
+  },
+  "script_sha256": "f2b77217e197f8617b15fbc9def54f857403b710916f8262aea76924926de064",
+  "speedup_range": [
+    1.1997545436258779,
+    4.446758638943924
+  ],
+  "median_dataset_speedup": 1.3713804165509216,
+  "rss_change_percent_range": [
+    -13.088235294117645,
+    2.031802120141335
+  ],
+  "rss_increased_datasets": 6,
+  "outputs": {
+    "paired_performance.svg": "93841cb5f37a0d648ba5cc0167d61f83ae40c2b90fac53684625210800073ecd",
+    "panel_source.tsv": "ffc619ffb0df39f587a2f969f7a5930e9952fd74cf9e3cd1769de5b514b21e84",
+    "paired_performance.pdf": "656201b012b4e13322ed4ff2c0b801c5bb1137bea21dfae55642a7dcff1ded34",
+    "paired_performance.png": "d2c93d1d470a2602c722e80809454874665d330c3fa635ef99ebfd9fd6b1fe6f"
+  }
+}

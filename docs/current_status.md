@@ -92,11 +92,33 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   the requested maximum period is huge. The GIL is released for seed processing.
 - Current checks: 235 tests passed in 62.25s; 7 Rust tests, clippy and fmt passed.
   Added paired-performance gate test passed separately after that full run.
-- New `compare_discovery_snapshots.py` will compare frozen old/new sources on the
-  same datasets with shuffled order, repeated timings, RSS, user/system CPU and
-  byte equality of all six discovery outputs. It is not yet run at this snapshot;
-  do not claim a speedup until measured. It must run without concurrent local
-  tests, profiler or compilation. Final publication superiority is still unproven.
+- Commit 3f2482f5c501e7d4f2e7e92d17db2bfa76e5cead is pushed to both branches;
+  GitHub run 34008863635 passed Linux/macOS source tests, Rust checks and wheels.
+- Paired source-snapshot experiment completed at T7
+  `results/native_seed_paired_v1_20260906`: **96/96 executions, all six outputs
+  byte-identical**, same seed-2101 inputs, shuffled old/new order, three repeats.
+  Per-dataset median-wall speedups range 1.200–4.447, median 1.371. Positive
+  scenarios range 1.200–1.657; the maximum is the low-complexity control.
+  RSS changes range -13.09% to +2.03%, increasing in six of 16 scenarios.
+  No concurrent local tests/profilers/builds were run during this experiment.
+  This is same-tool optimization, not external or publication superiority.
+- Compact raw/summary/provenance and a four-panel editable figure are archived
+  in `paper/evidence/native_seed_paired`; all 16 scenarios are displayed. PNG
+  visually inspected; SVG contains editable text and no raster images.
+
+## Conditional abundance experiment (new)
+
+- Independent generator/scorer/runner in `benchmarks/abundance`, with bounded
+  genomic truth, uniformly sampled circular reads, sampling oracle, and five
+  retained-copy assembly versions. Documentation: `docs/abundance_benchmark.md`.
+- Development seeds 4101–4103; held-out 5101–5103 reserved. Known monomers are
+  supplied to isolate quantification/localization, not discovery recovery.
+- Current copy-number intervals are diagnostic-k-mer spreads, not calibrated
+  sampling confidence intervals. The experiment measures bias, truth coverage,
+  localization and false under-representation calls before modifying the model.
+- Initial independent truth/scoring/CLI checks: four passed in 1.30s. Full
+  suite now passed: **240 tests in 63.67s**. Core Rust code unchanged since
+  3f2482f. Full development experiment has not yet run at this source snapshot.
 
 ## Source, Git and storage
 
