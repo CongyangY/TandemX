@@ -7,7 +7,7 @@ import hashlib
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Iterator
 
 
 @dataclass(frozen=True)
@@ -45,7 +45,8 @@ def write_table(path: Path, rows: Iterable[dict], fields: list[str]) -> None:
                           for k, v in row.items()} for row in rows)
 
 
-def read_table(path: Path, required: set[str] | None = None) -> list[dict[str, str]]:
+def iter_table(path: Path, required: set[str] | None = None) -> Iterator[dict[str, str]]:
+    """Validate and yield one TSV row at a time, including late malformed rows."""
     with path.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle, delimiter="\t")
         if not reader.fieldnames:
@@ -54,7 +55,11 @@ def read_table(path: Path, required: set[str] | None = None) -> list[dict[str, s
             raise ValueError(f"Duplicate TSV field: {path}")
         if required and required - set(reader.fieldnames):
             raise ValueError(f"Missing required TSV fields in {path}: {sorted(required - set(reader.fieldnames))}")
-        rows = list(reader)
-    if any(None in row or None in row.values() for row in rows):
-        raise ValueError(f"Malformed TSV row: {path}")
-    return rows
+        for row in reader:
+            if None in row or None in row.values():
+                raise ValueError(f"Malformed TSV row: {path}")
+            yield row
+
+
+def read_table(path: Path, required: set[str] | None = None) -> list[dict[str, str]]:
+    return list(iter_table(path, required))

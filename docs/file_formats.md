@@ -946,3 +946,22 @@ TSVs hold `truth_id`, `recovered`, `assigned_sequence_index`, `threshold` and
 Below-threshold exact sequence identities are not calculated or reported.
 `metrics.json` uses null for undefined values. Standard source/execution/validation
 receipts and logs accompany every run.
+
+### Disk-backed real benchmark evaluation
+
+`run_real_comparators.py` defaults to `--evaluation-backend disk` and records the
+backend, evaluator source hash and SQLite cache policy in `environment.json`.
+`evaluation.sqlite` retains a `reads` table (unique `read_id`, `length` in bp),
+`metadata(name,value)` with a JSON `ready` input receipt, and `arrays` with tool,
+1-based native in-scope ordinal, read ID and 0-based half-open start/end. It is a
+scratch/evaluation index, not a genome annotation or accuracy truth source.
+Native call order and `normalized_arrays.tsv` schema are unchanged. Failed
+conversion/normalization leaves `.partial` artifacts, never a completed TSV or
+FASTA. Unknown read IDs, out-of-bounds calls and late malformed rows fail.
+
+`replay_real_normalization.py` writes `replay_receipt.json`: input/source hashes,
+preparation/total seconds, optional previous-run path/environment hash, and one
+entry per tool with descriptive metrics, `byte_identical`, `metrics_identical`,
+native/normalized hashes and normalization seconds. `complete=false` plus
+`error` preserves failure; preparation-only runs have no normalized tool rows.
+It is evaluator validation, not a new discovery or accuracy measurement.

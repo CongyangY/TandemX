@@ -19,6 +19,7 @@ from benchmarks.challenge.adapters import build_command, parse_arrays
 from benchmarks.challenge.run import run_process, source_manifest
 from benchmarks.challenge.schema import digest_file, write_table
 from benchmarks.scripts.fastq_stream import hashed_fastq, records
+from benchmarks.scripts.real_disk import prepare_disk_input, normalize_disk
 
 
 def prepare_input(receipt: Path, sample_id: str, output: Path) -> tuple[dict, dict[str, int]]:
@@ -60,16 +61,22 @@ def describe_arrays(arrays, lengths: dict[str, int]) -> dict:
 
 
 def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path, timeout: float,
-        family_audit: str = 'full') -> None:
+        family_audit: str = 'full', evaluation_backend: str = 'disk') -> None:
     if family_audit not in {'full', 'related'}:
         raise ValueError('Unknown TandemX family-audit policy')
+    if evaluation_backend not in {'memory', 'disk'}:
+        raise ValueError('Unknown real-input evaluation backend')
     outdir = outdir.resolve()
     outdir.mkdir(parents=True, exist_ok=False)
-    sample, lengths = prepare_input(receipt.resolve(), sample_id, outdir/'reads.fa')
+    if evaluation_backend == 'disk':
+        sample = prepare_disk_input(receipt.resolve(), sample_id, outdir/'reads.fa', outdir/'evaluation.sqlite')
+        lengths = None
+    else:
+        sample, lengths = prepare_input(receipt.resolve(), sample_id, outdir/'reads.fa')
     snapshot = outdir/'source_snapshot'
     root = Path(__file__).resolve().parents[2]
     manifest = source_manifest(root, snapshot)
-    for name in ('run_real_comparators.py', 'fastq_stream.py'):
+    for name in ('run_real_comparators.py', 'fastq_stream.py', 'real_disk.py'):
         source = Path(__file__).with_name(name)
         target = snapshot/'benchmarks/scripts'/name
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -83,6 +90,9 @@ def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path
                     tool_order=order, scope=dict(min_period=30, max_period=1000, min_span=100),
                     repetitions=1, threads=1, timeout_per_tool_seconds=timeout,
                     tandemx_family_audit=family_audit,
+                    evaluation_backend=evaluation_backend,
+                    evaluator_sha256=digest_file(Path(__file__).with_name('real_disk.py')),
+                    evaluator_memory='SQLite 16 MiB page cache, mmap disabled, disk temporary sorting' if evaluation_backend == 'disk' else '100000-read dictionary cap',
                     runner_sha256=digest_file(Path(__file__)), parser_sha256=digest_file(Path(__file__).with_name('fastq_stream.py')),
                     accuracy='not_assessed_without_curated_independent_truth',
                     resources='direct-child wait4; excludes controller; acquisition may overlap; not publication ranking')
@@ -105,10 +115,14 @@ def run(receipt: Path, sample_id: str, outdir: Path, trf: Path, tidehunter: Path
                    warning='descriptive_real_input_pilot_no_accuracy_truth_no_resource_ranking')
         if measured['exit_code'] == 0 and not measured['timed_out']:
             try:
-                arrays = parse_arrays(tool, output, 30, 1000, 100)
-                row.update(describe_arrays(arrays, lengths), normalization='ok')
-                write_table(folder/'normalized_arrays.tsv', [asdict(a) for a in arrays],
-                            ['read_id', 'start', 'end', 'period', 'sequence', 'family_id'])
+                if evaluation_backend == 'disk':
+                    row.update(normalize_disk(tool, output, outdir/'evaluation.sqlite', folder/'normalized_arrays.tsv'),
+                               normalization='ok')
+                else:
+                    arrays = parse_arrays(tool, output, 30, 1000, 100)
+                    row.update(describe_arrays(arrays, lengths), normalization='ok')
+                    write_table(folder/'normalized_arrays.tsv', [asdict(a) for a in arrays],
+                                ['read_id', 'start', 'end', 'period', 'sequence', 'family_id'])
             except Exception as exc:
                 row['normalization'] = 'failed: '+str(exc)
         summaries.append(row)
@@ -126,5 +140,8 @@ if __name__ == '__main__':
     parser.add_argument('--tidehunter', type=Path, required=True)
     parser.add_argument('--timeout', type=float, default=900)
     parser.add_argument('--family-audit', choices=('full', 'related'), default='full')
+    parser.add_argument('--evaluation-backend', choices=('disk', 'memory'), default='disk',
+                        help='Disk-backed normalization is default; memory backend retains the 100000-read pilot cap')
     args = parser.parse_args()
-    run(args.sampling_receipt, args.sample_id, args.outdir, args.trf, args.tidehunter, args.timeout, args.family_audit)
+    run(args.sampling_receipt, args.sample_id, args.outdir, args.trf, args.tidehunter, args.timeout,
+        args.family_audit, args.evaluation_backend)

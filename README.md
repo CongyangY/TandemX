@@ -421,6 +421,9 @@ Complete Mo17 CCS input QC now covers 407,670 reads / 5.625 Gb, with nested
 Source receipts and a four-panel QC figure are in `paper/evidence/Mo17_input_qc`.
 The [real-input comparator pilot](docs/real_comparator_pilot.md) uses identical
 sample sequences and preserves native outputs; call counts are not accuracy.
+Its default disk-backed evaluator streams read validation, native calls and
+interval unions beyond the old 100,000-read controller cap. Exact replay and
+large-input preparation checks are documented separately from tool performance.
 The complete Col-0N FASTQ also passed QC (933,904 reads, 14.647 Gb); full-library
 random sampling is under way. [Published Mo17 regions](docs/published_mo17_regions.md)
 retain the original spreadsheet, source cells, assembly-coordinate checks and

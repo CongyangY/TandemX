@@ -7,6 +7,25 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Disk-backed real-input evaluator
+
+- Default real comparator evaluation now streams FASTQ/native rows into SQLite;
+  read IDs and intervals are not retained in Python dictionaries/lists. The
+  100,000-read cap remains only for the optional memory reference backend.
+  Scope, native call order and duplicate/union semantics are unchanged.
+- Tests compare all four adapters to an independent base mask, verify exact
+  normalized TSV parity, accept 100,001 generated reads and reject duplicate IDs,
+  changed/truncated input, late malformed rows and invalid coordinates. Failed
+  outputs stay `.partial`; no false completion. **312 passed in 68.12 s**.
+- New replay command retains exact input/source/native hashes and can check
+  previously completed normalizations or only large-input preparation. Actual
+  real-data parity and a >100,000-read stress replay follow this source commit.
+  This removes an evaluator limit; it is not proof of whole-genome tool scaling.
+- ce33eeaf9cce8d6a8b0fac5aa803af552a620e07 hosted CI 34014359486 and
+  34014359473 both passed. Mo17 1.129-Gb old-source TandemX completed in
+  1,930.701 s / 710.59 MiB, with85,663 candidates and28,586 families. TRF is
+  still running; preserve all receipts before claiming the comparison complete.
+
 ### Exact multiset index for sequence-clustering candidates
 
 - e57ae542f1d3ac50ada057a8d6155821f358fb5c pushed to both branches;
@@ -34,10 +53,8 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 - Randomized/edge cases compare complete old/new family and membership objects
   at five identity thresholds; pruned pairs are checked against the original
   comparison. Full suite **296 passed in 66.88 s**. Native Rust is unchanged.
-- `replay_clustering.py` will compare old snapshot/new clustering on identical
-  serialized Mo17 candidates; rounded exported scores make this narrower than
-  full live-pipeline parity. Actual stage timing/parity and end-to-end rerun remain
-  the next checks after this source commit.
+- Serialized replay uses rounded exported scores and is narrower than the now
+  completed full 111.506-Mb live-pipeline parity check described above.
 
 ### Fixed multi-k replay and expanded discovery scoring
 

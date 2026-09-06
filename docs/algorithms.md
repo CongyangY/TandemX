@@ -1,5 +1,13 @@
 # TandemX Algorithm Design
 
+Real-input benchmark normalization now defaults to a disk-backed read-length and
+interval index (`benchmarks/scripts/real_disk.py`). Native adapters yield rows;
+coordinate validation and interval unions preserve the previous endpoint, call
+order and duplicate policy. Python state is bounded by one record/interval;
+SQLite uses a 16 MiB page-cache target and on-disk indexes. This is evaluator
+scaling, not a change to discovery or biological interpretation. See
+[real comparator replay](real_comparator_pilot.md).
+
 Sequence clustering now accumulates canonical circular 9-mer **multiplicities**
 through its inverted representative index. For identity >.9 and query length>=20,
 it rejects length-incompatible pairs and canonical multiset overlap below the

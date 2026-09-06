@@ -4,16 +4,20 @@ Use the identical FASTA converted from a verified whole-library random FASTQ
 sample. Original read IDs and sequence content are retained; only qualities are
 omitted so every tool sees the same format. The source checksum, selected read
 counts/bases, sampling receipt, FASTA checksum, source snapshot and tool hashes
-are recorded. This controller is capped at 100,000 reads because normalization
-keeps a read-length dictionary in memory; final larger studies need disk-backed
-evaluation. It is not the final performance runner.
+are recorded. The default disk evaluator stores read IDs/lengths and normalized
+intervals in SQLite, with a 16 MiB page-cache target, memory mapping disabled and
+temporary sorting on disk. Reads, native calls and sorted interval unions are
+streamed. This removes the previous 100,000-read controller cap; it does not
+establish that each discovery tool scales to arbitrarily large data. The retained
+`--evaluation-backend memory` path has the old cap for regression comparisons.
+Neither mode is the final performance runner.
 
 ```bash
 conda run --no-capture-output -n tandemx-dev python -m benchmarks.scripts.run_real_comparators \
   --sampling-receipt /path/to/samples/sampling_receipt.json \
   --sample-id sample_001 --outdir /path/to/new/pilot \
   --trf /path/to/trf --tidehunter /path/to/TideHunter --timeout 900
-pytest -q tests/unit/test_real_comparator_inputs.py
+pytest -q tests/unit/test_real_comparator_inputs.py tests/unit/test_real_disk.py
 ```
 
 This first workflow runs elastic/sequence-clustering TandemX, TRF and TideHunter
@@ -62,3 +66,23 @@ The runner records this non-default policy in the command and environment.
 Compare five primary data files byte-for-byte and compare the related table to
 the full table's non-distinct rows. Do not demand full table byte equality after
 explicitly changing its row policy, or hide the omitted-distinct-pair count.
+
+The retained `evaluation.sqlite` contains `reads(read_id,length)`, a `metadata`
+ready receipt and `arrays(tool,ordinal,read_id,start,end)`. Consensus and family
+strings stay in TSV/native outputs. SQL validates known IDs and read bounds,
+then scans an index sorted by read/start/end to form unions with constant Python
+interval state. Duplicate calls remain separate; overlapping bases count once.
+Empty successful native outputs yield header-only TSVs and zero observations.
+Failures retain `.partial` files without a completed normalized TSV or input
+FASTA. SQLite storage scales with data; its cache is not a total-RSS cap.
+
+```bash
+python -m benchmarks.scripts.replay_real_normalization \
+  --sampling-receipt /path/to/samples/sampling_receipt.json --sample-id sample_002 \
+  --previous-run /path/to/completed/real_pilot --outdir /path/to/new/replay
+```
+
+This replay verifies input hashes, exact normalized TSV bytes and all descriptive
+metrics, retaining source/native hashes and failures. Without `--previous-run`
+it tests selected-input conversion only, enabling large-input validation without
+claiming a discovery run. It does not remeasure tools or provide accuracy truth.
