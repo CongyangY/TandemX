@@ -76,6 +76,60 @@ def banded_self_align(
     return _self_align_python(sequence, period, min_span, band, x_drop)
 
 
+def banded_self_align_many(
+    sequence: str,
+    periods: list[int],
+    min_span: int,
+    *,
+    x_drop: int = 40,
+    backend: str = "python",
+) -> list[AlignmentHit]:
+    """Align several period bands while reusing one native sequence buffer."""
+    if min_span <= 0 or x_drop <= 0:
+        raise ValueError("min_span and x_drop must be positive")
+    period_bands = [
+        (period, min(period - 1, max(3, ceil(period * 0.08))))
+        for period in periods
+    ]
+    for period, band in period_bands:
+        if period <= 0 or band < 0 or band >= period:
+            raise ValueError("periods must be positive")
+        if (len(sequence) + 1) * (2 * band + 1) > MAX_TRACE_CELLS:
+            raise ValueError(
+                "Self-alignment trace exceeds 32 million cells; split this read or narrow the period band"
+            )
+    if not sequence.isascii():
+        raise ValueError("sequence must be ASCII")
+    if backend == "rust":
+        from tandemx.discover.rust_backend import RustBackendUnavailable
+
+        try:
+            from tandemx import _rust_core
+        except ImportError as exc:
+            raise RustBackendUnavailable(
+                "Rebuild the TandemX Rust extension for elastic discovery"
+            ) from exc
+        if not hasattr(_rust_core, "banded_self_align_many"):
+            raise RustBackendUnavailable(
+                "Rust extension lacks batched elastic alignment; reinstall TandemX"
+            )
+        return [
+            AlignmentHit(a, b, p, m, c, g, s, tuple(pairs))
+            for a, b, p, m, c, g, s, pairs in _rust_core.banded_self_align_many(
+                sequence, period_bands, min_span, x_drop
+            )
+        ]
+    if backend != "python":
+        raise ValueError("alignment backend must be python or rust")
+    return [
+        hit
+        for period, band in period_bands
+        for hit in banded_self_align(
+            sequence, period, min_span, band=band, x_drop=x_drop, backend="python"
+        )
+    ]
+
+
 def _self_align_python(sequence: str, period: int, min_span: int,
                        band: int, x_drop: int) -> list[AlignmentHit]:
     n = len(sequence)

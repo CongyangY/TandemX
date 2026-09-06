@@ -13,6 +13,19 @@ type Hit = (
     Vec<(usize, usize)>,
 );
 
+#[inline]
+fn set_direction(directions: &mut [u8], index: usize, direction: u8) {
+    let byte = index >> 2;
+    let shift = (index & 3) * 2;
+    let mask = !(3_u8 << shift);
+    directions[byte] = (directions[byte] & mask) | (direction << shift);
+}
+
+#[inline]
+fn get_direction(directions: &[u8], index: usize) -> u8 {
+    (directions[index >> 2] >> ((index & 3) * 2)) & 3
+}
+
 fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i32) -> Vec<Hit> {
     let n = sequence.len();
     let width = 2 * band + 1;
@@ -20,7 +33,8 @@ fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i
     if lowest >= n {
         return Vec::new();
     }
-    let mut directions = vec![0_u8; (n + 1) * width];
+    let trace_cells = (n + 1) * width;
+    let mut directions = vec![0_u8; trace_cells.div_ceil(4)];
     let mut previous = vec![0_i32; width];
     let mut previous_peak = vec![0_i32; width];
     // Traverse bands left to right in place: b and b+1 still hold the previous
@@ -65,7 +79,7 @@ fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i
             }
             previous[b] = score;
             previous_peak[b] = peak.max(score);
-            directions[i * width + b] = direction;
+            set_direction(&mut directions, i * width + b, direction);
             if score > row_best.0 {
                 row_best = (score, b);
             }
@@ -89,7 +103,7 @@ fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i
         let mut pairs = Vec::new();
         let (mut matches, mut columns, mut gaps) = (0, 0, 0);
         while i > 0 && b >= 0 && b < width as isize {
-            let direction = directions[i * width + b as usize];
+            let direction = get_direction(&directions, i * width + b as usize);
             if direction == 0 {
                 break;
             }
@@ -135,21 +149,19 @@ fn align(sequence: &[u8], period: usize, min_span: usize, band: usize, x_drop: i
     hits
 }
 
-#[pyfunction]
-pub fn banded_self_align(
-    py: Python<'_>,
-    sequence: &str,
+fn validate_alignment_parameters(
+    sequence_len: usize,
     period: usize,
     min_span: usize,
     band: usize,
     x_drop: i32,
-) -> PyResult<Vec<Hit>> {
+) -> PyResult<()> {
     if period == 0 || min_span == 0 || x_drop <= 0 || band >= period {
         return Err(PyValueError::new_err(
             "invalid elastic alignment parameters",
         ));
     }
-    let cells = sequence.len().checked_add(1).and_then(|n| {
+    let cells = sequence_len.checked_add(1).and_then(|n| {
         band.checked_mul(2)
             .and_then(|b| b.checked_add(1))
             .and_then(|width| n.checked_mul(width))
@@ -159,11 +171,47 @@ pub fn banded_self_align(
             "Self-alignment trace exceeds 32 million cells",
         ));
     }
+    Ok(())
+}
+
+#[pyfunction]
+pub fn banded_self_align(
+    py: Python<'_>,
+    sequence: &str,
+    period: usize,
+    min_span: usize,
+    band: usize,
+    x_drop: i32,
+) -> PyResult<Vec<Hit>> {
+    validate_alignment_parameters(sequence.len(), period, min_span, band, x_drop)?;
     if !sequence.is_ascii() {
         return Err(PyValueError::new_err("sequence must be ASCII"));
     }
     let sequence = sequence.as_bytes().to_ascii_uppercase();
     Ok(py.allow_threads(move || align(&sequence, period, min_span, band, x_drop)))
+}
+
+#[pyfunction]
+pub fn banded_self_align_many(
+    py: Python<'_>,
+    sequence: &str,
+    period_bands: Vec<(usize, usize)>,
+    min_span: usize,
+    x_drop: i32,
+) -> PyResult<Vec<Hit>> {
+    for &(period, band) in &period_bands {
+        validate_alignment_parameters(sequence.len(), period, min_span, band, x_drop)?;
+    }
+    if !sequence.is_ascii() {
+        return Err(PyValueError::new_err("sequence must be ASCII"));
+    }
+    let sequence = sequence.as_bytes().to_ascii_uppercase();
+    Ok(py.allow_threads(move || {
+        period_bands
+            .into_iter()
+            .flat_map(|(period, band)| align(&sequence, period, min_span, band, x_drop))
+            .collect()
+    }))
 }
 
 #[cfg(test)]
@@ -184,6 +232,17 @@ mod tests {
     #[test]
     fn ambiguity_breaks_alignment() {
         assert!(align(&vec![b'N'; 500], 50, 100, 4, 40).is_empty());
+    }
+
+    #[test]
+    fn packed_trace_directions_round_trip() {
+        let mut directions = vec![0_u8; 3];
+        for index in 0..12 {
+            set_direction(&mut directions, index, (index % 4) as u8);
+        }
+        for index in 0..12 {
+            assert_eq!(get_direction(&directions, index), (index % 4) as u8);
+        }
     }
 }
 

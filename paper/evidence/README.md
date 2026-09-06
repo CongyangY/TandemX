@@ -14,6 +14,15 @@ accepted six-panel rendering; v1 is retained as an inspected draft. Evidence
 commit `3b21825` passed hosted Ubuntu/macOS Python, Rust and wheel runs
 `34047548628`/`34047562996` on the work branch and main.
 
+`discovery_packed_trace_batch_v1/` records two completed exact-output Mo17
+discovery replays after packing native traceback directions and batching all
+periods from one read through one native call. At 11.681/111.506 Mb, elapsed
+time fell 28.75%/25.72% and peak RSS fell 23.52%/13.27%; six/seven stable
+products were byte-identical. The compact archive retains the dirty-source
+warning, exact source digest and file hashes. Each row is one historical
+baseline plus one replay, so it is engineering evidence rather than a repeated
+publication timing claim or universal external-tool superiority result.
+
 `challenge_v1_baseline/` records the discovery algorithm at Git revision
 `08e100d` using the initial challenge harness hashes in `environment.json`.
 The complete data and command logs are in `results/challenge_v1_development_20260906`

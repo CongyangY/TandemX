@@ -1,0 +1,104 @@
+[
+  {
+    "file": "Mo17_11Mb/baseline_environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_native_audit_v1_20260906/environment.json",
+    "sha256": "e66f3057c1864dc99df89866d446ce2dc7857d362d05853fe8287ddbb43a0e5d",
+    "bytes": 8291
+  },
+  {
+    "file": "Mo17_11Mb/baseline_execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_native_audit_v1_20260906/tandemx/execution.json",
+    "sha256": "3837360ce5a1f39216ad2af977b1cf62145b6eba3efde088b38c9568eac78014",
+    "bytes": 940
+  },
+  {
+    "file": "Mo17_11Mb/baseline_discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_native_audit_v1_20260906/tandemx/discover/discovery_summary.json",
+    "sha256": "acca384f769b993354a1157aaebccbb5ce7b5e18985f98985e6b7e0c3c5fa32e",
+    "bytes": 765
+  },
+  {
+    "file": "Mo17_11Mb/replay_environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_11Mb_packed_trace_batch_replay_v1_20260907/environment.json",
+    "sha256": "d591a288da74c25e26c6ef1dc405d4c86769ac368f85fe19fbf810bd2e87d6b6",
+    "bytes": 8419
+  },
+  {
+    "file": "Mo17_11Mb/replay_validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_11Mb_packed_trace_batch_replay_v1_20260907/validation.json",
+    "sha256": "55a6ab1ce7da963f5ceb8009cab5b5666a9f19c88320cc7340b6c875ca412fe2",
+    "bytes": 2587
+  },
+  {
+    "file": "Mo17_11Mb/replay_discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_11Mb_packed_trace_batch_replay_v1_20260907/discover/discovery_summary.json",
+    "sha256": "798569e7875d912c426f381892e0b719d5859f9a7577458eb6955b3a0df98be5",
+    "bytes": 866
+  },
+  {
+    "file": "Mo17_11Mb/replay_stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_11Mb_packed_trace_batch_replay_v1_20260907/stdout.log",
+    "sha256": "256b8fc0dddc7041923a78bfa960c5bf0be994041797594616081a3ca2dd1094",
+    "bytes": 150
+  },
+  {
+    "file": "Mo17_11Mb/replay_stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_11Mb_packed_trace_batch_replay_v1_20260907/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "Mo17_111Mb/baseline_environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/environment.json",
+    "sha256": "3e011e84e339bd088331f973f20255feaaefb2d1fcfa5e36be8b3b71b5a82b6f",
+    "bytes": 8437
+  },
+  {
+    "file": "Mo17_111Mb/baseline_execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/tandemx/execution.json",
+    "sha256": "7684865aa523d4094c7e13b5098f8b77b0732ef0ebd346e201c4db1a8fb71a9e",
+    "bytes": 978
+  },
+  {
+    "file": "Mo17_111Mb/baseline_discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_111Mb_indexed_clustering_v1_20260906/tandemx/discover/discovery_summary.json",
+    "sha256": "3ede0e51fb32504622b22a9f58165774e9153aef477244079163d8209fde708b",
+    "bytes": 870
+  },
+  {
+    "file": "Mo17_111Mb/replay_environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_packed_trace_batch_replay_v1_20260907/environment.json",
+    "sha256": "ba5c18a159b15179deccfc6f5415611a028be21c2e9c6823bb460b7e33108ca9",
+    "bytes": 8528
+  },
+  {
+    "file": "Mo17_111Mb/replay_validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_packed_trace_batch_replay_v1_20260907/validation.json",
+    "sha256": "748f84036070373ce368714fcffa756f4cf2413807cc2bf14b698ae88cedeac2",
+    "bytes": 2844
+  },
+  {
+    "file": "Mo17_111Mb/replay_discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_packed_trace_batch_replay_v1_20260907/discover/discovery_summary.json",
+    "sha256": "3ede0e51fb32504622b22a9f58165774e9153aef477244079163d8209fde708b",
+    "bytes": 870
+  },
+  {
+    "file": "Mo17_111Mb/replay_stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_packed_trace_batch_replay_v1_20260907/stdout.log",
+    "sha256": "3166aab4ee342301751e3bf3104a584f822ec43fa6f12810929154bf818e39cb",
+    "bytes": 153
+  },
+  {
+    "file": "Mo17_111Mb/replay_stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Mo17_111Mb_packed_trace_batch_replay_v1_20260907/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "comparison.tsv",
+    "source": "derived_from_hash_checked_receipts",
+    "sha256": "10977135e93e775259c9fbbfdfa49e76be267667a6a0b92e1f1757f9cc38d7fe",
+    "bytes": 797
+  }
+]

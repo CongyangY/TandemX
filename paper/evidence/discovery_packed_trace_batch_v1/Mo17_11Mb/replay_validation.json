@@ -1,0 +1,78 @@
+{
+  "complete": true,
+  "command": [
+    "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+    "-m",
+    "tandemx.cli",
+    "discover",
+    "--reads",
+    "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_native_audit_v1_20260906/reads.fa",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/Mo17_11Mb_packed_trace_batch_replay_v1_20260907/discover",
+    "--min-period",
+    "30",
+    "--max-period",
+    "1000",
+    "--min-repeat-span",
+    "100",
+    "--min-support-reads",
+    "1",
+    "--min-read-length",
+    "1",
+    "--kmer-backend",
+    "rust",
+    "--threads",
+    "1",
+    "--no-progress",
+    "--discovery-method",
+    "elastic",
+    "--clustering-method",
+    "sequence",
+    "--cluster-identity",
+    ".95"
+  ],
+  "profile": false,
+  "execution": {
+    "exit_code": 0,
+    "runtime_seconds": 12.3609944160562,
+    "peak_rss_mib": 62.484375,
+    "cpu_user_seconds": 11.924539,
+    "cpu_system_seconds": 0.054308999999999996,
+    "timed_out": false
+  },
+  "products": {
+    "candidate_reads.tsv": {
+      "expected_sha256": "0d054e626d9c815a28a105154d731c53efe05c8bb0329da1e44f8483432e02e9",
+      "observed_sha256": "0d054e626d9c815a28a105154d731c53efe05c8bb0329da1e44f8483432e02e9",
+      "byte_identical": true
+    },
+    "candidate_monomers.fa": {
+      "expected_sha256": "bd9df5a36078bfa2fb2f73310d2641a6e51b6c8283bb48dbdd35c9a6d5e1696b",
+      "observed_sha256": "bd9df5a36078bfa2fb2f73310d2641a6e51b6c8283bb48dbdd35c9a6d5e1696b",
+      "byte_identical": true
+    },
+    "monomers.fa": {
+      "expected_sha256": "b6828ee2c79fbf0ce11117fb2139e2462228fb3d4a6f6556b0676e7b35be9bde",
+      "observed_sha256": "b6828ee2c79fbf0ce11117fb2139e2462228fb3d4a6f6556b0676e7b35be9bde",
+      "byte_identical": true
+    },
+    "families.tsv": {
+      "expected_sha256": "bf19e2f9561cf731b87978efb68ef747c577a4276fe2b8e5f7a03f92cedb2948",
+      "observed_sha256": "bf19e2f9561cf731b87978efb68ef747c577a4276fe2b8e5f7a03f92cedb2948",
+      "byte_identical": true
+    },
+    "monomer_membership.tsv": {
+      "expected_sha256": "be6d1342f4719b946e2bdad35327c53e344d7e214846f50898e2ba12ef99c29b",
+      "observed_sha256": "be6d1342f4719b946e2bdad35327c53e344d7e214846f50898e2ba12ef99c29b",
+      "byte_identical": true
+    },
+    "family_similarity.tsv": {
+      "expected_sha256": "90dea680a0778d12366475129be6d95413c20a09790d004df8f948782902c47b",
+      "observed_sha256": "90dea680a0778d12366475129be6d95413c20a09790d004df8f948782902c47b",
+      "byte_identical": true
+    }
+  },
+  "uncompared_new_products": [
+    "family_audit_summary.json"
+  ]
+}

@@ -103,6 +103,18 @@ produced the same 4,380-family payload. Clustering time decreased from 13.611 to
 one fixed-order run with local native build artifacts, so the magnitude is an
 engineering diagnostic rather than a final performance estimate.
 
+We then reduced the dominant elastic-alignment storage and call overhead without
+changing the recurrence: traceback directions were packed from one byte to two
+bits per cell, and all candidate periods for one read reused one native uppercase
+buffer. Complete Mo17 discovery replays preserved all six historical core
+products at 11.681 Mb and all seven products at 111.506 Mb byte for byte. Elapsed
+time decreased from 17.348 to 12.361 s and from 134.684 to 100.039 s,
+respectively; peak RSS decreased from 81.703 to 62.484 MiB and from 178.438 to
+154.766 MiB. Each comparison used one historical baseline and one replay, so the
+magnitudes remain engineering diagnostics rather than repeated performance
+estimates (Evidence E19). Existing external-tool diagnostics still place
+TideHunter ahead of TandemX in elapsed time on these real-data scales.
+
 ### Comparator conclusions depend on the measured endpoint
 
 In a 5× read simulation from one 10-Mb development genome, TandemX, TRF and
@@ -783,6 +795,9 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   baseline/localization, raw multi-k pairs, selected classifier rows, per-seed
   metrics and 1,062 command resource receipts in
   `evidence/abundance_classifier_depth_gated_validation_v1`.
+- Supplementary Table S16: exact-output Mo17 discovery optimization resources,
+  parity status and compact receipts in
+  `evidence/discovery_packed_trace_batch_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -796,7 +811,8 @@ E13: paired `abundance_domain_shift_heldout_baseline` and
 E15: `Morex_115Mb_index_interface_v2`; E16: paired localizer development and
 held-out directories listed for Supplementary Table S13; E17:
 `abundance_classifier_validation_v1`; E18:
-`abundance_classifier_depth_gated_validation_v1`.
+`abundance_classifier_depth_gated_validation_v1`; E19:
+`discovery_packed_trace_batch_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

@@ -3,7 +3,7 @@ import random
 
 import pytest
 
-from tandemx.discover.alignment import banded_self_align, global_align_ops
+from tandemx.discover.alignment import banded_self_align, banded_self_align_many, global_align_ops
 from tandemx.discover.consensus import aligned_unit_consensus
 from tandemx.discover.elastic import discover_elastic_arrays
 from tandemx.discover.rust_backend import rust_backend_available
@@ -86,6 +86,20 @@ def test_native_reference_parity_and_reverse_complement():
     a = aligned_unit_consensus(read, python[0])[0]
     b = aligned_unit_consensus(read, python[0], backend="rust")[0]
     assert a == b
+
+
+@pytest.mark.skipif(not rust_backend_available(), reason="compiled extension unavailable")
+def test_native_batched_alignment_matches_individual_period_calls():
+    first = sequence(70, 67)
+    second = sequence(71, 101)
+    read = sequence(72, 90) + first * 6 + "N" * 50 + second * 5 + sequence(73, 80)
+    periods = [65, 67, 99, 101]
+    expected = [
+        hit
+        for period in periods
+        for hit in banded_self_align(read, period, 100, backend="rust")
+    ]
+    assert banded_self_align_many(read, periods, 100, backend="rust") == expected
 
 
 @pytest.mark.skipif(not rust_backend_available(), reason="compiled extension unavailable")

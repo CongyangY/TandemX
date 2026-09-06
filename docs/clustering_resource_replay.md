@@ -111,8 +111,10 @@ pytest -q tests/integration/test_discovery_replay.py
 
 This command checks the baseline input hash and successful discovery receipt,
 freezes current source, preserves original CLI settings except an explicitly
-requested thread budget, and compares all seven deterministic products using live
-candidate scores. The environment records baseline and replay thread counts.
+requested thread budget, and compares six core deterministic products using live
+candidate scores. It also compares `family_audit_summary.json` when the baseline
+contains that later receipt; otherwise the new summary is listed under
+`uncompared_new_products`. The environment records baseline and replay thread counts.
 Changed inputs or any product disagreement fail explicitly. Optional `--profile`
 identifies hotspots but adds overhead, so profiled resources cannot be used as
 unprofiled speed rankings.

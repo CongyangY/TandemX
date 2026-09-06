@@ -4,7 +4,7 @@ from __future__ import annotations
 from math import ceil
 from collections import Counter
 
-from tandemx.discover.alignment import AlignmentHit, banded_self_align
+from tandemx.discover.alignment import AlignmentHit, banded_self_align_many
 from tandemx.discover.consensus import aligned_unit_consensus
 from tandemx.discover.spacing import extract_repeated_kmer_positions, build_spacing_histogram
 
@@ -76,9 +76,7 @@ def discover_elastic_arrays(sequence: str, *, min_period: int, max_period: int,
         positions, overflow = extract_repeated_kmer_positions(sequence, k, min_seed_occurrences, max_pairs_per_kmer)
         histogram = build_spacing_histogram(positions, max(20, min_period), max_period, max_pairs_per_kmer)
     periods = short_periods + select_alignment_periods(histogram, top_periods, min_spacing_support)
-    hits = []
-    for period in periods:
-        hits.extend(banded_self_align(sequence, period, min_span, backend=backend))
+    hits = banded_self_align_many(sequence, periods, min_span, backend=backend)
     result = []
     eligible = [hit for hit in hits if composition_adjusted_identity(sequence, hit) >= 0.7]
     for hit in suppress_overlapping_hits(eligible):

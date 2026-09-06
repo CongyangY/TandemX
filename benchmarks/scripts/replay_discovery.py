@@ -11,8 +11,19 @@ import sys
 from benchmarks.challenge.run import run_process, source_manifest
 from benchmarks.challenge.schema import digest_file
 
-PRODUCTS = ('candidate_reads.tsv', 'candidate_monomers.fa', 'monomers.fa', 'families.tsv',
-            'monomer_membership.tsv', 'family_similarity.tsv', 'family_audit_summary.json')
+CORE_PRODUCTS = ('candidate_reads.tsv', 'candidate_monomers.fa', 'monomers.fa', 'families.tsv',
+                 'monomer_membership.tsv', 'family_similarity.tsv')
+OPTIONAL_PRODUCTS = ('family_audit_summary.json',)
+
+
+def comparable_products(baseline: Path) -> tuple[str, ...]:
+    """Require core outputs while admitting baselines made before audit summaries."""
+    missing = [name for name in CORE_PRODUCTS if not (baseline / name).is_file()]
+    if missing:
+        raise ValueError(f"Baseline lacks core discovery products: {', '.join(missing)}")
+    return CORE_PRODUCTS + tuple(
+        name for name in OPTIONAL_PRODUCTS if (baseline / name).is_file()
+    )
 
 
 def command_with_threads(command: list[str], threads: int | None) -> tuple[list[str], int, int]:
@@ -51,7 +62,8 @@ def replay(previous_run: Path, outdir: Path, timeout: float = 1800, profile: boo
     if input_hash != old_environment['input']['fasta_sha256']:
         raise ValueError('Baseline FASTA no longer matches its input receipt')
     baseline = previous_run/'tandemx/discover'
-    expected = {name: digest_file(baseline/name) for name in PRODUCTS}
+    product_names = comparable_products(baseline)
+    expected = {name: digest_file(baseline/name) for name in product_names}
     outdir.mkdir(parents=True, exist_ok=False)
     snapshot = outdir/'source_snapshot'
     environment = source_manifest(root, snapshot)
@@ -78,6 +90,10 @@ def replay(previous_run: Path, outdir: Path, timeout: float = 1800, profile: boo
                              observed_sha256=digest_file(outdir/'discover'/name),
                              byte_identical=value == digest_file(outdir/'discover'/name))
                              for name, value in expected.items()}
+        result['uncompared_new_products'] = [
+            name for name in OPTIONAL_PRODUCTS
+            if name not in expected and (outdir/'discover'/name).is_file()
+        ]
         if digest_file(fasta) != input_hash or any(digest_file(baseline/n) != h for n, h in expected.items()):
             raise ValueError('Baseline input/product changed during replay')
         if not all(p['byte_identical'] for p in result['products'].values()):

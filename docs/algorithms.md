@@ -161,6 +161,13 @@ mode remains the default pending independent evaluation and resource profiling.
    the inactive right tail is cleared after the last upward dependency is used.
    This removes per-row allocations without changing scores, tie order, traceback
    or acceptance rules. Differential tests check complete paths against Python.
+   Native traceback directions are packed into two bits per cell because the
+   recurrence has only stop, diagonal, left and up states. Candidate periods for
+   one read are submitted together, allowing the native code to uppercase and
+   copy the read once before evaluating each period in the original order. These
+   are storage and call-boundary changes: scoring, bands, tie order, traceback
+   and accepted paths remain unchanged. Complete discovery replays require
+   byte-identical core outputs before a resource difference is reported.
 3. Trace candidate local paths in descending score order. Require alignment
    identity >=0.75, the configured span, and a comparison span >=0.8 times the
    median aligned offset. The minimum alignment score is

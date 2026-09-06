@@ -1224,12 +1224,37 @@ and writes source/input/output hashes in `audit_receipt.json`; it does not apply
 automatic correction or calculate biological recall/precision.
 
 `replay_discovery.py` writes a frozen environment plus `validation.json` with
-command, child execution, profile flag and all seven expected/observed product
-hashes and equality flags. An optional `--threads` override changes only the
+command, child execution, profile flag and six required expected/observed core
+product hashes and equality flags. `family_audit_summary.json` is also compared
+when present in the baseline; otherwise the generated receipt is named in
+`uncompared_new_products`. An optional `--threads` override changes only the
 declared discover thread budget; `baseline_threads` and `replay_threads` are
 recorded, and byte parity remains mandatory. Profile mode additionally creates
 `discovery.prof`. Any changed input/baseline product, tool failure or output
 mismatch leaves `complete=false` and a concrete error.
+
+`archive_discovery_optimization.py` validates one or more baseline/replay pairs
+and writes `comparison.tsv`. Its stable columns are:
+
+- `dataset`: caller-supplied scale label;
+- `processed_reads`, `processed_bases`, `candidate_count`, `family_count`:
+  summary counts required to agree between the baseline and replay;
+- `baseline_runtime_seconds`, `optimized_runtime_seconds`,
+  `runtime_change_percent`, `speedup`: direct child wall-time measurements and
+  their replay/baseline contrasts;
+- `baseline_peak_rss_mib`, `optimized_peak_rss_mib`,
+  `peak_rss_change_percent`: direct child peak resident memory and its contrast;
+- `compared_products`, `all_products_byte_identical`: number of hash-compared
+  discovery products and the mandatory parity result;
+- `uncompared_new_products`: semicolon-delimited auxiliary outputs absent from
+  a historical baseline;
+- `warning`: fixed scope label stating that one historical baseline plus one
+  replay is engineering evidence rather than publication timing.
+
+The archive also copies each environment, execution, discovery summary,
+validation and stdout/stderr receipt and writes `archive_manifest.json` with
+their source path, SHA-256 and byte size. Any input/source-receipt disagreement,
+failed process, changed summary count or product-hash mismatch aborts the archive.
 
 ### Factorial assembly comparator evaluation
 

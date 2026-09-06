@@ -30,6 +30,11 @@ def test_live_discovery_profile_replay_and_changed_input_rejection(tmp_path):
     assert result['complete'] and len(result['products']) == 7
     assert all(r['byte_identical'] for r in result['products'].values())
     assert (tmp_path/'replay/discovery.prof').stat().st_size > 0
+    (output/'family_audit_summary.json').unlink()
+    legacy = replay(previous, tmp_path/'legacy_replay', 60)
+    assert legacy['complete'] and len(legacy['products']) == 6
+    assert legacy['uncompared_new_products'] == ['family_audit_summary.json']
+    assert all(r['byte_identical'] for r in legacy['products'].values())
     fasta.write_text('>changed\nACGT\n')
     with pytest.raises(ValueError, match='no longer matches'):
         replay(previous, tmp_path/'invalid')

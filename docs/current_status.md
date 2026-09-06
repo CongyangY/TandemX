@@ -7,6 +7,30 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### Exact-output elastic alignment optimization (local, not yet pushed)
+
+- The native elastic alignment now packs four traceback directions per byte and
+  processes all selected periods for one read through one native call, reusing a
+  single uppercase sequence buffer. Scores, bands, tie order, traceback and hit
+  order are unchanged; focused native/Python parity checks passed.
+- Complete Mo17 discovery replays were run once and are finished. On 11,680,888
+  bp, runtime changed 17.348 to 12.361 s (-28.75%) and peak RSS 81.703 to
+  62.484 MiB (-23.52%), with all six historical core products byte-identical.
+  On 111,505,681 bp, runtime changed 134.684 to 100.039 s (-25.72%) and peak RSS
+  178.438 to 154.766 MiB (-13.27%), with all seven products byte-identical.
+- `paper/evidence/discovery_packed_trace_batch_v1` contains hash-checked compact
+  receipts. Each comparison is one historical baseline and one replay, so it is
+  an engineering result rather than a publication timing distribution. Existing
+  diagnostics still show TideHunter faster; no general superiority is claimed.
+- The replay helper now accepts a legacy baseline without the newer auxiliary
+  `family_audit_summary.json`, while still requiring and comparing all six core
+  products. Missing core output remains an error. A compact archiver validates
+  execution, input/source receipts, summary counts and product hashes.
+- Full local Python validation passed: 472 tests in 47.68 s. Rust formatting and
+  Clippy with warnings denied passed. `cargo test --release` compiled locally but
+  its test executable cannot launch because this conda environment lacks a
+  dynamic `libpython3.11.dylib`; hosted Rust CI remains the executable test gate.
+
 ### Published article draft and resolved figure export checkpoint
 
 - b85a266 is pushed to main and working branch. Both hosted CI runs

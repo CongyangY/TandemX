@@ -98,6 +98,28 @@ before one bounded-chunk assembly pass. These changes remove the
 previous `families × assembly` and `probes × assembly` rescans. Result tables can
 still grow with the number of reported arrays, windows and probe regions.
 
+## Exact-output packed-trace replay
+
+On 2026-09-07 the native elastic path was changed to store each traceback
+direction in two bits and to evaluate all selected periods for one read through
+one native call. The latter reuses one uppercase sequence buffer. The complete
+discovery pipeline was replayed against two historical Mo17 baselines with the
+same input and command. Stable output products had to be byte-identical.
+
+| Input | Reads | Bases | Baseline time | Optimized time | Speedup | Baseline peak RSS | Optimized peak RSS | RSS change | Output check |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Mo17 11 Mb | 840 | 11,680,888 | 17.348 s | 12.361 s | 1.403× | 81.703 MiB | 62.484 MiB | -23.52% | 6/6 core products identical |
+| Mo17 111 Mb | 8,084 | 111,505,681 | 134.684 s | 100.039 s | 1.346× | 178.438 MiB | 154.766 MiB | -13.27% | 7/7 products identical |
+
+The smaller baseline predates the auxiliary `family_audit_summary.json`, so the
+new summary is recorded but not compared there. Each row is one historical
+baseline and one replay, with possible concurrent host activity. The timings are
+engineering diagnostics rather than repeated publication measurements. The
+compact receipts are in
+`paper/evidence/discovery_packed_trace_batch_v1`. Existing real-data diagnostics
+still show TideHunter faster than TandemX, so this replay does not establish
+general external-tool superiority.
+
 ## Remaining Limits
 
 The spacing prefilter and Rust read-scanning threads enable larger subsets but do not make TandemX ready for full 7-20 Gb genomes or 100 Gb read sets. Remaining work includes multiprocessing or distributed chunks, intra-step checkpoints, bounded on-disk result tables and validation on real HiFi subsets. The synthetic benchmark runner now records per-command peak resident memory with `wait4` on supported Unix platforms.
