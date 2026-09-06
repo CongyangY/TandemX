@@ -1,0 +1,2 @@
+offset_from_native_1based	status	warning	base_union_recall	base_union_precision	base_union_f1	predicted_union_bp	truth_union_bp	duplicated_prediction_bp	duplicate_bp_fraction	unit_count
+0	ok	unit_coverage_only_not_array_period_or_recall	0.9999436722085945	0.9998987053821056	0.9999211882898064	2201499	2201400	0	0.0	11436

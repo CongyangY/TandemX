@@ -1,0 +1,21 @@
+{
+  "complete": true,
+  "fastq_records_valid": true,
+  "gzip_trailer_checked": true,
+  "exact_duplicate_read_ids": 0,
+  "read_count": 1500000,
+  "total_bases": 24953679430,
+  "min_length": 118,
+  "max_length": 47653,
+  "median_length": 15985,
+  "read_n50": 16579,
+  "gc_fraction": 0.45957071918672154,
+  "n_fraction": 0.0,
+  "mean_reported_error_probability": 0.0016308203288606974,
+  "phred_from_mean_reported_error": 27.87593883522924,
+  "quality_note": "Phred+33 reported base-quality probabilities, not empirically measured read accuracy",
+  "input_sha256": "951766fc974ed199bd173e184dcde8847a6a709bd8c707629b3ce3e07900532a",
+  "script_sha256": "24d704f39bf21e3203166459411d1ca0ff79ddf90df694a8b345ac6f6d41ac3a",
+  "parser_sha256": "9b0d190c449ed707a9de2e8c009a34f1bbd54e6b2c6a23c91d8c8f63ff61a2e0",
+  "biological_qc": "species/material/ploidy/background contamination/mapping bias not established by file QC"
+}

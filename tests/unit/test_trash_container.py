@@ -1,6 +1,6 @@
 import pytest
 
-from benchmarks.scripts.run_trash_container import linux_time, native_products, tool_command
+from benchmarks.scripts.run_trash_container import cgroup_cpu, linux_time, native_products, tool_command
 
 
 def test_container_resource_units_and_failure_status_are_preserved(tmp_path):
@@ -26,3 +26,19 @@ def test_native_comparator_commands_use_distinct_author_interfaces_without_templ
     assert native_products('trash2')[1] == ('assembly.fa_arrays.csv', 'assembly.fa_repeats.csv')
     with pytest.raises(ValueError):
         tool_command('other')
+
+
+def test_cgroup_cpu_includes_all_tasks_and_preserves_counter_units(tmp_path):
+    before, after = tmp_path/'before', tmp_path/'after'
+    before.write_text('usage_usec 100\nuser_usec 80\nsystem_usec 20\nnr_throttled 2\n')
+    after.write_text('usage_usec 2500100\nuser_usec 2000080\nsystem_usec 500020\nnr_throttled 12\n')
+    measured = cgroup_cpu(before, after)
+    assert measured['usage_seconds'] == 2.5
+    assert measured['user_seconds'] == 2
+    assert measured['system_seconds'] == .5
+    assert measured['delta_counters']['nr_throttled'] == 10
+    with pytest.raises(ValueError, match='decreased'):
+        cgroup_cpu(after, before)
+    after.write_text('usage_usec 100\nusage_usec 100\n')
+    with pytest.raises(ValueError, match='Invalid'):
+        cgroup_cpu(before, after)

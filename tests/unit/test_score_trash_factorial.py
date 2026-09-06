@@ -34,10 +34,10 @@ def test_independent_fixture_scoring_coordinates_and_tamper_rejection(tmp_path, 
         units = [dict(start=start+i*31+2, end=start+(i+1)*31+1, width=31,
                       strand='+', seq=sequence, **{'seq.name': 'chr_sim'}) for i in range(6)]
     else:
-        arrays = [dict(start=start+1, end=end, seqID='chr_sim', top_N=31, representative=sequence.lower())]
+        arrays = [dict(start=start+1, end=end, seqID='chr_sim', top_N=31, representative=sequence.lower(), array_num_ID=1)]
         units = [dict(start=start+i*31+1, end=start+(i+1)*31, width=31,
                       strand='-', sequence=sequence.translate(str.maketrans('ACGT', 'TGCA'))[::-1],
-                      seqID='chr_sim') for i in range(6)]
+                      seqID='chr_sim', arrayID=1) for i in range(6)]
     csv_file(native/ARRAY_FILES[tool], arrays)
     csv_file(native/UNIT_FILES[tool], units)
     if tool == 'trash2':

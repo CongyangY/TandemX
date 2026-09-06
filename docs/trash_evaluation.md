@@ -20,6 +20,11 @@ Timeouts, OOM, startup and native failures remain missing accuracy observations.
 
 The evaluator reports one-to-one array/period matches, conditional boundary and
 period errors, independent cyclic sequence recovery and interval-union coverage.
+For TRASH2, `unit_extent` derives outer array boundaries from the primary repeat
+table's explicit `(seqID,arrayID)` membership and joins it to `array_num_ID`.
+No truth coordinates enter this normalization. Gaps between units stay inside
+the array interval; unknown IDs, duplicate array IDs or arrays without monomers
+are explicit errors. Retain the approximate native-array endpoint alongside it.
 It separately evaluates native broad regions and actual monomer intervals; a
 wide discovery window is not equivalent to claiming every contained base as a
 monomer. Both region/coverage endpoints must accompany any accuracy comparison.
@@ -47,3 +52,7 @@ Synthetic parser fixtures in tests verify scoring; they are never reported as
 executed comparator data. Resource comparisons need identical input and platform;
 Linux container RSS cannot be directly ranked against a different-input macOS
 read run. Concurrent diagnostics are excluded from final isolated timing claims.
+New runs additionally retain cgroup CPU counters before and after execution.
+Their difference includes all forked workers and small wrapper overhead. Actual
+controls showed that GNU time's command CPU totals omit substantial R-worker
+work; do not treat those older totals as whole-workflow CPU consumption.

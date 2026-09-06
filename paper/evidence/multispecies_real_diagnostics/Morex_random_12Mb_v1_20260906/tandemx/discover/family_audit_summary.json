@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "mode": "related",
+  "backend": "rust",
+  "family_count": 586,
+  "possible_pairs": 171405,
+  "pairs_scored": 394,
+  "pairs_pruned_by_kmer_gate": 171011,
+  "emitted_pairs": 182,
+  "related_pairs": 182,
+  "omitted_distinct_pairs": 171223,
+  "warning": "heuristic_relationships_not_biological_truth;dense_catalogues_can_remain_quadratic"
+}

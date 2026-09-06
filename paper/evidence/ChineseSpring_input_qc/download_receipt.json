@@ -1,0 +1,50 @@
+{
+  "accession": "SRR28200549",
+  "metadata": {
+    "run_accession": "SRR28200549",
+    "study_accession": "PRJNA1062539",
+    "secondary_study_accession": "SRP485044",
+    "sample_accession": "SAMN40209867",
+    "experiment_accession": "SRX23813612",
+    "scientific_name": "Triticum aestivum",
+    "sample_title": "HiFib run 1",
+    "experiment_title": "Sequel II sequencing: HiFi data of Triticum Aestivum",
+    "instrument_platform": "PACBIO_SMRT",
+    "instrument_model": "Sequel II",
+    "library_strategy": "WGS",
+    "library_source": "GENOMIC",
+    "library_selection": "size fractionation",
+    "read_count": "1500000",
+    "base_count": "24953679430",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR282/049/SRR28200549/SRR28200549_subreads.fastq.gz",
+    "fastq_md5": "f897d290f9be23724474c2b472188361",
+    "fastq_bytes": "19358787707"
+  },
+  "metadata_sha256": "65a1e265cf505fe8838736ccacdd1494b14b922dd65cf9ccf497cb44f7c088dd",
+  "files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR282/049/SRR28200549/SRR28200549_subreads.fastq.gz",
+      "filename": "SRR28200549_subreads.fastq.gz",
+      "expected_md5": "f897d290f9be23724474c2b472188361",
+      "expected_bytes": 19358787707
+    }
+  ],
+  "max_download_gb": 20.0,
+  "sampling": "complete_ENA_run",
+  "script_sha256": "17e0d01e66f709b3aad4b3f945160ac7d3b74c1160d5a2a970d1069cf824744b",
+  "completed_files": [
+    {
+      "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR282/049/SRR28200549/SRR28200549_subreads.fastq.gz",
+      "filename": "SRR28200549_subreads.fastq.gz",
+      "expected_md5": "f897d290f9be23724474c2b472188361",
+      "expected_bytes": 19358787707,
+      "bytes": 19358787707,
+      "md5": "f897d290f9be23724474c2b472188361",
+      "sha256": "951766fc974ed199bd173e184dcde8847a6a709bd8c707629b3ce3e07900532a",
+      "source_md5_verified": true,
+      "transfer": "downloaded_complete"
+    }
+  ],
+  "complete": true,
+  "fastq_qc_status": "not_run"
+}

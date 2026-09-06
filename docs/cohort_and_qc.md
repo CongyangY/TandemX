@@ -6,14 +6,16 @@ the prospective design and acquisition record, **not completed validation**.
 
 Full-file QC passed for Mo17 SRR15447419 (5.625 Gb), Col-0N ERR6210723
 (14.647 Gb), Nipponbare SRR25241090 (32.966 Gb) and Morex ERR4659246
-(19.525 Gb), and Lo7 ERR15194059 (77.092 Gb). These are five materials/species
-with file QC, not five completed biological accuracy validations. Chinese Spring's full
-19.359-GB compressed archive passed transfer checks and its24.954-Gb FASTQ QC
-has started. Whole-file seed6101 rice/Morex10-Mb to10-Gb and Lo7 up-to40-Gb sampling is active.
+(19.525 Gb), Lo7 ERR15194059 (77.092 Gb) and Chinese Spring SRR28200549
+(24.954 Gb). These are six materials/species with file QC, not six completed
+biological accuracy validations. Whole-file seed6101 rice/Morex sampling through
+10 Gb completed; wheat and Lo7 up-to40-Gb sampling remain active.
 Mo17 comparison now includes1.129 Gb, with all three methods successful; its
 seven TandemX products are identical before/after dictionary-index optimization.
-All real-call metrics remain descriptive. Victoria oat, Col-0R single-plant and
-Ey15-2R pooled-plant complete downloads have started to broaden species/materials.
+All real-call metrics remain descriptive. Victoria oat completed transfer checks
+and started full QC; Col-0R single-plant and Ey15-2R pooled-plant downloads remain
+active to broaden species/materials. New Morex and rice comparisons include
+uniform whole-file samples, not archive-order prefixes.
 The prospective enrollment table below retains metadata-level source details;
 use the latest receipts and `current_status.md` for completed versus running work.
 Published Mo17 region evidence is documented in

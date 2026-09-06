@@ -1,0 +1,16 @@
+{
+  "scope": "same_input_same_image_author_defaults_two_executions;output_agreement_not_accuracy",
+  "old_run": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v2_20260906",
+  "new_run": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906",
+  "old_input_sha256": "4c1f8bc38793f8a0b0e9d5989244cae94de045e667695e7eb5112996e6149d2d",
+  "new_input_sha256": "4c1f8bc38793f8a0b0e9d5989244cae94de045e667695e7eb5112996e6149d2d",
+  "unchanged_native_region_geometry": true,
+  "old_unit_count": 360,
+  "new_unit_count": 363,
+  "old_unit_union_bp": 60732,
+  "new_unit_union_bp": 60931,
+  "shared_unit_covered_bp": 60723,
+  "unit_coverage_jaccard": 0.9964391204463406,
+  "native_product_hashes_identical": false,
+  "warning": "default_R_top_level_seed_does_not_establish_worker_determinism;cause_not_isolated;phase_consensus_and_unit_differences_retained"
+}

@@ -79,3 +79,36 @@ def iter_units(native: Path, tool: str, offset: int = 0) -> Iterator[ArrayRecord
         if a < 1 or b < a or width != b-a+1 or row['strand'] not in {'+', '-'}:
             raise ValueError('Invalid native monomer width/strand/coordinates')
         yield ArrayRecord(row[identifier], a-1+offset, b+offset, width)
+
+
+def iter_unit_extents(native: Path, period_source: str = 'native_peak') -> Iterator[ArrayRecord]:
+    """TRASH2 arrays from its explicit unit-to-array IDs and outer unit bounds.
+
+    Author documentation calls the array table approximate. Retain that table
+    separately; this derives boundaries from the main repeat output, never from
+    truth overlap. Gaps between units remain inside the array interval. An array
+    without units is unresolved, not silently dropped from the denominator.
+    """
+    arrays = {}
+    fields = {'seqID', 'array_num_ID'}
+    raw_arrays = csv_records(native/ARRAY_FILES['trash2'], fields)
+    for region, raw in zip(iter_regions(native, 'trash2', 'one_based', period_source), raw_arrays, strict=True):
+        key = raw['seqID'], int(raw['array_num_ID'])
+        if key in arrays or key[1] < 1 or len(arrays) >= 100_000:
+            raise ValueError('Duplicate/invalid array ID or development array-count limit exceeded')
+        arrays[key] = region
+    extents = {}
+    raw_units = csv_records(native/UNIT_FILES['trash2'], {'seqID', 'arrayID'})
+    for unit, raw in zip(iter_units(native, 'trash2'), raw_units, strict=True):
+        key = raw['seqID'], int(raw['arrayID'])
+        if key not in arrays:
+            raise ValueError('Native monomer points to an unknown array ID')
+        if key in extents:
+            start, end = extents[key]
+            extents[key] = min(start, unit.start), max(end, unit.end)
+        else:
+            extents[key] = unit.start, unit.end
+    if arrays.keys() != extents.keys():
+        raise ValueError('Native array without observed monomers; do not omit its row')
+    for key, region in arrays.items():
+        yield ArrayRecord(region.read_id, *extents[key], region.period, region.sequence)

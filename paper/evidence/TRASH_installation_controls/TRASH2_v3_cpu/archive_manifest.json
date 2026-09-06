@@ -1,0 +1,80 @@
+[
+  {
+    "file": "execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/execution.json",
+    "sha256": "c993aba32571d472e59d3ffdf562a437efbccddd18a0b5d2b6b9b5725d9efdc3",
+    "bytes": 3361
+  },
+  {
+    "file": "input_qc.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/input_qc.json",
+    "sha256": "76e534095906cf563f7029de50b86fa5f14767608819ab068d7eb7e613d30dfa",
+    "bytes": 607
+  },
+  {
+    "file": "image_inspect.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/image_inspect.json",
+    "sha256": "93c5744f9b4717e898294860c194e47a104b71a455c3d0b8732fefdd67222652",
+    "bytes": 4312
+  },
+  {
+    "file": "run_trash_container.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/run_trash_container.py",
+    "sha256": "95cb761eba9753dc483762f8c45fad9fe0bb719c78b42dc1343a4192e52a16fc",
+    "bytes": 9995
+  },
+  {
+    "file": "stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/stdout.log",
+    "sha256": "bda8b106bb798da40a2e3dd30656756871d23e53e592d9ca88390e74de9eeae7",
+    "bytes": 3223
+  },
+  {
+    "file": "stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "native/linux_time.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/native/linux_time.tsv",
+    "sha256": "6c2f6ab8eddadf519f9ae3d309257cf4be75c9c039b7490a250a0442821235c8",
+    "bytes": 91
+  },
+  {
+    "file": "native/cgroup_memory_peak_bytes.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/native/cgroup_memory_peak_bytes.txt",
+    "sha256": "ca1a63f46dc4acb852f64befd9ba641692945c331054de967c5a8798fe565e66",
+    "bytes": 10
+  },
+  {
+    "file": "native/cgroup_cpu_before.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/native/cgroup_cpu_before.txt",
+    "sha256": "39d72faf70241947420351a149257b6dda7719ce3f99632e700343068f8d11aa",
+    "bytes": 119
+  },
+  {
+    "file": "native/cgroup_cpu_after.txt",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/native/cgroup_cpu_after.txt",
+    "sha256": "a684165d008e4250238d4994f0f1e0fc971c3a96830c0b6850d8f953744a0b65",
+    "bytes": 138
+  },
+  {
+    "file": "native/assembly.fa_arrays.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/native/assembly.fa_arrays.csv",
+    "sha256": "e79139b26d0efa4da191501f6ff0476090ba77464e6a9e4a6ea36fd3515c7223",
+    "bytes": 2797
+  },
+  {
+    "file": "native/assembly.fa_repeats.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/native/assembly.fa_repeats.csv",
+    "sha256": "43f237d6cb16fefc85388438cf11d16bfc7da152d63f3d4a0c9a842552a18730",
+    "bytes": 30832
+  },
+  {
+    "file": "native/assembly.fa_repeats_with_seq.csv",
+    "source": "/Volumes/T7/Codex/TandemX/results/TRASH2_offline_author_example_v3_cpu_20260906/native/assembly.fa_repeats_with_seq.csv",
+    "sha256": "b2acf00c96034786364a1a0282fe4b8fd6de98a08c3c7635e128d2880d0aac9e",
+    "bytes": 92863
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "complete": true,
+  "contig_count": 1,
+  "total_bases": 10000000,
+  "n_bases": 0,
+  "other_ambiguous_bases": 0,
+  "base_counts": {
+    "G": 2374655,
+    "T": 2683557,
+    "A": 2610110,
+    "C": 2331678
+  },
+  "input_sha256": "15958d097a6e36fd49d7e8fc397dceb36297845b1e4b7fd4f06f0690ce15c57c",
+  "contigs": [
+    {
+      "contig": "chr_sim",
+      "length_bp": 10000000,
+      "base_counts": {
+        "G": 2374655,
+        "T": 2683557,
+        "A": 2610110,
+        "C": 2331678
+      }
+    }
+  ],
+  "biological_qc": "file content only; assembly completeness and satellite copy truth not established"
+}

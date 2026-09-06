@@ -1,0 +1,86 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/environment.json",
+    "sha256": "17823afb489fa42fb527f57da193b639b6a9c5bf4bfebc2fcdeda36c4772a1c6",
+    "bytes": 8841
+  },
+  {
+    "file": "summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/summary.tsv",
+    "sha256": "2bca3e6fad1a91c42d75266b9c23797efca7bba103acbfaed76b75a0885984c4",
+    "bytes": 717
+  },
+  {
+    "file": "tandemx/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tandemx/execution.json",
+    "sha256": "8df1e468fb1990723ab10a3b043ef56b0011659d75900b25e4e44c06b37376c7",
+    "bytes": 933
+  },
+  {
+    "file": "tandemx/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tandemx/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tandemx/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tandemx/stdout.log",
+    "sha256": "2c32a19ca33d24690a3311e774120e3370a51909b256ceb7510dc23e25d1e822",
+    "bytes": 145
+  },
+  {
+    "file": "trf/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/trf/execution.json",
+    "sha256": "9ed5ac509853d3139f7e3033c66164ef070299dcb431851edb924f4a8a38d000",
+    "bytes": 437
+  },
+  {
+    "file": "trf/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/trf/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tidehunter/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tidehunter/execution.json",
+    "sha256": "9a6d5aea9b670e475d70e4b8bfd58482482c93e15836cd3b789936e1e577378f",
+    "bytes": 582
+  },
+  {
+    "file": "tidehunter/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tidehunter/stderr.log",
+    "sha256": "a26b390b740a419edfd5405d87d58e72df565db7f35f4ba6f73feb732587e9de",
+    "bytes": 64
+  },
+  {
+    "file": "tidehunter/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tidehunter/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tandemx/discover/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tandemx/discover/run_config.yaml",
+    "sha256": "151c7b78ad398c01ddaac8fc07fe343125f40c89ff7baa845988e5e0a93c37e9",
+    "bytes": 1947
+  },
+  {
+    "file": "tandemx/discover/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tandemx/discover/run.log",
+    "sha256": "3da80f3cc65c2a8a5b2b9a6343ef67bd3f6e81693a85a094cdcb31985bbcf0a2",
+    "bytes": 1466
+  },
+  {
+    "file": "tandemx/discover/discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tandemx/discover/discovery_summary.json",
+    "sha256": "d86868081ffd927ca5ef0f05b92693c19b13f7cce605c3267eeb1f422e49f6fa",
+    "bytes": 866
+  },
+  {
+    "file": "tandemx/discover/family_audit_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_11Mb_v1_20260906/tandemx/discover/family_audit_summary.json",
+    "sha256": "b6ce44014fddad79d438399b332dd9dceb7af10062ab099909fa3e12939bedcd",
+    "bytes": 384
+  }
+]

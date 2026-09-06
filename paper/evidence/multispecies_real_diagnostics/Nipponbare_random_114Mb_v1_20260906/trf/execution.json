@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/trf",
+    "/Volumes/T7/Codex/TandemX/results/Nipponbare_random_114Mb_v1_20260906/reads.fa",
+    "2",
+    "7",
+    "7",
+    "80",
+    "10",
+    "50",
+    "1000",
+    "-ngs",
+    "-h"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 140.9574844171293,
+  "peak_rss_mib": 333.859375,
+  "cpu_user_seconds": 135.599119,
+  "cpu_system_seconds": 3.086979,
+  "timed_out": false
+}

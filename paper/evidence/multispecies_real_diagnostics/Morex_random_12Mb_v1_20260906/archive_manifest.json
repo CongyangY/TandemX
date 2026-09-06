@@ -1,0 +1,86 @@
+[
+  {
+    "file": "environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/environment.json",
+    "sha256": "6540406c6d2f6f70b4cc5cca234f974a854c55ac683fb90f3d0917932e332f05",
+    "bytes": 8832
+  },
+  {
+    "file": "summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/summary.tsv",
+    "sha256": "c321cd1e768fcb2a48323f0edf36c9b28e8b1b2cc9ee9bac5d173198759b3fc9",
+    "bytes": 722
+  },
+  {
+    "file": "tandemx/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/execution.json",
+    "sha256": "9220ecf438431f4e991634101d770d8d20ed6889994598dbd5ddd74dffdbe52b",
+    "bytes": 932
+  },
+  {
+    "file": "tandemx/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tandemx/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/stdout.log",
+    "sha256": "9a57c56bd9a21ea9c3b20c58cc34915af9858a80f0c2c4f24e9addc369bd132d",
+    "bytes": 140
+  },
+  {
+    "file": "trf/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/trf/execution.json",
+    "sha256": "2472bf65c518143ac63e3a4a0d6fd2b5e60f1b0bae42670b9456a7906d299487",
+    "bytes": 428
+  },
+  {
+    "file": "trf/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/trf/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tidehunter/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tidehunter/execution.json",
+    "sha256": "d0b7395118d2b90ae6adb60baa88727959475a474472c18e4cac47651e4f4d8c",
+    "bytes": 573
+  },
+  {
+    "file": "tidehunter/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tidehunter/stderr.log",
+    "sha256": "fdb425cad8acdd7b8631a3fdf8717431362728669fd7dd9602f0dd452b1d90bf",
+    "bytes": 64
+  },
+  {
+    "file": "tidehunter/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tidehunter/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "tandemx/discover/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/discover/run_config.yaml",
+    "sha256": "6de787a3fe33e38033e37208073ccc47bd0b37fbc5882fcfb609f36477243291",
+    "bytes": 1922
+  },
+  {
+    "file": "tandemx/discover/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/discover/run.log",
+    "sha256": "c672842ea84209f82e08b1a032157c2075219bcf4624ef4c07fea926b0be2abe",
+    "bytes": 1462
+  },
+  {
+    "file": "tandemx/discover/discovery_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/discover/discovery_summary.json",
+    "sha256": "da79e626a072cb011f3608bb8f41b6828d65dbcb29c5ab52c7641954a4568ef1",
+    "bytes": 866
+  },
+  {
+    "file": "tandemx/discover/family_audit_summary.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/discover/family_audit_summary.json",
+    "sha256": "57887ff0c37e952f85d99527a1a11264de16e5204c435cec786fdb2afd18763f",
+    "bytes": 384
+  }
+]

@@ -1,0 +1,74 @@
+command: "tandemx discover"
+subcommand: "discover"
+version: "0.1.0"
+timestamp_utc: "2026-09-06T07:59:07.181679+00:00"
+cwd: "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/source_snapshot"
+argv:
+  - "discover"
+  - "--reads"
+  - "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/reads.fa"
+  - "--outdir"
+  - "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/discover"
+  - "--min-period"
+  - "30"
+  - "--max-period"
+  - "1000"
+  - "--min-repeat-span"
+  - "100"
+  - "--min-support-reads"
+  - "1"
+  - "--min-read-length"
+  - "1"
+  - "--kmer-backend"
+  - "rust"
+  - "--threads"
+  - "1"
+  - "--no-progress"
+  - "--discovery-method"
+  - "elastic"
+  - "--clustering-method"
+  - "sequence"
+  - "--cluster-identity"
+  - ".95"
+  - "--family-audit"
+  - "related"
+python_version: "3.11.15"
+platform: "macOS-14.4.1-arm64-arm-64bit"
+status: "discover_mvp_completed"
+parameters:
+  auto_discovery_max_bases: 40000000000
+  auto_discovery_trigger_bases: 20000000000
+  chunk_bases: 8000000
+  chunk_size: 1000
+  cluster_identity: 0.95
+  clustering_method: "sequence"
+  collapse_redundant_families: false
+  command: "discover"
+  count_threads: 1
+  discovery_method: "elastic"
+  enable_auto_discovery_budget: false
+  family_audit: "related"
+  genome_size: null
+  kmer_backend: "rust"
+  kmer_size: 11
+  max_monomer_len: 1000
+  max_pairs_per_kmer: 100
+  max_read_bases: null
+  max_reads: null
+  min_monomer_len: 30
+  min_read_length: 1
+  min_repeat_span: 100
+  min_seed_occurrences: 2
+  min_spacing_support: 2
+  min_support_reads: 1
+  no_progress: true
+  outdir: "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/tandemx/discover"
+  progress_every: 1000
+  reads:
+    - "/Volumes/T7/Codex/TandemX/results/Morex_random_12Mb_v1_20260906/reads.fa"
+  resolved_clustering_method: "sequence"
+  sample_rate: 1.0
+  seed: 1
+  target_discovery_coverage: 10.0
+  threads: 1
+  top_periods: 5

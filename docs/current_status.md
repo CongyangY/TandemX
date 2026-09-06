@@ -7,6 +7,35 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
+### TRASH2 truth evaluation and six-species file QC
+
+- Source96fd5dc pushed to both branches; CI34020558074/34020558009 passed. Full suite
+  after native-membership and cgroup-CPU additions:365 passed in81.70 s.
+  Native core is unchanged since96fd5dc. Mo17 1.129-Gb exact replay is active.
+- TRASH2 default10-Mb s6301 run completed:55/55 cyclic family recovery;
+  all11,436 monomer sequences match reference at standard1-based coordinates.
+  Native approximate windows match49/55 arrays; using explicit native unit-to-array
+  IDs and outer unit bounds matches55/55, with3.1545-bp boundary MAE. Unit-base
+  precision0.9998987 and recall0.9999437. Both evaluations are archived under
+  `TRASH2_factorial_s6301`. Do not call coarse-window differences missed families.
+- A repeated author control validated whole-cgroup CPU accounting (29.761 s
+  versus3.85 s GNU time user+system). The repeated default output is not byte
+  identical:7 region geometries match, units360 versus363, coverageJaccard0.996439.
+  All outputs remain archived. R-worker stochasticity is a hypothesis, not an
+  isolated cause; no claim that the new resource wrapper preserves exact native
+  products. TRASH1 10-Mb run is still computing with bounded8-GiB allocation.
+- Chinese Spring full QC passed:1,500,000 reads/24.954 Gb, median15,985/N5016,579,
+  no N or duplicate archive IDs. This raises completed file QC to6 species,
+  not6 biological accuracy validations. Wheat seed6101 whole-file sampling runs.
+- Rice sampling completed through10.542 Gb; source receipts archived. New three-
+  tool real comparisons completed on Morex12.542 Mb and Nipponbare11.418/113.627 Mb.
+  Rice113.627 Mb:TX104.784 s/212.75 MiB, TRF140.957 s/333.86 MiB,
+  TideHunter46.330 s/450.64 MiB. Morex115.272-Mb comparison still running.
+  No real accuracy truth or isolated timing ranking is inferred. Compact evidence
+  is under `multispecies_real_diagnostics`.
+- Victoria oat full download passed source checks; complete7.346-Gb QC runs.
+  Col-0R/Ey15-2R downloads, Lo7 sampling and Morex reference transfer remain active.
+
 ### Exact native alignment workspace and assembly-evaluation checkpoint
 
 - Source99c0c66 pushed to both branches; CI34019743265/34019743319 passed.

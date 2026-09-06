@@ -1014,6 +1014,12 @@ inference success; GNU time resource parsing failures remain `resource_error`.
 `native/linux_time.tsv` reports elapsed/user/system seconds, maximum RSS KiB,
 and exit code. GNU time may also retain a nonzero-exit status line. Cgroup peak
 includes cache and is not interchangeable with maximum RSS.
+New executions also retain `cgroup_cpu_before.txt`/`cgroup_cpu_after.txt`.
+`execution.json.cgroup_cpu` has all monotonic counter differences, aggregate
+`usage_seconds`, `user_seconds`, `system_seconds` and measurement scope.
+Counter units ending in `_usec` remain microseconds in `delta_counters`; other
+counters retain their native count units. Missing/invalid counters are explicit
+resource errors, never invented totals. Historical executions lack this field.
 
 `coordinate_offsets.tsv` reports native1-based offsets-2..2, total monomer rows,
 width discrepancies, forward/strand-adjusted exact sequence matches, and
@@ -1043,6 +1049,10 @@ interval records and10 MB of truth/catalogue input; it never loads the genome.
   metrics. `raw_region_count` and `excluded_scope_count` show the effect of the
   fixed30–1000-bp period and100-bp span scope. One chromosome is not a read-level
   negative-control experiment, so read-level metrics are omitted.
+  TRASH2 additionally reports `unit_extent`, using its native repeat-to-array IDs
+  and the outermost observed unit boundaries; it does not infer membership from
+  overlap with truth. Native approximate regions and actual unit unions remain
+  separate, and arrays without units cannot be silently dropped.
 - Each policy directory contains `normalized_arrays.tsv`, `array_details.tsv`
   and `family_recovery.tsv`, with the existing independent evaluator schemas.
 - `unit_coordinate_audit.tsv`: offsets−2..2 from native1-based coordinates,
