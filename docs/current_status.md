@@ -11,9 +11,9 @@ This section is the restart point for a new Codex window. Verify the state below
 before continuing and do not stage the untracked `.codex/` directory.
 
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `054b935`, aligned with `origin/codex/publish-current-progress`; GitHub `main`
+  `9b09bfd`, aligned with `origin/codex/publish-current-progress`; GitHub `main`
   was also fast-forwarded to that object through the API after the local SSH
-  proxy closed the direct push. Hosted runs `34095006477` and `34095171697`
+  proxy closed the direct push. Hosted runs `34097112749` and `34097146588`
   passed Ubuntu/macOS Python tests, Rust checks and wheel builds. The earlier
   commit `9eda196` froze
   the untouched depth-gated quantify validation source, seeds, data-generation
@@ -146,10 +146,11 @@ before continuing and do not stage the untracked `.codex/` directory.
   formatting/release Clippy and both hosted workflows. The post-validation
   archiver/figure/manuscript source passes 49 focused and all 533 Python tests
   in 60.11 s, compileall, diff check, 69 local Markdown links, archive hashes
-  and visual/PDF checks. It still requires a commit, both pushes and hosted
-  workflows. Never tune against consumed 2201, 3101--3103 or 6401--6403 values.
-  Continue the real matched-donor, plant-scale-comparator and release-portability
-  gaps.
+  and visual/PDF checks. It is published as `9b09bfd`; working-branch/main runs
+  `34097112749`/`34097146588` passed Ubuntu/macOS Python, Rust and wheel jobs.
+  Only `.codex/` is untracked. Never tune against consumed 2201, 3101--3103 or
+  6401--6403 values. Continue the real matched-donor, plant-scale-comparator and
+  release-portability gaps.
 
 ## Sequence-clustering and scoring checkpoint (current)
 
