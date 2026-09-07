@@ -67,16 +67,31 @@ before continuing and do not stage the untracked `.codex/` directory.
   68 editable SVG text nodes and no raster image elements; its direct PNG and a
   Poppler render of the PDF were both visually inspected with no overlap or
   clipping observed.
-- **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `c8593e0a186f589cf14c347475a615ec50d1a205`, aligned with
-  `origin/codex/publish-current-progress` and `origin/main`. Hosted runs
-  `34104475816` and `34104475946` passed Ubuntu/macOS Python tests, Rust checks
-  and wheel builds. Commit `50de982` is the cohort hardening/TideCluster runner
-  checkpoint; `c8593e0` archives the completed Morex 10/100-Mb evidence. The earlier
+- **Published cohort-visualization checkpoint.** Commit
+  `9723aad7e031dabd5c2c6a29f3273a2bd3e6d51d` is on both
+  `codex/publish-current-progress` and `main`. Hosted runs `34105542000` and
+  `34105542475` passed Ubuntu/macOS Python tests, Rust checks and wheel builds.
+  Commit `50de982` is the cohort hardening/TideCluster runner checkpoint;
+  `c8593e0` archives the completed Morex 10/100-Mb evidence. The earlier
   commit `9eda196` froze
   the untouched depth-gated quantify validation source, seeds, data-generation
   hashes, decision rule and nine scientific gates before any validation data
   were generated; `9291fd6` publishes the completed evidence and opt-in CLI.
+- **External TideHunter calls now have a first-class downstream route.** The
+  current continuation adds `tandemx import tidehunter`: strict 11-field `-f 2`
+  parsing, disk-backed validation against the original reads, full/native ID
+  reconciliation, 1-based-inclusive to 0-based-half-open conversion, native
+  field audit, fixed-representative family clustering and standard catalogue
+  outputs for quantify/locate/compare/probe/cohort. The first real toy attempt
+  at `/tmp/tandemx-tidehunter-import-v1` correctly failed because TideHunter
+  retained semicolon header metadata while TandemX normalized it; the corrected
+  mapping then completed on fresh `/tmp/tandemx-tidehunter-import-v2` using
+  TideHunter 1.5.5: 37 imported candidates, one family, seven validated files/
+  150 records and a successful downstream quantify run. External provenance is
+  explicit and is not counted as TandemX native detector evidence. Nine import
+  output hashes independently rechecked, and the complete source suite passes
+  556 tests in 64.55 s; compileall, shell syntax, 72 tracked local links and diff
+  checks pass.
 - **Frozen cascade held-out is consumed; never rerun seeds 3101--3103.** The
   once-only run is complete at
   `/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907`:

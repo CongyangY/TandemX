@@ -81,3 +81,20 @@ machine-readable source for the displayed top families and
 `cohort_figure_receipt.json` records input/output hashes and editable SVG-node
 counts. This example verifies the data contract and rendering path; it is not
 biological cohort validation.
+
+## TideHunter import example
+
+With a TideHunter executable available, this workflow generates new toy reads,
+runs TideHunter `-f 2`, imports the actual native calls, validates the catalogue
+and uses it for TandemX quantification:
+
+```bash
+bash examples/toy/run_tidehunter_import.sh \
+  /tmp/tandemx-tidehunter-import \
+  /path/to/TideHunter
+```
+
+The importer validates TideHunter IDs, lengths and coordinates against the
+generated reads. Its audit preserves full native IDs separately from TandemX's
+normalized IDs. This is an executable interoperability example, not a detector
+accuracy benchmark.

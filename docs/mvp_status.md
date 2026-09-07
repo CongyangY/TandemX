@@ -13,6 +13,8 @@ Current implemented commands:
 7. `tandemx visualize`
 8. `tandemx validate`
 9. `tandemx run`
+10. `tandemx cohort`
+11. `tandemx import tidehunter`
 
 Implemented benchmark support:
 
@@ -43,7 +45,11 @@ Default analysis flow:
 raw reads -> de novo discover -> repeat catalog -> quantify/locate/compare/probe/visualize
 ```
 
-`tandemx discover` is de novo in the MVP: it needs reads and output parameters, not a catalog, user-supplied repeat sequence or simulator truth file. Downstream `--catalog` arguments refer to `monomers.fa` produced by `tandemx discover`.
+`tandemx discover` is de novo in the MVP: it needs reads and output parameters,
+not a catalog, user-supplied repeat sequence or simulator truth file. Downstream
+`--catalog` arguments normally refer to `monomers.fa` produced by
+`tandemx discover`; a provenance-labelled catalogue produced by
+`tandemx import tidehunter` is also accepted.
 
 Implemented sequence input support:
 
@@ -74,6 +80,12 @@ Discover:
 1. `candidate_reads.tsv`
 2. `monomers.fa`
 3. `families.tsv`
+
+TideHunter import:
+
+1. standard discovery catalogue/evidence outputs;
+2. `tidehunter_import.tsv` with native and normalized fields;
+3. `import_summary.json` with source/output provenance and hashes.
 
 Quantify:
 

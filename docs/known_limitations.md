@@ -8,13 +8,18 @@ The current MVP:
 2. performs de novo discovery from reads in `tandemx discover`;
 3. assumes small toy data;
 4. uses a bounded k-mer spacing prefilter and local period refinement with Python and optional Rust backends;
-5. does not use external tandem repeat finders;
+5. keeps native discovery independent of external tandem repeat finders, while
+   an explicit provenance-labelled importer can ingest TideHunter `-f 2` calls;
 6. does not perform read mapping;
 7. flags possible higher-order or partial family relationships but does not infer higher-order repeat structure;
 8. does not model ploidy or subgenomes;
 9. does not provide experimentally calibrated FISH probe prediction.
 
-The downstream `--catalog` input reuses the de novo repeat catalog produced by `tandemx discover`. It is not a requirement that users already know the repeat sequence before running TandemX.
+The downstream `--catalog` input normally reuses the de novo repeat catalog
+produced by `tandemx discover`. It can also use a catalogue from
+`tandemx import tidehunter`, whose external detector provenance remains in the
+candidate, family and import-audit outputs. It is not a requirement that users
+already know the repeat sequence before running TandemX.
 
 Known-repeat annotation is post hoc. `tandemx annotate-repeats` can compare
 discovered monomers to a known-repeat FASTA after discovery, but that library is

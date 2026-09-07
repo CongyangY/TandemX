@@ -96,6 +96,7 @@ tandemx locate --help
 tandemx probe --help
 tandemx compare --help
 tandemx cohort --help
+tandemx import tidehunter --help
 tandemx visualize --help
 tandemx validate --help
 tandemx annotate-repeats --help
@@ -267,6 +268,31 @@ Unknown, duplicate or incompletely quantified catalogue families fail clearly.
 Missing or unevaluated families remain `NA`; they are not silently converted to
 zero. A complete two-sample example is available at
 `examples/toy/run_toy_cohort.sh`.
+
+TandemX can also ingest native TideHunter `-f 2` calls while keeping the
+detector source explicit:
+
+```bash
+tandemx import tidehunter \
+  --input tidehunter.tsv \
+  --reads reads.fastq.gz \
+  --outdir results/tidehunter-import
+tandemx quantify \
+  --reads reads.fastq.gz \
+  --catalog results/tidehunter-import/monomers.fa \
+  --genome-size 4200000000 \
+  --outdir results/quantify-from-tidehunter
+```
+
+The importer streams the original reads into a temporary disk-backed ID/length
+index, verifies every TideHunter read and 1-based inclusive interval, converts
+coordinates to TandemX's 0-based half-open convention, and clusters native
+consensuses into an operational catalogue. It retains every native field in
+`tidehunter_import.tsv`, source and output hashes in `import_summary.json`, and
+`external_detector=tidehunter` warnings in candidates and families. This route
+uses TideHunter for detection; it is not evidence for TandemX native detector
+accuracy. An executable toy workflow that runs the real TideHunter binary is
+available at `examples/toy/run_tidehunter_import.sh`.
 
 ## Comparing two run directories
 
