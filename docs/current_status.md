@@ -12,11 +12,11 @@ still uncommitted and must be verified before publication. Do not stage the
 untracked `.codex/` directory.
 
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `c3798db`, aligned with `origin/codex/publish-current-progress` and
-  `origin/main`. Hosted runs `34080916140` and `34081012863` passed Ubuntu/macOS
-  Python tests, Rust checks and wheel builds. That commit contains `tandemx
-  cohort`, the staged native-screen `cascade`, the frozen held-out evaluator,
-  resource profiling, and the pinned TideCluster 1.21.2 image/smoke evidence.
+  `c8b3a8b`, aligned with `origin/codex/publish-current-progress` and
+  `origin/main`. Hosted runs `34084539666` and `34084539713` passed Ubuntu/macOS
+  Python tests, Rust checks and wheel builds. That commit contains the failed
+  cascade held-out audit, public control/error-aware quantification, its frozen
+  development evaluator and the retrospective biological-source audit.
 - **Frozen cascade held-out is consumed; never rerun seeds 3101--3103.** The
   once-only run is complete at
   `/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907`:
@@ -37,16 +37,24 @@ untracked `.codex/` directory.
   40/40 manifest hashes valid. `figures_v2` is the accepted six-panel SVG/PDF/PNG
   with 188 editable SVG text nodes and no raster image elements. `figures_v1`
   remains an inspected draft because its SVG text was converted to paths.
-- **Current uncommitted P1 implementation.** Public `tandemx quantify` now has
-  optional independently supplied single-copy k-mer normalization, FASTQ
-  Phred-derived or explicit-error k-mer survival correction, strict control
-  validation, streaming counts, and new audit fields. The empirical estimator
-  uses the control arithmetic mean while retaining median, MAD and zero fraction.
-  The 10th--90th percentile diagnostic-k-mer spread is still explicitly not a
-  calibrated sampling confidence interval. A frozen development ablation on
-  existing seeds 6301--6303 compares four public-command methods across 27 read
-  conditions; it has not been executed and must wait for this source/config to
-  be committed and hosted CI to pass.
+- **Quantify development ablation is complete.** The committed source snapshot
+  ran once at `/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907`:
+  108/108 successful public-command executions, 5,940 family rows and 36 strata.
+  Across 1,485 family conditions per method, mean absolute relative error was
+  0.401898 for total-bases depth, 0.359640 for oracle error survival, and 0.365728
+  for empirical controls. Controls improved all three genome means but regressed
+  at nominal 1x. Controls plus oracle produced exactly the same 1,485 estimates
+  as controls alone while increasing median runtime from 1.771 to 4.934 s.
+  Diagnostic-spread truth inclusion was far below 0.95 and remains explicitly
+  not a sampling CI. The hash-checked compact archive and accepted editable
+  six-panel figure are in `paper/evidence/quantify_calibration_development_v1`.
+- **Current uncommitted optimization.** The original explicit-error path scanned
+  every valid FASTA base in Python and had median runtime 4.658 s versus 1.589 s
+  for the baseline. A mathematically equivalent all-ACGT FASTA shortcut is now
+  implemented and has focused tests, but is not committed or replayed. The
+  post-hoc development candidate uses controls only when mean control depth is
+  at least 2; its MARE is 0.356117 and it improves every development seed, but it
+  is not promoted until source/config commit, hosted CI and untouched genomes.
 - **Real-data source audit.** Exact ENA metadata for PRJEB50694, PRJNA751841,
   PRJNA953663 and PRJNA919186 is archived at
   `paper/evidence/retrospective_collapse_source_audit`. Five manifest files and
@@ -55,17 +63,18 @@ untracked `.codex/` directory.
   does not establish identical DNA extraction, individual plant, stock or
   BioSample between historical and newer assemblies. All five manifest entries
   were independently rehashed. Donor-matched collapse truth remains unavailable.
-- **Verification state and exact next actions.** The complete local suite passed:
-  502 Python tests, 16 Rust release tests, Rust format and Clippy with warnings
-  denied, compileall, `git diff --check`, relative Markdown-link audit, 40/40
-  held-out archive hashes and 5/5 retrospective-audit hashes. A real Rust/FASTQ/
-  control-k-mer CLI smoke test produced the expected copy number and audit files.
-  Each seed-6301--6303 genome also yielded all 1,000 requested whole-genome-
-  unique controls in preflight. Next commit all code/docs/evidence except
-  `.codex/`, push both branches, verify hosted CI, and only then run
-  `quantify_calibration_development_v1` once into a new T7 result directory.
-  Diagnose cascade speed on development or newly frozen seeds; never tune against
-  the consumed held-out seed values.
+- **Verification state and exact next actions.** Commit `c8b3a8b` passed 502
+  Python tests, 16 Rust release tests, format/Clippy, compile, link and artifact
+  audits locally and both hosted workflows above. The current evidence/speed
+  checkpoint passes 505 Python tests, the same 16 Rust release tests,
+  format/Clippy, compile, link and artifact audits. Quantify archive hashes are
+  19/19 and the accepted SVG has six axes, 86 editable text nodes and no raster
+  elements. Next commit/push this checkpoint and pass hosted CI. Then replay the
+  same development matrix into a new T7 directory to require identical scientific
+  estimates and quantify the runtime change.
+  Freeze new 6401--6403 genomes before evaluating the depth-gated candidate.
+  Diagnose cascade speed only on development/new seeds; never tune against the
+  consumed cascade held-out values.
 
 ## Sequence-clustering and scoring checkpoint (current)
 

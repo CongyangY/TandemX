@@ -511,6 +511,26 @@ def quality_window_survival(
         raise ValueError("Assumed error rate must be in [0,1)")
     if quality is not None and any(not 0 <= ord(character) - 33 <= 93 for character in quality):
         raise ValueError("FASTQ quality characters must encode Phred+33 values in 0..93")
+    if quality is None:
+        if not set(sequence).difference("ACGT"):
+            valid_windows = max(0, len(sequence) - k + 1)
+        else:
+            valid_windows = 0
+            run_length = 0
+            for character in sequence:
+                if character in "ACGT":
+                    run_length += 1
+                else:
+                    valid_windows += max(0, run_length - k + 1)
+                    run_length = 0
+            valid_windows += max(0, run_length - k + 1)
+        rate = assumed_error_rate or 0.0
+        return (
+            valid_windows * (1.0 - rate) ** k,
+            valid_windows,
+            0,
+            valid_windows,
+        )
     survival_sum = 0.0
     valid_windows = 0
     quality_windows = 0

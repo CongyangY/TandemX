@@ -27,7 +27,23 @@ remain diagnostic-k-mer spread and are not relabelled as sampling confidence
 intervals. The separate joint-read multi-k experiment evaluates approximate
 sampling intervals and missingness.
 
-After committing the source/configuration and passing hosted CI, run:
+The first complete development run used committed source `c8b3a8b` after both
+hosted workflows passed. It completed 108/108 commands, 5,940 family rows and 36
+strata. Aggregate mean absolute relative error was 0.401898 for total-bases
+normalization, 0.359640 for the planted-error oracle, and 0.365728 for empirical
+controls. Controls improved all three independent-genome means but were worse at
+nominal 1x. Controls plus oracle generated exactly the same estimates as controls
+alone, so the global survival factor is redundant when it corrects both numerator
+and denominator. The exported 10th--90th diagnostic spread had very low truth
+inclusion and is not a sampling confidence interval.
+
+The original explicit-error implementation also added substantial FASTA scan
+time. A subsequent exact-formula shortcut must be committed and replayed against
+the archived run with byte-identical estimates before an engineering speed claim.
+The development-selected candidate uses empirical controls only when their mean
+depth is at least 2; it requires untouched genome/family validation.
+
+The executed command was:
 
 ```bash
 conda run --no-capture-output -n tandemx-dev \
@@ -37,9 +53,11 @@ conda run --no-capture-output -n tandemx-dev \
     /path/to/factorial_scale_s6301_v1 \
     /path/to/factorial_scale_s6302_v1 \
     /path/to/factorial_scale_s6303_v1 \
-  --outdir /path/to/new/result
+  --outdir /Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907
 ```
 
+Compact tables, per-execution hashes, the recomputed decision and the accepted
+six-panel figure are in `paper/evidence/quantify_calibration_development_v1`.
 Do not select a default from this development ablation alone. Freeze a separate
 family/genome-held-out configuration after reviewing failure modes, then run it
 once without changing the rule or silently removing failed conditions.

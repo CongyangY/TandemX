@@ -1,0 +1,116 @@
+[
+  {
+    "file": "run/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/environment.json",
+    "sha256": "72bca04580adb54907672cc7486954478a411169b03249fbed792dae3092e4b2",
+    "bytes": 8007
+  },
+  {
+    "file": "run/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/execution.json",
+    "sha256": "6dc82c1219f766d1cb386ea8bc7452abf4c0895496ec9bbdabc376a77f956da2",
+    "bytes": 904
+  },
+  {
+    "file": "run/executions.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/executions.tsv",
+    "sha256": "c35795ea630122d8a4503a2877487b2735adc344f1e6e5bb8fda8ab0391e6d46",
+    "bytes": 13741
+  },
+  {
+    "file": "run/metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/metrics.tsv",
+    "sha256": "886e4a0e7a84e33e4fff9b84761eedc7202df3ed9f89635bee02ffc9c835aa99",
+    "bytes": 1507723
+  },
+  {
+    "file": "run/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/summary.tsv",
+    "sha256": "ed31936c9ee57fabc2d31e936e2611cc731ec49cb6262f9b2208d1713541754e",
+    "bytes": 10705
+  },
+  {
+    "file": "run/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/validation.json",
+    "sha256": "3d84f285a04601d6d4c2e9b5f3b12f2ad20ae5e3f814dfe871c3cd38fb4b5ed8",
+    "bytes": 260
+  },
+  {
+    "file": "run/frozen_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/frozen_config.yaml",
+    "sha256": "c96cc1ad77f4a2fe38ec18e5e13dece7661770d9c80feb9b3247ba98dd799544",
+    "bytes": 792
+  },
+  {
+    "file": "run/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "run/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "controls/s6301/single_copy_kmers.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/controls/s6301/single_copy_kmers.tsv",
+    "sha256": "5ea7ced504f35cdec4f65b843fdca032431b25093bc770e1479437ec8923d9f4",
+    "bytes": 24026
+  },
+  {
+    "file": "controls/s6301/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/controls/s6301/receipt.json",
+    "sha256": "dfc6c8e371119e389ed9e9fe368cc7fc1f421c21f3f7f856bef0bd72b2468020",
+    "bytes": 751
+  },
+  {
+    "file": "controls/s6302/single_copy_kmers.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/controls/s6302/single_copy_kmers.tsv",
+    "sha256": "e9a8d5dd67ab3f108211b760ca1a6399a829127d8b52a182befaae047af77e17",
+    "bytes": 24026
+  },
+  {
+    "file": "controls/s6302/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/controls/s6302/receipt.json",
+    "sha256": "bf9b16421d4a3fdd47759664783887c7112e6502ec0541614490280bf8f832f8",
+    "bytes": 751
+  },
+  {
+    "file": "controls/s6303/single_copy_kmers.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/controls/s6303/single_copy_kmers.tsv",
+    "sha256": "41e9ad6c0d11e4c49e67f8b008ee3da750e9b24aa9b20ce3cf0c21f579d52fcb",
+    "bytes": 24026
+  },
+  {
+    "file": "controls/s6303/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v1_20260907/controls/s6303/receipt.json",
+    "sha256": "f188819ce0696fdc94d9dce7eec445323f0ae0e6d39167fef4f73a41d11ada6b",
+    "bytes": 751
+  },
+  {
+    "file": "execution_artifacts.tsv",
+    "source": "derived_after_validation",
+    "sha256": "707df991381b091cde5b550f48c2f51e9b7f04bf0ccbff050c5dd2465357e5ea",
+    "bytes": 125213
+  },
+  {
+    "file": "decision.json",
+    "source": "derived_after_validation",
+    "sha256": "075f9ca6b03f4da37d85166debdd95b7a110b13312da3f2b2c04a8c725f8f3b6",
+    "bytes": 5777
+  },
+  {
+    "file": "archive_summary.json",
+    "source": "derived_after_validation",
+    "sha256": "10299cb658256c6b893c49a0039e7b3814e55c26c9b74c4c957a67ddbd5fb212",
+    "bytes": 557
+  },
+  {
+    "file": "README.md",
+    "source": "derived_after_validation",
+    "sha256": "b026663a08453bf00dbaf31407408ee723d8da77a81f972d93aabdf580a1c08a",
+    "bytes": 513
+  }
+]

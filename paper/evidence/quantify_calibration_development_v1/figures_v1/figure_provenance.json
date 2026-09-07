@@ -1,0 +1,37 @@
+{
+  "benchmark_id": "quantify_calibration_development_v1",
+  "inputs": {
+    "metrics": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_calibration_development_v1/run/metrics.tsv",
+      "sha256": "886e4a0e7a84e33e4fff9b84761eedc7202df3ed9f89635bee02ffc9c835aa99"
+    },
+    "executions": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_calibration_development_v1/run/executions.tsv",
+      "sha256": "c35795ea630122d8a4503a2877487b2735adc344f1e6e5bb8fda8ab0391e6d46"
+    },
+    "summary": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_calibration_development_v1/run/summary.tsv",
+      "sha256": "ed31936c9ee57fabc2d31e936e2611cc731ec49cb6262f9b2208d1713541754e"
+    },
+    "decision": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_calibration_development_v1/decision.json",
+      "sha256": "075f9ca6b03f4da37d85166debdd95b7a110b13312da3f2b2c04a8c725f8f3b6"
+    },
+    "validation": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_calibration_development_v1/run/validation.json",
+      "sha256": "3d84f285a04601d6d4c2e9b5f3b12f2ad20ae5e3f814dfe871c3cd38fb4b5ed8"
+    },
+    "manifest": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_calibration_development_v1/archive_manifest.json",
+      "sha256": "0d9f4a5550667cd31448990d7d26c26005f5321e21f4d92ca9ac78922a654145"
+    }
+  },
+  "outputs": {
+    "figure_legend.md": "92c24cd5b26c05466a33b829018a38ca922483b9b0ee2798297548d98bf6b67b",
+    "panel_source.tsv": "48c5cbc6592390a01986a85d7a5b71535b2785fd2e29f76703375f1765625c2b",
+    "quantify_calibration.pdf": "8531caa1824325d29885fd8447dd686f511b38f0ffe5a120b1f626000b0b54e6",
+    "quantify_calibration.png": "a7f8777aa988021def4805958d2561da4f2b52d979a6aafcf6881ac439ec1460",
+    "quantify_calibration.svg": "72b24fbba23b7a3bd395b5f7639a08e82835e6948bd55e59b28523b38cb01c44"
+  },
+  "warning": "development_only;posthoc_candidate;oracle_not_blind;diagnostic_spread_not_sampling_CI"
+}

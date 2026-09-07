@@ -1,0 +1,14 @@
+{
+  "k": 21,
+  "requested_controls": 1000,
+  "selected_controls": 1000,
+  "candidate_controls": 7830,
+  "selection_stride_bp": 997,
+  "excluded_planted_array_count": 55,
+  "genome_sha256": "a57d0a5cc1c19af931b59778d099fac55048337bc342f93f6a2a6f44ceed8cd5",
+  "truth_sha256": "4fdfbd7f2b583d18963a8ef7747870f9de07da97607c4139be88c2140459c0d9",
+  "catalogue_sha256": "98edbba7f63b7f3aa6184bee7d0a60425f01fc7ec10691bc0ea1f2dfa14b7bfa",
+  "criterion": "canonical_whole_genome_occurrence_equals_1;outside_planted_array_intervals;not_repeat_diagnostic;not_low_complexity",
+  "warning": "simulation_truth_assisted_control_selection_not_available_for_blind_real_data",
+  "controls_sha256": "e9a8d5dd67ab3f108211b760ca1a6399a829127d8b52a182befaae047af77e17"
+}

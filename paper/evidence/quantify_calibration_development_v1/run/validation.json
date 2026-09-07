@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "executions": 108,
+  "successful_executions": 108,
+  "family_conditions": 5940,
+  "independent_genomes": 3,
+  "heldout_used": false,
+  "warning": "development_ablation;oracle_error_rate_is_not_blind;diagnostic_spread_not_sampling_CI"
+}

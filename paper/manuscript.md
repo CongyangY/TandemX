@@ -186,6 +186,31 @@ trend cannot distinguish biological divergence from sequencing error. Related
 families, background word sharing and discovered-catalogue error remain
 outside this conditional result.
 
+### Public depth calibration reduces aggregate bias but exposes low-depth and interval failures
+
+We then evaluated the public single-k `quantify` command on the same three
+independent 10-Mb development genomes. Each of 27 read conditions was run with
+total-bases depth, the planted aggregate error rate, 1,000 simulation-truth-
+assisted whole-genome-unique control k-mers, and controls plus the planted error
+rate. All 108 commands completed, yielding 1,485 family conditions per method.
+Mean absolute relative error was 0.401898 for total-bases depth, 0.359640 for the
+oracle error correction and 0.365728 for empirical controls. Mean signed errors
+were -0.262533, -0.145827 and -0.113112, respectively. Controls improved the
+mean absolute error in every independent genome but were worse at nominal 1x;
+969/1,485 paired family conditions improved and 450 worsened.
+
+Applying the same global survival factor to repeat and control counts cancelled
+algebraically: controls plus oracle produced exactly the same 1,485 copy-number
+estimates as controls alone, while median wall time increased from 1.771 to
+4.934 s in the original implementation. A post-hoc development rule that used
+controls only when their mean depth was at least 2 reduced aggregate error to
+0.356117 and improved all three genome means. It remains a candidate rather than
+a promoted default because the controls were selected with simulation truth and
+no untouched genome/family split has tested the rule. Across every method and
+coverage stratum, truth inclusion in the exported diagnostic 10th--90th spread
+was far below 0.95, confirming that these endpoints cannot be interpreted as a
+sampling confidence interval (Figure 9; Evidence E22).
+
 ### Joint-read uncertainty retains correlated k values and sparse-support failures
 
 Measurements at different k values use the same reads. We therefore retained
@@ -647,6 +672,18 @@ Minimum effective support is min_k[(Σ_iY_ifk)²/Σ_iY_ifk²]. Values below 20,
 missing diagnostic support and numerical-resolution failures yield unavailable
 intervals. The genome size and catalogue are fixed conditioning inputs.
 
+For the public single-k calibration ablation, control words were sampled outside
+planted array intervals, excluded catalogue diagnostic/low-complexity words and
+were retained only when their canonical whole-genome occurrence was exactly one.
+This use of simulation truth does not represent a blind real-data control panel.
+FASTQ survival is the mean product of calibrated Phred-derived correctness
+probabilities over valid k-mer windows; FASTA survival uses the supplied
+independent-error approximation `(1-error)^k`. Corrected diagnostic depth is
+normalized by explicit haploid depth, mean control depth including zero-count
+controls, or total read bases/genome size in that precedence order. Median,
+MAD and zero fraction are retained for audit. The 10th--90th diagnostic-word
+spread is scored only as a diagnostic range.
+
 ### Raw-data and reference QC
 
 Complete ENA files were checked against official source sizes/MD5 values and
@@ -759,6 +796,18 @@ and the TandemX/TideHunter wall-time geometric mean was 2.457943 (>2.0).
 editable SVG, PDF/PNG, panel source, complete legend and hashes. Failed TRF rows
 are NA rather than fabricated zero-accuracy observations.
 
+**Figure 9. Development audit of public copy-number calibration.** A, aggregate
+mean absolute relative error with independent-genome points, including the
+post-hoc depth-gated candidate. B, residual signed error. C, error by nominal
+coverage, exposing the empirical-control regression at 1x. D, fractions of
+paired family conditions that improve, tie or worsen relative to total-bases
+normalization. E, original single-execution wall time by coverage; oracle input
+is unavailable in blind data. F, truth inclusion within the exported 10th--90th
+diagnostic-k-mer spread, with nominal 0.95 shown only to demonstrate lack of
+calibration. The accepted editable figure, source rows, full legend and hashes
+are in `evidence/quantify_calibration_development_v1/figures_v1`. All controls
+were selected with simulation truth, and the candidate is not held-out evidence.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -838,6 +887,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S18: exact four-project ENA queries and the 12 selected
   PacBio genomic-WGS run rows in
   `evidence/retrospective_collapse_source_audit`.
+- Supplementary Table S19: all 5,940 public quantify calibration rows, 108
+  execution resources, 36 strata, control receipts, per-execution artifact
+  hashes, development decision and Figure 9 source data in
+  `evidence/quantify_calibration_development_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -854,7 +907,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `abundance_classifier_depth_gated_validation_v1`; E19:
 `discovery_packed_trace_batch_v1`; E20:
 `cascade_native_screen_heldout_v1`; E21:
-`retrospective_collapse_source_audit`.
+`retrospective_collapse_source_audit`; E22:
+`quantify_calibration_development_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

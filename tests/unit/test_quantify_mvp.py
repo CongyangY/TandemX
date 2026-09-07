@@ -147,6 +147,17 @@ def test_quality_window_survival_uses_phred_probabilities_and_skips_n() -> None:
     assert (windows, quality_windows, assumed_windows) == (4, 4, 0)
 
 
+def test_quality_window_survival_fast_fasta_path_preserves_ambiguous_breaks() -> None:
+    observed = quality_window_survival("AACGTNACGTTA", None, 3, 0.01)
+    expected_windows = 3 + 4
+    assert observed == (
+        expected_windows * (1.0 - 0.01) ** 3,
+        expected_windows,
+        0,
+        expected_windows,
+    )
+
+
 def test_quantify_corrects_fastq_kmer_survival(tmp_path: Path) -> None:
     reads = tmp_path / "reads.fastq"
     monomers = tmp_path / "monomers.fa"

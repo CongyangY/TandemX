@@ -30,6 +30,16 @@ matching, but not identical DNA extraction, plant, stock or BioSample between
 the read data and both assemblies. It is a source-eligibility audit, not a
 completed biological collapse benchmark.
 
+`quantify_calibration_development_v1/` archives 108/108 successful public
+`quantify` executions across three independently simulated genomes, 27 read
+conditions and four methods. Empirical controls reduced aggregate MARE from
+0.401898 to 0.365728 and improved each genome mean, while regressing at nominal
+1x. The planted-error oracle reached 0.359640 but is unavailable in blind data.
+Controls plus oracle were estimate-identical to controls and added runtime. The
+post-hoc mean-control-depth >=2 candidate reached MARE 0.356117 and improved all
+three development seeds, but remains unpromoted. The archive has 19 verified
+manifest entries; `figures_v1` is the visually accepted six-panel rendering.
+
 `tidecluster_simulated_smoke/` records the first complete assembly-level
 TideCluster 1.21.2 smoke test, its strict normalization, exact image ID,
 container recipe, dependency versions, logs and internal GNU-time measurements.
