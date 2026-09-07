@@ -138,3 +138,26 @@ def test_quantify_accepts_multiple_read_files(tmp_path: Path) -> None:
     assert result.returncode == 0, result.stderr
     estimates = parse_tsv(outdir / "copy_number.tsv")
     assert estimates[0]["median_kmer_depth"] == "2.0000"
+
+
+def test_quantify_cli_uses_empirical_single_copy_controls(tmp_path: Path) -> None:
+    reads = tmp_path / "reads.fa"
+    monomers = tmp_path / "monomers.fa"
+    controls = tmp_path / "controls.tsv"
+    outdir = tmp_path / "quantify"
+    reads.write_text(">r1\nACGTTCAGGACACGTTCAGGACTTTGC\n")
+    monomers.write_text(
+        ">family_id=TXF000001;length_bp=11\nACGTTCAGGAC\n"
+    )
+    controls.write_text("kmer\texpected_copy_number\nTTTGC\t1\n")
+    result = run_cli(
+        "quantify", "--reads", str(reads), "--catalog", str(monomers),
+        "--genome-size", "27", "--single-copy-kmers", str(controls),
+        "--k", "5", "--outdir", str(outdir),
+    )
+    assert result.returncode == 0, result.stderr
+    estimate = parse_tsv(outdir / "copy_number.tsv")[0]
+    assert estimate["normalization_method"] == "empirical_single_copy_kmers_mean"
+    assert estimate["single_copy_control_mean_depth"] == "1.0000"
+    assert estimate["single_copy_control_median_depth"] == "1.0000"
+    assert estimate["kmer_survival_probability"] == "1.00000000"

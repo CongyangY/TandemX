@@ -11,75 +11,61 @@ This section is the restart point for a new Codex window. The changes below are
 still uncommitted and must be verified before publication. Do not stage the
 untracked `.codex/` directory.
 
-- The current branch is `codex/publish-current-progress`; verified start HEAD
-  was `a692e95`, aligned with `origin/main` and
-  `origin/codex/publish-current-progress`. The working tree contains the files
-  listed by `git status`; no earlier benchmark was restarted.
-- Added `tandemx cohort`, which reads a sample manifest and writes a cross-sample
-  pan-repeat catalogue, auditable membership, abundance and representation
-  matrices, and a JSON summary. CLI/file-format/algorithm documentation and an
-  integration test are included. Missing comparisons remain explicit rather
-  than being converted to zero.
-- Added a staged `cascade` discovery mode: repeated-k-mer screen, a deliberately
-  narrow near-exact gap-free fast path, and the existing indel-aware elastic
-  fallback. Branch provenance is retained per candidate. Focused elastic,
-  cascade, integration and challenge tests passed (59 tests). The public default
-  remains `legacy`; held-out promotion gates have not yet been run.
-- Added `benchmarks/scripts/profile_stage_resources.py`, which records per-stage
-  wall time, user/system CPU, live process-tree RSS, process count, scratch size,
-  logs and a receipt. Two focused tests passed. The macOS process-tree sampler
-  was exercised on a failed TideCluster run and retained a real RSS trace.
-- Replayed only the already-consumed seed-2101 related-family output with current
-  fixed-representative sequence clustering. It recovered all three truth
-  consensuses with cyclic monomer recall 1.0, showing that the earlier 2/3
-  snapshot is stale. This was a diagnostic replay, not new independent evidence.
-- The first Python gap-free cascade completed 48/48 validation-seed repetitions at
-  `/Volumes/T7/Codex/TandemX/results/cascade_validation_v1_20260907` using
-  already-consumed seed 2101. Accuracy passed, including 3/3 related families,
-  but geometric-mean runtime was 4.917 times the elastic method; retain it as a
-  rejected experiment. The optimized native-screen cascade then completed 48/48
-  development repetitions in two non-overlapping runs. Against the existing
-  elastic seed-1101 results, all 16 scenarios retained accuracy, runtime was
-  lower in 16/16 (geometric-mean ratio 0.562930), and RSS was lower in 15/16
-  (geometric-mean ratio 0.837814). The two clean long-period scenarios also had
-  lower boundary MAE. A tested archiver copied both non-overlapping runs into
-  `paper/evidence/cascade_native_screen_development`, verified 17 manifest
-  entries and froze the exact evidence hashes. Config
-  `benchmarks/configs/cascade_native_screen_heldout_v1.yaml` predeclares three
-  repetitions on reserved held-out seeds 3101-3103; those seeds remain
-  untouched and must be run only after this source/configuration is committed
-  and hosted CI passes.
-- TideCluster is now a tier-1 assembly comparator. Official source 1.21.2 is at
-  `/Volumes/T7/Codex/TandemX/tools/src/TideCluster` (commit
-  `3f3eac895aab65227f819669a3b8b41d9cc486bd`). A native full environment failed
-  because pinned TideHunter 1.4.3 and KITE-HOR 0.13.2 lack macOS ARM packages.
-  A core environment ran the wrapper but was correctly rejected because the
-  available native TideHunter reports 1.5.5. Native TideHunter 1.4.3 compilation
-  then failed on x86-only `immintrin.h`. Retain these as installation evidence;
-  they are not accuracy failures.
-- The final linux/amd64 TideCluster 1.21.2 image is
-  `sha256:62691b116427394984a8bace59a6f4ba7f3ea834373772734fbcfc567c3a27a7`.
-  Version QA passed for TideCluster 1.21.2, pinned SSE2 TideHunter 1.4.3,
-  KITE-HOR 0.13.2, BLASTN 2.16.0+, GNU time 1.10 and official MMseqs2 commit
-  `747c64cc8db3b4803a0f1194a3f75b3ba9f81bcb`. The new two-stage smoke run at
-  `/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907`
-  completed and recovered 3/3 planted families and arrays. Array recall,
-  precision and F1 were 1.0; period MAE was 0 bp, boundary MAE 29 bp and base
-  union recall/precision were 1.0/0.998247. Internal GNU time recorded 70,248 kB
-  maximum RSS for TideHunter and 7,669,232 kB for clustering; the host-side
-  process-tree profiler measured only Docker-client processes and is labelled
-  accordingly. A tested archiver verified and copied 20 compact files plus its
-  own manifest to `paper/evidence/tidecluster_simulated_smoke`. This is a toy
-  smoke test, not publication-scale evidence.
-- No TandemX or TideCluster benchmark is active at this checkpoint. Recent
-  focused suites passed: 38 cohort/profiler/cascade tests, three archive/config
-  tests, four TideCluster normalizer/archive tests and three held-out evaluator/
-  config tests. `evaluate_cascade_heldout.py` now requires the complete frozen
-  matrix and enforces failure, determinism, accuracy, false-call, family,
-  TideHunter noninferiority, runtime and RSS gates. Next inspect the complete
-  diff, run the full Python suite plus Rust format/Clippy, then commit and push
-  both the working branch and `main` if all checks pass. Only then may seeds
-  3101-3103 be consumed once.
+- **Published source baseline.** Branch `codex/publish-current-progress` is at
+  `c3798db`, aligned with `origin/codex/publish-current-progress` and
+  `origin/main`. Hosted runs `34080916140` and `34081012863` passed Ubuntu/macOS
+  Python tests, Rust checks and wheel builds. That commit contains `tandemx
+  cohort`, the staged native-screen `cascade`, the frozen held-out evaluator,
+  resource profiling, and the pinned TideCluster 1.21.2 image/smoke evidence.
+- **Frozen cascade held-out is consumed; never rerun seeds 3101--3103.** The
+  once-only run is complete at
+  `/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907`:
+  432/432 planned rows, 423 successes and nine explicit TRF timeouts on the
+  low-complexity negative control. TandemX and TideHunter completed 144/144;
+  TRF completed 135/144. Failed processes remain missing measurements and must
+  never be converted to zero accuracy.
+- **Cascade promotion failed 2/12 predeclared gates.** TandemX itself had no
+  process failures, deterministic output fraction 1.0, minimum positive array
+  recall/precision 0.985714, zero negative-read calls, related-family cyclic
+  recall 1.0 and direct-child RSS ratio 0.455130 versus TideHunter. Promotion
+  failed because all comparator runs were required to complete (nine TRF
+  timeouts) and TandemX/TideHunter wall-time geometric-mean ratio was 2.457943,
+  above the frozen 2.0 limit. The cascade therefore remains non-default.
+- **Held-out evidence is archived and visualized.** A tested archiver retained
+  the complete matrix, gate receipt and every failure command/receipt/log at
+  `paper/evidence/cascade_native_screen_heldout_v1`; an independent check found
+  40/40 manifest hashes valid. `figures_v2` is the accepted six-panel SVG/PDF/PNG
+  with 188 editable SVG text nodes and no raster image elements. `figures_v1`
+  remains an inspected draft because its SVG text was converted to paths.
+- **Current uncommitted P1 implementation.** Public `tandemx quantify` now has
+  optional independently supplied single-copy k-mer normalization, FASTQ
+  Phred-derived or explicit-error k-mer survival correction, strict control
+  validation, streaming counts, and new audit fields. The empirical estimator
+  uses the control arithmetic mean while retaining median, MAD and zero fraction.
+  The 10th--90th percentile diagnostic-k-mer spread is still explicitly not a
+  calibrated sampling confidence interval. A frozen development ablation on
+  existing seeds 6301--6303 compares four public-command methods across 27 read
+  conditions; it has not been executed and must wait for this source/config to
+  be committed and hosted CI to pass.
+- **Real-data source audit.** Exact ENA metadata for PRJEB50694, PRJNA751841,
+  PRJNA953663 and PRJNA919186 is archived at
+  `paper/evidence/retrospective_collapse_source_audit`. Five manifest files and
+  all 12 selected PacBio genomic-WGS run rows were independently verified. The
+  metadata supports accession, platform and cultivar/material matching only; it
+  does not establish identical DNA extraction, individual plant, stock or
+  BioSample between historical and newer assemblies. All five manifest entries
+  were independently rehashed. Donor-matched collapse truth remains unavailable.
+- **Verification state and exact next actions.** The complete local suite passed:
+  502 Python tests, 16 Rust release tests, Rust format and Clippy with warnings
+  denied, compileall, `git diff --check`, relative Markdown-link audit, 40/40
+  held-out archive hashes and 5/5 retrospective-audit hashes. A real Rust/FASTQ/
+  control-k-mer CLI smoke test produced the expected copy number and audit files.
+  Each seed-6301--6303 genome also yielded all 1,000 requested whole-genome-
+  unique controls in preflight. Next commit all code/docs/evidence except
+  `.codex/`, push both branches, verify hosted CI, and only then run
+  `quantify_calibration_development_v1` once into a new T7 result directory.
+  Diagnose cascade speed on development or newly frozen seeds; never tune against
+  the consumed held-out seed values.
 
 ## Sequence-clustering and scoring checkpoint (current)
 

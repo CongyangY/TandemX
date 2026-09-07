@@ -11,6 +11,25 @@ the common accuracy/error fields versus elastic, lower runtime in 16/16 cases
 boundary MAE in the 421-bp and 729-bp clean scenarios. Seed 1101 is development
 evidence; it is not independent promotion evidence.
 
+`cascade_native_screen_heldout_v1/` preserves the once-only seeds 3101--3103
+matrix and its failed promotion decision. Of 432 planned executions, TandemX
+and TideHunter completed 144/144 each and TRF completed 135/144; all nine TRF
+failures were frozen 180-s timeouts on the low-complexity negative control.
+TandemX passed the accuracy, determinism, negative-control, related-family and
+RSS gates, but its paired wall-time geometric-mean ratio to TideHunter was
+2.457943 against a 2.0 limit. Comparator completion was also mandatory. The
+archive retains all failure commands, receipts and logs. `figures_v2` is the
+accepted six-panel figure with editable SVG text; `figures_v1` is retained as a
+draft because its text was converted to paths. Seeds 3101--3103 must not be
+rerun or used for tuning.
+
+`retrospective_collapse_source_audit/` freezes the exact ENA metadata queried
+for four candidate old-to-new assembly comparisons and a 12-row PacBio genomic-
+WGS selection. The metadata supports accession, platform and reported material
+matching, but not identical DNA extraction, plant, stock or BioSample between
+the read data and both assemblies. It is a source-eligibility audit, not a
+completed biological collapse benchmark.
+
 `tidecluster_simulated_smoke/` records the first complete assembly-level
 TideCluster 1.21.2 smoke test, its strict normalization, exact image ID,
 container recipe, dependency versions, logs and internal GNU-time measurements.

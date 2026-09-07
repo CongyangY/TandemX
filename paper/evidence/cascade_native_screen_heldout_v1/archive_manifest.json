@@ -1,0 +1,242 @@
+[
+  {
+    "file": "run/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/environment.json",
+    "sha256": "6d21919ff8d7e67ccdef9c540061727b4c2a94525ee1b1e46409242bfa0f531f",
+    "bytes": 8657
+  },
+  {
+    "file": "run/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/run_config.yaml",
+    "sha256": "f79fc8c17444c61c900655824914b0e3dd398526cc0d9fc2874e77d7004e57a4",
+    "bytes": 2508
+  },
+  {
+    "file": "run/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/validation.json",
+    "sha256": "0bcc1fd0e3ed70dd754acc8bbd25d827075bcdb026918ab3ad8300c0a1b4854b",
+    "bytes": 90
+  },
+  {
+    "file": "run/raw_runs.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/raw_runs.tsv",
+    "sha256": "4c5c4181c8a0cc4ddbc43115a254e6ffdbf287245063d498d98feafe41ed6c2d",
+    "bytes": 260688
+  },
+  {
+    "file": "run/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/summary.tsv",
+    "sha256": "678fa8d7ff1ae94b55e144b0ad93e21c4bbcb444b7856101025ce9670e877e14",
+    "bytes": 30720
+  },
+  {
+    "file": "run/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/run.log",
+    "sha256": "d4b546ae2be334485be502cf9eb82558e7823c855f61ccad9df56a5848ab5511",
+    "bytes": 31293
+  },
+  {
+    "file": "evaluation/gate_results.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/gate_evaluation/gate_results.json",
+    "sha256": "44ccc8649234280fa4c03c115ead2f40a887cefacaf0b4f1cda84e8565f84f41",
+    "bytes": 2541
+  },
+  {
+    "file": "evaluation/paired_tidehunter.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/gate_evaluation/paired_tidehunter.tsv",
+    "sha256": "34a0b0005ea66e7566cae8b38b93d9d336ff7b3e6c1b3fe98698785afadb4114",
+    "bytes": 7969
+  },
+  {
+    "file": "frozen_config.yaml",
+    "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/cascade_native_screen_heldout_v1.yaml",
+    "sha256": "2f8981f5d05bf15e53762b59186aa969a09bef862ac7947e77e4e1f1ffc79481",
+    "bytes": 2484
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep1/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep1/command.json",
+    "sha256": "144aae1e9878d33cbbab887522db808a9ddec229856b7ca07e2acd5f397c00bf",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep1/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep1/receipt.json",
+    "sha256": "65b2c3bfb043f718c36820e8c4e399584b427d0282b5176b0b517dbc4fdce0bf",
+    "bytes": 404
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep1/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep1/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep2/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep2/command.json",
+    "sha256": "144aae1e9878d33cbbab887522db808a9ddec229856b7ca07e2acd5f397c00bf",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep2/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep2/receipt.json",
+    "sha256": "ec789db429829ff308e0e10054e19b021e3880380d46896b81c4be83a2f26313",
+    "bytes": 405
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep2/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep2/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep3/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep3/command.json",
+    "sha256": "144aae1e9878d33cbbab887522db808a9ddec229856b7ca07e2acd5f397c00bf",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep3/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep3/receipt.json",
+    "sha256": "056008d7f529f139faea67f1eea125b55b6eac894606e7144fa200f02db3240d",
+    "bytes": 415
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3101/trf/rep3/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3101/trf/rep3/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep1/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep1/command.json",
+    "sha256": "d24c71ef235aad7582c3ea11a63caad87427bcebed1c0229043eceded08a0bcb",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep1/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep1/receipt.json",
+    "sha256": "10608495220bf4d20625c64271776100840cb070dd1d8cb93b9db68e790b4b49",
+    "bytes": 402
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep1/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep1/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep2/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep2/command.json",
+    "sha256": "d24c71ef235aad7582c3ea11a63caad87427bcebed1c0229043eceded08a0bcb",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep2/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep2/receipt.json",
+    "sha256": "61694a1c1da7cff887c3e516dcccab100ed860d2c69966c4c16f7c0f67b1525f",
+    "bytes": 405
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep2/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep2/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep3/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep3/command.json",
+    "sha256": "d24c71ef235aad7582c3ea11a63caad87427bcebed1c0229043eceded08a0bcb",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep3/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep3/receipt.json",
+    "sha256": "47cf6fd2bbf3f35d31c2780dfbaa46c846bba151ffca6ad6c8c9b6dcfdd92491",
+    "bytes": 405
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3102/trf/rep3/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3102/trf/rep3/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep1/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep1/command.json",
+    "sha256": "4f12eb16a247fd3a668b769ea05a4ac5806a04ff38b75b81a2c5ff6588442870",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep1/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep1/receipt.json",
+    "sha256": "4d4e0a6de85fc3dc1d86c57a2134abd6741a5347711996b96088cef531b03fa2",
+    "bytes": 404
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep1/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep1/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep2/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep2/command.json",
+    "sha256": "4f12eb16a247fd3a668b769ea05a4ac5806a04ff38b75b81a2c5ff6588442870",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep2/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep2/receipt.json",
+    "sha256": "29ac73d21eac0c86946905563e3504ac14a0654511aa22c1e598045886e73f34",
+    "bytes": 405
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep2/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep2/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep3/command.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep3/command.json",
+    "sha256": "4f12eb16a247fd3a668b769ea05a4ac5806a04ff38b75b81a2c5ff6588442870",
+    "bytes": 234
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep3/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep3/receipt.json",
+    "sha256": "115827ff1a9e846c506dc00c769a1502f4f64f6dd306a3e2d33dbf8af9d7ad73",
+    "bytes": 403
+  },
+  {
+    "file": "failed_runs/low_complexity_control_s3103/trf/rep3/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/runs/low_complexity_control_s3103/trf/rep3/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "failed_runs.tsv",
+    "source": "derived_after_validation",
+    "sha256": "d3a8185a4e0878dc008974edfc55e59dda33025c929508b0c7c3076b2c5ce0d2",
+    "bytes": 3297
+  },
+  {
+    "file": "failure_artifacts.tsv",
+    "source": "derived_after_validation",
+    "sha256": "bef6989b0c37bafd26c03792ee8b85d0879c0bc9b1d80ecb2f2c7257c09a7459",
+    "bytes": 4564
+  },
+  {
+    "file": "archive_summary.json",
+    "source": "derived_after_validation",
+    "sha256": "a867d186dc20b05afce8d09e794ef9bb7dd0b9bcf401a8742347b4d8b53689bc",
+    "bytes": 448
+  },
+  {
+    "file": "README.md",
+    "source": "derived_after_validation",
+    "sha256": "8b8a842848d6dc9521ebe21417955684d97eb7d714c0bb87d4b6b18c9b568287",
+    "bytes": 335
+  }
+]

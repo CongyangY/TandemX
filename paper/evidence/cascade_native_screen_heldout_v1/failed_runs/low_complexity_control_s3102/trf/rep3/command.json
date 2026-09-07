@@ -1,0 +1,13 @@
+[
+  ".conda-benchmark/bin/trf",
+  "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907/datasets/low_complexity_control_s3102/reads.fa",
+  "2",
+  "7",
+  "7",
+  "80",
+  "10",
+  "50",
+  "1000",
+  "-ngs",
+  "-h"
+]

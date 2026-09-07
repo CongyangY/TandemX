@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import math
 import os
 import time
 from collections import Counter, defaultdict
@@ -13,7 +14,11 @@ from statistics import median
 from typing import Iterable, Sequence
 
 from tandemx.discover.mvp import FastaRecord, read_fasta, read_fasta_many
-from tandemx.io.sequences import normalize_sequence_paths
+from tandemx.io.sequences import (
+    detect_sequence_format,
+    normalize_sequence_paths,
+    read_sequence_records_many,
+)
 from tandemx.discover.rust_backend import RustDiagnosticKmerCounter
 from tandemx.utils.threads import discover_thread_limit
 from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
@@ -43,6 +48,9 @@ class QuantifyConfig:
     max_reads: int | None = None
     max_read_bases: int | None = None
     progress_every: int = 1000
+    single_copy_kmers: Path | None = None
+    read_error_rate: float | None = None
+    quality_correction_enabled: bool = True
 
 
 @dataclass(frozen=True)
@@ -57,8 +65,37 @@ class CopyNumberEstimate:
     depth_mad: float
     copy_number_interval_low: float
     copy_number_interval_high: float
+    normalization_method: str
+    raw_median_kmer_depth: float
+    kmer_survival_probability: float
+    single_copy_control_kmer_count: int
+    single_copy_control_mean_depth: float | None
+    single_copy_control_median_depth: float | None
+    single_copy_control_depth_mad: float | None
+    single_copy_control_zero_fraction: float | None
+    quality_window_count: int
     confidence: str
     warning: str
+
+
+@dataclass(frozen=True)
+class KmerSurvivalStats:
+    survival_sum: float = 0.0
+    window_count: int = 0
+    quality_window_count: int = 0
+    assumed_error_window_count: int = 0
+
+    @property
+    def mean_survival(self) -> float:
+        return self.survival_sum / self.window_count if self.window_count else 1.0
+
+
+@dataclass(frozen=True)
+class ControlDepthStats:
+    mean: float
+    median: float
+    mad: float
+    zero_fraction: float
 
 
 def quantify_toy_copy_number(
@@ -83,41 +120,99 @@ def quantify_toy_copy_number(
         }
         for monomer in monomers
     }
+    single_copy_controls = (
+        read_single_copy_kmers(config.single_copy_kmers, config.k)
+        if config.single_copy_kmers is not None
+        else {}
+    )
     target_kmers = {
         kmer
         for diagnostic in diagnostic_by_family.values()
         for kmer in diagnostic
     }
-    read_kmers, total_read_bases, read_count, max_read_len = count_selected_read_kmers_and_bases(
-        config.reads,
-        config.k,
-        target_kmers,
-        config.kmer_backend,
-        max_reads=config.max_reads,
-        max_read_bases=config.max_read_bases,
-        progress_every=config.progress_every,
-        logger=logger,
-        progress=progress,
-    )
+    overlap = target_kmers.intersection(single_copy_controls)
+    if overlap:
+        raise ValueError(
+            f"Single-copy control k-mers overlap repeat diagnostic k-mers: {sorted(overlap)[:3]}"
+        )
+    target_kmers.update(single_copy_controls)
+    sequence_paths = normalize_sequence_paths(config.reads)
+    uses_fastq = any(detect_sequence_format(path) == "fastq" for path in sequence_paths)
+    if config.quality_correction_enabled and (uses_fastq or config.read_error_rate is not None):
+        read_kmers, total_read_bases, read_count, max_read_len, survival = (
+            count_selected_read_kmers_quality_and_bases(
+                sequence_paths,
+                config.k,
+                target_kmers,
+                config.kmer_backend,
+                max_reads=config.max_reads,
+                max_read_bases=config.max_read_bases,
+                progress_every=config.progress_every,
+                logger=logger,
+                progress=progress,
+                assumed_error_rate=config.read_error_rate,
+            )
+        )
+    else:
+        read_kmers, total_read_bases, read_count, max_read_len = count_selected_read_kmers_and_bases(
+            sequence_paths,
+            config.k,
+            target_kmers,
+            config.kmer_backend,
+            max_reads=config.max_reads,
+            max_read_bases=config.max_read_bases,
+            progress_every=config.progress_every,
+            logger=logger,
+            progress=progress,
+        )
+        survival = KmerSurvivalStats()
     if read_count == 0:
         raise ValueError("No reads found for quantify")
     if max_read_len < config.k:
         raise ValueError("--k is greater than all read lengths")
-    haploid_depth = (
-        config.haploid_depth
-        if config.haploid_depth is not None
-        else total_read_bases / config.genome_size
-    )
+    survival_probability = survival.mean_survival
+    if (
+        config.quality_correction_enabled
+        and (uses_fastq or config.read_error_rate is not None)
+        and survival.window_count == 0
+    ):
+        raise ValueError("No valid ACGT k-mer windows available for survival correction")
+    if not 0 < survival_probability <= 1:
+        raise ValueError("Effective k-mer survival probability must be in (0,1]")
+    corrected_read_kmers = {
+        kmer: count / survival_probability for kmer, count in read_kmers.items()
+    }
+    control_depths = [
+        corrected_read_kmers.get(kmer, 0.0) / expected_copy_number
+        for kmer, expected_copy_number in single_copy_controls.items()
+    ]
+    control_stats = estimate_control_depth(control_depths) if control_depths else None
+    if config.haploid_depth is not None:
+        haploid_depth = config.haploid_depth
+        normalization_method = "explicit_haploid_depth"
+    elif control_stats is not None:
+        if control_stats.mean <= 0:
+            raise ValueError("Single-copy controls have zero mean observed depth")
+        # Include zero-observation controls. Their arithmetic mean is an
+        # unbiased depth estimator under uniform independent sampling, whereas
+        # the median becomes exactly zero around or below 1x coverage.
+        haploid_depth = control_stats.mean
+        normalization_method = "empirical_single_copy_kmers_mean"
+    else:
+        haploid_depth = total_read_bases / config.genome_size
+        normalization_method = "total_read_bases_divided_by_genome_size"
 
     update_quantify_terminal_progress(progress, "estimate_copy_number", read_count, total_read_bases, config)
     estimates = []
     for monomer in monomers:
         diagnostic = diagnostic_by_family[monomer.family_id]
-        corrected_depths = [
+        raw_depths = [
             read_kmers.get(kmer, 0) / multiplicity
             for kmer, multiplicity in diagnostic.items()
             if multiplicity > 0
         ]
+        corrected_depths = [depth / survival_probability for depth in raw_depths]
+        raw_median_depth = float(median(raw_depths)) if raw_depths else 0.0
         median_depth = float(median(corrected_depths)) if corrected_depths else 0.0
         depth_mad = (
             float(median(abs(value - median_depth) for value in corrected_depths))
@@ -131,8 +226,25 @@ def quantify_toy_copy_number(
         interval_low = interval_low_depth / haploid_depth if haploid_depth > 0 else 0.0
         interval_high = interval_high_depth / haploid_depth if haploid_depth > 0 else 0.0
         warning_parts = []
-        if config.haploid_depth is None:
+        if normalization_method == "total_read_bases_divided_by_genome_size":
             warning_parts.append("haploid_depth_estimated_from_total_read_bases_and_genome_size")
+        elif normalization_method == "empirical_single_copy_kmers_mean":
+            warning_parts.append("single_copy_status_depends_on_user_supplied_control_provenance")
+            if len(single_copy_controls) < 100:
+                warning_parts.append("fewer_than_100_single_copy_control_kmers")
+            if control_stats is not None and control_stats.zero_fraction > 0.5:
+                warning_parts.append("more_than_half_single_copy_controls_unobserved")
+        elif single_copy_controls:
+            warning_parts.append("single_copy_controls_reported_but_explicit_depth_used")
+        if survival_probability < 1:
+            warning_parts.append("independent_base_error_survival_approximation")
+            if survival.quality_window_count:
+                warning_parts.append("phred_scores_treated_as_calibrated_probabilities")
+            if (
+                survival.assumed_error_window_count
+                and config.read_error_rate is None
+            ):
+                warning_parts.append("fasta_windows_in_mixed_input_treated_as_error_free")
         if not diagnostic:
             warning_parts.append("no_diagnostic_kmers")
         else:
@@ -157,6 +269,15 @@ def quantify_toy_copy_number(
                 depth_mad=depth_mad,
                 copy_number_interval_low=interval_low,
                 copy_number_interval_high=interval_high,
+                normalization_method=normalization_method,
+                raw_median_kmer_depth=raw_median_depth,
+                kmer_survival_probability=survival_probability,
+                single_copy_control_kmer_count=len(single_copy_controls),
+                single_copy_control_mean_depth=control_stats.mean if control_stats else None,
+                single_copy_control_median_depth=control_stats.median if control_stats else None,
+                single_copy_control_depth_mad=control_stats.mad if control_stats else None,
+                single_copy_control_zero_fraction=control_stats.zero_fraction if control_stats else None,
+                quality_window_count=survival.quality_window_count,
                 confidence=confidence,
                 warning=";".join(warning_parts),
             )
@@ -187,6 +308,64 @@ def validate_quantify_config(config: QuantifyConfig) -> None:
         raise ValueError("--max-read-bases must be positive when provided")
     if config.progress_every <= 0:
         raise ValueError("--progress-every must be positive")
+    if config.single_copy_kmers is not None and not config.single_copy_kmers.is_file():
+        raise ValueError("--single-copy-kmers must be an existing TSV file")
+    if config.read_error_rate is not None and not 0 <= config.read_error_rate < 1:
+        raise ValueError("--read-error-rate must be in [0,1)")
+    if type(config.quality_correction_enabled) is not bool:
+        raise ValueError("quality correction flag must be boolean")
+    if config.read_error_rate is not None and not config.quality_correction_enabled:
+        raise ValueError(
+            "--read-error-rate cannot be combined with --disable-quality-correction"
+        )
+
+
+def read_single_copy_kmers(path: Path, k: int) -> dict[str, float]:
+    """Read canonical background controls with declared haploid copy number."""
+    import csv
+
+    with path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        if reader.fieldnames is None or len(reader.fieldnames) != len(set(reader.fieldnames)):
+            raise ValueError("Single-copy control TSV requires unique header names")
+        if not {"kmer", "expected_copy_number"} <= set(reader.fieldnames):
+            raise ValueError("Single-copy control TSV requires kmer and expected_copy_number columns")
+        controls: dict[str, float] = {}
+        for line_number, row in enumerate(reader, 2):
+            raw_word = row.get("kmer")
+            if not isinstance(raw_word, str):
+                raise ValueError(f"Missing k-mer control at line {line_number}")
+            word = raw_word.strip().upper()
+            if len(word) != k or set(word) - set("ACGT"):
+                raise ValueError(f"Invalid {k}-mer control at line {line_number}")
+            if is_low_complexity_kmer(word):
+                raise ValueError(f"Low-complexity control k-mer at line {line_number}")
+            word = canonical_kmer(word)
+            try:
+                expected = float(row.get("expected_copy_number", ""))
+            except (TypeError, ValueError) as error:
+                raise ValueError(f"Invalid expected copy number at line {line_number}") from error
+            if not math.isfinite(expected) or expected <= 0:
+                raise ValueError(f"Expected copy number must be positive at line {line_number}")
+            if word in controls:
+                raise ValueError(f"Duplicate canonical control k-mer at line {line_number}: {word}")
+            controls[word] = expected
+    if not controls:
+        raise ValueError("Single-copy control TSV contains no records")
+    return controls
+
+
+def estimate_control_depth(depths: Sequence[float]) -> ControlDepthStats:
+    """Summarize normalized controls without dropping unobserved k-mers."""
+    if not depths or any(not math.isfinite(value) or value < 0 for value in depths):
+        raise ValueError("Control depths must be nonempty, finite and nonnegative")
+    center = float(median(depths))
+    return ControlDepthStats(
+        mean=math.fsum(depths) / len(depths),
+        median=center,
+        mad=float(median(abs(value - center) for value in depths)),
+        zero_fraction=sum(value == 0 for value in depths) / len(depths),
+    )
 
 
 def read_monomer_fasta(path: Path) -> Iterable[MonomerRecord]:
@@ -316,6 +495,135 @@ def count_selected_read_kmers_and_bases(
         rust_counter.count_sequences(rust_batch)
         counts.update(rust_counter.counts())
     return counts, total_bases, read_count, max_read_len
+
+
+def quality_window_survival(
+    sequence: str,
+    quality: str | None,
+    k: int,
+    assumed_error_rate: float | None,
+) -> tuple[float, int, int, int]:
+    """Return survival sum, valid windows, quality windows and assumed windows."""
+    sequence = sequence.upper()
+    if quality is not None and len(quality) != len(sequence):
+        raise ValueError("FASTQ sequence and quality lengths must match")
+    if assumed_error_rate is not None and not 0 <= assumed_error_rate < 1:
+        raise ValueError("Assumed error rate must be in [0,1)")
+    if quality is not None and any(not 0 <= ord(character) - 33 <= 93 for character in quality):
+        raise ValueError("FASTQ quality characters must encode Phred+33 values in 0..93")
+    survival_sum = 0.0
+    valid_windows = 0
+    quality_windows = 0
+    assumed_windows = 0
+    start = 0
+    while start < len(sequence):
+        while start < len(sequence) and sequence[start] not in "ACGT":
+            start += 1
+        end = start
+        while end < len(sequence) and sequence[end] in "ACGT":
+            end += 1
+        length = end - start
+        windows = max(0, length - k + 1)
+        if windows:
+            valid_windows += windows
+            if quality is None:
+                rate = assumed_error_rate or 0.0
+                survival_sum += windows * (1.0 - rate) ** k
+                assumed_windows += windows
+            else:
+                logs: list[float] = []
+                zeros: list[int] = []
+                for character in quality[start:end]:
+                    phred = ord(character) - 33
+                    probability = 1.0 - 10.0 ** (-phred / 10.0)
+                    logs.append(math.log(probability) if probability > 0 else 0.0)
+                    zeros.append(int(probability == 0))
+                log_sum = sum(logs[:k])
+                zero_count = sum(zeros[:k])
+                survival_sum += 0.0 if zero_count else math.exp(log_sum)
+                for index in range(k, length):
+                    log_sum += logs[index] - logs[index - k]
+                    zero_count += zeros[index] - zeros[index - k]
+                    survival_sum += 0.0 if zero_count else math.exp(log_sum)
+                quality_windows += windows
+        start = end + 1
+    return survival_sum, valid_windows, quality_windows, assumed_windows
+
+
+def count_selected_read_kmers_quality_and_bases(
+    paths: Sequence[Path],
+    k: int,
+    targets: set[str],
+    backend: str,
+    *,
+    max_reads: int | None,
+    max_read_bases: int | None,
+    progress_every: int,
+    logger: logging.Logger,
+    progress: TerminalProgress | None,
+    assumed_error_rate: float | None,
+) -> tuple[Counter[str], int, int, int, KmerSurvivalStats]:
+    """Count target k-mers and their global error survival in one streaming pass."""
+    counts: Counter[str] = Counter()
+    rust_counter = RustDiagnosticKmerCounter(k, targets) if backend == "rust" else None
+    total_bases = read_count = max_read_len = 0
+    survival_sum = 0.0
+    window_count = quality_windows = assumed_windows = 0
+    rust_batch: list[str] = []
+    rust_batch_bases = 0
+    started = time.perf_counter()
+    for record in read_sequence_records_many(
+        paths, check_duplicate_ids_across_files=False
+    ):
+        if max_reads is not None and read_count >= max_reads:
+            break
+        if max_read_bases is not None and total_bases + len(record.sequence) > max_read_bases:
+            logger.info(
+                "limit_reached=max_read_bases configured_bases=%s next_read_bases=%s",
+                max_read_bases,
+                len(record.sequence),
+            )
+            break
+        read_count += 1
+        total_bases += len(record.sequence)
+        max_read_len = max(max_read_len, len(record.sequence))
+        observed = quality_window_survival(
+            record.sequence, record.quality, k, assumed_error_rate
+        )
+        survival_sum += observed[0]
+        window_count += observed[1]
+        quality_windows += observed[2]
+        assumed_windows += observed[3]
+        if rust_counter is not None:
+            rust_batch.append(record.sequence)
+            rust_batch_bases += len(record.sequence)
+            if len(rust_batch) >= 512 or rust_batch_bases >= 8_000_000:
+                rust_counter.count_sequences(rust_batch)
+                rust_batch.clear()
+                rust_batch_bases = 0
+        else:
+            counts.update(
+                word for word in iter_kmers(record.sequence, k) if word in targets
+            )
+        if read_count % progress_every == 0:
+            log_quantify_progress(
+                logger, read_count, total_bases, started, max_reads, max_read_bases
+            )
+            update_quantify_read_progress(
+                progress, read_count, total_bases, max_reads, max_read_bases
+            )
+    if rust_counter is not None:
+        rust_counter.count_sequences(rust_batch)
+        counts.update(rust_counter.counts())
+    log_quantify_progress(
+        logger, read_count, total_bases, started, max_reads, max_read_bases
+    )
+    update_quantify_read_progress(
+        progress, read_count, total_bases, max_reads, max_read_bases
+    )
+    return counts, total_bases, read_count, max_read_len, KmerSurvivalStats(
+        survival_sum, window_count, quality_windows, assumed_windows
+    )
 
 
 def count_selected_read_kmers_and_bases_parallel_files(
@@ -509,7 +817,12 @@ def write_copy_number(path: Path, estimates: Sequence[CopyNumberEstimate]) -> No
         (
             "family_id\tmonomer_length\tdiagnostic_kmer_count\tmedian_kmer_depth\t"
             "haploid_depth\testimated_copy_number\testimated_bp\tdepth_mad\t"
-            "copy_number_interval_low\tcopy_number_interval_high\tconfidence\twarning"
+            "copy_number_interval_low\tcopy_number_interval_high\t"
+            "normalization_method\traw_median_kmer_depth\tkmer_survival_probability\t"
+            "single_copy_control_kmer_count\tsingle_copy_control_mean_depth\t"
+            "single_copy_control_median_depth\tsingle_copy_control_depth_mad\t"
+            "single_copy_control_zero_fraction\t"
+            "quality_window_count\tconfidence\twarning"
         )
     ]
     for estimate in estimates:
@@ -526,6 +839,31 @@ def write_copy_number(path: Path, estimates: Sequence[CopyNumberEstimate]) -> No
                     f"{estimate.depth_mad:.4f}",
                     f"{estimate.copy_number_interval_low:.4f}",
                     f"{estimate.copy_number_interval_high:.4f}",
+                    estimate.normalization_method,
+                    f"{estimate.raw_median_kmer_depth:.4f}",
+                    f"{estimate.kmer_survival_probability:.8f}",
+                    str(estimate.single_copy_control_kmer_count),
+                    (
+                        f"{estimate.single_copy_control_mean_depth:.4f}"
+                        if estimate.single_copy_control_mean_depth is not None
+                        else "NA"
+                    ),
+                    (
+                        f"{estimate.single_copy_control_median_depth:.4f}"
+                        if estimate.single_copy_control_median_depth is not None
+                        else "NA"
+                    ),
+                    (
+                        f"{estimate.single_copy_control_depth_mad:.4f}"
+                        if estimate.single_copy_control_depth_mad is not None
+                        else "NA"
+                    ),
+                    (
+                        f"{estimate.single_copy_control_zero_fraction:.6f}"
+                        if estimate.single_copy_control_zero_fraction is not None
+                        else "NA"
+                    ),
+                    str(estimate.quality_window_count),
                     estimate.confidence,
                     estimate.warning,
                 ]

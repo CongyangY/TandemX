@@ -169,6 +169,18 @@ tandemx validate --project results
 
 In this workflow, `results/discover/monomers.fa` is a de novo discovery output. Passing it to `--catalog` in downstream commands reuses TandemX's discovered catalog; it does not mean TandemX needs repeat sequences before discovery.
 
+For a separately curated set of genomic depth controls, add
+`--single-copy-kmers controls.tsv`; its required columns are `kmer` and
+`expected_copy_number`. If `--haploid-depth` is absent, their corrected mean
+depth, including zero-observation controls, replaces the total-bases/genome-size
+approximation; median, MAD and zero fraction remain visible for QC. FASTQ input also
+enables Phred-derived k-mer survival correction; FASTA can use an explicit
+`--read-error-rate`. The supplied error rate cannot be combined with
+`--disable-quality-correction`. Output records the chosen normalization, raw depth,
+survival probability and control evidence. These controls require independent
+single-copy provenance and the reported percentile endpoints are not calibrated
+biological confidence intervals.
+
 The same dependency chain can be run in one command:
 
 ```bash

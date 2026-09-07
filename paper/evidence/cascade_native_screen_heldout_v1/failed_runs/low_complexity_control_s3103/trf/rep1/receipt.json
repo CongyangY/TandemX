@@ -1,0 +1,17 @@
+{
+  "scenario": "low_complexity_control",
+  "dataset_id": "low_complexity_control_s3103",
+  "seed": 3103,
+  "split": "heldout",
+  "tool": "trf",
+  "repetition": 1,
+  "total_bases": 500000,
+  "exit_code": -9,
+  "runtime_seconds": 180.0217144167982,
+  "peak_rss_mib": 38.734375,
+  "cpu_user_seconds": 179.143316,
+  "cpu_system_seconds": 0.198202,
+  "timed_out": true,
+  "status": "failed",
+  "error": ""
+}

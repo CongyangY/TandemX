@@ -1,0 +1,37 @@
+[
+  {
+    "file": "PRJEB50694.ena_read_run.tsv",
+    "source": "ENA Portal API filereport accession=PRJEB50694, result=read_run, retrieved 2026-09-07 Asia/Shanghai",
+    "sha256": "ac782cfd82eca2027bc8f09bf2a102cc6a9b0fcd6e6148ee7e560dbe70860ea5",
+    "bytes": 1622,
+    "rows": 3
+  },
+  {
+    "file": "PRJNA751841.ena_read_run.tsv",
+    "source": "ENA Portal API filereport accession=PRJNA751841, result=read_run, retrieved 2026-09-07 Asia/Shanghai",
+    "sha256": "8cf5d00c909db13f93c3453ed07dcaaf8612855f3802ebdc2ca6bb38f8de2b18",
+    "bytes": 16590,
+    "rows": 51
+  },
+  {
+    "file": "PRJNA953663.ena_read_run.tsv",
+    "source": "ENA Portal API filereport accession=PRJNA953663, result=read_run, retrieved 2026-09-07 Asia/Shanghai",
+    "sha256": "30d57298f90691b1bc73d3b54601181232a4e74e658f32fd373f4df0945b4785",
+    "bytes": 4192,
+    "rows": 10
+  },
+  {
+    "file": "PRJNA919186.ena_read_run.tsv",
+    "source": "ENA Portal API filereport accession=PRJNA919186, result=read_run, retrieved 2026-09-07 Asia/Shanghai",
+    "sha256": "dc9c0180bcb6c597ef7ea031257dfeb4bf8807afb62227342ce7e70553781221",
+    "bytes": 903,
+    "rows": 2
+  },
+  {
+    "file": "selected_pacbio_wgs_runs.tsv",
+    "source": "derived exact filter instrument_platform=PACBIO_SMRT, library_strategy=WGS, library_source=GENOMIC",
+    "sha256": "b2d808ccb8c220785aac567d89cb51fc058b4dcfadae0aab1913913bd2ad2b5c",
+    "bytes": 3427,
+    "rows": 12
+  }
+]

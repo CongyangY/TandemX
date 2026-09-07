@@ -1,0 +1,42 @@
+{
+  "benchmark_id": "cascade_native_screen_heldout_v1",
+  "gate_status": "failed",
+  "failed_gate_names": [
+    "all_comparator_failed_runs",
+    "tidehunter_runtime_geometric_mean_ratio"
+  ],
+  "inputs": {
+    "summary": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_native_screen_heldout_v1/run/summary.tsv",
+      "sha256": "678fa8d7ff1ae94b55e144b0ad93e21c4bbcb444b7856101025ce9670e877e14"
+    },
+    "raw": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_native_screen_heldout_v1/run/raw_runs.tsv",
+      "sha256": "4c5c4181c8a0cc4ddbc43115a254e6ffdbf287245063d498d98feafe41ed6c2d"
+    },
+    "paired": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_native_screen_heldout_v1/evaluation/paired_tidehunter.tsv",
+      "sha256": "34a0b0005ea66e7566cae8b38b93d9d336ff7b3e6c1b3fe98698785afadb4114"
+    },
+    "gates": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_native_screen_heldout_v1/evaluation/gate_results.json",
+      "sha256": "44ccc8649234280fa4c03c115ead2f40a887cefacaf0b4f1cda84e8565f84f41"
+    },
+    "config": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_native_screen_heldout_v1/frozen_config.yaml",
+      "sha256": "2f8981f5d05bf15e53762b59186aa969a09bef862ac7947e77e4e1f1ffc79481"
+    },
+    "archive": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_native_screen_heldout_v1/archive_summary.json",
+      "sha256": "a867d186dc20b05afce8d09e794ef9bb7dd0b9bcf401a8742347b4d8b53689bc"
+    }
+  },
+  "outputs": {
+    "cascade_heldout.pdf": "8648bbe763cd25d959c822c45ea82531d67e463cf214d5b36c53d2efa8b35e33",
+    "cascade_heldout.png": "d49d41c31d58e01998c89d2a61ebeaaf853ba8777a16daf746eaf1c09e3feaba",
+    "cascade_heldout.svg": "7a9bdbfbba84761ec9e25326d47025e21ce444fb5762d6e1c9907f38f38f7615",
+    "figure_legend.md": "597b305a0be1413ff241e69a44f5538eba5022599e27f3d72074a0b0801dd66f",
+    "panel_source.tsv": "db3c3e45900273c971e959fcaa64ca69b7d8c66fc9e2ee603f540b58a4fb1185"
+  },
+  "warning": "heldout_failure_retained;mean_cells_average_three_independent_seeds;timing_repetitions_not_biological_replicates"
+}

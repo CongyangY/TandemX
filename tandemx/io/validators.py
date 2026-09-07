@@ -163,6 +163,16 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
             "depth_mad",
             "copy_number_interval_low",
             "copy_number_interval_high",
+            "raw_median_kmer_depth",
+            "kmer_survival_probability",
+            "single_copy_control_kmer_count",
+            "quality_window_count",
+        },
+        "nullable_numeric": {
+            "single_copy_control_mean_depth",
+            "single_copy_control_median_depth",
+            "single_copy_control_depth_mad",
+            "single_copy_control_zero_fraction",
         },
     },
     "assembly_vs_read_cn.tsv": {

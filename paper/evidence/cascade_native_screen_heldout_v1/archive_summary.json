@@ -1,0 +1,18 @@
+{
+  "benchmark_id": "cascade_native_screen_heldout_v1",
+  "gate_status": "failed",
+  "failed_gate_names": [
+    "all_comparator_failed_runs",
+    "tidehunter_runtime_geometric_mean_ratio"
+  ],
+  "matrix": {
+    "raw_rows": 432,
+    "summary_rows": 144,
+    "datasets": 48
+  },
+  "failed_run_count": 9,
+  "failed_run_tools": [
+    "trf"
+  ],
+  "warning": "heldout_seeds_consumed_once;failed_runs_and_failed_gates_retained;do_not_rerun_or_relabel"
+}

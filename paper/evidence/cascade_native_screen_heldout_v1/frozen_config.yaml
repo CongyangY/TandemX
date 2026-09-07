@@ -1,0 +1,54 @@
+benchmark_id: cascade_native_screen_heldout_v1
+repetitions: 3
+timeout_seconds: 180
+period_range: [30, 1000]
+minimum_span_bp: 100
+minimum_iou: 0.5
+seeds:
+  development: [1101]
+  validation: [2101]
+  heldout: [3101, 3102, 3103]
+tools:
+  tandemx: tandemx
+  trf: .conda-benchmark/bin/trf
+  tidehunter: .conda-benchmark/bin/TideHunter
+tool_versions:
+  trf: 4.10.0-rc.2
+  tidehunter: 1.5.5
+scenarios:
+  - {name: clean_60, period: 60, copies: 30}
+  - {name: clean_171, period: 171, copies: 12}
+  - {name: clean_421, period: 421, copies: 8}
+  - {name: clean_729, period: 729, copies: 6}
+  - {name: substitution_1pct, substitution_rate: 0.01}
+  - {name: substitution_5pct, substitution_rate: 0.05}
+  - {name: indel_01pct, insertion_rate: 0.0005, deletion_rate: 0.0005}
+  - {name: indel_1pct, insertion_rate: 0.005, deletion_rate: 0.005}
+  - {name: indel_4pct, insertion_rate: 0.02, deletion_rate: 0.02}
+  - {name: divergent_units, unit_divergence: 0.10}
+  - {name: related_families, related_families: true}
+  - {name: short_arrays, copies: 3}
+  - {name: two_arrays, copies: 8, arrays_per_read: 2}
+  - {name: dispersed_control, positive_fraction: 0.0, negative_kind: dispersed}
+  - {name: at_rich_control, positive_fraction: 0.0, negative_kind: at_rich}
+  - {name: low_complexity_control, positive_fraction: 0.0, negative_kind: low_complexity}
+discovery_method: cascade
+selection_provenance:
+  development_archive_manifest_sha256: 3aca44323f4c132f5138ad520002f199e302a3e78a43d4f0cf29ba78f3b40141
+  development_aggregate_sha256: 1b04f44ad406242d24143c9adddbbc04dd12e5771bd067dd593b7ea99d499653
+  development_source_digest: e24b44eb440a7b96eb562edb8966ceb9772ba73f103bed1ac547dcaa536c531b
+  selected_reason: all_common_accuracy_metrics_noninferior_and_better_time_and_memory_geomeans_on_development_seed
+acceptance_gates:
+  tandemx_failed_runs_max: 0
+  all_comparator_failed_runs_max: 0
+  tandemx_deterministic_groups_fraction_min: 1.0
+  paired_tidehunter_groups_fraction_min: 1.0
+  positive_array_recall_min: 0.95
+  positive_array_precision_min: 0.95
+  negative_read_call_rate_max: 0.0
+  related_family_cyclic_monomer_recall_min: 1.0
+  tidehunter_array_recall_noninferiority_margin: 0.02
+  tidehunter_array_precision_noninferiority_margin: 0.02
+  tidehunter_runtime_geometric_mean_ratio_max: 2.0
+  tidehunter_peak_rss_geometric_mean_ratio_max: 1.25
+  warning: promotion_requires_all_gates;comparator_failures_are_failures_not_zero_accuracy;heldout_seeds_must_run_once_after_source_commit_and_ci

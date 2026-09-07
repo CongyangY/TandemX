@@ -1,0 +1,102 @@
+{
+  "benchmark_id": "cascade_native_screen_heldout_v1",
+  "status": "failed",
+  "matrix": {
+    "raw_rows": 432,
+    "summary_rows": 144,
+    "datasets": 48
+  },
+  "config_sha256": "2f8981f5d05bf15e53762b59186aa969a09bef862ac7947e77e4e1f1ffc79481",
+  "run_source_digest": "e24b44eb440a7b96eb562edb8966ceb9772ba73f103bed1ac547dcaa536c531b",
+  "gates": [
+    {
+      "name": "tandemx_failed_runs",
+      "passed": true,
+      "observed": 0,
+      "operator": "<=",
+      "threshold": 0
+    },
+    {
+      "name": "all_comparator_failed_runs",
+      "passed": false,
+      "observed": 9,
+      "operator": "<=",
+      "threshold": 0
+    },
+    {
+      "name": "tandemx_deterministic_groups_fraction",
+      "passed": true,
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "name": "minimum_positive_array_recall",
+      "passed": true,
+      "observed": 0.9857142857142858,
+      "operator": ">=",
+      "threshold": 0.95
+    },
+    {
+      "name": "minimum_positive_array_precision",
+      "passed": true,
+      "observed": 0.9857142857142858,
+      "operator": ">=",
+      "threshold": 0.95
+    },
+    {
+      "name": "maximum_negative_read_call_rate",
+      "passed": true,
+      "observed": 0.0,
+      "operator": "<=",
+      "threshold": 0.0
+    },
+    {
+      "name": "minimum_related_family_cyclic_monomer_recall",
+      "passed": true,
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "name": "paired_tidehunter_groups_fraction",
+      "passed": true,
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "name": "worst_tidehunter_array_recall_difference",
+      "passed": true,
+      "observed": 0.0,
+      "operator": ">=",
+      "threshold": -0.02
+    },
+    {
+      "name": "worst_tidehunter_array_precision_difference",
+      "passed": true,
+      "observed": 0.0,
+      "operator": ">=",
+      "threshold": -0.02
+    },
+    {
+      "name": "tidehunter_runtime_geometric_mean_ratio",
+      "passed": false,
+      "observed": 2.457943015401224,
+      "operator": "<=",
+      "threshold": 2.0
+    },
+    {
+      "name": "tidehunter_peak_rss_geometric_mean_ratio",
+      "passed": true,
+      "observed": 0.45513053224782063,
+      "operator": "<=",
+      "threshold": 1.25
+    }
+  ],
+  "failed_gate_names": [
+    "all_comparator_failed_runs",
+    "tidehunter_runtime_geometric_mean_ratio"
+  ],
+  "warning": "heldout_seeds_consumed_once;failed_gates_must_be_retained;timing_repetitions_are_not_biological_replicates"
+}

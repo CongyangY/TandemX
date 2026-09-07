@@ -68,6 +68,9 @@ class PipelineConfig:
     clustering_method: str = "auto"
     family_audit: str = "full"
     cluster_identity: float = 0.95
+    single_copy_kmers: Path | None = None
+    read_error_rate: float | None = None
+    quality_correction_enabled: bool = True
 
 
 @dataclass(frozen=True)
@@ -115,6 +118,9 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--assembly", type=Path)
     parser.add_argument("--genome-size", type=int)
     parser.add_argument("--haploid-depth", type=float)
+    parser.add_argument("--single-copy-kmers", type=Path)
+    parser.add_argument("--read-error-rate", type=float)
+    parser.add_argument("--disable-quality-correction", action="store_true")
     parser.add_argument("--outdir", required=True, type=Path)
     parser.add_argument("--max-reads", type=int)
     parser.add_argument("--max-read-bases", type=int)
@@ -165,6 +171,12 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
             raise ValueError(f"--{name.replace('_', '-')} must be positive")
     if args.haploid_depth is not None and args.haploid_depth <= 0:
         raise ValueError("--haploid-depth must be positive")
+    if args.read_error_rate is not None and not 0 <= args.read_error_rate < 1:
+        raise ValueError("--read-error-rate must be in [0,1)")
+    if args.read_error_rate is not None and args.disable_quality_correction:
+        raise ValueError(
+            "--read-error-rate cannot be combined with --disable-quality-correction"
+        )
     return PipelineConfig(
         reads=tuple(args.reads),
         assembly=args.assembly,
@@ -186,6 +198,9 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         clustering_method=args.clustering_method,
         cluster_identity=args.cluster_identity,
         family_audit=args.family_audit,
+        single_copy_kmers=args.single_copy_kmers,
+        read_error_rate=args.read_error_rate,
+        quality_correction_enabled=not args.disable_quality_correction,
     )
 
 
@@ -251,6 +266,12 @@ def build_step_command(config: PipelineConfig, step: str) -> list[str]:
         ]
         if config.haploid_depth is not None:
             command.extend(["--haploid-depth", str(config.haploid_depth)])
+        if config.single_copy_kmers is not None:
+            command.extend(["--single-copy-kmers", str(config.single_copy_kmers)])
+        if config.read_error_rate is not None:
+            command.extend(["--read-error-rate", str(config.read_error_rate)])
+        if not config.quality_correction_enabled:
+            command.append("--disable-quality-correction")
         if config.max_reads is not None:
             command.extend(["--max-reads", str(config.max_reads)])
         if config.max_read_bases is not None:
@@ -374,7 +395,11 @@ def step_input_paths(config: PipelineConfig, step: str) -> tuple[Path, ...]:
     copy_number = quantify_dir / "copy_number.tsv"
     paths: dict[str, tuple[Path, ...]] = {
         "discover": config.reads,
-        "quantify": (*config.reads, catalog),
+        "quantify": (
+            *config.reads,
+            catalog,
+            *((config.single_copy_kmers,) if config.single_copy_kmers else ()),
+        ),
         "locate": tuple(path for path in (config.assembly, catalog, copy_number) if path is not None),
         "compare": (copy_number, locate_dir / "arrays.bed"),
         "probe": tuple(
@@ -548,6 +573,8 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
             raise ValueError(f"Input reads file does not exist: {reads_path}")
     if config.assembly is not None and not config.assembly.is_file():
         raise ValueError(f"Input assembly file does not exist: {config.assembly}")
+    if config.single_copy_kmers is not None and not config.single_copy_kmers.is_file():
+        raise ValueError(f"Single-copy k-mer file does not exist: {config.single_copy_kmers}")
     config.outdir.mkdir(parents=True, exist_ok=True)
     logs_dir = config.outdir / "logs"
     profiles_dir = config.outdir / "profiles"

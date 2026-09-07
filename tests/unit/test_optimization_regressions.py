@@ -22,7 +22,7 @@ from tandemx.locate.mvp import (
     locate_record_arrays,
     window_density,
 )
-from tandemx.pipeline import PipelineConfig, step_fingerprint
+from tandemx.pipeline import PipelineConfig, build_step_command, step_fingerprint
 from tandemx.probe.mvp import candidate_probe_sequences, long_oligo_tm
 from tandemx.quantify.mvp import MonomerRecord, monomer_kmer_counts
 from tandemx.utils.kmers import canonical_kmer_code, iter_canonical_kmer_codes
@@ -136,6 +136,48 @@ def test_pipeline_fingerprint_changes_when_input_content_changes(tmp_path: Path)
     before = step_fingerprint(config, "discover")
     reads.write_text(">r1\nTGCA\n", encoding="utf-8")
     after = step_fingerprint(config, "discover")
+    assert before != after
+
+
+def test_quantify_pipeline_propagates_and_fingerprints_calibration_inputs(
+    tmp_path: Path,
+) -> None:
+    reads = tmp_path / "reads.fa"
+    controls = tmp_path / "controls.tsv"
+    outdir = tmp_path / "run"
+    catalog = outdir / "discover" / "monomers.fa"
+    reads.write_text(">r1\nACGTTCAGGAC\n", encoding="utf-8")
+    controls.write_text("kmer\texpected_copy_number\nAACGT\t1\n", encoding="utf-8")
+    catalog.parent.mkdir(parents=True)
+    catalog.write_text(">family_id=TXF000001\nACGTTCAGGAC\n", encoding="utf-8")
+    config = PipelineConfig(
+        reads=(reads,),
+        assembly=None,
+        genome_size=100,
+        haploid_depth=None,
+        outdir=outdir,
+        max_reads=None,
+        max_read_bases=None,
+        kmer_backend="python",
+        steps=("quantify",),
+        min_period=2,
+        max_period=10,
+        top_periods=2,
+        threads=1,
+        resume=False,
+        force=False,
+        profile=False,
+        single_copy_kmers=controls,
+        read_error_rate=0.01,
+        quality_correction_enabled=True,
+    )
+    command = build_step_command(config, "quantify")
+    assert command[command.index("--single-copy-kmers") + 1] == str(controls)
+    assert command[command.index("--read-error-rate") + 1] == "0.01"
+    assert "--disable-quality-correction" not in command
+    before = step_fingerprint(config, "quantify")
+    controls.write_text("kmer\texpected_copy_number\nAACGT\t2\n", encoding="utf-8")
+    after = step_fingerprint(config, "quantify")
     assert before != after
 
 

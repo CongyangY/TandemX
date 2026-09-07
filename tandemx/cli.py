@@ -268,7 +268,10 @@ def run_discover(args: argparse.Namespace) -> int:
 def run_quantify(args: argparse.Namespace) -> int:
     args.kmer_backend = resolve_kmer_backend(args.kmer_backend, args.k)
     monomers_path = args.monomers if args.monomers is not None else args.catalogue
-    _require_existing_files([args.reads, monomers_path])
+    required = [args.reads, monomers_path]
+    if args.single_copy_kmers is not None:
+        required.append(args.single_copy_kmers)
+    _require_existing_files(required)
     args.outdir.mkdir(parents=True, exist_ok=True)
     _write_run_config(args.outdir, "quantify", args, status="quantify_running")
     logger = _configure_log(args.outdir, "quantify")
@@ -295,6 +298,9 @@ def run_quantify(args: argparse.Namespace) -> int:
                 max_reads=args.max_reads,
                 max_read_bases=args.max_read_bases,
                 progress_every=args.progress_every,
+                single_copy_kmers=args.single_copy_kmers,
+                read_error_rate=args.read_error_rate,
+                quality_correction_enabled=not args.disable_quality_correction,
             ),
             logger=logger,
             progress=progress,
@@ -652,7 +658,10 @@ def build_parser() -> argparse.ArgumentParser:
     quantify.add_argument("--monomers", type=_path_value, help="Optional explicit path to the discovered monomer catalog FASTA. If omitted, --catalogue/--catalog is used.")
     quantify.add_argument("--genome-size", required=True, type=int, help="Estimated haploid or target genome size in bp.")
     quantify.add_argument("--k", type=int, default=21, help="Diagnostic k-mer size.")
-    quantify.add_argument("--haploid-depth", type=float, help="Optional haploid sequencing depth. If omitted, depth is estimated as total read bases divided by genome size.")
+    quantify.add_argument("--haploid-depth", type=float, help="Optional haploid sequencing depth. If omitted, use supplied single-copy controls, then total read bases divided by genome size.")
+    quantify.add_argument("--single-copy-kmers", type=_path_value, help="Optional TSV of independently selected background k-mers with kmer and expected_copy_number columns; used for empirical depth normalization when --haploid-depth is omitted.")
+    quantify.add_argument("--read-error-rate", type=float, help="Optional independent per-base error probability for k-mer survival correction when FASTQ qualities are unavailable.")
+    quantify.add_argument("--disable-quality-correction", action="store_true", help="Disable FASTQ Phred or --read-error-rate k-mer survival correction.")
     quantify.add_argument("--kmer-backend", choices=("auto", "python", "rust"), default="auto", help="Diagnostic target k-mer counting backend. auto uses Rust when the compiled extension and k-mer size are supported, otherwise Python.")
     quantify.add_argument("--max-reads", type=int, help="Maximum input reads to count; useful for a subset matched to discover.")
     quantify.add_argument("--max-read-bases", type=int, help="Maximum cumulative input read bases to count without splitting a read.")

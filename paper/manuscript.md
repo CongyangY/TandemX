@@ -115,6 +115,19 @@ magnitudes remain engineering diagnostics rather than repeated performance
 estimates (Evidence E19). Existing external-tool diagnostics still place
 TideHunter ahead of TandemX in elapsed time on these real-data scales.
 
+The staged native-screen cascade was next evaluated once on predeclared seeds
+3101--3103. The complete matrix contained 48 scenario-seed datasets and three
+technical repetitions per tool. TandemX completed all 144 runs, its minimum
+positive array recall and precision were both 0.985714, no negative-control read
+was called, related-family cyclic monomer recall was 1.0, and the direct-child
+peak-RSS geometric-mean ratio to TideHunter was 0.455130. Promotion nevertheless
+failed. All nine TRF low-complexity-control runs reached the frozen 180-s timeout,
+violating the required comparator-completion gate, and TandemX/TideHunter wall-
+time ratio was 2.457943 against the predeclared maximum 2.0. Ten of 12 gates
+passed, but the mode remains non-default. The failed processes, gates and both
+favorable and unfavorable metrics are retained together (Figure 8; Evidence
+E20).
+
 ### Comparator conclusions depend on the measured endpoint
 
 In a 5× read simulation from one 10-Mb development genome, TandemX, TRF and
@@ -364,6 +377,16 @@ samples, corresponding to nominal total-base coverages of 0.0116×, 0.1095×,
 1.0897× and 10.9570× against the 1,008,523,555-bp assembly denominator
 (Figures S1–S3; Evidence E7). These ratios are sampling denominators, not
 measured nuclear depth.
+
+We separately audited four retrospective old-to-new assembly candidates using
+exact ENA run metadata. Twelve PacBio genomic-WGS runs were retained across
+Arabidopsis, maize, rice and soybean. The rice HiFi run and AGIS1.0 assembly use
+different BioSamples; the seven selected Mo17 CCS runs also use BioSamples
+different from the T2T assembly; and exact DNA-extraction/individual equivalence
+could not be established for the Arabidopsis or soybean historical-to-new pairs
+[5,7--9]. These candidates can support material-matched concordance or bounded
+workflow pilots, but they do not yet provide donor-matched biological collapse
+truth (Evidence E21).
 
 Whole-library random-sample comparator diagnostics on Morex, Nipponbare,
 Victoria, Chinese Spring and Lo7 successfully normalized all three read-tool
@@ -725,6 +748,17 @@ Inputs, panel values, hashes and the complete legend are in
 This known-catalogue IID substitution simulation is not biological collapse
 truth or a general comparison with external tools.
 
+**Figure 8. Frozen held-out audit of cascade discovery.** Six panels report
+mean array recall and raw-call precision across 13 positive scenarios, negative-
+read call rates for three controls, paired TandemX/TideHunter wall-time and
+direct-child peak-RSS ratios, and all 12 predeclared gates. TandemX passed its
+accuracy, determinism, false-call, related-family and RSS requirements, but
+promotion failed because nine TRF low-complexity-control executions timed out
+and the TandemX/TideHunter wall-time geometric mean was 2.457943 (>2.0).
+`evidence/cascade_native_screen_heldout_v1/figures_v2` contains the accepted
+editable SVG, PDF/PNG, panel source, complete legend and hashes. Failed TRF rows
+are NA rather than fabricated zero-accuracy observations.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -798,6 +832,12 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S16: exact-output Mo17 discovery optimization resources,
   parity status and compact receipts in
   `evidence/discovery_packed_trace_batch_v1`.
+- Supplementary Table S17: complete cascade held-out raw/summary rows, paired
+  TideHunter ratios, failed runs, gate receipt and Figure 8 panel source in
+  `evidence/cascade_native_screen_heldout_v1`.
+- Supplementary Table S18: exact four-project ENA queries and the 12 selected
+  PacBio genomic-WGS run rows in
+  `evidence/retrospective_collapse_source_audit`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -812,7 +852,9 @@ E15: `Morex_115Mb_index_interface_v2`; E16: paired localizer development and
 held-out directories listed for Supplementary Table S13; E17:
 `abundance_classifier_validation_v1`; E18:
 `abundance_classifier_depth_gated_validation_v1`; E19:
-`discovery_packed_trace_batch_v1`.
+`discovery_packed_trace_batch_v1`; E20:
+`cascade_native_screen_heldout_v1`; E21:
+`retrospective_collapse_source_audit`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 
@@ -831,6 +873,14 @@ final table/figure packaging and journal-specific formatting checks.
 6. Minimap2 author documentation and source.
    [manual](https://lh3.github.io/minimap2/minimap2.html);
    [source](https://github.com/lh3/minimap2).
+7. Pushing the limits of HiFi assemblies reveals centromere diversity between
+   two Arabidopsis thaliana genomes.
+   [Genome Biology study](https://pmc.ncbi.nlm.nih.gov/articles/PMC9757041/).
+8. A complete telomere-to-telomere assembly of the maize genome.
+   [Nature Genetics study](https://pmc.ncbi.nlm.nih.gov/articles/PMC10335936/).
+9. Near-gapless genome assemblies of Williams 82 and Lee cultivars for
+   accelerating global soybean research.
+   [Plant Genome study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12807316/).
 
 Bibliographic metadata and the full primary dataset references require final
 reference-manager curation. No author, funding, conflict or accession-deposition

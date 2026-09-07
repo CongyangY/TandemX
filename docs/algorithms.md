@@ -301,34 +301,63 @@ Current MVP implementation:
 2. enumerate canonical k-mers in circular tandem context from every monomer phase, including when `k` is longer than the monomer;
 3. count k-mer multiplicity within each monomer;
 4. remove low-complexity k-mers and k-mers shared by multiple families;
-5. stream canonical k-mers from FASTA or FASTQ reads, including gzip-compressed inputs;
-6. correct each diagnostic k-mer depth by its multiplicity within the monomer;
-7. summarize corrected diagnostic k-mer depth with the median;
-8. if `--haploid-depth` is provided, use it directly;
-9. otherwise estimate haploid depth as total read bases divided by `--genome-size` and add a warning;
-10. estimate copy number as `median_kmer_depth / haploid_depth`;
-11. estimate repeat bp as `estimated_copy_number * monomer_length`;
-12. report median absolute deviation and empirical 10th-90th percentile copy-number intervals;
-13. batch Rust target counting while releasing the Python GIL; both backends retain only catalog target counts, not all read k-mers.
+5. optionally read independently selected background controls from
+   `--single-copy-kmers`; each row declares a canonicalizable k-mer and expected
+   haploid copy number, and overlap with a repeat diagnostic k-mer is rejected;
+6. stream canonical target k-mers from FASTA or FASTQ reads, including
+   gzip-compressed inputs;
+7. estimate the probability that a complete k-mer survives base-calling error.
+   FASTQ uses the mean product of Phred-derived per-base correctness across all
+   valid windows; FASTA can use `(1 - --read-error-rate)^k`. This independent-
+   error approximation is explicit and can be disabled;
+8. divide observed target counts by this survival probability, then correct each
+   diagnostic depth by its multiplicity within the circular monomer;
+9. summarize corrected diagnostic k-mer depth with the median;
+10. use `--haploid-depth` when supplied; otherwise use the arithmetic mean of
+    all corrected single-copy control depths, including zero observations, then
+    fall back to total read bases divided by `--genome-size`. The mean avoids the
+    zero-median discontinuity near 1x coverage; median, MAD and zero fraction are
+    retained as control-QC fields;
+11. estimate copy number as `median_kmer_depth / haploid_depth` and repeat bp as
+    `estimated_copy_number * monomer_length`;
+12. report raw/corrected depth, normalization method, survival probability,
+    control count/mean/median/MAD/zero fraction, diagnostic median absolute
+    deviation and empirical 10th-90th
+    percentile copy-number endpoints;
+13. batch Rust target counting while releasing the Python GIL; both backends
+    retain only requested diagnostic/control target counts, not all read k-mers.
 
 MVP constraints:
 
 1. toy reads only;
 2. no complex ploidy model;
-3. no genome-wide unique k-mer depth estimation;
+3. TandemX does not infer that user-supplied controls are truly single-copy;
+   their selection and assembly/population provenance must be recorded;
 4. no external k-mer counter;
-5. missing `--haploid-depth` uses a rough total-bases/genome-size estimate and is labeled with a warning;
+5. without explicit depth or controls, normalization uses a rough total-bases/
+   genome-size estimate and is labelled with a warning;
 6. confidence labels are based on diagnostic k-mer count, depth dispersion and whether haploid depth was provided;
-7. uniqueness is checked within the supplied catalog, not against an independent genome background, so the MVP emits `genome_background_uniqueness_not_verified` and does not assign high confidence.
+7. repeat diagnostic uniqueness is checked within the supplied catalog, not
+   against an independent genome background, so the output emits
+   `genome_background_uniqueness_not_verified` and does not assign high confidence;
+8. Phred values are treated as calibrated independent error probabilities and
+   the 10th-90th percentile endpoints are diagnostic-k-mer dispersion, not a
+   calibrated biological confidence interval.
 
 The downstream `--catalog` input reuses discovery results. It does not mean TandemX requires repeat sequences before de novo discovery.
+
+The paired development design for the optional normalization paths is documented
+in [quantify_calibration.md](quantify_calibration.md). It scores public-command
+outputs and retains the oracle-input boundary rather than treating planted error
+rates as observable data.
 
 Future work:
 
 1. contamination-aware k-mer filtering;
-2. depth modeling across multiple samples;
-3. uncertainty intervals from bootstrap or Bayesian models;
-4. scalable k-mer counting backends.
+2. automatic, population-aware single-copy control selection and QC;
+3. depth modeling across multiple samples;
+4. independently calibrated bootstrap, negative-binomial or Bayesian intervals;
+5. scalable k-mer counting backends.
 
 ## Assembly Density Localization
 
