@@ -10,11 +10,47 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 This section is the restart point for a new Codex window. Verify the state below
 before continuing and do not stage the untracked `.codex/` directory.
 
+- **TideCluster comparator is active and must not be restarted blindly.** The
+  pinned `tandemx/tidecluster:1.21.2` image has immutable ID
+  `sha256:62691b116427394984a8bace59a6f4ba7f3ea834373772734fbcfc567c3a27a7`
+  and contains the required TideHunter 1.4.3, KiteHOR 0.13.2, MMseqs2 commit
+  747c64 and BLAST 2.16.0+. Deterministic nested MorexV3 samples are at
+  `/Volumes/T7/Codex/TandemX/results/MorexV3_reference_windows_s8101_v2_20260907`:
+  10/100/1,000 windows and 10/100/1,000 Mb, with SHA-256 values recorded in its
+  receipt. The v1 sample has identical sequence records but unsafe `=`-bearing
+  identifiers and is retained as a failed-interface case.
+- **The 10-Mb real-reference TideCluster gate is complete.** Do not rerun
+  `/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907`.
+  Its two external stages succeeded and the corrected three-GFF provenance join
+  was applied without rerunning them. It reports 87 arrays, 28 operational
+  families, 239,939 union bp (0.0239939 of the sampled bases), and positives in
+  10/10 windows. TideHunter used 25.03 s/561,556 kB internal GNU-time maximum
+  RSS; clustering used 45.92 s/7,809,052 kB. Copy number is retained for 85
+  exact TideHunter intervals and explicitly unavailable for two merged/resolved
+  intervals. All 20 files in `finalization_receipt.json` independently passed
+  byte-size and SHA-256 rechecks. These are descriptive calls on real reference
+  windows; no independent array/family accuracy truth exists.
+- **The 100-Mb TideCluster resource gate is running.** The isolated 1-CPU run
+  directory is
+  `/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907`.
+  It was started from the source snapshot stored inside that directory. Inspect
+  `profile/`, `run_receipt.json`, `result.json` and the terminal/process state
+  before deciding whether to resume or finalize; never delete a failed gate.
+  The 1-Gb sample remains unrun and must wait for the 100-Mb memory/time result.
+- **`tandemx cohort` is being hardened concurrently.** The current uncommitted
+  change rejects unknown, duplicate and incompletely quantified catalogue
+  families; records per-sample input counts and SHA-256 values; propagates the
+  least local confidence; and adds wide lower/upper abundance-endpoint matrices.
+  `examples/toy/run_toy_cohort.sh` completed two end-to-end samples and schema
+  validation in `/tmp/tandemx-toy-cohort-check`. The full Python suite passes
+  543 tests in 61.35 s; compileall, shell syntax and diff checks also pass.
+  Commit and push this checkpoint after the staged diff review completes.
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `9b09bfd`, aligned with `origin/codex/publish-current-progress`; GitHub `main`
-  was also fast-forwarded to that object through the API after the local SSH
-  proxy closed the direct push. Hosted runs `34097112749` and `34097146588`
-  passed Ubuntu/macOS Python tests, Rust checks and wheel builds. The earlier
+  `a14ceded7267f46fb81b003e2c0142020c6cd1b1`, aligned with
+  `origin/codex/publish-current-progress` and `origin/main`. Hosted runs
+  `34097684678` and `34097716770` passed Ubuntu/macOS Python tests, Rust checks
+  and wheel builds. Commit `9b09bfd` is the guarded-cascade validation evidence
+  baseline; `a14cede` records the final published checkpoint. The earlier
   commit `9eda196` froze
   the untouched depth-gated quantify validation source, seeds, data-generation
   hashes, decision rule and nine scientific gates before any validation data

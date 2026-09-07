@@ -31,6 +31,29 @@ class TideClusterRecord:
         )
 
 
+@dataclass(frozen=True)
+class ResolvedTideClusterRecord:
+    sequence_id: str
+    start: int
+    end: int
+    family_id: str
+    period: int
+    consensus_sequence: str
+    copy_number: float | None
+    representative_tidehunter_id: str
+    copy_number_source: str
+
+    def array(self) -> ArrayRecord:
+        return ArrayRecord(
+            self.sequence_id,
+            self.start,
+            self.end,
+            self.period,
+            self.consensus_sequence,
+            self.family_id,
+        )
+
+
 def parse_attributes(value: str) -> dict[str, str]:
     result: dict[str, str] = {}
     for field in value.split(";"):
@@ -96,6 +119,88 @@ def normalize_tidecluster(tidehunter_gff: Path, clustering_gff: Path) -> list[Ti
     if not normalized:
         raise ValueError("No TideCluster tandem-repeat records found")
     return sorted(normalized, key=lambda x: (x.sequence_id, x.start, x.end, x.family_id))
+
+
+def normalize_resolved_tidecluster(
+    tidehunter_gff: Path,
+    intermediate_clustering_gff: Path,
+    clustering_gff: Path,
+) -> list[ResolvedTideClusterRecord]:
+    """Join merged TideCluster intervals through its representative-ID map.
+
+    TideCluster may merge adjacent or overlapping TideHunter hits before writing
+    its final GFF.  In that case no single TideHunter interval has the final
+    coordinates.  The intermediate clustering GFF retains the representative
+    TideHunter ID for each final interval and is therefore the authoritative
+    bridge to period and consensus provenance.
+    """
+    tidehunter_by_id: dict[str, dict[str, str]] = {}
+    tidehunter_by_interval: dict[tuple[str, int, int], list[dict[str, str]]] = {}
+    for row in read_gff(tidehunter_gff):
+        attributes = row["attributes"]
+        required = {"ID", "consensus_sequence", "consensus_length", "copy_number"}
+        if not required <= set(attributes):
+            raise ValueError("TideHunter row lacks resolved-normalization attributes")
+        identifier = attributes["ID"]
+        if identifier in tidehunter_by_id:
+            raise ValueError(f"Duplicate TideHunter ID: {identifier}")
+        tidehunter_by_id[identifier] = attributes
+        key = (str(row["sequence_id"]), int(row["start"]), int(row["end"]))
+        tidehunter_by_interval.setdefault(key, []).append(attributes)
+
+    representative_by_interval: dict[tuple[str, int, int], str] = {}
+    for row in read_gff(intermediate_clustering_gff):
+        key = (str(row["sequence_id"]), int(row["start"]), int(row["end"]))
+        attributes = row["attributes"]
+        if "Name" not in attributes or key in representative_by_interval:
+            raise ValueError(f"Invalid intermediate TideCluster interval: {key}")
+        representative_by_interval[key] = attributes["Name"]
+
+    normalized: list[ResolvedTideClusterRecord] = []
+    for row in read_gff(clustering_gff):
+        key = (str(row["sequence_id"]), int(row["start"]), int(row["end"]))
+        attributes = row["attributes"]
+        if "Name" not in attributes or key not in representative_by_interval:
+            raise ValueError(f"Final TideCluster interval lacks intermediate provenance: {key}")
+        representative_id = representative_by_interval[key]
+        if representative_id not in tidehunter_by_id:
+            raise ValueError(
+                f"TideCluster representative is absent from TideHunter output: {representative_id}"
+            )
+        representative = tidehunter_by_id[representative_id]
+        sequence = representative["consensus_sequence"].upper()
+        period = int(representative["consensus_length"])
+        if period != len(sequence):
+            raise ValueError(
+                f"TideHunter representative length differs from sequence: {representative_id}"
+            )
+        exact = tidehunter_by_interval.get(key, [])
+        if len(exact) == 1:
+            copy_number = float(exact[0]["copy_number"])
+            copy_number_source = "exact_tidehunter_interval"
+        else:
+            copy_number = None
+            copy_number_source = "unavailable_after_interval_merge_or_resolution"
+        normalized.append(
+            ResolvedTideClusterRecord(
+                sequence_id=key[0],
+                start=key[1],
+                end=key[2],
+                family_id=attributes["Name"],
+                period=period,
+                consensus_sequence=sequence,
+                copy_number=copy_number,
+                representative_tidehunter_id=representative_id,
+                copy_number_source=copy_number_source,
+            )
+        )
+    if not normalized:
+        raise ValueError("No resolved TideCluster tandem-repeat records found")
+    if len(normalized) != len(representative_by_interval):
+        raise ValueError("Final and intermediate TideCluster interval sets differ")
+    return sorted(
+        normalized, key=lambda item: (item.sequence_id, item.start, item.end, item.family_id)
+    )
 
 
 def read_truth(path: Path, sequences: dict[str, str]) -> list[ArrayRecord]:

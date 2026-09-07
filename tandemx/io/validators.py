@@ -263,6 +263,15 @@ TSV_SCHEMAS.update({
                     "compatible_pan_family_count"},
         "status": {"assigned", "below_minimum_support", "unresolved_sequence"},
     },
+    "cohort_input_qc.tsv": {
+        "required": {"sample_id", "monomer_family_count", "copy_number_family_count",
+                     "copy_number_matched_count", "comparison_provided", "comparison_family_count",
+                     "comparison_matched_count", "monomers_sha256", "copy_number_sha256",
+                     "comparison_sha256", "status", "warning"},
+        "numeric": {"monomer_family_count", "copy_number_family_count", "copy_number_matched_count",
+                    "comparison_family_count", "comparison_matched_count"},
+        "status": {"complete"},
+    },
     "sample_family_abundance.tsv": {
         "required": {"sample_id", "pan_family_id", "local_family_count", "estimated_bp",
                      "estimated_bp_interval_low", "estimated_bp_interval_high", "status", "confidence", "warning"},
@@ -279,6 +288,14 @@ TSV_SCHEMAS.update({
                    "reads_only", "low_confidence", "mixed_local_status", "not_evaluated", "not_observed"},
     },
     "abundance_matrix.tsv": {
+        "required": {"pan_family_id"},
+        "numeric": set(),
+    },
+    "abundance_interval_low_matrix.tsv": {
+        "required": {"pan_family_id"},
+        "numeric": set(),
+    },
+    "abundance_interval_high_matrix.tsv": {
         "required": {"pan_family_id"},
         "numeric": set(),
     },

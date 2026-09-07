@@ -14,6 +14,7 @@ from tandemx.quantify.mvp import read_monomer_fasta
 
 
 MANIFEST_FIELDS = {"sample_id", "monomers", "copy_number", "comparison"}
+CONFIDENCE_ORDER = {"low": 0, "medium": 1, "high": 2}
 
 
 @dataclass(frozen=True)
@@ -118,6 +119,41 @@ def _float(row: dict[str, str], field: str, path: Path) -> float:
         raise ValueError(f"{path} field {field} is not numeric for family {row.get('family_id', 'NA')}") from error
 
 
+def _index_family_rows(
+    rows: list[dict[str, str]],
+    path: Path,
+    expected: set[str],
+    *,
+    require_complete: bool,
+) -> dict[str, dict[str, str]]:
+    indexed: dict[str, dict[str, str]] = {}
+    for row in rows:
+        family_id = row["family_id"].strip()
+        if not family_id:
+            raise ValueError(f"{path} contains an empty family_id")
+        if family_id in indexed:
+            raise ValueError(f"{path} contains duplicate family_id: {family_id}")
+        indexed[family_id] = row
+    unknown = sorted(set(indexed) - expected)
+    if unknown:
+        raise ValueError(
+            f"{path} contains families absent from its monomer catalogue: {','.join(unknown)}"
+        )
+    missing = sorted(expected - set(indexed))
+    if require_complete and missing:
+        raise ValueError(
+            f"{path} lacks quantified catalogue families: {','.join(missing)}"
+        )
+    return indexed
+
+
+def _least_confidence(rows: Iterable[dict[str, str]]) -> str:
+    observed = [row.get("confidence", "").strip() for row in rows]
+    if not observed or any(value not in CONFIDENCE_ORDER for value in observed):
+        return "low"
+    return min(observed, key=CONFIDENCE_ORDER.__getitem__)
+
+
 def write_tsv(path: Path, fields: list[str], rows: Iterable[dict[str, Any]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t", lineterminator="\n")
@@ -207,29 +243,85 @@ def build_cohort(manifest: Path, outdir: Path, *, cluster_identity: float = 0.95
     write_tsv(outdir / "family_membership.tsv", list(membership_rows[0]), membership_rows)
 
     local_lengths = {(record.sample_id, record.family_id): len(record.sequence) for record in local}
+    local_ids = {
+        sample.sample_id: {
+            record.family_id for record in local if record.sample_id == sample.sample_id
+        }
+        for sample in samples
+    }
     abundance_rows = []
     abundance_matrix: dict[tuple[str, str], str] = {}
+    abundance_interval_low_matrix: dict[tuple[str, str], str] = {}
+    abundance_interval_high_matrix: dict[tuple[str, str], str] = {}
     representation_rows = []
     representation_matrix: dict[tuple[str, str], str] = {}
+    input_qc_rows = []
     for sample in samples:
         copy_rows = read_tsv(sample.copy_number, {
             "family_id", "estimated_copy_number", "estimated_bp",
             "copy_number_interval_low", "copy_number_interval_high", "confidence", "warning",
         })
+        copy_index = _index_family_rows(
+            copy_rows,
+            sample.copy_number,
+            local_ids[sample.sample_id],
+            require_complete=True,
+        )
         copy_by_pan: dict[str, list[dict[str, str]]] = {}
-        for row in copy_rows:
+        for row in copy_index.values():
             pan_id = mapping.get((sample.sample_id, row["family_id"]))
-            if pan_id is not None:
-                copy_by_pan.setdefault(pan_id, []).append(row)
+            if pan_id is None:
+                raise ValueError(
+                    f"catalogue family lacks a pan-family assignment: "
+                    f"{sample.sample_id}/{row['family_id']}"
+                )
+            copy_by_pan.setdefault(pan_id, []).append(row)
         comparison_by_pan: dict[str, list[dict[str, str]]] = {}
+        comparison_index: dict[str, dict[str, str]] = {}
         if sample.comparison is not None:
-            for row in read_tsv(sample.comparison, {
+            comparison_rows = read_tsv(sample.comparison, {
                 "family_id", "read_estimated_bp", "assembly_estimated_bp",
                 "assembly_read_ratio", "status", "confidence", "warning",
-            }):
+            })
+            comparison_index = _index_family_rows(
+                comparison_rows,
+                sample.comparison,
+                local_ids[sample.sample_id],
+                require_complete=False,
+            )
+            for row in comparison_index.values():
                 pan_id = mapping.get((sample.sample_id, row["family_id"]))
-                if pan_id is not None:
-                    comparison_by_pan.setdefault(pan_id, []).append(row)
+                if pan_id is None:
+                    raise ValueError(
+                        f"comparison family lacks a pan-family assignment: "
+                        f"{sample.sample_id}/{row['family_id']}"
+                    )
+                comparison_by_pan.setdefault(pan_id, []).append(row)
+        comparison_missing = sorted(local_ids[sample.sample_id] - set(comparison_index))
+        input_qc_rows.append({
+            "sample_id": sample.sample_id,
+            "monomer_family_count": len(local_ids[sample.sample_id]),
+            "copy_number_family_count": len(copy_index),
+            "copy_number_matched_count": len(copy_index),
+            "comparison_provided": str(sample.comparison is not None).lower(),
+            "comparison_family_count": len(comparison_index),
+            "comparison_matched_count": len(comparison_index),
+            "monomers_sha256": hashlib.sha256(sample.monomers.read_bytes()).hexdigest(),
+            "copy_number_sha256": hashlib.sha256(sample.copy_number.read_bytes()).hexdigest(),
+            "comparison_sha256": (
+                "NA" if sample.comparison is None
+                else hashlib.sha256(sample.comparison.read_bytes()).hexdigest()
+            ),
+            "status": "complete",
+            "warning": (
+                "comparison_not_provided"
+                if sample.comparison is None
+                else (
+                    "comparison_missing_catalogue_families:" + ",".join(comparison_missing)
+                    if comparison_missing else ""
+                )
+            ),
+        })
         for pan_id in pan_ids:
             rows = copy_by_pan.get(pan_id, [])
             if rows:
@@ -243,7 +335,8 @@ def build_cohort(manifest: Path, outdir: Path, *, cluster_identity: float = 0.95
                     * local_lengths[(sample.sample_id, row["family_id"])] for row in rows
                 )
                 warnings = sorted({item for row in rows for item in row["warning"].split(";") if item})
-                confidence = "low" if any(row["confidence"] == "low" for row in rows) else "medium"
+                warnings.append("summed_marginal_interval_endpoints_not_joint_ci")
+                confidence = _least_confidence(rows)
                 status = "quantified"
                 value = f"{estimated_bp:.4f}"
             else:
@@ -264,6 +357,12 @@ def build_cohort(manifest: Path, outdir: Path, *, cluster_identity: float = 0.95
                 "warning": ";".join(warnings),
             })
             abundance_matrix[(sample.sample_id, pan_id)] = value
+            abundance_interval_low_matrix[(sample.sample_id, pan_id)] = (
+                "NA" if interval_low is None else f"{interval_low:.4f}"
+            )
+            abundance_interval_high_matrix[(sample.sample_id, pan_id)] = (
+                "NA" if interval_high is None else f"{interval_high:.4f}"
+            )
 
             comparisons = comparison_by_pan.get(pan_id, [])
             if comparisons:
@@ -273,10 +372,12 @@ def build_cohort(manifest: Path, outdir: Path, *, cluster_identity: float = 0.95
                 statuses = sorted({row["status"] for row in comparisons})
                 rep_status = statuses[0] if len(statuses) == 1 else "mixed_local_status"
                 rep_warnings = sorted({item for row in comparisons for item in row["warning"].split(";") if item})
+                rep_confidence = _least_confidence(comparisons)
             else:
                 read_bp = assembly_bp = ratio = None
                 rep_status = "not_evaluated" if sample.comparison is None else "not_observed"
                 rep_warnings = ["assembly_read_comparison_unavailable"]
+                rep_confidence = "low"
             ratio_value = "NA" if ratio is None else f"{ratio:.6f}"
             representation_rows.append({
                 "sample_id": sample.sample_id,
@@ -285,21 +386,33 @@ def build_cohort(manifest: Path, outdir: Path, *, cluster_identity: float = 0.95
                 "assembly_estimated_bp": "NA" if assembly_bp is None else f"{assembly_bp:.4f}",
                 "assembly_read_ratio": ratio_value,
                 "status": rep_status,
-                "confidence": "low" if ratio is None else "medium",
+                "confidence": rep_confidence,
                 "warning": ";".join(rep_warnings),
             })
             representation_matrix[(sample.sample_id, pan_id)] = ratio_value
 
+    write_tsv(outdir / "cohort_input_qc.tsv", list(input_qc_rows[0]), input_qc_rows)
     write_tsv(outdir / "sample_family_abundance.tsv", list(abundance_rows[0]), abundance_rows)
     write_tsv(outdir / "abundance_matrix.tsv", ["pan_family_id", *(sample.sample_id for sample in samples)],
               _matrix_rows(pan_ids, samples, abundance_matrix))
+    write_tsv(
+        outdir / "abundance_interval_low_matrix.tsv",
+        ["pan_family_id", *(sample.sample_id for sample in samples)],
+        _matrix_rows(pan_ids, samples, abundance_interval_low_matrix),
+    )
+    write_tsv(
+        outdir / "abundance_interval_high_matrix.tsv",
+        ["pan_family_id", *(sample.sample_id for sample in samples)],
+        _matrix_rows(pan_ids, samples, abundance_interval_high_matrix),
+    )
     write_tsv(outdir / "sample_family_representation.tsv", list(representation_rows[0]), representation_rows)
     write_tsv(outdir / "representation_matrix.tsv", ["pan_family_id", *(sample.sample_id for sample in samples)],
               _matrix_rows(pan_ids, samples, representation_matrix))
 
     outputs = [
-        "pan_families.tsv", "pan_monomers.fa", "family_membership.tsv",
+        "pan_families.tsv", "pan_monomers.fa", "family_membership.tsv", "cohort_input_qc.tsv",
         "sample_family_abundance.tsv", "abundance_matrix.tsv",
+        "abundance_interval_low_matrix.tsv", "abundance_interval_high_matrix.tsv",
         "sample_family_representation.tsv", "representation_matrix.tsv",
     ]
     receipt = {

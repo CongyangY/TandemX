@@ -461,7 +461,11 @@ Current cohort integration:
 3. it aggregates copy-number interval endpoints in bp and assembly/read ratios
    only after local families are mapped to a pan family;
 4. it emits explicit `NA`, `not_observed`, and `not_evaluated` states rather
-   than treating missing evidence as zero abundance.
+   than treating missing evidence as zero abundance;
+5. it rejects duplicate, unknown or incompletely quantified catalogue families,
+   hashes every supplied input and writes a per-sample QC audit;
+6. it writes point, lower-endpoint and upper-endpoint abundance matrices and
+   propagates the least confident local evidence into each aggregate.
 
 Remaining work includes chromosome/subgenome summaries and calibrated joint
 uncertainty across biological samples.

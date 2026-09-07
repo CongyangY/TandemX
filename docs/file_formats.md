@@ -288,12 +288,20 @@ recorded threshold, not inferred ancestral families.
 `pan_family_id`. It retains monomer length, edit-distance upper bound,
 similarity lower bound, number of compatible clusters, status, and warning.
 
+`cohort_input_qc.tsv` records per-sample catalogue, copy-number and optional
+comparison row counts plus SHA-256 values for all supplied inputs. Copy-number
+tables must contain each catalogue family exactly once. Unknown or duplicate
+family identifiers fail explicitly. Comparison tables may omit catalogue
+families, but unknown or duplicate identifiers fail and omissions are recorded.
+
 `sample_family_abundance.tsv` contains one row per sample and pan family:
 `local_family_count`, `estimated_bp`, propagated low/high bp endpoints,
 `status`, `confidence`, and `warning`. Endpoints sum the local copy-number
 quantiles after conversion to bp; they are descriptive propagated endpoints,
 not a joint confidence interval. `abundance_matrix.tsv` is the corresponding
-wide estimated-bp matrix.
+wide estimated-bp matrix. `abundance_interval_low_matrix.tsv` and
+`abundance_interval_high_matrix.tsv` expose the same propagated endpoints in
+wide form. The least confident contributing local row is propagated.
 
 `sample_family_representation.tsv` aggregates read and assembly bp and reports
 their ratio, status, confidence, and warning. `representation_matrix.tsv` is

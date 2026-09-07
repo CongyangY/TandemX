@@ -67,4 +67,37 @@ def test_cohort_cli_builds_pan_catalogue_and_na_aware_matrices(tmp_path: Path) -
     assert next(row["assembly_read_ratio"] for row in representation if row["sample_id"] == "s1" and row["pan_family_id"] == pan_a) == "0.500000"
     assert all(row["assembly_read_ratio"] == "NA" for row in representation if row["sample_id"] == "s2")
     assert 'status: "cohort_completed"' in (out / "run_config.yaml").read_text()
-    assert len(validate_project(out)) == 7
+    low_matrix = rows(out / "abundance_interval_low_matrix.tsv")
+    high_matrix = rows(out / "abundance_interval_high_matrix.tsv")
+    assert next(row["s1"] for row in low_matrix if row["pan_family_id"] == pan_a) == "2560.0000"
+    assert next(row["s1"] for row in high_matrix if row["pan_family_id"] == pan_a) == "4096.0000"
+    input_qc = rows(out / "cohort_input_qc.tsv")
+    assert [row["status"] for row in input_qc] == ["complete", "complete"]
+    assert input_qc[1]["comparison_sha256"] == "NA"
+    assert input_qc[1]["warning"] == "comparison_not_provided"
+    assert len(validate_project(out)) == 10
+
+
+def test_cohort_cli_rejects_copy_number_family_mismatch(tmp_path: Path) -> None:
+    sequence = "ACGTGCACTGATCGTACGATCGTAGCTAGCTA"
+    for sample_id in ("s1", "s2"):
+        folder = tmp_path / sample_id
+        folder.mkdir()
+        (folder / "monomers.fa").write_text(f">family_id=A\n{sequence}\n")
+        family_id = "UNKNOWN" if sample_id == "s1" else "A"
+        (folder / "copy_number.tsv").write_text(
+            COPY_HEADER
+            + f"{family_id}\t32\t20\t10\t5\t100\t3200\t1\t80\t120\tmedium\ttest\n"
+        )
+    manifest = tmp_path / "samples.tsv"
+    manifest.write_text(
+        "sample_id\tmonomers\tcopy_number\tcomparison\n"
+        "s1\ts1/monomers.fa\ts1/copy_number.tsv\tNA\n"
+        "s2\ts2/monomers.fa\ts2/copy_number.tsv\tNA\n"
+    )
+    result = subprocess.run([
+        sys.executable, "-m", "tandemx.cli", "cohort", "--manifest", str(manifest),
+        "--backend", "python", "--outdir", str(tmp_path / "out"),
+    ], text=True, capture_output=True)
+    assert result.returncode == 2
+    assert "families absent from its monomer catalogue: UNKNOWN" in result.stderr

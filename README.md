@@ -254,9 +254,13 @@ tandemx cohort --manifest samples.tsv --outdir results/cohort
 ```
 
 The command clusters circular monomer sequences against fixed representatives
-and writes a pan-repeat catalogue, a local-to-pan membership audit, long-form
-abundance/representation tables, and sample-by-family matrices. Missing or
-unevaluated families remain `NA`; they are not silently converted to zero.
+and writes an input checksum/QC audit, pan-repeat catalogue, local-to-pan
+membership audit, long-form abundance/representation tables, point and interval
+endpoint abundance matrices, and a sample-by-family representation matrix.
+Unknown, duplicate or incompletely quantified catalogue families fail clearly.
+Missing or unevaluated families remain `NA`; they are not silently converted to
+zero. A complete two-sample example is available at
+`examples/toy/run_toy_cohort.sh`.
 
 ## Comparing two run directories
 

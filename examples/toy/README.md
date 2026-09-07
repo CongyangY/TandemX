@@ -62,3 +62,18 @@ results/visualize/in_silico_fish.svg
 The final validation step checks recognized TandemX output schemas, numeric fields, BED-style coordinates and TandemX FASTA headers.
 
 Do not commit generated `results/` directories.
+
+## Two-sample cohort example
+
+The cohort example generates two samples with the same seeded monomers and
+different planted copy counts, runs the required single-sample commands, then
+builds and validates a pan-repeat catalogue:
+
+```bash
+bash examples/toy/run_toy_cohort.sh /tmp/tandemx-toy-cohort
+```
+
+Key cohort outputs include `cohort_input_qc.tsv`, `pan_families.tsv`,
+`family_membership.tsv`, three abundance matrices (point, lower endpoint and
+upper endpoint), and the assembly representation matrix. This example verifies
+the data contract; it is not biological cohort validation.
