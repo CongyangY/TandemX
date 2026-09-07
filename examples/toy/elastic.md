@@ -12,7 +12,7 @@ pytest tests/unit/test_elastic_discovery.py tests/integration/test_elastic_cli.p
 ```
 
 Inputs are FASTA/FASTQ reads (optionally gzip). Outputs are `candidate_reads.tsv`,
-`candidate_monomers.fa`, `monomer_membership.tsv`, `monomers.fa`, `families.tsv`, `family_similarity.tsv`, `discovery_summary.json`,
+`candidate_monomers.fa`, `monomer_membership.tsv`, `monomers.fa`, `families.tsv`, `family_similarity.tsv`, `family_hierarchy.tsv`, `discovery_summary.json`,
 `run.log` and `run_config.yaml`. A valid negative result can contain no candidates.
 See [field definitions](../../docs/file_formats.md) and
 [algorithm](../../docs/algorithms.md#elastic-read-local-discovery-experimental).

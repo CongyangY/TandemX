@@ -48,7 +48,8 @@ def test_multi_array_cli_outputs_are_deterministic_and_valid(tmp_path, backend):
         assert 'discovery_method: "elastic"' in (folder / "run_config.yaml").read_text()
         artifacts.append([(folder / name).read_bytes() for name in
                           ["candidate_reads.tsv", "candidate_monomers.fa", "monomer_membership.tsv",
-                           "monomers.fa", "families.tsv", "family_similarity.tsv"]])
+                           "monomers.fa", "families.tsv", "family_similarity.tsv",
+                           "family_hierarchy.tsv"]])
     assert artifacts[0] == artifacts[1]
 
 
@@ -77,3 +78,4 @@ def test_related_family_audit_pipeline_preserves_catalog_and_exposes_omissions(t
     full = list(csv.DictReader((outputs[0]/'family_similarity.tsv').open(), delimiter='\t'))
     related = list(csv.DictReader((outputs[1]/'family_similarity.tsv').open(), delimiter='\t'))
     assert related == [r for r in full if r['relationship'] != 'distinct']
+    assert (outputs[0]/'family_hierarchy.tsv').read_bytes() == (outputs[1]/'family_hierarchy.tsv').read_bytes()

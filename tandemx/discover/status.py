@@ -6,7 +6,13 @@ import hashlib
 import json
 from pathlib import Path
 
-FILES = ("candidate_reads.tsv", "families.tsv", "monomers.fa", "family_similarity.tsv")
+FILES = (
+    "candidate_reads.tsv",
+    "families.tsv",
+    "monomers.fa",
+    "family_similarity.tsv",
+    "family_hierarchy.tsv",
+)
 OPTIONAL_FILES = ("collapsed_families.tsv", "collapsed_monomers.fa", "family_collapse.tsv",
                   "candidate_monomers.fa", "monomer_membership.tsv", "family_audit_summary.json")
 

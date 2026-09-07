@@ -92,6 +92,28 @@ before continuing and do not stage the untracked `.codex/` directory.
   output hashes independently rechecked, and the complete source suite passes
   556 tests in 64.55 s; compileall, shell syntax, 72 tracked local links and diff
   checks pass.
+- **The TideHunter importer checkpoint is published and portable.** Commit
+  `20aca270a4c51ccedfb59a917c4633582a3ef8cf` is on both
+  `codex/publish-current-progress` and `main`; hosted runs `34107440725` and
+  `34107440959` completed successfully. An independently built CPython 3.11
+  macOS ARM64 wheel includes `tandemx/importers/tidehunter.py`; a temporary
+  target installation outside the source tree imported the module and exposed
+  `tandemx import tidehunter --help`.
+- **Candidate monomer/HOR architecture is now machine-readable locally.** Every
+  native discovery and TideHunter import writes `family_hierarchy.tsv` while
+  streaming the existing pair audit. Each
+  `possible_higher_order_or_partial` pair is directed shorter-to-longer and
+  classified as `putative_period_multiple` only when the representative-length
+  ratio is within 0.05 of an integer of at least two; other related edges remain
+  unresolved. All alternatives are retained, so the output is an evidence graph
+  rather than a forced tree or validated HOR call. An actual 171/342/684 bp
+  import at `/tmp/tandemx-hierarchy-import-v1` produced three families and all
+  three pairwise candidate edges; eight files/36 records validated and 10 import
+  hashes independently rechecked. The current source suite passes 561 tests in
+  65.59 s. A release wheel installed outside the source tree, repeated the
+  import with the Rust backend, validated the same eight files/36 records and
+  has SHA-256
+  `c6c44bfc43fdf037848d3aae2ae9034f5e2f8d3ce19c6784680c78054b4bc504`.
 - **Frozen cascade held-out is consumed; never rerun seeds 3101--3103.** The
   once-only run is complete at
   `/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907`:

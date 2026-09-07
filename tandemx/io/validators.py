@@ -129,6 +129,36 @@ TSV_SCHEMAS: dict[str, dict[str, set[str]]] = {
             "length_ratio",
         },
     },
+    "family_hierarchy.tsv": {
+        "required": {
+            "hierarchy_edge_id",
+            "shorter_family_id",
+            "longer_family_id",
+            "shorter_length_bp",
+            "longer_length_bp",
+            "nearest_integer_multiple",
+            "length_ratio",
+            "multiple_error",
+            "local_identity",
+            "local_overlap_fraction_shorter",
+            "shared_kmer_fraction",
+            "orientation",
+            "edge_type",
+            "status",
+            "warning",
+        },
+        "numeric": {
+            "shorter_length_bp",
+            "longer_length_bp",
+            "nearest_integer_multiple",
+            "length_ratio",
+            "multiple_error",
+            "local_identity",
+            "local_overlap_fraction_shorter",
+            "shared_kmer_fraction",
+        },
+        "status": {"candidate", "unresolved"},
+    },
     "family_collapse.tsv": {
         "required": {
             "original_family_id",
@@ -347,7 +377,11 @@ TSV_SCHEMAS.update({
     },
 })
 
-ALLOW_EMPTY_TSV_RECORDS = {"family_similarity.tsv", "family_collapse.tsv"}
+ALLOW_EMPTY_TSV_RECORDS = {
+    "family_similarity.tsv",
+    "family_hierarchy.tsv",
+    "family_collapse.tsv",
+}
 
 
 FASTA_HEADER_PATTERNS = {

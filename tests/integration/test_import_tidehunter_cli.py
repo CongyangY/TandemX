@@ -88,6 +88,7 @@ def test_import_tidehunter_builds_a_valid_downstream_catalogue(tmp_path: Path) -
     assert len(families) == 1
     assert families[0]["support_read_count"] == "2"
     assert "external_detector=tidehunter" in families[0]["warning"]
+    assert rows(out / "family_hierarchy.tsv") == []
     membership = rows(out / "monomer_membership.tsv")
     assert {row["status"] for row in membership} == {"assigned"}
     summary = json.loads((out / "import_summary.json").read_text())
@@ -96,7 +97,7 @@ def test_import_tidehunter_builds_a_valid_downstream_catalogue(tmp_path: Path) -
     assert summary["candidate_count"] == 2 and summary["family_count"] == 1
     assert len(summary["reads_semantic_sha256"]) == 64
     validated = {result.path.name for result in validate_project(out)}
-    assert {"candidate_reads.tsv", "families.tsv", "tidehunter_import.tsv"} <= validated
+    assert {"candidate_reads.tsv", "families.tsv", "family_hierarchy.tsv", "tidehunter_import.tsv"} <= validated
     assert 'status: "tidehunter_import_completed"' in (out / "run_config.yaml").read_text()
 
     quantify = run_cli(

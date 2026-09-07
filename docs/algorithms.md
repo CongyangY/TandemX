@@ -304,6 +304,16 @@ similar catalogues can still require quadratic work/output. Empty catalogues
 write a header-only table and a zero-count receipt. This mode does not change
 read-local detection or gapped sequence clustering.
 
+The audit simultaneously streams `family_hierarchy.tsv`. Each
+`possible_higher_order_or_partial` relationship becomes an edge directed from
+the shorter to the longer representative. A nearest integer length multiple of
+at least two, with absolute ratio error no greater than 0.05, is labelled a
+`putative_period_multiple`; other related edges remain unresolved. This preserves
+all supported 171/342/684-style alternatives as a graph instead of forcing one
+parent or collapsing period multiples. The graph is a catalogue QC result. It
+does not reconstruct HOR order, prove direct ancestry, or distinguish a true HOR
+from harmonic detection and partial representatives without additional context.
+
 ## Diagnostic k-mer Copy-number Calibration
 
 MVP goal: estimate repeat family copy number from diagnostic k-mer depth on toy reads using a repeat catalog discovered upstream.

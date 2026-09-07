@@ -12,7 +12,9 @@
 8. Stabilize and package the implemented Rust read-local rolling seed/position interface across supported Python/platform combinations; global k-mer counters do not replace this position-aware operation.
 9. Preserve `tandemx run` step summaries while adding resource metrics and dependency-aware invalidation.
 10. Refine post hoc known-repeat annotation and family-similarity review without turning known libraries into discovery templates.
-11. Keep optional family collapse conservative: only `likely_redundant` pairs should collapse, while possible higher-order or partial relationships remain visible for review.
+11. Extend the implemented pairwise `family_hierarchy.tsv` candidate graph with
+    assembly/read-context evidence before selecting or validating rooted HOR
+    models; only `likely_redundant` pairs should collapse.
 12. Add future multi-sample compare support separately from the current single-run assembly/read abundance MVP.
 
 The default workflow should remain de novo: reads enter `tandemx discover`, and the discovered repeat catalog feeds downstream commands. A future optional guided mode may allow `--catalog` to point to user-supplied known-repeat FASTA files, such as named satellite sequences, for guided quantification, localization or probe design. That guided mode must be documented as optional and separate from the default discovery workflow.

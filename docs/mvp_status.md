@@ -80,6 +80,9 @@ Discover:
 1. `candidate_reads.tsv`
 2. `monomers.fa`
 3. `families.tsv`
+4. `family_similarity.tsv`
+5. `family_hierarchy.tsv`, a pairwise candidate period-multiple/related-family
+   graph with explicit unresolved and non-HOR-truth warnings
 
 TideHunter import:
 

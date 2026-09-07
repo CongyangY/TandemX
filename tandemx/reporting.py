@@ -41,6 +41,7 @@ OUTPUT_SPECS = {
         ("monomer_catalog", "discover/monomers.fa", "Discovered representative monomer sequences.", "quantify,locate,probe,visualize"),
         ("family_catalog", "discover/families.tsv", "Discovered repeat family summary.", "interpretation"),
         ("family_similarity", "discover/family_similarity.tsv", "Pairwise monomer similarity and redundancy flags.", "catalog review"),
+        ("family_hierarchy", "discover/family_hierarchy.tsv", "Directional candidate period-multiple and unresolved related-family edges.", "architecture review"),
         ("collapsed_monomer_catalog", "discover/collapsed_monomers.fa", "Optional catalog collapsed only for likely_redundant families.", "optional catalog review"),
         ("collapsed_family_catalog", "discover/collapsed_families.tsv", "Optional family summary after likely_redundant collapse.", "optional catalog review"),
         ("family_collapse", "discover/family_collapse.tsv", "Optional audit trail for likely_redundant family collapse.", "optional catalog review"),
@@ -169,6 +170,7 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
     copy_number_path = config.outdir / "quantify" / "copy_number.tsv"
     compare_path = config.outdir / "compare" / "assembly_vs_read_cn.tsv"
     family_similarity_path = config.outdir / "discover" / "family_similarity.tsv"
+    family_hierarchy_path = config.outdir / "discover" / "family_hierarchy.tsv"
     repeat_annotation_path = config.outdir / "repeat_annotation.tsv"
     possible_higher_order_count = count_tsv_value(
         family_similarity_path,
@@ -214,6 +216,7 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
             f"- Compare rows: {count_data_rows(compare_path)}",
             f"- Compare status summary: {summarize_tsv_counts(compare_path, 'status')}",
             f"- Family similarity rows: {count_data_rows(family_similarity_path)}",
+            f"- Family hierarchy edges: {count_data_rows(family_hierarchy_path)}",
             f"- Repeat annotation summary: {summarize_tsv_counts(repeat_annotation_path, 'annotation_status')}",
             "",
             "## Main outputs",
@@ -221,6 +224,7 @@ def write_run_report(config: ReportConfig, records: Sequence[ReportStep]) -> Non
             f"- Family catalogue: `{family_path}`",
             f"- Monomer FASTA: `{config.outdir / 'discover' / 'monomers.fa'}`",
             f"- Family similarity: `{family_similarity_path}`",
+            f"- Family hierarchy: `{family_hierarchy_path}`",
             f"- Copy-number table: `{copy_number_path}`" if copy_number_path.is_file() else "- Copy-number table: not generated",
             f"- Assembly/read comparison: `{compare_path}`" if compare_path.is_file() else "- Assembly/read comparison: not generated",
             f"- Repeat annotation: `{repeat_annotation_path}`" if repeat_annotation_path.is_file() else "- Repeat annotation: not generated",

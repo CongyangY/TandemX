@@ -11,7 +11,8 @@ The current MVP:
 5. keeps native discovery independent of external tandem repeat finders, while
    an explicit provenance-labelled importer can ingest TideHunter `-f 2` calls;
 6. does not perform read mapping;
-7. flags possible higher-order or partial family relationships but does not infer higher-order repeat structure;
+7. emits a directional candidate period-multiple graph for higher-order/partial
+   review, but does not infer or validate higher-order repeat structure;
 8. does not model ploidy or subgenomes;
 9. does not provide experimentally calibrated FISH probe prediction.
 
@@ -47,6 +48,8 @@ collapses only `likely_redundant` relationships and keeps an audit table.
 and should not be described as definitively redundant or definitively
 higher-order without assembly, read-support, known-repeat annotation or
 experimental evidence.
+`family_hierarchy.tsv` makes those pairwise alternatives machine-readable but
+does not select a rooted hierarchy or validate a HOR model.
 
 Known-repeat annotation and optional collapse improve interpretability, but they
 do not replace assembly localization, FISH validation, or literature-supported

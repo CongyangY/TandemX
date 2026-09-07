@@ -48,6 +48,7 @@ def test_cached_pair_audit_preserves_all_fields_and_builds_each_sketch_once(monk
 
 def test_streaming_audit_preserves_table_warning_order_and_optional_collapse(tmp_path):
     from tandemx.discover.family_audit import write_family_audit
+    from tandemx.discover.hierarchy import write_family_hierarchy
     generator = random.Random(6203)
     a = ''.join(generator.choices('ACGT', k=100))
     sequences = [a, a[:44]+'A'+a[45:], a+a, ''.join(generator.choices('ACGT', k=100))]
@@ -56,16 +57,20 @@ def test_streaming_audit_preserves_table_warning_order_and_optional_collapse(tmp
     expected = compare_families(families, 11, 'python')
     expected_families = mvp.annotate_family_redundancy(families, expected)
     mvp.write_family_similarity(tmp_path/'expected.tsv', expected)
+    write_family_hierarchy(tmp_path/'expected_hierarchy.tsv', expected)
     for keep in (True, False):
         observed, pairs = write_family_audit(tmp_path/'observed.tsv', families, k=11, backend='rust', keep_redundant=keep)
         assert observed == expected_families
         assert (tmp_path/'observed.tsv').read_bytes() == (tmp_path/'expected.tsv').read_bytes()
+        assert (tmp_path/'family_hierarchy.tsv').read_bytes() == (tmp_path/'expected_hierarchy.tsv').read_bytes()
         assert not (tmp_path/'observed.tsv.partial').exists()
+        assert not (tmp_path/'family_hierarchy.tsv.partial').exists()
         assert len(pairs) == (sum(p.relationship == 'likely_redundant' for p in expected) if keep else 0)
         if keep:
             assert mvp.collapse_redundant_families(observed, pairs) == mvp.collapse_redundant_families(expected_families, expected)
     assert write_family_audit(tmp_path/'empty.tsv', [], k=11, backend='rust') == ([], [])
     assert (tmp_path/'empty.tsv').read_text() == mvp.family_similarity_header()+'\n'
+    assert (tmp_path/'family_hierarchy.tsv').read_text().count('\n') == 1
 
 
 @pytest.mark.parametrize('k', [1, 11, 31, 200])
@@ -89,6 +94,10 @@ def test_related_index_preserves_every_non_distinct_pair_and_collapse(tmp_path, 
     assert mvp.collapse_redundant_families(annotated, collapse) == mvp.collapse_redundant_families(annotated, full)
     summary = json.loads((tmp_path/'family_audit_summary.json').read_text())
     assert summary['related_pairs'] == summary['emitted_pairs'] == len(expected)
+    assert summary['hierarchy_edges'] == sum(
+        pair.relationship == 'possible_higher_order_or_partial' for pair in expected
+    )
+    assert summary['putative_period_multiple_edges'] <= summary['hierarchy_edges']
     assert summary['omitted_distinct_pairs'] == len(full)-len(expected)
     assert summary['possible_pairs'] == summary['pairs_scored']+summary['pairs_pruned_by_kmer_gate']
     if k == 200:

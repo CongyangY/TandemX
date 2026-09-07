@@ -629,7 +629,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Discover candidate tandem repeat monomers from reads.",
     )
     discover.add_argument("--reads", required=True, nargs="+", type=_path_value, help="One or more toy-scale HiFi-like read files in FASTA/FASTQ format, optionally gzip-compressed. Multiple files are streamed and merged in input order.")
-    discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, candidate_reads.tsv, monomers.fa, families.tsv, and family_similarity.tsv.")
+    discover.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, candidate_reads.tsv, monomers.fa, families.tsv, family_similarity.tsv, and family_hierarchy.tsv.")
     discover.add_argument("--min-period", "--min-monomer-len", dest="min_monomer_len", type=int, default=2, help="Minimum candidate repeat period in bp.")
     discover.add_argument("--max-period", "--max-monomer-len", dest="max_monomer_len", type=int, default=2000, help="Maximum candidate repeat period in bp.")
     discover.add_argument("--min-support-reads", type=int, default=5, help="Minimum number of reads supporting a candidate family.")
@@ -860,7 +860,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--outdir",
         required=True,
         type=_path_value,
-        help="Fresh output directory for the imported catalogue and provenance audit.",
+        help="Fresh output directory for the imported catalogue, family hierarchy, and provenance audit.",
     )
     tidehunter.set_defaults(func=run_import_tidehunter)
 

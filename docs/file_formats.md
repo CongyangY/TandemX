@@ -128,7 +128,8 @@ current heuristic; they are not untested biological negatives.
 `family_audit_summary.json` records `schema_version`, `complete`, `mode`,
 `backend`, `family_count`, `possible_pairs`, `pairs_scored` (exact ungapped
 comparisons), `pairs_pruned_by_kmer_gate` (provably distinct without alignment),
-`emitted_pairs`, `related_pairs`, `omitted_distinct_pairs`, and `warning`.
+`emitted_pairs`, `related_pairs`, `omitted_distinct_pairs`,
+`hierarchy_edges`, `putative_period_multiple_edges`, and `warning`.
 Possible = scored + pruned; possible = emitted + omitted. Full mode has no
 pruned/omitted pairs. The discovery completion receipt hashes this audit receipt.
 
@@ -148,6 +149,42 @@ pruned/omitted pairs. The discovery completion receipt hashes this audit receipt
 | relationship | string | NA | `distinct`, `possible_higher_order_or_partial`, or `likely_redundant` |
 | redundant_candidate | boolean | NA | Whether TandemX considers the pair a likely redundant representative |
 | notes | string | NA | Interpretation notes for non-distinct pairs |
+
+## family_hierarchy.tsv
+
+Produced by: `tandemx discover` and `tandemx import tidehunter`
+
+This headered edge table turns every
+`possible_higher_order_or_partial` pair into a directional, machine-readable
+candidate architecture graph. Direction runs from the shorter representative to
+the longer representative. Near-integer length ratios of at least two are
+labelled `putative_period_multiple`; related pairs without that length evidence
+remain `unresolved_related_or_partial`. All qualifying pairwise edges are kept,
+including 171-to-342, 171-to-684 and 342-to-684 candidates when supported.
+
+The table is not a rooted tree and does not select one biological monomer or HOR
+model. A period multiple can also arise from partial representatives, harmonic
+detection or related sequence. Assembly/read context and independent sequence
+evidence are required before describing an edge as a validated HOR. No related
+pairs produce a valid header-only table.
+
+| Field | Type | Unit | Description |
+|---|---|---:|---|
+| hierarchy_edge_id | string | NA | Stable edge identifier in audit order |
+| shorter_family_id | string | NA | Family with the shorter representative |
+| longer_family_id | string | NA | Family with the longer representative |
+| shorter_length_bp | integer | bp | Shorter representative length |
+| longer_length_bp | integer | bp | Longer representative length |
+| nearest_integer_multiple | integer | NA | Integer nearest to longer/shorter length ratio |
+| length_ratio | float | ratio | Longer representative length divided by shorter length |
+| multiple_error | float | ratio | Absolute distance between `length_ratio` and `nearest_integer_multiple` |
+| local_identity | float | fraction | Pairwise audit identity copied from `family_similarity.tsv` |
+| local_overlap_fraction_shorter | float | fraction | Pairwise audit overlap fraction copied from `family_similarity.tsv` |
+| shared_kmer_fraction | float | fraction | Pairwise audit shared-k-mer fraction |
+| orientation | string | NA | Best pairwise audit orientation |
+| edge_type | string | NA | `putative_period_multiple` or `unresolved_related_or_partial` |
+| status | string | NA | `candidate` or `unresolved` |
+| warning | string | NA | Explicit evidence boundary for the edge |
 
 ## collapsed_families.tsv and collapsed_monomers.fa
 
@@ -346,7 +383,7 @@ semicolon metadata retain their complete TideHunter-facing identifier as
 
 The standard outputs are `candidate_reads.tsv`, `candidate_monomers.fa`,
 `monomer_membership.tsv`, `families.tsv`, `monomers.fa`,
-`family_similarity.tsv`, `family_audit_summary.json`, and
+`family_similarity.tsv`, `family_hierarchy.tsv`, `family_audit_summary.json`, and
 `discovery_summary.json`. They use the same schemas as native discovery and may
 be passed to downstream TandemX commands. Candidate/family warnings preserve
 `external_detector=tidehunter`; imported catalogues must not be interpreted as
@@ -439,7 +476,7 @@ The validator scans the project directory for recognized TandemX output filename
 6. TandemX FASTA header structure for `monomers.fa` and `probes.fa`;
 7. non-empty recognized output files, except pairwise/audit tables that can legitimately have no data rows when there are no pairs or no collapse events.
 
-Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `family_similarity.tsv`, `collapsed_families.tsv`, `family_collapse.tsv`, `repeat_annotation.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `output_manifest.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, `collapsed_monomers.fa`, and `probes.fa`.
+Currently recognized files are `candidate_reads.tsv`, `families.tsv`, `family_similarity.tsv`, `family_hierarchy.tsv`, `collapsed_families.tsv`, `family_collapse.tsv`, `repeat_annotation.tsv`, `copy_number.tsv`, `repeat_density.bedgraph`, `arrays.bed`, `assembly_vs_read_cn.tsv`, `output_manifest.tsv`, `probes.rank.tsv`, `in_silico_fish.tsv`, `monomers.fa`, `collapsed_monomers.fa`, and `probes.fa`.
 
 ## Pipeline Summaries
 

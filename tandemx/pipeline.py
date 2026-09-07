@@ -357,7 +357,8 @@ def expected_outputs(config: PipelineConfig, step: str) -> tuple[Path, ...]:
     outputs = {
         "discover": (output_dir / "candidate_reads.tsv", output_dir / "candidate_monomers.fa",
                      output_dir / "monomers.fa", output_dir / "families.tsv",
-                     output_dir / "family_similarity.tsv", output_dir / "family_audit_summary.json"),
+                     output_dir / "family_similarity.tsv", output_dir / "family_hierarchy.tsv",
+                     output_dir / "family_audit_summary.json"),
         "quantify": (output_dir / "copy_number.tsv",),
         "locate": (output_dir / "repeat_density.bedgraph", output_dir / "arrays.bed", output_dir / "assembly_vs_read_cn.tsv"),
         "compare": (output_dir / "assembly_vs_read_cn.tsv",),

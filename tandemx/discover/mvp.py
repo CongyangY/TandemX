@@ -267,6 +267,8 @@ def discover_toy_repeats(
         config.outdir / "monomers.fa",
         config.outdir / "families.tsv",
         config.outdir / "family_similarity.tsv",
+        config.outdir / "family_hierarchy.tsv",
+        config.outdir / "family_audit_summary.json",
         config.outdir / "collapsed_families.tsv",
         config.outdir / "collapsed_monomers.fa",
         config.outdir / "family_collapse.tsv",

@@ -69,6 +69,11 @@ def related_pair_candidates(families: Sequence[RepeatFamily], k: int, backend: s
 def write_family_audit(path: Path, families: Sequence[RepeatFamily], *, k: int,
                        backend: str, keep_redundant: bool = False,
                        logger: logging.Logger | None = None, mode: str = 'full') -> tuple[list[RepeatFamily], list[FamilySimilarity]]:
+    from tandemx.discover.hierarchy import (
+        format_hierarchy_edge,
+        hierarchy_edge,
+        hierarchy_header,
+    )
     from tandemx.discover.mvp import iter_family_similarities, family_similarity_header, format_family_similarity
 
     logger = logger or logging.getLogger('tandemx.discover')
@@ -80,12 +85,17 @@ def write_family_audit(path: Path, families: Sequence[RepeatFamily], *, k: int,
     logger.info('family_audit mode=%s backend=%s families=%s possible_pairs=%s', mode, backend, len(families), pair_count)
     warnings = {family.family_id: [] for family in families}
     redundant = []
-    scored = emitted = related = 0
+    scored = emitted = related = hierarchy_edges = putative_period_multiples = 0
     similarities = (iter_family_similarities(families, k, backend) if mode == 'full'
                     else related_pair_candidates(families, k, backend))
     temporary = path.with_suffix(path.suffix+'.partial')
-    with temporary.open('w', encoding='utf-8') as handle:
+    hierarchy_path = path.with_name('family_hierarchy.tsv')
+    hierarchy_temporary = hierarchy_path.with_suffix(hierarchy_path.suffix+'.partial')
+    with temporary.open('w', encoding='utf-8') as handle, hierarchy_temporary.open(
+        'w', encoding='utf-8'
+    ) as hierarchy_handle:
         handle.write(family_similarity_header()+'\n')
+        hierarchy_handle.write(hierarchy_header()+'\n')
         for index, similarity in enumerate(similarities, 1):
             scored += 1
             if mode == 'full' or similarity.relationship != 'distinct':
@@ -96,15 +106,24 @@ def write_family_audit(path: Path, families: Sequence[RepeatFamily], *, k: int,
                 warning = f'{similarity.relationship}:{similarity.family_a}-{similarity.family_b}'
                 warnings[similarity.family_a].append(warning)
                 warnings[similarity.family_b].append(warning)
+            edge = hierarchy_edge(similarity, hierarchy_edges + 1)
+            if edge is not None:
+                hierarchy_handle.write(format_hierarchy_edge(edge)+'\n')
+                hierarchy_edges += 1
+                if edge.edge_type == 'putative_period_multiple':
+                    putative_period_multiples += 1
             if keep_redundant and similarity.relationship == 'likely_redundant':
                 redundant.append(similarity)
             if index % 50_000 == 0:
                 logger.info('family_audit compared_pairs=%s total_pairs=%s', index, pair_count)
     temporary.replace(path)
+    hierarchy_temporary.replace(hierarchy_path)
     receipt = dict(schema_version=1, complete=True, mode=mode, backend=backend,
                    family_count=len(families), possible_pairs=pair_count, pairs_scored=scored,
                    pairs_pruned_by_kmer_gate=pair_count-scored, emitted_pairs=emitted,
                    related_pairs=related, omitted_distinct_pairs=pair_count-emitted,
+                   hierarchy_edges=hierarchy_edges,
+                   putative_period_multiple_edges=putative_period_multiples,
                    warning='heuristic_relationships_not_biological_truth;dense_catalogues_can_remain_quadratic')
     summary = path.with_name('family_audit_summary.json')
     partial_summary = summary.with_suffix('.json.partial')

@@ -142,3 +142,19 @@ def test_validate_project_allows_header_only_family_similarity(tmp_path: Path) -
 
     assert results[0].path.name == "family_similarity.tsv"
     assert results[0].record_count == 0
+
+
+def test_validate_project_allows_header_only_family_hierarchy(tmp_path: Path) -> None:
+    path = tmp_path / "family_hierarchy.tsv"
+    path.write_text(
+        "hierarchy_edge_id\tshorter_family_id\tlonger_family_id\tshorter_length_bp\t"
+        "longer_length_bp\tnearest_integer_multiple\tlength_ratio\tmultiple_error\t"
+        "local_identity\tlocal_overlap_fraction_shorter\tshared_kmer_fraction\t"
+        "orientation\tedge_type\tstatus\twarning\n",
+        encoding="utf-8",
+    )
+
+    results = validate_project(tmp_path)
+
+    assert results[0].path.name == "family_hierarchy.tsv"
+    assert results[0].record_count == 0
