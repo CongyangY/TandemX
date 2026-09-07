@@ -1,0 +1,4 @@
+##gff-version 3
+chr_sim	TideCluster	tandem_repeat	24998	26221	1	.	.	Name=TRC_3;repeat_type=TR
+chr_sim	TideCluster	tandem_repeat	51053	64901	1	.	.	Name=TRC_2;repeat_type=TR
+chr_sim	TideCluster	tandem_repeat	89901	174101	1	.	.	Name=TRC_1;repeat_type=TR

@@ -1,0 +1,104 @@
+[
+  {
+    "file": "run_part_1/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_20260907/environment.json",
+    "sha256": "0b553d0cd8d190c25cbbb3f286019cec6ed8c09b1661266894fe8d54d2f6fcc5",
+    "bytes": 8131
+  },
+  {
+    "file": "run_part_1/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_20260907/run_config.yaml",
+    "sha256": "e4d14f90e282a794c8a683a778015d30dbc138a71557907465069278d2602aea",
+    "bytes": 1339
+  },
+  {
+    "file": "run_part_1/raw_runs.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_20260907/raw_runs.tsv",
+    "sha256": "18d582c2e36e5c8958c37c5fdf6718dc91eb33a1aae591cdcb2dcdfce4cb59a4",
+    "bytes": 11260
+  },
+  {
+    "file": "run_part_1/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_20260907/summary.tsv",
+    "sha256": "5755124518a2967821ece765a11de00b88185796f80f70e2805315fe134e449a",
+    "bytes": 1592
+  },
+  {
+    "file": "run_part_1/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_20260907/validation.json",
+    "sha256": "db08cb8ea52c979ef7a10b7f89e03f29dadb2d3d5776a3dfd11378d11ff1869d",
+    "bytes": 88
+  },
+  {
+    "file": "run_part_1/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_20260907/run.log",
+    "sha256": "6dfb4c9f6870d6ab79e143009b187e9d2257127939e062acbaba5312d88ea8aa",
+    "bytes": 1305
+  },
+  {
+    "file": "run_part_2/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_remaining_20260907/environment.json",
+    "sha256": "71510481cce97ef8efb30346d3e6b281d43de81a283fd7af352ffb36315591ba",
+    "bytes": 8141
+  },
+  {
+    "file": "run_part_2/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_remaining_20260907/run_config.yaml",
+    "sha256": "6131129f470284eafc9b50ccafb022e7da41583e55f2517b9369bcaa0a66d502",
+    "bytes": 1396
+  },
+  {
+    "file": "run_part_2/raw_runs.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_remaining_20260907/raw_runs.tsv",
+    "sha256": "124cd89aefc714f2f7e180ec7b7171a3618ae1db8e0fd8d24dc3361177277ff2",
+    "bytes": 18900
+  },
+  {
+    "file": "run_part_2/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_remaining_20260907/summary.tsv",
+    "sha256": "d121365c98587b28ee254967bd96e6926f53941f582f02784264e7395a1b7bbe",
+    "bytes": 2522
+  },
+  {
+    "file": "run_part_2/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_remaining_20260907/validation.json",
+    "sha256": "4010446f646c15e30cb57d06500b682a389e4472b1670687008017c0ffc499e2",
+    "bytes": 88
+  },
+  {
+    "file": "run_part_2/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_native_screen_development_v2_remaining_20260907/run.log",
+    "sha256": "857938421ecf7c7ddf8b47e199b1dbca6ff48bc32ece8e4da11795331bae58e8",
+    "bytes": 2148
+  },
+  {
+    "file": "combined_raw_runs.tsv",
+    "source": "derived_after_validation",
+    "sha256": "a0b265caeef646ca0d27eb525a40c4124f6119add2a2491a6bcb260bcf176586",
+    "bytes": 29188
+  },
+  {
+    "file": "combined_summary.tsv",
+    "source": "derived_after_validation",
+    "sha256": "bd0ba2b54e006ee35c7eb13946d26e362e0cf0e992a34163ac1e685c4020b66b",
+    "bytes": 3651
+  },
+  {
+    "file": "comparison.tsv",
+    "source": "derived_after_validation",
+    "sha256": "408452c604255dbb74a84ab52eded16094969edfad9b25a4a3ce4423c3389649",
+    "bytes": 2049
+  },
+  {
+    "file": "aggregate.json",
+    "source": "derived_after_validation",
+    "sha256": "1b04f44ad406242d24143c9adddbbc04dd12e5771bd067dd593b7ea99d499653",
+    "bytes": 502
+  },
+  {
+    "file": "README.md",
+    "source": "derived_after_validation",
+    "sha256": "6d5cd54110f3aa30a2968d9947de6652c9855d7079a90004ed84ac2902c02943",
+    "bytes": 275
+  }
+]

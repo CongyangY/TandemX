@@ -13,6 +13,7 @@ from typing import Any, Iterable
 
 from tandemx import __version__
 from tandemx.annotation import annotate_repeat_catalog
+from tandemx.cohort import build_cohort
 from tandemx.compare.mvp import CompareConfig, compare_toy_abundance
 from tandemx.discover.mvp import DiscoverConfig, DiscoverProgressTotals, discover_toy_repeats
 from tandemx.discover.rust_backend import RUST_MAX_KMER_SIZE, rust_backend_available
@@ -33,7 +34,7 @@ from tandemx.utils.threads import (
 from tandemx.visualize.mvp import VisualizeConfig, render_static_plots
 
 
-COMMANDS = ("run", "discover", "quantify", "locate", "probe", "compare", "visualize", "simulate", "validate", "annotate-repeats")
+COMMANDS = ("run", "discover", "quantify", "locate", "probe", "compare", "cohort", "visualize", "simulate", "validate", "annotate-repeats")
 
 
 class InputFileError(Exception):
@@ -168,7 +169,7 @@ def run_discover(args: argparse.Namespace) -> int:
     logger.info("status=discover_running")
     logger.info(
         "algorithm_mode=%s kmer_backend=%s min_period=%s max_period=%s",
-        "spacing_prefilter" if args.discovery_method == "legacy" else "elastic_self_alignment",
+        "spacing_prefilter" if args.discovery_method == "legacy" else args.discovery_method,
         args.kmer_backend,
         args.min_monomer_len,
         args.max_monomer_len,
@@ -520,6 +521,27 @@ def run_annotate_repeats(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_cohort(args: argparse.Namespace) -> int:
+    _require_existing_files([args.manifest])
+    args.outdir.mkdir(parents=True, exist_ok=True)
+    _write_run_config(args.outdir, "cohort", args, status="cohort_running")
+    logger = _configure_log(args.outdir, "cohort")
+    logger.info("command=tandemx cohort")
+    receipt = build_cohort(
+        args.manifest,
+        args.outdir,
+        cluster_identity=args.cluster_identity,
+        backend=args.backend,
+    )
+    _write_run_config(args.outdir, "cohort", args, status="cohort_completed")
+    logger.info("status=cohort_completed samples=%s pan_families=%s", receipt["sample_count"], receipt["pan_family_count"])
+    print(
+        f"tandemx cohort: integrated {receipt['sample_count']} samples into "
+        f"{receipt['pan_family_count']} pan families at {args.outdir}"
+    )
+    return 0
+
+
 def resolve_kmer_backend(requested: str, kmer_size: int | None = None) -> str:
     if requested == "auto":
         rust_supports_kmer_size = kmer_size is None or kmer_size <= RUST_MAX_KMER_SIZE
@@ -555,7 +577,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--min-read-length", type=int, default=1, help="Skip reads shorter than this length in bp; set explicitly for real-read pilots.")
     discover.add_argument("--kmer-size", type=int, default=11, help="Canonical seed k-mer size for spacing prefiltering.")
     discover.add_argument("--top-periods", type=int, default=5, help="Maximum spacing peaks refined per read.")
-    discover.add_argument("--discovery-method", choices=("legacy", "elastic"), default="legacy", help="legacy: fixed-offset single-array baseline; elastic: experimental indel-aware multiple-array alignment and consensus.")
+    discover.add_argument("--discovery-method", choices=("legacy", "elastic", "cascade"), default="legacy", help="legacy: fixed-offset ablation; elastic: indel-aware alignment; cascade: fast dominant clean path with elastic fallback.")
     discover.add_argument("--clustering-method", choices=("auto", "legacy", "sequence"), default="auto", help="auto: sequence clusters for elastic, historical clustering for legacy; override for ablation.")
     discover.add_argument("--cluster-identity", type=float, default=0.95, help="Minimum circular global edit similarity to a fixed observed cluster representative; sequence clustering only.")
     discover.add_argument("--family-audit", choices=("full", "related"), default="full", help="full: emit every pair; related: exact k-mer gate and emit all non-distinct pairs only, preserving catalogue warnings/collapse.")
@@ -701,6 +723,16 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--overexpansion-threshold", type=float, default=1.5, help="Assembly/read ratio above this threshold is possible_overexpansion.")
     compare.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and assembly_vs_read_cn.tsv.")
     compare.set_defaults(func=run_compare)
+
+    cohort = subparsers.add_parser(
+        "cohort",
+        help="Build a cross-sample pan-repeat catalogue and abundance/representation matrices.",
+    )
+    cohort.add_argument("--manifest", required=True, type=_path_value, help="TSV with sample_id, monomers, copy_number, and optional comparison paths.")
+    cohort.add_argument("--cluster-identity", type=float, default=0.95, help="Minimum circular global edit similarity to a fixed pan-family representative.")
+    cohort.add_argument("--backend", choices=("python", "rust"), default="rust", help="Sequence-distance backend for cross-sample clustering.")
+    cohort.add_argument("--outdir", required=True, type=_path_value, help="Directory for the pan catalogue, membership audit, matrices, run_config.yaml, and run.log.")
+    cohort.set_defaults(func=run_cohort)
 
     visualize = subparsers.add_parser(
         "visualize",

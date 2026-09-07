@@ -1,0 +1,73 @@
+{
+  "complete": true,
+  "image": {
+    "id": "sha256:62691b116427394984a8bace59a6f4ba7f3ea834373772734fbcfc567c3a27a7",
+    "os": "linux",
+    "architecture": "amd64",
+    "versions": {
+      "tidecluster": "1.21.2",
+      "tidehunter": "1.4.3",
+      "kitehor": "0.13.2",
+      "mmseqs2_commit": "747c64cc8db3b4803a0f1194a3f75b3ba9f81bcb",
+      "blastn": "2.16.0+",
+      "gnu_time": "1.10"
+    }
+  },
+  "smoke_test": {
+    "scope": "controlled_planted_assembly_truth",
+    "publication_scale": false,
+    "metrics": {
+      "truth_array_count": 3,
+      "predicted_array_count": 3,
+      "matched_array_count": 3,
+      "array_recall": 1.0,
+      "array_precision": 1.0,
+      "array_f1": 1.0,
+      "read_detection_recall": 1.0,
+      "read_detection_precision": 1.0,
+      "negative_read_count": 0,
+      "false_positive_read_count": 0,
+      "negative_read_call_rate": null,
+      "matched_period_mae_bp": 0.0,
+      "matched_boundary_mae_bp": 29.0,
+      "warning": "known_planted_assembly_truth;smoke_test_not_publication_scale",
+      "base_union_recall": 1.0,
+      "base_union_precision": 0.9982472752180833,
+      "base_union_f1": 0.999122868924355,
+      "predicted_union_bp": 99274,
+      "truth_union_bp": 99100,
+      "duplicated_prediction_bp": 0,
+      "duplicate_bp_fraction": 0.0,
+      "array_recall_ci_low": 0.4385029682449546,
+      "array_recall_ci_high": 1.0,
+      "array_precision_ci_low": 0.4385029682449546,
+      "array_precision_ci_high": 1.0,
+      "negative_read_call_rate_ci_low": null,
+      "negative_read_call_rate_ci_high": null,
+      "truth_family_count": 3,
+      "recovered_family_count": 3,
+      "sequence_family_recall": 1.0,
+      "family_criterion": "equal_length_circular_ungapped_identity_ge_0.9",
+      "normalized_coordinate_system": "0-based_half-open",
+      "source_coordinate_system": "GFF3_1-based_inclusive"
+    }
+  },
+  "internal_gnu_time": {
+    "tidehunter": {
+      "user_seconds": 0.59,
+      "system_seconds": 0.07,
+      "maximum_rss_kb": 70248,
+      "exit_status": 0,
+      "wall_seconds": 0.67
+    },
+    "clustering": {
+      "user_seconds": 8.15,
+      "system_seconds": 11.54,
+      "maximum_rss_kb": 7669232,
+      "exit_status": 0,
+      "wall_seconds": 31.41
+    }
+  },
+  "host_profile_scope": "aggregate_live_process_tree",
+  "warning": "toy_smoke_only;container_internal_rss_and_host_docker_client_rss_are_not_interchangeable"
+}

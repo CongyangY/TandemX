@@ -86,6 +86,7 @@ tandemx quantify --help
 tandemx locate --help
 tandemx probe --help
 tandemx compare --help
+tandemx cohort --help
 tandemx visualize --help
 tandemx validate --help
 tandemx annotate-repeats --help
@@ -205,6 +206,19 @@ results/run1/
 ```
 
 Start with `run_report.md` for a concise run overview and use `output_manifest.tsv` to locate individual files or diagnose skipped/missing outputs.
+
+To integrate completed runs across samples, prepare a tab-separated manifest
+with `sample_id`, `monomers`, `copy_number`, and `comparison` columns. Use `NA`
+for a sample without an assembly comparison:
+
+```bash
+tandemx cohort --manifest samples.tsv --outdir results/cohort
+```
+
+The command clusters circular monomer sequences against fixed representatives
+and writes a pan-repeat catalogue, a local-to-pan membership audit, long-form
+abundance/representation tables, and sample-by-family matrices. Missing or
+unevaluated families remain `NA`; they are not silently converted to zero.
 
 ## Comparing two run directories
 

@@ -5,7 +5,7 @@ import pytest
 
 from tandemx.discover.alignment import banded_self_align, banded_self_align_many, global_align_ops
 from tandemx.discover.consensus import aligned_unit_consensus
-from tandemx.discover.elastic import discover_elastic_arrays
+from tandemx.discover.elastic import discover_cascade_arrays, discover_elastic_arrays
 from tandemx.discover.rust_backend import rust_backend_available
 from tandemx.simulate.toy import reverse_complement
 
@@ -71,6 +71,31 @@ def test_short_toy_repeat_is_supported_with_explicit_span():
     assert calls[0][0].start == 0
     assert calls[0][0].end == 16
     assert calls[0][1] == "ACGT"
+
+
+@pytest.mark.parametrize("backend", ["python", "rust"])
+def test_cascade_uses_narrow_clean_path_and_elastic_fallback(backend):
+    if backend == "rust" and not rust_backend_available():
+        pytest.skip("compiled extension unavailable")
+    unit = sequence(111, 67)
+    clean = sequence(112, 80) + unit * 12 + sequence(113, 80)
+    calls, _ = discover_cascade_arrays(
+        clean, min_period=30, max_period=120, min_span=100, backend=backend
+    )
+    assert len(calls) == 1
+    assert calls[0][3] == "cascade_gap_free"
+    assert calls[0][0].gaps == 0 and calls[0][1] in unit * 2
+
+    mutated = unit + unit[:20] + "G" + unit[20:] + unit + unit[:40] + unit[41:]
+    gapped = sequence(114, 180) + mutated * 3 + sequence(115, 180)
+    cascade, _ = discover_cascade_arrays(
+        gapped, min_period=30, max_period=120, min_span=100, backend=backend
+    )
+    elastic, _ = discover_elastic_arrays(
+        gapped, min_period=30, max_period=120, min_span=100, backend=backend
+    )
+    assert [(hit, consensus, units) for hit, consensus, units, _branch in cascade] == elastic
+    assert cascade and all(call[3] == "cascade_elastic" for call in cascade)
 
 
 @pytest.mark.skipif(not rust_backend_available(), reason="compiled extension unavailable")

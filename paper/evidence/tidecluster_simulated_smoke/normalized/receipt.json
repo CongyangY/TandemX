@@ -1,0 +1,31 @@
+{
+  "complete": true,
+  "inputs": {
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/tc_tidehunter.gff3": {
+      "sha256": "88aa29840434e5599cfa7e8138fe6552d6cf41b2bb13b89f71363b1616ff0708",
+      "bytes": 1121
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/tc_clustering.gff3": {
+      "sha256": "70448112d005a09045e378aa307d5c90cf62cb263c7280d2cbc5f8ed78bbff15",
+      "bytes": 251
+    },
+    "/Volumes/T7/Codex/TandemX/results/abundance_baseline_v1_20260906/genomes/s4101/genome.fa": {
+      "sha256": "26a4179bda66336256ead3bbaa1fe981b1b396a43c35ed53ee549e55961855fd",
+      "bytes": 199110
+    },
+    "/Volumes/T7/Codex/TandemX/results/abundance_baseline_v1_20260906/genomes/s4101/assembly_0.truth.tsv": {
+      "sha256": "64232ca7c69757b2c6522a9a67424e414fa0424013487051cc10dd51b16d90da",
+      "bytes": 162
+    },
+    "/Volumes/T7/Codex/TandemX/results/abundance_baseline_v1_20260906/genomes/s4101/catalogue.fa": {
+      "sha256": "582d27c3c9fb67482e7c67a0feaf1d72b860915bf7e993d92feb7af1683963b4",
+      "bytes": 668
+    }
+  },
+  "outputs": {
+    "normalized_arrays.tsv": "431a5116b04c231f6e55af36cfd0cac784dcac667aa561334175c344e7a56713",
+    "matches.tsv": "69e8d9183de8e9b17ff56c2566c1f8c482d1d66a7031800c2e7d7a794e1ec71c",
+    "family_recovery.tsv": "7b13d0651b768b41844bfbf6fb890968ccec9b147c8ae9f4e2ed6037c346dfcb",
+    "metrics.json": "88b9e9186340fc6ecf0879f92f4ff8bba9c02d91743452aee0ca322da67bae58"
+  }
+}

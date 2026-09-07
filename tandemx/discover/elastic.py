@@ -6,7 +6,12 @@ from collections import Counter
 
 from tandemx.discover.alignment import AlignmentHit, banded_self_align_many
 from tandemx.discover.consensus import aligned_unit_consensus
-from tandemx.discover.spacing import extract_repeated_kmer_positions, build_spacing_histogram
+from tandemx.discover.spacing import (
+    best_local_periodicity_score,
+    build_spacing_histogram,
+    expand_candidate_periods,
+    extract_repeated_kmer_positions,
+)
 
 
 def select_alignment_periods(histogram: dict[int, int], top_periods: int,
@@ -54,27 +59,35 @@ def composition_adjusted_identity(sequence: str, hit: AlignmentHit) -> float:
     return (hit.identity - chance) / (1 - chance) if chance < 1 else 0.0
 
 
-def discover_elastic_arrays(sequence: str, *, min_period: int, max_period: int,
-                            min_span: int, k: int = 11, top_periods: int = 5,
-                            min_seed_occurrences: int = 2, min_spacing_support: int = 2,
-                            max_pairs_per_kmer: int = 100, backend: str = "python"
-                            ) -> tuple[list[tuple[AlignmentHit, str, int]], int]:
-    """Return alignment evidence, consensus and unit count for each retained locus."""
+def _validate_parameters(min_period: int, max_period: int, min_span: int, k: int,
+                         top_periods: int, min_seed_occurrences: int,
+                         min_spacing_support: int, max_pairs_per_kmer: int) -> None:
     if min_period <= 0 or max_period < min_period or min_span <= 0 or k <= 0:
         raise ValueError("Invalid elastic discovery period, span or k-mer size")
     if top_periods <= 0 or min_seed_occurrences < 2 or min_spacing_support <= 0 or max_pairs_per_kmer <= 0:
         raise ValueError("Invalid elastic discovery seed parameters")
-    max_period = min(max_period, len(sequence) // 2)
-    if min_period > max_period or len(sequence) < min_span:
-        return [], 0
-    short_periods = list(range(min_period, min(19, max_period) + 1))
+
+
+def _seed_histogram(sequence: str, *, k: int, min_period: int, max_period: int,
+                    min_seed_occurrences: int, max_pairs_per_kmer: int,
+                    backend: str) -> tuple[dict[int, int], int]:
     if backend == "rust":
         from tandemx.discover.rust_backend import seed_spacing_histogram
-        histogram, overflow = seed_spacing_histogram(sequence, k, max(20, min_period), max_period,
-                                                     min_seed_occurrences, max_pairs_per_kmer)
-    else:
-        positions, overflow = extract_repeated_kmer_positions(sequence, k, min_seed_occurrences, max_pairs_per_kmer)
-        histogram = build_spacing_histogram(positions, max(20, min_period), max_period, max_pairs_per_kmer)
+        return seed_spacing_histogram(sequence, k, max(20, min_period), max_period,
+                                      min_seed_occurrences, max_pairs_per_kmer)
+    positions, overflow = extract_repeated_kmer_positions(
+        sequence, k, min_seed_occurrences, max_pairs_per_kmer
+    )
+    return build_spacing_histogram(
+        positions, max(20, min_period), max_period, max_pairs_per_kmer
+    ), overflow
+
+
+def _elastic_calls(sequence: str, histogram: dict[int, int], *, min_period: int,
+                   max_period: int, min_span: int, top_periods: int,
+                   min_spacing_support: int, backend: str
+                   ) -> list[tuple[AlignmentHit, str, int]]:
+    short_periods = list(range(min_period, min(19, max_period) + 1))
     periods = short_periods + select_alignment_periods(histogram, top_periods, min_spacing_support)
     hits = banded_self_align_many(sequence, periods, min_span, backend=backend)
     result = []
@@ -84,4 +97,157 @@ def discover_elastic_arrays(sequence: str, *, min_period: int, max_period: int,
         if not min_period <= len(consensus) <= max_period:
             continue
         result.append((hit, consensus, units))
-    return result, overflow
+    return result
+
+
+def _dominant_clean_call(sequence: str, histogram: dict[int, int], *, min_period: int,
+                         max_period: int, min_span: int, top_periods: int,
+                         min_spacing_support: int, backend: str
+                         ) -> tuple[AlignmentHit, str, int] | None:
+    """Return a near-exact dominant array without allocating an alignment trace.
+
+    This fast path is deliberately narrow: one gap-free interval must cover at
+    least 60% of the read at >=99.5% shifted identity. Reads outside that domain
+    use the indel-aware path, preserving multiple-array and drift behavior.
+    """
+    peaks = list(range(min_period, min(19, max_period) + 1))
+    peaks += select_alignment_periods(histogram, top_periods, min_spacing_support)
+    periods = expand_candidate_periods(peaks, min_period, max_period, refinement_radius=3)
+    minimum_dominant_span = max(min_span, ceil(0.6 * len(sequence)))
+    best: tuple[tuple[int, float, int], AlignmentHit] | None = None
+    for period in periods:
+        identity, start, end = best_local_periodicity_score(
+            sequence, period, min_span, acceptance_score=0.995
+        )
+        span = end - start
+        if identity < 0.995 or span < minimum_dominant_span:
+            continue
+        pairs = tuple(
+            (left, left + period)
+            for left in range(start, end - period)
+            if sequence[left] in "ACGT" and sequence[left + period] in "ACGT"
+        )
+        if not pairs:
+            continue
+        matches = sum(sequence[left] == sequence[right] for left, right in pairs)
+        columns = len(pairs)
+        hit = AlignmentHit(
+            start, end, period, matches, columns, 0,
+            2 * matches - 3 * (columns - matches), pairs,
+        )
+        if composition_adjusted_identity(sequence, hit) < 0.7:
+            continue
+        key = (span, identity, -period)
+        if best is None or key > best[0]:
+            best = key, hit
+    if best is None:
+        return None
+    hit = best[1]
+    consensus, units = aligned_unit_consensus(sequence, hit, backend=backend)
+    if not min_period <= len(consensus) <= max_period:
+        return None
+    return hit, consensus, units
+
+
+def _verified_gap_free_call(sequence: str, period: int, start: int, end: int,
+                            *, min_period: int, max_period: int, min_span: int,
+                            backend: str) -> tuple[AlignmentHit, str, int] | None:
+    """Verify one native clean-path proposal without another period scan."""
+    if not min_period <= period <= max_period:
+        return None
+    start = max(0, start)
+    end = min(len(sequence), end)
+    if end - start < max(min_span, ceil(0.6 * len(sequence))):
+        return None
+    pairs = tuple(
+        (left, left + period)
+        for left in range(start, end - period)
+        if sequence[left] in "ACGT" and sequence[left + period] in "ACGT"
+    )
+    if not pairs:
+        return None
+    matches = sum(sequence[left] == sequence[right] for left, right in pairs)
+    columns = len(pairs)
+    if matches / columns < 0.995:
+        return None
+    hit = AlignmentHit(
+        start, end, period, matches, columns, 0,
+        2 * matches - 3 * (columns - matches), pairs,
+    )
+    if composition_adjusted_identity(sequence, hit) < 0.7:
+        return None
+    consensus, units = aligned_unit_consensus(sequence, hit, backend=backend)
+    if not min_period <= len(consensus) <= max_period:
+        return None
+    return hit, consensus, units
+
+
+def discover_elastic_arrays(sequence: str, *, min_period: int, max_period: int,
+                            min_span: int, k: int = 11, top_periods: int = 5,
+                            min_seed_occurrences: int = 2, min_spacing_support: int = 2,
+                            max_pairs_per_kmer: int = 100, backend: str = "python"
+                            ) -> tuple[list[tuple[AlignmentHit, str, int]], int]:
+    """Return alignment evidence, consensus and unit count for each retained locus."""
+    _validate_parameters(min_period, max_period, min_span, k, top_periods,
+                         min_seed_occurrences, min_spacing_support, max_pairs_per_kmer)
+    max_period = min(max_period, len(sequence) // 2)
+    if min_period > max_period or len(sequence) < min_span:
+        return [], 0
+    histogram, overflow = _seed_histogram(
+        sequence, k=k, min_period=min_period, max_period=max_period,
+        min_seed_occurrences=min_seed_occurrences, max_pairs_per_kmer=max_pairs_per_kmer,
+        backend=backend,
+    )
+    return _elastic_calls(
+        sequence, histogram, min_period=min_period, max_period=max_period,
+        min_span=min_span, top_periods=top_periods,
+        min_spacing_support=min_spacing_support, backend=backend,
+    ), overflow
+
+
+def discover_cascade_arrays(sequence: str, *, min_period: int, max_period: int,
+                            min_span: int, k: int = 11, top_periods: int = 5,
+                            min_seed_occurrences: int = 2, min_spacing_support: int = 2,
+                            max_pairs_per_kmer: int = 100, backend: str = "python"
+                            ) -> tuple[list[tuple[AlignmentHit, str, int, str]], int]:
+    """Screen, use a narrow gap-free fast path, then fall back to elastic alignment."""
+    _validate_parameters(min_period, max_period, min_span, k, top_periods,
+                         min_seed_occurrences, min_spacing_support, max_pairs_per_kmer)
+    max_period = min(max_period, len(sequence) // 2)
+    if min_period > max_period or len(sequence) < min_span:
+        return [], 0
+    if backend == "rust":
+        from tandemx.discover.rust_backend import scan_read_for_periods
+
+        screen = scan_read_for_periods(
+            sequence, k=k, min_period=min_period, max_period=max_period,
+            top_periods=top_periods, min_seed_occurrences=min_seed_occurrences,
+            min_spacing_support=min_spacing_support,
+            max_pairs_per_kmer=max_pairs_per_kmer, min_repeat_span=min_span,
+        )
+        histogram = dict(screen.spacing_support)
+        overflow = screen.overflow_count
+        clean = _verified_gap_free_call(
+            sequence, screen.best_period, screen.repeat_start, screen.repeat_end,
+            min_period=min_period, max_period=max_period, min_span=min_span,
+            backend=backend,
+        )
+    else:
+        histogram, overflow = _seed_histogram(
+            sequence, k=k, min_period=min_period, max_period=max_period,
+            min_seed_occurrences=min_seed_occurrences,
+            max_pairs_per_kmer=max_pairs_per_kmer, backend=backend,
+        )
+        clean = _dominant_clean_call(
+            sequence, histogram, min_period=min_period, max_period=max_period,
+            min_span=min_span, top_periods=top_periods,
+            min_spacing_support=min_spacing_support, backend=backend,
+        )
+    if clean is not None:
+        return [(*clean, "cascade_gap_free")], overflow
+    calls = _elastic_calls(
+        sequence, histogram, min_period=min_period, max_period=max_period,
+        min_span=min_span, top_periods=top_periods,
+        min_spacing_support=min_spacing_support, backend=backend,
+    )
+    return [(*call, "cascade_elastic") for call in calls], overflow

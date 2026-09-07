@@ -245,6 +245,42 @@ The formal compare MVP input is `copy_number.tsv` plus `arrays.bed`. `repeat_den
 | confidence | string | NA | Confidence label |
 | warning | string | NA | Semicolon-separated warnings or empty |
 
+## Cohort outputs
+
+Produced by: `tandemx cohort`
+
+The input manifest is TSV with `sample_id`, `monomers`, `copy_number`, and
+`comparison`. Paths may be absolute or relative to the manifest. `comparison`
+may be `NA`; the other paths are required. Sample identifiers and each
+sample/local-family pair must be unique.
+
+`pan_families.tsv` records `pan_family_id`, representative monomer length,
+sample and local-family counts, representative SHA-256, mean assignment
+identity, confidence, and warning. `pan_monomers.fa` contains the corresponding
+representatives. These are operational circular-sequence clusters at the
+recorded threshold, not inferred ancestral families.
+
+`family_membership.tsv` maps every `sample_id` and `local_family_id` to a
+`pan_family_id`. It retains monomer length, edit-distance upper bound,
+similarity lower bound, number of compatible clusters, status, and warning.
+
+`sample_family_abundance.tsv` contains one row per sample and pan family:
+`local_family_count`, `estimated_bp`, propagated low/high bp endpoints,
+`status`, `confidence`, and `warning`. Endpoints sum the local copy-number
+quantiles after conversion to bp; they are descriptive propagated endpoints,
+not a joint confidence interval. `abundance_matrix.tsv` is the corresponding
+wide estimated-bp matrix.
+
+`sample_family_representation.tsv` aggregates read and assembly bp and reports
+their ratio, status, confidence, and warning. `representation_matrix.tsv` is
+the corresponding wide ratio matrix. Missing calls and samples without an
+assembly comparison are `NA` with `not_observed` or `not_evaluated`; `NA` never
+means zero biological abundance.
+
+`cohort_summary.json` records schema version, completion, sample/local/pan
+family counts, clustering parameters, output SHA-256 values, and the principal
+interpretation warning.
+
 ## probes.fa
 
 Produced by: `tandemx probe`

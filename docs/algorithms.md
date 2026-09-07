@@ -403,11 +403,20 @@ MVP constraints:
 3. no complex assembly quality model;
 4. no multi-sample population comparison.
 
-Future work:
+Current cohort integration:
 
-1. chromosome-level discrepancy summaries;
-2. support for polyploid subgenome interpretation;
-3. uncertainty propagation from read and assembly estimates.
+1. `tandemx cohort` reads each sample's monomer catalogue, copy-number table,
+   and optional assembly/read comparison;
+2. it clusters circular monomers against fixed, abundance-ordered observed
+   representatives with witnessed edit-similarity bounds and no transitive
+   membership propagation;
+3. it aggregates copy-number interval endpoints in bp and assembly/read ratios
+   only after local families are mapped to a pan family;
+4. it emits explicit `NA`, `not_observed`, and `not_evaluated` states rather
+   than treating missing evidence as zero abundance.
+
+Remaining work includes chromosome/subgenome summaries and calibrated joint
+uncertainty across biological samples.
 
 ## FISH Probe Scoring
 

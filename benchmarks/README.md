@@ -30,6 +30,47 @@ the observable 5000-base input-read length, not repeat truth. The upstream defau
 at max period 1000 advertises about 4.09 GB of buffer memory; both settings and
 actual measured peak memory must be distinguished.
 
+## TideCluster assembly comparator
+
+The pinned TideCluster 1.21.2 comparator image is defined in
+`benchmarks/containers/tidecluster/`. It rebuilds the official TideHunter 1.4.3
+commit and replaces MMseqs2 with the official 16-747c6 SSE2 release after exact
+checksum/version checks, because both conda binaries otherwise execute illegal
+instructions under linux/amd64 emulation on Apple Silicon. Build and use this
+container separately from the read-local TideHunter comparator.
+
+Normalize a completed two-stage TideCluster run against explicit assembly truth:
+
+```bash
+python -m benchmarks.tidecluster.normalize \
+  --tidehunter-gff RUN/tc_tidehunter.gff3 \
+  --clustering-gff RUN/tc_clustering.gff3 \
+  --assembly assembly.fa --truth truth.tsv --catalogue catalogue.fa \
+  --outdir RUN/normalized
+```
+
+`archive_tidecluster_smoke.py` then verifies both profiled stages, every input
+and normalized-output hash, the planted-truth evidence boundary, internal GNU
+time and the exact Docker image ID. The current 199.1-kb smoke recovered 3/3
+families and arrays with 0-bp period MAE, 29-bp boundary MAE and 0.998247 base
+union precision. Its clustering maximum RSS was 7,669,232 kB. These values prove
+that the comparator path works; they are not publication-scale ranks.
+
+The cascade promotion configuration predeclares all 16 scenarios, held-out
+seeds 3101–3103 and three repetitions. After committing the frozen source and
+passing hosted CI, run the complete `heldout` split once. Apply the gates with:
+
+```bash
+python -m benchmarks.scripts.evaluate_cascade_heldout \
+  --config benchmarks/configs/cascade_native_screen_heldout_v1.yaml \
+  --run RUN --outdir RUN/gate_evaluation
+```
+
+The evaluator rejects incomplete/duplicated matrices, config-hash mismatches,
+missing metrics and comparator failures. A failed speed, memory or accuracy gate
+is retained as a failed held-out experiment; the consumed seeds cannot tune a
+replacement model.
+
 ## Challenge benchmark and public-data pilot
 
 Development release smoke check (inside `tandemx-dev`):

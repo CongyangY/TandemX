@@ -1,0 +1,11 @@
+{
+  "scenario_count": 16,
+  "cascade_source_digest": "e24b44eb440a7b96eb562edb8966ceb9772ba73f103bed1ac547dcaa536c531b",
+  "all_common_accuracy_metrics_noninferior": true,
+  "changed_accuracy_or_error_cells": 2,
+  "runtime_geometric_mean_ratio": 0.5629300316135178,
+  "runtime_faster_scenarios": 16,
+  "peak_rss_geometric_mean_ratio": 0.8378144158755664,
+  "peak_rss_lower_scenarios": 15,
+  "warning": "development_seed_only;baseline_has_one_timing_run_per_scenario;not_independent_heldout_evidence"
+}

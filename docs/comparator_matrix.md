@@ -1,7 +1,7 @@
 # Comparator scope and measurement contract
 
-Updated 2026-09-06. This is a prospective evaluation contract, not a table of
-completed comparisons. The aim is to establish reproducible advantages against
+Updated 2026-09-07. This is an evaluation contract with explicit execution
+status, not a claim that every listed comparison is complete. The aim is to establish reproducible advantages against
 strong, task-matched methods over several metrics. A method is not declared
 superior simply because its combined workflow has more commands.
 
@@ -11,6 +11,7 @@ superior simply because its combined workflow has more commands.
 | --- | --- | --- | --- |
 | TRF | De novo intervals and repeat period | Established comparator; raw duplicate calls and standardized interval-union metrics both required | Development benchmark executed |
 | TideHunter | Read-local repeat consensus and intervals | Strong long-read comparator; retain recommended settings and matched period range | Development benchmark executed |
+| TideCluster | Assembly tandem-repeat detection and family clustering | Tier-1 assembly comparator; run its TideHunter detection and MMseqs2/BLAST clustering as one end-to-end method, then score intervals and sequence-supported families independently | Reproducible 1.21.2 linux/amd64 image and planted-truth smoke passed; plant-scale matched comparison pending |
 | ULTRA | Genomic tandem-repeat annotation | Indel-aware probabilistic baseline; default and documented tuning configurations, including tuning cost | v1.2.2 built; default and tuned ten-read pilots completed |
 | TRASH | Assembly tandem arrays and monomers | Plant/large-genome relevance; matched assembly or synthetic sequence endpoints | Pinned Linux ARM64 offline author positive-control completed;355 monomer sequences require a recorded -1 bp coordinate offset for exact source agreement; no plant-scale comparison yet |
 | TRASH2 | Assembly tandem arrays and monomers | Author-designated early-development successor, evaluated separately from TRASH1 | Default 10-Mb synthetic run completed: 55/55 families and unit-derived arrays; native coarse-window and unit endpoints retained. Two author-control runs differ in unit/consensus outputs; no real plant assembly benchmark yet |
@@ -98,6 +99,7 @@ data scale, true independent units, reference quality and sampling.
 - [SRF Genome Research paper (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10760446/)
 - [TRASH official implementation](https://github.com/vlothec/TRASH)
 - [TideHunter official implementation](https://github.com/Xinglab/TideHunter)
+- [TideCluster official implementation](https://github.com/kavonrtep/TideCluster)
 - [Chorus2 official implementation](https://github.com/zhangtaolab/Chorus2)
 - [TandemTools paper](https://doi.org/10.1093/bioinformatics/btaa440) and [official implementation](https://github.com/ablab/TandemTools)
 - [RaMA Genome Research paper](https://doi.org/10.1101/gr.279763.124) and [official implementation](https://github.com/pinglu-zhang/RaMA)

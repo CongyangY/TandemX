@@ -1,0 +1,4 @@
+prediction_index	read_id	start	end	period	matched_truth_index	truth_family_id	iou	status
+0	chr_sim	24997	26221	61	0	f1	0.9967320261437909	matched
+1	chr_sim	51052	64901	171	1	f2	0.9877969528485812	matched
+2	chr_sim	89900	174101	421	2	f3	0.9999881236564886	matched

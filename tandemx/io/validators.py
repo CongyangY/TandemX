@@ -239,6 +239,45 @@ TSV_SCHEMAS["monomer_membership.tsv"] = {
     "status": {"assigned", "below_minimum_support", "unresolved_sequence"},
 }
 
+TSV_SCHEMAS.update({
+    "pan_families.tsv": {
+        "required": {"pan_family_id", "monomer_length_bp", "sample_count", "member_family_count",
+                     "representative_sha256", "mean_assignment_identity", "confidence", "warning"},
+        "numeric": {"monomer_length_bp", "sample_count", "member_family_count", "mean_assignment_identity"},
+    },
+    "family_membership.tsv": {
+        "required": {"sample_id", "local_family_id", "pan_family_id", "monomer_length_bp",
+                     "edit_distance_upper_bound", "similarity_lower_bound", "compatible_pan_family_count",
+                     "status", "warning"},
+        "numeric": {"monomer_length_bp", "edit_distance_upper_bound", "similarity_lower_bound",
+                    "compatible_pan_family_count"},
+        "status": {"assigned", "below_minimum_support", "unresolved_sequence"},
+    },
+    "sample_family_abundance.tsv": {
+        "required": {"sample_id", "pan_family_id", "local_family_count", "estimated_bp",
+                     "estimated_bp_interval_low", "estimated_bp_interval_high", "status", "confidence", "warning"},
+        "numeric": {"local_family_count"},
+        "nullable_numeric": {"estimated_bp", "estimated_bp_interval_low", "estimated_bp_interval_high"},
+        "status": {"quantified", "not_observed"},
+    },
+    "sample_family_representation.tsv": {
+        "required": {"sample_id", "pan_family_id", "read_estimated_bp", "assembly_estimated_bp",
+                     "assembly_read_ratio", "status", "confidence", "warning"},
+        "numeric": set(),
+        "nullable_numeric": {"read_estimated_bp", "assembly_estimated_bp", "assembly_read_ratio"},
+        "status": {"consistent", "possible_collapse", "possible_overexpansion", "assembly_only",
+                   "reads_only", "low_confidence", "mixed_local_status", "not_evaluated", "not_observed"},
+    },
+    "abundance_matrix.tsv": {
+        "required": {"pan_family_id"},
+        "numeric": set(),
+    },
+    "representation_matrix.tsv": {
+        "required": {"pan_family_id"},
+        "numeric": set(),
+    },
+})
+
 ALLOW_EMPTY_TSV_RECORDS = {"family_similarity.tsv", "family_collapse.tsv"}
 
 
@@ -247,6 +286,7 @@ FASTA_HEADER_PATTERNS = {
     "monomers.fa": re.compile(r"^family_id=[^;]+;monomer_id=[^;]+;length_bp=\d+;confidence=[^;]+$"),
     "collapsed_monomers.fa": re.compile(r"^family_id=[^;]+;monomer_id=[^;]+;length_bp=\d+;confidence=[^;]+$"),
     "probes.fa": re.compile(r"^probe_id=[^;]+;family_id=[^;]+;length_bp=\d+;probe_score=[0-9.]+;confidence=[^;]+$"),
+    "pan_monomers.fa": re.compile(r"^pan_family_id=[^;]+;length_bp=\d+;samples=\d+$"),
 }
 
 
@@ -289,6 +329,9 @@ def validate_tsv(path: Path, schema: dict[str, set[str]]) -> ValidationResult:
                 raise ValidationError(f"{path} line {line_number} has {len(fields)} fields, expected {len(header)}")
             for name in schema["numeric"].intersection(index):
                 parse_numeric(fields[index[name]], path, line_number, name)
+            for name in schema.get("nullable_numeric", set()).intersection(index):
+                if fields[index[name]] != "NA":
+                    parse_numeric(fields[index[name]], path, line_number, name)
             if "confidence" in index and not fields[index["confidence"]]:
                 raise ValidationError(f"{path} line {line_number} has empty confidence")
             if "status" in index and not fields[index["status"]]:

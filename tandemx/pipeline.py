@@ -127,8 +127,8 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--min-period", type=int, default=2)
     parser.add_argument("--max-period", type=int, default=2000)
     parser.add_argument("--top-periods", type=int, default=5)
-    parser.add_argument("--discovery-method", choices=("legacy", "elastic"), default="legacy",
-                        help="Discovery algorithm; elastic enables experimental indel-aware multiple arrays.")
+    parser.add_argument("--discovery-method", choices=("legacy", "elastic", "cascade"), default="legacy",
+                        help="Discovery algorithm; cascade adds a narrow clean fast path before elastic fallback.")
     parser.add_argument("--clustering-method", choices=("auto", "legacy", "sequence"), default="auto",
                         help="auto uses sequence clusters for elastic discovery; override for ablation.")
     parser.add_argument("--cluster-identity", type=float, default=0.95,

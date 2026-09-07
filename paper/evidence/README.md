@@ -4,6 +4,21 @@ This directory intentionally versions compact executed benchmark tables and
 editable figures. Large inputs, normalized predictions and logs are at the
 configurable data root (`/Volumes/T7/Codex/TandemX` on the originating machine).
 
+`cascade_native_screen_development/` combines two non-overlapping runs covering
+all 16 development scenarios. The hash-checked archive shows no regression in
+the common accuracy/error fields versus elastic, lower runtime in 16/16 cases
+(geometric-mean ratio 0.562930), lower RSS in 15/16 (ratio 0.837814), and lower
+boundary MAE in the 421-bp and 729-bp clean scenarios. Seed 1101 is development
+evidence; it is not independent promotion evidence.
+
+`tidecluster_simulated_smoke/` records the first complete assembly-level
+TideCluster 1.21.2 smoke test, its strict normalization, exact image ID,
+container recipe, dependency versions, logs and internal GNU-time measurements.
+All three planted families and arrays were recovered, but the test is only a
+199.1-kb controlled assembly. Clustering used 7,669,232 kB maximum RSS inside
+the emulated container. The archive must not be described as plant-scale
+accuracy, portability or resource superiority evidence.
+
 `abundance_classifier_depth_gated_validation_v1/` preserves the frozen v3
 development-to-held-out chain. Commit `62892a6` and dual-platform hosted CI
 preceded one-time use of seeds 5801-5803. The rule passed all predeclared gates:

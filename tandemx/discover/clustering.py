@@ -28,7 +28,7 @@ MEMBERSHIP_FIELDS = ["read_id", "candidate_id", "cluster_id", "family_id", "repr
 def resolve_clustering_method(requested: str, discovery_method: str) -> str:
     if requested not in {"auto", "legacy", "sequence"}:
         raise ValueError("--clustering-method must be auto, legacy, or sequence")
-    return ("sequence" if discovery_method == "elastic" else "legacy") if requested == "auto" else requested
+    return ("sequence" if discovery_method in {"elastic", "cascade"} else "legacy") if requested == "auto" else requested
 
 
 def write_membership(path: Path, rows: list[dict]) -> None:

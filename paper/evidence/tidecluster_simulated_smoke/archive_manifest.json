@@ -1,0 +1,125 @@
+{
+  "complete": true,
+  "files": [
+    {
+      "file": "tc_tidehunter.gff3",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/tc_tidehunter.gff3",
+      "sha256": "88aa29840434e5599cfa7e8138fe6552d6cf41b2bb13b89f71363b1616ff0708",
+      "bytes": 1121
+    },
+    {
+      "file": "tc_clustering.gff3",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/tc_clustering.gff3",
+      "sha256": "70448112d005a09045e378aa307d5c90cf62cb263c7280d2cbc5f8ed78bbff15",
+      "bytes": 251
+    },
+    {
+      "file": "tc_cmd_args.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/tc_cmd_args.json",
+      "sha256": "d04451588e9f05113830a68e2fed50cc8ba04903b88426778320268cf82206c1",
+      "bytes": 482
+    },
+    {
+      "file": "tc_consensus/consensus_sequences_all.fasta",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/tc_consensus/consensus_sequences_all.fasta",
+      "sha256": "86a80b74ec9f0b851384a64ebce4d5c52727f1b6409408b8b2faf4d523cdc022",
+      "bytes": 1375
+    },
+    {
+      "file": "tidehunter.gnu_time.txt",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/tidehunter.gnu_time.txt",
+      "sha256": "5bf1aa4232c78c9fbe53f0682b644484a99227137ff510edb7b23b14c6832b63",
+      "bytes": 888
+    },
+    {
+      "file": "clustering.gnu_time.txt",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/clustering.gnu_time.txt",
+      "sha256": "3323b90b1a85c552754bf46d0a48beea49187c5f1f863ac4e67d92a8a8cba3c1",
+      "bytes": 919
+    },
+    {
+      "file": "profile/receipt.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/profile/receipt.json",
+      "sha256": "c5abfd7bf8c9da0239fc0a9a97850144076e4530f8851f002b0f122035522502",
+      "bytes": 217
+    },
+    {
+      "file": "profile/stages.tsv",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/profile/stages.tsv",
+      "sha256": "b416d4bc3aa21f115fd6b3418dfad69ddb405d43ed832a5524f0c67ce15c3c57",
+      "bytes": 377
+    },
+    {
+      "file": "profile/tidehunter.stdout.log",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/profile/tidehunter.stdout.log",
+      "sha256": "c5153fd8aa3f8f1ef872de8325f82a8ebc62edb010ee121e45f60477395d2130",
+      "bytes": 108
+    },
+    {
+      "file": "profile/tidehunter.stderr.log",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/profile/tidehunter.stderr.log",
+      "sha256": "664afc2f7da751afdd11a5ba0f37e0f03d3c91c4e10ffbbd228609f376de21a6",
+      "bytes": 64
+    },
+    {
+      "file": "profile/clustering.stdout.log",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/profile/clustering.stdout.log",
+      "sha256": "384e8c52d270db4f4655923bfe8f5f52446b8a41e5d3b009c818264bd826acd1",
+      "bytes": 74
+    },
+    {
+      "file": "profile/clustering.stderr.log",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/profile/clustering.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "normalized/normalized_arrays.tsv",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/normalized/normalized_arrays.tsv",
+      "sha256": "431a5116b04c231f6e55af36cfd0cac784dcac667aa561334175c344e7a56713",
+      "bytes": 1160
+    },
+    {
+      "file": "normalized/matches.tsv",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/normalized/matches.tsv",
+      "sha256": "69e8d9183de8e9b17ff56c2566c1f8c482d1d66a7031800c2e7d7a794e1ec71c",
+      "bytes": 267
+    },
+    {
+      "file": "normalized/family_recovery.tsv",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/normalized/family_recovery.tsv",
+      "sha256": "7b13d0651b768b41844bfbf6fb890968ccec9b147c8ae9f4e2ed6037c346dfcb",
+      "bytes": 246
+    },
+    {
+      "file": "normalized/metrics.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/normalized/metrics.json",
+      "sha256": "88b9e9186340fc6ecf0879f92f4ff8bba9c02d91743452aee0ca322da67bae58",
+      "bytes": 1216
+    },
+    {
+      "file": "normalized/receipt.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_simulated_smoke_sse2_v2_20260907/normalized/receipt.json",
+      "sha256": "a3f4938a674a8a8177505977c614fbf5307f4bb120afe47d8aa8b945562ba050",
+      "bytes": 1503
+    },
+    {
+      "file": "container/Dockerfile",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/containers/tidecluster/Dockerfile",
+      "sha256": "bfd52f84aa59eec2444f3a676a25996cf40f7fbc0cf13b3a2af80d161c556d16",
+      "bytes": 2863
+    },
+    {
+      "file": "container/README.md",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/containers/tidecluster/README.md",
+      "sha256": "65672391b9a36268b6b0bd0a3f8ab2954d2e61f15636e5f9e1378c537a6c2eaa",
+      "bytes": 2224
+    },
+    {
+      "file": "summary.json",
+      "source": "generated_by_archive_tidecluster_smoke",
+      "sha256": "60aa3c87dbac3a05c767b107ee33cb7023de764844c5ce5adbf8a1fd92fb9bff",
+      "bytes": 2404
+    }
+  ]
+}

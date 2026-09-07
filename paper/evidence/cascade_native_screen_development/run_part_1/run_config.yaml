@@ -1,0 +1,72 @@
+benchmark_id: cascade_validation_v1
+repetitions: 3
+timeout_seconds: 180
+period_range:
+- 30
+- 1000
+minimum_span_bp: 100
+minimum_iou: 0.5
+seeds:
+  development:
+  - 1101
+  validation:
+  - 2101
+  heldout:
+  - 3101
+  - 3102
+  - 3103
+tools:
+  tandemx: tandemx
+scenarios:
+- name: clean_60
+  period: 60
+  copies: 30
+- name: clean_171
+  period: 171
+  copies: 12
+- name: clean_421
+  period: 421
+  copies: 8
+- name: clean_729
+  period: 729
+  copies: 6
+- name: substitution_1pct
+  substitution_rate: 0.01
+- name: substitution_5pct
+  substitution_rate: 0.05
+- name: indel_01pct
+  insertion_rate: 0.0005
+  deletion_rate: 0.0005
+- name: indel_1pct
+  insertion_rate: 0.005
+  deletion_rate: 0.005
+- name: indel_4pct
+  insertion_rate: 0.02
+  deletion_rate: 0.02
+- name: divergent_units
+  unit_divergence: 0.1
+- name: related_families
+  related_families: true
+- name: short_arrays
+  copies: 3
+- name: two_arrays
+  copies: 8
+  arrays_per_read: 2
+- name: dispersed_control
+  positive_fraction: 0.0
+  negative_kind: dispersed
+- name: at_rich_control
+  positive_fraction: 0.0
+  negative_kind: at_rich
+- name: low_complexity_control
+  positive_fraction: 0.0
+  negative_kind: low_complexity
+discovery_method: cascade
+selected_split: development
+selected_scenarios:
+- clean_171
+- clean_421
+- indel_1pct
+- related_families
+- at_rich_control
+- low_complexity_control

@@ -730,7 +730,7 @@ def scan_discover_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanRe
     if len(sequence) < config.min_read_length:
         return ReadScanResult(read_bases=len(sequence), skipped_short_reads=1)
 
-    if config.discovery_method == "elastic":
+    if config.discovery_method in {"elastic", "cascade"}:
         return scan_elastic_read(task, config)
 
     if config.kmer_backend == "rust":
@@ -799,22 +799,28 @@ def scan_discover_chunk(
 
 
 def scan_elastic_read(task: ReadScanTask, config: DiscoverConfig) -> ReadScanResult:
-    from tandemx.discover.elastic import discover_elastic_arrays
+    from tandemx.discover.elastic import discover_cascade_arrays, discover_elastic_arrays
 
     record = task.record
     if len(record.sequence) < config.kmer_size and config.min_monomer_len > SHORT_PERIOD_SCAN_MAX:
         return ReadScanResult(read_bases=len(record.sequence), skipped_short_kmer=1)
-    arrays, overflow = discover_elastic_arrays(
-        record.sequence, min_period=config.min_monomer_len, max_period=config.max_monomer_len,
+    parameters = dict(
+        min_period=config.min_monomer_len, max_period=config.max_monomer_len,
         min_span=config.min_repeat_span, k=config.kmer_size, top_periods=config.top_periods,
         min_seed_occurrences=config.min_seed_occurrences, min_spacing_support=config.min_spacing_support,
         max_pairs_per_kmer=config.max_pairs_per_kmer, backend=config.kmer_backend,
     )
+    if config.discovery_method == "cascade":
+        cascade, overflow = discover_cascade_arrays(record.sequence, **parameters)
+        arrays = [(hit, consensus, units, branch) for hit, consensus, units, branch in cascade]
+    else:
+        elastic, overflow = discover_elastic_arrays(record.sequence, **parameters)
+        arrays = [(hit, consensus, units, "elastic_alignment") for hit, consensus, units in elastic]
     candidates = []
-    for hit, consensus, units in arrays:
+    for hit, consensus, units, branch in arrays:
         consensus = orient_monomer(consensus)
         low_complexity = is_low_complexity(consensus)
-        warnings = ["elastic_alignment", "uncalibrated_confidence", f"consensus_units={units}"]
+        warnings = [branch, "uncalibrated_confidence", f"consensus_units={units}"]
         if low_complexity:
             warnings.append("low_complexity_candidate")
         if hit.period != len(consensus):
@@ -920,8 +926,8 @@ def validate_discover_config(config: DiscoverConfig) -> None:
         raise ValueError("--family-audit must be full or related")
     if not 0 < config.cluster_identity <= 1:
         raise ValueError("--cluster-identity must be in (0,1]")
-    if config.discovery_method not in {"legacy", "elastic"}:
-        raise ValueError("--discovery-method must be legacy or elastic")
+    if config.discovery_method not in {"legacy", "elastic", "cascade"}:
+        raise ValueError("--discovery-method must be legacy, elastic, or cascade")
     if config.min_monomer_len <= 0:
         raise ValueError("--min-period must be positive")
     if config.max_monomer_len < config.min_monomer_len:
