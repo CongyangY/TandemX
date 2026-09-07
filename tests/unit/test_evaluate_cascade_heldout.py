@@ -17,10 +17,16 @@ def _write(path: Path, rows: list[dict[str, object]]) -> None:
         writer.writerows(rows)
 
 
-def _run(tmp_path: Path, tx_time: float = 1.5) -> tuple[Path, Path]:
+def _run(
+    tmp_path: Path,
+    tx_time: float = 1.5,
+    evaluation_split: str = "heldout",
+    extra_metric_gates: bool = False,
+) -> tuple[Path, Path]:
+    evaluation_seed = 3 if evaluation_split == "heldout" else 4
     config = {
         "benchmark_id": "test", "repetitions": 2,
-        "seeds": {"development": [1], "heldout": [3]},
+        "seeds": {"development": [1], "validation": [4], "heldout": [3]},
         "tools": {"tandemx": "x", "tidehunter": "y", "trf": "z"},
         "scenarios": [{"name": "positive"}, {"name": "control", "positive_fraction": 0.0}],
         "acceptance_gates": {
@@ -35,6 +41,15 @@ def _run(tmp_path: Path, tx_time: float = 1.5) -> tuple[Path, Path]:
             "tidehunter_peak_rss_geometric_mean_ratio_max": 1.25,
         },
     }
+    if evaluation_split != "heldout":
+        config["evaluation_split"] = evaluation_split
+    if extra_metric_gates:
+        config["acceptance_gates"].update(
+            {
+                "positive_base_union_f1_min": 0.99,
+                "positive_matched_boundary_mae_bp_max": 4.0,
+            }
+        )
     # The evaluator requires the named related-family scenario for its dedicated gate.
     config["scenarios"].append({"name": "related_families"})
     config_path = tmp_path / "config.yaml"
@@ -46,20 +61,22 @@ def _run(tmp_path: Path, tx_time: float = 1.5) -> tuple[Path, Path]:
     for scenario in ("positive", "control", "related_families"):
         for tool in ("tandemx", "tidehunter", "trf"):
             for repetition in (1, 2):
-                raw.append({"scenario": scenario, "seed": 3, "tool": tool, "repetition": repetition, "status": "ok"})
+                raw.append({"scenario": scenario, "seed": evaluation_seed, "tool": tool, "repetition": repetition, "status": "ok"})
             positive = scenario != "control"
             summary.append({
-                "scenario": scenario, "seed": 3, "tool": tool,
+                "scenario": scenario, "seed": evaluation_seed, "tool": tool,
                 "successful_runs": 2, "attempted_runs": 2, "deterministic": True,
                 "array_recall": 1.0 if positive else "NA", "array_precision": 1.0 if positive else "NA",
                 "negative_read_call_rate": 0.0, "cyclic_monomer_recall": 1.0 if positive else "NA",
+                "base_union_f1": 0.995 if positive else "NA",
+                "matched_boundary_mae_bp": 2.0 if positive else "NA",
                 "median_runtime_seconds": tx_time if tool == "tandemx" else 1.0,
                 "median_peak_rss_mib": 10.0,
             })
     _write(run / "raw_runs.tsv", raw)
     _write(run / "summary.tsv", summary)
-    (run / "environment.json").write_text(json.dumps({"config_sha256": digest_file(config_path), "split": "heldout", "source_digest": "abc"}))
-    (run / "run_config.yaml").write_text(yaml.safe_dump({**config, "selected_split": "heldout", "selected_scenarios": None}))
+    (run / "environment.json").write_text(json.dumps({"config_sha256": digest_file(config_path), "split": evaluation_split, "source_digest": "abc"}))
+    (run / "run_config.yaml").write_text(yaml.safe_dump({**config, "selected_split": evaluation_split, "selected_scenarios": None}))
     (run / "validation.json").write_text(json.dumps({"complete": True, "total_runs": len(raw)}))
     return config_path, run
 
@@ -76,3 +93,15 @@ def test_heldout_gates_retain_performance_failure(tmp_path: Path) -> None:
     result = evaluate(config, run, tmp_path / "evaluation")
     assert result["status"] == "failed"
     assert "tidehunter_runtime_geometric_mean_ratio" in result["failed_gate_names"]
+
+
+def test_validation_split_and_optional_accuracy_gates(tmp_path: Path) -> None:
+    config, run = _run(
+        tmp_path, evaluation_split="validation", extra_metric_gates=True
+    )
+    result = evaluate(config, run, tmp_path / "evaluation")
+    assert result["status"] == "passed"
+    observed = {row["name"]: row["observed"] for row in result["gates"]}
+    assert observed["minimum_positive_base_union_f1"] == 0.995
+    assert observed["maximum_positive_matched_boundary_mae_bp"] == 2.0
+    assert result["warning"].startswith("validation_seeds_consumed_once")

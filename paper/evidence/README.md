@@ -23,6 +23,16 @@ accepted six-panel figure with editable SVG text; `figures_v1` is retained as a
 draft because its text was converted to paths. Seeds 3101--3103 must not be
 rerun or used for tuning.
 
+`cascade_gap_free_development_v1/` preserves the fresh seed-1201 speed
+development that followed the failed promotion. Its 29 hash-checked entries
+include three identical 96-run matrices, a 1,600-read observable-feature audit
+and native profiles. The baseline TandemX/TideHunter runtime ratio was 2.357698.
+An unguarded candidate reached 1.933332 but worsened the 0.1%-indel boundary MAE
+to 14.221 bp and was rejected. The selected guarded candidate reached 1.989148,
+retained array/family endpoints, minimum base-union F1 0.997597, maximum
+boundary MAE 2.921 bp and zero negative-control calls. This is development
+evidence; frozen validation seed 2201 remains unobserved.
+
 `retrospective_collapse_source_audit/` freezes the exact ENA metadata queried
 for four candidate old-to-new assembly comparisons and a 12-row PacBio genomic-
 WGS selection. The metadata supports accession, platform and reported material

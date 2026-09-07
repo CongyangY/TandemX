@@ -14,6 +14,17 @@ from tandemx.discover.spacing import (
 )
 
 
+CASCADE_GAP_FREE_MIN_READ_FRACTION = 0.30
+CASCADE_GAP_FREE_MIN_SHIFTED_IDENTITY = 0.95
+CASCADE_GAP_FREE_MIN_VALID_PAIR_FRACTION = 0.95
+CASCADE_GAP_FREE_MAX_UNIT_RESIDUAL_FRACTION = 0.02
+
+
+def _unit_span_residual_fraction(span: int, period: int) -> float:
+    remainder = span % period
+    return min(remainder, period - remainder) / period
+
+
 def select_alignment_periods(histogram: dict[int, int], top_periods: int,
                              minimum_support: int) -> list[int]:
     """Spend the period budget on distinct alignment bands, including harmonics."""
@@ -104,30 +115,46 @@ def _dominant_clean_call(sequence: str, histogram: dict[int, int], *, min_period
                          max_period: int, min_span: int, top_periods: int,
                          min_spacing_support: int, backend: str
                          ) -> tuple[AlignmentHit, str, int] | None:
-    """Return a near-exact dominant array without allocating an alignment trace.
+    """Return a gap-free dominant array without allocating an alignment trace.
 
-    This fast path is deliberately narrow: one gap-free interval must cover at
-    least 60% of the read at >=99.5% shifted identity. Reads outside that domain
-    use the indel-aware path, preserving multiple-array and drift behavior.
+    A development audit chose a 30% read fraction and 95% shifted identity while
+    retaining the composition-adjusted identity filter. The span guard keeps the
+    observed two-array stress case on the elastic path. Reads outside this domain
+    retain indel-aware alignment and multiple-array behavior.
     """
     peaks = list(range(min_period, min(19, max_period) + 1))
     peaks += select_alignment_periods(histogram, top_periods, min_spacing_support)
     periods = expand_candidate_periods(peaks, min_period, max_period, refinement_radius=3)
-    minimum_dominant_span = max(min_span, ceil(0.6 * len(sequence)))
+    minimum_dominant_span = max(
+        min_span, ceil(CASCADE_GAP_FREE_MIN_READ_FRACTION * len(sequence))
+    )
     best: tuple[tuple[int, float, int], AlignmentHit] | None = None
     for period in periods:
         identity, start, end = best_local_periodicity_score(
-            sequence, period, min_span, acceptance_score=0.995
+            sequence,
+            period,
+            min_span,
+            acceptance_score=CASCADE_GAP_FREE_MIN_SHIFTED_IDENTITY,
         )
         span = end - start
-        if identity < 0.995 or span < minimum_dominant_span:
+        if (
+            identity < CASCADE_GAP_FREE_MIN_SHIFTED_IDENTITY
+            or span < minimum_dominant_span
+            or _unit_span_residual_fraction(span, period)
+            > CASCADE_GAP_FREE_MAX_UNIT_RESIDUAL_FRACTION
+        ):
             continue
         pairs = tuple(
             (left, left + period)
             for left in range(start, end - period)
             if sequence[left] in "ACGT" and sequence[left + period] in "ACGT"
         )
-        if not pairs:
+        possible_columns = max(0, end - start - period)
+        if (
+            not pairs
+            or len(pairs) / possible_columns
+            < CASCADE_GAP_FREE_MIN_VALID_PAIR_FRACTION
+        ):
             continue
         matches = sum(sequence[left] == sequence[right] for left, right in pairs)
         columns = len(pairs)
@@ -157,18 +184,30 @@ def _verified_gap_free_call(sequence: str, period: int, start: int, end: int,
         return None
     start = max(0, start)
     end = min(len(sequence), end)
-    if end - start < max(min_span, ceil(0.6 * len(sequence))):
+    if end - start < max(
+        min_span, ceil(CASCADE_GAP_FREE_MIN_READ_FRACTION * len(sequence))
+    ):
+        return None
+    if (
+        _unit_span_residual_fraction(end - start, period)
+        > CASCADE_GAP_FREE_MAX_UNIT_RESIDUAL_FRACTION
+    ):
         return None
     pairs = tuple(
         (left, left + period)
         for left in range(start, end - period)
         if sequence[left] in "ACGT" and sequence[left + period] in "ACGT"
     )
-    if not pairs:
+    possible_columns = max(0, end - start - period)
+    if (
+        not pairs
+        or len(pairs) / possible_columns
+        < CASCADE_GAP_FREE_MIN_VALID_PAIR_FRACTION
+    ):
         return None
     matches = sum(sequence[left] == sequence[right] for left, right in pairs)
     columns = len(pairs)
-    if matches / columns < 0.995:
+    if matches / columns < CASCADE_GAP_FREE_MIN_SHIFTED_IDENTITY:
         return None
     hit = AlignmentHit(
         start, end, period, matches, columns, 0,

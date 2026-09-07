@@ -1,0 +1,61 @@
+profile	rank	filename	line	function	primitive_calls	total_calls	self_seconds	cumulative_seconds
+at_rich_control	1	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	1	<module>	1	1	5.6042e-05	1.1426227500000001
+at_rich_control	2	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	804	main	1	1	2.6542e-05	1.076281042
+at_rich_control	3	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	155	run_discover	1	1	9.7501e-05	1.070005667
+at_rich_control	4	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	252	discover_toy_repeats	1	1	0.00032507900000000004	1.05397
+at_rich_control	5	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	394	flush_chunk	1	1	2.6492000000000003e-05	1.032679417
+at_rich_control	6	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	792	scan_discover_chunk	1	1	6.334000000000001e-06	1.0325748750000001
+at_rich_control	7	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	798	<listcomp>	1	1	5.0332000000000005e-05	1.032568541
+at_rich_control	8	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	727	scan_discover_read	100	100	0.00018153400000000001	1.032518209
+at_rich_control	9	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	801	scan_elastic_read	100	100	0.000966371	1.032331586
+at_rich_control	10	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/elastic.py	208	discover_cascade_arrays	100	100	0.000614031	1.0298596230000001
+at_rich_control	11	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/elastic.py	86	_elastic_calls	100	100	0.00045181400000000004	0.8426882480000001
+at_rich_control	12	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/alignment.py	79	banded_self_align_many	100	100	0.00072628	0.8401032060000001
+at_rich_control	13	~	0	<built-in method tandemx._rust_core.banded_self_align_many>	100	100	0.8388299130000001	0.8388299130000001
+at_rich_control	14	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/rust_backend.py	103	scan_read_for_periods	100	100	0.0007103190000000001	0.18617746100000002
+at_rich_control	15	~	0	<built-in method tandemx._rust_core.scan_read_for_periods>	100	100	0.184520874	0.184520874
+at_rich_control	16	/Users/ycy/Codex/Sofw/TandemX/tandemx/cohort.py	1	<module>	1	1	1.9044000000000003e-05	0.022186708000000003
+at_rich_control	17	/Users/ycy/Codex/Sofw/TandemX/tandemx/annotation.py	1	<module>	1	1	1.5418e-05	0.018767625
+at_rich_control	18	/Users/ycy/Codex/Sofw/TandemX/tandemx/io/sequences.py	1	<module>	1	1	2.1624e-05	0.014712291
+at_rich_control	19	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	86	_write_run_config	2	2	0.0001037	0.010922083
+at_rich_control	20	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	1	<module>	1	1	3.9542e-05	0.008592625000000001
+clean_171	1	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	1	<module>	1	1	5.3542e-05	1.1921889170000002
+clean_171	2	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	804	main	1	1	3.6416000000000005e-05	1.1249523750000001
+clean_171	3	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	155	run_discover	1	1	0.00011920700000000001	1.118310042
+clean_171	4	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	252	discover_toy_repeats	1	1	0.00039237	1.1024625000000001
+clean_171	5	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	394	flush_chunk	1	1	2.6086e-05	1.0716486250000001
+clean_171	6	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	792	scan_discover_chunk	1	1	5.667e-06	1.071147917
+clean_171	7	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	798	<listcomp>	1	1	5.5962000000000004e-05	1.07114225
+clean_171	8	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	727	scan_discover_read	100	100	0.002172961	1.071086288
+clean_171	9	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	801	scan_elastic_read	100	100	0.0011736890000000001	1.0689079940000001
+clean_171	10	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/elastic.py	208	discover_cascade_arrays	100	100	0.006406338	1.0567259180000002
+clean_171	11	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/elastic.py	86	_elastic_calls	100	100	0.0018306190000000001	0.9097397070000001
+clean_171	12	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/alignment.py	79	banded_self_align_many	100	100	0.000688619	0.6780280860000001
+clean_171	13	~	0	<built-in method tandemx._rust_core.banded_self_align_many>	100	100	0.6748524130000001	0.6748524130000001
+clean_171	14	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/consensus.py	73	aligned_unit_consensus	70	70	0.0011694140000000001	0.20275124600000002
+clean_171	15	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/rust_backend.py	103	scan_read_for_periods	100	100	0.000627381	0.140269334
+clean_171	16	~	0	<built-in method tandemx._rust_core.scan_read_for_periods>	100	100	0.13851096100000002	0.13851096100000002
+clean_171	17	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/consensus.py	43	_vote	70	70	0.07481581000000001	0.126858206
+clean_171	18	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/consensus.py	82	<listcomp>	70	70	0.009319483	0.026395914000000003
+clean_171	19	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/elastic.py	94	<listcomp>	100	100	0.000181287	0.024662418000000002
+clean_171	20	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/elastic.py	47	composition_adjusted_identity	350	350	0.000749837	0.024481131000000003
+indel_1pct	1	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	1	<module>	1	1	4.9668000000000006e-05	1.245758583
+indel_1pct	2	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	804	main	1	1	3.7668e-05	1.1783580420000002
+indel_1pct	3	/Users/ycy/Codex/Sofw/TandemX/tandemx/cli.py	155	run_discover	1	1	9.974800000000001e-05	1.1718738750000002
+indel_1pct	4	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	252	discover_toy_repeats	1	1	0.00039313200000000003	1.15676025
+indel_1pct	5	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	394	flush_chunk	1	1	2.5753000000000002e-05	1.128487916
+indel_1pct	6	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	792	scan_discover_chunk	1	1	8.124e-06	1.127996833
+indel_1pct	7	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	798	<listcomp>	1	1	5.2836e-05	1.127988709
+indel_1pct	8	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	727	scan_discover_read	100	100	0.002240493	1.127935873
+indel_1pct	9	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/mvp.py	801	scan_elastic_read	100	100	0.00119428	1.1256896220000001
+indel_1pct	10	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/elastic.py	208	discover_cascade_arrays	100	100	0.006387338	1.1149866290000001
+indel_1pct	11	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/elastic.py	86	_elastic_calls	100	100	0.002356157	0.963757418
+indel_1pct	12	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/alignment.py	79	banded_self_align_many	100	100	0.0006922440000000001	0.697182335
+indel_1pct	13	~	0	<built-in method tandemx._rust_core.banded_self_align_many>	100	100	0.6941024170000001	0.6941024170000001
+indel_1pct	14	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/consensus.py	73	aligned_unit_consensus	70	70	0.001355324	0.240280873
+indel_1pct	15	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/consensus.py	43	_vote	90	90	0.096166048	0.164723005
+indel_1pct	16	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/rust_backend.py	103	scan_read_for_periods	100	100	0.0005861730000000001	0.14453866
+indel_1pct	17	~	0	<built-in method tandemx._rust_core.scan_read_for_periods>	100	100	0.14305995800000001	0.14305995800000001
+indel_1pct	18	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/consensus.py	82	<listcomp>	70	70	0.009477014	0.026644792
+indel_1pct	19	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/alignment.py	213	global_align_ops	1080	1080	0.0034185170000000003	0.024843996
+indel_1pct	20	/Users/ycy/Codex/Sofw/TandemX/tandemx/discover/consensus.py	84	<lambda>	840	840	0.0009145290000000001	0.022445506

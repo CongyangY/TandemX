@@ -56,20 +56,51 @@ families and arrays with 0-bp period MAE, 29-bp boundary MAE and 0.998247 base
 union precision. Its clustering maximum RSS was 7,669,232 kB. These values prove
 that the comparator path works; they are not publication-scale ranks.
 
-The cascade promotion configuration predeclares all 16 scenarios, held-out
-seeds 3101–3103 and three repetitions. After committing the frozen source and
-passing hosted CI, run the complete `heldout` split once. Apply the gates with:
+The first cascade promotion configuration predeclared all 16 scenarios, held-out
+seeds 3101–3103 and three repetitions. That once-only split is complete and must
+not be rerun. It failed two gates: nine TRF low-complexity controls timed out and
+the TandemX/TideHunter runtime geometric-mean ratio was 2.457943, above 2.0.
+All failures and missing measurements remain in the archived evidence.
+
+## Cascade gap-free speed development
+
+Fresh development seed 1201 profiles the same 16 scenarios with TandemX and
+TideHunter. The baseline completed 96/96 commands and had a paired runtime
+geometric-mean ratio of 2.357698. An unguarded 30%-span/95%-identity fast path
+reached 1.933332 but worsened the 0.1%-indel boundary MAE from 1.364 to 14.221 bp;
+it is retained as a rejected experiment. The selected candidate adds >=95%
+valid shifted columns and <=2% residual from a whole number of units. It also
+completed 96/96 commands, reached 1.989148, retained array/family endpoints,
+kept minimum positive base-union F1 at 0.997597 and maximum boundary MAE at
+2.921 bp, and made no negative-control calls.
+
+`analyze_cascade_fast_path.py` records 1,600 read-level observable screen rows
+and scores proposed rules against development truth. The selected rule accepted
+403 reads with no truth-scored negative, wrong-single-array or multi-array
+acceptance. `archive_cascade_gap_free_development.py` preserves the baseline,
+rejected attempt, selected candidate, profiles and audit at
+`paper/evidence/cascade_gap_free_development_v1`.
+
+`cascade_gap_free_validation_v1.yaml` freezes validation seed 2201, the selected
+rule provenance and 14 accuracy/resource gates. It may be executed exactly once
+only after the source/config commit and both hosted workflows pass:
 
 ```bash
+python -m benchmarks.challenge.run \
+  --config benchmarks/configs/cascade_gap_free_validation_v1.yaml \
+  --split validation \
+  --outdir /Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907
+
 python -m benchmarks.scripts.evaluate_cascade_heldout \
-  --config benchmarks/configs/cascade_native_screen_heldout_v1.yaml \
-  --run RUN --outdir RUN/gate_evaluation
+  --config benchmarks/configs/cascade_gap_free_validation_v1.yaml \
+  --run /Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907 \
+  --outdir /Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/gate_evaluation
 ```
 
 The evaluator rejects incomplete/duplicated matrices, config-hash mismatches,
 missing metrics and comparator failures. A failed speed, memory or accuracy gate
-is retained as a failed held-out experiment; the consumed seeds cannot tune a
-replacement model.
+must be retained as a failed validation experiment. Seed 2201 cannot tune a
+replacement model after it is observed; seeds 3201–3203 remain reserved.
 
 ## Quantify depth-gated validation
 

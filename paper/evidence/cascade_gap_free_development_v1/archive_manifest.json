@@ -1,0 +1,176 @@
+[
+  {
+    "file": "baseline/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/environment.json",
+    "sha256": "b25e07e06ce641b491024a64ba8fda10790065305b0ec4b196de330fb0cd377e",
+    "bytes": 8345
+  },
+  {
+    "file": "baseline/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/run_config.yaml",
+    "sha256": "e34e8c848290eb70d5774438fa5119e5c1bff0ea07e505eb2891fb499b490c03",
+    "bytes": 1478
+  },
+  {
+    "file": "baseline/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/validation.json",
+    "sha256": "0d8e31581a78e4d2599fde8756650fd88f920d26137becc33c9fc467e12c9bac",
+    "bytes": 88
+  },
+  {
+    "file": "baseline/raw_runs.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/raw_runs.tsv",
+    "sha256": "d7ff86d8ea3a1b52903ffb279d7a09544e68562a6bebd60897ac60d24259b5dd",
+    "bytes": 60536
+  },
+  {
+    "file": "baseline/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/summary.tsv",
+    "sha256": "e6bc7e7b02b9c1039387c5da31fa97e5d4a22e446512f9351c942d193bcdab5f",
+    "bytes": 7552
+  },
+  {
+    "file": "baseline/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/run.log",
+    "sha256": "fe319ba8c4fe39a0866a4eb3c2abf606815253ca4bd9eaa28e9edbab578ee4a0",
+    "bytes": 7095
+  },
+  {
+    "file": "rejected_intermediate/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v2_20260907/environment.json",
+    "sha256": "688160ae4ae7448dfb68f744cd4214d64583c74a02fbeb6afb2921d6d30ff52e",
+    "bytes": 8345
+  },
+  {
+    "file": "rejected_intermediate/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v2_20260907/run_config.yaml",
+    "sha256": "e34e8c848290eb70d5774438fa5119e5c1bff0ea07e505eb2891fb499b490c03",
+    "bytes": 1478
+  },
+  {
+    "file": "rejected_intermediate/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v2_20260907/validation.json",
+    "sha256": "0d8e31581a78e4d2599fde8756650fd88f920d26137becc33c9fc467e12c9bac",
+    "bytes": 88
+  },
+  {
+    "file": "rejected_intermediate/raw_runs.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v2_20260907/raw_runs.tsv",
+    "sha256": "7eaf245bc30dbea4903d3d4522d3e01c2b9b0d88a8ae98a60a4e94efd6ddab57",
+    "bytes": 60580
+  },
+  {
+    "file": "rejected_intermediate/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v2_20260907/summary.tsv",
+    "sha256": "c6c5a2b8f2d3aeb9c9edee4f28f655b28a19633d1f352a224dbc681a913ef4ab",
+    "bytes": 7580
+  },
+  {
+    "file": "rejected_intermediate/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v2_20260907/run.log",
+    "sha256": "55760386f4d403664a4960612da38cbeaebb2b1978b6648f26629a3169512341",
+    "bytes": 7095
+  },
+  {
+    "file": "candidate/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v3_20260907/environment.json",
+    "sha256": "54e0b5b3b4d4d6834a985de5337ec8912148423297d4668737973a1b9b21dd22",
+    "bytes": 8345
+  },
+  {
+    "file": "candidate/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v3_20260907/run_config.yaml",
+    "sha256": "e34e8c848290eb70d5774438fa5119e5c1bff0ea07e505eb2891fb499b490c03",
+    "bytes": 1478
+  },
+  {
+    "file": "candidate/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v3_20260907/validation.json",
+    "sha256": "0d8e31581a78e4d2599fde8756650fd88f920d26137becc33c9fc467e12c9bac",
+    "bytes": 88
+  },
+  {
+    "file": "candidate/raw_runs.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v3_20260907/raw_runs.tsv",
+    "sha256": "aabb91e482e6763e9431be34bd231bde5fbb89c5b574b6eda2cc6c876e120650",
+    "bytes": 60677
+  },
+  {
+    "file": "candidate/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v3_20260907/summary.tsv",
+    "sha256": "6a869fddc492c55cec55bfb83ce688b25d26dfcd735e5c15913249426c50e5aa",
+    "bytes": 7568
+  },
+  {
+    "file": "candidate/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v3_20260907/run.log",
+    "sha256": "40cb1455562906a6b877784c673829771cc5cec991e9b7ad36509f68374f78f3",
+    "bytes": 7095
+  },
+  {
+    "file": "development_config.yaml",
+    "source": "benchmarks/configs/cascade_speed_profile_development_v1.yaml",
+    "sha256": "60d65d8f9eba5d1a2e4ef1264fae9915806a519dd509383280b25b22d838a01b",
+    "bytes": 1450
+  },
+  {
+    "file": "fast_path_audit/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/fast_path_audit_v2/receipt.json",
+    "sha256": "e868a3ea95c198451aba5da2b8299b73f4619aec713759c1d87fea9b51cb9035",
+    "bytes": 2212
+  },
+  {
+    "file": "fast_path_audit/screen_features.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/fast_path_audit_v2/screen_features.tsv",
+    "sha256": "8940692e78a1e89282d1f08f549519bc869cc3c923ecf3da200fa368f04b8ee5",
+    "bytes": 245056
+  },
+  {
+    "file": "fast_path_audit/threshold_grid.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/fast_path_audit_v2/threshold_grid.tsv",
+    "sha256": "51cfa2c428e907ac9674a3a6a6f66c39d4f8b102f71c9e706e0b52df2fa5dca9",
+    "bytes": 2354
+  },
+  {
+    "file": "fast_path_audit/scenario_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/fast_path_audit_v2/scenario_summary.tsv",
+    "sha256": "d328c8ea6724fb5761633d495201fb86ca3dc177f3f979fadd3cf837862b2a91",
+    "bytes": 1058
+  },
+  {
+    "file": "scenario_comparison.tsv",
+    "source": "derived_from_validated_development_inputs",
+    "sha256": "f59d734a7a639ca9ed64ddcefd3062d4471702c986f493cc6fe37b0542108ae6",
+    "bytes": 1545
+  },
+  {
+    "file": "metric_differences.tsv",
+    "source": "derived_from_validated_development_inputs",
+    "sha256": "80486f39f7559b85bbaa2b99883adc21654bc68f990a0cc07227854c5d2ea33b",
+    "bytes": 1306
+  },
+  {
+    "file": "branch_counts.tsv",
+    "source": "derived_from_validated_development_inputs",
+    "sha256": "bf4144c0a6f2aa21151abb0e16e816e6ae2839f085ac26e16ef0ddc47fb349a1",
+    "bytes": 361
+  },
+  {
+    "file": "profile_top.tsv",
+    "source": "derived_from_validated_development_inputs",
+    "sha256": "fae72d5a24e82b5e1373d6459689840d6d96fe7bde1b15f63529acfe9bf8b61b",
+    "bytes": 7671
+  },
+  {
+    "file": "decision.json",
+    "source": "derived_from_validated_development_inputs",
+    "sha256": "c3fd0d7374cfa19aa5dbeeaae2dae1003c5f9bfec62f80f3d9a76a1dc79d158e",
+    "bytes": 927
+  },
+  {
+    "file": "README.md",
+    "source": "derived_from_validated_development_inputs",
+    "sha256": "c3b3130c68b86bca992a6ee508b04a14c81f1b43d4930f014b2f8144bdb6d494",
+    "bytes": 562
+  }
+]

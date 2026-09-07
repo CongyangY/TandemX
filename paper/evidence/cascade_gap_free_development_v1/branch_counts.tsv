@@ -1,0 +1,17 @@
+scenario	cascade_gap_free	cascade_elastic
+at_rich_control	0	0
+clean_171	67	3
+clean_421	70	0
+clean_60	58	12
+clean_729	70	0
+dispersed_control	0	0
+divergent_units	0	70
+indel_01pct	5	65
+indel_1pct	0	70
+indel_4pct	0	70
+low_complexity_control	0	0
+related_families	69	1
+short_arrays	0	70
+substitution_1pct	64	6
+substitution_5pct	0	70
+two_arrays	0	140

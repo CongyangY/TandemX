@@ -1,0 +1,45 @@
+{
+  "complete": true,
+  "dataset_root": "/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907/datasets",
+  "dataset_manifests": {
+    "at_rich_control_s1201": "b7dd3b0fe3394f7d4867ea50621ee8c2d82ab59c82ea5405c74f76cc4cd69757",
+    "clean_171_s1201": "6b842ec8cbf42964fbf027842c7e4dea16d495e933c334e381f2209e59f3ec25",
+    "clean_421_s1201": "69dd7a10171e970779aed821995f16e44bcddcf11cd8b39e7672ae1291dd4908",
+    "clean_60_s1201": "63aa966ad890fb9403a5b9e90595aa744422913e8657c54b4a67c558cb427c45",
+    "clean_729_s1201": "404173452356429c5bd0d6704ece5a744be2b4ac48f50bce30305160f4044040",
+    "dispersed_control_s1201": "736c4b61583a7020116331ab45a80527deb9e795f0d9896e4fe8d9d38fc0dc3f",
+    "divergent_units_s1201": "832d1b3f179a9f3dbffc162c5688aa188653e2653d9cd1c8e1ff01b464cf5b55",
+    "indel_01pct_s1201": "8d4317455245dfafbfce80e43c4c886b806fcee519c2e21ab26eb3e164c1d9cb",
+    "indel_1pct_s1201": "86dd235a2c9f8deadf6566b13945b787460a66c65d180c14da85835361c90885",
+    "indel_4pct_s1201": "1748be34813a159dbfbfe198ad74d2873126cf7b5e1dd3b4db3e09998c4ed956",
+    "low_complexity_control_s1201": "0109c5c9a6c42edaf5bb03f36dba48b48f4900b7702e5e242d2375ab42f97873",
+    "related_families_s1201": "89050b11e4ac780cc43de10cacb3dc3e0896997c87bdfe6677f676253d965916",
+    "short_arrays_s1201": "dee78caf59365440521a319c0e99279f272e84c397ec84171ee8df70aedbde47",
+    "substitution_1pct_s1201": "f9c19535c447692e3034bd210366bb903f7badc21fe03288850276f935f29ea7",
+    "substitution_5pct_s1201": "88e11330445a965f9511e5a012ba796d85761f28a6ac5525ab149e98200a7872",
+    "two_arrays_s1201": "78323d4f954a2b005383ef8c2817e63ce15c2268e500cb806e63ac8002998003"
+  },
+  "git_head": "aabaa29b58be5de389a9bf456d30592643bfe750",
+  "feature_rows": 1600,
+  "threshold_rows": 28,
+  "scenario_rows": 16,
+  "span_fractions": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6
+  ],
+  "identity_thresholds": [
+    0.95,
+    0.975,
+    0.99,
+    0.995
+  ],
+  "minimum_composition_adjusted_identity": 0.7,
+  "minimum_valid_pair_fraction": 0.95,
+  "maximum_unit_span_residual_fraction": 0.02,
+  "warning": "development_truth_used_for_scoring;rules_use_observed_screen_features_only;not_validation"
+}

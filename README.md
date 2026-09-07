@@ -32,6 +32,12 @@ important indel-boundary and multiple-array limitations; see
 [benchmarks/README.md](benchmarks/README.md). An opt-in indel-aware multiple-array
 method is now available for validation (`--discovery-method elastic`); the
 original method remains available as `legacy` and is still the default.
+The experimental `cascade` mode uses a native periodicity screen, a guarded
+gap-free path and elastic fallback. On development seed 1201 its revised guard
+reduced the paired TandemX/TideHunter runtime geometric-mean ratio from 2.358 to
+1.989 while retaining array/family recovery and bounded base/boundary metrics.
+Validation seed 2201 is frozen but has not been run; this is development evidence,
+not a general speed claim.
 Elastic mode now uses explicit circular edit-similarity monomer clusters
 (default 95%), with original candidate sequences and assignment evidence retained.
 These clusters do not define biological family ancestry.
@@ -102,6 +108,9 @@ tandemx discover --reads /tmp/tandemx-toy/reads.fa --outdir /tmp/tandemx-elastic
   --discovery-method elastic --kmer-backend rust --threads 1
 tandemx validate --project /tmp/tandemx-elastic
 ```
+
+Replace `elastic` with `cascade` to exercise the screened fast-path/fallback
+implementation; both remain experimental and `legacy` remains the default.
 
 See [examples/toy/elastic.md](examples/toy/elastic.md) for its evidence and limits.
 `--clustering-method legacy` preserves the previous clustering for ablation;

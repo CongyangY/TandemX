@@ -1,0 +1,18 @@
+{
+  "status": "development_passed",
+  "runtime_geomean_ratio": {
+    "baseline": 2.3576982790981247,
+    "rejected_intermediate": 1.9333319545006789,
+    "candidate": 1.9891483423482819
+  },
+  "candidate_gate": "tandemx_divided_by_tidehunter_runtime_geomean_ratio_le_2",
+  "candidate_gate_passed": true,
+  "candidate_metric_difference_rows": 16,
+  "profile_sha256": {
+    "at_rich_control.prof": "0cdd7552315ff197bbb151a1728164790e09a24402c57c1f641c8b41db978991",
+    "clean_171.prof": "54166bcf0e908e525e1d0952b3c185982f6059c321639ee77122bf010ddb02f4",
+    "indel_1pct.prof": "44721dda155bb0bf1fe98b0856fdd0b83d15f7627f37a24d26c7d5a4d86197d8"
+  },
+  "interpretation": "the guarded 30%-span gap-free path passed the development runtime gate; the unguarded intermediate indel boundary regression is retained",
+  "warning": "development_seed_1201_used_for_selection;not_validation;timing_repetitions_not_biological_replicates"
+}

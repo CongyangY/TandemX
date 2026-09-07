@@ -1,4 +1,4 @@
-"""Apply the frozen cascade promotion gates to a completed held-out run."""
+"""Apply frozen cascade promotion gates to a completed evaluation split."""
 from __future__ import annotations
 
 import argparse
@@ -53,18 +53,19 @@ def _gate(name: str, observed: object, operator: str, threshold: float) -> dict[
 def validate_matrix(config: dict[str, Any], config_path: Path, run: Path, raw: list[dict[str, str]], summary: list[dict[str, str]]) -> dict[str, int]:
     required = ("environment.json", "run_config.yaml", "validation.json", "raw_runs.tsv", "summary.tsv")
     if any(not (run / name).is_file() for name in required):
-        raise ValueError("Held-out run lacks required root files")
+        raise ValueError("Evaluation run lacks required root files")
     environment = json.loads((run / "environment.json").read_text())
     run_config = yaml.safe_load((run / "run_config.yaml").read_text())
     validation = json.loads((run / "validation.json").read_text())
     if environment.get("config_sha256") != digest_file(config_path):
         raise ValueError("Run environment does not match the frozen config hash")
-    if environment.get("split") != "heldout" or run_config.get("selected_split") != "heldout":
-        raise ValueError("Run is not the held-out split")
+    evaluation_split = str(config.get("evaluation_split", "heldout"))
+    if environment.get("split") != evaluation_split or run_config.get("selected_split") != evaluation_split:
+        raise ValueError(f"Run is not the configured {evaluation_split} split")
     if run_config.get("selected_scenarios") is not None:
-        raise ValueError("Held-out run omitted one or more predeclared scenarios")
+        raise ValueError("Evaluation run omitted one or more predeclared scenarios")
     scenarios = {row["name"] for row in config["scenarios"]}
-    seeds = {int(seed) for seed in config["seeds"]["heldout"]}
+    seeds = {int(seed) for seed in config["seeds"][evaluation_split]}
     tools = set(config["tools"])
     repetitions = int(config["repetitions"])
     expected_raw = len(scenarios) * len(seeds) * len(tools) * repetitions
@@ -74,11 +75,11 @@ def validate_matrix(config: dict[str, Any], config_path: Path, run: Path, raw: l
     expected_raw_keys = {(scenario, seed, tool, repetition) for scenario in scenarios for seed in seeds for tool in tools for repetition in range(1, repetitions + 1)}
     expected_summary_keys = {(scenario, seed, tool) for scenario in scenarios for seed in seeds for tool in tools}
     if raw_keys != expected_raw_keys or len(raw) != expected_raw:
-        raise ValueError("Held-out raw run matrix is incomplete or duplicated")
+        raise ValueError("Evaluation raw run matrix is incomplete or duplicated")
     if summary_keys != expected_summary_keys or len(summary) != expected_summary:
-        raise ValueError("Held-out summary matrix is incomplete or duplicated")
+        raise ValueError("Evaluation summary matrix is incomplete or duplicated")
     if validation.get("complete") is not True or validation.get("total_runs") != expected_raw:
-        raise ValueError("Held-out validation receipt disagrees with the matrix")
+        raise ValueError("Evaluation receipt disagrees with the matrix")
     return {"raw_rows": expected_raw, "summary_rows": expected_summary, "datasets": len(scenarios) * len(seeds)}
 
 
@@ -109,6 +110,25 @@ def evaluate(config_path: Path, run: Path, outdir: Path) -> dict[str, object]:
         _gate("maximum_negative_read_call_rate", _complete_max(tandemx_negative, "negative_read_call_rate"), "<=", limits["negative_read_call_rate_max"]),
         _gate("minimum_related_family_cyclic_monomer_recall", _complete_min(related, "cyclic_monomer_recall"), ">=", limits["related_family_cyclic_monomer_recall_min"]),
     ]
+    optional_metric_gates = (
+        (
+            "minimum_positive_base_union_f1",
+            _complete_min(tandemx_positive, "base_union_f1"),
+            ">=",
+            "positive_base_union_f1_min",
+            "base_union_f1",
+        ),
+        (
+            "maximum_positive_matched_boundary_mae_bp",
+            _complete_max(tandemx_positive, "matched_boundary_mae_bp"),
+            "<=",
+            "positive_matched_boundary_mae_bp_max",
+            "matched_boundary_mae_bp",
+        ),
+    )
+    for name, observed, operator, limit_name, _field in optional_metric_gates:
+        if limit_name in limits:
+            gates.append(_gate(name, observed, operator, limits[limit_name]))
     # A missing metric must fail rather than disappear from min/max calculations.
     for gate, rows, field in (
         (gates[3], tandemx_positive, "array_recall"),
@@ -119,11 +139,20 @@ def evaluate(config_path: Path, run: Path, outdir: Path) -> dict[str, object]:
         if not rows or any(_number(row.get(field)) is None for row in rows):
             gate["passed"] = False
             gate["missing_group_count"] = sum(_number(row.get(field)) is None for row in rows)
+    for name, _observed, _operator, limit_name, field in optional_metric_gates:
+        if limit_name not in limits:
+            continue
+        gate = next(row for row in gates if row["name"] == name)
+        if not tandemx_positive or any(_number(row.get(field)) is None for row in tandemx_positive):
+            gate["passed"] = False
+            gate["missing_group_count"] = sum(
+                _number(row.get(field)) is None for row in tandemx_positive
+            )
 
     by_key = {(row["scenario"], row["seed"], row["tool"]): row for row in summary}
     paired_rows: list[dict[str, object]] = []
     for scenario in sorted(scenarios):
-        for seed in map(str, config["seeds"]["heldout"]):
+        for seed in map(str, config["seeds"][str(config.get("evaluation_split", "heldout"))]):
             tx = by_key[(scenario, seed, "tandemx")]
             th = by_key[(scenario, seed, "tidehunter")]
             valid = (
@@ -166,7 +195,10 @@ def evaluate(config_path: Path, run: Path, outdir: Path) -> dict[str, object]:
         "run_source_digest": json.loads((run / "environment.json").read_text())["source_digest"],
         "gates": gates,
         "failed_gate_names": [gate["name"] for gate in gates if not gate["passed"]],
-        "warning": "heldout_seeds_consumed_once;failed_gates_must_be_retained;timing_repetitions_are_not_biological_replicates",
+        "warning": (
+            f"{config.get('evaluation_split', 'heldout')}_seeds_consumed_once;"
+            "failed_gates_must_be_retained;timing_repetitions_are_not_biological_replicates"
+        ),
     }
     outdir.mkdir(parents=True, exist_ok=True)
     fields = list(dict.fromkeys(key for row in paired_rows for key in row))

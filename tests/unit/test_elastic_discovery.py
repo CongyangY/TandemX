@@ -99,6 +99,41 @@ def test_cascade_uses_narrow_clean_path_and_elastic_fallback(backend):
 
 
 @pytest.mark.skipif(not rust_backend_available(), reason="compiled extension unavailable")
+def test_native_cascade_gap_free_path_accepts_moderate_span_with_substitutions():
+    unit = sequence(100, 67)
+    array = list(unit * 8)
+    for index in range(17, len(array), 101):
+        array[index] = "A" if array[index] != "A" else "C"
+    read = sequence(1100, 500) + "".join(array) + sequence(2100, 500)
+    calls, _ = discover_cascade_arrays(
+        read, min_period=30, max_period=120, min_span=100, backend="rust"
+    )
+    assert len(calls) == 1
+    assert calls[0][3] == "cascade_gap_free"
+    assert calls[0][0].gaps == 0
+
+
+@pytest.mark.parametrize("backend", ["python", "rust"])
+def test_cascade_span_guard_keeps_separated_arrays_on_elastic_path(backend):
+    if backend == "rust" and not rust_backend_available():
+        pytest.skip("compiled extension unavailable")
+    first = sequence(119, 67)
+    second = sequence(120, 71)
+    read = (
+        sequence(121, 300)
+        + first * 4
+        + "N" * 400
+        + second * 4
+        + sequence(122, 300)
+    )
+    cascade, _ = discover_cascade_arrays(
+        read, min_period=30, max_period=120, min_span=100, backend=backend
+    )
+    assert len(cascade) == 2
+    assert all(call[3] == "cascade_elastic" for call in cascade)
+
+
+@pytest.mark.skipif(not rust_backend_available(), reason="compiled extension unavailable")
 def test_native_reference_parity_and_reverse_complement():
     unit = sequence(14, 67)
     read = sequence(4, 80) + (unit + unit[:21] + "T" + unit[21:] + unit) * 3 + sequence(3, 70)

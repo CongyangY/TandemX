@@ -1,0 +1,17 @@
+scenario	tool	metric	baseline	candidate
+clean_171	tandemx	matched_boundary_mae_bp	0.8928571428571429	0.38571428571428573
+clean_171	tandemx	base_union_precision	0.9991305255103815	0.9996242014280345
+clean_171	tandemx	base_union_f1	0.9995650736765191	0.9998120654012403
+clean_60	tandemx	matched_boundary_mae_bp	1.3571428571428572	0.7214285714285714
+clean_60	tandemx	base_union_precision	0.9984943339408828	0.9991990547259736
+clean_60	tandemx	base_union_f1	0.9992465997858757	0.999599366920401
+indel_01pct	tandemx	matched_boundary_mae_bp	1.3642857142857143	1.3285714285714285
+indel_01pct	tandemx	base_union_precision	0.9986720987791652	0.9987068156377972
+indel_01pct	tandemx	base_union_f1	0.9993356082662854	0.9993529894669468
+related_families	tandemx	matched_boundary_mae_bp	1.35	0.34285714285714286
+related_families	tandemx	base_union_precision	0.9986859395532195	0.9996659428762318
+related_families	tandemx	base_union_f1	0.9993425378040762	0.9998329435349148
+substitution_1pct	tandemx	matched_boundary_mae_bp	1.3428571428571427	0.6357142857142857
+substitution_1pct	tandemx	base_union_recall	0.9999443052074631	0.9999025341130604
+substitution_1pct	tandemx	base_union_precision	0.9987483659221762	0.999478082963932
+substitution_1pct	tandemx	base_union_f1	0.999345977763244	0.999690263484849

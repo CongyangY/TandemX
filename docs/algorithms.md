@@ -207,6 +207,17 @@ first attempts and corrected results remain available. Perfect recovery on
 development seed 1101 is not a held-out accuracy or speed claim. The expanded
 comparator/metric contract is in [comparator_matrix.md](comparator_matrix.md).
 
+`--discovery-method cascade` first calls the same native seed/period screen. A
+gap-free proposal can bypass elastic traceback only when its interval spans at
+least 30% of the read, shifted identity is at least 0.95, at least 95% of shifted
+columns contain A/C/G/T, its span is within 2% of an integer number of proposed
+units, and composition-adjusted identity is at least 0.7. The unit-span and
+valid-column guards were added after an intermediate development rule worsened
+0.1% indel boundary MAE from 1.364 to 14.221 bp. Reads outside all five gates use
+the unchanged elastic path, preserving short-array, phase-drift and multiple-array
+behavior. These constants were selected on seed 1201 and require frozen seed-2201
+validation before promotion.
+
 ## Operational monomer clustering (experimental)
 
 `--clustering-method auto` selects `sequence` for elastic discovery and the

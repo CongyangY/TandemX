@@ -120,6 +120,29 @@ compact receipts are in
 still show TideHunter faster than TandemX, so this replay does not establish
 general external-tool superiority.
 
+## Guarded cascade gap-free development
+
+Fresh development seed 1201 was used to diagnose the cascade runtime deficit
+without reusing consumed held-out seeds. Each revision ran the same 16 scenarios,
+two tools and three timing repetitions (96 commands). Ratios are the geometric
+mean of condition-level median TandemX/TideHunter wall-time ratios.
+
+| Revision | Runtime ratio | 0.1%-indel boundary MAE | Decision |
+| --- | ---: | ---: | --- |
+| Published baseline | 2.357698 | 1.364 bp | Too slow |
+| Unguarded 30%-span/95%-identity | 1.933332 | 14.221 bp | Rejected for boundary regression |
+| Guarded candidate | 1.989148 | 1.329 bp | Selected for frozen validation |
+
+The guarded candidate also requires at least 95% valid A/C/G/T shifted columns,
+at most 2% residual from an integer unit count and composition-adjusted identity
+of at least 0.7. It retained the baseline array/family results, had minimum
+positive base-union F1 0.997597, maximum positive boundary MAE 2.921 bp and zero
+negative-control calls. Its 1,600-read screen audit accepted 403 reads with no
+truth-scored negative, incorrect single-array or multi-array acceptance. These
+constants were selected on development data. Validation seed 2201 remains
+unobserved, so the result is not yet a promoted speed claim. Compact evidence is
+in `paper/evidence/cascade_gap_free_development_v1`.
+
 ## Remaining Limits
 
 The spacing prefilter and Rust read-scanning threads enable larger subsets but do not make TandemX ready for full 7-20 Gb genomes or 100 Gb read sets. Remaining work includes multiprocessing or distributed chunks, intra-step checkpoints, bounded on-disk result tables and validation on real HiFi subsets. The synthetic benchmark runner now records per-command peak resident memory with `wait4` on supported Unix platforms.
