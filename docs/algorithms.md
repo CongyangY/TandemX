@@ -317,7 +317,10 @@ Current MVP implementation:
     all corrected single-copy control depths, including zero observations, then
     fall back to total read bases divided by `--genome-size`. The mean avoids the
     zero-median discontinuity near 1x coverage; median, MAD and zero fraction are
-    retained as control-QC fields;
+    retained as control-QC fields. Optional `--single-copy-min-depth` applies a
+    condition-level observed-control-depth gate: below the threshold it uses the
+    total-bases fallback while retaining control statistics and an explicit
+    fallback method/warning;
 11. estimate copy number as `median_kmer_depth / haploid_depth` and repeat bp as
     `estimated_copy_number * monomer_length`;
 12. report raw/corrected depth, normalization method, survival probability,
@@ -349,7 +352,10 @@ The downstream `--catalog` input reuses discovery results. It does not mean Tand
 The paired development design for the optional normalization paths is documented
 in [quantify_calibration.md](quantify_calibration.md). It scores public-command
 outputs and retains the oracle-input boundary rather than treating planted error
-rates as observable data.
+rates as observable data. The value 2.0 was frozen after development and passed
+nine predeclared gates on three additional simulated genomes; this supports the
+explicit opt-in mode but does not validate real control specificity or make it a
+default.
 
 Future work:
 

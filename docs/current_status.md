@@ -7,15 +7,15 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 ## Active 2026-09-07 continuation checkpoint
 
-This section is the restart point for a new Codex window. The changes below are
-still uncommitted and must be verified before publication. Do not stage the
-untracked `.codex/` directory.
+This section is the restart point for a new Codex window. Verify the state below
+before continuing and do not stage the untracked `.codex/` directory.
 
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `f47fc1a`, aligned with `origin/codex/publish-current-progress` and
-  `origin/main`. Hosted runs `34087474642` and `34087489635` passed Ubuntu/macOS
-  Python tests, Rust checks and wheel builds. That commit contains the exact
-  quantify speed replay, its tested archiver and the 112-product parity record.
+  `9eda196`, aligned with `origin/codex/publish-current-progress` and
+  `origin/main`. Hosted runs `34088623796` and `34088640260` passed Ubuntu/macOS
+  Python tests, Rust checks and wheel builds. That commit freezes the untouched
+  depth-gated quantify validation source, seeds, data-generation hashes, decision
+  rule and nine scientific gates before any validation data are generated.
 - **Frozen cascade held-out is consumed; never rerun seeds 3101--3103.** The
   once-only run is complete at
   `/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907`:
@@ -59,24 +59,27 @@ untracked `.codex/` directory.
   same-machine replay, so it is an engineering check rather than publication
   timing. The 112 product hashes, resources and replay receipts are compacted at
   `paper/evidence/quantify_calibration_fast_fasta_replay_v1`.
-- **Depth-gated quantify candidate remains unpromoted.** The post-hoc development
-  candidate uses controls only when mean control depth is at least 2; its MARE is
-  0.356117 and it improves every development seed, but it has not been run on
-  untouched genomes 6401--6403.
-- **Current uncommitted validation freeze.** A separate simulation config fixes
-  untouched validation seeds 6401--6403 under the same 10-Mb, 55-family, nine-
-  condition process. The candidate threshold remains 2.0 and the public-command
-  evaluator runs only total-bases and empirical-control methods before applying
-  that frozen condition-level rule. Nine predeclared gates require zero process
-  failures, aggregate MARE reduction at least 0.02, candidate MARE at most 0.40,
-  positive improvement in every genome, no mean coverage-stratum regression,
-  paired improved/nonworse fractions at least 0.40/0.70, and use of both branches.
-  Exact hashes for the generation JSON, complete Mo17 length histogram and five
-  generator/helper source files are also frozen and enforced against each receipt.
-  The generator now records `split=validation` and `validation_used=true`; future
-  reserved 7401--7403 remain refused. Focused unit and actual toy public-command
-  integration tests pass. Do not generate 6401--6403 before this source/config is
-  committed and hosted CI passes.
+- **Frozen quantify validation passed; seeds 6401--6403 are consumed.** Commit
+  `9eda196` and both hosted workflows passed before the three 10-Mb validation
+  genomes were generated. The input audit verified 30 manifests and all 93
+  declared payload files (2,380,726,368 bytes). The once-only result is at
+  `/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907`:
+  54/54 successful public commands, 2,970 raw rows, 1,485 candidate rows and
+  9/9 passed predeclared gates. Candidate MARE was 0.363222 versus 0.408767 for
+  total-bases normalization; each seed improved by 0.037855--0.055248. Paired
+  outcomes were 661 improved, 495 equal and 329 worse. Nine 1× conditions used
+  the baseline branch and 18 5×/20× conditions used controls. Ungated controls
+  had slightly lower aggregate MARE, 0.359443; retain this limitation and never
+  tune on 6401--6403. Reserved 7401--7403 remain refused.
+- **Validation evidence and public option are prepared locally.** The 2.2-MiB
+  compact archive at `paper/evidence/quantify_depth_gated_validation_v1` has 67
+  hash-checked entries, all 54 execution-artifact rows, compact dataset manifests,
+  the input audit and independently recomputed decisions/resources. `figures_v3`
+  is the accepted six-panel SVG/PDF/PNG with 94 editable SVG texts, no raster
+  elements, and 54 uniquely paired runtime/RSS points. v1 is rejected for legend
+  overlap; v2 fixed the layout but lacked unique panel-source resource keys. The
+  opt-in `quantify --single-copy-min-depth 2` implementation records a total-
+  bases fallback below the threshold without changing the controls default.
 - **Real-data source audit.** Exact ENA metadata for PRJEB50694, PRJNA751841,
   PRJNA953663 and PRJNA919186 is archived at
   `paper/evidence/retrospective_collapse_source_audit`. Five manifest files and
@@ -85,16 +88,21 @@ untracked `.codex/` directory.
   does not establish identical DNA extraction, individual plant, stock or
   BioSample between historical and newer assemblies. All five manifest entries
   were independently rehashed. Donor-matched collapse truth remains unavailable.
-- **Verification state and exact next actions.** Commit `f47fc1a` passed 510
-  Python tests, 16 Rust release tests, format/Clippy, compile, link and artifact
-  audits locally and both hosted workflows above. The current validation freeze
-  passes 514 Python tests, compile/diff/CLI-help/link audits and exact config-
-  design parity; nine focused unit/integration tests cover its new paths. Next
-  commit/push source, configs, tests and documentation, and pass hosted CI. Only
-  then generate 6401--6403 into new T7 directories and evaluate the frozen
-  candidate exactly once.
-  Diagnose cascade speed only on development/new seeds; never tune against the
-  consumed cascade held-out values.
+- **Verification state and exact next actions.** Commit `9eda196` passed 514
+  Python tests, compile/diff/CLI-help/link audits and both hosted Ubuntu/macOS
+  workflows. The current uncommitted validator/archive/figure/CLI work passes all
+  522 Python tests, compileall, diff check, CLI help and 72 local Markdown links.
+  Rust format and release Clippy with warnings denied pass. `cargo test --release`
+  compiles but cannot launch locally because this conda build has only
+  `libpython3.11.a`, not the requested dynamic dylib; hosted CI must execute the
+  16 Rust tests. The release wheel builds and its isolated install/import plus
+  complete toy workflow pass; wheel SHA-256 is
+  `7c80951f09c3c52779dc5b81ea1492bd76a3323a11d4f6942a065af5ac45b350`.
+  Final Figure 10 PDF was rendered with Poppler and visually passed. Next commit,
+  push both branches and require both hosted workflows to pass. Then continue
+  cascade speed diagnosis only on development/new seeds and the real-data/
+  release-portability gaps; never tune against consumed 3101--3103 or
+  6401--6403 values.
 
 ## Sequence-clustering and scoring checkpoint (current)
 

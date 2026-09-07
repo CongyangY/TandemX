@@ -161,3 +161,40 @@ def test_quantify_cli_uses_empirical_single_copy_controls(tmp_path: Path) -> Non
     assert estimate["single_copy_control_mean_depth"] == "1.0000"
     assert estimate["single_copy_control_median_depth"] == "1.0000"
     assert estimate["kmer_survival_probability"] == "1.00000000"
+
+
+def test_quantify_cli_applies_explicit_low_control_depth_fallback(tmp_path: Path) -> None:
+    reads = tmp_path / "reads.fa"
+    monomers = tmp_path / "monomers.fa"
+    controls = tmp_path / "controls.tsv"
+    outdir = tmp_path / "quantify"
+    reads.write_text(">r1\nACGTTCAGGACACGTTCAGGACTTTGC\n")
+    monomers.write_text(
+        ">family_id=TXF000001;length_bp=11\nACGTTCAGGAC\n"
+    )
+    controls.write_text("kmer\texpected_copy_number\nTTTGC\t1\n")
+    result = run_cli(
+        "quantify",
+        "--reads",
+        str(reads),
+        "--catalog",
+        str(monomers),
+        "--genome-size",
+        "27",
+        "--single-copy-kmers",
+        str(controls),
+        "--single-copy-min-depth",
+        "2",
+        "--k",
+        "5",
+        "--outdir",
+        str(outdir),
+    )
+    assert result.returncode == 0, result.stderr
+    estimate = parse_tsv(outdir / "copy_number.tsv")[0]
+    assert estimate["normalization_method"] == (
+        "total_read_bases_divided_by_genome_size_low_control_depth_fallback"
+    )
+    assert estimate["single_copy_control_mean_depth"] == "1.0000"
+    assert "single_copy_control_mean_depth_below_configured_minimum" in estimate["warning"]
+    assert "single_copy_controls_reported_but_not_used" in estimate["warning"]

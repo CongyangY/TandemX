@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "gates": [
+    {
+      "name": "failed_executions",
+      "observed": 0.0,
+      "operator": "<=",
+      "threshold": 0.0,
+      "passed": true
+    },
+    {
+      "name": "aggregate_mare_reduction",
+      "observed": 0.04554471240179575,
+      "operator": ">=",
+      "threshold": 0.02,
+      "passed": true
+    },
+    {
+      "name": "candidate_mare",
+      "observed": 0.36322232875420873,
+      "operator": "<=",
+      "threshold": 0.4,
+      "passed": true
+    },
+    {
+      "name": "minimum_seed_mare_reduction",
+      "observed": 0.03785504003367002,
+      "operator": ">",
+      "threshold": 0.0,
+      "passed": true
+    },
+    {
+      "name": "minimum_coverage_mare_reduction",
+      "observed": 0.0,
+      "operator": ">=",
+      "threshold": -1e-12,
+      "passed": true
+    },
+    {
+      "name": "paired_improved_fraction",
+      "observed": 0.44511784511784513,
+      "operator": ">=",
+      "threshold": 0.4,
+      "passed": true
+    },
+    {
+      "name": "paired_nonworse_fraction",
+      "observed": 0.7784511784511785,
+      "operator": ">=",
+      "threshold": 0.7,
+      "passed": true
+    },
+    {
+      "name": "baseline_selected_condition_count",
+      "observed": 9.0,
+      "operator": ">=",
+      "threshold": 1.0,
+      "passed": true
+    },
+    {
+      "name": "controls_selected_condition_count",
+      "observed": 18.0,
+      "operator": ">=",
+      "threshold": 1.0,
+      "passed": true
+    }
+  ],
+  "failed_gate_names": [],
+  "baseline_mean_absolute_relative_error": 0.4087670411560045,
+  "candidate_mean_absolute_relative_error": 0.36322232875420873,
+  "aggregate_mare_reduction": 0.04554471240179575,
+  "minimum_seed_mare_reduction": 0.03785504003367002,
+  "minimum_coverage_mare_reduction": 0.0,
+  "paired_improved": 661,
+  "paired_equal": 495,
+  "paired_worse": 329,
+  "selected_condition_counts": {
+    "baseline_total_bases": 9,
+    "empirical_controls": 18
+  },
+  "warning": "frozen_validation_same_factorial_process;simulation_truth_assisted_controls;conditional_known_catalogue_scope",
+  "benchmark_id": "quantify_depth_gated_validation_v1",
+  "config_sha256": "059db4afab1d4ad9aec2c94870fea7b7547aeb62486b68188b252acdf1ee2f44",
+  "candidate_rule": {
+    "rule": "empirical_controls_when_control_mean_depth_at_least_threshold_else_total_bases",
+    "control_mean_depth_threshold": 2.0
+  },
+  "validation_seeds_consumed": [
+    6401,
+    6402,
+    6403
+  ]
+}

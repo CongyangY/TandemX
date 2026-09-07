@@ -299,6 +299,7 @@ def run_quantify(args: argparse.Namespace) -> int:
                 max_read_bases=args.max_read_bases,
                 progress_every=args.progress_every,
                 single_copy_kmers=args.single_copy_kmers,
+                single_copy_min_depth=args.single_copy_min_depth,
                 read_error_rate=args.read_error_rate,
                 quality_correction_enabled=not args.disable_quality_correction,
             ),
@@ -660,6 +661,7 @@ def build_parser() -> argparse.ArgumentParser:
     quantify.add_argument("--k", type=int, default=21, help="Diagnostic k-mer size.")
     quantify.add_argument("--haploid-depth", type=float, help="Optional haploid sequencing depth. If omitted, use supplied single-copy controls, then total read bases divided by genome size.")
     quantify.add_argument("--single-copy-kmers", type=_path_value, help="Optional TSV of independently selected background k-mers with kmer and expected_copy_number columns; used for empirical depth normalization when --haploid-depth is omitted.")
+    quantify.add_argument("--single-copy-min-depth", type=float, help="Optional nonnegative mean control-depth gate. With --single-copy-kmers, fall back to total read bases/genome size below this threshold and record the fallback. The frozen simulation-tested value is 2.0; no gate is applied by default.")
     quantify.add_argument("--read-error-rate", type=float, help="Optional independent per-base error probability for k-mer survival correction when FASTQ qualities are unavailable.")
     quantify.add_argument("--disable-quality-correction", action="store_true", help="Disable FASTQ Phred or --read-error-rate k-mer survival correction.")
     quantify.add_argument("--kmer-backend", choices=("auto", "python", "rust"), default="auto", help="Diagnostic target k-mer counting backend. auto uses Rust when the compiled extension and k-mer size are supported, otherwise Python.")

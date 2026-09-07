@@ -1,0 +1,41 @@
+{
+  "benchmark_id": "quantify_depth_gated_validation_v1",
+  "inputs": {
+    "metrics": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_depth_gated_validation_v1/run/metrics.tsv",
+      "sha256": "b02a6688c3c2a9e3a569fd77976591b4939c47dee546fd5cbf5cbf70302f0ade"
+    },
+    "paired": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_depth_gated_validation_v1/run/paired.tsv",
+      "sha256": "2310d6365b0f45928c505b9429a3ccd7107cc179a1f0c5f5076a9cd0c47fd75c"
+    },
+    "executions": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_depth_gated_validation_v1/run/executions.tsv",
+      "sha256": "fe51bd05070d3971837804deca733c80b34dd24efd937372e5bfe98479e35fdc"
+    },
+    "gates": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_depth_gated_validation_v1/run/gate_results.json",
+      "sha256": "976ea530bef7d624de469989b85c40b4f7825be8dac58f8b49ba0200120269bb"
+    },
+    "validation": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_depth_gated_validation_v1/run/validation.json",
+      "sha256": "02a6b83ceda609eba87ee1367ad1536407e1ed9051b4c9ef9e12178f6aba8b9f"
+    },
+    "decision": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_depth_gated_validation_v1/decision.json",
+      "sha256": "b18f6c1042bc8936a689391690100674f40f9511af2a8abcf98414560323b034"
+    },
+    "manifest": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/quantify_depth_gated_validation_v1/archive_manifest.json",
+      "sha256": "b7d2fc13a0372ac86158b180bb488af023e31c15124b262156874078d92709ea"
+    }
+  },
+  "outputs": {
+    "figure_legend.md": "bc0066440da20c3160df1fe678b3846fd8acbc357f77a41531359789d6ac032e",
+    "panel_source.tsv": "f3bbbfcbdd1512bd2cfba6c6c42843e0e001621dbe72759fbae9c0427b8695c7",
+    "quantify_depth_gated_validation.pdf": "fb981731bfb32cabee835508178e04850b8c4c44bd3966ca74cf6f7e8a808b16",
+    "quantify_depth_gated_validation.png": "d06a7d706878090e4c9d1dfa523a68fc68af715d595f35fa4a649e2d4858b80f",
+    "quantify_depth_gated_validation.svg": "1259d04fb5e67c062f7b1b84585e71a8a037fa67d6cb7ae95a9dc500d411041c"
+  },
+  "warning": "simulation_truth_assisted_controls;known_catalogue;conditions_within_genome_dependent;single_execution_resources_not_publication_timing;not_biological_truth"
+}

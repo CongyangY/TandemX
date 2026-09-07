@@ -1,0 +1,36 @@
+{
+  "status": "passed_frozen_simulation_gates",
+  "aggregate_mean_absolute_relative_error": {
+    "baseline_total_bases": 0.4087670411560045,
+    "empirical_controls": 0.3594430532435466,
+    "depth_gated_controls": 0.36322232875420873
+  },
+  "aggregate_mean_signed_relative_error": {
+    "baseline_total_bases": -0.27732869671156,
+    "empirical_controls": -0.21607649667789,
+    "depth_gated_controls": -0.21222261696969696
+  },
+  "aggregate_mare_reduction": 0.04554471240179575,
+  "candidate_minus_empirical_controls_mare": 0.00377927551066215,
+  "per_seed_mare_reduction": {
+    "6401": 0.03785504003367002,
+    "6402": 0.04353146447811451,
+    "6403": 0.055247632693602666
+  },
+  "per_coverage_mare_reduction": {
+    "1": 0.0,
+    "5": 0.05081595461279459,
+    "20": 0.0858181825925926
+  },
+  "paired_outcomes": {
+    "improved": 661,
+    "equal": 495,
+    "worse": 329
+  },
+  "selected_condition_counts": {
+    "baseline_total_bases": 9,
+    "empirical_controls": 18
+  },
+  "interpretation": "the frozen gate improves total-bases normalization on every validation genome; ungated empirical controls retain slightly lower aggregate MARE in this split",
+  "warning": "simulation_truth_assisted_controls;known_catalogue;conditions_within_genome_dependent;single_execution_resources_not_publication_timing;not_biological_truth"
+}

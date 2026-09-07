@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "executions": 54,
+  "successful_executions": 54,
+  "raw_family_conditions": 2970,
+  "candidate_family_conditions": 1485,
+  "independent_genomes": 3,
+  "validation_used": true,
+  "heldout_used": false,
+  "promotion_status": "passed",
+  "warning": "frozen_validation_same_factorial_process;conditions_within_genome_are_dependent"
+}

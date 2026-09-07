@@ -1,0 +1,22 @@
+{
+  "benchmark_id": "quantify_depth_gated_validation_v1",
+  "validation": {
+    "complete": true,
+    "executions": 54,
+    "successful_executions": 54,
+    "raw_family_conditions": 2970,
+    "candidate_family_conditions": 1485,
+    "independent_genomes": 3,
+    "validation_used": true,
+    "heldout_used": false,
+    "promotion_status": "passed",
+    "warning": "frozen_validation_same_factorial_process;conditions_within_genome_are_dependent"
+  },
+  "execution_artifact_rows": 54,
+  "metric_rows": 4455,
+  "paired_rows": 1485,
+  "dataset_receipts": 3,
+  "decision_status": "passed_frozen_simulation_gates",
+  "manifest_entries_excluding_self": 67,
+  "warning": "simulation_truth_assisted_controls;known_catalogue;conditions_within_genome_dependent;single_execution_resources_not_publication_timing;not_biological_truth"
+}

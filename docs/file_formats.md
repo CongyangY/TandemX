@@ -188,6 +188,11 @@ same length as `--k`, and be unique after reverse-complement canonicalization.
 Low-complexity words are rejected. Expected copy number is a positive haploid value. TandemX validates this syntax
 and rejects overlap with repeat diagnostic k-mers; it cannot prove from the file
 alone that the controls are single-copy in the sequenced material.
+Optional `--single-copy-min-depth FLOAT` requires this controls file and cannot
+be combined with explicit `--haploid-depth`. When the observed corrected control
+mean is below the nonnegative threshold, TandemX retains the control QC fields
+but uses total read bases/genome size and records the fallback in
+`normalization_method` and `warning`. No gate is applied by default.
 
 | Field | Type | Unit | Description |
 |---|---|---:|---|
@@ -201,7 +206,7 @@ alone that the controls are single-copy in the sequenced material.
 | depth_mad | float | counts | Median absolute deviation of corrected diagnostic k-mer depths |
 | copy_number_interval_low | float | copies | Empirical 10th-percentile copy-number estimate across diagnostic k-mers |
 | copy_number_interval_high | float | copies | Empirical 90th-percentile copy-number estimate across diagnostic k-mers |
-| normalization_method | string | NA | `explicit_haploid_depth`, `empirical_single_copy_kmers_mean`, or `total_read_bases_divided_by_genome_size` |
+| normalization_method | string | NA | `explicit_haploid_depth`, `empirical_single_copy_kmers_mean`, `total_read_bases_divided_by_genome_size`, or `total_read_bases_divided_by_genome_size_low_control_depth_fallback` |
 | raw_median_kmer_depth | float | counts | Median multiplicity-corrected diagnostic depth before survival correction |
 | kmer_survival_probability | float | probability | Mean probability of an error-free k-mer from FASTQ Phred values or the supplied error rate; 1 when correction is unavailable/disabled |
 | single_copy_control_kmer_count | integer | k-mers | Number of validated supplied controls, or 0 |
@@ -1344,6 +1349,11 @@ dataset-receipt hashes, the config hash and exact source snapshot.
 Every public-command run retains its `command.json`, `receipt.json`, stdout/
 stderr and standard `copy_number.tsv`, `run_config.yaml` and `run.log` outputs.
 Resource rows are descriptive single executions and do not enter promotion gates.
+The completed 6401--6403 matrix contains 54 successful executions, 2,970 raw and
+1,485 candidate family rows. `gate_results.json` reports nine passed gates;
+the compact archive additionally provides the 93-payload input audit,
+`execution_artifacts.tsv`, `resource_summary.tsv`, recomputed `decision.json`
+and a 67-entry hash manifest.
 
 ### Factorial assembly comparator evaluation
 

@@ -50,7 +50,8 @@ a timing distribution. Compact comparison evidence is in
 `paper/evidence/quantify_calibration_fast_fasta_replay_v1`.
 
 The development-selected candidate uses empirical controls only when their mean
-depth is at least 2; it requires untouched genome/family validation.
+depth is at least 2. Its threshold was carried unchanged into the separately
+frozen validation below.
 
 ## Frozen untouched-genome validation
 
@@ -72,9 +73,11 @@ nonworse fractions >=0.40 and >=0.70; and at least one condition routed through
 each branch. Individual families may regress and remain in the paired table.
 Resource observations are excluded from these scientific gates.
 
-After committing these files and passing hosted CI, generate all three datasets
-with `--split validation` as documented in
-[factorial_scale_simulation.md](factorial_scale_simulation.md), then run once:
+Commit `9eda196` and hosted runs `34088623796`/`34088640260` passed before all
+three datasets were generated with `--split validation` as documented in
+[factorial_scale_simulation.md](factorial_scale_simulation.md). An independent
+audit checked 30 manifests and every one of 93 declared payload files. The
+frozen evaluation was then run once with:
 
 ```bash
 conda run --no-capture-output -n tandemx-dev \
@@ -89,6 +92,32 @@ conda run --no-capture-output -n tandemx-dev \
 
 Seeds 6401--6403 are consumed after this once-only evaluation. Seeds 7401--7403
 remain reserved and the generator refuses them.
+
+All 54 public commands completed without timeout, producing 2,970 raw and 1,485
+candidate family rows. The rule passed all nine predeclared gates. Aggregate MARE
+changed from 0.408767 for total-bases normalization to 0.363222 for the candidate,
+an absolute reduction of 0.045545. Per-genome reductions were 0.037855, 0.043531
+and 0.055248; the 1×, 5× and 20× reductions were 0, 0.050816 and 0.085818.
+Among 1,485 paired family conditions, 661 improved, 495 were equal and 329
+worsened. Nine conditions used the total-bases branch and 18 used controls.
+
+Ungated controls reached a slightly lower aggregate MARE of 0.359443 in this
+validation split. The gate therefore validates robust improvement over the
+predeclared total-bases baseline, while remaining conservative relative to the
+controls-only result. This observation is retained and was not used to retune the
+threshold. Median baseline/controls wall times at 1×, 5× and 20× were
+0.500/0.518, 1.616/1.836 and 5.887/6.605 seconds. These are single executions,
+not repeated publication timing.
+
+The validated rule is exposed as the opt-in public option
+`tandemx quantify --single-copy-kmers controls.tsv --single-copy-min-depth 2`.
+Below threshold it records
+`total_read_bases_divided_by_genome_size_low_control_depth_fallback`; the default
+controls behavior is unchanged pending real-control specificity validation.
+The 67-entry compact archive and accepted editable six-panel figure are in
+`paper/evidence/quantify_depth_gated_validation_v1/figures_v3`. Figure v1 is
+retained as a rejected legend-overlap layout; v2 fixed that layout but lacked
+unique runtime/RSS pairing keys in its panel-source table.
 
 The executed command was:
 

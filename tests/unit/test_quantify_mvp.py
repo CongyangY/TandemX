@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -13,6 +14,8 @@ from tandemx.quantify.mvp import (
     quality_window_survival,
     quantify_toy_copy_number,
     read_single_copy_kmers,
+    select_haploid_depth,
+    validate_quantify_config,
 )
 
 
@@ -265,3 +268,57 @@ def test_control_depth_mean_retains_zero_observations_at_low_depth() -> None:
     assert stats.median == 0.5
     assert stats.mad == 0.5
     assert stats.zero_fraction == 0.5
+
+
+def test_single_copy_depth_gate_selects_a_recorded_total_bases_fallback(tmp_path: Path) -> None:
+    config = QuantifyConfig(
+        reads=tmp_path / "reads.fa",
+        monomers=tmp_path / "monomers.fa",
+        genome_size=100,
+        outdir=tmp_path / "out",
+        k=5,
+        haploid_depth=None,
+        single_copy_kmers=tmp_path / "controls.tsv",
+        single_copy_min_depth=2.0,
+    )
+    stats = estimate_control_depth([0.0, 1.0])
+    depth, method = select_haploid_depth(config, stats, total_read_bases=100)
+    assert depth == 1.0
+    assert method == "total_read_bases_divided_by_genome_size_low_control_depth_fallback"
+
+    ungated = replace(config, single_copy_min_depth=None)
+    assert select_haploid_depth(ungated, stats, 100) == (
+        0.5,
+        "empirical_single_copy_kmers_mean",
+    )
+
+
+def test_single_copy_depth_gate_requires_controls(tmp_path: Path) -> None:
+    config = QuantifyConfig(
+        reads=tmp_path / "reads.fa",
+        monomers=tmp_path / "monomers.fa",
+        genome_size=100,
+        outdir=tmp_path / "out",
+        k=5,
+        haploid_depth=None,
+        single_copy_min_depth=2.0,
+    )
+    with pytest.raises(ValueError, match="requires --single-copy-kmers"):
+        validate_quantify_config(config)
+
+
+def test_single_copy_depth_gate_rejects_explicit_haploid_depth(tmp_path: Path) -> None:
+    controls = tmp_path / "controls.tsv"
+    controls.write_text("kmer\texpected_copy_number\nACGTT\t1\n")
+    config = QuantifyConfig(
+        reads=tmp_path / "reads.fa",
+        monomers=tmp_path / "monomers.fa",
+        genome_size=100,
+        outdir=tmp_path / "out",
+        k=5,
+        haploid_depth=1.0,
+        single_copy_kmers=controls,
+        single_copy_min_depth=2.0,
+    )
+    with pytest.raises(ValueError, match="cannot be combined with --haploid-depth"):
+        validate_quantify_config(config)

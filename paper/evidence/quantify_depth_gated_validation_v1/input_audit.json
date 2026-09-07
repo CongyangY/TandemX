@@ -1,0 +1,51 @@
+{
+  "complete": true,
+  "status": "passed",
+  "dataset_count": 3,
+  "manifest_count": 30,
+  "payload_file_count": 93,
+  "payload_bytes": 2380726368,
+  "read_count": 169560,
+  "observed_bases": 2340210649,
+  "datasets": [
+    {
+      "dataset": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1",
+      "seed": 6401,
+      "split": "validation",
+      "condition_count": 9,
+      "manifest_count": 10,
+      "payload_file_count": 31,
+      "payload_bytes": 793566665,
+      "read_count": 56544,
+      "observed_bases": 780065418,
+      "generation_receipt_sha256": "8376e1f52a89fd813a21d2bff3304c1099db6091baa2dbf28750a556e9bf2a24",
+      "status": "passed"
+    },
+    {
+      "dataset": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1",
+      "seed": 6402,
+      "split": "validation",
+      "condition_count": 9,
+      "manifest_count": 10,
+      "payload_file_count": 31,
+      "payload_bytes": 793584775,
+      "read_count": 56484,
+      "observed_bases": 780081306,
+      "generation_receipt_sha256": "680075f61ea7bb6638ef370f747a589fe409be31c76298588279e33d1969f4dc",
+      "status": "passed"
+    },
+    {
+      "dataset": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1",
+      "seed": 6403,
+      "split": "validation",
+      "condition_count": 9,
+      "manifest_count": 10,
+      "payload_file_count": 31,
+      "payload_bytes": 793574928,
+      "read_count": 56532,
+      "observed_bases": 780063925,
+      "generation_receipt_sha256": "2725c34fd7c102e8ae0b7c6215107230d295b4a0d19ac0ce0d5f689e2b06e70e",
+      "status": "passed"
+    }
+  ]
+}

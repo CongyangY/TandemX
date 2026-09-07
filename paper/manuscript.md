@@ -13,7 +13,11 @@ combines streaming read analysis with sequence-supported family catalogues,
 diagnostic k-mer quantification and explicit evidence records. We evaluated
 development versions using independent simulated genomes and public plant HiFi
 libraries. Three 10-Mb simulated genomes generated 27 coverage/error conditions
-and 1,485 family conditions. In the 20× stratum with 2% unit divergence and high
+and 1,485 family conditions. On three additional genomes, a predeclared control-
+depth gate reduced aggregate mean absolute relative copy-number error from
+0.4088 to 0.3632 and passed all nine frozen simulation gates; 661/1,485 family
+conditions improved, 495 were unchanged and 329 worsened. In the 20× stratum
+with 2% unit divergence and high
 read errors, fixed multi-k extrapolation reduced mean absolute relative
 copy-number error from 56.59% for the median-k21 baseline to 13.53%. A joint-read
 sampling calculation retained dependence across k values: at 20×, 424 of 495
@@ -209,13 +213,24 @@ from 610.507 to 349.217 s; oracle-error and controls-plus-oracle median times
 decreased 58.26% and 55.85%, respectively. This single same-machine replay is an
 engineering check rather than a publication timing distribution (Evidence E23).
 A post-hoc development rule that used controls only when their mean depth was at
-least 2 reduced aggregate error to 0.356117 and improved all three genome means.
-It remains a candidate rather than a promoted default because the controls were
-selected with simulation truth and no untouched genome/family split has tested
-the rule. Across every method and coverage stratum, truth inclusion in the
-exported diagnostic 10th--90th spread was far below 0.95, confirming that these
-endpoints cannot be interpreted as a sampling confidence interval (Figure 9;
-Evidence E22).
+least 2 reduced aggregate error to 0.356117 and improved all three development
+genome means. We froze that threshold, the same generating process, three new
+seeds and nine gates in commit `9eda196`; Ubuntu and macOS workflows passed
+before any new data were generated. The three validation datasets then passed an
+independent audit of 30 manifests and all 93 declared payloads. All 54 public
+commands completed. The frozen rule reduced MARE from 0.408767 to 0.363222,
+with reductions of 0.037855, 0.043531 and 0.055248 in seeds 6401--6403, and
+passed all nine gates (Figure 10; Evidence E24). Of 1,485 paired family
+conditions, 661 improved, 495 were unchanged and 329 worsened. The rule retained
+the total-bases estimate for all nine 1× conditions and used controls for all 18
+5×/20× conditions. Ungated controls reached a slightly lower validation MARE of
+0.359443; this adverse contrast was retained and the threshold was not refit.
+The validated rule is now an explicit `--single-copy-min-depth 2` option, while
+the controls-only behavior remains unchanged by default because control selection
+still used simulation truth. Across every development method and coverage
+stratum, truth inclusion in the exported diagnostic 10th--90th spread was far
+below 0.95, confirming that these endpoints cannot be interpreted as a sampling
+confidence interval (Figure 9; Evidence E22).
 
 ### Joint-read uncertainty retains correlated k values and sparse-support failures
 
@@ -521,11 +536,15 @@ The uncertainty analysis also distinguishes usable inference from a plausible
 looking numerical interval. Correlated k values cannot supply independent
 replication, and a high conditional coverage rate can conceal substantial
 missingness. A practical estimator must report interval availability, model
-diagnostics and the sampling unit together. The present guard is conservative
-at low depth, while real-genome specificity and model bias are not yet calibrated.
-The observed organellar contribution adds a denominator issue that idealized
-haploid simulations do not reproduce. Consequently, the experimental estimator
-has not replaced the public quantification default.
+diagnostics and the sampling unit together. The validated depth guard is
+conservative at low depth, while real-genome control specificity and model bias
+are not yet calibrated. In its validation split, controls alone had slightly
+lower aggregate error than the gate; the gate's support is therefore robustness
+against total-bases normalization rather than superiority to every internal
+alternative. The observed organellar contribution adds a denominator issue that
+idealized haploid simulations do not reproduce. Consequently, the experimental
+estimator is exposed as an opt-in public mode and has not replaced the controls
+default.
 
 The current biological evidence is incomplete. Additional species and materials
 must be evaluated with documented technical/biological replication, true
@@ -690,6 +709,15 @@ controls, or total read bases/genome size in that precedence order. Median,
 MAD and zero fraction are retained for audit. The 10th--90th diagnostic-word
 spread is scored only as a diagnostic range.
 
+The depth-gated candidate was fixed at a mean control depth of 2 after the
+development run. A separate configuration froze seeds 6401--6403, the same
+factorial generator, its input/source hashes and nine gates before generation.
+The evaluator ran total-bases and controls modes for every condition, then chose
+one complete condition branch without using family truth. The public
+`--single-copy-min-depth` implementation was added after validation; it performs
+the same observed-depth decision in one command and records the fallback path.
+It does not select or certify control k-mers.
+
 ### Raw-data and reference QC
 
 Complete ENA files were checked against official source sizes/MD5 values and
@@ -814,6 +842,20 @@ calibration. The accepted editable figure, source rows, full legend and hashes
 are in `evidence/quantify_calibration_development_v1/figures_v1`. All controls
 were selected with simulation truth, and the candidate is not held-out evidence.
 
+**Figure 10. Frozen validation of depth-gated copy-number normalization.** A,
+aggregate MARE with independent-genome points. B, paired genome means. C,
+coverage-specific errors for total-bases, controls-only and depth-gated methods.
+D, all improved/equal/worse family pairs. E, condition-level use of both frozen
+branches. F, runtime and direct-child RSS for all 54 public commands, with group
+medians highlighted. The rule passed all nine predeclared gates, but controls
+alone retained slightly lower aggregate MARE and all 329 family regressions are
+shown. `evidence/quantify_depth_gated_validation_v1/figures_v3` contains the
+accepted editable SVG/PDF/PNG, uniquely paired panel source, full legend and
+hashes. v1 is a rejected legend-overlap layout; v2 fixed the layout but did not
+uniquely key runtime/RSS source rows. Controls used simulation truth, catalogues
+were supplied, within-genome conditions are dependent and resource rows are
+single executions.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -900,6 +942,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S20: exact-output hashes for 5,940 metric rows, 108
   copy-number products and three control panels, plus paired method resources and
   replay receipts in `evidence/quantify_calibration_fast_fasta_replay_v1`.
+- Supplementary Table S21: all 4,455 frozen-validation metric rows, 1,485 paired
+  family outcomes, 54 command resources and artifact hashes, three compact input-
+  dataset manifest sets, nine gate observations and Figure 10 panel source in
+  `evidence/quantify_depth_gated_validation_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -918,7 +964,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `cascade_native_screen_heldout_v1`; E21:
 `retrospective_collapse_source_audit`; E22:
 `quantify_calibration_development_v1`; E23:
-`quantify_calibration_fast_fasta_replay_v1`.
+`quantify_calibration_fast_fasta_replay_v1`; E24:
+`quantify_depth_gated_validation_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

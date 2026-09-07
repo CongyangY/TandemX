@@ -1,0 +1,43 @@
+{
+  "seeds": {
+    "development": [],
+    "validation": [6401, 6402, 6403],
+    "heldout": [7401, 7402, 7403]
+  },
+  "genome_bp": 10000000,
+  "background_gc": 0.45,
+  "periods": [61, 171, 421],
+  "copies": [20, 80, 200],
+  "gc_fractions": [0.3, 0.5, 0.7],
+  "unit_substitution_rates": [0, 0.02],
+  "additional_arrays": [
+    {
+      "family_id": "megabase_171",
+      "period": 171,
+      "copies": 6000,
+      "gc": 0.5,
+      "unit_substitution_rate": 0.01
+    }
+  ],
+  "coverages": [1, 5, 20],
+  "read_error_models": [
+    {
+      "label": "error_free",
+      "substitution_rate": 0,
+      "insertion_rate": 0,
+      "deletion_rate": 0
+    },
+    {
+      "label": "iid_low_indel",
+      "substitution_rate": 0.001,
+      "insertion_rate": 0.001,
+      "deletion_rate": 0.001
+    },
+    {
+      "label": "iid_high_indel",
+      "substitution_rate": 0.01,
+      "insertion_rate": 0.005,
+      "deletion_rate": 0.005
+    }
+  ]
+}

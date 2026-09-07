@@ -1,0 +1,404 @@
+[
+  {
+    "file": "run/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/environment.json",
+    "sha256": "3f6c0a8691e2a8eff676414db1980f00ca5f198af5d3168706fe0e9e77a50227",
+    "bytes": 8227
+  },
+  {
+    "file": "run/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/execution.json",
+    "sha256": "7cdc2372680c5aa6e4dbd81ed40c8275bf6826c7854fcd3acb88b46dc8f30563",
+    "bytes": 944
+  },
+  {
+    "file": "run/executions.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/executions.tsv",
+    "sha256": "fe51bd05070d3971837804deca733c80b34dd24efd937372e5bfe98479e35fdc",
+    "bytes": 6401
+  },
+  {
+    "file": "run/raw_metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/raw_metrics.tsv",
+    "sha256": "4f6f80b8e235de14b2338ebaefd4ea99f8075cecf06aefb78d8b7af6a505f50e",
+    "bytes": 474891
+  },
+  {
+    "file": "run/metrics.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/metrics.tsv",
+    "sha256": "b02a6688c3c2a9e3a569fd77976591b4939c47dee546fd5cbf5cbf70302f0ade",
+    "bytes": 759883
+  },
+  {
+    "file": "run/paired.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/paired.tsv",
+    "sha256": "2310d6365b0f45928c505b9429a3ccd7107cc179a1f0c5f5076a9cd0c47fd75c",
+    "bytes": 175927
+  },
+  {
+    "file": "run/aggregate_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/aggregate_summary.tsv",
+    "sha256": "4c87cd5038c9fb700263b7e76ae33a9162552aa8d4fed74b607f08767d91be1b",
+    "bytes": 296
+  },
+  {
+    "file": "run/seed_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/seed_summary.tsv",
+    "sha256": "0a3a4c29186855639f1cd23f56af33aa7b7224ae1b29e1e35739419fc71902ea",
+    "bytes": 721
+  },
+  {
+    "file": "run/coverage_summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/coverage_summary.tsv",
+    "sha256": "06425a1effc21ce3aeb376a4c5305d4fa6559a07d47ed6ed6f799540c70bb007",
+    "bytes": 699
+  },
+  {
+    "file": "run/gate_results.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/gate_results.json",
+    "sha256": "976ea530bef7d624de469989b85c40b4f7825be8dac58f8b49ba0200120269bb",
+    "bytes": 2428
+  },
+  {
+    "file": "run/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/validation.json",
+    "sha256": "02a6b83ceda609eba87ee1367ad1536407e1ed9051b4c9ef9e12178f6aba8b9f",
+    "bytes": 354
+  },
+  {
+    "file": "run/frozen_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/frozen_config.yaml",
+    "sha256": "059db4afab1d4ad9aec2c94870fea7b7547aeb62486b68188b252acdf1ee2f44",
+    "bytes": 1964
+  },
+  {
+    "file": "run/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "run/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "input_audit.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_input_audit_v1_20260907/verification.json",
+    "sha256": "b8cf02fed2defaa9882e2a9c0c0d99c6c72e717a8644d60a0a9c3f2123ffdecc",
+    "bytes": 1639
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/evaluate_quantify_depth_gated_validation.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/source_snapshot/benchmarks/scripts/evaluate_quantify_depth_gated_validation.py",
+    "sha256": "5fe35f7c369b28374d23743bccf6dd36078f93d51a466522233240e17782efce",
+    "bytes": 22887
+  },
+  {
+    "file": "source_snapshot/benchmarks/scripts/evaluate_quantify_calibration.py",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/source_snapshot/benchmarks/scripts/evaluate_quantify_calibration.py",
+    "sha256": "9f136298c1794337f5eaa3da17193c0fa9213ae2473f91bf65d391479106cc63",
+    "bytes": 18243
+  },
+  {
+    "file": "datasets/s6401/generation_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/generation_receipt.json",
+    "sha256": "8376e1f52a89fd813a21d2bff3304c1099db6091baa2dbf28750a556e9bf2a24",
+    "bytes": 4257
+  },
+  {
+    "file": "datasets/s6401/run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/run_config.json",
+    "sha256": "39bfe5a11fabd8b3545e572d0be5eb15835bb1bff1a94b1731e794c06a847335",
+    "bytes": 929
+  },
+  {
+    "file": "datasets/s6401/length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/length_histogram.tsv",
+    "sha256": "49c605030d1ae5f72f4f43884a454751de0fc602064d616b560a56d479b165e7",
+    "bytes": 148524
+  },
+  {
+    "file": "datasets/s6401/genome/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/genome/manifest.json",
+    "sha256": "2440eeb584c24460ac7db531c4eccaf00896c536918923990f67a91b01e5163e",
+    "bytes": 8075
+  },
+  {
+    "file": "datasets/s6401/reads/condition_001/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_001/manifest.json",
+    "sha256": "76a0c0a0df39298b534752c75431f7f465e2b76dc1876e2be99fd778aa4d5935",
+    "bytes": 2204
+  },
+  {
+    "file": "datasets/s6401/reads/condition_002/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_002/manifest.json",
+    "sha256": "b15bfa911bfc6e75e3b65cd0747f2b5bc649d94530f5cecd8faa26705b398989",
+    "bytes": 2225
+  },
+  {
+    "file": "datasets/s6401/reads/condition_003/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_003/manifest.json",
+    "sha256": "00066ade4035bccb91c0e080508b2e3064584553c97e195756a1c11e32bdfc9e",
+    "bytes": 2227
+  },
+  {
+    "file": "datasets/s6401/reads/condition_004/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_004/manifest.json",
+    "sha256": "2326fca5195a61207e0606b4c52a772eb3f09fd8cf79c7741901fcc130c0ddb6",
+    "bytes": 2335
+  },
+  {
+    "file": "datasets/s6401/reads/condition_005/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_005/manifest.json",
+    "sha256": "5ba5d3a695cc8616dc3652c96178a3081878398f21d8564a60d69795002b6bb3",
+    "bytes": 2359
+  },
+  {
+    "file": "datasets/s6401/reads/condition_006/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_006/manifest.json",
+    "sha256": "22805adf609ba03f8f17be4a2235dddb70e0b50835aa7579544080a416d95820",
+    "bytes": 2361
+  },
+  {
+    "file": "datasets/s6401/reads/condition_007/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_007/manifest.json",
+    "sha256": "9a55338e715bcd001954587c59a2a6d1dd40dccc06ef568e118907d39ffe55a6",
+    "bytes": 2378
+  },
+  {
+    "file": "datasets/s6401/reads/condition_008/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_008/manifest.json",
+    "sha256": "9e387eab0f8b2b7af6680f44d3b81ea2b23bfe7485527eb1c2248fcee194828f",
+    "bytes": 2405
+  },
+  {
+    "file": "datasets/s6401/reads/condition_009/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/reads/condition_009/manifest.json",
+    "sha256": "767f5a67daa3b5f9ef3971b19a194c010a981e146f9f48ebc74ecaa17ac0e773",
+    "bytes": 2405
+  },
+  {
+    "file": "datasets/s6402/generation_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/generation_receipt.json",
+    "sha256": "680075f61ea7bb6638ef370f747a589fe409be31c76298588279e33d1969f4dc",
+    "bytes": 4257
+  },
+  {
+    "file": "datasets/s6402/run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/run_config.json",
+    "sha256": "39bfe5a11fabd8b3545e572d0be5eb15835bb1bff1a94b1731e794c06a847335",
+    "bytes": 929
+  },
+  {
+    "file": "datasets/s6402/length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/length_histogram.tsv",
+    "sha256": "49c605030d1ae5f72f4f43884a454751de0fc602064d616b560a56d479b165e7",
+    "bytes": 148524
+  },
+  {
+    "file": "datasets/s6402/genome/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/manifest.json",
+    "sha256": "227a2b4ae26423e49594fabeea431942f3c5d8bb2b547669b886c02b0cb366b6",
+    "bytes": 8075
+  },
+  {
+    "file": "datasets/s6402/reads/condition_001/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_001/manifest.json",
+    "sha256": "626f9ce080adf683863714a28c678e7c56063319de5b93d7366e2382b41e752f",
+    "bytes": 2152
+  },
+  {
+    "file": "datasets/s6402/reads/condition_002/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_002/manifest.json",
+    "sha256": "17ff45e4668fb3479cb6bae176a68d59b8c0f55effff0ee3e503e125e899acef",
+    "bytes": 2175
+  },
+  {
+    "file": "datasets/s6402/reads/condition_003/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_003/manifest.json",
+    "sha256": "0e5215f17bb590c733ac74e5db5e29fdd19c1b83c866999bf074d70dabaf88d6",
+    "bytes": 2175
+  },
+  {
+    "file": "datasets/s6402/reads/condition_004/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_004/manifest.json",
+    "sha256": "a00cbcfa91a127e791dc203d4215171f15c68c5890f019ff424927dbbd2f3e5d",
+    "bytes": 2337
+  },
+  {
+    "file": "datasets/s6402/reads/condition_005/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_005/manifest.json",
+    "sha256": "9e72eaec3cb1757e22e337d72deaaea1207fefc78f276cdb3aeeba63efec7ca0",
+    "bytes": 2361
+  },
+  {
+    "file": "datasets/s6402/reads/condition_006/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_006/manifest.json",
+    "sha256": "44500a80c1ad9b46e02d3171b225b641b8706b12a7452d51830512a15c17568b",
+    "bytes": 2362
+  },
+  {
+    "file": "datasets/s6402/reads/condition_007/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_007/manifest.json",
+    "sha256": "71acab0a9befe0d12585e4a45fe4c336478370438ee8463c6b64c2ee4106acc8",
+    "bytes": 2375
+  },
+  {
+    "file": "datasets/s6402/reads/condition_008/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_008/manifest.json",
+    "sha256": "7c72d5711be37349b6ae63c78c4fe94659468d2fb45f18b276a7fedcd90f977d",
+    "bytes": 2402
+  },
+  {
+    "file": "datasets/s6402/reads/condition_009/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/reads/condition_009/manifest.json",
+    "sha256": "ef08aaf34dc9a5745fe44fc2f7e89745c64a5e5815d5618c8233d0ffc3841249",
+    "bytes": 2402
+  },
+  {
+    "file": "datasets/s6403/generation_receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/generation_receipt.json",
+    "sha256": "2725c34fd7c102e8ae0b7c6215107230d295b4a0d19ac0ce0d5f689e2b06e70e",
+    "bytes": 4257
+  },
+  {
+    "file": "datasets/s6403/run_config.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/run_config.json",
+    "sha256": "39bfe5a11fabd8b3545e572d0be5eb15835bb1bff1a94b1731e794c06a847335",
+    "bytes": 929
+  },
+  {
+    "file": "datasets/s6403/length_histogram.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/length_histogram.tsv",
+    "sha256": "49c605030d1ae5f72f4f43884a454751de0fc602064d616b560a56d479b165e7",
+    "bytes": 148524
+  },
+  {
+    "file": "datasets/s6403/genome/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/genome/manifest.json",
+    "sha256": "e0f5ba49ab84f3d17c31f8654b8ef8023de1d4e6d5f7406b32ce9a23084bd697",
+    "bytes": 8075
+  },
+  {
+    "file": "datasets/s6403/reads/condition_001/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_001/manifest.json",
+    "sha256": "6600e46be4d10f5d07b06e27a13216b8f45a8093bbd65499a9408da4094af63c",
+    "bytes": 2183
+  },
+  {
+    "file": "datasets/s6403/reads/condition_002/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_002/manifest.json",
+    "sha256": "d3a8683bb7ea644005a9b5497930df789a56ff0723e365deef4fe0c54d20ac01",
+    "bytes": 2204
+  },
+  {
+    "file": "datasets/s6403/reads/condition_003/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_003/manifest.json",
+    "sha256": "a32d9b70a4fc183230bad0c417f21a349ade9a25eab27474fbd15c8d1ec9984b",
+    "bytes": 2206
+  },
+  {
+    "file": "datasets/s6403/reads/condition_004/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_004/manifest.json",
+    "sha256": "c264affcd63f8c71a2f34c91ef7a39f0ac67c3d3d9a2d567e458afe7e19fe4e2",
+    "bytes": 2337
+  },
+  {
+    "file": "datasets/s6403/reads/condition_005/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_005/manifest.json",
+    "sha256": "4f7bc088803916f5cfcd64cb6571a9858679517872bc8f7c7af013358a325dd2",
+    "bytes": 2361
+  },
+  {
+    "file": "datasets/s6403/reads/condition_006/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_006/manifest.json",
+    "sha256": "7200e13dd69c51b974447c83a7959df8e4bf63e2a06ff5ce2d7dcb3b7a5f5054",
+    "bytes": 2363
+  },
+  {
+    "file": "datasets/s6403/reads/condition_007/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_007/manifest.json",
+    "sha256": "0c928c660f083d2030262f6a6b2be3fcb40c12dbea178e143d6235bb5e34c892",
+    "bytes": 2375
+  },
+  {
+    "file": "datasets/s6403/reads/condition_008/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_008/manifest.json",
+    "sha256": "7a274e07d5af50575ab8980504c52a08a5630c754106a932338a41a425f7320f",
+    "bytes": 2402
+  },
+  {
+    "file": "datasets/s6403/reads/condition_009/manifest.json",
+    "source": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/reads/condition_009/manifest.json",
+    "sha256": "08ee552888969e2f9b7387bd0b1f7fadd864530beae31f939143d6f06a8c07b6",
+    "bytes": 2403
+  },
+  {
+    "file": "controls/s6401/single_copy_kmers.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/controls/s6401/single_copy_kmers.tsv",
+    "sha256": "d7b147c8d122606bab9d7006c9d740f899b1127d655b6f94d5fa15354c16cf25",
+    "bytes": 24026
+  },
+  {
+    "file": "controls/s6401/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/controls/s6401/receipt.json",
+    "sha256": "7a63fbc21c506de07f2427e4a87a6c80ad66e2a02647cfca5ac893aec9de326d",
+    "bytes": 751
+  },
+  {
+    "file": "controls/s6402/single_copy_kmers.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/controls/s6402/single_copy_kmers.tsv",
+    "sha256": "1e5319946838bd207d63d50fee328ce0e202e194729721ac5fe8a7ceb7e18086",
+    "bytes": 24026
+  },
+  {
+    "file": "controls/s6402/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/controls/s6402/receipt.json",
+    "sha256": "051b1359c8c351038a232f9d6428d486bf7de7f6551368a5a5c5c161b247a817",
+    "bytes": 751
+  },
+  {
+    "file": "controls/s6403/single_copy_kmers.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/controls/s6403/single_copy_kmers.tsv",
+    "sha256": "8afa52f1eb690fadc262d53689b30311a062ee2c62bedc27538ee321b11ec240",
+    "bytes": 24026
+  },
+  {
+    "file": "controls/s6403/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907/controls/s6403/receipt.json",
+    "sha256": "99a3a81ac1e9d442581b1e56c6c036f5e064e9abf0750b377d3887c864c77186",
+    "bytes": 751
+  },
+  {
+    "file": "execution_artifacts.tsv",
+    "source": "derived_after_validation",
+    "sha256": "d0a339c9171cbda82eb36530977e65b6680964fbc3592c8c1f189014d8511766",
+    "bytes": 62438
+  },
+  {
+    "file": "resource_summary.tsv",
+    "source": "derived_after_validation",
+    "sha256": "7bc1cc0d6c7926ddcd37381415ff0bc290ffd1bfa238ae4995f88785408c5bb6",
+    "bytes": 813
+  },
+  {
+    "file": "decision.json",
+    "source": "derived_after_validation",
+    "sha256": "b18f6c1042bc8936a689391690100674f40f9511af2a8abcf98414560323b034",
+    "bytes": 1332
+  },
+  {
+    "file": "README.md",
+    "source": "derived_after_validation",
+    "sha256": "01eecbbfea9c7943846b70aeec8a569fa8d6c5a22a08e50a6b7c73c333c9f653",
+    "bytes": 792
+  },
+  {
+    "file": "archive_summary.json",
+    "source": "derived_after_validation",
+    "sha256": "e38bba1a29d4e863ac26099e0f307730a803c07ce948d60ad3f4d79d627ba2af",
+    "bytes": 825
+  }
+]

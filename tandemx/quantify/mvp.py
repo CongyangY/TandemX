@@ -49,6 +49,7 @@ class QuantifyConfig:
     max_read_bases: int | None = None
     progress_every: int = 1000
     single_copy_kmers: Path | None = None
+    single_copy_min_depth: float | None = None
     read_error_rate: float | None = None
     quality_correction_enabled: bool = True
 
@@ -96,6 +97,29 @@ class ControlDepthStats:
     median: float
     mad: float
     zero_fraction: float
+
+
+def select_haploid_depth(
+    config: QuantifyConfig,
+    control_stats: ControlDepthStats | None,
+    total_read_bases: int,
+) -> tuple[float, str]:
+    """Select a recorded normalization path, including an optional depth gate."""
+    if config.haploid_depth is not None:
+        return config.haploid_depth, "explicit_haploid_depth"
+    if control_stats is not None:
+        if (
+            config.single_copy_min_depth is not None
+            and control_stats.mean < config.single_copy_min_depth
+        ):
+            return (
+                total_read_bases / config.genome_size,
+                "total_read_bases_divided_by_genome_size_low_control_depth_fallback",
+            )
+        if control_stats.mean <= 0:
+            raise ValueError("Single-copy controls have zero mean observed depth")
+        return control_stats.mean, "empirical_single_copy_kmers_mean"
+    return total_read_bases / config.genome_size, "total_read_bases_divided_by_genome_size"
 
 
 def quantify_toy_copy_number(
@@ -187,20 +211,14 @@ def quantify_toy_copy_number(
         for kmer, expected_copy_number in single_copy_controls.items()
     ]
     control_stats = estimate_control_depth(control_depths) if control_depths else None
-    if config.haploid_depth is not None:
-        haploid_depth = config.haploid_depth
-        normalization_method = "explicit_haploid_depth"
-    elif control_stats is not None:
-        if control_stats.mean <= 0:
-            raise ValueError("Single-copy controls have zero mean observed depth")
-        # Include zero-observation controls. Their arithmetic mean is an
-        # unbiased depth estimator under uniform independent sampling, whereas
-        # the median becomes exactly zero around or below 1x coverage.
-        haploid_depth = control_stats.mean
-        normalization_method = "empirical_single_copy_kmers_mean"
-    else:
-        haploid_depth = total_read_bases / config.genome_size
-        normalization_method = "total_read_bases_divided_by_genome_size"
+    # Include zero-observation controls. Their arithmetic mean is an unbiased
+    # depth estimator under uniform independent sampling, whereas the median
+    # becomes exactly zero around or below 1x coverage. The optional gate
+    # preserves the observed control statistics while selecting total-bases
+    # normalization when their mean support is below a declared threshold.
+    haploid_depth, normalization_method = select_haploid_depth(
+        config, control_stats, total_read_bases
+    )
 
     update_quantify_terminal_progress(progress, "estimate_copy_number", read_count, total_read_bases, config)
     estimates = []
@@ -226,8 +244,11 @@ def quantify_toy_copy_number(
         interval_low = interval_low_depth / haploid_depth if haploid_depth > 0 else 0.0
         interval_high = interval_high_depth / haploid_depth if haploid_depth > 0 else 0.0
         warning_parts = []
-        if normalization_method == "total_read_bases_divided_by_genome_size":
+        if normalization_method.startswith("total_read_bases_divided_by_genome_size"):
             warning_parts.append("haploid_depth_estimated_from_total_read_bases_and_genome_size")
+            if normalization_method.endswith("low_control_depth_fallback"):
+                warning_parts.append("single_copy_control_mean_depth_below_configured_minimum")
+                warning_parts.append("single_copy_controls_reported_but_not_used")
         elif normalization_method == "empirical_single_copy_kmers_mean":
             warning_parts.append("single_copy_status_depends_on_user_supplied_control_provenance")
             if len(single_copy_controls) < 100:
@@ -310,6 +331,13 @@ def validate_quantify_config(config: QuantifyConfig) -> None:
         raise ValueError("--progress-every must be positive")
     if config.single_copy_kmers is not None and not config.single_copy_kmers.is_file():
         raise ValueError("--single-copy-kmers must be an existing TSV file")
+    if config.single_copy_min_depth is not None:
+        if not math.isfinite(config.single_copy_min_depth) or config.single_copy_min_depth < 0:
+            raise ValueError("--single-copy-min-depth must be finite and nonnegative")
+        if config.single_copy_kmers is None:
+            raise ValueError("--single-copy-min-depth requires --single-copy-kmers")
+        if config.haploid_depth is not None:
+            raise ValueError("--single-copy-min-depth cannot be combined with --haploid-depth")
     if config.read_error_rate is not None and not 0 <= config.read_error_rate < 1:
         raise ValueError("--read-error-rate must be in [0,1)")
     if type(config.quality_correction_enabled) is not bool:

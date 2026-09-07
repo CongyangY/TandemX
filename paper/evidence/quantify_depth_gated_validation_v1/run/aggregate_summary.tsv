@@ -1,0 +1,4 @@
+method	stratum	family_conditions	mean_absolute_relative_error	mean_signed_relative_error
+baseline_total_bases	all	1485	0.4087670411560045	-0.27732869671156
+depth_gated_controls	all	1485	0.36322232875420873	-0.21222261696969696
+empirical_controls	all	1485	0.3594430532435466	-0.21607649667789

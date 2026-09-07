@@ -1,0 +1,121 @@
+{
+  "complete": true,
+  "seed": 6403,
+  "split": "validation",
+  "source_sha256": {
+    "benchmarks/scripts/generate_factorial_scale.py": "84653d8a900a242e7eb31cf35d72ec90b2c729d867df5e7a5e5745a8b59b45bd",
+    "benchmarks/abundance/stream_genome.py": "4da7648bdeafa2dc27ac1719face768297ffe2bb8e32e9231e8cb08cbf6139f8",
+    "benchmarks/abundance/stream_reads.py": "b721cffb5d811a6d71ec2d0eb8c2414fad60bda8f8e36c7eaf649f41e9b45d9a",
+    "benchmarks/challenge/simulate.py": "22dfb3645ff6d31019474f1d6fd86f47eb6a8a4f61f456a5cc999ee62eb33368",
+    "benchmarks/challenge/schema.py": "ea2d531bbc69ed4ce78c5eb8de9ccb77d17a75e0e68c4e3a9608a05316363146"
+  },
+  "config_sha256": "39bfe5a11fabd8b3545e572d0be5eb15835bb1bff1a94b1731e794c06a847335",
+  "histogram_sha256": "49c605030d1ae5f72f4f43884a454751de0fc602064d616b560a56d479b165e7",
+  "worst_case_sequence_base_budget": 1310535005,
+  "family_count": 55,
+  "genome_bp": 10000000,
+  "conditions_completed": [
+    {
+      "condition_id": "condition_001",
+      "coverage": 1,
+      "label": "error_free",
+      "substitution_rate": 0,
+      "insertion_rate": 0,
+      "deletion_rate": 0,
+      "read_count": 724,
+      "total_bases": 10002561,
+      "manifest_sha256": "6600e46be4d10f5d07b06e27a13216b8f45a8093bbd65499a9408da4094af63c"
+    },
+    {
+      "condition_id": "condition_002",
+      "coverage": 1,
+      "label": "iid_low_indel",
+      "substitution_rate": 0.001,
+      "insertion_rate": 0.001,
+      "deletion_rate": 0.001,
+      "read_count": 724,
+      "total_bases": 10002547,
+      "manifest_sha256": "d3a8683bb7ea644005a9b5497930df789a56ff0723e365deef4fe0c54d20ac01"
+    },
+    {
+      "condition_id": "condition_003",
+      "coverage": 1,
+      "label": "iid_high_indel",
+      "substitution_rate": 0.01,
+      "insertion_rate": 0.005,
+      "deletion_rate": 0.005,
+      "read_count": 724,
+      "total_bases": 10002668,
+      "manifest_sha256": "a32d9b70a4fc183230bad0c417f21a349ade9a25eab27474fbd15c8d1ec9984b"
+    },
+    {
+      "condition_id": "condition_004",
+      "coverage": 5,
+      "label": "error_free",
+      "substitution_rate": 0,
+      "insertion_rate": 0,
+      "deletion_rate": 0,
+      "read_count": 3623,
+      "total_bases": 50008715,
+      "manifest_sha256": "c264affcd63f8c71a2f34c91ef7a39f0ac67c3d3d9a2d567e458afe7e19fe4e2"
+    },
+    {
+      "condition_id": "condition_005",
+      "coverage": 5,
+      "label": "iid_low_indel",
+      "substitution_rate": 0.001,
+      "insertion_rate": 0.001,
+      "deletion_rate": 0.001,
+      "read_count": 3623,
+      "total_bases": 50008756,
+      "manifest_sha256": "4f7bc088803916f5cfcd64cb6571a9858679517872bc8f7c7af013358a325dd2"
+    },
+    {
+      "condition_id": "condition_006",
+      "coverage": 5,
+      "label": "iid_high_indel",
+      "substitution_rate": 0.01,
+      "insertion_rate": 0.005,
+      "deletion_rate": 0.005,
+      "read_count": 3623,
+      "total_bases": 50008696,
+      "manifest_sha256": "7200e13dd69c51b974447c83a7959df8e4bf63e2a06ff5ce2d7dcb3b7a5f5054"
+    },
+    {
+      "condition_id": "condition_007",
+      "coverage": 20,
+      "label": "error_free",
+      "substitution_rate": 0,
+      "insertion_rate": 0,
+      "deletion_rate": 0,
+      "read_count": 14497,
+      "total_bases": 200010482,
+      "manifest_sha256": "0c928c660f083d2030262f6a6b2be3fcb40c12dbea178e143d6235bb5e34c892"
+    },
+    {
+      "condition_id": "condition_008",
+      "coverage": 20,
+      "label": "iid_low_indel",
+      "substitution_rate": 0.001,
+      "insertion_rate": 0.001,
+      "deletion_rate": 0.001,
+      "read_count": 14497,
+      "total_bases": 200010429,
+      "manifest_sha256": "7a274e07d5af50575ab8980504c52a08a5630c754106a932338a41a425f7320f"
+    },
+    {
+      "condition_id": "condition_009",
+      "coverage": 20,
+      "label": "iid_high_indel",
+      "substitution_rate": 0.01,
+      "insertion_rate": 0.005,
+      "deletion_rate": 0.005,
+      "read_count": 14497,
+      "total_bases": 200009071,
+      "manifest_sha256": "08ee552888969e2f9b7387bd0b1f7fadd864530beae31f939143d6f06a8c07b6"
+    }
+  ],
+  "validation_used": true,
+  "heldout_used": false,
+  "warning": "frozen_validation_genome_not_an_independent_plant;validation_consumed_when_scored;factorial_conditions_share_genome_and_read_starts"
+}

@@ -173,13 +173,27 @@ For a separately curated set of genomic depth controls, add
 `--single-copy-kmers controls.tsv`; its required columns are `kmer` and
 `expected_copy_number`. If `--haploid-depth` is absent, their corrected mean
 depth, including zero-observation controls, replaces the total-bases/genome-size
-approximation; median, MAD and zero fraction remain visible for QC. FASTQ input also
+approximation; median, MAD and zero fraction remain visible for QC. Add
+`--single-copy-min-depth 2` to use the frozen simulation-validated condition-
+level rule: below the threshold TandemX records a low-control-depth fallback to
+total read bases/genome size. The gate is opt-in because real single-copy-control
+specificity remains unvalidated. FASTQ input also
 enables Phred-derived k-mer survival correction; FASTA can use an explicit
 `--read-error-rate`. The supplied error rate cannot be combined with
 `--disable-quality-correction`. Output records the chosen normalization, raw depth,
 survival probability and control evidence. These controls require independent
 single-copy provenance and the reported percentile endpoints are not calibrated
 biological confidence intervals.
+
+```bash
+tandemx quantify \
+  --reads reads.fastq.gz \
+  --catalog results/discover/monomers.fa \
+  --genome-size 10000000 \
+  --single-copy-kmers controls.tsv \
+  --single-copy-min-depth 2 \
+  --outdir results/quantify
+```
 
 The same dependency chain can be run in one command:
 
@@ -425,9 +439,12 @@ hashes and reports every family's bias, sampling-oracle difference and k-mer
 spread coverage. Supplied founder catalogues isolate quantification from discovery.
 The [public depth-calibration audit](docs/quantify_calibration.md) records the
 development ablation, an exact-output FASTA-speed replay, and a separately frozen
-6401--6403 validation of the condition-level control-depth gate. Its validation
-configuration and gates must be committed and pass CI before those seeds are
-generated or scored.
+6401--6403 validation of the condition-level control-depth gate. The freeze passed
+hosted CI before generation; 54/54 public commands and all nine predeclared gates
+then passed. The rule reduced MARE from 0.408767 to 0.363222 on every validation
+genome, while ungated controls reached 0.359443. Seeds 6401--6403 are consumed and
+cannot be used for tuning. Compact evidence and the accepted six-panel Figure 10
+are in `paper/evidence/quantify_depth_gated_validation_v1`.
 The [real and simulated cohort/QC programme](docs/cohort_and_qc.md) specifies
 species/material breadth, scale ladders, full-file validation and independent
 evidence requirements. Current development/toy results do not satisfy those gates.
