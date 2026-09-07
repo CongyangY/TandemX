@@ -11,11 +11,12 @@ This section is the restart point for a new Codex window. Verify the state below
 before continuing and do not stage the untracked `.codex/` directory.
 
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `9eda196`, aligned with `origin/codex/publish-current-progress` and
-  `origin/main`. Hosted runs `34088623796` and `34088640260` passed Ubuntu/macOS
-  Python tests, Rust checks and wheel builds. That commit freezes the untouched
-  depth-gated quantify validation source, seeds, data-generation hashes, decision
-  rule and nine scientific gates before any validation data are generated.
+  `9291fd6`, aligned with `origin/codex/publish-current-progress` and
+  `origin/main`. Hosted runs `34091825974` and `34092069808` passed Ubuntu/macOS
+  Python tests, Rust checks and wheel builds. The earlier commit `9eda196` froze
+  the untouched depth-gated quantify validation source, seeds, data-generation
+  hashes, decision rule and nine scientific gates before any validation data
+  were generated; `9291fd6` publishes the completed evidence and opt-in CLI.
 - **Frozen cascade held-out is consumed; never rerun seeds 3101--3103.** The
   once-only run is complete at
   `/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907`:
@@ -71,8 +72,8 @@ before continuing and do not stage the untracked `.codex/` directory.
   the baseline branch and 18 5×/20× conditions used controls. Ungated controls
   had slightly lower aggregate MARE, 0.359443; retain this limitation and never
   tune on 6401--6403. Reserved 7401--7403 remain refused.
-- **Validation evidence and public option are prepared locally.** The 2.2-MiB
-  compact archive at `paper/evidence/quantify_depth_gated_validation_v1` has 67
+- **Validation evidence and public option are published.** The compact archive
+  at `paper/evidence/quantify_depth_gated_validation_v1` has 67
   hash-checked entries, all 54 execution-artifact rows, compact dataset manifests,
   the input audit and independently recomputed decisions/resources. `figures_v3`
   is the accepted six-panel SVG/PDF/PNG with 94 editable SVG texts, no raster
@@ -88,18 +89,16 @@ before continuing and do not stage the untracked `.codex/` directory.
   does not establish identical DNA extraction, individual plant, stock or
   BioSample between historical and newer assemblies. All five manifest entries
   were independently rehashed. Donor-matched collapse truth remains unavailable.
-- **Verification state and exact next actions.** Commit `9eda196` passed 514
-  Python tests, compile/diff/CLI-help/link audits and both hosted Ubuntu/macOS
-  workflows. The current uncommitted validator/archive/figure/CLI work passes all
-  522 Python tests, compileall, diff check, CLI help and 72 local Markdown links.
+- **Verification state and exact next actions.** Commit `9291fd6` passes all 522
+  Python tests, compileall, diff check, CLI help, 72 local Markdown links and both
+  hosted Ubuntu/macOS workflows. Only `.codex/` remains untracked locally.
   Rust format and release Clippy with warnings denied pass. `cargo test --release`
   compiles but cannot launch locally because this conda build has only
   `libpython3.11.a`, not the requested dynamic dylib; hosted CI must execute the
   16 Rust tests. The release wheel builds and its isolated install/import plus
   complete toy workflow pass; wheel SHA-256 is
   `7c80951f09c3c52779dc5b81ea1492bd76a3323a11d4f6942a065af5ac45b350`.
-  Final Figure 10 PDF was rendered with Poppler and visually passed. Next commit,
-  push both branches and require both hosted workflows to pass. Then continue
+  Final Figure 10 PDF was rendered with Poppler and visually passed. Continue
   cascade speed diagnosis only on development/new seeds and the real-data/
   release-portability gaps; never tune against consumed 3101--3103 or
   6401--6403 values.
@@ -824,7 +823,8 @@ before continuing and do not stage the untracked `.codex/` directory.
   successes, identical repeated outputs, all 13 positive scenarios at array
   recall/precision and cyclic monomer recall 1.0, zero calls on the three
   100-read negative datasets. Related-monomer recovery is corrected to 3/3. Held-out
-  3101/3102/3103 remain unused. Candidate evidence supports a future comparison
+  3101/3102/3103 were unused at that checkpoint and were later consumed by the
+  frozen cascade audit described at the top. Candidate evidence supports a comparison
   at matched per-array output granularity instead of catalog versus raw calls.
 
 ## Broader comparator and figure checkpoint
@@ -1178,21 +1178,21 @@ reuse assembly-alignment BAMs from other projects as raw reads.
 
 ## Next critical work
 
-0. Verify this checkpoint's hosted CI after pushing. Sequence clustering and
-   independent gapped/union endpoints are now implemented and tested; do not redo
-   the earlier completed fix. Next expand independent distributions, matched
-   per-array consensus scoring, performance profiling and task-matched abundance/
-   copy-number evaluation. SRF high-k misses on highly mutated inputs require a
-   broader parameter sensitivity study, not a claim of general inferiority.
-   Held-out 3101/3102/3103 remain unused.
+0. The current checkpoint and both hosted CI runs pass. Sequence clustering and
+   independent gapped/union endpoints are implemented and tested; do not redo the
+   earlier completed fix. Profile the cascade speed gap only on development/new
+   seeds, then expand independent distributions, matched per-array consensus
+   scoring and task-matched abundance/copy-number evaluation. SRF high-k misses
+   on highly mutated inputs require broader sensitivity study, not a claim of
+   general inferiority. Seeds 3101--3103 and 6401--6403 are consumed.
 
 1. Keep meaningful source/tests/documentation checkpoints on GitHub; source
    snapshots are now available for subsequent benchmark runs.
 2. Elastic now addresses indel boundaries/multiple arrays in development and
    validation, with parity tests; investigate remaining family clustering and
    runtime costs before making it the default.
-3. Development/validation seeds first, then freeze settings and use held-out
-   3101/3102/3103. Add more independent families/seeds for publication inference.
+3. Use new development/validation seeds, freeze every decision before untouched
+   evaluation and add independent families/processes for publication inference.
 4. Add coverage/error/copy-number and engineered assembly-collapse experiments,
    calibrated uncertainty and independently tested probe specificity.
 5. Expand real plant validation with matched assemblies and curated repeats;
