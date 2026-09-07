@@ -36,9 +36,12 @@ declare fragment eligibility and treatment of partially labelled regions. The
 generator imports no detector/quantifier code. Founders/truth are never de novo
 tool inputs. A generation receipt is not a completed software benchmark.
 
-Run one declared development genome (6301/6302/6303); this controller refuses
-reserved seeds 7301/7302/7303. Nine conditions use 1/5/20x source coverage.
-One genome and its 55 families are not 55 biological replicates.
+Run one declared development genome (6301/6302/6303) by default. A separate
+committed configuration may declare a `validation` split, which must be selected
+explicitly with `--split validation`; the receipt then records
+`validation_used=true`. The controller refuses every `heldout` seed. Nine
+conditions use 1/5/20x source coverage. One genome and its 55 families are not
+55 biological replicates.
 
 ```bash
 conda run --no-capture-output -n tandemx-dev python -m benchmarks.scripts.generate_factorial_scale \
@@ -46,6 +49,17 @@ conda run --no-capture-output -n tandemx-dev python -m benchmarks.scripts.genera
   --length-histogram /path/to/complete_Mo17_qc/length_histogram.tsv \
   --seed 6301 --max-output-bases 1500000000 --outdir /path/to/new/factorial_s6301
 pytest -q tests/unit/test_streamed_factorial_simulation.py
+```
+
+The untouched quantify validation genomes use the independently frozen config
+and are generated only after its source/config commit passes hosted CI:
+
+```bash
+conda run --no-capture-output -n tandemx-dev python -m benchmarks.scripts.generate_factorial_scale \
+  --config benchmarks/configs/factorial_scale_quantify_validation_v1.json \
+  --length-histogram paper/evidence/Mo17_input_qc/qc/length_histogram.tsv \
+  --split validation --seed 6401 --max-output-bases 1500000000 \
+  --outdir /Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1
 ```
 
 Tests create an actual <1-MB example, checking every small random-access

@@ -423,6 +423,11 @@ coordinates. It generates development inputs independently of detector code.
 Its conditional scoring controller executes the public quantifier, verifies input
 hashes and reports every family's bias, sampling-oracle difference and k-mer
 spread coverage. Supplied founder catalogues isolate quantification from discovery.
+The [public depth-calibration audit](docs/quantify_calibration.md) records the
+development ablation, an exact-output FASTA-speed replay, and a separately frozen
+6401--6403 validation of the condition-level control-depth gate. Its validation
+configuration and gates must be committed and pass CI before those seeds are
+generated or scored.
 The [real and simulated cohort/QC programme](docs/cohort_and_qc.md) specifies
 species/material breadth, scale ladders, full-file validation and independent
 evidence requirements. Current development/toy results do not satisfy those gates.

@@ -71,6 +71,22 @@ missing metrics and comparator failures. A failed speed, memory or accuracy gate
 is retained as a failed held-out experiment; the consumed seeds cannot tune a
 replacement model.
 
+## Quantify depth-gated validation
+
+`factorial_scale_quantify_validation_v1.json` predeclares untouched validation
+genomes 6401--6403 under the same factorial process as development. Generate
+them only after the source/config commit passes hosted CI, using
+`generate_factorial_scale --split validation`. Their receipts must report
+`validation_used=true`; 7401--7403 remain refused reserved seeds.
+
+`evaluate_quantify_depth_gated_validation.py` runs the public total-bases and
+empirical-control modes, then applies the already fixed mean-control-depth >=2
+condition-level switch. Its nine gates, exact one-time command and output fields
+are documented in [quantify_calibration.md](../docs/quantify_calibration.md) and
+[file_formats.md](../docs/file_formats.md#depth-gated-quantify-validation).
+Failure of any scientific gate remains a completed failed validation and cannot
+be repaired by tuning against 6401--6403.
+
 ## Challenge benchmark and public-data pilot
 
 Development release smoke check (inside `tandemx-dev`):

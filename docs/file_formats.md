@@ -1311,6 +1311,40 @@ validation and stdout/stderr receipt and writes `archive_manifest.json` with
 their source path, SHA-256 and byte size. Any input/source-receipt disagreement,
 failed process, changed summary count or product-hash mismatch aborts the archive.
 
+### Depth-gated quantify validation
+
+`evaluate_quantify_depth_gated_validation.py` accepts only complete datasets
+whose generation receipts declare `split=validation`, `validation_used=true`
+and `heldout_used=false`, and whose generation config, length histogram and five
+generator/helper hashes equal the frozen validation config. `environment.json` freezes core/helper source hashes,
+dataset-receipt hashes, the config hash and exact source snapshot.
+`execution.json` records the driver command and direct-child resources.
+
+- `executions.tsv`: one row per seed, condition and actually run public method,
+  with coverage/error labels, exit/timeout/status, wall/CPU time and peak RSS.
+- `raw_metrics.tsv`: one family row for each total-bases and empirical-control
+  execution, with truth/estimate, signed and absolute relative error,
+  normalization method, control mean depth and zero fraction.
+- `metrics.tsv`: all raw rows plus `depth_gated_controls` rows. Candidate rows add
+  `candidate_selected_method` and `candidate_control_mean_depth`; missing fields
+  on raw rows are empty TSV cells rather than inferred values.
+- `paired.tsv`: one baseline/candidate family pair with absolute errors, their
+  signed improvement, improved/equal/worse outcome, selected branch and control
+  depth. Individual regressions are retained.
+- `aggregate_summary.tsv`, `seed_summary.tsv`, `coverage_summary.tsv`: family-
+  condition counts and mean absolute/signed relative error by method and stated
+  stratum. Families/conditions within a genome are dependent.
+- `gate_results.json`: frozen threshold, all gate observations and pass/fail
+  states, failed gate names, seed/coverage minima, paired counts and branch-use
+  counts. Failed promotion remains a completed scientific result.
+- `validation.json`: execution and family-row counts, split-use flags, promotion
+  status and scope warning. Process failure leaves an incomplete matrix rather
+  than zero-valued accuracy rows.
+
+Every public-command run retains its `command.json`, `receipt.json`, stdout/
+stderr and standard `copy_number.tsv`, `run_config.yaml` and `run.log` outputs.
+Resource rows are descriptive single executions and do not enter promotion gates.
+
 ### Factorial assembly comparator evaluation
 
 `score_trash_factorial.py` consumes a generated `genome/` directory and a complete

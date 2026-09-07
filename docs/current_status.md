@@ -12,11 +12,10 @@ still uncommitted and must be verified before publication. Do not stage the
 untracked `.codex/` directory.
 
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `6863155`, aligned with `origin/codex/publish-current-progress` and
-  `origin/main`. Hosted runs `34086256099` and `34086367490` passed Ubuntu/macOS
-  Python tests, Rust checks and wheel builds. That commit contains the complete
-  quantify development archive and Figure 9 plus the exact all-ACGT FASTA
-  survival shortcut.
+  `f47fc1a`, aligned with `origin/codex/publish-current-progress` and
+  `origin/main`. Hosted runs `34087474642` and `34087489635` passed Ubuntu/macOS
+  Python tests, Rust checks and wheel builds. That commit contains the exact
+  quantify speed replay, its tested archiver and the 112-product parity record.
 - **Frozen cascade held-out is consumed; never rerun seeds 3101--3103.** The
   once-only run is complete at
   `/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907`:
@@ -64,6 +63,20 @@ untracked `.codex/` directory.
   candidate uses controls only when mean control depth is at least 2; its MARE is
   0.356117 and it improves every development seed, but it has not been run on
   untouched genomes 6401--6403.
+- **Current uncommitted validation freeze.** A separate simulation config fixes
+  untouched validation seeds 6401--6403 under the same 10-Mb, 55-family, nine-
+  condition process. The candidate threshold remains 2.0 and the public-command
+  evaluator runs only total-bases and empirical-control methods before applying
+  that frozen condition-level rule. Nine predeclared gates require zero process
+  failures, aggregate MARE reduction at least 0.02, candidate MARE at most 0.40,
+  positive improvement in every genome, no mean coverage-stratum regression,
+  paired improved/nonworse fractions at least 0.40/0.70, and use of both branches.
+  Exact hashes for the generation JSON, complete Mo17 length histogram and five
+  generator/helper source files are also frozen and enforced against each receipt.
+  The generator now records `split=validation` and `validation_used=true`; future
+  reserved 7401--7403 remain refused. Focused unit and actual toy public-command
+  integration tests pass. Do not generate 6401--6403 before this source/config is
+  committed and hosted CI passes.
 - **Real-data source audit.** Exact ENA metadata for PRJEB50694, PRJNA751841,
   PRJNA953663 and PRJNA919186 is archived at
   `paper/evidence/retrospective_collapse_source_audit`. Five manifest files and
@@ -72,14 +85,14 @@ untracked `.codex/` directory.
   does not establish identical DNA extraction, individual plant, stock or
   BioSample between historical and newer assemblies. All five manifest entries
   were independently rehashed. Donor-matched collapse truth remains unavailable.
-- **Verification state and exact next actions.** Commit `6863155` passed 505
+- **Verification state and exact next actions.** Commit `f47fc1a` passed 510
   Python tests, 16 Rust release tests, format/Clippy, compile, link and artifact
-  audits locally and both hosted workflows above. The current replay-evidence
-  checkpoint passes 510 Python tests, compile/diff/link audits and 79/79 hashes
-  across the four active compact evidence archives; the new replay archive is
-  15/15. Next commit/push this checkpoint and pass hosted CI. Then freeze
-  source/config and generate new 6401--6403 genomes before evaluating the
-  depth-gated candidate exactly once.
+  audits locally and both hosted workflows above. The current validation freeze
+  passes 514 Python tests, compile/diff/CLI-help/link audits and exact config-
+  design parity; nine focused unit/integration tests cover its new paths. Next
+  commit/push source, configs, tests and documentation, and pass hosted CI. Only
+  then generate 6401--6403 into new T7 directories and evaluate the frozen
+  candidate exactly once.
   Diagnose cascade speed only on development/new seeds; never tune against the
   consumed cascade held-out values.
 

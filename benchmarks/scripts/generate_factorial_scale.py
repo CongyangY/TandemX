@@ -13,11 +13,26 @@ from benchmarks.abundance.stream_reads import length_distribution, sample
 from benchmarks.challenge.schema import digest_file
 
 
-def run(config_path: Path, histogram: Path, outdir: Path, seed: int, max_output_bases: int) -> None:
+def run(
+    config_path: Path,
+    histogram: Path,
+    outdir: Path,
+    seed: int,
+    max_output_bases: int,
+    split: str = 'development',
+) -> None:
     config = json.loads(config_path.read_text())
-    dev, held = config['seeds']['development'], config['seeds']['heldout']
-    if seed not in dev or len(set(dev+held)) != len(dev+held):
-        raise ValueError('Only distinct predeclared development seeds are allowed')
+    seed_groups = config['seeds']
+    declared = [value for values in seed_groups.values() for value in values]
+    if (
+        split not in {'development', 'validation'}
+        or split not in seed_groups
+        or seed not in seed_groups[split]
+        or len(set(declared)) != len(declared)
+    ):
+        raise ValueError(
+            'Only distinct predeclared development or validation seeds are allowed'
+        )
     for name in ('periods', 'copies', 'gc_fractions', 'unit_substitution_rates', 'coverages'):
         if not config[name] or len(set(config[name])) != len(config[name]):
             raise ValueError('Factorial axes must be nonempty and contain unique values')
@@ -54,11 +69,13 @@ def run(config_path: Path, histogram: Path, outdir: Path, seed: int, max_output_
                 'benchmarks/abundance/stream_reads.py','benchmarks/challenge/simulate.py','benchmarks/challenge/schema.py']:
         path = root/rel; target=source/rel; target.parent.mkdir(parents=True,exist_ok=True)
         shutil.copyfile(path,target); hashes[rel]=digest_file(target)
-    receipt = dict(complete=False, seed=seed, split='development', source_sha256=hashes,
+    receipt = dict(complete=False, seed=seed, split=split, source_sha256=hashes,
                    config_sha256=digest_file(config_path), histogram_sha256=digest_file(histogram),
                    worst_case_sequence_base_budget=bound, family_count=len(specs), genome_bp=config['genome_bp'],
-                   conditions_completed=[], heldout_used=False,
-                   warning='one_simulated_genome_not_an_independent_plant;factorial_conditions_share_genome_and_read_starts')
+                   conditions_completed=[], validation_used=split == 'validation', heldout_used=False,
+                   warning=('one_simulated_genome_not_an_independent_plant;factorial_conditions_share_genome_and_read_starts'
+                            if split == 'development' else
+                            'frozen_validation_genome_not_an_independent_plant;validation_consumed_when_scored;factorial_conditions_share_genome_and_read_starts'))
     receipt_path = outdir/'generation_receipt.json'
     receipt_path.write_text(json.dumps(receipt, indent=2)+'\n')
     generate(specs, config['genome_bp'], seed, outdir/'genome', config['background_gc'])
@@ -84,6 +101,7 @@ if __name__ == '__main__':
     parser.add_argument('--length-histogram', type=Path, required=True)
     parser.add_argument('--outdir', type=Path, required=True)
     parser.add_argument('--seed', type=int, required=True)
+    parser.add_argument('--split', choices=('development', 'validation'), default='development')
     parser.add_argument('--max-output-bases', type=int, required=True, help='Worst-case emitted sequence bases, excluding headers/TSV/source code')
     args = parser.parse_args()
-    run(args.config, args.length_histogram, args.outdir, args.seed, args.max_output_bases)
+    run(args.config, args.length_histogram, args.outdir, args.seed, args.max_output_bases, args.split)

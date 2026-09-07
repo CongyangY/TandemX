@@ -52,6 +52,44 @@ a timing distribution. Compact comparison evidence is in
 The development-selected candidate uses empirical controls only when their mean
 depth is at least 2; it requires untouched genome/family validation.
 
+## Frozen untouched-genome validation
+
+`factorial_scale_quantify_validation_v1.json` retains the development data-
+generating process but replaces its seeds with untouched validation genomes
+6401--6403. `quantify_depth_gated_validation_v1.yaml` freezes the candidate and
+nine gates before data generation. It also freezes SHA-256 values for the data-
+generation JSON, complete Mo17 length histogram and all five generator/helper
+source files; every dataset receipt must match them. The evaluator runs two observable public
+command modes: total-bases normalization and the same 1,000 simulation-truth-
+assisted controls. It selects controls for an entire read condition only when
+their mean depth is at least 2; it does not refit the threshold.
+
+Promotion within this conditional known-catalogue IID simulation requires all of
+the following: zero failed commands; aggregate MARE reduction >=0.02; candidate
+MARE <=0.40; positive MARE reduction for every independent genome; no mean
+coverage-stratum regression beyond numerical tolerance; paired improved and
+nonworse fractions >=0.40 and >=0.70; and at least one condition routed through
+each branch. Individual families may regress and remain in the paired table.
+Resource observations are excluded from these scientific gates.
+
+After committing these files and passing hosted CI, generate all three datasets
+with `--split validation` as documented in
+[factorial_scale_simulation.md](factorial_scale_simulation.md), then run once:
+
+```bash
+conda run --no-capture-output -n tandemx-dev \
+  python -m benchmarks.scripts.evaluate_quantify_depth_gated_validation \
+  --config benchmarks/configs/quantify_depth_gated_validation_v1.yaml \
+  --datasets \
+    /Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1 \
+    /Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1 \
+    /Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1 \
+  --outdir /Volumes/T7/Codex/TandemX/results/quantify_depth_gated_validation_v1_20260907
+```
+
+Seeds 6401--6403 are consumed after this once-only evaluation. Seeds 7401--7403
+remain reserved and the generator refuses them.
+
 The executed command was:
 
 ```bash

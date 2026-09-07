@@ -114,7 +114,7 @@ def test_sampled_source_occupancy_and_observed_coordinates_have_independent_orac
 
 def test_controller_budgets_reserved_seeds_and_actual_small_generation(tmp_path):
     hist=tmp_path/'hist.tsv';hist.write_text('length_bp\tread_count\n50\t1\n')
-    config=dict(seeds={'development':[6351],'heldout':[7351]},genome_bp=1000,background_gc=.4,
+    config=dict(seeds={'development':[6351],'validation':[6451],'heldout':[7351]},genome_bp=1000,background_gc=.4,
         periods=[11],copies=[3,7],gc_fractions=[.3,.7],unit_substitution_rates=[0,.1],
         coverages=[1],read_error_models=[dict(label='clean',substitution_rate=0,insertion_rate=0,deletion_rate=0)])
     path=tmp_path/'config.json';path.write_text(json.dumps(config))
@@ -124,6 +124,13 @@ def test_controller_budgets_reserved_seeds_and_actual_small_generation(tmp_path)
     run(path,hist,tmp_path/'ok',6351,100000)
     receipt=json.loads((tmp_path/'ok/generation_receipt.json').read_text())
     assert receipt['complete'] and receipt['family_count']==8 and not receipt['heldout_used']
+    assert not receipt['validation_used'] and receipt['split']=='development'
     assert len(receipt['conditions_completed'])==1
+    run(path,hist,tmp_path/'validation',6451,100000,'validation')
+    validation=json.loads((tmp_path/'validation/generation_receipt.json').read_text())
+    assert validation['complete'] and validation['validation_used']
+    assert validation['split']=='validation' and not validation['heldout_used']
+    with pytest.raises(ValueError,match='development or validation'):
+        run(path,hist,tmp_path/'wrong-split',6351,100000,'validation')
     hist.write_text('length_bp\tread_count\n50\t1\n50\t2\n')
     with pytest.raises(ValueError,match='duplicate'):length_distribution(hist,100)
