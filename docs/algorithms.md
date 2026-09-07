@@ -465,7 +465,15 @@ Current cohort integration:
 5. it rejects duplicate, unknown or incompletely quantified catalogue families,
    hashes every supplied input and writes a per-sample QC audit;
 6. it writes point, lower-endpoint and upper-endpoint abundance matrices and
-   propagates the least confident local evidence into each aggregate.
+   propagates the least confident local evidence into each aggregate;
+7. it ranks pan families by maximum sample read-estimated bp with a stable ID
+   tie-break, then renders the requested top families as a four-panel editable
+   SVG/PDF overview with a machine-readable plot-source table and hash receipt.
+
+The interval panel displays the sum of local marginal endpoint widths relative
+to the point estimate. It is a QC diagnostic, not a calibrated joint interval
+across families or samples. Display clipping of assembly/read ratios does not
+change values in `cohort_plot_source.tsv` or the long-form source table.
 
 Remaining work includes chromosome/subgenome summaries and calibrated joint
 uncertainty across biological samples.

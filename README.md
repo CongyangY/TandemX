@@ -256,7 +256,13 @@ tandemx cohort --manifest samples.tsv --outdir results/cohort
 The command clusters circular monomer sequences against fixed representatives
 and writes an input checksum/QC audit, pan-repeat catalogue, local-to-pan
 membership audit, long-form abundance/representation tables, point and interval
-endpoint abundance matrices, and a sample-by-family representation matrix.
+endpoint abundance matrices, a sample-by-family representation matrix, and a
+four-panel SVG/PDF cohort overview. The overview ranks at most 30 families by
+their maximum read-estimated bp across samples; use `--top-families` to change
+that display limit. Its abundance, assembly/read representation, prevalence and
+relative endpoint-width panels remain editable vector artwork. The exact plotted
+rows and input/output hashes are retained in `cohort_plot_source.tsv` and
+`cohort_figure_receipt.json`.
 Unknown, duplicate or incompletely quantified catalogue families fail clearly.
 Missing or unevaluated families remain `NA`; they are not silently converted to
 zero. A complete two-sample example is available at

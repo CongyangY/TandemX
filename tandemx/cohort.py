@@ -202,11 +202,13 @@ def _matrix_rows(
 
 
 def build_cohort(manifest: Path, outdir: Path, *, cluster_identity: float = 0.95,
-                 backend: str = "python") -> dict[str, Any]:
+                 backend: str = "python", top_families: int = 30) -> dict[str, Any]:
     if not 0 < cluster_identity <= 1:
         raise ValueError("--cluster-identity must be in (0,1]")
     if backend not in {"python", "rust"}:
         raise ValueError("--backend must be python or rust")
+    if top_families < 1:
+        raise ValueError("--top-families must be positive")
     samples = read_manifest(manifest)
     local, candidates = load_local_families(samples)
     families, membership = cluster_monomers(candidates, 1, cluster_identity, backend)
@@ -409,11 +411,16 @@ def build_cohort(manifest: Path, outdir: Path, *, cluster_identity: float = 0.95
     write_tsv(outdir / "representation_matrix.tsv", ["pan_family_id", *(sample.sample_id for sample in samples)],
               _matrix_rows(pan_ids, samples, representation_matrix))
 
+    from tandemx.visualize.cohort import render_cohort_overview
+
+    figure_outputs = render_cohort_overview(outdir, top_families)
+
     outputs = [
         "pan_families.tsv", "pan_monomers.fa", "family_membership.tsv", "cohort_input_qc.tsv",
         "sample_family_abundance.tsv", "abundance_matrix.tsv",
         "abundance_interval_low_matrix.tsv", "abundance_interval_high_matrix.tsv",
         "sample_family_representation.tsv", "representation_matrix.tsv",
+        *(path.name for path in figure_outputs),
     ]
     receipt = {
         "schema_version": 1,
@@ -423,6 +430,7 @@ def build_cohort(manifest: Path, outdir: Path, *, cluster_identity: float = 0.95
         "pan_family_count": len(families),
         "cluster_identity": cluster_identity,
         "backend": backend,
+        "top_families": top_families,
         "output_sha256": {
             name: hashlib.sha256((outdir / name).read_bytes()).hexdigest() for name in outputs
         },

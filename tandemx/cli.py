@@ -539,6 +539,7 @@ def run_cohort(args: argparse.Namespace) -> int:
         args.outdir,
         cluster_identity=args.cluster_identity,
         backend=args.backend,
+        top_families=args.top_families,
     )
     _write_run_config(args.outdir, "cohort", args, status="cohort_completed")
     logger.info("status=cohort_completed samples=%s pan_families=%s", receipt["sample_count"], receipt["pan_family_count"])
@@ -742,6 +743,7 @@ def build_parser() -> argparse.ArgumentParser:
     cohort.add_argument("--manifest", required=True, type=_path_value, help="TSV with sample_id, monomers, copy_number, and optional comparison paths.")
     cohort.add_argument("--cluster-identity", type=float, default=0.95, help="Minimum circular global edit similarity to a fixed pan-family representative.")
     cohort.add_argument("--backend", choices=("python", "rust"), default="rust", help="Sequence-distance backend for cross-sample clustering.")
+    cohort.add_argument("--top-families", type=int, default=30, help="Maximum abundance-ranked pan families in the four-panel cohort overview.")
     cohort.add_argument("--outdir", required=True, type=_path_value, help="Directory for the pan catalogue, membership audit, matrices, run_config.yaml, and run.log.")
     cohort.set_defaults(func=run_cohort)
 

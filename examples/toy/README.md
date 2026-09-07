@@ -75,5 +75,9 @@ bash examples/toy/run_toy_cohort.sh /tmp/tandemx-toy-cohort
 
 Key cohort outputs include `cohort_input_qc.tsv`, `pan_families.tsv`,
 `family_membership.tsv`, three abundance matrices (point, lower endpoint and
-upper endpoint), and the assembly representation matrix. This example verifies
-the data contract; it is not biological cohort validation.
+upper endpoint), the assembly representation matrix, and the four-panel
+`cohort_overview.svg`/`cohort_overview.pdf`. `cohort_plot_source.tsv` is the
+machine-readable source for the displayed top families and
+`cohort_figure_receipt.json` records input/output hashes and editable SVG-node
+counts. This example verifies the data contract and rendering path; it is not
+biological cohort validation.

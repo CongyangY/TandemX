@@ -309,9 +309,27 @@ the corresponding wide ratio matrix. Missing calls and samples without an
 assembly comparison are `NA` with `not_observed` or `not_evaluated`; `NA` never
 means zero biological abundance.
 
+`cohort_overview.svg` and `cohort_overview.pdf` are the same four-panel static
+overview: read-estimated abundance on a `log10(bp + 1)` scale, assembly/read
+representation ratio clipped at two for display, pan-family prevalence, and
+relative propagated endpoint width `(high - low) / estimate`. Families are
+ranked deterministically by maximum sample `estimated_bp`, then
+`pan_family_id`, and limited by `--top-families` (default 30). Missing cells use
+the bad-value colour and remain unavailable evidence rather than zero.
+
+`cohort_plot_source.tsv` contains one row per displayed sample/family cell. Its
+fields are `sample_id`, `pan_family_id`, `selection_rank`, `estimated_bp`,
+`estimated_bp_interval_low`, `estimated_bp_interval_high`,
+`relative_interval_width`, `assembly_read_ratio`, `abundance_status`,
+`representation_status`, `sample_count`, and `warning`.
+`cohort_figure_receipt.json` records panel count, requested/rendered family
+counts, selected family order, source-table hashes, output hashes, and editable
+SVG text/image-node counts.
+
 `cohort_summary.json` records schema version, completion, sample/local/pan
-family counts, clustering parameters, output SHA-256 values, and the principal
-interpretation warning.
+family counts, clustering/display parameters, output SHA-256 values (including
+the figure, source and figure receipt), and the principal interpretation
+warning.
 
 ## probes.fa
 

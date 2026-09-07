@@ -53,14 +53,14 @@ before continuing and do not stage the untracked `.codex/` directory.
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the
   least local confidence; and adds wide lower/upper abundance-endpoint matrices.
-  `examples/toy/run_toy_cohort.sh` completed two end-to-end samples and schema
-  validation in `/tmp/tandemx-toy-cohort-check`. The full Python suite passes
-  543 tests in 61.35 s; compileall, shell syntax and diff checks also pass.
-  Direct SSH push of `50de982` failed because the local proxy closed
-  `127.0.0.1:7897`; `gh auth status` also reports an invalid token. At that
-  checkpoint local HEAD was one commit ahead of both remote refs. Publish the
-  cohort and following evidence commits together through a safe HTTPS/browser/API
-  path, then verify both hosted refs and CI.
+  The current continuation adds an automatic four-panel cohort SVG/PDF, stable
+  abundance-ranked `--top-families` selection, machine-readable plot source and
+  a hash/node-count figure receipt. Its toy workflow completed two end-to-end
+  samples and validated 11 files/30 records at
+  `/tmp/tandemx-toy-cohort-visual-v2`; an independent PDF render passed visual
+  inspection, and the SVG has 59 editable text nodes and no raster image nodes.
+  The complete source suite passes 548 tests in 66.69 s; compileall, 72 tracked
+  local Markdown links and diff checks pass.
 - **Current verification after TideCluster evidence.** The full Python suite
   passes 547 tests in 62.84 s; compileall and diff checks pass. The archive has
   32/32 independently rehashed entries. Supplementary Figure S5 has six panels,
@@ -68,11 +68,11 @@ before continuing and do not stage the untracked `.codex/` directory.
   Poppler render of the PDF were both visually inspected with no overlap or
   clipping observed.
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `a14ceded7267f46fb81b003e2c0142020c6cd1b1`, aligned with
+  `c8593e0a186f589cf14c347475a615ec50d1a205`, aligned with
   `origin/codex/publish-current-progress` and `origin/main`. Hosted runs
-  `34097684678` and `34097716770` passed Ubuntu/macOS Python tests, Rust checks
-  and wheel builds. Commit `9b09bfd` is the guarded-cascade validation evidence
-  baseline; `a14cede` records the final published checkpoint. The earlier
+  `34104475816` and `34104475946` passed Ubuntu/macOS Python tests, Rust checks
+  and wheel builds. Commit `50de982` is the cohort hardening/TideCluster runner
+  checkpoint; `c8593e0` archives the completed Morex 10/100-Mb evidence. The earlier
   commit `9eda196` froze
   the untouched depth-gated quantify validation source, seeds, data-generation
   hashes, decision rule and nine scientific gates before any validation data

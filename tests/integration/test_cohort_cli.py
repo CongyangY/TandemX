@@ -51,7 +51,7 @@ def test_cohort_cli_builds_pan_catalogue_and_na_aware_matrices(tmp_path: Path) -
     out = tmp_path / "out"
     result = subprocess.run([
         sys.executable, "-m", "tandemx.cli", "cohort", "--manifest", str(manifest),
-        "--backend", "python", "--outdir", str(out),
+        "--backend", "python", "--top-families", "2", "--outdir", str(out),
     ], text=True, capture_output=True)
     assert result.returncode == 0, result.stderr
     summary = json.loads((out / "cohort_summary.json").read_text())
@@ -75,7 +75,27 @@ def test_cohort_cli_builds_pan_catalogue_and_na_aware_matrices(tmp_path: Path) -
     assert [row["status"] for row in input_qc] == ["complete", "complete"]
     assert input_qc[1]["comparison_sha256"] == "NA"
     assert input_qc[1]["warning"] == "comparison_not_provided"
-    assert len(validate_project(out)) == 10
+    figure_receipt = json.loads((out / "cohort_figure_receipt.json").read_text())
+    assert figure_receipt["complete"] and figure_receipt["panel_count"] == 4
+    assert figure_receipt["top_families_requested"] == 2
+    assert figure_receipt["top_families_rendered"] == 2
+    assert figure_receipt["selected_pan_family_ids"][0] == pan_a
+    assert figure_receipt["svg_text_nodes"] > 0
+    assert figure_receipt["svg_image_nodes"] == 0
+    assert (out / "cohort_overview.svg").is_file()
+    assert (out / "cohort_overview.pdf").is_file()
+    plot_rows = rows(out / "cohort_plot_source.tsv")
+    assert len(plot_rows) == 4
+    assert {row["pan_family_id"] for row in plot_rows} == set(
+        figure_receipt["selected_pan_family_ids"]
+    )
+    assert [row["pan_family_id"] for row in plot_rows[:2]] == [pan_a, pan_a]
+    assert len(validate_project(out)) == 11
+    for filename in (
+        "cohort_overview.svg", "cohort_overview.pdf", "cohort_plot_source.tsv",
+        "cohort_figure_receipt.json",
+    ):
+        assert filename in summary["output_sha256"]
 
 
 def test_cohort_cli_rejects_copy_number_family_mismatch(tmp_path: Path) -> None:
@@ -101,3 +121,14 @@ def test_cohort_cli_rejects_copy_number_family_mismatch(tmp_path: Path) -> None:
     ], text=True, capture_output=True)
     assert result.returncode == 2
     assert "families absent from its monomer catalogue: UNKNOWN" in result.stderr
+
+
+def test_cohort_cli_rejects_nonpositive_top_family_limit(tmp_path: Path) -> None:
+    manifest = tmp_path / "samples.tsv"
+    manifest.write_text("sample_id\tmonomers\tcopy_number\tcomparison\n")
+    result = subprocess.run([
+        sys.executable, "-m", "tandemx.cli", "cohort", "--manifest", str(manifest),
+        "--backend", "python", "--top-families", "0", "--outdir", str(tmp_path / "out"),
+    ], text=True, capture_output=True)
+    assert result.returncode == 2
+    assert "--top-families must be positive" in result.stderr

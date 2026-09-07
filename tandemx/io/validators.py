@@ -272,6 +272,16 @@ TSV_SCHEMAS.update({
                     "comparison_family_count", "comparison_matched_count"},
         "status": {"complete"},
     },
+    "cohort_plot_source.tsv": {
+        "required": {"sample_id", "pan_family_id", "selection_rank", "estimated_bp",
+                     "estimated_bp_interval_low", "estimated_bp_interval_high",
+                     "relative_interval_width", "assembly_read_ratio", "abundance_status",
+                     "representation_status", "sample_count", "warning"},
+        "numeric": {"selection_rank", "sample_count"},
+        "nullable_numeric": {"estimated_bp", "estimated_bp_interval_low",
+                             "estimated_bp_interval_high", "relative_interval_width",
+                             "assembly_read_ratio"},
+    },
     "sample_family_abundance.tsv": {
         "required": {"sample_id", "pan_family_id", "local_family_count", "estimated_bp",
                      "estimated_bp_interval_low", "estimated_bp_interval_high", "status", "confidence", "warning"},
