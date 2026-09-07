@@ -215,8 +215,10 @@ units, and composition-adjusted identity is at least 0.7. The unit-span and
 valid-column guards were added after an intermediate development rule worsened
 0.1% indel boundary MAE from 1.364 to 14.221 bp. Reads outside all five gates use
 the unchanged elastic path, preserving short-array, phase-drift and multiple-array
-behavior. These constants were selected on seed 1201 and require frozen seed-2201
-validation before promotion.
+behavior. These constants were selected on seed 1201. After commit `054b935`
+and both hosted workflows passed, frozen seed 2201 was run once and passed all
+14 predeclared validation gates. The result supports the guarded split on this
+synthetic distribution; it does not establish real-data or universal superiority.
 
 ## Operational monomer clustering (experimental)
 

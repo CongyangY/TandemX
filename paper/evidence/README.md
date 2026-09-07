@@ -31,7 +31,21 @@ An unguarded candidate reached 1.933332 but worsened the 0.1%-indel boundary MAE
 to 14.221 bp and was rejected. The selected guarded candidate reached 1.989148,
 retained array/family endpoints, minimum base-union F1 0.997597, maximum
 boundary MAE 2.921 bp and zero negative-control calls. This is development
-evidence; frozen validation seed 2201 remains unobserved.
+evidence; seed 2201 was still unobserved when the rule was selected and frozen.
+
+`cascade_gap_free_validation_v1/` preserves the one-time seed-2201 validation
+run performed only after commit `054b935` and both hosted workflows passed.
+All 96 commands and all 14 frozen gates passed. TandemX's minimum positive array
+recall/precision were 1.0, minimum base-union F1 was 0.997445, maximum boundary
+MAE was 2.35 bp and negative-control call rate was zero. Its
+TandemX/TideHunter runtime and direct-child peak-RSS geometric-mean ratios were
+1.977877 and 0.396864. Some condition-level runtime ratios exceeded 4, so the
+result does not imply per-scenario or real-data dominance. The archive has 13
+verified manifest entries. `figures_v2` is the accepted six-panel rendering
+with editable SVG text; v1 is retained after clarifying its generic NA label.
+The source receipt's revision warning records two untracked local native
+extensions included and hashed in the execution snapshot; scoped tracked source
+matched commit `054b935`.
 
 `retrospective_collapse_source_audit/` freezes the exact ENA metadata queried
 for four candidate old-to-new assembly comparisons and a 12-row PacBio genomic-

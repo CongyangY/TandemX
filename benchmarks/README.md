@@ -81,9 +81,10 @@ acceptance. `archive_cascade_gap_free_development.py` preserves the baseline,
 rejected attempt, selected candidate, profiles and audit at
 `paper/evidence/cascade_gap_free_development_v1`.
 
-`cascade_gap_free_validation_v1.yaml` freezes validation seed 2201, the selected
-rule provenance and 14 accuracy/resource gates. It may be executed exactly once
-only after the source/config commit and both hosted workflows pass:
+`cascade_gap_free_validation_v1.yaml` froze validation seed 2201, the selected
+rule provenance and 14 accuracy/resource gates. Commit `054b935` and both
+hosted workflows passed before the one-time command below was executed. It is
+retained for provenance and must not be issued again:
 
 ```bash
 python -m benchmarks.challenge.run \
@@ -99,8 +100,11 @@ python -m benchmarks.scripts.evaluate_cascade_heldout \
 
 The evaluator rejects incomplete/duplicated matrices, config-hash mismatches,
 missing metrics and comparator failures. A failed speed, memory or accuracy gate
-must be retained as a failed validation experiment. Seed 2201 cannot tune a
-replacement model after it is observed; seeds 3201–3203 remain reserved.
+would have been retained. The 96-run matrix had no process failures and passed
+all 14 gates: runtime ratio 1.977877, direct-child peak-RSS ratio 0.396864,
+minimum positive array recall/precision 1.0, minimum base-union F1 0.997445,
+maximum positive boundary MAE 2.35 bp and zero TandemX negative calls. Seed 2201
+is consumed and cannot tune a replacement model; seeds 3201–3203 remain reserved.
 
 ## Quantify depth-gated validation
 

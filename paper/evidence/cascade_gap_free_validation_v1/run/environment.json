@@ -1,0 +1,109 @@
+{
+  "git_head": "054b93514cfa6750cc2a4444cc40571dc33ba5fb",
+  "revision_warning": "worktree_differs_from_git_head_use_source_digest",
+  "file_hashes": {
+    "LICENSE": "c8d5394e90790dc4f21c8ff75114d273d5e5482ca1de708266b4bbddf20a9cff",
+    "README.md": "17e02287b5af3c8792e81661c58d1913093c7d7a8ae5a193729aeabd0327eeb4",
+    "benchmarks/challenge/__init__.py": "75f411d6ad51f444233b444efc3191ed03bea981498f9e28cc4775522a1b9e53",
+    "benchmarks/challenge/adapters.py": "2c1bc4e341776be81af94b88008bb229ea89fcb960bb806afe9e01ae7f4b7063",
+    "benchmarks/challenge/evaluate.py": "d5d9a9ca9dbc87b6fddbfdd35e9e5c3a3fe6da2d16f2f1df56b7c77639cf4b9b",
+    "benchmarks/challenge/run.py": "1abc5df97ae8ce1d2e5ddbc6c6cbd4cf406a846dfddf9845ae29dad37229a947",
+    "benchmarks/challenge/schema.py": "ea2d531bbc69ed4ce78c5eb8de9ccb77d17a75e0e68c4e3a9608a05316363146",
+    "benchmarks/challenge/sequence_metrics.py": "664676c4b84711b2677eb169c2e3b9c9d60ecf72edd1109c6c1ee0a42d8c63d0",
+    "benchmarks/challenge/simulate.py": "22dfb3645ff6d31019474f1d6fd86f47eb6a8a4f61f456a5cc999ee62eb33368",
+    "benchmarks/challenge/trash_adapters.py": "612205c3089009fcfcaff35efca02494886c529b52b8fdb2871fc45295888d26",
+    "environment.yml": "cfda98a8643bb5707fb106e8ea4d0bf207c0d0ca60c6d24c646859f947218101",
+    "pyproject.toml": "f51c80ac48efc74950d65f28dc9887734174a750d4e297be5465316a68736f67",
+    "rust-core/Cargo.lock": "71509b006bee3b43421df98856edc7c1ba7d0f1b98a9aec663fa605cab6df8aa",
+    "rust-core/Cargo.toml": "a962fd9a72684620a9d9293efb171bc2051426dbda13282b950260b6b9202cc0",
+    "rust-core/src/distance.rs": "66ac7cc705581dfdec8f669697eca45cedc207086062c7571a0ff98f30d3ee03",
+    "rust-core/src/elastic.rs": "2198879df6772e3405fde548e49d9317c74f7066dc76d08229666edd3a14e112",
+    "rust-core/src/family_compare.rs": "184759397a6d4fa6cf59c338848afe3bba70f602c1f32c43bddba6f08a6898cb",
+    "rust-core/src/lib.rs": "0f51db0103567586741089128cbfcb2140ac453122b7b714ceda06efa19932ed",
+    "rust-core/src/representative_index.rs": "0b7ad7a87a888bae56771c25db711e5d9a54b77b508beea512f2a681b4bf8f46",
+    "rust-core/src/spacing.rs": "5c2f7ee2452ed49f13b755b32ff868a828929cf631fa8f9168f7bf3249978952",
+    "rust-core/src/weighted_words.rs": "2440534f3a251288fa4b4e51e7ca833c6358743784255b49b8ae2b8325377bb3",
+    "tandemx/__init__.py": "9cc4e66a64feb439361ba5919aa2be679df76b7cfe5753fb6b10e6d40f271e43",
+    "tandemx/_rust_core.cpython-310-darwin.so": "8e912d88f491ba1a418f9bacab210134872db7927e04cec598d9c97e92392ab1",
+    "tandemx/_rust_core.cpython-311-darwin.so": "5b059e487ca50e8e8c9c77d7fef9bc8223c960c6d84b2cdf6d2ea29899682646",
+    "tandemx/annotation.py": "59b9fb7cb3ebb57177aaf0f7823b607115046873cdeba3a59299d9e6c560d2a2",
+    "tandemx/cli.py": "64af2b554de8d64910eee287a599ec4a03bd6b378f577ab5c6712704e6d9b51c",
+    "tandemx/cohort.py": "c2d941564e8aa67a7cabb8ce4a3295f8465d57abc2f5435c58c78ec026b1ef19",
+    "tandemx/compare/__init__.py": "bd42f487e1a679eee9af71a912fbed0622cf917ba5ef4867dfe5d649b87493f6",
+    "tandemx/compare/mvp.py": "02315eea7fcafbfeedb292edd91acc1b3161806c98e392b2ad0dec387249ddbb",
+    "tandemx/discover/__init__.py": "efa7e14d1800b77f75c1c5f8764470b25a040345960f77ee05ce8d2cf7fd7895",
+    "tandemx/discover/alignment.py": "abc5be4a6f64eda41e503df1c7e43b116340b74391e171a758951d598b6e97df",
+    "tandemx/discover/clustering.py": "5594ec8f3c3eb5ea9da8f5c4fd599e7850139dcf33a72739945aff8e93f69a70",
+    "tandemx/discover/consensus.py": "6afa077151b9d5a0a30fe2113d15fb09c93dcec505f66debe08e6021b6b3df44",
+    "tandemx/discover/distance.py": "0acdab33c8e8c145106e8e1521287b3cde5df287e46f7dac561ad77458c060db",
+    "tandemx/discover/elastic.py": "2ce05c6fc6cc6be73b8b55b94954fbfe03a92edaf7d9b3bd67921f1ed3dc6608",
+    "tandemx/discover/family_audit.py": "365938bd5ba84cacaf9ca473907d85afb347aa4758e0fa805f075382644bf967",
+    "tandemx/discover/mvp.py": "40bb3dcc642f0fbd8a1b49c22beedd167ba8c708b61625d194eb5464c3efde8a",
+    "tandemx/discover/rust_backend.py": "2a723489cf19c2a6621c5a47ffd1de2124dade21d0ab4be053a3e456acc72f82",
+    "tandemx/discover/spacing.py": "a62065719e198fc66d825f81316a9f4b881f15b26435df87a00b6bfef391f926",
+    "tandemx/discover/status.py": "27283ce8acb98981c7078ff28213dda71ff40607565b270c1362e6db48676278",
+    "tandemx/io/__init__.py": "bf30851b522a3dda2669763a036bd3f52a29533d5751eb88b3f22702c21e0139",
+    "tandemx/io/sequences.py": "1f7501cdcf2c8b31822ddc1a97ed031eee038026c9a1173d840357c8e8225295",
+    "tandemx/io/validators.py": "01336e30b1c5bb7ac39157fc660233aec1e9bcd932d51863986d19165e99dc4f",
+    "tandemx/locate/__init__.py": "c5c99d8f56b52ed8c8868412e668e29de3605e427018a894c54a8d7a898e8afb",
+    "tandemx/locate/mvp.py": "fc89b8ebf5ecd5f8aadf3f4e7d0a953b4d751e109abc9c26920742b60802194d",
+    "tandemx/pipeline.py": "e1a8382030f9696511d0c9358022fb74bdaf2eecba2ef611eac13627eb515d74",
+    "tandemx/probe/__init__.py": "dce847b9e126d1e1d98423224414570b040ea5fb08e82179f8432f0bbe225769",
+    "tandemx/probe/mvp.py": "3ae28201eba0c4091417f0f1a702100bcdf9f38c5ffd4ca3fa0a31cb230ff2ee",
+    "tandemx/quantify/__init__.py": "eb4e6a76db06c5dcad964befdbb188930e228b32527bb11e2f580d1c63f098fc",
+    "tandemx/quantify/joint_moments.py": "d7864b72c2e1004423f62de75184a023feef2d916c4db49fcf3be154c13268fa",
+    "tandemx/quantify/joint_multik.py": "21fdafe0bdbdc5f5b8a01dc778130adffa64c3a3ece0144b645ca82e9fe8a504",
+    "tandemx/quantify/multik.py": "dce04beff64d7caa8fef1df5a9523141799c6fbcbd3f73b4ed4f36168accef57",
+    "tandemx/quantify/mvp.py": "302a1f51bbb9fe35138200dfbaec52eb88c079e75d93bd31333e5d4fdd937738",
+    "tandemx/quantify/read_moments.py": "3ccc40468463542488fc074563539cbb4c47d9b9646a8f9ae99b3bb18de80e5c",
+    "tandemx/reporting.py": "5db41cdc58416e1d25701e801ad91867ca98ccf25408e3b8d7003f7cb86de2f4",
+    "tandemx/run_compare.py": "4e0fbd654e3ab947a800dcc5e13bd25281c08664dfde311976a31d782743280c",
+    "tandemx/sensitivity.py": "d7aa9490b78f4e64f1aa3a0d8b38c8dc14cb95a88466b3f99f7c2ddf2d6388de",
+    "tandemx/simulate/__init__.py": "6658de068c15187a53de78809dd274795e968e27cb18e7e8ef2606ddfe7ade03",
+    "tandemx/simulate/toy.py": "7794a22ed6941136d1001b87a6e3a3e744fd6c673e9132944d1eb201c5cc517f",
+    "tandemx/utils/__init__.py": "70aeaf7a75179a8f2fb3f6ba9b93d8f272ce18b0f0e2b1c4b4022ccd6c8ee944",
+    "tandemx/utils/kmers.py": "2bca0ce2d2a5b0ef7d628bfd2462d0f0efe24e17186b8fd371f9ee5bdb9f7174",
+    "tandemx/utils/progress.py": "545a0176e684996083b2505b7154749f0d555972afd9ad51abfaf31ccd0d5acd",
+    "tandemx/utils/threads.py": "1548f1189f5d8b3c29b60f09698b80de2b8ada0f1de9aa529f7187c36bfd8b44",
+    "tandemx/visualize/__init__.py": "22ada5f92dd4a34ffe31f4b8fc6e36ac4cbb6f55bb3b910ffd36e2dc110a6fb1",
+    "tandemx/visualize/discover_catalog.py": "87bf1caa44a0c1c50d392f367eeb29abe1a007ebe19e851c20379a14d7c0c72d",
+    "tandemx/visualize/mvp.py": "5142eab21ea1a6a715d0e940dd5945a2372650f88e1923e2103ebf8581d961e1"
+  },
+  "git_untracked_snapshot_files": [
+    "tandemx/_rust_core.cpython-310-darwin.so",
+    "tandemx/_rust_core.cpython-311-darwin.so"
+  ],
+  "source_snapshot": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/source_snapshot",
+  "source_digest": "76c71244bc05600c5d4302a3a42159844fe8b9772756837ce9e0c219368b4cde",
+  "config_sha256": "23378f77bec4de943ab0aa92c62fb034b1dd370db984086703f9b1226d7afeba",
+  "python": "3.11.15 | packaged by conda-forge | (main, Mar  5 2026, 16:59:26) [Clang 19.1.7 ]",
+  "platform": "macOS-14.4.1-arm64-arm-64bit",
+  "independent_evaluator": {
+    "edlib": "1.3.9.post1"
+  },
+  "executables": {
+    "tandemx": {
+      "path": "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/tandemx",
+      "sha256": "97825749df27e1a47a183c4c7cc23cf35016e12889a15430ebea8f3f083755d6"
+    },
+    "tidehunter": {
+      "path": ".conda-benchmark/bin/TideHunter",
+      "sha256": "b45940e18bd3855f0012305a27ce97fc863927f5479a9e379440da1b3037275c"
+    }
+  },
+  "tool_versions": {
+    "tandemx": {
+      "exit_code": 0,
+      "self_report": "tandemx 0.1.0\n"
+    },
+    "tidehunter": {
+      "exit_code": 0,
+      "self_report": "1.5.5\n"
+    }
+  },
+  "memory_method": "wait4 direct child ru_maxrss",
+  "threads": 1,
+  "split": "validation",
+  "family_recovery_source": "TandemX final catalog; other tools per-array consensuses",
+  "tandemx_execution_source": "source_snapshot via PYTHONPATH and working directory"
+}

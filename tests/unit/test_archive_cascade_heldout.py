@@ -134,3 +134,23 @@ def test_archive_rejects_inconsistent_gate_receipt(tmp_path: Path) -> None:
     config = yaml.safe_load(config_path.read_text())
     with pytest.raises(ValueError, match="internally inconsistent"):
         validate_gate_receipt(config, config_path, run, evaluation)
+
+
+def test_archive_supports_successful_validation_without_failures(
+    tmp_path: Path,
+) -> None:
+    evidence = Path("paper/evidence/cascade_gap_free_validation_v1")
+    destination = tmp_path / "archive"
+    result = archive(
+        evidence / "frozen_config.yaml",
+        evidence / "run",
+        evidence / "evaluation",
+        destination,
+    )
+    assert result["gate_status"] == "passed"
+    assert result["failed_run_count"] == 0
+    assert result["evaluation_split"] == "validation"
+    assert result["evaluation_seeds"] == ["2201"]
+    with (destination / "failed_runs.tsv").open(newline="", encoding="utf-8") as handle:
+        assert list(csv.DictReader(handle, delimiter="\t")) == []
+    assert "2201 was consumed once" in (destination / "README.md").read_text()

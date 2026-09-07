@@ -11,9 +11,9 @@ This section is the restart point for a new Codex window. Verify the state below
 before continuing and do not stage the untracked `.codex/` directory.
 
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `aabaa29`, aligned with `origin/codex/publish-current-progress`; GitHub `main`
+  `054b935`, aligned with `origin/codex/publish-current-progress`; GitHub `main`
   was also fast-forwarded to that object through the API after the local SSH
-  proxy closed the direct push. Hosted runs `34092483185` and `34092507958`
+  proxy closed the direct push. Hosted runs `34095006477` and `34095171697`
   passed Ubuntu/macOS Python tests, Rust checks and wheel builds. The earlier
   commit `9eda196` froze
   the untouched depth-gated quantify validation source, seeds, data-generation
@@ -83,7 +83,7 @@ before continuing and do not stage the untracked `.codex/` directory.
   overlap; v2 fixed the layout but lacked unique panel-source resource keys. The
   opt-in `quantify --single-copy-min-depth 2` implementation records a total-
   bases fallback below the threshold without changing the controls default.
-- **Guarded cascade speed development is complete; validation is untouched.**
+- **Guarded cascade speed development is complete.**
   Fresh development seed 1201 was used for three identical 96-run TandemX/
   TideHunter matrices. The baseline at
   `/Volumes/T7/Codex/TandemX/results/cascade_speed_profile_development_v1_20260907`
@@ -104,9 +104,25 @@ before continuing and do not stage the untracked `.codex/` directory.
   `paper/evidence/cascade_gap_free_development_v1` contains the baseline,
   rejected intermediate, guarded candidate, audit, branch counts, profiles and
   decision; an independent check found 29/29 manifest entries hash-valid.
-  `benchmarks/configs/cascade_gap_free_validation_v1.yaml` freezes seed 2201 and
-  14 gates. Seed 2201 has not been generated or run; reserved seeds 3201--3203
-  also remain untouched.
+  `benchmarks/configs/cascade_gap_free_validation_v1.yaml` froze seed 2201 and
+  14 gates.
+- **Frozen cascade validation passed; seed 2201 is consumed.** Commit `054b935`
+  was pushed to the working branch and `main`; hosted runs `34095006477` and
+  `34095171697` passed Ubuntu/macOS Python, Rust and wheel jobs before the
+  validation directory was created. The once-only run at
+  `/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907`
+  completed 96/96 commands and passed 14/14 gates. TandemX had minimum positive
+  array recall/precision 1.0, minimum base-union F1 0.997445, maximum positive
+  boundary MAE 2.35 bp and zero negative-control calls. Its paired runtime
+  geometric-mean ratio to TideHunter was 1.977877 and direct-child peak-RSS ratio
+  0.396864. Some condition-level runtime ratios exceeded 4, so retain the
+  distribution-level and synthetic-data limits. Reserved seeds 3201--3203 remain
+  untouched. The compact archive has 13/13 valid manifest hashes at
+  `paper/evidence/cascade_gap_free_validation_v1`; `figures_v2` is the accepted
+  six-panel editable SVG/PDF/PNG, while v1 is retained after its generic NA label
+  was clarified. The run's revision warning is caused by two untracked local
+  native-extension files included in the source snapshot; both are hash-recorded.
+  The scoped tracked source was clean at `054b935` before execution.
 - **Real-data source audit.** Exact ENA metadata for PRJEB50694, PRJNA751841,
   PRJNA953663 and PRJNA919186 is archived at
   `paper/evidence/retrospective_collapse_source_audit`. Five manifest files and
@@ -115,24 +131,25 @@ before continuing and do not stage the untracked `.codex/` directory.
   does not establish identical DNA extraction, individual plant, stock or
   BioSample between historical and newer assemblies. All five manifest entries
   were independently rehashed. Donor-matched collapse truth remains unavailable.
-- **Verification state and exact next actions.** Published commit `aabaa29`
-  passes all 522 Python tests, compileall, diff check, CLI help, 72 local
-  Markdown links and both
-  hosted Ubuntu/macOS workflows. At that published checkpoint only `.codex/`
-  remained untracked locally.
+- **Verification state and exact next actions.** Pre-cascade commit `aabaa29`
+  passed all 522 Python tests, compileall, diff check, CLI help, 72 local
+  Markdown links and both hosted Ubuntu/macOS workflows. At that checkpoint
+  only `.codex/` remained untracked locally.
   Rust format and release Clippy with warnings denied pass. `cargo test --release`
   compiles but cannot launch locally because this conda build has only
   `libpython3.11.a`, not the requested dynamic dylib; hosted CI must execute the
   16 Rust tests. The release wheel builds and its isolated install/import plus
   complete toy workflow pass; wheel SHA-256 is
   `7c80951f09c3c52779dc5b81ea1492bd76a3323a11d4f6942a065af5ac45b350`.
-  Final Figure 10 PDF was rendered with Poppler and visually passed. The current
-  uncommitted cascade candidate passes all 531 Python tests in 62.54 s,
-  compileall, diff check, Rust formatting and release Clippy with warnings
-  denied. Its commit, both pushes and both hosted workflows are still required.
-  Only after those hosted workflows pass may seed 2201 be run once and evaluated
-  with the frozen gates. Never tune against consumed 3101--3103 or 6401--6403
-  values, and never rerun seed 2201 after observing it.
+  Final Figure 10 PDF was rendered with Poppler and visually passed. Commit
+  `054b935` passes all 531 Python tests in 62.54 s, compileall, diff check, Rust
+  formatting/release Clippy and both hosted workflows. The post-validation
+  archiver/figure/manuscript source passes 49 focused and all 533 Python tests
+  in 60.11 s, compileall, diff check, 69 local Markdown links, archive hashes
+  and visual/PDF checks. It still requires a commit, both pushes and hosted
+  workflows. Never tune against consumed 2201, 3101--3103 or 6401--6403 values.
+  Continue the real matched-donor, plant-scale-comparator and release-portability
+  gaps.
 
 ## Sequence-clustering and scoring checkpoint (current)
 

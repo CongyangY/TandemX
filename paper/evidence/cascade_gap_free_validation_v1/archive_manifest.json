@@ -1,0 +1,80 @@
+[
+  {
+    "file": "run/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/environment.json",
+    "sha256": "4c99e5828f1e6532c4535fc1ab28a7a15ff9cd3409aa3b24127ef865ecde0784",
+    "bytes": 8338
+  },
+  {
+    "file": "run/run_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/run_config.yaml",
+    "sha256": "42f1919ca5ae8fd8bc36e2991719a002a5b6cba4ace8c18dde443954bc241b24",
+    "bytes": 3377
+  },
+  {
+    "file": "run/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/validation.json",
+    "sha256": "0d8e31581a78e4d2599fde8756650fd88f920d26137becc33c9fc467e12c9bac",
+    "bytes": 88
+  },
+  {
+    "file": "run/raw_runs.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/raw_runs.tsv",
+    "sha256": "6541165fc8d66902d7ccd78172636fa034e551f7de29c864315272c67c5d8ac0",
+    "bytes": 59790
+  },
+  {
+    "file": "run/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/summary.tsv",
+    "sha256": "d555b359c23fb5efe9ef9237f98aff00cd3aa0dc87d3ebf5e6236fddd4db75aa",
+    "bytes": 7373
+  },
+  {
+    "file": "run/run.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/run.log",
+    "sha256": "491eb1f9a7919d617640bd2e163392edec05bd9b33667beaa07842a4d46b35a7",
+    "bytes": 7095
+  },
+  {
+    "file": "evaluation/gate_results.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/gate_evaluation/gate_results.json",
+    "sha256": "593bacd41d049b36afd65c45623ff587b176889dbd7b886328c71ad523e11ee7",
+    "bytes": 2759
+  },
+  {
+    "file": "evaluation/paired_tidehunter.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/cascade_gap_free_validation_v1_20260907/gate_evaluation/paired_tidehunter.tsv",
+    "sha256": "ec2445bb9f6608d2679cd689bec92ae055cb28e29cbf3a64c41c44034e89f35d",
+    "bytes": 2917
+  },
+  {
+    "file": "frozen_config.yaml",
+    "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/cascade_gap_free_validation_v1.yaml",
+    "sha256": "23378f77bec4de943ab0aa92c62fb034b1dd370db984086703f9b1226d7afeba",
+    "bytes": 3352
+  },
+  {
+    "file": "failed_runs.tsv",
+    "source": "derived_after_validation",
+    "sha256": "b9a4f33d9560fab4ae4500b3181d94ec0118f607d3c7a385cabd6401f2e67a50",
+    "bytes": 972
+  },
+  {
+    "file": "failure_artifacts.tsv",
+    "source": "derived_after_validation",
+    "sha256": "e9bc946931351c28f385b3b27cf4cb05f00daf0df60742be8a492bdb5d69b594",
+    "bytes": 64
+  },
+  {
+    "file": "archive_summary.json",
+    "source": "derived_after_validation",
+    "sha256": "27b10b38a2fd2258e8f29d2b8c561cf424b3e49e5eb388efa9aa085fb2530b16",
+    "bytes": 427
+  },
+  {
+    "file": "README.md",
+    "source": "derived_after_validation",
+    "sha256": "7e9e6d870ec86d441308d3a85d270122992927757f84178907d55deaa77bf281",
+    "bytes": 316
+  }
+]

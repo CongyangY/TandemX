@@ -1,4 +1,4 @@
-"""Render a six-panel audit of the frozen cascade held-out benchmark."""
+"""Render a six-panel audit of a frozen cascade evaluation benchmark."""
 from __future__ import annotations
 
 import argparse
@@ -19,7 +19,6 @@ matplotlib.rcParams["svg.fonttype"] = "none"
 from benchmarks.challenge.schema import digest_file, write_table
 
 
-TOOLS = ("tandemx", "trf", "tidehunter")
 TOOL_LABELS = {"tandemx": "TandemX", "trf": "TRF", "tidehunter": "TideHunter"}
 
 
@@ -94,6 +93,14 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
     config = yaml.safe_load(required["config"].read_text())
     if gates["matrix"] != {"raw_rows": len(raw), "summary_rows": len(summary), "datasets": len(paired)}:
         raise ValueError("Figure inputs disagree with the gate matrix")
+    evaluation_split = str(config.get("evaluation_split", "heldout"))
+    evaluation_seeds = [str(seed) for seed in config["seeds"][evaluation_split]]
+    seed_label = (
+        evaluation_seeds[0]
+        if len(evaluation_seeds) == 1
+        else "mean_of_" + "_".join(evaluation_seeds)
+    )
+    tools = tuple(config["tools"])
     scenarios = [row["name"] for row in config["scenarios"]]
     positive = [
         row["name"]
@@ -108,8 +115,8 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
     source_rows: list[dict[str, object]] = []
     matrices: dict[str, np.ndarray] = {}
     for panel, field in (("A", "array_recall"), ("B", "array_precision")):
-        matrix = np.full((len(TOOLS), len(positive)), np.nan)
-        for i, tool in enumerate(TOOLS):
+        matrix = np.full((len(tools), len(positive)), np.nan)
+        for i, tool in enumerate(tools):
             for j, scenario in enumerate(positive):
                 values = [
                     value
@@ -126,14 +133,14 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
                         "tool": tool,
                         "metric": field,
                         "value": matrix[i, j] if values else None,
-                        "seed": "mean_of_3101_3102_3103",
+                        "seed": seed_label,
                         "status": "observed" if values else "missing",
                     }
                 )
         matrices[panel] = matrix
 
-    negative_matrix = np.full((len(TOOLS), len(negative)), np.nan)
-    for i, tool in enumerate(TOOLS):
+    negative_matrix = np.full((len(tools), len(negative)), np.nan)
+    for i, tool in enumerate(tools):
         for j, scenario in enumerate(negative):
             values = [
                 value
@@ -150,7 +157,7 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
                     "tool": tool,
                     "metric": "negative_read_call_rate",
                     "value": negative_matrix[i, j] if values else None,
-                    "seed": "mean_of_3101_3102_3103",
+                    "seed": seed_label,
                     "status": "observed" if values else "all_repetitions_failed",
                 }
             )
@@ -159,14 +166,14 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
     _heatmap(
         axes[0, 0],
         matrices["A"],
-        [TOOL_LABELS[tool] for tool in TOOLS],
+        [TOOL_LABELS.get(tool, tool) for tool in tools],
         positive,
-        "A  Mean array recall across held-out seeds",
+        f"A  Mean array recall across {evaluation_split} seeds",
     )
     _heatmap(
         axes[0, 1],
         matrices["B"],
-        [TOOL_LABELS[tool] for tool in TOOLS],
+        [TOOL_LABELS.get(tool, tool) for tool in tools],
         positive,
         "B  Mean raw-call array precision",
         minimum=0.5,
@@ -174,9 +181,9 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
     _heatmap(
         axes[1, 0],
         negative_matrix,
-        [TOOL_LABELS[tool] for tool in TOOLS],
+        [TOOL_LABELS.get(tool, tool) for tool in tools],
         negative,
-        "C  Negative-read call rate (NA = process failure)",
+        "C  Negative-read call rate (NA = unavailable)",
         minimum=0.0,
     )
 
@@ -225,7 +232,7 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
         axis.axhline(threshold, color="#d62728", linestyle="--", linewidth=1.2, label=f"gate {threshold:g}")
         axis.axhline(geomean, color="black", linestyle=":", linewidth=1.2, label=f"geomean {geomean:.3f}")
         axis.set_title(title, loc="left", fontweight="bold")
-        axis.set_xlabel("scenario-seed pair (48 total)")
+        axis.set_xlabel(f"scenario-seed pair ({len(paired)} total)")
         axis.set_ylabel(ylabel)
         axis.grid(axis="y", alpha=0.2)
         axis.legend(frameon=False, fontsize=8)
@@ -239,7 +246,7 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
     gate_axis.set_xlim(0, 1.02)
     gate_axis.set_xticks([])
     gate_axis.invert_yaxis()
-    gate_axis.set_title("F  Predeclared promotion gates", loc="left", fontweight="bold")
+    gate_axis.set_title("F  Predeclared evaluation gates", loc="left", fontweight="bold")
     for index, row in enumerate(gate_rows):
         observed = row.get("observed")
         observed_text = "NA" if observed is None else f"{float(observed):.3g}"
@@ -252,35 +259,57 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
                 "tool": "gate",
                 "metric": "passed",
                 "value": 1 if row["passed"] else 0,
-                "seed": "heldout_matrix",
+                "seed": f"{evaluation_split}_matrix",
                 "status": label,
             }
         )
-    fig.suptitle(
-        "Cascade discovery held-out audit: accuracy and memory pass; promotion fails on runtime and comparator completion",
-        fontsize=15,
-        fontweight="bold",
-    )
+    if gates["status"] == "passed":
+        title = (
+            f"Cascade discovery {evaluation_split} audit: "
+            f"all {len(gate_rows)} predeclared gates pass"
+        )
+    else:
+        title = (
+            f"Cascade discovery {evaluation_split} audit: "
+            f"{len(gates['failed_gate_names'])} predeclared gates fail"
+        )
+    fig.suptitle(title, fontsize=15, fontweight="bold")
     outdir.mkdir(parents=True)
+    stem = "cascade_heldout" if evaluation_split == "heldout" else f"cascade_{evaluation_split}"
     for extension in ("svg", "pdf", "png"):
-        fig.savefig(outdir / f"cascade_heldout.{extension}", dpi=180)
+        fig.savefig(outdir / f"{stem}.{extension}", dpi=180)
     plt.close(fig)
     write_table(
         outdir / "panel_source.tsv",
         source_rows,
         ["panel", "scenario", "tool", "metric", "value", "seed", "status"],
     )
+    gate_by_name = {row["name"]: row for row in gate_rows}
+    runtime_ratio = float(
+        gate_by_name["tidehunter_runtime_geometric_mean_ratio"]["observed"]
+    )
+    rss_ratio = float(
+        gate_by_name["tidehunter_peak_rss_geometric_mean_ratio"]["observed"]
+    )
+    status_text = (
+        f"All {len(gate_rows)} frozen gates passed; wall-time and peak-RSS "
+        f"geometric-mean ratios were {runtime_ratio:.6f} and {rss_ratio:.6f}."
+        if gates["status"] == "passed"
+        else (
+            f"The failed gates were {', '.join(gates['failed_gate_names'])}; "
+            f"wall-time and peak-RSS ratios were {runtime_ratio:.6f} and "
+            f"{rss_ratio:.6f}."
+        )
+    )
     (outdir / "figure_legend.md").write_text(
-        "**Cascade held-out audit.** A-B, mean one-to-one array recall and raw-call "
-        "precision across independent seeds 3101-3103 for 13 positive scenarios. "
-        "C, negative-read call rates for three controls; TRF is NA on the low-"
-        "complexity control because all nine processes reached the frozen 180-s "
-        "timeout. D-E, paired TandemX/TideHunter median wall-time and direct-child "
-        "peak-RSS ratios for all 48 scenario-seed groups; dotted lines are geometric "
-        "means and dashed lines are predeclared limits. F, all 12 frozen gates. "
-        "TandemX passed accuracy, determinism, false-call, family and RSS gates but "
-        "failed promotion because the runtime ratio was 2.458 (>2.0) and comparator "
-        "completion was required. Technical repetitions measure execution variation, "
+        f"**Cascade {evaluation_split} audit.** A-B, mean one-to-one array recall "
+        f"and raw-call precision across seed(s) {', '.join(evaluation_seeds)} for "
+        "13 positive scenarios. C, negative-read call rates for three controls; "
+        "NA denotes a missing metric and is never converted to zero. D-E, paired "
+        "TandemX/TideHunter median wall-time and direct-child peak-RSS ratios for "
+        f"all {len(paired)} scenario-seed groups; dotted lines are geometric means "
+        f"and dashed lines are predeclared limits. F, all {len(gate_rows)} frozen "
+        f"gates. {status_text} Technical repetitions measure execution variation, "
         "not biological replication.\n"
     )
     provenance = {
@@ -293,7 +322,13 @@ def plot(evidence: Path, outdir: Path) -> dict[str, object]:
             for path in sorted(outdir.iterdir())
             if path.name != "figure_provenance.json"
         },
-        "warning": "heldout_failure_retained;mean_cells_average_three_independent_seeds;timing_repetitions_not_biological_replicates",
+        "evaluation_split": evaluation_split,
+        "evaluation_seeds": evaluation_seeds,
+        "warning": (
+            f"{evaluation_split}_result_retained;"
+            "mean_cells_average_only_the_declared_evaluation_seeds;"
+            "timing_repetitions_not_biological_replicates"
+        ),
     }
     (outdir / "figure_provenance.json").write_text(json.dumps(provenance, indent=2) + "\n")
     return provenance

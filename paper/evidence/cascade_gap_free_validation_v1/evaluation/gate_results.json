@@ -1,0 +1,113 @@
+{
+  "benchmark_id": "cascade_gap_free_validation_v1",
+  "status": "passed",
+  "matrix": {
+    "raw_rows": 96,
+    "summary_rows": 32,
+    "datasets": 16
+  },
+  "config_sha256": "23378f77bec4de943ab0aa92c62fb034b1dd370db984086703f9b1226d7afeba",
+  "run_source_digest": "76c71244bc05600c5d4302a3a42159844fe8b9772756837ce9e0c219368b4cde",
+  "gates": [
+    {
+      "name": "tandemx_failed_runs",
+      "passed": true,
+      "observed": 0,
+      "operator": "<=",
+      "threshold": 0
+    },
+    {
+      "name": "all_comparator_failed_runs",
+      "passed": true,
+      "observed": 0,
+      "operator": "<=",
+      "threshold": 0
+    },
+    {
+      "name": "tandemx_deterministic_groups_fraction",
+      "passed": true,
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "name": "minimum_positive_array_recall",
+      "passed": true,
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 0.95
+    },
+    {
+      "name": "minimum_positive_array_precision",
+      "passed": true,
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 0.95
+    },
+    {
+      "name": "maximum_negative_read_call_rate",
+      "passed": true,
+      "observed": 0.0,
+      "operator": "<=",
+      "threshold": 0.0
+    },
+    {
+      "name": "minimum_related_family_cyclic_monomer_recall",
+      "passed": true,
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "name": "minimum_positive_base_union_f1",
+      "passed": true,
+      "observed": 0.997444586411866,
+      "operator": ">=",
+      "threshold": 0.995
+    },
+    {
+      "name": "maximum_positive_matched_boundary_mae_bp",
+      "passed": true,
+      "observed": 2.35,
+      "operator": "<=",
+      "threshold": 4.0
+    },
+    {
+      "name": "paired_tidehunter_groups_fraction",
+      "passed": true,
+      "observed": 1.0,
+      "operator": ">=",
+      "threshold": 1.0
+    },
+    {
+      "name": "worst_tidehunter_array_recall_difference",
+      "passed": true,
+      "observed": 0.0,
+      "operator": ">=",
+      "threshold": -0.02
+    },
+    {
+      "name": "worst_tidehunter_array_precision_difference",
+      "passed": true,
+      "observed": 0.0,
+      "operator": ">=",
+      "threshold": -0.02
+    },
+    {
+      "name": "tidehunter_runtime_geometric_mean_ratio",
+      "passed": true,
+      "observed": 1.9778767360380727,
+      "operator": "<=",
+      "threshold": 2.0
+    },
+    {
+      "name": "tidehunter_peak_rss_geometric_mean_ratio",
+      "passed": true,
+      "observed": 0.39686364356383963,
+      "operator": "<=",
+      "threshold": 1.25
+    }
+  ],
+  "failed_gate_names": [],
+  "warning": "validation_seeds_consumed_once;failed_gates_must_be_retained;timing_repetitions_are_not_biological_replicates"
+}

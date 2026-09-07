@@ -101,6 +101,14 @@ retained slightly higher base precision. Actual task-specific TRASH1/2 assembly
 comparisons now exist and preserve native unit/consensus alternatives. TAREAN
 and further applicable tools still require their own input-compatible evaluation.
 
+A separate guarded-cascade validation passed all 14 frozen synthetic gates:
+TandemX/TideHunter wall-time and direct-child RSS geometric-mean ratios were
+1.977877 and 0.396864, TandemX minimum positive array recall/precision were 1.0,
+and its negative-control call rate was zero. Individual runtime ratios still
+exceeded 4 in some scenarios, and existing real-data runs remain slower than
+TideHunter. The result therefore supports the frozen synthetic distribution,
+not universal or real-data superiority.
+
 The stronger publication-level differentiation is the integrated read-first,
 assembly-aware workflow: candidate monomer discovery, diagnostic k-mer copy
 number estimation, assembly localization, possible assembly

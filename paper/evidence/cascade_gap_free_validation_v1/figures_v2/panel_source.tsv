@@ -1,0 +1,105 @@
+panel	scenario	tool	metric	value	seed	status
+A	clean_60	tandemx	array_recall	1.0	2201	observed
+A	clean_171	tandemx	array_recall	1.0	2201	observed
+A	clean_421	tandemx	array_recall	1.0	2201	observed
+A	clean_729	tandemx	array_recall	1.0	2201	observed
+A	substitution_1pct	tandemx	array_recall	1.0	2201	observed
+A	substitution_5pct	tandemx	array_recall	1.0	2201	observed
+A	indel_01pct	tandemx	array_recall	1.0	2201	observed
+A	indel_1pct	tandemx	array_recall	1.0	2201	observed
+A	indel_4pct	tandemx	array_recall	1.0	2201	observed
+A	divergent_units	tandemx	array_recall	1.0	2201	observed
+A	related_families	tandemx	array_recall	1.0	2201	observed
+A	short_arrays	tandemx	array_recall	1.0	2201	observed
+A	two_arrays	tandemx	array_recall	1.0	2201	observed
+A	clean_60	tidehunter	array_recall	1.0	2201	observed
+A	clean_171	tidehunter	array_recall	1.0	2201	observed
+A	clean_421	tidehunter	array_recall	1.0	2201	observed
+A	clean_729	tidehunter	array_recall	1.0	2201	observed
+A	substitution_1pct	tidehunter	array_recall	1.0	2201	observed
+A	substitution_5pct	tidehunter	array_recall	1.0	2201	observed
+A	indel_01pct	tidehunter	array_recall	1.0	2201	observed
+A	indel_1pct	tidehunter	array_recall	1.0	2201	observed
+A	indel_4pct	tidehunter	array_recall	1.0	2201	observed
+A	divergent_units	tidehunter	array_recall	0.9142857142857143	2201	observed
+A	related_families	tidehunter	array_recall	1.0	2201	observed
+A	short_arrays	tidehunter	array_recall	1.0	2201	observed
+A	two_arrays	tidehunter	array_recall	1.0	2201	observed
+B	clean_60	tandemx	array_precision	1.0	2201	observed
+B	clean_171	tandemx	array_precision	1.0	2201	observed
+B	clean_421	tandemx	array_precision	1.0	2201	observed
+B	clean_729	tandemx	array_precision	1.0	2201	observed
+B	substitution_1pct	tandemx	array_precision	1.0	2201	observed
+B	substitution_5pct	tandemx	array_precision	1.0	2201	observed
+B	indel_01pct	tandemx	array_precision	1.0	2201	observed
+B	indel_1pct	tandemx	array_precision	1.0	2201	observed
+B	indel_4pct	tandemx	array_precision	1.0	2201	observed
+B	divergent_units	tandemx	array_precision	1.0	2201	observed
+B	related_families	tandemx	array_precision	1.0	2201	observed
+B	short_arrays	tandemx	array_precision	1.0	2201	observed
+B	two_arrays	tandemx	array_precision	1.0	2201	observed
+B	clean_60	tidehunter	array_precision	1.0	2201	observed
+B	clean_171	tidehunter	array_precision	1.0	2201	observed
+B	clean_421	tidehunter	array_precision	1.0	2201	observed
+B	clean_729	tidehunter	array_precision	1.0	2201	observed
+B	substitution_1pct	tidehunter	array_precision	0.9859154929577465	2201	observed
+B	substitution_5pct	tidehunter	array_precision	0.8536585365853658	2201	observed
+B	indel_01pct	tidehunter	array_precision	1.0	2201	observed
+B	indel_1pct	tidehunter	array_precision	1.0	2201	observed
+B	indel_4pct	tidehunter	array_precision	0.958904109589041	2201	observed
+B	divergent_units	tidehunter	array_precision	0.4507042253521127	2201	observed
+B	related_families	tidehunter	array_precision	0.9859154929577465	2201	observed
+B	short_arrays	tidehunter	array_precision	1.0	2201	observed
+B	two_arrays	tidehunter	array_precision	1.0	2201	observed
+C	dispersed_control	tandemx	negative_read_call_rate	0.0	2201	observed
+C	at_rich_control	tandemx	negative_read_call_rate	0.0	2201	observed
+C	low_complexity_control	tandemx	negative_read_call_rate	0.0	2201	observed
+C	dispersed_control	tidehunter	negative_read_call_rate	0.75	2201	observed
+C	at_rich_control	tidehunter	negative_read_call_rate	0.43	2201	observed
+C	low_complexity_control	tidehunter	negative_read_call_rate	1.0	2201	observed
+D	at_rich_control	tandemx_over_tidehunter	median_runtime_seconds_ratio	1.8654449358130698	2201	negative_control
+D	clean_171	tandemx_over_tidehunter	median_runtime_seconds_ratio	1.545484636486009	2201	positive
+D	clean_421	tandemx_over_tidehunter	median_runtime_seconds_ratio	1.1818162877974656	2201	positive
+D	clean_60	tandemx_over_tidehunter	median_runtime_seconds_ratio	1.976970269814757	2201	positive
+D	clean_729	tandemx_over_tidehunter	median_runtime_seconds_ratio	0.9512558149442352	2201	positive
+D	dispersed_control	tandemx_over_tidehunter	median_runtime_seconds_ratio	1.3020760224060839	2201	negative_control
+D	divergent_units	tandemx_over_tidehunter	median_runtime_seconds_ratio	3.855472076796685	2201	positive
+D	indel_01pct	tandemx_over_tidehunter	median_runtime_seconds_ratio	3.3371563872987218	2201	positive
+D	indel_1pct	tandemx_over_tidehunter	median_runtime_seconds_ratio	3.8028396098387756	2201	positive
+D	indel_4pct	tandemx_over_tidehunter	median_runtime_seconds_ratio	3.6133956638829416	2201	positive
+D	low_complexity_control	tandemx_over_tidehunter	median_runtime_seconds_ratio	0.2808489599483365	2201	negative_control
+D	related_families	tandemx_over_tidehunter	median_runtime_seconds_ratio	1.6255957328293646	2201	positive
+D	short_arrays	tandemx_over_tidehunter	median_runtime_seconds_ratio	3.6333405205719838	2201	positive
+D	substitution_1pct	tandemx_over_tidehunter	median_runtime_seconds_ratio	1.7628447724771432	2201	positive
+D	substitution_5pct	tandemx_over_tidehunter	median_runtime_seconds_ratio	4.202602561746067	2201	positive
+D	two_arrays	tandemx_over_tidehunter	median_runtime_seconds_ratio	3.025903960001653	2201	positive
+E	at_rich_control	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.3077051646331272	2201	negative_control
+E	clean_171	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.40779510022271714	2201	positive
+E	clean_421	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.3896684970510474	2201	positive
+E	clean_60	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.4970893444697545	2201	positive
+E	clean_729	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.2979452054794521	2201	positive
+E	dispersed_control	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.2673843468140821	2201	negative_control
+E	divergent_units	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.424223073648361	2201	positive
+E	indel_01pct	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.362188495409406	2201	positive
+E	indel_1pct	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.434870188003581	2201	positive
+E	indel_4pct	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.3242479641017118	2201	positive
+E	low_complexity_control	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.8779826464208242	2201	negative_control
+E	related_families	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.38235889136152135	2201	positive
+E	short_arrays	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.5537449075524914	2201	positive
+E	substitution_1pct	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.36532682193839217	2201	positive
+E	substitution_5pct	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.33685646096147287	2201	positive
+E	two_arrays	tandemx_over_tidehunter	median_peak_rss_mib_ratio	0.3945690187204279	2201	positive
+F	tandemx_failed_runs	gate	passed	1	validation_matrix	PASS  0 <= 0
+F	all_comparator_failed_runs	gate	passed	1	validation_matrix	PASS  0 <= 0
+F	tandemx_deterministic_groups_fraction	gate	passed	1	validation_matrix	PASS  1 >= 1
+F	minimum_positive_array_recall	gate	passed	1	validation_matrix	PASS  1 >= 0.95
+F	minimum_positive_array_precision	gate	passed	1	validation_matrix	PASS  1 >= 0.95
+F	maximum_negative_read_call_rate	gate	passed	1	validation_matrix	PASS  0 <= 0
+F	minimum_related_family_cyclic_monomer_recall	gate	passed	1	validation_matrix	PASS  1 >= 1
+F	minimum_positive_base_union_f1	gate	passed	1	validation_matrix	PASS  0.997 >= 0.995
+F	maximum_positive_matched_boundary_mae_bp	gate	passed	1	validation_matrix	PASS  2.35 <= 4
+F	paired_tidehunter_groups_fraction	gate	passed	1	validation_matrix	PASS  1 >= 1
+F	worst_tidehunter_array_recall_difference	gate	passed	1	validation_matrix	PASS  0 >= -0.02
+F	worst_tidehunter_array_precision_difference	gate	passed	1	validation_matrix	PASS  0 >= -0.02
+F	tidehunter_runtime_geometric_mean_ratio	gate	passed	1	validation_matrix	PASS  1.98 <= 2
+F	tidehunter_peak_rss_geometric_mean_ratio	gate	passed	1	validation_matrix	PASS  0.397 <= 1.25

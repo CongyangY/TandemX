@@ -9,8 +9,8 @@ superior simply because its combined workflow has more commands.
 
 | Method | Relevant endpoint | Planned role and boundary | Actual state |
 | --- | --- | --- | --- |
-| TRF | De novo intervals and repeat period | Established comparator; raw duplicate calls and standardized interval-union metrics both required | Development benchmark executed |
-| TideHunter | Read-local repeat consensus and intervals | Strong long-read comparator; retain recommended settings and matched period range | Development benchmark executed |
+| TRF | De novo intervals and repeat period | Established comparator; raw duplicate calls and standardized interval-union metrics both required | Development benchmark executed; first cascade held-out retained nine low-complexity timeouts |
+| TideHunter | Read-local repeat consensus and intervals | Strong long-read comparator; retain recommended settings and matched period range | Development and first held-out comparisons executed; fresh guarded-cascade validation completed 96/96 commands and 14/14 gates |
 | TideCluster | Assembly tandem-repeat detection and family clustering | Tier-1 assembly comparator; run its TideHunter detection and MMseqs2/BLAST clustering as one end-to-end method, then score intervals and sequence-supported families independently | Reproducible 1.21.2 linux/amd64 image and planted-truth smoke passed; plant-scale matched comparison pending |
 | ULTRA | Genomic tandem-repeat annotation | Indel-aware probabilistic baseline; default and documented tuning configurations, including tuning cost | v1.2.2 built; default and tuned ten-read pilots completed |
 | TRASH | Assembly tandem arrays and monomers | Plant/large-genome relevance; matched assembly or synthetic sequence endpoints | Pinned Linux ARM64 offline author positive-control completed;355 monomer sequences require a recorded -1 bp coordinate offset for exact source agreement; no plant-scale comparison yet |

@@ -139,9 +139,16 @@ of at least 0.7. It retained the baseline array/family results, had minimum
 positive base-union F1 0.997597, maximum positive boundary MAE 2.921 bp and zero
 negative-control calls. Its 1,600-read screen audit accepted 403 reads with no
 truth-scored negative, incorrect single-array or multi-array acceptance. These
-constants were selected on development data. Validation seed 2201 remains
-unobserved, so the result is not yet a promoted speed claim. Compact evidence is
-in `paper/evidence/cascade_gap_free_development_v1`.
+constants were selected on development data. Commit `054b935` and its working-
+branch/main hosted workflows passed before validation seed 2201 was used once.
+The 96-run validation matrix completed without failures and passed all 14 gates:
+the runtime ratio was 1.977877, direct-child RSS ratio 0.396864, minimum positive
+array recall/precision 1.0, minimum base-union F1 0.997445, maximum positive
+boundary MAE 2.35 bp and maximum negative-read call rate 0. Some condition-level
+runtime ratios still exceeded 4, so this is a distribution-level synthetic
+result rather than per-condition or real-data speed dominance. Compact evidence
+is in `paper/evidence/cascade_gap_free_development_v1` and
+`paper/evidence/cascade_gap_free_validation_v1`.
 
 ## Remaining Limits
 

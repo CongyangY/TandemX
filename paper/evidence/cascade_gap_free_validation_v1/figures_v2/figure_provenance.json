@@ -1,0 +1,43 @@
+{
+  "benchmark_id": "cascade_gap_free_validation_v1",
+  "gate_status": "passed",
+  "failed_gate_names": [],
+  "inputs": {
+    "summary": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_gap_free_validation_v1/run/summary.tsv",
+      "sha256": "d555b359c23fb5efe9ef9237f98aff00cd3aa0dc87d3ebf5e6236fddd4db75aa"
+    },
+    "raw": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_gap_free_validation_v1/run/raw_runs.tsv",
+      "sha256": "6541165fc8d66902d7ccd78172636fa034e551f7de29c864315272c67c5d8ac0"
+    },
+    "paired": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_gap_free_validation_v1/evaluation/paired_tidehunter.tsv",
+      "sha256": "ec2445bb9f6608d2679cd689bec92ae055cb28e29cbf3a64c41c44034e89f35d"
+    },
+    "gates": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_gap_free_validation_v1/evaluation/gate_results.json",
+      "sha256": "593bacd41d049b36afd65c45623ff587b176889dbd7b886328c71ad523e11ee7"
+    },
+    "config": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_gap_free_validation_v1/frozen_config.yaml",
+      "sha256": "23378f77bec4de943ab0aa92c62fb034b1dd370db984086703f9b1226d7afeba"
+    },
+    "archive": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/cascade_gap_free_validation_v1/archive_summary.json",
+      "sha256": "27b10b38a2fd2258e8f29d2b8c561cf424b3e49e5eb388efa9aa085fb2530b16"
+    }
+  },
+  "outputs": {
+    "cascade_validation.pdf": "1d207b745e7f010a80e7c946b039edf646d74269493c07ec137088ac7c301c56",
+    "cascade_validation.png": "fc9dcf884465c8310f3fefd0df03ceed01070a878d283d3a16dbcc972197434a",
+    "cascade_validation.svg": "411cbfc6e525560c000fbd29d28b5d6f0f4d4a8bf1775c21dea489c031788ccc",
+    "figure_legend.md": "cbb2040d5f4cb3102b8363a95426125d4e1bfc3a6ee6f14af9d5235850acb272",
+    "panel_source.tsv": "9f25844bf2f1d3f3b4ae333c356778e4915a99792a459b14728e4af254bcdaf7"
+  },
+  "evaluation_split": "validation",
+  "evaluation_seeds": [
+    "2201"
+  ],
+  "warning": "validation_result_retained;mean_cells_average_only_the_declared_evaluation_seeds;timing_repetitions_not_biological_replicates"
+}

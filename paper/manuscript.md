@@ -41,7 +41,12 @@ decreased from 96.93% to 95.87%, failing the predeclared held-out gates.
 Exact native optimizations shortened a 1.129-Gb maize replay by 23.61% relative
 to its preceding indexed version while preserving seven output files byte for
 byte; peak memory increased 0.81%. External comparisons showed task-dependent
-trade-offs and did not establish universal speed, memory or accuracy superiority.
+trade-offs. After a failed first cascade promotion and a guarded development
+revision, a frozen 96-run validation passed all 14 gates: the
+TandemX/TideHunter wall-time and direct-child peak-RSS geometric-mean ratios
+were 1.9779 and 0.3969, minimum positive array recall/precision were 1.0 and
+the negative-control call rate was zero. Some scenario runtime ratios exceeded
+4, so this does not establish universal speed, memory or accuracy superiority.
 These results support further evaluation of read-based repeat evidence and
 conditional uncertainty, while independent biological truth, held-out
 generalization and production-scale validation remain necessary.
@@ -131,6 +136,29 @@ time ratio was 2.457943 against the predeclared maximum 2.0. Ten of 12 gates
 passed, but the mode remains non-default. The failed processes, gates and both
 favorable and unfavorable metrics are retained together (Figure 8; Evidence
 E20).
+
+We next used fresh development seed 1201 to diagnose the runtime deficit without
+reusing those held-out rows. A broad 30%-read-span/95%-shifted-identity gap-free
+path reduced the paired runtime ratio from 2.357698 to 1.933332, but worsened
+0.1%-indel boundary MAE from 1.364 to 14.221 bp and was rejected. A read-level
+audit then added two observable guards: at least 95% valid shifted columns and
+at most 2% residual from an integer number of proposed units. The resulting
+candidate completed the same 96-run development matrix with a ratio of 1.989148,
+minimum base-union F1 0.997597 and maximum boundary MAE 2.921 bp. Commit
+`054b935`, the exact rule, seed 2201 and 14 gates were fixed before both
+working-branch and main hosted workflows passed.
+
+Seed 2201 was then run once. All 96 TandemX/TideHunter executions completed and
+all 14 gates passed. TandemX's minimum positive array recall and precision were
+1.0, minimum base-union F1 was 0.997445, maximum positive boundary MAE was
+2.35 bp and no negative-control read was called. Relative to TideHunter, the
+wall-time geometric-mean ratio was 1.977877 and direct-child peak-RSS ratio was
+0.396864; the worst positive recall and precision differences were both zero,
+satisfying non-inferiority. The wall-time result is an aggregate across the
+frozen distribution: individual scenario ratios reached 4.203, and technical
+repetitions are not biological replicates. The validation therefore resolves
+the predeclared synthetic promotion gate without establishing real-data or
+per-condition dominance (Figure 11; Evidence E25).
 
 ### Comparator conclusions depend on the measured endpoint
 
@@ -525,12 +553,18 @@ as a guardrail. Its independent test failed despite a sensitivity gain: all
 additional false positives occurred at 1×, and the held-out FPR and precision
 regressed overall and in the worst seed. This shows that seed-level robustness
 within three development genomes was insufficient to guarantee transfer.
-None establishes that TandemX dominates existing tools. In the current read simulation, all three
-methods recovered every founder. TRF retained slightly higher base precision,
-and TideHunter remained faster. TRASH2 was a strong assembly baseline after
+The guarded cascade subsequently passed its separate frozen synthetic
+validation, correcting the earlier aggregate runtime-gate failure while using
+about 40% of TideHunter's measured direct-child RSS. The 1.977877 runtime ratio
+was close to the predeclared limit and several scenarios remained more than
+four-fold slower. It therefore supports the cascade routing rule on the tested
+distribution rather than a blanket superiority claim. In another read
+simulation all three methods recovered every founder; TRF retained slightly
+higher base precision, and existing real-read diagnostics still place
+TideHunter ahead in elapsed time. TRASH2 was a strong assembly baseline after
 its primary unit output was interpreted correctly. Maintaining these results
-is necessary for a defensible comparison and identifies where algorithmic
-work is still required.
+is necessary for a defensible comparison and identifies where algorithmic work
+is still required.
 
 The uncertainty analysis also distinguishes usable inference from a plausible
 looking numerical interval. Correlated k values cannot supply independent
@@ -562,10 +596,13 @@ held-out families and species; it is not a substitute for these evidence gaps.
 ### Software and reproducibility
 
 Development used the dedicated `tandemx-dev` Python 3.11 environment and a
-PyO3/Rust extension. The current source passed 462 local Python tests. Its Rust
-source is unchanged from commit 1231743, whose hosted Linux/macOS workflows
-passed Python tests, 15 Rust tests, formatting, clippy with warnings denied and
-distributable-wheel builds.
+PyO3/Rust extension. Frozen validation commit `054b935` passed 531 local Python
+tests, compileall, Rust formatting and release clippy with warnings denied.
+Hosted runs `34095006477` and `34095171697` passed Linux/macOS Python tests,
+executable Rust checks and distributable-wheel builds before seed 2201 was used.
+The validation source snapshot included and hashed two untracked local native
+extensions, which triggered its conservative revision warning; scoped tracked
+source matched commit `054b935` before execution.
 Per-run manifests and compact evidence archives preserve
 the exact source, input and output hashes used for each result and take
 precedence over a manuscript-level version label.
@@ -670,6 +707,20 @@ requiring interval IoU ≥ 0.5 and period error ≤ max(2 bp, rounded 2% truth p
 Cyclic sequence recovery used the documented exact edit-identity threshold 0.9,
 with reverse-complement treatment and native duplicate handling retained.
 Failure, timeout or malformed output was unavailable evidence, not zero recall.
+
+For cascade speed refinement, seed 1201 was used only for development. The
+screen audit exposed read length, proposed interval, shifted identity, valid
+A/C/G/T pair fraction, composition-adjusted identity and residual from an
+integer number of units; simulation truth scored candidate rules but was not an
+input to the final routing decision. A gap-free proposal was accepted only when
+its interval spanned at least 30% of the read, shifted identity was at least
+0.95, valid-pair fraction was at least 0.95, unit-span residual was at most 0.02
+and composition-adjusted identity was at least 0.7. Other reads retained the
+elastic path. The validation configuration froze seed 2201, three repetitions,
+16 scenarios and 14 process, determinism, array, base-union, boundary,
+negative-control, related-family, TideHunter non-inferiority, runtime and RSS
+gates. Source/config commit and hosted-CI success preceded the one-time run.
+Seeds 3201--3203 remain reserved and seed 2201 cannot be reused for selection.
 
 TRASH1 and TRASH2 ran de novo without supplied templates in an immutable
 ARM64 Linux container with R 4.4.3, one CPU and 8-GiB memory allocation. Native
@@ -856,6 +907,19 @@ uniquely key runtime/RSS source rows. Controls used simulation truth, catalogues
 were supplied, within-genome conditions are dependent and resource rows are
 single executions.
 
+**Figure 11. Frozen validation of the guarded cascade speed path.** A-B,
+one-to-one array recall and raw-call precision for TandemX and TideHunter across
+13 positive scenarios. C, negative-read call rates for three controls. D-E,
+paired median wall-time and direct-child peak-RSS ratios across all 16
+scenario-seed groups, with geometric means and predeclared limits. F, all 14
+frozen gates. All 96 commands and all gates passed; runtime and RSS ratios were
+1.977877 and 0.396864, minimum TandemX base-union F1 was 0.997445 and maximum
+boundary MAE was 2.35 bp. Condition-level runtime ratios above 4 are retained.
+`evidence/cascade_gap_free_validation_v1/figures_v2` contains the accepted
+editable SVG/PDF/PNG, panel source, complete legend and hashes. This is one
+synthetic validation seed with technical timing repetitions, not biological
+replication or a real-data superiority claim.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -946,6 +1010,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   family outcomes, 54 command resources and artifact hashes, three compact input-
   dataset manifest sets, nine gate observations and Figure 10 panel source in
   `evidence/quantify_depth_gated_validation_v1`.
+- Supplementary Table S22: all 96 cascade validation executions, 32
+  scenario-tool summaries, 16 paired TandemX/TideHunter rows, all 14 frozen
+  gate observations and Figure 11 panel source in
+  `evidence/cascade_gap_free_validation_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -965,7 +1033,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `retrospective_collapse_source_audit`; E22:
 `quantify_calibration_development_v1`; E23:
 `quantify_calibration_fast_fasta_replay_v1`; E24:
-`quantify_depth_gated_validation_v1`.
+`quantify_depth_gated_validation_v1`; E25:
+`cascade_gap_free_validation_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

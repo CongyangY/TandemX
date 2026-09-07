@@ -1,4 +1,4 @@
-"""Archive a frozen cascade held-out run, including failed promotion gates."""
+"""Archive a frozen cascade evaluation, including any failed gates and runs."""
 from __future__ import annotations
 
 import argparse
@@ -36,7 +36,7 @@ def _copy(source: Path, destination: Path, relative: Path) -> dict[str, object]:
     shutil.copyfile(source, destination)
     source_digest = digest_file(source)
     if destination.stat().st_size != source.stat().st_size or digest_file(destination) != source_digest:
-        raise OSError(f"Held-out archive copy differs: {source}")
+        raise OSError(f"Evaluation archive copy differs: {source}")
     return {
         "file": relative.as_posix(),
         "source": str(source),
@@ -55,7 +55,7 @@ def validate_gate_receipt(
     missing = [name for name in ROOT_FILES if not (run / name).is_file()]
     missing.extend(name for name in EVALUATION_FILES if not (evaluation / name).is_file())
     if missing:
-        raise ValueError(f"Held-out evidence lacks required files: {', '.join(missing)}")
+        raise ValueError(f"Evaluation evidence lacks required files: {', '.join(missing)}")
     raw = _read_tsv(run / "raw_runs.tsv")
     summary = _read_tsv(run / "summary.tsv")
     matrix = validate_matrix(config, config_path, run, raw, summary)
@@ -90,6 +90,8 @@ def archive(config_path: Path, run: Path, evaluation: Path, outdir: Path) -> dic
     config = yaml.safe_load(config_path.read_text())
     gates, raw, matrix = validate_gate_receipt(config, config_path, run, evaluation)
     failed = [row for row in raw if row["status"] != "ok"]
+    evaluation_split = str(config.get("evaluation_split", "heldout"))
+    evaluation_seeds = [str(seed) for seed in config["seeds"][evaluation_split]]
 
     outdir.mkdir(parents=True)
     manifest: list[dict[str, object]] = []
@@ -151,15 +153,23 @@ def archive(config_path: Path, run: Path, evaluation: Path, outdir: Path) -> dic
         "matrix": matrix,
         "failed_run_count": len(failed),
         "failed_run_tools": sorted({row["tool"] for row in failed}),
-        "warning": "heldout_seeds_consumed_once;failed_runs_and_failed_gates_retained;do_not_rerun_or_relabel",
+        "evaluation_split": evaluation_split,
+        "evaluation_seeds": evaluation_seeds,
+        "warning": (
+            f"{evaluation_split}_seeds_consumed_once;"
+            "failed_runs_and_failed_gates_retained;do_not_rerun_or_relabel"
+        ),
     }
     (outdir / "archive_summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     (outdir / "README.md").write_text(
-        "# Cascade native-screen held-out evidence\n\n"
+        f"# Cascade {evaluation_split} evidence\n\n"
         "This compact archive preserves the complete frozen matrix, gate receipt, "
-        "and receipts/logs for every failed execution. A failed comparator process "
-        "remains a process failure and is never converted to zero accuracy. Seeds "
-        "3101-3103 were consumed once and must not be rerun for model selection.\n"
+        "and receipts/logs for every failed execution. A failed process remains a "
+        "process failure and is never converted to zero accuracy. Evaluation seed"
+        f"{'s' if len(evaluation_seeds) != 1 else ''} "
+        f"{', '.join(evaluation_seeds)} "
+        f"{'were' if len(evaluation_seeds) != 1 else 'was'} consumed once and must "
+        "not be rerun for model selection.\n"
     )
     for name in ("failed_runs.tsv", "failure_artifacts.tsv", "archive_summary.json", "README.md"):
         path = outdir / name

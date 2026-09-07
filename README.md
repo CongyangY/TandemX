@@ -36,8 +36,11 @@ The experimental `cascade` mode uses a native periodicity screen, a guarded
 gap-free path and elastic fallback. On development seed 1201 its revised guard
 reduced the paired TandemX/TideHunter runtime geometric-mean ratio from 2.358 to
 1.989 while retaining array/family recovery and bounded base/boundary metrics.
-Validation seed 2201 is frozen but has not been run; this is development evidence,
-not a general speed claim.
+After the source/config freeze and both hosted workflows passed, validation seed
+2201 ran once and passed all 14 gates: the runtime ratio was 1.978, direct-child
+peak-RSS ratio 0.397, minimum positive array recall/precision 1.0, minimum
+base-union F1 0.997445, maximum boundary MAE 2.35 bp and negative-control call
+rate zero. This synthetic result is not a general real-data speed claim.
 Elastic mode now uses explicit circular edit-similarity monomer clusters
 (default 95%), with original candidate sequences and assignment evidence retained.
 These clusters do not define biological family ancestry.
