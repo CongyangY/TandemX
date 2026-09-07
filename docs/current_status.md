@@ -99,7 +99,9 @@ before continuing and do not stage the untracked `.codex/` directory.
   macOS ARM64 wheel includes `tandemx/importers/tidehunter.py`; a temporary
   target installation outside the source tree imported the module and exposed
   `tandemx import tidehunter --help`.
-- **Candidate monomer/HOR architecture is now machine-readable locally.** Every
+- **Candidate monomer/HOR architecture is published and machine-readable.**
+  Commit `9f9196498e0e3b14ccf86e6daa68335ff19aedf2` is on both branches;
+  hosted runs `34109053190` and `34109049735` completed successfully. Every
   native discovery and TideHunter import writes `family_hierarchy.tsv` while
   streaming the existing pair audit. Each
   `possible_higher_order_or_partial` pair is directed shorter-to-longer and

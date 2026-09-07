@@ -93,6 +93,15 @@ homology. Operational clustering thresholds define analytical families; they
 do not establish evolutionary ancestry. Run configuration, logs, stable tables
 and source/input hashes connect results to their implementation.
 
+The family audit also emits a directional candidate architecture graph instead
+of collapsing all related representative lengths. Related 171/342/684-style
+pairs retain shorter-to-longer edges, their nearest integer length multiple and
+the underlying identity, overlap and shared-word evidence. Near-integer ratios
+are labelled putative period multiples; non-integer related pairs remain
+unresolved. All alternatives remain in the graph. This makes harmonic and
+possible higher-order relationships machine-readable without selecting a rooted
+tree or treating a length multiple as a validated higher-order repeat.
+
 The native clustering gate rejects candidate comparisons that cannot satisfy
 the existing length and canonical-word multiplicity bounds. A subsequent
 alignment workspace change retains only the required score/peak rows. These
@@ -628,6 +637,16 @@ Per-run manifests and compact evidence archives preserve
 the exact source, input and output hashes used for each result and take
 precedence over a manuscript-level version label.
 Public inputs and reuse paths are described in the repository documentation.
+
+After sequence clustering, TandemX streams an all-pair or exactly gated
+related-pair catalogue audit. For relationships classified as possible
+higher-order or partial, it directs an architecture edge from the shorter to the
+longer representative. The nearest integer multiple is accepted as a candidate
+period multiple only when it is at least two and differs from the observed
+length ratio by no more than 0.05. The output retains local identity, overlap,
+shared canonical-word fraction and orientation. These are heuristic catalogue
+relationships; the method does not infer unit order, choose a biological root,
+or distinguish true HORs from harmonic calls and partial representatives.
 
 ### Independent simulation and split discipline
 
