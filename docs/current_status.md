@@ -12,11 +12,11 @@ still uncommitted and must be verified before publication. Do not stage the
 untracked `.codex/` directory.
 
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
-  `c8b3a8b`, aligned with `origin/codex/publish-current-progress` and
-  `origin/main`. Hosted runs `34084539666` and `34084539713` passed Ubuntu/macOS
-  Python tests, Rust checks and wheel builds. That commit contains the failed
-  cascade held-out audit, public control/error-aware quantification, its frozen
-  development evaluator and the retrospective biological-source audit.
+  `6863155`, aligned with `origin/codex/publish-current-progress` and
+  `origin/main`. Hosted runs `34086256099` and `34086367490` passed Ubuntu/macOS
+  Python tests, Rust checks and wheel builds. That commit contains the complete
+  quantify development archive and Figure 9 plus the exact all-ACGT FASTA
+  survival shortcut.
 - **Frozen cascade held-out is consumed; never rerun seeds 3101--3103.** The
   once-only run is complete at
   `/Volumes/T7/Codex/TandemX/results/cascade_native_screen_heldout_v1_20260907`:
@@ -48,13 +48,22 @@ untracked `.codex/` directory.
   Diagnostic-spread truth inclusion was far below 0.95 and remains explicitly
   not a sampling CI. The hash-checked compact archive and accepted editable
   six-panel figure are in `paper/evidence/quantify_calibration_development_v1`.
-- **Current uncommitted optimization.** The original explicit-error path scanned
-  every valid FASTA base in Python and had median runtime 4.658 s versus 1.589 s
-  for the baseline. A mathematically equivalent all-ACGT FASTA shortcut is now
-  implemented and has focused tests, but is not committed or replayed. The
-  post-hoc development candidate uses controls only when mean control depth is
-  at least 2; its MARE is 0.356117 and it improves every development seed, but it
-  is not promoted until source/config commit, hosted CI and untouched genomes.
+- **FASTA speed replay has exact scientific parity.** After commit `6863155` and
+  both hosted workflows passed, the same 108-command development matrix was
+  replayed once into
+  `/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907`.
+  All 5,940 metric rows, 108 copy-number products, three control panels and every
+  non-resource summary field are byte/field-identical to v1. Driver time changed
+  from 610.507 to 349.217 s (-42.80%, 1.748x) and peak RSS from 108.234 to
+  106.844 MiB (-1.28%). Median time changed 4.658 to 1.944 s (-58.26%) for oracle
+  error and 4.934 to 2.178 s (-55.85%) for controls plus oracle. This is one
+  same-machine replay, so it is an engineering check rather than publication
+  timing. The 112 product hashes, resources and replay receipts are compacted at
+  `paper/evidence/quantify_calibration_fast_fasta_replay_v1`.
+- **Depth-gated quantify candidate remains unpromoted.** The post-hoc development
+  candidate uses controls only when mean control depth is at least 2; its MARE is
+  0.356117 and it improves every development seed, but it has not been run on
+  untouched genomes 6401--6403.
 - **Real-data source audit.** Exact ENA metadata for PRJEB50694, PRJNA751841,
   PRJNA953663 and PRJNA919186 is archived at
   `paper/evidence/retrospective_collapse_source_audit`. Five manifest files and
@@ -63,16 +72,14 @@ untracked `.codex/` directory.
   does not establish identical DNA extraction, individual plant, stock or
   BioSample between historical and newer assemblies. All five manifest entries
   were independently rehashed. Donor-matched collapse truth remains unavailable.
-- **Verification state and exact next actions.** Commit `c8b3a8b` passed 502
+- **Verification state and exact next actions.** Commit `6863155` passed 505
   Python tests, 16 Rust release tests, format/Clippy, compile, link and artifact
-  audits locally and both hosted workflows above. The current evidence/speed
-  checkpoint passes 505 Python tests, the same 16 Rust release tests,
-  format/Clippy, compile, link and artifact audits. Quantify archive hashes are
-  19/19 and the accepted SVG has six axes, 86 editable text nodes and no raster
-  elements. Next commit/push this checkpoint and pass hosted CI. Then replay the
-  same development matrix into a new T7 directory to require identical scientific
-  estimates and quantify the runtime change.
-  Freeze new 6401--6403 genomes before evaluating the depth-gated candidate.
+  audits locally and both hosted workflows above. The current replay-evidence
+  checkpoint passes 510 Python tests, compile/diff/link audits and 79/79 hashes
+  across the four active compact evidence archives; the new replay archive is
+  15/15. Next commit/push this checkpoint and pass hosted CI. Then freeze
+  source/config and generate new 6401--6403 genomes before evaluating the
+  depth-gated candidate exactly once.
   Diagnose cascade speed only on development/new seeds; never tune against the
   consumed cascade held-out values.
 

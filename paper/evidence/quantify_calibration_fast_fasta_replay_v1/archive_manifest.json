@@ -1,0 +1,92 @@
+[
+  {
+    "file": "replay/environment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/environment.json",
+    "sha256": "cc4663ecacdb90070d9a6dd8e6220218489e5555504a1b4c79a2e54c49824195",
+    "bytes": 8018
+  },
+  {
+    "file": "replay/execution.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/execution.json",
+    "sha256": "e2b4a9c37b9070a7979b84ea20620c47d0d919b1793574202fb8caedb81b0e62",
+    "bytes": 936
+  },
+  {
+    "file": "replay/executions.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/executions.tsv",
+    "sha256": "7bcb42bf433eddcb8d9b056c40994b541440d869d95d044db03dfb053ca56e3a",
+    "bytes": 13775
+  },
+  {
+    "file": "replay/summary.tsv",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/summary.tsv",
+    "sha256": "b7c33f5d4509d19d7e777029b0a1ee889779a3cd5b5da3ae3c17a73e430676a4",
+    "bytes": 10707
+  },
+  {
+    "file": "replay/validation.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/validation.json",
+    "sha256": "3d84f285a04601d6d4c2e9b5f3b12f2ad20ae5e3f814dfe871c3cd38fb4b5ed8",
+    "bytes": 260
+  },
+  {
+    "file": "replay/frozen_config.yaml",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/frozen_config.yaml",
+    "sha256": "c96cc1ad77f4a2fe38ec18e5e13dece7661770d9c80feb9b3247ba98dd799544",
+    "bytes": 792
+  },
+  {
+    "file": "replay/stdout.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "replay/stderr.log",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "file": "replay/controls/s6301/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/controls/s6301/receipt.json",
+    "sha256": "dfc6c8e371119e389ed9e9fe368cc7fc1f421c21f3f7f856bef0bd72b2468020",
+    "bytes": 751
+  },
+  {
+    "file": "replay/controls/s6302/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/controls/s6302/receipt.json",
+    "sha256": "bf9b16421d4a3fdd47759664783887c7112e6502ec0541614490280bf8f832f8",
+    "bytes": 751
+  },
+  {
+    "file": "replay/controls/s6303/receipt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/controls/s6303/receipt.json",
+    "sha256": "f188819ce0696fdc94d9dce7eec445323f0ae0e6d39167fef4f73a41d11ada6b",
+    "bytes": 751
+  },
+  {
+    "file": "comparison.json",
+    "source": "derived_after_exact_output_validation",
+    "sha256": "4ccf91d992f1a3dedd1f4fbaadd24426bd93ccf1a6de0a63abd85c1dfc89b3a9",
+    "bytes": 1315
+  },
+  {
+    "file": "resource_comparison.tsv",
+    "source": "derived_after_exact_output_validation",
+    "sha256": "8b8784db70758002ab31fcd663e12837a28f7b3a37aa645318c4d2a15529b576",
+    "bytes": 1234
+  },
+  {
+    "file": "exact_output_hashes.tsv",
+    "source": "derived_after_exact_output_validation",
+    "sha256": "baccfec45f67b462481c9c602e2ad0e22f4a947473f28cbeda0dbc4d3b3722b4",
+    "bytes": 23266
+  },
+  {
+    "file": "README.md",
+    "source": "derived_after_exact_output_validation",
+    "sha256": "7992fe0e201ebce1b729a4973f2a51ced8f4bdd0215bea65d89a5d0f8ad567cd",
+    "bytes": 437
+  }
+]

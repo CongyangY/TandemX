@@ -202,14 +202,20 @@ mean absolute error in every independent genome but were worse at nominal 1x;
 Applying the same global survival factor to repeat and control counts cancelled
 algebraically: controls plus oracle produced exactly the same 1,485 copy-number
 estimates as controls alone, while median wall time increased from 1.771 to
-4.934 s in the original implementation. A post-hoc development rule that used
-controls only when their mean depth was at least 2 reduced aggregate error to
-0.356117 and improved all three genome means. It remains a candidate rather than
-a promoted default because the controls were selected with simulation truth and
-no untouched genome/family split has tested the rule. Across every method and
-coverage stratum, truth inclusion in the exported diagnostic 10th--90th spread
-was far below 0.95, confirming that these endpoints cannot be interpreted as a
-sampling confidence interval (Figure 9; Evidence E22).
+4.934 s in the original implementation. Replacing the Python per-base FASTA
+survival scan with its exact all-ACGT formula retained byte-identical 5,940-row
+metrics and all 108 copy-number products in a full replay. Driver time changed
+from 610.507 to 349.217 s; oracle-error and controls-plus-oracle median times
+decreased 58.26% and 55.85%, respectively. This single same-machine replay is an
+engineering check rather than a publication timing distribution (Evidence E23).
+A post-hoc development rule that used controls only when their mean depth was at
+least 2 reduced aggregate error to 0.356117 and improved all three genome means.
+It remains a candidate rather than a promoted default because the controls were
+selected with simulation truth and no untouched genome/family split has tested
+the rule. Across every method and coverage stratum, truth inclusion in the
+exported diagnostic 10th--90th spread was far below 0.95, confirming that these
+endpoints cannot be interpreted as a sampling confidence interval (Figure 9;
+Evidence E22).
 
 ### Joint-read uncertainty retains correlated k values and sparse-support failures
 
@@ -891,6 +897,9 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   execution resources, 36 strata, control receipts, per-execution artifact
   hashes, development decision and Figure 9 source data in
   `evidence/quantify_calibration_development_v1`.
+- Supplementary Table S20: exact-output hashes for 5,940 metric rows, 108
+  copy-number products and three control panels, plus paired method resources and
+  replay receipts in `evidence/quantify_calibration_fast_fasta_replay_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -908,7 +917,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `discovery_packed_trace_batch_v1`; E20:
 `cascade_native_screen_heldout_v1`; E21:
 `retrospective_collapse_source_audit`; E22:
-`quantify_calibration_development_v1`.
+`quantify_calibration_development_v1`; E23:
+`quantify_calibration_fast_fasta_replay_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

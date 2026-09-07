@@ -38,8 +38,17 @@ and denominator. The exported 10th--90th diagnostic spread had very low truth
 inclusion and is not a sampling confidence interval.
 
 The original explicit-error implementation also added substantial FASTA scan
-time. A subsequent exact-formula shortcut must be committed and replayed against
-the archived run with byte-identical estimates before an engineering speed claim.
+time. After the exact-formula all-ACGT shortcut passed hosted CI, the full matrix
+was replayed into a new T7 directory. All 5,940 metric rows and 108 copy-number
+files were byte-identical; all three control panels and every non-resource summary
+field also agreed. Total driver time changed from 610.507 to 349.217 seconds
+(-42.80%). Median oracle-error time changed from 4.658 to 1.944 seconds (-58.26%)
+and controls-plus-oracle changed from 4.934 to 2.178 seconds (-55.85%). Peak
+driver RSS changed from 108.234 to 106.844 MiB. These are one historical run and
+one same-machine replay, so they are an engineering regression result rather than
+a timing distribution. Compact comparison evidence is in
+`paper/evidence/quantify_calibration_fast_fasta_replay_v1`.
+
 The development-selected candidate uses empirical controls only when their mean
 depth is at least 2; it requires untouched genome/family validation.
 

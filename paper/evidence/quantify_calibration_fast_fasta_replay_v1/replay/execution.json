@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+    "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/source_snapshot/benchmarks/scripts/evaluate_quantify_calibration.py",
+    "--worker",
+    "--config",
+    "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907/frozen_config.yaml",
+    "--datasets",
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6301_v1",
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6302_v1",
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6303_v1",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/quantify_calibration_development_v2_fast_fasta_20260907"
+  ],
+  "exit_code": 0,
+  "runtime_seconds": 349.2168931670021,
+  "peak_rss_mib": 106.84375,
+  "cpu_user_seconds": 339.186427,
+  "cpu_system_seconds": 4.625369,
+  "timed_out": false
+}

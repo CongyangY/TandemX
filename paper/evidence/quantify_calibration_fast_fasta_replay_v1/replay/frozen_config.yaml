@@ -1,0 +1,19 @@
+benchmark_id: quantify_calibration_development_v1
+split: development
+seeds: [6301, 6302, 6303]
+condition_count_per_seed: 9
+k: 21
+control_kmer_count: 1000
+control_candidate_multiplier: 8
+control_stride_bp: 997
+timeout_seconds: 900
+methods:
+  - baseline_total_bases
+  - oracle_error_survival
+  - empirical_controls
+  - empirical_controls_plus_oracle_error
+interpretation:
+  oracle_error_survival: planted total error rate is supplied and is an upper-bound ablation, not a blind estimate
+  empirical_controls: controls are selected from known unique non-array sequence in the simulated source genome
+  intervals: public 10th-90th diagnostic-kmer spread is scored but is not a sampling confidence interval
+  resources: one execution per method-condition is descriptive, not a timing distribution

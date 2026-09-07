@@ -40,6 +40,13 @@ post-hoc mean-control-depth >=2 candidate reached MARE 0.356117 and improved all
 three development seeds, but remains unpromoted. The archive has 19 verified
 manifest entries; `figures_v1` is the visually accepted six-panel rendering.
 
+`quantify_calibration_fast_fasta_replay_v1/` verifies the committed FASTA
+survival shortcut against the complete development matrix. All 5,940 metric
+rows, 108 copy-number files, three control panels and non-resource summary fields
+agree exactly. Full-matrix time changed 610.507→349.217 s and peak RSS
+108.234→106.844 MiB. The 112 product hashes and 15-file compact archive are
+verified. Resource changes are one same-machine replay, not publication timing.
+
 `tidecluster_simulated_smoke/` records the first complete assembly-level
 TideCluster 1.21.2 smoke test, its strict normalization, exact image ID,
 container recipe, dependency versions, logs and internal GNU-time measurements.
