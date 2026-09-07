@@ -30,21 +30,43 @@ before continuing and do not stage the untracked `.codex/` directory.
   intervals. All 20 files in `finalization_receipt.json` independently passed
   byte-size and SHA-256 rechecks. These are descriptive calls on real reference
   windows; no independent array/family accuracy truth exists.
-- **The 100-Mb TideCluster resource gate is running.** The isolated 1-CPU run
-  directory is
+- **The 100-Mb TideCluster resource gate is complete.** Do not rerun the two
+  external stages in
   `/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907`.
-  It was started from the source snapshot stored inside that directory. Inspect
-  `profile/`, `run_receipt.json`, `result.json` and the terminal/process state
-  before deciding whether to resume or finalize; never delete a failed gate.
-  The 1-Gb sample remains unrun and must wait for the 100-Mb memory/time result.
-- **`tandemx cohort` is being hardened concurrently.** The current uncommitted
-  change rejects unknown, duplicate and incompletely quantified catalogue
+  The first normalizer stopped after both stages because final intervals can be
+  clipped or merged relative to intermediate GFF rows. A family-consensus map,
+  overlap-coverage check and deterministic representative selection resolved
+  all 1,372 final intervals without rerunning TideCluster: 1,200 exact, 41
+  clipped and 131 merged. The run reports 130 families, 2,356,743 union bp
+  (0.02356743) and positives in 99/100 windows. TideHunter used 331.52 s/
+  5,152,444 kB; clustering used 60.99 s/7,770,936 kB. Copy number is unavailable
+  for 202 merged/resolved intervals. All 20 finalization files independently
+  passed hash/size checks. The 1-Gb sample remains unrun because the 100-Mb
+  memory gate does not yet justify that resource risk.
+- **TideCluster scaling evidence is compact and visualized.** The 10/100-Mb
+  archive is at `paper/evidence/tidecluster_morex_reference_scaling_v1`; all 32
+  archive-manifest entries pass independent hash/size verification. Its accepted
+  six-panel SVG/PDF/PNG has 68 editable SVG text nodes and no raster nodes. Both
+  the direct PNG and independently rendered PDF were visually inspected. Calls
+  are descriptive real-reference output, not accuracy or whole-genome evidence.
+- **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
+  unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the
   least local confidence; and adds wide lower/upper abundance-endpoint matrices.
   `examples/toy/run_toy_cohort.sh` completed two end-to-end samples and schema
   validation in `/tmp/tandemx-toy-cohort-check`. The full Python suite passes
   543 tests in 61.35 s; compileall, shell syntax and diff checks also pass.
-  Commit and push this checkpoint after the staged diff review completes.
+  Direct SSH push of `50de982` failed because the local proxy closed
+  `127.0.0.1:7897`; `gh auth status` also reports an invalid token. At that
+  checkpoint local HEAD was one commit ahead of both remote refs. Publish the
+  cohort and following evidence commits together through a safe HTTPS/browser/API
+  path, then verify both hosted refs and CI.
+- **Current verification after TideCluster evidence.** The full Python suite
+  passes 547 tests in 62.84 s; compileall and diff checks pass. The archive has
+  32/32 independently rehashed entries. Supplementary Figure S5 has six panels,
+  68 editable SVG text nodes and no raster image elements; its direct PNG and a
+  Poppler render of the PDF were both visually inspected with no overlap or
+  clipping observed.
 - **Published source baseline.** Branch `codex/publish-current-progress` is at
   `a14ceded7267f46fb81b003e2c0142020c6cd1b1`, aligned with
   `origin/codex/publish-current-progress` and `origin/main`. Hosted runs

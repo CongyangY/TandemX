@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "action": "postprocess_completed_external_stages_without_rerun",
+  "sample_id": "morex_100mb",
+  "sampling_receipt": "/Volumes/T7/Codex/TandemX/results/MorexV3_reference_windows_s8101_v2_20260907/receipt.json",
+  "sampling_receipt_sha256": "994246ec3802fa53918f9d1f34b3ddd9bb18e984ab07c325e4a7892b46161cc4",
+  "sample_sha256": "1ed444535a22cd61dc76149b64abb68f1fc937828a6b703dc7e1285d41f5e2c7",
+  "external_output_sha256": {
+    "tc_tidehunter.gff3": "6eb2c43ab1059cbfd291fadd408619a0811837c138720b8008032421d5015109",
+    "tc_clustering.gff3_1.gff3": "f09bcac22441ef81bbfc92b00e26daac8f7d48fe400d6c61b4f869d5e1431527",
+    "tc_clustering.gff3": "d3df0137caf261ad6633c61c31763ae0ae98c3580b5203dd060f27b2c1ac1cb9",
+    "tc_cmd_args.json": "1149eb0d6a6b09eea56f7aff0ac7b26c3b2d981bb0242c00a3800c8d0b4abb39",
+    "tc_consensus/consensus_sequences_all.fasta": "bce70dbaaefb04469e98d71800c92ec39f6b9414c74d11933660019f8f0e3a30"
+  },
+  "project_commit": "50de982942ef3c56c1283f008035b9132e473ebd",
+  "project_status": "M benchmarks/scripts/finalize_tidecluster_reference.py\n M benchmarks/scripts/run_tidecluster_docker_reference.py\n M benchmarks/scripts/run_tidecluster_reference.py\n M benchmarks/tidecluster/normalize.py\n M tests/unit/test_tidecluster_normalize.py\n?? .codex/",
+  "source_sha256": {
+    "finalize_tidecluster_reference.py": "a52c890e3416cfcb9556dc97f422311135a55f544765ca65c12b95da9c922fa0",
+    "normalize.py": "74c0b3ba2ef3459622f78cba099c8936a30699932cd867d60bf5d64d78c4bbe6",
+    "run_tidecluster_reference.py": "8da1c7d98b4139618370ddfb7ce2bac8a4da69b1be57ec7bff6ea5a2f237016b",
+    "run_tidecluster_docker_reference.py": "dabe8437ae4076da7e1fa06204247a0561ede4433f349dbd4f30425e5e21a3fc"
+  },
+  "warning": "normalization_only_external_tidecluster_stages_not_rerun"
+}

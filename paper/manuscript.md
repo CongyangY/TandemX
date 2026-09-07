@@ -513,6 +513,27 @@ This verifies file identity and parseable reference content. Same-cultivar study
 context does not establish an identical raw-read donor or exact satellite copy
 truth.
 
+We then ran pinned TideCluster 1.21.2 on deterministic nested 10- and 100-Mb
+sets of 1-Mb MorexV3 windows. Both external TideHunter and clustering stages
+completed. The 10-Mb set produced 87 final intervals in 28 operational families
+covering 239,939 union bp (2.39939%); the 100-Mb set produced 1,372 intervals in
+130 families covering 2,356,743 bp (2.356743%). Positive calls occurred in
+10/10 and 99/100 windows. TideHunter stage time/RSS changed from 25.03 s/561,556
+kB to 331.52 s/5,152,444 kB, whereas clustering changed from 45.92 s/7,809,052
+kB to 60.99 s/7,770,936 kB. Thus clustering already required about 7.4 GiB at
+both sampled sizes, and the 1-Gb run was withheld pending a safer resource plan.
+TideCluster overlap resolution also made final intervals differ from raw
+TideHunter intervals: at 100 Mb, 1,200 final intervals retained exact
+intermediate coordinates, 41 were clipped and 131 merged multiple same-family
+intervals. A family-consensus membership map and complete overlap coverage were
+therefore required to retain sequence provenance; copy number remained
+unavailable for 202 merged/resolved intervals (Figure S5; Evidence E26).
+
+These nested windows quantify execution behavior and expose a normalization
+requirement. They are neither whole-chromosome runs nor independent accuracy
+tests, because no curated MorexV3 family/array denominator exists and windowing
+removes long-range chromosome context.
+
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
 In the larger sample, 7,554/7,557 reads mapped and primary query spans covered
@@ -943,6 +964,16 @@ work and are not final isolated rankings. Called-base fraction is output extent,
 not accuracy. The inspected version 2 and source rows are in
 `evidence/multispecies_real_diagnostics/figures_v2`.
 
+**Figure S5. TideCluster MorexV3 reference-window scaling and provenance.** A,
+internal GNU-time wall time for the TideHunter and clustering stages. B,
+container-stage maximum RSS. C, descriptive final interval and operational
+family counts. D, union repeat coverage of sampled bases. E, exact, clipped and
+merged coordinate-provenance fractions. F, selected representative-period
+distributions. Inputs are deterministic nested 1-Mb windows; calls lack
+independent accuracy truth and whole-chromosome context. The inspected editable
+SVG/PDF/PNG, panel source and hashes are in
+`evidence/tidecluster_morex_reference_scaling_v1/figures_v1`.
+
 Additional method, biological validation and resource-scaling multi-panel
 figures remain required; their absence is tracked in `submission_readiness.md`.
 
@@ -1014,6 +1045,9 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   scenario-tool summaries, 16 paired TandemX/TideHunter rows, all 14 frozen
   gate observations and Figure 11 panel source in
   `evidence/cascade_gap_free_validation_v1`.
+- Supplementary Table S23: nested MorexV3 TideCluster stage resources, call
+  summaries, interval-provenance classes, copy-number availability and Figure
+  S5 source rows in `evidence/tidecluster_morex_reference_scaling_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1034,7 +1068,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `quantify_calibration_development_v1`; E23:
 `quantify_calibration_fast_fasta_replay_v1`; E24:
 `quantify_depth_gated_validation_v1`; E25:
-`cascade_gap_free_validation_v1`.
+`cascade_gap_free_validation_v1`; E26:
+`tidecluster_morex_reference_scaling_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

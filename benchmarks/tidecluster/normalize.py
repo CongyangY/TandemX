@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import json
 import math
 from pathlib import Path
+import re
 from typing import Iterable
 
 from benchmarks.challenge.adapters import read_fasta
@@ -41,6 +42,8 @@ class ResolvedTideClusterRecord:
     consensus_sequence: str
     copy_number: float | None
     representative_tidehunter_id: str
+    representative_selection_source: str
+    supporting_tidehunter_count: int
     copy_number_source: str
 
     def array(self) -> ArrayRecord:
@@ -125,6 +128,7 @@ def normalize_resolved_tidecluster(
     tidehunter_gff: Path,
     intermediate_clustering_gff: Path,
     clustering_gff: Path,
+    family_consensus_fasta: Path | None = None,
 ) -> list[ResolvedTideClusterRecord]:
     """Join merged TideCluster intervals through its representative-ID map.
 
@@ -148,24 +152,110 @@ def normalize_resolved_tidecluster(
         key = (str(row["sequence_id"]), int(row["start"]), int(row["end"]))
         tidehunter_by_interval.setdefault(key, []).append(attributes)
 
+    family_by_representative: dict[str, str] = {}
+    if family_consensus_fasta is not None:
+        for line_number, line in enumerate(family_consensus_fasta.open(encoding="utf-8"), 1):
+            if not line.startswith(">"):
+                continue
+            match = re.fullmatch(r">(TRC_\d+)_(rep\S+)", line.rstrip())
+            if match is None:
+                raise ValueError(
+                    f"Malformed TideCluster consensus header: "
+                    f"{family_consensus_fasta}:{line_number}"
+                )
+            family_id, representative_id = match.groups()
+            if representative_id in family_by_representative:
+                raise ValueError(
+                    f"Duplicate TideCluster consensus representative: {representative_id}"
+                )
+            family_by_representative[representative_id] = family_id
+
     representative_by_interval: dict[tuple[str, int, int], str] = {}
+    intermediate_by_sequence: dict[str, list[tuple[int, int, str]]] = {}
     for row in read_gff(intermediate_clustering_gff):
         key = (str(row["sequence_id"]), int(row["start"]), int(row["end"]))
         attributes = row["attributes"]
         if "Name" not in attributes or key in representative_by_interval:
             raise ValueError(f"Invalid intermediate TideCluster interval: {key}")
         representative_by_interval[key] = attributes["Name"]
+        intermediate_by_sequence.setdefault(key[0], []).append(
+            (key[1], key[2], attributes["Name"])
+        )
+
+    missing_representatives = sorted(
+        set(representative_by_interval.values()) - set(tidehunter_by_id)
+    )
+    if missing_representatives:
+        raise ValueError(
+            "TideCluster representatives are absent from TideHunter output: "
+            + ",".join(missing_representatives[:5])
+        )
+    if family_consensus_fasta is not None:
+        missing_membership = sorted(
+            set(representative_by_interval.values()) - set(family_by_representative)
+        )
+        if missing_membership:
+            raise ValueError(
+                "TideCluster representatives lack family membership: "
+                + ",".join(missing_membership[:5])
+            )
 
     normalized: list[ResolvedTideClusterRecord] = []
     for row in read_gff(clustering_gff):
         key = (str(row["sequence_id"]), int(row["start"]), int(row["end"]))
         attributes = row["attributes"]
-        if "Name" not in attributes or key not in representative_by_interval:
-            raise ValueError(f"Final TideCluster interval lacks intermediate provenance: {key}")
-        representative_id = representative_by_interval[key]
-        if representative_id not in tidehunter_by_id:
-            raise ValueError(
-                f"TideCluster representative is absent from TideHunter output: {representative_id}"
+        if "Name" not in attributes:
+            raise ValueError(f"Final TideCluster interval lacks family name: {key}")
+        family_id = attributes["Name"]
+        if key in representative_by_interval:
+            representative_id = representative_by_interval[key]
+            representative_selection_source = "exact_intermediate_interval"
+            supporting_tidehunter_count = 1
+            if (
+                family_consensus_fasta is not None
+                and family_by_representative[representative_id] != family_id
+            ):
+                raise ValueError(
+                    f"Exact TideCluster representative-family mismatch: {key}"
+                )
+        else:
+            if family_consensus_fasta is None:
+                raise ValueError(
+                    f"Final TideCluster interval lacks exact intermediate provenance: {key}; "
+                    "family consensus membership is required to resolve clipping or merging"
+                )
+            candidates = []
+            for start, end, candidate_id in intermediate_by_sequence.get(key[0], []):
+                overlap = min(key[2], end) - max(key[1], start)
+                if overlap > 0 and family_by_representative[candidate_id] == family_id:
+                    candidates.append((overlap, start, end, candidate_id))
+            if not candidates:
+                raise ValueError(
+                    f"Final TideCluster interval lacks family-consistent overlap provenance: {key}"
+                )
+            clipped = sorted(
+                (max(key[1], start), min(key[2], end))
+                for _overlap, start, end, _candidate_id in candidates
+            )
+            cursor = key[1]
+            for start, end in clipped:
+                if start > cursor:
+                    break
+                cursor = max(cursor, end)
+            if cursor < key[2]:
+                raise ValueError(
+                    f"Family-consistent TideCluster provenance does not cover final interval: {key}"
+                )
+            selected = min(
+                candidates,
+                key=lambda item: (-item[0], item[1], item[2], item[3]),
+            )
+            representative_id = selected[3]
+            supporting_tidehunter_count = len(candidates)
+            representative_selection_source = (
+                "unique_family_consistent_overlap_after_clipping"
+                if len(candidates) == 1
+                else "longest_family_consistent_overlap_after_merge"
             )
         representative = tidehunter_by_id[representative_id]
         sequence = representative["consensus_sequence"].upper()
@@ -186,18 +276,18 @@ def normalize_resolved_tidecluster(
                 sequence_id=key[0],
                 start=key[1],
                 end=key[2],
-                family_id=attributes["Name"],
+                family_id=family_id,
                 period=period,
                 consensus_sequence=sequence,
                 copy_number=copy_number,
                 representative_tidehunter_id=representative_id,
+                representative_selection_source=representative_selection_source,
+                supporting_tidehunter_count=supporting_tidehunter_count,
                 copy_number_source=copy_number_source,
             )
         )
     if not normalized:
         raise ValueError("No resolved TideCluster tandem-repeat records found")
-    if len(normalized) != len(representative_by_interval):
-        raise ValueError("Final and intermediate TideCluster interval sets differ")
     return sorted(
         normalized, key=lambda item: (item.sequence_id, item.start, item.end, item.family_id)
     )

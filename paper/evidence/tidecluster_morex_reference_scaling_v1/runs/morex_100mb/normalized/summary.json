@@ -1,0 +1,12 @@
+{
+  "predicted_array_count": 1372,
+  "predicted_family_count": 130,
+  "predicted_positive_sequence_count": 99,
+  "predicted_union_bp": 2356743,
+  "predicted_union_base_fraction": 0.02356743,
+  "period_bp_min": 40,
+  "period_bp_median": 70.0,
+  "period_bp_p95": 675.0,
+  "period_bp_max": 1054,
+  "accuracy": "not_assessed_without_independent_real_array_and_family_truth"
+}

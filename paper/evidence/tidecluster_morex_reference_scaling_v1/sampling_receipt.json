@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "method": "seeded_permutation_of_complete_nonoverlapping_reference_windows",
+  "warning": "separate_window_records_preserve_source_coordinates_but_not_whole_genome_context",
+  "reference": {
+    "path": "/Volumes/T7/Codex/TandemX/data/references/MorexV3_IPK_2021_3/Barley_MorexV3_pseudomolecules.fasta",
+    "bytes": 4296032540,
+    "sha256": "54c98a04d13ff97350f5f3a5bfa45ac395ad640df8bb1f7598eca4e7edb437c1",
+    "sequence_count": 8,
+    "total_bases": 4225605719,
+    "sequence_lengths": {
+      "chr1H": 516505932,
+      "chr2H": 665585731,
+      "chr3H": 621516506,
+      "chr4H": 610333535,
+      "chr5H": 588218686,
+      "chr6H": 561794515,
+      "chr7H": 632540561,
+      "chrUn": 29110253
+    }
+  },
+  "seed": 8101,
+  "window_size": 1000000,
+  "eligible_window_count": 4222,
+  "samples": {
+    "morex_10mb": {
+      "path": "morex_10mb.fa",
+      "requested_bases": 10000000,
+      "window_count": 10,
+      "total_bases": 10000000,
+      "bytes": 10166801,
+      "sha256": "e9110b71f7eae8fad011a767b7c5833c585433c9dd40ecbd1284b6a9e1702d45"
+    },
+    "morex_100mb": {
+      "path": "morex_100mb.fa",
+      "requested_bases": 100000000,
+      "window_count": 100,
+      "total_bases": 100000000,
+      "bytes": 101668035,
+      "sha256": "1ed444535a22cd61dc76149b64abb68f1fc937828a6b703dc7e1285d41f5e2c7"
+    },
+    "morex_1000mb": {
+      "path": "morex_1000mb.fa",
+      "requested_bases": 1000000000,
+      "window_count": 1000,
+      "total_bases": 1000000000,
+      "bytes": 1016680318,
+      "sha256": "40723eb9b5898d935ca6d01fc1193d9ae7a4a02f950d1aa0cc8c5bbb9f9f9df7"
+    }
+  },
+  "windows": {
+    "path": "windows.tsv",
+    "rows": 1000,
+    "bytes": 64855,
+    "sha256": "e8edfb859c11d697a0d551b0c07b62dba0c45ef355359a44648584b64e6f9ebb"
+  }
+}

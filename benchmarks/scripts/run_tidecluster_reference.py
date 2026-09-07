@@ -30,6 +30,8 @@ NORMALIZED_FIELDS = (
     "consensus_sequence",
     "copy_number",
     "representative_tidehunter_id",
+    "representative_selection_source",
+    "supporting_tidehunter_count",
     "copy_number_source",
     "source",
     "warning",
@@ -115,9 +117,13 @@ def normalize_real_outputs(
     clustering_gff: Path,
     sequence_lengths: dict[str, int],
     outdir: Path,
+    family_consensus_fasta: Path | None = None,
 ) -> dict[str, object]:
     records = normalize_resolved_tidecluster(
-        tidehunter_gff, intermediate_clustering_gff, clustering_gff
+        tidehunter_gff,
+        intermediate_clustering_gff,
+        clustering_gff,
+        family_consensus_fasta,
     )
     summary = summarize_records(records, sequence_lengths)
     rows = [
@@ -130,9 +136,25 @@ def normalize_real_outputs(
             "consensus_sequence": record.consensus_sequence,
             "copy_number": record.copy_number,
             "representative_tidehunter_id": record.representative_tidehunter_id,
+            "representative_selection_source": record.representative_selection_source,
+            "supporting_tidehunter_count": record.supporting_tidehunter_count,
             "copy_number_source": record.copy_number_source,
             "source": "TideCluster_clustering_joined_to_TideHunter",
-            "warning": "family_sequence_from_cluster_representative;copy_number_unavailable_for_merged_intervals;descriptive_real_reference_output_without_accuracy_truth",
+            "warning": ";".join([
+                "family_sequence_from_cluster_representative",
+                *(
+                    ["representative_selected_from_family_consistent_overlaps"]
+                    if record.representative_selection_source
+                    != "exact_intermediate_interval"
+                    else []
+                ),
+                *(
+                    ["copy_number_unavailable_for_merged_or_resolved_interval"]
+                    if record.copy_number is None
+                    else []
+                ),
+                "descriptive_real_reference_output_without_accuracy_truth",
+            ]),
         }
         for record in records
     ]
@@ -299,6 +321,9 @@ def run(
         Path(str(prefix) + "_clustering.gff3"),
         sequence_lengths,
         normalized_dir,
+        family_consensus_fasta=Path(
+            str(prefix) + "_consensus/consensus_sequences_all.fasta"
+        ),
     )
     stage_rows = (profile_dir / "stages.tsv").read_text().splitlines()
     result = {

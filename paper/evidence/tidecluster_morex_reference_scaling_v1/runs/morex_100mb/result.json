@@ -1,0 +1,34 @@
+{
+  "complete": true,
+  "sample_id": "morex_100mb",
+  "summary": {
+    "predicted_array_count": 1372,
+    "predicted_family_count": 130,
+    "predicted_positive_sequence_count": 99,
+    "predicted_union_bp": 2356743,
+    "predicted_union_base_fraction": 0.02356743,
+    "period_bp_min": 40,
+    "period_bp_median": 70.0,
+    "period_bp_p95": 675.0,
+    "period_bp_max": 1054,
+    "accuracy": "not_assessed_without_independent_real_array_and_family_truth"
+  },
+  "internal_gnu_time": {
+    "tidehunter": {
+      "user_seconds": 327.92,
+      "system_seconds": 3.45,
+      "maximum_rss_kb": 5152444,
+      "exit_status": 0,
+      "wall_seconds": 331.52
+    },
+    "clustering": {
+      "user_seconds": 29.31,
+      "system_seconds": 10.38,
+      "maximum_rss_kb": 7770936,
+      "exit_status": 0,
+      "wall_seconds": 60.99
+    }
+  },
+  "accuracy": "not_assessed_without_independent_real_array_and_family_truth",
+  "warning": "sampled_real_reference_no_whole_genome_context"
+}

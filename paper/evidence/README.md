@@ -79,6 +79,16 @@ All three planted families and arrays were recovered, but the test is only a
 the emulated container. The archive must not be described as plant-scale
 accuracy, portability or resource superiority evidence.
 
+`tidecluster_morex_reference_scaling_v1/` contains hash-checked nested 10- and
+100-Mb MorexV3 reference-window runs with the pinned TideCluster 1.21.2 image.
+The compact archive retains all three provenance GFFs, cluster consensuses,
+normalized arrays, finalization receipts and GNU-time stage resources. The
+100-Mb output required family-membership-aware handling of 41 clipped and 131
+merged final intervals; 1,200 intervals remained exact. Its six-panel SVG has
+68 editable text nodes and no raster nodes, and its PDF was independently
+rendered and visually checked. These are descriptive reference calls without
+independent family/array truth or whole-chromosome context.
+
 `abundance_classifier_depth_gated_validation_v1/` preserves the frozen v3
 development-to-held-out chain. Commit `62892a6` and dual-platform hosted CI
 preceded one-time use of seeds 5801-5803. The rule passed all predeclared gates:

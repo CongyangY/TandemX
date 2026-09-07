@@ -82,6 +82,7 @@ def finalize(
         run_dir / "tc_clustering.gff3",
         sequence_lengths,
         run_dir / "normalized",
+        family_consensus_fasta=run_dir / "tc_consensus/consensus_sequences_all.fasta",
     )
     external_hashes_after = {
         name: digest_file(run_dir / name) for name in EXTERNAL_OUTPUTS

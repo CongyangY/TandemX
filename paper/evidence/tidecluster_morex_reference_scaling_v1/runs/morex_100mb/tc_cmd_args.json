@@ -1,0 +1,1 @@
+{"command": "clustering", "fasta": "/input/morex_100mb.fa", "prefix": "/output/tc", "cpu": 1, "tidehunter_arguments": "-p 40 -P 3000 -c 5 -e 0.25", "long": false, "keep_rounds": false, "original_fasta": "/input/morex_100mb.fa", "min_length": 100, "no_dust": false, "cluster_identity": 75, "cluster_coverage": 0.8, "keep_overlaps": false}

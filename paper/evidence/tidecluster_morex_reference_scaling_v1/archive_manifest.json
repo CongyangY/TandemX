@@ -1,0 +1,197 @@
+{
+  "complete": true,
+  "files": [
+    {
+      "file": "runs/morex_10mb/tc_tidehunter.gff3",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/tc_tidehunter.gff3",
+      "bytes": 29882,
+      "sha256": "9b2d219a2f55b85ba85e824c21c8e2c40747a9ed67b8c55f54944b3e56c9dae2"
+    },
+    {
+      "file": "runs/morex_10mb/tc_clustering.gff3_1.gff3",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/tc_clustering.gff3_1.gff3",
+      "bytes": 7124,
+      "sha256": "9d5f2354b8a62463b3a1594504718bdc66eec3a6f11394492dc11f399f4a5218"
+    },
+    {
+      "file": "runs/morex_10mb/tc_clustering.gff3",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/tc_clustering.gff3",
+      "bytes": 7428,
+      "sha256": "d204ed6f6f38c214460c146fe3971bdf33d01a808e646c2e64d27d2db36f2912"
+    },
+    {
+      "file": "runs/morex_10mb/tc_cmd_args.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/tc_cmd_args.json",
+      "bytes": 335,
+      "sha256": "9f303f809f71efdb7fcd235539bbc0d9ac061502b4038ced7742f24dcf712f3d"
+    },
+    {
+      "file": "runs/morex_10mb/tc_consensus/consensus_sequences_all.fasta",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/tc_consensus/consensus_sequences_all.fasta",
+      "bytes": 33007,
+      "sha256": "16654b9d2ea7ae653a473e11496efa2201480ac21861b0572457738e6c7cc8e2"
+    },
+    {
+      "file": "runs/morex_10mb/result.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/result.json",
+      "bytes": 965,
+      "sha256": "a3549abbc6313ce82f1cd58ab0023db4f953261fc501cded9fe06350f42a3287"
+    },
+    {
+      "file": "runs/morex_10mb/finalization_environment.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/finalization_environment.json",
+      "bytes": 2093,
+      "sha256": "bc35f3b15d018e6cd30de82498a8961995586c3f6a78372e5ec3bab65e7eaa04"
+    },
+    {
+      "file": "runs/morex_10mb/finalization_receipt.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/finalization_receipt.json",
+      "bytes": 3231,
+      "sha256": "20e34d75de7744a0cfa11a685ade3f1dc17014858ab7a209953157ed6b7718f7"
+    },
+    {
+      "file": "runs/morex_10mb/profile/receipt.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/profile/receipt.json",
+      "bytes": 217,
+      "sha256": "b73091a666edfe99547bb7a042917629f4568b301e3903aa07c3cda5504bbcae"
+    },
+    {
+      "file": "runs/morex_10mb/profile/stages.tsv",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/profile/stages.tsv",
+      "bytes": 382,
+      "sha256": "183acad42d133c3ea8a462ecb4ada761e74074a2bffc368577bcd0de470f11bd"
+    },
+    {
+      "file": "runs/morex_10mb/tidehunter.gnu_time.txt",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/tidehunter.gnu_time.txt",
+      "bytes": 797,
+      "sha256": "7aea785d73bb1b6e54e9e32ef29f77a745260e8d8064c6c4e180500c28d281ca"
+    },
+    {
+      "file": "runs/morex_10mb/clustering.gnu_time.txt",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/clustering.gnu_time.txt",
+      "bytes": 821,
+      "sha256": "4450c645351554b4efb812c1797e6a9b97193aca5248284c37e8e1eca5b51ee7"
+    },
+    {
+      "file": "runs/morex_10mb/normalized/summary.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/normalized/summary.json",
+      "bytes": 366,
+      "sha256": "b7cde3d0c655e9f5b06af27813610a3fadd8317ff0d01035b7184e2696dbc59d"
+    },
+    {
+      "file": "runs/morex_10mb/normalized/normalized_arrays.tsv",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_10mb_s8101_v4_20260907/normalized/normalized_arrays.tsv",
+      "bytes": 36567,
+      "sha256": "ed59e4b88eacd096aa9f0279b333e64d41748ff4cfbb8b8844428878fbcc3c73"
+    },
+    {
+      "file": "runs/morex_100mb/tc_tidehunter.gff3",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/tc_tidehunter.gff3",
+      "bytes": 493108,
+      "sha256": "6eb2c43ab1059cbfd291fadd408619a0811837c138720b8008032421d5015109"
+    },
+    {
+      "file": "runs/morex_100mb/tc_clustering.gff3_1.gff3",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/tc_clustering.gff3_1.gff3",
+      "bytes": 134940,
+      "sha256": "f09bcac22441ef81bbfc92b00e26daac8f7d48fe400d6c61b4f869d5e1431527"
+    },
+    {
+      "file": "runs/morex_100mb/tc_clustering.gff3",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/tc_clustering.gff3",
+      "bytes": 139719,
+      "sha256": "d3df0137caf261ad6633c61c31763ae0ae98c3580b5203dd060f27b2c1ac1cb9"
+    },
+    {
+      "file": "runs/morex_100mb/tc_cmd_args.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/tc_cmd_args.json",
+      "bytes": 337,
+      "sha256": "1149eb0d6a6b09eea56f7aff0ac7b26c3b2d981bb0242c00a3800c8d0b4abb39"
+    },
+    {
+      "file": "runs/morex_100mb/tc_consensus/consensus_sequences_all.fasta",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/tc_consensus/consensus_sequences_all.fasta",
+      "bytes": 477602,
+      "sha256": "bce70dbaaefb04469e98d71800c92ec39f6b9414c74d11933660019f8f0e3a30"
+    },
+    {
+      "file": "runs/morex_100mb/result.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/result.json",
+      "bytes": 976,
+      "sha256": "a5ee52ea0c6cd877c4b25b08e6defff7b2e89dd436c5df09b43a8fbe0e0f7f0d"
+    },
+    {
+      "file": "runs/morex_100mb/finalization_environment.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/finalization_environment.json",
+      "bytes": 1836,
+      "sha256": "affe283e4b2544060a120a121db1495ac1c87fe5dadfee6edb92706718ec286f"
+    },
+    {
+      "file": "runs/morex_100mb/finalization_receipt.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/finalization_receipt.json",
+      "bytes": 3243,
+      "sha256": "c1e36e736692646d5cd3b189ec341c73bcd2ada4670502b5aa5904fe7a2b3238"
+    },
+    {
+      "file": "runs/morex_100mb/profile/receipt.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/profile/receipt.json",
+      "bytes": 217,
+      "sha256": "b73091a666edfe99547bb7a042917629f4568b301e3903aa07c3cda5504bbcae"
+    },
+    {
+      "file": "runs/morex_100mb/profile/stages.tsv",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/profile/stages.tsv",
+      "bytes": 387,
+      "sha256": "70c0d110d1e34793ef6fd2b54427b0cfa9aa0b3094a5d79094aba552fb6e35f2"
+    },
+    {
+      "file": "runs/morex_100mb/tidehunter.gnu_time.txt",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/tidehunter.gnu_time.txt",
+      "bytes": 804,
+      "sha256": "e1c07fef5409a7f4f0f10c70594701b06b7b8862512fb2ec7897f951fd81ca79"
+    },
+    {
+      "file": "runs/morex_100mb/clustering.gnu_time.txt",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/clustering.gnu_time.txt",
+      "bytes": 823,
+      "sha256": "1d86ea8391a9a78e977301812c6de2518da1fd8daf7f0819ec4253dfe6959bf5"
+    },
+    {
+      "file": "runs/morex_100mb/normalized/summary.json",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/normalized/summary.json",
+      "bytes": 372,
+      "sha256": "cc0175c3e9be2d9bf284e4905ace1fc18fc6664c39aece90a06bb182754d06d1"
+    },
+    {
+      "file": "runs/morex_100mb/normalized/normalized_arrays.tsv",
+      "source": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907/normalized/normalized_arrays.tsv",
+      "bytes": 581680,
+      "sha256": "be35699446edac8cd5a944d81de818a53e9f692c15f388ef3008655af5621d0f"
+    },
+    {
+      "file": "sampling_receipt.json",
+      "source": "generated_by_archive_tidecluster_reference_scaling",
+      "bytes": 1810,
+      "sha256": "994246ec3802fa53918f9d1f34b3ddd9bb18e984ab07c325e4a7892b46161cc4"
+    },
+    {
+      "file": "scaling_summary.tsv",
+      "source": "generated_by_archive_tidecluster_reference_scaling",
+      "bytes": 1166,
+      "sha256": "8d696919b255569675f6c60b860d7ef9aaef8c27287505364a32e2b1c6a8c010"
+    },
+    {
+      "file": "summary.json",
+      "source": "generated_by_archive_tidecluster_reference_scaling",
+      "bytes": 291,
+      "sha256": "e4815eab7714f16ead1a3a37cdcaa0e973510862e3bbeb6422b37ce9fecbd2a7"
+    },
+    {
+      "file": "README.md",
+      "source": "generated_by_archive_tidecluster_reference_scaling",
+      "bytes": 629,
+      "sha256": "ef13f7cd5b0e28838929498c6b023f720065fd1abc2a0f1521d87302799d494d"
+    }
+  ]
+}

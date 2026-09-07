@@ -1,0 +1,106 @@
+{
+  "complete": true,
+  "external_stages_reused": true,
+  "files": [
+    {
+      "file": "tc_tidehunter.gff3",
+      "bytes": 29882,
+      "sha256": "9b2d219a2f55b85ba85e824c21c8e2c40747a9ed67b8c55f54944b3e56c9dae2"
+    },
+    {
+      "file": "tc_clustering.gff3_1.gff3",
+      "bytes": 7124,
+      "sha256": "9d5f2354b8a62463b3a1594504718bdc66eec3a6f11394492dc11f399f4a5218"
+    },
+    {
+      "file": "tc_clustering.gff3",
+      "bytes": 7428,
+      "sha256": "d204ed6f6f38c214460c146fe3971bdf33d01a808e646c2e64d27d2db36f2912"
+    },
+    {
+      "file": "tc_cmd_args.json",
+      "bytes": 335,
+      "sha256": "9f303f809f71efdb7fcd235539bbc0d9ac061502b4038ced7742f24dcf712f3d"
+    },
+    {
+      "file": "tc_consensus/consensus_sequences_all.fasta",
+      "bytes": 33007,
+      "sha256": "16654b9d2ea7ae653a473e11496efa2201480ac21861b0572457738e6c7cc8e2"
+    },
+    {
+      "file": "environment.json",
+      "bytes": 2294,
+      "sha256": "dacb1481c866b5f8d78297c74c04e8721053bb23daf0bbadd04ea40ee476f1b7"
+    },
+    {
+      "file": "stage_manifest.json",
+      "bytes": 1992,
+      "sha256": "38e78aa0d362d33cd1d64a26af3e951cb38e09aa801cf31603084f187873e87f"
+    },
+    {
+      "file": "profile/receipt.json",
+      "bytes": 217,
+      "sha256": "b73091a666edfe99547bb7a042917629f4568b301e3903aa07c3cda5504bbcae"
+    },
+    {
+      "file": "profile/stages.tsv",
+      "bytes": 382,
+      "sha256": "183acad42d133c3ea8a462ecb4ada761e74074a2bffc368577bcd0de470f11bd"
+    },
+    {
+      "file": "profile/samples.tsv",
+      "bytes": 12650,
+      "sha256": "f455fcb2f488479b410ce2ccac1136351bc65c77bc519d22689e53940b837489"
+    },
+    {
+      "file": "profile/tidehunter.stdout.log",
+      "bytes": 108,
+      "sha256": "7dfd753085b938c199bcbe21ecde9f0bff90ed85b154e409fba2e3032ccd01ac"
+    },
+    {
+      "file": "profile/tidehunter.stderr.log",
+      "bytes": 66,
+      "sha256": "4ddf9bf2578bcdb649ce54c4773d2ec9e07101c40aebb83efd655c379194a8d8"
+    },
+    {
+      "file": "profile/clustering.stdout.log",
+      "bytes": 74,
+      "sha256": "384e8c52d270db4f4655923bfe8f5f52446b8a41e5d3b009c818264bd826acd1"
+    },
+    {
+      "file": "profile/clustering.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "tidehunter.gnu_time.txt",
+      "bytes": 797,
+      "sha256": "7aea785d73bb1b6e54e9e32ef29f77a745260e8d8064c6c4e180500c28d281ca"
+    },
+    {
+      "file": "clustering.gnu_time.txt",
+      "bytes": 821,
+      "sha256": "4450c645351554b4efb812c1797e6a9b97193aca5248284c37e8e1eca5b51ee7"
+    },
+    {
+      "file": "normalized/normalized_arrays.tsv",
+      "bytes": 36567,
+      "sha256": "ed59e4b88eacd096aa9f0279b333e64d41748ff4cfbb8b8844428878fbcc3c73"
+    },
+    {
+      "file": "normalized/summary.json",
+      "bytes": 366,
+      "sha256": "b7cde3d0c655e9f5b06af27813610a3fadd8317ff0d01035b7184e2696dbc59d"
+    },
+    {
+      "file": "finalization_environment.json",
+      "bytes": 2093,
+      "sha256": "bc35f3b15d018e6cd30de82498a8961995586c3f6a78372e5ec3bab65e7eaa04"
+    },
+    {
+      "file": "result.json",
+      "bytes": 965,
+      "sha256": "a3549abbc6313ce82f1cd58ab0023db4f953261fc501cded9fe06350f42a3287"
+    }
+  ]
+}

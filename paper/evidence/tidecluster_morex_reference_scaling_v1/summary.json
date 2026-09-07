@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "sample_ids": [
+    "morex_100mb",
+    "morex_10mb"
+  ],
+  "run_count": 2,
+  "accuracy": "not_assessed_without_independent_real_array_and_family_truth",
+  "warning": "descriptive_nested_real_reference_windows_not_whole_genome_accuracy_truth"
+}

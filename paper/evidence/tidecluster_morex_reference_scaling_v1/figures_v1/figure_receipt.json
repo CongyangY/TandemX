@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "panel_count": 6,
+  "input_sha256": {
+    "scaling_summary.tsv": "8d696919b255569675f6c60b860d7ef9aaef8c27287505364a32e2b1c6a8c010",
+    "summary.json": "e4815eab7714f16ead1a3a37cdcaa0e973510862e3bbeb6422b37ce9fecbd2a7",
+    "archive_manifest.json": "79d8cf3d46b9e8a0c3d5bc780879528f35d7693947f0fffba98d48030aa44a4a",
+    "runs/morex_10mb/normalized/normalized_arrays.tsv": "ed59e4b88eacd096aa9f0279b333e64d41748ff4cfbb8b8844428878fbcc3c73",
+    "runs/morex_100mb/normalized/normalized_arrays.tsv": "be35699446edac8cd5a944d81de818a53e9f692c15f388ef3008655af5621d0f"
+  },
+  "output_sha256": {
+    "tidecluster_morex_reference_scaling.svg": "ccc7275f22fa51fadb418608aefcb74b8cf742059e7f2f0be1b081afbda6f907",
+    "tidecluster_morex_reference_scaling.pdf": "9e3ad13c833531ee32624efaadea2634e1e1c2762b7ce06ad868620ae5b5200e",
+    "tidecluster_morex_reference_scaling.png": "e0a7b0800ae88e0811872ea76ddaca1a946632b95a37e93330ab50cc379aba17",
+    "panel_source.tsv": "675a3a8d58e08fec7c45916f223f91847bee36e43604f60e53dbd5c3aee98772"
+  },
+  "svg_text_nodes": 68,
+  "svg_image_nodes": 0,
+  "warning": "descriptive_nested_reference_windows_without_independent_accuracy_truth"
+}

@@ -1,0 +1,5 @@
+sample_id	input_bases	input_mb	stage	wall_seconds	maximum_rss_kb	predicted_array_count	predicted_family_count	predicted_positive_sequence_count	predicted_union_bp	predicted_union_base_fraction	exact_intermediate_interval_count	clipped_interval_count	merged_interval_count	exact_copy_number_count	unavailable_copy_number_count	accuracy	warning
+morex_10mb	10000000	10.0	clustering	45.92	7809052	87	28	10	239939	0.0239939	87	0	0	85	2	not_assessed_without_independent_real_array_and_family_truth	sampled_real_reference_no_whole_genome_context
+morex_10mb	10000000	10.0	tidehunter	25.03	561556	87	28	10	239939	0.0239939	87	0	0	85	2	not_assessed_without_independent_real_array_and_family_truth	sampled_real_reference_no_whole_genome_context
+morex_100mb	100000000	100.0	clustering	60.99	7770936	1372	130	99	2356743	0.02356743	1200	41	131	1170	202	not_assessed_without_independent_real_array_and_family_truth	sampled_real_reference_no_whole_genome_context
+morex_100mb	100000000	100.0	tidehunter	331.52	5152444	1372	130	99	2356743	0.02356743	1200	41	131	1170	202	not_assessed_without_independent_real_array_and_family_truth	sampled_real_reference_no_whole_genome_context

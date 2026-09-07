@@ -247,6 +247,7 @@ def run(
         outdir / "tc_clustering.gff3",
         sequence_lengths,
         outdir / "normalized",
+        family_consensus_fasta=outdir / "tc_consensus/consensus_sequences_all.fasta",
     )
     result = {
         "complete": True,
