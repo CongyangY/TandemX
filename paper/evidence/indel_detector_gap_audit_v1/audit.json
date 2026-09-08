@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "audit_id": "indel_detector_gap_audit_v1",
+  "question": "is_tandemx_clearly_behind_tidehunter_in_read_local_accuracy_on_frozen_indel_scenarios",
+  "source": {
+    "benchmark_id": "cascade_gap_free_validation_v1",
+    "evaluation_seed": 2201,
+    "seed_status": "consumed_once_not_rerun_for_this_audit",
+    "summary_path": "paper/evidence/cascade_gap_free_validation_v1/run/summary.tsv",
+    "summary_sha256": "d555b359c23fb5efe9ef9237f98aff00cd3aa0dc87d3ebf5e6236fddd4db75aa",
+    "paired_path": "paper/evidence/cascade_gap_free_validation_v1/evaluation/paired_tidehunter.tsv",
+    "paired_sha256": "ec2445bb9f6608d2679cd689bec92ae055cb28e29cbf3a64c41c44034e89f35d"
+  },
+  "indel_scenarios": [
+    {
+      "scenario": "indel_01pct",
+      "total_indel_rate": 0.001,
+      "tandemx": {
+        "array_recall": 1.0,
+        "array_precision": 1.0,
+        "base_union_f1": 0.9994016350669682,
+        "matched_boundary_mae_bp": 1.2285714285714286,
+        "median_runtime_seconds": 1.0264613330364227,
+        "median_direct_child_peak_rss_mib": 30.203125
+      },
+      "tidehunter": {
+        "array_recall": 1.0,
+        "array_precision": 1.0,
+        "base_union_f1": 0.9992937533703272,
+        "matched_boundary_mae_bp": 1.45,
+        "median_runtime_seconds": 0.3075856249779463,
+        "median_direct_child_peak_rss_mib": 83.390625
+      },
+      "tandemx_to_tidehunter_runtime_ratio": 3.3371563872987218,
+      "tandemx_to_tidehunter_peak_rss_ratio": 0.362188495409406
+    },
+    {
+      "scenario": "indel_1pct",
+      "total_indel_rate": 0.01,
+      "tandemx": {
+        "array_recall": 1.0,
+        "array_precision": 1.0,
+        "base_union_f1": 0.9992104759751665,
+        "matched_boundary_mae_bp": 1.6214285714285714,
+        "median_runtime_seconds": 1.1295243338681757,
+        "median_direct_child_peak_rss_mib": 30.359375
+      },
+      "tidehunter": {
+        "array_recall": 1.0,
+        "array_precision": 1.0,
+        "base_union_f1": 0.9993772461756305,
+        "matched_boundary_mae_bp": 1.2785714285714285,
+        "median_runtime_seconds": 0.29702129191718996,
+        "median_direct_child_peak_rss_mib": 69.8125
+      },
+      "tandemx_to_tidehunter_runtime_ratio": 3.8028396098387756,
+      "tandemx_to_tidehunter_peak_rss_ratio": 0.434870188003581
+    },
+    {
+      "scenario": "indel_4pct",
+      "total_indel_rate": 0.04,
+      "tandemx": {
+        "array_recall": 1.0,
+        "array_precision": 1.0,
+        "base_union_f1": 0.9992515986201567,
+        "matched_boundary_mae_bp": 1.5357142857142858,
+        "median_runtime_seconds": 1.1303632089402527,
+        "median_direct_child_peak_rss_mib": 30.484375
+      },
+      "tidehunter": {
+        "array_recall": 1.0,
+        "array_precision": 0.958904109589041,
+        "base_union_f1": 0.997217213670047,
+        "matched_boundary_mae_bp": 0.6285714285714286,
+        "median_runtime_seconds": 0.3128257500939071,
+        "median_direct_child_peak_rss_mib": 94.015625
+      },
+      "tandemx_to_tidehunter_runtime_ratio": 3.6133956638829416,
+      "tandemx_to_tidehunter_peak_rss_ratio": 0.3242479641017118
+    }
+  ],
+  "accuracy_assessment": "not_clearly_behind_on_frozen_synthetic_indel_scenarios",
+  "largest_observed_gap": "elapsed_time_not_read_local_accuracy",
+  "decision": "defer_new_seed_and_chain_detector_while_higher_value_external_validation_and_comparators_are_pending",
+  "unresolved": [
+    "real_read_local_interval_truth",
+    "biological_replicates",
+    "indel_profiles_outside_the_frozen_generator",
+    "indel_specific_runtime_gap",
+    "condition_level_speed_dominance"
+  ],
+  "warning": "synthetic_distribution_level_evidence_only;not_a_claim_of_general_accuracy_or_speed_superiority"
+}
