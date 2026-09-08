@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "experiment_id": "unitfinder_source_audit_v1",
+  "official_url": "https://github.com/HuangYicheng-Bio/unitFinder",
+  "expected_commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28",
+  "expected_tracked_file_count": 52,
+  "entrypoint": "bin/unitFinder.py",
+  "primary_modes": ["de_novo_single_chromosome", "reference_assisted_single_chromosome"],
+  "external_commands": ["trf", "nucmer", "delta-filter", "show-coords", "clustalo"],
+  "boundary": "Source and dependency audit only. Manual cross-chromosome merging and script edits remain outside the single-chromosome command and must be timed separately; no accuracy or successful execution is implied."
+}
