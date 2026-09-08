@@ -1,0 +1,158 @@
+{
+  "archive_complete": true,
+  "experiment_complete": false,
+  "file_count": 25,
+  "files": [
+    {
+      "bytes": 2065,
+      "file": "preregistration.json",
+      "sha256": "665c562c263fb0365f779845264f60351a8fc94f0b648cf4a2e234cb6b55d146",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/tidecluster_factorial_continuation_v2.json"
+    },
+    {
+      "bytes": 1832,
+      "file": "results/environment.json",
+      "sha256": "f60b3ee0bc462eaadce6247af581a0e7c11dd4242965479b33aafe58b9becade",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/environment.json"
+    },
+    {
+      "bytes": 736,
+      "file": "results/parent_failure_snapshot/profile/s6401_default_primary_tidehunter.stderr.log",
+      "sha256": "ecda184b167c056f0a87acddb956c957e9665f4c312b3ee92aee5a7d3b46081f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/parent_failure_snapshot/profile/s6401_default_primary_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 337,
+      "file": "results/parent_failure_snapshot/profile/stages.tsv",
+      "sha256": "8025283b96365802d1b137244141594b3c2fcfaf41de04caa2980597d8b2aa4d",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/parent_failure_snapshot/profile/stages.tsv"
+    },
+    {
+      "bytes": 382,
+      "file": "results/parent_failure_snapshot/run_receipt.json",
+      "sha256": "1d708955250cc93baf3edea8494cb9e225bd8ebb745eeffa879c87536097c8d0",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/parent_failure_snapshot/run_receipt.json"
+    },
+    {
+      "bytes": 872,
+      "file": "results/parent_failure_snapshot/seed6401/default_primary/tidehunter.gnu_time.txt",
+      "sha256": "73044ac814254169922738a23407921b25dc044d86050d49929d2ca9cb47eb28",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/parent_failure_snapshot/seed6401/default_primary/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 13671,
+      "file": "results/parent_failure_snapshot/stage_manifest.json",
+      "sha256": "df16f881563f72f4feb30b2890ec9dfaec09aa8e4da6310c9fc3b52209ebeeb0",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/parent_failure_snapshot/stage_manifest.json"
+    },
+    {
+      "bytes": 0,
+      "file": "results/profile/s6401_matched_period_sensitivity_tidehunter.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/profile/s6401_matched_period_sensitivity_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 0,
+      "file": "results/profile/s6401_matched_period_sensitivity_tidehunter.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/profile/s6401_matched_period_sensitivity_tidehunter.stdout.log"
+    },
+    {
+      "bytes": 1842,
+      "file": "results/run_receipt.json",
+      "sha256": "9549d5fe1597fffc49e5a6197e41e0bbd08776263cc53e68bc7897041f6dc9e6",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/run_receipt.json"
+    },
+    {
+      "bytes": 683,
+      "file": "results/seed6401/matched_period_sensitivity/tc_chunks.bed",
+      "sha256": "a19742f6e275f9524e199b18059c405bd6aa782be3a091dceffcb149fa1d91ad",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/seed6401/matched_period_sensitivity/tc_chunks.bed"
+    },
+    {
+      "bytes": 217,
+      "file": "results/seed6401/matched_period_sensitivity/tc_cmd_args.json",
+      "sha256": "bfb942e0f32d1cf10973dd087c7aa9320ff3dec52600ba052f4ca5f0a3585c7a",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/seed6401/matched_period_sensitivity/tc_cmd_args.json"
+    },
+    {
+      "bytes": 40259,
+      "file": "results/seed6401/matched_period_sensitivity/tc_tidehunter.gff3",
+      "sha256": "862f2f8960bd0fe0dfb94273c5f4e73053e08be9d14ca52091cc504d24580b5c",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/seed6401/matched_period_sensitivity/tc_tidehunter.gff3"
+    },
+    {
+      "bytes": 827,
+      "file": "results/seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt",
+      "sha256": "acd06e23fc74baf05af53a76801a9981499bdd706b08b3419e1364320a49e1ae",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 22500,
+      "file": "results/source_snapshot/factorial_continue.py",
+      "sha256": "4c9619cb849269c67b8de5c6be6863f179b39fe955894ac7c2ec71b5768731fa",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/source_snapshot/factorial_continue.py"
+    },
+    {
+      "bytes": 5010,
+      "file": "results/source_snapshot/factorial_evaluate.py",
+      "sha256": "1d196f68781d85b2118bfce8cc9593e68fccb61b2c8f3dd30b5c5ba1dd31f224",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/source_snapshot/factorial_evaluate.py"
+    },
+    {
+      "bytes": 12055,
+      "file": "results/source_snapshot/factorial_run.py",
+      "sha256": "4154c98dc2d600faf99641780d60f2bb6c8fde9b1a51e316e49e70f7c2d3e676",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/source_snapshot/factorial_run.py"
+    },
+    {
+      "bytes": 16804,
+      "file": "results/source_snapshot/normalize.py",
+      "sha256": "9f16f0393c723d58bc046adf4bfcd885b107664c926c5ba6aadf4ca5fa3a27e7",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/source_snapshot/normalize.py"
+    },
+    {
+      "bytes": 8942,
+      "file": "results/source_snapshot/profile_stage_resources.py",
+      "sha256": "02b3175fc1271f393a7e3f84710a0482a93153110e8795861bd3958d2d1adfdf",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/source_snapshot/profile_stage_resources.py"
+    },
+    {
+      "bytes": 12232,
+      "file": "results/source_snapshot/run_tidecluster_docker_reference.py",
+      "sha256": "833a9bb7d8d0a18abde068ae56f33351cdeb82093677909d2b17fd6718b5c015",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/source_snapshot/run_tidecluster_docker_reference.py"
+    },
+    {
+      "bytes": 2065,
+      "file": "results/source_snapshot/tidecluster_factorial_continuation_v2.json",
+      "sha256": "665c562c263fb0365f779845264f60351a8fc94f0b648cf4a2e234cb6b55d146",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/source_snapshot/tidecluster_factorial_continuation_v2.json"
+    },
+    {
+      "bytes": 2817,
+      "file": "results/source_snapshot/tidecluster_factorial_validation_v1.json",
+      "sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/source_snapshot/tidecluster_factorial_validation_v1.json"
+    },
+    {
+      "bytes": 14837,
+      "file": "results/stage_manifest.json",
+      "sha256": "4aa510c5a5885f574049ab99eef208fc9b4bd24812cc275a87b9e4a9a3e201ce",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908/stage_manifest.json"
+    },
+    {
+      "bytes": 812,
+      "file": "headline_summary.json",
+      "sha256": "12af9c16a20831722fd62f00eeb13a8cd104ef453661b68c113e12e37083f44d",
+      "source": "generated_by_archive_tidecluster_factorial"
+    },
+    {
+      "bytes": 640,
+      "file": "README.md",
+      "sha256": "e815e24ef630268f26b11409abe69072ef15dd2c5e254b5de84758c286a479df",
+      "source": "generated_by_archive_tidecluster_factorial"
+    }
+  ],
+  "schema_version": 1
+}

@@ -71,10 +71,8 @@ def validate_parent_failure(config: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("parent does not retain the expected external-process failure")
     stage_rows = read_tsv(parent / "profile/stages.tsv")
     failed = {row["stage"] for row in stage_rows if int(row["exit_code"]) != 0}
-    declared_failed = set(
-        config.get("imported_failed_stages", config.get("never_rerun_stages", []))
-    )
-    if failed != declared_failed or len(failed) != 1:
+    frozen_skip = set(config.get("never_rerun_stages", []))
+    if failed != frozen_skip or len(failed) != 1:
         raise ValueError("never-rerun stages differ from the parent failure")
     failed_stage = next(iter(failed))
     if not failed_stage.endswith("_tidehunter"):
@@ -85,51 +83,6 @@ def validate_parent_failure(config: dict[str, Any]) -> dict[str, Any]:
         "stage_rows": stage_rows,
         "failed_stage": failed_stage,
     }
-
-
-def validate_imported_successes(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    declared = config.get("imported_successful_stages", {})
-    if not isinstance(declared, dict):
-        raise ValueError("imported successful stages must be an object")
-    validated: dict[str, dict[str, Any]] = {}
-    for stage, record in declared.items():
-        if not stage.endswith("_tidehunter") or not isinstance(record, dict):
-            raise ValueError(f"invalid imported successful stage: {stage}")
-        source = Path(record["source_dir"]).resolve()
-        artifacts = record.get("artifacts")
-        copy_outputs = record.get("copy_outputs")
-        if not isinstance(artifacts, dict) or not artifacts:
-            raise ValueError(f"imported stage lacks artifact hashes: {stage}")
-        if not isinstance(copy_outputs, list) or not copy_outputs:
-            raise ValueError(f"imported stage lacks copy outputs: {stage}")
-        for name, expected in artifacts.items():
-            relative = Path(name)
-            if relative.is_absolute() or ".." in relative.parts:
-                raise ValueError(f"unsafe imported artifact path: {stage}:{name}")
-            path = source / name
-            if not path.is_file() or digest_file(path) != expected:
-                raise ValueError(f"imported successful artifact changed: {stage}:{name}")
-        receipt = json.loads((source / "run_receipt.json").read_text(encoding="utf-8"))
-        if receipt.get("fate") != "orchestration_failure_after_external_stage_start":
-            raise ValueError(f"imported stage source lacks orchestration failure: {stage}")
-        if receipt.get("affected_stage") != stage:
-            raise ValueError(f"imported receipt names a different stage: {stage}")
-        time_names = [name for name in artifacts if name.endswith("tidehunter.gnu_time.txt")]
-        if len(time_names) != 1:
-            raise ValueError(f"imported stage requires one GNU-time record: {stage}")
-        resources = parse_gnu_time(source / time_names[0])
-        for name in copy_outputs:
-            if not isinstance(name, str):
-                raise ValueError(f"copy output is not a path string: {stage}")
-            if name not in artifacts:
-                raise ValueError(f"copy output lacks a frozen hash: {stage}:{name}")
-        validated[stage] = {
-            "source": source,
-            "artifacts": artifacts,
-            "copy_outputs": copy_outputs,
-            "resources": resources,
-        }
-    return validated
 
 
 def blank_summary(
@@ -210,11 +163,7 @@ class ContinuationRecords:
     summary_rows: list[dict[str, Any]] = field(default_factory=list)
 
     def execute(self, stage: dict[str, Any]) -> dict[str, Any]:
-        normalized = dict(stage)
-        for field_name in ("cwd", "scratch_dir"):
-            value = normalized.get(field_name)
-            normalized[field_name] = Path(value) if value is not None else None
-        result, samples = run_stage(normalized, self.profile_dir, self.interval)
+        result, samples = run_stage(stage, self.profile_dir, self.interval)
         self.profile_rows.append(result)
         self.sample_rows.extend(samples)
         write_profile_table(
@@ -291,7 +240,7 @@ def record_tidehunter_failure(
                 setting,
                 "clustering",
                 "not_started_dependency_failure",
-                source,
+                "continuation_v2",
                 "",
                 "parent_tidehunter_failed" if parent else "tidehunter_failed",
             ),
@@ -307,7 +256,6 @@ def record_clustering_failure(
     tidehunter_time: dict[str, float | int],
     clustering_time: dict[str, float | int] | None,
     exit_code: int,
-    source: str,
 ) -> None:
     records.summary_rows.append(
         blank_summary(
@@ -331,7 +279,7 @@ def record_clustering_failure(
             "clustering_status": f"failed_exit_{inner_exit}"
             + ("_gnu_time_unavailable" if clustering_time is None else ""),
             "evaluation_status": "not_started_dependency_failure",
-            "source": source,
+            "source": "continuation_v2",
             "reason": "clustering_external_process_failure",
         }
     )
@@ -342,7 +290,7 @@ def record_clustering_failure(
             setting,
             "clustering",
             "failed",
-            source,
+            "continuation_v2",
             exit_code,
             "external_process_failure",
         )
@@ -356,7 +304,6 @@ def record_evaluation_failure(
     error: Exception,
     tidehunter_time: dict[str, float | int],
     clustering_time: dict[str, float | int],
-    source: str,
 ) -> None:
     reason = f"{type(error).__name__}:{error}"
     records.summary_rows.append(
@@ -377,7 +324,7 @@ def record_evaluation_failure(
             "tidehunter_status": "ok",
             "clustering_status": "ok",
             "evaluation_status": "failed",
-            "source": source,
+            "source": "continuation_v2",
             "reason": reason,
         }
     )
@@ -390,7 +337,6 @@ def record_success(
     metrics: dict[str, Any],
     tidehunter_time: dict[str, float | int],
     clustering_time: dict[str, float | int],
-    source: str,
 ) -> None:
     records.summary_rows.append(
         success_summary(seed, setting, metrics, tidehunter_time, clustering_time)
@@ -403,7 +349,7 @@ def record_success(
             "tidehunter_status": "ok",
             "clustering_status": "ok",
             "evaluation_status": "ok",
-            "source": source,
+            "source": "continuation_v2",
             "reason": "",
         }
     )
@@ -414,8 +360,6 @@ def execute_cells(
     stage_by_name: dict[str, dict[str, object]],
     frozen_skip: set[str],
     parent_time: dict[str, float | int],
-    imported_successes: dict[str, dict[str, Any]],
-    continuation_source: str,
     profile_dir: Path,
     interval: float,
 ) -> ContinuationRecords:
@@ -427,21 +371,7 @@ def execute_cells(
         prefix = f"s{seed}_{setting}"
         tidehunter_name = f"{prefix}_tidehunter"
         clustering_name = f"{prefix}_clustering"
-        if tidehunter_name in imported_successes:
-            tidehunter_time = imported_successes[tidehunter_name]["resources"]
-            records.stage_fates.append(
-                _stage_fate(
-                    tidehunter_name,
-                    seed,
-                    setting,
-                    "tidehunter",
-                    "ok",
-                    "prior_continuation_hash_verified",
-                    0,
-                    "completed_before_orchestration_failure",
-                )
-            )
-        elif tidehunter_name in frozen_skip:
+        if tidehunter_name in frozen_skip:
             record_tidehunter_failure(
                 records,
                 seed,
@@ -454,35 +384,35 @@ def execute_cells(
                 parent=True,
             )
             continue
-        else:
-            tidehunter_result = records.execute(stage_by_name[tidehunter_name])
-            tidehunter_time = retained_gnu_time(run_dir / "tidehunter.gnu_time.txt")
-            if int(tidehunter_result["exit_code"]) != 0:
-                record_tidehunter_failure(
-                    records,
-                    seed,
-                    setting,
-                    tidehunter_name,
-                    clustering_name,
-                    tidehunter_time,
-                    int(tidehunter_result["exit_code"]),
-                    continuation_source,
-                )
-                continue
-            if tidehunter_time is None:
-                raise ValueError("successful TideHunter stage lacks a GNU-time record")
-            records.stage_fates.append(
-                _stage_fate(
-                    tidehunter_name,
-                    seed,
-                    setting,
-                    "tidehunter",
-                    "ok",
-                    continuation_source,
-                    0,
-                    "",
-                )
+
+        tidehunter_result = records.execute(stage_by_name[tidehunter_name])
+        tidehunter_time = retained_gnu_time(run_dir / "tidehunter.gnu_time.txt")
+        if int(tidehunter_result["exit_code"]) != 0:
+            record_tidehunter_failure(
+                records,
+                seed,
+                setting,
+                tidehunter_name,
+                clustering_name,
+                tidehunter_time,
+                int(tidehunter_result["exit_code"]),
+                "continuation_v2",
             )
+            continue
+        if tidehunter_time is None:
+            raise ValueError("successful TideHunter stage lacks a GNU-time record")
+        records.stage_fates.append(
+            _stage_fate(
+                tidehunter_name,
+                seed,
+                setting,
+                "tidehunter",
+                "ok",
+                "continuation_v2",
+                0,
+                "",
+            )
+        )
 
         clustering_result = records.execute(stage_by_name[clustering_name])
         clustering_time = retained_gnu_time(run_dir / "clustering.gnu_time.txt")
@@ -495,7 +425,6 @@ def execute_cells(
                 tidehunter_time,
                 clustering_time,
                 int(clustering_result["exit_code"]),
-                continuation_source,
             )
             continue
         if clustering_time is None:
@@ -507,7 +436,7 @@ def execute_cells(
                 setting,
                 "clustering",
                 "ok",
-                continuation_source,
+                "continuation_v2",
                 0,
                 "",
             )
@@ -530,7 +459,6 @@ def execute_cells(
                 error,
                 tidehunter_time,
                 clustering_time,
-                continuation_source,
             )
             continue
         record_success(
@@ -540,7 +468,6 @@ def execute_cells(
             metrics,
             tidehunter_time,
             clustering_time,
-            continuation_source,
         )
     return records
 
@@ -565,13 +492,6 @@ def run_continuation(
     ) is not True:
         raise ValueError("continuation did not freeze the original experiment")
     parent = validate_parent_failure(continuation)
-    imported_successes = validate_imported_successes(continuation)
-    never_rerun = set(continuation.get("never_rerun_stages", []))
-    expected_never_rerun = {parent["failed_stage"], *imported_successes}
-    if never_rerun != expected_never_rerun:
-        raise ValueError(
-            "never-rerun stages must equal the hash-verified failed and successful imports"
-        )
     datasets = validate_datasets(base)
     metadata = docker_metadata(docker, base["image"])
     if metadata["image_id"] != base["image_id"]:
@@ -589,12 +509,6 @@ def run_continuation(
     stage_by_name = {str(stage["name"]): stage for stage in stages}
     if parent["failed_stage"] not in stage_by_name:
         raise ValueError("parent failed stage is absent from the frozen stage plan")
-    unknown_imports = set(imported_successes) - set(stage_by_name)
-    if unknown_imports:
-        raise ValueError(
-            f"imported successful stages are absent from the frozen stage plan: "
-            f"{sorted(unknown_imports)}"
-        )
     (outdir / "stage_manifest.json").write_text(
         json.dumps(
             {
@@ -628,20 +542,6 @@ def run_continuation(
         target = parent_snapshot / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
-    prior_success_snapshot = outdir / "prior_success_snapshot"
-    for stage, record in imported_successes.items():
-        for name in record["artifacts"]:
-            source = record["source"] / name
-            target = prior_success_snapshot / stage / name
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, target)
-        for name in record["copy_outputs"]:
-            source = record["source"] / name
-            target = outdir / name
-            if target.exists():
-                raise FileExistsError(f"refusing to overwrite imported output: {target}")
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, target)
 
     environment = {
         "schema_version": 1,
@@ -657,15 +557,6 @@ def run_continuation(
             "failed_stage": parent["failed_stage"],
             "artifacts": continuation["parent_artifacts"],
         },
-        "imported_successful_stages": {
-            stage: {
-                "directory": str(record["source"]),
-                "artifacts": record["artifacts"],
-                "copy_outputs": record["copy_outputs"],
-                "resources": record["resources"],
-            }
-            for stage, record in imported_successes.items()
-        },
         "boundary": continuation["boundary"],
     }
     environment_path = outdir / "environment.json"
@@ -673,7 +564,7 @@ def run_continuation(
 
     profile_dir = outdir / "profile"
     profile_dir.mkdir()
-    frozen_skip = never_rerun
+    frozen_skip = set(continuation["never_rerun_stages"])
     parent_time_names = [
         name
         for name in continuation["parent_artifacts"]
@@ -689,8 +580,6 @@ def run_continuation(
         stage_by_name,
         frozen_skip,
         parent_time,
-        imported_successes,
-        continuation["experiment_id"],
         profile_dir,
         interval,
     )
@@ -707,7 +596,6 @@ def run_continuation(
         "complete": True,
         "planned_stage_count": len(stages),
         "parent_imported_failed_stage_count": 1,
-        "prior_imported_successful_stage_count": len(imported_successes),
         "continuation_attempted_stage_count": len(records.profile_rows),
         "successful_continuation_stage_count": sum(
             int(row["exit_code"]) == 0 for row in records.profile_rows
@@ -757,9 +645,7 @@ def run_continuation(
         "summary_sha256": digest_file(outdir / "summary.tsv"),
         "cell_fates_sha256": digest_file(outdir / "cell_fates.tsv"),
         "stage_fates_sha256": digest_file(outdir / "stage_fates.tsv"),
-        "never_rerun_stages": sorted(frozen_skip),
-        "parent_failure_never_rerun": [parent["failed_stage"]],
-        "prior_success_never_rerun": sorted(imported_successes),
+        "parent_failure_never_rerun": sorted(frozen_skip),
         "warning": (
             "same_process_simulated_validation_genomes_not_independent_plants;"
             "failed_accuracy_measurements_are_NA_not_zero"

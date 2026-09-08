@@ -160,9 +160,23 @@ before continuing and do not stage the untracked `.codex/` directory.
   `benchmarks/configs/tidecluster_factorial_continuation_v2.json`: it will never
   rerun the failed cell, will skip its dependent clustering stage, and will
   attempt only the five previously unstarted seed-setting cells while retaining
-  every failure and missing accuracy value. Nineteen focused continuation,
-  verifier, plotter and archiver tests pass; the complete source suite passes
-  **624 tests in 68.02 s**, plus compileall and `git diff --check`.
+  every failure and missing accuracy value.
+- **The first v2 continuation launch exposed and retained an orchestration
+  defect; it did not produce an accuracy result.** After importing the frozen
+  seed-6401/default failure, the seed-6401 matched-period TideHunter command was
+  launched. The parent profiler then raised `AttributeError: 'str' object has
+  no attribute 'exists'` while measuring a manifest-round-tripped scratch path,
+  but the already started external command completed successfully: internal GNU
+  time records 11.08 s, 3,250,036 kB maximum RSS and exit 0. Its command record,
+  chunk map and 40,259-byte native GFF are retained by hash. Dependent
+  clustering and evaluation never started, so accuracy remains unavailable.
+  The 25-file compact archive is
+  `paper/evidence/tidecluster_factorial_continuation_v2_failure`. The continuation
+  now normalizes manifest paths before profiling and can import a previously
+  successful external stage only after receipt and artifact hashes pass; the
+  successful TideHunter stage must not be rerun in the next continuation. After
+  this failure-retention and import hardening, the complete source suite passes
+  **628 tests in 63.25 s**; compileall and `git diff --check` also pass.
 - **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment_id": "tidecluster_factorial_validation_v2_continuation",
+  "complete": false,
+  "fate": "orchestration_failure_after_external_stage_start",
+  "orchestration_error": {
+    "type": "AttributeError",
+    "message": "'str' object has no attribute 'exists'",
+    "location": "profile_stage_resources.directory_size(stage_scratch_dir)"
+  },
+  "affected_stage": "s6401_matched_period_sensitivity_tidehunter",
+  "profile_stage_row_written": false,
+  "external_stage_observed_status": "completed_after_profiler_exception",
+  "internal_gnu_time": {
+    "user_seconds": 32.99,
+    "system_seconds": 1.13,
+    "maximum_rss_kb": 3250036,
+    "exit_status": 0,
+    "wall_seconds": 11.08
+  },
+  "retained_outputs": {
+    "seed6401/matched_period_sensitivity/tc_cmd_args.json": {
+      "bytes": 217,
+      "sha256": "bfb942e0f32d1cf10973dd087c7aa9320ff3dec52600ba052f4ca5f0a3585c7a"
+    },
+    "seed6401/matched_period_sensitivity/tc_chunks.bed": {
+      "bytes": 683,
+      "sha256": "a19742f6e275f9524e199b18059c405bd6aa782be3a091dceffcb149fa1d91ad"
+    },
+    "seed6401/matched_period_sensitivity/tc_tidehunter.gff3": {
+      "bytes": 40259,
+      "sha256": "862f2f8960bd0fe0dfb94273c5f4e73053e08be9d14ca52091cc504d24580b5c"
+    }
+  },
+  "logs": {
+    "stdout": {
+      "file": "profile/s6401_matched_period_sensitivity_tidehunter.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "file": "profile/s6401_matched_period_sensitivity_tidehunter.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "warning": "technical_orchestration_failure_not_TideCluster_accuracy_failure;completed_external_stage_must_not_be_rerun;dependent_clustering_unstarted"
+}

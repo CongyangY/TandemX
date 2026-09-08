@@ -645,6 +645,16 @@ logs, frozen configuration and source snapshot are archived (Evidence E32). A
 v2 continuation was frozen after the failure but before any previously
 unattempted output: it imports the failed cell by hash, never reruns it, skips
 dependent clustering and continues only the remaining five seed-setting cells.
+On its first launch, the seed-6401 matched-period TideHunter command completed
+with exit 0 after 11.08 s and 3,250,036 kB maximum RSS, but the parent profiler
+failed while interpreting a manifest-round-tripped scratch-directory string.
+Consequently its dependent clustering and evaluation did not start and no
+accuracy value exists. We retained the successful native GFF, command record,
+chunk map, GNU-time record and logs by hash rather than rerunning that external
+stage (Evidence E33). The continuation implementation now normalizes manifest
+paths and requires receipt- and artifact-hash validation before it can import a
+previously successful stage. This technical failure is separate from the v1
+external resource failure and is not counted as comparator performance.
 
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
@@ -1250,6 +1260,11 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   host/container resources, exact command manifest, source snapshot and
   explicit unavailable-accuracy fate in
   `evidence/tidecluster_factorial_validation_v1`.
+- Supplementary Table S30: frozen TideCluster factorial v2 orchestration-failure
+  receipt, successful seed-6401 matched-period TideHunter GNU-time and native
+  outputs, parent-failure snapshot, exact source snapshot and explicit
+  unstarted clustering/evaluation fate in
+  `evidence/tidecluster_factorial_continuation_v2_failure`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1277,7 +1292,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `tomato_heinz1706_source_audit_v1`; E30:
 `b73_ab10_donor_matched_source_audit_v1`; E31:
 `ey15_donor_matched_collapse_v1`; E32:
-`tidecluster_factorial_validation_v1`.
+`tidecluster_factorial_validation_v1`; E33:
+`tidecluster_factorial_continuation_v2_failure`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

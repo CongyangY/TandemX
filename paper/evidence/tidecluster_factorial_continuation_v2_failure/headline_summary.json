@@ -1,0 +1,25 @@
+{
+  "accuracy_complete": false,
+  "archive_complete": true,
+  "experiment_complete": false,
+  "experiment_fate": "orchestration_failure_after_external_stage_start",
+  "independent_verification": null,
+  "resource_context": {
+    "failed_profile_stages": [],
+    "internal_gnu_time": {
+      "seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt": {
+        "exit_status": 0,
+        "maximum_rss_kb": 3250036,
+        "system_seconds": 1.13,
+        "user_seconds": 32.99,
+        "wall_seconds": 11.08
+      }
+    },
+    "profile_stage_count": 0
+  },
+  "run_count": 0,
+  "schema_version": 1,
+  "setting_summary": {},
+  "validation_figure": null,
+  "warning": "same_process_simulated_validation_genomes;technical_repetitions_not_biological_replicates;failed_processes_are_missing_not_zero_measurements"
+}

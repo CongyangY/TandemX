@@ -87,6 +87,7 @@ def candidate_files(source: Path) -> list[Path]:
     for directory in (
         source / "source_snapshot",
         source / "parent_failure_snapshot",
+        source / "prior_success_snapshot",
         source / "profile",
     ):
         if directory.is_dir():
@@ -96,6 +97,8 @@ def candidate_files(source: Path) -> list[Path]:
         paths.update(path for path in figure_dir.rglob("*") if path.is_file())
     retained_run_patterns = (
         "*.gnu_time.txt",
+        "tc_cmd_args.json",
+        "tc_chunks.bed",
         "tc_tidehunter.gff3",
         "tc_clustering.gff3_1.gff3",
         "tc_clustering.gff3",
