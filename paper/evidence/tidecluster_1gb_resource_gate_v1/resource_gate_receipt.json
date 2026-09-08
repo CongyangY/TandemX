@@ -1,0 +1,36 @@
+{
+  "boundary": "A refusal establishes infeasibility only for the measured Docker runtime limit on this host; it is not a claim that TideCluster cannot process 1 Gb with more memory.",
+  "complete": true,
+  "config_sha256": "4fe39c66199a5c6b04769f24fac3ee27a7b9854f88a9a5b04a2c2960013a549c",
+  "decision": "resource_infeasible_preflight_do_not_start",
+  "execution_started": false,
+  "experiment_id": "tidecluster_morex_1gb_resource_gate_v1",
+  "fate": "resource_infeasible_preflight",
+  "project_commit": "a4e25bfede9ed56eaaeeb44bad149c201d0e9b08",
+  "reference_run": {
+    "path": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907",
+    "peak_rss_bytes": 7957438464,
+    "peak_rss_kb": 7770936,
+    "peak_stage": "clustering",
+    "result_sha256": "a5ee52ea0c6cd877c4b25b08e6defff7b2e89dd436c5df09b43a8fbe0e0f7f0d",
+    "stage_maximum_rss_kb": {
+      "clustering": 7770936,
+      "tidehunter": 5152444
+    }
+  },
+  "runtime": {
+    "memory_limit_bytes": 8217432064,
+    "minimum_free_fraction_required": 0.15000000000000002,
+    "peak_reference_fraction": 0.9683607241319324
+  },
+  "sampling_receipt_sha256": "994246ec3802fa53918f9d1f34b3ddd9bb18e984ab07c325e4a7892b46161cc4",
+  "schema_version": 1,
+  "scope": "same_host_same_container_resource_feasibility_not_cross_host_tool_limit",
+  "target": {
+    "bytes": 1016680318,
+    "path": "/Volumes/T7/Codex/TandemX/results/MorexV3_reference_windows_s8101_v2_20260907/morex_1000mb.fa",
+    "sample_id": "morex_1000mb",
+    "sha256": "40723eb9b5898d935ca6d01fc1193d9ae7a4a02f950d1aa0cc8c5bbb9f9f9df7",
+    "total_bases": 1000000000
+  }
+}

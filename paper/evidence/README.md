@@ -89,6 +89,14 @@ merged final intervals; 1,200 intervals remained exact. Its six-panel SVG has
 rendered and visually checked. These are descriptive reference calls without
 independent family/array truth or whole-chromosome context.
 
+`tidecluster_1gb_resource_gate_v1/` preserves the frozen MorexV3 1-Gb
+preflight refusal as a formal resource fate. The successful 100-Mb clustering
+stage used 7,957,438,464 bytes, 96.836% of the same 8,217,432,064-byte Docker
+limit, exceeding the predeclared 85% threshold. The 1-Gb command was not
+started, so runtime and accuracy are unavailable rather than zero. This is a
+same-host, same-container infeasibility result, not a universal TideCluster
+memory limit.
+
 `abundance_classifier_depth_gated_validation_v1/` preserves the frozen v3
 development-to-held-out chain. Commit `62892a6` and dual-platform hosted CI
 preceded one-time use of seeds 5801-5803. The rule passed all predeclared gates:

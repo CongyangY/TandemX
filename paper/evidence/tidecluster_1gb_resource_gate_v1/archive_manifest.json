@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 785,
+      "sha256": "c35dc7fa6708f7e7fd998feec261b4084b8148f08715dd90f3150378fd142970"
+    },
+    {
+      "file": "preregistration.json",
+      "bytes": 1181,
+      "sha256": "4fe39c66199a5c6b04769f24fac3ee27a7b9854f88a9a5b04a2c2960013a549c"
+    },
+    {
+      "file": "resource_gate_receipt.json",
+      "bytes": 1624,
+      "sha256": "e585a9f7f6ab8067efcad62b502ae8b805520eff763dd7938f9da14eaea140f8"
+    }
+  ],
+  "boundary": "same_host_same_container_resource_feasibility_not_cross_host_tool_limit"
+}

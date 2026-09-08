@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "experiment_id": "tidecluster_morex_1gb_resource_gate_v1",
+  "source_commit": "838b0791aaf692fa81a7f2912f16da44c0ab3b0a",
+  "scope": "same_host_same_container_resource_feasibility_not_cross_host_tool_limit",
+  "image": "tandemx/tidecluster:1.21.2",
+  "image_id": "sha256:62691b116427394984a8bace59a6f4ba7f3ea834373772734fbcfc567c3a27a7",
+  "completed_reference_run": "/Volumes/T7/Codex/TandemX/results/MorexV3_tidecluster_docker_100mb_s8101_v1_20260907",
+  "sampling_receipt": "/Volumes/T7/Codex/TandemX/results/MorexV3_reference_windows_s8101_v2_20260907/receipt.json",
+  "target_sample_id": "morex_1000mb",
+  "target_sample_path": "/Volumes/T7/Codex/TandemX/results/MorexV3_reference_windows_s8101_v2_20260907/morex_1000mb.fa",
+  "decision_rule": {
+    "maximum_successful_stage_fraction_of_runtime_memory": 0.85,
+    "if_at_or_above_threshold": "resource_infeasible_preflight_do_not_start",
+    "if_below_threshold": "eligible_for_separately_profiled_execution"
+  },
+  "boundary": "A refusal establishes infeasibility only for the measured Docker runtime limit on this host; it is not a claim that TideCluster cannot process 1 Gb with more memory."
+}

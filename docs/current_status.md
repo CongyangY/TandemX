@@ -63,8 +63,14 @@ before continuing and do not stage the untracked `.codex/` directory.
   (0.02356743) and positives in 99/100 windows. TideHunter used 331.52 s/
   5,152,444 kB; clustering used 60.99 s/7,770,936 kB. Copy number is unavailable
   for 202 merged/resolved intervals. All 20 finalization files independently
-  passed hash/size checks. The 1-Gb sample remains unrun because the 100-Mb
-  memory gate does not yet justify that resource risk.
+  passed hash/size checks. The frozen 1-Gb preflight then refused execution:
+  the 7,957,438,464-byte 100-Mb clustering peak was 96.836% of the same
+  8,217,432,064-byte Docker limit, above the predeclared 85% ceiling. Its fate
+  is `resource_infeasible_preflight`, `execution_started=false`, with no fake
+  runtime or accuracy value. The hash-checked compact record is at
+  `paper/evidence/tidecluster_1gb_resource_gate_v1`; this is a limit of the
+  measured host/container, not a universal claim that TideCluster cannot run
+  on 1 Gb with more memory.
 - **TideCluster scaling evidence is compact and visualized.** The 10/100-Mb
   archive is at `paper/evidence/tidecluster_morex_reference_scaling_v1`; all 32
   archive-manifest entries pass independent hash/size verification. Its accepted
