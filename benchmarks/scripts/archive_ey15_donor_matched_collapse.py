@@ -51,6 +51,11 @@ RESULT_FILES = (
     "old_new_alignment_context/summary.json",
     "old_new_alignment_context/family_alignment_context.tsv",
     "old_new_alignment_context/independent_verification.json",
+    "figures_v1/ey15_donor_validation.svg",
+    "figures_v1/ey15_donor_validation.pdf",
+    "figures_v1/ey15_donor_validation.png",
+    "figures_v1/panel_source.tsv",
+    "figures_v1/figure_provenance.json",
 )
 
 
@@ -149,6 +154,30 @@ def validate_context(
     return author, context, alignment
 
 
+def validate_figure(source: Path) -> dict[str, Any]:
+    directory = source / "figures_v1"
+    provenance = load_json(directory / "figure_provenance.json")
+    if provenance.get("complete") is not True:
+        raise ValueError("Ey15 validation figure is incomplete")
+    if provenance.get("panel_count") != 6:
+        raise ValueError("Ey15 validation figure does not contain six panels")
+    if provenance.get("primary_family_count") != 19:
+        raise ValueError("Ey15 validation figure changed the frozen denominator")
+    if provenance.get("svg_raster_image_element_count") != 0:
+        raise ValueError("Ey15 validation SVG contains raster image elements")
+    if provenance.get("svg_text_element_count", 0) < 1:
+        raise ValueError("Ey15 validation SVG text is not editable")
+    for name, record in provenance.get("outputs", {}).items():
+        path = directory / name
+        if not path.is_file():
+            raise FileNotFoundError(f"figure output is missing: {path}")
+        if path.stat().st_size != record.get("bytes"):
+            raise ValueError(f"figure output byte count changed: {path}")
+        if digest_file(path) != record.get("sha256"):
+            raise ValueError(f"figure output hash changed: {path}")
+    return provenance
+
+
 def archive(
     source: Path,
     enrollment: Path,
@@ -170,6 +199,7 @@ def archive(
     depth107 = validate_evaluation(source, "evaluation_depth107_sensitivity")
     resources = validate_resources(source)
     author, context, alignment = validate_context(source)
+    figure = validate_figure(source)
     if primary["all_family_rows"] != depth107["all_family_rows"]:
         raise ValueError("primary and depth-107 family universes differ")
     if primary["eligible_family_rows"] != depth107["eligible_family_rows"]:
@@ -233,6 +263,7 @@ def archive(
         "author_annotation_audit": author,
         "posthoc_reference_annotation_context": context,
         "old_new_alignment_context": alignment,
+        "validation_figure": figure,
         "resource_stage_count": len(resource_rows),
         "warning": (
             "new_assembly_shares_HiFi_evidence_with_read_estimator;"
@@ -249,7 +280,9 @@ def archive(
         "assembly-enrollment receipt, discovery catalogue, old/new/sensitivity "
         "localizations, two full-read quantifications, all family fates, "
         "independent standard-library recomputations, resource profiles and "
-        "author-annotation audits. `headline_summary.json` is the concise "
+        "author-annotation audits. It also retains the editable six-panel "
+        "SVG, matching PDF/PNG exports and panel-level source table. "
+        "`headline_summary.json` is the concise "
         "result; `results/` retains the auditable inputs to each claim.\n\n"
         "The newer assembly is a donor-matched high-quality reference proxy, "
         "not absolute truth, and shares HiFi evidence with the read estimator. "

@@ -6,8 +6,10 @@ import pytest
 
 from benchmarks.scripts.archive_ey15_donor_matched_collapse import (
     validate_evaluation,
+    validate_figure,
     validate_resources,
 )
+from benchmarks.challenge.schema import digest_file
 
 
 def write_tsv(path: Path, rows: list[dict[str, object]]) -> None:
@@ -70,3 +72,31 @@ def test_validate_resources_rejects_incomplete_receipt(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match="profile incomplete"):
         validate_resources(tmp_path)
+
+
+def test_validate_figure_requires_editable_svg_and_matching_hashes(
+    tmp_path: Path,
+) -> None:
+    directory = tmp_path / "figures_v1"
+    directory.mkdir()
+    svg = directory / "ey15_donor_validation.svg"
+    svg.write_text("<svg><text>Ey15</text></svg>")
+    provenance = {
+        "complete": True,
+        "panel_count": 6,
+        "primary_family_count": 19,
+        "svg_raster_image_element_count": 0,
+        "svg_text_element_count": 1,
+        "outputs": {
+            svg.name: {
+                "bytes": svg.stat().st_size,
+                "sha256": digest_file(svg),
+            }
+        },
+    }
+    (directory / "figure_provenance.json").write_text(json.dumps(provenance))
+    assert validate_figure(tmp_path)["panel_count"] == 6
+    provenance["svg_raster_image_element_count"] = 1
+    (directory / "figure_provenance.json").write_text(json.dumps(provenance))
+    with pytest.raises(ValueError, match="raster image"):
+        validate_figure(tmp_path)
