@@ -1,0 +1,320 @@
+{
+  "archive_complete": true,
+  "experiment_complete": false,
+  "file_count": 52,
+  "files": [
+    {
+      "bytes": 3743,
+      "file": "preregistration.json",
+      "sha256": "a547b34e3aaed6ddc83593fa4d84f53bee04879f62e9091441c61b5f249b1713",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/unitfinder_interface_smoke_v3.json"
+    },
+    {
+      "bytes": 3067,
+      "file": "results/environment.json",
+      "sha256": "7e049a16b72409bc3437185966305eaca190dd299863ba32f96a489030dc59c2",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/environment.json"
+    },
+    {
+      "bytes": 2038,
+      "file": "results/operator_termination.json",
+      "sha256": "cb6e4a95e29b2d664701cda9fe242205aed35fc0cc20dcbae0a5c1c08fef385d",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/operator_termination.json"
+    },
+    {
+      "bytes": 2851,
+      "file": "results/parent_build_snapshot/docker_build.log",
+      "sha256": "bd906930a2161626405d84d94193b1042814ca192a80faeeea50d1f2dcfa0263",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/docker_build.log"
+    },
+    {
+      "bytes": 6,
+      "file": "results/parent_build_snapshot/image_provenance/clustalo_version.txt",
+      "sha256": "563a0b4eec3c77bbc34ac630d4fa5214f5c6726ae01468404fd704473110084e",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/image_provenance/clustalo_version.txt"
+    },
+    {
+      "bytes": 10028,
+      "file": "results/parent_build_snapshot/image_provenance/conda_explicit.txt",
+      "sha256": "75194d5e24a0db94bd97e4def39e39ab4a729ce42cb68a0a5191919546af3a73",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/image_provenance/conda_explicit.txt"
+    },
+    {
+      "bytes": 149,
+      "file": "results/parent_build_snapshot/image_provenance/help.txt",
+      "sha256": "e55aed7ffe35f5ac1b030300451f5d87d8fd3b62722ead7499f3583e8ea96f1e",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/image_provenance/help.txt"
+    },
+    {
+      "bytes": 6,
+      "file": "results/parent_build_snapshot/image_provenance/nucmer_version.txt",
+      "sha256": "cd6321af37482f49efc326524a9fcd7fc86902a48da8d4bbd3dc718d290c3fea",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/image_provenance/nucmer_version.txt"
+    },
+    {
+      "bytes": 1,
+      "file": "results/parent_build_snapshot/image_provenance/trf_version.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/image_provenance/trf_version.txt"
+    },
+    {
+      "bytes": 4509,
+      "file": "results/parent_build_snapshot/image_provenance/unitfinder_tracked_files.sha256",
+      "sha256": "d9f1e89e4904ead02c213a5fcfbc2759fb95e4cad1d1dd32fa2d0b1b78ba2be7",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/image_provenance/unitfinder_tracked_files.sha256"
+    },
+    {
+      "bytes": 2198,
+      "file": "results/parent_build_snapshot/run_receipt.json",
+      "sha256": "63baae2dbed9eae7f3e3b63dc6e193ecb5544bb80de0f9272f055ff682df872f",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/run_receipt.json"
+    },
+    {
+      "bytes": 1837,
+      "file": "results/parent_build_snapshot/source_snapshot/Dockerfile",
+      "sha256": "0542f45ff928d7f09796540d424e46ec68d767730be14e314825bb32c8540563",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/source_snapshot/Dockerfile"
+    },
+    {
+      "bytes": 6221,
+      "file": "results/parent_build_snapshot/source_snapshot/record_unitfinder_build_success.py",
+      "sha256": "f22d8d524de4ac2a16d1eada1f6abe8dc3d6a59460099f579a0774d0c74fd297",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/source_snapshot/record_unitfinder_build_success.py"
+    },
+    {
+      "bytes": 2847,
+      "file": "results/parent_build_snapshot/source_snapshot/unitfinder_interface_smoke_v2.json",
+      "sha256": "156190204a224206bef38daf0188b05da7a14b361588538f4bfbdf2186eb76af",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/parent_build_snapshot/source_snapshot/unitfinder_interface_smoke_v2.json"
+    },
+    {
+      "bytes": 0,
+      "file": "results/profile/help.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/profile/help.stderr.log"
+    },
+    {
+      "bytes": 149,
+      "file": "results/profile/help.stdout.log",
+      "sha256": "e55aed7ffe35f5ac1b030300451f5d87d8fd3b62722ead7499f3583e8ea96f1e",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/profile/help.stdout.log"
+    },
+    {
+      "bytes": 218,
+      "file": "results/profile/receipt.json",
+      "sha256": "c2013b96449f16e7284305cb1040bdac938c07def17a1e39fa37d071e12244d2",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/profile/receipt.json"
+    },
+    {
+      "bytes": 1220798,
+      "file": "results/profile/samples.tsv",
+      "sha256": "8e61a368f8a2daa559a5f76f823f81fbfe8ba9a1cfe758bdc8c35379b4d11ef7",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/profile/samples.tsv"
+    },
+    {
+      "bytes": 2700,
+      "file": "results/profile/smoke.stderr.log",
+      "sha256": "bad588141569d1f070a3691403918053a8aadcee6a7393066d54c252f5e21f79",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/profile/smoke.stderr.log"
+    },
+    {
+      "bytes": 189,
+      "file": "results/profile/smoke.stdout.log",
+      "sha256": "0c4bd3e23b9e3db0831c4ced05cef8f7c339834b60b92b53eb58b51fbbe50ef6",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/profile/smoke.stdout.log"
+    },
+    {
+      "bytes": 353,
+      "file": "results/profile/stages.tsv",
+      "sha256": "b7e2456f0142e38e1fd3efb502abdfaa56257da86e0ee3b523a1ab9c76de3120",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/profile/stages.tsv"
+    },
+    {
+      "bytes": 6494,
+      "file": "results/run/findTandemRepeats/round1/unitfinder_smoke.fa.2.7.7.80.10.50.500.1.html",
+      "sha256": "a4068e245cc17c9a7307d4aeb6a47edc04c0095d7dd72a85d59d2f806a62e432",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/findTandemRepeats/round1/unitfinder_smoke.fa.2.7.7.80.10.50.500.1.html"
+    },
+    {
+      "bytes": 811140,
+      "file": "results/run/findTandemRepeats/round1/unitfinder_smoke.fa.2.7.7.80.10.50.500.1.txt.html",
+      "sha256": "bf562ed0f5f37e6320d42a01bfea1379cf019eec02a4835d7daa8b93252a5f46",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/findTandemRepeats/round1/unitfinder_smoke.fa.2.7.7.80.10.50.500.1.txt.html"
+    },
+    {
+      "bytes": 743,
+      "file": "results/run/findTandemRepeats/round2/unitfinder_smoke-1.next.fa.2.7.7.80.10.50.500.summary.html",
+      "sha256": "ada7fb7b7e7298072f8665fd88ac26d8b6ff8d661f01ccea07fadf2d7f0881b0",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/findTandemRepeats/round2/unitfinder_smoke-1.next.fa.2.7.7.80.10.50.500.summary.html"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder.gnu_time.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder.gnu_time.txt"
+    },
+    {
+      "bytes": 209601,
+      "file": "results/run/unitfinder_smoke-1.all.fa",
+      "sha256": "ed9b74493c8a063be290d011cdde23cf02ee006dcd9ec29c5b42782d8f42b290",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-1.all.fa"
+    },
+    {
+      "bytes": 2201,
+      "file": "results/run/unitfinder_smoke-1.consensus.fa",
+      "sha256": "a277b37c8906ee36a583dc2f113bbd87cc8243756def254690884db827d25502",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-1.consensus.fa"
+    },
+    {
+      "bytes": 2201,
+      "file": "results/run/unitfinder_smoke-1.next.fa",
+      "sha256": "a277b37c8906ee36a583dc2f113bbd87cc8243756def254690884db827d25502",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-1.next.fa"
+    },
+    {
+      "bytes": 1838,
+      "file": "results/run/unitfinder_smoke-1.next.fa.2.7.7.80.10.50.500.dat",
+      "sha256": "75c3faea0c56f0aabe9bf2451d4822af912e29ee6953d2a554d366bb53baf26e",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-1.next.fa.2.7.7.80.10.50.500.dat"
+    },
+    {
+      "bytes": 2222,
+      "file": "results/run/unitfinder_smoke-1.next.fa.2.7.7.80.10.50.500.mask",
+      "sha256": "ea7bd4f62609ca321f854b3e9d4a8354c2cbe3c0e72ceb9d1c5343f4b9bedc24",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-1.next.fa.2.7.7.80.10.50.500.mask"
+    },
+    {
+      "bytes": 348512,
+      "file": "results/run/unitfinder_smoke-1.next.unit.fa",
+      "sha256": "b1c4190fc4e67df782ad6cf6bc6205ddd65a44281c34ade79553b7c842b5b2a6",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-1.next.unit.fa"
+    },
+    {
+      "bytes": 348512,
+      "file": "results/run/unitfinder_smoke-1.units.fa",
+      "sha256": "b1c4190fc4e67df782ad6cf6bc6205ddd65a44281c34ade79553b7c842b5b2a6",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-1.units.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke-2.all.fa",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-2.all.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke-2.consensus.fa",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-2.consensus.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke-2.next.fa",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-2.next.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke-2.next.unit.fa",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-2.next.unit.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke-2.pro.all.units.fa",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-2.pro.all.units.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke-2.pro.units.fa",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-2.pro.units.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke-2.pro.units.units.fa",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-2.pro.units.units.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke-2.units.fa",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke-2.units.fa"
+    },
+    {
+      "bytes": 2201,
+      "file": "results/run/unitfinder_smoke.Consensus.fa",
+      "sha256": "a277b37c8906ee36a583dc2f113bbd87cc8243756def254690884db827d25502",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke.Consensus.fa"
+    },
+    {
+      "bytes": 348512,
+      "file": "results/run/unitfinder_smoke.Units.fa",
+      "sha256": "b1c4190fc4e67df782ad6cf6bc6205ddd65a44281c34ade79553b7c842b5b2a6",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke.Units.fa"
+    },
+    {
+      "bytes": 0,
+      "file": "results/run/unitfinder_smoke.Units.length.pdf",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke.Units.length.pdf"
+    },
+    {
+      "bytes": 210165,
+      "file": "results/run/unitfinder_smoke.fa.2.7.7.80.10.50.500.dat",
+      "sha256": "9b074aa960dbbe6551abfc6f1f567ef276868363e4e2d3005f92a58afa6a7b50",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke.fa.2.7.7.80.10.50.500.dat"
+    },
+    {
+      "bytes": 313538,
+      "file": "results/run/unitfinder_smoke.fa.2.7.7.80.10.50.500.mask",
+      "sha256": "b3dc5048c82cc17f2e9a395be28a73a8f17e6b3142428951090773db704e28ca",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run/unitfinder_smoke.fa.2.7.7.80.10.50.500.mask"
+    },
+    {
+      "bytes": 467,
+      "file": "results/run_receipt.json",
+      "sha256": "5ab58ac94425e4caafc9ac62a240cbc53b9aa9ea1e21f42ee1c88fd4cbc03945",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run_receipt.json"
+    },
+    {
+      "bytes": 1837,
+      "file": "results/source_snapshot/Dockerfile",
+      "sha256": "0542f45ff928d7f09796540d424e46ec68d767730be14e314825bb32c8540563",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/source_snapshot/Dockerfile"
+    },
+    {
+      "bytes": 11546,
+      "file": "results/source_snapshot/run_unitfinder_interface_smoke.py",
+      "sha256": "7e5db295abcc1f0523cdcb050ef9de94d55c89e3d3b64a1193d3f44dfa34741d",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/source_snapshot/run_unitfinder_interface_smoke.py"
+    },
+    {
+      "bytes": 3743,
+      "file": "results/source_snapshot/unitfinder_interface_smoke_v3.json",
+      "sha256": "a547b34e3aaed6ddc83593fa4d84f53bee04879f62e9091441c61b5f249b1713",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/source_snapshot/unitfinder_interface_smoke_v3.json"
+    },
+    {
+      "bytes": 1803,
+      "file": "results/stage_manifest.json",
+      "sha256": "62ea9d8342ccc119d2277795e3ac0c95046be6b017bf474856107ab3a7f065b6",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/stage_manifest.json"
+    },
+    {
+      "bytes": 3087,
+      "file": "headline_summary.json",
+      "sha256": "167b61d3c5d401455c2cc3c6a68f658dc4bfc804b57b19fd3bd7908372acf57d",
+      "source": "generated_by_archive_unitfinder_interface"
+    },
+    {
+      "bytes": 370,
+      "file": "README.md",
+      "sha256": "d0b0705bb3705dd84f5c7fc1d48ae937942ce791de04ec2e7be0e8e58422bdea",
+      "source": "generated_by_archive_unitfinder_interface"
+    }
+  ],
+  "schema_version": 1
+}

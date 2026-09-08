@@ -1,0 +1,16 @@
+{
+  "accession": "GWHBWDJ00000000.1",
+  "archive_complete": true,
+  "boundary": "This enrollment fixes the exact official ZH13-T2T v1 genome file, compressed byte count and publisher MD5 before download. Passing download/QC establishes input identity and FASTA integrity only. It does not establish unitFinder reproducibility, Table S1 agreement, biological accuracy, CENH3 truth or donor equivalence between the assembly and ChIP-seq runs.",
+  "experiment_complete": false,
+  "experiment_fate": "source_enrollment_failure",
+  "external_payload": {
+    "bytes": 260472580,
+    "md5": "69bdb74dcc3c73f83814a141c4d44c12",
+    "path": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908/GWHBWDJ00000000.1.genome.fasta.gz.partial",
+    "retained_outside_git": true,
+    "sha256": "e709d03523283f7151823d0768a87ff2e3eff28e4030932e936cd7fa93f6b2f5"
+  },
+  "fasta_qc": null,
+  "schema_version": 1
+}

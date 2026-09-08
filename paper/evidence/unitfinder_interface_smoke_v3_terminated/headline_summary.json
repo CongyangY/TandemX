@@ -1,0 +1,65 @@
+{
+  "accuracy_available": false,
+  "archive_complete": true,
+  "boundary": "This v3 execution is frozen after the corrected image build and before any external smoke output. It binds the exact image ID and rehashes the complete v2 build receipt, log, upstream source manifest, dependency lock, preflight artifacts and source snapshots. The input, command and acceptance contract are unchanged from v2. Success establishes only executable packaging and required native outputs; failure is retained as an execution or interface fate, never converted to zero accuracy. No real-data recovery, cross-chromosome manual merging, reference-assisted mode or biological accuracy is tested.",
+  "evidence_scope": "retained_failure_only",
+  "experiment_complete": false,
+  "experiment_fate": "external_process_failure",
+  "operator_termination": {
+    "accuracy_available": false,
+    "boundary": "The operational cap was not present in the frozen v3 config. This record must not be cited as a formal unitFinder timeout, OOM, algorithm failure or zero-accuracy result.",
+    "cap_declared": "after_run_start_before_cap_in_agent_commentary",
+    "complete": true,
+    "config_sha256": "a547b34e3aaed6ddc83593fa4d84f53bee04879f62e9091441c61b5f249b1713",
+    "formal_benchmark_timeout": false,
+    "oom_interpretation": "not_OOM_evidence_exit_137_followed_operator_docker_stop",
+    "operational_cap_seconds": 7200.0,
+    "operator_stop_requested": true,
+    "partial_fasta": {
+      "unitfinder_smoke.Consensus.fa": {
+        "bases": 981,
+        "bytes": 2201,
+        "records": 11,
+        "sha256": "a277b37c8906ee36a583dc2f113bbd87cc8243756def254690884db827d25502"
+      },
+      "unitfinder_smoke.Units.fa": {
+        "bases": 208375,
+        "bytes": 348512,
+        "records": 1875,
+        "sha256": "b1c4190fc4e67df782ad6cf6bc6205ddd65a44281c34ade79553b7c842b5b2a6"
+      }
+    },
+    "profile_receipt_sha256": "c2013b96449f16e7284305cb1040bdac938c07def17a1e39fa37d071e12244d2",
+    "required_outputs": {
+      "unitfinder_smoke.Consensus.fa": {
+        "bytes": 2201,
+        "exists": true,
+        "sha256": "a277b37c8906ee36a583dc2f113bbd87cc8243756def254690884db827d25502"
+      },
+      "unitfinder_smoke.Consensus.uniq.fa": {
+        "bytes": null,
+        "exists": false,
+        "sha256": null
+      },
+      "unitfinder_smoke.Units.fa": {
+        "bytes": 348512,
+        "exists": true,
+        "sha256": "b1c4190fc4e67df782ad6cf6bc6205ddd65a44281c34ade79553b7c842b5b2a6"
+      },
+      "unitfinder_smoke.Units.uniq.fa": {
+        "bytes": null,
+        "exists": false,
+        "sha256": null
+      }
+    },
+    "run_receipt_sha256": "5ab58ac94425e4caafc9ac62a240cbc53b9aa9ea1e21f42ee1c88fd4cbc03945",
+    "schema_version": 1,
+    "smoke_stage_exit_code": 137,
+    "smoke_stage_wall_seconds": 7267.918509,
+    "stop_command": "docker stop --time 30 zealous_benz",
+    "termination_classification": "post_start_host_operational_termination_not_formal_tool_timeout"
+  },
+  "resources": null,
+  "schema_version": 1,
+  "source_commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"
+}

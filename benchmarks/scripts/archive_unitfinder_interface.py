@@ -64,6 +64,16 @@ def validate(source: Path, config_path: Path) -> tuple[dict[str, Any], dict[str,
                 raise ValueError("failed smoke profile changed")
             if fate == "interface_contract_failure" and profile.get("complete") is not True:
                 raise ValueError("interface-contract failure lacks complete stages")
+            termination_path = source / "operator_termination.json"
+            if termination_path.is_file():
+                termination = json.loads(termination_path.read_text(encoding="utf-8"))
+                if (
+                    termination.get("formal_benchmark_timeout") is not False
+                    or termination.get("run_receipt_sha256") != digest(receipt_path)
+                    or termination.get("profile_receipt_sha256")
+                    != digest(source / "profile/receipt.json")
+                ):
+                    raise ValueError("unitFinder operator termination record changed")
     elif receipt.get("complete") is True:
         if receipt.get("fate") == "container_build_passed":
             if receipt.get("smoke_execution_started") is not False:
@@ -145,8 +155,13 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
 
     resources = None
     time_path = source / "run/unitfinder.gnu_time.txt"
-    if time_path.is_file():
+    if time_path.is_file() and time_path.stat().st_size > 0:
         resources = parse_gnu_time(time_path, require_success=receipt["complete"] is True)
+    termination = None
+    if (source / "operator_termination.json").is_file():
+        termination = json.loads(
+            (source / "operator_termination.json").read_text(encoding="utf-8")
+        )
     headline = {
         "schema_version": 1,
         "archive_complete": True,
@@ -164,6 +179,7 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
         "accuracy_available": False,
         "source_commit": config["source_commit"],
         "resources": resources,
+        "operator_termination": termination,
         "boundary": config["boundary"],
     }
     headline_path = outdir / "headline_summary.json"
@@ -192,12 +208,21 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
             "accuracy measurement.\n"
         )
     else:
-        description = (
-            "The frozen unitFinder interface smoke started but did not satisfy its "
-            "predeclared execution/output contract. All partial outputs, logs and "
-            "resource records are retained. This is an interface execution fate, "
-            "not a zero-accuracy measurement.\n"
-        )
+        if termination is None:
+            description = (
+                "The frozen unitFinder interface smoke started but did not satisfy its "
+                "predeclared execution/output contract. All partial outputs, logs and "
+                "resource records are retained. This is an interface execution fate, "
+                "not a zero-accuracy measurement.\n"
+            )
+        else:
+            description = (
+                "The frozen unitFinder interface smoke was stopped by the operator at "
+                "the separately declared host-operational cap after the run had started. "
+                "The cap was not part of the frozen benchmark config, so this is neither "
+                "a formal tool timeout nor an OOM or accuracy result. All partial outputs, "
+                "logs and resource records are retained.\n"
+            )
     readme.write_text(f"# {config['experiment_id']}\n\n{description}", encoding="utf-8")
     for path in (headline_path, readme):
         copied.append(

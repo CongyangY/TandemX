@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "experiment_id": "unitfinder_zh13_assembly_enrollment_v2_range_resume",
+  "status": "frozen_after_v1_truncated_transfer_before_range_resume",
+  "preregistration_parent_commit": "a45aa5430258feb7fb20e1003c8d9192f8c5f80e",
+  "allowed_change_from_v1": "copy_parent_partial_then_http_range_resume_from_exact_byte_offset",
+  "assembly": {
+    "accession": "GWHBWDJ00000000.1",
+    "assembly_name": "ZH13-T2T",
+    "bioproject": "PRJCA015269",
+    "biosample": "SAMC1127443",
+    "filename": "GWHBWDJ00000000.1.genome.fasta.gz",
+    "url": "https://download.cncb.ac.cn/gwh/Plants/Glycine_max_ZH13-T2T_GWHBWDJ00000000.1/GWHBWDJ00000000.1.genome.fasta.gz",
+    "expected_bytes": 286375748,
+    "expected_md5": "86fe5e3cdd12510afa61c6e3345a4a97"
+  },
+  "parent_failure": {
+    "directory": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908",
+    "fate": "source_enrollment_failure",
+    "classification": "truncated_transfer_before_expected_content_length",
+    "resume_offset": 260472580,
+    "artifacts": {
+      "run_receipt.json": "760bd6c5f07c36a504433afea28de0cfb84b5d877d84e66c85b177ab51bd8c2b",
+      "transport_diagnosis.json": "e79f14633d5eff773c444906b84e9415266ef7cbdf8ef95d43423f44d08f3428",
+      "GWHBWDJ00000000.1.genome.fasta.gz.partial": "e709d03523283f7151823d0768a87ff2e3eff28e4030932e936cd7fa93f6b2f5",
+      "source_snapshot/download_unitfinder_zh13_assembly.py": "2e17c5b46752a8c0bc3f6b3ac22602679dd82ebfa2a284f1457723bf6104f026",
+      "source_snapshot/unitfinder_zh13_assembly_enrollment_v1.json": "c0d0d72bf45e8705844fd9e29f0b31154ad7edb003e13f63f1a6f8fef8b80ca4"
+    }
+  },
+  "range_acceptance": {
+    "status": 206,
+    "content_range": "bytes 260472580-286375747/286375748",
+    "remaining_bytes": 25903168
+  },
+  "qc": {
+    "verify_compressed_size": true,
+    "verify_official_md5": true,
+    "compute_sha256": true,
+    "stream_gzip_and_fasta": true,
+    "report_record_count_and_base_composition": true
+  },
+  "boundary": "This v2 source retry retains the complete v1 truncated transfer by hash, copies rather than modifies its partial file, and requests only the frozen missing byte range. A server response other than the exact HTTP 206 Content-Range is rejected before append. Passing establishes official assembly input identity and FASTA integrity only, not unitFinder reproducibility, Table S1 agreement, biological accuracy, CENH3 truth or assembly/ChIP donor equivalence."
+}

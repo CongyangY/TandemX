@@ -1,0 +1,50 @@
+{
+  "archive_complete": true,
+  "experiment_complete": false,
+  "file_count": 7,
+  "files": [
+    {
+      "bytes": 1713,
+      "file": "preregistration.json",
+      "sha256": "c0d0d72bf45e8705844fd9e29f0b31154ad7edb003e13f63f1a6f8fef8b80ca4",
+      "source": "benchmarks/configs/unitfinder_zh13_assembly_enrollment_v1.json"
+    },
+    {
+      "bytes": 1099,
+      "file": "results/run_receipt.json",
+      "sha256": "760bd6c5f07c36a504433afea28de0cfb84b5d877d84e66c85b177ab51bd8c2b",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908/run_receipt.json"
+    },
+    {
+      "bytes": 1597,
+      "file": "results/transport_diagnosis.json",
+      "sha256": "e79f14633d5eff773c444906b84e9415266ef7cbdf8ef95d43423f44d08f3428",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908/transport_diagnosis.json"
+    },
+    {
+      "bytes": 5720,
+      "file": "results/source_snapshot/download_unitfinder_zh13_assembly.py",
+      "sha256": "2e17c5b46752a8c0bc3f6b3ac22602679dd82ebfa2a284f1457723bf6104f026",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908/source_snapshot/download_unitfinder_zh13_assembly.py"
+    },
+    {
+      "bytes": 1713,
+      "file": "results/source_snapshot/unitfinder_zh13_assembly_enrollment_v1.json",
+      "sha256": "c0d0d72bf45e8705844fd9e29f0b31154ad7edb003e13f63f1a6f8fef8b80ca4",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908/source_snapshot/unitfinder_zh13_assembly_enrollment_v1.json"
+    },
+    {
+      "bytes": 919,
+      "file": "headline_summary.json",
+      "sha256": "015abc747484f091e299ee081e7cf1f48d1d9f1e96f0d52f58ad4aaa9caae783",
+      "source": "generated_by_archive_unitfinder_source_enrollment"
+    },
+    {
+      "bytes": 241,
+      "file": "README.md",
+      "sha256": "10b0274054ddd1dce862d56a10793593922c9d5ea26b65c99f9dbd4c2e89f90d",
+      "source": "generated_by_archive_unitfinder_source_enrollment"
+    }
+  ],
+  "schema_version": 1
+}
