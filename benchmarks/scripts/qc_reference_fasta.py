@@ -13,13 +13,13 @@ def reference_qc(path: Path) -> dict:
     total = Counter()
     counts = Counter()
     with hashed_fastq(path) as (handle, digest):
-        while line := handle.readline(5_000_002):
-            if len(line) >= 5_000_002:
-                raise ValueError('Reference line exceeds bounded parser limit')
-            line = line.strip()
-            if not line:
-                continue
-            if line.startswith(b'>'):
+        at_line_start = True
+        while fragment := handle.readline(1024 * 1024):
+            line_terminated = fragment.endswith(b'\n')
+            if at_line_start and fragment.startswith(b'>'):
+                if not line_terminated:
+                    raise ValueError('Reference header exceeds bounded parser limit')
+                line = fragment.rstrip(b'\n\r')
                 if current is not None:
                     if not counts:
                         raise ValueError('Empty reference contig')
@@ -32,12 +32,16 @@ def reference_qc(path: Path) -> dict:
                     raise ValueError('Duplicate reference identifier')
                 identifiers.add(current)
                 counts = Counter()
-            else:
-                if current is None or set(line.upper())-set(b'ACGTRYSWKMBDHVN'):
+                at_line_start = True
+                continue
+            line = fragment.rstrip(b'\n\r') if line_terminated else fragment
+            if line:
+                if current is None or set(line.upper()) - set(b'ACGTRYSWKMBDHVN'):
                     raise ValueError('Invalid reference sequence or missing header')
                 count = Counter(line.upper().decode('ascii'))
                 counts.update(count)
                 total.update(count)
+            at_line_start = line_terminated
         if current is None or not counts:
             raise ValueError('Empty reference input or terminal contig')
         contigs.append(dict(contig=current, length_bp=sum(counts.values()), base_counts=dict(counts)))
