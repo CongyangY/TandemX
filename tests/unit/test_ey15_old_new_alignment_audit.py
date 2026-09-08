@@ -6,6 +6,10 @@ from benchmarks.scripts.evaluate_ey15_old_new_alignment_audit import (
     evaluate,
     intersection_bp,
 )
+from benchmarks.scripts.independent_verify_ey15_alignment_audit import (
+    expected as independently_expected,
+    query_segments,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -37,6 +41,11 @@ def test_cigar_query_segments_exclude_insertions_on_both_strands() -> None:
     assert aligned_query_segments(10, 27, "+", "5=3I4X2D5=") == [(10, 15), (18, 27)]
     assert aligned_query_segments(10, 27, "-", "5=3I4X2D5=") == [(10, 19), (22, 27)]
     assert intersection_bp([(0, 10), (8, 20)], [(5, 15)]) == 10
+    assert query_segments(10, 27, "+", "5=3I4X2D5=") == [
+        (10, 15),
+        (18, 22),
+        (22, 27),
+    ]
 
 
 def test_evaluate_reports_all_eligible_families_and_scopes(tmp_path: Path) -> None:
@@ -62,3 +71,12 @@ def test_evaluate_reports_all_eligible_families_and_scopes(tmp_path: Path) -> No
     for row in rows:
         assert row["same_chromosome_primary_alignment_bp"] == 80
         assert row["same_chromosome_primary_alignment_fraction"] == 0.8
+    independent_rows, independent_summary = independently_expected(
+        paf,
+        old_bed,
+        new_bed,
+        min_new_bp=50,
+        collapse_threshold=0.6,
+    )
+    assert independent_rows["collapse"]["same_chromosome_primary_alignment_bp"] == 80
+    assert independent_summary["eligible_family_count"] == 2

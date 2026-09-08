@@ -45,6 +45,12 @@ RESULT_FILES = (
     "author_annotation_audit/independent_raster_validation.json",
     "reference_annotation_context_posthoc_v2/summary.json",
     "reference_annotation_context_posthoc_v2/reference_annotation_rows.tsv",
+    "old_new_alignment_audit/environment.json",
+    "old_new_alignment_audit/receipt.json",
+    "old_new_alignment_audit/resources/stages.tsv",
+    "old_new_alignment_context/summary.json",
+    "old_new_alignment_context/family_alignment_context.tsv",
+    "old_new_alignment_context/independent_verification.json",
 )
 
 
@@ -105,7 +111,9 @@ def validate_resources(source: Path) -> dict[str, list[dict[str, str]]]:
     return result
 
 
-def validate_context(source: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+def validate_context(
+    source: Path,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     author = load_json(source / "author_annotation_audit/summary.json")
     raster = load_json(source / "author_annotation_audit/independent_raster_validation.json")
     context = load_json(source / "reference_annotation_context_posthoc_v2/summary.json")
@@ -122,7 +130,23 @@ def validate_context(source: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         raise ValueError("annotation context claims the primary benchmark changed")
     if len(context_rows) != context.get("eligible_families"):
         raise ValueError("annotation context row count differs from summary")
-    return author, context
+    alignment_run = load_json(source / "old_new_alignment_audit/receipt.json")
+    alignment = load_json(source / "old_new_alignment_context/summary.json")
+    alignment_verification = load_json(
+        source / "old_new_alignment_context/independent_verification.json"
+    )
+    alignment_rows = read_tsv(
+        source / "old_new_alignment_context/family_alignment_context.tsv"
+    )
+    if alignment_run.get("complete") is not True:
+        raise ValueError("old/new assembly alignment did not complete")
+    if alignment_verification.get("verification_passed") is not True:
+        raise ValueError("independent old/new alignment verification failed")
+    if alignment_verification.get("failures") != []:
+        raise ValueError("independent old/new alignment verification retains failures")
+    if len(alignment_rows) != alignment.get("eligible_family_count"):
+        raise ValueError("old/new alignment family row count differs from summary")
+    return author, context, alignment
 
 
 def archive(
@@ -145,7 +169,7 @@ def archive(
     primary = validate_evaluation(source, "evaluation_primary_total_bases")
     depth107 = validate_evaluation(source, "evaluation_depth107_sensitivity")
     resources = validate_resources(source)
-    author, context = validate_context(source)
+    author, context, alignment = validate_context(source)
     if primary["all_family_rows"] != depth107["all_family_rows"]:
         raise ValueError("primary and depth-107 family universes differ")
     if primary["eligible_family_rows"] != depth107["eligible_family_rows"]:
@@ -208,6 +232,7 @@ def archive(
         "sensitivity_explicit_depth_107": depth107,
         "author_annotation_audit": author,
         "posthoc_reference_annotation_context": context,
+        "old_new_alignment_context": alignment,
         "resource_stage_count": len(resource_rows),
         "warning": (
             "new_assembly_shares_HiFi_evidence_with_read_estimator;"
@@ -272,4 +297,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
