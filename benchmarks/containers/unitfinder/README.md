@@ -28,3 +28,12 @@ docker build --platform linux/amd64 \
 
 After the image digest and provenance files pass inspection, run each input in
 its own empty working directory so upstream fixed temporary names cannot collide.
+Generate the deterministic 308,375-bp installation/interface smoke with:
+
+```bash
+python benchmarks/scripts/generate_unitfinder_smoke.py --outdir /new/output/path
+```
+
+Its ten 105--150-copy decoys and one 600-copy target exercise unitFinder's
+source-defined copy-number outlier gate. The smoke is not an accuracy benchmark;
+the target, manifest, input hashes and any failed native output must be retained.

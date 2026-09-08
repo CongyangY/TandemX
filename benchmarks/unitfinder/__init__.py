@@ -1,1 +1,1 @@
-"""Reproducibility helpers for the task-matched unitFinder comparator."""
+"""Reproducible unitFinder comparator inputs and adapters."""
