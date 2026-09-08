@@ -4,6 +4,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 AUDIT = ROOT / "paper" / "evidence" / "unitfinder_source_scope_v1" / "audit.json"
+SOURCE_SCAN = (
+    ROOT / "paper" / "evidence" / "unitfinder_source_scope_v1" / "source_scan.json"
+)
 
 
 def test_unitfinder_source_scope_keeps_reproduction_distinct_from_truth() -> None:
@@ -34,3 +37,19 @@ def test_unitfinder_source_scope_records_exact_workbook_identity() -> None:
         f"CRR638{value}" for value in range(211, 217)
     ]
     assert "unresolved" in audit["planned_real_inputs"]["zh13_chip_seq"]["boundary"]
+
+
+def test_unitfinder_source_scan_retains_reproducibility_failures() -> None:
+    scan = json.loads(SOURCE_SCAN.read_text())
+    assert scan["complete"] is True
+    assert scan["has_dependency_manifest"] is False
+    assert scan["has_automated_test_tree"] is False
+    assert scan["python_syntax_failures"] == [
+        {
+            "error": "'(' was never closed",
+            "file": "bin/clustering.1.py",
+            "line": 99,
+        }
+    ]
+    assert scan["os_system_call_count"] == 85
+    assert scan["scope"].endswith("no_accuracy_execution")

@@ -1,0 +1,43 @@
+{
+  "boundary": "Source and dependency audit only. Manual cross-chromosome merging and script edits remain outside the single-chromosome command and must be timed separately; no accuracy or successful execution is implied.",
+  "checkout_status": "",
+  "commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28",
+  "complete": true,
+  "config_sha256": "565149569a2932bafc7eced90221b810e214c8e8e7a4c545bfbe313177548edf",
+  "entrypoint_sha256": "62385142d620ea76bb28fd2d2925eb446fbc892da001a919699196843745bec9",
+  "external_command_evidence": {
+    "clustalo": true,
+    "delta-filter": true,
+    "nucmer": true,
+    "show-coords": true,
+    "trf": true
+  },
+  "has_automated_test_tree": false,
+  "has_dependency_manifest": false,
+  "official_url": "https://github.com/HuangYicheng-Bio/unitFinder",
+  "os_system_call_count": 85,
+  "packaged_python2_pyc_count": 3,
+  "python_syntax_failure_count": 1,
+  "python_syntax_failures": [
+    {
+      "error": "'(' was never closed",
+      "file": "bin/clustering.1.py",
+      "line": 99
+    }
+  ],
+  "readme_manual_steps": {
+    "clustal_omega": true,
+    "script_modification": true,
+    "shell_concatenation": true
+  },
+  "schema_version": 1,
+  "scope": "source_dependency_and_interface_audit_no_accuracy_execution",
+  "third_party_python_imports": [
+    "Bio",
+    "matplotlib",
+    "numpy",
+    "sklearn"
+  ],
+  "tracked_file_count": 52,
+  "tracked_python_file_count": 47
+}

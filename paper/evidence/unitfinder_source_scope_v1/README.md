@@ -4,6 +4,12 @@ This audit fixes the evidence boundary for adding unitFinder as a serious
 assembly-side comparator.  It does not report a successful unitFinder run or an
 accuracy result.
 
+`source_scan.json` is the compact copy of the completed pinned-checkout audit.
+It preserves the missing dependency manifest/test tree, one syntax-invalid
+auxiliary Python file, three packaged Python-2 bytecode files, 85 `os.system`
+calls and the manual README steps.  These are reproducibility risks, not failed
+accuracy measurements.
+
 The official Genome Biology study applies unitFinder to three telomere-to-
 telomere soybean assemblies (Jack, ZH13 and WM82).  The workflow first predicts
 potential centromeric regions de novo from tandem-repeat structure and then uses
