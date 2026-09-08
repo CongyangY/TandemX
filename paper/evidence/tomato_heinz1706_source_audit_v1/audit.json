@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "audit_id": "tomato_heinz1706_source_audit_v1",
+  "audit_date": "2026-09-08",
+  "status": "not_source_eligible_donor_mismatch_risk",
+  "execution_state": {
+    "raw_reads_downloaded": false,
+    "assemblies_downloaded": false,
+    "benchmark_preregistered": false,
+    "benchmark_executed": false,
+    "accuracy_result_available": false
+  },
+  "source_paper": {
+    "title": "A telomere-to-telomere reference genome assembly of tomato cultivar Heinz 1706",
+    "journal": "Plant Communications",
+    "doi": "10.1016/j.xplc.2025.101618",
+    "article_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13084067/",
+    "reported_old_assembly": "SL5.0; HiFi plus Hi-C; 801.8 Mb; 31 gaps; 21 missing telomeres; 45S rDNA information absent",
+    "reported_new_assembly": "SL-T2T; ONT-based; 831.45 Mb; all 24 telomeres; chromosome 2 45S rDNA remains the stated exception",
+    "reported_added_sequence_bp": 29670000,
+    "reported_added_sequence_tandem_repeat_and_45s_fraction": 0.8451,
+    "donor_warning": "small differences up to 46 kb may reflect heterozygosity from mixed seeds or sample differences between ONT and HiFi sequencing"
+  },
+  "donor_match": {
+    "material_label_old": "Solanum lycopersicum cultivar Heinz 1706",
+    "material_label_new": "Solanum lycopersicum cultivar Heinz 1706",
+    "same_cultivar_supported": true,
+    "same_biosample_supported": false,
+    "same_plant_supported": false,
+    "same_dna_extraction_supported": false,
+    "paper_explicitly_allows_sample_difference": true,
+    "state": "same_cultivar_only_donor_mismatch_risk"
+  },
+  "old_hifi_evidence": {
+    "assembly": {
+      "name": "SL5.0",
+      "url": "https://solgenomics.net/ftp/genomes/TGG/genome/SL5.0.fasta.gz",
+      "compressed_bytes_from_http_head": 239182278,
+      "published_md5": "4ea3fc4a3ef92083bed44273ed194b5b",
+      "metadata_checked_date": "2026-09-08"
+    },
+    "reads": {
+      "project": "PRJNA733299",
+      "run": "SRR15243707",
+      "biosample": "SAMN20298915",
+      "platform": "PACBIO_SMRT",
+      "instrument_model": "Sequel II",
+      "read_count": 2072446,
+      "base_count": 34431605563,
+      "compressed_fastq_bytes": 28768190557,
+      "fastq_md5": "c3ff29f64a9497d73eb5b162a1b1e963",
+      "ena_metadata_url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR15243707&result=read_run"
+    }
+  },
+  "new_t2t_evidence": {
+    "bioproject": "PRJCA034231",
+    "gwh_accession": "GWHFILF00000000",
+    "database_page": "https://tomato.mbkbase.org/slt2t",
+    "metadata_api": "https://tomato.mbkbase.org/proapi/tomato/get/sl/t2t/data/json",
+    "metadata_api_result": {
+      "status": "OK",
+      "genome_show_name": "genome fasta",
+      "genome_file_name": "SL-T2T.fa"
+    },
+    "genome_download_url": "https://tomato.mbkbase.org/proapi/tomato/slt2t/download/file?file_name=SL-T2T.fa&species=tomato",
+    "genome_bytes_from_http_head": 831451202,
+    "accept_ranges": "bytes",
+    "last_modified_http": "2025-10-30T10:23:38Z",
+    "metadata_checked_date": "2026-09-08"
+  },
+  "eligibility_decision": {
+    "fate": "not_source_eligible_donor_mismatch_risk",
+    "blocking_reason": "the primary paper explicitly allows ONT-versus-HiFi sample differences and mixed-seed heterozygosity",
+    "why_cultivar_name_is_insufficient": "a shared cultivar label does not establish the same plant, BioSample or DNA extraction",
+    "permitted_future_use": "same-cultivar Tier B descriptive context under separately frozen scoring rules",
+    "prohibited_use": "donor-matched truth or primary assembly-collapse accuracy validation"
+  },
+  "evidence_boundary": "source eligibility audit only; no large download, TandemX run, accuracy estimate or resource measurement"
+}

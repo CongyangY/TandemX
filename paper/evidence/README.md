@@ -62,6 +62,13 @@ CLR-Falcon/Falcon-Unzip FASTA.  The candidate is therefore
 `metadata_blocked_no_public_old_assembly`; no 56.14-GB read download,
 reassembly, benchmark execution or accuracy claim was made.
 
+`tomato_heinz1706_source_audit_v1/` retains a second negative source screen.
+SL5.0, its exact HiFi run and the official 831,451,202-byte SL-T2T FASTA are
+public, but the SL-T2T paper explicitly allows mixed-seed heterozygosity and
+ONT-versus-HiFi sample differences. The pair is therefore
+`not_source_eligible_donor_mismatch_risk`: same cultivar is not donor matching.
+No approximately 28.77-GB HiFi download or benchmark execution was started.
+
 `quantify_calibration_development_v1/` archives 108/108 successful public
 `quantify` executions across three independently simulated genomes, 27 read
 conditions and four methods. Empirical controls reduced aggregate MARE from

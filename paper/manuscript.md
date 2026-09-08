@@ -507,6 +507,15 @@ requirement for any future TME204 analysis: its two haplotypes need a frozen
 diploid scoring model before they can be used as reference evidence (Evidence
 E28).
 
+We also screened the newer Heinz 1706 SL5.0-to-SL-T2T contrast. Both assemblies,
+the exact SL5.0 HiFi run and the official 831,451,202-byte SL-T2T FASTA are
+public. However, the SL-T2T study explicitly allows mixed-seed heterozygosity
+and sample differences between the ONT and HiFi sequencing [11]. We therefore
+retained `not_source_eligible_donor_mismatch_risk`, downloaded none of the
+28,768,190,557-byte HiFi archive and did not score a donor-matched result. The
+pair remains eligible only for a separately frozen same-cultivar descriptive
+analysis (Evidence E29).
+
 Whole-library random-sample comparator diagnostics on Morex, Nipponbare,
 Victoria, Chinese Spring and Lo7 successfully normalized all three read-tool
 outputs. TandemX was faster than TRF and slower than TideHunter in these
@@ -1110,6 +1119,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   accessions and volumes, complete GigaDB inventory result, missing historical
   assembly gate and no-execution fate in
   `evidence/tme204_donor_matched_source_audit_v1`.
+- Supplementary Table S26: Heinz 1706 SL5.0/SL-T2T source relationship, exact
+  HiFi run and file volumes, official download endpoints, explicit donor-risk
+  statement and no-execution fate in
+  `evidence/tomato_heinz1706_source_audit_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1133,7 +1146,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `cascade_gap_free_validation_v1`; E26:
 `tidecluster_morex_reference_scaling_v1`; E27:
 `indel_detector_gap_audit_v1`; E28:
-`tme204_donor_matched_source_audit_v1`.
+`tme204_donor_matched_source_audit_v1`; E29:
+`tomato_heinz1706_source_audit_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 
@@ -1164,6 +1178,9 @@ final table/figure packaging and journal-specific formatting checks.
     cassava cultivar reveal novel pan-genome and allele-specific transcriptome
     features.
     [GigaScience, doi:10.1093/gigascience/giac028](https://doi.org/10.1093/gigascience/giac028).
+11. A telomere-to-telomere reference genome assembly of tomato cultivar Heinz
+    1706.
+    [Plant Communications, doi:10.1016/j.xplc.2025.101618](https://doi.org/10.1016/j.xplc.2025.101618).
 
 Bibliographic metadata and the full primary dataset references require final
 reference-manager curation. No author, funding, conflict or accession-deposition

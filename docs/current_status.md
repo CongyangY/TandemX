@@ -44,6 +44,16 @@ before continuing and do not stage the untracked `.codex/` directory.
   exact historical FASTA becomes available, then freeze a haplotype-aware
   diploid scoring model before output inspection.
 
+- **A same-cultivar tomato T2T pair was rejected from the donor-matched tier.**
+  Heinz 1706 SL5.0, its exact HiFi run `SRR15243707`, and the official
+  831,451,202-byte `SL-T2T.fa` endpoint are public. However, the SL-T2T paper
+  explicitly states that observed differences can reflect mixed-seed
+  heterozygosity or sample differences between ONT and HiFi sequencing. The
+  fate is `not_source_eligible_donor_mismatch_risk`; no 28,768,190,557-byte
+  HiFi download or execution was started. The source record is at
+  `paper/evidence/tomato_heinz1706_source_audit_v1`. It may support a separately
+  preregistered same-cultivar Tier B context, never Tier A donor-matched truth.
+
 - **The requested indel-rich detector decision has been audited without a new
   benchmark run.** On the already consumed frozen seed-2201 scenarios,
   TandemX and TideHunter both had array recall 1.0 at 0.1%, 1% and 4% total
