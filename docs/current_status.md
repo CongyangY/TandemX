@@ -217,7 +217,13 @@ before continuing and do not stage the untracked `.codex/` directory.
   zero-accuracy result. The next build may only correct the hashing working
   directory and must use a newly frozen Dockerfile/config identity. With the
   failure recorder/archiver tests, the complete source suite passes **633 tests
-  in 63.75 s**; compileall and `git diff --check` also pass.
+  in 63.75 s**; compileall and `git diff --check` also pass. The packaging-only
+  v2 is now frozen before build in
+  `benchmarks/configs/unitfinder_interface_smoke_v2.json` (SHA-256
+  `156190204a224206bef38daf0188b05da7a14b361588538f4bfbdf2186eb76af`).
+  It rehashes the complete v1 failure, changes only the tracked-file hash
+  working directory, retains the exact e80bff38 source/dependencies/input/
+  command and uses the distinct `tandemx/unitfinder:e80bff38-v2` image tag.
 - **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the

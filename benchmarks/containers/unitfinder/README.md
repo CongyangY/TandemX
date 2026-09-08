@@ -23,8 +23,13 @@ Build without modifying the host Python or conda environments:
 
 ```bash
 docker build --platform linux/amd64 \
-  -t tandemx/unitfinder:e80bff38 benchmarks/containers/unitfinder
+  -t tandemx/unitfinder:e80bff38-v2 benchmarks/containers/unitfinder
 ```
+
+The original `e80bff38` image-tag attempt is retained as a failed build: its
+provenance hash command ran outside the checkout, so all repository-relative
+paths were unresolved. The `-v2` definition changes only that working directory
+and has a separate frozen configuration and image identity.
 
 After the image digest and provenance files pass inspection, run each input in
 its own empty working directory so upstream fixed temporary names cannot collide.

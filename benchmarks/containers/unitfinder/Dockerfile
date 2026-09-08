@@ -23,7 +23,8 @@ RUN mkdir -p /opt/provenance \
     && git -C /opt/unitFinder checkout --detach FETCH_HEAD \
     && test "$(git -C /opt/unitFinder rev-parse HEAD)" = "${UNITFINDER_COMMIT}" \
     && test -z "$(git -C /opt/unitFinder status --short)" \
-    && git -C /opt/unitFinder ls-files -z | sort -z | xargs -0 sha256sum \
+    && (cd /opt/unitFinder \
+      && git ls-files -z | sort -z | xargs -0 sha256sum) \
       > /opt/provenance/unitfinder_tracked_files.sha256 \
     && conda list -n unitfinder --explicit > /opt/provenance/conda_explicit.txt \
     && python /opt/unitFinder/bin/unitFinder.py -h > /opt/provenance/help.txt \

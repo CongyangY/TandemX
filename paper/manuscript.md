@@ -687,7 +687,10 @@ before the help interface because the container definition hashed repository-
 relative paths from the wrong working directory. The 52 missing-path messages,
 exit 123 and complete 535-line BuildKit log are retained (Evidence E35). This
 packaging failure is neither a unitFinder algorithm failure nor an accuracy or
-runtime measurement; no smoke output was produced.
+runtime measurement; no smoke output was produced. A second configuration was
+then frozen before rebuilding. It binds the complete first failure by hash and
+changes only the working directory used for tracked-file hashing; the upstream
+commit, dependency specifications, input and interface command remain fixed.
 
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.

@@ -42,11 +42,38 @@ def docker_image_metadata(docker: str, image: str) -> dict[str, Any]:
     }
 
 
+def validate_parent_build_failure(config: dict[str, Any]) -> dict[str, Any] | None:
+    parent_record = config.get("parent_build_failure")
+    if parent_record is None:
+        return None
+    if config.get("allowed_change_from_v1") != (
+        "run_tracked_file_sha256_from_opt_unitFinder_checkout_only"
+    ):
+        raise ValueError("unitFinder v2 does not declare the frozen packaging-only change")
+    parent = Path(parent_record["directory"]).resolve()
+    artifacts = parent_record.get("artifacts")
+    if not isinstance(artifacts, dict) or not artifacts:
+        raise ValueError("unitFinder v2 requires parent failure artifact hashes")
+    for name, expected in artifacts.items():
+        path = parent / name
+        if not path.is_file() or digest(path) != expected:
+            raise ValueError(f"unitFinder parent build artifact changed: {name}")
+    receipt = json.loads((parent / "run_receipt.json").read_text(encoding="utf-8"))
+    if (
+        receipt.get("complete") is not False
+        or receipt.get("fate") != parent_record.get("fate")
+        or receipt.get("smoke_execution_started") is not False
+    ):
+        raise ValueError("unitFinder parent build failure receipt changed")
+    return {"directory": parent, "receipt": receipt, "artifacts": artifacts}
+
+
 def validate_inputs(config: dict[str, Any], config_path: Path) -> tuple[Path, Path]:
     root = Path(__file__).resolve().parents[2]
     dockerfile = root / "benchmarks/containers/unitfinder/Dockerfile"
     if digest(dockerfile) != config["dockerfile_sha256"]:
         raise ValueError("unitFinder Dockerfile differs from the frozen config")
+    validate_parent_build_failure(config)
     input_dir = Path(config["input"]["directory"]).resolve()
     fasta = input_dir / config["input"]["fasta"]
     truth = input_dir / config["input"]["truth"]
