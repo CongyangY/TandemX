@@ -32,6 +32,18 @@ before continuing and do not stage the untracked `.codex/` directory.
   the predictor and remains a donor-matched high-quality reference proxy rather
   than absolute independent truth.
 
+- **A second donor-matched candidate was stopped at source enrollment rather
+  than converted into a favourable benchmark.** The cassava TME204 study used
+  121x CLR and 42x HiFi reads from the same DNA sample, but the inspected
+  86-file GigaDB 102193 inventory and linked Mendeley record do not expose the
+  published CLR-Falcon/Falcon-Unzip sequence. Only the final HiFi haplotypes and
+  supporting products are publicly visible. The fate is
+  `metadata_blocked_no_public_old_assembly`; no approximately 56.14-GB raw-read
+  download, reassembly or accuracy run was started. The negative audit is in
+  `paper/evidence/tme204_donor_matched_source_audit_v1`. Reopen only if the
+  exact historical FASTA becomes available, then freeze a haplotype-aware
+  diploid scoring model before output inspection.
+
 - **The requested indel-rich detector decision has been audited without a new
   benchmark run.** On the already consumed frozen seed-2201 scenarios,
   TandemX and TideHunter both had array recall 1.0 at 0.1%, 1% and 4% total

@@ -54,6 +54,14 @@ matching, but not identical DNA extraction, plant, stock or BioSample between
 the read data and both assemblies. It is a source-eligibility audit, not a
 completed biological collapse benchmark.
 
+`tme204_donor_matched_source_audit_v1/` retains a negative eligibility result
+for cassava TME204.  The study explicitly used CLR and HiFi reads from the same
+DNA sample, but the 86-file GigaDB inventory and linked Mendeley record expose
+the final HiFi haplotypes and supporting annotations, not the published
+CLR-Falcon/Falcon-Unzip FASTA.  The candidate is therefore
+`metadata_blocked_no_public_old_assembly`; no 56.14-GB read download,
+reassembly, benchmark execution or accuracy claim was made.
+
 `quantify_calibration_development_v1/` archives 108/108 successful public
 `quantify` executions across three independently simulated genomes, 27 read
 conditions and four methods. Empirical controls reduced aggregate MARE from

@@ -494,6 +494,19 @@ so no donor-matched performance result is reported here yet. The newer assembly
 also shares HiFi evidence with TandemX; it is a donor-matched high-quality
 reference proxy rather than absolute independent copy truth (Evidence E21).
 
+We screened cassava TME204 as a second donor-matched comparison because its CLR
+and HiFi reads were generated from the same DNA sample and the published
+CLR-Falcon/Falcon-Unzip assembly was less haplotype-resolved than the HiFi-
+hifiasm assembly [10]. However, the inspected 86-file GigaDB inventory and
+linked Mendeley record expose the final HiFi haplotypes but not the historical
+CLR assembly sequence. We therefore assigned
+`metadata_blocked_no_public_old_assembly`, downloaded none of the approximately
+56.14-GB compressed read set and did not replace the missing historical
+assembly with a new reassembly. This retained failure also identifies a design
+requirement for any future TME204 analysis: its two haplotypes need a frozen
+diploid scoring model before they can be used as reference evidence (Evidence
+E28).
+
 Whole-library random-sample comparator diagnostics on Morex, Nipponbare,
 Victoria, Chinese Spring and Lo7 successfully normalized all three read-tool
 outputs. TandemX was faster than TRF and slower than TideHunter in these
@@ -1093,6 +1106,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S24: no-rerun seed-2201 indel-condition comparison,
   including accuracy, boundary, elapsed-time and memory rows with exact source
   hashes in `evidence/indel_detector_gap_audit_v1`.
+- Supplementary Table S25: TME204 same-DNA source relationship, raw-read
+  accessions and volumes, complete GigaDB inventory result, missing historical
+  assembly gate and no-execution fate in
+  `evidence/tme204_donor_matched_source_audit_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1115,7 +1132,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `quantify_depth_gated_validation_v1`; E25:
 `cascade_gap_free_validation_v1`; E26:
 `tidecluster_morex_reference_scaling_v1`; E27:
-`indel_detector_gap_audit_v1`.
+`indel_detector_gap_audit_v1`; E28:
+`tme204_donor_matched_source_audit_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 
@@ -1142,6 +1160,10 @@ final table/figure packaging and journal-specific formatting checks.
 9. Near-gapless genome assemblies of Williams 82 and Lee cultivars for
    accelerating global soybean research.
    [Plant Genome study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12807316/).
+10. The haplotype-resolved chromosome pairs of a heterozygous diploid African
+    cassava cultivar reveal novel pan-genome and allele-specific transcriptome
+    features.
+    [GigaScience, doi:10.1093/gigascience/giac028](https://doi.org/10.1093/gigascience/giac028).
 
 Bibliographic metadata and the full primary dataset references require final
 reference-manager curation. No author, funding, conflict or accession-deposition

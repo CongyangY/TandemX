@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "audit_id": "tme204_donor_matched_source_audit_v1",
+  "audit_date": "2026-09-08",
+  "status": "metadata_blocked_no_public_old_assembly",
+  "execution_state": {
+    "raw_reads_downloaded": false,
+    "assemblies_downloaded": false,
+    "benchmark_preregistered": false,
+    "benchmark_executed": false,
+    "accuracy_result_available": false
+  },
+  "source_paper": {
+    "title": "The haplotype-resolved chromosome pairs of a heterozygous diploid African cassava cultivar reveal novel pan-genome and allele-specific transcriptome features",
+    "journal": "GigaScience",
+    "doi": "10.1093/gigascience/giac028",
+    "article_url": "https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giac028/6554099",
+    "reported_design": "121x PacBio CLR and 42x PacBio HiFi reads from the same DNA sample; CLR assembled with Falcon/Falcon-Unzip and HiFi assembled with hifiasm among other assemblers",
+    "reported_old_assembly_qv": 38.86,
+    "reported_old_assembly_kmer_completeness_percent": 97.64,
+    "reported_new_hifiasm_qv": 46.74,
+    "reported_haplotype_resolution_order": "HiFi-hifiasm most resolved; CLR-Falcon least resolved"
+  },
+  "donor_match": {
+    "material": "Manihot esculenta cultivar TME204",
+    "biosample": "SAMEA8245905",
+    "study_level_same_dna_statement": true,
+    "heterozygosity_context": "heterozygous diploid; approximately 1 percent variation-induced branching rate reported, excluding denser or larger variation",
+    "state": "donor_match_supported_but_haplotype_aware_truth_model_required"
+  },
+  "raw_reads": {
+    "ena_project": "PRJEB43673",
+    "hifi": {
+      "runs": ["ERR5485301"],
+      "reported_bases": 31312160541,
+      "reported_reads": 1531543,
+      "compressed_fastq_bytes": 28504514756
+    },
+    "clr": {
+      "runs": [
+        "ERR5487554",
+        "ERR5487555",
+        "ERR5487556",
+        "ERR5487557",
+        "ERR5487558",
+        "ERR5487559"
+      ],
+      "reported_bases": 90586242030,
+      "reported_reads": 5037588,
+      "compressed_fastq_bytes": 27631680315
+    },
+    "combined_compressed_fastq_bytes": 56136195071,
+    "decision": "not_downloaded_because_missing_historical_assembly_blocks_the_retrospective_validation"
+  },
+  "public_assembly_inventory": {
+    "gigadb": {
+      "dataset_id": "102193",
+      "doi": "10.5524/102193",
+      "metadata_api": "https://gigadb.org/gigadb/api/dataset/get_dataset/?dataset_id=102193",
+      "file_api": "https://gigadb.org/gigadb/api/dataset/list_dataset_files/?dataset_id=102193&per_page=100&start=1",
+      "file_api_retrieved_date": "2026-09-08",
+      "file_api_payload_bytes": 37888,
+      "file_api_payload_sha256": "9150eab6a9b42a05110c8e970b9c6efceda29a3c8328f4a46d27ba972b4b9ca2",
+      "file_count": 86,
+      "old_assembly_name_hits_for_clr_falcon_unzip": [],
+      "final_hifi_sequence_files": [
+        {"file_name": "TME204.HiFi_HiC_allmap.hap1.fasta", "size_bytes": 775120984},
+        {"file_name": "TME204.HiFi_HiC_allmap.hap2.fasta", "size_bytes": 718113074},
+        {"file_name": "TME204.HiFi_HiC.haplotig1.fa", "size_bytes": 762412929},
+        {"file_name": "TME204.HiFi_HiC.haplotig2.fa", "size_bytes": 706339423},
+        {"file_name": "TME204_HiFi_HiC_allmap.hap1.soft_masked.fasta", "size_bytes": 777669310},
+        {"file_name": "TME204_HiFi_HiC_allmap.hap2.soft_masked.fasta", "size_bytes": 720468810}
+      ]
+    },
+    "mendeley": {
+      "doi": "10.17632/fr6g4tgnfh.2",
+      "url": "https://data.mendeley.com/datasets/fr6g4tgnfh/2",
+      "visible_top_level_folders": [
+        "Augustus_annotation_release_v1.1",
+        "Liftoff_annotation_release_v1.0",
+        "SupplementaryFiles"
+      ],
+      "old_assembly_sequence_visible": false,
+      "api_attempt_state": "public_API_query_requested_authentication"
+    },
+    "final_haplotype_ncbi_projects": ["PRJNA758616", "PRJNA758615"],
+    "historical_clr_assembly_accession": null
+  },
+  "eligibility_decision": {
+    "fate": "metadata_blocked_no_public_old_assembly",
+    "blocking_reason": "the published historical CLR-Falcon/Falcon-Unzip sequence is not present in the public inventories inspected",
+    "why_not_reassemble": "reconstructing the old assembly would test a new software execution rather than validate against the published historical assembly",
+    "reopen_condition": "obtain the exact published CLR-Falcon/Falcon-Unzip FASTA with provenance",
+    "additional_design_requirement": "freeze haplotype-aware old-versus-H1/H2 scoring and a diploid copy-number denominator before any output inspection"
+  },
+  "evidence_boundary": "source eligibility audit only; no TandemX run, accuracy estimate or resource measurement"
+}
