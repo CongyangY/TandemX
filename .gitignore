@@ -14,6 +14,8 @@ results/
 !paper/evidence/unitfinder_interface_smoke_v3_terminated/results/**
 !paper/evidence/unitfinder_zh13_download_v1_failure/results/
 !paper/evidence/unitfinder_zh13_download_v1_failure/results/**
+!paper/evidence/unitfinder_zh13_source_enrollment_v2_success/results/
+!paper/evidence/unitfinder_zh13_source_enrollment_v2_success/results/**
 examples/toy/results/
 /test_data/
 /rust-core/target/

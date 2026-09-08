@@ -1,0 +1,20 @@
+{
+  "assembly": {
+    "acgt_bases": 1007237669,
+    "base_count": 1007237669,
+    "bytes": 286375748,
+    "md5": "86fe5e3cdd12510afa61c6e3345a4a97",
+    "other_bases": 0,
+    "record_count": 20,
+    "sha256": "db628d16c550e4f587bf834eea36b2c2325afcbe633923161e04312fa8f32ca9"
+  },
+  "boundary": "This verifies source bytes, publisher MD5, gzip/FASTA readability and sequence lengths only. It is not unitFinder output or accuracy evidence.",
+  "complete": true,
+  "independent_of_enrollment_implementation": true,
+  "schema_version": 1,
+  "sequence_lengths_file": {
+    "bytes": 562,
+    "file": "sequence_lengths.tsv",
+    "sha256": "ffbeae8030e354e635999347b4d55eec7a4a92c94ba3f9a376871cabdef83afc"
+  }
+}

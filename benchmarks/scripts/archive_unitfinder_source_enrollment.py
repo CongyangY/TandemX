@@ -88,6 +88,10 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
     if snapshot.is_dir():
         for path in sorted(item for item in snapshot.rglob("*") if item.is_file()):
             copy(path, outdir / "results/source_snapshot" / path.relative_to(snapshot))
+    for name in ("independent_verification.json", "sequence_lengths.tsv"):
+        path = source / name
+        if path.is_file():
+            copy(path, outdir / "results" / name)
 
     external = {
         "path": str(payload),
@@ -102,6 +106,13 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
         "accession": config["assembly"]["accession"],
         "external_payload": external,
         "fasta_qc": receipt.get("fasta_qc"),
+        "independent_verification": (
+            json.loads(
+                (source / "independent_verification.json").read_text(encoding="utf-8")
+            )
+            if (source / "independent_verification.json").is_file()
+            else None
+        ),
         "boundary": config["boundary"],
     }
     headline_path = outdir / "headline_summary.json"

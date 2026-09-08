@@ -1,0 +1,56 @@
+{
+  "archive_complete": true,
+  "experiment_complete": true,
+  "file_count": 8,
+  "files": [
+    {
+      "bytes": 2463,
+      "file": "preregistration.json",
+      "sha256": "4908cedfc290cb82425f69da0f383d1ac742af0fffcd6b8ea3dbab1a24c34548",
+      "source": "benchmarks/configs/unitfinder_zh13_assembly_enrollment_v2.json"
+    },
+    {
+      "bytes": 1436,
+      "file": "results/run_receipt.json",
+      "sha256": "8eeb020b5df07b00b1c22ece0b1b22683a6bba0979e18bb06df62e62bd5e37ac",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/run_receipt.json"
+    },
+    {
+      "bytes": 6156,
+      "file": "results/source_snapshot/resume_unitfinder_zh13_assembly.py",
+      "sha256": "30939f89508eb7b71e824df232ccb3849cddbc9fb5828d1422a1b3c85b41c10b",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/source_snapshot/resume_unitfinder_zh13_assembly.py"
+    },
+    {
+      "bytes": 2463,
+      "file": "results/source_snapshot/unitfinder_zh13_assembly_enrollment_v2.json",
+      "sha256": "4908cedfc290cb82425f69da0f383d1ac742af0fffcd6b8ea3dbab1a24c34548",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/source_snapshot/unitfinder_zh13_assembly_enrollment_v2.json"
+    },
+    {
+      "bytes": 706,
+      "file": "results/independent_verification.json",
+      "sha256": "35ca4092a7f8f2a1f7726f436c83fbca1b932c4234e2e5aa123b8e708d50cc64",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/independent_verification.json"
+    },
+    {
+      "bytes": 562,
+      "file": "results/sequence_lengths.tsv",
+      "sha256": "ffbeae8030e354e635999347b4d55eec7a4a92c94ba3f9a376871cabdef83afc",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/sequence_lengths.tsv"
+    },
+    {
+      "bytes": 1930,
+      "file": "headline_summary.json",
+      "sha256": "4f5d7d77fb7ca8be9f2a3a37b932c21c7537d471a1f52478de80d3268e776f6c",
+      "source": "generated_by_archive_unitfinder_source_enrollment"
+    },
+    {
+      "bytes": 315,
+      "file": "README.md",
+      "sha256": "9891867702b9de33752240df9f9e6956d8584d09e125f236504b8c7661e75553",
+      "source": "generated_by_archive_unitfinder_source_enrollment"
+    }
+  ],
+  "schema_version": 1
+}

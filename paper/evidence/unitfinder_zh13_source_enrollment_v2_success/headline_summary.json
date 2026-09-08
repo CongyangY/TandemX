@@ -1,0 +1,42 @@
+{
+  "accession": "GWHBWDJ00000000.1",
+  "archive_complete": true,
+  "boundary": "This v2 source retry retains the complete v1 truncated transfer by hash, copies rather than modifies its partial file, and requests only the frozen missing byte range. A server response other than the exact HTTP 206 Content-Range is rejected before append. Passing establishes official assembly input identity and FASTA integrity only, not unitFinder reproducibility, Table S1 agreement, biological accuracy, CENH3 truth or assembly/ChIP donor equivalence.",
+  "experiment_complete": true,
+  "experiment_fate": "source_enrollment_passed",
+  "external_payload": {
+    "bytes": 286375748,
+    "md5": "86fe5e3cdd12510afa61c6e3345a4a97",
+    "path": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/GWHBWDJ00000000.1.genome.fasta.gz",
+    "retained_outside_git": true,
+    "sha256": "db628d16c550e4f587bf834eea36b2c2325afcbe633923161e04312fa8f32ca9"
+  },
+  "fasta_qc": {
+    "acgt_bases": 1007237669,
+    "base_count": 1007237669,
+    "other_bases": 0,
+    "other_fraction": 0.0,
+    "record_count": 20
+  },
+  "independent_verification": {
+    "assembly": {
+      "acgt_bases": 1007237669,
+      "base_count": 1007237669,
+      "bytes": 286375748,
+      "md5": "86fe5e3cdd12510afa61c6e3345a4a97",
+      "other_bases": 0,
+      "record_count": 20,
+      "sha256": "db628d16c550e4f587bf834eea36b2c2325afcbe633923161e04312fa8f32ca9"
+    },
+    "boundary": "This verifies source bytes, publisher MD5, gzip/FASTA readability and sequence lengths only. It is not unitFinder output or accuracy evidence.",
+    "complete": true,
+    "independent_of_enrollment_implementation": true,
+    "schema_version": 1,
+    "sequence_lengths_file": {
+      "bytes": 562,
+      "file": "sequence_lengths.tsv",
+      "sha256": "ffbeae8030e354e635999347b4d55eec7a4a92c94ba3f9a376871cabdef83afc"
+    }
+  },
+  "schema_version": 1
+}

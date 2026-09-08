@@ -312,6 +312,33 @@ the archive includes the complete build log, 52 upstream tracked-file hashes,
 pass size/SHA-256 checks. The external smoke had not started, so this proves
 image construction and provenance only, not interface execution or accuracy.
 
+`unitfinder_interface_smoke_v3_terminated/` retains the image-ID-bound external
+smoke. Help passed, and the default workflow generated 1,875 unit records and 11
+consensus records, but it remained inside its first Matplotlib PDF save on the
+linux/amd64 image under Apple-Silicon emulation. An operator-stopped 7,200-s cap
+had been declared after the run started; the wrapper ended at 7,267.92 s with
+exit 137. The unique-unit FASTAs were absent and the open PDF was zero bytes.
+All 52 archive-manifest entries pass an independent size/SHA-256 check. This is
+not a frozen formal timeout, OOM, natural tool failure or accuracy result.
+
+`unitfinder_zh13_source_enrollment_v1/` fixes the official ZH13-T2T v1 file
+inventory and publisher MD5 before download. The selected genome is
+286,375,748 compressed bytes with MD5 `86fe5e3cdd12510afa61c6e3345a4a97`.
+
+`unitfinder_zh13_download_v1_failure/` retains the first frozen acquisition
+fate. The transfer ended at 260,472,580 bytes; its partial file remains on T7 by
+path and hashes, failed `gzip -t`, and was classified against a full-length HEAD
+response as a truncated transfer. All seven compact manifest entries rehash.
+
+`unitfinder_zh13_source_enrollment_v2_success/` retains the frozen exact-Range
+continuation and independent verification. The copied partial received the exact
+25,903,168 missing bytes via HTTP 206, passed the publisher MD5, and independently
+resolved to SHA-256
+`db628d16c550e4f587bf834eea36b2c2325afcbe633923161e04312fa8f32ca9`.
+The 20 records contain 1,007,237,669 bp and zero non-ACGT characters. All eight
+compact manifest entries rehash. This closes source identity only; Table S1
+reproduction and CENH3-based accuracy remain unrun.
+
 ## SRF workflow evidence
 
 `srf_pilot/` retains the initial four successful native workflows and the exact

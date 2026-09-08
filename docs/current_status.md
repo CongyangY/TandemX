@@ -230,12 +230,47 @@ before continuing and do not stage the untracked `.codex/` directory.
   125-line explicit conda lock, build log and in-image help/version artifacts
   are archived at `paper/evidence/unitfinder_container_build_v2_success`; all
   14 manifest entries pass size/SHA-256 checks. This proves the packaging fix
-  and source/dependency identity only. The external interface smoke remains
-  unrun and no accuracy or algorithm runtime is available. The first full
+  and source/dependency identity only. The image-ID-bound v3 interface smoke
+  was frozen at commit `1843c7a` before external output. Its help stage passed
+  in 1.42 s. The default upstream workflow then generated 1,875 unit records
+  (208,375 bp) and 11 consensus records (981 bp), but remained inside its first
+  Matplotlib PDF save on the linux/amd64 image under Apple-Silicon emulation.
+  A 7,200-s host-operational cap was declared after the run started; the
+  operator stopped the container at that cap, and the profiled wrapper ended
+  after 7,267.92 s with exit 137. `Units.uniq.fa` and `Consensus.uniq.fa` were
+  never created and the open PDF remained zero bytes. This is a retained
+  post-start operator termination, not a frozen formal timeout, OOM, natural
+  unitFinder failure, accuracy value or native-x86 resource comparison. The
+  complete 52-entry compact payload archive (53 files including its manifest)
+  is `paper/evidence/unitfinder_interface_smoke_v3_terminated`; an independent
+  size/SHA-256 pass found zero changed entries. The first full
   regression after renaming the documented image tag retained one stale-test
   failure (635 passed/1 failed); after updating that exact documentation
-  assertion, the complete suite passes **636 tests in 63.01 s**, plus compileall
-  and `git diff --check`.
+  assertion, that checkpoint passed **636 tests in 63.01 s**.
+- **The exact ZH13-T2T assembly input is now enrolled and independently
+  verified, with its failed first transfer retained.** The official GWH v1
+  directory fixes `GWHBWDJ00000000.1.genome.fasta.gz` at 286,375,748 bytes and
+  publisher MD5 `86fe5e3cdd12510afa61c6e3345a4a97`. The first frozen download ended cleanly
+  at only 260,472,580 bytes; its MD5/SHA-256 were retained, `gzip -t` reported
+  unexpected EOF, and a new HEAD request still reported the full expected
+  length with Range support. It is therefore
+  `truncated_transfer_before_expected_content_length`, not an accepted genome.
+  Its seven-entry compact archive is
+  `paper/evidence/unitfinder_zh13_download_v1_failure`; the 260-MB partial
+  remains on T7 by exact path/hash. A separately frozen v2 copied rather than
+  modified that partial, required exact HTTP 206 Content-Range
+  `bytes 260472580-286375747/286375748`, appended 25,903,168 bytes, and passed
+  the publisher MD5. Independent code reproduced SHA-256
+  `db628d16c550e4f587bf834eea36b2c2325afcbe633923161e04312fa8f32ca9`,
+  20 FASTA records, 1,007,237,669 bp and zero non-ACGT characters. The eight-
+  entry compact success archive is
+  `paper/evidence/unitfinder_zh13_source_enrollment_v2_success`; the genome is
+  at `/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/`.
+  This materially closes exact source identity but provides no Table S1
+  reproduction, unitFinder accuracy or CENH3 truth. With all current source,
+  recorder, continuation, archive and independent-verification tests, the full
+  suite passes **648 tests in 63.32 s**; compileall and `git diff --check` also
+  pass.
 - **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the
@@ -1529,13 +1564,21 @@ reuse assembly-alignment BAMs from other projects as raw reads.
    runtime costs before making it the default.
 3. Use new development/validation seeds, freeze every decision before untouched
    evaluation and add independent families/processes for publication inference.
-4. Add coverage/error/copy-number and engineered assembly-collapse experiments,
-   calibrated uncertainty and independently tested probe specificity.
-5. Expand real plant validation with matched assemblies and curated repeats;
-   measure resources on bounded inputs before larger datasets.
+4. Seek a second eligible donor-matched old/new assembly experiment or an
+   orthogonal biological endpoint; the completed Ey15-2 proxy must not be
+   generalized beyond one donor whose newer assembly shares HiFi evidence with
+   the predictor.
+5. The exact ZH13-T2T assembly is ready. Before Table S1 reproduction, rerun the
+   unchanged unitFinder interface on native x86/Linux with a predeclared wall-
+   time cap and stage-separated analysis/plot timing. Then freeze all 20 per-
+   chromosome commands and manual cross-chromosome steps. Keep published Table
+   S1 reproducibility separate from CENH3-based accuracy.
 6. SRF family/abundance development workflows now ran as described above. TRASH
-   assembly and applicable TAREAN short-read workflow comparisons remain unrun. Docker CLI is present but daemon not running.
-   TRASH needs R dependencies; TRASH 2 also needs mafft/nhmmer. ULTRA, SRF, KMC, k8 and minimap2 comparator dependencies are now available. Keep incompatible task metrics separate.
+   assembly and applicable TAREAN short-read workflow comparisons remain unrun.
+   Docker execution is available; the TideCluster and unitFinder resource/
+   failure fates above are retained. TRASH needs R dependencies; TRASH 2 also
+   needs mafft/nhmmer. ULTRA, SRF, KMC, k8 and minimap2 comparator dependencies
+   are available. Keep incompatible task metrics separate.
 7. Prior art: SRF already supports accurate-read satellite discovery/abundance.
    Optional AI requires transparent baselines, held-out evaluation, ablation,
    calibration and domain-shift evidence; do not add an AI label for novelty.

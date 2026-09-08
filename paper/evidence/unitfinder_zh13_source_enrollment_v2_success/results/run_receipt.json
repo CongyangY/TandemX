@@ -1,0 +1,31 @@
+{
+  "appended_bytes": 25903168,
+  "boundary": "This v2 source retry retains the complete v1 truncated transfer by hash, copies rather than modifies its partial file, and requests only the frozen missing byte range. A server response other than the exact HTTP 206 Content-Range is rejected before append. Passing establishes official assembly input identity and FASTA integrity only, not unitFinder reproducibility, Table S1 agreement, biological accuracy, CENH3 truth or assembly/ChIP donor equivalence.",
+  "complete": true,
+  "compressed_file": {
+    "bytes": 286375748,
+    "file": "GWHBWDJ00000000.1.genome.fasta.gz",
+    "md5": "86fe5e3cdd12510afa61c6e3345a4a97",
+    "sha256": "db628d16c550e4f587bf834eea36b2c2325afcbe633923161e04312fa8f32ca9"
+  },
+  "experiment_id": "unitfinder_zh13_assembly_enrollment_v2_range_resume",
+  "fasta_qc": {
+    "acgt_bases": 1007237669,
+    "base_count": 1007237669,
+    "other_bases": 0,
+    "other_fraction": 0.0,
+    "record_count": 20
+  },
+  "fate": "source_enrollment_passed",
+  "parent_failure_directory": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908",
+  "response": {
+    "accept_ranges": null,
+    "content_length": "25903168",
+    "content_range": "bytes 260472580-286375747/286375748",
+    "etag": "\"690eea97-1111bf44\"",
+    "last_modified": "Sat, 08 Nov 2025 07:00:39 GMT",
+    "status": 206
+  },
+  "resume_offset": 260472580,
+  "schema_version": 1
+}
