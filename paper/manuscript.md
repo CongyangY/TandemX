@@ -516,6 +516,17 @@ retained `not_source_eligible_donor_mismatch_risk`, downloaded none of the
 pair remains eligible only for a separately frozen same-cultivar descriptive
 analysis (Evidence E29).
 
+B73-Ab10 provided a stronger paper-level same-DNA candidate: the v2 study
+states that its HiFi library reused the HMW DNA from the CLR-based v1 assembly
+[12]. We did not promote it, because its newer assembly is reported to retain
+N-gaps predominantly within tandem-repeat arrays, with only about 28% of the
+approximately 30.67-Mb Ab10 knob assembled and slightly smaller assembled
+knob180/TR-1 totals than v1. In addition, the archival BioSample identifiers
+differ and the public 257,275,342,048-byte sequence deposit exposes split
+subreads rather than a ready CCS-read product. This candidate therefore failed
+the reference-truth gate as `reference_ineligible_new_assembly_incomplete`; no
+large download or accuracy run was made (Evidence E30).
+
 Whole-library random-sample comparator diagnostics on Morex, Nipponbare,
 Victoria, Chinese Spring and Lo7 successfully normalized all three read-tool
 outputs. TandemX was faster than TRF and slower than TideHunter in these
@@ -1123,6 +1134,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   HiFi run and file volumes, official download endpoints, explicit donor-risk
   statement and no-execution fate in
   `evidence/tomato_heinz1706_source_audit_v1`.
+- Supplementary Table S27: B73-Ab10 v1/v2 direct same-HMW-DNA statement,
+  conflicting archival BioSamples, exact public subread volumes, assembly file
+  identity and the target-array reference-ineligibility decision in
+  `evidence/b73_ab10_donor_matched_source_audit_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1147,7 +1162,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `tidecluster_morex_reference_scaling_v1`; E27:
 `indel_detector_gap_audit_v1`; E28:
 `tme204_donor_matched_source_audit_v1`; E29:
-`tomato_heinz1706_source_audit_v1`.
+`tomato_heinz1706_source_audit_v1`; E30:
+`b73_ab10_donor_matched_source_audit_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 
@@ -1181,6 +1197,8 @@ final table/figure packaging and journal-specific formatting checks.
 11. A telomere-to-telomere reference genome assembly of tomato cultivar Heinz
     1706.
     [Plant Communications, doi:10.1016/j.xplc.2025.101618](https://doi.org/10.1016/j.xplc.2025.101618).
+12. Conflicting Kinesin-14s in a single chromosomal drive haplotype.
+    [Genetics, doi:10.1093/genetics/iyaf091](https://doi.org/10.1093/genetics/iyaf091).
 
 Bibliographic metadata and the full primary dataset references require final
 reference-manager curation. No author, funding, conflict or accession-deposition

@@ -69,6 +69,14 @@ ONT-versus-HiFi sample differences. The pair is therefore
 `not_source_eligible_donor_mismatch_risk`: same cultivar is not donor matching.
 No approximately 28.77-GB HiFi download or benchmark execution was started.
 
+`b73_ab10_donor_matched_source_audit_v1/` retains a biologically strong but
+reference-ineligible maize candidate. The v2 paper directly states that the
+HiFi library reused the v1 HMW DNA, yet archival BioSample identifiers conflict
+and the public 257.28-GB deposit exposes split subreads rather than a ready CCS
+product. More importantly, v2 remains gapped within the target knob arrays and
+reports only about 28% assembly of the approximately 30.67-Mb Ab10 knob. It
+therefore cannot label v1 collapse; no large download or execution was started.
+
 `quantify_calibration_development_v1/` archives 108/108 successful public
 `quantify` executions across three independently simulated genomes, 27 read
 conditions and four methods. Empirical controls reduced aggregate MARE from

@@ -54,6 +54,19 @@ before continuing and do not stage the untracked `.codex/` directory.
   `paper/evidence/tomato_heinz1706_source_audit_v1`. It may support a separately
   preregistered same-cultivar Tier B context, never Tier A donor-matched truth.
 
+- **B73-Ab10 passed the paper-level same-DNA screen but failed the reference-
+  truth gate.** The v2 paper states that its HiFi library reused the HMW DNA
+  from the v1 CLR assembly, and both assembly sequences are public. However,
+  the archival BioSamples differ (`SAMEA6236504` versus `SAMN48109500`), the
+  four B73-Ab10 SRA runs expose 257,275,342,048 compressed bytes of split
+  subreads rather than a ready CCS product, and the newer assembly remains
+  N-gapped predominantly within tandem arrays. The authors estimate that only
+  about 28% of the approximately 30.67-Mb Ab10 knob is assembled and report
+  slightly smaller assembled knob180/TR-1 totals than v1. Its primary fate is
+  `reference_ineligible_new_assembly_incomplete`, not a collapse result. No
+  large download or execution was started; the complete negative audit is at
+  `paper/evidence/b73_ab10_donor_matched_source_audit_v1`.
+
 - **The requested indel-rich detector decision has been audited without a new
   benchmark run.** On the already consumed frozen seed-2201 scenarios,
   TandemX and TideHunter both had array recall 1.0 at 0.1%, 1% and 4% total

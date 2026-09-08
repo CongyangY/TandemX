@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "audit_id": "b73_ab10_donor_matched_source_audit_v1",
+  "audit_date": "2026-09-08",
+  "status": "reference_ineligible_new_assembly_incomplete",
+  "warnings": [
+    "biosample_identifier_conflict",
+    "input_blocked_no_public_ccs_product"
+  ],
+  "execution_state": {
+    "raw_reads_downloaded": false,
+    "assemblies_downloaded": false,
+    "benchmark_preregistered": false,
+    "benchmark_executed": false,
+    "accuracy_result_available": false
+  },
+  "source_papers": {
+    "v1": {
+      "title": "Gapless assembly of maize chromosomes using long-read technologies",
+      "journal": "Genome Biology",
+      "doi": "10.1186/s13059-020-02029-9",
+      "url": "https://link.springer.com/article/10.1186/s13059-020-02029-9"
+    },
+    "v2": {
+      "title": "Conflicting Kinesin-14s in a single chromosomal drive haplotype",
+      "journal": "Genetics",
+      "doi": "10.1093/genetics/iyaf091",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13031179/",
+      "reported_same_dna_statement": "the v2 HiFi library used the same high molecular weight genomic DNA used in the B73-Ab10 v1 assembly",
+      "reported_reference_limit": "N-gaps occur predominantly within tandem-repeat arrays; the approximately 30.67-Mb Ab10 knob is about 28 percent assembled"
+    }
+  },
+  "v1_assembly": {
+    "accession": "GCA_902714155.1",
+    "assembly_name": "Zm-B73_AB10-REFERENCE-NAM-1.0b",
+    "biosample": "SAMEA6236504",
+    "source_material_id": "PI 690316",
+    "assembly_level": "Chromosome",
+    "sequencing_tech": "PacBio Sequel",
+    "assembly_method": "Canu 1.8",
+    "total_sequence_length_bp": 2243621556,
+    "total_ungapped_length_bp": 2241350720,
+    "contig_n50_bp": 161994764,
+    "ncbi_dataset_report": "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCA_902714155.1/dataset_report"
+  },
+  "v2_assembly": {
+    "zenodo_record": "14537663",
+    "doi": "10.5281/zenodo.14537663",
+    "file_name": "AB10_half_Mo17_chr_ragtag.scaffold_Mo17.fasta",
+    "file_bytes": 2133305035,
+    "file_md5": "b3d02bea875027a9d3d58f4df71f22dd",
+    "assembly_process": "hifiasm 0.19.6 high-confidence contigs, half-depth filtering, RagTag scaffolding against Mo17 T2T",
+    "truth_limit": "not T2T or complete at the target knob arrays; assembled TR-1 and knob180 totals were reported slightly lower than v1"
+  },
+  "donor_provenance": {
+    "paper_same_hmw_dna_statement": true,
+    "v1_biosample": "SAMEA6236504",
+    "v2_hifi_biosample": "SAMN48109500",
+    "v2_hifi_collection_year": 2021,
+    "source_material_id_old": "PI 690316",
+    "source_material_id_new": "PI 690316",
+    "state": "direct_same_dna_statement_but_archival_identifier_conflict"
+  },
+  "hifi_deposit": {
+    "bioproject": "PRJNA1254310",
+    "biosample": "SAMN48109500",
+    "runs": [
+      {"run": "SRR33301057", "read_count": 11125994, "base_count": 177538082802, "ena_fastq_bytes": 53555164187, "ena_fastq_md5": "1a164139c38943d42243c781971836bf"},
+      {"run": "SRR33301058", "read_count": 16000000, "base_count": 256819344848, "ena_fastq_bytes": 77373425884, "ena_fastq_md5": "18e35a28a50212a54f3e95e6f46ce14c"},
+      {"run": "SRR33301059", "read_count": 14378652, "base_count": 198413286268, "ena_fastq_bytes": 59593738097, "ena_fastq_md5": "9ad034c5eea75a30e28fc405e0b035ac"},
+      {"run": "SRR33301060", "read_count": 16000000, "base_count": 222910544747, "ena_fastq_bytes": 66753013880, "ena_fastq_md5": "1ab1dcfaaecf6373b5282db2ff623536"}
+    ],
+    "total_read_count": 57504646,
+    "total_base_count": 855681258665,
+    "total_ena_fastq_bytes": 257275342048,
+    "sra_design": "HiFi library sequenced in CCS mode",
+    "public_object_state": "original objects are split subreads BAM; ENA FASTQ is subreads rather than a published CCS product",
+    "decision": "not_downloaded_or_converted"
+  },
+  "eligibility_decision": {
+    "fate": "reference_ineligible_new_assembly_incomplete",
+    "primary_reason": "the newer assembly is reported incomplete at the tandem arrays that would define collapse truth",
+    "secondary_reason": "the public deposit does not expose a ready CCS-read product and the BioSample identifiers conflict despite the paper's same-DNA statement",
+    "why_no_execution": "running TandemX cannot create valid labels when the proposed reference truth is explicitly incomplete",
+    "reopen_condition": "obtain a demonstrably complete Ab10 array reference, resolve archival donor provenance and obtain validated CCS reads"
+  },
+  "evidence_boundary": "source and reference eligibility audit only; no TandemX run, accuracy estimate or resource measurement"
+}
