@@ -1,0 +1,7 @@
+--seq *.fa
+--name ID
+--cen *.fa(optional)
+--flag 0|1 (default 0)
+		0:find potential centromere region.
+		1:find repeats with whole sequence.
+-h help

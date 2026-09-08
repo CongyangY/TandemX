@@ -1,0 +1,40 @@
+{
+  "boundary": "This v3 execution is frozen after the corrected image build and before any external smoke output. It binds the exact image ID and rehashes the complete v2 build receipt, log, upstream source manifest, dependency lock, preflight artifacts and source snapshots. The input, command and acceptance contract are unchanged from v2. Success establishes only executable packaging and required native outputs; failure is retained as an execution or interface fate, never converted to zero accuracy. No real-data recovery, cross-chromosome manual merging, reference-assisted mode or biological accuracy is tested.",
+  "complete": false,
+  "config_sha256": "a547b34e3aaed6ddc83593fa4d84f53bee04879f62e9091441c61b5f249b1713",
+  "dockerfile_sha256": "0542f45ff928d7f09796540d424e46ec68d767730be14e314825bb32c8540563",
+  "experiment_id": "unitfinder_interface_smoke_v3_execution",
+  "image": {
+    "architecture": "amd64",
+    "image_id": "sha256:eadbae183cf29f24b987ea38db3aa5131b1b6b87b1074f45058c60b92929d221",
+    "labels": {
+      "org.opencontainers.image.revision": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28",
+      "org.opencontainers.image.source": "https://github.com/HuangYicheng-Bio/unitFinder",
+      "org.opencontainers.image.title": "TandemX unitFinder comparator",
+      "org.opencontainers.image.version": "24.04"
+    },
+    "os": "linux",
+    "repo_digests": [],
+    "tag": "tandemx/unitfinder:e80bff38-v2"
+  },
+  "input_manifest_sha256": "3f03c3b8b63a67ff83b95f9b0378a605653503c40fe1ea5de7fda52e55f5cc5e",
+  "parent_build_success": {
+    "artifacts": {
+      "docker_build.log": "bd906930a2161626405d84d94193b1042814ca192a80faeeea50d1f2dcfa0263",
+      "image_provenance/clustalo_version.txt": "563a0b4eec3c77bbc34ac630d4fa5214f5c6726ae01468404fd704473110084e",
+      "image_provenance/conda_explicit.txt": "75194d5e24a0db94bd97e4def39e39ab4a729ce42cb68a0a5191919546af3a73",
+      "image_provenance/help.txt": "e55aed7ffe35f5ac1b030300451f5d87d8fd3b62722ead7499f3583e8ea96f1e",
+      "image_provenance/nucmer_version.txt": "cd6321af37482f49efc326524a9fcd7fc86902a48da8d4bbd3dc718d290c3fea",
+      "image_provenance/trf_version.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "image_provenance/unitfinder_tracked_files.sha256": "d9f1e89e4904ead02c213a5fcfbc2759fb95e4cad1d1dd32fa2d0b1b78ba2be7",
+      "run_receipt.json": "63baae2dbed9eae7f3e3b63dc6e193ecb5544bb80de0f9272f055ff682df872f",
+      "source_snapshot/Dockerfile": "0542f45ff928d7f09796540d424e46ec68d767730be14e314825bb32c8540563",
+      "source_snapshot/record_unitfinder_build_success.py": "f22d8d524de4ac2a16d1eada1f6abe8dc3d6a59460099f579a0774d0c74fd297",
+      "source_snapshot/unitfinder_interface_smoke_v2.json": "156190204a224206bef38daf0188b05da7a14b361588538f4bfbdf2186eb76af"
+    },
+    "directory": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908",
+    "fate": "container_build_passed",
+    "image_id": "sha256:eadbae183cf29f24b987ea38db3aa5131b1b6b87b1074f45058c60b92929d221"
+  },
+  "schema_version": 1
+}

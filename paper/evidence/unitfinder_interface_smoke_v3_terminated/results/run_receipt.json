@@ -1,0 +1,17 @@
+{
+  "accuracy_available": false,
+  "complete": false,
+  "fate": "external_process_failure",
+  "profile": {
+    "commands_use_shell": false,
+    "complete": false,
+    "completed_stage_count": 2,
+    "requested_stage_count": 2,
+    "rss_scope": "aggregate_live_process_tree",
+    "sample_interval_seconds": 0.2,
+    "schema_version": 1
+  },
+  "schema_version": 1,
+  "smoke_execution_started": true,
+  "warning": "retained_failure_is_not_a_zero_accuracy_measurement"
+}

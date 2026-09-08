@@ -1,0 +1,20 @@
+{
+  "assembly": {
+    "accession": "GWHBWDJ00000000.1",
+    "filename": "GWHBWDJ00000000.1.genome.fasta.gz",
+    "url": "https://download.cncb.ac.cn/gwh/Plants/Glycine_max_ZH13-T2T_GWHBWDJ00000000.1/GWHBWDJ00000000.1.genome.fasta.gz"
+  },
+  "boundary": "This enrollment fixes the exact official ZH13-T2T v1 genome file, compressed byte count and publisher MD5 before download. Passing download/QC establishes input identity and FASTA integrity only. It does not establish unitFinder reproducibility, Table S1 agreement, biological accuracy, CENH3 truth or donor equivalence between the assembly and ChIP-seq runs.",
+  "complete": false,
+  "error": "downloaded compressed byte count differs from frozen source",
+  "error_type": "ValueError",
+  "experiment_id": "unitfinder_zh13_assembly_enrollment_v1",
+  "fate": "source_enrollment_failure",
+  "partial_file": {
+    "bytes": 260472580,
+    "file": "GWHBWDJ00000000.1.genome.fasta.gz.partial",
+    "md5": "69bdb74dcc3c73f83814a141c4d44c12",
+    "sha256": "e709d03523283f7151823d0768a87ff2e3eff28e4030932e936cd7fa93f6b2f5"
+  },
+  "schema_version": 1
+}

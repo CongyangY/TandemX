@@ -1,0 +1,60 @@
+{
+  "stages": [
+    {
+      "name": "help",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "-v",
+        "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v1_20260908/input:/input:ro",
+        "-v",
+        "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run:/output",
+        "-w",
+        "/output",
+        "tandemx/unitfinder:e80bff38-v2",
+        "-h"
+      ],
+      "cwd": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run",
+      "scratch_dir": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run"
+    },
+    {
+      "name": "smoke",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "-v",
+        "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v1_20260908/input:/input:ro",
+        "-v",
+        "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run:/output",
+        "-w",
+        "/output",
+        "--entrypoint",
+        "/opt/conda/envs/unitfinder/bin/time",
+        "tandemx/unitfinder:e80bff38-v2",
+        "-v",
+        "-o",
+        "/output/unitfinder.gnu_time.txt",
+        "python",
+        "/opt/unitFinder/bin/unitFinder.py",
+        "--seq",
+        "/input/unitfinder_smoke.fa",
+        "--name",
+        "unitfinder_smoke",
+        "--flag",
+        "1"
+      ],
+      "cwd": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run",
+      "scratch_dir": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v3_execution_20260908/run"
+    }
+  ]
+}

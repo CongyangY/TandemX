@@ -1,0 +1,34 @@
+{
+  "boundary": "This classifies transport completeness only. It does not validate the assembly, unitFinder output, Table S1 agreement or biological accuracy.",
+  "classification": "truncated_transfer_before_expected_content_length",
+  "complete": true,
+  "config_sha256": "c0d0d72bf45e8705844fd9e29f0b31154ad7edb003e13f63f1a6f8fef8b80ca4",
+  "expected_bytes": 286375748,
+  "expected_md5": "86fe5e3cdd12510afa61c6e3345a4a97",
+  "gzip_test": {
+    "command": [
+      "gzip",
+      "-t",
+      "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908/GWHBWDJ00000000.1.genome.fasta.gz.partial"
+    ],
+    "exit_code": 1,
+    "stderr": "gzip: /Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908/GWHBWDJ00000000.1.genome.fasta.gz.partial: unexpected end of file\ngzip: /Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_20260908/GWHBWDJ00000000.1.genome.fasta.gz.partial: uncompress failed"
+  },
+  "head_response": {
+    "accept_ranges": "bytes",
+    "content_length": "286375748",
+    "content_type": "application/octet-stream",
+    "etag": "\"690eea97-1111bf44\"",
+    "last_modified": "Sat, 08 Nov 2025 07:00:39 GMT",
+    "status": 200
+  },
+  "partial_file": {
+    "bytes": 260472580,
+    "file": "GWHBWDJ00000000.1.genome.fasta.gz.partial",
+    "md5": "69bdb74dcc3c73f83814a141c4d44c12",
+    "sha256": "e709d03523283f7151823d0768a87ff2e3eff28e4030932e936cd7fa93f6b2f5"
+  },
+  "run_receipt_sha256": "760bd6c5f07c36a504433afea28de0cfb84b5d877d84e66c85b177ab51bd8c2b",
+  "safe_range_resume_offset": 260472580,
+  "schema_version": 1
+}

@@ -1,0 +1,59 @@
+{
+  "accuracy_available": false,
+  "build_ref": "5o9d0j6d5uusj39gb3zge5ki2",
+  "complete": true,
+  "config_sha256": "156190204a224206bef38daf0188b05da7a14b361588538f4bfbdf2186eb76af",
+  "docker_build_log": {
+    "bytes": 2851,
+    "file": "docker_build.log",
+    "sha256": "bd906930a2161626405d84d94193b1042814ca192a80faeeea50d1f2dcfa0263"
+  },
+  "dockerfile_sha256": "0542f45ff928d7f09796540d424e46ec68d767730be14e314825bb32c8540563",
+  "experiment_id": "unitfinder_interface_smoke_v2",
+  "fate": "container_build_passed",
+  "image": {
+    "architecture": "amd64",
+    "image_id": "sha256:eadbae183cf29f24b987ea38db3aa5131b1b6b87b1074f45058c60b92929d221",
+    "labels": {
+      "org.opencontainers.image.revision": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28",
+      "org.opencontainers.image.source": "https://github.com/HuangYicheng-Bio/unitFinder",
+      "org.opencontainers.image.title": "TandemX unitFinder comparator",
+      "org.opencontainers.image.version": "24.04"
+    },
+    "os": "linux",
+    "repo_digests": [],
+    "size_bytes": 1529204905,
+    "tag": "tandemx/unitfinder:e80bff38-v2"
+  },
+  "image_provenance": {
+    "clustalo_version.txt": {
+      "bytes": 6,
+      "sha256": "563a0b4eec3c77bbc34ac630d4fa5214f5c6726ae01468404fd704473110084e"
+    },
+    "conda_explicit.txt": {
+      "bytes": 10028,
+      "sha256": "75194d5e24a0db94bd97e4def39e39ab4a729ce42cb68a0a5191919546af3a73"
+    },
+    "help.txt": {
+      "bytes": 149,
+      "sha256": "e55aed7ffe35f5ac1b030300451f5d87d8fd3b62722ead7499f3583e8ea96f1e"
+    },
+    "nucmer_version.txt": {
+      "bytes": 6,
+      "sha256": "cd6321af37482f49efc326524a9fcd7fc86902a48da8d4bbd3dc718d290c3fea"
+    },
+    "trf_version.txt": {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "unitfinder_tracked_files.sha256": {
+      "bytes": 4509,
+      "sha256": "d9f1e89e4904ead02c213a5fcfbc2759fb95e4cad1d1dd32fa2d0b1b78ba2be7"
+    }
+  },
+  "project_commit": "1de0ac39ba9ce7166250c991234041d7584b4f98",
+  "schema_version": 1,
+  "smoke_execution_started": false,
+  "tracked_source_file_count": 52,
+  "warning": "container_build_success_only;unitFinder_smoke_and_accuracy_unrun"
+}

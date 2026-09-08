@@ -1,0 +1,3 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+help	0	1.415033	0.033441	0.141668	23.562500	1	0	7	help.stdout.log	help.stderr.log
+smoke	137	7267.918509	108.377397	580.351267	25.296875	1	2607880	31421	smoke.stdout.log	smoke.stderr.log

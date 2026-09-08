@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "unitfinder_zh13_assembly_enrollment_v1",
+  "status": "frozen_after_official_file_enrollment_before_genome_download_or_qc",
+  "preregistration_parent_commit": "1843c7aefe638b1ae0a7ae112f9210fd426d82b7",
+  "assembly": {
+    "accession": "GWHBWDJ00000000.1",
+    "assembly_name": "ZH13-T2T",
+    "bioproject": "PRJCA015269",
+    "biosample": "SAMC1127443",
+    "filename": "GWHBWDJ00000000.1.genome.fasta.gz",
+    "url": "https://download.cncb.ac.cn/gwh/Plants/Glycine_max_ZH13-T2T_GWHBWDJ00000000.1/GWHBWDJ00000000.1.genome.fasta.gz",
+    "expected_bytes": 286375748,
+    "expected_md5": "86fe5e3cdd12510afa61c6e3345a4a97"
+  },
+  "source_evidence": {
+    "directory_listing_url": "https://download.cncb.ac.cn/gwh/Plants/Glycine_max_ZH13-T2T_GWHBWDJ00000000.1/",
+    "directory_listing_sha256": "a0840564bb6d46e43e3b753aa18f3716735f4e26f8be187ff099ea07bc611aa1",
+    "md5_manifest_url": "https://download.cncb.ac.cn/gwh/Plants/Glycine_max_ZH13-T2T_GWHBWDJ00000000.1/GWHBWDJ00000000.1_md5.txt",
+    "md5_manifest_sha256": "439eb262f771016dff319974bce9580d30b170c6faa0b2cac7b7f199af7bacd3"
+  },
+  "qc": {
+    "verify_compressed_size": true,
+    "verify_official_md5": true,
+    "compute_sha256": true,
+    "stream_gzip_and_fasta": true,
+    "report_record_count_and_base_composition": true
+  },
+  "boundary": "This enrollment fixes the exact official ZH13-T2T v1 genome file, compressed byte count and publisher MD5 before download. Passing download/QC establishes input identity and FASTA integrity only. It does not establish unitFinder reproducibility, Table S1 agreement, biological accuracy, CENH3 truth or donor equivalence between the assembly and ChIP-seq runs."
+}
