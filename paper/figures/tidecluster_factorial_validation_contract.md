@@ -4,7 +4,11 @@ Initial status: frozen before any TideCluster output from
 `tidecluster_factorial_validation_v1` was inspected. That runner stopped after
 the first external-process failure. The v2 continuation and missing-value
 rendering rules below were frozen after that failure but before any previously
-unattempted seed-setting cell was executed.
+unattempted seed-setting cell was executed. The v2 profiler failure and its
+successful external TideHunter output were retained separately. A v3
+continuation then froze both prior stage fates by hash before executing only the
+remaining stages. It completed all six cell fates: four with independently
+verified accuracy and two with explicit resource-failure/NA accuracy states.
 
 ## Claim boundary
 

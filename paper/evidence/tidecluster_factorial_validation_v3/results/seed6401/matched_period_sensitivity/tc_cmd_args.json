@@ -1,0 +1,1 @@
+{"command": "clustering", "fasta": "/input/genome.fa", "prefix": "/output/tc", "cpu": 4, "tidehunter_arguments": "-p 30 -P 1000 -c 5 -e 0.25", "long": false, "keep_rounds": false, "original_fasta": "/input/genome.fa", "min_length": 100, "no_dust": false, "cluster_identity": 75, "cluster_coverage": 0.8, "keep_overlaps": false}

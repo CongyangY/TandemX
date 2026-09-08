@@ -142,6 +142,23 @@ source snapshot and original preregistration. The v2 continuation is separately
 frozen to import this failure by hash and attempt only previously unstarted
 cells.
 
+`tidecluster_factorial_continuation_v2_failure/` preserves the separate parent-
+profiler defect after the seed-6401 matched-period TideHunter command had
+already started. That external stage completed in 11.08 s at 3,250,036 kB and
+its native GFF, chunk map, command record and GNU-time record are retained by
+hash. Clustering and evaluation were unstarted; no accuracy is claimed. The
+25-entry manifest passed independent rehashing.
+
+`tidecluster_factorial_validation_v3/` preserves the no-rerun completion of all
+six frozen cell fates. Four cells have independently recomputed accuracy and two
+default-setting TideHunter stages retain resource failures with missing
+accuracy. The matched 30--1000-bp setting succeeded for all three seeds at mean
+array recall/precision 0.915152, while clustering used 7,788,088--7,805,732 kB.
+All 118 manifest entries passed independent size/SHA-256 checks. The failed
+overlapping figure v1 and visually accepted editable figure v2 have byte-
+identical panel-source rows. These are same-process technical simulations, not
+biological replicates or whole-genome truth.
+
 `abundance_classifier_depth_gated_validation_v1/` preserves the frozen v3
 development-to-held-out chain. Commit `62892a6` and dual-platform hosted CI
 preceded one-time use of seeds 5801-5803. The rule passed all predeclared gates:

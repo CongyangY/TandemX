@@ -1,0 +1,9 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+s6401_matched_period_sensitivity_clustering	0	37.936189	0.600417	3.318142	23.234375	1	185941	163	s6401_matched_period_sensitivity_clustering.stdout.log	s6401_matched_period_sensitivity_clustering.stderr.log
+s6402_default_primary_tidehunter	0	10.148013	0.179199	0.993681	24.218750	1	48261	44	s6402_default_primary_tidehunter.stdout.log	s6402_default_primary_tidehunter.stderr.log
+s6402_default_primary_clustering	0	33.299227	0.520615	2.875272	23.296875	1	219343	145	s6402_default_primary_clustering.stdout.log	s6402_default_primary_clustering.stderr.log
+s6402_matched_period_sensitivity_tidehunter	0	12.200343	0.191039	1.027591	24.437500	1	44010	52	s6402_matched_period_sensitivity_tidehunter.stdout.log	s6402_matched_period_sensitivity_tidehunter.stderr.log
+s6402_matched_period_sensitivity_clustering	0	39.362872	0.626760	3.337810	23.640625	1	195929	172	s6402_matched_period_sensitivity_clustering.stdout.log	s6402_matched_period_sensitivity_clustering.stderr.log
+s6403_default_primary_tidehunter	1	12.807976	0.199233	1.056716	24.031250	1	1090	56	s6403_default_primary_tidehunter.stdout.log	s6403_default_primary_tidehunter.stderr.log
+s6403_matched_period_sensitivity_tidehunter	0	10.993682	0.174157	0.919208	25.375000	1	45300	48	s6403_matched_period_sensitivity_tidehunter.stdout.log	s6403_matched_period_sensitivity_tidehunter.stderr.log
+s6403_matched_period_sensitivity_clustering	0	27.083728	0.402418	2.154175	25.312500	1	200957	119	s6403_matched_period_sensitivity_clustering.stdout.log	s6403_matched_period_sensitivity_clustering.stderr.log

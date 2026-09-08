@@ -1,0 +1,1 @@
+{"command": "tidehunter", "fasta": "/input/genome.fa", "prefix": "/output/tc", "cpu": 4, "tidehunter_arguments": "-p 40 -P 3000 -c 5 -e 0.25", "long": false, "keep_rounds": false, "original_fasta": "/input/genome.fa"}

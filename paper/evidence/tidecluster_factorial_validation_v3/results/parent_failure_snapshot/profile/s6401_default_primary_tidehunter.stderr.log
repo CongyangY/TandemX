@@ -1,0 +1,12 @@
+Killed
+Traceback (most recent call last):
+  File "/opt/conda/envs/tidecluster/bin/TideCluster.py", line 1781, in <module>
+    tidehunter(
+  File "/opt/conda/envs/tidecluster/bin/TideCluster.py", line 1000, in tidehunter
+    results = tc.run_tidehunter(
+              ^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/tidecluster/share/tidecluster/tc_utils.py", line 1802, in run_tidehunter
+    subprocess.check_call(tidehunter_cmd, shell=True)
+  File "/opt/conda/envs/tidecluster/lib/python3.11/subprocess.py", line 413, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'TideHunter -f 2 -o /tmp/tmps3d2iqrt.out -p 40 -P 3000 -c 5 -e 0.25 -t 4 /tmp/tmps3d2iqrt' returned non-zero exit status 137.

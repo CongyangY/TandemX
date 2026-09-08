@@ -658,7 +658,27 @@ external resource failure and is not counted as comparator performance. Before
 any further output was generated, a v3 continuation froze both prior stage
 fates by hash and prohibited both TideHunter commands from being rerun; it can
 attempt only the unstarted matched-period clustering and four wholly unstarted
-seed-setting cells.
+seed-setting cells. The continuation completed with all six cell fates recorded.
+The matched 30--1000-bp sensitivity setting succeeded in all three seeds:
+array recall and precision were 0.890909--0.927273 (mean 0.915152), base-union
+recall was 0.999994--0.999999, base-union precision was 0.999467--0.999811,
+matched boundary MAE was 4.357--11.529 bp and matched period MAE was zero.
+TideHunter stages used 10.45--11.66 s and 1,452,008--4,655,556 kB maximum RSS;
+clustering used 26.64--38.82 s and 7,788,088--7,805,732 kB. The unchanged
+default succeeded for seed 6402 with 0.890909 array recall/precision, whereas
+the seed-6401 and seed-6403 TideHunter stages failed after reaching 7,776,184
+and 7,801,524 kB. Their accuracy and dependent clustering resources remain
+unavailable. An independent implementation reproduced all 16 accuracy
+endpoints for each of the four successful cells and verified that the two
+failed cells contained no invented zero values (Figure S6; Evidence E34).
+
+The sensitivity setting was declared before outputs were inspected, but its
+complete three-seed success does not establish superiority over the default:
+only one default seed yielded accuracy, and both failures occurred near the
+same container memory ceiling. These same-process 10-Mb simulations provide a
+conditional planted-truth result, not biological replication, whole-genome
+accuracy or a repeated isolated timing distribution. The earlier same-host
+1-Gb preflight remains resource-infeasible.
 
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
@@ -1166,6 +1186,17 @@ independent accuracy truth and whole-chromosome context. The inspected editable
 SVG/PDF/PNG, panel source and hashes are in
 `evidence/tidecluster_morex_reference_scaling_v1/figures_v1`.
 
+**Figure S6. Frozen planted-truth TideCluster accuracy and resources.** A,
+array recall and precision. B, base-union recall and precision. C, conditional
+boundary and period errors among matched calls. D, cyclic monomer recall and
+homologous distinct-consensus fraction. E-F, internal stage wall time and
+maximum RSS. The unchanged default and predeclared matched-period sensitivity
+setting are shown across all three technical seeds. Failed TideHunter stages
+are marked with crosses and retain resource values; their accuracy and
+dependent clustering remain missing rather than zero. The rejected overlapping
+v1 render and inspected editable v2 SVG/PDF/PNG share an identical panel-source
+table in `evidence/tidecluster_factorial_validation_v3/results`.
+
 Additional replicated biological validation and isolated resource-scaling
 figures remain required; their absence is tracked in `submission_readiness.md`.
 
@@ -1269,6 +1300,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   outputs, parent-failure snapshot, exact source snapshot and explicit
   unstarted clustering/evaluation fate in
   `evidence/tidecluster_factorial_continuation_v2_failure`.
+- Supplementary Table S31: all six TideCluster factorial cell/stage fates, four
+  independently recomputed successful-cell accuracy records, two resource-
+  failure records, native outputs, resources and Figure S6 source in
+  `evidence/tidecluster_factorial_validation_v3`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1297,7 +1332,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `b73_ab10_donor_matched_source_audit_v1`; E31:
 `ey15_donor_matched_collapse_v1`; E32:
 `tidecluster_factorial_validation_v1`; E33:
-`tidecluster_factorial_continuation_v2_failure`.
+`tidecluster_factorial_continuation_v2_failure`; E34:
+`tidecluster_factorial_validation_v3`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

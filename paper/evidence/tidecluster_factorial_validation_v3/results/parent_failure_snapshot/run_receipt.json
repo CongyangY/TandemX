@@ -1,0 +1,14 @@
+{
+  "complete": false,
+  "fate": "external_process_failure",
+  "profile": {
+    "schema_version": 1,
+    "complete": false,
+    "requested_stage_count": 12,
+    "completed_stage_count": 1,
+    "sample_interval_seconds": 0.2,
+    "rss_scope": "aggregate_live_process_tree",
+    "commands_use_shell": false
+  },
+  "warning": "failed_runs_are_missing_measurements_not_zero_accuracy"
+}

@@ -182,7 +182,28 @@ before continuing and do not stage the untracked `.codex/` directory.
   `8838e3ffffe6cc27dc826a3edf611d2dda2d92db80f63b17dac8b4ee378d6a03`).
   It hash-imports both prior fates, forbids rerunning both TideHunter stages,
   and permits only the unstarted matched-period clustering plus four wholly
-  unstarted cells.
+  unstarted cells. That continuation completed all six cell fates without
+  rerunning either imported stage: four cells have accuracy and two default-
+  setting TideHunter stages are retained as resource failures. The matched
+  30--1000-bp setting succeeded in all three seeds with array recall/precision
+  0.890909--0.927273 (mean 0.915152), base-union recall 0.999994--0.999999,
+  base-union precision 0.999467--0.999811, boundary MAE 4.357--11.529 bp and
+  period MAE 0. Its TideHunter stages used 1,452,008--4,655,556 kB and
+  10.45--11.66 s; clustering used 7,788,088--7,805,732 kB and 26.64--38.82 s.
+  The unchanged default succeeded only for seed 6402 (array recall/precision
+  0.890909); seeds 6401 and 6403 failed near the container limit at 7,776,184
+  and 7,801,524 kB, respectively. An independent implementation reproduced all
+  16 accuracy endpoints for the four successful cells and confirmed explicit
+  missing accuracy for both failures. The accepted six-panel v2 figure passed
+  direct-PNG and independent PDF-render inspection, has 92 editable SVG text
+  nodes and no raster nodes, and retains a byte-identical 72-row panel source
+  beside the rejected overlapping v1 render. The 118-entry compact archive is
+  `paper/evidence/tidecluster_factorial_validation_v3`; all entries passed
+  independent size/SHA-256 checks. This materially adds a planted-truth
+  TideCluster accuracy/resource result, but does not make the 1-Gb preflight or
+  biological/whole-genome accuracy gaps disappear. With the accepted-render
+  archive logic included, the complete source suite passes **629 tests in
+  63.31 s**; compileall and `git diff --check` also pass.
 - **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the

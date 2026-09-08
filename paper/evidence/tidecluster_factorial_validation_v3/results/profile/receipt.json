@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "planned_stage_count": 12,
+  "parent_imported_failed_stage_count": 1,
+  "prior_imported_successful_stage_count": 1,
+  "continuation_attempted_stage_count": 8,
+  "successful_continuation_stage_count": 7,
+  "failed_continuation_stage_count": 1,
+  "dependency_not_started_stage_count": 2,
+  "all_stage_fates_recorded": true,
+  "sample_interval_seconds": 0.2,
+  "rss_scope": "aggregate_live_host_process_tree;container_gnu_time_in_summary"
+}

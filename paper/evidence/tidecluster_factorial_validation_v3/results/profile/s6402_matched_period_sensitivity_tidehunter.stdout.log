@@ -1,0 +1,2 @@
+running TideHunter
+TideHunter -f 2 -o /tmp/tmp4lgxmqqh.out -p 30 -P 1000 -c 5 -e 0.25 -t 4 /tmp/tmp4lgxmqqh

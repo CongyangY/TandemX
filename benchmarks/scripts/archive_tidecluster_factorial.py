@@ -92,9 +92,10 @@ def candidate_files(source: Path) -> list[Path]:
     ):
         if directory.is_dir():
             paths.update(path for path in directory.rglob("*") if path.is_file())
-    figure_dir = source / "figures_v1"
-    if figure_dir.is_dir():
-        paths.update(path for path in figure_dir.rglob("*") if path.is_file())
+    for figure_name in ("figures_v1", "figures_v2"):
+        figure_dir = source / figure_name
+        if figure_dir.is_dir():
+            paths.update(path for path in figure_dir.rglob("*") if path.is_file())
     retained_run_patterns = (
         "*.gnu_time.txt",
         "tc_cmd_args.json",
@@ -163,7 +164,9 @@ def archive_description(
 
 
 def validate_figure(source: Path) -> dict[str, Any]:
-    directory = source / "figures_v1"
+    failed_directory = source / "figures_v1"
+    accepted_directory = source / "figures_v2"
+    directory = accepted_directory if accepted_directory.is_dir() else failed_directory
     provenance = json.loads(
         (directory / "figure_provenance.json").read_text(encoding="utf-8")
     )
@@ -183,6 +186,31 @@ def validate_figure(source: Path) -> dict[str, Any]:
             "sha256"
         ):
             raise ValueError(f"TideCluster figure output changed: {path}")
+    if accepted_directory.is_dir():
+        failed_provenance = json.loads(
+            (failed_directory / "figure_provenance.json").read_text(encoding="utf-8")
+        )
+        for name, record in failed_provenance.get("outputs", {}).items():
+            path = failed_directory / name
+            if not path.is_file() or path.stat().st_size != record.get("bytes"):
+                raise ValueError(f"failed TideCluster figure output changed: {path}")
+            if digest(path) != record.get("sha256"):
+                raise ValueError(f"failed TideCluster figure output changed: {path}")
+        if digest(failed_directory / "panel_source.tsv") != digest(
+            accepted_directory / "panel_source.tsv"
+        ):
+            raise ValueError("failed and accepted TideCluster panel sources differ")
+        if digest(failed_directory / "tidecluster_factorial_validation.png") == digest(
+            accepted_directory / "tidecluster_factorial_validation.png"
+        ):
+            raise ValueError("failed and accepted TideCluster renders are identical")
+        provenance = dict(provenance)
+        provenance["qa_history"] = {
+            "failed_render": "figures_v1",
+            "accepted_render": "figures_v2",
+            "failed_reason": "top_and_bottom_legends_overlap_panel_content",
+            "panel_source_identical": True,
+        }
     return provenance
 
 

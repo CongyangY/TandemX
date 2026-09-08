@@ -1,0 +1,62 @@
+{
+  "complete": true,
+  "frozen_run_count": 6,
+  "outputs": {
+    "panel_source.tsv": {
+      "bytes": 8319,
+      "sha256": "7f7595ebc7e886f237cb6bd562f7d9185164e511c841eb8ab0e53b7b256b077b"
+    },
+    "tidecluster_factorial_validation.pdf": {
+      "bytes": 31881,
+      "sha256": "6b607573ac881b0acb32248d1220dafd9111df8b3d6d8055bc32cb891e64fa03"
+    },
+    "tidecluster_factorial_validation.png": {
+      "bytes": 325037,
+      "sha256": "124f975c81962d3834f2f4c63859ab190db00a314ddf5626846531a99ccc9b49"
+    },
+    "tidecluster_factorial_validation.svg": {
+      "bytes": 68275,
+      "sha256": "5a55cfd10ae41c0837bcce4b39c39ae2009becefa729744617e29bc137f69a03"
+    }
+  },
+  "panel_count": 6,
+  "panel_source_rows": 72,
+  "schema_version": 1,
+  "source_files": {
+    "cell_fates": {
+      "bytes": 893,
+      "path": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/cell_fates.tsv",
+      "sha256": "d58bf167f4e3058bf19134226d26d1912e40acbb087dff989cde82a1f5cc66b6"
+    },
+    "environment": {
+      "bytes": 4152,
+      "path": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/environment.json",
+      "sha256": "9ecb71e54cf96ac5c58739281a28919531b8fece9b2b4d4701a5748d9b5f1ffe"
+    },
+    "independent_verification": {
+      "bytes": 4762,
+      "path": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/independent_verification.json",
+      "sha256": "75ca55c4cf2c8688717c2aef9ff1ec540afe5ef229a8f30d552f31b4acffdb5c"
+    },
+    "run_receipt": {
+      "bytes": 986,
+      "path": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/run_receipt.json",
+      "sha256": "434f6cbddab307281cfd9d5860bad9fe09d0f8f1b216f8c3386eb0c4b26e7aa6"
+    },
+    "stage_fates": {
+      "bytes": 1778,
+      "path": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/stage_fates.tsv",
+      "sha256": "dcdc0dacc1d51a665fbecf59762a8445a5dc2db0d54591f017a90bdb19a710f9"
+    },
+    "summary": {
+      "bytes": 2167,
+      "path": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/summary.tsv",
+      "sha256": "3db195eeb6a42bdc644148b709ada79d251d10423e3566ec3e8c6ea2a2b3d5c6"
+    }
+  },
+  "successful_accuracy_run_count": 4,
+  "svg_raster_image_element_count": 0,
+  "svg_text_element_count": 92,
+  "unavailable_accuracy_run_count": 2,
+  "warning": "same_process_simulated_genomes;technical_seeds_not_biological_replicates;conditional_errors_on_matched_calls"
+}

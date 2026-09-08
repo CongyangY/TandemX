@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "complete": false,
+  "experiment_id": "tidecluster_factorial_validation_v2_continuation",
+  "project_commit": "4961b08eeb60e6fb04ce859eea89ac7986023963",
+  "project_status": "",
+  "base_config_sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+  "continuation_config_sha256": "665c562c263fb0365f779845264f60351a8fc94f0b648cf4a2e234cb6b55d146",
+  "tool": {
+    "image": "tandemx/tidecluster:1.21.2",
+    "image_id": "sha256:62691b116427394984a8bace59a6f4ba7f3ea834373772734fbcfc567c3a27a7",
+    "platform": "linux/amd64",
+    "versions": {
+      "tidecluster": "1.21.2",
+      "tidehunter": "1.4.3",
+      "kitehor": "kitehor 0.13.2",
+      "mmseqs": "747c64cc8db3b4803a0f1194a3f75b3ba9f81bcb",
+      "blastn": "2.16.0+"
+    }
+  },
+  "parent_failure": {
+    "directory": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908",
+    "failed_stage": "s6401_default_primary_tidehunter",
+    "artifacts": {
+      "run_receipt.json": "1d708955250cc93baf3edea8494cb9e225bd8ebb745eeffa879c87536097c8d0",
+      "profile/stages.tsv": "8025283b96365802d1b137244141594b3c2fcfaf41de04caa2980597d8b2aa4d",
+      "stage_manifest.json": "df16f881563f72f4feb30b2890ec9dfaec09aa8e4da6310c9fc3b52209ebeeb0",
+      "seed6401/default_primary/tidehunter.gnu_time.txt": "73044ac814254169922738a23407921b25dc044d86050d49929d2ca9cb47eb28",
+      "profile/s6401_default_primary_tidehunter.stderr.log": "ecda184b167c056f0a87acddb956c957e9665f4c312b3ee92aee5a7d3b46081f"
+    }
+  },
+  "boundary": "This continuation exists only because the v1 profiler stopped after the first external-process failure. It imports that frozen failure by hash, never reruns it, and attempts only previously unstarted seed-setting cells without changing data, commands, settings or evaluation rules."
+}

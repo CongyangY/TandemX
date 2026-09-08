@@ -1,0 +1,83 @@
+{
+  "complete": true,
+  "input_hashes": {
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/catalogue.fa": {
+      "bytes": 12318,
+      "sha256": "6c7d77a780c5b2becf97855190a2663e01edd7b22b516cabb00941d23a79d915"
+    },
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/genome.fa": {
+      "bytes": 10125009,
+      "sha256": "fd71941d068a0d892b77a887486146793dce723dbd8bea159a67661f8558f358"
+    },
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/manifest.json": {
+      "bytes": 8075,
+      "sha256": "227a2b4ae26423e49594fabeea431942f3c5d8bb2b547669b886c02b0cb366b6"
+    },
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/truth_copy_number.tsv": {
+      "bytes": 7684,
+      "sha256": "56ea8e6c507905cbcf9e208d2e3d3b5c04be30d323f06c2facc9254e8cc225cc"
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_clustering.gff3": {
+      "bytes": 4558,
+      "sha256": "d820632a0b847a0df2e220afeecfaa51217a84d73a76ea7e4d1a41f9de3a7fc7"
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_clustering.gff3_1.gff3": {
+      "bytes": 4204,
+      "sha256": "dffc5f76d568e8a37fa82b974eb785a8c7f2c74239da5531884d7e10d12a1d2a"
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_consensus/consensus_sequences_all.fasta": {
+      "bytes": 54607,
+      "sha256": "dd35a6617f0d61ce7fcd9ba363377d598e4d156d01b3d128ce2ee741c29548f0"
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_tidehunter.gff3": {
+      "bytes": 42280,
+      "sha256": "cfb9a117b077f49aa2734d81efeef78f319fdbf8fa33d4fc7a0d615eaab7131f"
+    }
+  },
+  "metrics": {
+    "array_f1": 0.9272727272727272,
+    "array_precision": 0.9272727272727272,
+    "array_precision_ci_high": 0.9713559397669594,
+    "array_precision_ci_low": 0.8274005992784393,
+    "array_recall": 0.9272727272727272,
+    "array_recall_ci_high": 0.9713559397669594,
+    "array_recall_ci_low": 0.8274005992784393,
+    "base_union_f1": 0.9997325141940049,
+    "base_union_precision": 0.9994665327626067,
+    "base_union_recall": 0.9999986372308531,
+    "cyclic_monomer_recall": 0.9272727272727272,
+    "distinct_consensus_count": 55,
+    "duplicate_bp_fraction": 0.0,
+    "duplicated_prediction_bp": 0,
+    "false_positive_read_count": 0,
+    "homologous_consensus_fraction": 0.9272727272727272,
+    "matched_array_count": 51,
+    "matched_boundary_mae_bp": 11.529411764705882,
+    "matched_period_mae_bp": 0.0,
+    "negative_read_call_rate": null,
+    "negative_read_call_rate_ci_high": null,
+    "negative_read_call_rate_ci_low": null,
+    "negative_read_count": 0,
+    "normalized_coordinate_system": "0-based_half-open",
+    "operational_family_count": 55,
+    "predicted_array_count": 55,
+    "predicted_union_bp": 2202572,
+    "read_detection_precision": 1.0,
+    "read_detection_recall": 1.0,
+    "recovered_family_count": 51,
+    "seed": 6402,
+    "source_coordinate_system": "GFF3_1-based_inclusive",
+    "truth_array_count": 55,
+    "truth_family_count": 55,
+    "truth_union_bp": 2201400,
+    "unmatched_distinct_consensus_count": 4,
+    "warning": "known_planted_factorial_assembly_truth;same_process_validation_genome;not_an_independent_plant;TideCluster_settings_frozen_before_output_inspection"
+  },
+  "outputs": {
+    "array_matches.tsv": "36fd121567c64685e75de2ac49a91e5930c470f6693219baf45b56b0f87dfeb7",
+    "family_recovery.tsv": "7e02945b3640bf36180d6fa22d91c9a2ba4261e49b36f9fcdf53fc231095c590",
+    "metrics.json": "c4ce1135699a47d05fb4e430fb2627b57e231083ec1a475cd7ba4e954c0da2ab",
+    "normalized_arrays.tsv": "ded3ba033e0e75880714812d1226e2a7c579370812e91573cc57a3011fe6f2ad"
+  },
+  "schema_version": 1
+}

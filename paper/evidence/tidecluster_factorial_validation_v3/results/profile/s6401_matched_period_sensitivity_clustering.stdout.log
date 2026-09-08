@@ -1,0 +1,4 @@
+running filtering on gff3 file
+Clustering by mmseqs2
+Clustering by BLASTN
+resolve_trc_overlaps: 1 TRC(s) fully absorbed by dominant overlapping TRCs and dropped: TRC_38

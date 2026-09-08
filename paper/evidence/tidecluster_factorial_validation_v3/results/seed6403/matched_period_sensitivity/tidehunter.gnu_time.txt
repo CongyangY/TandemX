@@ -1,0 +1,23 @@
+	Command being timed: "TideCluster.py tidehunter -c 4 -T -p 30 -P 1000 -c 5 -e 0.25 -pr /output/tc -f /input/genome.fa"
+	User time (seconds): 31.30
+	System time (seconds): 0.84
+	Percent of CPU this job got: 307%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:10.45
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4655556
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 67
+	Minor (reclaiming a frame) page faults: 740187
+	Voluntary context switches: 8855
+	Involuntary context switches: 264
+	Swaps: 0
+	File system inputs: 46136
+	File system outputs: 21726
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

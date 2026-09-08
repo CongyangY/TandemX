@@ -1,0 +1,716 @@
+{
+  "archive_complete": true,
+  "experiment_complete": true,
+  "file_count": 118,
+  "files": [
+    {
+      "bytes": 2817,
+      "file": "preregistration.json",
+      "sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/tidecluster_factorial_validation_v1.json"
+    },
+    {
+      "bytes": 893,
+      "file": "results/cell_fates.tsv",
+      "sha256": "d58bf167f4e3058bf19134226d26d1912e40acbb087dff989cde82a1f5cc66b6",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/cell_fates.tsv"
+    },
+    {
+      "bytes": 4152,
+      "file": "results/environment.json",
+      "sha256": "9ecb71e54cf96ac5c58739281a28919531b8fece9b2b4d4701a5748d9b5f1ffe",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/environment.json"
+    },
+    {
+      "bytes": 2605,
+      "file": "results/figures_v1/figure_provenance.json",
+      "sha256": "c2c2452eba10cd0f7e15c3a4f79f6f883e05ba888205ac1646f828676fba3882",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v1/figure_provenance.json"
+    },
+    {
+      "bytes": 8319,
+      "file": "results/figures_v1/panel_source.tsv",
+      "sha256": "7f7595ebc7e886f237cb6bd562f7d9185164e511c841eb8ab0e53b7b256b077b",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v1/panel_source.tsv"
+    },
+    {
+      "bytes": 32224,
+      "file": "results/figures_v1/tidecluster_factorial_validation.pdf",
+      "sha256": "73eeebea5908d5b76b3f8a1f3db44777954dd5be1406d478954a3133c6a8ec98",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v1/tidecluster_factorial_validation.pdf"
+    },
+    {
+      "bytes": 346444,
+      "file": "results/figures_v1/tidecluster_factorial_validation.png",
+      "sha256": "e602e7a00f36fa029c332ce7d2f432af6bd7f319e296ea5ae3d075040b8bad70",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v1/tidecluster_factorial_validation.png"
+    },
+    {
+      "bytes": 70016,
+      "file": "results/figures_v1/tidecluster_factorial_validation.svg",
+      "sha256": "5b25d2634dc1017b80adc0a38d6c36a5b74e78e754ddcff6140e837448aad5d6",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v1/tidecluster_factorial_validation.svg"
+    },
+    {
+      "bytes": 2605,
+      "file": "results/figures_v2/figure_provenance.json",
+      "sha256": "356457485cdf92cb76995bb1dba229c12a9036bfba0dda720e7096dc4d8027df",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v2/figure_provenance.json"
+    },
+    {
+      "bytes": 8319,
+      "file": "results/figures_v2/panel_source.tsv",
+      "sha256": "7f7595ebc7e886f237cb6bd562f7d9185164e511c841eb8ab0e53b7b256b077b",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v2/panel_source.tsv"
+    },
+    {
+      "bytes": 31881,
+      "file": "results/figures_v2/tidecluster_factorial_validation.pdf",
+      "sha256": "6b607573ac881b0acb32248d1220dafd9111df8b3d6d8055bc32cb891e64fa03",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v2/tidecluster_factorial_validation.pdf"
+    },
+    {
+      "bytes": 325037,
+      "file": "results/figures_v2/tidecluster_factorial_validation.png",
+      "sha256": "124f975c81962d3834f2f4c63859ab190db00a314ddf5626846531a99ccc9b49",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v2/tidecluster_factorial_validation.png"
+    },
+    {
+      "bytes": 68275,
+      "file": "results/figures_v2/tidecluster_factorial_validation.svg",
+      "sha256": "5a55cfd10ae41c0837bcce4b39c39ae2009becefa729744617e29bc137f69a03",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/figures_v2/tidecluster_factorial_validation.svg"
+    },
+    {
+      "bytes": 4762,
+      "file": "results/independent_verification.json",
+      "sha256": "75ca55c4cf2c8688717c2aef9ff1ec540afe5ef229a8f30d552f31b4acffdb5c",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/independent_verification.json"
+    },
+    {
+      "bytes": 736,
+      "file": "results/parent_failure_snapshot/profile/s6401_default_primary_tidehunter.stderr.log",
+      "sha256": "ecda184b167c056f0a87acddb956c957e9665f4c312b3ee92aee5a7d3b46081f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/parent_failure_snapshot/profile/s6401_default_primary_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 337,
+      "file": "results/parent_failure_snapshot/profile/stages.tsv",
+      "sha256": "8025283b96365802d1b137244141594b3c2fcfaf41de04caa2980597d8b2aa4d",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/parent_failure_snapshot/profile/stages.tsv"
+    },
+    {
+      "bytes": 382,
+      "file": "results/parent_failure_snapshot/run_receipt.json",
+      "sha256": "1d708955250cc93baf3edea8494cb9e225bd8ebb745eeffa879c87536097c8d0",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/parent_failure_snapshot/run_receipt.json"
+    },
+    {
+      "bytes": 872,
+      "file": "results/parent_failure_snapshot/seed6401/default_primary/tidehunter.gnu_time.txt",
+      "sha256": "73044ac814254169922738a23407921b25dc044d86050d49929d2ca9cb47eb28",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/parent_failure_snapshot/seed6401/default_primary/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 13671,
+      "file": "results/parent_failure_snapshot/stage_manifest.json",
+      "sha256": "df16f881563f72f4feb30b2890ec9dfaec09aa8e4da6310c9fc3b52209ebeeb0",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/parent_failure_snapshot/stage_manifest.json"
+    },
+    {
+      "bytes": 1832,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/environment.json",
+      "sha256": "f60b3ee0bc462eaadce6247af581a0e7c11dd4242965479b33aafe58b9becade",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/environment.json"
+    },
+    {
+      "bytes": 0,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/profile/s6401_matched_period_sensitivity_tidehunter.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/profile/s6401_matched_period_sensitivity_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 0,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/profile/s6401_matched_period_sensitivity_tidehunter.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/profile/s6401_matched_period_sensitivity_tidehunter.stdout.log"
+    },
+    {
+      "bytes": 1842,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/run_receipt.json",
+      "sha256": "9549d5fe1597fffc49e5a6197e41e0bbd08776263cc53e68bc7897041f6dc9e6",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/run_receipt.json"
+    },
+    {
+      "bytes": 683,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/seed6401/matched_period_sensitivity/tc_chunks.bed",
+      "sha256": "a19742f6e275f9524e199b18059c405bd6aa782be3a091dceffcb149fa1d91ad",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/seed6401/matched_period_sensitivity/tc_chunks.bed"
+    },
+    {
+      "bytes": 217,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/seed6401/matched_period_sensitivity/tc_cmd_args.json",
+      "sha256": "bfb942e0f32d1cf10973dd087c7aa9320ff3dec52600ba052f4ca5f0a3585c7a",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/seed6401/matched_period_sensitivity/tc_cmd_args.json"
+    },
+    {
+      "bytes": 40259,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/seed6401/matched_period_sensitivity/tc_tidehunter.gff3",
+      "sha256": "862f2f8960bd0fe0dfb94273c5f4e73053e08be9d14ca52091cc504d24580b5c",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/seed6401/matched_period_sensitivity/tc_tidehunter.gff3"
+    },
+    {
+      "bytes": 827,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt",
+      "sha256": "acd06e23fc74baf05af53a76801a9981499bdd706b08b3419e1364320a49e1ae",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 22500,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/source_snapshot/factorial_continue.py",
+      "sha256": "4c9619cb849269c67b8de5c6be6863f179b39fe955894ac7c2ec71b5768731fa",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/source_snapshot/factorial_continue.py"
+    },
+    {
+      "bytes": 2065,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/source_snapshot/tidecluster_factorial_continuation_v2.json",
+      "sha256": "665c562c263fb0365f779845264f60351a8fc94f0b648cf4a2e234cb6b55d146",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/source_snapshot/tidecluster_factorial_continuation_v2.json"
+    },
+    {
+      "bytes": 2817,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/source_snapshot/tidecluster_factorial_validation_v1.json",
+      "sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/source_snapshot/tidecluster_factorial_validation_v1.json"
+    },
+    {
+      "bytes": 14837,
+      "file": "results/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/stage_manifest.json",
+      "sha256": "4aa510c5a5885f574049ab99eef208fc9b4bd24812cc275a87b9e4a9a3e201ce",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/prior_success_snapshot/s6401_matched_period_sensitivity_tidehunter/stage_manifest.json"
+    },
+    {
+      "bytes": 485,
+      "file": "results/profile/receipt.json",
+      "sha256": "7c6a2e18259c9e85d8629174c213dfee2a56a7428c5354cc4c96837f57fbacdb",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/receipt.json"
+    },
+    {
+      "bytes": 0,
+      "file": "results/profile/s6401_matched_period_sensitivity_clustering.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6401_matched_period_sensitivity_clustering.stderr.log"
+    },
+    {
+      "bytes": 169,
+      "file": "results/profile/s6401_matched_period_sensitivity_clustering.stdout.log",
+      "sha256": "55ddd42f99c344e23b4a9f5b8f9363b578da4286d0fed431fa881c8ff1fb8aaa",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6401_matched_period_sensitivity_clustering.stdout.log"
+    },
+    {
+      "bytes": 0,
+      "file": "results/profile/s6402_default_primary_clustering.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6402_default_primary_clustering.stderr.log"
+    },
+    {
+      "bytes": 74,
+      "file": "results/profile/s6402_default_primary_clustering.stdout.log",
+      "sha256": "384e8c52d270db4f4655923bfe8f5f52446b8a41e5d3b009c818264bd826acd1",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6402_default_primary_clustering.stdout.log"
+    },
+    {
+      "bytes": 65,
+      "file": "results/profile/s6402_default_primary_tidehunter.stderr.log",
+      "sha256": "f5c1ba6922521640d478d12ddce3f875fc5ccb7eddcb3923fd355e2ba21abe18",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6402_default_primary_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 108,
+      "file": "results/profile/s6402_default_primary_tidehunter.stdout.log",
+      "sha256": "369a02235d2d8c3785615217e294118d66e261afb209e68a179d3fa375a6b6cb",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6402_default_primary_tidehunter.stdout.log"
+    },
+    {
+      "bytes": 0,
+      "file": "results/profile/s6402_matched_period_sensitivity_clustering.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6402_matched_period_sensitivity_clustering.stderr.log"
+    },
+    {
+      "bytes": 74,
+      "file": "results/profile/s6402_matched_period_sensitivity_clustering.stdout.log",
+      "sha256": "384e8c52d270db4f4655923bfe8f5f52446b8a41e5d3b009c818264bd826acd1",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6402_matched_period_sensitivity_clustering.stdout.log"
+    },
+    {
+      "bytes": 66,
+      "file": "results/profile/s6402_matched_period_sensitivity_tidehunter.stderr.log",
+      "sha256": "0825dc9629cb1e0ae2c0a1b7648dc6c54918ea2f96552bbfa359ce913ac50f51",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6402_matched_period_sensitivity_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 108,
+      "file": "results/profile/s6402_matched_period_sensitivity_tidehunter.stdout.log",
+      "sha256": "8c407f0af75f93b675c29eedfd88d5bf1a932b764c897f7bff58b015e7109028",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6402_matched_period_sensitivity_tidehunter.stdout.log"
+    },
+    {
+      "bytes": 736,
+      "file": "results/profile/s6403_default_primary_tidehunter.stderr.log",
+      "sha256": "c84076af2f81597233df117118961e0cb1bd968bbb9ac7685f68e6b4d2631239",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6403_default_primary_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 108,
+      "file": "results/profile/s6403_default_primary_tidehunter.stdout.log",
+      "sha256": "d88aded6b440dbec33fb5d89f6d937f8130118d15b5b6814546dd248e4029eea",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6403_default_primary_tidehunter.stdout.log"
+    },
+    {
+      "bytes": 0,
+      "file": "results/profile/s6403_matched_period_sensitivity_clustering.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6403_matched_period_sensitivity_clustering.stderr.log"
+    },
+    {
+      "bytes": 169,
+      "file": "results/profile/s6403_matched_period_sensitivity_clustering.stdout.log",
+      "sha256": "f64e39e14ef7b0ae6ac4a7079f2ba538a41a2e34ac95c0744564474009e7a6a8",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6403_matched_period_sensitivity_clustering.stdout.log"
+    },
+    {
+      "bytes": 65,
+      "file": "results/profile/s6403_matched_period_sensitivity_tidehunter.stderr.log",
+      "sha256": "b2500e3c18dc497d451773170c8a936486d87ef59eb241266ae07a6077f7ce36",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6403_matched_period_sensitivity_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 108,
+      "file": "results/profile/s6403_matched_period_sensitivity_tidehunter.stdout.log",
+      "sha256": "8044ec996419c85bf0236096e9e082c65cd38443834670a0197fcecea3825ed3",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/s6403_matched_period_sensitivity_tidehunter.stdout.log"
+    },
+    {
+      "bytes": 54932,
+      "file": "results/profile/samples.tsv",
+      "sha256": "04d7993828d2a1f008b893386b907c2c6732acac6307d27a40752e6e656b2f14",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/samples.tsv"
+    },
+    {
+      "bytes": 1721,
+      "file": "results/profile/stages.tsv",
+      "sha256": "506b9879a5248f28867bab5ed395fe50889f4a142e0bc4ae9daa39043e963e3b",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/profile/stages.tsv"
+    },
+    {
+      "bytes": 986,
+      "file": "results/run_receipt.json",
+      "sha256": "434f6cbddab307281cfd9d5860bad9fe09d0f8f1b216f8c3386eb0c4b26e7aa6",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/run_receipt.json"
+    },
+    {
+      "bytes": 817,
+      "file": "results/seed6401/matched_period_sensitivity/clustering.gnu_time.txt",
+      "sha256": "7abc67f69370bfbbdf2f7ebe601eca67e7dbab883d29d64a01380f9449d98f0f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/clustering.gnu_time.txt"
+    },
+    {
+      "bytes": 3305,
+      "file": "results/seed6401/matched_period_sensitivity/evaluation/array_matches.tsv",
+      "sha256": "9087f058fdc441cf1b6a3466013a927595e9564a936cfd5460346e19dc9a47d8",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/evaluation/array_matches.tsv"
+    },
+    {
+      "bytes": 4072,
+      "file": "results/seed6401/matched_period_sensitivity/evaluation/evaluation_receipt.json",
+      "sha256": "31126e2748d77a22537d4e5bbaa886e7ad9966d6be9831a8c165146e84b8ebe8",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/evaluation/evaluation_receipt.json"
+    },
+    {
+      "bytes": 4188,
+      "file": "results/seed6401/matched_period_sensitivity/evaluation/family_recovery.tsv",
+      "sha256": "b7ed8b7cab1d4d516eef35dfb380ffe913df605dcab802923669290771ebe9a6",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/evaluation/family_recovery.tsv"
+    },
+    {
+      "bytes": 1539,
+      "file": "results/seed6401/matched_period_sensitivity/evaluation/metrics.json",
+      "sha256": "5e26d77e300b0d8f9dc983524fe7cbef78241fc365e22252dc93347edc5f5df3",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/evaluation/metrics.json"
+    },
+    {
+      "bytes": 18896,
+      "file": "results/seed6401/matched_period_sensitivity/evaluation/normalized_arrays.tsv",
+      "sha256": "44011ab99f1441fdc08ae178408bb8ad35d0bbe0ceb465371ba1e74c5294ccfb",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/evaluation/normalized_arrays.tsv"
+    },
+    {
+      "bytes": 683,
+      "file": "results/seed6401/matched_period_sensitivity/tc_chunks.bed",
+      "sha256": "a19742f6e275f9524e199b18059c405bd6aa782be3a091dceffcb149fa1d91ad",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/tc_chunks.bed"
+    },
+    {
+      "bytes": 4558,
+      "file": "results/seed6401/matched_period_sensitivity/tc_clustering.gff3",
+      "sha256": "5da6779c9846f1af27746956d58e6f855261a85bef63280c109bf37f1effa1d2",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/tc_clustering.gff3"
+    },
+    {
+      "bytes": 4280,
+      "file": "results/seed6401/matched_period_sensitivity/tc_clustering.gff3_1.gff3",
+      "sha256": "5d1708e5c8782a7590b527c60f3baa868273adec009fd6c13b3511d59cff3a58",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/tc_clustering.gff3_1.gff3"
+    },
+    {
+      "bytes": 327,
+      "file": "results/seed6401/matched_period_sensitivity/tc_cmd_args.json",
+      "sha256": "76cc5af5861fb298a60a766e3d6c8c7e6d3e67520b741bd492309ad805c7db8f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/tc_cmd_args.json"
+    },
+    {
+      "bytes": 51406,
+      "file": "results/seed6401/matched_period_sensitivity/tc_consensus/consensus_sequences_all.fasta",
+      "sha256": "45cb100416511360b7f4482810041d483f94f9b60b698b1af10e05e8992cd820",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/tc_consensus/consensus_sequences_all.fasta"
+    },
+    {
+      "bytes": 40259,
+      "file": "results/seed6401/matched_period_sensitivity/tc_tidehunter.gff3",
+      "sha256": "862f2f8960bd0fe0dfb94273c5f4e73053e08be9d14ca52091cc504d24580b5c",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/tc_tidehunter.gff3"
+    },
+    {
+      "bytes": 827,
+      "file": "results/seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt",
+      "sha256": "acd06e23fc74baf05af53a76801a9981499bdd706b08b3419e1364320a49e1ae",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 816,
+      "file": "results/seed6402/default_primary/clustering.gnu_time.txt",
+      "sha256": "f6dd65b494a6a0fef934f9cda339486ff4a07bb09ff16f699e84e73953876203",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/clustering.gnu_time.txt"
+    },
+    {
+      "bytes": 3293,
+      "file": "results/seed6402/default_primary/evaluation/array_matches.tsv",
+      "sha256": "6aa101637a8b159b3c3be2d99b8c05eda3f08fe2c8783e1e3c003595a19ebb29",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/evaluation/array_matches.tsv"
+    },
+    {
+      "bytes": 4015,
+      "file": "results/seed6402/default_primary/evaluation/evaluation_receipt.json",
+      "sha256": "7494864e37841357c0a7e737ef9225dbf751454d9cae6ca5f970c34ed33d913c",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/evaluation/evaluation_receipt.json"
+    },
+    {
+      "bytes": 4188,
+      "file": "results/seed6402/default_primary/evaluation/family_recovery.tsv",
+      "sha256": "55a3883ff0581c1ad769f3142c54a3a32abce6b3dd3a3c3d518de59cf76a8b13",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/evaluation/family_recovery.tsv"
+    },
+    {
+      "bytes": 1526,
+      "file": "results/seed6402/default_primary/evaluation/metrics.json",
+      "sha256": "d3448b3eb9d6b91001fb3e6b1354a8c829cddea4d225780dc06e8f53f4c4acdf",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/evaluation/metrics.json"
+    },
+    {
+      "bytes": 21236,
+      "file": "results/seed6402/default_primary/evaluation/normalized_arrays.tsv",
+      "sha256": "7ce707557916deabfb8f50ae0a21c35626044c653e462cb9f39579a2ecae2b6a",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/evaluation/normalized_arrays.tsv"
+    },
+    {
+      "bytes": 683,
+      "file": "results/seed6402/default_primary/tc_chunks.bed",
+      "sha256": "a19742f6e275f9524e199b18059c405bd6aa782be3a091dceffcb149fa1d91ad",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_chunks.bed"
+    },
+    {
+      "bytes": 4558,
+      "file": "results/seed6402/default_primary/tc_clustering.gff3",
+      "sha256": "d820632a0b847a0df2e220afeecfaa51217a84d73a76ea7e4d1a41f9de3a7fc7",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_clustering.gff3"
+    },
+    {
+      "bytes": 4204,
+      "file": "results/seed6402/default_primary/tc_clustering.gff3_1.gff3",
+      "sha256": "493c41f20f096e2e9f8b7ebcb2094824c51581c95cbd52740e828873bb90ce35",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_clustering.gff3_1.gff3"
+    },
+    {
+      "bytes": 327,
+      "file": "results/seed6402/default_primary/tc_cmd_args.json",
+      "sha256": "91c85d298f597159fb243515faaab4d25f24475e4aa23c9ada20de09c85a0f0f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_cmd_args.json"
+    },
+    {
+      "bytes": 62258,
+      "file": "results/seed6402/default_primary/tc_consensus/consensus_sequences_all.fasta",
+      "sha256": "22692363fb5e03c3126ef1d3523439f6f22b6b295de833470c3c0429cb13c4e0",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_consensus/consensus_sequences_all.fasta"
+    },
+    {
+      "bytes": 46531,
+      "file": "results/seed6402/default_primary/tc_tidehunter.gff3",
+      "sha256": "59516458a4b6633ccd6703613bbd2928317818862e20afe203dd66fe02540977",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_tidehunter.gff3"
+    },
+    {
+      "bytes": 830,
+      "file": "results/seed6402/default_primary/tidehunter.gnu_time.txt",
+      "sha256": "da8abacbd56f53ebc45e525536d3b70915a318216f44d60cdbd685fd932f73ba",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 817,
+      "file": "results/seed6402/matched_period_sensitivity/clustering.gnu_time.txt",
+      "sha256": "c00c5a63bdafa975a9caf3288f463bf80000ee1b82e2eef46d1b363d5758aefe",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/clustering.gnu_time.txt"
+    },
+    {
+      "bytes": 3290,
+      "file": "results/seed6402/matched_period_sensitivity/evaluation/array_matches.tsv",
+      "sha256": "36fd121567c64685e75de2ac49a91e5930c470f6693219baf45b56b0f87dfeb7",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/evaluation/array_matches.tsv"
+    },
+    {
+      "bytes": 4073,
+      "file": "results/seed6402/matched_period_sensitivity/evaluation/evaluation_receipt.json",
+      "sha256": "8cc0389d47d0c53c8903fc2ec05ccf80e2546b626b1b0dc1a07aeeba9c0d035c",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/evaluation/evaluation_receipt.json"
+    },
+    {
+      "bytes": 4187,
+      "file": "results/seed6402/matched_period_sensitivity/evaluation/family_recovery.tsv",
+      "sha256": "7e02945b3640bf36180d6fa22d91c9a2ba4261e49b36f9fcdf53fc231095c590",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/evaluation/family_recovery.tsv"
+    },
+    {
+      "bytes": 1540,
+      "file": "results/seed6402/matched_period_sensitivity/evaluation/metrics.json",
+      "sha256": "c4ce1135699a47d05fb4e430fb2627b57e231083ec1a475cd7ba4e954c0da2ab",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/evaluation/metrics.json"
+    },
+    {
+      "bytes": 19128,
+      "file": "results/seed6402/matched_period_sensitivity/evaluation/normalized_arrays.tsv",
+      "sha256": "ded3ba033e0e75880714812d1226e2a7c579370812e91573cc57a3011fe6f2ad",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/evaluation/normalized_arrays.tsv"
+    },
+    {
+      "bytes": 683,
+      "file": "results/seed6402/matched_period_sensitivity/tc_chunks.bed",
+      "sha256": "a19742f6e275f9524e199b18059c405bd6aa782be3a091dceffcb149fa1d91ad",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_chunks.bed"
+    },
+    {
+      "bytes": 4558,
+      "file": "results/seed6402/matched_period_sensitivity/tc_clustering.gff3",
+      "sha256": "d820632a0b847a0df2e220afeecfaa51217a84d73a76ea7e4d1a41f9de3a7fc7",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_clustering.gff3"
+    },
+    {
+      "bytes": 4204,
+      "file": "results/seed6402/matched_period_sensitivity/tc_clustering.gff3_1.gff3",
+      "sha256": "dffc5f76d568e8a37fa82b974eb785a8c7f2c74239da5531884d7e10d12a1d2a",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_clustering.gff3_1.gff3"
+    },
+    {
+      "bytes": 327,
+      "file": "results/seed6402/matched_period_sensitivity/tc_cmd_args.json",
+      "sha256": "76cc5af5861fb298a60a766e3d6c8c7e6d3e67520b741bd492309ad805c7db8f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_cmd_args.json"
+    },
+    {
+      "bytes": 54607,
+      "file": "results/seed6402/matched_period_sensitivity/tc_consensus/consensus_sequences_all.fasta",
+      "sha256": "dd35a6617f0d61ce7fcd9ba363377d598e4d156d01b3d128ce2ee741c29548f0",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_consensus/consensus_sequences_all.fasta"
+    },
+    {
+      "bytes": 42280,
+      "file": "results/seed6402/matched_period_sensitivity/tc_tidehunter.gff3",
+      "sha256": "cfb9a117b077f49aa2734d81efeef78f319fdbf8fa33d4fc7a0d615eaab7131f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tc_tidehunter.gff3"
+    },
+    {
+      "bytes": 830,
+      "file": "results/seed6402/matched_period_sensitivity/tidehunter.gnu_time.txt",
+      "sha256": "dd89740f904a2c363a29426e5b9c5c6aaa87a9b50f0b16d9943fc792fe5c67c5",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/matched_period_sensitivity/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 217,
+      "file": "results/seed6403/default_primary/tc_cmd_args.json",
+      "sha256": "822ecaa85450bf38b072a7fe42303ed467f468edfeb205a670ff3f77d016b535",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/default_primary/tc_cmd_args.json"
+    },
+    {
+      "bytes": 873,
+      "file": "results/seed6403/default_primary/tidehunter.gnu_time.txt",
+      "sha256": "dd4e1492537b5562fe06a9f6d5a1a7606fd216fe9c0f96b09ba66d9488291b48",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/default_primary/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 815,
+      "file": "results/seed6403/matched_period_sensitivity/clustering.gnu_time.txt",
+      "sha256": "e9fca20676e46562323e4b34abc8d36a32cbc4e242fb80e42926663c0792bc32",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/clustering.gnu_time.txt"
+    },
+    {
+      "bytes": 3230,
+      "file": "results/seed6403/matched_period_sensitivity/evaluation/array_matches.tsv",
+      "sha256": "a893f98e13d96e77dc88a6524a1973f44ce2b9eb757d2667894914e0c97b1a67",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/evaluation/array_matches.tsv"
+    },
+    {
+      "bytes": 4072,
+      "file": "results/seed6403/matched_period_sensitivity/evaluation/evaluation_receipt.json",
+      "sha256": "6ea650f670268030fd0d186295314ed56ecc43a913ff6919e211751fe975e6b6",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/evaluation/evaluation_receipt.json"
+    },
+    {
+      "bytes": 4188,
+      "file": "results/seed6403/matched_period_sensitivity/evaluation/family_recovery.tsv",
+      "sha256": "6ab32ea6eaeae0bce57d93901fe1599bb84cb842b6a16412b0f90d02371a1019",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/evaluation/family_recovery.tsv"
+    },
+    {
+      "bytes": 1539,
+      "file": "results/seed6403/matched_period_sensitivity/evaluation/metrics.json",
+      "sha256": "e8f25a52964766fb0a342db60955eb681d58e689462952e8f6d74cd79c1edbf9",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/evaluation/metrics.json"
+    },
+    {
+      "bytes": 19451,
+      "file": "results/seed6403/matched_period_sensitivity/evaluation/normalized_arrays.tsv",
+      "sha256": "0eedc4da46bcd68047fc6eb55916e419734132d0ebea5c321b22a4beeea80c40",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/evaluation/normalized_arrays.tsv"
+    },
+    {
+      "bytes": 683,
+      "file": "results/seed6403/matched_period_sensitivity/tc_chunks.bed",
+      "sha256": "a19742f6e275f9524e199b18059c405bd6aa782be3a091dceffcb149fa1d91ad",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/tc_chunks.bed"
+    },
+    {
+      "bytes": 4558,
+      "file": "results/seed6403/matched_period_sensitivity/tc_clustering.gff3",
+      "sha256": "b78c544459d0fe818409aa5e7c8eef2e792bf4182716f3b83db2ce4107b1da98",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/tc_clustering.gff3"
+    },
+    {
+      "bytes": 4280,
+      "file": "results/seed6403/matched_period_sensitivity/tc_clustering.gff3_1.gff3",
+      "sha256": "7b9544a030e588764a38416560577c3598a9d60234526c21f8c1ec929b5c1fe2",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/tc_clustering.gff3_1.gff3"
+    },
+    {
+      "bytes": 327,
+      "file": "results/seed6403/matched_period_sensitivity/tc_cmd_args.json",
+      "sha256": "76cc5af5861fb298a60a766e3d6c8c7e6d3e67520b741bd492309ad805c7db8f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/tc_cmd_args.json"
+    },
+    {
+      "bytes": 56053,
+      "file": "results/seed6403/matched_period_sensitivity/tc_consensus/consensus_sequences_all.fasta",
+      "sha256": "688c2ad1421ad353b514cc1ce6320f8fa80cf1ed8bcb89db56d91fd1558d185a",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/tc_consensus/consensus_sequences_all.fasta"
+    },
+    {
+      "bytes": 43570,
+      "file": "results/seed6403/matched_period_sensitivity/tc_tidehunter.gff3",
+      "sha256": "32be517ff34ecb2de60b168d5e05d8e8a45aeaa1ff2f788c8169324d35a0ab51",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/tc_tidehunter.gff3"
+    },
+    {
+      "bytes": 830,
+      "file": "results/seed6403/matched_period_sensitivity/tidehunter.gnu_time.txt",
+      "sha256": "7d0dc14640f27f47dce4db2dfe68113289217d73b83346b2d159ad789d23a360",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6403/matched_period_sensitivity/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 28058,
+      "file": "results/source_snapshot/factorial_continue.py",
+      "sha256": "8b5000e391af5618e2077606c4948b9a8dcdf09ec63cdaa43a8dd5e3800730b5",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/source_snapshot/factorial_continue.py"
+    },
+    {
+      "bytes": 5010,
+      "file": "results/source_snapshot/factorial_evaluate.py",
+      "sha256": "1d196f68781d85b2118bfce8cc9593e68fccb61b2c8f3dd30b5c5ba1dd31f224",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/source_snapshot/factorial_evaluate.py"
+    },
+    {
+      "bytes": 12055,
+      "file": "results/source_snapshot/factorial_run.py",
+      "sha256": "4154c98dc2d600faf99641780d60f2bb6c8fde9b1a51e316e49e70f7c2d3e676",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/source_snapshot/factorial_run.py"
+    },
+    {
+      "bytes": 16804,
+      "file": "results/source_snapshot/normalize.py",
+      "sha256": "9f16f0393c723d58bc046adf4bfcd885b107664c926c5ba6aadf4ca5fa3a27e7",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/source_snapshot/normalize.py"
+    },
+    {
+      "bytes": 8942,
+      "file": "results/source_snapshot/profile_stage_resources.py",
+      "sha256": "02b3175fc1271f393a7e3f84710a0482a93153110e8795861bd3958d2d1adfdf",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/source_snapshot/profile_stage_resources.py"
+    },
+    {
+      "bytes": 12232,
+      "file": "results/source_snapshot/run_tidecluster_docker_reference.py",
+      "sha256": "833a9bb7d8d0a18abde068ae56f33351cdeb82093677909d2b17fd6718b5c015",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/source_snapshot/run_tidecluster_docker_reference.py"
+    },
+    {
+      "bytes": 4341,
+      "file": "results/source_snapshot/tidecluster_factorial_continuation_v3.json",
+      "sha256": "8838e3ffffe6cc27dc826a3edf611d2dda2d92db80f63b17dac8b4ee378d6a03",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/source_snapshot/tidecluster_factorial_continuation_v3.json"
+    },
+    {
+      "bytes": 2817,
+      "file": "results/source_snapshot/tidecluster_factorial_validation_v1.json",
+      "sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/source_snapshot/tidecluster_factorial_validation_v1.json"
+    },
+    {
+      "bytes": 1778,
+      "file": "results/stage_fates.tsv",
+      "sha256": "dcdc0dacc1d51a665fbecf59762a8445a5dc2db0d54591f017a90bdb19a710f9",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/stage_fates.tsv"
+    },
+    {
+      "bytes": 14888,
+      "file": "results/stage_manifest.json",
+      "sha256": "5e2422b8b6e2f988068b529ffd94f442182e049cd0c85ade00354400c94b78d8",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/stage_manifest.json"
+    },
+    {
+      "bytes": 2167,
+      "file": "results/summary.tsv",
+      "sha256": "3db195eeb6a42bdc644148b709ada79d251d10423e3566ec3e8c6ea2a2b3d5c6",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/summary.tsv"
+    },
+    {
+      "bytes": 15214,
+      "file": "headline_summary.json",
+      "sha256": "70b734d899d5b6b3e4c006aa9ea45137f7052812012abd178d75626fe4b9f9fe",
+      "source": "generated_by_archive_tidecluster_factorial"
+    },
+    {
+      "bytes": 689,
+      "file": "README.md",
+      "sha256": "8a03f7f06ba23fa28d39170649e770a9966386f30896913021836ea48de5f63f",
+      "source": "generated_by_archive_tidecluster_factorial"
+    }
+  ],
+  "schema_version": 1
+}

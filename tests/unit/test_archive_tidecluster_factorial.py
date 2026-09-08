@@ -82,6 +82,41 @@ def test_validate_figure_rejects_raster_svg(tmp_path) -> None:
         validate_figure(tmp_path)
 
 
+def test_validate_figure_prefers_v2_and_requires_identical_panel_source(tmp_path) -> None:
+    for version, png_text in (("figures_v1", "failed"), ("figures_v2", "accepted")):
+        directory = tmp_path / version
+        directory.mkdir()
+        outputs = {}
+        for name, text in (
+            ("figure.svg", "<svg><text>test</text></svg>"),
+            ("tidecluster_factorial_validation.png", png_text),
+            ("panel_source.tsv", "panel\tvalue\nA\t1\n"),
+        ):
+            path = directory / name
+            path.write_text(text)
+            outputs[name] = {
+                "bytes": path.stat().st_size,
+                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            }
+        (directory / "figure_provenance.json").write_text(
+            json.dumps(
+                {
+                    "complete": True,
+                    "panel_count": 6,
+                    "frozen_run_count": 6,
+                    "svg_raster_image_element_count": 0,
+                    "svg_text_element_count": 1,
+                    "outputs": outputs,
+                }
+            )
+        )
+    result = validate_figure(tmp_path)
+    assert result["qa_history"]["accepted_render"] == "figures_v2"
+    (tmp_path / "figures_v2/panel_source.tsv").write_text("changed\n")
+    with pytest.raises(ValueError, match="output changed"):
+        validate_figure(tmp_path)
+
+
 def test_failure_archive_description_does_not_claim_accuracy_outputs() -> None:
     description = archive_description(False)
     assert "failed before accuracy evaluation" in description

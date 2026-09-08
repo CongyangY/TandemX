@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "experiment_id": "tidecluster_factorial_validation_v3_continuation",
+  "complete": true,
+  "fate": "completed_with_retained_external_or_technical_failures",
+  "accuracy_complete": false,
+  "run_count": 6,
+  "successful_run_count": 4,
+  "failed_or_unavailable_run_count": 2,
+  "summary_sha256": "3db195eeb6a42bdc644148b709ada79d251d10423e3566ec3e8c6ea2a2b3d5c6",
+  "cell_fates_sha256": "d58bf167f4e3058bf19134226d26d1912e40acbb087dff989cde82a1f5cc66b6",
+  "stage_fates_sha256": "dcdc0dacc1d51a665fbecf59762a8445a5dc2db0d54591f017a90bdb19a710f9",
+  "never_rerun_stages": [
+    "s6401_default_primary_tidehunter",
+    "s6401_matched_period_sensitivity_tidehunter"
+  ],
+  "parent_failure_never_rerun": [
+    "s6401_default_primary_tidehunter"
+  ],
+  "prior_success_never_rerun": [
+    "s6401_matched_period_sensitivity_tidehunter"
+  ],
+  "warning": "same_process_simulated_validation_genomes_not_independent_plants;failed_accuracy_measurements_are_NA_not_zero"
+}

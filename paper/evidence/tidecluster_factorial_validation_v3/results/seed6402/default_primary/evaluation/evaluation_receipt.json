@@ -1,0 +1,83 @@
+{
+  "complete": true,
+  "input_hashes": {
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/catalogue.fa": {
+      "bytes": 12318,
+      "sha256": "6c7d77a780c5b2becf97855190a2663e01edd7b22b516cabb00941d23a79d915"
+    },
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/genome.fa": {
+      "bytes": 10125009,
+      "sha256": "fd71941d068a0d892b77a887486146793dce723dbd8bea159a67661f8558f358"
+    },
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/manifest.json": {
+      "bytes": 8075,
+      "sha256": "227a2b4ae26423e49594fabeea431942f3c5d8bb2b547669b886c02b0cb366b6"
+    },
+    "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome/truth_copy_number.tsv": {
+      "bytes": 7684,
+      "sha256": "56ea8e6c507905cbcf9e208d2e3d3b5c04be30d323f06c2facc9254e8cc225cc"
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_clustering.gff3": {
+      "bytes": 4558,
+      "sha256": "d820632a0b847a0df2e220afeecfaa51217a84d73a76ea7e4d1a41f9de3a7fc7"
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_clustering.gff3_1.gff3": {
+      "bytes": 4204,
+      "sha256": "493c41f20f096e2e9f8b7ebcb2094824c51581c95cbd52740e828873bb90ce35"
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_consensus/consensus_sequences_all.fasta": {
+      "bytes": 62258,
+      "sha256": "22692363fb5e03c3126ef1d3523439f6f22b6b295de833470c3c0429cb13c4e0"
+    },
+    "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v3_continuation_20260908/seed6402/default_primary/tc_tidehunter.gff3": {
+      "bytes": 46531,
+      "sha256": "59516458a4b6633ccd6703613bbd2928317818862e20afe203dd66fe02540977"
+    }
+  },
+  "metrics": {
+    "array_f1": 0.8909090909090909,
+    "array_precision": 0.8909090909090909,
+    "array_precision_ci_high": 0.9490327499921767,
+    "array_precision_ci_low": 0.7817445091344648,
+    "array_recall": 0.8909090909090909,
+    "array_recall_ci_high": 0.9490327499921767,
+    "array_recall_ci_low": 0.7817445091344648,
+    "base_union_f1": 0.9997325141940049,
+    "base_union_precision": 0.9994665327626067,
+    "base_union_recall": 0.9999986372308531,
+    "cyclic_monomer_recall": 0.8909090909090909,
+    "distinct_consensus_count": 55,
+    "duplicate_bp_fraction": 0.0,
+    "duplicated_prediction_bp": 0,
+    "false_positive_read_count": 0,
+    "homologous_consensus_fraction": 0.8909090909090909,
+    "matched_array_count": 49,
+    "matched_boundary_mae_bp": 12.0,
+    "matched_period_mae_bp": 0.0,
+    "negative_read_call_rate": null,
+    "negative_read_call_rate_ci_high": null,
+    "negative_read_call_rate_ci_low": null,
+    "negative_read_count": 0,
+    "normalized_coordinate_system": "0-based_half-open",
+    "operational_family_count": 55,
+    "predicted_array_count": 55,
+    "predicted_union_bp": 2202572,
+    "read_detection_precision": 1.0,
+    "read_detection_recall": 1.0,
+    "recovered_family_count": 49,
+    "seed": 6402,
+    "source_coordinate_system": "GFF3_1-based_inclusive",
+    "truth_array_count": 55,
+    "truth_family_count": 55,
+    "truth_union_bp": 2201400,
+    "unmatched_distinct_consensus_count": 6,
+    "warning": "known_planted_factorial_assembly_truth;same_process_validation_genome;not_an_independent_plant;TideCluster_settings_frozen_before_output_inspection"
+  },
+  "outputs": {
+    "array_matches.tsv": "6aa101637a8b159b3c3be2d99b8c05eda3f08fe2c8783e1e3c003595a19ebb29",
+    "family_recovery.tsv": "55a3883ff0581c1ad769f3142c54a3a32abce6b3dd3a3c3d518de59cf76a8b13",
+    "metrics.json": "d3448b3eb9d6b91001fb3e6b1354a8c829cddea4d225780dc06e8f53f4c4acdf",
+    "normalized_arrays.tsv": "7ce707557916deabfb8f50ae0a21c35626044c653e462cb9f39579a2ecae2b6a"
+  },
+  "schema_version": 1
+}

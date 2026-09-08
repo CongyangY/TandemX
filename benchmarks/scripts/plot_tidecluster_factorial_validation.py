@@ -18,10 +18,10 @@ CHARCOAL = "#30343B"
 GREY = "#9299A1"
 GRID = "#D9DDE2"
 SETTING_STYLE = {
-    "default_primary": {"color": BLUE, "label": "TideCluster default"},
+    "default_primary": {"color": BLUE, "label": "Default"},
     "matched_period_sensitivity": {
         "color": ORANGE,
-        "label": "Matched 30--1000-bp period range",
+        "label": "Matched P30–1000",
     },
 }
 SOURCE_FIELDS = (
@@ -183,7 +183,7 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
     )
     figure, axes = plt.subplots(3, 2, figsize=(8.3, 10.4), constrained_layout=False)
     figure.subplots_adjust(
-        left=0.10, right=0.97, top=0.925, bottom=0.075, hspace=0.48, wspace=0.31
+        left=0.10, right=0.97, top=0.855, bottom=0.165, hspace=0.58, wspace=0.31
     )
     figure.suptitle(
         "TideCluster factorial assembly validation",
@@ -262,6 +262,7 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
         source_rows,
     )
     axis.set_yscale("symlog", linthresh=0.5)
+    axis.set_ylim(0, 20)
     axis.set_ylabel("Mean absolute error (bp)")
     axis.set_title("Matched-call errors remain conditional")
     style_axis(axis)
@@ -397,7 +398,7 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
         fontsize=7.1,
         ncol=2,
         loc="upper center",
-        bbox_to_anchor=(0.54, 0.915),
+        bbox_to_anchor=(0.54, 0.905),
     )
     handles, labels = axes[2, 0].get_legend_handles_labels()
     figure.legend(
@@ -405,9 +406,9 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
         labels,
         frameon=False,
         fontsize=6.7,
-        ncol=2,
+        ncol=3,
         loc="lower center",
-        bbox_to_anchor=(0.54, 0.036),
+        bbox_to_anchor=(0.54, 0.055),
     )
     figure.text(
         0.10,
