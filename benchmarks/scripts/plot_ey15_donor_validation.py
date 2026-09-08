@@ -24,6 +24,8 @@ GREY = "#9299A1"
 LIGHT_GREY = "#E4E7EA"
 GRID = "#D9DDE2"
 PANELS = "ABCDEF"
+SYMLOG_LINTHRESH = 100.0
+SYMLOG_LOWER_LIMIT = -10.0
 SOURCE_FIELDS = (
     "panel",
     "record_type",
@@ -259,10 +261,10 @@ def plot(source: Path, outdir: Path) -> dict[str, Any]:
     maximum = line_extent(primary, ("new_assembly_bp", "old_assembly_bp")) * 1.25
     axis.plot([0, maximum], [0, maximum], color=GREY, linewidth=1.0, linestyle="--", label="Equality")
     axis.plot([0, maximum], [0, 0.6 * maximum], color=ORANGE, linewidth=1.1, linestyle=":", label="Collapse threshold")
-    axis.set_xscale("symlog", linthresh=1000)
-    axis.set_yscale("symlog", linthresh=1000)
-    axis.set_xlim(-20, maximum)
-    axis.set_ylim(-20, maximum)
+    axis.set_xscale("symlog", linthresh=SYMLOG_LINTHRESH)
+    axis.set_yscale("symlog", linthresh=SYMLOG_LINTHRESH)
+    axis.set_xlim(SYMLOG_LOWER_LIMIT, maximum)
+    axis.set_ylim(SYMLOG_LOWER_LIMIT, maximum)
     axis.set_xlabel("New-assembly localized bp")
     axis.set_ylabel("Old-assembly localized bp")
     axis.set_title("Assembly reference states")
@@ -288,10 +290,10 @@ def plot(source: Path, outdir: Path) -> dict[str, Any]:
     maximum = line_extent(primary, ("read_estimated_bp", "old_assembly_bp")) * 1.25
     axis.plot([0, maximum], [0, maximum], color=GREY, linewidth=1.0, linestyle="--")
     axis.plot([0, maximum], [0, 0.6 * maximum], color=ORANGE, linewidth=1.1, linestyle=":")
-    axis.set_xscale("symlog", linthresh=1000)
-    axis.set_yscale("symlog", linthresh=1000)
-    axis.set_xlim(-20, maximum)
-    axis.set_ylim(-20, maximum)
+    axis.set_xscale("symlog", linthresh=SYMLOG_LINTHRESH)
+    axis.set_yscale("symlog", linthresh=SYMLOG_LINTHRESH)
+    axis.set_xlim(SYMLOG_LOWER_LIMIT, maximum)
+    axis.set_ylim(SYMLOG_LOWER_LIMIT, maximum)
     axis.set_xlabel("Read-estimated repeat bp")
     axis.set_ylabel("Old-assembly localized bp")
     axis.set_title("Read-based collapse predictions")
@@ -315,10 +317,10 @@ def plot(source: Path, outdir: Path) -> dict[str, Any]:
     scatter_by_state(axis, primary, "observed_gain_bp", "predicted_missing_bp")
     maximum = line_extent(primary, ("observed_gain_bp", "predicted_missing_bp")) * 1.25
     axis.plot([0, maximum], [0, maximum], color=CHARCOAL, linewidth=1.0, linestyle="--")
-    axis.set_xscale("symlog", linthresh=1000)
-    axis.set_yscale("symlog", linthresh=1000)
-    axis.set_xlim(-20, maximum)
-    axis.set_ylim(-20, maximum)
+    axis.set_xscale("symlog", linthresh=SYMLOG_LINTHRESH)
+    axis.set_yscale("symlog", linthresh=SYMLOG_LINTHRESH)
+    axis.set_xlim(SYMLOG_LOWER_LIMIT, maximum)
+    axis.set_ylim(SYMLOG_LOWER_LIMIT, maximum)
     axis.set_xlabel("Observed old-to-new gain (bp)")
     axis.set_ylabel("Predicted missing bp")
     axis.set_title("Missing-sequence magnitude")

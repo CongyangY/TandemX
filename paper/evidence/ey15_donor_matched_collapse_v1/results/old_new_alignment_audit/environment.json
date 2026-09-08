@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "config_path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/ey15_old_new_alignment_audit_v1.json",
+  "config_sha256": "35e96bdfe8f60fc476ba3feedad138a8a9074b8d06d0b2aa8529e955d44c864e",
+  "command": [
+    "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+    "-x",
+    "asm5",
+    "-t",
+    "4",
+    "-c",
+    "--eqx",
+    "--secondary=yes",
+    "-N",
+    "100",
+    "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/old_assembly.fa",
+    "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/new_assembly.fa"
+  ],
+  "tool_version": "2.31-r1302",
+  "tool_source_commit": "3c28777e7e2dcc90f825de1b9f17a89cca7d4452",
+  "input_sha256": {
+    "old_assembly": "d7a094865701433e2ffd726495f61cc943e80bfa1ff30a7a38990dae0c7224b3",
+    "new_assembly": "48d67e8d26c5d9ebc1fbd772e877e2f957437b5a3b27bbdde4a1d3c77923208c"
+  },
+  "resource_scope": "aggregate_live_process_tree_sampled_on_host"
+}

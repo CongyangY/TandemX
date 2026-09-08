@@ -1,0 +1,80 @@
+panel	record_type	family_id	group	metric	threshold_bp	normalization	state	x_value	y_value	numerator	denominator	value	warning
+A	family_point	TXF000002					reference_collapse	49758.0	3317.0		19		
+A	family_point	TXF000020					reference_collapse	714580.0	46823.0		19		
+A	family_point	TXF000078					reference_collapse	25707.0	6715.0		19		
+A	family_point	TXF000088					reference_retained	35252.0	35252.0		19		
+A	family_point	TXF000113					reference_retained	57131.0	57131.0		19		
+A	family_point	TXF000137					reference_retained	40584.0	40584.0		19		
+A	family_point	TXF000153					reference_retained	59042.0	59043.0		19		
+A	family_point	TXF000154					reference_collapse	18297.0	0.0		19		
+A	family_point	TXF000319					reference_collapse	144148.0	0.0		19		
+A	family_point	TXF000556					reference_retained	55082.0	43873.0		19		
+A	family_point	TXF000827					reference_retained	15213.0	15213.0		19		
+A	family_point	TXF001083					reference_retained	21970.0	21970.0		19		
+A	family_point	TXF001094					reference_collapse	21569.0	4288.0		19		
+A	family_point	TXF001097					reference_retained	48829.0	48829.0		19		
+A	family_point	TXF001517					reference_collapse	27167.0	0.0		19		
+A	family_point	TXF001519					reference_retained	88343.0	83381.0		19		
+A	family_point	TXF001543					reference_retained	17279.0	17279.0		19		
+A	family_point	TXF001550					reference_collapse	17199.0	0.0		19		
+A	family_point	TXF001620					reference_retained	23930.0	23424.0		19		
+B	family_point	TXF000002					predicted_collapse	310457.0694	3317.0		19		
+B	family_point	TXF000020					predicted_collapse	263874.0575	46823.0		19		
+B	family_point	TXF000078					predicted_collapse	17265.6061	6715.0		19		
+B	family_point	TXF000088					predicted_old_excess	22039.1095	35252.0		19		
+B	family_point	TXF000113					predicted_old_excess	23675.6559	57131.0		19		
+B	family_point	TXF000137					predicted_old_excess	9021.4333	40584.0		19		
+B	family_point	TXF000153					predicted_old_excess	11611.9733	59043.0		19		
+B	family_point	TXF000154					predicted_collapse	67445.4619	0.0		19		
+B	family_point	TXF000319					predicted_collapse	181957.782	0.0		19		
+B	family_point	TXF000556					predicted_old_excess	7788.5966	43873.0		19		
+B	family_point	TXF000827					predicted_old_excess	6911.333	15213.0		19		
+B	family_point	TXF001083					predicted_old_excess	2623.1452	21970.0		19		
+B	family_point	TXF001094					predicted_collapse	10960.5886	4288.0		19		
+B	family_point	TXF001097					predicted_old_excess	668.1192	48829.0		19		
+B	family_point	TXF001517					predicted_collapse	45595.4284	0.0		19		
+B	family_point	TXF001519					predicted_old_excess	9668.1924	83381.0		19		
+B	family_point	TXF001543					predicted_old_excess	3893.156	17279.0		19		
+B	family_point	TXF001550					predicted_collapse	4244.5515	0.0		19		
+B	family_point	TXF001620					predicted_old_excess	1806.66	23424.0		19		
+C	family_point	TXF000002					reference_collapse	46441.0	307140.0694		19		
+C	family_point	TXF000020					reference_collapse	667757.0	217051.0575		19		
+C	family_point	TXF000078					reference_collapse	18992.0	10550.6061		19		
+C	family_point	TXF000088					reference_retained	0.0	0.0		19		
+C	family_point	TXF000113					reference_retained	0.0	0.0		19		
+C	family_point	TXF000137					reference_retained	0.0	0.0		19		
+C	family_point	TXF000153					reference_retained	0.0	0.0		19		
+C	family_point	TXF000154					reference_collapse	18297.0	67445.4619		19		
+C	family_point	TXF000319					reference_collapse	144148.0	181957.782		19		
+C	family_point	TXF000556					reference_retained	11209.0	0.0		19		
+C	family_point	TXF000827					reference_retained	0.0	0.0		19		
+C	family_point	TXF001083					reference_retained	0.0	0.0		19		
+C	family_point	TXF001094					reference_collapse	17281.0	6672.588599999999		19		
+C	family_point	TXF001097					reference_retained	0.0	0.0		19		
+C	family_point	TXF001517					reference_collapse	27167.0	45595.4284		19		
+C	family_point	TXF001519					reference_retained	4962.0	0.0		19		
+C	family_point	TXF001543					reference_retained	0.0	0.0		19		
+C	family_point	TXF001550					reference_collapse	17199.0	4244.5515		19		
+C	family_point	TXF001620					reference_retained	506.0	0.0		19		
+D	confusion_count			TP	5000					19	62	19	predeclared_threshold_sensitivity
+D	confusion_count			TP	15000					8	19	8	predeclared_threshold_sensitivity
+D	confusion_count			TP	50000					2	6	2	predeclared_threshold_sensitivity
+D	confusion_count			TN	5000					40	62	40	predeclared_threshold_sensitivity
+D	confusion_count			TN	15000					11	19	11	predeclared_threshold_sensitivity
+D	confusion_count			TN	50000					4	6	4	predeclared_threshold_sensitivity
+D	confusion_count			FN	5000					1	62	1	predeclared_threshold_sensitivity
+D	confusion_count			FN	15000					0	19	0	predeclared_threshold_sensitivity
+D	confusion_count			FN	50000					0	6	0	predeclared_threshold_sensitivity
+D	confusion_count			FP	5000					2	62	2	predeclared_threshold_sensitivity
+D	confusion_count			FP	15000					0	19	0	predeclared_threshold_sensitivity
+D	confusion_count			FP	50000					0	6	0	predeclared_threshold_sensitivity
+E	metric_with_wilson95			Sensitivity		total_bases		0.6755924351161198	1.0		19	1.0	same_reads_not_biological_replicates
+E	metric_with_wilson95			Precision		total_bases		0.6755924351161198	1.0		19	1.0	same_reads_not_biological_replicates
+E	metric_with_wilson95			False-positive rate		total_bases		0.0	0.2588329669680317		19	0.0	same_reads_not_biological_replicates
+E	metric_with_wilson95			Sensitivity		depth107		0.6755924351161198	1.0		19	1.0	same_reads_not_biological_replicates
+E	metric_with_wilson95			Precision		depth107		0.6755924351161198	1.0		19	1.0	same_reads_not_biological_replicates
+E	metric_with_wilson95			False-positive rate		depth107		0.0	0.2588329669680317		19	0.0	same_reads_not_biological_replicates
+F	orthogonal_context_fraction		reference_collapse	Author annotation overlap							8	1.0	annotation_is_posthoc;alignment_is_context_not_independent_copy_truth
+F	orthogonal_context_fraction		reference_collapse	Same-chromosome primary alignment coverage							8	0.7075976723930666	annotation_is_posthoc;alignment_is_context_not_independent_copy_truth
+F	orthogonal_context_fraction		other_reference_state	Author annotation overlap							11	0.2727272727272727	annotation_is_posthoc;alignment_is_context_not_independent_copy_truth
+F	orthogonal_context_fraction		other_reference_state	Same-chromosome primary alignment coverage							11	1.0	annotation_is_posthoc;alignment_is_context_not_independent_copy_truth

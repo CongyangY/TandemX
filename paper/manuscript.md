@@ -1,6 +1,6 @@
 # TandemX: read-level evidence and sampling uncertainty for plant satellite repeat analysis
 
-**Evidence-backed development manuscript, 7 September 2026.** Author information
+**Evidence-backed development manuscript, 8 September 2026.** Author information
 is not assigned. This draft contains completed results, with unresolved release
 and biological-validation requirements listed in `submission_readiness.md`.
 It is not a submission-ready manuscript or a claim of universal superiority.
@@ -26,6 +26,14 @@ Low-coverage missingness remained substantial. File-level QC covered 262.731 Gb
 in ten libraries across eight reported plant species. Reference concordance in a 118.497-Mb
 Arabidopsis subset identified 22.19% of input bases with organellar primary
 alignment spans, highlighting a potential total-library normalization bias.
+In a frozen retrospective comparison using complete Ey15-2 HiFi reads and
+donor-matched CLR-Canu and HiFi-Hifiasm assemblies, the 15-kb reference-proxy
+denominator contained eight collapsed and 11 other families; read-based calls
+gave TP/FN/FP/TN=8/0/0/11, with sensitivity and precision Wilson 95% intervals
+of 0.676--1.0. At the predeclared 5-kb threshold, one false negative and two
+false positives remained, and predicted missing-bp Pearson correlation was
+0.589. The newer assembly shares HiFi evidence with the estimator and is not
+fully independent biological truth.
 On three fresh predeclared conditional genomes, a frozen multi-k/depth rule
 improved under-representation sensitivity from 81.48% to 85.60%, false-positive
 rate from 8.64% to 7.41% and precision from 93.40% to 94.55%. The 20×/1%-error/
@@ -489,10 +497,34 @@ comparison of Bionano-scaffolded `9994.CLR_Canu` against
 reserved for sensitivity. Primary source eligibility requires at least 15 kb
 localized in the newer assembly and deliberately does not depend on new/read
 agreement. The analysis preserves every family fate and fixes 5-, 15- and
-50-kb denominator sensitivities. Acquisition and execution remain incomplete,
-so no donor-matched performance result is reported here yet. The newer assembly
-also shares HiFi evidence with TandemX; it is a donor-matched high-quality
-reference proxy rather than absolute independent copy truth (Evidence E21).
+50-kb denominator sensitivities. The complete official 1,605,112,570-byte
+archive passed its published MD5 and local SHA-256 checks before execution
+(Evidence E21).
+
+The frozen run produced 2,133 family rows: 19 were source eligible, 2,114 were
+`not_source_eligible` and none was a `technical_failure`. The newer assembly
+labelled eight of the 19 as reference collapse and 11 as other states; read-
+based calls yielded TP=8, FN=0, FP=0 and TN=11. Sensitivity and precision were
+both 1.0, but their Wilson 95% intervals were 0.675592--1.0 because the positive
+denominator contained only eight families. At 5 kb, the larger 62-family
+denominator exposed TP/FN/FP/TN=19/1/2/40; at 50 kb, only six families remained.
+Predicted missing sequence totalled 840,658 bp versus 973,959 bp observed, with
+mean/median absolute errors 45,551/4,962 bp, Pearson r=0.589321 and Spearman
+rho=0.921213. Thus the perfect primary classification did not imply precise
+missing-sequence magnitude (Figure 12; Evidence E31).
+
+A separate standard-library implementation reproduced every family value,
+fate, confusion count and summary statistic. Replacing total-bases depth with
+the authors' explicit 107x estimate preserved all primary and sensitivity
+classifications; continuous results were mixed, with mean absolute error
+worsening to 49,081 bp, median error improving to 4,695 bp and Pearson r
+improving to 0.603433. A frozen assembly-to-assembly audit provided explanatory
+context: the eight collapse families had median same-chromosome primary
+MAPQ>=20 aligned-query coverage 0.574083, versus 1.0 for the other 11 families,
+and an independent CIGAR parser reproduced all 19 rows. This alignment contrast
+and a post hoc author-annotation association are not independent copy truth.
+The newer assembly shares HiFi evidence with TandemX and remains a donor-
+matched high-quality reference proxy rather than absolute biological truth.
 
 We screened cassava TME204 as a second donor-matched comparison because its CLR
 and HiFi reads were generated from the same DNA sample and the published
@@ -666,8 +698,12 @@ idealized haploid simulations do not reproduce. Consequently, the experimental
 estimator is exposed as an opt-in public mode and has not replaced the controls
 default.
 
-The current biological evidence is incomplete. Additional species and materials
-must be evaluated with documented technical/biological replication, true
+The current biological evidence is incomplete. The single-donor Ey15-2
+reference-proxy experiment is stronger than source matching alone, but its
+newer assembly shares HiFi evidence with the read estimator, its primary
+denominator contains only 19 families and it supplies no biological replication.
+Additional species and materials must be evaluated with documented technical/
+biological replication, true
 genomic depth rather than file size alone, and relevant hard negatives.
 Matched-donor evidence, known repeat-family recovery, collapse validation beyond
 exact simulated arrays and probe/FISH concordance are necessary before biological
@@ -793,6 +829,41 @@ method pairs at every family-condition key, applied the frozen depth rule, and
 recorded that held-out fitting and selection were absent. The same six held-out
 criteria used above were retained. Commit 62892a6 passed hosted Ubuntu/macOS
 checks before seeds 5801–5803 were executed once.
+
+### Retrospective donor-matched assembly reference proxy
+
+The Ey15-2 analysis used the complete public HiFi library `ERR8666125` and the
+paper-supplied Bionano-scaffolded `9994.CLR_Canu` and `9994.HiFi_Hifiasm`
+assemblies. Source identifiers, file sizes and digests were frozen before
+localization. TandemX discovered a single read catalogue, quantified it twice
+using either total read bases divided by the 143.12-Mb genome-size estimate or
+an explicit 107x depth, and localized the same catalogue independently on each
+assembly. The final combined HiFi-Hifiasm plus CLR-Canu assembly was processed
+only as a predeclared sensitivity reference.
+
+For each catalogue family, old- and new-assembly localized bases were summed
+from unioned intervals. Primary source eligibility depended only on at least
+15,000 localized bases in the new assembly. Reference collapse was
+`old_bp/new_bp < 0.6`; the read prediction was `old_bp/read_estimated_bp < 0.6`.
+The evaluator retained every family, including source-ineligible and technical-
+failure states, and repeated the calculation with new-assembly minima of 5,000
+and 50,000 bp. Predicted and observed missing bases were
+`max(read_bp-old_bp,0)` and `max(new_bp-old_bp,0)`. Wilson intervals used the
+family as the sampling unit. A separate Python standard-library verifier
+re-parsed the TSV inputs and recomputed all family rows and summary statistics.
+
+For explanatory assembly context, minimap2 2.31-r1302 aligned the new assembly
+as query to the old assembly target with `-x asm5 -c --eqx` and
+`--secondary=yes -N100`. Query bases covered by CIGAR match/mismatch operations
+were marked per new-assembly array interval; insertions were deliberately
+excluded. Results
+were summarized for any, primary, same-chromosome primary and same-chromosome
+primary MAPQ>=20 alignments. An independent parser reprocessed all PAF CIGAR
+strings and byte-marked each interval. Author centromere, 5S/45S rDNA and
+telomere annotations were evaluated only in a labelled post hoc audit and did
+not change the primary denominator or threshold. A process-tree sampler
+recorded wall time, CPU time, peak aggregate RSS, process count and scratch
+growth for all six public TandemX stages.
 
 ### Comparator execution and scoring
 
@@ -1016,6 +1087,23 @@ editable SVG/PDF/PNG, panel source, complete legend and hashes. This is one
 synthetic validation seed with technical timing repetitions, not biological
 replication or a real-data superiority claim.
 
+**Figure 12. Frozen Ey15-2 donor-matched assembly-collapse reference-proxy
+validation.** A, new- versus old-assembly localized bases for all 19 source-
+eligible families, with equality and the frozen 0.6 ratio threshold. B, read-
+estimated versus old-assembly bases with the corresponding prediction
+threshold. C, predicted missing bases versus observed old-to-new gain; Pearson
+and Spearman values are shown. D, complete TP/FN/FP/TN counts at the
+predeclared 5-, 15- and 50-kb new-assembly denominators. E, primary total-bases
+and explicit-107x normalization on the same reads with Wilson intervals. F,
+post hoc author-annotation overlap and frozen same-chromosome primary alignment
+context. `evidence/ey15_donor_matched_collapse_v1/results` contains both the
+failed `figures_v1` and accepted `figures_v2` editable SVG/PDF/PNG, panel-source
+rows and hashes. The first render failed visual QA because zero and first-decade
+tick labels overlapped; its panel-source table is byte-identical to the accepted
+render. The newer
+assembly shares HiFi evidence with TandemX and is a high-quality reference
+proxy, not absolute or fully independent biological truth.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -1049,7 +1137,7 @@ independent accuracy truth and whole-chromosome context. The inspected editable
 SVG/PDF/PNG, panel source and hashes are in
 `evidence/tidecluster_morex_reference_scaling_v1/figures_v1`.
 
-Additional method, biological validation and resource-scaling multi-panel
+Additional replicated biological validation and isolated resource-scaling
 figures remain required; their absence is tracked in `submission_readiness.md`.
 
 ## Tables and evidence index
@@ -1138,6 +1226,11 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   conflicting archival BioSamples, exact public subread volumes, assembly file
   identity and the target-array reference-ineligibility decision in
   `evidence/b73_ab10_donor_matched_source_audit_v1`.
+- Supplementary Table S28: all Ey15-2 donor-matched family fates, primary and
+  explicit-107x summary statistics, 5/15/50-kb sensitivity denominators,
+  independent verification receipts, old/new alignment context, resource rows
+  and Figure 12 panel source in
+  `evidence/ey15_donor_matched_collapse_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1163,7 +1256,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `indel_detector_gap_audit_v1`; E28:
 `tme204_donor_matched_source_audit_v1`; E29:
 `tomato_heinz1706_source_audit_v1`; E30:
-`b73_ab10_donor_matched_source_audit_v1`.
+`b73_ab10_donor_matched_source_audit_v1`; E31:
+`ey15_donor_matched_collapse_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

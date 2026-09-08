@@ -1,0 +1,38 @@
+command: "tandemx locate"
+subcommand: "locate"
+version: "0.1.0"
+timestamp_utc: "2026-09-08T02:31:09.294228+00:00"
+cwd: "/Users/ycy/Codex/Sofw/TandemX"
+argv:
+  - "locate"
+  - "--assembly"
+  - "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/new_assembly.fa"
+  - "--catalog"
+  - "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomers.fa"
+  - "--k"
+  - "21"
+  - "--identity-model"
+  - "iid_base"
+  - "--min-identity"
+  - "0.9"
+  - "--window-size"
+  - "100000"
+  - "--step-size"
+  - "10000"
+  - "--outdir"
+  - "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_new"
+python_version: "3.11.15"
+platform: "macOS-14.4.1-arm64-arm-64bit"
+status: "locate_mvp_completed"
+parameters:
+  assembly: "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/new_assembly.fa"
+  catalogue: "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomers.fa"
+  command: "locate"
+  copy_number: null
+  identity_model: "iid_base"
+  k: 21
+  min_identity: 0.9
+  monomers: null
+  outdir: "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_new"
+  step_size: 10000
+  window_size: 100000

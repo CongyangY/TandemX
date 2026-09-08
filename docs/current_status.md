@@ -10,27 +10,48 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 This section is the restart point for a new Codex window. Verify the state below
 before continuing and do not stage the untracked `.codex/` directory.
 
-- **A Tier A Ey15-2 donor-matched collapse candidate is now preregistered.**
-  Rabanal et al. explicitly compare CLR and HiFi assemblies of the same Ey15-2
-  sample (9994/CS76399), correcting the earlier audit that considered Col-0 but
-  missed this same-sample contrast. The primary pair holds the Bionano
-  scaffolding context constant: `9994.CLR_Canu` versus `9994.HiFi_Hifiasm`;
-  the final HiFi-Hifiasm+CLR-Canu assembly is sensitivity-only. The source and
-  complete ERR8666125 read library are already fixed; the 1.605-GB official
-  Zenodo bundle is still being acquired and must pass its published byte count
-  and MD5 before use. The frozen v1 rules are in
-  `benchmarks/configs/ey15_donor_matched_collapse_v1.json`; do not change them
-  after inspecting old/new localization results.
-- **The donor-matched evaluator is frozen before result inspection.** Primary
-  source eligibility depends only on at least 15 kb localized in the newer
-  assembly, not on new/read agreement. It preserves all family fates, separates
-  `not_source_eligible` from `technical_failure`, reports predeclared 5/15/50-kb
-  denominator sensitivities and computes confusion, Wilson intervals, balanced
-  accuracy, MCC and missing-bp agreement. Five focused tests and the full suite
-  pass: **566 tests in 64.12 s**. This is a design/software checkpoint, not a
-  completed biological result. The newer assembly shares HiFi evidence with
-  the predictor and remains a donor-matched high-quality reference proxy rather
-  than absolute independent truth.
+- **The frozen Ey15-2 Tier A donor-matched experiment is complete and
+  archived.** The complete official 1,605,112,570-byte Zenodo bundle passed its
+  published MD5 and a local SHA-256 check. The primary pair holds donor and
+  Bionano scaffolding context constant: `9994.CLR_Canu` versus
+  `9994.HiFi_Hifiasm`; the final HiFi-Hifiasm plus CLR-Canu assembly remains
+  sensitivity-only. All rules in
+  `benchmarks/configs/ey15_donor_matched_collapse_v1.json` were frozen before
+  localization results were inspected.
+- **The primary 15-kb analysis classified all eight reference-collapse
+  families correctly and all 11 other families correctly.** The full
+  2,133-family catalogue retains 19 `eligible`, 2,114 `not_source_eligible` and
+  zero `technical_failure` fates. The primary confusion counts are TP=8, FN=0,
+  FP=0 and TN=11; sensitivity and precision are both 1.0, with identical wide
+  Wilson 95% intervals of 0.675592--1.0. This small single-donor denominator
+  must not be presented as a population estimate. The predeclared 5-kb analysis
+  exposes one FN and two FP among 62 families; the 50-kb denominator contains
+  only six families. Predicted versus observed missing sequence has Pearson
+  r=0.589321, Spearman rho=0.921213 and mean absolute error 45,551 bp, so perfect
+  classification does not imply precise missing-bp magnitude.
+- **Independent and sensitivity checks passed without result-dependent
+  retuning.** A separately implemented standard-library verifier reproduced
+  every family value, fate and summary statistic. Explicit 107x normalization
+  left all classification outcomes unchanged but changed continuous agreement
+  in mixed directions: mean absolute error worsened to 49,081 bp, median error
+  improved to 4,695 bp and Pearson r improved to 0.603433. In the frozen old/new
+  assembly alignment audit, the eight collapse families had median
+  same-chromosome primary MAPQ>=20 coverage 0.574083 versus 1.0 for the 11 other
+  families; an independent CIGAR parser reproduced all 19 rows. This is
+  explanatory assembly context, not independent copy-number truth.
+- **The compact result package is complete.** Six profiled public stages include
+  discovery (989.19 s; 1,830.06 MiB peak process-tree RSS), two full-read
+  quantifications (9,494.86/9,622.67 s; 266.48/337.61 MiB), and three assembly
+  localizations (91.70--99.43 s; 198.47--454.73 MiB). The first figure render is
+  retained after failing visual QA because zero and first-decade tick labels
+  overlapped. `figures_v2` passed direct-PNG and independent PDF-render checks;
+  its SVG has 102 editable text nodes and zero raster nodes, and its panel-source
+  table is byte-identical to v1. The 56-file, 17.24-MB hash-checked archive is
+  `paper/evidence/ey15_donor_matched_collapse_v1`. The newer assembly shares
+  HiFi evidence with the predictor and remains a donor-matched high-quality
+  reference proxy, not absolute or fully independent biological truth. After
+  the archive and figure-gate changes, the complete source suite passes **616
+  tests in 66.44 s**; compileall and `git diff --check` also pass.
 
 - **A second donor-matched candidate was stopped at source enrollment rather
   than converted into a favourable benchmark.** The cassava TME204 study used
@@ -303,7 +324,10 @@ before continuing and do not stage the untracked `.codex/` directory.
   metadata supports accession, platform and cultivar/material matching only; it
   does not establish identical DNA extraction, individual plant, stock or
   BioSample between historical and newer assemblies. All five manifest entries
-  were independently rehashed. Donor-matched collapse truth remains unavailable.
+  were independently rehashed. This initial screen did not establish donor-
+  matched collapse truth; the later paper-level Ey15-2 enrollment and completed
+  E31 reference-proxy experiment at the top of this document supersede that
+  earlier availability statement.
 - **Verification state and exact next actions.** Pre-cascade commit `aabaa29`
   passed all 522 Python tests, compileall, diff check, CLI help, 72 local
   Markdown links and both hosted Ubuntu/macOS workflows. At that checkpoint

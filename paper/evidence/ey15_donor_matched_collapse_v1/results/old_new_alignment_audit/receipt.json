@@ -1,0 +1,22 @@
+{
+  "boundary": "Post-primary orthogonal assembly-alignment context. Query segments represented only as insertions relative to the old assembly are excluded from aligned coverage. Repetitive multi-mapping, assembly rearrangement, unresolved gaps and mapper heuristics prevent this from being independent copy-number truth. No v1 prediction threshold or family catalogue may change from this audit.",
+  "complete": true,
+  "exit_code": 0,
+  "paf": "old_new.paf",
+  "paf_bytes": 1632768,
+  "paf_sha256": "37b351649632340b681ca721afa5af57f592c373607cf994560d948fd27714ea",
+  "resource": {
+    "exit_code": 0,
+    "peak_process_count": 1,
+    "peak_process_tree_rss_mib": "4400.265625",
+    "peak_scratch_bytes": 1634660,
+    "sample_count": 156,
+    "stage": "old_new_minimap2",
+    "stderr_log": "old_new_minimap2.stderr.log",
+    "stdout_log": "old_new.paf",
+    "system_cpu_seconds": "3.786947",
+    "user_cpu_seconds": "95.153783",
+    "wall_seconds": "36.102679"
+  },
+  "schema_version": 1
+}

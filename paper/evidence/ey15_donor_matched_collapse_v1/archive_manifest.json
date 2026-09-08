@@ -1,0 +1,342 @@
+{
+  "complete": true,
+  "files": [
+    {
+      "bytes": 4067,
+      "file": "preregistration.json",
+      "sha256": "605562c404e6576522b4731e456efe06be9d734e6bfc3d4082358d733552f8e6",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/ey15_donor_matched_collapse_v1.json"
+    },
+    {
+      "bytes": 2762,
+      "file": "read_stage_manifest.json",
+      "sha256": "827470ec09cae6626ba3cf3f2b69c40e36bc8ff7c5430bd17c37c6c943061474",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/ey15_donor_matched_read_stages_v1.json"
+    },
+    {
+      "bytes": 2890,
+      "file": "assembly_stage_manifest.json",
+      "sha256": "f9d54a4e14f5dae03f8c70825309f0222be6baeae04153c8225b804e21504381",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/ey15_donor_matched_assembly_stages_v1.json"
+    },
+    {
+      "bytes": 8005,
+      "file": "assembly_enrollment_receipt.json",
+      "sha256": "3dc964b574b02a2d5f6665c705a9cb84361e8a4e599186e5c547284c9fcb4b74",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/enrollment_receipt.json"
+    },
+    {
+      "bytes": 217,
+      "file": "results/assembly_stage_resources/receipt.json",
+      "sha256": "3dd60d4b5b1564eff0728fb219d7de42c5b30cd3e04ce90d4c21e45ccafb2764",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/assembly_stage_resources/receipt.json"
+    },
+    {
+      "bytes": 630,
+      "file": "results/assembly_stage_resources/stages.tsv",
+      "sha256": "9d1e06b9a5253112329fba64d156255ad8504bf975bdc541625cfdd2f01c436f",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/assembly_stage_resources/stages.tsv"
+    },
+    {
+      "bytes": 217,
+      "file": "results/read_stage_resources/receipt.json",
+      "sha256": "3dd60d4b5b1564eff0728fb219d7de42c5b30cd3e04ce90d4c21e45ccafb2764",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/read_stage_resources/receipt.json"
+    },
+    {
+      "bytes": 592,
+      "file": "results/read_stage_resources/stages.tsv",
+      "sha256": "fd18bd12c73e03a5200b345865fd6c7cc496d3ccebfddd18d3ec8c7e334be7e1",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/read_stage_resources/stages.tsv"
+    },
+    {
+      "bytes": 969,
+      "file": "results/run/discover/discovery_summary.json",
+      "sha256": "3366b50f76fa9d711925dcb579b5c11978f4f0619a1c793b8fdb01a753ff1725",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/discovery_summary.json"
+    },
+    {
+      "bytes": 459,
+      "file": "results/run/discover/family_audit_summary.json",
+      "sha256": "9da7be3b4bf3cd5f6d4fc0e7fb573ccb63988d4360cf1b25b3f6417889f3689e",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/family_audit_summary.json"
+    },
+    {
+      "bytes": 1899,
+      "file": "results/run/discover/run_config.yaml",
+      "sha256": "5fd050cdb98a0ad5908d86514a5405315b63018d5f1f9a2b227a8e9ef4b50d34",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/run_config.yaml"
+    },
+    {
+      "bytes": 468673,
+      "file": "results/run/discover/monomers.fa",
+      "sha256": "277d376aa8961673ca84dd4603d5c31b057c805cfe26b642ab350b63f8556aeb",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomers.fa"
+    },
+    {
+      "bytes": 533348,
+      "file": "results/run/discover/families.tsv",
+      "sha256": "9f21b61df6a39806b65510493e1c5e8eeeae43bb32905a389c04bc1fc1560e4c",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/families.tsv"
+    },
+    {
+      "bytes": 7903697,
+      "file": "results/run/discover/monomer_membership.tsv",
+      "sha256": "de114ba77862dcbf87851046e1f2029593c134b488746e97222a7928bc1bb106",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomer_membership.tsv"
+    },
+    {
+      "bytes": 1357,
+      "file": "results/run/quantify_primary/run_config.yaml",
+      "sha256": "273e1ae46d3e7078fde16f9ae08dcee78ac1f8e7d3018a7bc0d663b6b63bc7d1",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/quantify_primary/run_config.yaml"
+    },
+    {
+      "bytes": 774688,
+      "file": "results/run/quantify_primary/copy_number.tsv",
+      "sha256": "02f2860c58c36a1c5f27b988f7e477f9af206a2e333ea215808b841efd639437",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/quantify_primary/copy_number.tsv"
+    },
+    {
+      "bytes": 1416,
+      "file": "results/run/quantify_depth107_sensitivity/run_config.yaml",
+      "sha256": "271acb75ca289fd5b9bf4f5070e205352a7b4b114c5c4fefb87d22583d36c6c6",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/quantify_depth107_sensitivity/run_config.yaml"
+    },
+    {
+      "bytes": 606421,
+      "file": "results/run/quantify_depth107_sensitivity/copy_number.tsv",
+      "sha256": "be4ffc09811a3d93997bd208423936e11b395eda5588be215252c274807f7bbf",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/quantify_depth107_sensitivity/copy_number.tsv"
+    },
+    {
+      "bytes": 1271,
+      "file": "results/run/locate_old/run_config.yaml",
+      "sha256": "2c03c0f64d70506a0ecbc44ae7c93deb137ba52f600bcd8d1d0f1545a01e5d64",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_old/run_config.yaml"
+    },
+    {
+      "bytes": 949488,
+      "file": "results/run/locate_old/arrays.bed",
+      "sha256": "9c080867273b58e4f384b05cbde0fa0c52f6cbab56089e6842eba236985c6219",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_old/arrays.bed"
+    },
+    {
+      "bytes": 1271,
+      "file": "results/run/locate_new/run_config.yaml",
+      "sha256": "2ba520e62793b3b02dc2fc4fef1f39a333bc3d5a0dc7c65c32b4b7fe28c1a2b1",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_new/run_config.yaml"
+    },
+    {
+      "bytes": 1129480,
+      "file": "results/run/locate_new/arrays.bed",
+      "sha256": "1f0a4c5b57206dfa46bcc69c2f5aecbf03735aecdd16a1f24e6a0762c6a1352a",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_new/arrays.bed"
+    },
+    {
+      "bytes": 1303,
+      "file": "results/run/locate_sensitivity/run_config.yaml",
+      "sha256": "224ba6333fc3820c150d8d3d0063936d8fa7f7b66b19c6ffde261ca4f1d6f4a4",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_sensitivity/run_config.yaml"
+    },
+    {
+      "bytes": 1127684,
+      "file": "results/run/locate_sensitivity/arrays.bed",
+      "sha256": "873a8575f453ed4fc4f06eab863cf3c06b85a6856baa254cce81463bd6e82952",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_sensitivity/arrays.bed"
+    },
+    {
+      "bytes": 1638,
+      "file": "results/evaluation_primary_total_bases/summary.json",
+      "sha256": "45d3a74e503356550ed0763dfbe5aad1b47dd80057933cb7affaa94a16b20e2c",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/evaluation_primary_total_bases/summary.json"
+    },
+    {
+      "bytes": 379987,
+      "file": "results/evaluation_primary_total_bases/family_metrics.tsv",
+      "sha256": "985943042a79f2ef8c6e6793b13304847a0f9e836e3ad7425a9f75774df1b5b1",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/evaluation_primary_total_bases/family_metrics.tsv"
+    },
+    {
+      "bytes": 1978,
+      "file": "results/evaluation_primary_total_bases/independent_verification.json",
+      "sha256": "5c51665b05ef24cffe5351c18f57a27dc7c9bda3f686d0f589ebb8e502824666",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/evaluation_primary_total_bases/independent_verification.json"
+    },
+    {
+      "bytes": 1656,
+      "file": "results/evaluation_depth107_sensitivity/summary.json",
+      "sha256": "6eb2d8fb2b980588c9316e0c5ed004b18754aac52d6d3fa0d9e127d61d0fe930",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/evaluation_depth107_sensitivity/summary.json"
+    },
+    {
+      "bytes": 382185,
+      "file": "results/evaluation_depth107_sensitivity/family_metrics.tsv",
+      "sha256": "e0ee3818b3b264de0c24bbc35d28401f71cadeb0b0c6c822b59b41abfbf29c15",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/evaluation_depth107_sensitivity/family_metrics.tsv"
+    },
+    {
+      "bytes": 1993,
+      "file": "results/evaluation_depth107_sensitivity/independent_verification.json",
+      "sha256": "ae00f02152fb7200856b80792f966f2f7c309709db0bcdb1311a06f9808c2ff7",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/evaluation_depth107_sensitivity/independent_verification.json"
+    },
+    {
+      "bytes": 678,
+      "file": "results/author_annotation_audit/summary.json",
+      "sha256": "23a8b324937a717ac5344ab0da887c3b14a28a1958f8540394d8b7097b8c88bf",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/author_annotation_audit/summary.json"
+    },
+    {
+      "bytes": 286,
+      "file": "results/author_annotation_audit/annotation_class_summary.tsv",
+      "sha256": "4d83974ad89f98540bf3d9078703a30e31e0994bd77e683dc3f66d101b3329ec",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/author_annotation_audit/annotation_class_summary.tsv"
+    },
+    {
+      "bytes": 124481,
+      "file": "results/author_annotation_audit/family_annotation_summary.tsv",
+      "sha256": "31a2372c2330121bba4233108cf983bc5e197376a35703a2d43aa9fcd0756d12",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/author_annotation_audit/family_annotation_summary.tsv"
+    },
+    {
+      "bytes": 886,
+      "file": "results/author_annotation_audit/independent_raster_validation.json",
+      "sha256": "2f7d410ca6886a1cfd163c33be407540ebfe7f2a4a77ccdae9b2d06fa661c969",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/author_annotation_audit/independent_raster_validation.json"
+    },
+    {
+      "bytes": 1749,
+      "file": "results/reference_annotation_context_posthoc_v2/summary.json",
+      "sha256": "79005ca1290cc938b0579b742e7790f7a02b32118641066be71de183d1cb7c5a",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/reference_annotation_context_posthoc_v2/summary.json"
+    },
+    {
+      "bytes": 1686,
+      "file": "results/reference_annotation_context_posthoc_v2/reference_annotation_rows.tsv",
+      "sha256": "9d8f0932043251c4574293515a377d423fef1ae20aa76a8e82831741c7bfb831",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/reference_annotation_context_posthoc_v2/reference_annotation_rows.tsv"
+    },
+    {
+      "bytes": 990,
+      "file": "results/old_new_alignment_audit/environment.json",
+      "sha256": "305e27e089e0e41af859cfb3ffcc603de8a61c102836d8c04564c9aa9f237f46",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_audit/environment.json"
+    },
+    {
+      "bytes": 1632768,
+      "file": "results/old_new_alignment_audit/old_new.paf",
+      "sha256": "37b351649632340b681ca721afa5af57f592c373607cf994560d948fd27714ea",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_audit/old_new.paf"
+    },
+    {
+      "bytes": 994,
+      "file": "results/old_new_alignment_audit/receipt.json",
+      "sha256": "581b3bf0249f15321e8558ece67d6a08d4086377fec2e516272e927ae3b01ca3",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_audit/receipt.json"
+    },
+    {
+      "bytes": 280,
+      "file": "results/old_new_alignment_audit/resources/stages.tsv",
+      "sha256": "98703da7759f1ff4d9df7ef09c885aab1b05ca044b4d412e1cb77af2f0fda0b4",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_audit/resources/stages.tsv"
+    },
+    {
+      "bytes": 2304,
+      "file": "results/old_new_alignment_context/summary.json",
+      "sha256": "be959173f752f4451eca4d2d717f16264f007be946aedd728d4ec0ddf1865122",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_context/summary.json"
+    },
+    {
+      "bytes": 2592,
+      "file": "results/old_new_alignment_context/family_alignment_context.tsv",
+      "sha256": "b81ef6b7ac2e4c6bfb63193ea7ebc5eb1a8f61ee8f5940e8466eece9e578db92",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_context/family_alignment_context.tsv"
+    },
+    {
+      "bytes": 1402,
+      "file": "results/old_new_alignment_context/independent_verification.json",
+      "sha256": "94bfd6b36676d0a164b0238b0f10a2ff10046be2de20da565be1ee82fe0230f9",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_context/independent_verification.json"
+    },
+    {
+      "bytes": 89210,
+      "file": "results/figures_v1/ey15_donor_validation.svg",
+      "sha256": "49a32f4d31a32d272d8bee3f90266328d6071894b323745278008bff7c0026b4",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v1/ey15_donor_validation.svg"
+    },
+    {
+      "bytes": 35876,
+      "file": "results/figures_v1/ey15_donor_validation.pdf",
+      "sha256": "d505e9fee932661e3e24053c9b57b099f895fb1abc11ea1c8ebd422bc3574840",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v1/ey15_donor_validation.pdf"
+    },
+    {
+      "bytes": 446619,
+      "file": "results/figures_v1/ey15_donor_validation.png",
+      "sha256": "24a21701bdd7dd992dfdaa61166adb58ba6345fefbeddc307d50ded45703892a",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v1/ey15_donor_validation.png"
+    },
+    {
+      "bytes": 6409,
+      "file": "results/figures_v1/panel_source.tsv",
+      "sha256": "529159cc5daba4d96467611f0b5c610b1e8d84c224ca9e8d7ab984360d0ed1e0",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v1/panel_source.tsv"
+    },
+    {
+      "bytes": 4102,
+      "file": "results/figures_v1/figure_provenance.json",
+      "sha256": "a013f18000ae5aa1600f65e58d918e770c458b68a815e272f8ee036765c85fa0",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v1/figure_provenance.json"
+    },
+    {
+      "bytes": 89225,
+      "file": "results/figures_v2/ey15_donor_validation.svg",
+      "sha256": "08c2f8624144890787cbd67a2f2c4493cd2c5c080b14e89f64fb28c51aff01cb",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v2/ey15_donor_validation.svg"
+    },
+    {
+      "bytes": 35850,
+      "file": "results/figures_v2/ey15_donor_validation.pdf",
+      "sha256": "e777bc6110f3a80f6915d4a84c3b7f73aaa8877213a75023f42fc2a89de5d4af",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v2/ey15_donor_validation.pdf"
+    },
+    {
+      "bytes": 445838,
+      "file": "results/figures_v2/ey15_donor_validation.png",
+      "sha256": "a1da421b4770945df2a8e8a0c280a285c0f1422d474ee2007987025dc426d587",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v2/ey15_donor_validation.png"
+    },
+    {
+      "bytes": 6409,
+      "file": "results/figures_v2/panel_source.tsv",
+      "sha256": "529159cc5daba4d96467611f0b5c610b1e8d84c224ca9e8d7ab984360d0ed1e0",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v2/panel_source.tsv"
+    },
+    {
+      "bytes": 4102,
+      "file": "results/figures_v2/figure_provenance.json",
+      "sha256": "ac5a8fdeb52f6b0c38058c2b16e3adc820b68cdb3e9df091b1732c9741534835",
+      "source": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/figures_v2/figure_provenance.json"
+    },
+    {
+      "bytes": 1210,
+      "file": "resource_summary.tsv",
+      "sha256": "2374cce531f1822feb1611c749f52bb7baabc32423278a9462083dfd813b120a",
+      "source": "generated_by_archive_ey15_donor_matched_collapse"
+    },
+    {
+      "bytes": 13611,
+      "file": "headline_summary.json",
+      "sha256": "2a74514021514a868266085cf359e36483f0e0c3ea9fe749a74d5c22080a7bb3",
+      "source": "generated_by_archive_ey15_donor_matched_collapse"
+    },
+    {
+      "bytes": 913,
+      "file": "README.md",
+      "sha256": "454f41b2e3273497b25d27392074e534d53fc560f4dcafc1c6b9e11fe793e679",
+      "source": "generated_by_archive_ey15_donor_matched_collapse"
+    }
+  ],
+  "schema_version": 1
+}

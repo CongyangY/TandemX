@@ -1,0 +1,75 @@
+{
+  "all_family_rows": 2133,
+  "balanced_accuracy": 1.0,
+  "config": {
+    "collapse_threshold": 0.6,
+    "min_new_bp_sensitivity": [
+      5000,
+      15000,
+      50000
+    ],
+    "overexpansion_threshold": 1.5,
+    "primary_min_new_bp": 15000
+  },
+  "confusion": {
+    "FN": 0,
+    "FP": 0,
+    "TN": 11,
+    "TP": 8
+  },
+  "eligibility_rule": "new_assembly_bp_at_least_primary_min_new_bp_independent_of_read_estimate",
+  "eligible_family_rows": 19,
+  "false_positive_rate": 0.0,
+  "false_positive_rate_wilson95": [
+    0.0,
+    0.2588329669680317
+  ],
+  "interpretation": "donor_matched_retrospective_reference_proxy_not_absolute_biological_truth",
+  "matthews_correlation": 1.0,
+  "min_new_bp_sensitivity": [
+    {
+      "FN": 1,
+      "FP": 2,
+      "TN": 40,
+      "TP": 19,
+      "families": 62,
+      "min_new_bp": 5000
+    },
+    {
+      "FN": 0,
+      "FP": 0,
+      "TN": 11,
+      "TP": 8,
+      "families": 19,
+      "min_new_bp": 15000
+    },
+    {
+      "FN": 0,
+      "FP": 0,
+      "TN": 4,
+      "TP": 2,
+      "families": 6,
+      "min_new_bp": 50000
+    }
+  ],
+  "missing_bp_mean_absolute_error": 49081.41717894737,
+  "missing_bp_median_absolute_error": 4694.929800000002,
+  "missing_bp_pearson": 0.6034333847062922,
+  "missing_bp_spearman": 0.9212128254799333,
+  "not_source_eligible_rows": 2114,
+  "observed_gain_bp_total": 973959.0,
+  "precision": 1.0,
+  "precision_wilson95": [
+    0.6755924351161198,
+    1.0
+  ],
+  "predicted_missing_bp_total": 1036339.2625999999,
+  "schema_version": 1,
+  "sensitivity": 1.0,
+  "sensitivity_wilson95": [
+    0.6755924351161198,
+    1.0
+  ],
+  "specificity": 1.0,
+  "technical_failure_rows": 0
+}

@@ -1,0 +1,271 @@
+{
+  "bundle": {
+    "bytes": 1605112570,
+    "md5": "fd3b9bd2f12195aa036a16d2b25d660a",
+    "path": "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/SupportingData_A.thaliana_CLR_vs_HiFi.zip",
+    "sha256": "80c30347a9c306218995c3c894932bddcf619ee2b59665ed3a0d20470752b00a",
+    "zip_integrity": "passed_by_complete_member_read"
+  },
+  "complete": true,
+  "evidence_boundary": "donor_matched_high_quality_reference_proxy;new_assembly_shares_HiFi_evidence;not_absolute_independent_biological_copy_truth",
+  "fasta_qc": {
+    "new": {
+      "base_counts": {
+        "A": 43359074,
+        "C": 24763854,
+        "G": 24761496,
+        "N": 21299,
+        "T": 43256750
+      },
+      "biological_qc": "file content only; assembly completeness and satellite copy truth not established",
+      "complete": true,
+      "contig_count": 5,
+      "contigs": [
+        {
+          "base_counts": {
+            "A": 11097174,
+            "C": 6120545,
+            "G": 6286586,
+            "T": 10859576
+          },
+          "contig": "Chr1",
+          "length_bp": 34363881
+        },
+        {
+          "base_counts": {
+            "A": 6990960,
+            "C": 4070085,
+            "G": 3972134,
+            "N": 2442,
+            "T": 7072718
+          },
+          "contig": "Chr2",
+          "length_bp": 22108339
+        },
+        {
+          "base_counts": {
+            "A": 8499154,
+            "C": 4959862,
+            "G": 4867353,
+            "N": 7446,
+            "T": 8547827
+          },
+          "contig": "Chr3",
+          "length_bp": 26881642
+        },
+        {
+          "base_counts": {
+            "A": 6955240,
+            "C": 4123435,
+            "G": 3989382,
+            "N": 7927,
+            "T": 7056538
+          },
+          "contig": "Chr4",
+          "length_bp": 22132522
+        },
+        {
+          "base_counts": {
+            "A": 9816546,
+            "C": 5489927,
+            "G": 5646041,
+            "N": 3484,
+            "T": 9720091
+          },
+          "contig": "Chr5",
+          "length_bp": 30676089
+        }
+      ],
+      "input_sha256": "48d67e8d26c5d9ebc1fbd772e877e2f957437b5a3b27bbdde4a1d3c77923208c",
+      "n_bases": 21299,
+      "other_ambiguous_bases": 0,
+      "total_bases": 136162473
+    },
+    "old": {
+      "base_counts": {
+        "A": 38479568,
+        "C": 21713784,
+        "G": 21641119,
+        "N": 948870,
+        "T": 38432055
+      },
+      "biological_qc": "file content only; assembly completeness and satellite copy truth not established",
+      "complete": true,
+      "contig_count": 5,
+      "contigs": [
+        {
+          "base_counts": {
+            "A": 9774480,
+            "C": 5494395,
+            "G": 5438503,
+            "N": 288784,
+            "T": 9745271
+          },
+          "contig": "Chr1",
+          "length_bp": 30741433
+        },
+        {
+          "base_counts": {
+            "A": 6394265,
+            "C": 3580894,
+            "G": 3567482,
+            "N": 74647,
+            "T": 6405595
+          },
+          "contig": "Chr2",
+          "length_bp": 20022883
+        },
+        {
+          "base_counts": {
+            "A": 7544222,
+            "C": 4313133,
+            "G": 4306218,
+            "N": 227270,
+            "T": 7517757
+          },
+          "contig": "Chr3",
+          "length_bp": 23908600
+        },
+        {
+          "base_counts": {
+            "A": 6072800,
+            "C": 3453015,
+            "G": 3430451,
+            "N": 200,
+            "T": 6042298
+          },
+          "contig": "Chr4",
+          "length_bp": 18998764
+        },
+        {
+          "base_counts": {
+            "A": 8693801,
+            "C": 4872347,
+            "G": 4898465,
+            "N": 357969,
+            "T": 8721134
+          },
+          "contig": "Chr5",
+          "length_bp": 27543716
+        }
+      ],
+      "input_sha256": "d7a094865701433e2ffd726495f61cc943e80bfa1ff30a7a38990dae0c7224b3",
+      "n_bases": 948870,
+      "other_ambiguous_bases": 0,
+      "total_bases": 121215396
+    },
+    "sensitivity": {
+      "base_counts": {
+        "A": 43356477,
+        "C": 24760924,
+        "G": 24760195,
+        "N": 100,
+        "T": 43257675
+      },
+      "biological_qc": "file content only; assembly completeness and satellite copy truth not established",
+      "complete": true,
+      "contig_count": 5,
+      "contigs": [
+        {
+          "base_counts": {
+            "A": 11097174,
+            "C": 6120545,
+            "G": 6286586,
+            "T": 10859576
+          },
+          "contig": "Chr1",
+          "length_bp": 34363881
+        },
+        {
+          "base_counts": {
+            "A": 6992120,
+            "C": 4069406,
+            "G": 3972466,
+            "T": 7073394
+          },
+          "contig": "Chr2",
+          "length_bp": 22107386
+        },
+        {
+          "base_counts": {
+            "A": 8499220,
+            "C": 4960099,
+            "G": 4867377,
+            "N": 100,
+            "T": 8548077
+          },
+          "contig": "Chr3",
+          "length_bp": 26874873
+        },
+        {
+          "base_counts": {
+            "A": 6955849,
+            "C": 4124712,
+            "G": 3989862,
+            "T": 7059106
+          },
+          "contig": "Chr4",
+          "length_bp": 22129529
+        },
+        {
+          "base_counts": {
+            "A": 9812114,
+            "C": 5486162,
+            "G": 5643904,
+            "T": 9717522
+          },
+          "contig": "Chr5",
+          "length_bp": 30659702
+        }
+      ],
+      "input_sha256": "943cd2543f1e583015a025fc7da86ea8a066f7da9e29520671548d83bdda7e11",
+      "n_bases": 100,
+      "other_ambiguous_bases": 0,
+      "total_bases": 136135371
+    }
+  },
+  "files": [
+    {
+      "archive_member": "SupportingData_A.thaliana_CLR_vs_HiFi/Bionano_optical_maps_based_assemblies/9994.CLR_Canu/CLR_Canu-Arrow.bionano.ragtag.fa",
+      "bytes": 121215431,
+      "file": "old_assembly.fa",
+      "sha256": "d7a094865701433e2ffd726495f61cc943e80bfa1ff30a7a38990dae0c7224b3"
+    },
+    {
+      "archive_member": "SupportingData_A.thaliana_CLR_vs_HiFi/Bionano_optical_maps_based_assemblies/9994.CLR_Canu/CLR_Canu-Arrow.bionano.ragtag.fa.fai",
+      "bytes": 198,
+      "file": "old_assembly.fa.fai",
+      "sha256": "1789116a541a9d23d756404d04703dfbeebd4168cf0ac93a93903a13561a99f9"
+    },
+    {
+      "archive_member": "SupportingData_A.thaliana_CLR_vs_HiFi/Bionano_optical_maps_based_assemblies/9994.HiFi_Hifiasm/HiFi_Hifiasm.bionano.ragtag.fa",
+      "bytes": 136162508,
+      "file": "new_assembly.fa",
+      "sha256": "48d67e8d26c5d9ebc1fbd772e877e2f957437b5a3b27bbdde4a1d3c77923208c"
+    },
+    {
+      "archive_member": "SupportingData_A.thaliana_CLR_vs_HiFi/Bionano_optical_maps_based_assemblies/9994.HiFi_Hifiasm/HiFi_Hifiasm.bionano.ragtag.fa.fai",
+      "bytes": 199,
+      "file": "new_assembly.fa.fai",
+      "sha256": "03484de2331fb497b6135b3962db35eded027310a181ce6c799c24b8438722fa"
+    },
+    {
+      "archive_member": "SupportingData_A.thaliana_CLR_vs_HiFi/Ey15-2_HiFi-Hifiasm_plus_CLR-Canu_assembly/Hifiasm_Canu-Arrow_2.patch.scaffold.Chr.fa",
+      "bytes": 138404327,
+      "file": "sensitivity_assembly.fa",
+      "sha256": "943cd2543f1e583015a025fc7da86ea8a066f7da9e29520671548d83bdda7e11"
+    },
+    {
+      "archive_member": "SupportingData_A.thaliana_CLR_vs_HiFi/Ey15-2_HiFi-Hifiasm_plus_CLR-Canu_assembly/9994.Hifiasm_Canu-Arrow.patch.Repeats_merged.gff",
+      "bytes": 1555692,
+      "file": "sensitivity_repeat_annotation.gff",
+      "sha256": "1455b52a798a9896024973a0786f43578f979232ea6363431d08fb70d655ad8f"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "same_sample_Ey15-2_CLR_Canu_vs_HiFi_Hifiasm_reference_proxy",
+  "script_sha256": "ace9bad49d215ea6bde85ef55e39fa7cbed650e2a1e5a89d77bedb1c9cc74690",
+  "source_doi": "10.5281/zenodo.7326462",
+  "source_paper_doi": "10.1093/nar/gkac1115",
+  "source_url": "https://zenodo.org/records/7326462/files/SupportingData_A.thaliana_CLR_vs_HiFi.zip?download=1"
+}

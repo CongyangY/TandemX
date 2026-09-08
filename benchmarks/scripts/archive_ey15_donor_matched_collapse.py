@@ -46,6 +46,7 @@ RESULT_FILES = (
     "reference_annotation_context_posthoc_v2/summary.json",
     "reference_annotation_context_posthoc_v2/reference_annotation_rows.tsv",
     "old_new_alignment_audit/environment.json",
+    "old_new_alignment_audit/old_new.paf",
     "old_new_alignment_audit/receipt.json",
     "old_new_alignment_audit/resources/stages.tsv",
     "old_new_alignment_context/summary.json",
@@ -56,6 +57,11 @@ RESULT_FILES = (
     "figures_v1/ey15_donor_validation.png",
     "figures_v1/panel_source.tsv",
     "figures_v1/figure_provenance.json",
+    "figures_v2/ey15_donor_validation.svg",
+    "figures_v2/ey15_donor_validation.pdf",
+    "figures_v2/ey15_donor_validation.png",
+    "figures_v2/panel_source.tsv",
+    "figures_v2/figure_provenance.json",
 )
 
 
@@ -155,7 +161,7 @@ def validate_context(
 
 
 def validate_figure(source: Path) -> dict[str, Any]:
-    directory = source / "figures_v1"
+    directory = source / "figures_v2"
     provenance = load_json(directory / "figure_provenance.json")
     if provenance.get("complete") is not True:
         raise ValueError("Ey15 validation figure is incomplete")
@@ -175,6 +181,31 @@ def validate_figure(source: Path) -> dict[str, Any]:
             raise ValueError(f"figure output byte count changed: {path}")
         if digest_file(path) != record.get("sha256"):
             raise ValueError(f"figure output hash changed: {path}")
+    failed_directory = source / "figures_v1"
+    failed_provenance = load_json(failed_directory / "figure_provenance.json")
+    for name, record in failed_provenance.get("outputs", {}).items():
+        path = failed_directory / name
+        if not path.is_file():
+            raise FileNotFoundError(f"failed figure output is missing: {path}")
+        if path.stat().st_size != record.get("bytes"):
+            raise ValueError(f"failed figure output byte count changed: {path}")
+        if digest_file(path) != record.get("sha256"):
+            raise ValueError(f"failed figure output hash changed: {path}")
+    if digest_file(failed_directory / "panel_source.tsv") != digest_file(
+        directory / "panel_source.tsv"
+    ):
+        raise ValueError("failed and accepted figure panel-source rows differ")
+    if digest_file(failed_directory / "ey15_donor_validation.png") == digest_file(
+        directory / "ey15_donor_validation.png"
+    ):
+        raise ValueError("failed and accepted figure renders are identical")
+    provenance = dict(provenance)
+    provenance["qa_history"] = {
+        "failed_render": "figures_v1",
+        "accepted_render": "figures_v2",
+        "failed_reason": "zero_and_first_decade_tick_labels_overlap_panels_A_to_C",
+        "panel_source_identical": True,
+    }
     return provenance
 
 
@@ -280,8 +311,9 @@ def archive(
         "assembly-enrollment receipt, discovery catalogue, old/new/sensitivity "
         "localizations, two full-read quantifications, all family fates, "
         "independent standard-library recomputations, resource profiles and "
-        "author-annotation audits. It also retains the editable six-panel "
-        "SVG, matching PDF/PNG exports and panel-level source table. "
+        "author-annotation audits. It also retains the rejected v1 figure "
+        "render and accepted editable v2 six-panel SVG, matching PDF/PNG "
+        "exports and panel-level source tables. "
         "`headline_summary.json` is the concise "
         "result; `results/` retains the auditable inputs to each claim.\n\n"
         "The newer assembly is a donor-matched high-quality reference proxy, "

@@ -77,6 +77,18 @@ product. More importantly, v2 remains gapped within the target knob arrays and
 reports only about 28% assembly of the approximately 30.67-Mb Ab10 knob. It
 therefore cannot label v1 collapse; no large download or execution was started.
 
+`ey15_donor_matched_collapse_v1/` is the completed frozen single-donor
+retrospective validation. It retains all 2,133 family fates, both normalization
+choices, independent family/statistic recomputation, old/new assembly PAF and
+an independently reproduced CIGAR-based alignment audit, author-annotation
+context, six command-level resource profiles and the accepted six-panel figure.
+At the predeclared 15-kb denominator, TP/FN/FP/TN were 8/0/0/11; the 5-kb
+sensitivity denominator retained one FN and two FP. Archived `figures_v1`
+retains the visible tick-label-overlap failure; accepted `figures_v2` changes
+layout only and has identical panel-source rows.
+The newer assembly is a donor-matched high-quality reference proxy that shares
+HiFi evidence with the read estimator, not absolute or independent copy truth.
+
 `quantify_calibration_development_v1/` archives 108/108 successful public
 `quantify` executions across three independently simulated genomes, 27 read
 conditions and four methods. Empirical controls reduced aggregate MARE from

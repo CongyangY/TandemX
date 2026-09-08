@@ -1,0 +1,5 @@
+annotation_class	annotation_bp	tandemx_overlap_bp	annotation_bp_recall	overlapping_family_count
+centromere	13853492	439849	0.031750045403714816	94
+5S_rDNA	1645340	791970	0.4813412425395359	4
+45S_rDNA	912735	91615	0.10037415021884775	11
+telomere	330662	54719	0.16548318222232974	56

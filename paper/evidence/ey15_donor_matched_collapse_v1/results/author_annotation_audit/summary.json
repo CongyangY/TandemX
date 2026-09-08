@@ -1,0 +1,19 @@
+{
+  "coordinate_normalization": "GFF3_1_based_inclusive_to_0_based_half_open",
+  "families_with_selected_annotation_overlap": 114,
+  "families_without_selected_annotation_overlap": 1797,
+  "interpretation": "orthogonal_author_annotation_overlap_not_used_for_threshold_selection",
+  "overlap_union_bp": 1377472,
+  "schema_version": 1,
+  "selected_annotation_bp_recall": 0.0822904143010803,
+  "selected_annotation_classes": [
+    "centromere",
+    "5S_rDNA",
+    "45S_rDNA",
+    "telomere"
+  ],
+  "selected_annotation_union_bp": 16739155,
+  "tandemx_array_fraction_in_selected_annotation": 0.5339117397853147,
+  "tandemx_array_union_bp": 2579962,
+  "tandemx_family_count": 1911
+}

@@ -1,0 +1,7 @@
+resource_group	stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+assembly_stage_resources	locate_old_CLR_Canu	0	91.696276	89.190439	7.748574	454.734375	4	1688847	401	locate_old_CLR_Canu.stdout.log	locate_old_CLR_Canu.stderr.log
+assembly_stage_resources	locate_new_HiFi_Hifiasm	0	99.432894	97.675059	8.022059	424.468750	3	1921161	436	locate_new_HiFi_Hifiasm.stdout.log	locate_new_HiFi_Hifiasm.stderr.log
+assembly_stage_resources	locate_final_hybrid_sensitivity	0	97.737622	96.549046	7.475810	198.468750	3	1919284	431	locate_final_hybrid_sensitivity.stdout.log	locate_final_hybrid_sensitivity.stderr.log
+read_stage_resources	discover	0	989.190886	2008.783001	269.637476	1830.062500	4	30329703	4314	discover.stdout.log	discover.stderr.log
+read_stage_resources	quantify_primary	0	9494.862556	9515.949238	689.775745	266.484375	3	938555	41103	quantify_primary.stdout.log	quantify_primary.stderr.log
+read_stage_resources	quantify_depth107_sensitivity	0	9622.672023	9659.222594	693.575705	337.609375	3	770360	42057	quantify_depth107_sensitivity.stdout.log	quantify_depth107_sensitivity.stderr.log

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "experiment_id": "ey15_donor_matched_collapse_v1",
+  "status": "preregistered_before_old_new_result_inspection",
+  "frozen_on": "2026-09-08",
+  "scientific_scope": "donor_matched_retrospective_high_quality_reference_proxy",
+  "material": {
+    "species": "Arabidopsis thaliana",
+    "accession": "Ey15-2",
+    "accession_id": "9994",
+    "stock_id": "CS76399",
+    "biosample": "SAMEA13018399",
+    "bioproject": "PRJEB50694",
+    "source_paper_doi": "10.1093/nar/gkac1115",
+    "source_data_doi": "10.5281/zenodo.7326462",
+    "donor_match_basis": "paper_explicitly_compares_CLR_and_HiFi_assemblies_of_the_same_Ey15-2_sample"
+  },
+  "reads": {
+    "run_accession": "ERR8666125",
+    "full_fastq_sha256": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8",
+    "full_read_count": 837586,
+    "full_total_bases": 18636790429,
+    "discovery_subset": "sample_003.fastq.gz",
+    "discovery_subset_sha256": "1f05335279f80e604d0f451a72741d45fb53e31d35e139023e0afbe528b26baf",
+    "discovery_subset_read_count": 50267,
+    "discovery_subset_total_bases": 1119053887,
+    "discovery_subset_method": "seed6101_whole_file_hash_sample_inclusion_probability_0.06",
+    "quantification_input": "full_ERR8666125_FASTQ"
+  },
+  "assembly_bundle": {
+    "url": "https://zenodo.org/records/7326462/files/SupportingData_A.thaliana_CLR_vs_HiFi.zip?download=1",
+    "bytes": 1605112570,
+    "md5": "fd3b9bd2f12195aa036a16d2b25d660a",
+    "primary_old_role": "Bionano_optical_maps_based_assemblies/9994.CLR_Canu",
+    "primary_new_role": "Bionano_optical_maps_based_assemblies/9994.HiFi_Hifiasm",
+    "sensitivity_new_role": "Ey15-2_HiFi-Hifiasm_plus_CLR-Canu_assembly",
+    "role_reason": "primary_pair_holds_Bionano_scaffolding_context_constant;final_hybrid_is_sensitivity_only"
+  },
+  "discovery": {
+    "method": "cascade",
+    "clustering_method": "sequence",
+    "cluster_identity": 0.95,
+    "family_audit": "related",
+    "min_period": 30,
+    "max_period": 1000,
+    "top_periods": 5,
+    "min_support_reads": 5,
+    "min_repeat_span": 100,
+    "kmer_backend": "rust",
+    "threads": 4
+  },
+  "quantification": {
+    "k": 21,
+    "genome_size_bp": 143120000,
+    "genome_size_basis": "paper_PCR_free_Illumina_21mer_estimate",
+    "primary_haploid_depth": null,
+    "primary_normalization": "full_read_bases_divided_by_independent_genome_size",
+    "sensitivity_explicit_haploid_depth": 107.0,
+    "sensitivity_depth_basis": "paper_approximate_original_q20_HiFi_coverage",
+    "quality_correction": true
+  },
+  "localization": {
+    "k": 21,
+    "identity_model": "iid_base",
+    "min_identity": 0.9,
+    "window_size": 100000,
+    "step_size": 10000
+  },
+  "evaluation": {
+    "collapse_threshold": 0.6,
+    "overexpansion_threshold": 1.5,
+    "primary_min_new_bp": 15000,
+    "min_new_bp_sensitivity": [5000, 15000, 50000],
+    "primary_truth": "old_to_new_localized_bp_ratio_below_collapse_threshold",
+    "primary_prediction": "old_to_read_estimated_bp_ratio_below_collapse_threshold",
+    "source_eligibility": "new_assembly_localized_bp_at_least_primary_min_new_bp",
+    "source_eligibility_excludes_read_new_agreement": true,
+    "report": [
+      "all_family_fates",
+      "TP_FN_FP_TN",
+      "sensitivity_false_positive_rate_precision_specificity",
+      "wilson_95_intervals",
+      "balanced_accuracy_MCC",
+      "predicted_missing_bp_vs_observed_gain_bp",
+      "primary_and_predeclared_min_new_bp_sensitivity"
+    ]
+  },
+  "orthogonal_audits_after_primary_scoring": [
+    "author_repeat_annotation_class_gains",
+    "paper_reported_centromere_and_5S_rDNA_totals",
+    "PCR_free_Illumina_repeat_evidence",
+    "Bionano_scaffold_support",
+    "old_to_new_assembly_alignment_for_candidate_loci"
+  ],
+  "stop_rules": [
+    "do_not_change_thresholds_or_discovery_parameters_after_inspecting_old_new_results",
+    "retain_zero_family_and_failed_stage_outputs_as_results",
+    "separate_not_source_eligible_from_technical_failure",
+    "do_not_claim_absolute_copy_truth_or_independent_validation_of_the_HiFi_read_estimator"
+  ]
+}

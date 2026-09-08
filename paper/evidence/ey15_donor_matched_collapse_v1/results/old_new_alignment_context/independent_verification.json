@@ -1,0 +1,29 @@
+{
+  "eligible_families_recomputed": 19,
+  "failures": [],
+  "inputs": {
+    "family_context": {
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_context/family_alignment_context.tsv",
+      "sha256": "b81ef6b7ac2e4c6bfb63193ea7ebc5eb1a8f61ee8f5940e8466eece9e578db92"
+    },
+    "new_arrays": {
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_new/arrays.bed",
+      "sha256": "1f0a4c5b57206dfa46bcc69c2f5aecbf03735aecdd16a1f24e6a0762c6a1352a"
+    },
+    "old_arrays": {
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_old/arrays.bed",
+      "sha256": "9c080867273b58e4f384b05cbde0fa0c52f6cbab56089e6842eba236985c6219"
+    },
+    "paf": {
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_audit/old_new.paf",
+      "sha256": "37b351649632340b681ca721afa5af57f592c373607cf994560d948fd27714ea"
+    },
+    "summary": {
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/old_new_alignment_context/summary.json",
+      "sha256": "be959173f752f4451eca4d2d717f16264f007be946aedd728d4ec0ddf1865122"
+    }
+  },
+  "schema_version": 1,
+  "verification_method": "independent_manual_CIGAR_parser_and_per_interval_byte_marking",
+  "verification_passed": true
+}

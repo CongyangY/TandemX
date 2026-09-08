@@ -1,0 +1,42 @@
+command: "tandemx quantify"
+subcommand: "quantify"
+version: "0.1.0"
+timestamp_utc: "2026-09-08T05:01:38.773108+00:00"
+cwd: "/Users/ycy/Codex/Sofw/TandemX"
+argv:
+  - "quantify"
+  - "--reads"
+  - "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz"
+  - "--catalog"
+  - "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomers.fa"
+  - "--genome-size"
+  - "143120000"
+  - "--k"
+  - "21"
+  - "--kmer-backend"
+  - "rust"
+  - "--outdir"
+  - "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/quantify_primary"
+  - "--no-progress"
+python_version: "3.11.15"
+platform: "macOS-14.4.1-arm64-arm-64bit"
+status: "quantify_mvp_completed"
+parameters:
+  catalogue: "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomers.fa"
+  command: "quantify"
+  disable_quality_correction: false
+  genome_size: 143120000
+  haploid_depth: null
+  k: 21
+  kmer_backend: "rust"
+  max_read_bases: null
+  max_reads: null
+  monomers: null
+  no_progress: true
+  outdir: "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/quantify_primary"
+  progress_every: 1000
+  read_error_rate: null
+  reads:
+    - "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz"
+  single_copy_kmers: null
+  single_copy_min_depth: null

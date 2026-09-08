@@ -57,3 +57,8 @@ text. Render the PDF independently to PNG and inspect both it and the direct PNG
 for clipping, overlap, detached labels and honest scales. Do not promote the
 figure to the manuscript if either independent evaluator receipt fails.
 
+The first direct-PNG render (`figures_v1`) was rejected during visual QA because
+the zero and first decade labels overlapped in panels A--C. It is retained as a
+failed render. The replacement (`figures_v2`) changes only the symmetric-log
+linear threshold and plot margin; all source rows, denominators and statistics
+remain unchanged.

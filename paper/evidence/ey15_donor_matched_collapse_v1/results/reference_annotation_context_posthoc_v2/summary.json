@@ -1,0 +1,43 @@
+{
+  "analysis_status": "posthoc_descriptive_audit_after_reference_state_inspection",
+  "collapse_best_annotation_class_counts": {
+    "45S_rDNA": 1,
+    "5S_rDNA": 1,
+    "centromere": 6
+  },
+  "config": {
+    "annotation_positive_rule": "selected_annotation_overlap_bp_greater_than_zero",
+    "collapse_threshold": 0.6,
+    "min_new_bp": 15000,
+    "overexpansion_threshold": 1.5
+  },
+  "contingency": {
+    "collapse_annotated": 8,
+    "collapse_unannotated": 0,
+    "other_annotated": 3,
+    "other_unannotated": 8
+  },
+  "eligible_families": 19,
+  "fisher_exact_greater_p": 0.0021830594586012544,
+  "inputs": {
+    "annotation_summary": {
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/author_annotation_audit/family_annotation_summary.tsv",
+      "sha256": "31a2372c2330121bba4233108cf983bc5e197376a35703a2d43aa9fcd0756d12"
+    },
+    "new_arrays": {
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_new/arrays.bed",
+      "sha256": "1f0a4c5b57206dfa46bcc69c2f5aecbf03735aecdd16a1f24e6a0762c6a1352a"
+    },
+    "old_arrays": {
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_old/arrays.bed",
+      "sha256": "9c080867273b58e4f384b05cbde0fa0c52f6cbab56089e6842eba236985c6219"
+    }
+  },
+  "odds_ratio": null,
+  "odds_ratio_warning": "undefined_due_to_zero_cell",
+  "other_reference_state_families": 11,
+  "primary_benchmark_changed": false,
+  "reference_collapse_families": 8,
+  "schema_version": 1,
+  "warning": "posthoc_association_with_selected_author_annotations_not_independent_truth;new_assembly_shares_HiFi_evidence_with_read_estimator;localizer_has_low_author_centromere_annotation_recall"
+}

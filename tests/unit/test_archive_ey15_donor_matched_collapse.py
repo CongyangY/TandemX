@@ -77,25 +77,35 @@ def test_validate_resources_rejects_incomplete_receipt(tmp_path: Path) -> None:
 def test_validate_figure_requires_editable_svg_and_matching_hashes(
     tmp_path: Path,
 ) -> None:
-    directory = tmp_path / "figures_v1"
-    directory.mkdir()
-    svg = directory / "ey15_donor_validation.svg"
-    svg.write_text("<svg><text>Ey15</text></svg>")
-    provenance = {
-        "complete": True,
-        "panel_count": 6,
-        "primary_family_count": 19,
-        "svg_raster_image_element_count": 0,
-        "svg_text_element_count": 1,
-        "outputs": {
-            svg.name: {
-                "bytes": svg.stat().st_size,
-                "sha256": digest_file(svg),
-            }
-        },
-    }
-    (directory / "figure_provenance.json").write_text(json.dumps(provenance))
-    assert validate_figure(tmp_path)["panel_count"] == 6
+    provenances = {}
+    for version in ("figures_v1", "figures_v2"):
+        directory = tmp_path / version
+        directory.mkdir()
+        svg = directory / "ey15_donor_validation.svg"
+        png = directory / "ey15_donor_validation.png"
+        panel_source = directory / "panel_source.tsv"
+        svg.write_text(f"<svg><text>{version}</text></svg>")
+        png.write_text(version)
+        panel_source.write_text("panel\tvalue\nA\t1\n")
+        provenance = {
+            "complete": True,
+            "panel_count": 6,
+            "primary_family_count": 19,
+            "svg_raster_image_element_count": 0,
+            "svg_text_element_count": 1,
+            "outputs": {
+                path.name: {
+                    "bytes": path.stat().st_size,
+                    "sha256": digest_file(path),
+                }
+                for path in (svg, png, panel_source)
+            },
+        }
+        (directory / "figure_provenance.json").write_text(json.dumps(provenance))
+        provenances[version] = provenance
+    assert validate_figure(tmp_path)["qa_history"]["panel_source_identical"] is True
+    directory = tmp_path / "figures_v2"
+    provenance = provenances["figures_v2"]
     provenance["svg_raster_image_element_count"] = 1
     (directory / "figure_provenance.json").write_text(json.dumps(provenance))
     with pytest.raises(ValueError, match="raster image"):

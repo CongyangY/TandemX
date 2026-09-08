@@ -1,6 +1,8 @@
 import pytest
 
 from benchmarks.scripts.plot_ey15_donor_validation import (
+    SYMLOG_LINTHRESH,
+    SYMLOG_LOWER_LIMIT,
     annotation_class_recall,
     metric_rows,
 )
@@ -41,3 +43,8 @@ def test_annotation_class_recall_uses_the_documented_column() -> None:
 def test_annotation_class_recall_requires_one_matching_row() -> None:
     with pytest.raises(ValueError, match="expected one annotation-class row"):
         annotation_class_recall([], "centromere")
+
+
+def test_symlog_zero_and_first_decade_have_visible_separation() -> None:
+    assert SYMLOG_LINTHRESH == 100.0
+    assert SYMLOG_LOWER_LIMIT < 0
