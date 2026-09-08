@@ -110,3 +110,14 @@ def test_resolved_join_handles_family_consistent_clipping_and_merging(tmp_path: 
     assert records[1].representative_selection_source == (
         "unique_family_consistent_overlap_after_clipping"
     )
+
+
+def test_resolved_join_can_retain_valid_empty_output_for_truth_scoring(tmp_path: Path) -> None:
+    inputs = [tmp_path / name for name in ("tidehunter.gff", "intermediate.gff", "final.gff")]
+    for path in inputs:
+        path.write_text("##gff-version 3\n")
+    consensus = tmp_path / "consensus.fa"
+    consensus.write_text("")
+    assert normalize_resolved_tidecluster(*inputs, consensus, allow_empty=True) == []
+    with pytest.raises(ValueError, match="No resolved"):
+        normalize_resolved_tidecluster(*inputs, consensus)

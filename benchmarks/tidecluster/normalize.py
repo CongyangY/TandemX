@@ -129,6 +129,8 @@ def normalize_resolved_tidecluster(
     intermediate_clustering_gff: Path,
     clustering_gff: Path,
     family_consensus_fasta: Path | None = None,
+    *,
+    allow_empty: bool = False,
 ) -> list[ResolvedTideClusterRecord]:
     """Join merged TideCluster intervals through its representative-ID map.
 
@@ -286,7 +288,7 @@ def normalize_resolved_tidecluster(
                 copy_number_source=copy_number_source,
             )
         )
-    if not normalized:
+    if not normalized and not allow_empty:
         raise ValueError("No resolved TideCluster tandem-repeat records found")
     return sorted(
         normalized, key=lambda item: (item.sequence_id, item.start, item.end, item.family_id)
