@@ -29,18 +29,41 @@ def validate(source: Path, config_path: Path) -> tuple[dict[str, Any], dict[str,
     if receipt.get("accuracy_available") not in (None, False):
         raise ValueError("interface evidence cannot claim unitFinder accuracy")
     if receipt.get("complete") is False:
-        if receipt.get("fate") != "container_build_failure":
+        fate = receipt.get("fate")
+        if fate not in {
+            "container_build_failure",
+            "external_process_failure",
+            "interface_contract_failure",
+        }:
             raise ValueError("unexpected incomplete unitFinder fate")
-        log = source / receipt["docker_build_log"]["file"]
-        record = receipt["docker_build_log"]
-        if (
-            not log.is_file()
-            or log.stat().st_size != record["bytes"]
-            or digest(log) != record["sha256"]
-        ):
-            raise ValueError("unitFinder failed-build log changed")
-        if receipt.get("smoke_execution_started") is not False:
-            raise ValueError("failed-build receipt changed smoke execution state")
+        if fate == "container_build_failure":
+            log = source / receipt["docker_build_log"]["file"]
+            record = receipt["docker_build_log"]
+            if (
+                not log.is_file()
+                or log.stat().st_size != record["bytes"]
+                or digest(log) != record["sha256"]
+            ):
+                raise ValueError("unitFinder failed-build log changed")
+            if receipt.get("smoke_execution_started") is not False:
+                raise ValueError("failed-build receipt changed smoke execution state")
+        else:
+            if receipt.get("smoke_execution_started") is not True:
+                raise ValueError("failed smoke receipt changed execution state")
+            environment = json.loads(
+                (source / "environment.json").read_text(encoding="utf-8")
+            )
+            profile = json.loads(
+                (source / "profile/receipt.json").read_text(encoding="utf-8")
+            )
+            if environment.get("complete") is not False:
+                raise ValueError("failed smoke environment changed completion state")
+            if fate == "external_process_failure" and (
+                profile.get("complete") is not False or receipt.get("profile") != profile
+            ):
+                raise ValueError("failed smoke profile changed")
+            if fate == "interface_contract_failure" and profile.get("complete") is not True:
+                raise ValueError("interface-contract failure lacks complete stages")
     elif receipt.get("complete") is True:
         if receipt.get("fate") == "container_build_passed":
             if receipt.get("smoke_execution_started") is not False:
@@ -132,7 +155,11 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
         "evidence_scope": (
             "container_build_only"
             if receipt["fate"] == "container_build_passed"
-            else "interface_smoke_only"
+            else (
+                "interface_smoke_only"
+                if receipt["fate"] == "smoke_passed"
+                else "retained_failure_only"
+            )
         ),
         "accuracy_available": False,
         "source_commit": config["source_commit"],
@@ -157,12 +184,19 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
             "installation/interface smoke. This establishes executable packaging "
             "and required native outputs only; it is not an accuracy result.\n"
         )
-    else:
+    elif receipt["fate"] == "container_build_failure":
         description = (
             "The first frozen unitFinder container build failed before the upstream "
             "interface started. The complete BuildKit log and source snapshot are "
             "retained; this is a container-definition failure, not an algorithm-"
             "accuracy measurement.\n"
+        )
+    else:
+        description = (
+            "The frozen unitFinder interface smoke started but did not satisfy its "
+            "predeclared execution/output contract. All partial outputs, logs and "
+            "resource records are retained. This is an interface execution fate, "
+            "not a zero-accuracy measurement.\n"
         )
     readme.write_text(f"# {config['experiment_id']}\n\n{description}", encoding="utf-8")
     for path in (headline_path, readme):

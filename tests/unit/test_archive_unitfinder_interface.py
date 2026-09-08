@@ -107,3 +107,33 @@ def test_archive_successful_build_remains_build_only(tmp_path) -> None:
     headline = json.loads((outdir / "headline_summary.json").read_text())
     assert headline["evidence_scope"] == "container_build_only"
     assert headline["accuracy_available"] is False
+
+
+def test_archive_external_smoke_failure_retains_partial_evidence(tmp_path) -> None:
+    source = tmp_path / "failed_smoke"
+    (source / "profile").mkdir(parents=True)
+    profile = {
+        "complete": False,
+        "requested_stage_count": 2,
+        "completed_stage_count": 2,
+    }
+    (source / "profile/receipt.json").write_text(json.dumps(profile))
+    (source / "profile/stages.tsv").write_text("stage\texit_code\nhelp\t0\nsmoke\t1\n")
+    (source / "environment.json").write_text(json.dumps({"complete": False}))
+    (source / "run_receipt.json").write_text(
+        json.dumps(
+            {
+                "complete": False,
+                "fate": "external_process_failure",
+                "accuracy_available": False,
+                "smoke_execution_started": True,
+                "profile": profile,
+            }
+        )
+    )
+    outdir = tmp_path / "archive"
+    archive(source, _config(tmp_path), outdir)
+    headline = json.loads((outdir / "headline_summary.json").read_text())
+    assert headline["experiment_fate"] == "external_process_failure"
+    assert headline["evidence_scope"] == "retained_failure_only"
+    assert (outdir / "results/profile/stages.tsv").is_file()

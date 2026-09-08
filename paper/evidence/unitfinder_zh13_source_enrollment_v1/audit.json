@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "source_enrolled_before_download",
+  "retrieved_date": "2026-09-08",
+  "accession": "GWHBWDJ00000000.1",
+  "assembly_name": "ZH13-T2T",
+  "directory_listing_url": "https://download.cncb.ac.cn/gwh/Plants/Glycine_max_ZH13-T2T_GWHBWDJ00000000.1/",
+  "directory_listing_sha256": "a0840564bb6d46e43e3b753aa18f3716735f4e26f8be187ff099ea07bc611aa1",
+  "md5_manifest_url": "https://download.cncb.ac.cn/gwh/Plants/Glycine_max_ZH13-T2T_GWHBWDJ00000000.1/GWHBWDJ00000000.1_md5.txt",
+  "md5_manifest_sha256": "439eb262f771016dff319974bce9580d30b170c6faa0b2cac7b7f199af7bacd3",
+  "genome_file": {
+    "filename": "GWHBWDJ00000000.1.genome.fasta.gz",
+    "bytes": 286375748,
+    "md5": "86fe5e3cdd12510afa61c6e3345a4a97"
+  },
+  "complete_directory_file_count": 6,
+  "boundary": "Official source file enrollment only; genome download/QC, Table S1 reproduction and independent CENH3 accuracy remain unrun."
+}
