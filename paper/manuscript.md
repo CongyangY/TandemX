@@ -169,6 +169,18 @@ repetitions are not biological replicates. The validation therefore resolves
 the predeclared synthetic promotion gate without establishing real-data or
 per-condition dominance (Figure 11; Evidence E25).
 
+A subsequent prioritization audit reused these fixed outputs without rerunning
+or retuning the benchmark. At 0.1%, 1% and 4% total indels, both TandemX and
+TideHunter had array recall 1.0. TandemX precision was 1.0 in all three
+conditions, whereas TideHunter precision was 1.0, 1.0 and 0.958904. TandemX
+boundary MAE was 1.229--1.621 bp, but its median elapsed time was 3.34--3.80
+times that of TideHunter and its measured direct-child peak RSS was 0.32--0.43
+times TideHunter's. We therefore did not introduce a result-driven
+seed-and-chain replacement: on this synthetic distribution the remaining clear
+deficit was elapsed time rather than read-local accuracy. This decision does
+not resolve real-read interval truth or indel profiles outside the generator
+(Evidence E27).
+
 ### Comparator conclusions depend on the measured endpoint
 
 In a 5× read simulation from one 10-Mb development genome, TandemX, TRF and
@@ -1078,6 +1090,9 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S23: nested MorexV3 TideCluster stage resources, call
   summaries, interval-provenance classes, copy-number availability and Figure
   S5 source rows in `evidence/tidecluster_morex_reference_scaling_v1`.
+- Supplementary Table S24: no-rerun seed-2201 indel-condition comparison,
+  including accuracy, boundary, elapsed-time and memory rows with exact source
+  hashes in `evidence/indel_detector_gap_audit_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1099,7 +1114,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `quantify_calibration_fast_fasta_replay_v1`; E24:
 `quantify_depth_gated_validation_v1`; E25:
 `cascade_gap_free_validation_v1`; E26:
-`tidecluster_morex_reference_scaling_v1`.
+`tidecluster_morex_reference_scaling_v1`; E27:
+`indel_detector_gap_audit_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

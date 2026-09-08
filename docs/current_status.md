@@ -32,6 +32,19 @@ before continuing and do not stage the untracked `.codex/` directory.
   the predictor and remains a donor-matched high-quality reference proxy rather
   than absolute independent truth.
 
+- **The requested indel-rich detector decision has been audited without a new
+  benchmark run.** On the already consumed frozen seed-2201 scenarios,
+  TandemX and TideHunter both had array recall 1.0 at 0.1%, 1% and 4% total
+  indels. TandemX precision remained 1.0; TideHunter precision was 1.0, 1.0
+  and 0.958904. TandemX boundary MAE remained below 1.7 bp, but it was
+  3.34--3.80 times slower and used 0.32--0.43 times TideHunter's measured
+  direct-child peak RSS. Thus the frozen synthetic evidence does not show a
+  remaining read-local accuracy deficit that justifies making a new
+  seed-and-chain detector the current priority. The decision and all source
+  hashes are archived at `paper/evidence/indel_detector_gap_audit_v1`.
+  Real-read interval truth and error profiles outside the generator remain
+  unresolved, so this is a deferral rather than a general non-inferiority claim.
+
 - **TideCluster comparator is active and must not be restarted blindly.** The
   pinned `tandemx/tidecluster:1.21.2` image has immutable ID
   `sha256:62691b116427394984a8bace59a6f4ba7f3ea834373772734fbcfc567c3a27a7`

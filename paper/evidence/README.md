@@ -156,6 +156,14 @@ calls on the same three negative datasets. It tests zero-result handling only.
   equal-length family recovery was 0.0 for both; inspect the actual consensuses
   and add a gapped homology metric before interpreting that as missing families.
 
+`indel_detector_gap_audit_v1/` reuses the consumed seed-2201 outputs without a
+new run or threshold change. Both TandemX and TideHunter reached array recall
+1.0 at 0.1%, 1% and 4% total indels; TandemX precision remained 1.0 while its
+median elapsed time was 3.34--3.80 times TideHunter's. The audit therefore
+defers a seed-and-chain replacement because the observed deficit is runtime,
+not frozen synthetic read-local accuracy. It does not settle real-read truth or
+generalize beyond the simulated error distribution.
+
 These early runs preserve full source/executable hashes but not the complete
 intermediate dirty source. They are diagnostics, not frozen release benchmarks.
 The updated runner snapshots source/build inputs and loads the TandemX snapshot;
