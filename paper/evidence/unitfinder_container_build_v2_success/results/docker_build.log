@@ -1,0 +1,45 @@
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.88kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/condaforge/miniforge3@sha256:2052d26e02808699f24f8c67f6900fce705563c04fd4bcc4e5dca434265524f4
+#2 DONE 5.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/condaforge/miniforge3@sha256:2052d26e02808699f24f8c67f6900fce705563c04fd4bcc4e5dca434265524f4
+#4 DONE 0.0s
+
+#5 [2/4] RUN mamba create -y -n unitfinder -c conda-forge -c bioconda       python=3.11 biopython numpy matplotlib-base scikit-learn       trf=4.09.1 mummer4=4.0.1 clustalo=1.2.4 time git     && mamba clean --all --yes
+#5 CACHED
+
+#6 [3/4] RUN mkdir -p /opt/provenance     && git init /opt/unitFinder     && git -C /opt/unitFinder fetch --depth 1       https://github.com/HuangYicheng-Bio/unitFinder.git "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"     && git -C /opt/unitFinder checkout --detach FETCH_HEAD     && test "$(git -C /opt/unitFinder rev-parse HEAD)" = "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"     && test -z "$(git -C /opt/unitFinder status --short)"     && (cd /opt/unitFinder       && git ls-files -z | sort -z | xargs -0 sha256sum)       > /opt/provenance/unitfinder_tracked_files.sha256     && conda list -n unitfinder --explicit > /opt/provenance/conda_explicit.txt     && python /opt/unitFinder/bin/unitFinder.py -h > /opt/provenance/help.txt     && trf 2>&1 | head -n 1 > /opt/provenance/trf_version.txt     && nucmer --version > /opt/provenance/nucmer_version.txt     && clustalo --version > /opt/provenance/clustalo_version.txt
+#6 0.186 hint: Using 'master' as the name for the initial branch. This default branch name
+#6 0.186 hint: will change to "main" in Git 3.0. To configure the initial branch name
+#6 0.186 hint: to use in all of your new repositories, which will suppress this warning,
+#6 0.186 hint: call:
+#6 0.186 hint:
+#6 0.186 hint: 	git config --global init.defaultBranch <name>
+#6 0.186 hint:
+#6 0.186 hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+#6 0.186 hint: 'development'. The just-created branch can be renamed via this command:
+#6 0.186 hint:
+#6 0.186 hint: 	git branch -m <name>
+#6 0.186 hint:
+#6 0.186 hint: Disable this message with "git config set advice.defaultBranchName false"
+#6 0.192 Initialized empty Git repository in /opt/unitFinder/.git/
+#6 2.267 From https://github.com/HuangYicheng-Bio/unitFinder
+#6 2.267  * branch            e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28 -> FETCH_HEAD
+#6 2.351 HEAD is now at e80bff3 Update README.md
+#6 DONE 5.2s
+
+#7 [4/4] WORKDIR /work
+#7 DONE 0.0s
+
+#8 exporting to image
+#8 exporting layers 5.4s done
+#8 writing image sha256:eadbae183cf29f24b987ea38db3aa5131b1b6b87b1074f45058c60b92929d221 done
+#8 naming to docker.io/tandemx/unitfinder:e80bff38-v2 done
+#8 DONE 5.4s

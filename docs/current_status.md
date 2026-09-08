@@ -224,6 +224,18 @@ before continuing and do not stage the untracked `.codex/` directory.
   It rehashes the complete v1 failure, changes only the tracked-file hash
   working directory, retains the exact e80bff38 source/dependencies/input/
   command and uses the distinct `tandemx/unitfinder:e80bff38-v2` image tag.
+  The corrected build then completed as image
+  `sha256:eadbae183cf29f24b987ea38db3aa5131b1b6b87b1074f45058c60b92929d221`
+  (linux/amd64; 1,529,204,905 bytes). The exact 52-file upstream hash manifest,
+  125-line explicit conda lock, build log and in-image help/version artifacts
+  are archived at `paper/evidence/unitfinder_container_build_v2_success`; all
+  14 manifest entries pass size/SHA-256 checks. This proves the packaging fix
+  and source/dependency identity only. The external interface smoke remains
+  unrun and no accuracy or algorithm runtime is available. The first full
+  regression after renaming the documented image tag retained one stale-test
+  failure (635 passed/1 failed); after updating that exact documentation
+  assertion, the complete suite passes **636 tests in 63.01 s**, plus compileall
+  and `git diff --check`.
 - **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the

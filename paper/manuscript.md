@@ -691,6 +691,11 @@ runtime measurement; no smoke output was produced. A second configuration was
 then frozen before rebuilding. It binds the complete first failure by hash and
 changes only the working directory used for tracked-file hashing; the upstream
 commit, dependency specifications, input and interface command remain fixed.
+That build completed as a 1,529,204,905-byte linux/amd64 image with a fixed
+SHA-256 image ID. The exact 52-file upstream source-hash manifest, explicit
+125-line conda lock and in-image preflight artifacts are retained (Evidence
+E36). At this stage the external smoke command remained unrun, so the result
+established reproducible packaging only.
 
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
@@ -1319,6 +1324,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S32: unitFinder e80bff38 first-build command, complete
   BuildKit log, source/config hashes and explicit pre-interface container-
   definition failure in `evidence/unitfinder_container_build_v1_failure`.
+- Supplementary Table S33: corrected unitFinder image ID/metadata, complete
+  successful BuildKit log, 52 upstream tracked-file hashes, explicit conda lock
+  and in-image preflight artifacts in
+  `evidence/unitfinder_container_build_v2_success`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1349,7 +1358,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `tidecluster_factorial_validation_v1`; E33:
 `tidecluster_factorial_continuation_v2_failure`; E34:
 `tidecluster_factorial_validation_v3`; E35:
-`unitfinder_container_build_v1_failure`.
+`unitfinder_container_build_v1_failure`; E36:
+`unitfinder_container_build_v2_success`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

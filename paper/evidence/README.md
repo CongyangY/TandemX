@@ -304,6 +304,14 @@ directory; 52 relative paths were unresolved and the build stopped with exit
 all eight archive entries pass size/SHA-256 checks. This is a packaging failure,
 not unitFinder algorithm, resource or accuracy evidence.
 
+`unitfinder_container_build_v2_success/` retains the packaging-only correction.
+The linux/amd64 image built with immutable ID
+`sha256:eadbae183cf29f24b987ea38db3aa5131b1b6b87b1074f45058c60b92929d221`;
+the archive includes the complete build log, 52 upstream tracked-file hashes,
+125-line explicit conda lock and in-image preflight artifacts. All 14 entries
+pass size/SHA-256 checks. The external smoke had not started, so this proves
+image construction and provenance only, not interface execution or accuracy.
+
 ## SRF workflow evidence
 
 `srf_pilot/` retains the initial four successful native workflows and the exact

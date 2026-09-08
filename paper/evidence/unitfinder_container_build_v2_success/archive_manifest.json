@@ -1,0 +1,92 @@
+{
+  "archive_complete": true,
+  "experiment_complete": true,
+  "file_count": 14,
+  "files": [
+    {
+      "bytes": 2847,
+      "file": "preregistration.json",
+      "sha256": "156190204a224206bef38daf0188b05da7a14b361588538f4bfbdf2186eb76af",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/unitfinder_interface_smoke_v2.json"
+    },
+    {
+      "bytes": 2851,
+      "file": "results/docker_build.log",
+      "sha256": "bd906930a2161626405d84d94193b1042814ca192a80faeeea50d1f2dcfa0263",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/docker_build.log"
+    },
+    {
+      "bytes": 6,
+      "file": "results/image_provenance/clustalo_version.txt",
+      "sha256": "563a0b4eec3c77bbc34ac630d4fa5214f5c6726ae01468404fd704473110084e",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/image_provenance/clustalo_version.txt"
+    },
+    {
+      "bytes": 10028,
+      "file": "results/image_provenance/conda_explicit.txt",
+      "sha256": "75194d5e24a0db94bd97e4def39e39ab4a729ce42cb68a0a5191919546af3a73",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/image_provenance/conda_explicit.txt"
+    },
+    {
+      "bytes": 149,
+      "file": "results/image_provenance/help.txt",
+      "sha256": "e55aed7ffe35f5ac1b030300451f5d87d8fd3b62722ead7499f3583e8ea96f1e",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/image_provenance/help.txt"
+    },
+    {
+      "bytes": 6,
+      "file": "results/image_provenance/nucmer_version.txt",
+      "sha256": "cd6321af37482f49efc326524a9fcd7fc86902a48da8d4bbd3dc718d290c3fea",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/image_provenance/nucmer_version.txt"
+    },
+    {
+      "bytes": 1,
+      "file": "results/image_provenance/trf_version.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/image_provenance/trf_version.txt"
+    },
+    {
+      "bytes": 4509,
+      "file": "results/image_provenance/unitfinder_tracked_files.sha256",
+      "sha256": "d9f1e89e4904ead02c213a5fcfbc2759fb95e4cad1d1dd32fa2d0b1b78ba2be7",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/image_provenance/unitfinder_tracked_files.sha256"
+    },
+    {
+      "bytes": 2198,
+      "file": "results/run_receipt.json",
+      "sha256": "63baae2dbed9eae7f3e3b63dc6e193ecb5544bb80de0f9272f055ff682df872f",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/run_receipt.json"
+    },
+    {
+      "bytes": 1837,
+      "file": "results/source_snapshot/Dockerfile",
+      "sha256": "0542f45ff928d7f09796540d424e46ec68d767730be14e314825bb32c8540563",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/source_snapshot/Dockerfile"
+    },
+    {
+      "bytes": 6221,
+      "file": "results/source_snapshot/record_unitfinder_build_success.py",
+      "sha256": "f22d8d524de4ac2a16d1eada1f6abe8dc3d6a59460099f579a0774d0c74fd297",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/source_snapshot/record_unitfinder_build_success.py"
+    },
+    {
+      "bytes": 2847,
+      "file": "results/source_snapshot/unitfinder_interface_smoke_v2.json",
+      "sha256": "156190204a224206bef38daf0188b05da7a14b361588538f4bfbdf2186eb76af",
+      "source": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v2_success_20260908/source_snapshot/unitfinder_interface_smoke_v2.json"
+    },
+    {
+      "bytes": 696,
+      "file": "headline_summary.json",
+      "sha256": "8a56cd85d0884528a6bea9d07c65780100c451dc04d0c9827de31487e5f2e70d",
+      "source": "generated_by_archive_unitfinder_interface"
+    },
+    {
+      "bytes": 292,
+      "file": "README.md",
+      "sha256": "db11f48a062198c6dc88111d527da9240fb9fdaf803a8301a1dac518cb215d3d",
+      "source": "generated_by_archive_unitfinder_interface"
+    }
+  ],
+  "schema_version": 1
+}

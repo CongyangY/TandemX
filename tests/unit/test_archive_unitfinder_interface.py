@@ -71,3 +71,39 @@ def test_validate_failed_build_rejects_changed_log(tmp_path) -> None:
     log.write_text("changed\n")
     with pytest.raises(ValueError, match="log changed"):
         validate(source, _config(tmp_path))
+
+
+def test_archive_successful_build_remains_build_only(tmp_path) -> None:
+    source = tmp_path / "built"
+    provenance = source / "image_provenance"
+    provenance.mkdir(parents=True)
+    log = source / "docker_build.log"
+    log.write_text("built\n")
+    tracked = provenance / "unitfinder_tracked_files.sha256"
+    tracked.write_text("a" * 64 + "  README.md\n")
+    (source / "run_receipt.json").write_text(
+        json.dumps(
+            {
+                "complete": True,
+                "fate": "container_build_passed",
+                "accuracy_available": False,
+                "smoke_execution_started": False,
+                "docker_build_log": {
+                    "file": log.name,
+                    "bytes": log.stat().st_size,
+                    "sha256": hashlib.sha256(log.read_bytes()).hexdigest(),
+                },
+                "image_provenance": {
+                    tracked.name: {
+                        "bytes": tracked.stat().st_size,
+                        "sha256": hashlib.sha256(tracked.read_bytes()).hexdigest(),
+                    }
+                },
+            }
+        )
+    )
+    outdir = tmp_path / "archive"
+    archive(source, _config(tmp_path), outdir)
+    headline = json.loads((outdir / "headline_summary.json").read_text())
+    assert headline["evidence_scope"] == "container_build_only"
+    assert headline["accuracy_available"] is False

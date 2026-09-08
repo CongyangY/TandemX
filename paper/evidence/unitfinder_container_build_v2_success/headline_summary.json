@@ -1,0 +1,11 @@
+{
+  "accuracy_available": false,
+  "archive_complete": true,
+  "boundary": "This v2 attempt retains the v1 container-definition failure by exact hashes and changes only the working directory used to hash the unchanged upstream checkout. A successful smoke establishes only executable packaging and the documented single-chromosome interface. It does not validate real-data recovery, cross-chromosome manual merging, reference-assisted mode or biological accuracy.",
+  "evidence_scope": "container_build_only",
+  "experiment_complete": true,
+  "experiment_fate": "container_build_passed",
+  "resources": null,
+  "schema_version": 1,
+  "source_commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"
+}

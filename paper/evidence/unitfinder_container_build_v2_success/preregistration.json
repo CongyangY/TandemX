@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "experiment_id": "unitfinder_interface_smoke_v2",
+  "status": "frozen_after_v1_container_failure_before_v2_build_or_smoke_output",
+  "preregistration_parent_commit": "83e0e88968c37f1e9a734da07ae1ee047bca3f8b",
+  "scope": "installation_and_interface_smoke_not_accuracy_evidence",
+  "image_tag": "tandemx/unitfinder:e80bff38-v2",
+  "source_commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28",
+  "dockerfile_sha256": "0542f45ff928d7f09796540d424e46ec68d767730be14e314825bb32c8540563",
+  "parent_build_failure": {
+    "directory": "/Volumes/T7/Codex/TandemX/results/unitfinder_container_build_v1_failure_20260908",
+    "fate": "container_build_failure",
+    "artifacts": {
+      "run_receipt.json": "122bac336f03aeeae4fea0db0920137e3a84e24a9f44867ad291e654f309b212",
+      "docker_build.log": "104ed9fca49e2f759717717c39081e153d8129773d76defc3fdf4254258c313d",
+      "source_snapshot/Dockerfile": "d2eeca2463426732987d06809298264aa7c10831063cb5a737c2cee430313a01",
+      "source_snapshot/unitfinder_interface_smoke_v1.json": "40f1d1311ed60351f9017a6d68600224f4bdff61169bc499abb26393723ae014",
+      "source_snapshot/record_unitfinder_build_failure.py": "736eb3fa7137b072ee70dd8e04e38d4463bb4690333e41c02f0c2dcabbea1ebb"
+    }
+  },
+  "allowed_change_from_v1": "run_tracked_file_sha256_from_opt_unitFinder_checkout_only",
+  "input": {
+    "directory": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v1_20260908/input",
+    "fasta": "unitfinder_smoke.fa",
+    "fasta_sha256": "e7a372298273c1595eba39fe38930bd2be2000e71d33243fe71829c2efacf750",
+    "truth": "truth_arrays.tsv",
+    "truth_sha256": "9ebbae8d6e17e8a027463f12003bec760f82f43ba4753b9a7c59f32d968dbb44",
+    "manifest_sha256": "3f03c3b8b63a67ff83b95f9b0378a605653503c40fe1ea5de7fda52e55f5cc5e",
+    "sequence_length_bp": 308375
+  },
+  "command_arguments": [
+    "--seq",
+    "/input/unitfinder_smoke.fa",
+    "--name",
+    "unitfinder_smoke",
+    "--flag",
+    "1"
+  ],
+  "docker": {
+    "platform": "linux/amd64",
+    "network": "none",
+    "read_only_input": true
+  },
+  "acceptance": {
+    "container_build_exit_code": 0,
+    "help_exit_code": 0,
+    "smoke_exit_code": 0,
+    "required_nonempty_outputs": [
+      "unitfinder_smoke.Units.fa",
+      "unitfinder_smoke.Consensus.fa",
+      "unitfinder_smoke.Units.uniq.fa",
+      "unitfinder_smoke.Consensus.uniq.fa"
+    ],
+    "all_failures_retained": true,
+    "no_accuracy_claim": true
+  },
+  "boundary": "This v2 attempt retains the v1 container-definition failure by exact hashes and changes only the working directory used to hash the unchanged upstream checkout. A successful smoke establishes only executable packaging and the documented single-chromosome interface. It does not validate real-data recovery, cross-chromosome manual merging, reference-assisted mode or biological accuracy."
+}

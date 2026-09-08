@@ -42,26 +42,48 @@ def validate(source: Path, config_path: Path) -> tuple[dict[str, Any], dict[str,
         if receipt.get("smoke_execution_started") is not False:
             raise ValueError("failed-build receipt changed smoke execution state")
     elif receipt.get("complete") is True:
-        if receipt.get("fate") != "smoke_passed" or receipt.get(
-            "missing_required_outputs"
-        ) != []:
-            raise ValueError("unitFinder success receipt is incomplete")
-        for name, record in receipt.get("outputs", {}).items():
-            path = source / "run" / name
+        if receipt.get("fate") == "container_build_passed":
+            if receipt.get("smoke_execution_started") is not False:
+                raise ValueError("unitFinder build-only receipt changed smoke state")
+            log = source / receipt["docker_build_log"]["file"]
+            record = receipt["docker_build_log"]
             if (
-                not path.is_file()
-                or path.stat().st_size != record["bytes"]
-                or digest(path) != record["sha256"]
+                not log.is_file()
+                or log.stat().st_size != record["bytes"]
+                or digest(log) != record["sha256"]
             ):
-                raise ValueError(f"unitFinder smoke output changed: {name}")
-        environment = json.loads(
-            (source / "environment.json").read_text(encoding="utf-8")
-        )
-        profile = json.loads(
-            (source / "profile/receipt.json").read_text(encoding="utf-8")
-        )
-        if environment.get("complete") is not True or profile.get("complete") is not True:
-            raise ValueError("unitFinder success environment/profile is incomplete")
+                raise ValueError("unitFinder successful-build log changed")
+            for name, record in receipt.get("image_provenance", {}).items():
+                path = source / "image_provenance" / name
+                if (
+                    not path.is_file()
+                    or path.stat().st_size != record["bytes"]
+                    or digest(path) != record["sha256"]
+                ):
+                    raise ValueError(f"unitFinder image provenance changed: {name}")
+        elif receipt.get("fate") == "smoke_passed":
+            if receipt.get("missing_required_outputs") != []:
+                raise ValueError("unitFinder success receipt is incomplete")
+            for name, record in receipt.get("outputs", {}).items():
+                path = source / "run" / name
+                if (
+                    not path.is_file()
+                    or path.stat().st_size != record["bytes"]
+                    or digest(path) != record["sha256"]
+                ):
+                    raise ValueError(f"unitFinder smoke output changed: {name}")
+            environment = json.loads(
+                (source / "environment.json").read_text(encoding="utf-8")
+            )
+            profile = json.loads(
+                (source / "profile/receipt.json").read_text(encoding="utf-8")
+            )
+            if environment.get("complete") is not True or profile.get(
+                "complete"
+            ) is not True:
+                raise ValueError("unitFinder success environment/profile is incomplete")
+        else:
+            raise ValueError("unexpected complete unitFinder fate")
     else:
         raise ValueError("unitFinder receipt lacks an explicit completion state")
     return config, receipt
@@ -107,7 +129,11 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
         "archive_complete": True,
         "experiment_complete": receipt["complete"],
         "experiment_fate": receipt["fate"],
-        "interface_smoke_only": True,
+        "evidence_scope": (
+            "container_build_only"
+            if receipt["fate"] == "container_build_passed"
+            else "interface_smoke_only"
+        ),
         "accuracy_available": False,
         "source_commit": config["source_commit"],
         "resources": resources,
@@ -118,7 +144,14 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
         json.dumps(headline, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     readme = outdir / "README.md"
-    if receipt["complete"]:
+    if receipt["fate"] == "container_build_passed":
+        description = (
+            "The corrected pinned unitFinder image built successfully, and its "
+            "BuildKit log, image ID, dependency lock and upstream tracked-file "
+            "hashes are retained. The interface smoke had not started, so this is "
+            "container-build evidence only and not an accuracy result.\n"
+        )
+    elif receipt["complete"]:
         description = (
             "The pinned unitFinder source completed its frozen single-chromosome "
             "installation/interface smoke. This establishes executable packaging "

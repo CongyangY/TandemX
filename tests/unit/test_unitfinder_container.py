@@ -10,6 +10,8 @@ def test_unitfinder_container_pins_source_and_preserves_upstream_code() -> None:
     assert "mummer4=4.0.1" in dockerfile
     assert "clustalo=1.2.4" in dockerfile
     assert "git -C /opt/unitFinder status --short" in dockerfile
+    assert "(cd /opt/unitFinder" in dockerfile
     assert "COPY" not in dockerfile
     assert "sed -i" not in dockerfile
-    assert "-t tandemx/unitfinder:e80bff38 benchmarks/containers/unitfinder" in readme
+    assert "-t tandemx/unitfinder:e80bff38-v2 benchmarks/containers/unitfinder" in readme
+    assert "original `e80bff38` image-tag attempt is retained" in readme
