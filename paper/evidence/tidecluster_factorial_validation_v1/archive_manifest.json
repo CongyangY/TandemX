@@ -1,0 +1,116 @@
+{
+  "archive_complete": true,
+  "experiment_complete": false,
+  "file_count": 18,
+  "files": [
+    {
+      "bytes": 2817,
+      "file": "preregistration.json",
+      "sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/tidecluster_factorial_validation_v1.json"
+    },
+    {
+      "bytes": 1668,
+      "file": "results/environment.json",
+      "sha256": "869f4a1e9611a4d17a730fc4a6a648d8a4ab352fd08c1bf3c582d372e9b4305f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/environment.json"
+    },
+    {
+      "bytes": 219,
+      "file": "results/profile/receipt.json",
+      "sha256": "10a18bd6e680e05374dae166801177b7dfc0a5efb0a9f77cb2fb7c252f6fd4c8",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/profile/receipt.json"
+    },
+    {
+      "bytes": 736,
+      "file": "results/profile/s6401_default_primary_tidehunter.stderr.log",
+      "sha256": "ecda184b167c056f0a87acddb956c957e9665f4c312b3ee92aee5a7d3b46081f",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/profile/s6401_default_primary_tidehunter.stderr.log"
+    },
+    {
+      "bytes": 108,
+      "file": "results/profile/s6401_default_primary_tidehunter.stdout.log",
+      "sha256": "2244295dca88a58fae57591c4b78514b2d0b202e846646c8a3c9f371762f5b56",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/profile/s6401_default_primary_tidehunter.stdout.log"
+    },
+    {
+      "bytes": 3012,
+      "file": "results/profile/samples.tsv",
+      "sha256": "090b972c7bccda59be1be019cef44c2bc0097442d8923c4b8d834dbb2aa2c31a",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/profile/samples.tsv"
+    },
+    {
+      "bytes": 337,
+      "file": "results/profile/stages.tsv",
+      "sha256": "8025283b96365802d1b137244141594b3c2fcfaf41de04caa2980597d8b2aa4d",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/profile/stages.tsv"
+    },
+    {
+      "bytes": 382,
+      "file": "results/run_receipt.json",
+      "sha256": "1d708955250cc93baf3edea8494cb9e225bd8ebb745eeffa879c87536097c8d0",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/run_receipt.json"
+    },
+    {
+      "bytes": 872,
+      "file": "results/seed6401/default_primary/tidehunter.gnu_time.txt",
+      "sha256": "73044ac814254169922738a23407921b25dc044d86050d49929d2ca9cb47eb28",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/seed6401/default_primary/tidehunter.gnu_time.txt"
+    },
+    {
+      "bytes": 5010,
+      "file": "results/source_snapshot/factorial_evaluate.py",
+      "sha256": "1d196f68781d85b2118bfce8cc9593e68fccb61b2c8f3dd30b5c5ba1dd31f224",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/source_snapshot/factorial_evaluate.py"
+    },
+    {
+      "bytes": 12055,
+      "file": "results/source_snapshot/factorial_run.py",
+      "sha256": "4154c98dc2d600faf99641780d60f2bb6c8fde9b1a51e316e49e70f7c2d3e676",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/source_snapshot/factorial_run.py"
+    },
+    {
+      "bytes": 16804,
+      "file": "results/source_snapshot/normalize.py",
+      "sha256": "9f16f0393c723d58bc046adf4bfcd885b107664c926c5ba6aadf4ca5fa3a27e7",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/source_snapshot/normalize.py"
+    },
+    {
+      "bytes": 8942,
+      "file": "results/source_snapshot/profile_stage_resources.py",
+      "sha256": "02b3175fc1271f393a7e3f84710a0482a93153110e8795861bd3958d2d1adfdf",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/source_snapshot/profile_stage_resources.py"
+    },
+    {
+      "bytes": 12157,
+      "file": "results/source_snapshot/run_tidecluster_docker_reference.py",
+      "sha256": "dabe8437ae4076da7e1fa06204247a0561ede4433f349dbd4f30425e5e21a3fc",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/source_snapshot/run_tidecluster_docker_reference.py"
+    },
+    {
+      "bytes": 2817,
+      "file": "results/source_snapshot/tidecluster_factorial_validation_v1.json",
+      "sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/source_snapshot/tidecluster_factorial_validation_v1.json"
+    },
+    {
+      "bytes": 13671,
+      "file": "results/stage_manifest.json",
+      "sha256": "df16f881563f72f4feb30b2890ec9dfaec09aa8e4da6310c9fc3b52209ebeeb0",
+      "source": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908/stage_manifest.json"
+    },
+    {
+      "bytes": 1286,
+      "file": "headline_summary.json",
+      "sha256": "3c8e30cec9cdd51b2076a2468ecaf34d62723b311f8768afbf3479146fbe6173",
+      "source": "generated_by_archive_tidecluster_factorial"
+    },
+    {
+      "bytes": 627,
+      "file": "README.md",
+      "sha256": "1ea64faf7de5bcbc5c5c313d394f7492b7d114d1def3595429ad94972ce86165",
+      "source": "generated_by_archive_tidecluster_factorial"
+    }
+  ],
+  "schema_version": 1
+}

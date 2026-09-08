@@ -11,6 +11,8 @@ import shutil
 import statistics
 from typing import Any
 
+from benchmarks.scripts.run_tidecluster_docker_reference import parse_gnu_time
+
 
 HEADLINE_METRICS = (
     "array_recall",
@@ -56,6 +58,12 @@ def aggregate_settings(rows: list[dict[str, str]]) -> dict[str, Any]:
             }
         result[setting] = {
             "run_count": len(selected),
+            "successful_accuracy_run_count": sum(
+                row.get("status") == "ok" for row in selected
+            ),
+            "unavailable_accuracy_run_count": sum(
+                row.get("status") != "ok" for row in selected
+            ),
             "seeds": sorted(int(row["seed"]) for row in selected),
             "metrics": metrics,
         }
@@ -68,13 +76,19 @@ def candidate_files(source: Path) -> list[Path]:
         "environment.json",
         "stage_manifest.json",
         "summary.tsv",
+        "cell_fates.tsv",
+        "stage_fates.tsv",
         "run_receipt.json",
         "independent_verification.json",
     ):
         path = source / name
         if path.is_file():
             paths.add(path)
-    for directory in (source / "source_snapshot", source / "profile"):
+    for directory in (
+        source / "source_snapshot",
+        source / "parent_failure_snapshot",
+        source / "profile",
+    ):
         if directory.is_dir():
             paths.update(path for path in directory.rglob("*") if path.is_file())
     figure_dir = source / "figures_v1"
@@ -95,6 +109,54 @@ def candidate_files(source: Path) -> list[Path]:
         for pattern in retained_run_patterns:
             paths.update(path for path in seed_dir.glob(f"*/{pattern}") if path.is_file())
     return sorted(paths, key=lambda path: path.relative_to(source).as_posix())
+
+
+def resource_context(source: Path) -> dict[str, Any]:
+    stage_path = source / "profile/stages.tsv"
+    stage_rows = read_tsv(stage_path) if stage_path.is_file() else []
+    internal: dict[str, Any] = {}
+    for path in sorted(source.glob("seed*/*/*.gnu_time.txt")):
+        relative = path.relative_to(source).as_posix()
+        try:
+            internal[relative] = parse_gnu_time(path, require_success=False)
+        except (OSError, ValueError) as error:
+            internal[relative] = {"parse_error": str(error)}
+    return {
+        "profile_stage_count": len(stage_rows),
+        "failed_profile_stages": [
+            row for row in stage_rows if int(row.get("exit_code", -1)) != 0
+        ],
+        "internal_gnu_time": internal,
+    }
+
+
+def archive_description(
+    experiment_complete: bool, accuracy_complete: bool = True
+) -> str:
+    if experiment_complete and accuracy_complete:
+        return (
+            "This compact archive retains the frozen configuration, native GFF "
+            "and consensus outputs, normalization/evaluation tables, external-"
+            "stage resources, logs, source snapshot and editable six-panel figure. "
+            "The separate verifier recomputed interval, base-union, boundary, "
+            "period and cyclic-family endpoints before archival.\n\n"
+        )
+    if experiment_complete:
+        return (
+            "This compact archive retains all frozen cell and stage fates, native "
+            "outputs for successful cells, failed-stage logs and resources, "
+            "normalization/evaluation tables, source snapshots and an editable "
+            "six-panel figure. The independent verifier recomputed successful "
+            "accuracy cells and confirmed that unavailable cells contain no "
+            "invented zero measurements.\n\n"
+        )
+    return (
+        "This compact archive retains the frozen configuration, exact attempted "
+        "stage, external-process logs, source snapshot and host/container resource "
+        "records. Execution failed before accuracy evaluation, so no figure or "
+        "accuracy summary is present and unavailable measurements remain missing "
+        "rather than zero.\n\n"
+    )
 
 
 def validate_figure(source: Path) -> dict[str, Any]:
@@ -179,15 +241,20 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
         "schema_version": 1,
         "archive_complete": True,
         "experiment_complete": experiment_complete,
-        "experiment_fate": (
+        "experiment_fate": run_receipt.get(
+            "fate",
             "completed_and_independently_verified"
             if experiment_complete
-            else run_receipt.get("fate", "incomplete_unknown_fate")
+            else "incomplete_unknown_fate",
+        ),
+        "accuracy_complete": run_receipt.get(
+            "accuracy_complete", experiment_complete
         ),
         "run_count": len(summary_rows),
         "setting_summary": aggregate_settings(summary_rows),
         "independent_verification": independent,
         "validation_figure": figure,
+        "resource_context": resource_context(source),
         "warning": (
             "same_process_simulated_validation_genomes;technical_repetitions_not_"
             "biological_replicates;failed_processes_are_missing_not_zero_measurements"
@@ -196,17 +263,16 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
     (outdir / "headline_summary.json").write_text(
         json.dumps(headline, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
+    title = run_receipt.get(
+        "experiment_id", config.get("experiment_id", "TideCluster factorial validation")
+    )
     (outdir / "README.md").write_text(
-        "# TideCluster factorial validation v1\n\n"
-        "This compact archive retains the frozen configuration, native GFF and "
-        "consensus outputs, normalization/evaluation tables, external-stage "
-        "resources, logs, source snapshot and editable six-panel figure. A "
-        "completed result is archived "
-        "only after the separate verifier recomputes interval, base-union, "
-        "boundary, period and cyclic-family endpoints. If execution failed, "
-        "the archive preserves that fate and does not replace unavailable "
-        "measurements with zero.\n\n"
-        "The three 10-Mb genomes are same-process simulations and the seeds were "
+        f"# {title}\n\n"
+        + archive_description(
+            experiment_complete,
+            run_receipt.get("accuracy_complete", experiment_complete),
+        )
+        + "The three 10-Mb genomes are same-process simulations and the seeds were "
         "already consumed for TandemX quantification validation. TideCluster "
         "settings were frozen before its outputs were inspected, but the runs "
         "are technical comparisons rather than independent biological replicates.\n",

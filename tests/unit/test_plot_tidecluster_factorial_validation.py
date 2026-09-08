@@ -16,7 +16,7 @@ def test_optional_float_preserves_missing_measurements() -> None:
     assert optional_float("1.25") == 1.25
 
 
-def test_plot_requires_and_renders_all_six_frozen_runs(tmp_path) -> None:
+def test_plot_renders_all_six_frozen_fates_and_preserves_unavailable(tmp_path) -> None:
     result_dir = tmp_path / "result"
     result_dir.mkdir()
     rows = []
@@ -41,6 +41,18 @@ def test_plot_requires_and_renders_all_six_frozen_runs(tmp_path) -> None:
                     "clustering_maximum_rss_kb": 200000,
                 }
             )
+    rows[0]["status"] = "external_resource_failure_parent_v1"
+    for name in (
+        "array_recall",
+        "array_precision",
+        "base_union_recall",
+        "base_union_precision",
+        "matched_boundary_mae_bp",
+        "matched_period_mae_bp",
+        "cyclic_monomer_recall",
+        "homologous_consensus_fraction",
+    ):
+        rows[0][name] = ""
     with (result_dir / "summary.tsv").open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]), delimiter="\t")
         writer.writeheader()
@@ -50,8 +62,37 @@ def test_plot_requires_and_renders_all_six_frozen_runs(tmp_path) -> None:
         json.dumps({"verification_passed": True, "failures": []})
     )
     (result_dir / "environment.json").write_text(json.dumps({"complete": True}))
+    with (result_dir / "cell_fates.tsv").open("w", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=(
+                "seed",
+                "setting",
+                "status",
+                "tidehunter_status",
+                "clustering_status",
+            ),
+            delimiter="\t",
+        )
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(
+                {
+                    "seed": row["seed"],
+                    "setting": row["setting"],
+                    "status": row["status"],
+                    "tidehunter_status": (
+                        "imported_failed_exit_137" if row is rows[0] else "ok"
+                    ),
+                    "clustering_status": (
+                        "not_started_dependency_failure" if row is rows[0] else "ok"
+                    ),
+                }
+            )
     receipt = plot(result_dir, tmp_path / "figure")
     assert receipt["panel_count"] == 6
     assert receipt["frozen_run_count"] == 6
+    assert receipt["successful_accuracy_run_count"] == 5
+    assert receipt["unavailable_accuracy_run_count"] == 1
     assert receipt["svg_raster_image_element_count"] == 0
     assert receipt["svg_text_element_count"] > 0

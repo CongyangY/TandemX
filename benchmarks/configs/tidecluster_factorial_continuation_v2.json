@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "tidecluster_factorial_validation_v2_continuation",
+  "preregistration_parent_commit": "568efcfc6aeb0516ba3a934c319ddf8c8b91543e",
+  "status": "frozen_after_v1_failure_before_any_unattempted_cell_output",
+  "base_config": "benchmarks/configs/tidecluster_factorial_validation_v1.json",
+  "base_config_sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+  "parent_failure_dir": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908",
+  "parent_artifacts": {
+    "run_receipt.json": "1d708955250cc93baf3edea8494cb9e225bd8ebb745eeffa879c87536097c8d0",
+    "profile/stages.tsv": "8025283b96365802d1b137244141594b3c2fcfaf41de04caa2980597d8b2aa4d",
+    "stage_manifest.json": "df16f881563f72f4feb30b2890ec9dfaec09aa8e4da6310c9fc3b52209ebeeb0",
+    "seed6401/default_primary/tidehunter.gnu_time.txt": "73044ac814254169922738a23407921b25dc044d86050d49929d2ca9cb47eb28",
+    "profile/s6401_default_primary_tidehunter.stderr.log": "ecda184b167c056f0a87acddb956c957e9665f4c312b3ee92aee5a7d3b46081f"
+  },
+  "never_rerun_stages": [
+    "s6401_default_primary_tidehunter"
+  ],
+  "continuation_rule": {
+    "unit": "seed_and_setting_cell",
+    "attempt_unstarted_cells": true,
+    "after_tidehunter_failure": "record_external_resource_failure_skip_dependent_clustering_continue_next_cell",
+    "after_clustering_failure": "record_external_resource_failure_continue_next_cell",
+    "after_normalization_or_evaluation_failure": "record_technical_failure_continue_next_cell",
+    "all_original_datasets_settings_commands_and_accuracy_rules_unchanged": true,
+    "complete_means_all_six_cell_fates_recorded_not_all_stages_successful": true,
+    "missing_accuracy_is_NA_not_zero": true
+  },
+  "boundary": "This continuation exists only because the v1 profiler stopped after the first external-process failure. It imports that frozen failure by hash, never reruns it, and attempts only previously unstarted seed-setting cells without changing data, commands, settings or evaluation rules."
+}

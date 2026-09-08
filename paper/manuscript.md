@@ -618,7 +618,9 @@ covering 239,939 union bp (2.39939%); the 100-Mb set produced 1,372 intervals in
 10/10 and 99/100 windows. TideHunter stage time/RSS changed from 25.03 s/561,556
 kB to 331.52 s/5,152,444 kB, whereas clustering changed from 45.92 s/7,809,052
 kB to 60.99 s/7,770,936 kB. Thus clustering already required about 7.4 GiB at
-both sampled sizes, and the 1-Gb run was withheld pending a safer resource plan.
+both sampled sizes. A frozen same-host 1-Gb preflight refused execution because
+the 100-Mb clustering peak was 96.836% of the 8,217,432,064-byte Docker limit,
+above the predeclared 85% ceiling; its runtime and accuracy remain unavailable.
 TideCluster overlap resolution also made final intervals differ from raw
 TideHunter intervals: at 100 Mb, 1,200 final intervals retained exact
 intermediate coordinates, 41 were clipped and 131 merged multiple same-family
@@ -630,6 +632,19 @@ These nested windows quantify execution behavior and expose a normalization
 requirement. They are neither whole-chromosome runs nor independent accuracy
 tests, because no curated MorexV3 family/array denominator exists and windowing
 removes long-range chromosome context.
+
+We next attempted a frozen planted-truth TideCluster factorial comparison on
+the three 10-Mb seed-6401--6403 assemblies used previously for quantification
+validation. The fail-fast v1 runner stopped in the first default-setting
+TideHunter stage: the inner process was killed with exit 137 after GNU time
+recorded 10.89 s and 7,776,184 kB maximum RSS. No clustering or accuracy value
+exists for that cell, and none is reported as zero. This long-contig 10-Mb
+failure contrasts with the successful ten-window Morex 10-Mb run and therefore
+precludes treating input bases alone as a resource predictor. The failed cell,
+logs, frozen configuration and source snapshot are archived (Evidence E32). A
+v2 continuation was frozen after the failure but before any previously
+unattempted output: it imports the failed cell by hash, never reruns it, skips
+dependent clustering and continues only the remaining five seed-setting cells.
 
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
@@ -1231,6 +1246,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   independent verification receipts, old/new alignment context, resource rows
   and Figure 12 panel source in
   `evidence/ey15_donor_matched_collapse_v1`.
+- Supplementary Table S29: frozen TideCluster factorial v1 failed-stage logs,
+  host/container resources, exact command manifest, source snapshot and
+  explicit unavailable-accuracy fate in
+  `evidence/tidecluster_factorial_validation_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1257,7 +1276,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `tme204_donor_matched_source_audit_v1`; E29:
 `tomato_heinz1706_source_audit_v1`; E30:
 `b73_ab10_donor_matched_source_audit_v1`; E31:
-`ey15_donor_matched_collapse_v1`.
+`ey15_donor_matched_collapse_v1`; E32:
+`tidecluster_factorial_validation_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "tidecluster_factorial_validation_v1",
+  "preregistration_parent_commit": "a4e25bfede9ed56eaaeeb44bad149c201d0e9b08",
+  "status": "frozen_before_TideCluster_output_inspection",
+  "image": "tandemx/tidecluster:1.21.2",
+  "image_id": "sha256:62691b116427394984a8bace59a6f4ba7f3ea834373772734fbcfc567c3a27a7",
+  "cpus": 4,
+  "minimum_length": 100,
+  "settings": {
+    "default_primary": {
+      "tidehunter_arguments": "-p 40 -P 3000 -c 5 -e 0.25",
+      "role": "unchanged_TideCluster_default"
+    },
+    "matched_period_sensitivity": {
+      "tidehunter_arguments": "-p 30 -P 1000 -c 5 -e 0.25",
+      "role": "period_range_matched_to_TandemX_benchmark_without_accuracy_tuning"
+    }
+  },
+  "datasets": [
+    {
+      "seed": 6401,
+      "genome_dir": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/genome",
+      "genome_sha256": "419fbfc3f1fc0463e19b091f8960b3054bbdd08a8dfb0c49aa1ae453719c4d53",
+      "catalogue_sha256": "e0566e91f55570a4976b9424646bf5cd92c0e37e187f0fa548410c61cd40b83d",
+      "truth_sha256": "8ce029191168d4509c23e18bcc4da1ffc6e468426f4c2cf283c33150ea603085"
+    },
+    {
+      "seed": 6402,
+      "genome_dir": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome",
+      "genome_sha256": "fd71941d068a0d892b77a887486146793dce723dbd8bea159a67661f8558f358",
+      "catalogue_sha256": "6c7d77a780c5b2becf97855190a2663e01edd7b22b516cabb00941d23a79d915",
+      "truth_sha256": "56ea8e6c507905cbcf9e208d2e3d3b5c04be30d323f06c2facc9254e8cc225cc"
+    },
+    {
+      "seed": 6403,
+      "genome_dir": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/genome",
+      "genome_sha256": "5f0a61fdf7121d3e0d563cd4317f1183c87bce61f06385dd5798a9a85c70f90d",
+      "catalogue_sha256": "d8f989173f3b23e9ee63c292ede5f05833356ef8a95995f4707d7a299ec04d0a",
+      "truth_sha256": "3801065bbeb11f8ddf551d7ac747dce04dd05ea5ec827ed0654aa07808fbf735"
+    }
+  ],
+  "evaluation": {
+    "array_match": "one_to_one_same_chrom_IoU_at_least_0.5_and_period_error_at_most_max_2bp_or_2pct",
+    "family_recovery": "one_to_one_exact_cyclic_Levenshtein_similarity_at_least_0.9",
+    "report": [
+      "array_recall",
+      "array_precision",
+      "base_union_recall",
+      "base_union_precision",
+      "boundary_MAE",
+      "period_MAE",
+      "cyclic_monomer_recall",
+      "homologous_consensus_fraction",
+      "all_failures",
+      "per_stage_resources"
+    ],
+    "no_result_dependent_gate": true
+  },
+  "boundary": "The three 10-Mb validation genomes have planted truth and were previously consumed for quantification validation, but TideCluster settings were frozen before any TideCluster output was inspected. They are same-process simulated genomes, not independent plant samples."
+}

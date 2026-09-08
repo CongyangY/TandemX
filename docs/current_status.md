@@ -146,6 +146,23 @@ before continuing and do not stage the untracked `.codex/` directory.
   six-panel SVG/PDF/PNG has 68 editable SVG text nodes and no raster nodes. Both
   the direct PNG and independently rendered PDF were visually inspected. Calls
   are descriptive real-reference output, not accuracy or whole-genome evidence.
+- **The first frozen TideCluster planted-truth factorial attempt failed on
+  resources and is formally archived.** The fail-fast v1 runner attempted only
+  seed 6401 with the unchanged default setting. TideCluster's internal
+  TideHunter command was killed with inner exit 137; GNU time retained 10.89 s
+  wall time and 7,776,184 kB maximum RSS. The outer stage returned 1 after
+  11.46 s. Accuracy, clustering time and clustering memory are unavailable,
+  not zero. The 18-file failure archive is
+  `paper/evidence/tidecluster_factorial_validation_v1`. Because this 10-Mb
+  simulated input is a long contig whereas the successful Morex 10-Mb input
+  comprised ten 1-Mb windows, the result also exposes input-structure-dependent
+  resource behavior. A hash-bound v2 continuation is frozen in
+  `benchmarks/configs/tidecluster_factorial_continuation_v2.json`: it will never
+  rerun the failed cell, will skip its dependent clustering stage, and will
+  attempt only the five previously unstarted seed-setting cells while retaining
+  every failure and missing accuracy value. Nineteen focused continuation,
+  verifier, plotter and archiver tests pass; the complete source suite passes
+  **624 tests in 68.02 s**, plus compileall and `git diff --check`.
 - **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the

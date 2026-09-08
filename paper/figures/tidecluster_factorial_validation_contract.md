@@ -1,7 +1,10 @@
 # TideCluster factorial-validation figure contract
 
-Status: frozen before any TideCluster output from
-`tidecluster_factorial_validation_v1` was inspected.
+Initial status: frozen before any TideCluster output from
+`tidecluster_factorial_validation_v1` was inspected. That runner stopped after
+the first external-process failure. The v2 continuation and missing-value
+rendering rules below were frozen after that failure but before any previously
+unattempted seed-setting cell was executed.
 
 ## Claim boundary
 
@@ -32,10 +35,12 @@ it is a declared sensitivity setting, not result-dependent tuning.
 
 ## Visual and source-data rules
 
-- Use all six frozen runs if execution completes; do not omit an unfavorable
-  seed or setting.
+- Preserve all six frozen cell fates; do not omit an unfavorable seed or
+  setting. Accuracy panels show only independently verified successful cells
+  and state the successful denominator out of six.
 - Failed external stages are labelled as failed/missing and are not plotted as
-  zero-valued accuracy or resources.
+  zero-valued accuracy. Their measured failed-stage time/RSS may be shown with
+  an `x`, while dependent unstarted stages remain unavailable.
 - Use a restrained blue/orange palette for the two settings, with point shapes
   and stage line styles as redundant non-colour encodings.
 - Export SVG, PDF and PNG plus a panel-level source TSV and provenance JSON.

@@ -36,9 +36,7 @@ def container_path(path: Path, host_root: Path, container_root: str) -> str:
     return str(PurePosixPath(container_root) / PurePosixPath(relative.as_posix()))
 
 
-def parse_gnu_time(
-    path: Path, *, require_success: bool = True
-) -> dict[str, float | int]:
+def parse_gnu_time(path: Path) -> dict[str, float | int]:
     text = path.read_text(encoding="utf-8")
     patterns = {
         "user_seconds": r"User time \(seconds\): ([0-9.]+)",
@@ -65,9 +63,7 @@ def parse_gnu_time(
     result["wall_seconds"] = sum(
         value * 60**index for index, value in enumerate(reversed(parts))
     )
-    if require_success and (
-        result["exit_status"] != 0 or result["maximum_rss_kb"] <= 0
-    ):
+    if result["exit_status"] != 0 or result["maximum_rss_kb"] <= 0:
         raise ValueError(f"GNU time does not describe a successful stage: {path}")
     return result
 

@@ -1,0 +1,39 @@
+{
+  "accuracy_complete": false,
+  "archive_complete": true,
+  "experiment_complete": false,
+  "experiment_fate": "external_process_failure",
+  "independent_verification": null,
+  "resource_context": {
+    "failed_profile_stages": [
+      {
+        "exit_code": "1",
+        "peak_process_count": "1",
+        "peak_process_tree_rss_mib": "23.609375",
+        "peak_scratch_bytes": "1089",
+        "sample_count": "50",
+        "stage": "s6401_default_primary_tidehunter",
+        "stderr_log": "s6401_default_primary_tidehunter.stderr.log",
+        "stdout_log": "s6401_default_primary_tidehunter.stdout.log",
+        "system_cpu_seconds": "0.951137",
+        "user_cpu_seconds": "0.175237",
+        "wall_seconds": "11.460722"
+      }
+    ],
+    "internal_gnu_time": {
+      "seed6401/default_primary/tidehunter.gnu_time.txt": {
+        "exit_status": 1,
+        "maximum_rss_kb": 7776184,
+        "system_seconds": 3.38,
+        "user_seconds": 26.37,
+        "wall_seconds": 10.89
+      }
+    },
+    "profile_stage_count": 1
+  },
+  "run_count": 0,
+  "schema_version": 1,
+  "setting_summary": {},
+  "validation_figure": null,
+  "warning": "same_process_simulated_validation_genomes;technical_repetitions_not_biological_replicates;failed_processes_are_missing_not_zero_measurements"
+}

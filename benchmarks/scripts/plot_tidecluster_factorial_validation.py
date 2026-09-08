@@ -130,6 +130,10 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
         "independent_verification": result_dir / "independent_verification.json",
         "environment": result_dir / "environment.json",
     }
+    for name in ("cell_fates", "stage_fates"):
+        path = result_dir / f"{name}.tsv"
+        if path.is_file():
+            paths[name] = path
     missing = [str(path) for path in paths.values() if not path.is_file()]
     if missing:
         raise FileNotFoundError(f"TideCluster figure inputs are incomplete: {missing}")
@@ -149,8 +153,20 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
     }
     if {(int(row["seed"]), row["setting"]) for row in rows} != expected:
         raise ValueError("TideCluster figure requires all six frozen runs")
-    if any(row["status"] != "ok" for row in rows):
-        raise ValueError("TideCluster figure does not convert failed runs to zero")
+    allowed_statuses = {
+        "ok",
+        "external_resource_failure",
+        "external_resource_failure_parent_v1",
+        "normalization_or_evaluation_failure",
+    }
+    unexpected = sorted({row["status"] for row in rows} - allowed_statuses)
+    if unexpected:
+        raise ValueError(f"unexpected TideCluster run statuses: {unexpected}")
+    success_count = sum(row["status"] == "ok" for row in rows)
+    cell_fates = read_tsv(paths["cell_fates"]) if "cell_fates" in paths else []
+    fate_by_key = {
+        (int(row["seed"]), row["setting"]): row for row in cell_fates
+    }
 
     plt.rcParams.update(
         {
@@ -179,11 +195,24 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
     figure.text(
         0.10,
         0.945,
-        "Pinned v1.21.2; three frozen 10-Mb planted-truth assemblies; default primary and period-range sensitivity",
+        "Pinned v1.21.2; three frozen 10-Mb planted-truth assemblies; "
+        f"accuracy available for {success_count}/6 cells",
         fontsize=8.5,
         ha="left",
     )
     source_rows: list[dict[str, Any]] = []
+
+    def add_accuracy_availability(axis: plt.Axes) -> None:
+        axis.text(
+            0.98,
+            0.04,
+            f"Evaluated: {success_count}/6\nFailed cells: {6 - success_count} (NA)",
+            transform=axis.transAxes,
+            ha="right",
+            va="bottom",
+            fontsize=6.7,
+            color=CHARCOAL,
+        )
 
     axis = axes[0, 0]
     plot_metric_pair(
@@ -200,6 +229,7 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
     axis.set_ylabel("Fraction")
     axis.set_title("Array calls recover planted intervals")
     style_axis(axis)
+    add_accuracy_availability(axis)
     panel_label(axis, "A")
 
     axis = axes[0, 1]
@@ -217,6 +247,7 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
     axis.set_ylabel("Fraction")
     axis.set_title("Base-union overlap measures coverage")
     style_axis(axis)
+    add_accuracy_availability(axis)
     panel_label(axis, "B")
 
     axis = axes[1, 0]
@@ -234,6 +265,7 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
     axis.set_ylabel("Mean absolute error (bp)")
     axis.set_title("Matched-call errors remain conditional")
     style_axis(axis)
+    add_accuracy_availability(axis)
     panel_label(axis, "C")
 
     axis = axes[1, 1]
@@ -256,6 +288,7 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
     axis.set_ylabel("Fraction")
     axis.set_title("Sequence-supported family recovery")
     style_axis(axis)
+    add_accuracy_availability(axis)
     panel_label(axis, "D")
 
     for panel, axis, suffix, title, ylabel, unit in (
@@ -282,7 +315,23 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
                 values = [optional_float(selected[seed].get(field)) for seed in seeds]
                 if suffix == "maximum_rss_kb":
                     values = [None if value is None else value / 1024 for value in values]
-                valid = [(seed, value) for seed, value in zip(seeds, values) if value is not None]
+                stage_states = [
+                    fate_by_key.get((seed, setting), {}).get(
+                        f"{stage}_status",
+                        "ok" if selected[seed]["status"] == "ok" else "unavailable",
+                    )
+                    for seed in seeds
+                ]
+                valid = [
+                    (seed, value)
+                    for seed, value, state in zip(seeds, values, stage_states)
+                    if value is not None and state == "ok"
+                ]
+                failed = [
+                    (seed, value)
+                    for seed, value, state in zip(seeds, values, stage_states)
+                    if value is not None and "fail" in state
+                ]
                 if valid:
                     axis.plot(
                         [seed for seed, _value in valid],
@@ -297,7 +346,18 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
                         label=f"{style['label']}: {stage}",
                         zorder=3,
                     )
-                for seed, value in zip(seeds, values):
+                if failed:
+                    axis.scatter(
+                        [seed for seed, _value in failed],
+                        [value for _seed, value in failed],
+                        color=style["color"],
+                        marker="x",
+                        linewidths=1.5,
+                        s=34,
+                        label=f"{style['label']}: failed {stage} resource",
+                        zorder=4,
+                    )
+                for seed, value, state in zip(seeds, values, stage_states):
                     source_rows.append(
                         {
                             "panel": panel,
@@ -307,8 +367,18 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
                             "stage": stage,
                             "value": "" if value is None else value,
                             "unit": unit,
-                            "status": "unavailable" if value is None else "ok",
-                            "warning": "single_same_host_execution_per_seed_setting",
+                            "status": (
+                                "unavailable"
+                                if value is None
+                                else "failed_resource"
+                                if "fail" in state
+                                else "ok"
+                            ),
+                            "warning": (
+                                "failed_stage_accuracy_is_NA_not_zero"
+                                if "fail" in state
+                                else "single_same_host_execution_per_seed_setting"
+                            ),
                         }
                     )
         axis.set_xticks(seeds, [str(seed) for seed in seeds])
@@ -342,7 +412,8 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
     figure.text(
         0.10,
         0.012,
-        "Same-process simulations and technical seeds; not biological replicates. Failed stages remain missing rather than zero.",
+        "Same-process simulations and technical seeds; not biological replicates. "
+        "Failed stages remain missing rather than zero.",
         fontsize=7.1,
         ha="left",
     )
@@ -372,6 +443,8 @@ def plot(result_dir: Path, outdir: Path) -> dict[str, Any]:
         "complete": True,
         "panel_count": 6,
         "frozen_run_count": len(rows),
+        "successful_accuracy_run_count": success_count,
+        "unavailable_accuracy_run_count": len(rows) - success_count,
         "panel_source_rows": len(source_rows),
         "svg_text_element_count": svg_text.count("<text"),
         "svg_raster_image_element_count": svg_text.count("<image"),

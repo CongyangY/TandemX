@@ -5,6 +5,8 @@ import pytest
 
 from benchmarks.scripts.archive_tidecluster_factorial import (
     aggregate_settings,
+    archive_description,
+    resource_context,
     validate_figure,
 )
 
@@ -78,3 +80,35 @@ def test_validate_figure_rejects_raster_svg(tmp_path) -> None:
     (directory / "figure_provenance.json").write_text(json.dumps(provenance))
     with pytest.raises(ValueError, match="raster image"):
         validate_figure(tmp_path)
+
+
+def test_failure_archive_description_does_not_claim_accuracy_outputs() -> None:
+    description = archive_description(False)
+    assert "failed before accuracy evaluation" in description
+    assert "no figure or accuracy summary" in description
+    partial = archive_description(True, False)
+    assert "all frozen cell and stage fates" in partial
+    assert "unavailable cells contain no" in partial
+
+
+def test_resource_context_retains_failed_container_peak(tmp_path) -> None:
+    profile = tmp_path / "profile"
+    profile.mkdir()
+    (profile / "stages.tsv").write_text(
+        "stage\texit_code\twall_seconds\nfirst\t1\t2.0\n"
+    )
+    run_dir = tmp_path / "seed1/default"
+    run_dir.mkdir(parents=True)
+    (run_dir / "tidehunter.gnu_time.txt").write_text(
+        "User time (seconds): 1.0\n"
+        "System time (seconds): 0.2\n"
+        "Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.00\n"
+        "Maximum resident set size (kbytes): 7776184\n"
+        "Exit status: 1\n"
+    )
+    context = resource_context(tmp_path)
+    assert context["failed_profile_stages"][0]["stage"] == "first"
+    internal = context["internal_gnu_time"][
+        "seed1/default/tidehunter.gnu_time.txt"
+    ]
+    assert internal["maximum_rss_kb"] == 7776184

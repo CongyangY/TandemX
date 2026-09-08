@@ -1,0 +1,2 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+s6401_default_primary_tidehunter	1	11.460722	0.175237	0.951137	23.609375	1	1089	50	s6401_default_primary_tidehunter.stdout.log	s6401_default_primary_tidehunter.stderr.log

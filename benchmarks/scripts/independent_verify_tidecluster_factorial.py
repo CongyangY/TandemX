@@ -288,6 +288,54 @@ def verify(config_path: Path, result_dir: Path, output: Path) -> dict[str, Any]:
         failures.append("run_count_changed")
     if observed_keys != expected_keys:
         failures.append("summary_run_keys_changed")
+    cell_fates_path = result_dir / "cell_fates.tsv"
+    stage_fates_path = result_dir / "stage_fates.tsv"
+    cell_fates = read_tsv(cell_fates_path) if cell_fates_path.is_file() else []
+    stage_fates = read_tsv(stage_fates_path) if stage_fates_path.is_file() else []
+    has_unavailable = any(row.get("status") != "ok" for row in summary_rows)
+    if has_unavailable and not cell_fates:
+        failures.append("missing_cell_fates_for_unavailable_runs")
+    if has_unavailable and not stage_fates:
+        failures.append("missing_stage_fates_for_unavailable_runs")
+    if cell_fates:
+        fate_keys = {(int(row["seed"]), row["setting"]) for row in cell_fates}
+        if fate_keys != expected_keys or len(cell_fates) != len(expected_keys):
+            failures.append("cell_fate_keys_changed")
+        fate_by_key = {
+            (int(row["seed"]), row["setting"]): row for row in cell_fates
+        }
+        for row in summary_rows:
+            key = (int(row["seed"]), row["setting"])
+            if fate_by_key.get(key, {}).get("status") != row.get("status"):
+                failures.append(f"seed{key[0]}/{key[1]}:cell_fate_status_mismatch")
+        if receipt.get("cell_fates_sha256") != sha256(cell_fates_path):
+            failures.append("run_receipt_cell_fates_hash_changed")
+    if stage_fates:
+        expected_stage_keys = {
+            (int(dataset["seed"]), setting, component)
+            for dataset in config["datasets"]
+            for setting in config["settings"]
+            for component in ("tidehunter", "clustering")
+        }
+        observed_stage_keys = {
+            (int(row["seed"]), row["setting"], row["component"])
+            for row in stage_fates
+        }
+        if observed_stage_keys != expected_stage_keys or len(stage_fates) != len(
+            expected_stage_keys
+        ):
+            failures.append("stage_fate_keys_changed")
+        if receipt.get("stage_fates_sha256") != sha256(stage_fates_path):
+            failures.append("run_receipt_stage_fates_hash_changed")
+    environment_path = result_dir / "environment.json"
+    if environment_path.is_file():
+        environment = json.loads(environment_path.read_text(encoding="utf-8"))
+        for name, expected_hash in environment.get("parent_failure", {}).get(
+            "artifacts", {}
+        ).items():
+            parent_copy = result_dir / "parent_failure_snapshot" / name
+            if not parent_copy.is_file() or sha256(parent_copy) != expected_hash:
+                failures.append(f"parent_failure_snapshot_changed:{name}")
     dataset_by_seed = {int(row["seed"]): row for row in config["datasets"]}
     for seed, dataset in dataset_by_seed.items():
         genome_dir = Path(dataset["genome_dir"])
@@ -301,6 +349,28 @@ def verify(config_path: Path, result_dir: Path, output: Path) -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
     for summary in summary_rows:
         seed, setting = int(summary["seed"]), summary["setting"]
+        if summary.get("status") != "ok":
+            nonmissing = [
+                metric for metric in CHECKED_METRICS if summary.get(metric, "") != ""
+            ]
+            mismatches = []
+            if nonmissing:
+                mismatches.append("unavailable_run_has_accuracy_values:" + ",".join(nonmissing))
+            if "unavailable" not in summary.get("warning", ""):
+                mismatches.append("unavailable_run_missing_explicit_warning")
+            if mismatches:
+                failures.append(f"seed{seed}/{setting}:" + ",".join(mismatches))
+            checks.append(
+                {
+                    "seed": seed,
+                    "setting": setting,
+                    "status": summary.get("status"),
+                    "verification_passed": not mismatches,
+                    "mismatches": mismatches,
+                    "recomputed": None,
+                }
+            )
+            continue
         evaluation_dir = result_dir / f"seed{seed}" / setting / "evaluation"
         expected = recompute_run(Path(dataset_by_seed[seed]["genome_dir"]), evaluation_dir)
         stored = json.loads((evaluation_dir / "metrics.json").read_text(encoding="utf-8"))
@@ -325,17 +395,27 @@ def verify(config_path: Path, result_dir: Path, output: Path) -> dict[str, Any]:
             {
                 "seed": seed,
                 "setting": setting,
+                "status": "ok",
                 "verification_passed": not mismatches,
                 "mismatches": mismatches,
                 "recomputed": expected,
             }
         )
+    successful_run_count = sum(row.get("status") == "ok" for row in summary_rows)
+    if receipt.get("successful_run_count") != successful_run_count:
+        failures.append("successful_run_count_changed")
+    if "accuracy_complete" in receipt and receipt.get("accuracy_complete") != (
+        successful_run_count == len(expected_keys)
+    ):
+        failures.append("accuracy_complete_flag_changed")
     payload = {
         "schema_version": 1,
         "verification_passed": not failures,
         "config_sha256": sha256(config_path),
         "summary_sha256": actual_summary_sha256,
         "checked_run_count": len(checks),
+        "successful_accuracy_run_count": successful_run_count,
+        "unavailable_accuracy_run_count": len(checks) - successful_run_count,
         "checked_metrics": list(CHECKED_METRICS),
         "failures": failures,
         "runs": checks,

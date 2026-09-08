@@ -132,6 +132,16 @@ started, so runtime and accuracy are unavailable rather than zero. This is a
 same-host, same-container infeasibility result, not a universal TideCluster
 memory limit.
 
+`tidecluster_factorial_validation_v1/` preserves the failed first execution of
+the frozen three-seed, two-setting planted-truth plan. Only seed 6401/default
+was attempted before the fail-fast profiler stopped: the inner TideHunter
+process was killed with exit 137 after 10.89 s and 7,776,184 kB GNU-time maximum
+RSS. Clustering and every accuracy endpoint are unavailable rather than zero.
+The 18-file archive retains the exact command manifest, logs, resource records,
+source snapshot and original preregistration. The v2 continuation is separately
+frozen to import this failure by hash and attempt only previously unstarted
+cells.
+
 `abundance_classifier_depth_gated_validation_v1/` preserves the frozen v3
 development-to-held-out chain. Commit `62892a6` and dual-platform hosted CI
 preceded one-time use of seeds 5801-5803. The rule passed all predeclared gates:

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "complete": false,
+  "experiment_id": "tidecluster_factorial_validation_v1",
+  "project_commit": "568efcfc6aeb0516ba3a934c319ddf8c8b91543e",
+  "project_status": "",
+  "config_sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+  "tool": {
+    "image": "tandemx/tidecluster:1.21.2",
+    "image_id": "sha256:62691b116427394984a8bace59a6f4ba7f3ea834373772734fbcfc567c3a27a7",
+    "platform": "linux/amd64",
+    "versions": {
+      "tidecluster": "1.21.2",
+      "tidehunter": "1.4.3",
+      "kitehor": "kitehor 0.13.2",
+      "mmseqs": "747c64cc8db3b4803a0f1194a3f75b3ba9f81bcb",
+      "blastn": "2.16.0+"
+    }
+  },
+  "datasets": [
+    {
+      "seed": 6401,
+      "genome_dir": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6401_validation_v1/genome",
+      "manifest_sha256": "2440eeb584c24460ac7db531c4eccaf00896c536918923990f67a91b01e5163e"
+    },
+    {
+      "seed": 6402,
+      "genome_dir": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6402_validation_v1/genome",
+      "manifest_sha256": "227a2b4ae26423e49594fabeea431942f3c5d8bb2b547669b886c02b0cb366b6"
+    },
+    {
+      "seed": 6403,
+      "genome_dir": "/Volumes/T7/Codex/TandemX/data/simulated/factorial_scale_s6403_validation_v1/genome",
+      "manifest_sha256": "e0f5ba49ab84f3d17c31f8654b8ef8023de1d4e6d5f7406b32ce9a23084bd697"
+    }
+  ],
+  "boundary": "The three 10-Mb validation genomes have planted truth and were previously consumed for quantification validation, but TideCluster settings were frozen before any TideCluster output was inspected. They are same-process simulated genomes, not independent plant samples."
+}
