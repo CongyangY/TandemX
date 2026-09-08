@@ -15,18 +15,24 @@ and newer assembly must be tracked separately.
 | C | Same cultivar/strain name across studies or repositories | Exploratory locus nomination only |
 | D | Species match only | Ineligible for collapse validation |
 
-No current candidate reaches Tier A. The exact ENA query outputs and their
-filtered PacBio genomic-WGS rows are hash-frozen in
-`paper/evidence/retrospective_collapse_source_audit`.
+Ey15-2 now reaches Tier A because the primary paper explicitly compares CLR and
+HiFi assemblies of the same sample. This corrects the earlier source audit,
+which enrolled the Ey15-2 read metadata but considered the Col-0 historical
+comparison instead. The exact ENA query outputs and their filtered PacBio
+genomic-WGS rows remain hash-frozen in
+`paper/evidence/retrospective_collapse_source_audit`. The analysis is
+preregistered in `benchmarks/configs/ey15_donor_matched_collapse_v1.json` and
+documented in `docs/ey15_donor_matched_validation.md`.
 
 ## Current candidate audit
 
 | Priority | Material and reads | Historical assembly | New assembly | Current tier and blocker | Local state |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Rice Nipponbare `SRR25241090`, BioSample `SAMN36368305`, 32,966,159,623 bp | IRGSP-1.0 `GCA_001433935.1`, BioSample `SAMD00000397` | AGIS1.0 `GCA_034140825.1`, BioSample `SAMN36344332` | B/C: same reported cultivar/project context, three different BioSamples; exact donor unresolved | New complete assembly and read/QC data present on T7; historical assembly not yet enrolled |
-| 2 | Maize Mo17 seven selected CCS WGS runs from `SRR15447414`--`SRR15447421`, BioSamples `SAMN20604742`--`SAMN20604748`, 151,123,941,618 bp total | Mo17ref_V1, candidate accession `GCA_003185045.1` | T2T Mo17 `GCA_022117705.1`, BioSample `SAMN20854702` | B/C: same inbred/study context but read and assembly BioSamples differ; historical accession must be source-receipt verified before download | New T2T assembly present; only `SRR15447419` is currently complete/QC on T7 |
-| 3 | Arabidopsis Col-0R `ERR8666127`, BioSample `SAMEA13018400`, 17,746,722,015 bp | TAIR10.1 `GCF_000001735.4` / GenBank `GCA_000001735.2` | Col-0 assembly `GCA_946499705` | B/C: new reads and assembly are from the same study/accession, but identical plant/DNA extraction is not established; TAIR10 is historical Columbia material | Col-CEN v1.2 reference and Col-0R read/QC data present on T7 |
-| 4 | Soybean Williams 82 `SRR23004521`, BioSample `SAMN32622558`, 136,471,999,387 bp | `Wm82.gnm4.4PTR` | `Wm82.a5`, Figshare DOI `10.6084/m9.figshare.22688281` | B/C: same study/cultivar for reads/new assembly, but repository assembly has no matched BioSample and the historical stock relationship is unresolved | No full read/assembly acquisition yet |
+| 1 | Arabidopsis Ey15-2 `ERR8666125`, BioSample `SAMEA13018399`, 18,636,790,429 bp | Bionano-scaffolded `9994.CLR_Canu` | Bionano-scaffolded `9994.HiFi_Hifiasm`; final HiFi-Hifiasm+CLR-Canu hybrid as sensitivity | A: the paper explicitly compares CLR and HiFi assemblies of the same Ey15-2 sample; newer assembly shares HiFi evidence and is a high-quality reference proxy, not absolute independent truth | Full HiFi read/QC and frozen subsets present; official Zenodo bundle acquisition and checksum validation in progress |
+| 2 | Rice Nipponbare `SRR25241090`, BioSample `SAMN36368305`, 32,966,159,623 bp | IRGSP-1.0 `GCA_001433935.1`, BioSample `SAMD00000397` | AGIS1.0 `GCA_034140825.1`, BioSample `SAMN36344332` | B/C: same reported cultivar/project context, three different BioSamples; exact donor unresolved | New complete assembly and read/QC data present on T7; historical assembly not yet enrolled |
+| 3 | Maize Mo17 seven selected CCS WGS runs from `SRR15447414`--`SRR15447421`, BioSamples `SAMN20604742`--`SAMN20604748`, 151,123,941,618 bp total | Mo17ref_V1, candidate accession `GCA_003185045.1` | T2T Mo17 `GCA_022117705.1`, BioSample `SAMN20854702` | B/C: same inbred/study context but read and assembly BioSamples differ; historical accession must be source-receipt verified before download | New T2T assembly present; only `SRR15447419` is currently complete/QC on T7 |
+| 4 | Arabidopsis Col-0R `ERR8666127`, BioSample `SAMEA13018400`, 17,746,722,015 bp | TAIR10.1 `GCF_000001735.4` / GenBank `GCA_000001735.2` | Col-0 assembly `GCA_946499705` | B/C: new reads and assembly are from the same study/accession, but identical plant/DNA extraction is not established; TAIR10 is historical Columbia material | Col-CEN v1.2 reference and Col-0R read/QC data present on T7 |
+| 5 | Soybean Williams 82 `SRR23004521`, BioSample `SAMN32622558`, 136,471,999,387 bp | `Wm82.gnm4.4PTR` | `Wm82.a5`, Figshare DOI `10.6084/m9.figshare.22688281` | B/C: same study/cultivar for reads/new assembly, but repository assembly has no matched BioSample and the historical stock relationship is unresolved | No full read/assembly acquisition yet |
 
 The maize run interval above is shorthand, not a claim that every intervening
 accession is selected. The authoritative seven-run set is the exact filtered TSV
@@ -50,7 +56,6 @@ in the evidence directory.
    Reserve biological collapse sensitivity/specificity for Tier A truth or
    independent orthogonal validation.
 
-The first bounded pilot should use rice because the complete new assembly and
-read data are already available locally and the genome is much smaller than
-maize or soybean. It can test workflow feasibility, but its different BioSamples
-prevent a donor-matched accuracy claim.
+The first bounded validation now uses Ey15-2 because it is the only Tier A
+candidate. Rice remains a useful workflow sensitivity, but its different
+BioSamples prevent a donor-matched accuracy claim.

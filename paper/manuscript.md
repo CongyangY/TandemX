@@ -463,13 +463,24 @@ measured nuclear depth.
 
 We separately audited four retrospective old-to-new assembly candidates using
 exact ENA run metadata. Twelve PacBio genomic-WGS runs were retained across
-Arabidopsis, maize, rice and soybean. The rice HiFi run and AGIS1.0 assembly use
-different BioSamples; the seven selected Mo17 CCS runs also use BioSamples
-different from the T2T assembly; and exact DNA-extraction/individual equivalence
-could not be established for the Arabidopsis or soybean historical-to-new pairs
-[5,7--9]. These candidates can support material-matched concordance or bounded
-workflow pilots, but they do not yet provide donor-matched biological collapse
-truth (Evidence E21).
+Arabidopsis, maize, rice and soybean. The initial audit correctly found that the
+rice HiFi run and AGIS1.0 assembly use different BioSamples and that the seven
+selected Mo17 CCS runs use BioSamples different from the T2T assembly. It did
+not, however, enroll the stronger Ey15-2 comparison in the Arabidopsis source
+paper. Rabanal et al. explicitly compare CLR and HiFi assemblies of the same
+Ey15-2 sample (9994/CS76399), and the archived HiFi run `ERR8666125` is assigned
+to BioSample `SAMEA13018399` [7]. This meets our predeclared Tier A source rule.
+
+Before inspecting TandemX old/new localization differences, we froze a primary
+comparison of Bionano-scaffolded `9994.CLR_Canu` against
+`9994.HiFi_Hifiasm`, with the authors' final HiFi-Hifiasm plus CLR-Canu assembly
+reserved for sensitivity. Primary source eligibility requires at least 15 kb
+localized in the newer assembly and deliberately does not depend on new/read
+agreement. The analysis preserves every family fate and fixes 5-, 15- and
+50-kb denominator sensitivities. Acquisition and execution remain incomplete,
+so no donor-matched performance result is reported here yet. The newer assembly
+also shares HiFi evidence with TandemX; it is a donor-matched high-quality
+reference proxy rather than absolute independent copy truth (Evidence E21).
 
 Whole-library random-sample comparator diagnostics on Morex, Nipponbare,
 Victoria, Chinese Spring and Lo7 successfully normalized all three read-tool
@@ -1109,7 +1120,7 @@ final table/figure packaging and journal-specific formatting checks.
    [source](https://github.com/lh3/minimap2).
 7. Pushing the limits of HiFi assemblies reveals centromere diversity between
    two Arabidopsis thaliana genomes.
-   [Genome Biology study](https://pmc.ncbi.nlm.nih.gov/articles/PMC9757041/).
+   [Nucleic Acids Research, doi:10.1093/nar/gkac1115](https://doi.org/10.1093/nar/gkac1115).
 8. A complete telomere-to-telomere assembly of the maize genome.
    [Nature Genetics study](https://pmc.ncbi.nlm.nih.gov/articles/PMC10335936/).
 9. Near-gapless genome assemblies of Williams 82 and Lee cultivars for

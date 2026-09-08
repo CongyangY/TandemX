@@ -1,14 +1,36 @@
 # TandemX current status and handoff
 
-Updated 2026-09-07. Read completely after `AGENTS.md`, then verify Git/tests.
+Updated 2026-09-08. Read completely after `AGENTS.md`, then verify Git/tests.
 The user has authorized autonomous development and GitHub updates toward mature
 software and a full evidence-backed paper (multi-panel figures and supplement).
 The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
-## Active 2026-09-07 continuation checkpoint
+## Active 2026-09-08 continuation checkpoint
 
 This section is the restart point for a new Codex window. Verify the state below
 before continuing and do not stage the untracked `.codex/` directory.
+
+- **A Tier A Ey15-2 donor-matched collapse candidate is now preregistered.**
+  Rabanal et al. explicitly compare CLR and HiFi assemblies of the same Ey15-2
+  sample (9994/CS76399), correcting the earlier audit that considered Col-0 but
+  missed this same-sample contrast. The primary pair holds the Bionano
+  scaffolding context constant: `9994.CLR_Canu` versus `9994.HiFi_Hifiasm`;
+  the final HiFi-Hifiasm+CLR-Canu assembly is sensitivity-only. The source and
+  complete ERR8666125 read library are already fixed; the 1.605-GB official
+  Zenodo bundle is still being acquired and must pass its published byte count
+  and MD5 before use. The frozen v1 rules are in
+  `benchmarks/configs/ey15_donor_matched_collapse_v1.json`; do not change them
+  after inspecting old/new localization results.
+- **The donor-matched evaluator is frozen before result inspection.** Primary
+  source eligibility depends only on at least 15 kb localized in the newer
+  assembly, not on new/read agreement. It preserves all family fates, separates
+  `not_source_eligible` from `technical_failure`, reports predeclared 5/15/50-kb
+  denominator sensitivities and computes confusion, Wilson intervals, balanced
+  accuracy, MCC and missing-bp agreement. Five focused tests and the full suite
+  pass: **566 tests in 64.12 s**. This is a design/software checkpoint, not a
+  completed biological result. The newer assembly shares HiFi evidence with
+  the predictor and remains a donor-matched high-quality reference proxy rather
+  than absolute independent truth.
 
 - **TideCluster comparator is active and must not be restarted blindly.** The
   pinned `tandemx/tidecluster:1.21.2` image has immutable ID
