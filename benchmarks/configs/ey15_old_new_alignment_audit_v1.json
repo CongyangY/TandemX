@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "ey15_old_new_alignment_audit_v1",
+  "parent_experiment": "ey15_donor_matched_collapse_v1",
+  "preregistration_parent_commit": "5608a9176fad039f54685e69225ef238eef31a48",
+  "status": "frozen_before_alignment_output_inspection",
+  "tool": {
+    "name": "minimap2",
+    "version": "2.31-r1302",
+    "source_commit": "3c28777e7e2dcc90f825de1b9f17a89cca7d4452",
+    "binary": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2"
+  },
+  "inputs": {
+    "old_assembly": {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/old_assembly.fa",
+      "sha256": "d7a094865701433e2ffd726495f61cc943e80bfa1ff30a7a38990dae0c7224b3",
+      "role": "target_CLR_Canu_Bionano"
+    },
+    "new_assembly": {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/new_assembly.fa",
+      "sha256": "48d67e8d26c5d9ebc1fbd772e877e2f957437b5a3b27bbdde4a1d3c77923208c",
+      "role": "query_HiFi_Hifiasm_Bionano"
+    }
+  },
+  "arguments": [
+    "-x",
+    "asm5",
+    "-t",
+    "4",
+    "-c",
+    "--eqx",
+    "--secondary=yes",
+    "-N",
+    "100"
+  ],
+  "evaluation": {
+    "eligible_family_rule": "new_localized_union_bp_at_least_15000",
+    "reference_collapse_rule": "old_to_new_localized_union_bp_ratio_below_0.6",
+    "aligned_query_operations": ["M", "=", "X"],
+    "excluded_query_insertion_operation": "I",
+    "coverage_scopes": [
+      "any_alignment",
+      "primary_alignment",
+      "same_chromosome_primary_alignment",
+      "same_chromosome_primary_mapq20_alignment"
+    ],
+    "primary_tag": "tp:A:P",
+    "same_chromosome_rule": "exact_query_target_name_equality",
+    "report_all_eligible_families": true
+  },
+  "boundary": "Post-primary orthogonal assembly-alignment context. Query segments represented only as insertions relative to the old assembly are excluded from aligned coverage. Repetitive multi-mapping, assembly rearrangement, unresolved gaps and mapper heuristics prevent this from being independent copy-number truth. No v1 prediction threshold or family catalogue may change from this audit."
+}
