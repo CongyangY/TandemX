@@ -654,7 +654,11 @@ chunk map, GNU-time record and logs by hash rather than rerunning that external
 stage (Evidence E33). The continuation implementation now normalizes manifest
 paths and requires receipt- and artifact-hash validation before it can import a
 previously successful stage. This technical failure is separate from the v1
-external resource failure and is not counted as comparator performance.
+external resource failure and is not counted as comparator performance. Before
+any further output was generated, a v3 continuation froze both prior stage
+fates by hash and prohibited both TideHunter commands from being rerun; it can
+attempt only the unstarted matched-period clustering and four wholly unstarted
+seed-setting cells.
 
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.

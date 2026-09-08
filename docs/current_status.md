@@ -176,7 +176,13 @@ before continuing and do not stage the untracked `.codex/` directory.
   successful external stage only after receipt and artifact hashes pass; the
   successful TideHunter stage must not be rerun in the next continuation. After
   this failure-retention and import hardening, the complete source suite passes
-  **628 tests in 63.25 s**; compileall and `git diff --check` also pass.
+  **628 tests in 63.25 s**; compileall and `git diff --check` also pass. The v3
+  continuation was then frozen before any remaining output at
+  `benchmarks/configs/tidecluster_factorial_continuation_v3.json` (SHA-256
+  `8838e3ffffe6cc27dc826a3edf611d2dda2d92db80f63b17dac8b4ee378d6a03`).
+  It hash-imports both prior fates, forbids rerunning both TideHunter stages,
+  and permits only the unstarted matched-period clustering plus four wholly
+  unstarted cells.
 - **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the

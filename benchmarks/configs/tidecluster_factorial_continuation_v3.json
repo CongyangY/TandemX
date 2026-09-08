@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "experiment_id": "tidecluster_factorial_validation_v3_continuation",
+  "preregistration_parent_commit": "19e2bf766f66210e39d71ab63400d92ce30fbef0",
+  "status": "frozen_after_v2_orchestration_failure_before_any_remaining_stage_output",
+  "base_config": "benchmarks/configs/tidecluster_factorial_validation_v1.json",
+  "base_config_sha256": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39",
+  "parent_failure_dir": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v1_20260908",
+  "parent_artifacts": {
+    "run_receipt.json": "1d708955250cc93baf3edea8494cb9e225bd8ebb745eeffa879c87536097c8d0",
+    "profile/stages.tsv": "8025283b96365802d1b137244141594b3c2fcfaf41de04caa2980597d8b2aa4d",
+    "stage_manifest.json": "df16f881563f72f4feb30b2890ec9dfaec09aa8e4da6310c9fc3b52209ebeeb0",
+    "seed6401/default_primary/tidehunter.gnu_time.txt": "73044ac814254169922738a23407921b25dc044d86050d49929d2ca9cb47eb28",
+    "profile/s6401_default_primary_tidehunter.stderr.log": "ecda184b167c056f0a87acddb956c957e9665f4c312b3ee92aee5a7d3b46081f"
+  },
+  "imported_failed_stages": [
+    "s6401_default_primary_tidehunter"
+  ],
+  "imported_successful_stages": {
+    "s6401_matched_period_sensitivity_tidehunter": {
+      "source_dir": "/Volumes/T7/Codex/TandemX/results/tidecluster_factorial_validation_v2_continuation_20260908",
+      "artifacts": {
+        "run_receipt.json": "9549d5fe1597fffc49e5a6197e41e0bbd08776263cc53e68bc7897041f6dc9e6",
+        "environment.json": "f60b3ee0bc462eaadce6247af581a0e7c11dd4242965479b33aafe58b9becade",
+        "stage_manifest.json": "4aa510c5a5885f574049ab99eef208fc9b4bd24812cc275a87b9e4a9a3e201ce",
+        "profile/s6401_matched_period_sensitivity_tidehunter.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "profile/s6401_matched_period_sensitivity_tidehunter.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt": "acd06e23fc74baf05af53a76801a9981499bdd706b08b3419e1364320a49e1ae",
+        "seed6401/matched_period_sensitivity/tc_cmd_args.json": "bfb942e0f32d1cf10973dd087c7aa9320ff3dec52600ba052f4ca5f0a3585c7a",
+        "seed6401/matched_period_sensitivity/tc_chunks.bed": "a19742f6e275f9524e199b18059c405bd6aa782be3a091dceffcb149fa1d91ad",
+        "seed6401/matched_period_sensitivity/tc_tidehunter.gff3": "862f2f8960bd0fe0dfb94273c5f4e73053e08be9d14ca52091cc504d24580b5c",
+        "source_snapshot/factorial_continue.py": "4c9619cb849269c67b8de5c6be6863f179b39fe955894ac7c2ec71b5768731fa",
+        "source_snapshot/tidecluster_factorial_continuation_v2.json": "665c562c263fb0365f779845264f60351a8fc94f0b648cf4a2e234cb6b55d146",
+        "source_snapshot/tidecluster_factorial_validation_v1.json": "687ceee3fe536d48742040ad471afc619d49ef1cfecc067bf2f310f41fa38b39"
+      },
+      "copy_outputs": [
+        "seed6401/matched_period_sensitivity/tidehunter.gnu_time.txt",
+        "seed6401/matched_period_sensitivity/tc_cmd_args.json",
+        "seed6401/matched_period_sensitivity/tc_chunks.bed",
+        "seed6401/matched_period_sensitivity/tc_tidehunter.gff3"
+      ]
+    }
+  },
+  "never_rerun_stages": [
+    "s6401_default_primary_tidehunter",
+    "s6401_matched_period_sensitivity_tidehunter"
+  ],
+  "continuation_rule": {
+    "unit": "seed_and_setting_cell",
+    "attempt_unstarted_cells": true,
+    "after_tidehunter_failure": "record_external_resource_failure_skip_dependent_clustering_continue_next_cell",
+    "after_clustering_failure": "record_external_resource_failure_continue_next_cell",
+    "after_normalization_or_evaluation_failure": "record_technical_failure_continue_next_cell",
+    "all_original_datasets_settings_commands_and_accuracy_rules_unchanged": true,
+    "complete_means_all_six_cell_fates_recorded_not_all_stages_successful": true,
+    "missing_accuracy_is_NA_not_zero": true
+  },
+  "boundary": "This continuation imports the v1 default-setting TideHunter resource failure and the v2 matched-period TideHunter success by exact receipt and artifact hashes. Neither external stage may be rerun. It may attempt only the successful stage's unstarted clustering plus the four wholly unstarted seed-setting cells, without changing any original data, command, setting or evaluation rule."
+}
