@@ -1,0 +1,535 @@
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.86kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/condaforge/miniforge3@sha256:2052d26e02808699f24f8c67f6900fce705563c04fd4bcc4e5dca434265524f4
+#2 DONE 2.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/condaforge/miniforge3@sha256:2052d26e02808699f24f8c67f6900fce705563c04fd4bcc4e5dca434265524f4
+#4 CACHED
+
+#5 [2/4] RUN mamba create -y -n unitfinder -c conda-forge -c bioconda       python=3.11 biopython numpy matplotlib-base scikit-learn       trf=4.09.1 mummer4=4.0.1 clustalo=1.2.4 time git     && mamba clean --all --yes
+#5 37.48 
+#5 38.63 
+#5 38.63 Transaction
+#5 38.63 
+#5 38.63   Prefix: /opt/conda/envs/unitfinder
+#5 38.63 
+#5 38.63   Updating specs:
+#5 38.63 
+#5 38.63    - python=3.11
+#5 38.63    - biopython
+#5 38.63    - numpy
+#5 38.63    - matplotlib-base
+#5 38.63    - scikit-learn
+#5 38.63    - trf=4.9.1
+#5 38.63    - mummer4=4.0.1
+#5 38.63    - clustalo=1.2.4
+#5 38.63    - time
+#5 38.63    - git
+#5 38.63 
+#5 38.63 
+#5 38.64   Package                           Version  Build                 Channel          Size
+#5 38.64 ──────────────────────────────────────────────────────────────────────────────────────────
+#5 38.64   Install:
+#5 38.64 ──────────────────────────────────────────────────────────────────────────────────────────
+#5 38.64 
+#5 38.64   + _openmp_mutex                       4.5  20_gnu                conda-forge      29kB
+#5 38.64   + argtable2                          2.13  hd590300_1004         conda-forge       2MB
+#5 38.64   + biopython                          1.88  py311h49ec1c0_0       conda-forge       3MB
+#5 38.64   + brotli                            1.2.0  h505cf86_4            conda-forge      21kB
+#5 38.64   + brotli-bin                        1.2.0  h9908984_4            conda-forge      22kB
+#5 38.64   + bzip2                             1.0.8  hda65f42_10           conda-forge     258kB
+#5 38.64   + c-ares                           1.34.8  hebe6cf0_2            conda-forge     229kB
+#5 38.64   + ca-certificates               2026.7.22  hbd8a1cb_0            conda-forge     132kB
+#5 38.64   + cairo                            1.18.4  h3c89d7e_3            conda-forge     991kB
+#5 38.64   + cloudpickle                       3.1.2  pyhcf101f3_1          conda-forge      27kB
+#5 38.64   + clustalo                          1.2.4  h503566f_10           bioconda        219kB
+#5 38.64   + contourpy                         1.3.3  py311h724c32c_4       conda-forge     321kB
+#5 38.64   + cycler                           0.12.1  pyhcf101f3_2          conda-forge      15kB
+#5 38.64   + font-ttf-dejavu-sans-mono          2.37  hab24e00_0            conda-forge     397kB
+#5 38.64   + font-ttf-inconsolata              3.000  h77eed37_0            conda-forge      97kB
+#5 38.64   + font-ttf-source-code-pro          2.038  h77eed37_0            conda-forge     701kB
+#5 38.64   + font-ttf-ubuntu                    0.83  h77eed37_3            conda-forge       2MB
+#5 38.64   + fontconfig                       2.18.3  h4db4eae_1            conda-forge     296kB
+#5 38.64   + fonts-conda-ecosystem                 1  0                     conda-forge       4kB
+#5 38.64   + fonts-conda-forge                     1  hc364b38_1            conda-forge       4kB
+#5 38.64   + fonttools                        4.63.0  py311h3778330_0       conda-forge       3MB
+#5 38.64   + freetype                         2.14.3  ha770c72_2            conda-forge     175kB
+#5 38.64   + fribidi                          1.0.16  h7cc23a3_2            conda-forge      62kB
+#5 38.64   + gdbm                               1.18  h0a1914f_2            conda-forge     195kB
+#5 38.64   + git                              2.55.0  pl5321h5685339_1      conda-forge      12MB
+#5 38.64   + gmp                               6.3.0  hfd2156b_3            conda-forge     493kB
+#5 38.64   + graphite2                        1.3.15  h54a6638_1            conda-forge     103kB
+#5 38.64   + icu                                78.3  py310h44b86e0_2       conda-forge      14MB
+#5 38.64   + joblib                            1.6.0  pyhcf101f3_0          conda-forge     229kB
+#5 38.64   + keyutils                          1.6.3  h7cc23a3_1            conda-forge     135kB
+#5 38.64   + kiwisolver                        1.5.1  py311h4c6fd42_1       conda-forge      77kB
+#5 38.64   + krb5                             1.22.2  hbc21106_2            conda-forge       1MB
+#5 38.64   + lcms2                            2.19.1  h9073bf1_2            conda-forge     254kB
+#5 38.64   + ld_impl_linux-64                 2.46.1  default_hbd61a6d_102  conda-forge     745kB
+#5 38.64   + lerc                              4.2.0  hdb68285_0            conda-forge     271kB
+#5 38.64   + libblas                          3.11.0  10_h4a7cf45_openblas  conda-forge      18kB
+#5 38.64   + libbrotlicommon                   1.2.0  h39a168f_4            conda-forge      81kB
+#5 38.64   + libbrotlidec                      1.2.0  ha411449_4            conda-forge      35kB
+#5 38.64   + libbrotlienc                      1.2.0  h018ffa1_4            conda-forge     298kB
+#5 38.64   + libcblas                         3.11.0  10_h0358290_openblas  conda-forge      18kB
+#5 38.64   + libcurl                          8.22.0  ha042cf0_0            conda-forge     500kB
+#5 38.64   + libdeflate                         1.25  hd45a770_1            conda-forge      74kB
+#5 38.64   + libedit                    3.1.20250104  pl5321h373387f_1      conda-forge     135kB
+#5 38.64   + libev                              4.33  h280c20c_3            conda-forge      43kB
+#5 38.64   + libexpat                          2.8.1  hecca717_1            conda-forge      78kB
+#5 38.64   + libffi                            3.7.0  h81df57d_1            conda-forge      68kB
+#5 38.64   + libfreetype                      2.14.3  ha770c72_2            conda-forge       8kB
+#5 38.64   + libfreetype6                     2.14.3  h5e6c136_2            conda-forge     388kB
+#5 38.64   + libgcc                           16.2.0  ha9f2e26_4            conda-forge       1MB
+#5 38.64   + libgcc-ng                        16.2.0  h69a702a_4            conda-forge      28kB
+#5 38.64   + libgfortran                      16.2.0  h69a702a_4            conda-forge      28kB
+#5 38.64   + libgfortran5                     16.2.0  h6b99dfc_4            conda-forge       3MB
+#5 38.64   + libglib                          2.88.3  he503a2a_3            conda-forge       5MB
+#5 38.64   + libgomp                          16.2.0  he0feb66_4            conda-forge     640kB
+#5 38.64   + libharfbuzz                      14.4.0  h23af247_1            conda-forge       1MB
+#5 38.64   + libiconv                           1.18  h0cb94f2_3            conda-forge     789kB
+#5 38.64   + libjpeg-turbo                     3.2.0  hb03c661_1            conda-forge     650kB
+#5 38.64   + liblapack                        3.11.0  10_h47877c9_openblas  conda-forge      18kB
+#5 38.64   + liblzma                           5.8.3  hb03c661_1            conda-forge     113kB
+#5 38.64   + libnghttp2                       1.68.1  h74cf4be_1            conda-forge     650kB
+#5 38.64   + libnsl                            2.0.1  hb9d3cd8_1            conda-forge      34kB
+#5 38.64   + libopenblas                      0.3.34  pthreads_hcf972fe_1   conda-forge       6MB
+#5 38.64   + libpng                           1.6.58  h922cc85_1            conda-forge     317kB
+#5 38.64   + libpsl                           0.23.1  hd9e3e90_1            conda-forge      73kB
+#5 38.64   + libpython                       3.11.16  h0c77377_2_cpython    conda-forge       8MB
+#5 38.64   + libraqm                          0.11.0  h6406941_0            conda-forge      34kB
+#5 38.64   + libsqlite                        3.53.4  h13e7031_1            conda-forge     974kB
+#5 38.64   + libssh2                          1.11.1  h6154650_1            conda-forge     306kB
+#5 38.64   + libstdcxx                        16.2.0  h934c35e_4            conda-forge       7MB
+#5 38.64   + libstdcxx-ng                     16.2.0  hdf11a46_4            conda-forge      28kB
+#5 38.64   + libtiff                           4.7.2  hcc2c06a_1            conda-forge     460kB
+#5 38.64   + libuuid                          2.42.3  hcfc3c73_0            conda-forge      40kB
+#5 38.64   + libwebp-base                      1.6.0  hd42ef1d_1            conda-forge     428kB
+#5 38.64   + libxcb                           1.17.0  hb83e432_2            conda-forge     395kB
+#5 38.64   + libxcrypt                        4.4.38  h280c20c_0            conda-forge     102kB
+#5 38.64   + libzlib                           1.3.2  h25fd6f3_3            conda-forge      64kB
+#5 38.64   + matplotlib-base                  3.11.1  py311he401cf6_2       conda-forge       9MB
+#5 38.64   + mummer4                           4.0.1  pl5321h9948957_0      bioconda        877kB
+#5 38.64   + munkres                           1.1.4  pyhd8ed1ab_1          conda-forge      16kB
+#5 38.64   + narwhals                         2.25.0  pyhcf101f3_0          conda-forge     294kB
+#5 38.64   + ncurses                             6.6  hdb14827_1            conda-forge     911kB
+#5 38.64   + numpy                             2.4.6  py311h2e04523_0       conda-forge       9MB
+#5 38.64   + openjpeg                          2.5.4  heb1ab33_2            conda-forge     391kB
+#5 38.64   + openssl                           3.6.4  h781a0a9_0            conda-forge       3MB
+#5 38.64   + packaging                          26.3  pyhc364b38_0          conda-forge     116kB
+#5 38.64   + pcre2                             10.47  h8b3dc9c_1            conda-forge       1MB
+#5 38.64   + perl                             5.32.1  7_hd590300_perl5      conda-forge      13MB
+#5 38.64   + pillow                           12.3.0  py311hf303fd3_2       conda-forge       1MB
+#5 38.64   + pip                              26.2.1  pyh8b19718_0          conda-forge       1MB
+#5 38.64   + pixman                           0.46.4  h54a6638_3            conda-forge     377kB
+#5 38.64   + pthread-stubs                       0.4  h7cc23a3_1004         conda-forge      10kB
+#5 38.64   + pyparsing                         3.3.2  pyhcf101f3_0          conda-forge     111kB
+#5 38.64   + python                          3.11.16  h5f976f7_2_cpython    conda-forge      23MB
+#5 38.64   + python-dateutil             2.9.0.post0  pyhe01879c_2          conda-forge     233kB
+#5 38.64   + python_abi                         3.11  9_cp311               conda-forge       7kB
+#5 38.64   + qhull                            2020.2  h434a139_5            conda-forge     553kB
+#5 38.64   + readline                            8.3  hd6e31c0_1            conda-forge     349kB
+#5 38.64   + ruby                              3.4.2  he7af4c9_0            conda-forge      13MB
+#5 38.64   + scikit-learn                      1.9.0  np2py311ha15b03d_0    conda-forge      10MB
+#5 38.64   + scipy                            1.17.1  py311hbe70eeb_1       conda-forge      17MB
+#5 38.64   + setuptools                       84.0.0  pyh332efcf_0          conda-forge     524kB
+#5 38.64   + six                              1.17.0  pyhe01879c_1          conda-forge      18kB
+#5 38.64   + threadpoolctl                     3.6.0  pyhecae5ae_0          conda-forge      24kB
+#5 38.64   + time                               1.10  h280c20c_0            conda-forge      42kB
+#5 38.64   + tk                               8.6.13  noxft_h1df4ec4_4      conda-forge       4MB
+#5 38.64   + trf                              4.09.1  h7b50bb2_7            bioconda         70kB
+#5 38.64   + tzdata                            2026c  h151e31d_0            conda-forge     119kB
+#5 38.64   + unicodedata2                     17.0.1  py311h0d48ccd_1       conda-forge     413kB
+#5 38.64   + wheel                            0.48.0  pyhd8ed1ab_0          conda-forge      35kB
+#5 38.64   + xorg-libice                       1.1.2  h280c20c_0            conda-forge      63kB
+#5 38.64   + xorg-libsm                        1.2.6  h0d788c3_1            conda-forge      31kB
+#5 38.64   + xorg-libx11                      1.8.13  he1eb515_1            conda-forge     840kB
+#5 38.64   + xorg-libxau                      1.0.12  hb03c661_2            conda-forge      16kB
+#5 38.64   + xorg-libxdmcp                     1.1.5  hb03c661_2            conda-forge      21kB
+#5 38.64   + xorg-libxext                      1.3.7  h7cc23a3_1            conda-forge      53kB
+#5 38.64   + xorg-libxrender                  0.9.12  hb03c661_1            conda-forge      35kB
+#5 38.64   + yaggo                            1.5.10  hdfd78af_1            bioconda         24kB
+#5 38.64   + yaml                              0.2.5  hebe6cf0_3            conda-forge      85kB
+#5 38.64   + zlib-ng                           2.3.3  hce19668_1            conda-forge     124kB
+#5 38.64   + zstd                              1.5.7  hb78ec9c_7            conda-forge     601kB
+#5 38.64 
+#5 38.64   Summary:
+#5 38.64 
+#5 38.64   Install: 120 packages
+#5 38.64 
+#5 38.64   Total download: 195MB
+#5 38.64 
+#5 38.64 ──────────────────────────────────────────────────────────────────────────────────────────
+#5 38.64 
+#5 38.64 
+#5 38.65 
+#5 38.65 Transaction starting
+#5 76.79 error    libmamba Could not set lock (Resource temporarily unavailable)
+#5 76.79 warning  libmamba Cannot lock '/opt/conda/pkgs/mummer4-4.0.1-pl5321h9948957_0.tar.bz2'
+#5 76.79     Waiting for other mamba process to finish
+#5 77.73 error    libmamba Could not set lock (Resource temporarily unavailable)
+#5 77.73 warning  libmamba Cannot lock '/opt/conda/pkgs/font-ttf-source-code-pro-2.038-h77eed37_0.tar.bz2'
+#5 77.73     Waiting for other mamba process to finish
+#5 83.50 Linking libgomp-16.2.0-he0feb66_4
+#5 83.51 Linking libzlib-1.3.2-h25fd6f3_3
+#5 83.51 Linking _openmp_mutex-4.5-20_gnu
+#5 83.52 Linking zstd-1.5.7-hb78ec9c_7
+#5 83.52 Linking libgcc-16.2.0-ha9f2e26_4
+#5 83.52 Linking ld_impl_linux-64-2.46.1-default_hbd61a6d_102
+#5 83.54 Linking yaml-0.2.5-hebe6cf0_3
+#5 83.54 Linking xorg-libice-1.1.2-h280c20c_0
+#5 83.54 Linking libev-4.33-h280c20c_3
+#5 83.54 Linking c-ares-1.34.8-hebe6cf0_2
+#5 83.55 Linking keyutils-1.6.3-h7cc23a3_1
+#5 83.55 Linking libdeflate-1.25-hd45a770_1
+#5 83.55 Linking xorg-libxdmcp-1.1.5-hb03c661_2
+#5 83.55 Linking xorg-libxau-1.0.12-hb03c661_2
+#5 83.55 Linking pthread-stubs-0.4-h7cc23a3_1004
+#5 83.55 Linking libwebp-base-1.6.0-hd42ef1d_1
+#5 83.56 Linking libjpeg-turbo-3.2.0-hb03c661_1
+#5 83.56 Linking libgfortran5-16.2.0-h6b99dfc_4
+#5 83.56 Linking libbrotlicommon-1.2.0-h39a168f_4
+#5 83.56 Linking libiconv-1.18-h0cb94f2_3
+#5 83.57 Linking libpng-1.6.58-h922cc85_1
+#5 83.57 Linking fribidi-1.0.16-h7cc23a3_2
+#5 83.57 Linking tk-8.6.13-noxft_h1df4ec4_4
+#5 83.60 Linking ncurses-6.6-hdb14827_1
+#5 84.74 Linking libnsl-2.0.1-hb9d3cd8_1
+#5 84.74 Linking liblzma-5.8.3-hb03c661_1
+#5 84.74 Linking libffi-3.7.0-h81df57d_1
+#5 84.74 Linking libexpat-2.8.1-hecca717_1
+#5 84.74 Linking bzip2-1.0.8-hda65f42_10
+#5 84.74 Linking libgcc-ng-16.2.0-h69a702a_4
+#5 84.74 Linking libstdcxx-16.2.0-h934c35e_4
+#5 84.75 Linking time-1.10-h280c20c_0
+#5 84.75 Linking libxcrypt-4.4.38-h280c20c_0
+#5 84.75 Linking libuuid-2.42.3-hcfc3c73_0
+#5 84.75 Linking libxcb-1.17.0-hb83e432_2
+#5 84.76 Linking libgfortran-16.2.0-h69a702a_4
+#5 84.76 Linking libbrotlienc-1.2.0-h018ffa1_4
+#5 84.76 Linking libbrotlidec-1.2.0-ha411449_4
+#5 84.76 Linking libfreetype6-2.14.3-h5e6c136_2
+#5 84.76 Linking libedit-3.1.20250104-pl5321h373387f_1
+#5 84.76 Linking readline-8.3-hd6e31c0_1
+#5 84.76 Linking pcre2-10.47-h8b3dc9c_1
+#5 84.78 Linking argtable2-2.13-hd590300_1004
+#5 84.78 Linking graphite2-1.3.15-h54a6638_1
+#5 84.78 Linking icu-78.3-py310h44b86e0_2
+#5 84.80 Linking zlib-ng-2.3.3-hce19668_1
+#5 84.80 Linking lerc-4.2.0-hdb68285_0
+#5 84.80 Linking gmp-6.3.0-hfd2156b_3
+#5 84.80 Linking pixman-0.46.4-h54a6638_3
+#5 84.80 Linking libstdcxx-ng-16.2.0-hdf11a46_4
+#5 84.80 Linking libpython-3.11.16-h0c77377_2_cpython
+#5 84.90 Linking perl-5.32.1-7_hd590300_perl5
+#5 85.11 Linking xorg-libsm-1.2.6-h0d788c3_1
+#5 85.11 Linking xorg-libx11-1.8.13-he1eb515_1
+#5 85.13 Linking libopenblas-0.3.34-pthreads_hcf972fe_1
+#5 85.13 Linking brotli-bin-1.2.0-h9908984_4
+#5 85.13 Linking libfreetype-2.14.3-ha770c72_2
+#5 85.13 Linking gdbm-1.18-h0a1914f_2
+#5 85.13 Linking libglib-2.88.3-he503a2a_3
+#5 85.17 Linking libsqlite-3.53.4-h13e7031_1
+#5 85.17 Linking libpsl-0.23.1-hd9e3e90_1
+#5 85.17 Linking libtiff-4.7.2-hcc2c06a_1
+#5 85.17 Linking qhull-2020.2-h434a139_5
+#5 85.18 Linking xorg-libxrender-0.9.12-hb03c661_1
+#5 85.18 Linking xorg-libxext-1.3.7-h7cc23a3_1
+#5 85.18 Linking libblas-3.11.0-10_h4a7cf45_openblas
+#5 85.41 Linking brotli-1.2.0-h505cf86_4
+#5 85.41 Linking fontconfig-2.18.3-h4db4eae_1
+#5 85.42 Linking freetype-2.14.3-ha770c72_2
+#5 85.43 Linking openjpeg-2.5.4-heb1ab33_2
+#5 85.43 Linking lcms2-2.19.1-h9073bf1_2
+#5 85.43 Linking libcblas-3.11.0-10_h0358290_openblas
+#5 85.65 Linking liblapack-3.11.0-10_h47877c9_openblas
+#5 85.87 Linking python_abi-3.11-9_cp311
+#5 85.87 Linking tzdata-2026c-h151e31d_0
+#5 85.90 Linking ca-certificates-2026.7.22-hbd8a1cb_0
+#5 85.90 Linking font-ttf-dejavu-sans-mono-2.37-hab24e00_0
+#5 85.90 Linking font-ttf-ubuntu-0.83-h77eed37_3
+#5 85.90 Linking font-ttf-inconsolata-3.000-h77eed37_0
+#5 85.90 Linking font-ttf-source-code-pro-2.038-h77eed37_0
+#5 85.90 Linking fonts-conda-forge-1-hc364b38_1
+#5 85.90 Linking fonts-conda-ecosystem-1-0
+#5 85.90 Linking trf-4.09.1-h7b50bb2_7
+#5 85.90 Linking clustalo-1.2.4-h503566f_10
+#5 85.90 Linking openssl-3.6.4-h781a0a9_0
+#5 85.94 Linking cairo-1.18.4-h3c89d7e_3
+#5 85.94 Linking libssh2-1.11.1-h6154650_1
+#5 85.95 Linking libnghttp2-1.68.1-h74cf4be_1
+#5 85.95 Linking krb5-1.22.2-hbc21106_2
+#5 85.97 Linking ruby-3.4.2-he7af4c9_0
+#5 86.11 Linking python-3.11.16-h5f976f7_2_cpython
+#5 86.32 Linking libharfbuzz-14.4.0-h23af247_1
+#5 86.32 Linking libcurl-8.22.0-ha042cf0_0
+#5 86.33 Linking libraqm-0.11.0-h6406941_0
+#5 86.33 Linking git-2.55.0-pl5321h5685339_1
+#5 86.51 Linking yaggo-1.5.10-hdfd78af_1
+#5 86.51 Linking setuptools-84.0.0-pyh332efcf_0
+#5 86.55 Linking packaging-26.3-pyhc364b38_0
+#5 86.55 Linking wheel-0.48.0-pyhd8ed1ab_0
+#5 86.55 Linking pip-26.2.1-pyh8b19718_0
+#5 86.58 Linking cloudpickle-3.1.2-pyhcf101f3_1
+#5 86.58 Linking six-1.17.0-pyhe01879c_1
+#5 86.58 Linking munkres-1.1.4-pyhd8ed1ab_1
+#5 86.58 Linking pyparsing-3.3.2-pyhcf101f3_0
+#5 86.58 Linking cycler-0.12.1-pyhcf101f3_2
+#5 86.58 Linking threadpoolctl-3.6.0-pyhecae5ae_0
+#5 86.58 Linking narwhals-2.25.0-pyhcf101f3_0
+#5 86.59 Linking joblib-1.6.0-pyhcf101f3_0
+#5 86.60 Linking python-dateutil-2.9.0.post0-pyhe01879c_2
+#5 86.60 Linking mummer4-4.0.1-pl5321h9948957_0
+#5 86.60 Linking unicodedata2-17.0.1-py311h0d48ccd_1
+#5 86.61 Linking pillow-12.3.0-py311hf303fd3_2
+#5 86.62 Linking kiwisolver-1.5.1-py311h4c6fd42_1
+#5 86.62 Linking numpy-2.4.6-py311h2e04523_0
+#5 86.69 Linking fonttools-4.63.0-py311h3778330_0
+#5 86.73 Linking contourpy-1.3.3-py311h724c32c_4
+#5 86.73 Linking scipy-1.17.1-py311hbe70eeb_1
+#5 86.79 Linking biopython-1.88-py311h49ec1c0_0
+#5 86.84 Linking matplotlib-base-3.11.1-py311he401cf6_2
+#5 86.88 Linking scikit-learn-1.9.0-np2py311ha15b03d_0
+#5 87.30 
+#5 87.30 Transaction finished
+#5 87.30 
+#5 87.31 
+#5 87.31 To activate this environment, use:
+#5 87.31 
+#5 87.31     mamba activate unitfinder
+#5 87.31 
+#5 87.31 Or to execute a single command in this environment, use:
+#5 87.31 
+#5 87.31     mamba run -n unitfinder mycommand
+#5 87.31 
+#5 87.41 Collect information..
+#5 87.41 Cleaning index cache..
+#5 87.46 Cleaning lock files..
+#5 87.47   Package file                                           Size
+#5 87.47 ───────────────────────────────────────────────────────────────
+#5 87.47   /opt/conda/pkgs
+#5 87.47 ───────────────────────────────────────────────────────────────
+#5 87.47 
+#5 87.47   _openmp_mutex-4.5-20_gnu.conda                         29kB
+#5 87.47   argtable2-2.13-hd590300_1004.conda                      2MB
+#5 87.47   biopython-1.88-py311h49ec1c0_0.conda                    3MB
+#5 87.47   brotli-1.2.0-h505cf86_4.conda                          21kB
+#5 87.47   brotli-bin-1.2.0-h9908984_4.conda                      22kB
+#5 87.47   bzip2-1.0.8-hda65f42_10.conda                         258kB
+#5 87.47   c-ares-1.34.8-hebe6cf0_2.conda                        229kB
+#5 87.47   ca-certificates-2026.7.22-hbd8a1cb_0.conda            132kB
+#5 87.47   cairo-1.18.4-h3c89d7e_3.conda                         991kB
+#5 87.47   cloudpickle-3.1.2-pyhcf101f3_1.conda                   27kB
+#5 87.47   clustalo-1.2.4-h503566f_10.conda                      219kB
+#5 87.47   contourpy-1.3.3-py311h724c32c_4.conda                 321kB
+#5 87.47   cycler-0.12.1-pyhcf101f3_2.conda                       15kB
+#5 87.47   font-ttf-dejavu-sans-mono-2.37-hab24e00_0.tar.bz2     397kB
+#5 87.47   font-ttf-inconsolata-3.000-h77eed37_0.tar.bz2          97kB
+#5 87.47   font-ttf-source-code-pro-2.038-h77eed37_0.tar.bz2     701kB
+#5 87.47   font-ttf-ubuntu-0.83-h77eed37_3.conda                   2MB
+#5 87.47   fontconfig-2.18.3-h4db4eae_1.conda                    296kB
+#5 87.47   fonts-conda-ecosystem-1-0.tar.bz2                       4kB
+#5 87.47   fonts-conda-forge-1-hc364b38_1.conda                    4kB
+#5 87.47   fonttools-4.63.0-py311h3778330_0.conda                  3MB
+#5 87.47   freetype-2.14.3-ha770c72_2.conda                      175kB
+#5 87.47   fribidi-1.0.16-h7cc23a3_2.conda                        62kB
+#5 87.47   gdbm-1.18-h0a1914f_2.tar.bz2                          195kB
+#5 87.47   git-2.55.0-pl5321h5685339_1.conda                      12MB
+#5 87.47   gmp-6.3.0-hfd2156b_3.conda                            493kB
+#5 87.47   graphite2-1.3.15-h54a6638_1.conda                     103kB
+#5 87.47   icu-78.3-py310h44b86e0_2.conda                         14MB
+#5 87.47   joblib-1.6.0-pyhcf101f3_0.conda                       229kB
+#5 87.47   keyutils-1.6.3-h7cc23a3_1.conda                       135kB
+#5 87.47   kiwisolver-1.5.1-py311h4c6fd42_1.conda                 77kB
+#5 87.47   krb5-1.22.2-hbc21106_2.conda                            1MB
+#5 87.47   lcms2-2.19.1-h9073bf1_2.conda                         254kB
+#5 87.47   ld_impl_linux-64-2.46.1-default_hbd61a6d_102.conda    745kB
+#5 87.47   lerc-4.2.0-hdb68285_0.conda                           271kB
+#5 87.47   libblas-3.11.0-10_h4a7cf45_openblas.conda              18kB
+#5 87.47   libbrotlicommon-1.2.0-h39a168f_4.conda                 81kB
+#5 87.47   libbrotlidec-1.2.0-ha411449_4.conda                    35kB
+#5 87.47   libbrotlienc-1.2.0-h018ffa1_4.conda                   298kB
+#5 87.47   libcblas-3.11.0-10_h0358290_openblas.conda             18kB
+#5 87.47   libcurl-8.22.0-ha042cf0_0.conda                       500kB
+#5 87.47   libdeflate-1.25-hd45a770_1.conda                       74kB
+#5 87.47   libedit-3.1.20250104-pl5321h373387f_1.conda           135kB
+#5 87.47   libev-4.33-h280c20c_3.conda                            43kB
+#5 87.47   libexpat-2.8.1-hecca717_1.conda                        78kB
+#5 87.47   libffi-3.7.0-h81df57d_1.conda                          68kB
+#5 87.47   libfreetype-2.14.3-ha770c72_2.conda                     8kB
+#5 87.47   libfreetype6-2.14.3-h5e6c136_2.conda                  388kB
+#5 87.47   libgcc-16.2.0-ha9f2e26_4.conda                          1MB
+#5 87.47   libgcc-ng-16.2.0-h69a702a_4.conda                      28kB
+#5 87.47   libgfortran-16.2.0-h69a702a_4.conda                    28kB
+#5 87.47   libgfortran5-16.2.0-h6b99dfc_4.conda                    3MB
+#5 87.47   libglib-2.88.3-he503a2a_3.conda                         5MB
+#5 87.47   libgomp-16.2.0-he0feb66_4.conda                       640kB
+#5 87.47   libharfbuzz-14.4.0-h23af247_1.conda                     1MB
+#5 87.47   libiconv-1.18-h0cb94f2_3.conda                        789kB
+#5 87.47   libjpeg-turbo-3.2.0-hb03c661_1.conda                  650kB
+#5 87.47   liblapack-3.11.0-10_h47877c9_openblas.conda            18kB
+#5 87.47   liblzma-5.8.3-hb03c661_1.conda                        113kB
+#5 87.47   libnghttp2-1.68.1-h74cf4be_1.conda                    650kB
+#5 87.47   libnsl-2.0.1-hb9d3cd8_1.conda                          34kB
+#5 87.47   libopenblas-0.3.34-pthreads_hcf972fe_1.conda            6MB
+#5 87.47   libpng-1.6.58-h922cc85_1.conda                        317kB
+#5 87.47   libpsl-0.23.1-hd9e3e90_1.conda                         73kB
+#5 87.47   libpython-3.11.16-h0c77377_2_cpython.conda              8MB
+#5 87.47   libraqm-0.11.0-h6406941_0.conda                        34kB
+#5 87.47   libsqlite-3.53.4-h13e7031_1.conda                     974kB
+#5 87.47   libssh2-1.11.1-h6154650_1.conda                       306kB
+#5 87.47   libstdcxx-16.2.0-h934c35e_4.conda                       7MB
+#5 87.47   libstdcxx-ng-16.2.0-hdf11a46_4.conda                   28kB
+#5 87.47   libtiff-4.7.2-hcc2c06a_1.conda                        460kB
+#5 87.47   libuuid-2.42.3-hcfc3c73_0.conda                        40kB
+#5 87.47   libwebp-base-1.6.0-hd42ef1d_1.conda                   428kB
+#5 87.47   libxcb-1.17.0-hb83e432_2.conda                        395kB
+#5 87.47   libxcrypt-4.4.38-h280c20c_0.conda                     102kB
+#5 87.47   libzlib-1.3.2-h25fd6f3_3.conda                         64kB
+#5 87.47   matplotlib-base-3.11.1-py311he401cf6_2.conda            9MB
+#5 87.47   mummer4-4.0.1-pl5321h9948957_0.tar.bz2                877kB
+#5 87.47   munkres-1.1.4-pyhd8ed1ab_1.conda                       16kB
+#5 87.47   narwhals-2.25.0-pyhcf101f3_0.conda                    294kB
+#5 87.47   ncurses-6.6-hdb14827_1.conda                          911kB
+#5 87.47   numpy-2.4.6-py311h2e04523_0.conda                       9MB
+#5 87.47   openjpeg-2.5.4-heb1ab33_2.conda                       391kB
+#5 87.47   openssl-3.6.4-h781a0a9_0.conda                          3MB
+#5 87.47   packaging-26.3-pyhc364b38_0.conda                     116kB
+#5 87.47   pcre2-10.47-h8b3dc9c_1.conda                            1MB
+#5 87.47   perl-5.32.1-7_hd590300_perl5.conda                     13MB
+#5 87.47   pillow-12.3.0-py311hf303fd3_2.conda                     1MB
+#5 87.47   pip-26.2.1-pyh8b19718_0.conda                           1MB
+#5 87.47   pixman-0.46.4-h54a6638_3.conda                        377kB
+#5 87.47   pthread-stubs-0.4-h7cc23a3_1004.conda                  10kB
+#5 87.47   pyparsing-3.3.2-pyhcf101f3_0.conda                    111kB
+#5 87.47   python-3.11.16-h5f976f7_2_cpython.conda                23MB
+#5 87.47   python-dateutil-2.9.0.post0-pyhe01879c_2.conda        233kB
+#5 87.47   python_abi-3.11-9_cp311.conda                           7kB
+#5 87.47   qhull-2020.2-h434a139_5.conda                         553kB
+#5 87.47   readline-8.3-hd6e31c0_1.conda                         349kB
+#5 87.47   ruby-3.4.2-he7af4c9_0.conda                            13MB
+#5 87.47   scikit-learn-1.9.0-np2py311ha15b03d_0.conda            10MB
+#5 87.47   scipy-1.17.1-py311hbe70eeb_1.conda                     17MB
+#5 87.47   setuptools-84.0.0-pyh332efcf_0.conda                  524kB
+#5 87.47   six-1.17.0-pyhe01879c_1.conda                          18kB
+#5 87.47   threadpoolctl-3.6.0-pyhecae5ae_0.conda                 24kB
+#5 87.47   time-1.10-h280c20c_0.conda                             42kB
+#5 87.47   tk-8.6.13-noxft_h1df4ec4_4.conda                        4MB
+#5 87.47   trf-4.09.1-h7b50bb2_7.tar.bz2                          70kB
+#5 87.47   tzdata-2026c-h151e31d_0.conda                         119kB
+#5 87.47   unicodedata2-17.0.1-py311h0d48ccd_1.conda             413kB
+#5 87.47   wheel-0.48.0-pyhd8ed1ab_0.conda                        35kB
+#5 87.47   xorg-libice-1.1.2-h280c20c_0.conda                     63kB
+#5 87.47   xorg-libsm-1.2.6-h0d788c3_1.conda                      31kB
+#5 87.47   xorg-libx11-1.8.13-he1eb515_1.conda                   840kB
+#5 87.47   xorg-libxau-1.0.12-hb03c661_2.conda                    16kB
+#5 87.47   xorg-libxdmcp-1.1.5-hb03c661_2.conda                   21kB
+#5 87.47   xorg-libxext-1.3.7-h7cc23a3_1.conda                    53kB
+#5 87.47   xorg-libxrender-0.9.12-hb03c661_1.conda                35kB
+#5 87.47   yaggo-1.5.10-hdfd78af_1.tar.bz2                        24kB
+#5 87.47   yaml-0.2.5-hebe6cf0_3.conda                            85kB
+#5 87.47   zlib-ng-2.3.3-hce19668_1.conda                        124kB
+#5 87.47   zstd-1.5.7-hb78ec9c_7.conda                           601kB
+#5 87.47 
+#5 87.47   /root/.mamba/pkgs
+#5 87.47 ───────────────────────────────────────────────────────────────
+#5 87.47 
+#5 87.47 
+#5 87.47   
+#5 87.47 ───────────────────────────────────────────────────────────────
+#5 87.47 
+#5 87.47   Total size:                                           195MB
+#5 87.47 Cleaning tarballs..
+#5 87.48 Cleaning packages..
+#5 DONE 87.9s
+
+#6 [3/4] RUN mkdir -p /opt/provenance     && git init /opt/unitFinder     && git -C /opt/unitFinder fetch --depth 1       https://github.com/HuangYicheng-Bio/unitFinder.git "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"     && git -C /opt/unitFinder checkout --detach FETCH_HEAD     && test "$(git -C /opt/unitFinder rev-parse HEAD)" = "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"     && test -z "$(git -C /opt/unitFinder status --short)"     && git -C /opt/unitFinder ls-files -z | sort -z | xargs -0 sha256sum       > /opt/provenance/unitfinder_tracked_files.sha256     && conda list -n unitfinder --explicit > /opt/provenance/conda_explicit.txt     && python /opt/unitFinder/bin/unitFinder.py -h > /opt/provenance/help.txt     && trf 2>&1 | head -n 1 > /opt/provenance/trf_version.txt     && nucmer --version > /opt/provenance/nucmer_version.txt     && clustalo --version > /opt/provenance/clustalo_version.txt
+#6 0.206 hint: Using 'master' as the name for the initial branch. This default branch name
+#6 0.206 hint: will change to "main" in Git 3.0. To configure the initial branch name
+#6 0.206 hint: to use in all of your new repositories, which will suppress this warning,
+#6 0.206 hint: call:
+#6 0.206 hint:
+#6 0.206 hint: 	git config --global init.defaultBranch <name>
+#6 0.206 hint:
+#6 0.206 hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+#6 0.206 hint: 'development'. The just-created branch can be renamed via this command:
+#6 0.206 hint:
+#6 0.206 hint: 	git branch -m <name>
+#6 0.206 hint:
+#6 0.206 hint: Disable this message with "git config set advice.defaultBranchName false"
+#6 0.212 Initialized empty Git repository in /opt/unitFinder/.git/
+#6 2.679 From https://github.com/HuangYicheng-Bio/unitFinder
+#6 2.679  * branch            e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28 -> FETCH_HEAD
+#6 2.761 HEAD is now at e80bff3 Update README.md
+#6 2.877 sha256sum: LICENSE: No such file or directory
+#6 2.877 sha256sum: README.md: No such file or directory
+#6 2.877 sha256sum: bin/Group.TRF.py: No such file or directory
+#6 2.877 sha256sum: bin/clustering.1.py: No such file or directory
+#6 2.877 sha256sum: bin/getAlnUnits.py: No such file or directory
+#6 2.877 sha256sum: bin/getChrTypeFromMerge.Consensus.py: No such file or directory
+#6 2.877 sha256sum: bin/getChrTypeFromMerge.py: No such file or directory
+#6 2.877 sha256sum: bin/getTypeFromMerge.py: No such file or directory
+#6 2.877 sha256sum: bin/getUniqBlock.py: No such file or directory
+#6 2.877 sha256sum: bin/getseq.py: No such file or directory
+#6 2.877 sha256sum: bin/getunits.py: No such file or directory
+#6 2.877 sha256sum: bin/groupTRF.py: No such file or directory
+#6 2.877 sha256sum: bin/hotplot.uniq.py: No such file or directory
+#6 2.877 sha256sum: bin/length.py: No such file or directory
+#6 2.877 sha256sum: bin/mergeAln.py: No such file or directory
+#6 2.877 sha256sum: bin/mergeAln.pyc: No such file or directory
+#6 2.877 sha256sum: bin/mummer_cen.py: No such file or directory
+#6 2.877 sha256sum: bin/mummer_cen.pyc: No such file or directory
+#6 2.877 sha256sum: bin/mummer_type.py: No such file or directory
+#6 2.877 sha256sum: bin/mummer_unit.py: No such file or directory
+#6 2.877 sha256sum: bin/plotRepeat.py: No such file or directory
+#6 2.877 sha256sum: bin/plotRepeatBlock.py: No such file or directory
+#6 2.877 sha256sum: bin/plotRepeatGroup.py: No such file or directory
+#6 2.877 sha256sum: bin/plotRepeatGroup.pyc: No such file or directory
+#6 2.877 sha256sum: bin/plotRepeatGroup_s.py: No such file or directory
+#6 2.877 sha256sum: bin/secondary.py: No such file or directory
+#6 2.877 sha256sum: bin/typeMerge.py: No such file or directory
+#6 2.877 sha256sum: bin/typeMerge_type.py: No such file or directory
+#6 2.877 sha256sum: bin/typeMerge_type_raw.py: No such file or directory
+#6 2.877 sha256sum: bin/uniqUnits.py: No such file or directory
+#6 2.877 sha256sum: bin/unitFinder.py: No such file or directory
+#6 2.877 sha256sum: standards/aln_1.py: No such file or directory
+#6 2.877 sha256sum: standards/aln_4.py: No such file or directory
+#6 2.877 sha256sum: standards/completeGm1.py: No such file or directory
+#6 2.877 sha256sum: standards/completeGm4.py: No such file or directory
+#6 2.877 sha256sum: standards/getDistenseBlock.py: No such file or directory
+#6 2.877 sha256sum: standards/getDistenseBlock_bp.py: No such file or directory
+#6 2.877 sha256sum: standards/getHORBlock.py: No such file or directory
+#6 2.877 sha256sum: standards/getHORBlock_bp.py: No such file or directory
+#6 2.877 sha256sum: standards/getType.py: No such file or directory
+#6 2.877 sha256sum: standards/mummer_1.py: No such file or directory
+#6 2.878 sha256sum: standards/mummer_2.py: No such file or directory
+#6 2.878 sha256sum: standards/uniqStandards.py: No such file or directory
+#6 2.878 sha256sum: unify/change.stat.py: No such file or directory
+#6 2.878 sha256sum: unify/complete-Gm1.unit.py: No such file or directory
+#6 2.878 sha256sum: unify/complete-Gm4.unit.py: No such file or directory
+#6 2.878 sha256sum: unify/mummer_1.py: No such file or directory
+#6 2.878 sha256sum: unify/mummer_2.py: No such file or directory
+#6 2.878 sha256sum: unify/mummer_3.py: No such file or directory
+#6 2.878 sha256sum: unify/mummer_4.py: No such file or directory
+#6 2.878 sha256sum: unify/standards.py: No such file or directory
+#6 2.878 sha256sum: unify/unify.py: No such file or directory
+#6 ERROR: process "/bin/sh -c mkdir -p /opt/provenance     && git init /opt/unitFinder     && git -C /opt/unitFinder fetch --depth 1       https://github.com/HuangYicheng-Bio/unitFinder.git \"${UNITFINDER_COMMIT}\"     && git -C /opt/unitFinder checkout --detach FETCH_HEAD     && test \"$(git -C /opt/unitFinder rev-parse HEAD)\" = \"${UNITFINDER_COMMIT}\"     && test -z \"$(git -C /opt/unitFinder status --short)\"     && git -C /opt/unitFinder ls-files -z | sort -z | xargs -0 sha256sum       > /opt/provenance/unitfinder_tracked_files.sha256     && conda list -n unitfinder --explicit > /opt/provenance/conda_explicit.txt     && python /opt/unitFinder/bin/unitFinder.py -h > /opt/provenance/help.txt     && trf 2>&1 | head -n 1 > /opt/provenance/trf_version.txt     && nucmer --version > /opt/provenance/nucmer_version.txt     && clustalo --version > /opt/provenance/clustalo_version.txt" did not complete successfully: exit code: 123
+------
+ > [3/4] RUN mkdir -p /opt/provenance     && git init /opt/unitFinder     && git -C /opt/unitFinder fetch --depth 1       https://github.com/HuangYicheng-Bio/unitFinder.git "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"     && git -C /opt/unitFinder checkout --detach FETCH_HEAD     && test "$(git -C /opt/unitFinder rev-parse HEAD)" = "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"     && test -z "$(git -C /opt/unitFinder status --short)"     && git -C /opt/unitFinder ls-files -z | sort -z | xargs -0 sha256sum       > /opt/provenance/unitfinder_tracked_files.sha256     && conda list -n unitfinder --explicit > /opt/provenance/conda_explicit.txt     && python /opt/unitFinder/bin/unitFinder.py -h > /opt/provenance/help.txt     && trf 2>&1 | head -n 1 > /opt/provenance/trf_version.txt     && nucmer --version > /opt/provenance/nucmer_version.txt     && clustalo --version > /opt/provenance/clustalo_version.txt:
+2.878 sha256sum: standards/uniqStandards.py: No such file or directory
+2.878 sha256sum: unify/change.stat.py: No such file or directory
+2.878 sha256sum: unify/complete-Gm1.unit.py: No such file or directory
+2.878 sha256sum: unify/complete-Gm4.unit.py: No such file or directory
+2.878 sha256sum: unify/mummer_1.py: No such file or directory
+2.878 sha256sum: unify/mummer_2.py: No such file or directory
+2.878 sha256sum: unify/mummer_3.py: No such file or directory
+2.878 sha256sum: unify/mummer_4.py: No such file or directory
+2.878 sha256sum: unify/standards.py: No such file or directory
+2.878 sha256sum: unify/unify.py: No such file or directory
+------

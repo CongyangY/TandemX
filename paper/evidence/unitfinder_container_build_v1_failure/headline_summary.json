@@ -1,0 +1,11 @@
+{
+  "accuracy_available": false,
+  "archive_complete": true,
+  "boundary": "A successful smoke establishes only that the pinned source and reconstructed dependency environment can execute the documented single-chromosome interface. It does not validate real-data recovery, cross-chromosome manual merging, reference-assisted mode or biological accuracy.",
+  "experiment_complete": false,
+  "experiment_fate": "container_build_failure",
+  "interface_smoke_only": true,
+  "resources": null,
+  "schema_version": 1,
+  "source_commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28"
+}

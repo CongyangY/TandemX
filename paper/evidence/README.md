@@ -296,6 +296,14 @@ not independent biological truth.  The audit keeps the failed PMC workbook
 download and makes CENH3 ChIP-seq the required route to an accuracy endpoint;
 it reports no successful unitFinder execution yet.
 
+`unitfinder_container_build_v1_failure/` retains the first frozen e80bff38
+container attempt. Dependency installation and exact source checkout completed,
+but the Dockerfile ran its tracked-file hash command from the wrong working
+directory; 52 relative paths were unresolved and the build stopped with exit
+123 before the help interface. The full 535-line BuildKit log is retained and
+all eight archive entries pass size/SHA-256 checks. This is a packaging failure,
+not unitFinder algorithm, resource or accuracy evidence.
+
 ## SRF workflow evidence
 
 `srf_pilot/` retains the initial four successful native workflows and the exact

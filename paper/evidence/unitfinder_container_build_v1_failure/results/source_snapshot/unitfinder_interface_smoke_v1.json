@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment_id": "unitfinder_interface_smoke_v1",
+  "status": "frozen_before_container_build_and_unitfinder_output",
+  "scope": "installation_and_interface_smoke_not_accuracy_evidence",
+  "image_tag": "tandemx/unitfinder:e80bff38",
+  "source_commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28",
+  "dockerfile_sha256": "d2eeca2463426732987d06809298264aa7c10831063cb5a737c2cee430313a01",
+  "input": {
+    "directory": "/Volumes/T7/Codex/TandemX/results/unitfinder_interface_smoke_v1_20260908/input",
+    "fasta": "unitfinder_smoke.fa",
+    "fasta_sha256": "e7a372298273c1595eba39fe38930bd2be2000e71d33243fe71829c2efacf750",
+    "truth": "truth_arrays.tsv",
+    "truth_sha256": "9ebbae8d6e17e8a027463f12003bec760f82f43ba4753b9a7c59f32d968dbb44",
+    "manifest_sha256": "3f03c3b8b63a67ff83b95f9b0378a605653503c40fe1ea5de7fda52e55f5cc5e",
+    "sequence_length_bp": 308375
+  },
+  "command_arguments": [
+    "--seq",
+    "/input/unitfinder_smoke.fa",
+    "--name",
+    "unitfinder_smoke",
+    "--flag",
+    "1"
+  ],
+  "docker": {
+    "platform": "linux/amd64",
+    "network": "none",
+    "read_only_input": true
+  },
+  "acceptance": {
+    "container_build_exit_code": 0,
+    "help_exit_code": 0,
+    "smoke_exit_code": 0,
+    "required_nonempty_outputs": [
+      "unitfinder_smoke.Units.fa",
+      "unitfinder_smoke.Consensus.fa",
+      "unitfinder_smoke.Units.uniq.fa",
+      "unitfinder_smoke.Consensus.uniq.fa"
+    ],
+    "all_failures_retained": true,
+    "no_accuracy_claim": true
+  },
+  "boundary": "A successful smoke establishes only that the pinned source and reconstructed dependency environment can execute the documented single-chromosome interface. It does not validate real-data recovery, cross-chromosome manual merging, reference-assisted mode or biological accuracy."
+}

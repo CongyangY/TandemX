@@ -204,6 +204,20 @@ before continuing and do not stage the untracked `.codex/` directory.
   biological/whole-genome accuracy gaps disappear. With the accepted-render
   archive logic included, the complete source suite passes **629 tests in
   63.31 s**; compileall and `git diff --check` also pass.
+- **unitFinder has advanced from source audit to a retained first build
+  attempt, but it has not yet produced an interface or accuracy result.** The
+  frozen e80bff38 container build installed all 120 isolated dependencies and
+  checked out the exact upstream commit, then failed with exit 123 before
+  running `unitFinder.py -h`. The Dockerfile invoked `sha256sum` from outside
+  `/opt/unitFinder`, so all 52 tracked relative paths were unresolved. The
+  535-line BuildKit log, original Dockerfile/config and machine-readable fate
+  are archived in `paper/evidence/unitfinder_container_build_v1_failure`; all
+  eight manifest entries pass size/SHA-256 rechecks. This is a TandemX
+  container-definition failure, not a unitFinder algorithm failure, runtime or
+  zero-accuracy result. The next build may only correct the hashing working
+  directory and must use a newly frozen Dockerfile/config identity. With the
+  failure recorder/archiver tests, the complete source suite passes **633 tests
+  in 63.75 s**; compileall and `git diff --check` also pass.
 - **`tandemx cohort` was hardened concurrently.** Commit `50de982` rejects
   unknown, duplicate and incompletely quantified catalogue
   families; records per-sample input counts and SHA-256 values; propagates the

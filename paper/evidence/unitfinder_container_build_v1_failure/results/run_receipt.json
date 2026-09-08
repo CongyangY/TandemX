@@ -1,0 +1,36 @@
+{
+  "accuracy_available": false,
+  "attempted_command": [
+    "docker",
+    "build",
+    "--platform",
+    "linux/amd64",
+    "-t",
+    "tandemx/unitfinder:e80bff38",
+    "benchmarks/containers/unitfinder"
+  ],
+  "build_ref": "on63vof7q832h7ikazjqhtfk2",
+  "classification": {
+    "classification": "container_provenance_hash_working_directory_error",
+    "dependency_install_reached": true,
+    "first_missing_relative_path": "LICENSE",
+    "missing_relative_path_count": 52,
+    "source_checkout_reached": true,
+    "upstream_interface_started": false
+  },
+  "complete": false,
+  "config_sha256": "40f1d1311ed60351f9017a6d68600224f4bdff61169bc499abb26393723ae014",
+  "docker_build_log": {
+    "bytes": 37893,
+    "file": "docker_build.log",
+    "sha256": "104ed9fca49e2f759717717c39081e153d8129773d76defc3fdf4254258c313d"
+  },
+  "dockerfile_sha256": "d2eeca2463426732987d06809298264aa7c10831063cb5a737c2cee430313a01",
+  "experiment_id": "unitfinder_interface_smoke_v1",
+  "fate": "container_build_failure",
+  "project_commit": "173db59cf843e765a337548ac12e5d6f30387bd3",
+  "schema_version": 1,
+  "smoke_execution_started": false,
+  "target_image_present_after_failure": false,
+  "warning": "retained_container_definition_failure_not_unitFinder_algorithm_failure;no_accuracy_or_runtime_claim"
+}

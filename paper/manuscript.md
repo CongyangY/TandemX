@@ -680,6 +680,15 @@ conditional planted-truth result, not biological replication, whole-genome
 accuracy or a repeated isolated timing distribution. The earlier same-host
 1-Gb preflight remains resource-infeasible.
 
+We also enrolled unitFinder as an assembly-side plant centromeric-satellite
+comparator at upstream commit e80bff38. Its first container build installed the
+isolated dependency environment and checked out the correct source, then failed
+before the help interface because the container definition hashed repository-
+relative paths from the wrong working directory. The 52 missing-path messages,
+exit 123 and complete 535-line BuildKit log are retained (Evidence E35). This
+packaging failure is neither a unitFinder algorithm failure nor an accuracy or
+runtime measurement; no smoke output was produced.
+
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
 In the larger sample, 7,554/7,557 reads mapped and primary query spans covered
@@ -1304,6 +1313,9 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   independently recomputed successful-cell accuracy records, two resource-
   failure records, native outputs, resources and Figure S6 source in
   `evidence/tidecluster_factorial_validation_v3`.
+- Supplementary Table S32: unitFinder e80bff38 first-build command, complete
+  BuildKit log, source/config hashes and explicit pre-interface container-
+  definition failure in `evidence/unitfinder_container_build_v1_failure`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1333,7 +1345,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `ey15_donor_matched_collapse_v1`; E32:
 `tidecluster_factorial_validation_v1`; E33:
 `tidecluster_factorial_continuation_v2_failure`; E34:
-`tidecluster_factorial_validation_v3`.
+`tidecluster_factorial_validation_v3`; E35:
+`unitfinder_container_build_v1_failure`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 
