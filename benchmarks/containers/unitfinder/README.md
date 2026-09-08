@@ -23,8 +23,7 @@ Build without modifying the host Python or conda environments:
 
 ```bash
 docker build --platform linux/amd64 \
-  -f benchmarks/containers/unitfinder/Dockerfile \
-  -t tandemx/unitfinder:e80bff38 .
+  -t tandemx/unitfinder:e80bff38 benchmarks/containers/unitfinder
 ```
 
 After the image digest and provenance files pass inspection, run each input in
