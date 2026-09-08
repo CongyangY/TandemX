@@ -13,6 +13,29 @@
     "commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28",
     "released_workflow_boundary": "single_chromosome_commands_plus_manual_cross_chromosome_grouping"
   },
+  "planned_real_inputs": {
+    "zh13_t2t_assembly": {
+      "accession": "GWHBWDJ00000000.1",
+      "assembly_name": "ZH13-T2T",
+      "bioproject": "PRJCA015269",
+      "biosample": "SAMC1127443",
+      "official_record": "https://ngdc.cncb.ac.cn/gwh/search/advanced/result?query_box=GWHBWDJ00000000",
+      "state": "source_resolved_not_downloaded_or_enrolled"
+    },
+    "zh13_chip_seq": {
+      "run_accessions": [
+        "CRR638211",
+        "CRR638212",
+        "CRR638213",
+        "CRR638214",
+        "CRR638215",
+        "CRR638216"
+      ],
+      "source_basis": "paper_data_availability_statement",
+      "state": "accessions_resolved_but_per_run_roles_and_files_not_enrolled",
+      "boundary": "exact_donor_relationship_to_assembly_and_input_control_roles_unresolved"
+    }
+  },
   "supplementary_workbook": {
     "source_url": "https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-025-03924-9/MediaObjects/13059_2025_3924_MOESM2_ESM.xlsx",
     "filename": "13059_2025_3924_MOESM2_ESM.xlsx",

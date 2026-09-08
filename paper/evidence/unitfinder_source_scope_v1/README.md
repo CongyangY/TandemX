@@ -31,7 +31,14 @@ The highest-value real experiment is therefore staged as follows:
    runs only after their donor/assembly mapping and peak-calling plan is frozen;
 6. retain FISH as qualitative family-level support, not base-pair truth.
 
+The current source audit resolves the ZH13 T2T assembly as Genome Warehouse
+`GWHBWDJ00000000.1` (BioProject `PRJCA015269`, BioSample `SAMC1127443`).  The
+paper's data-availability statement assigns ZH13 ChIP-seq to
+`CRR638211`--`CRR638216`.  Those accessions establish an available route to an
+orthogonal assay, but per-run input/control roles, replicate structure and the
+exact biological relationship to the assembly donor still require enrollment
+before the reads can be treated as an accuracy standard.
+
 This comparator does not estimate read-based copy number and must not be placed
 in the copy-number table as though its prediction unit were equivalent to
 TandemX `quantify`.
-

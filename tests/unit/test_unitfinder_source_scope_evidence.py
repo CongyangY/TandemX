@@ -29,3 +29,8 @@ def test_unitfinder_source_scope_records_exact_workbook_identity() -> None:
     )
     assert workbook["sheet_count"] == 14
     assert audit["failed_acquisition_retained"]["size_bytes"] == 1816
+    assert audit["planned_real_inputs"]["zh13_t2t_assembly"]["biosample"] == "SAMC1127443"
+    assert audit["planned_real_inputs"]["zh13_chip_seq"]["run_accessions"] == [
+        f"CRR638{value}" for value in range(211, 217)
+    ]
+    assert "unresolved" in audit["planned_real_inputs"]["zh13_chip_seq"]["boundary"]
