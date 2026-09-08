@@ -211,6 +211,13 @@ every panel to inputs. The final SVG has 95 editable text elements and no images
 small libc++ compatibility patch, failed build attempts, and an independent exact
 k-mer count validation. These build records alone are not benchmark evidence.
 
+`unitfinder_source_scope_v1/` fixes the official source commit, publisher
+supplement identity and the evidence boundary for unitFinder.  The 60 Table S1
+soybean intervals are published workflow outputs that can test reproducibility,
+not independent biological truth.  The audit keeps the failed PMC workbook
+download and makes CENH3 ChIP-seq the required route to an accuracy endpoint;
+it reports no successful unitFinder execution yet.
+
 ## SRF workflow evidence
 
 `srf_pilot/` retains the initial four successful native workflows and the exact

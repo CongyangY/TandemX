@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "audit_id": "unitfinder_source_scope_v1",
+  "status": "source_scope_only_no_execution_or_accuracy_result",
+  "source_paper": {
+    "title": "Genetic diversity and architectural dynamics of soybean centromeres",
+    "journal": "Genome Biology",
+    "doi": "10.1186/s13059-025-03924-9",
+    "article_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12870325/"
+  },
+  "software": {
+    "official_url": "https://github.com/HuangYicheng-Bio/unitFinder",
+    "commit": "e80bff38a1a2718d0b6cf5fd769e6d484fc2ce28",
+    "released_workflow_boundary": "single_chromosome_commands_plus_manual_cross_chromosome_grouping"
+  },
+  "supplementary_workbook": {
+    "source_url": "https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-025-03924-9/MediaObjects/13059_2025_3924_MOESM2_ESM.xlsx",
+    "filename": "13059_2025_3924_MOESM2_ESM.xlsx",
+    "size_bytes": 102935,
+    "sha256": "747e240fe57c0d8e665b925cadea15ffa9eea8a1f39f7e0659aef6b9cdf7bf6b",
+    "sheet_count": 14,
+    "table_s1": {
+      "title": "Location of predicted potential centromeric regions in three soybean varieties: Jack, ZH13 and WM82.",
+      "chromosome_rows": 60,
+      "rows_per_variety": 20,
+      "coordinate_semantics": "one_based_inclusive_inferred_from_all_lengths_equal_end_minus_start_plus_one",
+      "length_consistency_failure_rows": [],
+      "published_trs_interval_total_bp": {
+        "Jack": 40512042,
+        "ZH13": 43336133,
+        "WM82": 45793097
+      },
+      "published_potential_centgm_interval_total_bp": {
+        "Jack": 40704823,
+        "ZH13": 42616890,
+        "WM82": 44197055
+      },
+      "evidence_role": "published_workflow_output_for_reproducibility_not_independent_truth"
+    }
+  },
+  "failed_acquisition_retained": {
+    "filename": "13059_2025_3924_MOESM2_ESM.failed_download.html",
+    "size_bytes": 1816,
+    "reason": "PMC_supplement_link_returned_HTML_interstitial_instead_of_XLSX"
+  },
+  "real_validation_plan": [
+    "pass_frozen_interface_smoke",
+    "enroll_exact_ZH13_assembly_and_verify_hash",
+    "freeze_all_single_chromosome_and_manual_cross_chromosome_steps_before_output_inspection",
+    "score_Table_S1_reproducibility_separately_from_accuracy",
+    "freeze_matching_CENH3_ChIP_seq_mapping_and_peak_calling_before_independent_accuracy_evaluation",
+    "retain_FISH_as_qualitative_family_level_support_only"
+  ],
+  "comparison_boundary": "unitFinder_is_an_assembly_centromere_candidate_detector_not_a_read_copy_number_estimator"
+}
