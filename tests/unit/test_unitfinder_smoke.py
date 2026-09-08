@@ -7,6 +7,7 @@ import pytest
 from benchmarks.challenge.schema import digest_file
 from benchmarks.scripts.run_unitfinder_interface_smoke import (
     validate_parent_build_failure,
+    validate_parent_build_success,
 )
 from benchmarks.unitfinder.smoke import generate
 
@@ -65,6 +66,19 @@ def test_unitfinder_smoke_config_is_frozen_before_execution() -> None:
     assert v2["input"]["sequence_length_bp"] == 308375
     assert v2["acceptance"]["no_accuracy_claim"] is True
 
+    v3 = json.loads(
+        (ROOT / "benchmarks/configs/unitfinder_interface_smoke_v3.json").read_text()
+    )
+    assert v3["status"] == (
+        "frozen_after_v2_image_build_before_external_smoke_output"
+    )
+    assert v3["image_id"] == (
+        "sha256:eadbae183cf29f24b987ea38db3aa5131b1b6b87b1074f45058c60b92929d221"
+    )
+    assert v3["input"] == v2["input"]
+    assert v3["command_arguments"] == v2["command_arguments"]
+    assert v3["acceptance"] == v2["acceptance"]
+
 
 def test_unitfinder_v2_rehashes_parent_build_failure(tmp_path: Path) -> None:
     parent = tmp_path / "parent"
@@ -100,3 +114,38 @@ def test_unitfinder_v2_rehashes_parent_build_failure(tmp_path: Path) -> None:
     log.write_text("changed\n")
     with pytest.raises(ValueError, match="artifact changed"):
         validate_parent_build_failure(config)
+
+
+def test_unitfinder_v3_rehashes_parent_build_success(tmp_path: Path) -> None:
+    parent = tmp_path / "parent"
+    parent.mkdir()
+    image_id = "sha256:" + "a" * 64
+    receipt = parent / "run_receipt.json"
+    receipt.write_text(
+        json.dumps(
+            {
+                "complete": True,
+                "fate": "container_build_passed",
+                "smoke_execution_started": False,
+                "image": {"image_id": image_id},
+            }
+        )
+    )
+    lock = parent / "conda_explicit.txt"
+    lock.write_text("dependency-lock\n")
+    config = {
+        "image_id": image_id,
+        "parent_build_success": {
+            "directory": str(parent),
+            "artifacts": {
+                "run_receipt.json": digest_file(receipt),
+                "conda_explicit.txt": digest_file(lock),
+            },
+        },
+    }
+    result = validate_parent_build_success(config)
+    assert result is not None
+    assert result["receipt"]["image"]["image_id"] == image_id
+    lock.write_text("changed\n")
+    with pytest.raises(ValueError, match="build-success artifact changed"):
+        validate_parent_build_success(config)

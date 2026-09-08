@@ -68,12 +68,38 @@ def validate_parent_build_failure(config: dict[str, Any]) -> dict[str, Any] | No
     return {"directory": parent, "receipt": receipt, "artifacts": artifacts}
 
 
-def validate_inputs(config: dict[str, Any], config_path: Path) -> tuple[Path, Path]:
+def validate_parent_build_success(config: dict[str, Any]) -> dict[str, Any] | None:
+    parent_record = config.get("parent_build_success")
+    if parent_record is None:
+        return None
+    parent = Path(parent_record["directory"]).resolve()
+    artifacts = parent_record.get("artifacts")
+    if not isinstance(artifacts, dict) or not artifacts:
+        raise ValueError("unitFinder v3 requires parent build-success artifact hashes")
+    for name, expected in artifacts.items():
+        path = parent / name
+        if not path.is_file() or digest(path) != expected:
+            raise ValueError(f"unitFinder parent build-success artifact changed: {name}")
+    receipt = json.loads((parent / "run_receipt.json").read_text(encoding="utf-8"))
+    if (
+        receipt.get("complete") is not True
+        or receipt.get("fate") != "container_build_passed"
+        or receipt.get("smoke_execution_started") is not False
+        or receipt.get("image", {}).get("image_id") != config.get("image_id")
+    ):
+        raise ValueError("unitFinder parent build-success receipt changed")
+    return {"directory": parent, "receipt": receipt, "artifacts": artifacts}
+
+
+def validate_inputs(
+    config: dict[str, Any], config_path: Path
+) -> tuple[Path, Path, dict[str, Any] | None]:
     root = Path(__file__).resolve().parents[2]
     dockerfile = root / "benchmarks/containers/unitfinder/Dockerfile"
     if digest(dockerfile) != config["dockerfile_sha256"]:
         raise ValueError("unitFinder Dockerfile differs from the frozen config")
     validate_parent_build_failure(config)
+    parent_build = validate_parent_build_success(config)
     input_dir = Path(config["input"]["directory"]).resolve()
     fasta = input_dir / config["input"]["fasta"]
     truth = input_dir / config["input"]["truth"]
@@ -91,7 +117,7 @@ def validate_inputs(config: dict[str, Any], config_path: Path) -> tuple[Path, Pa
         raise ValueError("unitFinder smoke sequence length differs from frozen config")
     if digest(config_path) == "":
         raise AssertionError("unreachable empty config digest")
-    return input_dir, dockerfile
+    return input_dir, dockerfile, parent_build
 
 
 def build_stage_manifest(
@@ -151,13 +177,15 @@ def run(
     if outdir.exists():
         raise FileExistsError(f"choose a new output directory: {outdir}")
     config = json.loads(config_path.read_text(encoding="utf-8"))
-    input_dir, dockerfile = validate_inputs(config, config_path)
+    input_dir, dockerfile, parent_build = validate_inputs(config, config_path)
     metadata = docker_image_metadata(docker, config["image_tag"])
     labels = metadata["labels"]
     if labels.get("org.opencontainers.image.revision") != config["source_commit"]:
         raise ValueError("unitFinder image source revision differs from frozen config")
     if metadata["architecture"] != "amd64" or metadata["os"] != "linux":
         raise ValueError("unitFinder image platform differs from frozen config")
+    if config.get("image_id") and metadata["image_id"] != config["image_id"]:
+        raise ValueError("unitFinder image ID differs from frozen config")
 
     outdir.mkdir(parents=True)
     run_dir = outdir / "run"
@@ -166,6 +194,13 @@ def run(
     snapshot.mkdir()
     for path in (config_path, dockerfile, Path(__file__)):
         shutil.copyfile(path, snapshot / path.name)
+    if parent_build is not None:
+        parent_snapshot = outdir / "parent_build_snapshot"
+        for name in parent_build["artifacts"]:
+            source = parent_build["directory"] / name
+            target = parent_snapshot / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
     stage_manifest = outdir / "stage_manifest.json"
     stage_manifest.write_text(
         json.dumps(build_stage_manifest(config, input_dir, run_dir, docker), indent=2)
@@ -179,6 +214,16 @@ def run(
         "config_sha256": digest(config_path),
         "dockerfile_sha256": digest(dockerfile),
         "image": metadata,
+        "parent_build_success": (
+            {
+                "directory": str(parent_build["directory"]),
+                "fate": parent_build["receipt"]["fate"],
+                "image_id": parent_build["receipt"]["image"]["image_id"],
+                "artifacts": parent_build["artifacts"],
+            }
+            if parent_build is not None
+            else None
+        ),
         "input_manifest_sha256": digest(input_dir / "manifest.json"),
         "boundary": config["boundary"],
     }
@@ -195,7 +240,9 @@ def run(
             "schema_version": 1,
             "complete": False,
             "fate": "external_process_failure",
+            "accuracy_available": False,
             "profile": profile_receipt,
+            "smoke_execution_started": True,
             "warning": "retained_failure_is_not_a_zero_accuracy_measurement",
         }
         (outdir / "run_receipt.json").write_text(
@@ -214,6 +261,8 @@ def run(
         "schema_version": 1,
         "complete": complete,
         "fate": fate,
+        "accuracy_available": False,
+        "smoke_execution_started": True,
         "missing_required_outputs": missing,
         "output_file_count": len(output_files),
         "outputs": {
