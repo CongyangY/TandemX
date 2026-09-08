@@ -77,6 +77,9 @@ def candidate_files(source: Path) -> list[Path]:
     for directory in (source / "source_snapshot", source / "profile"):
         if directory.is_dir():
             paths.update(path for path in directory.rglob("*") if path.is_file())
+    figure_dir = source / "figures_v1"
+    if figure_dir.is_dir():
+        paths.update(path for path in figure_dir.rglob("*") if path.is_file())
     retained_run_patterns = (
         "*.gnu_time.txt",
         "tc_tidehunter.gff3",
@@ -94,6 +97,30 @@ def candidate_files(source: Path) -> list[Path]:
     return sorted(paths, key=lambda path: path.relative_to(source).as_posix())
 
 
+def validate_figure(source: Path) -> dict[str, Any]:
+    directory = source / "figures_v1"
+    provenance = json.loads(
+        (directory / "figure_provenance.json").read_text(encoding="utf-8")
+    )
+    if provenance.get("complete") is not True or provenance.get("panel_count") != 6:
+        raise ValueError("TideCluster validation figure is incomplete")
+    if provenance.get("frozen_run_count") != 6:
+        raise ValueError("TideCluster validation figure changed the frozen run count")
+    if provenance.get("svg_raster_image_element_count") != 0:
+        raise ValueError("TideCluster validation SVG contains raster image elements")
+    if provenance.get("svg_text_element_count", 0) < 1:
+        raise ValueError("TideCluster validation SVG text is not editable")
+    for name, record in provenance.get("outputs", {}).items():
+        path = directory / name
+        if not path.is_file():
+            raise FileNotFoundError(f"TideCluster figure output is missing: {path}")
+        if path.stat().st_size != record.get("bytes") or digest(path) != record.get(
+            "sha256"
+        ):
+            raise ValueError(f"TideCluster figure output changed: {path}")
+    return provenance
+
+
 def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
     if outdir.exists():
         raise FileExistsError(f"refusing to overwrite archive: {outdir}")
@@ -106,6 +133,7 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
     experiment_complete = run_receipt.get("complete") is True
     summary_rows: list[dict[str, str]] = []
     independent: dict[str, Any] | None = None
+    figure: dict[str, Any] | None = None
     if experiment_complete:
         summary_rows = read_tsv(source / "summary.tsv")
         expected_runs = len(config["datasets"]) * len(config["settings"])
@@ -117,6 +145,7 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
             raise ValueError("TideCluster independent accuracy verification failed")
         if independent.get("failures") != []:
             raise ValueError("TideCluster independent verification retained mismatches")
+        figure = validate_figure(source)
 
     outdir.mkdir(parents=True)
     copied: list[dict[str, Any]] = []
@@ -158,6 +187,7 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
         "run_count": len(summary_rows),
         "setting_summary": aggregate_settings(summary_rows),
         "independent_verification": independent,
+        "validation_figure": figure,
         "warning": (
             "same_process_simulated_validation_genomes;technical_repetitions_not_"
             "biological_replicates;failed_processes_are_missing_not_zero_measurements"
@@ -170,7 +200,8 @@ def archive(source: Path, config_path: Path, outdir: Path) -> dict[str, Any]:
         "# TideCluster factorial validation v1\n\n"
         "This compact archive retains the frozen configuration, native GFF and "
         "consensus outputs, normalization/evaluation tables, external-stage "
-        "resources, logs and source snapshot. A completed result is archived "
+        "resources, logs, source snapshot and editable six-panel figure. A "
+        "completed result is archived "
         "only after the separate verifier recomputes interval, base-union, "
         "boundary, period and cyclic-family endpoints. If execution failed, "
         "the archive preserves that fate and does not replace unavailable "

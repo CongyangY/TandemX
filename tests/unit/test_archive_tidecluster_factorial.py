@@ -1,4 +1,12 @@
-from benchmarks.scripts.archive_tidecluster_factorial import aggregate_settings
+import hashlib
+import json
+
+import pytest
+
+from benchmarks.scripts.archive_tidecluster_factorial import (
+    aggregate_settings,
+    validate_figure,
+)
 
 
 def test_aggregate_settings_preserves_seed_range_and_resource_values() -> None:
@@ -45,3 +53,28 @@ def test_aggregate_settings_preserves_seed_range_and_resource_values() -> None:
         "maximum": 1.0,
     }
     assert result["metrics"]["clustering_maximum_rss_kb"]["mean"] == 210
+
+
+def test_validate_figure_rejects_raster_svg(tmp_path) -> None:
+    directory = tmp_path / "figures_v1"
+    directory.mkdir()
+    svg = directory / "figure.svg"
+    svg.write_text("<svg><text>test</text></svg>")
+    record = {
+        "bytes": svg.stat().st_size,
+        "sha256": hashlib.sha256(svg.read_bytes()).hexdigest(),
+    }
+    provenance = {
+        "complete": True,
+        "panel_count": 6,
+        "frozen_run_count": 6,
+        "svg_raster_image_element_count": 0,
+        "svg_text_element_count": 1,
+        "outputs": {svg.name: record},
+    }
+    (directory / "figure_provenance.json").write_text(json.dumps(provenance))
+    assert validate_figure(tmp_path)["panel_count"] == 6
+    provenance["svg_raster_image_element_count"] = 1
+    (directory / "figure_provenance.json").write_text(json.dumps(provenance))
+    with pytest.raises(ValueError, match="raster image"):
+        validate_figure(tmp_path)
