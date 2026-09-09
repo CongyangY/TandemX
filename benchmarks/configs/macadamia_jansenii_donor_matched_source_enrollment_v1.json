@@ -88,7 +88,16 @@
         "base_count": 8442858124,
         "fastq_bytes": 6716963362,
         "fastq_md5": "008ec233ddf2c2dde62ca605613f8b4c",
-        "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR135/063/SRR13557763/SRR13557763_subreads.fastq.gz"
+        "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR135/063/SRR13557763/SRR13557763_subreads.fastq.gz",
+        "observed_sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6",
+        "full_fastq_qc": {
+          "complete": true,
+          "read_count": 635246,
+          "base_count": 8442858124,
+          "exact_duplicate_read_ids": 0,
+          "read_n50": 13592,
+          "phred_from_mean_reported_error": 27.60464753794149
+        }
       },
       {
         "run_accession": "SRR13557762",
@@ -98,7 +107,16 @@
         "base_count": 14103630530,
         "fastq_bytes": 11433466175,
         "fastq_md5": "b6826ff607fea2e947ebf156692dca5a",
-        "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR135/062/SRR13557762/SRR13557762_subreads.fastq.gz"
+        "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR135/062/SRR13557762/SRR13557762_subreads.fastq.gz",
+        "observed_sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e",
+        "full_fastq_qc": {
+          "complete": true,
+          "read_count": 1007148,
+          "base_count": 14103630530,
+          "exact_duplicate_read_ids": 0,
+          "read_n50": 14222,
+          "phred_from_mean_reported_error": 27.49291384448775
+        }
       }
     ],
     "total_read_count": 1642394,
