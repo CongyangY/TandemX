@@ -3,6 +3,7 @@
   "experiment_id": "macadamia_jansenii_donor_matched_collapse_v1",
   "status": "preregistered_before_old_new_TandemX_result_inspection",
   "frozen_on": "2026-09-09",
+  "preregistration_commit": "3ce73356675a20551f23d7e00beaef9482d4bd4f",
   "scientific_scope": "second_species_paper_same_sample_retrospective_high_quality_reference_proxy",
   "material": {
     "species": "Macadamia jansenii",
