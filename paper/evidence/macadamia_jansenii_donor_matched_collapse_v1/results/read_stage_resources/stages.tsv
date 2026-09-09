@@ -1,0 +1,4 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+discover	0	959.242321	1728.241972	277.604547	1447.000000	3	37655032	1776	discover.stdout.log	discover.stderr.log
+quantify_primary	0	11292.614337	11066.183491	421.639360	222.500000	3	769633	21216	quantify_primary.stdout.log	quantify_primary.stderr.log
+quantify_reported_28Gb_depth_sensitivity	0	11482.605452	11238.121902	414.783217	187.234375	3	672525	21764	quantify_reported_28Gb_depth_sensitivity.stdout.log	quantify_reported_28Gb_depth_sensitivity.stderr.log

@@ -1,0 +1,246 @@
+{
+  "complete": true,
+  "files": [
+    {
+      "bytes": 240168,
+      "file": "assembly_enrollment_receipt.json",
+      "sha256": "1ccaffa6a7ebe591bb0d9a5afc88eaf0185e392ab418c4da35a4d3e07c8b4ed1",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/enrollment_receipt.json"
+    },
+    {
+      "bytes": 6605,
+      "file": "macadamia_jansenii_donor_matched_source_enrollment_v1.json",
+      "sha256": "3cd354ff87cc72fee8e0ce5fd6751ec26e9f7c10e803090342655ee5c6ee526c",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/macadamia_jansenii_donor_matched_source_enrollment_v1.json"
+    },
+    {
+      "bytes": 4975,
+      "file": "macadamia_jansenii_donor_matched_collapse_v1.json",
+      "sha256": "b5da4f3b5c22c1a6c795075f3f4d2d580c2d70e61ba9264a53b202a7b5de5db9",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/macadamia_jansenii_donor_matched_collapse_v1.json"
+    },
+    {
+      "bytes": 3612,
+      "file": "macadamia_jansenii_donor_matched_read_stages_v1.json",
+      "sha256": "d3fc6acc06c82d6f50620a09f69fbd4e59c087646304a4cc40a75bf10d27ad78",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/macadamia_jansenii_donor_matched_read_stages_v1.json"
+    },
+    {
+      "bytes": 2133,
+      "file": "macadamia_jansenii_donor_matched_assembly_stages_v1.json",
+      "sha256": "8a4a797f93416634517bc15bea4e85695b4cdc03d28c2ed666065987b99a3c28",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/macadamia_jansenii_donor_matched_assembly_stages_v1.json"
+    },
+    {
+      "bytes": 2336,
+      "file": "macadamia_jansenii_old_new_alignment_audit_v1.json",
+      "sha256": "beb71842bba25fc457cbb046ef698c90820098d9e62e692e0c9f98b6aa13b8f2",
+      "source": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/macadamia_jansenii_old_new_alignment_audit_v1.json"
+    },
+    {
+      "bytes": 217,
+      "file": "results/assembly_stage_resources/receipt.json",
+      "sha256": "bc92a0fabebe004a74f906afbbba1078a52edb3f6743d7878d3d280efc5d7016",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/assembly_stage_resources/receipt.json"
+    },
+    {
+      "bytes": 477,
+      "file": "results/assembly_stage_resources/stages.tsv",
+      "sha256": "5eda9f4318dd3ac4b62fd3d63395e1bb9ccd8f4768e0a7ade91e869d7d93e756",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/assembly_stage_resources/stages.tsv"
+    },
+    {
+      "bytes": 217,
+      "file": "results/read_stage_resources/receipt.json",
+      "sha256": "3c356620687c19db77f8127c59a96a8f3631025ee44c7f8d958ffe9c1488c74e",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/read_stage_resources/receipt.json"
+    },
+    {
+      "bytes": 629,
+      "file": "results/read_stage_resources/stages.tsv",
+      "sha256": "2c8b759d419fb241077733c2508a5c0ff609f9e176c6be39ba0b6fa8c89a93a7",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/read_stage_resources/stages.tsv"
+    },
+    {
+      "bytes": 969,
+      "file": "results/run/discover/discovery_summary.json",
+      "sha256": "2dbaf5a6b04abd753e202c72820c1dc50c86478b3f25f3cfcaff84582411e731",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/discovery_summary.json"
+    },
+    {
+      "bytes": 456,
+      "file": "results/run/discover/family_audit_summary.json",
+      "sha256": "9bde737089b3320d3760acb91c2facddf43c994baa33e2eb9414bcf1dd23bf8c",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/family_audit_summary.json"
+    },
+    {
+      "bytes": 2372,
+      "file": "results/run/discover/run_config.yaml",
+      "sha256": "d479fdac6f24a0d6239161273c32d7a93b291b5020132e30313fae97a906315f",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/run_config.yaml"
+    },
+    {
+      "bytes": 206239,
+      "file": "results/run/discover/monomers.fa",
+      "sha256": "905b38bd083c23c7b391b83f31540e5a17e3f72be9cfc7a8ed329b734bb0dbd8",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/monomers.fa"
+    },
+    {
+      "bytes": 376497,
+      "file": "results/run/discover/families.tsv",
+      "sha256": "4f9f1d5d4227ac48623a26f557ec206cfcd846926cea0fe7abbe08a0e978c14e",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/families.tsv"
+    },
+    {
+      "bytes": 11726891,
+      "file": "results/run/discover/monomer_membership.tsv",
+      "sha256": "85cd1f1c4ae73abb2b0cc5e60f261cf2de55641bcb487c1e092be135405675a5",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/monomer_membership.tsv"
+    },
+    {
+      "bytes": 1813,
+      "file": "results/run/quantify_primary/run_config.yaml",
+      "sha256": "1b4222e406e3fa9b015b061b9c09e282b1005d4697547dac9472ed3a939ab1f2",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_primary/run_config.yaml"
+    },
+    {
+      "bytes": 447053,
+      "file": "results/run/quantify_primary/copy_number.tsv",
+      "sha256": "45f2d731699418f2fccbc79877c3ae290fa55cb46aa6616d20fbda5a4b605fba",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_primary/copy_number.tsv"
+    },
+    {
+      "bytes": 1908,
+      "file": "results/run/quantify_reported_depth_sensitivity/run_config.yaml",
+      "sha256": "8bc9335c1df9f31d2f33ab1ed575585c4186a3b37ba56de0c49e67a3a35131dc",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_reported_depth_sensitivity/run_config.yaml"
+    },
+    {
+      "bytes": 349802,
+      "file": "results/run/quantify_reported_depth_sensitivity/copy_number.tsv",
+      "sha256": "8ef8683c1112dbebc4072164147014fd9237bfe1f0941dd89b4cd2e764489490",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_reported_depth_sensitivity/copy_number.tsv"
+    },
+    {
+      "bytes": 1345,
+      "file": "results/run/locate_old/run_config.yaml",
+      "sha256": "85fe3adcb11b9e998b5afbcbcf734b11c82dda6fac556f65926665c5f918390d",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/locate_old/run_config.yaml"
+    },
+    {
+      "bytes": 5210852,
+      "file": "results/run/locate_old/arrays.bed",
+      "sha256": "dd50efdac653ab589103cf68e7a50ed8f6894ae1d96669cf79a3039f65cf9a16",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/locate_old/arrays.bed"
+    },
+    {
+      "bytes": 1345,
+      "file": "results/run/locate_new/run_config.yaml",
+      "sha256": "765be2ab1ca26e39e1431049d0bef26a61d7f19215a21b03b9ac8b86bb7ad565",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/locate_new/run_config.yaml"
+    },
+    {
+      "bytes": 5204924,
+      "file": "results/run/locate_new/arrays.bed",
+      "sha256": "a79bbd6e9da087d43f6daa679bd03ff68b72a9e129ed7c81348846019da89419",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/locate_new/arrays.bed"
+    },
+    {
+      "bytes": 1646,
+      "file": "results/evaluation_primary_total_bases/summary.json",
+      "sha256": "a0ee692f654401dbcc29da7c3aaff3d6ca9ff75c4ebcd57a5b52a08da2224d64",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/evaluation_primary_total_bases/summary.json"
+    },
+    {
+      "bytes": 229524,
+      "file": "results/evaluation_primary_total_bases/family_metrics.tsv",
+      "sha256": "4a9da94ae5fe162b6139f77efbb9dd98814c1c9bb2aa03b823702d083e0d03c9",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/evaluation_primary_total_bases/family_metrics.tsv"
+    },
+    {
+      "bytes": 1819,
+      "file": "results/evaluation_primary_total_bases/independent_verification.json",
+      "sha256": "cc8e8c9a8db498711f4db26a568c26ee08d1b7f7da173e546c978f5397480214",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/evaluation_primary_total_bases/independent_verification.json"
+    },
+    {
+      "bytes": 1647,
+      "file": "results/evaluation_reported_depth_sensitivity/summary.json",
+      "sha256": "31d17ec60c9e3c5d927054c999445d5a4486a8051bda0283c8078748a28f9f95",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/evaluation_reported_depth_sensitivity/summary.json"
+    },
+    {
+      "bytes": 228602,
+      "file": "results/evaluation_reported_depth_sensitivity/family_metrics.tsv",
+      "sha256": "b4a38c75477fce70836e79940460334a9f638e0b9a8f6a825c5faa5d4e9a408c",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/evaluation_reported_depth_sensitivity/family_metrics.tsv"
+    },
+    {
+      "bytes": 1852,
+      "file": "results/evaluation_reported_depth_sensitivity/independent_verification.json",
+      "sha256": "2308605b16f1cd78dd7d923fd19a9330ad294d5e64c1b84083a47a7a80b3196f",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/evaluation_reported_depth_sensitivity/independent_verification.json"
+    },
+    {
+      "bytes": 1022,
+      "file": "results/old_new_alignment_audit/environment.json",
+      "sha256": "9110d9a0a6bf53556fe71a42445ab556f1fed981c7d8feca9d9f314cc0474a21",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/old_new_alignment_audit/environment.json"
+    },
+    {
+      "bytes": 14744176,
+      "file": "results/old_new_alignment_audit/old_new.paf",
+      "sha256": "f67754794e893261f12c141733ba5df3dd8dba4d33117ba466a588b80981db86",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/old_new_alignment_audit/old_new.paf"
+    },
+    {
+      "bytes": 1110,
+      "file": "results/old_new_alignment_audit/receipt.json",
+      "sha256": "1cc24977c11d67879661bfd3bdc10055752f84b9bfbb9d60fa187259c4882732",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/old_new_alignment_audit/receipt.json"
+    },
+    {
+      "bytes": 285,
+      "file": "results/old_new_alignment_audit/resources/stages.tsv",
+      "sha256": "4a61a60d11e43b2c81aaddd2b2a953bed2cf743e69526c28891d30dbcf0f6707",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/old_new_alignment_audit/resources/stages.tsv"
+    },
+    {
+      "bytes": 2290,
+      "file": "results/old_new_alignment_context/summary.json",
+      "sha256": "47ec99ff11df5903c40de58eed2b40ec1482fe0daa3db6d937f5c57cb215ce34",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/old_new_alignment_context/summary.json"
+    },
+    {
+      "bytes": 5745,
+      "file": "results/old_new_alignment_context/family_alignment_context.tsv",
+      "sha256": "d08a08a3618f208b7f1ae6f5058f8df245a90c14556961305c88973f7713118f",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/old_new_alignment_context/family_alignment_context.tsv"
+    },
+    {
+      "bytes": 1472,
+      "file": "results/old_new_alignment_context/independent_verification.json",
+      "sha256": "ba1a69ff14bd917b970d9b02577bf4518fb5dbcb5aa246a23a6470c3e21b5bd8",
+      "source": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/old_new_alignment_context/independent_verification.json"
+    },
+    {
+      "bytes": 1069,
+      "file": "resource_summary.tsv",
+      "sha256": "6559406622d83c4b6e1c839da65796c202357183ab878bfe5836261902c25acd",
+      "source": "generated_by_archive_macadamia_jansenii_donor_matched_collapse"
+    },
+    {
+      "bytes": 6465,
+      "file": "headline_summary.json",
+      "sha256": "ee214ea4168eeccb2f35c7fad6147e148e8d756ed389721e699bead5e84d1b78",
+      "source": "generated_by_archive_macadamia_jansenii_donor_matched_collapse"
+    },
+    {
+      "bytes": 656,
+      "file": "README.md",
+      "sha256": "1389019df477a1defed66f6922e49593be512dcac9165e9a7c0afb8160a200e5",
+      "source": "generated_by_archive_macadamia_jansenii_donor_matched_collapse"
+    }
+  ],
+  "schema_version": 1
+}

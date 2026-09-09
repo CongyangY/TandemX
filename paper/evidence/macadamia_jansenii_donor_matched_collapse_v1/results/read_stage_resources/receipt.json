@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "requested_stage_count": 3,
+  "completed_stage_count": 3,
+  "sample_interval_seconds": 0.5,
+  "rss_scope": "aggregate_live_process_tree",
+  "commands_use_shell": false
+}

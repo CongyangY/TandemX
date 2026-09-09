@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "macadamia_jansenii_donor_matched_collapse_v1",
+  "preregistration_commit": "3ce73356675a20551f23d7e00beaef9482d4bd4f",
+  "stages": [
+    {
+      "name": "discover",
+      "cwd": "/Users/ycy/Codex/Sofw/TandemX",
+      "scratch_dir": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover",
+      "command": [
+        "conda", "run", "-n", "tandemx-dev", "python", "-m", "tandemx.cli",
+        "discover",
+        "--reads",
+        "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+        "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+        "--outdir", "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover",
+        "--discovery-method", "cascade",
+        "--clustering-method", "sequence",
+        "--cluster-identity", "0.95",
+        "--family-audit", "related",
+        "--min-period", "30",
+        "--max-period", "1000",
+        "--top-periods", "5",
+        "--min-support-reads", "5",
+        "--min-repeat-span", "100",
+        "--sample-rate", "0.05",
+        "--seed", "6101",
+        "--kmer-backend", "rust",
+        "--threads", "4",
+        "--no-progress"
+      ]
+    },
+    {
+      "name": "quantify_primary",
+      "cwd": "/Users/ycy/Codex/Sofw/TandemX",
+      "scratch_dir": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_primary",
+      "command": [
+        "conda", "run", "-n", "tandemx-dev", "python", "-m", "tandemx.cli",
+        "quantify",
+        "--reads",
+        "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+        "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+        "--catalog", "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/monomers.fa",
+        "--genome-size", "780000000",
+        "--k", "21",
+        "--kmer-backend", "rust",
+        "--outdir", "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_primary",
+        "--no-progress"
+      ]
+    },
+    {
+      "name": "quantify_reported_28Gb_depth_sensitivity",
+      "cwd": "/Users/ycy/Codex/Sofw/TandemX",
+      "scratch_dir": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_reported_depth_sensitivity",
+      "command": [
+        "conda", "run", "-n", "tandemx-dev", "python", "-m", "tandemx.cli",
+        "quantify",
+        "--reads",
+        "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+        "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+        "--catalog", "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/monomers.fa",
+        "--genome-size", "780000000",
+        "--haploid-depth", "35.8974358974359",
+        "--k", "21",
+        "--kmer-backend", "rust",
+        "--outdir", "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_reported_depth_sensitivity",
+        "--no-progress"
+      ]
+    }
+  ]
+}

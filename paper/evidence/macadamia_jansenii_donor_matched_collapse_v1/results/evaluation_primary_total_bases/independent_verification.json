@@ -1,0 +1,38 @@
+{
+  "checks": {
+    "family_universe_match": true,
+    "family_values_and_labels_match": true,
+    "summary_statistics_match": true
+  },
+  "failures": [],
+  "family_rows_recomputed": 1227,
+  "inputs": {
+    "config": {
+      "path": "benchmarks/configs/macadamia_jansenii_donor_matched_collapse_v1.json",
+      "sha256": "b5da4f3b5c22c1a6c795075f3f4d2d580c2d70e61ba9264a53b202a7b5de5db9"
+    },
+    "copy_number": {
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_primary/copy_number.tsv",
+      "sha256": "45f2d731699418f2fccbc79877c3ae290fa55cb46aa6616d20fbda5a4b605fba"
+    },
+    "family_metrics": {
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/evaluation_primary_total_bases/family_metrics.tsv",
+      "sha256": "4a9da94ae5fe162b6139f77efbb9dd98814c1c9bb2aa03b823702d083e0d03c9"
+    },
+    "new_arrays": {
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/locate_new/arrays.bed",
+      "sha256": "a79bbd6e9da087d43f6daa679bd03ff68b72a9e129ed7c81348846019da89419"
+    },
+    "old_arrays": {
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/locate_old/arrays.bed",
+      "sha256": "dd50efdac653ab589103cf68e7a50ed8f6894ae1d96669cf79a3039f65cf9a16"
+    },
+    "summary": {
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/evaluation_primary_total_bases/summary.json",
+      "sha256": "a0ee692f654401dbcc29da7c3aaff3d6ca9ff75c4ebcd57a5b52a08da2224d64"
+    }
+  },
+  "schema_version": 1,
+  "verification_method": "independent_standard_library_recomputation_without_tandemx_evaluator_imports",
+  "verification_passed": true
+}

@@ -1,0 +1,22 @@
+{
+  "boundary": "Post-primary orthogonal assembly-alignment context. Query segments represented only as insertions relative to the old assembly are excluded from aligned coverage. Old and new contig identifiers are not shared, so exact-name same-chromosome fields are not interpreted. Repetitive multi-mapping, assembly rearrangement, unresolved gaps and mapper heuristics prevent this from being independent copy-number truth. No primary prediction threshold or family catalogue may change from this audit.",
+  "complete": true,
+  "exit_code": 0,
+  "paf": "old_new.paf",
+  "paf_bytes": 14744176,
+  "paf_sha256": "f67754794e893261f12c141733ba5df3dd8dba4d33117ba466a588b80981db86",
+  "resource": {
+    "exit_code": 0,
+    "peak_process_count": 1,
+    "peak_process_tree_rss_mib": "8177.421875",
+    "peak_scratch_bytes": 14746184,
+    "sample_count": 614,
+    "stage": "old_new_minimap2",
+    "stderr_log": "old_new_minimap2.stderr.log",
+    "stdout_log": "old_new.paf",
+    "system_cpu_seconds": "43.372715",
+    "user_cpu_seconds": "1137.767632",
+    "wall_seconds": "327.640185"
+  },
+  "schema_version": 1
+}

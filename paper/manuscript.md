@@ -1,6 +1,6 @@
 # TandemX: read-level evidence and sampling uncertainty for plant satellite repeat analysis
 
-**Evidence-backed development manuscript, 8 September 2026.** Author information
+**Evidence-backed development manuscript, 9 September 2026.** Author information
 is not assigned. This draft contains completed results, with unresolved release
 and biological-validation requirements listed in `submission_readiness.md`.
 It is not a submission-ready manuscript or a claim of universal superiority.
@@ -34,6 +34,14 @@ of 0.676--1.0. At the predeclared 5-kb threshold, one false negative and two
 false positives remained, and predicted missing-bp Pearson correlation was
 0.589. The newer assembly shares HiFi evidence with the estimator and is not
 fully independent biological truth.
+In a second species, Macadamia jansenii, the update paper described the HiFi
+material as the same sample used for the earlier CLR comparison. At the same
+frozen 15-kb and 0.6 gates, 43 source-eligible families contained two reference-
+collapse and 41 other states; TandemX produced TP/FN/FP/TN=2/0/0/41. The two-
+positive Wilson interval was 0.342--1.0, and predicted missing sequence
+substantially exceeded observed old-to-new gain. This supports cross-species
+classification replication but not precise missing-bp estimation, population-
+level performance or absolute truth.
 On three fresh predeclared conditional genomes, a frozen multi-k/depth rule
 improved under-representation sensitivity from 81.48% to 85.60%, false-positive
 rate from 8.64% to 7.41% and precision from 93.40% to 94.55%. The 20×/1%-error/
@@ -526,6 +534,49 @@ and a post hoc author-annotation association are not independent copy truth.
 The newer assembly shares HiFi evidence with TandemX and remains a donor-
 matched high-quality reference proxy rather than absolute biological truth.
 
+We then enrolled Macadamia jansenii as a second-species paper-same-sample
+reference proxy. The earlier study generated an 84x CLR Falcon-Unzip primary
+assembly from ex situ tree accession 1005; its purged primary FASTA contained
+762 contigs, 758,277,953 bp and an N50 of 1,585,406 bp [13]. The update study
+described its two-cell HiFi material as the same sample used in the CLR
+comparison and produced an IPA primary assembly of 284 contigs, 737,613,980 bp
+and N50 4,485,544 bp [14]. The archival records nevertheless use old BioSample
+`SAMN14217788` and new BioSamples `SAMN17524927/8`, different aliases and
+different collection dates. We therefore do not claim the same DNA extraction.
+Both GigaDB assembly files and both complete ENA FASTQ files passed expected
+byte, publisher/ENA MD5, SHA-256 and sequence checks before execution. The two
+read runs contained 1,642,394 records and 22,546,488,654 bases.
+
+The discovery sample yielded 1,227 families. At the preregistered 15-kb newer-
+assembly denominator, 43 were source eligible, 1,184 were
+`not_source_eligible` and none was a `technical_failure`. The newer assembly
+labelled two families as reference collapse and 41 as other states; read-based
+calls gave TP=2, FN=0, FP=0 and TN=41. Sensitivity and precision were 1.0, with
+Wilson 95% intervals of 0.342380--1.0 because only two positives existed. The
+predeclared 5-kb denominator gave TP/FN/FP/TN=3/1/6/141, while the 50-kb
+denominator gave 1/0/0/8. Predicted missing sequence totalled 2,118,801 bp
+versus 158,602 bp observed, with mean absolute error 50,288 bp, Pearson
+r=0.535044 and Spearman rho=0.396064. An independent standard-library
+implementation reproduced every family and summary value.
+
+The separately executed reported-28-Gb depth sensitivity preserved the primary
+2/0/0/41 result and the 50-kb 1/0/0/8 result. At 5 kb, it reduced false
+positives from six to three while retaining one false negative. Predicted
+missing sequence decreased to 1,680,937 bp and mean absolute error to 40,186 bp,
+but this remained far above the 158,602-bp observed gain; Pearson r=0.534128 and
+Spearman rho=0.374853. Its independent recomputation also passed. Normalization
+robustness therefore applies to the primary binary calls, not missing-bp
+magnitude.
+
+The frozen post-primary minimap2 audit aligned 13,565 assembly segments. The
+two collapse families had mean/median primary aligned-query coverage 0.436792,
+whereas the 41 other families had mean 0.851601 and median 0.886090. Old and
+new contig names are not shared, so same-name chromosome scopes were not
+interpreted. An independent CIGAR parser reproduced all 43 rows. This direction-
+consistent alignment context is not independent copy truth, and the newer
+assembly shares the same HiFi evidence used by the read estimator (Evidence
+E41).
+
 We screened cassava TME204 as a second donor-matched comparison because its CLR
 and HiFi reads were generated from the same DNA sample and the published
 CLR-Falcon/Falcon-Unzip assembly was less haplotype-resolved than the HiFi-
@@ -714,6 +765,12 @@ missing HTTP 206 range, appended 25,903,168 bytes and passed the publisher MD5.
 Independent streaming verification reproduced the full-file SHA-256, 20 FASTA
 records, 1,007,237,669 bp and zero non-ACGT characters (Evidence E40). This
 establishes input identity, not Table S1 reproducibility or CENH3-based accuracy.
+No native x86/Linux host was available after the emulated smoke was stopped, so
+the unchanged smoke and formal ZH13 reproduction were removed from the current
+work programme rather than repeatedly retried. The retained result remains an
+incomplete comparator execution with no runtime or accuracy inference; exact
+ZH13 input enrollment can support a future run if suitable hardware becomes
+available.
 
 Reference QC aligned the Col-0N 11.766-Mb and 118.497-Mb samples to the checked
 Col-CEN v1.2 reference with its declared mitochondrial and chloroplast contigs.
@@ -782,12 +839,14 @@ idealized haploid simulations do not reproduce. Consequently, the experimental
 estimator is exposed as an opt-in public mode and has not replaced the controls
 default.
 
-The current biological evidence is incomplete. The single-donor Ey15-2
-reference-proxy experiment is stronger than source matching alone, but its
-newer assembly shares HiFi evidence with the read estimator, its primary
-denominator contains only 19 families and it supplies no biological replication.
-Additional species and materials must be evaluated with documented technical/
-biological replication, true
+The current biological evidence is incomplete. Ey15-2 and Macadamia provide
+two species-level same-sample reference proxies, but both newer assemblies share
+HiFi evidence with the read estimator. Their primary denominators contain only
+19 and 43 families, Macadamia has only two positive families and its archival
+identifiers do not establish the same DNA extraction. These are independent
+species comparisons, not biological replication or absolute copy truth.
+Additional materials must be evaluated with documented technical/biological
+replication, true
 genomic depth rather than file size alone, and relevant hard negatives.
 Matched-donor evidence, known repeat-family recovery, collapse validation beyond
 exact simulated arrays and probe/FISH concordance are necessary before biological
@@ -813,6 +872,9 @@ Per-run manifests and compact evidence archives preserve
 the exact source, input and output hashes used for each result and take
 precedence over a manuscript-level version label.
 Public inputs and reuse paths are described in the repository documentation.
+After the Macadamia archive and its validation guards were added, the complete
+local Python suite passed 662 tests in 68.00 s; compileall and the Git whitespace
+check also passed.
 
 After sequence clustering, TandemX streams an all-pair or exactly gated
 related-pair catalogue audit. For relationships classified as possible
@@ -948,6 +1010,21 @@ telomere annotations were evaluated only in a labelled post hoc audit and did
 not change the primary denominator or threshold. A process-tree sampler
 recorded wall time, CPU time, peak aggregate RSS, process count and scratch
 growth for all six public TandemX stages.
+
+The Macadamia analysis used complete ENA runs `SRR13557763` and `SRR13557762`,
+the exact purged CLR Falcon-Unzip primary-contig member of GigaDB dataset
+`100812`, and the HiFi IPA primary assembly from dataset `100906`. The catalogue
+was discovered from an identifier-hash Bernoulli 5% sample with seed 6101 and
+quantified on both complete FASTQ files. Primary depth was total public read
+bases divided by the independently reported 780-Mb genome size; a separately
+executed sensitivity used 28 Gb divided by 780 Mb because the paper's rounded
+read yield exceeds the 22.546-Gb public FASTQ total. Both assemblies used the
+same frozen catalogue, IID-base localization model, k=21, minimum identity 0.9,
+100-kb windows and 10-kb steps. Family fate rules, 5/15/50-kb denominators,
+collapse threshold and independent verification matched the Ey15 procedure.
+The post-primary assembly audit used minimap2 2.31-r1302 with `-x asm5 -c
+--eqx --secondary=yes -N100`; only any-alignment and primary-alignment scopes
+were interpreted because old and new contig identifiers differ.
 
 ### Comparator execution and scoring
 
@@ -1359,6 +1436,11 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
 - Supplementary Table S37: exact HTTP 206 continuation receipt, publisher MD5,
   independent SHA-256/FASTA verification and 20-sequence length table in
   `evidence/unitfinder_zh13_source_enrollment_v2_success`.
+- Supplementary Table S38: Macadamia paper-same-sample source relationship,
+  exact old/new assembly and two-run HiFi checks, all 1,227 family fates,
+  primary and reported-28-Gb-depth results, independent recomputations,
+  old/new alignment context and process-tree resources in
+  `evidence/macadamia_jansenii_donor_matched_collapse_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1394,7 +1476,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `unitfinder_interface_smoke_v3_terminated`; E38:
 `unitfinder_zh13_source_enrollment_v1`; E39:
 `unitfinder_zh13_download_v1_failure`; E40:
-`unitfinder_zh13_source_enrollment_v2_success`.
+`unitfinder_zh13_source_enrollment_v2_success`; E41:
+`macadamia_jansenii_donor_matched_collapse_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 
@@ -1430,6 +1513,11 @@ final table/figure packaging and journal-specific formatting checks.
     [Plant Communications, doi:10.1016/j.xplc.2025.101618](https://doi.org/10.1016/j.xplc.2025.101618).
 12. Conflicting Kinesin-14s in a single chromosomal drive haplotype.
     [Genetics, doi:10.1093/genetics/iyaf091](https://doi.org/10.1093/genetics/iyaf091).
+13. Comparison of long-read methods for sequencing and assembly of a plant
+    genome.
+    [GigaScience, doi:10.1093/gigascience/giaa146](https://doi.org/10.1093/gigascience/giaa146).
+14. Improvements in the Sequencing and Assembly of Plant Genomes.
+    [GigaByte, doi:10.46471/gigabyte.24](https://doi.org/10.46471/gigabyte.24).
 
 Bibliographic metadata and the full primary dataset references require final
 reference-manager curation. No author, funding, conflict or accession-deposition

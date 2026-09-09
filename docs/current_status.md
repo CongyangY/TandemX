@@ -1,9 +1,64 @@
 # TandemX current status and handoff
 
-Updated 2026-09-08. Read completely after `AGENTS.md`, then verify Git/tests.
+Updated 2026-09-09. Read completely after `AGENTS.md`, then verify Git/tests.
 The user has authorized autonomous development and GitHub updates toward mature
 software and a full evidence-backed paper (multi-panel figures and supplement).
 The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
+
+## Active 2026-09-09 continuation checkpoint
+
+- **A second-species donor-matched reference-proxy validation has passed its
+  preregistered primary analysis.** The Macadamia jansenii update paper calls
+  the two-cell HiFi material the same sample used for the earlier CLR
+  comparison. Archival identifiers, aliases and collection dates differ
+  (`SAMN14217788` versus `SAMN17524927/8`), so this is paper-level same-sample
+  matching and not a claim of the same DNA extraction. The exact 762-contig,
+  758,277,953-bp purged CLR Falcon-Unzip primary FASTA and 284-contig,
+  737,613,980-bp HiFi IPA primary FASTA passed publisher MD5, SHA-256 and
+  sequence-statistic checks. Both complete ENA FASTQ files passed checksum,
+  gzip, structure and duplicate-ID checks and contain 1,642,394 reads and
+  22,546,488,654 bases.
+- **The frozen 15-kb result is TP/FN/FP/TN=2/0/0/41.** Discovery used 82,626
+  deterministic sampled reads and emitted 1,227 families. The primary evaluator
+  retained 43 `eligible`, 1,184 `not_source_eligible` and zero
+  `technical_failure` rows. Sensitivity and precision are 1.0, but the two-
+  positive Wilson 95% interval is 0.342380--1.0. The 5-kb denominator yields
+  3/1/6/141 and the 50-kb denominator 1/0/0/8. Predicted missing sequence is
+  2,118,801 bp versus 158,602 bp observed, with mean absolute error 50,288 bp,
+  Pearson r=0.535044 and Spearman rho=0.396064. Thus the second species
+  strengthens binary collapse classification evidence but not missing-bp
+  magnitude accuracy. An independent standard-library implementation reproduced
+  every family and summary value.
+- **Post-primary assembly alignment provides direction-consistent context.**
+  minimap2 2.31-r1302 completed in 327.64 s with 8,177.42 MiB peak process-tree
+  RSS and emitted 13,565 PAF rows. The two collapse families had mean/median
+  primary aligned-query coverage 0.436792 versus mean 0.851601 and median
+  0.886090 for the other 41 families. An independent CIGAR parser reproduced
+  all 43 rows. Old/new contig identifiers are not shared, and this audit is not
+  independent copy truth. Discovery took 959.24 s/1,447.00 MiB; primary full-
+  read quantification took 11,292.61 s/222.50 MiB; old/new localization took
+  544.14/522.73 s and 148.33/518.56 MiB. The complete reported-28-Gb depth
+  sensitivity took 11,482.61 s/187.23 MiB and preserved the primary
+  TP/FN/FP/TN=2/0/0/41. At 5 kb it reduced FP from six to three while retaining
+  one FN. Predicted missing sequence fell to 1,680,937 bp but remained more than
+  tenfold above the 158,602-bp observed gain; mean absolute error improved to
+  40,186 bp while Pearson r remained 0.534128. Its independent verifier passed.
+- **The compact Macadamia archive is complete.** The 37-MB directory at
+  `paper/evidence/macadamia_jansenii_donor_matched_collapse_v1` contains 40
+  manifest-listed configuration/result/generated files plus its manifest. It
+  retains both full-read quantifications, all family fates, both independent
+  family verifications, the independent assembly-alignment audit and five
+  public TandemX stage resource rows. The archive guard rejects incomplete
+  resource profiles, missing fates and failed independent verification. The
+  complete source suite passes **662 tests in 68.00 s**; compileall and
+  `git diff --check` pass.
+- **unitFinder and the dependent ZH13 formal reproduction are stopped by scope
+  decision.** The current host is Apple Silicon, the linux/amd64 emulated smoke
+  was already operator-stopped without the two required final FASTAs, and no
+  native x86/Linux host is available. Do not spend more time retrying unitFinder.
+  Retain the exact ZH13 input enrollment and the incomplete smoke as provenance,
+  not as runtime, failure or accuracy evidence. Reopen only if a suitable native
+  host becomes directly available.
 
 ## Active 2026-09-08 continuation checkpoint
 
@@ -1564,15 +1619,15 @@ reuse assembly-alignment BAMs from other projects as raw reads.
    runtime costs before making it the default.
 3. Use new development/validation seeds, freeze every decision before untouched
    evaluation and add independent families/processes for publication inference.
-4. Seek a second eligible donor-matched old/new assembly experiment or an
-   orthogonal biological endpoint; the completed Ey15-2 proxy must not be
-   generalized beyond one donor whose newer assembly shares HiFi evidence with
-   the predictor.
-5. The exact ZH13-T2T assembly is ready. Before Table S1 reproduction, rerun the
-   unchanged unitFinder interface on native x86/Linux with a predeclared wall-
-   time cap and stage-separated analysis/plot timing. Then freeze all 20 per-
-   chromosome commands and manual cross-chromosome steps. Keep published Table
-   S1 reproducibility separate from CENH3-based accuracy.
+4. The second-species Macadamia analysis and depth sensitivity are complete and
+   archived. The result strengthens binary reference-proxy classification but
+   exposes poor missing-bp magnitude agreement. The next biological priority is
+   orthogonal or extraction-verified truth, not a third weakly matched assembly
+   pair.
+5. Stop unitFinder and the dependent ZH13 reproduction on this host. Preserve
+   the exact ZH13-T2T input and retained emulated-smoke fate, but do not infer
+   runtime or accuracy and do not retry unless a suitable native x86/Linux host
+   becomes directly available.
 6. SRF family/abundance development workflows now ran as described above. TRASH
    assembly and applicable TAREAN short-read workflow comparisons remain unrun.
    Docker execution is available; the TideCluster and unitFinder resource/

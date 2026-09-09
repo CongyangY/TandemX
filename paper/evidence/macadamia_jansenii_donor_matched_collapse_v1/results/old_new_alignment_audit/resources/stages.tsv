@@ -1,0 +1,2 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+old_new_minimap2	0	327.640185	1137.767632	43.372715	8177.421875	1	14746184	614	old_new.paf	old_new_minimap2.stderr.log

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "macadamia_jansenii_old_new_alignment_audit_v1",
+  "parent_experiment": "macadamia_jansenii_donor_matched_collapse_v1",
+  "preregistration_parent_commit": "3ce73356675a20551f23d7e00beaef9482d4bd4f",
+  "status": "frozen_before_alignment_output_inspection",
+  "tool": {
+    "name": "minimap2",
+    "version": "2.31-r1302",
+    "source_commit": "3c28777e7e2dcc90f825de1b9f17a89cca7d4452",
+    "binary": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2"
+  },
+  "inputs": {
+    "old_assembly": {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/old_assembly.fa",
+      "sha256": "d88d57e315065367c39e0c33b205ea7b83571fd3845b962992a0bfd2e84c064d",
+      "role": "target_CLR_Falcon_primary_after_Purge_Haplotigs"
+    },
+    "new_assembly": {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/new_assembly.fa",
+      "sha256": "d6e9272438d072662f51de7960bdef18cb3c834d97d4ca44213715b7196498a9",
+      "role": "query_HiFi_IPA_primary"
+    }
+  },
+  "arguments": [
+    "-x",
+    "asm5",
+    "-t",
+    "4",
+    "-c",
+    "--eqx",
+    "--secondary=yes",
+    "-N",
+    "100"
+  ],
+  "evaluation": {
+    "eligible_family_rule": "new_localized_union_bp_at_least_15000",
+    "reference_collapse_rule": "old_to_new_localized_union_bp_ratio_below_0.6",
+    "aligned_query_operations": [
+      "M",
+      "=",
+      "X"
+    ],
+    "excluded_query_insertion_operation": "I",
+    "interpretable_coverage_scopes": [
+      "any_alignment",
+      "primary_alignment"
+    ],
+    "contig_name_warning": "old_and_new_contig_identifiers_are_not_shared_so_exact_name_same_chromosome_scopes_are_not_interpretable",
+    "primary_tag": "tp:A:P",
+    "report_all_eligible_families": true
+  },
+  "boundary": "Post-primary orthogonal assembly-alignment context. Query segments represented only as insertions relative to the old assembly are excluded from aligned coverage. Old and new contig identifiers are not shared, so exact-name same-chromosome fields are not interpreted. Repetitive multi-mapping, assembly rearrangement, unresolved gaps and mapper heuristics prevent this from being independent copy-number truth. No primary prediction threshold or family catalogue may change from this audit."
+}
