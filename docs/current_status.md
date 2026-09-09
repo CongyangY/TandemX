@@ -51,7 +51,8 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   public TandemX stage resource rows. The archive guard rejects incomplete
   resource profiles, missing fates and failed independent verification. The
   complete source suite passes **662 tests in 68.00 s**; compileall and
-  `git diff --check` pass.
+  `git diff --check` pass. Evidence commit `3304d07` is pushed to
+  `codex/publish-current-progress`.
 - **unitFinder and the dependent ZH13 formal reproduction are stopped by scope
   decision.** The current host is Apple Silicon, the linux/amd64 emulated smoke
   was already operator-stopped without the two required final FASTAs, and no
