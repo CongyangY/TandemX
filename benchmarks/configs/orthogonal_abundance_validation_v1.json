@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "orthogonal_abundance_validation_v1",
+  "status": "frozen_before_orthogonal_fastq_download_or_family_result_inspection",
+  "frozen_on": "2026-09-09",
+  "scientific_question": "distinguish_HiFi_abundance_overestimate_from_residual_collapse_in_newer_assemblies",
+  "feature_freeze": true,
+  "unitfinder_status": "permanently_stopped",
+  "catalogues": {
+    "ey15": "paper/evidence/ey15_donor_matched_collapse_v1/results/run/discover/monomers.fa",
+    "macadamia": "paper/evidence/macadamia_jansenii_donor_matched_collapse_v1/results/run/discover/monomers.fa"
+  },
+  "primary_eligibility": {
+    "basis": "unchanged_15000_bp_newer_assembly_denominator",
+    "ey15_families": 19,
+    "macadamia_families": 43,
+    "selection_uses_orthogonal_result": false
+  },
+  "orthogonal_runs": {
+    "ey15_illumina": "ERR8666067",
+    "macadamia_illumina": "SRR11191912",
+    "macadamia_ont": "SRR11191910"
+  },
+  "illumina": {
+    "diagnostic_k": [21, 31],
+    "primary_quality_correction": false,
+    "normalization": "mean_depth_of_deterministic_cross_assembly_single_copy_controls",
+    "control_diagnostics": ["median_depth", "depth_MAD", "zero_fraction"],
+    "control_definition": "canonical_kmer_occurs_once_in_each_old_and_new_assembly_and_in_no_catalogue_monomer",
+    "control_selection": {
+      "seed": 6101,
+      "desired_per_k": 20000,
+      "candidate_limit_per_k": 200000,
+      "sampling_stride_bp_per_contig": 251,
+      "priority": "lowest_SHA256_of_seed_NUL_canonical_kmer"
+    },
+    "independent_counter": "KMC_exact_counts"
+  },
+  "macadamia_genome_size_sensitivity_bp": [616000000, 653000000, 738000000, 780000000],
+  "binary_threshold": 0.6,
+  "quantification_bias_fold_threshold": 1.5,
+  "continuous_terms": [
+    "read_assembly_abundance_deficit",
+    "estimated_under_representation"
+  ],
+  "forbidden_continuous_term": "prediction_error_against_newer_assembly_truth",
+  "decision_states": [
+    "orthogonal_supports_residual_collapse",
+    "orthogonal_supports_quantification_bias",
+    "unresolved"
+  ],
+  "stop_rules": [
+    "do_not_retune_catalogue_eligibility_or_thresholds_after_results",
+    "do_not_treat_newer_assembly_as_absolute_copy_number_truth",
+    "do_not_add_algorithms_comparators_or_unrelated_features",
+    "if_bias_is_supported_fix_only_the_demonstrated_quantification_problem",
+    "after_validation_stop_method_development"
+  ]
+}

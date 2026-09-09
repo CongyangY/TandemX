@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "experiment_id": "orthogonal_abundance_source_audit_v1",
+  "status": "source_audit_complete_validation_not_run",
+  "created_on": "2026-09-09",
+  "files": {
+    "README.md": "2a89e6f68463b187e66a80d586364f50f386fe8d5ce446434b66fec1389e1f22",
+    "ena_selected_runs.tsv": "428379dcfa8883d4dc7aee516f72a726ee54e4634f7e41596c1d79c1ca5c927c",
+    "evidence_summary.json": "d19e20dc70f372e6efebcaec9c14d6cbc5134639840ad6e7beee39e6d83d103c",
+    "source_audit.tsv": "2d96847393cac368619d9cdc0c6ff988d54445c34829fb4ba23e598bed209006",
+    "source_queries.json": "4053ccb8d835b56f62a95fbc7a3c9bd8842bae84d31d588bfeee65edde77f002"
+  },
+  "boundary": "This archive proves source feasibility and exact ENA metadata only; it contains no abundance result."
+}

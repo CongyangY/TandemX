@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "retrieved_on": "2026-09-09",
+  "retrieval_method": "ENA_Portal_API_via_isolated_browser_serverFetch",
+  "fields": "run_accession,sample_accession,experiment_accession,scientific_name,instrument_platform,instrument_model,library_layout,library_strategy,library_source,library_selection,study_accession,sample_title,experiment_title,run_alias,fastq_ftp,fastq_md5,fastq_bytes,read_count,base_count",
+  "queries": [
+    {
+      "accession": "SAMEA13018399",
+      "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SAMEA13018399&result=read_run&fields=run_accession,sample_accession,experiment_accession,scientific_name,instrument_platform,instrument_model,library_layout,library_strategy,library_source,library_selection,study_accession,sample_title,experiment_title,run_alias,fastq_ftp,fastq_md5,fastq_bytes,read_count,base_count&format=tsv&download=true",
+      "inventory_result": "two_runs_ERR8666125_HiFi_and_ERR8666067_Illumina;no_ONT"
+    },
+    {
+      "accession": "PRJNA609013",
+      "url": "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA609013&result=read_run&fields=run_accession,sample_accession,experiment_accession,scientific_name,instrument_platform,instrument_model,library_layout,library_strategy,library_source,library_selection,study_accession,sample_title,experiment_title,run_alias,fastq_ftp,fastq_md5,fastq_bytes,read_count,base_count&format=tsv&download=true",
+      "inventory_result": "nine_rows;selected_SRR11191912_Illumina_and_paper_declared_SRR11191910_PromethION"
+    }
+  ],
+  "source_pages": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC9757041/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7751402/",
+    "https://gigabytejournal.com/articles/24"
+  ]
+}

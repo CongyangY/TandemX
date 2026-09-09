@@ -279,3 +279,23 @@ At the start of every new Codex conversation in this repository:
 5. Use the `tandemx-dev` conda environment for development checks and run `pytest` before committing when practical.
 6. Commit meaningful code, tests, and documentation together so GitHub remains the durable project record across compressed or restarted conversations.
 7. Do not modify global shell configuration or install packages outside the project environment without explicit approval.
+
+### Feature freeze and final scientific gate (2026-09-09)
+
+TandemX is in feature freeze. Do not add algorithms, comparators, convenience
+features, or low-yield performance work. `unitFinder` is permanently stopped and
+must not be retried.
+
+The only remaining method-science task is to validate read-based repeat
+abundance and the read--assembly abundance deficit for the frozen Ey15-2 and
+Macadamia family catalogues using independent Illumina, ONT/ultra-long, or other
+orthogonal evidence. A newer assembly is not absolute copy-number truth.
+Continuous results must be described as read--assembly abundance deficit or
+estimated under-representation, and binary collapse classification must be
+evaluated separately from missing-base magnitude.
+
+If orthogonal reads support abundance above the newer assembly, test the
+residual-tandem-repeat-collapse interpretation. If they instead agree with the
+newer assembly, diagnose the quantification bias and change only that bounded
+problem. After this gate, stop method development and move to the final
+manuscript, figures, Bioconda, Zenodo, and release work.

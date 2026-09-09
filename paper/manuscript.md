@@ -27,21 +27,26 @@ in ten libraries across eight reported plant species. Reference concordance in a
 Arabidopsis subset identified 22.19% of input bases with organellar primary
 alignment spans, highlighting a potential total-library normalization bias.
 In a frozen retrospective comparison using complete Ey15-2 HiFi reads and
-donor-matched CLR-Canu and HiFi-Hifiasm assemblies, the 15-kb reference-proxy
-denominator contained eight collapsed and 11 other families; read-based calls
-gave TP/FN/FP/TN=8/0/0/11, with sensitivity and precision Wilson 95% intervals
-of 0.676--1.0. At the predeclared 5-kb threshold, one false negative and two
-false positives remained, and predicted missing-bp Pearson correlation was
-0.589. The newer assembly shares HiFi evidence with the estimator and is not
-fully independent biological truth.
+donor-matched CLR-Canu and HiFi-Hifiasm assemblies, the 15-kb assembly-proxy
+denominator contained eight old/new under-representation labels and 11 other
+families; read-based calls gave TP/FN/FP/TN=8/0/0/11, with sensitivity and
+precision Wilson 95% intervals of 0.676--1.0. At the predeclared 5-kb threshold,
+one false negative and two false positives remained. The correlation between
+HiFi-versus-old and new-versus-old deficit magnitudes was 0.589. The newer
+assembly shares HiFi evidence with the estimator and is neither fully
+independent nor copy-number truth.
 In a second species, Macadamia jansenii, the update paper described the HiFi
 material as the same sample used for the earlier CLR comparison. At the same
-frozen 15-kb and 0.6 gates, 43 source-eligible families contained two reference-
-collapse and 41 other states; TandemX produced TP/FN/FP/TN=2/0/0/41. The two-
-positive Wilson interval was 0.342--1.0, and predicted missing sequence
-substantially exceeded observed old-to-new gain. This supports cross-species
-classification replication but not precise missing-bp estimation, population-
-level performance or absolute truth.
+frozen 15-kb and 0.6 gates, 43 source-eligible families contained two old/new
+assembly under-representation labels and 41 other states; TandemX produced
+TP/FN/FP/TN=2/0/0/41. The two-positive Wilson interval was 0.342--1.0, and the
+HiFi-versus-old deficit substantially exceeded the new-versus-old assembly
+gain. This supports cross-species assembly-proxy classification concordance,
+not precise missing-bp estimation, population-level performance or absolute
+truth. Orthogonal PCR-free Illumina for Ey15-2 and Illumina plus PromethION for
+Macadamia have been source-frozen to distinguish HiFi abundance bias from
+residual under-representation in the newer assemblies; those results are not
+yet available.
 On three fresh predeclared conditional genomes, a frozen multi-k/depth rule
 improved under-representation sensitivity from 81.48% to 85.60%, false-positive
 rate from 8.64% to 7.41% and precision from 93.40% to 94.55%. The 20×/1%-error/
@@ -63,9 +68,11 @@ TandemX/TideHunter wall-time and direct-child peak-RSS geometric-mean ratios
 were 1.9779 and 0.3969, minimum positive array recall/precision were 1.0 and
 the negative-control call rate was zero. Some scenario runtime ratios exceeded
 4, so this does not establish universal speed, memory or accuracy superiority.
-These results support further evaluation of read-based repeat evidence and
-conditional uncertainty, while independent biological truth, held-out
-generalization and production-scale validation remain necessary.
+These results support a final, bounded orthogonal evaluation of read-based
+repeat abundance and conditional uncertainty. Independent physical copy-number
+truth remains unavailable; the next inference is explicitly between
+quantification bias, residual assembly under-representation and unresolved
+evidence.
 
 ## Background
 
@@ -510,22 +517,25 @@ archive passed its published MD5 and local SHA-256 checks before execution
 (Evidence E21).
 
 The frozen run produced 2,133 family rows: 19 were source eligible, 2,114 were
-`not_source_eligible` and none was a `technical_failure`. The newer assembly
-labelled eight of the 19 as reference collapse and 11 as other states; read-
+`not_source_eligible` and none was a `technical_failure`. The old/new assembly
+transition labelled eight of the 19 as assembly-proxy under-representation and
+11 as other states; read-
 based calls yielded TP=8, FN=0, FP=0 and TN=11. Sensitivity and precision were
 both 1.0, but their Wilson 95% intervals were 0.675592--1.0 because the positive
 denominator contained only eight families. At 5 kb, the larger 62-family
 denominator exposed TP/FN/FP/TN=19/1/2/40; at 50 kb, only six families remained.
-Predicted missing sequence totalled 840,658 bp versus 973,959 bp observed, with
-mean/median absolute errors 45,551/4,962 bp, Pearson r=0.589321 and Spearman
-rho=0.921213. Thus the perfect primary classification did not imply precise
-missing-sequence magnitude (Figure 12; Evidence E31).
+The HiFi-versus-old deficit totalled 840,658 bp versus a 973,959-bp
+new-versus-old assembly gain, with mean/median absolute differences of
+45,551/4,962 bp, Pearson r=0.589321 and Spearman rho=0.921213. Thus perfect
+binary proxy concordance did not establish missing-sequence magnitude
+(Figure 12; Evidence E31).
 
 A separate standard-library implementation reproduced every family value,
 fate, confusion count and summary statistic. Replacing total-bases depth with
 the authors' explicit 107x estimate preserved all primary and sensitivity
-classifications; continuous results were mixed, with mean absolute error
-worsening to 49,081 bp, median error improving to 4,695 bp and Pearson r
+classifications; continuous assembly-proxy agreement was mixed, with mean
+absolute difference worsening to 49,081 bp, median difference improving to
+4,695 bp and Pearson r
 improving to 0.603433. A frozen assembly-to-assembly audit provided explanatory
 context: the eight collapse families had median same-chromosome primary
 MAPQ>=20 aligned-query coverage 0.574083, versus 1.0 for the other 11 families,
@@ -549,21 +559,23 @@ read runs contained 1,642,394 records and 22,546,488,654 bases.
 
 The discovery sample yielded 1,227 families. At the preregistered 15-kb newer-
 assembly denominator, 43 were source eligible, 1,184 were
-`not_source_eligible` and none was a `technical_failure`. The newer assembly
-labelled two families as reference collapse and 41 as other states; read-based
+`not_source_eligible` and none was a `technical_failure`. The old/new assembly
+transition labelled two families as assembly-proxy under-representation and 41
+as other states; read-based
 calls gave TP=2, FN=0, FP=0 and TN=41. Sensitivity and precision were 1.0, with
 Wilson 95% intervals of 0.342380--1.0 because only two positives existed. The
 predeclared 5-kb denominator gave TP/FN/FP/TN=3/1/6/141, while the 50-kb
-denominator gave 1/0/0/8. Predicted missing sequence totalled 2,118,801 bp
-versus 158,602 bp observed, with mean absolute error 50,288 bp, Pearson
-r=0.535044 and Spearman rho=0.396064. An independent standard-library
+denominator gave 1/0/0/8. The HiFi-versus-old deficit totalled 2,118,801 bp
+versus a 158,602-bp new-versus-old assembly gain. Their mean absolute
+difference was 50,288 bp, Pearson r=0.535044 and Spearman rho=0.396064. An independent standard-library
 implementation reproduced every family and summary value.
 
 The separately executed reported-28-Gb depth sensitivity preserved the primary
 2/0/0/41 result and the 50-kb 1/0/0/8 result. At 5 kb, it reduced false
-positives from six to three while retaining one false negative. Predicted
-missing sequence decreased to 1,680,937 bp and mean absolute error to 40,186 bp,
-but this remained far above the 158,602-bp observed gain; Pearson r=0.534128 and
+positives from six to three while retaining one false negative. The
+HiFi-versus-old deficit decreased to 1,680,937 bp and mean absolute difference
+to 40,186 bp, but this remained far above the 158,602-bp new-versus-old
+assembly gain; Pearson r=0.534128 and
 Spearman rho=0.374853. Its independent recomputation also passed. Normalization
 robustness therefore applies to the primary binary calls, not missing-bp
 magnitude.
@@ -844,17 +856,16 @@ two species-level same-sample reference proxies, but both newer assemblies share
 HiFi evidence with the read estimator. Their primary denominators contain only
 19 and 43 families, Macadamia has only two positive families and its archival
 identifiers do not establish the same DNA extraction. These are independent
-species comparisons, not biological replication or absolute copy truth.
-Additional materials must be evaluated with documented technical/biological
-replication, true
-genomic depth rather than file size alone, and relevant hard negatives.
-Matched-donor evidence, known repeat-family recovery, collapse validation beyond
-exact simulated arrays and probe/FISH concordance are necessary before biological
-under-representation or experimental-success claims. Multi-gigabase files have
-been acquired and sampled, but complete production-scale discovery across the
-cohort and isolated cross-platform resource comparisons remain outstanding.
-AI would be justified only by reproducible gains over transparent baselines on
-held-out families and species; it is not a substitute for these evidence gaps.
+species comparisons, not biological replication or absolute copy truth. The
+final method-science gate uses source-frozen Ey15-2 PCR-free Illumina and
+Macadamia Illumina/PromethION runs on the unchanged family denominators. It
+reports read--assembly abundance deficit and estimated under-representation
+separately from binary collapse classification. If orthogonal reads agree with
+the HiFi direction, the supported interpretation is residual
+under-representation in the newer assembly; if they agree with the newer
+assembly instead, only the demonstrated quantification bias will be repaired.
+Disagreement remains `unresolved`. No other method, comparator or performance
+development is in scope before release packaging.
 
 ## Methods
 
@@ -989,13 +1000,16 @@ only as a predeclared sensitivity reference.
 
 For each catalogue family, old- and new-assembly localized bases were summed
 from unioned intervals. Primary source eligibility depended only on at least
-15,000 localized bases in the new assembly. Reference collapse was
-`old_bp/new_bp < 0.6`; the read prediction was `old_bp/read_estimated_bp < 0.6`.
+15,000 localized bases in the new assembly. The historical binary
+assembly-transition label was `old_bp/new_bp < 0.6`; the corresponding read
+label was `old_bp/read_estimated_bp < 0.6`. The former is an assembly-proxy
+label, not copy-number truth.
 The evaluator retained every family, including source-ineligible and technical-
 failure states, and repeated the calculation with new-assembly minima of 5,000
-and 50,000 bp. Predicted and observed missing bases were
-`max(read_bp-old_bp,0)` and `max(new_bp-old_bp,0)`. Wilson intervals used the
-family as the sampling unit. A separate Python standard-library verifier
+and 50,000 bp. Historical HiFi-versus-old deficit and new-versus-old assembly
+gain were `max(read_bp-old_bp,0)` and `max(new_bp-old_bp,0)`. Their difference
+measures assembly-proxy concordance and is not missing-bp prediction error.
+Wilson intervals used the family as the sampling unit. A separate Python standard-library verifier
 re-parsed the TSV inputs and recomputed all family rows and summary statistics.
 
 For explanatory assembly context, minimap2 2.31-r1302 aligned the new assembly
@@ -1248,12 +1262,13 @@ editable SVG/PDF/PNG, panel source, complete legend and hashes. This is one
 synthetic validation seed with technical timing repetitions, not biological
 replication or a real-data superiority claim.
 
-**Figure 12. Frozen Ey15-2 donor-matched assembly-collapse reference-proxy
+**Figure 12. Frozen Ey15-2 donor-matched assembly-under-representation proxy
 validation.** A, new- versus old-assembly localized bases for all 19 source-
 eligible families, with equality and the frozen 0.6 ratio threshold. B, read-
 estimated versus old-assembly bases with the corresponding prediction
-threshold. C, predicted missing bases versus observed old-to-new gain; Pearson
-and Spearman values are shown. D, complete TP/FN/FP/TN counts at the
+threshold. C, HiFi-versus-old deficit versus new-versus-old assembly gain;
+Pearson and Spearman values describe proxy agreement, not missing-bp accuracy.
+D, complete TP/FN/FP/TN counts at the
 predeclared 5-, 15- and 50-kb new-assembly denominators. E, primary total-bases
 and explicit-107x normalization on the same reads with Wilson intervals. F,
 post hoc author-annotation overlap and frozen same-chromosome primary alignment

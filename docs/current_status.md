@@ -5,6 +5,43 @@ The user has authorized autonomous development and GitHub updates toward mature
 software and a full evidence-backed paper (multi-panel figures and supplement).
 The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
+## Active 2026-09-09 feature-freeze checkpoint
+
+- **Independent evidence.** A source-frozen orthogonal validation is feasible.
+  Ey15-2 BioSample `SAMEA13018399` includes complete PCR-free Illumina run
+  `ERR8666067` (157,774,340 reads; 23,666,151,000 bases); the paper states that
+  its DNA was independently extracted from the same ground tissue used for HMW
+  DNA. The exact BioSample inventory contains no ONT run. Macadamia BioSample
+  `SAMN14217788` includes complete Illumina run `SRR11191912` (112,508,072
+  reads; 33,669,394,677 bases) and paper-declared PromethION run `SRR11191910`
+  (2,841,932 reads; 23,186,565,438 bases). The earlier paper describes the
+  platforms as using DNA from clonal tree accession 1005; the update paper's
+  same-sample statement remains paper-level because its archival BioSamples
+  differ. Exact ENA paths, bytes and MD5 values are frozen in
+  `paper/evidence/orthogonal_abundance_source_audit_v1`.
+- **Interpretation.** The existing Ey15 and Macadamia results establish only
+  concordance between a frozen HiFi call and an old-to-new assembly transition.
+  They do not yet distinguish HiFi abundance overestimation from residual
+  collapse in the newer assembly. Macadamia's 780-Mb normalization is 1.194-fold
+  above its Illumina GenomeScope estimate of 653 Mb and is a mandatory bias
+  sensitivity, but that scale difference alone is much smaller than the
+  existing approximately 23-fold and 41-fold read/new gaps for its two primary
+  positive families.
+- **Paper conclusion.** The manuscript now treats the continuous quantity as a
+  read--assembly abundance deficit or estimated under-representation. The newer
+  assembly is not copy-number truth. Historical binary assembly-proxy
+  classification and continuous magnitude are reported separately; the latter
+  is not scored as missing-bp prediction accuracy.
+- **Remaining blocker.** Complete the three orthogonal downloads and QC, run the
+  preregistered k=21/k=31 Illumina analysis with empirical cross-assembly
+  single-copy controls, independently reproduce exact k-mer depths, and obtain
+  the direction-only Macadamia ONT result. Then either freeze the method and
+  proceed to final manuscript/figures/Bioconda/Zenodo/release, or repair only a
+  demonstrated quantification bias and repeat this gate.
+- **Scope stop.** TandemX is in feature freeze. Do not add algorithms,
+  comparators, convenience features or low-yield optimizations. `unitFinder` is
+  permanently stopped and must not be retried.
+
 ## Active 2026-09-09 continuation checkpoint
 
 - **A second-species donor-matched reference-proxy validation has passed its
@@ -23,11 +60,12 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   retained 43 `eligible`, 1,184 `not_source_eligible` and zero
   `technical_failure` rows. Sensitivity and precision are 1.0, but the two-
   positive Wilson 95% interval is 0.342380--1.0. The 5-kb denominator yields
-  3/1/6/141 and the 50-kb denominator 1/0/0/8. Predicted missing sequence is
-  2,118,801 bp versus 158,602 bp observed, with mean absolute error 50,288 bp,
+  3/1/6/141 and the 50-kb denominator 1/0/0/8. The HiFi-versus-old deficit is
+  2,118,801 bp versus a 158,602-bp new-versus-old assembly gain, with mean
+  absolute difference 50,288 bp,
   Pearson r=0.535044 and Spearman rho=0.396064. Thus the second species
-  strengthens binary collapse classification evidence but not missing-bp
-  magnitude accuracy. An independent standard-library implementation reproduced
+  strengthens binary assembly-proxy concordance but does not establish
+  missing-bp magnitude accuracy. An independent standard-library implementation reproduced
   every family and summary value.
 - **Post-primary assembly alignment provides direction-consistent context.**
   minimap2 2.31-r1302 completed in 327.64 s with 8,177.42 MiB peak process-tree
@@ -40,8 +78,9 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
   544.14/522.73 s and 148.33/518.56 MiB. The complete reported-28-Gb depth
   sensitivity took 11,482.61 s/187.23 MiB and preserved the primary
   TP/FN/FP/TN=2/0/0/41. At 5 kb it reduced FP from six to three while retaining
-  one FN. Predicted missing sequence fell to 1,680,937 bp but remained more than
-  tenfold above the 158,602-bp observed gain; mean absolute error improved to
+  one FN. The HiFi-versus-old deficit fell to 1,680,937 bp but remained more
+  than tenfold above the 158,602-bp new-versus-old assembly gain; mean absolute
+  difference improved to
   40,186 bp while Pearson r remained 0.534128. Its independent verifier passed.
 - **The compact Macadamia archive is complete.** The 37-MB directory at
   `paper/evidence/macadamia_jansenii_donor_matched_collapse_v1` contains 40
@@ -74,17 +113,18 @@ before continuing and do not stage the untracked `.codex/` directory.
   sensitivity-only. All rules in
   `benchmarks/configs/ey15_donor_matched_collapse_v1.json` were frozen before
   localization results were inspected.
-- **The primary 15-kb analysis classified all eight reference-collapse
-  families correctly and all 11 other families correctly.** The full
+- **The primary 15-kb analysis matched all eight assembly-proxy
+  under-representation families and all 11 other families.** The full
   2,133-family catalogue retains 19 `eligible`, 2,114 `not_source_eligible` and
   zero `technical_failure` fates. The primary confusion counts are TP=8, FN=0,
   FP=0 and TN=11; sensitivity and precision are both 1.0, with identical wide
   Wilson 95% intervals of 0.675592--1.0. This small single-donor denominator
   must not be presented as a population estimate. The predeclared 5-kb analysis
   exposes one FN and two FP among 62 families; the 50-kb denominator contains
-  only six families. Predicted versus observed missing sequence has Pearson
-  r=0.589321, Spearman rho=0.921213 and mean absolute error 45,551 bp, so perfect
-  classification does not imply precise missing-bp magnitude.
+  only six families. HiFi-versus-old deficit versus new-versus-old assembly gain
+  has Pearson r=0.589321, Spearman rho=0.921213 and mean absolute difference
+  45,551 bp, so perfect binary proxy concordance does not imply precise
+  missing-bp magnitude.
 - **Independent and sensitivity checks passed without result-dependent
   retuning.** A separately implemented standard-library verifier reproduced
   every family value, fate and summary statistic. Explicit 107x normalization

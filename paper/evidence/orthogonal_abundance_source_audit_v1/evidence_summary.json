@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "source_audit_complete_download_and_abundance_validation_not_yet_run",
+  "ey15": {
+    "primary_run": "ERR8666067",
+    "evidence": "same_ground_tissue_pool_independent_DNA_extraction_PCR_free_Illumina",
+    "interpretation_supported": "orthogonal_test_is_feasible",
+    "ont_status": "not_available_for_exact_BioSample"
+  },
+  "macadamia": {
+    "primary_run": "SRR11191912",
+    "secondary_run": "SRR11191910",
+    "evidence": "old-study_same_BioSample_Illumina_and_PromethION_with_update-paper_same-sample_link",
+    "interpretation_supported": "two_platform_orthogonal_test_is_feasible",
+    "normalization_warning": "current_780Mb_scale_is_1.194_fold_above_653Mb_Illumina_GenomeScope_estimate"
+  },
+  "scientific_result": "unresolved_until_complete_FASTQ_QC_and_frozen_family_analysis",
+  "paper_conclusion_change": "yes_current_reference_proxy_classifications_must_not_be_presented_as_validated_copy_number_or_missing_bp_accuracy",
+  "remaining_submission_blocker": "complete_orthogonal_family_level_abundance_validation_and_directional_Macadamia_ONT_check"
+}

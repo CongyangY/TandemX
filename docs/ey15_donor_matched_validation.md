@@ -49,8 +49,9 @@ inspection of TandemX old/new localization differences.
 3. Localize the unchanged catalogue independently in the old, new and final
    sensitivity assemblies with the frozen k=21 IID-base model, minimum identity
    0.9.
-4. Define reference collapse as old/new localized bp below 0.6 and TandemX's
-   prediction as old/read-estimated bp below 0.6. A family is source-eligible
+4. Define the historical binary assembly-transition label as old/new localized
+   bp below 0.6 and the corresponding read label as old/read-estimated bp below
+   0.6. A family is source-eligible
    for the primary denominator when the newer assembly contains at least 15 kb
    of localized sequence. The 5-, 15- and 50-kb denominator sensitivities are
    fixed in advance.
@@ -58,7 +59,8 @@ inspection of TandemX old/new localization differences.
    `not_source_eligible`; a source-eligible family without a positive read
    estimate is a `technical_failure`. Neither category may be silently dropped.
 6. Report TP/FN/FP/TN, Wilson intervals, balanced accuracy, MCC, and the
-   relationship between predicted missing bp and observed old-to-new gain.
+   relationship between HiFi-versus-old deficit and new-versus-old assembly
+   gain. This is assembly-proxy concordance, not missing-bp prediction accuracy.
    New/read agreement is reported but is not an eligibility rule, because using
    it to define truth would condition the denominator on the predictor.
 
