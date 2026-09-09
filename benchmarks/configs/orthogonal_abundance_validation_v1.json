@@ -43,6 +43,19 @@
     "independent_counter": "KMC_exact_counts"
   },
   "macadamia_genome_size_sensitivity_bp": [616000000, 653000000, 738000000, 780000000],
+  "macadamia_ont": {
+    "target_families": "all_43_frozen_primary_source_eligible_families",
+    "tandem_template_length_bp": 250000,
+    "minimap2_version": "2.31-r1302",
+    "hifi_command_parameters": ["-x", "map-hifi", "-c", "--eqx", "--secondary=yes", "-N", "5"],
+    "ont_command_parameters": ["-x", "map-ont", "-c", "--eqx", "--secondary=yes", "-N", "5"],
+    "primary_alignment_filter": "tp_A_P;alignment_block_bp_at_least_500;nmatch_divided_by_alignment_block_at_least_0.75",
+    "read_assignment": "union_primary_query_intervals_per_family;exclude_reads_with_primary_assignments_to_multiple_families",
+    "raw_abundance": "accepted_query_bp_divided_by_total_library_bp_times_haploid_genome_size",
+    "mapping_efficiency_calibration": "global_median_of_raw_HiFi_mapping_bp_divided_by_frozen_HiFi_kmer_bp_across_positive_eligible_families;freeze_before_ONT_result_inspection",
+    "calibrated_ont_abundance": "raw_ONT_mapping_abundance_divided_by_frozen_global_HiFi_mapping_efficiency",
+    "role": "secondary_direction_only_not_precise_copy_number_truth"
+  },
   "binary_threshold": 0.6,
   "quantification_bias_fold_threshold": 1.5,
   "continuous_terms": [

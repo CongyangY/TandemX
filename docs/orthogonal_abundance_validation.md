@@ -93,6 +93,15 @@ Exact accessions, file bytes, MD5 values, and source limits are archived in
    frozen competitive mapping/occupancy rule, calibrated on the already used
    HiFi reads before inspecting family outcomes. Do not interpret noisy ONT
    exact-k-mer absence as copy-number evidence.
+   Tandemize each of the 43 eligible representatives to 250 kb and map
+   competitively with minimap2 2.31-r1302 (`map-hifi` or `map-ont`, `-c --eqx
+   --secondary=yes -N 5`). Retain `tp:A:P` alignments with at least 500 aligned
+   bases and `nmatch/alignment_block >= 0.75`; union query intervals by family
+   and exclude a read if primary intervals are assigned to multiple families.
+   Raw occupancy is accepted query bp divided by total library bp times genome
+   size. Before ONT inspection, freeze a single mapping-efficiency correction as
+   the median raw-HiFi-mapping/frozen-HiFi-k-mer abundance ratio across eligible
+   families with positive values; divide raw ONT occupancy by that factor.
 5. Report Macadamia abundance under predeclared haploid-genome-size
    sensitivities of 616, 653, 738, and 780 Mb. The 616- and 653-Mb values are
    the source paper's stLFR and Illumina GenomeScope estimates; 738 Mb is the
