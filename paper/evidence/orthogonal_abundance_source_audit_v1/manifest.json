@@ -4,11 +4,12 @@
   "status": "source_audit_complete_validation_not_run",
   "created_on": "2026-09-09",
   "files": {
-    "README.md": "2a89e6f68463b187e66a80d586364f50f386fe8d5ce446434b66fec1389e1f22",
+    "README.md": "ab233800e34b1b30089c2c224ec5833d2ae616c9859816e77f3341c7c4776f62",
     "ena_selected_runs.tsv": "428379dcfa8883d4dc7aee516f72a726ee54e4634f7e41596c1d79c1ca5c927c",
-    "evidence_summary.json": "d19e20dc70f372e6efebcaec9c14d6cbc5134639840ad6e7beee39e6d83d103c",
+    "evidence_summary.json": "2c9daeda301252a5dc6458fbff2779234899fc4cf68f6f43ac6b504b41da73b9",
+    "ncbi_sra_lite_selected.tsv": "90b34422dfa902f05c75ae3a13e9b05dd33d88fe847e73d92490c1d141e8ba5d",
     "source_audit.tsv": "2d96847393cac368619d9cdc0c6ff988d54445c34829fb4ba23e598bed209006",
-    "source_queries.json": "4053ccb8d835b56f62a95fbc7a3c9bd8842bae84d31d588bfeee65edde77f002"
+    "source_queries.json": "17fef686673511bc9467288e95c69d684705b388bca22ab0f017c5db756c3a83"
   },
   "boundary": "This archive proves source feasibility and exact ENA metadata only; it contains no abundance result."
 }

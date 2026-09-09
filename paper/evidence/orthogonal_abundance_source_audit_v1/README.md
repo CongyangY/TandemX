@@ -15,6 +15,14 @@ Selected complete runs:
 biological relationship and evidence limit. `source_queries.json` preserves the
 machine query and retrieval date. No FASTQ is versioned in Git.
 
+`ncbi_sra_lite_selected.tsv` records an alternate official NCBI sequence-only
+transfer for the same runs. SRA Lite omits original quality scores, so it is
+permitted only for the frozen sequence-counting and mapping analyses: Illumina
+quality correction is disabled, KMC does not consume qualities, and the ONT
+check uses alignment identity rather than base-quality filtering. Each Lite
+object must pass its official MD5, `vdb-validate`, and converted aggregate
+record/base-count reconciliation before it can enter the validation.
+
 The Ey15 paper reports a PCR-free extraction from the same ground tissue used
 for HMW DNA. The Macadamia paper describes one DNA extraction from leaves of
 clonal tree accession 1005 for its sequencing platforms, while the later HiFi
@@ -32,3 +40,5 @@ Sources:
 - Nock et al., GigaByte (2021), DOI `10.46471/gigabyte.24`, BioProject
   `PRJNA694456`.
 - ENA Portal API query URLs and selected rows in this directory.
+- NCBI SRA Run Selector metadata URLs and selected Lite-object rows in this
+  directory.

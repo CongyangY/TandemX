@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
-  "status": "source_audit_complete_download_and_abundance_validation_not_yet_run",
+  "status": "source_audit_complete_official_sequence_only_transfer_selected_validation_not_yet_run",
+  "transfer_boundary": "NCBI_SRA_Lite_preserves_sequences_but_not_original_quality_scores;use_requires_MD5_vdb_validate_and_aggregate_record_base_reconciliation",
   "ey15": {
     "primary_run": "ERR8666067",
     "evidence": "same_ground_tissue_pool_independent_DNA_extraction_PCR_free_Illumina",

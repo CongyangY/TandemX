@@ -38,20 +38,29 @@ def qc_run(
     stats = count_sequence_records_many(paths, threads=threads)
     expected_reads = int(row["read_count"])
     expected_bases = int(row["base_count"])
-    if stats.record_count != expected_reads or stats.total_bases != expected_bases:
+    layout = row.get("library_layout", "").strip().upper()
+    read_count_interpretation = "ENA_read_count_equals_FASTQ_records"
+    read_count_reconciled = stats.record_count == expected_reads
+    if not read_count_reconciled and layout == "PAIRED" and stats.record_count == 2 * expected_reads:
+        read_count_reconciled = True
+        read_count_interpretation = "ENA_read_count_equals_spots;two_FASTQ_records_per_spot"
+    if not read_count_reconciled or stats.total_bases != expected_bases:
         raise ValueError(
-            f"FASTQ statistics differ from ENA: reads {stats.record_count}/{expected_reads}; "
+            f"FASTQ statistics differ from ENA: FASTQ records {stats.record_count}/"
+            f"ENA read_count field {expected_reads} (layout={layout or 'unknown'}); "
             f"bases {stats.total_bases}/{expected_bases}"
         )
     result: dict[str, object] = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "complete",
         "run_accession": accession,
         "file_count": len(paths),
-        "read_count": stats.record_count,
+        "FASTQ_record_count": stats.record_count,
+        "ENA_read_count_field": expected_reads,
+        "read_count_interpretation": read_count_interpretation,
         "total_bases": stats.total_bases,
         "max_read_length": stats.max_read_length,
-        "ENA_read_count_matched": True,
+        "ENA_read_or_spot_count_reconciled": True,
         "ENA_base_count_matched": True,
         "all_ENA_file_MD5_matched": True,
         "files": verified_files,

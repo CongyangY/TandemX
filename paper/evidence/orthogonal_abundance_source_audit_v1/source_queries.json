@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "retrieved_on": "2026-09-09",
-  "retrieval_method": "ENA_Portal_API_via_isolated_browser_serverFetch",
+  "retrieval_method": "ENA_Portal_API_and_NCBI_SRA_run_metadata_via_isolated_browser_serverFetch",
   "fields": "run_accession,sample_accession,experiment_accession,scientific_name,instrument_platform,instrument_model,library_layout,library_strategy,library_source,library_selection,study_accession,sample_title,experiment_title,run_alias,fastq_ftp,fastq_md5,fastq_bytes,read_count,base_count",
   "queries": [
     {
@@ -18,6 +18,9 @@
   "source_pages": [
     "https://pmc.ncbi.nlm.nih.gov/articles/PMC9757041/",
     "https://pmc.ncbi.nlm.nih.gov/articles/PMC7751402/",
-    "https://gigabytejournal.com/articles/24"
+    "https://gigabytejournal.com/articles/24",
+    "https://trace.ncbi.nlm.nih.gov/Traces/sra-db-be/run_new?acc=ERR8666067",
+    "https://trace.ncbi.nlm.nih.gov/Traces/sra-db-be/run_new?acc=SRR11191912",
+    "https://trace.ncbi.nlm.nih.gov/Traces/sra-db-be/run_new?acc=SRR11191910"
   ]
 }
