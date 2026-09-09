@@ -2,7 +2,7 @@
   "schema_version": 1,
   "enrollment_id": "macadamia_jansenii_donor_matched_source_enrollment_v1",
   "frozen_on": "2026-09-09",
-  "status": "source_download_in_progress_before_benchmark_preregistration",
+  "status": "source_enrollment_passed",
   "scientific_scope": "paper_same_sample_old_CLR_Falcon_vs_new_HiFi_IPA_reference_proxy",
   "material": {
     "species": "Macadamia jansenii",
@@ -54,7 +54,13 @@
     "expected_bytes": 2564233808,
     "expected_md5_from_x_amz_meta_md5chksum": "f2be4b47799a1b37ca54dda6e70abc63",
     "selection_rule": "select_the_84x_Falcon_Unzip_primary_assembly_after_Purge_Haplotigs_only_if_archive_member_statistics_match_the_published_758Mb_762_contig_N50_1.57Mb_result",
-    "member_path": null
+    "member_path": "PacBio/PacBio_falcon_purgeHaplotigs_cns_p_ctg.fasta",
+    "observed_statistics": {
+      "total_sequence_bp": 758277953,
+      "contigs": 762,
+      "contig_n50_bp": 1585406,
+      "sha256": "d88d57e315065367c39e0c33b205ea7b83571fd3845b962992a0bfd2e84c064d"
+    }
   },
   "new_assembly": {
     "dataset_doi": "10.5524/100906",
@@ -63,7 +69,13 @@
     "expected_bytes": 737617956,
     "expected_md5_from_x_amz_meta_md5chksum": "e44711320edf9382a44b227c312f99f6",
     "assembly_method": "IPA_1.3.1_primary_contigs_from_two_Sequel_II_HiFi_SMRT_cells",
-    "reference_role": "higher_quality_reference_proxy_not_absolute_repeat_copy_truth"
+    "reference_role": "higher_quality_reference_proxy_not_absolute_repeat_copy_truth",
+    "observed_statistics": {
+      "total_sequence_bp": 737613980,
+      "contigs": 284,
+      "contig_n50_bp": 4485544,
+      "sha256": "d6e9272438d072662f51de7960bdef18cb3c834d97d4ca44213715b7196498a9"
+    }
   },
   "hifi_reads": {
     "bioproject": "PRJNA694456",
@@ -106,5 +118,6 @@
     "do_not_use_the_SRA_object_SRR13759102_as_raw_reads_because_its_284_records_and_737613980_bases_identify_an_assembly_deposited_as_a_run",
     "do_not_claim_absolute_repeat_copy_truth_from_the_new_assembly",
     "abort_if_published_old_or_new_assembly_statistics_cannot_be_reproduced"
-  ]
+  ],
+  "enrollment_receipt": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/enrollment_receipt.json"
 }
