@@ -16,6 +16,12 @@
     "macadamia_families": 43,
     "selection_uses_orthogonal_result": false
   },
+  "preorthogonal_hifi_newer_assembly_deficit_candidates": {
+    "definition": "source_eligible_and_newer_assembly_bp_divided_by_frozen_HiFi_estimated_bp_below_0.6",
+    "ey15": ["TXF000002", "TXF000154", "TXF001517"],
+    "macadamia": ["TXF000496", "TXF000563", "TXF000695"],
+    "note": "TXF000563_was_not_an_old_to_new_assembly_proxy_positive_but_is_a_read_newer_assembly_deficit_candidate"
+  },
   "orthogonal_runs": {
     "ey15_illumina": "ERR8666067",
     "macadamia_illumina": "SRR11191912",

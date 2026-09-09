@@ -33,6 +33,14 @@ families. Family definitions, eligibility, k-mer exclusivity rules, assembly
 localization, and the 0.6 binary threshold are not retuned after inspecting
 orthogonal results.
 
+Before orthogonal result inspection, the frozen HiFi/newer-assembly ratio marks
+three deficit candidates in each species: Ey15 `TXF000002`, `TXF000154` and
+`TXF001517`; Macadamia `TXF000496`, `TXF000563` and `TXF000695`. Notably,
+`TXF000563` was not an old-to-new assembly-proxy positive; it enters because
+the scientific question is the read--newer-assembly deficit rather than whether
+an older assembly gained sequence. All other eligible families remain required
+negative/context rows.
+
 ## Independent data
 
 ### Ey15-2
