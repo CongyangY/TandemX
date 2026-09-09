@@ -63,3 +63,27 @@ def test_independent_verifier_detects_tampered_family_metric(tmp_path: Path) -> 
     )
     assert receipt["verification_passed"] is False
     assert "family_numeric_mismatch:collapse:old_assembly_bp" in receipt["failures"]
+
+
+def test_independent_verifier_accepts_absent_sensitivity_assembly(tmp_path: Path) -> None:
+    config, copy_number, old, new, _sensitivity, _metrics, _summary = make_fixture(tmp_path)
+    result_dir = tmp_path / "result_without_sensitivity"
+    run_evaluation(
+        copy_number,
+        old,
+        new,
+        result_dir,
+        EvaluationConfig(primary_min_new_bp=100, min_new_bp_sensitivity=(50, 100, 200)),
+    )
+    receipt = verify(
+        config_path=config,
+        copy_number_path=copy_number,
+        old_arrays_path=old,
+        new_arrays_path=new,
+        sensitivity_arrays_path=None,
+        family_metrics_path=result_dir / "family_metrics.tsv",
+        summary_path=result_dir / "summary.json",
+    )
+
+    assert receipt["verification_passed"] is True
+    assert "sensitivity_arrays" not in receipt["inputs"]

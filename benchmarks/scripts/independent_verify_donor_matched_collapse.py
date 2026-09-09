@@ -327,7 +327,7 @@ def verify(
     copy_number_path: Path,
     old_arrays_path: Path,
     new_arrays_path: Path,
-    sensitivity_arrays_path: Path,
+    sensitivity_arrays_path: Path | None,
     family_metrics_path: Path,
     summary_path: Path,
 ) -> dict[str, Any]:
@@ -341,7 +341,7 @@ def verify(
         read_copy_number(copy_number_path),
         read_bed_unions(old_arrays_path),
         read_bed_unions(new_arrays_path),
-        read_bed_unions(sensitivity_arrays_path),
+        read_bed_unions(sensitivity_arrays_path) if sensitivity_arrays_path else {},
         collapse=collapse,
         overexpansion=overexpansion,
         primary_min_new_bp=primary_min_new_bp,
@@ -369,15 +369,16 @@ def verify(
     for key, value in expected_summary_payload.items():
         if key not in observed_summary or not close(value, observed_summary[key]):
             failures.append(f"summary_mismatch:{key}")
-    paths = {
+    paths: dict[str, Path] = {
         "config": config_path,
         "copy_number": copy_number_path,
         "old_arrays": old_arrays_path,
         "new_arrays": new_arrays_path,
-        "sensitivity_arrays": sensitivity_arrays_path,
         "family_metrics": family_metrics_path,
         "summary": summary_path,
     }
+    if sensitivity_arrays_path is not None:
+        paths["sensitivity_arrays"] = sensitivity_arrays_path
     return {
         "schema_version": 1,
         "verification_method": "independent_standard_library_recomputation_without_tandemx_evaluator_imports",
@@ -402,7 +403,7 @@ def main() -> int:
     parser.add_argument("--copy-number", required=True, type=Path)
     parser.add_argument("--old-arrays", required=True, type=Path)
     parser.add_argument("--new-arrays", required=True, type=Path)
-    parser.add_argument("--sensitivity-arrays", required=True, type=Path)
+    parser.add_argument("--sensitivity-arrays", type=Path)
     parser.add_argument("--family-metrics", required=True, type=Path)
     parser.add_argument("--summary", required=True, type=Path)
     parser.add_argument("--receipt", required=True, type=Path)
