@@ -1,0 +1,3 @@
+run_accession	sample_accession	experiment_accession	experiment_title	library_strategy	library_source	library_selection	instrument_model	read_count	base_count	fastq_ftp	fastq_md5	fastq_bytes
+SRR13557763	SAMN17524927	SRX9956047	Sequel II sequencing: First SMRT for M. janseni	WGA	GENOMIC	RANDOM	Sequel II	635246	8442858124	ftp.sra.ebi.ac.uk/vol1/fastq/SRR135/063/SRR13557763/SRR13557763_subreads.fastq.gz	008ec233ddf2c2dde62ca605613f8b4c	6716963362
+SRR13557762	SAMN17524928	SRX9956048	Sequel II sequencing: Second SMRT for M. jansenii	WGA	GENOMIC	RANDOM	Sequel II	1007148	14103630530	ftp.sra.ebi.ac.uk/vol1/fastq/SRR135/062/SRR13557762/SRR13557762_subreads.fastq.gz	b6826ff607fea2e947ebf156692dca5a	11433466175

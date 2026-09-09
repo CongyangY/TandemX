@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "enrollment_id": "macadamia_jansenii_donor_matched_source_enrollment_v1",
+  "frozen_on": "2026-09-09",
+  "status": "source_download_in_progress_before_benchmark_preregistration",
+  "scientific_scope": "paper_same_sample_old_CLR_Falcon_vs_new_HiFi_IPA_reference_proxy",
+  "material": {
+    "species": "Macadamia jansenii",
+    "old_reported_tree_accession": "1005",
+    "old_biosample": "SAMN14217788",
+    "old_biosample_alias": "M. Jansenii E2-5-11",
+    "new_hifi_biosamples": [
+      "SAMN17524927",
+      "SAMN17524928"
+    ],
+    "new_hifi_biosample_aliases": [
+      "Macadamia jansenii run1",
+      "Macadamia jansenii run2"
+    ],
+    "donor_match_basis": "the_update_paper_calls_the_HiFi_material_the_same_sample_previously_used_for_the_CLR_comparison",
+    "archival_warning": "the_old_and_new_records_use_different_BioSample_ids_collection_dates_and_aliases;the_new_records_are_split_by_SMRT_cell;the_same_DNA_extraction_is_not_established",
+    "allowed_claim": "paper_level_same_sample_reference_proxy_with_archival_identifier_warning"
+  },
+  "source_papers": {
+    "old": {
+      "title": "Comparison of long-read methods for sequencing and assembly of a plant genome",
+      "doi": "10.1093/gigascience/giaa146",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7751402/",
+      "reported_design": "PacBio Sequel I CLR from a clonally propagated ex situ tree with accession 1005",
+      "reported_old_falcon_assembly": {
+        "total_sequence_bp_rounded": 758000000,
+        "contigs": 762,
+        "contig_n50_bp_rounded": 1570000,
+        "busco_complete_percent": 97
+      }
+    },
+    "new": {
+      "title": "Improvements in the Sequencing and Assembly of Plant Genomes",
+      "doi": "10.46471/gigabyte.24",
+      "url": "https://gigabytejournal.com/articles/24",
+      "reported_relationship": "the_HiFi_update_compares_against_the_earlier_CLR_Falcon_result_and_calls_it_the_same_sample_previously_used",
+      "reported_new_ipa_assembly": {
+        "total_sequence_bp_rounded": 738000000,
+        "contigs": 284,
+        "contig_n50_bp_rounded": 4490000,
+        "busco_complete_percent": 98
+      }
+    }
+  },
+  "old_assembly_archive": {
+    "dataset_doi": "10.5524/100812",
+    "file_name": "PacBio.tar.gz",
+    "url": "https://s3.ap-northeast-1.wasabisys.com/gigadb-datasets/live/pub/10.5524/100001_101000/100812/PacBio.tar.gz",
+    "expected_bytes": 2564233808,
+    "expected_md5_from_x_amz_meta_md5chksum": "f2be4b47799a1b37ca54dda6e70abc63",
+    "selection_rule": "select_the_84x_Falcon_Unzip_primary_assembly_after_Purge_Haplotigs_only_if_archive_member_statistics_match_the_published_758Mb_762_contig_N50_1.57Mb_result",
+    "member_path": null
+  },
+  "new_assembly": {
+    "dataset_doi": "10.5524/100906",
+    "file_name": "complete_mjanseni_assembly.fasta",
+    "url": "https://s3.ap-northeast-1.wasabisys.com/gigadb-datasets/live/pub/10.5524/100001_101000/100906/Macadamia/complete_mjanseni_assembly.fasta",
+    "expected_bytes": 737617956,
+    "expected_md5_from_x_amz_meta_md5chksum": "e44711320edf9382a44b227c312f99f6",
+    "assembly_method": "IPA_1.3.1_primary_contigs_from_two_Sequel_II_HiFi_SMRT_cells",
+    "reference_role": "higher_quality_reference_proxy_not_absolute_repeat_copy_truth"
+  },
+  "hifi_reads": {
+    "bioproject": "PRJNA694456",
+    "runs": [
+      {
+        "run_accession": "SRR13557763",
+        "biosample": "SAMN17524927",
+        "run_alias": "m64123_200807_143445.Q20.fastq",
+        "read_count": 635246,
+        "base_count": 8442858124,
+        "fastq_bytes": 6716963362,
+        "fastq_md5": "008ec233ddf2c2dde62ca605613f8b4c",
+        "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR135/063/SRR13557763/SRR13557763_subreads.fastq.gz"
+      },
+      {
+        "run_accession": "SRR13557762",
+        "biosample": "SAMN17524928",
+        "run_alias": "m64123_201009_025513.Q20.fastq",
+        "read_count": 1007148,
+        "base_count": 14103630530,
+        "fastq_bytes": 11433466175,
+        "fastq_md5": "b6826ff607fea2e947ebf156692dca5a",
+        "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR135/062/SRR13557762/SRR13557762_subreads.fastq.gz"
+      }
+    ],
+    "total_read_count": 1642394,
+    "total_base_count": 22546488654,
+    "total_fastq_bytes": 18150429537,
+    "format_interpretation": "ENA_conversion_names_end_in_subreads.fastq.gz_but_run_aliases_are_Q20_FASTQ_and_the_paper_reports_CCS_generation_before_IPA_assembly"
+  },
+  "gates_before_execution": [
+    "verify_all_publisher_or_ENA_byte_counts_and_MD5_values",
+    "identify_the_exact_published_old_Falcon_Purge_Haplotigs_primary_FASTA_by_archive_member_and_sequence_statistics",
+    "verify_new_FASTA_statistics_against_the_published_738Mb_284_contig_result",
+    "freeze_discovery_quantification_localization_and_collapse_thresholds_before_inspecting_any_old_new_TandemX_result",
+    "retain_all_family_fates_and_separate_not_source_eligible_from_technical_failure"
+  ],
+  "stop_rules": [
+    "do_not_claim_same_DNA_extraction",
+    "do_not_use_the_SRA_object_SRR13759102_as_raw_reads_because_its_284_records_and_737613980_bases_identify_an_assembly_deposited_as_a_run",
+    "do_not_claim_absolute_repeat_copy_truth_from_the_new_assembly",
+    "abort_if_published_old_or_new_assembly_statistics_cannot_be_reproduced"
+  ]
+}

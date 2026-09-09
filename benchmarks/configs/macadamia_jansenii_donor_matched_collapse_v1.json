@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "experiment_id": "macadamia_jansenii_donor_matched_collapse_v1",
+  "status": "preregistered_before_old_new_TandemX_result_inspection",
+  "frozen_on": "2026-09-09",
+  "scientific_scope": "second_species_paper_same_sample_retrospective_high_quality_reference_proxy",
+  "material": {
+    "species": "Macadamia jansenii",
+    "old_tree_accession": "1005",
+    "old_biosample": "SAMN14217788",
+    "new_hifi_biosamples": [
+      "SAMN17524927",
+      "SAMN17524928"
+    ],
+    "old_bioproject": "PRJNA609013",
+    "new_bioproject": "PRJNA694456",
+    "old_paper_doi": "10.1093/gigascience/giaa146",
+    "new_paper_doi": "10.46471/gigabyte.24",
+    "old_data_doi": "10.5524/100812",
+    "new_data_doi": "10.5524/100906",
+    "donor_match_basis": "update_paper_explicitly_calls_the_HiFi_material_the_same_sample_previously_used_for_the_CLR_assembly_comparison",
+    "provenance_warning": "archival_BioSample_ids_aliases_and_collection_dates_differ;the_new_records_are_split_by_SMRT_cell;paper_level_same_sample_is_accepted_but_same_DNA_extraction_is_not_claimed"
+  },
+  "reads": {
+    "run_accessions": [
+      "SRR13557763",
+      "SRR13557762"
+    ],
+    "full_read_count": 1642394,
+    "full_total_bases": 22546488654,
+    "full_compressed_bytes": 18150429537,
+    "discovery_sample_rate": 0.05,
+    "discovery_seed": 6101,
+    "expected_discovery_bases": 1127324432.7,
+    "sampling_method": "TandemX_identifier_hash_Bernoulli_sampling_across_both_input_files",
+    "quantification_input": "both_complete_ENA_FASTQ_files"
+  },
+  "assemblies": {
+    "enrollment_config": "benchmarks/configs/macadamia_jansenii_donor_matched_source_enrollment_v1.json",
+    "old_role": "84x_PacBio_CLR_Falcon_Unzip_primary_contigs_after_Purge_Haplotigs",
+    "old_published_statistics": {
+      "total_sequence_bp_rounded": 758000000,
+      "contigs": 762,
+      "contig_n50_bp_rounded": 1590000,
+      "busco_complete_percent": 95.0
+    },
+    "new_role": "two_SMRT_cell_PacBio_HiFi_IPA_primary_assembly",
+    "new_published_statistics": {
+      "total_sequence_bp_rounded": 738000000,
+      "contigs": 284,
+      "contig_n50_bp_rounded": 4490000,
+      "busco_complete_percent": 98.0
+    },
+    "role_reason": "the_update_paper_directly_compares_the_purged_CLR_Falcon_primary_assembly_with_the_less_fragmented_HiFi_IPA_primary_assembly",
+    "truth_boundary": "the_new_assembly_is_a_higher_quality_reference_proxy_and_shares_HiFi_evidence_with_TandemX;it_is_not_absolute_or_independent_repeat_copy_truth"
+  },
+  "discovery": {
+    "method": "cascade",
+    "clustering_method": "sequence",
+    "cluster_identity": 0.95,
+    "family_audit": "related",
+    "min_period": 30,
+    "max_period": 1000,
+    "top_periods": 5,
+    "min_support_reads": 5,
+    "min_repeat_span": 100,
+    "kmer_backend": "rust",
+    "threads": 4
+  },
+  "quantification": {
+    "k": 21,
+    "genome_size_bp": 780000000,
+    "genome_size_basis": "published_M_jansenii_estimated_genome_size",
+    "primary_haploid_depth": null,
+    "primary_normalization": "full_ENA_read_bases_divided_by_independent_genome_size",
+    "primary_implied_depth": 28.905754684615385,
+    "reported_28Gb_depth_sensitivity": 35.8974358974359,
+    "sensitivity_reason": "the_paper_reports_28Gb_whereas_the_two_public_ENA_FASTQ_objects_total_22.546488654Gb",
+    "quality_correction": true
+  },
+  "localization": {
+    "k": 21,
+    "identity_model": "iid_base",
+    "min_identity": 0.9,
+    "window_size": 100000,
+    "step_size": 10000
+  },
+  "evaluation": {
+    "collapse_threshold": 0.6,
+    "overexpansion_threshold": 1.5,
+    "primary_min_new_bp": 15000,
+    "min_new_bp_sensitivity": [
+      5000,
+      15000,
+      50000
+    ],
+    "primary_truth": "old_to_new_localized_bp_ratio_below_collapse_threshold",
+    "primary_prediction": "old_to_read_estimated_bp_ratio_below_collapse_threshold",
+    "source_eligibility": "new_assembly_localized_bp_at_least_primary_min_new_bp",
+    "source_eligibility_excludes_read_new_agreement": true,
+    "report": [
+      "all_family_fates",
+      "TP_FN_FP_TN",
+      "sensitivity_false_positive_rate_precision_specificity",
+      "wilson_95_intervals",
+      "balanced_accuracy_MCC",
+      "predicted_missing_bp_vs_observed_gain_bp",
+      "primary_and_predeclared_min_new_bp_sensitivity"
+    ]
+  },
+  "orthogonal_audits_after_primary_scoring": [
+    "independent_family_and_statistic_recalculation",
+    "old_to_new_assembly_alignment_for_eligible_and_predicted_families",
+    "public_read_and_assembly_identifier_consistency_audit"
+  ],
+  "stop_rules": [
+    "do_not_change_thresholds_or_discovery_parameters_after_inspecting_old_new_results",
+    "retain_zero_family_and_failed_stage_outputs_as_results",
+    "separate_not_source_eligible_from_technical_failure",
+    "do_not_claim_same_DNA_extraction_or_absolute_copy_truth",
+    "do_not_claim_independent_validation_of_the_HiFi_read_estimator"
+  ]
+}
