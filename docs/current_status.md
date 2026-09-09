@@ -9,11 +9,11 @@ The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
 - **Independent evidence.** A source-frozen orthogonal validation is feasible.
   Ey15-2 BioSample `SAMEA13018399` includes complete PCR-free Illumina run
-  `ERR8666067` (157,774,340 reads; 23,666,151,000 bases); the paper states that
+  `ERR8666067` (157,774,340 sequence records; 23,666,151,000 bases); the paper states that
   its DNA was independently extracted from the same ground tissue used for HMW
   DNA. The exact BioSample inventory contains no ONT run. Macadamia BioSample
   `SAMN14217788` includes complete Illumina run `SRR11191912` (112,508,072
-  reads; 33,669,394,677 bases) and paper-declared PromethION run `SRR11191910`
+  paired spots, 225,016,144 sequence records; 33,669,394,677 bases) and paper-declared PromethION run `SRR11191910`
   (2,841,932 reads; 23,186,565,438 bases). The earlier paper describes the
   platforms as using DNA from clonal tree accession 1005; the update paper's
   same-sample statement remains paper-level because its archival BioSamples

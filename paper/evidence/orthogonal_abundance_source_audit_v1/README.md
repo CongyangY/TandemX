@@ -15,13 +15,16 @@ Selected complete runs:
 biological relationship and evidence limit. `source_queries.json` preserves the
 machine query and retrieval date. No FASTQ is versioned in Git.
 
-`ncbi_sra_lite_selected.tsv` records an alternate official NCBI sequence-only
-transfer for the same runs. SRA Lite omits original quality scores, so it is
-permitted only for the frozen sequence-counting and mapping analyses: Illumina
-quality correction is disabled, KMC does not consume qualities, and the ONT
-check uses alignment identity rather than base-quality filtering. Each Lite
-object must pass its official MD5, `vdb-validate`, and converted aggregate
-record/base-count reconciliation before it can enter the validation.
+`ncbi_sra_transfer_objects.tsv` records official NCBI normalized-SRA and SRA
+Lite objects for the same runs. Normalized SRA is preferred when an ENA FASTQ
+transfer fails integrity checks. SRA Lite omits original quality scores, so it
+is permitted only for the frozen sequence-counting and mapping analyses:
+Illumina quality correction is disabled, KMC does not consume qualities, and
+the ONT check uses alignment identity rather than base-quality filtering. Any
+used SRA object must pass its official MD5, `vdb-validate`, and converted
+aggregate record/base-count reconciliation before it can enter the validation.
+`transfer_failures.tsv` retains failed transfer evidence; failed objects are
+never silently admitted.
 
 The Ey15 paper reports a PCR-free extraction from the same ground tissue used
 for HMW DNA. The Macadamia paper describes one DNA extraction from leaves of
