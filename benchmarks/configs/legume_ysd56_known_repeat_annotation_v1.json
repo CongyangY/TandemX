@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_known_repeat_annotation_v1",
+  "status": "locked_before_annotation_output",
+  "catalogue": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/monomers.fa",
+  "catalogue_sha256": "c4af546f6f7648c35ea547510dcaed16fff34bc3755f3b29c85a9a34dd6da7ce",
+  "known_library": {
+    "path": "/Volumes/T7/Codex/TandemX/data/known_repeats/soybean_genbank_20260910/soybean_known_repeat_clones.fasta",
+    "sha256": "67d3a505f87bb8c43ffc6c397003343feaa614d1fc185fe12cb5d7a441110c91",
+    "record_count": 13,
+    "accessions": [
+      "U11026.1",
+      "OP605952.1",
+      "AB536705.1",
+      "AB536707.1",
+      "AB536708.1",
+      "AB536710.1",
+      "AB536712.1",
+      "OP605953.1",
+      "AB536703.1",
+      "AB536704.1",
+      "AB536706.1",
+      "AB536711.1",
+      "AB536714.1"
+    ]
+  },
+  "annotation": {
+    "kmer_size": 11,
+    "tool": "tandemx annotate-repeats",
+    "role": "post hoc family-source exclusion only",
+    "known_library_used_during_discovery": false,
+    "novelty_claim_allowed": false
+  },
+  "known_sequence_gaps": [
+    "CentGm273 has no independently accessioned monomer in the verified source inventory",
+    "CentGm444 has no independently accessioned monomer in the verified source inventory",
+    "YSD56 trf91/trf92/trf182/trf183/trf184/trf273/trf276 are assembly-derived labels without independent repeat accessions"
+  ],
+  "output": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/annotate_known_genbank/repeat_annotation.tsv"
+}
