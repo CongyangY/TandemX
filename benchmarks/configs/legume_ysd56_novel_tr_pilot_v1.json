@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_novel_tr_pilot_v1",
+  "status": "pre_registered_before_discovery_output",
+  "sample": {
+    "species": "Glycine soja",
+    "cultivar": "YSD56",
+    "biosample": "SAMN40909152",
+    "bioproject": "PRJNA1095640",
+    "hifi_run": "SRR28726931",
+    "assembly_accession": "GCA_040083835.1",
+    "assembly_name": "ASM4008383v1",
+    "assembly_level": "Complete Genome",
+    "assembly_total_bp": 1008523555,
+    "assembly_contigs": 20,
+    "reported_t2t_status": "20 chromosomes; 20 centromeres; 40 telomeres"
+  },
+  "inputs": {
+    "pilot_reads": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_003.fastq.gz",
+    "pilot_reads_sha256": "c4f97d045f2a1e7e78dab4de5c86b6a7c7359b7cfb7f28e35b709115d97a0ae3",
+    "pilot_read_count": 65106,
+    "pilot_read_bases": 1099009791,
+    "pilot_nominal_coverage": 1.0897214899457652,
+    "assembly_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/040/083/835/GCA_040083835.1_ASM4008383v1/GCA_040083835.1_ASM4008383v1_genomic.fna.gz",
+    "assembly_expected_bytes": 302094702,
+    "assembly_expected_md5": "c8b216d1f7ba5cc4af20adfb14dc8bdc"
+  },
+  "discovery": {
+    "discovery_method": "cascade",
+    "clustering_method": "sequence",
+    "cluster_identity": 0.95,
+    "family_audit": "related",
+    "min_period": 30,
+    "max_period": 1000,
+    "top_periods": 5,
+    "min_support_reads": 5,
+    "min_repeat_span": 100,
+    "kmer_backend": "rust",
+    "threads": 4,
+    "progress": false
+  },
+  "gates": {
+    "pilot_role": "high_abundance_candidate_and_cost_screen_only",
+    "required_outputs": [
+      "candidate_reads.tsv",
+      "monomers.fa",
+      "families.tsv",
+      "family_hierarchy.tsv",
+      "family_audit_summary.tsv",
+      "run_config.yaml",
+      "run.log"
+    ],
+    "formal_depth_if_pilot_passes": "10.957025281377787x_existing_nested_sample",
+    "novel_claim_allowed_from_pilot": false
+  }
+}
