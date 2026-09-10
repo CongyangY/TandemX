@@ -1,0 +1,159 @@
+{
+  "manifest_id": "peanut_v14167_enrollment_v1",
+  "manifest_status": "frozen_metadata_only",
+  "as_of": "2026-09-10",
+  "downloaded": false,
+  "analysis_run": false,
+  "dataset": {
+    "material": "V14167",
+    "species": "Arachis duranensis",
+    "common_name": "wild peanut",
+    "ploidy": "diploid AA",
+    "assembly_accession": "GCA_054824555.1",
+    "assembly_fasta_filename": "GCA_054824555.1_ASM5482455v1_genomic.fna.gz",
+    "assembly_reported_length_bp": 1178000000,
+    "assembly_reported_gap_count": 0,
+    "assembly_reported_telomere_count": 20,
+    "assembly_status": "paper_reported_T2T",
+    "assembly_biosample": "SAMN48356820",
+    "raw_study": "PRJNA1259747",
+    "raw_project_aliases": ["PRJNA1259200", "PRJCA026588"],
+    "donor_match": {
+      "evidence_grade": "A2_material_level_pooled",
+      "status": "material_matched",
+      "basis": [
+        "assembly isolate is V14167",
+        "HiFi, ONT and DNBSEQ runs are named and mapped to V14167 raw BioSamples",
+        "paper reports V14167 accession material and assembly in the same study"
+      ],
+      "limitation": "paper reports 20 plants and young-leaf collection per accession; a single-plant DNA extraction/library chain is not publicly proven"
+    }
+  },
+  "raw_libraries": [
+    {
+      "modality": "hifi",
+      "platform": "PacBio",
+      "run_accession": "SRR33996330",
+      "biosample_accession": "SAMN49012632",
+      "reported_bases": 211520000000,
+      "reported_bases_gb_decimal": 211.520,
+      "reported_bytes_gb_decimal": 161.392,
+      "reported_bytes_basis": "ENA fastq_bytes sum; exact integer byte field not retained in source table",
+      "expected_role": "primary long-read repeat discovery and abundance input",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/view/SRR33996330"
+    },
+    {
+      "modality": "ont",
+      "platform": "Oxford Nanopore",
+      "run_accession": "SRR33996240",
+      "biosample_accession": "SAMN49012638",
+      "reported_bases": 108019000000,
+      "reported_bases_gb_decimal": 108.019,
+      "reported_bytes_gb_decimal": 99.089,
+      "reported_bytes_basis": "ENA fastq_bytes sum; exact integer byte field not retained in source table",
+      "expected_role": "orthogonal long-read repeat evidence and long-array support",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/view/SRR33996240"
+    },
+    {
+      "modality": "short_read_wgs",
+      "platform": "DNBSEQ",
+      "run_accession": "SRR33996449",
+      "biosample_accession": "SAMN49012650",
+      "reported_bases": 131114000000,
+      "reported_bases_gb_decimal": 131.114,
+      "reported_bytes_gb_decimal": 97.367,
+      "reported_bytes_basis": "ENA fastq_bytes sum; exact integer byte field not retained in source table",
+      "expected_role": "independent short-read abundance/QC input; not a substitute for HiFi",
+      "source_url": "https://www.ebi.ac.uk/ena/browser/view/SRR33996449"
+    }
+  ],
+  "pilot_plan": {
+    "plan_status": "proposed_not_executed",
+    "sampling_unit": "primary_read_id",
+    "sampling_method": "deterministic_hash_or_streaming_subsample_with_source_order_preserved",
+    "seed_namespace": "tandemx.peanut.v14167.enrollment.v1",
+    "seeds": {
+      "hifi": 914167,
+      "ont": 914168,
+      "short_read_wgs": 914169
+    },
+    "target_depths_relative_to_assembly": {
+      "hifi": 5.0,
+      "ont": 2.0,
+      "short_read_wgs": 2.0
+    },
+    "target_bases_gb_decimal": {
+      "hifi": 5.89,
+      "ont": 2.36,
+      "short_read_wgs": 2.36
+    },
+    "target_total_bases_gb_decimal": 10.61,
+    "replicates": 2,
+    "replicate_policy": "same_seed_and_target_depth; independent source-file validation receipts",
+    "full_enrollment_condition": "only after both pilot replicates pass all hard validation rules and resource budget review",
+    "hi_c_not_in_first_pilot": true
+  },
+  "input_validation": {
+    "required_before_reading": [
+      "source_url_retrieved",
+      "run_accession_exact_match",
+      "biosample_accession_exact_match",
+      "study_accession_contains_PRJNA1259747",
+      "material_or_isolate_contains_V14167",
+      "platform_matches_manifest_modality",
+      "release_status_is_public",
+      "payload_size_is_nonzero",
+      "file_format_and_compression_are_expected"
+    ],
+    "required_after_acquisition": [
+      "source_file_sha256",
+      "source_file_md5_if_available",
+      "source_file_size_bytes",
+      "observed_read_count",
+      "observed_base_count",
+      "observed_read_length_summary",
+      "first_primary_read_id",
+      "last_primary_read_id",
+      "pilot_seed_and_target_bases",
+      "subsample_file_sha256",
+      "validation_timestamp_utc"
+    ],
+    "assembly_checks": [
+      "assembly_accession_exact_match_GCA_054824555.1",
+      "assembly_fasta_sha256",
+      "assembly_fasta_total_bp",
+      "assembly_sequence_count",
+      "assembly_N_count",
+      "assembly_report_or_metadata_snapshot_sha256"
+    ],
+    "expected_observation_policy": "reported assembly length, gap count and telomere count are source expectations; local FASTA checks may downgrade status and must not silently rewrite the accession"
+  },
+  "stop_rules": {
+    "hard_stop": [
+      "any run accession, BioSample accession, species or isolate fails exact manifest match",
+      "run is restricted, withdrawn, has zero payload, or source URL resolves to another record",
+      "platform or file format is inconsistent with the manifest",
+      "observed base count differs from reported bases by more than 10 percent without a recorded source explanation",
+      "checksum or file size changes during staging",
+      "paired-end short-read mates are incomplete or cannot be linked to the same run",
+      "assembly accession or assembly checksum does not match the frozen manifest",
+      "pilot produces fewer than two nonempty validated modality replicates",
+      "peak storage or memory exceeds the approved pilot budget by more than 20 percent"
+    ],
+    "review_stop": [
+      "assembly has unexpected Ns, sequence count or total length relative to the paper report",
+      "repeat signal is supported by only one modality or one pilot replicate",
+      "material metadata is V14167 at accession level but single-donor/library identity remains unresolved",
+      "DNBSEQ short-read bases are available but the source table does not expose exact integer bytes"
+    ],
+    "interpretation_boundary": "a stop or pass decision is a data-ingestion/QC decision; it is not evidence that the assembly is absolute copy-number truth"
+  },
+  "evidence": {
+    "inventory_document": "docs/legume_t2t_dataset_inventory_20260910.md",
+    "paper_doi": "https://doi.org/10.1038/s41588-026-02577-z",
+    "assembly_url": "https://www.ncbi.nlm.nih.gov/assembly/GCA_054824555.1/",
+    "bioproject_url": "https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1259747",
+    "biosample_url": "https://www.ncbi.nlm.nih.gov/biosample/SAMN48356820",
+    "ena_run_table_url": "https://www.ebi.ac.uk/ena/portal/api/search?result=read_run&query=run_accession%3D%22SRR33996330%22%20OR%20run_accession%3D%22SRR33996240%22%20OR%20run_accession%3D%22SRR33996449%22&fields=run_accession%2Csample_accession%2Cstudy_accession%2Cinstrument_platform%2Cbase_count%2Cfastq_bytes&format=tsv"
+  }
+}

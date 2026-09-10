@@ -30,7 +30,8 @@ Discovery uses the same production profile as the completed Ey15-2 and
 Macadamia family catalogues: cascade discovery, sequence clustering at 0.95,
 related-family audit, periods 30--1,000 bp, five period proposals, minimum five
 supporting reads, minimum 100-bp repeat span, Rust backend and four threads.
-The pilot reads the complete fixed 1.0897x subset; it does not re-sample or use
+The pilot reads the entirety of the fixed 1.0897x subset; it is not the
+complete 44.193-Gb YSD56 HiFi collection, does not re-sample, and does not use
 a known-repeat library during discovery.
 
 ## Pre-specified gates
