@@ -1,0 +1,74 @@
+{
+  "complete": true,
+  "file_count": 16,
+  "files": {
+    "README.md": {
+      "bytes": 2883,
+      "sha256": "bb31e1c699cd2d5d4861fd8a4a00ef76f970c776bcf5bfc57fe92e3b169393df"
+    },
+    "config.json": {
+      "bytes": 682,
+      "sha256": "78eecf70b8357fc8f88ef1a1a0c21a20fae49f2710f0ddb69b66d0fbf0562814"
+    },
+    "depth_metrics.tsv": {
+      "bytes": 2603,
+      "sha256": "31b7b39ca2b0cac3d4e9d36397d457b7f7dd79ca86113bd9cac51efdf8e319f4"
+    },
+    "environment.json": {
+      "bytes": 11010,
+      "sha256": "a04a24ed49d92b33a7ae1a01e1e20b066a1e94afd3e35759a74337c898cfdf67"
+    },
+    "evaluation_receipt.json": {
+      "bytes": 149,
+      "sha256": "2117c661eb379a0e69e67c818260295050890360a3c385069b5e484f5992b8a6"
+    },
+    "family_recovery.tsv": {
+      "bytes": 34641,
+      "sha256": "9bfe6f4f2666dadccd2c2be82c1245c131a6dc5daf17ebf43895eb7e6e8bad46"
+    },
+    "figures/discovery_saturation.pdf": {
+      "bytes": 25316,
+      "sha256": "4c0d297e87c53425508b07efd3525fb98e7128dc7fa2930e60052b64a25a377b"
+    },
+    "figures/discovery_saturation.png": {
+      "bytes": 373236,
+      "sha256": "03079a85094a89ad94cc8d4404ef812e515797ab47635a54a9e0561610b09dc8"
+    },
+    "figures/discovery_saturation.svg": {
+      "bytes": 112869,
+      "sha256": "21fd1d0fb704d84f9fdbc5159b28c2e0100af055ae219f43c276e5cb5935386a"
+    },
+    "figures/figure_legend.md": {
+      "bytes": 563,
+      "sha256": "acc3e3fab1425e5dd07ea261959ebcb5f9e56ff2a23b5c95d5ab520b3ad21cf1"
+    },
+    "figures/panel_source.tsv": {
+      "bytes": 6832,
+      "sha256": "ef931b69bb658db3be5d6e561a8cc3bb8e66ea957e8dd5c422b2805832bad384"
+    },
+    "protocol.md": {
+      "bytes": 3898,
+      "sha256": "3f4b9af1ab625cacf13e9851a4250fd7e3539139f61ada209dc1f273b99e0a1f"
+    },
+    "run_receipt.json": {
+      "bytes": 90,
+      "sha256": "2dfca60010a65586698a26384f592ecf60b3bd3c826ec6a45a88c4b4a4fa48c7"
+    },
+    "run_summary.tsv": {
+      "bytes": 4305,
+      "sha256": "6b186a9a0eeee12aaed40fdb6599451d9de79056680b3abb91f8ac7cbba81603"
+    },
+    "saturation_decision.json": {
+      "bytes": 1172,
+      "sha256": "f64fbc125927b5134c48e72472ed06ab5c12cbe56f040408697e9a1112737551"
+    },
+    "transition_metrics.tsv": {
+      "bytes": 2197,
+      "sha256": "bdf053de6d42026a8f4b954227ba8953586f46fa5b4aba7c3c24c02ed5310f7a"
+    }
+  },
+  "full_run": "/Volumes/T7/Codex/TandemX/results/discovery_saturation_validation_v1_20260910",
+  "full_data_parent": "/Volumes/T7/Codex/TandemX/data/simulated",
+  "primary_decision": "operational_saturation_at_20x",
+  "boundary": "simulated_factorial_validation_not_universal_real_plant_coverage"
+}

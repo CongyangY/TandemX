@@ -1,5 +1,38 @@
 # TandemX current status and handoff
 
+## Active 2026-09-10 manuscript v5 and discovery-saturation checkpoint
+
+The manuscript has been rewritten around the biological assembly-completeness
+question in `paper/0910/manuscript_v5.md`, while retaining exactly five Results.
+The controlled method comparison is condensed into Result 2; Ey15-2,
+Macadamia and orthogonal-read evidence carry Results 4-5. The current figure and
+table map is `paper/0910/manuscript_v5_figure_table_plan.md`. Bioconda, Zenodo,
+the final tag and a sixth Result remain paused.
+
+The discovery-saturation protocol was committed before output inspection as
+`67ca6ba`, with a pre-run scheduling correction in `fecbb3e`. Three independent
+simulated 10-Mb validation genomes (seeds 6501-6503) were each analyzed at nested
+0.5x, 1x, 2x, 5x, 10x, 20x and 30x. All **21/21** discovery runs completed,
+with no failure or timeout. The pre-specified two-consecutive-transition,
+all-seed rule first declared operational saturation at **20x**: 5x--10x and
+10x--20x passed in all three seeds, and 20x--30x also passed. All 55 planted
+families, including the 20-copy tier, were recovered in every seed by **5x**;
+no additional planted family was recovered above 5x. Median operational-family
+count rose 34 at 0.5x to 55 at 5x and 58 at 30x, while median unique candidates
+continued 36 to 119. Therefore 5x truth recovery and 20x catalogue stability
+must remain distinct conclusions. The result is factorial/IID simulation
+evidence, not a universal real-plant coverage rule.
+
+The conclusion is included in Result 2 without adding a new Result. The full
+curve is Supplementary Figure S1 and medians/ranges are Supplementary Tables
+S3-S4. Compact evidence is in
+`paper/evidence/discovery_saturation_validation_v1/`; full generated reads and
+native runs remain at `/Volumes/T7/Codex/TandemX/data/simulated/` and
+`/Volumes/T7/Codex/TandemX/results/discovery_saturation_validation_v1_20260910`.
+Full regression before validation passed **808** tests; focused saturation and
+plot checks passed after the plotting-only median correction. Final package
+verification passed **809** tests on 2026-09-10.
+
 ## Active 2026-09-10 formal SRF comparator checkpoint
 
 The user closed open-ended algorithm exploration. A3 is a development candidate

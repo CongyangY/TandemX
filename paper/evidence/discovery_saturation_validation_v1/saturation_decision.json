@@ -1,0 +1,60 @@
+{
+  "saturation_reached": true,
+  "saturation_depth": 20.0,
+  "rule": "two_consecutive_transitions_all_seeds_new_fraction_lt_0.05_and_jaccard_gt_0.95",
+  "transitions": [
+    {
+      "lower_depth": 0.5,
+      "higher_depth": 1.0,
+      "all_seed_pass": false,
+      "passing_seeds": 0
+    },
+    {
+      "lower_depth": 1.0,
+      "higher_depth": 2.0,
+      "all_seed_pass": false,
+      "passing_seeds": 0
+    },
+    {
+      "lower_depth": 2.0,
+      "higher_depth": 5.0,
+      "all_seed_pass": false,
+      "passing_seeds": 1
+    },
+    {
+      "lower_depth": 5.0,
+      "higher_depth": 10.0,
+      "all_seed_pass": true,
+      "passing_seeds": 3
+    },
+    {
+      "lower_depth": 10.0,
+      "higher_depth": 20.0,
+      "all_seed_pass": true,
+      "passing_seeds": 3
+    },
+    {
+      "lower_depth": 20.0,
+      "higher_depth": 30.0,
+      "all_seed_pass": true,
+      "passing_seeds": 3
+    }
+  ],
+  "seeds": [
+    6501,
+    6502,
+    6503
+  ],
+  "coverages": [
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    10.0,
+    20.0,
+    30.0
+  ],
+  "family_match_threshold": 0.9,
+  "main_text_eligible": true,
+  "scientific_interpretation": "pending_plot_and_cross_metric_review"
+}
