@@ -41,3 +41,21 @@ Lian et al. 2025 的 YSD56 论文报告 TRF 扫描得到 `trf91`, `trf92`, `trf1
 1. 可立即作为公开小型序列输入的是 `U11026.1`（SB92，183-bp dimer）、`OP605952.1` 及 AB536705/707/708/710/712（CentGm-1 家族），以及 `OP605953.1` 及 AB536703/704/706/711/714（CentGm-4 家族）。
 2. `CentGm91`/`CentGm92` 的长度标签与历史 `CentGm-1`/`CentGm-2` 命名存在顺序冲突；在未做序列比对前，只能写 family-level source，不能声称一一对应。
 3. `CentGm273`、`CentGm444` 和 YSD56 的七个 `trf` 标签目前没有被核验为独立 GenBank repeat accession。它们的可复现来源是固定版本组装（或研究附表中的 assembly 坐标），不应伪造 FASTA accession。
+
+## 6. SoyTEdb 故障与 Dfam 替代排除层
+
+SoyTEdb 的历史 bulk FASTA 地址
+`https://legacy.soybase.org/soytedb/Dump.php?type=fasta` 在 2026-09-10
+返回 PHP 128-MiB memory-exhaustion 错误。Mogil et al. 使用的公开复现仓库
+`slowkow/soy-rtms`（commit `1be5c5421157ed998e50d3e37adddec86013cb06`）
+保存了下载方法，但没有提交生成的 `soytedb.fa.bz2`。因此本轮不能把
+SoyTEdb bulk library 写成已取得或已排除。
+
+作为一个范围明确的替代层，本轮从 Dfam 4.0 current-release API 下载了
+taxon 3847（*Glycine max* descendants）的 raw + curated consensus：1,697
+条、3,540,456 bp，FASTA SHA-256 为
+`a37182dbcac71554650bc347d37f5fb006fe2fce557ec05719fe5516d756919f`。
+本地路径和 API 原始响应由
+`/Volumes/T7/Codex/TandemX/data/known_repeats/dfam_glycine_max_v40_20260910/source_receipt.json`
+绑定。Dfam 的 `DR` 条目包含 de novo putative TE families；它们适合做
+TE-related exclusion，不是经逐条实验验证的完整 soybean repeat truth。

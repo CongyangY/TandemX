@@ -128,6 +128,15 @@ fixed libraries, not proof of non-rDNA, non-organelle or non-TE origin. After
 the rDNA refinement, the retained FASTA and evidence row are in
 `run/candidate_refined_after_rdna_v1/`, and only `TXF000708` remains.
 
+The historical SoyTEdb bulk FASTA endpoint failed with a server-side PHP
+memory-exhaustion error, and its small public reproducibility repository does
+not contain the generated bulk library. A separately frozen local screen used
+the Dfam 4.0 API collection of 1,697 raw or curated *Glycine max* consensus
+families (3,540,456 bp). `TXF000708` again had no qualifying match: its best
+pair was a 72-bp Dfam record at 0.694444 glocal edit identity, below the locked
+0.80 possible-match threshold. This adds a species-specific TE exclusion layer
+but does not replace the unavailable SoyTEdb library or establish novelty.
+
 ## What remains unestablished
 
 The pilot does not provide any of the following:
@@ -138,8 +147,9 @@ The pilot does not provide any of the following:
    catalogue-completeness estimate;
 3. exclusion against a comprehensive soybean/legume TE/repeat resource, a
    full nucleotide-database search, or complete repeat annotation of the array
-   context; the current soybean-clone, rDNA, organelle and five-minisatellite
-   libraries are bounded screens only;
+   context; the current soybean-clone, rDNA, organelle, five-minisatellite and
+   Dfam *G. max* consensus libraries are bounded screens only, and the SoyTEdb
+   bulk FASTA remains unavailable;
 4. evidence that the 18,131 localized arrays are complete, or that unlocalized
    families are absent from the donor genome; or
 5. a validated HOR, physical copy number, assembly deficit, or biological
