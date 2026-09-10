@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_candidate_soybean_minisatellite_exclusion_v1",
+  "status": "locked_before_output",
+  "source_commit": "2bf3577",
+  "script": "benchmarks/scripts/score_known_repeat_exclusion.py",
+  "script_sha256": "d750952e1d784e90d6f3984abebad545dea175eff912db10ff5314f0b94bcc9d",
+  "candidate_fasta": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_refined_after_rdna_v1/refined_shortlist_retained.fa",
+  "candidate_fasta_sha256": "2cbde8d064e67e19ee04e39427ed46bb929cf63840da38b543263cb13df180c0",
+  "known_library": "/Volumes/T7/Codex/TandemX/data/known_repeats/soybean_minisatellites_slowkow_20260910/minisatellites.fa",
+  "known_library_sha256": "e48ed5d1228071ab04b0a4c29a7d18a3c5d1444862680cb9113ed18fabd8de72",
+  "known_record_count": 5,
+  "known_library_boundary": "Published retrotransposon-associated soybean minisatellites Gm_ms_a through Gm_ms_e; not comprehensive",
+  "thresholds": {
+    "strong_glocal_edit_identity": 0.9,
+    "possible_glocal_edit_identity": 0.8,
+    "minimum_aligned_bp": 20
+  },
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "benchmarks/scripts/score_known_repeat_exclusion.py",
+    "--catalog",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_refined_after_rdna_v1/refined_shortlist_retained.fa",
+    "--known",
+    "/Volumes/T7/Codex/TandemX/data/known_repeats/soybean_minisatellites_slowkow_20260910/minisatellites.fa",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_soybean_minisatellite_exclusion_v1",
+    "--possible-threshold",
+    "0.80",
+    "--strong-threshold",
+    "0.90",
+    "--minimum-aligned-bp",
+    "20"
+  ],
+  "output_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_soybean_minisatellite_exclusion_v1",
+  "interpretation_boundary": "Local exclusion against five published soybean minisatellites only; no-match is not proof of novelty."
+}
