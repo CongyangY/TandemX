@@ -1,0 +1,3 @@
+; Intentionally contains zero sequence records: all scoped Medicago repeat sequences
+; were reported by name/length or in a paper without a safely retrievable direct
+; GenBank/RefSeq/supplementary sequence locator during this read-only audit.

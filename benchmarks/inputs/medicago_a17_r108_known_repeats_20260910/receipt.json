@@ -1,0 +1,27 @@
+{
+  "schema_version": "medicago_known_repeat_exclusion_receipt_v1",
+  "audit_date": "2026-09-10",
+  "scope": "Medicago A17/R108 reported tandem, satellite and centromeric repeat names for candidate exclusion",
+  "sequence_records": 0,
+  "manifest_records": 8,
+  "sequence_file": "medicago_a17_r108_known_repeats_v1.fa",
+  "sequence_file_policy": "comment_only_zero_records",
+  "source_policy": ["peer_reviewed paper", "PubMed", "GenBank/RefSeq/ENA/NGDC locator when available"],
+  "large_data_downloaded": false,
+  "assemblies_or_reads_downloaded": false,
+  "algorithm_changed": false,
+  "direct_sequence_accessions_retrieved": [],
+  "primary_sources": [
+    {"locator": "https://pubmed.ncbi.nlm.nih.gov/15480726/", "identifier": "PMID:15480726", "use": "MtR1/MtR2/MtR3 names, lengths/context and A17/R108-1 FISH result"},
+    {"locator": "https://pubmed.ncbi.nlm.nih.gov/40714838/", "identifier": "PMID:40714838", "use": "CentM168/CentM183 and A17/R108 T2T context"},
+    {"locator": "https://ngdc.cncb.ac.cn/bioproject/browse/PRJCA042220", "identifier": "PRJCA042220", "use": "A17/R108 project and species/material scope"},
+    {"locator": "https://english.genetics.cas.cn/news_/researchnews/202508/t20250807_1049276.html", "identifier": "CAS:2025-08-07", "use": "CentM51/CentM515/CentM287 names in official study summary"}
+  ],
+  "unresolved": [
+    "exact monomer sequence/accession for MtR1, MtR2 and MtR3",
+    "exact monomer sequence/accession for CentM168 and CentM183",
+    "exact sequence and material/chromosome assignment for CentM51, CentM515 and CentM287",
+    "reconcile 2004 R108-1 terminology with 2025 M. littoralis R108 taxonomy before transferring sequence-level evidence"
+  ],
+  "interpretation": "This is a reported-name/length exclusion manifest. It is not a presence/absence call and a missing sequence is not evidence of novelty."
+}
