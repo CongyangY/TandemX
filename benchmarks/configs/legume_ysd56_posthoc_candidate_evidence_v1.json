@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_posthoc_candidate_evidence_v1",
+  "status": "locked_before_output",
+  "source_commit": "3be53d3",
+  "analysis_role": "post_hoc_follow_up_triage",
+  "script": "benchmarks/scripts/integrate_tr_candidate_evidence.py",
+  "script_sha256": "086524e3538b53133cfcd6535a3f367aee12d608b4efdc0378f7d6c90744a97e",
+  "inputs": {
+    "families": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/families.tsv",
+      "sha256": "482d6daa6dcde1bf1869b7ddd85224e1ff34e76b150ed3f1a447e1523c4daf01"
+    },
+    "monomers": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/monomers.fa",
+      "sha256": "c4af546f6f7648c35ea547510dcaed16fff34bc3755f3b29c85a9a34dd6da7ce"
+    },
+    "hierarchy": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/family_hierarchy.tsv",
+      "sha256": "aef0e1e354bd42eafa48ed1d8d7286c427e8144515b9b2373dbee4c969c115d6"
+    },
+    "similarity": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/family_similarity.tsv",
+      "sha256": "432c93c8b8160ca5f8e2dfc7e9776941da28223257bf22b7c84834ba5e759d9d"
+    },
+    "known_summary": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/known_exclusion_edlib_v2/known_repeat_family_summary.tsv",
+      "sha256": "499f75cbf747754689f8083d3e53c4bf6a57879bb5b1417c6fe88458a8c9962d"
+    },
+    "arrays": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/locate_all/arrays.bed",
+      "sha256": "d99f540927fe16e45b2300950554fcb5a6b7eda033e3b8a48e327660dadeebdc"
+    },
+    "sequence_lengths": {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/YSD56_T2T_GCA_040083835.1_20260910/sequence_lengths.tsv",
+      "sha256": "0738d1221a656660f5fa3b551eef43509440fd7869d1075ec44e75882ccdea92"
+    },
+    "sequence_aliases": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/ysd56_sequence_aliases_20260910.tsv",
+      "sha256": "1b26fce47fe5070a100b8af749a90392313b6829b80cf1883ab73c1a2dce48b0"
+    },
+    "centromeres": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/ysd56_published_centromeres_20260910.tsv",
+      "sha256": "9eb5f613510ba99905cfe5c9ced92e3b756aeecd81a2cbc0620ae221237b988a"
+    },
+    "gff": {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/YSD56_T2T_GCA_040083835.1_20260910/Glycine_soja.YSD56.v2.representative.gff",
+      "sha256": "069be5e05fb7ce82d6eeb887bc4eec0efc32b9bf91136033eacf97dcf3d93000"
+    }
+  },
+  "thresholds": {
+    "confidence": "high",
+    "tandemx_low_complexity_flag": false,
+    "maximum_hierarchy_degree": 0,
+    "maximum_redundancy_degree": 0,
+    "known_exclusion_state": "no_match_in_limited_library",
+    "minimum_read_support_span_bp": 50000,
+    "minimum_selected_array_monomer_ratio": 10,
+    "maximum_array_merge_gap_bp": 100,
+    "reject_any_of_two_published_centromere_definitions": true,
+    "terminal_exclusion_bp": 100000,
+    "maximum_gene_overlap_count": 0
+  },
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "benchmarks/scripts/integrate_tr_candidate_evidence.py",
+    "--families",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/families.tsv",
+    "--monomers",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/monomers.fa",
+    "--hierarchy",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/family_hierarchy.tsv",
+    "--similarity",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/family_similarity.tsv",
+    "--known-summary",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/known_exclusion_edlib_v2/known_repeat_family_summary.tsv",
+    "--arrays",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/locate_all/arrays.bed",
+    "--sequence-lengths",
+    "/Volumes/T7/Codex/TandemX/data/references/YSD56_T2T_GCA_040083835.1_20260910/sequence_lengths.tsv",
+    "--sequence-aliases",
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/ysd56_sequence_aliases_20260910.tsv",
+    "--centromeres",
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/ysd56_published_centromeres_20260910.tsv",
+    "--gff",
+    "/Volumes/T7/Codex/TandemX/data/references/YSD56_T2T_GCA_040083835.1_20260910/Glycine_soja.YSD56.v2.representative.gff",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v1",
+    "--minimum-confidence",
+    "high",
+    "--minimum-read-span",
+    "50000",
+    "--minimum-array-monomer-ratio",
+    "10",
+    "--terminal-exclusion-bp",
+    "100000",
+    "--maximum-array-merge-gap",
+    "100"
+  ],
+  "output_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v1",
+  "interpretation_boundary": "Post hoc pilot triage. Passing families are preliminary previously-unreported candidates, not validated novel repeats."
+}
