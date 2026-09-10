@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_novel_tr_pilot_v1",
+  "stages": [
+    {
+      "name": "discover_1p0897x",
+      "cwd": "/Users/ycy/Codex/Sofw/TandemX",
+      "scratch_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover",
+      "command": [
+        "conda",
+        "run",
+        "-n",
+        "tandemx-dev",
+        "python",
+        "-m",
+        "tandemx.cli",
+        "discover",
+        "--reads",
+        "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_003.fastq.gz",
+        "--outdir",
+        "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover",
+        "--discovery-method",
+        "cascade",
+        "--clustering-method",
+        "sequence",
+        "--cluster-identity",
+        "0.95",
+        "--family-audit",
+        "related",
+        "--min-period",
+        "30",
+        "--max-period",
+        "1000",
+        "--top-periods",
+        "5",
+        "--min-support-reads",
+        "5",
+        "--min-repeat-span",
+        "100",
+        "--kmer-backend",
+        "rust",
+        "--threads",
+        "4",
+        "--no-progress"
+      ]
+    },
+    {
+      "name": "validate_discovery",
+      "cwd": "/Users/ycy/Codex/Sofw/TandemX",
+      "scratch_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover",
+      "command": [
+        "conda",
+        "run",
+        "-n",
+        "tandemx-dev",
+        "python",
+        "-m",
+        "tandemx.cli",
+        "validate",
+        "--project",
+        "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover"
+      ]
+    }
+  ]
+}
