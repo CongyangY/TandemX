@@ -18,7 +18,8 @@ from pathlib import Path
 
 import edlib
 
-from tandemx.annotation import read_discovered_catalog, read_known_repeats
+from benchmarks.scripts.integrate_tr_candidate_evidence import read_fasta
+from tandemx.annotation import RepeatRecord, read_discovered_catalog, read_known_repeats
 from tandemx.simulate.toy import reverse_complement
 
 
@@ -44,6 +45,22 @@ def sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def read_masked_known_fasta(path: Path) -> tuple[list[RepeatRecord], int]:
+    """Read a fixed library and mask non-ACGT IUPAC characters as N."""
+    records: list[RepeatRecord] = []
+    masked_count = 0
+    for identifier, sequence in read_fasta(path).items():
+        masked = []
+        for base in sequence.upper():
+            if base in "ACGT":
+                masked.append(base)
+            else:
+                masked.append("N")
+                masked_count += 1
+        records.append(RepeatRecord(identifier=identifier, sequence="".join(masked)))
+    return records, masked_count
 
 
 def circular_glocal_identity(first: str, second: str) -> tuple[float, int, str]:
@@ -111,6 +128,11 @@ def main() -> int:
     parser.add_argument("--possible-threshold", type=float, default=0.80)
     parser.add_argument("--strong-threshold", type=float, default=0.90)
     parser.add_argument("--minimum-aligned-bp", type=int, default=50)
+    parser.add_argument(
+        "--mask-ambiguous-known-bases",
+        action="store_true",
+        help="Mask non-ACGT characters in the known FASTA as N and record the count.",
+    )
     args = parser.parse_args()
     if not 0 < args.possible_threshold <= args.strong_threshold <= 1:
         parser.error("require 0 < possible-threshold <= strong-threshold <= 1")
@@ -118,7 +140,11 @@ def main() -> int:
         parser.error("minimum-aligned-bp must be positive")
 
     catalog = read_discovered_catalog(args.catalog)
-    known = read_known_repeats(args.known)
+    if args.mask_ambiguous_known_bases:
+        known, masked_known_base_count = read_masked_known_fasta(args.known)
+    else:
+        known = read_known_repeats(args.known)
+        masked_known_base_count = 0
     if not catalog or not known:
         parser.error("catalog and known library must both contain sequences")
     args.outdir.mkdir(parents=True, exist_ok=True)
@@ -227,6 +253,8 @@ def main() -> int:
         "possible_threshold": args.possible_threshold,
         "strong_threshold": args.strong_threshold,
         "minimum_aligned_bp": args.minimum_aligned_bp,
+        "mask_ambiguous_known_bases": args.mask_ambiguous_known_bases,
+        "masked_known_base_count": masked_known_base_count,
         "alignment": "complete_shorter_vs_doubled_longer_edlib_HW_both_orientations",
         "edlib_version": version("edlib"),
         "family_state_counts": counts,
