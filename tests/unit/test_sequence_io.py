@@ -23,19 +23,26 @@ def collect(path: Path) -> list[tuple[str, str, str | None]]:
 
 def test_reads_fasta_fastq_and_gzip_variants(tmp_path: Path) -> None:
     fasta = tmp_path / "reads.fa"
+    ncbi_fasta = tmp_path / "assembly.fna"
     fastq = tmp_path / "reads.fastq"
     fasta_gz = tmp_path / "reads.fasta.gz"
+    ncbi_fasta_gz = tmp_path / "assembly.fna.gz"
     fastq_gz = tmp_path / "reads.fq.gz"
 
     fasta.write_text(">r1 description\nACGT\nACGT\n>r2\nNNAA\n", encoding="utf-8")
+    ncbi_fasta.write_text(fasta.read_text(encoding="utf-8"), encoding="utf-8")
     fastq.write_text("@q1 description\nACGT\n+\n!!!!\n@q2\nNNAA\n+\n####\n", encoding="utf-8")
     with gzip.open(fasta_gz, "wt", encoding="utf-8") as handle:
+        handle.write(fasta.read_text(encoding="utf-8"))
+    with gzip.open(ncbi_fasta_gz, "wt", encoding="utf-8") as handle:
         handle.write(fasta.read_text(encoding="utf-8"))
     with gzip.open(fastq_gz, "wt", encoding="utf-8") as handle:
         handle.write(fastq.read_text(encoding="utf-8"))
 
     assert collect(fasta) == [("r1", "ACGTACGT", None), ("r2", "NNAA", None)]
     assert collect(fasta_gz) == collect(fasta)
+    assert collect(ncbi_fasta) == collect(fasta)
+    assert collect(ncbi_fasta_gz) == collect(fasta)
     assert collect(fastq) == [("q1", "ACGT", "!!!!"), ("q2", "NNAA", "####")]
     assert collect(fastq_gz) == collect(fastq)
 

@@ -113,7 +113,7 @@ class DuplicateIdTracker:
         self.close()
 
 
-FASTA_SUFFIXES = (".fa", ".fasta")
+FASTA_SUFFIXES = (".fa", ".fasta", ".fna")
 FASTQ_SUFFIXES = (".fq", ".fastq")
 VALID_BASES = frozenset("ACGTN")
 
@@ -360,7 +360,7 @@ def detect_sequence_format(path: Path) -> str:
         return "fastq"
     raise SequenceFormatError(
         f"Unsupported sequence file extension for {path}. "
-        "Expected .fa, .fasta, .fq, .fastq, or .gz-compressed variants."
+        "Expected .fa, .fasta, .fna, .fq, .fastq, or .gz-compressed variants."
     )
 
 

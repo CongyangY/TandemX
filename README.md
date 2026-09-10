@@ -195,7 +195,7 @@ Generated results are ignored by git and should not be committed.
 
 `tandemx simulate toy` generates a reproducible simulated toy dataset. `tandemx discover` implements toy-scale de novo repeat discovery from reads and writes `candidate_reads.tsv`, `monomers.fa`, `families.tsv`, `family_similarity.tsv`, and `family_hierarchy.tsv` for catalogue and candidate architecture review. `tandemx quantify` estimates toy read-based copy number from the discovered repeat catalog and writes `copy_number.tsv`. `tandemx locate` scans a toy assembly with discovered monomer k-mers and writes `repeat_density.bedgraph`, `arrays.bed`, and a backward-compatible `assembly_vs_read_cn.tsv`; its optional `--identity-model iid_base` converts exact k-mer support to an explicitly assumption-limited base-match proxy for development testing. `tandemx compare` compares read-based abundance from `copy_number.tsv` with family-level assembly array abundance from `arrays.bed` and writes `assembly_vs_read_cn.tsv`. `tandemx probe` ranks toy FISH probe candidates from the discovered catalog and writes `probes.fa`, `probes.rank.tsv`, and `in_silico_fish.tsv`. `tandemx visualize` writes basic SVG/PDF static plots. `tandemx annotate-repeats` performs post hoc known-repeat annotation after discovery. `tandemx validate` checks recognized MVP outputs under a project directory.
 
-Sequence input support is centralized in `tandemx.io.sequences`. Analysis commands can read `.fa`, `.fasta`, `.fq`, `.fastq`, and gzip-compressed `.fa.gz`, `.fasta.gz`, `.fq.gz`, and `.fastq.gz` inputs where that file type is appropriate. Readers stream records with a shared `SequenceRecord` structure and validate empty files, malformed FASTQ records, duplicate IDs, and sequence/quality length mismatches.
+Sequence input support is centralized in `tandemx.io.sequences`. Analysis commands can read `.fa`, `.fasta`, NCBI-style nucleotide `.fna`, `.fq`, `.fastq`, and their gzip-compressed variants where that file type is appropriate. Readers stream records with a shared `SequenceRecord` structure and validate empty files, malformed FASTQ records, duplicate IDs, and sequence/quality length mismatches.
 
 The `compare` MVP is an assembly/read abundance comparison for one run, not a multi-sample population comparison. It uses `copy_number.tsv` and `arrays.bed`; `repeat_density.bedgraph` is not the primary compare input because it does not contain `family_id`.
 
@@ -213,7 +213,7 @@ tandemx quantify \
   --genome-size 7744 \
   --outdir results/quantify
 tandemx locate \
-  --assembly results/toy/assembly.fa \
+  --assembly results/toy/assembly.fna.gz \
   --catalog results/discover/monomers.fa \
   --copy-number results/quantify/copy_number.tsv \
   --window-size 500 \

@@ -92,7 +92,7 @@ MVP goal: identify simple candidate tandem repeat monomers de novo from toy HiFi
 
 Default `--discovery-method legacy` implementation (retained for ablation):
 
-1. stream FASTA or FASTQ reads, including gzip-compressed inputs;
+1. stream FASTA or FASTQ reads, including gzip-compressed inputs and NCBI-style nucleotide `.fna` assemblies;
 2. apply `--max-reads`, `--max-read-bases`, reproducible `--sample-rate`, minimum length filters and the automatic large-input discovery budget when enabled;
 3. directly scan bounded short periods so STR-like 2-19 bp repeats can be retained;
 4. extract canonical, non-low-complexity k-mers for one read at a time with a rolling 2-bit encoder in the selected Python or Rust backend for longer periods;

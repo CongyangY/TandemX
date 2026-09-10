@@ -20,12 +20,14 @@ TandemX uses `tandemx.io.sequences` for streaming sequence input where possible.
 
 1. `.fa`
 2. `.fasta`
-3. `.fq`
-4. `.fastq`
-5. `.fa.gz`
-6. `.fasta.gz`
-7. `.fq.gz`
-8. `.fastq.gz`
+3. `.fna` (the standard NCBI nucleotide FASTA suffix)
+4. `.fq`
+5. `.fastq`
+6. `.fa.gz`
+7. `.fasta.gz`
+8. `.fna.gz`
+9. `.fq.gz`
+10. `.fastq.gz`
 
 Each parsed record is normalized as `SequenceRecord(id, sequence, quality=None, description="...")`. FASTQ records retain quality strings and must have matching sequence and quality lengths. The reader reports clear errors for empty files, malformed FASTA/FASTQ syntax, duplicate record IDs, unsupported extensions, and unsupported bases.
 
