@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_candidate_rdna_exclusion_v2",
+  "status": "locked_before_output",
+  "source_commit": "f848e2f",
+  "script": "benchmarks/scripts/score_known_repeat_exclusion.py",
+  "script_sha256": "d750952e1d784e90d6f3984abebad545dea175eff912db10ff5314f0b94bcc9d",
+  "candidate_fasta": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.fa",
+  "candidate_fasta_sha256": "43fd91afeaa67bc746754ad69d46113fbd2aad3252f0a4f52341672469c5855f",
+  "rdna_library": "/Volumes/T7/Codex/TandemX/tools/src/TideCluster/data/rdna_library.fasta",
+  "rdna_library_sha256": "a887357ddabd839ad8200debc4fdf10218dd8fdf1371bbc071eb9221b187c1db",
+  "rdna_record_count": 117,
+  "thresholds": {
+    "strong_glocal_edit_identity": 0.9,
+    "possible_glocal_edit_identity": 0.8,
+    "minimum_aligned_bp": 50
+  },
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "benchmarks/scripts/score_known_repeat_exclusion.py",
+    "--catalog",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.fa",
+    "--known",
+    "/Volumes/T7/Codex/TandemX/tools/src/TideCluster/data/rdna_library.fasta",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_rdna_exclusion_v2",
+    "--possible-threshold",
+    "0.80",
+    "--strong-threshold",
+    "0.90",
+    "--minimum-aligned-bp",
+    "50",
+    "--mask-ambiguous-known-bases"
+  ],
+  "output_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_rdna_exclusion_v2",
+  "interpretation_boundary": "Local exclusion against the fixed TideCluster rDNA library after explicitly masking non-ACGT IUPAC bases as N; no-match is not proof of non-rDNA origin or novelty.",
+  "supersedes_attempt": "v1 terminated before output because the public rDNA FASTA contains IUPAC W/Y bases rejected by the strict production parser",
+  "mask_ambiguous_known_bases": true
+}
