@@ -1,0 +1,26 @@
+{
+  "srf#circ1-171": {
+    "status": "unique",
+    "matches": [
+      "truth_f2"
+    ],
+    "identities": [
+      [
+        "truth_f2",
+        1.0
+      ]
+    ]
+  },
+  "srf#circ2-171": {
+    "status": "unique",
+    "matches": [
+      "truth_f3"
+    ],
+    "identities": [
+      [
+        "truth_f3",
+        1.0
+      ]
+    ]
+  }
+}

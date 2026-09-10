@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": {
+    "name": "indel",
+    "period": 171,
+    "read_count": 100,
+    "read_length": 5000,
+    "families": 3,
+    "copies": 12,
+    "arrays_per_read": 1,
+    "positive_fraction": 0.7,
+    "substitution_rate": 0.0,
+    "insertion_rate": 0.001,
+    "deletion_rate": 0.001,
+    "unit_divergence": 0.0,
+    "related_families": false,
+    "negative_kind": "random"
+  },
+  "seed": 2026091002,
+  "read_count": 100,
+  "total_bases": 500003,
+  "truth_arrays": 70,
+  "simulator": "independent_planted_arrays_v1",
+  "warning": "controlled_stress_test_not_empirical_hifi_error_model",
+  "files": {
+    "reads.fa": {
+      "sha256": "9cd24ed4f2be9c72e5f3231de23c8dbfa4710671a5647356c804115ad5d93a6a",
+      "size_bytes": 501103
+    },
+    "truth_arrays.tsv": {
+      "sha256": "d87104152c1a783c8e16b6e19bc9c8a9e22b1c8e3449010d56aff717ce651c58",
+      "size_bytes": 14395
+    },
+    "truth_monomers.fa": {
+      "sha256": "b8573e8f781928a39bab1af0d38653c4c051cf296b5a58c68348467b8e1c4771",
+      "size_bytes": 546
+    },
+    "truth_reads.tsv": {
+      "sha256": "dbf00525fee0e79d8736688e1aa2250b29afb841c8a01b16dbcac73e2db2d65a",
+      "size_bytes": 2375
+    }
+  }
+}

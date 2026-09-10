@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": {
+    "name": "divergence",
+    "period": 171,
+    "read_count": 100,
+    "read_length": 5000,
+    "families": 3,
+    "copies": 12,
+    "arrays_per_read": 1,
+    "positive_fraction": 0.7,
+    "substitution_rate": 0.0,
+    "insertion_rate": 0.0,
+    "deletion_rate": 0.0,
+    "unit_divergence": 0.02,
+    "related_families": false,
+    "negative_kind": "random"
+  },
+  "seed": 2026091001,
+  "read_count": 100,
+  "total_bases": 500000,
+  "truth_arrays": 70,
+  "simulator": "independent_planted_arrays_v1",
+  "warning": "controlled_stress_test_not_empirical_hifi_error_model",
+  "files": {
+    "reads.fa": {
+      "sha256": "fa9282aed2f3cb9735d96cab268596414ff83a1b75cf57cdecce0512bbd02dda",
+      "size_bytes": 501100
+    },
+    "truth_arrays.tsv": {
+      "sha256": "d9bd4a33e5fafcd405c39335bbd8d5cd0205a7083b7a4f49e5841483edf753cd",
+      "size_bytes": 14395
+    },
+    "truth_monomers.fa": {
+      "sha256": "807fcf10da80818f4e4eddf8c93c4932fa329b661c29e50255b944e827da085a",
+      "size_bytes": 546
+    },
+    "truth_reads.tsv": {
+      "sha256": "71a1e714ae3a59b57acbc46f2b159ace490867b9975ce9d2c2c5ebec37448978",
+      "size_bytes": 2375
+    }
+  }
+}

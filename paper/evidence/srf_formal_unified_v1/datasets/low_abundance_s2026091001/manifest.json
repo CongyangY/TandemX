@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": {
+    "name": "low_abundance",
+    "period": 171,
+    "read_count": 100,
+    "read_length": 5000,
+    "families": 3,
+    "copies": 12,
+    "arrays_per_read": 1,
+    "positive_fraction": 0.1,
+    "substitution_rate": 0.0,
+    "insertion_rate": 0.0,
+    "deletion_rate": 0.0,
+    "unit_divergence": 0.0,
+    "related_families": false,
+    "negative_kind": "random"
+  },
+  "seed": 2026091001,
+  "read_count": 100,
+  "total_bases": 500000,
+  "truth_arrays": 10,
+  "simulator": "independent_planted_arrays_v1",
+  "warning": "controlled_stress_test_not_empirical_hifi_error_model",
+  "files": {
+    "reads.fa": {
+      "sha256": "451ec608e88a4cde273b76a1a463d48c74f77ba3994c311e685fbd5d0c07a011",
+      "size_bytes": 501100
+    },
+    "truth_arrays.tsv": {
+      "sha256": "75a8097b33fc892f1570ab73104825194ad3caa0f739e747580f5c724d632985",
+      "size_bytes": 2095
+    },
+    "truth_monomers.fa": {
+      "sha256": "807fcf10da80818f4e4eddf8c93c4932fa329b661c29e50255b944e827da085a",
+      "size_bytes": 546
+    },
+    "truth_reads.tsv": {
+      "sha256": "0a18ec26d6d99a93ac98bfa2827550715f18330c82893f4b02d789da365231cb",
+      "size_bytes": 2615
+    }
+  }
+}

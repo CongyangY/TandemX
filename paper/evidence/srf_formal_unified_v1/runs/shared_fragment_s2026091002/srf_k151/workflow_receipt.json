@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "workflow_wall_seconds": 2.0620829579420388,
+  "external_stage_wall_seconds": 2.053793250815943,
+  "maximum_external_stage_peak_rss_mib": 51.125,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "c8fd4d96fd84e0869209148c5f57bcfd266c3663e0afcbecbfb30f5661c680e6",
+  "total_input_bases": 500000,
+  "k": 151,
+  "minimum_count": 20,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1669770,
+  "stages": [
+    {
+      "stage": "count",
+      "exit_code": 0,
+      "runtime_seconds": 1.7353808749467134,
+      "peak_rss_mib": 51.125,
+      "cpu_user_seconds": 1.385408,
+      "cpu_system_seconds": 0.064839,
+      "timed_out": false
+    },
+    {
+      "stage": "dump",
+      "exit_code": 0,
+      "runtime_seconds": 0.07713124994188547,
+      "peak_rss_mib": 24.296875,
+      "cpu_user_seconds": 0.048777,
+      "cpu_system_seconds": 0.002477,
+      "timed_out": false
+    },
+    {
+      "stage": "assemble",
+      "exit_code": 0,
+      "runtime_seconds": 0.028099166927859187,
+      "peak_rss_mib": 1.203125,
+      "cpu_user_seconds": 0.000736,
+      "cpu_system_seconds": 0.0009019999999999999,
+      "timed_out": false
+    },
+    {
+      "stage": "elongate",
+      "exit_code": 0,
+      "runtime_seconds": 0.028262709034606814,
+      "peak_rss_mib": 9.9375,
+      "cpu_user_seconds": 0.0045119999999999995,
+      "cpu_system_seconds": 0.002551,
+      "timed_out": false
+    },
+    {
+      "stage": "map",
+      "exit_code": 0,
+      "runtime_seconds": 0.1271255409810692,
+      "peak_rss_mib": 3.578125,
+      "cpu_user_seconds": 0.100266,
+      "cpu_system_seconds": 0.0015279999999999998,
+      "timed_out": false
+    },
+    {
+      "stage": "filter",
+      "exit_code": 0,
+      "runtime_seconds": 0.02998662507161498,
+      "peak_rss_mib": 16.375,
+      "cpu_user_seconds": 0.008577,
+      "cpu_system_seconds": 0.002275,
+      "timed_out": false
+    },
+    {
+      "stage": "abundance",
+      "exit_code": 0,
+      "runtime_seconds": 0.027807083912193775,
+      "peak_rss_mib": 10.90625,
+      "cpu_user_seconds": 0.004645,
+      "cpu_system_seconds": 0.0018299999999999998,
+      "timed_out": false
+    }
+  ],
+  "skipped_stages": [],
+  "warning": "illustrative_srf_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

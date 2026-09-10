@@ -1,0 +1,38 @@
+{
+  "TXF000001": {
+    "status": "unique",
+    "matches": [
+      "truth_f2"
+    ],
+    "identities": [
+      [
+        "truth_f2",
+        1.0
+      ]
+    ]
+  },
+  "TXF000002": {
+    "status": "unique",
+    "matches": [
+      "truth_f1"
+    ],
+    "identities": [
+      [
+        "truth_f1",
+        1.0
+      ]
+    ]
+  },
+  "TXF000003": {
+    "status": "unique",
+    "matches": [
+      "truth_f3"
+    ],
+    "identities": [
+      [
+        "truth_f3",
+        1.0
+      ]
+    ]
+  }
+}

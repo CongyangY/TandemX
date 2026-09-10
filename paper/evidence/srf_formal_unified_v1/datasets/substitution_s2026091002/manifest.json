@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scenario": {
+    "name": "substitution",
+    "period": 171,
+    "read_count": 100,
+    "read_length": 5000,
+    "families": 3,
+    "copies": 12,
+    "arrays_per_read": 1,
+    "positive_fraction": 0.7,
+    "substitution_rate": 0.01,
+    "insertion_rate": 0.0,
+    "deletion_rate": 0.0,
+    "unit_divergence": 0.0,
+    "related_families": false,
+    "negative_kind": "random"
+  },
+  "seed": 2026091002,
+  "read_count": 100,
+  "total_bases": 500000,
+  "truth_arrays": 70,
+  "simulator": "independent_planted_arrays_v1",
+  "warning": "controlled_stress_test_not_empirical_hifi_error_model",
+  "files": {
+    "reads.fa": {
+      "sha256": "26d83e1e0e63fd3a28ae7bfa3b5071ac3605c561a4a9cf6ec3995e15ba4a3d76",
+      "size_bytes": 501100
+    },
+    "truth_arrays.tsv": {
+      "sha256": "88c39293b92e93469d4be1a571329bc0f50f157874468123e5a6cb8ff5014479",
+      "size_bytes": 14395
+    },
+    "truth_monomers.fa": {
+      "sha256": "b8573e8f781928a39bab1af0d38653c4c051cf296b5a58c68348467b8e1c4771",
+      "size_bytes": 546
+    },
+    "truth_reads.tsv": {
+      "sha256": "a2078511b89136f44cdcebe0d3e75d3752a6609e2b4d5d771984535430c89c12",
+      "size_bytes": 2375
+    }
+  }
+}

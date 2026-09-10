@@ -4,34 +4,29 @@
 
 ## Abstract
 
-Tandem and satellite repeats are major components of plant genomes and often
-form long arrays at centromeres, ribosomal DNA loci and other structurally
-important regions. Their length, homogeneity and copy number make them difficult
-to assemble, and high contiguity alone cannot establish that every repeat family
-is represented at the abundance present in the sequenced material. We developed
-TandemX as a family-resolved assembly-auditing framework. TandemX
-discovers candidate repeat units de novo from long reads, organizes
-sequence-supported repeat families, estimates family abundance from diagnostic
-k-mers and localizes the same families in an assembly, thereby identifying a
-read--assembly abundance deficit consistent with possible under-representation.
-Controlled simulations and comparisons with TideHunter, TRF, TRASH and
-TideCluster characterized the conditions under which each workflow recovered
-repeat families, estimated abundance and localized arrays, revealing distinct
-method- and endpoint-specific trade-offs. We then analysed historical and newer assemblies of *Arabidopsis
-thaliana* Ey15-2 and *Macadamia jansenii*. Families predicted from HiFi reads to
-be under-represented in the historical assemblies preferentially gained sequence
-in the newer high-quality assemblies, but the read estimates also identified
-candidate deficits that remained after assembly improvement. Independent
-PCR-free Illumina evidence in Ey15-2 and Illumina plus direction-level Oxford
-Nanopore evidence in Macadamia supported family-specific residual
-under-representation for Ey15-2 families TXF000002 and TXF000154 and Macadamia
-family TXF000496. Three other preselected families remained unresolved because
-k-mer lengths or sequencing platforms disagreed. Thus, high-quality HiFi
-assemblies can retain family-specific satellite-repeat under-representation, and
-raw-read-derived abundance provides a complementary measure of assembly
-completeness. TandemX reports this evidence with explicit uncertainty; its
-continuous deficits are estimated under-representation, not physical missing-base
-truth.
+Long tandem-repeat arrays remain difficult to represent in genome assemblies,
+and high contiguity does not establish family-level repeat completeness. We
+developed TandemX, a family-resolved assembly-auditing framework that connects
+long-read repeat discovery, operational family catalogues, diagnostic-k-mer
+abundance estimates and assembly localization. It records read–assembly abundance
+deficits together with source eligibility and supporting or conflicting evidence.
+A frozen comparison across 18 planted-read datasets separated family recovery
+from abundance accuracy and catalogue specificity. TandemX recovered all 54
+planted family conditions, compared with 45 and 53 for SRF at fixed k=151 and
+k=101, respectively. Ordinary competitive mapping using the TandemX catalogue
+had lower positive-family abundance error in every condition. Shared-fragment
+backgrounds also exposed substantial additional family and interval calls,
+preventing a general accuracy-superiority interpretation. We then examined
+historical and newer assemblies of *Arabidopsis thaliana* Ey15-2 and *Macadamia
+jansenii*. Read-prioritized families preferentially gained representation in
+newer assemblies, while independent Illumina evidence, supplemented by
+direction-level Nanopore evidence in Macadamia, supported residual
+under-representation for two Ey15-2 families and one Macadamia family. Three
+other preselected candidates remained unresolved because k-mer lengths or
+platforms disagreed. TandemX provides a reproducible connection between repeat
+families, assembly representation and orthogonal evidence. The supported
+family-specific deficits complement contiguity metrics; they do not establish
+physical missing-base quantities or a population-wide collapse rate.
 
 ## Introduction
 
@@ -175,7 +170,7 @@ candidate relationship graph. Editable vector exports and source tables support
 inspection and reuse; these outputs do not provide independent validation of
 repeat-family architecture.
 
-### TandemX recovers tandem-repeat families and abundance across controlled benchmarks
+### Controlled benchmarks define endpoint-specific performance
 
 We evaluated discovery, abundance estimation and assembly localization as
 separate tasks before combining them (Fig. 2). In a factorial 10-Mb simulation
@@ -232,14 +227,53 @@ approached the available memory ceiling in the tested container. Failed or
 unstarted comparator cells remain unavailable rather than being assigned zero
 accuracy.
 
-Together, the controlled analyses show that TandemX can recover repeat families,
-estimate abundance and localize arrays across the tested conditions. They also
-show why no global superiority claim is warranted: alternative tools can match
-family recovery, exceed TandemX in speed, or provide strong assembly annotation,
-and the ranking changes with the metric being measured. The development
-failures, parameter-selection history, resource profiles and frozen validation
-records are provided in Supplementary Results and the evidence archive rather
-than used as the organizing narrative of the main text.
+These task-matched comparisons characterize different parts of the workflow.
+The following unified experiment evaluates family recovery, abundance and
+background attribution on the same newly generated read collections.
+
+### A unified SRF comparison separates family recovery from catalogue specificity
+
+We compared the frozen production workflow with SRF at two fixed k-mer lengths
+and ordinary competitive-mapping occupancy on 18 new planted-read datasets
+(three seeds and six conditions; Table 2). The mapping baseline used the
+TandemX-discovered catalogue and therefore did not constitute an independent
+discovery method. TandemX recovered all 54 planted family conditions. SRF at
+k=151 recovered 45/54 and emitted no catalogue in all three 2% unit-divergence
+datasets; the fixed k=101 sensitivity recovered 53/54. Both SRF configurations
+are retained in the comparison.
+
+Abundance accuracy followed a different pattern. Mean absolute relative error
+(MARE) for TandemX was 0.00836 in clean reads, 0.19388 under 1% substitutions and
+0.34907 under 2% unit divergence. SRF k=101 gave corresponding errors of 0.04984,
+0.05282 and 0.16235. Competitive mapping had lower positive-family MARE in every
+condition (0.00013–0.00044). These values assess estimated bases in the sampled
+read collection under the declared uncorrected FASTA configuration.
+
+Recovery also differed from background specificity. Shared-fragment negatives
+contained partial family homology separated by unequal random gaps. TandemX
+returned 66–82 native families and annotated a mean 30,887 negative-read bases
+per dataset, compared with 0 for SRF k=151 and 227 for SRF k=101. Mapping against
+the TandemX catalogue annotated 11,166 negative-read bases on average. Although
+positive-family MARE remained low, mean abundance not uniquely corresponding to
+a planted family was 10,528 bp for TandemX and 11,008 bp for competitive mapping.
+Thus a small error for recovered true families does not establish specificity
+of the complete catalogue. These constructed backgrounds expose a confidence
+boundary that complements the real-data cross-platform assessment.
+
+**Table 2. Unified abundance comparison on newly generated planted-read data.**
+Values are mean MARE across three independent simulated datasets per condition;
+all positive-truth families, including undetected families, enter each mean.
+Unmatched native abundance is reported separately above and in Supplementary
+Data. The ordinary mapping baseline shares the TandemX-discovered catalogue.
+
+| Condition | TandemX | SRF k=151 | SRF k=101 | Competitive mapping |
+| --- | ---: | ---: | ---: | ---: |
+| Clean | 0.008361 | 0.045623 | 0.049840 | 0.000359 |
+| 1% substitutions | 0.193880 | 0.057697 | 0.052819 | 0.000261 |
+| 0.1% insertion + 0.1% deletion | 0.047374 | 0.055464 | 0.049672 | 0.000251 |
+| 2% unit divergence | 0.349075 | 1.000000 | 0.162351 | 0.000127 |
+| 10% positive reads | 0.003704 | 0.035118 | 0.047998 | 0.000394 |
+| Shared-fragment background | 0.013280 | 0.058794 | 0.046549 | 0.000437 |
 
 ### Read-derived abundance identifies repeat families under-represented in historical plant assemblies
 
@@ -456,12 +490,14 @@ TandemX connects three measurements: de novo family discovery in raw long
 reads, family abundance in the read population and representation of the same
 family in an assembly. That connection makes it possible to ask an
 assembly-completeness question without defining the assembly as truth. TRF,
-TideHunter, TRASH, TideCluster and SRF remain useful, task-specific alternatives
+TideHunter, TRASH, TideCluster and SRF provide task-specific alternatives
 or complements. Our controlled comparisons show that several recover the same
 planted families, TideHunter is often faster, and assembly-oriented tools can
-provide highly accurate interval annotation. TandemX instead emphasizes a
-family-level read--assembly comparison with explicit uncertainty and a direct
-path to orthogonal validation.
+provide highly accurate interval annotation. The unified comparison shows that stronger family recovery can coexist with
+background over-attribution and greater abundance error. The contribution of
+TandemX is the connected family-level audit and retained evidence states; the
+present results do not establish an advantage over SRF or ordinary mapping
+for historical-assembly prioritization on the same real inputs.
 
 The old/new assembly analyses support this framing. In Ey15-2, all eight
 families that gained substantial representation from CLR-Canu to HiFi-Hifiasm
@@ -631,6 +667,37 @@ were not treated as interchangeable. A failed, timed-out, malformed or
 unstarted process yielded unavailable evidence rather than zero accuracy.
 Complete settings, resource measurements and failure histories are in
 Supplementary Methods.
+
+The additional unified SRF comparison was frozen before generating seeds
+2026091001–2026091003. Each of six conditions contained 100 approximately 5-kb
+reads, three unrelated families and 12 units per planted array, with 70% positive
+reads except the 10% low-abundance condition. Conditions were clean 171-bp units,
+1% substitutions, 0.1% insertions plus 0.1% deletions, 2% unit substitutions,
+low abundance, and a 120-bp-unit shared-fragment background. Negative reads in
+the last condition contained a 100-bp fragment from one family separated by
+independent 30–80-bp random gaps. Observed post-mutation coordinates defined
+positive truth; neutral input read IDs contained no labels.
+
+TandemX used the existing cascade detector, sequence clustering, periods
+30–1000 bp, minimum span 100 bp and support of one read. Its Rust diagnostic
+counter used k=21 and depth=1; no simulated error rate was supplied to the
+FASTA quantifier. SRF used its native KMC–SRF–mapping–filtering–abundance
+workflow, with count cutoff 20 and both k=151 and k=101 reported. A clean KMC
+rebuild passed independent canonical-count checks at k=17,101,151. Competitive
+mapping used 10-kb tandemized native TandemX representatives and minimap2
+map-hifi, retaining primary and secondary alignments with block length >=100 bp
+and identity >=90%. Cross-native-family overlaps were withheld from abundance
+before truth correspondence but retained in global interval precision.
+
+Independent global edit correspondence allowed circular rotations, reverse
+complements and pure integer-repeat units up to 64 times at >=90% identity.
+Multiple matching families remained ambiguous. Native SRF retained mapped bp
+was verified against positive-keep BED intervals. Abundance errors included all
+positive-truth families; unmatched native amounts and negative-read interval
+attribution were reported separately. All 72 method/configuration cells
+completed, including three valid empty SRF catalogues. Native stages ran serially;
+wall time, CPU and maximum child RSS were recorded per dataset. These three
+simulation seeds were not technical timing repeats or a large-input scaling study.
 
 ### Plant long-read cohort
 

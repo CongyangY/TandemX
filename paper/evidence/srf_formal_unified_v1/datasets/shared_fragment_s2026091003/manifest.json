@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "scenario": {
+    "name": "shared_fragment",
+    "period": 120,
+    "read_count": 100,
+    "read_length": 5000,
+    "families": 3,
+    "copies": 12,
+    "arrays_per_read": 1,
+    "positive_fraction": 0.7,
+    "substitution_rate": 0.0,
+    "insertion_rate": 0.0,
+    "deletion_rate": 0.0,
+    "unit_divergence": 0.0,
+    "related_families": false,
+    "negative_kind": "shared_fragment"
+  },
+  "seed": 2026091003,
+  "read_count": 100,
+  "total_bases": 500000,
+  "truth_arrays": 70,
+  "simulator": "independent_planted_arrays_v1_shared_fragment_negative_overlay",
+  "warning": "controlled_stress_test_not_empirical_hifi_error_model",
+  "files": {
+    "reads.fa": {
+      "sha256": "fc7d644c9fad18fecf2766a3ab0709a55344ac15abdca81c0e07093036e4149f",
+      "size_bytes": 501100
+    },
+    "truth_arrays.tsv": {
+      "sha256": "dc728f45fbbd08d4123395d95eab0de36307f0400c7c06046241ed3981d792fd",
+      "size_bytes": 10825
+    },
+    "truth_monomers.fa": {
+      "sha256": "0ddb99cee8ee8e3cbb50bd308309cff745b09c9df70dc7c5ed27944cbe8b3965",
+      "size_bytes": 393
+    },
+    "truth_reads.tsv": {
+      "sha256": "eb50c129e0b9e3bf7e81f85e508d9c948f0032cc518dda15328130193da8ed3d",
+      "size_bytes": 2645
+    }
+  },
+  "negative_rng": "Random(seed*1000+zero_based_read_index)"
+}

@@ -1,9 +1,9 @@
 # Manuscript v4 change record — 2026-09-10
 
 `paper/0910/manuscript_v4.md` was created from `manuscript_v3.md`; v3 remains
-unchanged. This is an editorial revision only. No algorithm, threshold, result
-value or reference entry was changed, and no formal SRF comparison number is
-claimed.
+unchanged. The final v4 includes the newly completed frozen formal SRF comparison.
+Production algorithms and thresholds remain unchanged. Prior results are retained;
+new comparative numbers and verified bibliography entries are added.
 
 ## Applied changes
 
@@ -14,19 +14,26 @@ claimed.
   occupancy or under-representation measurements individually, or for exact
   missing-base inference.
 * Added task-positioning sentences with existing primary-source links for SRF,
-  Merqury, KAT, TandemTools and AniAnn's. The paragraph describes complementary
-  endpoints and contains no new benchmark result or superiority claim.
+  Merqury, KAT, TandemTools and AniAnn's. The paragraph describes complementary endpoints. A separate new Results
+  section and Table 2 report the actual unified comparison without a general
+  superiority claim.
 * Replaced the detailed recovery Results paragraph with one location sentence
   pointing to `paper/0910/supplementary_recovery_v3.md`, which retains the full
   negative result and methods.
 * Preserved the complete Discussion and all Methods headings and sections.
 
-## Deliberately pending
+## Completed comparison and remaining work
 
-Final figure artwork, source-data mappings and formal SRF unified-endpoint
-numbers remain pending parent-task verification. The manuscript does not state
-that these are complete, and it does not claim a formal SRF result from the
-existing development or pilot records.
+The formal 72-cell read comparison has completed and passed independent
+arithmetic checks. Table 2 reports mean MARE for all six conditions and both
+SRF k values. The abstract, Results and Discussion retain TandemX's background
+extra-family calls and greater abundance error than ordinary mapping. Unmatched
+mass stays separate from positive-family MARE. Native SRF no_catalogue results
+remain in the denominator. Ordinary mapping is N/A for independent discovery.
+
+Final figure artwork, source-data mappings, deferred large-input scaling and
+formal historical real-input comparator prioritization remain incomplete.
+The development pilot results are not relabeled as final comparison evidence.
 
 ## Structural check
 

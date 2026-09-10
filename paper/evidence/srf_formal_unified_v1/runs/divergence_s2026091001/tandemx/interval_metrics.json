@@ -1,0 +1,34 @@
+{
+  "global": {
+    "truth_union_bp": 143640,
+    "predicted_union_bp": 143651,
+    "true_positive_bp": 143609,
+    "base_union_recall": 0.9997841826789196,
+    "base_union_precision": 0.9997076247293788,
+    "negative_read_predicted_bp": 0,
+    "unassigned_native_bp": 0
+  },
+  "per_family": {
+    "truth_f1": {
+      "truth_bp": 41040,
+      "predicted_bp": 41055,
+      "true_positive_bp": 41030,
+      "false_positive_bp": 25,
+      "ambiguous_bp": 0
+    },
+    "truth_f2": {
+      "truth_bp": 51300,
+      "predicted_bp": 51300,
+      "true_positive_bp": 51289,
+      "false_positive_bp": 11,
+      "ambiguous_bp": 0
+    },
+    "truth_f3": {
+      "truth_bp": 51300,
+      "predicted_bp": 51296,
+      "true_positive_bp": 51290,
+      "false_positive_bp": 6,
+      "ambiguous_bp": 0
+    }
+  }
+}

@@ -1,0 +1,353 @@
+{
+  "TXF000001": {
+    "status": "unique",
+    "matches": [
+      "truth_f1"
+    ],
+    "identities": [
+      [
+        "truth_f1",
+        1.0
+      ]
+    ]
+  },
+  "TXF000002": {
+    "status": "unique",
+    "matches": [
+      "truth_f2"
+    ],
+    "identities": [
+      [
+        "truth_f2",
+        1.0
+      ]
+    ]
+  },
+  "TXF000003": {
+    "status": "unique",
+    "matches": [
+      "truth_f3"
+    ],
+    "identities": [
+      [
+        "truth_f3",
+        1.0
+      ]
+    ]
+  },
+  "TXF000004": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000005": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000006": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000007": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000008": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000009": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000010": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000011": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000012": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000013": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000014": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000015": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000016": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000017": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000018": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000019": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000020": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000021": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000022": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000023": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000024": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000025": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000026": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000027": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000028": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000029": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000030": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000031": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000032": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000033": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000034": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000035": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000036": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000037": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000038": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000039": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000040": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000041": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000042": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000043": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000044": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000045": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000046": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000047": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000048": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000049": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000050": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000051": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000052": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000053": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000054": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000055": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000056": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000057": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000058": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000059": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000060": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000061": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000062": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000063": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000064": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000065": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  },
+  "TXF000066": {
+    "status": "unmatched",
+    "matches": [],
+    "identities": []
+  }
+}

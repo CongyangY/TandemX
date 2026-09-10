@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "workflow_wall_seconds": 2.017787165939808,
+  "external_stage_wall_seconds": 2.008470042143017,
+  "maximum_external_stage_peak_rss_mib": 48.40625,
+  "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
+  "input_sha256": "058cfda75ff62bdcbfc0798eca1747364c28590500fa71357dde4ff4bfa1edbc",
+  "total_input_bases": 500000,
+  "k": 151,
+  "minimum_count": 20,
+  "threads_parameter": 1,
+  "temporary_and_output_bytes_after_run": 1538358,
+  "stages": [
+    {
+      "stage": "count",
+      "exit_code": 0,
+      "runtime_seconds": 1.7302891660947353,
+      "peak_rss_mib": 48.40625,
+      "cpu_user_seconds": 1.388527,
+      "cpu_system_seconds": 0.06523799999999999,
+      "timed_out": false
+    },
+    {
+      "stage": "dump",
+      "exit_code": 0,
+      "runtime_seconds": 0.0775532079860568,
+      "peak_rss_mib": 24.375,
+      "cpu_user_seconds": 0.050609999999999995,
+      "cpu_system_seconds": 0.0030069999999999997,
+      "timed_out": false
+    },
+    {
+      "stage": "assemble",
+      "exit_code": 0,
+      "runtime_seconds": 0.02395912492647767,
+      "peak_rss_mib": 1.296875,
+      "cpu_user_seconds": 0.000848,
+      "cpu_system_seconds": 0.000802,
+      "timed_out": false
+    },
+    {
+      "stage": "elongate",
+      "exit_code": 0,
+      "runtime_seconds": 0.02822666591964662,
+      "peak_rss_mib": 9.796875,
+      "cpu_user_seconds": 0.004441,
+      "cpu_system_seconds": 0.0019779999999999997,
+      "timed_out": false
+    },
+    {
+      "stage": "map",
+      "exit_code": 0,
+      "runtime_seconds": 0.09041820908896625,
+      "peak_rss_mib": 3.515625,
+      "cpu_user_seconds": 0.071086,
+      "cpu_system_seconds": 0.0021939999999999998,
+      "timed_out": false
+    },
+    {
+      "stage": "filter",
+      "exit_code": 0,
+      "runtime_seconds": 0.028231709031388164,
+      "peak_rss_mib": 15.921875,
+      "cpu_user_seconds": 0.008114,
+      "cpu_system_seconds": 0.002907,
+      "timed_out": false
+    },
+    {
+      "stage": "abundance",
+      "exit_code": 0,
+      "runtime_seconds": 0.02979195909574628,
+      "peak_rss_mib": 10.4375,
+      "cpu_user_seconds": 0.004726,
+      "cpu_system_seconds": 0.002459,
+      "timed_out": false
+    }
+  ],
+  "skipped_stages": [],
+  "warning": "illustrative_srf_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"
+}

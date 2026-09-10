@@ -1,0 +1,4 @@
+family_id	truth_bp	estimated_bp	absolute_relative_error	excess_bp
+truth_f1	41040	0.0	1.0	0
+truth_f2	51300	47657.0	0.07101364522417154	0
+truth_f3	51300	48432.0	0.05590643274853801	0

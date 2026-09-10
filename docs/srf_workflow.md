@@ -5,6 +5,20 @@ catalogue that can include higher-order units. The comparison runner executes
 seven native stages: KMC, kmc_dump, SRF, srfutils enlong, minimap2, srfutils paf2bed,
 and srfutils bed2abun. No truth sequence or label enters these commands.
 
+## 2026-09-10 formal comparison update
+
+A clean consistent C++14 KMC build now supersedes the mixed-standard pilot
+binary for the formal comparator only. Canonical counts agree independently
+at k17/101/151. The first missing-rpath attempt and the successful rebuild are
+retained in `/Volumes/T7/Codex/TandemX/tools/build_receipts/kmc_clean_20260910_archive`.
+The old binary and all old development results remain unchanged.
+
+The new 72-cell comparison at protocol/source commit 7abafc3 includes both
+k151/ci20 and k101/ci20 and a separate pure-unit/HOR correspondence endpoint.
+See `srf_formal_results_20260910.md` and `srf_formal_unified_protocol_20260910.md`.
+The historical pilot scope and build descriptions below remain as originally
+executed, not instructions to relabel them as formal evidence.
+
 ## Pinned tools for the macOS pilot
 
 | Component | Source / version |

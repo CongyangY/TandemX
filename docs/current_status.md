@@ -1,5 +1,45 @@
 # TandemX current status and handoff
 
+## Active 2026-09-10 formal SRF comparator checkpoint
+
+The user closed open-ended algorithm exploration. A3 is a development candidate
+without sufficient overall advantage, not a complete failure. Its synthetic FPR
+7/60 and historical FPR 16/972 are not commensurate; the former absolute .02 gate
+is withdrawn. Raw historical receipts remain unchanged. Rolling codes remain an
+implementation optimization. No new A3 held-out, 1-Gbase run or release action.
+
+Formal protocol/source commit **7abafc3** preceded generation. All **72/72**
+method/configuration cells completed, zero process failures, controller elapsed
+174.336 s. SRF k151 has three valid `no_catalogue` outcomes under 2% unit divergence;
+both k151/k101 are retained. TandemX recovered 54/54 planted family conditions,
+SRF k151 45/54 and k101 53/54. Ordinary mapping shares the TandemX catalogue
+(discovery=N/A) and has lower positive-family MARE in all six conditions.
+Shared-fragment backgrounds expose extra TandemX catalogue/interval attribution:
+66/82/66 native families; 29,847/35,717/27,096 negative-read bp. Unassigned native
+abundance is retained separately and cannot disappear behind low positive-family
+MARE. No production or Rust algorithm source changed from baseline 81827c3.
+
+Current manuscript: **paper/0910/manuscript_v4.md**, with the formal results,
+condition-specific trade-offs and family-resolved assembly-auditing positioning.
+V2/v3 are preserved. Recovery remains one Results sentence plus full supplement.
+Formal historical-assembly SRF/ordinary-mapping prioritization remains `not_run`;
+this and demonstrating added real-input audit value are the main comparative
+methodological gaps. Figure/source-data package and deferred scaling remain open.
+Bioconda, Zenodo and final tagged release remain paused.
+
+Evidence: `docs/srf_formal_results_20260910.md`,
+`docs/srf_formal_independent_audit_20260910.md`,
+`paper/evidence/srf_formal_unified_v1/`; full raw/native run under T7
+`results/srf_formal_unified_v1_20260910`. Clean KMC C++14 build passes independent
+canonical counts k17/101/151; failed initial rpath validation is retained.
+Regression: 802 passed, 2 skipped (99.95 s), then 35 focused checks including
+one additional negative-overlay preservation test. Earlier full-suite failure
+caught the historical simulator source hash; historical source was restored and
+the new fixture isolated in a benchmark-only module before formal generation.
+
+All earlier sections below are historical checkpoints, superseded where they
+conflict with this top checkpoint or the current user scope.
+
 ## Active 2026-09-10 bounded accuracy/efficiency decision
 
 Baseline `81827c3`; independent accuracy and efficiency branches only. Both
