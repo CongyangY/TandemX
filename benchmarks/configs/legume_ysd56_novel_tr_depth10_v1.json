@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_novel_tr_depth10_v1",
+  "status": "pre_registered_before_output",
+  "source_commit": "f3b712f",
+  "sample": {
+    "species": "Glycine soja",
+    "cultivar": "YSD56",
+    "biosample": "SAMN40909152",
+    "bioproject": "PRJNA1095640",
+    "hifi_run": "SRR28726931",
+    "assembly_accession": "GCA_040083835.1"
+  },
+  "inputs": {
+    "reads": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_004.fastq.gz",
+    "reads_sha256": "92068f9e1b7d0ac7a7f8a128c7c1260da93ff4759df5bad922358e260eeb8afb",
+    "read_count": 654450,
+    "read_bases": 11050418089,
+    "nominal_coverage": 10.957025281377787,
+    "nested_with_1p0897x_pilot": true
+  },
+  "discovery": {
+    "discovery_method": "cascade",
+    "clustering_method": "sequence",
+    "cluster_identity": 0.95,
+    "family_audit": "related",
+    "min_period": 30,
+    "max_period": 1000,
+    "top_periods": 5,
+    "min_support_reads": 5,
+    "min_repeat_span": 100,
+    "kmer_backend": "rust",
+    "threads": 4,
+    "progress": false
+  },
+  "evaluation": {
+    "primary_question": "whether the two 1.0897x preliminary candidates recur in the 10.9570x catalogue",
+    "pilot_candidates": [
+      "TXF000367",
+      "TXF000708"
+    ],
+    "direct_recurrence_rule": {
+      "alignment": "complete shorter versus doubled longer; edlib HW; both orientations",
+      "minimum_glocal_edit_identity": 0.95,
+      "minimum_length_ratio": 0.9,
+      "maximum_length_ratio": 1.1
+    },
+    "related_period_multiple_rule": {
+      "minimum_glocal_edit_identity": 0.9,
+      "maximum_integer_multiple_relative_error": 0.05
+    },
+    "absence_interpretation": "unresolved rather than false because catalogues are operational and read sets are nested",
+    "novel_claim_allowed": false
+  },
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "-m",
+    "tandemx.cli",
+    "discover",
+    "--reads",
+    "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_004.fastq.gz",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_depth10_v1_20260910/run/discover",
+    "--discovery-method",
+    "cascade",
+    "--clustering-method",
+    "sequence",
+    "--cluster-identity",
+    "0.95",
+    "--family-audit",
+    "related",
+    "--min-period",
+    "30",
+    "--max-period",
+    "1000",
+    "--top-periods",
+    "5",
+    "--min-support-reads",
+    "5",
+    "--min-repeat-span",
+    "100",
+    "--kmer-backend",
+    "rust",
+    "--threads",
+    "4",
+    "--no-progress"
+  ],
+  "output_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_depth10_v1_20260910/run/discover",
+  "interpretation_boundary": "Nested depth replication of the same HiFi run; not an independent sample, platform, or biological validation."
+}
