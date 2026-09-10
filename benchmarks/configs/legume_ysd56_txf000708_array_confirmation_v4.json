@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_txf000708_array_confirmation_v4",
+  "status": "locked_before_sequence_extraction",
+  "source_commit": "c2a6922",
+  "script": "benchmarks/scripts/extract_fasta_regions.py",
+  "script_sha256": "db12e14cf8b1914021c8b684559eab9c0da8b4e83998199fead3ad3b0fada1df",
+  "assembly": "/Volumes/T7/Codex/TandemX/data/references/YSD56_T2T_GCA_040083835.1_20260910/GCA_040083835.1_ASM4008383v1_genomic.fna.gz",
+  "assembly_sha256": "d83b877a221da2908d29068ad6513b24b36ba7005c266a7fdb10c10bde50413c",
+  "regions": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/ysd56_txf000708_region_20260910.tsv",
+  "regions_sha256": "2692de6e12c8291c6ed36a6cd6373d62d9acc3ff0e72ee353620ffeda3ed4809",
+  "coordinate_system": "zero_based_half_open",
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "benchmarks/scripts/extract_fasta_regions.py",
+    "--fasta",
+    "/Volumes/T7/Codex/TandemX/data/references/YSD56_T2T_GCA_040083835.1_20260910/GCA_040083835.1_ASM4008383v1_genomic.fna.gz",
+    "--regions",
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/ysd56_txf000708_region_20260910.tsv",
+    "--output",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/TXF000708_array.fasta",
+    "--receipt",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/extraction_receipt.json"
+  ],
+  "output_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4",
+  "planned_confirmation": {
+    "TRF": {
+      "version": "4.10.0-rc.2",
+      "command": [
+        "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/trf",
+        "TXF000708_array.fasta",
+        "2",
+        "7",
+        "7",
+        "80",
+        "10",
+        "50",
+        "1000",
+        "-d",
+        "-h"
+      ],
+      "cwd": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4"
+    },
+    "TideHunter": {
+      "version": "1.5.5",
+      "command": [
+        "/Users/ycy/Codex/Sofw/TandemX/.conda-benchmark/bin/TideHunter",
+        "-f",
+        "2",
+        "-p",
+        "30",
+        "-P",
+        "1000",
+        "-c",
+        "2",
+        "-t",
+        "1",
+        "-o",
+        "tidehunter.tsv",
+        "TXF000708_array.fasta"
+      ],
+      "cwd": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4"
+    },
+    "purpose": "confirm long tandem structure and dominant period independently of TandemX exact-kmer localization"
+  },
+  "interpretation_boundary": "Assembly sequence and independent repeat detectors confirm structure in the assembly only; they do not provide orthogonal donor or biological novelty evidence.",
+  "supersedes_attempt": "v3 was not executed because its extraction output and detector working directories pointed at different pilot roots; v4 corrects only those paths and retains the predeclared commands, versions, endpoints, and interpretation boundary",
+  "decision_rule": {
+    "minimum_fraction_of_extracted_locus_covered_by_each_detector": 0.9,
+    "period_concordance": "reported period/consensus length within 5% of 785 bp, or an integer multiple/divisor with <=5% relative error",
+    "confirmed_tandem_structure": "both TRF and TideHunter satisfy coverage; period relation reported separately",
+    "single_tool_or_period_disagreement": "unresolved detector disagreement",
+    "novelty_consequence": "none; assembly tandem confirmation alone does not establish novelty or independent biological support"
+  }
+}
