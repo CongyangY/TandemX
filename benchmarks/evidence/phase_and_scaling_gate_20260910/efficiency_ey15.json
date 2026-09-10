@@ -1,0 +1,98 @@
+{
+  "benchmark_script_sha256": "752023154c60a8721d9e45309ff79e11fe92420694933422de4f1b5f5d60e1dd",
+  "boundary": "efficiency-only measurement; input selection does not support whole-library biological inference",
+  "catalogue": {
+    "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomers.fa",
+    "sha256": "277d376aa8961673ca84dd4603d5c31b057c805cfe26b642ab350b63f8556aeb"
+  },
+  "complete": true,
+  "genome_size": 1760000000,
+  "io_scope": "read parsing is included in quantify timer; source hashing is performed outside it",
+  "k": 21,
+  "measurements": [
+    {
+      "copy_number_sha256": "5577a3fc85dbdd23026749b3a3f6da0e5b1987a76e5dc9bf330daadeda3f1c8e",
+      "input_bases": 113336152,
+      "input_gb_per_second": 0.0005633411843809784,
+      "mode": "legacy",
+      "peak_rss": 204914688,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 199.200152,
+      "quantify_call_wall_seconds": 201.18563162488863,
+      "temporary_output_bytes": 588166
+    },
+    {
+      "copy_number_sha256": "5577a3fc85dbdd23026749b3a3f6da0e5b1987a76e5dc9bf330daadeda3f1c8e",
+      "input_bases": 113336152,
+      "input_gb_per_second": 0.0012068059292035063,
+      "mode": "rolling",
+      "peak_rss": 190562304,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 92.57551199999999,
+      "quantify_call_wall_seconds": 93.9141491248738,
+      "temporary_output_bytes": 588166
+    },
+    {
+      "copy_number_sha256": "5577a3fc85dbdd23026749b3a3f6da0e5b1987a76e5dc9bf330daadeda3f1c8e",
+      "input_bases": 113336152,
+      "input_gb_per_second": 0.0005707238736217469,
+      "mode": "legacy",
+      "peak_rss": 206733312,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 197.383278,
+      "quantify_call_wall_seconds": 198.58316295896657,
+      "temporary_output_bytes": 588166
+    },
+    {
+      "copy_number_sha256": "5577a3fc85dbdd23026749b3a3f6da0e5b1987a76e5dc9bf330daadeda3f1c8e",
+      "input_bases": 113336152,
+      "input_gb_per_second": 0.0012037245611253749,
+      "mode": "rolling",
+      "peak_rss": 194936832,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 92.744392,
+      "quantify_call_wall_seconds": 94.15455633308738,
+      "temporary_output_bytes": 588166
+    },
+    {
+      "copy_number_sha256": "5577a3fc85dbdd23026749b3a3f6da0e5b1987a76e5dc9bf330daadeda3f1c8e",
+      "input_bases": 113336152,
+      "input_gb_per_second": 0.0005666960249035871,
+      "mode": "legacy",
+      "peak_rss": 199393280,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 198.493663,
+      "quantify_call_wall_seconds": 199.99461266607977,
+      "temporary_output_bytes": 588166
+    },
+    {
+      "copy_number_sha256": "5577a3fc85dbdd23026749b3a3f6da0e5b1987a76e5dc9bf330daadeda3f1c8e",
+      "input_bases": 113336152,
+      "input_gb_per_second": 0.0012619193561906473,
+      "mode": "rolling",
+      "peak_rss": 194150400,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 89.35064899999999,
+      "quantify_call_wall_seconds": 89.81251570791937,
+      "temporary_output_bytes": 588166
+    }
+  ],
+  "platform": "macOS-14.4.1-arm64-arm-64bit",
+  "provenance": {
+    "fixture_id": "ey15_ERR8666125_hash_sample_002",
+    "input_role": "real-read efficiency fixture only; deterministic subset is not a whole-library biological inference",
+    "selection": "existing deterministic hash-selected read subset; every selected record is retained at read boundaries",
+    "source_full_fastq_sha256": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8",
+    "source_plan": "/Volumes/T7/Codex/TandemX/data/subsets/ERR8666125_seed6101_v1/sampling_plan.json",
+    "source_receipt": "/Volumes/T7/Codex/TandemX/data/subsets/ERR8666125_seed6101_v1/sampling_receipt.json"
+  },
+  "python": "3.11.15 | packaged by conda-forge | (main, Mar  5 2026, 16:59:26) [Clang 19.1.7 ]",
+  "reads": {
+    "bases": 113336152,
+    "path": "/Volumes/T7/Codex/TandemX/data/subsets/ERR8666125_seed6101_v1/sample_002.fastq.gz",
+    "sha256": "ec1b87c6db8295d8e112acc5ee7d32ae11ca618985f7e7a5af0686397c23e542"
+  },
+  "repetitions": 3,
+  "schema_version": 2,
+  "timer_scope": "wall/CPU timer around quantify_toy_copy_number only; worker startup, imports, source hashing and result writing excluded"
+}

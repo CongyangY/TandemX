@@ -1,5 +1,28 @@
 # TandemX current status and handoff
 
+## Active 2026-09-10 bounded accuracy/efficiency decision
+
+Baseline `81827c3`; independent accuracy and efficiency branches only. Both
+allowed A3 revisions are complete. **Stop accuracy expansion:** final development
+MARE 0.07469 is worse than ordinary competitive occupancy 0.05683, despite
+indel recall improving from strict 0.10788 to 0.91656. No heldout was generated
+or inspected. Production algorithms and manuscript v3 remain baseline-identical.
+
+**Retain the existing exact Python counting optimization:** real Mo17 11.68 Mb
+and Ey15 113.34 Mb paired three-repeat timings are 3.61x and 2.13x faster with
+identical output hashes. No large RAM/storage-reduction claim; GB-scale was not
+run within the user's approximately 30-minute efficiency limit. Real-input
+formats/catalogues differ, and concurrent host activity is recorded.
+
+Decision, limitations and compact evidence:
+`docs/phase_and_scaling_gate_decision_20260910.md` and
+`benchmarks/evidence/phase_and_scaling_gate_20260910/`.
+Full regression 769 passed, 2 skipped; added short-gap test file 13 passed.
+All subagents have finished. SRF final unified-endpoint comparison and formal
+performance repetitions are future work, not executed by this checkpoint.
+Bioconda, Zenodo, formal tags and unitFinder remain on hold/stopped as recorded.
+
+
 ## Active 2026-09-10 algorithm research reassessment
 
 The user's three critique attachments and subsequent request authorize parallel

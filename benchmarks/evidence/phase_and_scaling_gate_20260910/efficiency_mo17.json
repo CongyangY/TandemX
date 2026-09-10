@@ -1,0 +1,96 @@
+{
+  "benchmark_script_sha256": "752023154c60a8721d9e45309ff79e11fe92420694933422de4f1b5f5d60e1dd",
+  "boundary": "efficiency-only measurement; input selection does not support whole-library biological inference",
+  "catalogue": {
+    "path": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_pilot_v1_20260906/tandemx/discover/monomers.fa",
+    "sha256": "b6828ee2c79fbf0ce11117fb2139e2462228fb3d4a6f6556b0676e7b35be9bde"
+  },
+  "complete": true,
+  "genome_size": 2178604320,
+  "io_scope": "read parsing is included in quantify timer; source hashing is performed outside it",
+  "k": 21,
+  "measurements": [
+    {
+      "copy_number_sha256": "821d266e9f67a64929dfee946911e14d7548df6d33897c31995f61a9390b1f51",
+      "input_bases": 11680888,
+      "input_gb_per_second": 0.0007764011189680493,
+      "mode": "legacy",
+      "peak_rss": 63291392,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 14.981862,
+      "quantify_call_wall_seconds": 15.04491391708143,
+      "temporary_output_bytes": 103755
+    },
+    {
+      "copy_number_sha256": "821d266e9f67a64929dfee946911e14d7548df6d33897c31995f61a9390b1f51",
+      "input_bases": 11680888,
+      "input_gb_per_second": 0.0028013921399085494,
+      "mode": "rolling",
+      "peak_rss": 60702720,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 4.150297999999999,
+      "quantify_call_wall_seconds": 4.169672582997009,
+      "temporary_output_bytes": 103755
+    },
+    {
+      "copy_number_sha256": "821d266e9f67a64929dfee946911e14d7548df6d33897c31995f61a9390b1f51",
+      "input_bases": 11680888,
+      "input_gb_per_second": 0.0007949512770987493,
+      "mode": "legacy",
+      "peak_rss": 63651840,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 14.66337,
+      "quantify_call_wall_seconds": 14.693841417087242,
+      "temporary_output_bytes": 103755
+    },
+    {
+      "copy_number_sha256": "821d266e9f67a64929dfee946911e14d7548df6d33897c31995f61a9390b1f51",
+      "input_bases": 11680888,
+      "input_gb_per_second": 0.0028119953575209146,
+      "mode": "rolling",
+      "peak_rss": 60735488,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 4.1477889999999995,
+      "quantify_call_wall_seconds": 4.15394995897077,
+      "temporary_output_bytes": 103755
+    },
+    {
+      "copy_number_sha256": "821d266e9f67a64929dfee946911e14d7548df6d33897c31995f61a9390b1f51",
+      "input_bases": 11680888,
+      "input_gb_per_second": 0.0007376798962416465,
+      "mode": "legacy",
+      "peak_rss": 64389120,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 15.58753,
+      "quantify_call_wall_seconds": 15.834629707969725,
+      "temporary_output_bytes": 103755
+    },
+    {
+      "copy_number_sha256": "821d266e9f67a64929dfee946911e14d7548df6d33897c31995f61a9390b1f51",
+      "input_bases": 11680888,
+      "input_gb_per_second": 0.00257501387023,
+      "mode": "rolling",
+      "peak_rss": 60391424,
+      "peak_rss_unit": "bytes_on_macos",
+      "quantify_call_cpu_seconds": 4.490932,
+      "quantify_call_wall_seconds": 4.536242750007659,
+      "temporary_output_bytes": 103755
+    }
+  ],
+  "platform": "macOS-14.4.1-arm64-arm-64bit",
+  "provenance": {
+    "fixture_id": "mo17_random_11mb_existing",
+    "input_role": "medium real-read efficiency fixture only; not whole-library biological inference",
+    "selection": "existing deterministic random-read pilot retained by prior run; whole fixture at read boundaries",
+    "source_receipt": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_pilot_v1_20260906/environment.json"
+  },
+  "python": "3.11.15 | packaged by conda-forge | (main, Mar  5 2026, 16:59:26) [Clang 19.1.7 ]",
+  "reads": {
+    "bases": 11680888,
+    "path": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_pilot_v1_20260906/reads.fa",
+    "sha256": "dde7b967cfa6bed09ad5e2ff464f6212fbca527ab17c263fb87b3fcc9a50a398"
+  },
+  "repetitions": 3,
+  "schema_version": 2,
+  "timer_scope": "wall/CPU timer around quantify_toy_copy_number only; worker startup, imports, source hashing and result writing excluded"
+}

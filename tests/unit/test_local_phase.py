@@ -77,3 +77,14 @@ def test_invalid_config_fails_fast(config: LocalPhaseConfig) -> None:
     with pytest.raises(ValueError):
         LocalPhasePrototype({"f": _unit()}, config)
 
+
+def test_final_round_bridges_only_short_gaps_on_accepted_chains() -> None:
+    from benchmarks.scripts.evaluate_context_development import development_scenarios
+    unit, _ = development_scenarios()
+    sequence = unit * 3 + "GATTACA" + unit * 3
+    first = LocalPhasePrototype({"F": unit}).intervals(sequence)
+    second = LocalPhasePrototype(
+        {"F": unit}, LocalPhaseConfig(bridge_accepted_short_gaps=True)
+    ).intervals(sequence)
+    assert second["F"] == [(0, len(sequence))]
+    assert sum(end-start for start,end in first["F"]) < len(sequence)

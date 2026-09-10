@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "fixture_result": "ey15_113mb.json",
+  "measurement_scope": "six serial fresh processes in the benchmark driver; no benchmark processes were run concurrently by this task",
+  "external_workload_note": "At launch, the coordinating task reported a separate small CPU accuracy job active on the host. This record preserves that condition. The values are therefore valid within this recorded host state but are not isolated-machine performance measurements.",
+  "normalization_note": "genome_size=1760000000 is a performance-only configuration value, not an Ey15 genome-size claim. The benchmark explicitly sets haploid_depth=1.0, so it does not estimate or assert biological abundance normalization.",
+  "comparison_scope_note": "The Mo17 FASTA and Ey15 FASTQ.gz fixtures use different input formats, quality-path handling and catalogues. Their 3.61x and 2.13x medians are separate fixture results, not a controlled single-variable scaling curve.",
+  "temporary_output_note": "temporary_output_bytes in the result is the completed worker output-tree size before cleanup. It is not peak temporary-disk usage, which was not measured.",
+  "decision": "Approximately 21 minutes of the authorized efficiency window were used by the Ey15 level. The 1 Gbase legacy-plus-rolling pair was not launched because the Mo17-based estimate of approximately 27.5 minutes could not fit the remaining window."
+}

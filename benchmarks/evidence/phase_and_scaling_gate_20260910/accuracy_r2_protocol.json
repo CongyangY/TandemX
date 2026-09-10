@@ -1,0 +1,25 @@
+{
+  "split": "development",
+  "algorithm_round": 2,
+  "only_change": "bridge short gaps on accepted chains; all other thresholds unchanged",
+  "config": {
+    "maximum_seed_gap": 45,
+    "maximum_drift": 20,
+    "reset_penalty": 1.0,
+    "drift_penalty": 0.05,
+    "predecessor_cap": 64,
+    "phase_fraction": 0.7,
+    "minimum_units": 2,
+    "specificity_weights": true,
+    "bridge_accepted_short_gaps": true
+  },
+  "round_one_rows_sha256": "1e3a13c61b1a905fabeb1568227d0d0bdc349c5ccad32d7027ca4cf0d37525eb",
+  "sources": {
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/evaluate_phase_round_two.py": "7ebd12ede0b98b15e8f58bf6a501a6eb01c085119850066093e9553433056b35",
+    "benchmarks/challenge/local_phase.py": "03d209260656a656c27f7ec29ea366828cff57b77e176e6a212d27ac2aa19c96",
+    "benchmarks/challenge/phase_gate_metrics.py": "f6a918d78a96357959e5fa8d6e5471ce9a96e42c3db477d79a7064494c39b22b",
+    "tandemx/quantify/mvp.py": "a8c0aa88738e75d8729887988d9aaf3976e7603c97c7088981e3ad20a7715473",
+    "tandemx/utils/kmers.py": "20e59ed1ea38e194c7444a80b650f580dbee5488eff1fd5781ba7b09f10fecaf",
+    "benchmarks/challenge/context_prototype.py": "21cea89776358ae3c293a61bd89024f730a7a123ca0d7fbdaab0eaa5f0e24d19"
+  }
+}

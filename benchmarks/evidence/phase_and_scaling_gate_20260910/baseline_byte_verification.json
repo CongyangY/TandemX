@@ -1,0 +1,17 @@
+{
+  "tandemx/quantify/mvp.py": {
+    "baseline": "81827c3",
+    "byte_identical": true,
+    "sha256": "a8c0aa88738e75d8729887988d9aaf3976e7603c97c7088981e3ad20a7715473"
+  },
+  "tandemx/utils/kmers.py": {
+    "baseline": "81827c3",
+    "byte_identical": true,
+    "sha256": "20e59ed1ea38e194c7444a80b650f580dbee5488eff1fd5781ba7b09f10fecaf"
+  },
+  "paper/0910/manuscript_v3.md": {
+    "baseline": "81827c3",
+    "byte_identical": true,
+    "sha256": "4f9a2121bfb7a619832532f3144113eb96094000952aee8d85a8f55383ef2740"
+  }
+}

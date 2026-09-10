@@ -1,0 +1,47 @@
+{
+  "baseline": "81827c3",
+  "split": "development",
+  "algorithm_round": 1,
+  "seeds": [
+    "dev-phase-gate-01",
+    "dev-phase-gate-02"
+  ],
+  "conditions": [
+    "clean",
+    "substitutions",
+    "indels_small",
+    "indels_long",
+    "partial",
+    "interruptions",
+    "background_homology",
+    "close_families",
+    "heterogeneous",
+    "abundance_low"
+  ],
+  "coverages": [
+    2,
+    5,
+    10
+  ],
+  "A3_config": {
+    "maximum_seed_gap": 45,
+    "maximum_drift": 20,
+    "reset_penalty": 1.0,
+    "drift_penalty": 0.05,
+    "predecessor_cap": 64,
+    "phase_fraction": 0.7,
+    "minimum_units": 2,
+    "specificity_weights": true
+  },
+  "minimap2": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+  "minimap2_sha256": "9747d27a83257eef51b4258b8b9248eaf313024ab8fc5dc5143ab7d22c9e3645",
+  "source_sha256": {
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/run_phase_gate_development.py": "88d041aed13f2037da1223d8c515bc5ebc552a6bfc88c03ddaf1c6db8b099ad9",
+    "benchmarks/challenge/local_phase.py": "e07450a5b715dfa4e96170b1235cdc694cd5fa89293b070f17fbe079b9d0473f",
+    "benchmarks/challenge/phase_gate_fixture.py": "95ee8126542fddffc26f3df4126653c1d636309fb6cd6472abd4b73dbbed7983",
+    "benchmarks/challenge/phase_gate_metrics.py": "f6a918d78a96357959e5fa8d6e5471ce9a96e42c3db477d79a7064494c39b22b"
+  },
+  "endpoint": "sampled repeat bp; A0 haploid_depth=1, k=21; interval methods k=11 or native mapper",
+  "classification": "synthetic source A is 0.3*truth for F1 and 1*truth for F2; R=read_estimate/observed_coverage; A/R<0.6",
+  "status": "running"
+}

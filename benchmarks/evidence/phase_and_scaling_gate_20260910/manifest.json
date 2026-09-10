@@ -1,0 +1,37 @@
+[
+  {
+    "file": "accuracy_r1_protocol.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/phase_coherence_gate_development_r1_20260910/protocol.json",
+    "sha256": "045555e9c24d58d4dbea434c3ead5cfa7201112f152f3e9d46096911ea187ae6"
+  },
+  {
+    "file": "accuracy_r2_protocol.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/phase_coherence_gate_development_r2_20260910/protocol.json",
+    "sha256": "5fb0a45f43261efc15b0b795bf2ef80a85dfb18445be2f43206f7c81a14928a1"
+  },
+  {
+    "file": "accuracy_r2_assessment.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/phase_coherence_gate_development_r2_20260910/assessment.json",
+    "sha256": "0b7a43cc72f520dd32b8426c0d2e402e75647a3632f01c6784f45caf6a48d168"
+  },
+  {
+    "file": "efficiency_mo17.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/rolling_target_count_scaling_gate_v1_20260910/mo17_11mb.json",
+    "sha256": "a36a22c3b10bc30affcd939858e7a6e4d826bc3891ec582edf5c1c08aae590bb"
+  },
+  {
+    "file": "efficiency_ey15.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/rolling_target_count_scaling_gate_v1_20260910/ey15_113mb.json",
+    "sha256": "9bf96914d840186a6bba0616d6effa4315ddd8bbffe4d20b691a8406e63f4799"
+  },
+  {
+    "file": "efficiency_ey15_context.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/rolling_target_count_scaling_gate_v1_20260910/ey15_113mb_execution_context.json",
+    "sha256": "12ae44c1f17e3078b18e743683f97e8bb7109de95e3b179302a357add90952ae"
+  },
+  {
+    "file": "efficiency_invalid_attempt.json",
+    "source": "/Volumes/T7/Codex/TandemX/results/rolling_target_count_scaling_gate_v1_20260910/attempts/mo17_11mb_metadata_error_operator_stop.json",
+    "sha256": "91e1811a00766cc697d0d82d6037c1123d9a320f6b60d46b6e832c2943a1a562"
+  }
+]

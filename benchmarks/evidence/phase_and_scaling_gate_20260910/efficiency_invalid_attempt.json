@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "complete": false,
+  "fate": "operator_stopped_metadata_error",
+  "fixture_id": "mo17_random_11mb_existing",
+  "reason": "The driver was started with input_bases=1129160864, but a read-boundary scan established the fixture contains 11680888 bases. It was interrupted before producing a result JSON so the erroneous run cannot be used as a measurement.",
+  "attempted_input_bases": 1129160864,
+  "verified_input_bases": 11680888,
+  "reads": {
+    "path": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_pilot_v1_20260906/reads.fa"
+  },
+  "catalogue": {
+    "path": "/Volumes/T7/Codex/TandemX/results/Mo17_complete_random_11Mb_pilot_v1_20260906/tandemx/discover/monomers.fa"
+  },
+  "result_json_created": false,
+  "persisted_worker_stdout_stderr": false,
+  "note": "The then-current driver captured worker streams in memory and had no persisted partial-result mechanism. This retained receipt records that limitation; it does not represent a successful or partially valid benchmark. No existing input or result was deleted."
+}

@@ -18,6 +18,7 @@ class LocalPhaseConfig:
     phase_fraction: float = 0.7
     minimum_units: int = 2
     specificity_weights: bool = True
+    bridge_accepted_short_gaps: bool = False
 
 
 class LocalPhasePrototype(PeriodicContextPrototype):
@@ -91,5 +92,7 @@ class LocalPhasePrototype(PeriodicContextPrototype):
                     continue
                 # Do not fill seed-free inserted sequence as repeat bp.
                 pieces = [(hits[i][0], hits[i][0] + k) for i in path]
+                if cfg.bridge_accepted_short_gaps:
+                    pieces = [(min(start for start, _ in pieces), max(end for _, end in pieces))]
                 accepted[family].extend(merge_intervals(pieces))
         return {family: merge_intervals(rows) for family, rows in accepted.items()}

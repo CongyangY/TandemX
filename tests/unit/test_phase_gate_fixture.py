@@ -56,4 +56,3 @@ def test_catalogue_and_mask_truth_are_present_for_mutation_cases() -> None:
         assert set(case["source_truth_intervals"]) == {"F1", "F2"}
         assert case["source_truth_bp"]["F1"] > 0
         assert case["source_truth_bp"]["F2"] > 0
-
