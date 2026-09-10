@@ -1,4 +1,5 @@
 from benchmarks.discovery.saturation import saturation_decision, transition_metrics
+from benchmarks.scripts.plot_discovery_saturation import grouped
 
 
 def test_transition_metrics_count_new_lost_and_jaccard():
@@ -49,3 +50,14 @@ def test_one_seed_failure_prevents_saturation():
     decision = saturation_decision(rows, seeds, coverages)
     assert decision["saturation_reached"] is False
     assert decision["saturation_depth"] is None
+
+
+def test_curve_summary_uses_median_and_range():
+    rows = [
+        {"coverage": 1, "value": value} for value in (1, 2, 100)
+    ] + [{"coverage": 2, "value": value} for value in (4, 5, 6)]
+    depth, center, low, high = grouped(rows, "value")
+    assert depth == [1.0, 2.0]
+    assert center == [2.0, 5.0]
+    assert low == [1.0, 4.0]
+    assert high == [100.0, 6.0]

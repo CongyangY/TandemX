@@ -28,7 +28,7 @@ def grouped(rows: list[dict], field: str) -> tuple[list[float], list[float], lis
     depths = sorted(by_depth)
     return (
         depths,
-        [statistics.mean(by_depth[d]) for d in depths],
+        [statistics.median(by_depth[d]) for d in depths],
         [min(by_depth[d]) for d in depths],
         [max(by_depth[d]) for d in depths],
     )
@@ -96,7 +96,10 @@ def run(evaluation: Path, outdir: Path) -> None:
         depth = float(decision["saturation_depth"])
         for axis in axes.flat:
             axis.axvline(depth, color="#111827", linestyle=":", linewidth=1)
-    fig.suptitle("TandemX discovery saturation across three validation genomes", fontsize=12)
+    fig.suptitle(
+        "TandemX discovery saturation across three simulated validation genomes",
+        fontsize=12,
+    )
     for suffix in ("pdf", "svg", "png"):
         fig.savefig(outdir / f"discovery_saturation.{suffix}", dpi=300)
     plt.close(fig)
@@ -141,7 +144,7 @@ def run(evaluation: Path, outdir: Path) -> None:
         "per added 1x and the fraction new relative to the higher-depth catalogue. "
         "C, one-to-one cyclic-sequence family Jaccard between adjacent nested depths. "
         "D, planted-family recall for low (20-copy), medium (80-copy) and high "
-        "(at least 200-copy) families. Lines show three-seed means and ribbons show "
+        "(at least 200-copy) families. Lines show three-seed medians and ribbons show "
         "ranges. Dashed lines mark the pre-specified 5% and 0.95 transition criteria. "
         f"Primary saturation reached: {decision['saturation_reached']}; depth: "
         f"{decision['saturation_depth']}."
