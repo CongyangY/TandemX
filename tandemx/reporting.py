@@ -71,6 +71,30 @@ OUTPUT_SPECS = {
         ("fish_pdf", "visualize/in_silico_fish.pdf", "PDF predicted FISH signal plot.", "publication review"),
     ),
 }
+REPORT_FIGURE_NAMES = (
+    "summary",
+    "family_abundance_vs_assembly",
+    "top_underrepresented",
+    "family_landscape",
+    "family_hierarchy",
+    "family_evidence_cards",
+)
+REPORT_OUTPUT_SPECS = (
+    ("offline_family_report", "report.html", "Standalone offline family evidence report.", "run review"),
+    ("family_summary_tsv", "summary.tsv", "Derived per-family evidence summary.", "run review"),
+    ("family_summary_json", "summary.json", "Machine-readable family evidence and provenance.", "run review"),
+    ("report_family_catalog", "families/families.tsv", "Report-derived family catalogue.", "run review"),
+    ("report_monomers", "families/monomers.fa", "Representative sequences copied from discovery evidence.", "run review"),
+    ("report_family_members", "families/family_members.tsv", "Sequence-clustering membership evidence.", "run review"),
+    ("report_family_hierarchy", "families/family_hierarchy.tsv", "Candidate architecture evidence edges.", "run review"),
+    ("report_repeat_architecture", "families/repeat_architecture.tsv", "Candidate architecture evidence table.", "run review"),
+    ("report_family_network", "families/family_network.graphml", "Family architecture graph with isolate nodes.", "run review"),
+    ("report_figure_manifest", "figures/figure_manifest.json", "Figure export index.", "run review"),
+) + tuple(
+    (f"report_{name}_{kind}", f"figures/{name}.{suffix}", f"Report {name} {kind} artifact.", "run review")
+    for name in REPORT_FIGURE_NAMES
+    for kind, suffix in (("svg", "svg"), ("pdf", "pdf"), ("png", "png"), ("source", "tsv"), ("receipt", "receipt.json"))
+)
 PIPELINE_OUTPUT_SPECS = (
     ("pipeline_summary_tsv", "pipeline_summary.tsv", "Step-level pipeline summary for tabular analysis."),
     ("pipeline_summary_json", "pipeline_summary.json", "Step-level pipeline summary for programmatic use."),
@@ -307,6 +331,21 @@ def write_output_manifest(config: ReportConfig, records: Sequence[ReportStep]) -
                 "description": description,
                 "required_for_next_step": "run review",
                 "notes": "" if exists else ("optional_not_generated" if output_type in OPTIONAL_OUTPUT_TYPES else "output_missing"),
+            }
+        )
+    for output_type, filename, description, required_for_next_step in REPORT_OUTPUT_SPECS:
+        path = config.outdir / filename
+        exists = path.is_file()
+        rows.append(
+            {
+                "step": "report",
+                "output_type": output_type,
+                "file_path": str(path),
+                "exists": str(exists).lower(),
+                "file_size_bytes": path.stat().st_size if exists else 0,
+                "description": description,
+                "required_for_next_step": required_for_next_step,
+                "notes": "" if exists else "output_missing",
             }
         )
     with (config.outdir / "output_manifest.tsv").open("wt", encoding="utf-8", newline="") as handle:

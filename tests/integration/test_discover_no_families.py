@@ -31,6 +31,14 @@ def test_valid_negative_discovery_and_pipeline(tmp_path: Path) -> None:
     (out / "quantify").mkdir()
     stale = out / "quantify" / "copy_number.tsv"
     stale.write_text("stale positive output\n")
+    before = (stale.read_bytes(), stale.stat().st_mtime_ns)
+    refused = subprocess.run([sys.executable, "-m", "tandemx.cli", "run", "--reads", str(reads),
+                              "--outdir", str(out), "--steps", "discover,quantify,validate", "--no-resume",
+                              "--min-period", "30", "--max-period", "500", "--threads", "1"],
+                             capture_output=True, text=True)
+    assert refused.returncode != 0
+    assert "--no-resume refuses a populated output directory" in refused.stderr
+    assert (stale.read_bytes(), stale.stat().st_mtime_ns) == before
     rerun = subprocess.run([sys.executable, "-m", "tandemx.cli", "run", "--reads", str(reads),
                             "--outdir", str(out), "--steps", "discover,quantify,validate", "--force",
                             "--min-period", "30", "--max-period", "500", "--threads", "1"],

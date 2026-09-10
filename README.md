@@ -21,6 +21,65 @@ raw reads -> tandemx discover -> de novo repeat catalog -> quantify/locate/compa
 
 ## Current Status
 
+The current manuscript is [paper/0910/manuscript_v2.md](paper/0910/manuscript_v2.md).
+The completed historical/newer-assembly and orthogonal abundance experiments
+remain frozen. The newly authorized scope is a bounded targeted-recovery proof
+of concept and a simpler, evidence-first user workflow; see
+[the implementation and stop rules](docs/recovery_and_reporting_plan.md).
+This remains research software, not a claim of complete satellite-array recovery
+or a finished production release.
+
+## Run and open the report
+
+```bash
+tandemx run --reads sample.hifi.fastq.gz --assembly genome.fa -o tandemx_results
+```
+
+Open `tandemx_results/report.html`. The offline report contains family summaries,
+read-versus-assembly evidence, candidate architecture, warnings, and editable
+SVG/PDF/PNG figures. Exact source tables and provenance remain downloadable.
+`families/` contains the consolidated catalogue, membership, architecture and
+GraphML views; the original stage directories remain the primary evidence.
+
+With only reads, discovery and its report still run. Absolute abundance requires
+a genome-size denominator. If an assembly is supplied without `--genome-size`,
+its total sequence length supplies a **provisional normalization proxy** and the
+report says so. It may underestimate the haploid genome or include multiple
+haplotypes; provide an independently supported genome size for interpretation.
+No genome-size measurement or ploidy inference is manufactured from the inputs.
+
+Existing numerical defaults, including diagnostic k=21, are recorded in
+`automatic_defaults.json`; automatic selection does not mean an optimized k or
+validated cross-k stability. Thread selection respects the existing host cap.
+The separate experimental detector choices remain available through advanced
+configuration, for example:
+
+```yaml
+# advanced.yaml: existing cascade research workflow, not a new detector
+genome_size: 143120000
+discovery_method: cascade
+clustering_method: sequence
+family_audit: related
+min_period: 30
+max_period: 1000
+threads: 4
+```
+
+```bash
+tandemx run --reads sample.hifi.fastq.gz --assembly genome.fa \
+  --config advanced.yaml -o tandemx_results
+```
+
+Explicit CLI options override the strict YAML configuration. PyYAML, already
+included in `tandemx-dev`, is a runtime dependency for this interface. Repeating
+the command automatically reuses only validated stages with matching input and
+command fingerprints. `--force` reruns stages; `--no-resume` refuses reuse;
+`--resume` remains a compatibility alias. This is stage-level resume, not an
+interrupted-stage checkpoint. See [output fields](docs/file_formats.md) and the
+[minimal example](examples/toy/simple_report.md).
+
+## Existing analysis modules and evidence
+
 This repository currently contains a toy dataset simulator, toy-scale `discover`, `quantify`, `locate`, `compare`, `probe`, and `visualize` MVPs, and a step-level `tandemx run` orchestrator.
 
 No production-scale tandem repeat discovery, copy-number estimation, assembly localization, assembly/read comparison, probe scoring, or visualization algorithm is available yet.
@@ -220,7 +279,7 @@ tandemx run \
   --kmer-backend rust
 ```
 
-Without `--assembly`, locate, compare, probe, and assembly-dependent visualization steps are recorded as skipped. `--resume` skips a completed step only when its outputs validate and a SHA-256 fingerprint of its inputs and effective command still matches; it is not an intra-step checkpoint. `--force` reruns selected steps. Pipeline runs write per-step logs plus `pipeline_summary.tsv`, `pipeline_summary.json`, `output_manifest.tsv`, and `run_report.md`. Read limits are passed to both discover and quantify so copy-number depth uses the same input prefix.
+Without `--assembly`, locate, compare, probe, and assembly-dependent visualization steps are recorded as skipped. Validated stage reuse is enabled by default: a completed step is reused only when its outputs validate and a SHA-256 fingerprint of its inputs and effective command still matches. `--resume` is a compatibility alias, `--no-resume` refuses reuse, and `--force` reruns selected stages. This is not an interrupted-stage checkpoint. Pipeline runs write per-step logs, `pipeline_summary.tsv/json`, `output_manifest.tsv`, `run_report.md`, and the offline report products below. Read limits are passed to both discover and quantify so copy-number depth uses the same input prefix.
 
 ## Where are my outputs?
 
@@ -237,6 +296,13 @@ results/run1/
 ├── validate/
 ├── logs/
 ├── profiles/                 # only with --profile
+├── automatic_defaults.json    # recorded existing defaults and normalization source
+├── run_config.yaml            # effective pipeline configuration
+├── report.html                # standalone offline evidence report
+├── summary.tsv
+├── summary.json
+├── families/                  # derived catalogue, membership, architecture, GraphML
+├── figures/                   # report SVG/PDF/PNG, source TSVs and receipts
 ├── output_manifest.tsv       # file inventory, sizes, status and dependencies
 ├── run_report.md             # human-readable results and next commands
 ├── pipeline_summary.tsv      # per-step timing and status
@@ -244,7 +310,7 @@ results/run1/
 └── pipeline.log
 ```
 
-Start with `run_report.md` for a concise run overview and use `output_manifest.tsv` to locate individual files or diagnose skipped/missing outputs.
+Open `report.html` for family-level evidence and figures; use `run_report.md` for the concise execution overview. `output_manifest.tsv` inventories both primary stage files and report derivatives, including figure receipts. The original stage tables remain the primary evidence; report products summarize them.
 
 To integrate completed runs across samples, prepare a tab-separated manifest
 with `sample_id`, `monomers`, `copy_number`, and `comparison` columns. Use `NA`

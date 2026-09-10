@@ -115,3 +115,10 @@ def test_run_report_summarizes_existing_repeat_annotation(tmp_path: Path) -> Non
     assert "Repeat annotation summary: strong_known_match=1" in report
     manifest = (config.outdir / "output_manifest.tsv").read_text(encoding="utf-8")
     assert "repeat_annotation.tsv\ttrue" in manifest
+    manifest_rows = list(csv.DictReader(manifest.splitlines(), delimiter="\t"))
+    report_rows = {row["output_type"]: row for row in manifest_rows if row["step"] == "report"}
+    assert report_rows["offline_family_report"]["exists"] == "true"
+    assert report_rows["family_summary_tsv"]["exists"] == "true"
+    assert report_rows["report_family_network"]["exists"] == "true"
+    assert report_rows["report_summary_svg"]["exists"] == "true"
+    assert report_rows["report_family_evidence_cards_receipt"]["exists"] == "true"

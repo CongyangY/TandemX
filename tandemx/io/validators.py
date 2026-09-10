@@ -377,6 +377,65 @@ TSV_SCHEMAS.update({
     },
 })
 
+# These are report derivatives, deliberately distinguished by their location
+# from discovery's canonical ``discover/families.tsv`` schema.
+REPORT_TSV_SCHEMAS: dict[str, dict[str, set[str] | bool]] = {
+    "families.tsv": {
+        "required": {"family_id", "representative_monomer_id", "monomer_length_bp", "gc_fraction",
+                     "support_read_count", "candidate_array_count", "estimated_abundance_bp",
+                     "assembly_representation_bp", "assembly_read_ratio", "abundance_deficit_bp",
+                     "confidence", "warning"},
+        "numeric": {"monomer_length_bp", "gc_fraction", "support_read_count"},
+        "nullable_numeric": {"candidate_array_count", "estimated_abundance_bp", "assembly_representation_bp",
+                             "assembly_read_ratio", "abundance_deficit_bp"},
+        "allow_empty": True,
+    },
+    "family_members.tsv": {
+        "required": TSV_SCHEMAS["monomer_membership.tsv"]["required"],
+        "numeric": TSV_SCHEMAS["monomer_membership.tsv"]["numeric"],
+        "status": TSV_SCHEMAS["monomer_membership.tsv"]["status"],
+        "allow_empty": True,
+    },
+    "repeat_architecture.tsv": {
+        "required": TSV_SCHEMAS["family_hierarchy.tsv"]["required"],
+        "numeric": TSV_SCHEMAS["family_hierarchy.tsv"]["numeric"],
+        "status": TSV_SCHEMAS["family_hierarchy.tsv"]["status"],
+        "allow_empty": True,
+    },
+    "family_hierarchy.tsv": {
+        "required": TSV_SCHEMAS["family_hierarchy.tsv"]["required"],
+        "numeric": TSV_SCHEMAS["family_hierarchy.tsv"]["numeric"],
+        "status": TSV_SCHEMAS["family_hierarchy.tsv"]["status"],
+        "allow_empty": True,
+    },
+    "summary.tsv": {
+        "required": {"family_id", "representative_monomer_id", "monomer_length_bp", "gc_fraction",
+                     "support_read_count", "candidate_array_count", "estimated_abundance_bp",
+                     "assembly_representation_bp", "assembly_read_ratio", "abundance_deficit_bp",
+                     "confidence", "warning"},
+        "numeric": {"monomer_length_bp", "gc_fraction", "support_read_count"},
+        "nullable_numeric": {"candidate_array_count", "estimated_abundance_bp", "assembly_representation_bp",
+                             "assembly_read_ratio", "abundance_deficit_bp"},
+        "allow_empty": True,
+    },
+    "recovery_candidates.tsv": {
+        "required": {"locus_id", "family_id", "chromosome", "start", "end", "original_assembly_repeat_bp",
+                     "read_derived_abundance_bp", "family_abundance_deficit_bp", "left_flank_uniqueness",
+                     "right_flank_uniqueness", "recruited_read_count", "flank_anchored_read_count",
+                     "dual_flank_read_count", "maximum_read_span_bp", "recovered_bp", "recovery_status",
+                     "confidence", "failure_reason", "warning"},
+        "numeric": set(),
+        "nullable_numeric": {"start", "end", "original_assembly_repeat_bp", "read_derived_abundance_bp",
+                             "family_abundance_deficit_bp", "left_flank_uniqueness", "right_flank_uniqueness",
+                             "recruited_read_count", "flank_anchored_read_count", "dual_flank_read_count",
+                             "maximum_read_span_bp", "recovered_bp"},
+        "recovery_status": {"resolved", "partially_resolved", "unresolved_no_assembly_locus",
+                            "unresolved_no_unique_anchor", "unresolved_array_exceeds_read_information",
+                            "unresolved_conflicting_paths", "insufficient_read_support"},
+        "allow_empty": True,
+    },
+}
+
 ALLOW_EMPTY_TSV_RECORDS = {
     "family_similarity.tsv",
     "family_hierarchy.tsv",
@@ -399,20 +458,49 @@ def validate_project(project_dir: Path) -> list[ValidationResult]:
         if not path.is_file():
             continue
         name = path.name
-        if name in TSV_SCHEMAS:
+        try:
+            relative = path.relative_to(project_dir)
+        except ValueError:
+            continue
+        report_schema = _report_schema(project_dir, path)
+        if report_schema is not None:
+            results.append(validate_tsv(path, report_schema))
+        elif _canonical_output_location(relative) and name in TSV_SCHEMAS:
             results.append(validate_tsv(path, TSV_SCHEMAS[name]))
-        elif name == "repeat_density.bedgraph":
+        elif _canonical_output_location(relative) and name == "repeat_density.bedgraph":
             results.append(validate_bedgraph(path))
-        elif name == "arrays.bed":
+        elif _canonical_output_location(relative) and name == "arrays.bed":
             results.append(validate_arrays_bed(path))
-        elif name in FASTA_HEADER_PATTERNS:
+        elif _canonical_output_location(relative) and name in FASTA_HEADER_PATTERNS:
             results.append(validate_tandemx_fasta(path, FASTA_HEADER_PATTERNS[name]))
     if not results:
         raise ValidationError(f"No recognized TandemX output files found under {project_dir}")
     return results
 
 
-def validate_tsv(path: Path, schema: dict[str, set[str]]) -> ValidationResult:
+def _canonical_output_location(relative: Path) -> bool:
+    """Recognize primary products, never report figures or other derivatives."""
+    return len(relative.parts) == 1 or (len(relative.parts) == 2 and relative.parts[0] in {
+        "discover", "quantify", "locate", "compare", "probe", "visualize",
+    })
+
+
+def _report_schema(project_dir: Path, path: Path) -> dict[str, set[str] | bool] | None:
+    """Return a report-only schema for explicit derived-product locations."""
+    try:
+        relative = path.relative_to(project_dir)
+    except ValueError:
+        return None
+    if relative.parts == ("summary.tsv",):
+        return REPORT_TSV_SCHEMAS["summary.tsv"]
+    if len(relative.parts) == 2 and relative.parts[0] == "families":
+        return REPORT_TSV_SCHEMAS.get(relative.parts[1])
+    if len(relative.parts) == 2 and relative.parts[0] == "recovery" and relative.parts[1] == "recovery_candidates.tsv":
+        return REPORT_TSV_SCHEMAS["recovery_candidates.tsv"]
+    return None
+
+
+def validate_tsv(path: Path, schema: dict[str, set[str] | bool]) -> ValidationResult:
     with path.open("rt", encoding="utf-8") as handle:
         header_line = handle.readline().rstrip("\n\r")
         if not header_line:
@@ -441,8 +529,15 @@ def validate_tsv(path: Path, schema: dict[str, set[str]]) -> ValidationResult:
                 raise ValidationError(f"{path} line {line_number} has empty status")
             if "status" in index and "status" in schema and fields[index["status"]] not in schema["status"]:
                 raise ValidationError(f"{path} line {line_number} has invalid status: {fields[index['status']]}")
+            if ("recovery_status" in index and "recovery_status" in schema
+                    and fields[index["recovery_status"]] not in schema["recovery_status"]):
+                raise ValidationError(
+                    f"{path} line {line_number} has invalid recovery_status: "
+                    f"{fields[index['recovery_status']]}"
+                )
             record_count += 1
-    if record_count == 0 and path.name not in ALLOW_EMPTY_TSV_RECORDS and not verified_empty_output(path):
+    if (record_count == 0 and not schema.get("allow_empty", False)
+            and path.name not in ALLOW_EMPTY_TSV_RECORDS and not verified_empty_output(path)):
         raise ValidationError(f"TSV file has no records: {path}")
     return ValidationResult(path=path, record_count=record_count)
 

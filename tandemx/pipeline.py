@@ -6,12 +6,13 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import shlex
 import subprocess
 import sys
 import threading
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Sequence, TextIO
@@ -19,7 +20,9 @@ from typing import Sequence, TextIO
 from tandemx.discover.rust_backend import rust_backend_available
 from tandemx.discover.status import has_verified_empty_catalog
 from tandemx.io.validators import ValidationError, validate_project
+from tandemx.io.sequences import count_sequence_records_many
 from tandemx.reporting import write_output_manifest, write_run_report
+from tandemx.run_defaults import apply_advanced_config, write_automatic_defaults
 from tandemx.utils.threads import DEFAULT_DISCOVER_THREADS, discover_thread_limit, resolve_discover_threads
 
 
@@ -71,6 +74,8 @@ class PipelineConfig:
     single_copy_kmers: Path | None = None
     read_error_rate: float | None = None
     quality_correction_enabled: bool = True
+    genome_size_source: str = "explicit"
+    config_path: Path | None = None
 
 
 @dataclass(frozen=True)
@@ -121,7 +126,8 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--single-copy-kmers", type=Path)
     parser.add_argument("--read-error-rate", type=float)
     parser.add_argument("--disable-quality-correction", action="store_true")
-    parser.add_argument("--outdir", required=True, type=Path)
+    parser.add_argument("-o", "--outdir", required=True, type=Path)
+    parser.add_argument("--config", type=Path, help="Strict YAML file of advanced run options; explicit CLI values take precedence.")
     parser.add_argument("--max-reads", type=int)
     parser.add_argument("--max-read-bases", type=int)
     parser.add_argument("--kmer-backend", choices=("auto", "python", "rust"), default="auto")
@@ -151,28 +157,54 @@ def add_pipeline_arguments(parser: argparse.ArgumentParser) -> None:
             "(smaller of 64 and half of available logical CPUs)."
         ),
     )
-    parser.add_argument("--resume", action="store_true", help="Skip existing steps only when their expected outputs validate.")
+    parser.add_argument("--resume", action="store_true", help="Compatibility alias; validated fingerprint resume is enabled by default.")
+    parser.add_argument("--no-resume", action="store_true", help="Do not reuse existing validated step outputs.")
     parser.add_argument("--force", action="store_true", help="Rerun selected steps even when output directories already exist.")
     parser.add_argument("--profile", action="store_true", help="Write a cProfile file for each executed step.")
     parser.add_argument("--validate", action="store_true", dest="validate_run", help="Append the validate step when it is not listed in --steps.")
 
 
 def config_from_args(args: argparse.Namespace) -> PipelineConfig:
-    steps = args.steps
+    apply_advanced_config(args)
+    steps = parse_steps(args.steps) if isinstance(args.steps, str) else args.steps
     if args.validate_run and "validate" not in steps:
         steps = tuple(step for step in PIPELINE_STEPS if step in {*steps, "validate"})
+    if args.resume and args.no_resume:
+        raise ValueError("--resume and --no-resume are mutually exclusive")
     if args.resume and args.force:
         raise ValueError("--resume and --force are mutually exclusive")
+    if args.no_resume and args.force:
+        raise ValueError("--no-resume and --force are mutually exclusive")
     threads = resolve_discover_threads(args.threads)
     kmer_backend = resolve_kmer_backend(args.kmer_backend)
+    if args.kmer_backend not in {"auto", "python", "rust"}:
+        raise ValueError("--config key 'kmer_backend' must be one of: auto, python, rust")
+    if args.discovery_method not in {"legacy", "elastic", "cascade"}:
+        raise ValueError("--config key 'discovery_method' must be one of: legacy, elastic, cascade")
+    if args.clustering_method not in {"auto", "legacy", "sequence"}:
+        raise ValueError("--config key 'clustering_method' must be one of: auto, legacy, sequence")
+    if args.family_audit not in {"full", "related"}:
+        raise ValueError("--config key 'family_audit' must be one of: full, related")
     for name in ("max_reads", "max_read_bases", "genome_size"):
         value = getattr(args, name)
         if value is not None and value <= 0:
             raise ValueError(f"--{name.replace('_', '-')} must be positive")
+    if args.min_period < 1:
+        raise ValueError("--min-period must be positive")
+    if args.max_period < args.min_period:
+        raise ValueError("--max-period must be greater than or equal to --min-period")
+    if args.top_periods < 1:
+        raise ValueError("--top-periods must be positive")
     if args.haploid_depth is not None and args.haploid_depth <= 0:
         raise ValueError("--haploid-depth must be positive")
-    if args.read_error_rate is not None and not 0 <= args.read_error_rate < 1:
+    if args.haploid_depth is not None and not math.isfinite(args.haploid_depth):
+        raise ValueError("--haploid-depth must be finite")
+    if args.read_error_rate is not None and (
+        not math.isfinite(args.read_error_rate) or not 0 <= args.read_error_rate < 1
+    ):
         raise ValueError("--read-error-rate must be in [0,1)")
+    if not math.isfinite(args.cluster_identity) or not 0 <= args.cluster_identity <= 1:
+        raise ValueError("--cluster-identity must be finite and in [0,1]")
     if args.read_error_rate is not None and args.disable_quality_correction:
         raise ValueError(
             "--read-error-rate cannot be combined with --disable-quality-correction"
@@ -191,7 +223,7 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         max_period=args.max_period,
         top_periods=args.top_periods,
         threads=threads,
-        resume=args.resume,
+        resume=not args.no_resume,
         force=args.force,
         profile=args.profile,
         discovery_method=args.discovery_method,
@@ -201,6 +233,32 @@ def config_from_args(args: argparse.Namespace) -> PipelineConfig:
         single_copy_kmers=args.single_copy_kmers,
         read_error_rate=args.read_error_rate,
         quality_correction_enabled=not args.disable_quality_correction,
+        genome_size_source="explicit" if args.genome_size is not None else "required",
+        config_path=args.config,
+    )
+
+
+def resolve_normalization_proxy(config: PipelineConfig) -> PipelineConfig:
+    """Use only a streamed assembly length when the user omitted genome size."""
+    if config.genome_size is not None or config.assembly is None:
+        return config
+    total_bases = count_sequence_records_many((config.assembly,), threads=1).total_bases
+    if total_bases <= 0:
+        raise ValueError(f"Assembly has no sequence bases: {config.assembly}")
+    return replace(config, genome_size=total_bases, genome_size_source="assembly_total_length_provisional")
+
+
+def write_pipeline_run_config(config: PipelineConfig) -> None:
+    """A root-level machine-readable receipt (JSON is valid YAML 1.2)."""
+    values = asdict(config)
+    for key, value in list(values.items()):
+        if isinstance(value, Path):
+            values[key] = str(value)
+        elif isinstance(value, tuple):
+            values[key] = [str(item) if isinstance(item, Path) else item for item in value]
+    (config.outdir / "run_config.yaml").write_text(
+        json.dumps({"command": "tandemx run", "parameters": values}, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
     )
 
 
@@ -497,6 +555,12 @@ def write_summaries(config: PipelineConfig, records: Sequence[StepRecord]) -> No
 def finalize_run_outputs(config: PipelineConfig, records: Sequence[StepRecord]) -> None:
     write_summaries(config, records)
     write_run_report(config, records)
+    try:
+        from tandemx.report_html import write_html_report
+    except ImportError:
+        pass
+    else:
+        write_html_report(config.outdir, records)
     write_output_manifest(config, records)
 
 
@@ -576,7 +640,22 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
         raise ValueError(f"Input assembly file does not exist: {config.assembly}")
     if config.single_copy_kmers is not None and not config.single_copy_kmers.is_file():
         raise ValueError(f"Single-copy k-mer file does not exist: {config.single_copy_kmers}")
+    if (
+        not config.resume
+        and not config.force
+        and config.outdir.exists()
+        and any(config.outdir.iterdir())
+    ):
+        raise ValueError(
+            "--no-resume refuses a populated output directory; use a fresh --outdir or --force"
+        )
+    config = resolve_normalization_proxy(config)
     config.outdir.mkdir(parents=True, exist_ok=True)
+    write_pipeline_run_config(config)
+    write_automatic_defaults(
+        config.outdir, genome_size=config.genome_size, genome_size_source=config.genome_size_source,
+        threads=config.threads, kmer_backend=config.kmer_backend, config_path=config.config_path,
+    )
     logs_dir = config.outdir / "logs"
     profiles_dir = config.outdir / "profiles"
     logs_dir.mkdir(parents=True, exist_ok=True)
@@ -591,15 +670,12 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
         start_time = utc_now()
         if step not in {"discover", "validate"} and has_verified_empty_catalog(config.outdir / "discover"):
             existing = [path for path in expected_outputs(config, step) if path.exists()]
+            # Refusal is checked before root receipts are rewritten. A resumed
+            # or forced negative rerun must not expose stale positive outputs.
             if existing and not (config.force or config.resume):
-                records.append(make_record(
-                    config, run_id, step, start_time=start_time, end_time=utc_now(),
-                    runtime_seconds=0.0, exit_status=2, output_validated=False,
-                    notes="output_exists_use_force_or_resume",
-                ))
-                finalize_run_outputs(config, records)
-                return records, 2
-            # A forced/resumed negative rerun must not expose stale positive results.
+                raise ValueError(
+                    "--no-resume refuses existing downstream output from an empty catalogue"
+                )
             for path in existing:
                 path.unlink()
             record = make_record(
@@ -608,6 +684,14 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
                 notes="skipped_no_discovered_families",
             )
             records.append(record)
+            write_summaries(config, records)
+            continue
+        if step == "quantify" and config.genome_size is None:
+            records.append(make_record(
+                config, run_id, step, start_time=start_time, end_time=utc_now(),
+                runtime_seconds=0.0, exit_status=0, output_validated=False,
+                notes="skipped_genome_size_required",
+            ))
             write_summaries(config, records)
             continue
         if config.assembly is None and step in ASSEMBLY_STEPS:
@@ -647,6 +731,7 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
         if step != "validate" and output_dir.exists() and any(output_dir.iterdir()):
             if (
                 config.resume
+                and not config.force
                 and step_outputs_validate(config, step)
                 and step_fingerprint_matches(config, step)
             ):
@@ -664,21 +749,9 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
                 records.append(record)
                 write_summaries(config, records)
                 continue
-            if not config.force and not config.resume:
-                record = make_record(
-                    config,
-                    run_id,
-                    step,
-                    start_time=start_time,
-                    end_time=utc_now(),
-                    runtime_seconds=0.0,
-                    exit_status=2,
-                    output_validated=False,
-                    notes="output_exists_use_force_or_resume",
-                )
-                records.append(record)
-                finalize_run_outputs(config, records)
-                return records, 2
+            # A mismatch is a legitimate new run, not an error. Commands write
+            # their documented outputs and the new fingerprint replaces stale
+            # provenance only after output validation succeeds.
 
         try:
             command = build_step_command(config, step)

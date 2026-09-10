@@ -1493,3 +1493,120 @@ GCA version/BioProject, official directory, archived metadata hashes, byte/MD5
 expectations and explicit transfer budget. `reference_receipt.json` retains
 complete/error state, transfer and streaming FASTA QC, plan/source hashes.
 Optional FCS metadata absent from the official manifest is explicitly unavailable.
+
+## Offline family report (2026-09-10)
+
+`tandemx run` retains the original `discover/`, `quantify/`, `locate/`, `compare/`
+and other stage products. `report.html` is a standalone offline entry point;
+`summary.tsv` and `families/families.tsv` contain the same derived family rows.
+`summary.json` contains those rows, source identities, stage availability,
+architecture edges and non-inferential recovery counts. These files do not
+replace the primary evidence or modify a numerical estimator.
+
+| Field | Meaning |
+| --- | --- |
+| `family_id`, `representative_monomer_id` | Original catalogue identifiers, not new cross-species matching |
+| `monomer_length_bp`, `gc_fraction` | Representative length and GC fraction from the catalogue |
+| `support_read_count` | Original distinct supporting-read count |
+| `candidate_array_count` | Number of localized assembly intervals; zero only when localization was measured and found none |
+| `estimated_abundance_bp` | Existing `copy_number.tsv` estimate, not physical copy truth |
+| `assembly_representation_bp` | Existing same-family assembly-union bases |
+| `assembly_read_ratio` | Validated assembly/read ratio; unavailable when the read denominator or comparison is unavailable |
+| `abundance_deficit_bp` | `max(estimated_abundance_bp - assembly_representation_bp, 0)` |
+| `discovery_confidence`, `abundance_confidence`, `comparison_confidence` | Original per-stage labels, which remain uncalibrated where their warnings say so |
+| `confidence_scope`, `confidence` | Included evidence stages and least confidence among their available labels |
+| `warning` | Deduplicated original warning codes; missing or incompatible evidence is explicit |
+
+Unavailable numeric values are `NA` in TSV and `null` in JSON, never implicit
+zero. Canonical comparison and copy-number estimates must reconcile within
+serialized precision. A legacy locate-only comparison lacking a matching read
+estimate can supply assembly bases but not a valid ratio or categorical call.
+Only validated successful/resumed stages contribute when run records are given;
+stale outputs from failed, absent or skipped stages are not used.
+
+`families/monomers.fa` retains actual representative sequences and structured
+headers. `family_members.tsv` preserves the sequence-clustering membership schema
+(`read_id`, `candidate_id`, `cluster_id`, `family_id`, representative hash,
+distance/similarity bounds, threshold, ambiguity counts, status and warning).
+Missing sequence-membership evidence is a header-only table, not a fabricated
+assignment inferred from an ID. `family_hierarchy.tsv` and
+`repeat_architecture.tsv` preserve actual candidate-edge fields and warnings.
+`family_network.graphml` is a directed graph with declared edge data keys and
+all catalogue nodes, including isolates. No unit/copy order is inferred.
+
+`figures/` contains `summary`, `family_abundance_vs_assembly`,
+`top_underrepresented`, `family_landscape`, `family_hierarchy` and
+`family_evidence_cards` in SVG/PDF/PNG, each with a source TSV and JSON receipt.
+SVG text remains editable. Receipts record exact bytes/SHA-256 and text/raster
+node counts. `figure_manifest.json` indexes the exports. Figure subsets are
+display selections with full tables retained; they are not new family
+denominators. Missing abundance uses an explicitly labelled read-support view.
+Candidate hierarchy links are not biological HOR truth. Long warnings are
+summarized on cards with an explicit pointer to complete table values.
+
+Root `run_config.yaml` is JSON-formatted YAML with `command` and effective
+`parameters`; `automatic_defaults.json` records `schema_version`,
+`diagnostic_k`, `diagnostic_k_selection`, `threads`, `kmer_backend`,
+`genome_size_bp`, `genome_size_source`, `warnings` and `advanced_config`.
+Genome-size source is `explicit`, `assembly_total_length_provisional` or
+`required`. The assembly total is a provisional denominator, not a measured
+haploid genome size. Fixed k=21 is an existing default, not an optimized k.
+
+The source-reuse helper `benchmarks/scripts/render_existing_family_report.py`
+copies compact completed stage products into a fresh directory, optionally
+recomputes the existing comparison from frozen tables at its unchanged
+thresholds, and writes `source_reuse_manifest.json`. Source/destination sizes
+and SHA-256 values, original configuration and the report adapter command are
+retained. It does not rerun discovery, raw-read quantification or localization.
+
+## Bounded targeted-recovery research outputs
+
+This PoC is invoked with `python -m tandemx.recovery.poc`, not a promoted
+automatic assembly-repair command. Preparation accepts a versioned JSON
+enrollment and requires a fresh output directory. Only historical assembly,
+historical arrays, frozen catalogue/abundance, original reads and complete-read
+QC are allowed. `prepare` writes targets, `flank_audit.tsv`, input manifests,
+configuration and preparation locks; `recruit` maps the existing reads and
+generates candidate-only evidence. All BED coordinates are 0-based half-open.
+
+`recovery_candidates.tsv` has one row per old locus, plus an explicit no-locus
+row for any enrolled family with no historical localization:
+
+| Fields | Definition |
+| --- | --- |
+| `locus_id`, `family_id`, `chromosome`, `start`, `end` | Historical locus identity and bounds; no-locus coordinates are NA |
+| `original_assembly_repeat_bp` | Repeat bases in that old localized interval; zero in a no-locus row is not proof of genomic absence |
+| `read_derived_abundance_bp`, `family_abundance_deficit_bp` | Frozen family-wide estimate and deficit against unioned old-family intervals; never allocated to a single locus |
+| `left_flank_uniqueness`, `right_flank_uniqueness` | Availability of an eligible anchor relative to the old assembly, not proof of genomic single-copy status |
+| `recruited_read_count` | Distinct repeat-supporting reads for the family; repeated on its locus rows and not additive across loci |
+| `flank_anchored_read_count`, `dual_flank_read_count` | Distinct locus-anchor reads and accepted primary-pair spanning reads |
+| `maximum_read_span_bp` | Maximum accepted dual-anchor between-flank span, zero when none was observed |
+| `maximum_recruited_read_length_bp` | Maximum full length of the family/locus recruited reads; distinct from a spanning interval |
+| `candidate_span_bp`, `candidate_read_id` | Observed between-anchor fragment length and source read; can include intervening non-repeat sequence |
+| `old_between_anchor_start`, `old_between_anchor_end` | Comparable old reference interval between selected anchor interiors |
+| `recovered_bp` | Repeat-specific recovered bases; NA until independently localized/validated, never substituted by the whole read-span length |
+| `recovery_status`, `confidence`, `failure_reason`, `warning` | Explicit candidate outcome, support limit and retained rejection reason |
+
+Statuses include `resolved`, `partially_resolved`,
+`unresolved_no_assembly_locus`, `unresolved_no_unique_anchor`,
+`unresolved_array_exceeds_read_information`, `unresolved_conflicting_paths`,
+and `insufficient_read_support`. The current observed-span path cannot produce
+`resolved`. Lack of spanning reads alone cannot establish that an array is
+longer than all reads; insufficient evidence stays insufficient.
+
+`recruited_reads.tsv` preserves every retained alignment row: read/family/locus
+ID, `evidence_type`, target, read length, 0-based read interval, strand,
+aligned bp, identity and MAPQ. Multiple alignment rows are not independent
+reads. `recovery_loci.bed` contains actual old loci and statuses only.
+`recovered_sequences.fasta` contains candidate fragments only; an unresolved
+run has an empty file with its absence explained by the tables and lock.
+`recovery_validation.tsv` separates independent read support, candidate state
+and post-hoc proxy evaluation. `candidate_lock.json` records output SHA-256,
+source identity, outcome counts, expansion decision and whether newer sequence
+was used. `recovery_report.html` is an offline evidence summary.
+
+External mappings have command/exit/time/hash receipts and native logs. Partial
+or operator-stopped outputs remain excluded execution fates, not zero biological
+accuracy. Newer sequence may enter only a separate post-lock validation.
+Original assemblies are never modified. Exact design and stop rules are in
+`docs/recovery_and_reporting_plan.md`.

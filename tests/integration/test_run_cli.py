@@ -191,12 +191,16 @@ def test_missing_genome_size_and_force_resume_behavior(tmp_path: Path) -> None:
         "--outdir",
         str(missing_outdir),
         "--steps",
-        "discover,quantify",
+        "discover,quantify,validate",
         "--kmer-backend",
         "rust",
     )
-    assert missing.returncode != 0
-    assert read_summary(missing_outdir)[-1]["notes"] == "--genome-size is required when quantify is selected"
+    assert missing.returncode == 0, missing.stderr
+    assert {row["step"]: row for row in read_summary(missing_outdir)}["quantify"]["notes"] == "skipped_genome_size_required"
+    defaults = json.loads((missing_outdir / "automatic_defaults.json").read_text(encoding="utf-8"))
+    assert defaults["genome_size_source"] == "required"
+    assert defaults["diagnostic_k"] == 21
+    assert (missing_outdir / "run_config.yaml").is_file()
 
     outdir = tmp_path / "resume"
     base_args = (
@@ -214,11 +218,20 @@ def test_missing_genome_size_and_force_resume_behavior(tmp_path: Path) -> None:
     )
     first = run_cli(*base_args)
     assert first.returncode == 0, first.stderr
-    blocked = run_cli(*base_args)
-    assert blocked.returncode != 0
-    assert read_summary(outdir)[0]["notes"] == "output_exists_use_force_or_resume"
-
-    resumed = run_cli(*base_args, "--resume")
+    preserved = [
+        outdir / "discover" / "monomers.fa",
+        outdir / "quantify" / "copy_number.tsv",
+        outdir / "run_config.yaml",
+        outdir / "automatic_defaults.json",
+        outdir / "report.html",
+        outdir / "pipeline_summary.tsv",
+    ]
+    before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in preserved}
+    refused = run_cli(*base_args, "--no-resume")
+    assert refused.returncode != 0
+    assert "--no-resume refuses a populated output directory" in refused.stderr
+    assert {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in preserved} == before
+    resumed = run_cli(*base_args)
     assert resumed.returncode == 0, resumed.stderr
     resume_rows = {row["step"]: row for row in read_summary(outdir)}
     assert resume_rows["discover"]["notes"] == "skipped_validated_resume"
@@ -241,6 +254,101 @@ def test_missing_genome_size_and_force_resume_behavior(tmp_path: Path) -> None:
     assert forced.returncode == 0, forced.stderr
     force_rows = read_summary(outdir)
     assert float(force_rows[0]["runtime_seconds"]) > 0
+
+
+def test_run_config_is_strict_and_cli_values_win(tmp_path: Path) -> None:
+    toy = simulate_toy(tmp_path)
+    config = tmp_path / "advanced.yaml"
+    config.write_text("max_reads: 10\nmin_period: 20\nmax_period: 24\n", encoding="utf-8")
+    outdir = tmp_path / "configured"
+    result = run_cli(
+        "run", "--reads", str(toy / "reads.fa"), "--genome-size", "1000000",
+        "--config", str(config), "--max-reads", "12", "-o", str(outdir),
+        "--steps", "discover,quantify", "--kmer-backend", "rust",
+    )
+    assert result.returncode == 0, result.stderr
+    assert "--max-reads 12" in read_summary(outdir)[0]["command"]
+    strict = tmp_path / "invalid.yaml"
+    strict.write_text("unknown_option: 1\n", encoding="utf-8")
+    invalid = run_cli(
+        "run", "--reads", str(toy / "reads.fa"), "-o", str(tmp_path / "invalid"),
+        "--config", str(strict), "--steps", "discover",
+    )
+    assert invalid.returncode != 0
+    assert "Unknown --config key(s): unknown_option" in invalid.stderr
+    assert not (tmp_path / "invalid").exists()
+    nonfinite = tmp_path / "nonfinite.yaml"
+    nonfinite.write_text("haploid_depth: .nan\n", encoding="utf-8")
+    nonfinite_outdir = tmp_path / "nonfinite"
+    rejected = run_cli(
+        "run", "--reads", str(toy / "reads.fa"), "-o", str(nonfinite_outdir),
+        "--config", str(nonfinite), "--steps", "discover",
+    )
+    assert rejected.returncode != 0
+    assert "--haploid-depth must be finite" in rejected.stderr
+    assert not nonfinite_outdir.exists()
+    integer_float = tmp_path / "integer_float.yaml"
+    integer_float.write_text("haploid_depth: 20\n", encoding="utf-8")
+    accepted = run_cli(
+        "run", "--reads", str(toy / "reads.fa"), "-o", str(tmp_path / "integer_float"),
+        "--config", str(integer_float), "--steps", "discover",
+    )
+    assert accepted.returncode == 0, accepted.stderr
+    for stem, contents, message in (
+        ("duplicate", "max_reads: 1\nmax_reads: 2\n", "Duplicate --config key: max_reads"),
+        ("nonstring", "1: one\n", "--config keys must be strings"),
+        ("bool_float", "haploid_depth: true\n", "must have type float"),
+    ):
+        path = tmp_path / f"{stem}.yaml"
+        outdir = tmp_path / stem
+        path.write_text(contents, encoding="utf-8")
+        invalid = run_cli(
+            "run", "--reads", str(toy / "reads.fa"), "-o", str(outdir),
+            "--config", str(path), "--steps", "discover",
+        )
+        assert invalid.returncode != 0
+        assert message in invalid.stderr
+        assert not outdir.exists()
+
+
+def test_run_rejects_invalid_advanced_periods_and_resume_conflicts_before_output(tmp_path: Path) -> None:
+    toy = simulate_toy(tmp_path)
+    for stem, config_text, message in (
+        ("min", "min_period: 0\n", "--min-period must be positive"),
+        ("range", "min_period: 9\nmax_period: 8\n", "--max-period must be greater"),
+        ("top", "top_periods: 0\n", "--top-periods must be positive"),
+    ):
+        config = tmp_path / f"{stem}.yaml"
+        outdir = tmp_path / stem
+        config.write_text(config_text, encoding="utf-8")
+        result = run_cli(
+            "run", "--reads", str(toy / "reads.fa"), "-o", str(outdir),
+            "--config", str(config), "--steps", "discover",
+        )
+        assert result.returncode != 0
+        assert message in result.stderr
+        assert not outdir.exists()
+    conflict = run_cli(
+        "run", "--reads", str(toy / "reads.fa"), "-o", str(tmp_path / "conflict"),
+        "--steps", "discover", "--resume", "--no-resume",
+    )
+    assert conflict.returncode != 0
+    assert "--resume and --no-resume are mutually exclusive" in conflict.stderr
+    assert not (tmp_path / "conflict").exists()
+
+
+def test_assembly_length_is_provisional_normalization_proxy(tmp_path: Path) -> None:
+    toy = simulate_toy(tmp_path)
+    outdir = tmp_path / "assembly_proxy"
+    result = run_cli(
+        "run", "--reads", str(toy / "reads.fa"), "--assembly", str(toy / "assembly.fa"),
+        "-o", str(outdir), "--steps", "discover,quantify", "--kmer-backend", "rust",
+    )
+    assert result.returncode == 0, result.stderr
+    assert (outdir / "quantify" / "copy_number.tsv").is_file()
+    defaults = json.loads((outdir / "automatic_defaults.json").read_text(encoding="utf-8"))
+    assert defaults["genome_size_source"] == "assembly_total_length_provisional"
+    assert defaults["warnings"]
 
 
 def test_run_passes_read_limits_to_discover_and_quantify(tmp_path: Path) -> None:

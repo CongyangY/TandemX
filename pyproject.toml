@@ -12,7 +12,7 @@ license = { text = "MIT" }
 authors = [
   { name = "TandemX developers" }
 ]
-dependencies = ["matplotlib>=3.7"]
+dependencies = ["matplotlib>=3.7", "pyyaml>=6"]
 
 [project.optional-dependencies]
 test = [

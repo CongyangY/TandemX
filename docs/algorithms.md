@@ -567,3 +567,35 @@ MVP constraints:
 3. no pixel-level tests;
 4. no seaborn dependency;
 5. figures summarize toy outputs only.
+
+### Authorized reporting and recovery extension (2026-09-10)
+
+The current reporting extension reads existing family/abundance/localization
+evidence and exports an offline HTML view and static SVG/PDF/PNG. It introduces
+no detector, classifier or biological HOR rule. Summary deficits are zero-bounded
+differences of existing estimates; composite confidence retains the least
+available stage confidence. Candidate graph edges preserve sequence evidence
+and ambiguity. Figure selection affects display only, with full tables retained.
+
+The simplified run interface uses the existing fixed diagnostic k=21 and host
+thread cap. Advanced YAML is strictly validated, with explicit CLI precedence.
+Automatic resume requires validated stage outputs and matching input/command
+fingerprints. An assembly total may provide a visibly provisional normalization
+denominator when genome size is omitted; this is not a genome-size estimator.
+Reads-only discovery remains available without a denominator, while absolute
+abundance remains unavailable. Existing explicitly normalized analyses retain
+their numerical algorithms and thresholds.
+
+The recovery PoC uses frozen historical loci and old-assembly flanks. Flanks are
+tested for assembly-relative uniqueness, then full original HiFi reads are
+mapped to those anchors and tandemized family targets. The closest eligible
+left/right pair is selected from old evidence before read outcomes. At least
+three distinct, correctly ordered, same-strand dual-anchor reads with concordant
+span lengths can nominate an observed median-length fragment. This is an
+unpolished candidate, not a consensus assembly, locus-specific copy truth or
+automatic patch. Candidate span and repeat-specific recovered bases are separate
+fields. No unique anchors, missing old loci, sparse support and conflicting paths
+remain explicit unresolved states. The newer assembly is prohibited during
+candidate generation and reserved for a separate post-lock reference-proxy
+comparison. See `docs/recovery_and_reporting_plan.md` for the fixed rules,
+retained resource failures and the stop criterion.
