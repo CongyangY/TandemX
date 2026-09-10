@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_txf000708_array_confirmation_summary_v1",
+  "status": "locked_before_detector_output",
+  "source_commit": "9290688",
+  "parent_protocol": "benchmarks/configs/legume_ysd56_txf000708_array_confirmation_v4.json",
+  "script": "benchmarks/scripts/confirm_array_tools.py",
+  "script_sha256": "3959a056f606d503497f92d1f8c8de8078cacd413bcf22cc2643e88de5288e77",
+  "inputs": {
+    "trf": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/TXF000708_array.fasta.2.7.7.80.10.50.1000.dat",
+    "tidehunter": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/tidehunter.tsv",
+    "region_length_bp": 124029,
+    "target_period_bp": 785
+  },
+  "decision_rule": {
+    "minimum_coverage_fraction_per_tool": 0.9,
+    "period_tolerance": 0.05,
+    "allowed_period_relation": "785 bp within tolerance, or an integer multiple/divisor within tolerance",
+    "confirmed_tandem_structure": "both tools return confirmed_tandem_structure",
+    "otherwise": "unresolved detector disagreement or insufficient coverage"
+  },
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "benchmarks/scripts/confirm_array_tools.py",
+    "--trf",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/TXF000708_array.fasta.2.7.7.80.10.50.1000.dat",
+    "--tidehunter",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/tidehunter.tsv",
+    "--region-length",
+    "124029",
+    "--coverage-threshold",
+    "0.90",
+    "--period-tolerance",
+    "0.05",
+    "--output",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/array_confirmation_summary.tsv"
+  ],
+  "output": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/array_confirmation_summary.tsv",
+  "interpretation_boundary": "This parser summarizes structure calls on one assembly locus. It does not establish sequence novelty, biological function, independent donor support, or physical copy number."
+}
