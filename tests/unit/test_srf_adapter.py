@@ -1,4 +1,5 @@
 import pytest
+from pathlib import Path
 
 from benchmarks.scripts.run_srf_pilot import parse_bed, workflow
 
@@ -44,3 +45,38 @@ def test_empty_successful_kmer_dump_skips_native_graph_without_fake_fasta(tmp_pa
     assert record["status"] == "no_eligible_kmers"
     assert record["skipped_stages"][0] == "assemble"
     assert not (outdir / "srf.fa").exists()
+
+
+def test_workflow_passes_keyword_k_to_kmc_and_records_it(tmp_path, monkeypatch):
+    import benchmarks.scripts.run_srf_pilot as runner
+
+    commands = []
+
+    def fake_process(command, stdout, stderr, timeout):
+        commands.append(command)
+        if command[0] == "dump":
+            Path(command[-1]).write_text("")
+        return dict(exit_code=0, runtime_seconds=0.1, peak_rss_mib=1, timed_out=False)
+
+    monkeypatch.setattr(runner, "run_process", fake_process)
+    reads = tmp_path / "reads.fa"
+    reads.write_text(">test\nACGT\n")
+    tools = {key: Path(key) for key in ("kmc", "dump", "srf", "k8", "minimap2", "utils")}
+
+    record = workflow(reads, tmp_path / "output", tools, 20, 5, k=101)
+
+    assert commands[0][2] == "-k101"
+    assert record["k"] == 101
+    assert record["minimum_count"] == 20
+
+
+@pytest.mark.parametrize("k", [0, -1, True, 101.0])
+def test_workflow_rejects_invalid_k_before_creating_output(tmp_path, k):
+    reads = tmp_path / "reads.fa"
+    reads.write_text(">test\nACGT\n")
+    outdir = tmp_path / "output"
+    tools = {key: Path(key) for key in ("kmc", "dump", "srf", "k8", "minimap2", "utils")}
+
+    with pytest.raises(ValueError, match="positive integer"):
+        workflow(reads, outdir, tools, 20, 5, k=k)
+    assert not outdir.exists()

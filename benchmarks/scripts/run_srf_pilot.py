@@ -36,7 +36,18 @@ def parse_bed(path: Path, motifs: dict[str, str], keep_only: bool = True) -> lis
     return arrays
 
 
-def workflow(reads: Path, outdir: Path, tools: dict[str, Path], minimum_count: int, timeout: float) -> dict:
+def workflow(
+    reads: Path,
+    outdir: Path,
+    tools: dict[str, Path],
+    minimum_count: int,
+    timeout: float,
+    *,
+    k: int = 151,
+    deadline: float | None = None,
+) -> dict:
+    if not isinstance(k, int) or isinstance(k, bool) or k < 1:
+        raise ValueError("SRF k must be a positive integer")
     outdir.mkdir(parents=True, exist_ok=False)
     temporary = outdir / "tmp"
     temporary.mkdir()
@@ -48,7 +59,7 @@ def workflow(reads: Path, outdir: Path, tools: dict[str, Path], minimum_count: i
     db, dumped, catalog = outdir / "counts", outdir / "counts.txt", outdir / "srf.fa"
     elongated, paf, bed, abundance = [outdir / name for name in ("srf.enlong.fa", "srf.paf", "srf.bed", "srf.abundance.tsv")]
     kmc, dump, srf, k8, mm2, utils = [str(tools[name]) for name in ("kmc", "dump", "srf", "k8", "minimap2", "utils")]
-    commands = [("count", [kmc, "-fm", "-k151", "-t1", "-m2", "-sm", f"-ci{minimum_count}", "-cs100000", str(reads), str(db), str(temporary)], None),
+    commands = [("count", [kmc, "-fm", f"-k{k}", "-t1", "-m2", "-sm", f"-ci{minimum_count}", "-cs100000", str(reads), str(db), str(temporary)], None),
                 ("dump", [dump, str(db), str(dumped)], None),
                 ("assemble", [srf, "-p", "srf", str(dumped)], catalog),
                 ("elongate", [k8, utils, "enlong", str(catalog)], elongated),
@@ -58,6 +69,9 @@ def workflow(reads: Path, outdir: Path, tools: dict[str, Path], minimum_count: i
     records = []
     status = "ok"
     for name, command, output in commands:
+        if deadline is not None and time.perf_counter() >= deadline:
+            status = "not_run_deadline"
+            break
         if name == "assemble" and dumped.is_file() and dumped.stat().st_size == 0:
             # Native SRF asserts on an empty count file. Record the observed
             # upstream zero result and an explicit skip; do not fabricate FASTA.
@@ -75,13 +89,13 @@ def workflow(reads: Path, outdir: Path, tools: dict[str, Path], minimum_count: i
     elapsed = time.perf_counter() - start
     record = {"status": status, "workflow_wall_seconds": elapsed,
               "external_stage_wall_seconds": sum(r["runtime_seconds"] for r in records),
-              "maximum_external_stage_peak_rss_mib": max(r["peak_rss_mib"] for r in records),
+              "maximum_external_stage_peak_rss_mib": max((r["peak_rss_mib"] for r in records), default=0),
               "memory_method": "max direct-child wait4 RSS across sequential native stages; benchmark controller excluded",
               "input_sha256": digest_file(reads), "total_input_bases": total_bases,
-              "k": 151, "minimum_count": minimum_count, "threads_parameter": 1,
+              "k": k, "minimum_count": minimum_count, "threads_parameter": 1,
               "temporary_and_output_bytes_after_run": sum(p.stat().st_size for p in outdir.rglob("*") if p.is_file()),
               "stages": records, "skipped_stages": [name for name, _, _ in commands[len(records):]],
-              "warning": "illustrative_readme_k151_count_preset;library_coverage_not_known;no_default_optimality_claim"}
+              "warning": f"illustrative_srf_k{k}_count_preset;library_coverage_not_known;no_default_optimality_claim"}
     (outdir / "workflow_receipt.json").write_text(json.dumps(record, indent=2) + "\n")
     return record
 

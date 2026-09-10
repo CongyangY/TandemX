@@ -3,10 +3,15 @@
 ## Active 2026-09-10 bounded accuracy/efficiency decision
 
 Baseline `81827c3`; independent accuracy and efficiency branches only. Both
-allowed A3 revisions are complete. **Stop accuracy expansion:** final development
-MARE 0.07469 is worse than ordinary competitive occupancy 0.05683, despite
-indel recall improving from strict 0.10788 to 0.91656. No heldout was generated
-or inspected. Production algorithms and manuscript v3 remain baseline-identical.
+allowed A3 revisions are complete. **No further A3 accuracy expansion in this
+round:** final development MARE 0.07469 is above ordinary competitive occupancy
+0.05683, so the candidate did not show sufficient overall advantage, despite
+indel recall improving from strict 0.10788 to 0.91656 and zero background excess
+in the designed background condition. The historical `.02` synthetic-FPR gate
+is withdrawn because its F2-role denominator is incommensurate with the
+historical classifier FPR; see `docs/fpr_scope_reconciliation_20260910.md`.
+No heldout was generated or inspected. Production algorithms and manuscript v3
+remain baseline-identical.
 
 **Retain the existing exact Python counting optimization:** real Mo17 11.68 Mb
 and Ey15 113.34 Mb paired three-repeat timings are 3.61x and 2.13x faster with

@@ -1,4 +1,4 @@
-# 本轮决策：停止 A3，保留精确计数优化
+# 本轮决策：A3 开发候选未显示足够整体优势；保留精确计数优化
 
 基线固定为 `81827c3`。准确度和效率分别在独立 Git 分支上运行，未合并到
 正式开发分支。正式 manuscript v3、生产 quantify 及 k-mer 实现与 baseline
@@ -9,7 +9,9 @@
 比较的是两个开发源种子、十类条件、2/5/10x 覆盖，共 60 个数据集的
 120 个 family-condition 行；不是 120 个独立生物学样本。
 全部家族包括歧义和零预测均保留。指标的分母和人工 source truth 见
-`phase_gate_protocol_20260910.md`，不可与历史 0.363222 MARE 直接比较。
+`phase_gate_protocol_20260910.md`。A3 synthetic FPR 的分母、truth 和阈值
+也与历史 classifier FPR 不可直接比较；完整调和见
+`fpr_scope_reconciliation_20260910.md`。
 
 | 方法 | 开发 MARE | indel recall | clean MARE | background excess bp | synthetic FPR |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -19,23 +21,26 @@
 | A3 第一轮 local re-phasing | 0.08224 | 0.89816 | 0.04569 | 0 | 0.1167 |
 | A3 第二轮 short-gap inclusion | 0.07469 | 0.91656 | 0.04569 | 0 | 0.1167 |
 
-支持的假设：局部 re-phasing 恢复了 strict phase locking 丢失的 indel
-证据，同时在本开发背景挑战中未产生过量丰度计数。第二轮仅纳入已接受
-相位链内部的短间隙，所有阈值保持不变。
+本开发夹具中的正向观察是：局部 re-phasing 将 indel recall 从 strict A2 的
+0.10788 提升至第二轮 A3 的 0.91656；A3 在 `background_homology` 条件的
+background excess 为 0，而 A0 为 37,757 bp。第二轮仅纳入已接受相位链
+内部的短间隙，所有阈值保持不变。
 
 未获支持的假设：A3 的丰度准确度优于普通 competitive mapping。最终 MARE
-仍比 A1 高约 31.4%，平均计时约为 A0 的 2.77 倍；synthetic FPR 也超过
-0.02。clean 条件误差仍高于 A0。这些结果没有达到进入独立验证的门槛。
+仍比 A1 高约 31.4%，平均计时约为 A0 的 2.77 倍，clean 条件误差也高于
+A0。因此这两轮开发结果没有显示足以支持继续扩展或进入独立验证的整体
+优势。历史 `binary_FPR_at_most_002` gate 因其 FPR 与历史 classifier FPR
+的定义不可通约而撤回；原始 receipt、代码和数值均保留不改。
 
 消融还显示：sequence-only 与单独 phase 步骤 MARE 同为 0.1984；加入 phase
 coverage 后为 0.0699，加入严格 recurrence/order 后反而为 0.2309；re-phasing
 恢复到 0.0822。specificity weight 的有/无在此开发集没有改变结果。
 因此不能把所有组件都描述为有效贡献，更不能用术语组合代替方法增益。
 
-**停止 accuracy branch。不再增加 HMM、EM、detector、repair 或第三轮修改。**
-未生成、未查看 final held-out 数据；没有独立验证成功率可报告。
-负结果只否定这次候选与这两轮实现的保留理由，不证明所有 phase-aware
-abundance 方法都不可能有效。SRF、mm2-ivh、MCS、TideHunter 等先例见
+**本轮不再扩展 A3 accuracy branch：不增加 HMM、EM、detector、repair 或
+第三轮修改。** 未生成、未查看 final held-out 数据；没有独立验证成功率可
+报告。这是一个尚未显示足够整体优势的开发候选，不是否定所有 phase-aware
+abundance 方法。SRF、mm2-ivh、MCS、TideHunter 等先例见
 `novelty_matrix_phase_gate_20260910.md`；本轮不命名新算法、不声称首创。
 
 ## 效率：真实输入仍有收益，GB 级尚未验证
