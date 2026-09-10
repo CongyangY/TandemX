@@ -94,7 +94,13 @@ def read_fasta(path: Path) -> dict[str, str]:
             if not line:
                 continue
             if line.startswith(">"):
-                current = line[1:].split()[0]
+                header_token = line[1:].split()[0]
+                structured = dict(
+                    field.split("=", 1)
+                    for field in header_token.split(";")
+                    if "=" in field
+                )
+                current = structured.get("family_id", header_token)
                 if not current or current in records:
                     raise ValueError(f"invalid or duplicate FASTA identifier: {current!r}")
                 records[current] = []

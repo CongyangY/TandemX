@@ -4,6 +4,7 @@ from benchmarks.scripts.integrate_tr_candidate_evidence import (
     interval_overlap,
     max_homopolymer,
     merge_intervals,
+    read_fasta,
     shannon_entropy,
 )
 
@@ -43,3 +44,12 @@ def test_interval_and_gene_context_use_zero_based_half_open_coordinates():
         ]
     }
     assert gene_context("chr1", 15, 25, genes) == (1, "left", 5, "right", 15)
+
+
+def test_read_fasta_uses_structured_family_identifier(tmp_path):
+    fasta = tmp_path / "monomers.fa"
+    fasta.write_text(
+        ">family_id=TXF000001;monomer_id=TXM000001;length_bp=8;confidence=high\nACGTACGT\n",
+        encoding="utf-8",
+    )
+    assert read_fasta(fasta) == {"TXF000001": "ACGTACGT"}
