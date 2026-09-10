@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_candidate_soybean_supplement_exclusion_v1",
+  "status": "locked_before_output",
+  "source_commit": "3b8f3fe3d560fe8c1ae7dce457df3482855c1350",
+  "script": "benchmarks/scripts/score_known_repeat_exclusion.py",
+  "script_sha256": "d750952e1d784e90d6f3984abebad545dea175eff912db10ff5314f0b94bcc9d",
+  "candidate_fasta": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_refined_after_rdna_v1/refined_shortlist_retained.fa",
+  "candidate_fasta_sha256": "2cbde8d064e67e19ee04e39427ed46bb929cf63840da38b543263cb13df180c0",
+  "known_library": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/soybean_known_repeats_supplement_v1_20260910/soybean_wild_soybean_published_repeats.fasta",
+  "known_library_sha256": "9c47db01bede8adb8043e549b5d901d66bf62bb32237c1c6a4f282fe0051b784",
+  "known_record_count": 7,
+  "known_library_boundary": "Seven directly published soybean or wild-soybean tandem-repeat sequences omitted from the earlier 13-clone screen; CentGm-2, CentGm273 and CentGm444 remain unresolved.",
+  "alignment": "complete shorter sequence versus doubled longer sequence; edlib HW; both orientations",
+  "thresholds": {
+    "strong_glocal_edit_identity": 0.90,
+    "possible_glocal_edit_identity": 0.80,
+    "minimum_aligned_bp": 50
+  },
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "benchmarks/scripts/score_known_repeat_exclusion.py",
+    "--catalog",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_refined_after_rdna_v1/refined_shortlist_retained.fa",
+    "--known",
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/soybean_known_repeats_supplement_v1_20260910/soybean_wild_soybean_published_repeats.fasta",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_soybean_supplement_exclusion_v1",
+    "--possible-threshold",
+    "0.80",
+    "--strong-threshold",
+    "0.90",
+    "--minimum-aligned-bp",
+    "50"
+  ],
+  "output_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_soybean_supplement_exclusion_v1",
+  "interpretation_boundary": "A no-match is a bounded exclusion against seven fixed public sequences, not proof of global novelty, non-TE origin, or independent biological support."
+}
