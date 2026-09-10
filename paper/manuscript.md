@@ -1,6 +1,6 @@
 # TandemX: read-level evidence and sampling uncertainty for plant satellite repeat analysis
 
-**Evidence-backed development manuscript, 9 September 2026.** Author information
+**Evidence-backed development manuscript, 10 September 2026.** Author information
 is not assigned. This draft contains completed results, with unresolved release
 and biological-validation requirements listed in `submission_readiness.md`.
 It is not a submission-ready manuscript or a claim of universal superiority.
@@ -43,10 +43,14 @@ TP/FN/FP/TN=2/0/0/41. The two-positive Wilson interval was 0.342--1.0, and the
 HiFi-versus-old deficit substantially exceeded the new-versus-old assembly
 gain. This supports cross-species assembly-proxy classification concordance,
 not precise missing-bp estimation, population-level performance or absolute
-truth. Orthogonal PCR-free Illumina for Ey15-2 and Illumina plus PromethION for
-Macadamia have been source-frozen to distinguish HiFi abundance bias from
-residual under-representation in the newer assemblies; those results are not
-yet available.
+truth. A final frozen orthogonal gate then used PCR-free Illumina for Ey15-2
+and Illumina plus direction-only PromethION evidence for Macadamia. Of six
+pre-orthogonal deficit candidates, Ey15 `TXF000002`/`TXF000154` and Macadamia
+`TXF000496` had stable support for residual under-representation in the newer
+assemblies; the other three remained unresolved across k or platform. No
+family satisfied a stable cross-k quantification-bias rule. This selected 3/6
+result supports family-specific residual tandem-repeat collapse, while the
+observed magnitude instability precludes a general claim of precise abundance.
 On three fresh predeclared conditional genomes, a frozen multi-k/depth rule
 improved under-representation sensitivity from 81.48% to 85.60%, false-positive
 rate from 8.64% to 7.41% and precision from 93.40% to 94.55%. The 20×/1%-error/
@@ -68,11 +72,11 @@ TandemX/TideHunter wall-time and direct-child peak-RSS geometric-mean ratios
 were 1.9779 and 0.3969, minimum positive array recall/precision were 1.0 and
 the negative-control call rate was zero. Some scenario runtime ratios exceeded
 4, so this does not establish universal speed, memory or accuracy superiority.
-These results support a final, bounded orthogonal evaluation of read-based
-repeat abundance and conditional uncertainty. Independent physical copy-number
-truth remains unavailable; the next inference is explicitly between
-quantification bias, residual assembly under-representation and unresolved
-evidence.
+These results support read-based abundance as evidence for family-specific
+residual assembly under-representation when independent platforms and k values
+agree. Independent physical copy-number truth remains unavailable; discordant
+families and continuous deficit magnitude remain explicitly unresolved rather
+than being scored against the newer assembly as truth.
 
 ## Background
 
@@ -589,6 +593,35 @@ consistent alignment context is not independent copy truth, and the newer
 assembly shares the same HiFi evidence used by the read estimator (Evidence
 E41).
 
+We therefore completed the preregistered orthogonal gate on the unchanged
+catalogues and 15-kb eligibility denominators. Official normalized SRA/SRA Lite
+objects and converted FASTQ totals passed integrity checks for Ey15-2 PCR-free
+Illumina `ERR8666067` (157,774,340 reads; 23,666,151,000 bases), Macadamia
+Illumina `SRR11191912` (225,016,144 reads; 33,669,394,677 bases) and Macadamia
+PromethION `SRR11191910` (2,841,932 reads; 23,186,565,438 bases). At k=21 and
+k=31, none of the 16 Ey15 or 40 Macadamia eligible negative/context families
+crossed the orthogonal deficit rule. Among the three predeclared Ey15 deficit
+candidates, `TXF000002` had an Illumina estimate of 519,994--555,544 bp versus
+49,758 bp in the newer assembly, and `TXF000154` had 33,895--44,496 bp versus
+18,297 bp. Both were stable residual-under-representation calls. `TXF001517`
+was unresolved across k. The HiFi estimate for `TXF000154` was nevertheless
+1.52--1.99-fold above Illumina, showing that directional support does not imply
+accurate magnitude.
+
+Macadamia `TXF000496` was the strongest cross-platform result: Illumina gave
+1,585,991--1,604,099 bp versus 55,562 bp in the newer assembly, while calibrated
+ONT occupancy across the 616--780-Mb genome-size sensitivity gave
+620,185--785,299 bp and the same deficit direction. In contrast, `TXF000563`
+was not stable across k and ONT did not support a residual deficit.
+`TXF000695` changed from 1,104,859 bp at k=21 to 1,649 bp at k=31, and ONT also
+did not support a deficit; it was therefore unresolved rather than treated as a
+stable bias diagnosis. Overall, three of the six selected candidates supported
+family-specific residual tandem-repeat under-representation and three remained
+unresolved. No candidate met the frozen stable cross-k quantification-bias rule,
+so no method change was triggered. These counts are not population accuracy,
+and all continuous ranges are read--assembly abundance deficits rather than
+physical missing-base truth (Figure 13; Evidence E42).
+
 We screened cassava TME204 as a second donor-matched comparison because its CLR
 and HiFi reads were generated from the same DNA sample and the published
 CLR-Falcon/Falcon-Unzip assembly was less haplotype-resolved than the HiFi-
@@ -834,8 +867,8 @@ simulation all three methods recovered every founder; TRF retained slightly
 higher base precision, and existing real-read diagnostics still place
 TideHunter ahead in elapsed time. TRASH2 was a strong assembly baseline after
 its primary unit output was interpreted correctly. Maintaining these results
-is necessary for a defensible comparison and identifies where algorithmic work
-is still required.
+is necessary for a defensible comparison and defines current limitations; they
+are not a mandate for further method work in this frozen release.
 
 The uncertainty analysis also distinguishes usable inference from a plausible
 looking numerical interval. Correlated k values cannot supply independent
@@ -851,21 +884,26 @@ idealized haploid simulations do not reproduce. Consequently, the experimental
 estimator is exposed as an opt-in public mode and has not replaced the controls
 default.
 
-The current biological evidence is incomplete. Ey15-2 and Macadamia provide
-two species-level same-sample reference proxies, but both newer assemblies share
-HiFi evidence with the read estimator. Their primary denominators contain only
-19 and 43 families, Macadamia has only two positive families and its archival
-identifiers do not establish the same DNA extraction. These are independent
-species comparisons, not biological replication or absolute copy truth. The
-final method-science gate uses source-frozen Ey15-2 PCR-free Illumina and
-Macadamia Illumina/PromethION runs on the unchanged family denominators. It
-reports read--assembly abundance deficit and estimated under-representation
-separately from binary collapse classification. If orthogonal reads agree with
-the HiFi direction, the supported interpretation is residual
-under-representation in the newer assembly; if they agree with the newer
-assembly instead, only the demonstrated quantification bias will be repaired.
-Disagreement remains `unresolved`. No other method, comparator or performance
-development is in scope before release packaging.
+The biological evidence remains bounded. Ey15-2 and Macadamia provide two
+species-level reference proxies, but their primary denominators contain only 19
+and 43 families, and the final question was restricted to six predeclared
+deficit candidates. Ey15 Illumina changes extraction, library and platform while
+preserving the ground-tissue pool. Macadamia adds Illumina and ONT from clonal
+tree accession 1005, but differing archival identifiers do not establish the
+same DNA extraction for the later HiFi data. The resulting 3/6 support is thus
+family-specific evidence for residual tandem-repeat under-representation in
+high-quality assemblies, not biological replication, a population accuracy
+rate or absolute copy truth.
+
+The unresolved half of the candidate set is equally important. HiFi exceeded
+Illumina for Ey15 `TXF000154` despite a stable deficit direction, and Macadamia
+`TXF000695` showed an extreme k-dependent reversal. The method can therefore
+supply useful directional evidence without making its continuous abundance
+universally accurate. We report read--assembly abundance deficit separately
+from binary interpretation, retain discordant families as `unresolved`, and do
+not convert either output into physical missing-bp truth. No stable cross-k
+quantification-bias case triggered repair; method and comparator development
+therefore stop at this gate before release packaging.
 
 ## Methods
 
@@ -1039,6 +1077,36 @@ collapse threshold and independent verification matched the Ey15 procedure.
 The post-primary assembly audit used minimap2 2.31-r1302 with `-x asm5 -c
 --eqx --secondary=yes -N100`; only any-alignment and primary-alignment scopes
 were interpreted because old and new contig identifiers differ.
+
+For orthogonal abundance validation, we preserved the same catalogues, newer-
+assembly localized bases and 15-kb eligible-family denominators. Complete input
+objects were accepted only after official MD5, `vdb-validate` and converted
+FASTQ record/base totals agreed with archival metadata. Illumina abundance was
+estimated independently at k=21 and k=31 from family-exclusive diagnostic
+k-mers. Counts were normalized by the mean depth of 20,000 deterministic
+controls that occurred exactly once in both enrolled assemblies and in no
+catalogue monomer. KMC 3.2.4 used minimum count two and an explicit counter
+maximum of 1,000,000,000; absent k-mers were conservatively assigned the frozen
+0/1 midpoint. SRA Lite lacks original qualities, but KMC used sequence only.
+
+For Macadamia direction-only ONT validation, all 43 eligible representatives
+were tandemized to 250 kb and mapped competitively with minimap2 2.31-r1302
+using `map-ont -c --eqx --secondary=yes -N 5`. We retained primary alignments
+with at least 500 aligned bases and identity at least 0.75, unioned query
+intervals by family and excluded reads assigned to multiple families. Before
+ONT inspection, a global efficiency correction of 0.7421169097 was frozen as
+the median ratio of raw HiFi mapping occupancy to frozen HiFi k-mer abundance
+across eligible positive families. ONT direction was evaluated at 616, 653, 738
+and 780 Mb. Residual under-representation required a newer-assembly/orthogonal-
+read ratio below 0.6 with stable k and applicable genome-size direction;
+Macadamia used ONT concordance for the strongest interpretation.
+Quantification bias required orthogonal consistency with the newer assembly
+and HiFi at least 1.5-fold above orthogonal abundance. All other or discordant
+states were `unresolved`. Continuous output was
+`max(orthogonal_read_bp-newer_assembly_bp,0)` and was explicitly treated as a
+read--assembly abundance deficit, not physical missing-bp truth. Failed ENA
+objects, saturated default KMC counters and a wrong-operand intersection were
+retained and excluded from final results (Evidence E42).
 
 ### Comparator execution and scoring
 
@@ -1280,6 +1348,21 @@ render. The newer
 assembly shares HiFi evidence with TandemX and is a high-quality reference
 proxy, not absolute or fully independent biological truth.
 
+**Figure 13. Orthogonal validation of read-based abundance and residual
+assembly under-representation.** A, newer-assembly localized bases, frozen HiFi
+abundance, independent Illumina k=21/k=31 abundance and Macadamia direction-
+only ONT ranges for six predeclared candidates. B, newer-assembly/read ratios
+with the frozen 0.6 threshold; ONT ranges span the 616--780-Mb genome-size
+sensitivity. C, platform-level direction and final frozen interpretation.
+Ey15 `TXF000002`/`TXF000154` and Macadamia `TXF000496` support residual under-
+representation; the other three families are unresolved. The selected 3/6
+split is not an accuracy rate, and continuous values are read--assembly
+abundance deficits rather than physical missing-base truth.
+`evidence/orthogonal_abundance_validation_v1/figures_v2` contains the accepted
+editable SVG/PDF/PNG, complete panel source, legend, hashes and visual review.
+The retained `figures_v1` failed visual QA because its legend obscured evidence;
+both versions have byte-identical 72-row panel-source tables.
+
 **Figure S1. Complete Mo17 input QC.** Four-panel source-backed distributions,
 with input and plotting receipts, in `evidence/Mo17_input_qc/figures_checked`.
 
@@ -1456,6 +1539,10 @@ figures remain required; their absence is tracked in `submission_readiness.md`.
   primary and reported-28-Gb-depth results, independent recomputations,
   old/new alignment context and process-tree resources in
   `evidence/macadamia_jansenii_donor_matched_collapse_v1`.
+- Supplementary Table S39: complete k=21/k=31 family matrices, empirical-control
+  diagnostics, three validated orthogonal-input QCs, Macadamia ONT occupancy,
+  all six final candidate interpretations and excluded run fates in
+  `evidence/orthogonal_abundance_validation_v1`.
 
 E1: `Mo17_alignment_workspace`; E2: `factorial_discovery_s6301_5x`;
 E3: `TRASH2_factorial_s6301`; E4: `TRASH_factorial_s6301`;
@@ -1492,7 +1579,8 @@ held-out directories listed for Supplementary Table S13; E17:
 `unitfinder_zh13_source_enrollment_v1`; E39:
 `unitfinder_zh13_download_v1_failure`; E40:
 `unitfinder_zh13_source_enrollment_v2_success`; E41:
-`macadamia_jansenii_donor_matched_collapse_v1`.
+`macadamia_jansenii_donor_matched_collapse_v1`; E42:
+`orthogonal_abundance_validation_v1`.
 These are authoritative result locations, not replacements for the remaining
 final table/figure packaging and journal-specific formatting checks.
 

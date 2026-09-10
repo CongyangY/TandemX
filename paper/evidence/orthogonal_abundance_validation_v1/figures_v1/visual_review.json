@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "failed_visual_review_retained",
+  "reviewed_on": "2026-09-10",
+  "direct_png_inspected": true,
+  "pdf_independent_render_inspected": true,
+  "data_or_classification_failure": false,
+  "failures": [
+    "panel_C_legend_obscured_ONT_and_final_cells",
+    "panel_B_Macadamia_tick_labels_were_crowded",
+    "panel_B_threshold_annotation_competed_with_data",
+    "panel_A_legend_was_too_close_to_data"
+  ],
+  "fate": "retained_not_promoted",
+  "replacement": "../figures_v2"
+}

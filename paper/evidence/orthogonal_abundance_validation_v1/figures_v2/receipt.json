@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "complete_pending_visual_inspection",
+  "panel_count": 3,
+  "candidate_count": 6,
+  "final_interpretation_counts": {
+    "orthogonal_supports_residual_collapse": 3,
+    "unresolved": 3
+  },
+  "panel_source_rows": 72,
+  "svg_text_element_count": 97,
+  "svg_raster_image_element_count": 0,
+  "sources": {
+    "plotting_script": {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/plot_orthogonal_abundance_validation.py",
+      "sha256": "50f55e10efba0e07e711774e2bc9acf62fb0a84e9eeeac1efe32533b51517ef2"
+    },
+    "ey15_final": {
+      "path": "paper/evidence/orthogonal_abundance_validation_v1/results/ey15_final_candidates.tsv",
+      "sha256": "40e1e9d606af6ca355baec48ea2bd51ed76b9cc2b461d6800a314e87e98d60d7"
+    },
+    "macadamia_final": {
+      "path": "paper/evidence/orthogonal_abundance_validation_v1/results/macadamia_final_candidates.tsv",
+      "sha256": "e056d0f396d0d3d7ca01d9481079a847914a926ef1986828341ad6dc74f6211f"
+    },
+    "macadamia_ont": {
+      "path": "paper/evidence/orthogonal_abundance_validation_v1/ont/macadamia_ont_direction.tsv",
+      "sha256": "40eb06016d9157d90248ac6d536c792f5d5a7e2db6de379ba015c6145fdbbc12"
+    }
+  },
+  "outputs": {
+    "orthogonal_abundance_validation.svg": {
+      "bytes": 64193,
+      "sha256": "5be9594861776f198bf2a1d283f17fa24f40ed8e68fb8e61e5317005c25c8a06"
+    },
+    "orthogonal_abundance_validation.pdf": {
+      "bytes": 32772,
+      "sha256": "ca7eaebddd59a4d208026b3bd7718dbf3e5a9fefeccd0771259a5898782d1525"
+    },
+    "orthogonal_abundance_validation.png": {
+      "bytes": 247511,
+      "sha256": "a09358a03b90430fde2729cce132defee779e2be1b5accc0ca57849c2d4b5807"
+    },
+    "panel_source.tsv": {
+      "bytes": 10164,
+      "sha256": "a919bc4418eb3555ead27d53ba6732ed753e90dd0fb2d5e5ed01a425d25c2754"
+    },
+    "figure_legend.md": {
+      "bytes": 722,
+      "sha256": "67134b66097e439e736de956c671e08a141886ff91a6430f526b82f10e499223"
+    }
+  },
+  "boundary": "binary_interpretation_separate_from_continuous_magnitude;read_assembly_deficit_not_physical_missing_bp_truth"
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "eligible_families": 43,
+  "template_length_bp_per_family": 250000,
+  "total_template_bp": 10750000,
+  "catalogue_sha256": "905b38bd083c23c7b391b83f31540e5a17e3f72be9cfc7a8ed329b734bb0dbd8",
+  "prior_family_metrics_sha256": "4a9da94ae5fe162b6139f77efbb9dd98814c1c9bb2aa03b823702d083e0d03c9",
+  "template_fasta_sha256": "83544eb12285c4f56d013ec95df3a73aa6730f2efdd94fb23ca6c3c3e1de57fc",
+  "boundary": "Templates include all frozen eligible families and do not use ONT outcomes."
+}

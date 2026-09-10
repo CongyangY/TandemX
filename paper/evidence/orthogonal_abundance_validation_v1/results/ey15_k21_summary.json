@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "complete_single_k_result_not_final_cross_k_interpretation",
+  "species_key": "ey15",
+  "k": 21,
+  "catalogue_families": 2133,
+  "eligible_families": 19,
+  "preorthogonal_candidates": 3,
+  "control_count": 20000,
+  "control_mean_depth": 115.24335,
+  "control_median_depth": 109.0,
+  "control_depth_mad": 11.0,
+  "control_zero_fraction": 0.0,
+  "kmc_reported_target_kmers": 212195,
+  "candidate_k_result_counts": {
+    "orthogonal_supports_residual_collapse_at_this_k": 2,
+    "unresolved_at_this_k": 1
+  },
+  "eligible_negative_context_orthogonal_deficits": 0,
+  "magnitude_boundary": "estimated_under_representation_is_a_read_assembly_deficit_not_missing_bp_truth_or_prediction_error",
+  "inputs": {
+    "config_sha256": "eaea3beb50183ccd0e9aba8e22d25f828a93bdd68a6c6a02afbc64f96752dbe1",
+    "catalogue_sha256": "277d376aa8961673ca84dd4603d5c31b057c805cfe26b642ab350b63f8556aeb",
+    "controls_sha256": "690cd187b3f2b159641b17c7d7173708cf1b66ec0c3f0d14bf7684b9fd02890f",
+    "kmc_dump_sha256": "d95d6e096b4cb854382fbfb67cfc4a2754e8f6ca6ed52005cd83b8cc2e0610d0",
+    "prior_family_metrics_sha256": "985943042a79f2ef8c6e6793b13304847a0f9e836e3ad7425a9f75774df1b5b1"
+  },
+  "output_tsv_sha256": "3c301d4bb84b8160c5c813823d8560b51c929da759f0f1ecb2ce54e6114b5d15"
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_ONT_result_inspection",
+  "positive_eligible_families": 23,
+  "global_median_raw_HiFi_mapping_over_frozen_HiFi_kmer": 0.7421169097433717,
+  "family_efficiencies": [
+    {
+      "family_id": "TXF000012",
+      "efficiency": 0.3426749250045233
+    },
+    {
+      "family_id": "TXF000047",
+      "efficiency": 2.242419058855985
+    },
+    {
+      "family_id": "TXF000058",
+      "efficiency": 0.45678062300111555
+    },
+    {
+      "family_id": "TXF000075",
+      "efficiency": 0.26169389001265814
+    },
+    {
+      "family_id": "TXF000209",
+      "efficiency": 3.048257266310483
+    },
+    {
+      "family_id": "TXF000220",
+      "efficiency": 6.563675691928967
+    },
+    {
+      "family_id": "TXF000246",
+      "efficiency": 0.06041762040298274
+    },
+    {
+      "family_id": "TXF000264",
+      "efficiency": 0.40909261404246317
+    },
+    {
+      "family_id": "TXF000327",
+      "efficiency": 0.7196994924300216
+    },
+    {
+      "family_id": "TXF000359",
+      "efficiency": 2.954390043612571
+    },
+    {
+      "family_id": "TXF000439",
+      "efficiency": 1.8107282519632626
+    },
+    {
+      "family_id": "TXF000496",
+      "efficiency": 1.0258127466527434
+    },
+    {
+      "family_id": "TXF000563",
+      "efficiency": 2.0855809496871687
+    },
+    {
+      "family_id": "TXF000579",
+      "efficiency": 0.7421169097433717
+    },
+    {
+      "family_id": "TXF000580",
+      "efficiency": 3.342883042078113
+    },
+    {
+      "family_id": "TXF000695",
+      "efficiency": 0.0011549521181532035
+    },
+    {
+      "family_id": "TXF000704",
+      "efficiency": 0.5081859880214131
+    },
+    {
+      "family_id": "TXF000870",
+      "efficiency": 9.47506101354657
+    },
+    {
+      "family_id": "TXF000888",
+      "efficiency": 8.973904969950379
+    },
+    {
+      "family_id": "TXF000890",
+      "efficiency": 14.81102613832833
+    },
+    {
+      "family_id": "TXF000894",
+      "efficiency": 0.032642405721269786
+    },
+    {
+      "family_id": "TXF000905",
+      "efficiency": 0.04158579243828036
+    },
+    {
+      "family_id": "TXF000910",
+      "efficiency": 0.3256797416553383
+    }
+  ],
+  "hifi_occupancy_tsv_sha256": "eb5b2d5cfb904ec04716b9b3c07439b122f2f8c7d2901e927d73f011d5c95024",
+  "prior_family_metrics_sha256": "4a9da94ae5fe162b6139f77efbb9dd98814c1c9bb2aa03b823702d083e0d03c9",
+  "boundary": "One global technical mapping correction; no family-specific or ONT-result fitting."
+}

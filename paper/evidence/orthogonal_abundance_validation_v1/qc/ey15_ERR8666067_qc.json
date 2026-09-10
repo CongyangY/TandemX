@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "run_accession": "ERR8666067",
+  "normalized_sra_bytes": 9539770515,
+  "normalized_sra_md5": "f98a96d41723f97bf5ce1c22654d3c29",
+  "normalized_sra_sha256": "7fbbdc44f457ccd1e63ae43e78d5f25a777c8007c05d62fbd4345a5f9f710481",
+  "vdb_validate_passed": true,
+  "converted_FASTQ_files": [
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/reads/Ey15-2_ERR8666067_NCBI_SRA_complete/fastq/ERR8666067_1.fastq",
+      "bytes": 30248228868
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/reads/Ey15-2_ERR8666067_NCBI_SRA_complete/fastq/ERR8666067_2.fastq",
+      "bytes": 30248228868
+    }
+  ],
+  "FASTQ_record_count": 157774340,
+  "total_bases": 23666151000,
+  "max_read_length": 150,
+  "NCBI_record_count_matched": true,
+  "NCBI_base_count_matched": true,
+  "metadata_sha256": "7388fc75068cfaafec63d352040757193f12124f4a948a5118fe4561b0dc720e",
+  "script_sha256": "97112a3d96df1e0d29c43a41cbabef674b32089004d8b3f31f4e84a53f22594b",
+  "evidence_limit": "official_normalized_SRA_MD5_plus_vdb_validate_and_converted_FASTQ_aggregate_counts;FASTQ_files_are_derived_not_publisher_objects"
+}

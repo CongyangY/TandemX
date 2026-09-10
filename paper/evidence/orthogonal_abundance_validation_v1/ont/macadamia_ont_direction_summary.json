@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "complete_direction_only",
+  "eligible_families": 43,
+  "candidate_families": 3,
+  "mapping_efficiency_correction": 0.7421169097433717,
+  "genome_size_sensitivity_bp": [
+    616000000,
+    653000000,
+    738000000,
+    780000000
+  ],
+  "candidate_result_counts": {
+    "ONT_direction_does_not_support_residual_collapse": 2,
+    "ONT_direction_supports_residual_collapse": 1
+  },
+  "inputs": {
+    "ont_occupancy_tsv_sha256": "5bd9c5e1bc5ce337218ee9871fcf1e4951c214d7a3f51c7ce82cc3d35628848b",
+    "calibration_json_sha256": "e50124984407fe962c6c86ff8ade5bc0a05b931b72e6bba9599d336398bd0111",
+    "prior_family_metrics_sha256": "4a9da94ae5fe162b6139f77efbb9dd98814c1c9bb2aa03b823702d083e0d03c9",
+    "config_json_sha256": "eaea3beb50183ccd0e9aba8e22d25f828a93bdd68a6c6a02afbc64f96752dbe1"
+  },
+  "output_tsv_sha256": "40eb06016d9157d90248ac6d536c792f5d5a7e2db6de379ba015c6145fdbbc12",
+  "boundary": "ONT supplies secondary direction only; magnitude is estimated under-representation, not missing-bp truth."
+}

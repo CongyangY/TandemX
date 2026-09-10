@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "run_accession": "SRR11191912",
+  "source_object_type": "sra_lite",
+  "source_sra_bytes": 8674694070,
+  "source_sra_md5": "4b60d06873b3347dda83a6199bbcaddf",
+  "source_sra_sha256": "59bc2c3326c9efecc87dc62fbbc12950e65b673a3f371c631cdd11c07689c697",
+  "vdb_validate_passed": true,
+  "converted_FASTQ_files": [
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/reads/Macadamia_jansenii_SRR11191912_NCBI_SRA_Lite_complete/fastq/SRR11191912.lite.1_1.fastq",
+      "bytes": 44923805722
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/reads/Macadamia_jansenii_SRR11191912_NCBI_SRA_Lite_complete/fastq/SRR11191912.lite.1_2.fastq",
+      "bytes": 44923982582
+    }
+  ],
+  "FASTQ_record_count": 225016144,
+  "total_bases": 33669394677,
+  "max_read_length": 151,
+  "NCBI_record_count_matched": true,
+  "NCBI_base_count_matched": true,
+  "metadata_sha256": "7388fc75068cfaafec63d352040757193f12124f4a948a5118fe4561b0dc720e",
+  "script_sha256": "f3dc8a1c3c7923b4c6503eb95fd5c0c221824f22598c5bf845c4325a2e0268b4",
+  "evidence_limit": "official_SRA_Lite_MD5_plus_vdb_validate_and_converted_FASTQ_aggregate_counts;original_quality_scores_are_not_present;FASTQ_files_are_derived_not_publisher_objects"
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "families": 43,
+  "total_library_bases": 23186565438,
+  "genome_size_bp": 780000000,
+  "minimum_alignment_block_bp": 500,
+  "minimum_identity": 0.75,
+  "accepted_primary_paf_rows": 39083,
+  "rejected_paf_rows": 592005,
+  "ambiguous_multi_family_reads_excluded": 821,
+  "accepted_query_bp": 25113237,
+  "paf_sha256": "825350f5097f8287c1038a35856d258202c6f7c64d25da767ed03e4bfc999610",
+  "template_fasta_sha256": "83544eb12285c4f56d013ec95df3a73aa6730f2efdd94fb23ca6c3c3e1de57fc",
+  "output_tsv_sha256": "5bd9c5e1bc5ce337218ee9871fcf1e4951c214d7a3f51c7ce82cc3d35628848b",
+  "boundary": "Mapping occupancy is direction-only and not physical copy-number truth."
+}

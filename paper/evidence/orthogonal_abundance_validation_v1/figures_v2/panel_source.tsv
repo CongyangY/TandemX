@@ -1,0 +1,73 @@
+panel	species_key	family_id	platform_or_measure	value_bp	value_bp_min	value_bp_max	assembly_read_ratio	assembly_read_ratio_min	assembly_read_ratio_max	evidence_state	final_interpretation	warning
+A	ey15	TXF000002	Newer assembly	49758.0							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF000154	Newer assembly	18297.0							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF001517	Newer assembly	27167.0							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000496	Newer assembly	55562.0							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000563	Newer assembly	15537.0							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000695	Newer assembly	20424.0							unresolved	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF000002	Frozen HiFi	310457.0694							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF000154	Frozen HiFi	67445.4619							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF001517	Frozen HiFi	45595.4284							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000496	Frozen HiFi	1273357.5146							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000563	Frozen HiFi	27947.6795							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000695	Frozen HiFi	831337.3479							unresolved	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF000002	Illumina k=21	555543.656098161							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF000154	Illumina k=21	44496.37224186905							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF001517	Illumina k=21	32599.920082156583							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000496	Illumina k=21	1585990.9712226903							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000563	Illumina k=21	26290.866572348375							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000695	Illumina k=21	1104858.9368630063							unresolved	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF000002	Illumina k=31	519994.0834461651							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF000154	Illumina k=31	33895.47269851745							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	ey15	TXF001517	Illumina k=31	26773.835178463745							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000496	Illumina k=31	1604099.3376326046							orthogonal_supports_residual_collapse	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000563	Illumina k=31	20224.820426781313							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000695	Illumina k=31	1648.6481763050735							unresolved	abundance_estimate_not_physical_copy_truth
+A	macadamia	TXF000496	ONT direction range		620185.1177779204	785299.3374460681				ONT_direction_supports_residual_collapse	orthogonal_supports_residual_collapse	direction_only_genome_size_sensitivity_not_copy_truth
+A	macadamia	TXF000563	ONT direction range		16508.498808561577	20903.61862123057				ONT_direction_does_not_support_residual_collapse	unresolved	direction_only_genome_size_sensitivity_not_copy_truth
+A	macadamia	TXF000695	ONT direction range		1343.9693593332627	1701.7793835713394				ONT_direction_does_not_support_residual_collapse	unresolved	direction_only_genome_size_sensitivity_not_copy_truth
+B	ey15	TXF000002	Illumina k=21				0.0895663184230621				orthogonal_supports_residual_collapse	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	ey15	TXF000154	Illumina k=21				0.41120206160949363				orthogonal_supports_residual_collapse	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	ey15	TXF001517	Illumina k=21				0.8333456012019408				unresolved	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	macadamia	TXF000496	Illumina k=21				0.035032986320953335				orthogonal_supports_residual_collapse	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	macadamia	TXF000563	Illumina k=21				0.590965686020451				unresolved	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	macadamia	TXF000695	Illumina k=21				0.018485617773060934				unresolved	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	ey15	TXF000002	Illumina k=31				0.09568955029303028				orthogonal_supports_residual_collapse	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	ey15	TXF000154	Illumina k=31				0.5398066037533175				orthogonal_supports_residual_collapse	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	ey15	TXF001517	Illumina k=31				1.0146846657908952				unresolved	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	macadamia	TXF000496	Illumina k=31				0.034637505730786396				orthogonal_supports_residual_collapse	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	macadamia	TXF000563	Illumina k=31				0.7682144845857918				unresolved	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	macadamia	TXF000695	Illumina k=31				12.388331418152521				unresolved	ratio_below_threshold_supports_direction_not_physical_missing_bp
+B	macadamia	TXF000496	ONT direction range					0.07075263832603937	0.08958937969855635	ONT_direction_supports_residual_collapse	orthogonal_supports_residual_collapse	direction_only_genome_size_sensitivity_not_copy_truth
+B	macadamia	TXF000563	ONT direction range					0.7432684398585414	0.9411515959247765	ONT_direction_does_not_support_residual_collapse	unresolved	direction_only_genome_size_sensitivity_not_copy_truth
+B	macadamia	TXF000695	ONT direction range					12.001555664129842	15.196775029255322	ONT_direction_does_not_support_residual_collapse	unresolved	direction_only_genome_size_sensitivity_not_copy_truth
+C	ey15	TXF000002	HiFi deficit							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000002	Illumina k=21							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000002	Illumina k=31							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000002	ONT							not_available	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000002	Final							orthogonal_supports_residual_collapse	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000154	HiFi deficit							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000154	Illumina k=21							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000154	Illumina k=31							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000154	ONT							not_available	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF000154	Final							orthogonal_supports_residual_collapse	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	ey15	TXF001517	HiFi deficit							orthogonal_supports_residual_collapse_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	ey15	TXF001517	Illumina k=21							unresolved_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	ey15	TXF001517	Illumina k=31							orthogonal_supports_quantification_bias_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	ey15	TXF001517	ONT							not_available	unresolved	binary_state_separate_from_magnitude
+C	ey15	TXF001517	Final							unresolved	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000496	HiFi deficit							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	macadamia	TXF000496	Illumina k=21							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	macadamia	TXF000496	Illumina k=31							orthogonal_supports_residual_collapse_at_this_k	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	macadamia	TXF000496	ONT							ONT_direction_supports_residual_collapse	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	macadamia	TXF000496	Final							orthogonal_supports_residual_collapse	orthogonal_supports_residual_collapse	binary_state_separate_from_magnitude
+C	macadamia	TXF000563	HiFi deficit							orthogonal_supports_residual_collapse_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000563	Illumina k=21							orthogonal_supports_residual_collapse_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000563	Illumina k=31							unresolved_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000563	ONT							ONT_direction_does_not_support_residual_collapse	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000563	Final							unresolved	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000695	HiFi deficit							orthogonal_supports_residual_collapse_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000695	Illumina k=21							orthogonal_supports_residual_collapse_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000695	Illumina k=31							orthogonal_supports_quantification_bias_at_this_k	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000695	ONT							ONT_direction_does_not_support_residual_collapse	unresolved	binary_state_separate_from_magnitude
+C	macadamia	TXF000695	Final							unresolved	unresolved	binary_state_separate_from_magnitude

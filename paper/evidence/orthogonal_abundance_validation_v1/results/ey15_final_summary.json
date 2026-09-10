@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "complete_frozen_cross_platform_interpretation",
+  "species_key": "ey15",
+  "candidate_families": 3,
+  "final_interpretation_counts": {
+    "orthogonal_supports_residual_collapse": 2,
+    "unresolved": 1
+  },
+  "classification_boundary": "binary_interpretation_is_separate_from_continuous_magnitude",
+  "magnitude_boundary": "ranges_are_read_assembly_deficits_not_missing_bp_truth_or_prediction_error",
+  "inputs": {
+    "k21_metrics_sha256": "3c301d4bb84b8160c5c813823d8560b51c929da759f0f1ecb2ce54e6114b5d15",
+    "k31_metrics_sha256": "fb50ec6594c59625dc7c1e761645c5f0d9bdf007d875b2c21f672c4ac2813762",
+    "ont_direction_sha256": null
+  },
+  "output_tsv_sha256": "40e1e9d606af6ca355baec48ea2bd51ed76b9cc2b461d6800a314e87e98d60d7"
+}

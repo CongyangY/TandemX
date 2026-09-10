@@ -1,46 +1,50 @@
 # TandemX current status and handoff
 
-Updated 2026-09-09. Read completely after `AGENTS.md`, then verify Git/tests.
+Updated 2026-09-10. Read completely after `AGENTS.md`, then verify Git/tests.
 The user has authorized autonomous development and GitHub updates toward mature
 software and a full evidence-backed paper (multi-panel figures and supplement).
 The goal is **not complete**. Acceptance gates: `docs/release_program.md`.
 
-## Active 2026-09-09 feature-freeze checkpoint
+## Active 2026-09-10 feature-freeze checkpoint
 
-- **Independent evidence.** A source-frozen orthogonal validation is feasible.
-  Ey15-2 BioSample `SAMEA13018399` includes complete PCR-free Illumina run
-  `ERR8666067` (157,774,340 sequence records; 23,666,151,000 bases); the paper states that
-  its DNA was independently extracted from the same ground tissue used for HMW
-  DNA. The exact BioSample inventory contains no ONT run. Macadamia BioSample
-  `SAMN14217788` includes complete Illumina run `SRR11191912` (112,508,072
-  paired spots, 225,016,144 sequence records; 33,669,394,677 bases) and paper-declared PromethION run `SRR11191910`
-  (2,841,932 reads; 23,186,565,438 bases). The earlier paper describes the
-  platforms as using DNA from clonal tree accession 1005; the update paper's
-  same-sample statement remains paper-level because its archival BioSamples
-  differ. Exact ENA paths, bytes and MD5 values are frozen in
-  `paper/evidence/orthogonal_abundance_source_audit_v1`.
-- **Interpretation.** The existing Ey15 and Macadamia results establish only
-  concordance between a frozen HiFi call and an old-to-new assembly transition.
-  They do not yet distinguish HiFi abundance overestimation from residual
-  collapse in the newer assembly. Macadamia's 780-Mb normalization is 1.194-fold
-  above its Illumina GenomeScope estimate of 653 Mb and is a mandatory bias
-  sensitivity, but that scale difference alone is much smaller than the
-  existing approximately 23-fold and 41-fold read/new gaps for its two primary
-  positive families.
-- **Paper conclusion.** The manuscript now treats the continuous quantity as a
-  read--assembly abundance deficit or estimated under-representation. The newer
-  assembly is not copy-number truth. Historical binary assembly-proxy
-  classification and continuous magnitude are reported separately; the latter
-  is not scored as missing-bp prediction accuracy.
-- **Remaining blocker.** Complete the three orthogonal downloads and QC, run the
-  preregistered k=21/k=31 Illumina analysis with empirical cross-assembly
-  single-copy controls, independently reproduce exact k-mer depths, and obtain
-  the direction-only Macadamia ONT result. Then either freeze the method and
-  proceed to final manuscript/figures/Bioconda/Zenodo/release, or repair only a
-  demonstrated quantification bias and repeat this gate.
-- **Scope stop.** TandemX is in feature freeze. Do not add algorithms,
-  comparators, convenience features or low-yield optimizations. `unitFinder` is
-  permanently stopped and must not be retried.
+- **Independent evidence.** The final method-science gate is complete. Official
+  normalized SRA/SRA Lite objects and converted FASTQ counts passed integrity
+  QC for Ey15-2 PCR-free Illumina `ERR8666067` (157,774,340 reads;
+  23,666,151,000 bases), Macadamia Illumina `SRR11191912` (225,016,144 reads;
+  33,669,394,677 bases) and Macadamia PromethION `SRR11191910` (2,841,932 reads;
+  23,186,565,438 bases). Ey15 changes extraction, library and platform while
+  preserving the ground-tissue pool. Macadamia preserves clonal tree accession
+  1005 at paper level; differing later HiFi BioSamples do not prove the same DNA
+  extraction. The compact final archive is
+  `paper/evidence/orthogonal_abundance_validation_v1`.
+- **Interpretation.** Of the six pre-orthogonal deficit candidates, Ey15
+  `TXF000002` and `TXF000154` and Macadamia `TXF000496` have stable orthogonal
+  support for residual tandem-repeat under-representation in the newer
+  assemblies. Ey15 `TXF001517` and Macadamia `TXF000563`/`TXF000695` remain
+  `unresolved` because k values or platforms disagree. No family satisfies a
+  stable cross-k quantification-bias rule. None of the other 16 Ey15 or 40
+  Macadamia primary-eligible context families crossed the orthogonal deficit
+  rule at either k.
+- **Paper conclusion.** High-quality newer assemblies can retain family-specific
+  residual tandem-repeat under-representation, but TandemX abundance magnitude
+  is not uniformly reliable. For example, Ey15 `TXF000154` retained the deficit
+  direction while HiFi was 1.52--1.99-fold above Illumina, and Macadamia
+  `TXF000695` showed extreme k/platform instability. Binary interpretation is
+  therefore reported separately from the read--assembly abundance-deficit
+  range; neither quantity is physical missing-bp truth. The selected 3/6 result
+  is not population accuracy.
+- **Remaining blocker.** Method development now stops. Remaining work is final
+  manuscript/legend/table cross-reference editing, bibliography/metadata,
+  Bioconda, Zenodo and tagged release packaging. Figure 13 has passed direct-PNG
+  and independent-PDF-render visual QA, and the complete suite passes 672 tests.
+  Independent physical copy-number truth, biological replication across donors
+  and real-read interval truth remain limitations rather than reasons to expand
+  the frozen method.
+- **Scope stop.** Do not add algorithms, comparators, convenience features or
+  low-yield optimizations. `unitFinder` is permanently stopped and must not be
+  retried. The failed ENA transfers, KMC temporary-file failure, saturated
+  default counters and wrong-side intersection are retained as excluded fates;
+  only integrity-passing inputs and unsaturated exact counts enter the result.
 
 ## Active 2026-09-09 continuation checkpoint
 
@@ -1645,41 +1649,20 @@ reuse assembly-alignment BAMs from other projects as raw reads.
 
 ## Next critical work
 
-0. The current checkpoint and both hosted CI runs pass. Sequence clustering and
-   independent gapped/union endpoints are implemented and tested; do not redo the
-   earlier completed fix. Profile the cascade speed gap only on development/new
-   seeds, then expand independent distributions, matched per-array consensus
-   scoring and task-matched abundance/copy-number evaluation. SRF high-k misses
-   on highly mutated inputs require broader sensitivity study, not a claim of
-   general inferiority. Seeds 3101--3103 and 6401--6403 are consumed.
+0. The method-science gate is complete. Do not run additional algorithm,
+   comparator, performance or `unitFinder` work for this release. Preserve the
+   three supported and three unresolved family interpretations unchanged.
+1. Finish the orthogonal-abundance manuscript figure and its source-data table,
+   then perform full manuscript/legend/table cross-reference and visual QA.
+2. Complete the bibliography and author, funding, competing-interest, data/code
+   availability and journal-specific metadata.
+3. Run final clean-install/package checks, prepare the Bioconda recipe, create a
+   versioned release candidate and resolve only release-blocking defects.
+4. Deposit the frozen source/evidence bundle to Zenodo, record checksums and DOI,
+   tag the matching Git commit and update installation/archive links.
+5. Retain biological replication, physical copy-number truth and real-read
+   interval truth as explicit limitations. They do not authorize reopening the
+   frozen method during this release cycle.
 
-1. Keep meaningful source/tests/documentation checkpoints on GitHub; source
-   snapshots are now available for subsequent benchmark runs.
-2. Elastic now addresses indel boundaries/multiple arrays in development and
-   validation, with parity tests; investigate remaining family clustering and
-   runtime costs before making it the default.
-3. Use new development/validation seeds, freeze every decision before untouched
-   evaluation and add independent families/processes for publication inference.
-4. The second-species Macadamia analysis and depth sensitivity are complete and
-   archived. The result strengthens binary reference-proxy classification but
-   exposes poor missing-bp magnitude agreement. The next biological priority is
-   orthogonal or extraction-verified truth, not a third weakly matched assembly
-   pair.
-5. Stop unitFinder and the dependent ZH13 reproduction on this host. Preserve
-   the exact ZH13-T2T input and retained emulated-smoke fate, but do not infer
-   runtime or accuracy and do not retry unless a suitable native x86/Linux host
-   becomes directly available.
-6. SRF family/abundance development workflows now ran as described above. TRASH
-   assembly and applicable TAREAN short-read workflow comparisons remain unrun.
-   Docker execution is available; the TideCluster and unitFinder resource/
-   failure fates above are retained. TRASH needs R dependencies; TRASH 2 also
-   needs mafft/nhmmer. ULTRA, SRF, KMC, k8 and minimap2 comparator dependencies
-   are available. Keep incompatible task metrics separate.
-7. Prior art: SRF already supports accurate-read satellite discovery/abundance.
-   Optional AI requires transparent baselines, held-out evaluation, ablation,
-   calibration and domain-shift evidence; do not add an AI label for novelty.
-8. Complete release/reuse and manuscript gates as evidence permits. No complete
-   manuscript, final comparative study or production-scale release exists yet.
-
-The objective remains active; a development wheel or toy run does not meet the
-user's mature-software and mature-paper endpoint.
+The objective remains active until the manuscript, figure/source-data package,
+Bioconda, Zenodo and tagged release gates pass.

@@ -4,6 +4,14 @@ Frozen 2026-09-09 after the Ey15-2 and Macadamia donor-matched
 assembly-reference-proxy analyses. This is the final method-science gate before
 manuscript and release packaging. It is not a new algorithm or comparator.
 
+Completed 2026-09-10 without changing families or thresholds. Ey15
+`TXF000002`/`TXF000154` and Macadamia `TXF000496` satisfy the frozen residual-
+under-representation rule; Ey15 `TXF001517` and Macadamia
+`TXF000563`/`TXF000695` are unresolved. No candidate satisfies a stable cross-k
+quantification-bias rule. The compact evidence is
+`paper/evidence/orthogonal_abundance_validation_v1`; method development is now
+stopped for this release.
+
 ## Scientific question
 
 For each already source-eligible repeat family, determine whether the TandemX

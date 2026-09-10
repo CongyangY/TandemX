@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "passed_visual_review",
+  "reviewed_on": "2026-09-10",
+  "direct_png_inspected": true,
+  "pdf_independent_render_inspected": true,
+  "direct_png_and_pdf_render_consistent": true,
+  "panel_source_identical_to_figures_v1": true,
+  "checks": {
+    "clipped_text": false,
+    "overlapping_labels": false,
+    "legend_obscures_data": false,
+    "detached_annotation": false,
+    "nonfinite_plotted_values": false,
+    "svg_raster_images": 0,
+    "svg_editable_text_nodes": 97,
+    "log_scales_and_threshold_honest": true
+  },
+  "fate": "accepted_for_manuscript"
+}
