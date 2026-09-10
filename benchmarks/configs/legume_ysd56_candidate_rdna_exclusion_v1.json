@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_candidate_rdna_exclusion_v1",
+  "status": "locked_before_output",
+  "source_commit": "7996a86",
+  "script": "benchmarks/scripts/score_known_repeat_exclusion.py",
+  "script_sha256": "f9a67e8be7c4940deaccf27f4ecdef1161e86b2a5fd63a843a09ca0230a76ec6",
+  "candidate_fasta": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.fa",
+  "candidate_fasta_sha256": "43fd91afeaa67bc746754ad69d46113fbd2aad3252f0a4f52341672469c5855f",
+  "rdna_library": "/Volumes/T7/Codex/TandemX/tools/src/TideCluster/data/rdna_library.fasta",
+  "rdna_library_sha256": "a887357ddabd839ad8200debc4fdf10218dd8fdf1371bbc071eb9221b187c1db",
+  "rdna_record_count": 117,
+  "thresholds": {
+    "strong_glocal_edit_identity": 0.9,
+    "possible_glocal_edit_identity": 0.8,
+    "minimum_aligned_bp": 50
+  },
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "benchmarks/scripts/score_known_repeat_exclusion.py",
+    "--catalog",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.fa",
+    "--known",
+    "/Volumes/T7/Codex/TandemX/tools/src/TideCluster/data/rdna_library.fasta",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_rdna_exclusion_v1",
+    "--possible-threshold",
+    "0.80",
+    "--strong-threshold",
+    "0.90",
+    "--minimum-aligned-bp",
+    "50"
+  ],
+  "output_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_rdna_exclusion_v1",
+  "interpretation_boundary": "Local exclusion against the TideCluster rDNA library only; no-match is not proof of non-rDNA origin or novelty."
+}
