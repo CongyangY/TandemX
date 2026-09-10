@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "catalog": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_refined_after_rdna_v1/refined_shortlist_retained.fa",
+  "catalog_sha256": "2cbde8d064e67e19ee04e39427ed46bb929cf63840da38b543263cb13df180c0",
+  "known": "/Volumes/T7/Codex/TandemX/data/known_repeats/glycine_organelle_refseq_20260910/glycine_soja_chloroplast_mitochondrion.fasta",
+  "known_sha256": "47055ba191b36894b864b1b00402d10c7f36bf01d1c1b889ac73a764fe5437ad",
+  "catalog_count": 1,
+  "known_count": 2,
+  "pair_count": 2,
+  "possible_threshold": 0.8,
+  "strong_threshold": 0.9,
+  "minimum_aligned_bp": 50,
+  "mask_ambiguous_known_bases": false,
+  "masked_known_base_count": 0,
+  "alignment": "complete_shorter_vs_doubled_longer_edlib_HW_both_orientations",
+  "edlib_version": "1.3.9.post1",
+  "family_state_counts": {
+    "no_match_in_limited_library": 1
+  },
+  "pairwise_sha256": "91663fb9df066881062639a69a47f4034fbc425b94ef32f3d7633ccec085f006",
+  "summary_sha256": "e3a45d1bd5820e86983878bea2953e1ac653a9de0dbdc3a386aa5972c42f33ef",
+  "interpretation_boundary": "post hoc exclusion against this library only; no novelty claim"
+}

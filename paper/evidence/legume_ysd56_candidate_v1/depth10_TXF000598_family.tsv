@@ -1,0 +1,2 @@
+family_id	monomer_id	monomer_length_bp	consensus_md5	gc_fraction	support_read_count	support_span_bp	mean_identity	low_complexity_flag	confidence	warning
+TXF000598	TXM000598	785	76c737f3773ed281915f26212b49ad46	0.3376	97	1397702	0.9905	false	high	operational_monomer_cluster;observed_consensus_representative;uncalibrated_confidence;cluster_identity=0.95;possible_higher_order_or_partial:TXF000598-TXF013117

@@ -212,9 +212,22 @@ Every planned stage needs a machine-readable state and an explanatory log.
 
 ## Decision boundary
 
-YSD56 is the first-priority legume dataset: its complete raw reads, nested
-samples, donor-matched `GCA_040083835.1` assembly and the validated
-`sample_003` discovery receipt are local. The next gate for an assembly-aware
-result is the predeclared Stage-B normalization, filtering and provenance
-contract. It is an evidence and reproducibility gate, not new method
+YSD56 remains the first executed legume dataset. Its 1.0897x and nested
+10.9570x discoveries both validated, and the retained 785-bp candidate recurred
+exactly at the deeper depth. TRF and TideHunter independently confirmed 100%
+coverage of its 124,029-bp assembly locus at dominant period 785 bp. This is a
+stable, previously unreported-in-the-source-article candidate; it is not yet a
+globally novel family because the deeper reads are nested, three named soybean
+satellite sequences remain unresolved and no independent platform or full-
+database exclusion has completed.
+
+V14167 peanut and Medicago A17/R108 are the next registered lineages, but no
+large payload was downloaded in this checkpoint. V14167's current small-pilot
+plan is blocked by the repository contract that requires complete FASTQ
+transfer and EOF validation before deterministic sampling. A17/R108 have an
+eight-label repeat exclusion inventory but no directly reusable monomer
+sequence records in the audited sources. The next scientific gate is therefore
+independent support and remaining known-sequence exclusion for the YSD56
+candidate, followed by a separately resourced complete-file acquisition for
+one non-*Glycine* lineage. This is evidence collection, not new method
 development.

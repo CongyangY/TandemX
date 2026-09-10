@@ -137,6 +137,16 @@ pair was a 72-bp Dfam record at 0.694444 glocal edit identity, below the locked
 0.80 possible-match threshold. This adds a species-specific TE exclusion layer
 but does not replace the unavailable SoyTEdb library or establish novelty.
 
+An additional source audit found seven directly published soybean or
+wild-soybean tandem-repeat sequences that were absent from the original
+13-clone library: `Z26334.1`, `AF297983.1`--`AF297985.1`, and published
+`SBRS1`--`SBRS3` sequences. A separately locked local screen retained
+`TXF000708` as `no_match_in_limited_library`; its best comparison was the
+92-bp `SBRS1` sequence at 0.586957 glocal edit identity, below the 0.80
+possible-match threshold. This closes those seven accession/source omissions,
+but `CentGm-2`, `CentGm273` and `CentGm444` remain unresolved because no
+independently located public monomer record was obtained.
+
 The YSD56 source paper searched assembly tandem repeats with TRF periods from
 30 to 500 bp and highlighted trf91, trf92, trf182, trf183, trf184, trf273 and
 trf276. A 785-bp operational monomer was therefore outside that declared
@@ -149,6 +159,45 @@ This supports `not_reported_in_the_YSD56_article_or_supplement`, but does not
 show that the sequence or array was absent from all previous literature or
 databases.
 
+## Nested 10.9570x depth recurrence
+
+A second configuration was committed before inspecting output and applied to
+the 10.9570x nested sample from the same HiFi run: 654,450 reads and
+11,050,418,089 bases. Discovery completed with 778,295 candidate intervals and
+36,847 operational families, and validation accepted seven output files with
+2,694,384 records. The profiler recorded 5,335.51 s wall time, 13,248.39 s
+user CPU, 1,517.28 s system CPU, 5,509.84 MiB peak aggregate process-tree RSS
+and 460,330,868 peak scratch bytes. These measurements expose a real high-depth
+catalogue and clustering cost; the 36,847 operational representatives must not
+be interpreted as 36,847 biological repeat families.
+
+The fixed 1.0897x candidates were then compared with all 36,847 deeper
+catalogue representatives under the predeclared full-shorter circular glocal
+rules. Both had exact direct recurrence. `TXF000708` matched deeper family
+`TXF000598` at 785/785 bp, zero edits and identity 1.000000. The deeper family
+has 97 supporting reads, 1,397,702 bp supporting span, mean identity 0.9905,
+high confidence and one emitted possible higher-order/partial relationship.
+The 335-bp rDNA-related control likewise recurred exactly as `TXF000248`.
+Because the 10.9570x reads contain the 1.0897x sample, this is same-run depth
+recurrence rather than independent biological or platform replication.
+
+## Independent detector confirmation of the assembly array
+
+The locked assembly interval `CP154579.1:13,966,881-14,090,910` (zero-based,
+half-open) was extracted from the hash-bound YSD56 assembly. Its length is
+124,029 bp. TRF 4.10.0-rc.2 reported 461 records whose merged coverage spans
+124,029 bp and whose dominant period is exactly 785 bp. TideHunter 1.5.5
+reported two records whose merged coverage also spans 124,029 bp and whose
+dominant period is exactly 785 bp. Both tools therefore passed the predeclared
+minimum 0.90 locus-coverage and period-concordance rules and returned
+`confirmed_tandem_structure`.
+
+This confirms that the assembly locus is a continuous 785-bp tandem array; it
+does not establish an HOR, centromeric function, physical array size, donor-
+independent support or sequence novelty. Together with exact deeper-catalogue
+recurrence, the retained status is
+`stable_previously_unreported_in_source_article_candidate`, not `novel_TR`.
+
 ## What remains unestablished
 
 The pilot does not provide any of the following:
@@ -156,12 +205,14 @@ The pilot does not provide any of the following:
 1. abundance estimates from the complete YSD56 HiFi collection or a justified
    real-data normalization path;
 2. independent ONT or Illumina support, an independent specimen, or a
-   catalogue-completeness estimate;
+   catalogue-completeness estimate; the 10.9570x recurrence is nested within
+   the same HiFi run;
 3. exclusion against a comprehensive soybean/legume TE/repeat resource, a
    full nucleotide-database search, or complete repeat annotation of the array
-   context; the current soybean-clone, rDNA, organelle, five-minisatellite and
-   Dfam *G. max* consensus libraries are bounded screens only, and the SoyTEdb
-   bulk FASTA remains unavailable;
+   context; the current soybean-clone, seven-sequence supplemental soybean,
+   rDNA, organelle, five-minisatellite and Dfam *G. max* consensus libraries
+   are bounded screens only, `CentGm-2`, `CentGm273` and `CentGm444` remain
+   sequence-unresolved, and the SoyTEdb bulk FASTA remains unavailable;
 4. evidence that the 18,131 localized arrays are complete, or that unlocalized
    families are absent from the donor genome; or
 5. a validated HOR, physical copy number, assembly deficit, or biological

@@ -1,0 +1,3 @@
+tool	tool_version	region_length_bp	record_count	covered_bp	coverage_fraction	dominant_period	period_relation_to_785	passes_coverage	passes_period	verdict
+TRF	4.10.0-rc.2	124029	461	124029	1.000000	785	exact_785	true	true	confirmed_tandem_structure
+TideHunter	1.5.5	124029	2	124029	1.000000	785	exact_785	true	true	confirmed_tandem_structure

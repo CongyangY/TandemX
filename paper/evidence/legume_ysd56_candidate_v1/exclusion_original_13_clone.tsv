@@ -1,0 +1,2 @@
+family_id	family_length_bp	best_known_id	best_known_length_bp	shorter_length_bp	best_orientation	edit_distance	glocal_edit_identity	length_ratio	integer_multiple	multiple_relative_error	exclusion_state	interpretation_boundary
+TXF000708	785	AB536708.1	73	73	forward	32	0.561644	10.753425	11	0.022930	no_match_in_limited_library	no-match is limited to the fixed input library; not proof of novelty

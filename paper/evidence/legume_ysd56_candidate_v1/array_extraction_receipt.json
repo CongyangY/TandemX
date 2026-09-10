@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "coordinate_system": "zero_based_half_open",
+  "fasta": "/Volumes/T7/Codex/TandemX/data/references/YSD56_T2T_GCA_040083835.1_20260910/GCA_040083835.1_ASM4008383v1_genomic.fna.gz",
+  "fasta_sha256": "d83b877a221da2908d29068ad6513b24b36ba7005c266a7fdb10c10bde50413c",
+  "regions": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/inputs/ysd56_txf000708_region_20260910.tsv",
+  "regions_sha256": "2692de6e12c8291c6ed36a6cd6373d62d9acc3ff0e72ee353620ffeda3ed4809",
+  "output": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_array_confirmation_v4/TXF000708_array.fasta",
+  "output_sha256": "0866dbf818cbcd81b7a768c974fb21f221b3de95cfd20e95b9314613b5b04df9",
+  "extracted": [
+    {
+      "region_id": "TXF000708_array",
+      "sequence_id": "CP154579.1",
+      "start0": 13966881,
+      "end0": 14090910,
+      "extracted_length_bp": 124029
+    }
+  ]
+}

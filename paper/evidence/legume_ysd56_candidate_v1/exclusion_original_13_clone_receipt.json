@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "catalog": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/discover/monomers.fa",
+  "catalog_sha256": "c4af546f6f7648c35ea547510dcaed16fff34bc3755f3b29c85a9a34dd6da7ce",
+  "known": "/Volumes/T7/Codex/TandemX/data/known_repeats/soybean_genbank_20260910/soybean_known_repeat_clones.fasta",
+  "known_sha256": "67d3a505f87bb8c43ffc6c397003343feaa614d1fc185fe12cb5d7a441110c91",
+  "catalog_count": 1474,
+  "known_count": 13,
+  "pair_count": 19162,
+  "possible_threshold": 0.8,
+  "strong_threshold": 0.9,
+  "minimum_aligned_bp": 50,
+  "alignment": "complete_shorter_vs_doubled_longer_edlib_HW_both_orientations",
+  "edlib_version": "1.3.9.post1",
+  "family_state_counts": {
+    "no_match_in_limited_library": 962,
+    "insufficient_length_for_exclusion": 385,
+    "strong_known_clone_match": 53,
+    "possible_known_family_match": 65,
+    "weak_known_similarity": 9
+  },
+  "pairwise_sha256": "91f8252092977079fd1290c05701d70ca930d45069668787daef57a5bf72f536",
+  "summary_sha256": "499f75cbf747754689f8083d3e53c4bf6a57879bb5b1417c6fe88458a8c9962d",
+  "interpretation_boundary": "post hoc exclusion against this library only; no novelty claim"
+}

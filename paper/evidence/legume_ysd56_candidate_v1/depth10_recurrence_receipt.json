@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "query": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.fa",
+  "query_sha256": "43fd91afeaa67bc746754ad69d46113fbd2aad3252f0a4f52341672469c5855f",
+  "target": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_depth10_v1_20260910/run/discover/monomers.fa",
+  "target_sha256": "ce516c998cdac7dadb01ea61b4328a1fb6a9fd67c81de171b8cc72515baed6e2",
+  "query_count": 2,
+  "target_count": 36847,
+  "pair_count": 73694,
+  "best_match_state_counts": {
+    "direct_catalogue_recurrence": 2
+  },
+  "thresholds": {
+    "direct_identity": 0.95,
+    "direct_minimum_length_ratio": 0.9,
+    "direct_maximum_length_ratio": 1.1,
+    "related_identity": 0.9,
+    "maximum_multiple_error": 0.05
+  },
+  "alignment": "complete_shorter_vs_doubled_longer_edlib_HW_both_orientations",
+  "edlib_version": "1.3.9.post1",
+  "output_sha256": {
+    "catalogue_matches.tsv": "e47f3f4f16a94d727cc76ea0a74b2a674e71580105d9f1d153222741f937b8bc",
+    "best_match_per_query.tsv": "c7886215b3ba48e56f8505c4ade02386ada25dc2d427fa53882f2b41462f4c48"
+  },
+  "interpretation_boundary": "nested-depth catalogue recurrence only; not independent sample/platform support or novelty proof"
+}

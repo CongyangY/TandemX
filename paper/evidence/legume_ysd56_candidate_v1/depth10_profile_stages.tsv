@@ -1,0 +1,3 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+discover_10p9570x	0	5335.507480	13248.392072	1517.279535	5509.843750	3	460330868	5161	discover_10p9570x.stdout.log	discover_10p9570x.stderr.log
+validate_discovery	0	4.190708	3.432122	0.242271	68.843750	3	460330868	5	validate_discovery.stdout.log	validate_discovery.stderr.log

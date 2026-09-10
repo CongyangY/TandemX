@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "catalog": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_refined_after_rdna_v1/refined_shortlist_retained.fa",
+  "catalog_sha256": "2cbde8d064e67e19ee04e39427ed46bb929cf63840da38b543263cb13df180c0",
+  "known": "/Volumes/T7/Codex/TandemX/data/known_repeats/dfam_glycine_max_v40_20260910/glycine_max_dfam_raw_and_curated.fa",
+  "known_sha256": "a37182dbcac71554650bc347d37f5fb006fe2fce557ec05719fe5516d756919f",
+  "catalog_count": 1,
+  "known_count": 1697,
+  "pair_count": 1697,
+  "possible_threshold": 0.8,
+  "strong_threshold": 0.9,
+  "minimum_aligned_bp": 50,
+  "mask_ambiguous_known_bases": true,
+  "masked_known_base_count": 47662,
+  "alignment": "complete_shorter_vs_doubled_longer_edlib_HW_both_orientations",
+  "edlib_version": "1.3.9.post1",
+  "family_state_counts": {
+    "no_match_in_limited_library": 1
+  },
+  "pairwise_sha256": "f2f9e55b2dbb43c6b8290a9a1c8c8628a67f5166811c3c2839900393e80b0914",
+  "summary_sha256": "21b3e6e44ec9bb813577444c2c686173bf5e206e3ef1364bb1deffc318130fa9",
+  "interpretation_boundary": "post hoc exclusion against this library only; no novelty claim"
+}

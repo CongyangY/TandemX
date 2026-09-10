@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "library_name": "TideCluster_rDNA_library_sha256_a887357d",
+  "candidate_count": 2,
+  "retained_count": 1,
+  "excluded_count": 1,
+  "retained_family_ids": [
+    "TXF000708"
+  ],
+  "excluded_family_ids": [
+    "TXF000367"
+  ],
+  "input_sha256": {
+    "preliminary_shortlist.tsv": "a6af7f0b247591810956b535a1147191cf3e5f4c12f737ece667908f56713dae",
+    "preliminary_shortlist.fa": "43fd91afeaa67bc746754ad69d46113fbd2aad3252f0a4f52341672469c5855f",
+    "known_repeat_family_summary.tsv": "54fa2f6142b027137fb4cb6aec47b31c7e3f76fae0fee9068c14587c20e178c3"
+  },
+  "output_sha256": {
+    "refined_shortlist_all.tsv": "838f4d9cc5b709630be15a8a858f9f4730b9754c7ca5efd2b4817498b486b547",
+    "refined_shortlist_retained.tsv": "ca2ac06e23c7440a88c7d8c28f9d0c9b872f3e553223b9919b7a2730dc34dd1c",
+    "refined_shortlist_excluded.tsv": "f72dc8995cc5bd3712251fa4282f3e7485743b8288f1965e16a7b9496b129ecc",
+    "refined_shortlist_retained.fa": "2cbde8d064e67e19ee04e39427ed46bb929cf63840da38b543263cb13df180c0"
+  },
+  "interpretation_boundary": "additional exclusion only; retained rows remain preliminary and are not validated novel repeats"
+}

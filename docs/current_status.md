@@ -1,5 +1,39 @@
 # TandemX current status and handoff
 
+## Active 2026-09-10 legume previously-unreported TR candidate checkpoint
+
+The frozen production workflow was applied to donor-matched *Glycine soja*
+YSD56 HiFi reads and its `GCA_040083835.1` T2T assembly. The 1.0897x discovery
+pilot produced 1,474 operational families and retained one post-exclusion
+candidate, `TXF000708`: a 785-bp representative supported by eight unique
+pilot reads and localized to a 124,029-bp chr13 array outside both published
+centromere definitions and annotated genes. A nested 10.9570x run completed and
+validated 778,295 candidates and 36,847 operational families. `TXF000708`
+recurred exactly as deeper family `TXF000598` (785/785 bp, zero edits), with
+97 supporting reads, 1,397,702 bp supporting span and mean identity 0.9905.
+
+TRF 4.10.0-rc.2 and TideHunter 1.5.5 independently covered the complete
+124,029-bp assembly interval and both reported dominant period 785 bp. The
+array structure is therefore confirmed under the locked rule. Local screens
+found no qualifying match to the original 13 soybean clones, seven additional
+published soybean/wild-soybean repeats, 117 rDNA records, *G. soja* organelles,
+five soybean minisatellites or 1,697 Dfam *G. max* consensuses. The YSD56 paper
+and official supplement do not report a 785-bp family. Retained status is
+`stable_previously_unreported_in_source_article_candidate`, not `novel_TR`:
+the deeper sample is nested, `CentGm-2`/273/444 sequence exclusion remains
+unresolved, and no independent ONT/Illumina, full nucleotide-database or wet-
+lab evidence exists.
+
+The deeper run required 5,335.51 s wall time, 13,248.39 s user CPU,
+1,517.28 s system CPU, 5,509.84 MiB peak process-tree RSS and 460,330,868
+scratch bytes. Its 36,847 operational representatives are not biological
+family counts. V14167 peanut is metadata-ready but its public raw FASTQs total
+357.848 GB compressed and the current QC/sampling contract requires complete
+files; no large download was started. Medicago A17/R108 known-repeat labels
+are inventoried, but their directly reusable monomer sequences remain
+unresolved. No sixth manuscript Result was added, and Bioconda, Zenodo and the
+formal tagged release remain paused.
+
 ## Active 2026-09-10 manuscript v5 and discovery-saturation checkpoint
 
 The manuscript has been rewritten around the biological assembly-completeness
