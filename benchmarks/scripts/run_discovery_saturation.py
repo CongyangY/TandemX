@@ -87,6 +87,11 @@ def run_one(job: dict, snapshot: Path, timeout: float) -> dict:
     return row
 
 
+def run_seed(jobs: list[dict], snapshot: Path, timeout: float) -> list[dict]:
+    """Run nested depths sequentially within one independent source genome."""
+    return [run_one(job, snapshot, timeout) for job in jobs]
+
+
 def run(
     config_path: Path,
     datasets: list[Path],
@@ -166,10 +171,16 @@ def run(
     )
     (outdir / "environment.json").write_text(json.dumps(provenance, indent=2) + "\n")
     rows = []
+    jobs_by_seed = {
+        seed: [job for job in jobs if job["seed"] == seed] for seed in seeds
+    }
     with ThreadPoolExecutor(max_workers=workers) as executor:
-        futures = {executor.submit(run_one, job, snapshot, timeout): job for job in jobs}
+        futures = {
+            executor.submit(run_seed, jobs_by_seed[seed], snapshot, timeout): seed
+            for seed in seeds
+        }
         for future in as_completed(futures):
-            rows.append(future.result())
+            rows.extend(future.result())
             rows.sort(key=lambda row: (row["seed"], row["coverage"]))
             write_table(outdir / "run_summary.tsv", rows, list(rows[0]))
     complete = len(rows) == 21 and all(row["status"] == "ok" for row in rows)
