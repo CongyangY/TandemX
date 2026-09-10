@@ -599,3 +599,16 @@ remain explicit unresolved states. The newer assembly is prohibited during
 candidate generation and reserved for a separate post-lock reference-proxy
 comparison. See `docs/recovery_and_reporting_plan.md` for the fixed rules,
 retained resource failures and the stop criterion.
+
+
+### Exact Python selected-k-mer counting (2026-09-10)
+
+For k <= 31, Python selected-target counting uses rolling canonical 2-bit codes
+and converts only enrolled target keys back to their existing string identities.
+The >31 and non-ASCII sequence cases retain the string iterator. The count,
+quality correction, normalization and output fields are unchanged. This avoids
+constructing a substring and reverse complement for every non-target window;
+it is an exact implementation optimization, not a new abundance estimator.
+See `performance_opportunity_audit_20260910.md` for the small-input parity and
+resource experiment. Rust behavior is unchanged. The experimental periodic-
+context gate under `benchmarks/challenge/` is not called by public commands.

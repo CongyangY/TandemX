@@ -24,8 +24,10 @@ from tandemx.utils.threads import discover_thread_limit
 from tandemx.utils.progress import ProgressSnapshot, TerminalProgress
 from tandemx.utils.kmers import (
     canonical_kmer,
+    canonical_kmer_code,
     circular_kmer_counts,
     is_low_complexity_kmer,
+    iter_canonical_kmer_codes,
     iter_linear_canonical_kmers,
 )
 
@@ -413,6 +415,37 @@ def iter_kmers(sequence: str, k: int) -> Iterable[str]:
     yield from iter_linear_canonical_kmers(sequence, k)
 
 
+def selected_target_code_map(targets: set[str], k: int) -> dict[int, str] | None:
+    """Map exactly matchable canonical target strings to rolling 2-bit codes.
+
+    ``None`` preserves the legacy string iterator for k values and text that the
+    encoder cannot represent.  Invalid/noncanonical target strings never match
+    legacy canonical output, so omitting them is equivalent.
+    """
+    if not 1 <= k <= 31:
+        return None
+    result: dict[int, str] = {}
+    for target in targets:
+        if not isinstance(target, str) or len(target) != k or not target.isascii():
+            continue
+        normalized = target.upper()
+        if set(normalized) - set("ACGT") or canonical_kmer(normalized) != target:
+            continue
+        result[canonical_kmer_code(normalized)] = target
+    return result
+
+
+def update_selected_python_kmer_counts(
+    counts: Counter[str], sequence: str, k: int, targets: set[str], code_targets: dict[int, str] | None,
+) -> None:
+    """Count the same selected canonical words as the historical string path."""
+    if code_targets is None or not sequence.isascii():
+        counts.update(kmer for kmer in iter_kmers(sequence, k) if kmer in targets)
+        return
+    counts.update(code_targets[code] for _, code in iter_canonical_kmer_codes(sequence, k)
+                  if code in code_targets)
+
+
 def count_read_kmers(reads: Sequence[FastaRecord], k: int) -> Counter[str]:
     counts: Counter[str] = Counter()
     for read in reads:
@@ -463,6 +496,7 @@ def count_selected_read_kmers_and_bases(
 
     counts: Counter[str] = Counter()
     rust_counter = RustDiagnosticKmerCounter(k, targets) if backend == "rust" else None
+    python_target_codes = None if rust_counter is not None else selected_target_code_map(targets, k)
     total_bases = 0
     read_count = 0
     max_read_len = 0
@@ -501,7 +535,7 @@ def count_selected_read_kmers_and_bases(
                 rust_batch.clear()
                 rust_batch_bases = 0
         else:
-            counts.update(kmer for kmer in iter_kmers(read.sequence, k) if kmer in targets)
+            update_selected_python_kmer_counts(counts, read.sequence, k, targets, python_target_codes)
         if read_count % progress_every == 0:
             log_quantify_progress(logger, read_count, total_bases, started, max_reads, max_read_bases)
             update_quantify_read_progress(
@@ -614,6 +648,7 @@ def count_selected_read_kmers_quality_and_bases(
     """Count target k-mers and their global error survival in one streaming pass."""
     counts: Counter[str] = Counter()
     rust_counter = RustDiagnosticKmerCounter(k, targets) if backend == "rust" else None
+    python_target_codes = None if rust_counter is not None else selected_target_code_map(targets, k)
     total_bases = read_count = max_read_len = 0
     survival_sum = 0.0
     window_count = quality_windows = assumed_windows = 0
@@ -650,9 +685,7 @@ def count_selected_read_kmers_quality_and_bases(
                 rust_batch.clear()
                 rust_batch_bases = 0
         else:
-            counts.update(
-                word for word in iter_kmers(record.sequence, k) if word in targets
-            )
+            update_selected_python_kmer_counts(counts, record.sequence, k, targets, python_target_codes)
         if read_count % progress_every == 0:
             log_quantify_progress(
                 logger, read_count, total_bases, started, max_reads, max_read_bases
@@ -741,6 +774,7 @@ def count_selected_read_kmers_and_bases_one_file(
 ) -> tuple[Counter[str], int, int, int]:
     counts: Counter[str] = Counter()
     rust_counter = RustDiagnosticKmerCounter(k, targets) if backend == "rust" else None
+    python_target_codes = None if rust_counter is not None else selected_target_code_map(targets, k)
     total_bases = 0
     read_count = 0
     max_read_len = 0
@@ -758,7 +792,7 @@ def count_selected_read_kmers_and_bases_one_file(
                 rust_batch.clear()
                 rust_batch_bases = 0
         else:
-            counts.update(kmer for kmer in iter_kmers(read.sequence, k) if kmer in targets)
+            update_selected_python_kmer_counts(counts, read.sequence, k, targets, python_target_codes)
     if rust_counter is not None:
         rust_counter.count_sequences(rust_batch)
         counts.update(rust_counter.counts())

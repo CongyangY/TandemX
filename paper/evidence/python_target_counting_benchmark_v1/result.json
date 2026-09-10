@@ -1,0 +1,58 @@
+{
+  "benchmark_script_sha256": "0e2ba2bdfe8b49bfcf650d1a292014b76be50c7d2e0b9eb546ce3a4dff788024",
+  "boundary": "small consumed development input; not a release performance claim",
+  "catalogue": {
+    "path": "/Volumes/T7/Codex/TandemX/results/abundance_baseline_v1_20260906/genomes/s4101/catalogue.fa",
+    "sha256": "582d27c3c9fb67482e7c67a0feaf1d72b860915bf7e993d92feb7af1683963b4"
+  },
+  "complete": true,
+  "genome_size": 199100,
+  "k": 21,
+  "measurements": [
+    {
+      "copy_number_sha256": "78c5d4afd7cde2def3ed9c3901f2ce7d31c1d806806b064366c0d661d193cf85",
+      "mode": "legacy",
+      "quantify_call_seconds": 0.2626103339716792,
+      "ru_maxrss": 24428544
+    },
+    {
+      "copy_number_sha256": "78c5d4afd7cde2def3ed9c3901f2ce7d31c1d806806b064366c0d661d193cf85",
+      "mode": "legacy",
+      "quantify_call_seconds": 0.26835058303549886,
+      "ru_maxrss": 23789568
+    },
+    {
+      "copy_number_sha256": "78c5d4afd7cde2def3ed9c3901f2ce7d31c1d806806b064366c0d661d193cf85",
+      "mode": "legacy",
+      "quantify_call_seconds": 0.263060542056337,
+      "ru_maxrss": 23805952
+    },
+    {
+      "copy_number_sha256": "78c5d4afd7cde2def3ed9c3901f2ce7d31c1d806806b064366c0d661d193cf85",
+      "mode": "rolling",
+      "quantify_call_seconds": 0.08433045796118677,
+      "ru_maxrss": 24182784
+    },
+    {
+      "copy_number_sha256": "78c5d4afd7cde2def3ed9c3901f2ce7d31c1d806806b064366c0d661d193cf85",
+      "mode": "rolling",
+      "quantify_call_seconds": 0.07821866706945002,
+      "ru_maxrss": 23920640
+    },
+    {
+      "copy_number_sha256": "78c5d4afd7cde2def3ed9c3901f2ce7d31c1d806806b064366c0d661d193cf85",
+      "mode": "rolling",
+      "quantify_call_seconds": 0.07887670793570578,
+      "ru_maxrss": 24641536
+    }
+  ],
+  "platform": "macOS-14.4.1-arm64-arm-64bit",
+  "python": "3.11.15 | packaged by conda-forge | (main, Mar  5 2026, 16:59:26) [Clang 19.1.7 ]",
+  "reads": {
+    "path": "/Volumes/T7/Codex/TandemX/results/abundance_baseline_v1_20260906/reads/s4101/c1_e0/reads.fa",
+    "sha256": "5591d9ce97fa34b470494bb4a47460f7aa2c1283b19c16333ddad5d83ea8106b"
+  },
+  "repetitions": 3,
+  "schema_version": 1,
+  "timer_scope": "time.perf_counter around quantify_toy_copy_number only; interpreter startup and imports excluded"
+}

@@ -1,0 +1,8 @@
+{
+  "tandemx/quantify/mvp.py": "a8c0aa88738e75d8729887988d9aaf3976e7603c97c7088981e3ad20a7715473",
+  "tandemx/utils/kmers.py": "20e59ed1ea38e194c7444a80b650f580dbee5488eff1fd5781ba7b09f10fecaf",
+  "benchmarks/scripts/benchmark_python_target_counting.py": "0e2ba2bdfe8b49bfcf650d1a292014b76be50c7d2e0b9eb546ce3a4dff788024",
+  "tests/unit/test_quantify_mvp.py": "6b1cf5124469d3df902af034342e687eab5c90b230e1cbbc81931bd338a77ed5",
+  "tests/unit/test_context_prototype.py": "beaaff9b8a3aec18b02b8b47c4917264d9ff0e82996c3fde8d959a810d7b6422",
+  "benchmarks/challenge/context_prototype.py": "21cea89776358ae3c293a61bd89024f730a7a123ca0d7fbdaab0eaa5f0e24d19"
+}

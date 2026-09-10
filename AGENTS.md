@@ -299,3 +299,17 @@ residual-tandem-repeat-collapse interpretation. If they instead agree with the
 newer assembly, diagnose the quantification bias and change only that bounded
 problem. After this gate, stop method development and move to the final
 manuscript, figures, Bioconda, Zenodo, and release work.
+
+### User-authorized algorithm reassessment (2026-09-10)
+
+The user subsequently requested parallel investigation of algorithmic accuracy,
+speed and memory improvements after three manuscript critiques. This supersedes
+the method freeze only for explicitly separated research prototypes and tested
+exact implementation optimizations. The main task owns scientific decisions;
+Terra/Luna may perform bounded mechanical work. Keep frozen scientific estimator
+rules and historical validation evidence unchanged unless a new bounded change
+passes its stated development and independent-validation gates. Do not present
+existing seed/chaining/occupancy primitives as novel by themselves. Current
+research status is at the top of `docs/current_status.md`; manuscript v3 is an
+editorial draft, with v2 retained. Bioconda, Zenodo and formal tagged release are
+paused until the user explicitly reauthorizes them. unitFinder stays stopped.

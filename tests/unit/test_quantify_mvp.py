@@ -322,3 +322,74 @@ def test_single_copy_depth_gate_rejects_explicit_haploid_depth(tmp_path: Path) -
     )
     with pytest.raises(ValueError, match="cannot be combined with --haploid-depth"):
         validate_quantify_config(config)
+
+@pytest.mark.parametrize("sequence,k,targets", [
+    ("ACGTACGTNNacgt", 3, {"ACG", "CGT", "AAA", "TTT"}),
+    ("ACGTACGT", 31, {"A" * 31}),
+    ("ACGTACGT", 32, {"A" * 32}),
+    ("ACGΩTACG", 3, {"ACG", "CGT"}),
+])
+def test_selected_python_rolling_codes_match_legacy_strings(sequence, k, targets):
+    from collections import Counter
+    from tandemx.quantify.mvp import (
+        iter_kmers, selected_target_code_map, update_selected_python_kmer_counts,
+    )
+
+    expected = Counter(word for word in iter_kmers(sequence, k) if word in targets)
+    observed = Counter()
+    update_selected_python_kmer_counts(
+        observed, sequence, k, targets, selected_target_code_map(targets, k)
+    )
+    assert observed == expected
+
+def test_full_quantify_rolling_codes_match_legacy_output(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import tandemx.quantify.mvp as quantify
+
+    reads = tmp_path / "reads.fa"
+    catalogue = tmp_path / "catalogue.fa"
+    reads.write_text(">r1\nACGTTCAGGACACGTTCAGGACNNACGTTCAGGAC\n>r2\nTCCTGAACGTCTCCTGAACGTC\n", encoding="utf-8")
+    catalogue.write_text(">family_id=F1\nACGTTCAGGAC\n>family_id=F2\nTCCTGAACGTC\n", encoding="utf-8")
+    base = dict(reads=reads, monomers=catalogue, genome_size=1_000, k=5,
+                haploid_depth=1.0, kmer_backend="python")
+    quantify.quantify_toy_copy_number(QuantifyConfig(outdir=tmp_path / "new", **base))
+    new_bytes = (tmp_path / "new" / "copy_number.tsv").read_bytes()
+
+    def legacy(counts, sequence, k, targets, code_targets):
+        counts.update(word for word in quantify.iter_kmers(sequence, k) if word in targets)
+
+    monkeypatch.setattr(quantify, "update_selected_python_kmer_counts", legacy)
+    quantify.quantify_toy_copy_number(QuantifyConfig(outdir=tmp_path / "legacy", **base))
+    assert (tmp_path / "legacy" / "copy_number.tsv").read_bytes() == new_bytes
+
+@pytest.mark.parametrize("quality", [False, True])
+def test_selected_count_quality_and_worker_match_legacy(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, quality: bool) -> None:
+    import tandemx.quantify.mvp as quantify
+
+    reads = tmp_path / ("reads.fastq" if quality else "reads.fa")
+    if quality:
+        reads.write_text("@r1\nACGTTCAGGACNACGTTCAGGAC\n+\nIIIIIIIIIIIIIIIIIIIIIII\n", encoding="utf-8")
+    else:
+        reads.write_text(">r1\nACGTTCAGGACNACGTTCAGGAC\n", encoding="utf-8")
+    targets = {quantify.canonical_kmer("ACGTT"), quantify.canonical_kmer("TCAGG")}
+    if quality:
+        observed = quantify.count_selected_read_kmers_quality_and_bases(
+            [reads], 5, targets, "python", max_reads=None, max_read_bases=None,
+            progress_every=1, logger=__import__("logging").getLogger(__name__), progress=None,
+            assumed_error_rate=None,
+        )
+    else:
+        observed = quantify.count_selected_read_kmers_and_bases_one_file(reads, 5, targets, "python")
+
+    def legacy(counts, sequence, word_k, old_targets, _code_targets):
+        counts.update(word for word in quantify.iter_kmers(sequence, word_k) if word in old_targets)
+
+    monkeypatch.setattr(quantify, "update_selected_python_kmer_counts", legacy)
+    if quality:
+        expected = quantify.count_selected_read_kmers_quality_and_bases(
+            [reads], 5, targets, "python", max_reads=None, max_read_bases=None,
+            progress_every=1, logger=__import__("logging").getLogger(__name__), progress=None,
+            assumed_error_rate=None,
+        )
+    else:
+        expected = quantify.count_selected_read_kmers_and_bases_one_file(reads, 5, targets, "python")
+    assert observed == expected

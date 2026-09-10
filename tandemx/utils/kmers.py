@@ -105,20 +105,29 @@ def iter_canonical_kmer_codes(
         raise ValueError("encoded canonical k-mers require k in 1..=31")
     mask = (1 << (2 * k)) - 1
     reverse_shift = 2 * (k - 1)
-    forward = 0
-    reverse = 0
-    valid_length = 0
+    forward = reverse = valid_length = 0
+    encoded = sequence.encode("ascii")
+    if not filter_low_complexity:
+        for index, base in enumerate(encoded):
+            code = _BYTE_CODES[base]
+            if code < 0:
+                forward = reverse = valid_length = 0
+                continue
+            valid_length += 1
+            forward = ((forward << 2) | code) & mask
+            reverse = (reverse >> 2) | ((3 - code) << reverse_shift)
+            if valid_length >= k:
+                yield index + 1 - k, min(forward, reverse)
+        return
+
     base_counts = [0, 0, 0, 0]
     window_codes = [0] * k
     distinct_bases = 0
     complexity_threshold = (4 * k + 4) // 5
-
-    for index, base in enumerate(sequence.encode("ascii")):
+    for index, base in enumerate(encoded):
         code = _BYTE_CODES[base]
         if code < 0:
-            forward = 0
-            reverse = 0
-            valid_length = 0
+            forward = reverse = valid_length = 0
             base_counts = [0, 0, 0, 0]
             distinct_bases = 0
             continue
@@ -137,7 +146,7 @@ def iter_canonical_kmer_codes(
         reverse = (reverse >> 2) | ((3 - code) << reverse_shift)
         if valid_length < k:
             continue
-        if filter_low_complexity and (
+        if (
             max(base_counts) >= complexity_threshold
             or (distinct_bases <= 2 and _is_simple_two_base_window(window_codes, index, k))
         ):

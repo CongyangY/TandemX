@@ -1,0 +1,108 @@
+{
+  "status": "development_mechanism_only_not_validation",
+  "config": {
+    "k": 11,
+    "minimum_units": 2,
+    "phase_fraction": 0.7,
+    "maximum_seed_gap": 22
+  },
+  "unit": "CATATTCTTCTAAGAACAGCCGCAATCTGTCCGGTTCAGTCGTTCATTTCCTGTATCAGCGCTTTGACTTGGGGAATGGTCACTAGGGTACATACGTTCGTAGAATGTAGGGTTGTATTC",
+  "unit_sha256": "0d09fcb39dde0d53300c4ba573f15e9520dbbb46a707eed5026d76b36c7fd5f2",
+  "rows": [
+    {
+      "scenario": "complete_array",
+      "input_sha256": "0d66f936bddc3177f473f5756621fa1506d06ea9c43a2100c9939094b1dafbcf",
+      "read_bp": 880,
+      "truth_repeat_bp": 720,
+      "raw_diagnostic_depth_bp": 720.0,
+      "raw_depth_absolute_error_bp": 0.0,
+      "context_qualified_bp": 720,
+      "context_absolute_error_bp": 0,
+      "ambiguous_bp": 0,
+      "unassigned_bp": 160
+    },
+    {
+      "scenario": "shared_24bp_decoy",
+      "input_sha256": "c2fd0591fb6a6a6148501b30d60b78cfcca75211709bc33b1c4cf56ead018294",
+      "read_bp": 6240,
+      "truth_repeat_bp": 0,
+      "raw_diagnostic_depth_bp": 0.0,
+      "raw_depth_absolute_error_bp": 0.0,
+      "context_qualified_bp": 0,
+      "context_absolute_error_bp": 0,
+      "ambiguous_bp": 0,
+      "unassigned_bp": 6240
+    },
+    {
+      "scenario": "shared_80bp_decoy",
+      "input_sha256": "1f10e8ca4c278e60c19b0685851351cd2eb6c8840abcc3c33ed5ea665f1fe98e",
+      "read_bp": 9600,
+      "truth_repeat_bp": 0,
+      "raw_diagnostic_depth_bp": 7200.0,
+      "raw_depth_absolute_error_bp": 7200.0,
+      "context_qualified_bp": 0,
+      "context_absolute_error_bp": 0,
+      "ambiguous_bp": 0,
+      "unassigned_bp": 9600
+    },
+    {
+      "scenario": "array_plus_80bp_decoy",
+      "input_sha256": "7feaac4f0de3d1507324560de98af509c475dcd4a53ffe2b43b424720aa9fdd3",
+      "read_bp": 10480,
+      "truth_repeat_bp": 720,
+      "raw_diagnostic_depth_bp": 7920.0,
+      "raw_depth_absolute_error_bp": 7200.0,
+      "context_qualified_bp": 720,
+      "context_absolute_error_bp": 0,
+      "ambiguous_bp": 0,
+      "unassigned_bp": 9760
+    },
+    {
+      "scenario": "substitution_7_of_720",
+      "input_sha256": "fc96112d2a44ea0107b7afe3a55e83eb68e369dae0ed714af7d4906b74e01029",
+      "read_bp": 880,
+      "truth_repeat_bp": 720,
+      "raw_diagnostic_depth_bp": 600.0,
+      "raw_depth_absolute_error_bp": 120.0,
+      "context_qualified_bp": 720,
+      "context_absolute_error_bp": 0,
+      "ambiguous_bp": 0,
+      "unassigned_bp": 160
+    },
+    {
+      "scenario": "insertion_7_of_720",
+      "input_sha256": "31f28dec5a510c774491525d4758bf0a855ea83ec18d4a2a2fa0e27ace2df0c1",
+      "read_bp": 887,
+      "truth_repeat_bp": 727,
+      "raw_diagnostic_depth_bp": 660.0,
+      "raw_depth_absolute_error_bp": 67.0,
+      "context_qualified_bp": 419,
+      "context_absolute_error_bp": 308,
+      "ambiguous_bp": 0,
+      "unassigned_bp": 468
+    },
+    {
+      "scenario": "partial_single_unit",
+      "input_sha256": "db933d9612d6dba65440480a3f9e1c65dd542f429631f2fe365b208483f66c89",
+      "read_bp": 280,
+      "truth_repeat_bp": 120,
+      "raw_diagnostic_depth_bp": 120.0,
+      "raw_depth_absolute_error_bp": 0.0,
+      "context_qualified_bp": 0,
+      "context_absolute_error_bp": 120,
+      "ambiguous_bp": 0,
+      "unassigned_bp": 280
+    }
+  ],
+  "limitations": [
+    "One synthetic unit; deliberately constructed decoys; all outcomes are development.",
+    "Raw depth diagnostic is not a full frozen production quantify benchmark.",
+    "No SRF or minimap2 occupancy comparison; no superiority claim.",
+    "Exact phase breaks at indels; partial units deliberately fail the two-unit gate.",
+    "No physical abundance, confidence calibration or cross-species validation."
+  ],
+  "source_sha256": {
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/evaluate_context_development.py": "a8ee3d89b34ccaacca46edebc18ccbbd387dca581c92409c66722014073cf1ec",
+    "benchmarks/challenge/context_prototype.py": "21cea89776358ae3c293a61bd89024f730a7a123ca0d7fbdaab0eaa5f0e24d19"
+  }
+}

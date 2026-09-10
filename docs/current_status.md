@@ -1,5 +1,38 @@
 # TandemX current status and handoff
 
+## Active 2026-09-10 algorithm research reassessment
+
+The user's three critique attachments and subsequent request authorize parallel
+research on accuracy, speed and memory. The main task owns scientific decisions;
+Terra/Luna handle bounded audits, mechanical implementation and checks.
+Bioconda, Zenodo and formal tagged release remain on hold; unitFinder remains
+permanently stopped. The older recovery branch is a negative result and is not
+being expanded. See `docs/research_direction_decision_20260910.md`.
+
+Current editorial draft: `paper/0910/manuscript_v3.md`; v2 remains unchanged.
+Complete recovery text is retained in `paper/0910/supplementary_recovery_v3.md`.
+This editorial draft does not establish new scientific performance or complete
+the pending manuscript artwork/package.
+
+The Python selected-k-mer count implementation now reuses exact rolling 2-bit
+codes, with legacy fallbacks and unchanged estimator outputs. A small consumed
+196-KiB input gave median quantify-call time 0.2631 to 0.0789 s (3.34x), with
+identical output SHA; RSS did not show a reliable reduction. This is a local
+Python engineering result, not a Rust or whole-genome speed claim. Reproducible
+script and receipt: `docs/performance_opportunity_audit_20260910.md`.
+
+A separate development-only exact-periodic-context prototype rejects a
+constructed shared-fragment abundance artifact but loses true sequence under
+indels and single-unit inputs. It is not wired into production. All seven
+initial scenarios and adverse outcomes are retained in
+`paper/evidence/context_development_v1/result.json`; see
+`docs/context_prototype_development_20260910.md`. Ordinary mapping/SRF abundance
+comparison and independent validation remain required. No new holdout was used.
+Full regression: **740 passed, 2 skipped**, 101.16 s in `tandemx-dev`.
+The separately added one-base flank-boundary regression is also retained; the
+context test file passes all eight tests. No new whole-genome benchmark was run.
+
+
 
 ## Active 2026-09-10 targeted recovery and report checkpoint
 
