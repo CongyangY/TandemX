@@ -20,7 +20,7 @@
 
 | repeat | 报道长度 | A17 | R108 | 可复用状态 | 主要证据与限制 |
 | --- | ---: | --- | --- | --- | --- |
-| MtR1 | 166 bp | pericentromeric | 2004 paper 报道 R108-1 缺失 | 仅名称/长度排除 | PMID 15480726；未取得直接序列 accession |
+| MtR1 | 166 bp | pericentromeric | 2004 paper 报道 R108-1 缺失 | 仅名称/长度排除 | PMID 15480726；论文还列出 AQ841077 marker/BAC context，但它不是已验证的 MtR1 monomer 序列 |
 | MtR2 | 183 bp | pericentromeric | 2004 paper 报道 R108-1 缺失 | 仅名称/长度排除 | PMID 15480726；未取得直接序列 accession |
 | MtR3 | 166 bp | functional centromere | 2004 paper 报道 R108-1 各二价体 centromeric | 仅名称/长度排除 | PMID 15480726；FISH 与阵列跨度不能替代序列 accession |
 | CentM168 | 168 bp | 主要 centromeric satellite | R108 centromere 几乎全为该 repeat | 仅名称/长度排除 | PMID 40714838；CENH3 enrichment 是功能线索，精确序列仍 unresolved |
