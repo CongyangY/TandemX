@@ -239,6 +239,14 @@ def write_tsv(path: Path, rows: list[dict[str, object]]) -> None:
         writer.writerows(rows)
 
 
+def gate_columns(gates: dict[str, bool]) -> dict[str, str]:
+    columns = {f"passes_{name}_gate": str(value).lower() for name, value in gates.items()}
+    unexpected = sorted(set(columns).difference(OUTPUT_FIELDS))
+    if unexpected:
+        raise ValueError(f"gate output columns are not declared: {', '.join(unexpected)}")
+    return columns
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--families", required=True, type=Path)
@@ -358,9 +366,9 @@ def main() -> int:
             "known_library": known["exclusion_state"] == "no_match_in_limited_library",
             "read_span": int(family["support_span_bp"]) >= args.minimum_read_span,
             "array_span": bool(selected) and span / monomer_length >= args.minimum_array_monomer_ratio,
-            "centromere": bool(selected) and not any_centromere_overlap,
-            "terminal": bool(selected) and distance_to_end is not None and distance_to_end >= args.terminal_exclusion_bp,
-            "gene": bool(selected) and overlap_count == 0,
+            "centromere_exclusion": bool(selected) and not any_centromere_overlap,
+            "terminal_exclusion": bool(selected) and distance_to_end is not None and distance_to_end >= args.terminal_exclusion_bp,
+            "gene_overlap": bool(selected) and overlap_count == 0,
         }
         shortlist = all(gates.values())
         if shortlist:
@@ -404,7 +412,7 @@ def main() -> int:
                 "nearest_upstream_gene_distance_bp": "--" if upstream_distance is None else upstream_distance,
                 "nearest_downstream_gene_id": downstream_id,
                 "nearest_downstream_gene_distance_bp": "--" if downstream_distance is None else downstream_distance,
-                **{f"passes_{name}_gate": str(value).lower() for name, value in gates.items()},
+                **gate_columns(gates),
                 "shortlist_pass": str(shortlist).lower(),
                 "candidate_state": "preliminary_previously_unreported_candidate" if shortlist else "not_shortlisted",
                 "interpretation_boundary": "post hoc triage; limited known library; depth and orthogonal validation pending; not a novelty claim",

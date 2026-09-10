@@ -1,5 +1,6 @@
 from benchmarks.scripts.integrate_tr_candidate_evidence import (
     best_short_period,
+    gate_columns,
     gene_context,
     interval_overlap,
     max_homopolymer,
@@ -53,3 +54,13 @@ def test_read_fasta_uses_structured_family_identifier(tmp_path):
         encoding="utf-8",
     )
     assert read_fasta(fasta) == {"TXF000001": "ACGTACGT"}
+
+
+def test_gate_columns_must_match_declared_output_schema():
+    assert gate_columns({"gene_overlap": True}) == {"passes_gene_overlap_gate": "true"}
+    try:
+        gate_columns({"undeclared": True})
+    except ValueError as error:
+        assert "passes_undeclared_gate" in str(error)
+    else:
+        raise AssertionError("undeclared gate did not fail")
