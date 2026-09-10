@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment_id": "legume_ysd56_candidate_refined_after_rdna_v1",
+  "status": "locked_before_output",
+  "source_commit": "4122b09",
+  "script": "benchmarks/scripts/refine_tr_shortlist.py",
+  "script_sha256": "bc9539007c41bc599b0d6b164ac983c927707721e3a06e3970569a043eb53ddb",
+  "inputs": {
+    "candidate_table": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.tsv",
+      "sha256": "a6af7f0b247591810956b535a1147191cf3e5f4c12f737ece667908f56713dae"
+    },
+    "candidate_fasta": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.fa",
+      "sha256": "43fd91afeaa67bc746754ad69d46113fbd2aad3252f0a4f52341672469c5855f"
+    },
+    "rdna_exclusion_summary": {
+      "path": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_rdna_exclusion_v2/known_repeat_family_summary.tsv",
+      "sha256": "54fa2f6142b027137fb4cb6aec47b31c7e3f76fae0fee9068c14587c20e178c3"
+    }
+  },
+  "retention_rule": "retain only no_match_in_limited_library; strong/possible/weak matches are known_or_related; insufficient length is unresolved and excluded",
+  "command": [
+    "conda",
+    "run",
+    "-n",
+    "tandemx-dev",
+    "python",
+    "benchmarks/scripts/refine_tr_shortlist.py",
+    "--candidate-table",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.tsv",
+    "--candidate-fasta",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_evidence_v3/preliminary_shortlist.fa",
+    "--exclusion-summary",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_rdna_exclusion_v2/known_repeat_family_summary.tsv",
+    "--library-name",
+    "TideCluster_rDNA_library_sha256_a887357d",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_refined_after_rdna_v1"
+  ],
+  "output_dir": "/Volumes/T7/Codex/TandemX/results/legume_ysd56_novel_tr_pilot_v1_20260910/run/candidate_refined_after_rdna_v1",
+  "interpretation_boundary": "Retained rows remain preliminary follow-up candidates, not validated novel repeats."
+}
