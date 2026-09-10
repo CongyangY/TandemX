@@ -137,6 +137,18 @@ pair was a 72-bp Dfam record at 0.694444 glocal edit identity, below the locked
 0.80 possible-match threshold. This adds a species-specific TE exclusion layer
 but does not replace the unavailable SoyTEdb library or establish novelty.
 
+The YSD56 source paper searched assembly tandem repeats with TRF periods from
+30 to 500 bp and highlighted trf91, trf92, trf182, trf183, trf184, trf273 and
+trf276. A 785-bp operational monomer was therefore outside that declared
+period range. This explains why the present candidate is not a direct recovery
+of one of the seven reported length labels. The official 1,172,429-byte
+supplementary DOCX (SHA-256
+`37926502c611eab322b91ffb2b484bb4ccee1d632ed4596b73e5f2b887d3333d`)
+also names only those seven families and contains no `785` text occurrence.
+This supports `not_reported_in_the_YSD56_article_or_supplement`, but does not
+show that the sequence or array was absent from all previous literature or
+databases.
+
 ## What remains unestablished
 
 The pilot does not provide any of the following:

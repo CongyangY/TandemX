@@ -117,16 +117,16 @@ YP4 是 *Phaseolus vulgaris* 品种 Pinjinyun No. 4（红芸豆/菜豆类型）�
 
 原始研究为 Lian et al., *Scientific Data* 2025，DOI [10.1038/s41597-025-05741-y](https://doi.org/10.1038/s41597-025-05741-y)，全文见 [PMC12350797](https://pmc.ncbi.nlm.nih.gov/articles/PMC12350797/)。GenBank assembly 为 [GCA_040083835.1](https://www.ncbi.nlm.nih.gov/assembly/GCA_040083835.1/)，SRA/BioProject 为 [PRJNA1095640](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1095640)，研究数据集索引为 SRP502474。
 
-YSD56 是对大豆胞囊线虫 X12 抗性稳定的 *Glycine soja* 野生种质。最终装配 1,008,523,555 bp、20 条染色体、40 个端粒、0 gap，BUSCO 99.7%、QV 52.16；论文明确使用 T2T reference genome。数据量为 Illumina 91.05 Gb、HiFi 44.19 Gb、ONT ultra-long 240.85 Gb、Hi-C 表格 123.84 Gb。正文另一处写 Hi-C 23.84 Gb（约 123×），形成不可忽略的 source conflict；在下载前应以 SRA run table 或作者补充表确认，不要把 23.84/123.84 任一数字当作已闭合事实。
+YSD56 是对大豆胞囊线虫 X12 抗性稳定的 *Glycine soja* 野生种质。最终装配 1,008,523,555 bp、20 条染色体、40 个端粒、0 gap，BUSCO 99.7%、QV 52.16；论文明确使用 T2T reference genome。论文报告 Illumina 91.05 Gb、HiFi 44.19 Gb、ONT ultra-long 240.85 Gb，并在不同位置把 Hi-C 写成 23.84 或 123.84 Gb。2026-09-10 复核的 ENA run table 则给出 Illumina 92.173 Gb、HiFi 44.193 Gb、ONT 71.019 Gb、Hi-C 123.845 Gb。ONT 差异尤其大，可能涉及过滤或统计层级，但公开记录不足以闭合；实际分析必须以具体 run 文件的 checksum 和 observed bases 为准。
 
-| raw modality | accession | 论文量 | donor-matched |
+| raw modality | accession | ENA run-level bases（论文报告） | donor-matched |
 |---|---|---:|---|
-| PacBio HiFi | PRJNA1095640 / SRP502474 | 44.19 Gb，约 43.42× | 是，raw reads 和 assembly 都是 YSD56；论文描述同一野大豆材料 |
-| ONT ultra-long | PRJNA1095640 / SRP502474 | 240.85 Gb，约 67.97× | 是，论文称用于该 YSD56 assembly |
-| Illumina | PRJNA1095640 / SRP502474 | 91.05 Gb，约 88.73× | 是 |
-| Hi-C | PRJNA1095640 / SRP502474 | 23.84 或 123.84 Gb，`unresolved` | 材料级匹配，具体 library 需按 SRA 元数据确认 |
+| PacBio HiFi | `SRR28726931` | 44.193 Gb（44.19 Gb） | 是，run 和 assembly 均关联 `SAMN40909152` / YSD56 leaf |
+| ONT ultra-long | `SRR28726929` | 71.019 Gb（240.85 Gb；`source_conflict`） | 是，run 和 assembly 均关联 `SAMN40909152`；统计量不闭合 |
+| Illumina WGS | `SRR28726932` | 92.173 Gb（91.05 Gb） | 是，run 和 assembly 均关联 `SAMN40909152` |
+| Hi-C | `SRR28726930` | 123.845 Gb（23.84 或 123.84 Gb） | 材料级匹配；不进入 discovery/abundance 输入 |
 
-core raw（不计 Iso-Seq）约 399.93 Gb 或 499.93 Gb，差异完全来自 Hi-C 记录冲突。YSD56 适合做野生大豆重复/着丝粒案例和抗性相关区域背景，但不要把它当作 ZH13 的 donor-matched replicate。
+ENA 当前三类 WGS genomic reads（HiFi、ONT、Illumina；不计 Hi-C/Iso-Seq）合计 207.385 Gb。该合计是 run metadata，不是本地已验证总量；目前只有 HiFi 完整文件通过本地 checksum 和 FASTQ 审计。YSD56 适合做野生大豆重复/着丝粒案例和抗性相关区域背景，但不要把它当作 ZH13 的 donor-matched replicate。
 
 ## 明确排除或降级的候选
 
