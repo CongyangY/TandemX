@@ -1,0 +1,38 @@
+{
+  "candidate_repeat_bp_status": "requires_separate_repeat_localization",
+  "candidate_sequences": 1,
+  "complete_genomic_resolvability_test": false,
+  "expansion_decision": "requires_remapping_and_posthoc_proxy_validation",
+  "newer_assembly_used": false,
+  "outputs": {
+    "recovered_sequences.fasta": "96305322caec54402ccbaab8fe7624ef973ef3b390821dc255712b5509196786",
+    "recovery_candidates.tsv": "804ea37096c949f34782f0797cd6db17486e8b292016f080b58303bb6423d7ce",
+    "recovery_loci.bed": "d57edb693c47a759fd70a289cb2e42fae3888aa8d4199bbec3329681a2e387e4",
+    "recovery_validation.tsv": "c49b0e68d7f70bb2820730c07028782f2d0f0c3e7ee5bb326c3600d63452ebc1",
+    "recruited_reads.tsv": "c84501b73d28f1d063fab167ca2be863ee74554618a8fe41f80bc1ca1c46294e"
+  },
+  "recovery_status_counts": {
+    "insufficient_read_support": 2,
+    "partially_resolved": 1,
+    "unresolved_no_assembly_locus": 1,
+    "unresolved_no_unique_anchor": 3
+  },
+  "resource_caps": {
+    "maximum_recruited_ids": 1000000,
+    "maximum_retained_alignment_rows": 10000000
+  },
+  "retained_alignment_rows": 4262088,
+  "scope": "fixed_historical_loci_2kb_flanks_at_0_2_5_10kb_and_full_HiFi_read_mapping",
+  "selected_families": [
+    "TXF000002",
+    "TXF000154"
+  ],
+  "source": {
+    "__init__.py": "f7c78e53394d8a68810d160d4fd8db3c1cf9633d495f6b18f69cff43dd58c9c0",
+    "evidence.py": "89459bbdc9b49aaa66f7bb1a4216bdb309dcd98845575cd53c733b8d33cd45ef",
+    "poc.py": "ec30bb1d7467b3251bfad9c8d99ea1ddcbaf3f9c51db7aa17d62458c86ede059",
+    "read_store.py": "7e8ef0e8829f25c85f7e7f1a1c536e71e13ee72f55ff16794477c0cf684ea47b"
+  },
+  "status": "candidate_generation_complete",
+  "unique_recruited_reads": 133592
+}

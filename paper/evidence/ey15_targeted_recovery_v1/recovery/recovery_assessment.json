@@ -1,0 +1,69 @@
+{
+  "candidate_sequences": 1,
+  "complete_genomic_resolvability_test": false,
+  "decision": "stop_recovery_expansion_negative_poc",
+  "evidence": {
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/candidate_lock.json": "2eece8a087d18e306b05e5c6e04a2af6c7effa357d42f9246ad18ba49a319ee3",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/proxy_completion.json": "ef54d0ef8da13df90c260961c0463f0dd7c86c814693b70a06118bc50c4ea1f1",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/proxy_validation.tsv": "272cb3a685107d6c0cd13ff0e649cd690d3ef407d4e4870c175b1bce558f7e30",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/read_support/receipt.json": "8227c7c26dc36cb9859a0b879c42345235382c1985986862f58af4faf1f2d01a",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/remapping_v2/read_remapping.tsv": "b454cd614484a493b0caa6053baa7bd2fdfd4f0f730201003c3bfe3e2c0982be",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/remapping_v2/remapping_completion.json": "0ea556fe62ebc1fb69e020b2065b8478811e2270481cce6c281da01733d193ee"
+  },
+  "proxy_validation": [
+    {
+      "candidate_localized_repeat_bp": "644",
+      "candidate_repeat_distance_to_proxy_bp": "35",
+      "candidate_repeat_gain_bp": "-35",
+      "candidate_span_bp": "5681",
+      "family_id": "TXF000002",
+      "locus_id": "L0004",
+      "newer_chromosome": "Chr2",
+      "newer_end": "565362",
+      "newer_left_hits": "1",
+      "newer_localized_repeat_bp": "679",
+      "newer_right_hits": "1",
+      "newer_span_bp": "5679",
+      "newer_start": "559683",
+      "old_localized_repeat_bp": "679",
+      "old_repeat_distance_to_proxy_bp": "0",
+      "old_span_bp": "5679",
+      "proxy_status": "unique_flank_pair_reference_proxy",
+      "warning": "same_frozen_localizer_not_independent_repeat_truth;candidate_span_includes_intervening_nonrepeat;reference_proxy_not_absolute_truth"
+    }
+  ],
+  "read_remapping": [
+    {
+      "identity_min": "0.98",
+      "independently_supporting_reads": "97",
+      "query_coverage_min": "0.9",
+      "sequence_id": "L0004_old",
+      "span_bp": "5679",
+      "supplied_independent_reads": "120",
+      "warning": "same_library_alignment_support_not_independent_copy_number_truth"
+    },
+    {
+      "identity_min": "0.98",
+      "independently_supporting_reads": "97",
+      "query_coverage_min": "0.9",
+      "sequence_id": "L0004_newer",
+      "span_bp": "5679",
+      "supplied_independent_reads": "120",
+      "warning": "same_library_alignment_support_not_independent_copy_number_truth"
+    },
+    {
+      "identity_min": "0.98",
+      "independently_supporting_reads": "97",
+      "query_coverage_min": "0.9",
+      "sequence_id": "L0004_candidate",
+      "span_bp": "5681",
+      "supplied_independent_reads": "120",
+      "warning": "same_library_alignment_support_not_independent_copy_number_truth"
+    }
+  ],
+  "status": "assessment_complete",
+  "summary": "No validated repeat-representation gain. One 5,681-bp unpolished candidate is supported by other reads, but the frozen localizer measures 644 repeat bp versus 679 bp in both old and newer assembly intervals. All three spans have 97 supporting reads among 120 candidate-excluded reads. Stop recovery algorithm expansion; retain this bounded negative proof of concept.",
+  "validated_recovery_successes": 0,
+  "validated_repeat_gain": false,
+  "warning": "localized repeat bp is not physical copy truth; same-library remapping is not independent abundance validation"
+}

@@ -1,0 +1,11 @@
+{
+  "alignment_identity_min": 0.98,
+  "minimap2_sha256": "9747d27a83257eef51b4258b8b9248eaf313024ab8fc5dc5143ab7d22c9e3645",
+  "proxy": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2",
+  "proxy_completion_sha256": "ef54d0ef8da13df90c260961c0463f0dd7c86c814693b70a06118bc50c4ea1f1",
+  "query_coverage_min": 0.9,
+  "read_receipt_sha256": "8227c7c26dc36cb9859a0b879c42345235382c1985986862f58af4faf1f2d01a",
+  "reads": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/read_support",
+  "scope": "same_library_source_read_excluded_alignment_support_not_copy_truth",
+  "source_sha256": "d0cb68470a3e52ffdab57d9f17d6422a4014ee137de20e85b89b472a4de9b857"
+}

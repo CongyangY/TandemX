@@ -1,0 +1,9 @@
+{
+  "complete": false,
+  "fate": "operator_stopped_duplicate",
+  "reason": "A prior read_support extraction was confirmed still running; this duplicate retry was stopped with SIGTERM before completion.",
+  "locus_id": "L0004",
+  "candidate_read_id_excluded": "ERR8666125.602387",
+  "successful_outputs": false,
+  "partial_retained": "reads.fa.partial"
+}

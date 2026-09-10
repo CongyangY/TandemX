@@ -146,6 +146,7 @@ def test_graphml_declares_edge_keys_and_retains_isolated_family_node(tmp_path: P
 def test_report_derivatives_have_explicit_schemas_and_recovery_is_status_only(tmp_path: Path) -> None:
     _products(tmp_path)
     _write(tmp_path / "recovery/recovery_candidates.tsv", "locus_id\tfamily_id\tchromosome\tstart\tend\toriginal_assembly_repeat_bp\tread_derived_abundance_bp\tfamily_abundance_deficit_bp\tleft_flank_uniqueness\tright_flank_uniqueness\trecruited_read_count\tflank_anchored_read_count\tdual_flank_read_count\tmaximum_read_span_bp\trecovered_bp\trecovery_status\tconfidence\tfailure_reason\twarning\nL1\tTXF1\tchr1\t0\t10\t10\t100\t90\t0.9\t0.9\t3\t2\t1\t1000\t20\tpartially_resolved\tmedium\t\tbounded_candidate\n")
+    _write(tmp_path / "recovery/recovery_assessment.json", json.dumps({"status": "assessment_complete", "validated_repeat_gain": False, "decision": "stop_recovery_expansion_negative_poc", "summary": "No validated repeat gain was observed."}))
     write_report_data(tmp_path)
     report_root = tmp_path / "validated_report"
     shutil.copytree(tmp_path / "families", report_root / "families")
@@ -156,6 +157,9 @@ def test_report_derivatives_have_explicit_schemas_and_recovery_is_status_only(tm
     data = build_report_data(tmp_path)
     assert data["summary"]["recovery_status_counts"] == {"partially_resolved": 1}
     assert data["summary"]["recovery_candidate_count"] == 1
+    assert data["summary"]["recovery_assessment"]["validated_repeat_gain"] is False
+    assessment_source = next(row for row in data["sources"] if row["path"] == "recovery/recovery_assessment.json")
+    assert assessment_source["used"] and assessment_source["sha256"]
 
     invalid = tmp_path / "invalid" / "discover" / "families.tsv"
     _write(invalid, (tmp_path / "families" / "families.tsv").read_text())

@@ -62,3 +62,24 @@ def test_render_existing_report_rejects_existing_outdir_and_changed_recovery_loc
     with pytest.raises(ValueError, match="hash mismatch"):
         render_existing_family_report(discover=discover, copy_number=copy_number, arrays=arrays,
                                       recovery=recovery, outdir=tmp_path / "changed")
+
+
+def test_render_existing_report_copies_optional_final_recovery_assessment(tmp_path: Path) -> None:
+    discover, copy_number, arrays = _inputs(tmp_path / "source")
+    recovery = tmp_path / "recovery"
+    outputs = {}
+    for name in ("recovery_candidates.tsv", "recovery_validation.tsv", "recovery_loci.bed", "recruited_reads.tsv", "recovered_sequences.fasta"):
+        _write(recovery / name, "original\n")
+        outputs[name] = _digest(recovery / name)
+    lock = {"status": "candidate_generation_complete", "outputs": outputs}
+    _write(recovery / "candidate_lock.json", json.dumps(lock))
+    _write(recovery / "recovery_assessment.json", json.dumps({"status": "assessment_complete", "validated_repeat_gain": False, "decision": "stop_recovery_expansion_negative_poc", "summary": "No validated repeat gain."}))
+    _write(recovery / "recovery_validation_report.html", "<h1>Validation evidence</h1>")
+
+    out = render_existing_family_report(discover=discover, copy_number=copy_number, arrays=arrays,
+                                        recovery=recovery, outdir=tmp_path / "rendered")
+    assert (out / "recovery/recovery_assessment.json").is_file()
+    assert (out / "recovery/recovery_validation_report.html").is_file()
+    assert json.loads((out / "recovery/candidate_lock.json").read_text()) == lock
+    manifest = json.loads((out / "source_reuse_manifest.json").read_text())
+    assert any(row["destination_path"].endswith("recovery/recovery_assessment.json") for row in manifest["files"])

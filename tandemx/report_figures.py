@@ -19,7 +19,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib.patches import FancyBboxPatch, Patch
+from matplotlib.patches import FancyBboxPatch, Patch, Rectangle
 
 _BLUE = "#2f638f"
 _GOLD = "#c18d32"
@@ -117,22 +117,30 @@ def _scatter(rows: list[dict[str, Any]], out: Path) -> dict[str, str]:
         positive = [v for _, x, y in points for v in (x, y) if v > 0]
         linthresh = max(min(positive) * 0.5, maxv * 1e-5) if positive else 1
         ax.set_xscale("symlog", linthresh=linthresh); ax.set_yscale("symlog", linthresh=linthresh)
+        confidence_colors = {"high": "#24577f", "medium": _BLUE, "low": _GOLD, "unresolved": _UNRESOLVED}
+        confidence_markers = {"high": "o", "medium": "s", "low": "^", "unresolved": "x"}
         for row, x, y in points:
-            confidence = str(row.get("confidence") or "")
-            color = _UNRESOLVED if confidence.lower() in {"unresolved", "unknown", ""} else _BLUE
-            marker = "o" if color == _BLUE else "o"
-            ax.scatter(x, y, s=32, c=color, edgecolors="white", linewidths=0.7, alpha=0.9, marker=marker, zorder=3)
+            confidence = str(row.get("confidence") or "unresolved").lower()
+            confidence = confidence if confidence in confidence_colors else "unresolved"
+            point_kwargs = {"s": 32, "c": confidence_colors[confidence], "linewidths": 0.7, "alpha": 0.9, "marker": confidence_markers[confidence], "zorder": 3}
+            if confidence != "unresolved":
+                point_kwargs["edgecolors"] = "white"
+            ax.scatter(x, y, **point_kwargs)
         bound = maxv * 1.15
         ax.plot([0, bound], [0, bound], color=_INK, linestyle="--", linewidth=0.9, label="equality")
-        ax.set_xlim(left=0); ax.set_ylim(bottom=0)
-        ax.legend(handles=[Line2D([0], [0], marker="o", color="w", markerfacecolor=_BLUE, markersize=6, label="confidence reported"), Line2D([0], [0], marker="o", color="w", markerfacecolor=_UNRESOLVED, markersize=6, label="unresolved / absent"), Line2D([0], [0], color=_INK, linestyle="--", label="equality")], frameon=False, fontsize=8, loc="upper left")
+        ax.set_xlim(-linthresh * .8, bound); ax.set_ylim(-linthresh * .8, bound)
+        no_negative = matplotlib.ticker.FuncFormatter(lambda value, _: "" if value < 0 else ("0" if value == 0 else f"{value:g}"))
+        ax.xaxis.set_major_formatter(no_negative); ax.yaxis.set_major_formatter(no_negative)
+        handles = [Line2D([0], [0], marker=confidence_markers[k], color="w", markerfacecolor=confidence_colors[k], markeredgecolor=confidence_colors[k], markersize=6, label=f"{k} confidence") for k in ("high", "medium", "low")]
+        handles.append(Line2D([0], [0], marker="x", color=_UNRESOLVED, markersize=6, label="unresolved / absent")); handles.append(Line2D([0], [0], color=_INK, linestyle="--", label="equality"))
+        ax.legend(handles=handles, frameon=False, fontsize=8, loc="upper left")
         ax.set_xlabel("Estimated read abundance (bp)"); ax.set_ylabel("Assembly representation (bp)")
     source = [{"family_id": r.get("family_id"), "estimated_abundance_bp": _num(r, "estimated_abundance_bp"), "assembly_representation_bp": _num(r, "assembly_representation_bp"), "assembly_read_ratio": _num(r, "assembly_read_ratio"), "confidence": r.get("confidence"), "warning": r.get("warning")} for r in rows]
     return _save(fig, "family_abundance_vs_assembly", out, source, list(source[0]) if source else ["family_id", "estimated_abundance_bp", "assembly_representation_bp", "assembly_read_ratio", "confidence", "warning"])
 
 
 def _top_deficit(rows: list[dict[str, Any]], out: Path) -> dict[str, str]:
-    fig, ax = plt.subplots(figsize=(7.4, 5.2), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(7.4, 5.2), constrained_layout=False)
     _style(ax, "Families with the largest abundance deficit", "Sorted by estimated read abundance minus assembly representation; values are estimates")
     valid = [(r, _num(r, "abundance_deficit_bp")) for r in rows]
     valid = [(r, d) for r, d in valid if d is not None and d > 0]
@@ -149,42 +157,63 @@ def _top_deficit(rows: list[dict[str, Any]], out: Path) -> dict[str, str]:
         ax.axvline(0, color=_INK, linewidth=0.8)
         ax.set_yticks(y, labels); ax.set_xlabel("Estimated sequence amount (bp)")
         ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, _: _label(x, "bp")))
-        ax.legend(frameon=False, fontsize=8, loc="lower right")
+        ax.legend(frameon=False, fontsize=8, loc="upper center", bbox_to_anchor=(.5, -.13), ncol=2)
         maxv = max(read + assembly + [1])
         for ypos, (r, d) in enumerate(valid[::-1]):
             conf = str(r.get("confidence") or "unresolved")
             ax.text(maxv * 1.01, ypos, f"deficit {_label(d)} · {conf}", va="center", fontsize=7, color=_MUTED, clip_on=False)
         ax.set_xlim(0, maxv * 1.32)
+    fig.subplots_adjust(bottom=.22)
     source = [{"family_id": r.get("family_id"), "estimated_abundance_bp": _num(r, "estimated_abundance_bp"), "assembly_representation_bp": _num(r, "assembly_representation_bp"), "abundance_deficit_bp": d, "confidence": r.get("confidence"), "warning": r.get("warning")} for r, d in valid]
     return _save(fig, "top_underrepresented", out, source, list(source[0]) if source else ["family_id", "estimated_abundance_bp", "assembly_representation_bp", "abundance_deficit_bp", "confidence", "warning"])
 
 
 def _landscape(rows: list[dict[str, Any]], out: Path) -> dict[str, str]:
-    fig, ax = plt.subplots(figsize=(7.0, 5.2), constrained_layout=True)
-    use_abundance = any(_num(r, "estimated_abundance_bp") is not None for r in rows)
-    ylabel = "Estimated abundance (bp)" if use_abundance else "Supporting reads (count)"
-    _style(ax, "Family landscape", f"Monomer length versus {ylabel.lower()}; colour encodes GC fraction")
-    value_key = "estimated_abundance_bp" if use_abundance else "support_read_count"
-    valid = [(r, _num(r, "monomer_length_bp"), _num(r, value_key)) for r in rows]
-    valid = [(r, l, a) for r, l, a in valid if l is not None and a is not None and l > 0 and a >= 0]
-    if not valid: _empty(ax)
-    else:
-        gc = [_num(r, "gc_fraction") for r, _, _ in valid]; c = [v if v is not None else None for v in gc]
-        cmap = matplotlib.colormaps["cividis"]
-        colors = [cmap(v) if v is not None and 0 <= v <= 1 else "#a5afb4" for v in c]
-        ax.scatter([l for _, l, _ in valid], [a for _, _, a in valid], color=colors, s=34, edgecolors="white", linewidths=.6)
-        ax.set_xscale("log"); ax.set_yscale("symlog", linthresh=max(min([a for _, _, a in valid if a > 0], default=1) * .5, 1))
-        ax.set_xlabel("Monomer length (bp)"); ax.set_ylabel(ylabel)
-        # Discrete legend keeps the exported SVG vector-only (Matplotlib colorbars
-        # can embed a raster gradient) while preserving the GC encoding.
-        ax.legend(handles=[Patch(facecolor=cmap(v), edgecolor="none", label=lab) for v, lab in ((.15, "low GC"), (.5, "mid GC"), (.85, "high GC"))], title="GC fraction", frameon=False, fontsize=7, title_fontsize=8, loc="best")
-    source = [{"family_id": r.get("family_id"), "monomer_length_bp": l, "landscape_measure": value_key, "landscape_value": a, "estimated_abundance_bp": _num(r, "estimated_abundance_bp"), "gc_fraction": _num(r, "gc_fraction"), "support_read_count": _num(r, "support_read_count"), "warning": r.get("warning")} for r, l, a in valid]
-    return _save(fig, "family_landscape", out, source, list(source[0]) if source else ["family_id", "monomer_length_bp", "estimated_abundance_bp", "gc_fraction", "support_read_count", "warning"])
+    fig, axes = plt.subplots(1, 2, figsize=(10.0, 4.8), constrained_layout=False)
+    fig.suptitle("Family landscape", x=.07, ha="left", fontsize=13, fontweight="bold", color=_INK)
+    fig.text(.07, .925, "Monomer length versus read and assembly representation; GC is shared; point size is supporting reads", fontsize=8, color=_MUTED)
+    cmap = matplotlib.colormaps["cividis"]
+    source = []
+    for index, (ax, value_key, ylabel) in enumerate(zip(axes, ("estimated_abundance_bp", "assembly_representation_bp"), ("Estimated abundance (bp)", "Assembly representation (bp)"))):
+        _style(ax, "Read abundance" if index == 0 else "Assembly representation")
+        valid = [(r, _num(r, "monomer_length_bp"), _num(r, value_key)) for r in rows]
+        valid = [(r, l, value) for r, l, value in valid if l is not None and value is not None and l > 0 and value >= 0]
+        if not valid:
+            _empty(ax, "Assembly representation not available" if index else "No quantitative data available")
+            continue
+        positives = [value for _, _, value in valid if value > 0]
+        linthresh = max(min(positives, default=1) * .5, 1)
+        max_value = max([value for _, _, value in valid] + [1])
+        for row, length, value in valid:
+            gc = _num(row, "gc_fraction")
+            support = _num(row, "support_read_count")
+            size = 28 + 9 * math.sqrt(max(support, 0)) if support is not None else 28
+            kwargs = {"s": size, "color": cmap(gc) if gc is not None and 0 <= gc <= 1 else "#a5afb4", "marker": "o" if support is not None else "x", "linewidths": .6, "zorder": 3}
+            if support is not None: kwargs["edgecolors"] = "white"
+            ax.scatter(length, value, **kwargs)
+            source.append({"family_id": row.get("family_id"), "monomer_length_bp": length, "estimated_abundance_bp": _num(row, "estimated_abundance_bp"), "assembly_representation_bp": _num(row, "assembly_representation_bp"), "landscape_panel": value_key, "landscape_value": value, "gc_fraction": gc, "support_read_count": support, "warning": row.get("warning")})
+        ax.set_xscale("log"); ax.set_yscale("symlog", linthresh=linthresh); ax.set_xlim(left=min(length for _, length, _ in valid) * .9); ax.set_ylim(-linthresh * .7, max_value * 1.12)
+        no_negative = matplotlib.ticker.FuncFormatter(lambda value, _: "" if value < 0 else ("0" if value == 0 else f"{value:g}"))
+        ax.yaxis.set_major_formatter(no_negative); ax.set_xlabel("Monomer length (bp)"); ax.set_ylabel(ylabel)
+        if index == 0:
+            handles = [ax.scatter([], [], s=28 + 9 * math.sqrt(count), color=_BLUE,
+                                  edgecolor="white", label=f"support {count} reads")
+                       for count in (10, 100)]
+            handles.extend([Line2D([0], [0], marker="x", linestyle="none", color=_MUTED,
+                                   markersize=math.sqrt(28), label="support unavailable"),
+                            Patch(facecolor="#a5afb4", edgecolor="none", label="GC unavailable")])
+            fig.legend(handles=handles, frameon=False, fontsize=7, loc="lower center",
+                       bbox_to_anchor=(.47, .005), ncol=4)
+    # Vector colour scale shared by both panels; missing GC is gray and is called out.
+    bar_ax = fig.add_axes([.91, .26, .018, .55]); bar_ax.set_ylim(0, 1); bar_ax.set_xlim(0, 1); bar_ax.axis("off")
+    for i in range(20): bar_ax.add_patch(Rectangle((0, i / 20), 1, 1 / 20 + .002, facecolor=cmap((i + .5) / 20), edgecolor="none"))
+    bar_ax.text(1.8, 1, "1", transform=bar_ax.transAxes, fontsize=7, va="top", color=_MUTED); bar_ax.text(1.8, 0, "0", transform=bar_ax.transAxes, fontsize=7, va="bottom", color=_MUTED); bar_ax.text(2.5, .5, "GC fraction", transform=bar_ax.transAxes, rotation=90, fontsize=8, va="center", color=_MUTED)
+    fig.subplots_adjust(left=.07, right=.88, top=.86, bottom=.23, wspace=.32)
+    columns = list(source[0]) if source else ["family_id", "monomer_length_bp", "estimated_abundance_bp", "assembly_representation_bp", "landscape_panel", "landscape_value", "gc_fraction", "support_read_count", "warning"]
+    return _save(fig, "family_landscape", out, source, columns)
 
 
 def _hierarchy(data: dict[str, Any], rows: list[dict[str, Any]], out: Path) -> dict[str, str]:
-    fig, ax = plt.subplots(figsize=(8.0, 5.2), constrained_layout=False)
-    _style(ax, "Candidate family architecture relationships", "Sequence-supported heuristic links; candidate period multiples are not validated HOR structures")
     edges = [e for e in data.get("architecture_edges", []) if isinstance(e, dict)]
     ranked = {str(r.get("family_id")): i for i, r in enumerate(sorted(rows, key=lambda r: (_num(r, "estimated_abundance_bp") or 0), reverse=True))}
     edges.sort(key=lambda e: (ranked.get(str(e.get("shorter_family_id")), 10**9), ranked.get(str(e.get("longer_family_id")), 10**9)))
@@ -192,26 +221,27 @@ def _hierarchy(data: dict[str, Any], rows: list[dict[str, Any]], out: Path) -> d
     edges = edges[:6]
     nodes = sorted({str(e.get(k)) for e in edges for k in ("shorter_family_id", "longer_family_id") if e.get(k)}, key=lambda n: ranked.get(n, 10**9))[:8]
     edges = [e for e in edges if str(e.get("shorter_family_id")) in nodes and str(e.get("longer_family_id")) in nodes]
-    ax.set_title(f"Candidate family architecture relationships ({len(edges)}/{total_edges} edges shown)", loc="left", fontsize=11, color=_INK, fontweight="bold", pad=12)
-    if not edges or not nodes: _empty(ax, "No candidate relationship edges available")
+    nrows = max(1, len(edges))
+    fig, axes = plt.subplots(nrows, 1, figsize=(8.0, max(3.0, 1.05 * nrows + .9)), squeeze=False, constrained_layout=False)
+    fig.suptitle(f"Candidate family architecture relationships ({len(edges)}/{total_edges} edges shown)", x=.03, ha="left", fontsize=11, color=_INK, fontweight="bold")
+    if not edges:
+        _empty(axes[0, 0], "No candidate relationship edges available")
     else:
         lengths = {str(r.get("family_id")): (_num(r, "monomer_length_bp") or 0) for r in rows}
-        layers = sorted(nodes, key=lambda n: (lengths.get(n, 0), n))
-        pos = {n: (0.15 if i < len(layers) / 2 else 0.85, .12 + .76 * (i % max(1, math.ceil(len(layers) / 2))) / max(1, math.ceil(len(layers) / 2) - 1)) for i, n in enumerate(layers)}
-        for e in edges:
-            a, b = str(e.get("shorter_family_id")), str(e.get("longer_family_id")); x1, y1 = pos[a]; x2, y2 = pos[b]
+        for ax, e in zip(axes[:, 0], edges):
+            ax.axis("off"); a, b = str(e.get("shorter_family_id")), str(e.get("longer_family_id")); x1, y1, x2, y2 = .18, .5, .82, .5
             color = _GOLD if str(e.get("edge_type")) == "putative_period_multiple" else _UNRESOLVED
             ax.annotate("", xy=(x2, y2), xytext=(x1, y1), arrowprops={"arrowstyle": "->", "color": color, "lw": 1.3, "alpha": .8})
             ratio = _num(e, "length_ratio"); ident = _num(e, "local_identity")
             edge_label = f"r={ratio:.2f}" if ratio is not None else "r=NA"
             edge_label += f", id={ident:.2f}" if ident is not None else ", id=NA"
-            ax.text((x1 + x2) / 2, (y1 + y2) / 2 + .035, edge_label, fontsize=6.5, color=color, ha="center", va="center")
-        for n, (x, y) in pos.items():
-            ax.scatter([x], [y], s=480, facecolor="white", edgecolor=_BLUE, linewidth=1.2, zorder=3)
-            ax.text(x, y, n, ha="center", va="center", fontsize=7, color=_INK, zorder=4)
-        ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
-        ax.legend(handles=[Line2D([0], [0], color=_GOLD, lw=1.5, label="putative period multiple"), Line2D([0], [0], color=_UNRESOLVED, lw=1.5, label="unresolved related / partial")], frameon=False, fontsize=8, loc="lower left")
-    fig.subplots_adjust(left=.02, right=.98, top=.84, bottom=.10)
+            ax.text(.5, .78, edge_label, fontsize=8, color="#59676e", ha="center", va="center")
+            ax.text(.5, .18, str(e.get("edge_type") or "relationship unresolved").replace("_", " "), fontsize=7.5, color=color, ha="center", va="center")
+            for x, n in ((x1, a), (x2, b)):
+                ax.scatter([x], [y1], s=360, facecolor="white", edgecolor=_BLUE, linewidth=1.2, zorder=3)
+                ax.text(x, y1, n, ha="center", va="center", fontsize=7, color=_INK, zorder=4)
+            ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+    fig.subplots_adjust(left=.02, right=.98, top=.90, bottom=.04, hspace=.25)
     source = [dict(e) for e in edges]
     cols = list(source[0]) if source else ["shorter_family_id", "longer_family_id", "edge_type", "status", "warning"]
     return _save(fig, "family_hierarchy", out, source, cols)

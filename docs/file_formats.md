@@ -1610,3 +1610,34 @@ or operator-stopped outputs remain excluded execution fates, not zero biological
 accuracy. Newer sequence may enter only a separate post-lock validation.
 Original assemblies are never modified. Exact design and stop rules are in
 `docs/recovery_and_reporting_plan.md`.
+
+
+### Final recovery assessment and post-lock validation
+
+`recovery_assessment.json` is optional, additive evidence after candidate lock.
+It does not replace the candidate table or alter locked sequences. Its fields
+include `status=assessment_complete`, `candidate_sequences`,
+`validated_recovery_successes`, `validated_repeat_gain`, `decision`, a readable
+`summary`, `complete_genomic_resolvability_test`, measured `proxy_validation`
+and `read_remapping` rows, and an `evidence` path-to-SHA256 mapping. The HTML
+report displays this final interpretation and hashes the assessment source.
+`recovery_validation_report.html` presents the same result offline.
+
+`proxy_validation.tsv` compares anchor-interior span bp and frozen-catalogue
+localized repeat bp separately for old, candidate and newer proxy sequence.
+It records unique flank-hit counts, newer 0-based coordinates, candidate repeat
+bp gain and absolute localized-repeat distance to the proxy. These are
+localization estimates, not physical gained or missing bases.
+`localized_repeat_intervals.tsv` provides `sequence_id`, 0-based `start`/`end`,
+`family_id`, confidence and warning. The complete original catalogue is retained
+when calculating diagnostic specificity.
+
+`read_remapping.tsv` lists `sequence_id`, `span_bp`, distinct
+`independently_supporting_reads`, `supplied_independent_reads`,
+`query_coverage_min`, `identity_min` and warning. Query coverage describes the
+comparison span, not the full supporting read. The candidate source read is
+excluded. This same-library check is not orthogonal copy-number validation.
+The extraction `IDs.tsv` has one `read_id` per row; its receipt records raw
+FASTQ/source-evidence hashes, complete source record/base counts, extracted
+counts and FASTA/ID-table hashes. Partial outputs and failed receipts are not
+valid read subsets.

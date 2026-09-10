@@ -1,0 +1,25 @@
+{
+  "bytes": 142326,
+  "command": [
+    "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+    "-x",
+    "asm5",
+    "-c",
+    "-k",
+    "15",
+    "-w",
+    "5",
+    "-N",
+    "1000",
+    "-p",
+    "0.5",
+    "--secondary=yes",
+    "-t",
+    "4",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/read_support/reads.fa",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/comparison_spans.fa"
+  ],
+  "elapsed_seconds": 0.4665001661051065,
+  "exit_code": 0,
+  "sha256": "9c0b606772bdbb3d7a8977fe0db88d539d07f9a919dd652551f5c13090239eb8"
+}

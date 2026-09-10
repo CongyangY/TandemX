@@ -1,0 +1,25 @@
+{
+  "bytes": 18137,
+  "command": [
+    "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+    "-x",
+    "asm5",
+    "-c",
+    "-k",
+    "15",
+    "-w",
+    "5",
+    "-N",
+    "1000",
+    "-p",
+    "0.5",
+    "--secondary=yes",
+    "-t",
+    "4",
+    "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/new_assembly.fa",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/selected_flanks.fa"
+  ],
+  "elapsed_seconds": 3.277613083133474,
+  "exit_code": 0,
+  "sha256": "b02d232f5e32c6ec4bfa9aaf690a164ac209f806bd6d95c0298b2dde2abc5868"
+}

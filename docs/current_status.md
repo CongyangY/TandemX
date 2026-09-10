@@ -1,5 +1,83 @@
 # TandemX current status and handoff
 
+
+## Active 2026-09-10 targeted recovery and report checkpoint
+
+**User release hold (2026-09-10):** do not submit Bioconda, deposit to Zenodo
+or create/publish a formal tagged release. The user will discuss further
+suggestions first. Development-branch code, tests, documentation and evidence
+updates remain in scope; release steps require a later explicit go-ahead.
+
+This explicitly authorized scope supersedes the earlier feature freeze only
+for the bounded recovery PoC and user workflow/reporting work. The current
+manuscript is `paper/0910/manuscript_v2.md`; do not update the superseded
+`paper/manuscript_v2.md`. Detector/quantify/localize/comparison rules remain
+frozen, and unitFinder remains permanently stopped.
+
+The simplified `tandemx run --reads ... [--assembly ...] -o ...` interface,
+strict optional `--config`, validated automatic resume, source-linked family
+summaries/GraphML and offline report are implemented. Six report figure classes
+have SVG/PDF/PNG, editable SVG text, source TSVs and receipts. Commit `7c34467`
+contains the independently tested workflow/report milestone. Inputs without an
+abundance denominator retain discovery and explicitly unavailable absolute
+abundance. Assembly total length is only a provisional denominator; k=21 is a
+recorded operating default, not an inferred optimum.
+
+Recovery used only historical Ey15-2 sequence/localization, its frozen catalogue
+and original full HiFi ERR8666125 for candidate generation. TXF000002 has six
+historical intervals; TXF000154 has no localized interval. Twenty of 48 predefined
+flanks were eligible relative to the old assembly. The completed mapper covered
+all 837,586 reads (18,636,790,429 bp), in 829.525 s with 0.571 GB reported peak RSS.
+The streamed collector retained 4,262,088 alignment rows and 133,592 distinct
+reads. Distinct repeat-supporting IDs were 30,138 and 103,061 for the two families;
+these are recruitment matches, not independently established family specificity.
+
+Outcomes: three `unresolved_no_unique_anchor`, two `insufficient_read_support`,
+one `unresolved_no_assembly_locus`, and one unpolished `partially_resolved`
+span candidate at L0004 (TXF000002, old Chr2:11777–12456; BED coordinates).
+Twenty-six dual-anchor reads supported the 5,681-bp candidate. Its selected
+anchor interiors delimit 5,679 bp in the old assembly and, after candidate lock,
+5,679 bp in the newer reference proxy. Full-catalogue frozen localization found
+679/644/679 repeat bp in old/candidate/newer spans, respectively. This is no
+repeat-representation gain and no improvement against the proxy. Preserve the
+candidate as evidence, do not promote recovery to a formal production module,
+and stop algorithm expansion. All three comparison spans map to 97 of 120 source-excluded validation reads
+at >=90% span coverage and >=98% identity. This supports the span, not a repeat
+expansion. The results do not establish genome-wide
+unresolvability, physical missing-base magnitude or a consensus sequence.
+
+Full results and all technical attempt fates are on T7:
+`results/ey15_targeted_recovery_poc_v4_20260910` and
+`results/ey15_targeted_recovery_validation_v1_20260910`.
+Preparation-only v1, operator-stopped long-template v2, completed short-template
+mapping plus collector-limit v3, and streaming evaluation v4 are retained.
+The final user-facing report is
+`/Volumes/T7/Codex/TandemX/results/ey15_family_report_recovery_20260910_v2/report.html`.
+Only template length and documented resource handling changed; biological
+thresholds did not. The first 1,000-read short-template cost pilot was
+non-inferential. Source reads used for candidate extraction are excluded from
+the separate remapping subset. A redundant extraction process was operator-
+stopped and retained separately; it is not a failed biological result.
+
+Software report figure QA is distinct from manuscript figure completion:
+`docs/report_figure_readiness.md` lists the remaining six-composite manuscript
+work. Browser checks verified 2,133 family rows, a one-family filter, offline
+assets and no horizontal overflow at the inspected width. Browser screenshot
+capture timed out; direct PNG and independent PDF-raster figure QA succeeded.
+The generic report does not automatically import the separate cross-k/orthogonal
+archive as a new confidence classifier.
+
+Final full regression: **726 passed, 2 skipped** in 99.17 s under
+`tandemx-dev`; compilation and `git diff --check` passed. Compact selected
+evidence: `paper/evidence/ey15_targeted_recovery_v1/` (37 source-hashed files,
+267,972 bytes before manifest/README). Large read/PAF evidence stays on T7.
+
+Release gaps remain: final manuscript composites/package, journal formatting,
+Bioconda, Zenodo, tagged release and clean-install portability. `pip check` in
+the existing development environment reports a pre-existing maturin wheel-tag
+mismatch (cp310 metadata under Python 3.11); this is not a passing clean-install
+check and was not repaired by changing global or base environments.
+
 Updated 2026-09-10. Read completely after `AGENTS.md`, then verify Git/tests.
 The user has authorized autonomous development and GitHub updates toward mature
 software and a full evidence-backed paper (multi-panel figures and supplement).

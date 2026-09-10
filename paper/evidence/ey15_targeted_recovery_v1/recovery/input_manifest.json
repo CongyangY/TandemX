@@ -1,0 +1,41 @@
+{
+  "config_sha256": "1840291f2a57883d186e39b4348bb4f4dc6d07e64ed8e955130741ddac66f94a",
+  "imported_preparation": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v3_20260910",
+  "imported_preparation_lock_sha256": "5653e6a8fdebed3995a0334455f49b66ccf451b551c020f6eed514f6db480166",
+  "inputs": {
+    "catalog": {
+      "bytes": 468673,
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomers.fa",
+      "sha256": "277d376aa8961673ca84dd4603d5c31b057c805cfe26b642ab350b63f8556aeb"
+    },
+    "copy_number": {
+      "bytes": 774688,
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/quantify_primary/copy_number.tsv",
+      "sha256": "02f2860c58c36a1c5f27b988f7e477f9af206a2e333ea215808b841efd639437"
+    },
+    "old_arrays": {
+      "bytes": 949488,
+      "path": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_old/arrays.bed",
+      "sha256": "9c080867273b58e4f384b05cbde0fa0c52f6cbab56089e6842eba236985c6219"
+    },
+    "old_assembly": {
+      "bytes": 121215431,
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/old_assembly.fa",
+      "sha256": "d7a094865701433e2ffd726495f61cc943e80bfa1ff30a7a38990dae0c7224b3"
+    },
+    "read_qc": {
+      "bytes": 914,
+      "path": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/qc_v1/qc.json",
+      "sha256": "3d54c214ac3ca697fbda03363ce4281bf57289e8529ee3fcfa4a38dc357cd465"
+    },
+    "reads": {
+      "bytes": 17397432231,
+      "path": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz",
+      "sha256": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8"
+    }
+  },
+  "minimap2_sha256": "9747d27a83257eef51b4258b8b9248eaf313024ab8fc5dc5143ab7d22c9e3645",
+  "minimap2_version": "2.31-r1302",
+  "prior_knowledge": "family_level_prior_results_known_not_fully_unobserved_validation",
+  "recovery_input_separation": "newer_sequence_and_locus_coordinates_not_used"
+}

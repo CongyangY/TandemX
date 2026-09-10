@@ -1,0 +1,16 @@
+{
+  "fate": "operator_stopped_resource_budget",
+  "signal": "SIGTERM",
+  "reason": "First 2173-read batch required 119.606 seconds with 30kb templates; stop before candidate evaluation.",
+  "not_inferred": [
+    "OOM",
+    "natural_tool_failure",
+    "formal_timeout",
+    "biological_negative"
+  ],
+  "retained": [
+    "reads_to_targets.partial.paf",
+    "reads_to_targets.log",
+    "reads_to_targets.receipt.json"
+  ]
+}

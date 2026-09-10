@@ -1,0 +1,7 @@
+{
+  "outputs": {
+    "read_remapping.tsv": "b454cd614484a493b0caa6053baa7bd2fdfd4f0f730201003c3bfe3e2c0982be",
+    "spans_to_independent_reads.paf": "9c0b606772bdbb3d7a8977fe0db88d539d07f9a919dd652551f5c13090239eb8"
+  },
+  "status": "read_remapping_complete"
+}

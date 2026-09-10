@@ -1,0 +1,7 @@
+#chrom	start	end	locus_id	family_id	status
+Chr1	12133495	12133789	L0001	TXF000002	insufficient_read_support
+Chr1	12327314	12327613	L0002	TXF000002	insufficient_read_support
+Chr2	170	849	L0003	TXF000002	unresolved_no_unique_anchor
+Chr2	11777	12456	L0004	TXF000002	partially_resolved
+Chr4	1073	1756	L0005	TXF000002	unresolved_no_unique_anchor
+Chr4	10625	11308	L0006	TXF000002	unresolved_no_unique_anchor

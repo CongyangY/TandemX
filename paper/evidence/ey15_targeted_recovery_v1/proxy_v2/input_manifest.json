@@ -1,0 +1,14 @@
+{
+  "candidate_lock_sha256": "2eece8a087d18e306b05e5c6e04a2af6c7effa357d42f9246ad18ba49a319ee3",
+  "frozen_localization": {
+    "catalogue": "complete_frozen_catalogue",
+    "identity_model": "iid_base",
+    "k": 21,
+    "min_identity": 0.9
+  },
+  "newer_assembly": "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/new_assembly.fa",
+  "newer_sha256": "48d67e8d26c5d9ebc1fbd772e877e2f957437b5a3b27bbdde4a1d3c77923208c",
+  "recovery": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910",
+  "scope": "post_lock_reference_proxy_not_absolute_copy_truth",
+  "source_sha256": "49abe2cfd08452581425c26e0b36478ac3d2bbfaecabb364f3a9d7e522b1cfc1"
+}

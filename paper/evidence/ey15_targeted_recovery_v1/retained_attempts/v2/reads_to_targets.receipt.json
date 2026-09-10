@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+    "-x",
+    "map-hifi",
+    "-c",
+    "-N",
+    "50",
+    "-p",
+    "0.5",
+    "--secondary=yes",
+    "-K",
+    "50M",
+    "-t",
+    "4",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v2_20260910/recruitment_targets.fa",
+    "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz"
+  ],
+  "elapsed_seconds": 186.36600041692145,
+  "exit_code": -15,
+  "fate": "external_mapping_failure"
+}

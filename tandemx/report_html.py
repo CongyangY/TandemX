@@ -54,11 +54,20 @@ def _svg_cards(root: Path, figure_result: object) -> str:
 
 def _recovery_status_text(summary: dict[str, Any]) -> str:
     counts = summary.get("recovery_status_counts", {})
+    assessment = summary.get("recovery_assessment")
+    assessment_text = ""
+    if isinstance(assessment, dict):
+        decision = assessment.get("decision")
+        final_summary = assessment.get("summary")
+        if decision or final_summary:
+            assessment_text = (" Final recovery assessment"
+                               + (f" ({_escape(decision)})" if decision else "")
+                               + (f": {_escape(final_summary)}" if final_summary else "."))
     if not counts:
-        return "No recovery candidates were reported."
+        return "No recovery candidates were reported." + assessment_text
     items = ", ".join(f"{_escape(status)}: {count}" for status, count in counts.items())
     return (f"Recovery candidate statuses: {items}. These are candidate-level outcomes; "
-            "partially resolved is not a resolved assembly result.")
+            "partially resolved is not a resolved assembly result." + assessment_text)
 
 
 def _availability_warnings(data: dict[str, Any]) -> str:
@@ -71,16 +80,35 @@ def _availability_warnings(data: dict[str, Any]) -> str:
 def _recommended_cards(data: dict[str, Any]) -> str:
     rows = data.get("recommended_families", [])
     if not rows:
-        return '<p class="muted">No family has the canonical comparison status <code>possible_collapse</code> in the validated comparison.</p>'
+        return '<p class="muted">No family met the recorded comparison rule for possible under-representation.</p>'
     cards = []
     for row in rows:
         cards.append(
             '<article class="recommendation"><h3>' + _escape(row.get("family_id")) + '</h3>'
-            + '<p>Canonical comparison status: <strong>' + _escape(row.get("comparison_status")) + '</strong>; reported confidence: '
+            + '<p><strong>Possible under-representation</strong>; confidence: '
             + _escape(row.get("confidence")) + '.</p><p>Estimated read–assembly abundance difference: '
             + _number(row.get("abundance_deficit_bp")) + ' bp.</p></article>'
         )
     return "".join(cards)
+
+
+def _summary_cards(summary: dict[str, Any]) -> str:
+    cards = [
+        (summary.get("family_count"), "families observed"),
+        (summary.get("high_confidence_family_count"), "families labelled high confidence"),
+        (summary.get("possible_underrepresented_count"), "families with possible under-representation"),
+        (summary.get("unresolved_family_count"), "families labelled unresolved"),
+        (summary.get("low_confidence_family_count"), "families labelled low confidence"),
+        (summary.get("architecture_edge_count"), "candidate family relationships"),
+    ]
+    assessment = summary.get("recovery_assessment")
+    if isinstance(assessment, dict):
+        for key, label in (("candidate_sequences", "recovery candidate sequences"),
+                           ("validated_recovery_successes", "validated recovery successes")):
+            if key in assessment:
+                cards.append((assessment[key], label))
+    return "".join(f'<div class="card"><div class="value">{_escape(value)}</div>{label}</div>'
+                   for value, label in cards)
 
 
 def write_html_report(outdir: Path, records: Sequence[object] = ()) -> None:
@@ -114,8 +142,8 @@ def write_html_report(outdir: Path, records: Sequence[object] = ()) -> None:
 body{{font:16px system-ui,sans-serif;margin:auto;max-width:1200px;padding:1.25rem;color:#172028;background:#fafcff}} h1{{margin-bottom:.2rem}} .lead{{font-size:1.1rem;max-width:70ch}} .cards,.recommendations{{display:flex;gap:.7rem;flex-wrap:wrap}} .card,.recommendation{{background:white;border:1px solid #d5deea;border-radius:9px;padding:.8rem;min-width:150px}} .recommendation{{max-width:300px}} .recommendation h3{{margin:.1rem 0}} .value{{font-size:1.55rem;font-weight:700}} .alert{{background:#fff4df;border-left:4px solid #c87a15;padding:.7rem}} table{{width:100%;border-collapse:collapse;background:white}} th,td{{padding:.45rem;border-bottom:1px solid #dce3ec;text-align:left;vertical-align:top}} th{{position:sticky;top:0;background:#eef4fb;cursor:pointer}} input{{width:min(420px,100%);padding:.55rem;margin:.8rem 0}} .muted{{color:#566575}} .figure{{background:white;border:1px solid #d5deea;border-radius:9px;padding:.6rem;margin:.8rem 0;overflow:auto}} .figure svg{{max-width:100%;height:auto}} details{{margin:.8rem 0}} @media(max-width:700px){{body{{padding:.7rem}} table{{font-size:.82rem}} th,td{{padding:.28rem}}}}
 </style></head><body>
 <main><h1>TandemX family evidence</h1>{_availability_warnings(data)}<p class="lead">This run reports discovered repeat-family evidence and, where validated inputs exist, read-based abundance and assembly representation. Candidate period multiples are not validated higher-order repeats; read–assembly differences are estimates, not physical missing-base truth.</p>
-<section class="cards"><div class="card"><div class="value">{summary["family_count"]}</div>families observed</div><div class="card"><div class="value">{summary["high_confidence_family_count"]}</div>families labelled high confidence</div><div class="card"><div class="value">{summary["possible_underrepresented_count"]}</div>canonical possible-collapse families</div><div class="card"><div class="value">{summary["unresolved_family_count"]}</div>families labelled unresolved</div><div class="card"><div class="value">{summary["low_confidence_family_count"]}</div>families labelled low confidence</div></section>
-<h2>Families recommended for evidence review</h2><p class="muted">Listed only because the canonical comparison reports <code>possible_collapse</code>; this is not a new threshold or a validated biological conclusion.</p><section class="recommendations">{_recommended_cards(data)}</section>
+<section class="cards">{_summary_cards(summary)}</section>
+<h2>Families recommended for evidence review</h2><p class="muted">Families whose estimated read abundance exceeds assembly representation under the recorded comparison rule. Review confidence and warnings before interpretation.</p><section class="recommendations">{_recommended_cards(data)}</section>
 <h2>Evidence overview</h2>{_svg_cards(root, figures)}
 <h2>Bounded recovery candidates</h2><p class="muted">{_recovery_status_text(summary)}</p>
 <details><summary>Full family table</summary><label for="filter">Filter families</label><br><input id="filter" placeholder="family ID, confidence, warning…" autocomplete="off"><p class="muted">Select a column heading to sort. NA means no validated value was available. Warnings are rendered as readable labels.</p><table id="families"><thead><tr><th>Family</th><th>Representative</th><th>Length bp</th><th>Supporting reads</th><th>Estimated abundance bp</th><th>Assembly representation bp</th><th>Assembly/read ratio</th><th>Confidence</th><th>Recorded warnings</th></tr></thead><tbody>{family_rows}</tbody></table></details>

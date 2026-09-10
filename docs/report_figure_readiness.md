@@ -37,6 +37,17 @@ The report figures are suitable for offline HTML embedding and software-level
 evidence review. They preserve unresolved values and warnings, and describe
 architecture links as heuristic candidates rather than validated HORs.
 
+Final parent visual review additionally rejected the first T7 report layout:
+the deficit legend overlapped its last row, same-column hierarchy edges
+occluded each other, and landscape symlog padding showed meaningless negative
+abundance ticks. The corrected report uses an external deficit legend,
+six separate pairwise relationship rows, explicit confidence groups in the
+scatter, and read/assembly landscape panels with nonnegative ticks, shared GC
+and source-consistent support-size encoding. The final report directory is
+`/Volumes/T7/Codex/TandemX/results/ey15_family_report_recovery_20260910_v2/`.
+The original T7 report remains retained as layout-rejected evidence. No
+scientific stage was rerun to make these display corrections.
+
 ## Manuscript gap assessment
 
 The current manuscript construction plan requires six biological figures with

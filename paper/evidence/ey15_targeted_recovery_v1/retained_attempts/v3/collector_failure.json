@@ -1,0 +1,9 @@
+{
+  "fate": "bounded_collector_resource_limit",
+  "mapping_completed": true,
+  "candidate_evaluation_completed": false,
+  "observed_error": "Bounded PoC recruitment limit exceeded; retain PAF, do not truncate results",
+  "biological_outcome": null,
+  "continuation": "v4 streaming collector with preoutcome resource caps and exact mapping import",
+  "traceback_note": "Running interpreter held prior code while source was edited; traceback source line displays are not authoritative. recruit_source.json retains loaded-stage source hashes."
+}

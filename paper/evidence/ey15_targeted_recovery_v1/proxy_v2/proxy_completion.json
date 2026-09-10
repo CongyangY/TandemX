@@ -1,0 +1,9 @@
+{
+  "candidate_lock_sha256": "2eece8a087d18e306b05e5c6e04a2af6c7effa357d42f9246ad18ba49a319ee3",
+  "outputs": {
+    "comparison_spans.fa": "88ec1b3b9f55e7153e7c82b9252f251f239e28c6d81eb27be1f7cc3656943508",
+    "localized_repeat_intervals.tsv": "8e7579b9512327836205e037f9d7fe0321e04f2aed2bb1da3fb05f053358583a",
+    "proxy_validation.tsv": "272cb3a685107d6c0cd13ff0e649cd690d3ef407d4e4870c175b1bce558f7e30"
+  },
+  "status": "posthoc_proxy_complete"
+}

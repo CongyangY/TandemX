@@ -1,0 +1,4 @@
+sequence_id	span_bp	independently_supporting_reads	supplied_independent_reads	query_coverage_min	identity_min	warning
+L0004_old	5679	97	120	0.9	0.98	same_library_alignment_support_not_independent_copy_number_truth
+L0004_newer	5679	97	120	0.9	0.98	same_library_alignment_support_not_independent_copy_number_truth
+L0004_candidate	5681	97	120	0.9	0.98	same_library_alignment_support_not_independent_copy_number_truth

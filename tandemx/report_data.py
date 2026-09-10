@@ -203,6 +203,16 @@ def build_report_data(outdir: Path, records: Sequence[object] = ()) -> dict[str,
         comparisons = _read_tsv(comparison_source_path, use("locate"))
     fasta = _fasta_records(outdir / "discover" / "monomers.fa", use("discover"))
     recovery = _read_tsv(outdir / "recovery" / "recovery_candidates.tsv", use("recovery"))
+    assessment_path = outdir / "recovery" / "recovery_assessment.json"
+    recovery_assessment: dict[str, Any] | None = None
+    if use("recovery") and assessment_path.is_file():
+        try:
+            parsed_assessment = json.loads(assessment_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Invalid recovery assessment JSON: {assessment_path}") from exc
+        if not isinstance(parsed_assessment, dict):
+            raise ValueError(f"Recovery assessment must be a JSON object: {assessment_path}")
+        recovery_assessment = parsed_assessment
 
     copy_by_family = _index_unique(copy_rows, "family_id", outdir / "quantify" / "copy_number.tsv")
     comparison_by_family = _index_unique(comparisons, "family_id", comparison_source_path)
@@ -313,6 +323,10 @@ def build_report_data(outdir: Path, records: Sequence[object] = ()) -> dict[str,
     sources.append({"step": "recovery", "path": "recovery/recovery_candidates.tsv", "used": recovery_used,
                     "sha256": _sha256(recovery_path) if recovery_used else None,
                     "bytes": recovery_path.stat().st_size if recovery_used else None})
+    assessment_used = use("recovery") and assessment_path.is_file()
+    sources.append({"step": "recovery", "path": "recovery/recovery_assessment.json", "used": assessment_used,
+                    "sha256": _sha256(assessment_path) if assessment_used else None,
+                    "bytes": assessment_path.stat().st_size if assessment_used else None})
     run_warnings, metadata_files, commands = _run_metadata(outdir, records, quantification_available=bool(copy_rows))
     return {"schema_version": 1, "run": {"outdir": str(outdir), "validated_steps": sorted(allowed) if allowed is not None else None},
             "summary": {"family_count": len(results), "high_confidence_family_count": high_confidence,
@@ -321,7 +335,8 @@ def build_report_data(outdir: Path, records: Sequence[object] = ()) -> dict[str,
                         "unresolved_family_count": unresolved_count, "low_confidence_family_count": low_confidence_count,
                         "recommended_review_family_ids": [row["family_id"] for row in recommended],
                         "recovery_candidate_count": len(recovery),
-                        "recovery_status_counts": dict(sorted(recovery_status_counts.items()))},
+                        "recovery_status_counts": dict(sorted(recovery_status_counts.items())),
+                        "recovery_assessment": recovery_assessment},
             "families": results, "architecture_edges": hierarchy, "sources": sources,
             "membership": membership, "recovery_candidates": recovery, "recommended_families": recommended,
             "data_availability_warnings": run_warnings, "provenance": {"files": metadata_files, "commands": commands}}

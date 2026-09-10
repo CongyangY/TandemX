@@ -1,0 +1,8 @@
+locus_id	family_id	newer_proxy_evaluated	candidate_sequence_id	independent_read_support	recovery_status	validation_status
+L0001	TXF000002	False	NA	0	insufficient_read_support	no_candidate_sequence
+L0002	TXF000002	False	NA	0	insufficient_read_support	no_candidate_sequence
+L0003	TXF000002	False	NA	0	unresolved_no_unique_anchor	no_candidate_sequence
+L0004	TXF000002	False	L0004	25	partially_resolved	candidate_remapping_required
+L0005	TXF000002	False	NA	0	unresolved_no_unique_anchor	no_candidate_sequence
+L0006	TXF000002	False	NA	0	unresolved_no_unique_anchor	no_candidate_sequence
+TXF000154_no_locus	TXF000154	False	NA	0	unresolved_no_assembly_locus	no_candidate_sequence

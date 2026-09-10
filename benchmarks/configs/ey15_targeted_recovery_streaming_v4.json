@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment_id": "ey15_targeted_recovery_streaming_v4",
+  "families": [
+    "TXF000002",
+    "TXF000154"
+  ],
+  "selection": "two_families_with_stable_preexisting_orthogonal_support",
+  "prior_knowledge": "family_level_newer_assembly_results_known;newer_sequence_and_locus_coordinates_prohibited",
+  "threads": 4,
+  "minimap2": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+  "inputs": {
+    "old_assembly": "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/old_assembly.fa",
+    "old_arrays": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/locate_old/arrays.bed",
+    "catalog": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/discover/monomers.fa",
+    "copy_number": "/Volumes/T7/Codex/TandemX/results/ey15_donor_matched_collapse_v1_20260908/run/quantify_primary/copy_number.tsv",
+    "reads": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz",
+    "read_qc": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/qc_v1/qc.json"
+  },
+  "expected_sha256": {
+    "old_assembly": "d7a094865701433e2ffd726495f61cc943e80bfa1ff30a7a38990dae0c7224b3",
+    "reads": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8"
+  },
+  "rules": {
+    "flank_bp": 2000,
+    "flank_offsets_bp": [
+      0,
+      2000,
+      5000,
+      10000
+    ],
+    "anchor_query_coverage_min": 0.9,
+    "anchor_identity_min": 0.98,
+    "competing_hit_identity_min": 0.95,
+    "repeat_read_aligned_bp_min": 500,
+    "repeat_read_identity_min": 0.85,
+    "minimum_dual_anchor_reads": 3,
+    "span_length_tolerance": "max(100bp,1pct_median)",
+    "candidate_method": "median_length_observed_dual_anchor_read_span_unpolished",
+    "mapping_timeout_seconds": 1800,
+    "maximum_recruited_ids": 1000000,
+    "maximum_retained_alignment_rows": 10000000,
+    "stop_on_no_supported_candidates": true
+  },
+  "recruitment_template_min_bp": 1000,
+  "continuation_reason": "resource_only_preoutcome_change: first_1000_read_pilot_has_5984_retained_rows_190_unique_reads_projecting_5012115_rows_159141_reads;stream_TSV_and_raise_resource_caps;reuse_identical_completed_mapping;all_biological_rules_unchanged",
+  "prior_attempt": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v3_20260910"
+}

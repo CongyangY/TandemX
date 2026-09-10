@@ -59,7 +59,8 @@ def _copy_recovery(source: Path, destination: Path, manifest: list[dict[str, obj
         path, expected = source / name, outputs.get(name)
         if not isinstance(expected, str) or not path.is_file() or sha256(path) != expected:
             raise ValueError(f"Recovery lock hash mismatch for {path}")
-    for name in (*RECOVERY_LOCKED, "candidate_lock.json", "recovery_report.html"):
+    for name in (*RECOVERY_LOCKED, "candidate_lock.json", "recovery_report.html", "flank_audit.tsv",
+                 "recovery_assessment.json", "recovery_validation_report.html"):
         path = source / name
         if path.is_file():
             _copy(path, destination / name, manifest)

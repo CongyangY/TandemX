@@ -131,3 +131,11 @@ completed v3 mapping after verifying commands, target/input hashes and mapper
 identity; no biological threshold or anchor selection rule changes. If the
 original v3 collector hits its smaller cap, retain that technical failure
 separately from the v4 biological outcome.
+
+
+## User release hold
+
+On 2026-09-10 the user explicitly postponed Bioconda, Zenodo and a formal
+tagged release until further suggestions have been discussed. This milestone
+may update the existing development branch; it must not trigger those release
+actions.

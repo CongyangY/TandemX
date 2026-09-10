@@ -1,0 +1,227 @@
+{
+  "scope": "selected_compact_evidence_only;large_read_and_mapping_files_remain_on_T7",
+  "files": [
+    {
+      "relative_path": "recovery/candidate_lock.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/candidate_lock.json",
+      "sha256": "2eece8a087d18e306b05e5c6e04a2af6c7effa357d42f9246ad18ba49a319ee3",
+      "bytes": 1686
+    },
+    {
+      "relative_path": "recovery/prepare_lock.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/prepare_lock.json",
+      "sha256": "c8bfc1f23e5f0122ce026718d63e6c57e2d99379648ae7e3a47a6cd0af749b8f",
+      "bytes": 596
+    },
+    {
+      "relative_path": "recovery/prepared.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/prepared.json",
+      "sha256": "f35d2e38654dbbe9d6dda5893cf4dd70cfa5ebf20c6a1d5d3d5dedbedbf5d678",
+      "bytes": 22994
+    },
+    {
+      "relative_path": "recovery/input_manifest.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/input_manifest.json",
+      "sha256": "08e251165dd534f5a9e9de1cf25e139f27dc49afbed95fd7fd74cb57c1648df4",
+      "bytes": 2062
+    },
+    {
+      "relative_path": "recovery/recruit_source.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recruit_source.json",
+      "sha256": "051ad8109cd717c0fa714589b55bf7baaaf80429ed4f90015511257ce10b7799",
+      "bytes": 455
+    },
+    {
+      "relative_path": "recovery/mapping_import.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/mapping_import.json",
+      "sha256": "0c94c564c0e54027c46a921fe483e7d5f91ca377012d52553de56685f4dacc28",
+      "bytes": 782
+    },
+    {
+      "relative_path": "recovery/flank_audit.tsv",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/flank_audit.tsv",
+      "sha256": "478651e2fd067fd7759522f9cb398f7b4b74592955d06a6d91cd98eafd12452c",
+      "bytes": 6277
+    },
+    {
+      "relative_path": "recovery/recovery_candidates.tsv",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recovery_candidates.tsv",
+      "sha256": "804ea37096c949f34782f0797cd6db17486e8b292016f080b58303bb6423d7ce",
+      "bytes": 3003
+    },
+    {
+      "relative_path": "recovery/recovery_validation.tsv",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recovery_validation.tsv",
+      "sha256": "c49b0e68d7f70bb2820730c07028782f2d0f0c3e7ee5bb326c3600d63452ebc1",
+      "bytes": 681
+    },
+    {
+      "relative_path": "recovery/recovery_loci.bed",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recovery_loci.bed",
+      "sha256": "d57edb693c47a759fd70a289cb2e42fae3888aa8d4199bbec3329681a2e387e4",
+      "bytes": 402
+    },
+    {
+      "relative_path": "recovery/recovered_sequences.fasta",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recovered_sequences.fasta",
+      "sha256": "96305322caec54402ccbaab8fe7624ef973ef3b390821dc255712b5509196786",
+      "bytes": 5761
+    },
+    {
+      "relative_path": "recovery/reads_to_targets.receipt.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/reads_to_targets.receipt.json",
+      "sha256": "30c56e672d31030c81542d1cefebe72087b7cdbe3b6e57cec9d8847548e36f6b",
+      "bytes": 568
+    },
+    {
+      "relative_path": "recovery/reads_to_targets.log",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/reads_to_targets.log",
+      "sha256": "c7e20c4798fc4319240123fb58af887acebb9960428c174564e506eb206ac87c",
+      "bytes": 22040
+    },
+    {
+      "relative_path": "recovery/recovery_assessment.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recovery_assessment.json",
+      "sha256": "44e243650c16f6c7c3bce97150860f7bef465460a7def4a89995e3421e6afca4",
+      "bytes": 3662
+    },
+    {
+      "relative_path": "recovery/recovery_validation_report.html",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recovery_validation_report.html",
+      "sha256": "a218bf45d99f3f23bbb7717e4108fb2d486107b90a9663d67af3b205fe715c5e",
+      "bytes": 1321
+    },
+    {
+      "relative_path": "recovery/recovery_report.html",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recovery_report.html",
+      "sha256": "577e485b9e493185ab73a8d2e13dec7a4ce8fab3f5e3ff118c44df254abe3921",
+      "bytes": 2187
+    },
+    {
+      "relative_path": "proxy_v2/input_manifest.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/input_manifest.json",
+      "sha256": "49d5704e8acd3f0ef1214b93155bdbd890d8149966c19658da5ae3adfc708ff8",
+      "bytes": 698
+    },
+    {
+      "relative_path": "proxy_v2/proxy_completion.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/proxy_completion.json",
+      "sha256": "ef54d0ef8da13df90c260961c0463f0dd7c86c814693b70a06118bc50c4ea1f1",
+      "bytes": 452
+    },
+    {
+      "relative_path": "proxy_v2/proxy_validation.tsv",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/proxy_validation.tsv",
+      "sha256": "272cb3a685107d6c0cd13ff0e649cd690d3ef407d4e4870c175b1bce558f7e30",
+      "bytes": 574
+    },
+    {
+      "relative_path": "proxy_v2/localized_repeat_intervals.tsv",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/localized_repeat_intervals.tsv",
+      "sha256": "8e7579b9512327836205e037f9d7fe0321e04f2aed2bb1da3fb05f053358583a",
+      "bytes": 561
+    },
+    {
+      "relative_path": "proxy_v2/comparison_spans.fa",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/comparison_spans.fa",
+      "sha256": "88ec1b3b9f55e7153e7c82b9252f251f239e28c6d81eb27be1f7cc3656943508",
+      "bytes": 17083
+    },
+    {
+      "relative_path": "proxy_v2/selected_flanks.fa",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/selected_flanks.fa",
+      "sha256": "f29e148d19b0038ea7f05cf952b8367269d69b01fe8d073cd11d4f95846d373c",
+      "bytes": 4034
+    },
+    {
+      "relative_path": "proxy_v2/flanks_to_newer.paf",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/flanks_to_newer.paf",
+      "sha256": "b02d232f5e32c6ec4bfa9aaf690a164ac209f806bd6d95c0298b2dde2abc5868",
+      "bytes": 18137
+    },
+    {
+      "relative_path": "proxy_v2/flanks_to_newer.receipt.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/proxy_v2/flanks_to_newer.receipt.json",
+      "sha256": "ad4d635778c49fe43d30616c20e6f339906e992849f3d0a3135a797ab19b58dd",
+      "bytes": 618
+    },
+    {
+      "relative_path": "read_support/receipt.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/read_support/receipt.json",
+      "sha256": "8227c7c26dc36cb9859a0b879c42345235382c1985986862f58af4faf1f2d01a",
+      "bytes": 1903
+    },
+    {
+      "relative_path": "read_support/IDs.tsv",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/read_support/IDs.tsv",
+      "sha256": "5b638f93024e3ce904a49ef65ebb28aa11a0f064e5ba356df0be86c5a88e5ff1",
+      "bytes": 2274
+    },
+    {
+      "relative_path": "remapping_v2/input_manifest.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/remapping_v2/input_manifest.json",
+      "sha256": "cd681747fb48815f7b33ce4adde92fa206d622e6c7b5342e838124683427b738",
+      "bytes": 723
+    },
+    {
+      "relative_path": "remapping_v2/read_remapping.tsv",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/remapping_v2/read_remapping.tsv",
+      "sha256": "b454cd614484a493b0caa6053baa7bd2fdfd4f0f730201003c3bfe3e2c0982be",
+      "bytes": 418
+    },
+    {
+      "relative_path": "remapping_v2/remapping_completion.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/remapping_v2/remapping_completion.json",
+      "sha256": "0ea556fe62ebc1fb69e020b2065b8478811e2270481cce6c281da01733d193ee",
+      "bytes": 261
+    },
+    {
+      "relative_path": "remapping_v2/spans_to_independent_reads.paf",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/remapping_v2/spans_to_independent_reads.paf",
+      "sha256": "9c0b606772bdbb3d7a8977fe0db88d539d07f9a919dd652551f5c13090239eb8",
+      "bytes": 142326
+    },
+    {
+      "relative_path": "remapping_v2/spans_to_independent_reads.receipt.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/remapping_v2/spans_to_independent_reads.receipt.json",
+      "sha256": "c0346921ec343e630e4083ec07ba47ec1be2fea8b87a5e6992c953c5ce0206eb",
+      "bytes": 622
+    },
+    {
+      "relative_path": "provenance_continuations.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/provenance_continuations.json",
+      "sha256": "8971397d2aa519a56d567dcc6a0343cbea69fda3a50ae3ef0989a9634e99139b",
+      "bytes": 417
+    },
+    {
+      "relative_path": "retained_attempts/v2/operator_stop.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v2_20260910/operator_stop.json",
+      "sha256": "591ee37f18178acce4a194ab5f536653d1e9c3520a2607494297fe8293917f25",
+      "bytes": 422
+    },
+    {
+      "relative_path": "retained_attempts/v2/reads_to_targets.receipt.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v2_20260910/reads_to_targets.receipt.json",
+      "sha256": "d36ce9f920755e366fd53f899f5094a00bcae0b8ab1bde389c322423bc353b48",
+      "bytes": 507
+    },
+    {
+      "relative_path": "retained_attempts/v3/collector_failure.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v3_20260910/collector_failure.json",
+      "sha256": "051d3cf3f404d442fb66b7424239c54680f60b34fcfa30900ca864ecbcbdc9e6",
+      "bytes": 543
+    },
+    {
+      "relative_path": "retained_attempts/v3/reads_to_targets.receipt.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v3_20260910/reads_to_targets.receipt.json",
+      "sha256": "30c56e672d31030c81542d1cefebe72087b7cdbe3b6e57cec9d8847548e36f6b",
+      "bytes": 568
+    },
+    {
+      "relative_path": "retained_attempts/duplicate_read_extraction.json",
+      "source_path": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/read_support_v2/receipt.json",
+      "sha256": "7f0bf1961a140140724070efae57458313ee256193a41f455af194b25a7985aa",
+      "bytes": 354
+    }
+  ]
+}

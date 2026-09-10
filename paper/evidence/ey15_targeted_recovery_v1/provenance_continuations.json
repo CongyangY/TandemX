@@ -1,0 +1,5 @@
+{
+  "proxy_v1": "Retained; proxy_v2 adds complete preparation/input-lock checks and reproduces identical proxy_validation.tsv.",
+  "read_support_v2": "operator_stopped_duplicate; original read_support completed successfully.",
+  "remapping_v1": "Retained; extraction command was appended to read_support receipt after first remap. remapping_v2 binds the finalized receipt; reads FASTA and result counts unchanged."
+}

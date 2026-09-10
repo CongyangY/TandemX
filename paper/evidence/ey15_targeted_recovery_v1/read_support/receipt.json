@@ -1,0 +1,38 @@
+{
+  "candidate_read_id_excluded": "ERR8666125.602387",
+  "command": [
+    "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/bin/python",
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/extract_recovery_validation_reads.py",
+    "--recruited-reads",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recruited_reads.tsv",
+    "--source-fastq",
+    "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz",
+    "--source-qc",
+    "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/qc_v1/qc.json",
+    "--outdir",
+    "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_validation_v1_20260910/read_support",
+    "--locus-id",
+    "L0004",
+    "--exclude-candidate-read",
+    "ERR8666125.602387"
+  ],
+  "complete": true,
+  "distinct_flank_read_ids_before_exclusion": 121,
+  "extracted_bases": 2537747,
+  "extracted_independent_read_ids": 120,
+  "flank_evidence_rows": 198,
+  "locus_id": "L0004",
+  "outputs": {
+    "IDs.tsv": "5b638f93024e3ce904a49ef65ebb28aa11a0f064e5ba356df0be86c5a88e5ff1",
+    "reads.fa": "d27a1548734438d464cff551390c08d1c7eff292caeb8f2cfd12061a09e480f8"
+  },
+  "recruited_reads_tsv": "/Volumes/T7/Codex/TandemX/results/ey15_targeted_recovery_poc_v4_20260910/recruited_reads.tsv",
+  "recruited_reads_tsv_sha256": "c84501b73d28f1d063fab167ca2be863ee74554618a8fe41f80bc1ca1c46294e",
+  "scope": "mechanical_independent_read_extraction_no_mapping_or_candidate_evaluation",
+  "source_bases_streamed": 18636790429,
+  "source_fastq": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz",
+  "source_fastq_sha256": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8",
+  "source_qc": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/qc_v1/qc.json",
+  "source_qc_sha256": "3d54c214ac3ca697fbda03363ce4281bf57289e8529ee3fcfa4a38dc357cd465",
+  "source_records_streamed": 837586
+}
