@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_long_range_extraction",
+  "scope": "benchmark_only_fixed_systematic_spot_ranges",
+  "run_accession": "SRR33996330",
+  "assembly_accession": "GCA_054824555.1",
+  "assembly_length_bp": 1177730076,
+  "run_reported_bases": 211519944561,
+  "run_reported_spots": 12170774,
+  "source": {
+    "tool": "vdb-dump",
+    "table": "SEQUENCE",
+    "format": "tab",
+    "columns": ["READ", "QUALITY", "READ_LEN", "READ_TYPE"],
+    "network_policy": "NO_PROXY=*; no_proxy=*; HTTPS_PROXY=; HTTP_PROXY=; ALL_PROXY=",
+    "read_type_required": "SRA_READ_TYPE_BIOLOGICAL"
+  },
+  "converter": {
+    "path": "benchmarks/scripts/convert_vdb_tab_to_fastq.py",
+    "quality_conversion": "integer_0_to_93_to_fastq_phred_plus_33",
+    "identifier_rule": "@SRR33996330.absolute_spot",
+    "failure_policy": "retain_partial_fastq_and_failed_receipt; never overwrite"
+  },
+  "selection": {
+    "label": "three_evenly_spaced_contiguous_spot_blocks",
+    "not_random_sampling": true,
+    "not_full_source_md5_verified": true,
+    "interpretation": "benchmark-only systematic spot-range subset; source-order and acquisition bias remain"
+  },
+  "targets": {
+    "per_block_nominal_coverage": 10,
+    "per_block_target_bases": 11777300760,
+    "aggregate_nominal_coverage": 30,
+    "aggregate_target_bases": 35331902280,
+    "expected_spots_per_block_from_reported_mean": 677662
+  },
+  "ranges": [
+    {"id": "block_01", "start_spot": 1689631, "end_spot": 2367292},
+    {"id": "block_02", "start_spot": 5746556, "end_spot": 6424217},
+    {"id": "block_03", "start_spot": 9803481, "end_spot": 10481142}
+  ],
+  "acceptance": {
+    "each_block_requires": [
+      "exactly_677662_records",
+      "all_READ_LEN_equal_sequence_length",
+      "all_QUALITY_counts_equal_READ_LEN",
+      "all_READ_TYPE_biological",
+      "unique_converter_identifiers",
+      "gzip_FASTQ_integrity",
+      "tab_and_FASTQ_sha256_in_receipt"
+    ],
+    "actual_coverage_rule": "sum(receipt.total_bases) / assembly_length_bp; report each block and aggregate observed values, never substitute targets",
+    "tool_input_rule": "TandemX_TRF_and_TideHunter_receive_the_byte_identical_concatenated_completed_block_FASTQ"
+  },
+  "chunking": {
+    "spots_per_chunk": 25000,
+    "resume_rule": "completed chunk receipts may be skipped; a failed partial is retained and must be rerun into a distinct attempt directory"
+  }
+}
