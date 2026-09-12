@@ -1,0 +1,4 @@
+panel	source_file	selection	metric	evidence_boundary
+A	paper/evidence/srf_formal_unified_v1/condition_summary.tsv	all formal conditions and methods	MARE_mean	mean of three simulation seeds; mapping reuses TandemX catalogue
+B	paper/evidence/srf_formal_unified_v1/condition_summary.tsv	all formal conditions and methods	base_union_recall_mean	mean of three simulation seeds; no runtime/memory ranking
+C	paper/evidence/srf_formal_unified_v1/condition_summary.tsv	all formal conditions and methods	family_recovery_mean	competitive-mapping value unavailable by design and not zero

@@ -16,17 +16,40 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "paper/0910/manuscript_v5.md"
 OUTPUT = ROOT / "paper/0910/manuscript_v5.docx"
 
+FIGURES = {
+    "1": (
+        ROOT / "paper/0910/figures/figure1_ai_biology_first/figure1_ai_biology_first_v1.png",
+        "TandemX links raw-read tandem-repeat families to assembly representation.",
+    ),
+    "2": (
+        ROOT / "paper/0910/figures/figure2_v3_1_production_only_preview/figure2_v3_1_production_only_preview.png",
+        "Endpoint-matched comparisons define the analytical scope of TandemX.",
+    ),
+    "3": (
+        ROOT / "paper/0910/figures/figure3_v2_operating_range/figure3_v2_operating_range.png",
+        "TandemX operates across diverse plant long-read datasets.",
+    ),
+    "4": (
+        ROOT / "paper/0910/figures/figure4_v2_assembly_recovery/figure4_v2_assembly_recovery.png",
+        "Repeat families prioritized from raw reads are preferentially recovered by improved assemblies.",
+    ),
+    "5": (
+        ROOT / "paper/0910/figures/figure5_v2_orthogonal_abundance/figure5_v2_orthogonal_abundance.png",
+        "Independent reads support three residual family-specific deficits and resolve the confidence boundary of three others.",
+    ),
+}
+
 INLINE = re.compile(
     r"(\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`|\*([^*]+)\*)"
 )
 
-PLACEHOLDERS = {
-    "TandemX addresses a distinction": "[INSERT FIGURE 1 NEAR HERE]",
-    "We evaluated repeat discovery": "[INSERT FIGURE 2 NEAR HERE]",
-    "We next measured how discovery": "[INSERT SUPPLEMENTARY FIGURE S1 NEAR HERE]",
-    "We next asked whether the workflow": "[INSERT FIGURE 3 NEAR HERE]",
-    "The first biological test asked": "[INSERT FIGURE 4 NEAR HERE]",
-    "We selected six newer-assembly": "[INSERT FIGURE 5 NEAR HERE]",
+PLACEMENTS = {
+    "TandemX addresses a distinction": "1",
+    "We evaluated repeat discovery": "2",
+    "We next measured how discovery": "S1",
+    "We next asked whether the workflow": "3",
+    "The first biological test asked": "4",
+    "We selected six newer-assembly": "5",
 }
 
 
@@ -227,6 +250,27 @@ def add_placeholder(document: Document, label: str) -> None:
     run.font.color.rgb = RGBColor(31, 78, 121)
 
 
+def add_figure(document: Document, number: str) -> None:
+    path, title = FIGURES[number]
+    if not path.is_file():
+        raise FileNotFoundError(f"Figure {number} is missing: {path}")
+    image = document.add_paragraph()
+    image.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    image.paragraph_format.space_before = Pt(8)
+    image.paragraph_format.space_after = Pt(2)
+    image.paragraph_format.keep_with_next = True
+    image.add_run().add_picture(str(path), width=Inches(6.95))
+    caption = document.add_paragraph()
+    caption.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    caption.paragraph_format.space_after = Pt(8)
+    caption.paragraph_format.keep_together = True
+    run = caption.add_run(f"Figure {number}. ")
+    set_font(run, size=9.5)
+    run.bold = True
+    run = caption.add_run(title)
+    set_font(run, size=9.5)
+
+
 def parse_table(lines: list[str], start: int) -> tuple[list[list[str]], int]:
     rows = []
     index = start
@@ -254,9 +298,15 @@ def build() -> None:
         add_inline(paragraph, text)
         if text.startswith("**Table "):
             paragraph.paragraph_format.keep_with_next = True
-        for prefix, label in PLACEHOLDERS.items():
+        for prefix, figure in PLACEMENTS.items():
             if text.startswith(prefix):
-                add_placeholder(document, label)
+                if figure == "S1":
+                    add_placeholder(
+                        document,
+                        "Supplementary Figure S1 is placed in the Supplementary Figures file; its complete legend appears below.",
+                    )
+                else:
+                    add_figure(document, figure)
                 break
 
     while index < len(lines):

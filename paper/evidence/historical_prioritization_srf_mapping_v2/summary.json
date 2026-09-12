@@ -1,0 +1,115 @@
+{
+  "endpoint": "historical_assembly_under_representation_prioritization",
+  "threshold": 0.6,
+  "truth": "frozen old/new ratio below 0.6 among predeclared >=15kb-new-assembly eligible families",
+  "competitive_mapping_discovery": "N/A_shared_TandemX_catalogue",
+  "formal_native_comparator_status": "blocked_t7_unverified",
+  "summaries": [
+    {
+      "species": "ey15",
+      "method": "tandemx_frozen",
+      "eligible_families": 19,
+      "available_families": 19,
+      "unavailable_families": 0,
+      "confusion_matrix": {
+        "TP": 8,
+        "FN": 0,
+        "FP": 0,
+        "TN": 11
+      },
+      "recall": 1.0,
+      "precision": 1.0,
+      "ranking_concordance_spearman": 0.9212128254799333,
+      "ranking_concordance_state": "assessed_read_deficit_vs_new_old_gain"
+    },
+    {
+      "species": "ey15",
+      "method": "srf_k151",
+      "eligible_families": 19,
+      "available_families": 0,
+      "unavailable_families": 19,
+      "confusion_matrix": "N/A",
+      "recall": "N/A",
+      "precision": "N/A",
+      "ranking_concordance_spearman": "N/A",
+      "ranking_concordance_state": "N/A_no_available_estimates"
+    },
+    {
+      "species": "ey15",
+      "method": "srf_k101",
+      "eligible_families": 19,
+      "available_families": 0,
+      "unavailable_families": 19,
+      "confusion_matrix": "N/A",
+      "recall": "N/A",
+      "precision": "N/A",
+      "ranking_concordance_spearman": "N/A",
+      "ranking_concordance_state": "N/A_no_available_estimates"
+    },
+    {
+      "species": "ey15",
+      "method": "competitive_mapping",
+      "eligible_families": 19,
+      "available_families": 0,
+      "unavailable_families": 19,
+      "confusion_matrix": "N/A",
+      "recall": "N/A",
+      "precision": "N/A",
+      "ranking_concordance_spearman": "N/A",
+      "ranking_concordance_state": "N/A_no_available_estimates"
+    },
+    {
+      "species": "macadamia",
+      "method": "tandemx_frozen",
+      "eligible_families": 43,
+      "available_families": 43,
+      "unavailable_families": 0,
+      "confusion_matrix": {
+        "TP": 2,
+        "FN": 0,
+        "FP": 0,
+        "TN": 41
+      },
+      "recall": 1.0,
+      "precision": 1.0,
+      "ranking_concordance_spearman": 0.39606398636158674,
+      "ranking_concordance_state": "assessed_read_deficit_vs_new_old_gain"
+    },
+    {
+      "species": "macadamia",
+      "method": "srf_k151",
+      "eligible_families": 43,
+      "available_families": 0,
+      "unavailable_families": 43,
+      "confusion_matrix": "N/A",
+      "recall": "N/A",
+      "precision": "N/A",
+      "ranking_concordance_spearman": "N/A",
+      "ranking_concordance_state": "N/A_no_available_estimates"
+    },
+    {
+      "species": "macadamia",
+      "method": "srf_k101",
+      "eligible_families": 43,
+      "available_families": 0,
+      "unavailable_families": 43,
+      "confusion_matrix": "N/A",
+      "recall": "N/A",
+      "precision": "N/A",
+      "ranking_concordance_spearman": "N/A",
+      "ranking_concordance_state": "N/A_no_available_estimates"
+    },
+    {
+      "species": "macadamia",
+      "method": "competitive_mapping",
+      "eligible_families": 43,
+      "available_families": 0,
+      "unavailable_families": 43,
+      "confusion_matrix": "N/A",
+      "recall": "N/A",
+      "precision": "N/A",
+      "ranking_concordance_spearman": "N/A",
+      "ranking_concordance_state": "N/A_no_available_estimates"
+    }
+  ]
+}

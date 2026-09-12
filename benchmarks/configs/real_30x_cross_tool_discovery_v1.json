@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_new_real_30x_tool_output_inspection",
+  "frozen_date": "2026-09-11",
+  "amendments_before_tool_output": [
+    "2026-09-11 user authorized bounded proxy acceleration under a remaining-month traffic constraint; direct remains default"
+  ],
+  "question": "Which repeat families are recovered only by TandemX de novo under fixed common 30x workflows?",
+  "claim_label": "TandemX_only_de_novo_under_fixed_30x_workflows",
+  "claim_boundary": "not a claim that another tool cannot detect the array after locus targeting",
+  "input": {
+    "modality": "PacBio_HiFi_FASTQ",
+    "nominal_depth": 30.0,
+    "depth_denominator": "verified_assembly_span_bp",
+    "sampling": "deterministic_source_order_preserving",
+    "same_normalized_fasta_for_all_read_level_tools": true,
+    "complete_source_qc_required": true,
+    "formal_partitions": {
+      "count": 3,
+      "target_coverage_each": 10.0,
+      "maximum_absolute_depth_delta": 1.0,
+      "source_order_preserving_and_disjoint": true
+    },
+    "direct_download_hosts": [
+      "NCBI",
+      "ENA",
+      "NGDC"
+    ],
+    "proxy_policy": {
+      "default": "direct_no_proxy",
+      "bounded_A_B_test_maximum_bytes": 500000000,
+      "minimum_stable_speedup_for_long_transfer": 2.0,
+      "current_project_proxy_budget_bytes": 50000000000,
+      "user_reported_month_remaining_bytes_approximate": 350000000000,
+      "require_route_and_byte_receipt": true
+    }
+  },
+  "scope": {
+    "minimum_period_bp": 30,
+    "maximum_period_bp": 1000,
+    "minimum_array_span_bp": 100
+  },
+  "required_read_level_tools": [
+    {
+      "tool": "TandemX",
+      "version": "0.1.0",
+      "source_commit": "af10cb11b50012c0058bf5b1e601035def11427b"
+    },
+    {
+      "tool": "TideHunter",
+      "version": "1.5.5",
+      "binary_sha256": "b45940e18bd3855f0012305a27ce97fc863927f5479a9e379440da1b3037275c"
+    },
+    {
+      "tool": "TRF",
+      "version": "4.10.0-rc.2",
+      "binary_sha256": "a1a23ca7fdbb4d6e5e61ca9913a80fb492486fb0ff7e6b567a7a2bb7c77ff982"
+    }
+  ],
+  "tandemx_frozen_discovery": {
+    "discovery_method": "cascade",
+    "clustering_method": "sequence",
+    "cluster_identity": 0.95,
+    "family_audit": "related",
+    "min_period": 30,
+    "max_period": 1000,
+    "top_periods": 5,
+    "min_support_reads": 5,
+    "min_repeat_span": 100,
+    "kmer_backend": "rust"
+  },
+  "endpoint_specific_tools": {
+    "assembly": [
+      "TRASH_or_TRASH2",
+      "TideCluster"
+    ],
+    "donor_matched_short_reads": [
+      "SRF"
+    ],
+    "missing_endpoint_state": "N/A"
+  },
+  "family_normalization": {
+    "canonicalize_reverse_complement": true,
+    "canonicalize_circular_rotation": true,
+    "direct_identity_minimum": 0.9,
+    "direct_shorter_to_longer_length_ratio_minimum": 0.9,
+    "related_period_multiple_identity_minimum": 0.8,
+    "related_period_multiple_relative_error_maximum": 0.05
+  },
+  "exclusive_candidate_requirements": {
+    "all_required_tools_complete": true,
+    "all_required_outputs_normalized": true,
+    "tandemx_production_support_pass": true,
+    "no_qualifying_comparator_family_match": true,
+    "recurrence": "at_least_two_disjoint_approximately_10x_partitions_or_independent_evidence",
+    "assembly_localization_required_when_assembly_available": true,
+    "known_sequence_screens_required": true,
+    "tool_failure_state": "technical_unresolved",
+    "targeted_detection_state": "not_tool-exclusive_after_targeted_locus_analysis"
+  },
+  "primary_materials": [
+    "V14167",
+    "K30076",
+    "S245",
+    "HN873",
+    "HN51",
+    "S83"
+  ],
+  "requested_additional_materials": [
+    "YSD56",
+    "ZH13"
+  ],
+  "withdrawn_materials": {
+    "Brachypodium_distachyon_Bd21": {
+      "assembly": "GWHDUCY00000000",
+      "raw_hifi": "CRR789935",
+      "biosample": "SAMC1255397",
+      "assembly_class": "near_complete_not_T2T_two_gaps",
+      "endpoint_bytes": 517292608950,
+      "status": "user_withdrawn_large_public_bam_low_operational_value",
+      "allowed_actions": []
+    }
+  },
+  "reporting": {
+    "record_runtime": true,
+    "record_cpu_time": true,
+    "record_peak_process_tree_rss": true,
+    "record_output_hashes": true,
+    "operational_representatives_are_not_biological_family_counts": true,
+    "manuscript_result_six": "paused_pending_user_decision",
+    "release_actions": "paused"
+  }
+}

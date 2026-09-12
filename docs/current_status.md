@@ -1,5 +1,123 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-13: evidence recovery and unfinished-work boundary
+
+This checkpoint supersedes conflicting statements in the historical sections
+below. The manuscript v5 text, Word artifact and its figure package are
+complete as local deliverables: `paper/0910/manuscript_v5.md`,
+`paper/0910/manuscript_v5.docx`, the v5 rendered QA PDF and the five main plus
+supplementary figure assets are present. This is a manuscript package
+milestone, not a claim that all remaining biological or comparative evidence
+is complete.
+
+The formal discovery-saturation analysis is complete for the prespecified
+0.5x, 1x, 2x, 5x, 10x, 20x and 30x depths with three seeds (21/21 runs), and
+the formal SRF unified simulation comparison is complete (72/72 cells, zero
+process failures). These are simulation/development and formal simulation
+results respectively; the formal real-data SRF/ordinary-mapping comparison is
+not complete. In particular, the historical-assembly under-representation
+prioritization endpoint remains blocked because its native comparator evidence
+is not currently durable.
+
+Three bounded local tools/evidence additions are available for replay or audit:
+`benchmarks/scripts/evaluate_historical_prioritization.py`,
+`benchmarks/scripts/postprocess_ysd56_tidehunter_permissive.py` and
+`benchmarks/scripts/audit_real_30x_recovery.py` (with their focused tests and
+local evidence directories). They do not change the frozen production
+algorithm and have not been submitted to GitHub.
+
+The T7 interruption/remount invalidated the durability of part of the real
+30x evidence. A later targeted read recovered the YSD56
+`normalization.sqlite`, `execution_summary.tsv` and `run_manifest.json`; copies
+under `tmp/ysd56_formal_run_recovery_20260913/` have source-matching SHA-256
+values. The frozen recurrence/exact screen was therefore re-derived: 12,070
+TandemX families recur in all three partitions, 2,099 have exact TideHunter
+support and 9,971 require nonexact review. The exact length-only search space is
+3,529,718,697 pairs, above the frozen five-million-pair execution gate. Those
+9,971 families remain technical unresolved and are not TandemX-only calls; see
+`paper/evidence/ysd56_tidehunter_permissive_postprocess_v2_20260913/`.
+K30076 block receipts/plans include
+zero-byte or missing files after remount and cannot be treated as completed.
+The V14167 run retains interrupted/partial files, but its previously observed
+nonzero comparator receipts are not all durable; it is therefore not a
+completed three-tool benchmark. These observations are retained as data-loss
+boundaries, not biological results.
+
+The T7 filesystem has not passed a read-only volume verification because active
+unrelated processes still hold the mount. All large writes/downloads and
+comparators to T7 are stopped pending safe verification or an explicit safe
+recovery route. The six T2T peanut materials and soybean 30x cross-tool cohort
+remain unfinished; their recovery inventory is complete in
+`docs/evidence/real_30x_recovery/` without new T7 writes. Brachypodium is
+excluded by the user's scope decision, and the
+user-owned BLAST follow-up remains excluded from the agent's work.
+
+The exact rolling-code change remains an implementation optimization only; no
+new abundance algorithm or third A3 round is active. The deferred final
+old/new scaling benchmark (including approximately 1-Gb input) remains
+deferred until the manuscript performance table is frozen. Bioconda, Zenodo,
+formal tagged release, and all release publication actions remain paused.
+The sixth manuscript Result remains reserved for the user's future testing.
+See `docs/unfinished_work_register_20260913.md` for the task-by-task state,
+replay conditions and required inputs.
+
+The final repository regression after the 2026-09-13 recovery/comparator audit
+passed **864 tests** in the `tandemx-dev` environment. No production algorithm
+source changed in this checkpoint.
+
+## Active 2026-09-11 real 30x cross-tool and BLAST checkpoint
+
+The formal real-read comparison protocol was frozen before new 30x tool
+output. Each material is represented by three disjoint, source-order-preserved
+approximately 10x partitions. TandemX uses the stable YSD56 production settings
+(`cascade`, sequence clustering at 0.95, `family_audit=related`, minimum five
+supporting reads); TRF 4.10.0-rc.2 and TideHunter 1.5.5 receive each same
+partition. Exact normalization is only a preliminary screen. The subsequent
+permissive screen uses symmetric `shorter_length/longer_length >= 0.90` at
+0.90 glocal identity or an integer period-multiple rule at 0.80 identity and
+0.05 relative length error. Candidate-index saturation or a possible short-
+primitive seed mismatch is `unresolved`, never negative comparator evidence.
+The benchmark runner and protocol passed 32 focused tests and the complete
+repository passed 842 tests. They remain local and have not been pushed.
+
+The complete YSD56 HiFi source was deterministically sampled at inclusion
+probability 0.685. The completed sample contains 1,792,287 reads and
+30,267,561,162 bp, or 30.0117543x against the 1,008,523,555-bp assembly span;
+the source and sample SHA-256 checks in the receipt passed. Common-FASTA
+preparation and partition binding are in progress. V14167 public FASTQ download
+was stopped at a resumable 1.04-GiB
+partial because direct ENA throughput was not operationally useful. A bounded
+SRA `vdb-dump` route was validated instead: 1,000 spots produced 1,000 valid
+biological FASTQ records and 15,082,940 bp with sequence, Phred+33 quality and
+declared length agreement. V14167 partition 1 is now being constructed from
+spots 1,689,631--2,367,292 in independently receipted 25,000-spot chunks. Direct
+transfer remains the default; a bounded proxy A/B may use at most 0.5 GB for
+testing and the current TandemX proxy budget is capped at 50 GB unless the user
+changes it.
+
+*Brachypodium distachyon* was withdrawn from the cohort by the user on
+2026-09-11. Its only applicable public HiFi endpoint is a
+517,292,608,950-byte BAM without a repository checksum, and the associated
+assembly is near-complete rather than T2T. No download, BAM conversion, 30x
+sampling or tool comparison will be attempted. This is an explicit scope
+decision (`user_withdrawn_large_public_bam_low_operational_value`), not a
+negative biological or software result.
+
+For cultivated soybean ZH13, `CRR705247` was corrected to ONT rather than
+HiFi. The relevant PacBio CCS runs are `CRR705248` and `CRR705249`, totalling
+46,775,562,505 endpoint bytes under `PRJCA015269/CRA010060`. The verified local
+assembly `GWHBWDJ00000000.1` contains 20 records, 1,007,237,669 ACGT bp and no
+N bases. The assembly is BioSample `SAMC1127443`, whereas the HiFi experiment
+is `SAMC1127444` and the BAM read-group sample is the internal ID `22D00017`.
+This is eligible only as a project/study-level control after complete BAM
+acquisition and QC; it is not donor-matched validation. The BAM endpoints have
+no published checksum or index, so their complete transfer is queued rather
+than replaced by arbitrary byte-range fragments.
+
+The user-supplied `TXF000708` core_nt BLAST result is integrated below. New
+real-data findings remain outside the manuscript pending the user's decision on
+a sixth Result. Bioconda, Zenodo and the formal tagged release remain paused.
+
 ## Active 2026-09-10 legume previously-unreported TR candidate checkpoint
 
 The frozen production workflow was applied to donor-matched *Glycine soja*
@@ -21,8 +139,14 @@ five soybean minisatellites or 1,697 Dfam *G. max* consensuses. The YSD56 paper
 and official supplement do not report a 785-bp family. Retained status is
 `stable_previously_unreported_in_source_article_candidate`, not `novel_TR`:
 the deeper sample is nested, `CentGm-2`/273/444 sequence exclusion remains
-unresolved, and no independent ONT/Illumina, full nucleotide-database or wet-
-lab evidence exists.
+unresolved, and no independent ONT/Illumina or wet-lab evidence exists. A
+user-supplied NCBI BLASTN search of `core_nt` (RID `A6RV2K9J014`) found six
+significant *Glycine max* records, but all HSPs overlapped query bases 1--172.
+The union covered 172/785 bp (21.91%); the strongest HSP was 94.25% identical
+over 174 aligned columns, and 84/172 union-hit bases overlapped XML-declared
+soft-mask intervals. The evidence state is therefore
+`no_near_full_length_core_nt_match_local_Glycine_max_homology_present`, not a
+claim of globally novel sequence.
 
 The deeper run required 5,335.51 s wall time, 13,248.39 s user CPU,
 1,517.28 s system CPU, 5,509.84 MiB peak process-tree RSS and 460,330,868

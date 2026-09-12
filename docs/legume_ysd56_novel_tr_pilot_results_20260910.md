@@ -159,6 +159,33 @@ This supports `not_reported_in_the_YSD56_article_or_supplement`, but does not
 show that the sequence or array was absent from all previous literature or
 databases.
 
+## User-supplied core_nt BLAST follow-up
+
+The user subsequently searched the 785-bp `TXF000708` representative with
+NCBI BLASTN against `core_nt` (RID `A6RV2K9J014`; low-complexity masking;
+E-value threshold 0.05). Six significant hits were returned, all from
+*Glycine max*. Their HSPs overlapped the same part of the query: the union was
+bases 1--172, or 172/785 bp (21.91%). The strongest hit, `AC235399.1`, was
+164/174 identical aligned columns (94.25%). The other accessions were
+`AC235047.1`, `AC235296.1`, `AC235913.2`, `XM_041016633.1` and `AC235885.2`.
+The `XM_041016633.1` HSP lies in transcript bases 2311--2444, downstream of its
+annotated CDS at bases 269--1618, and therefore does not support protein-coding
+homology. The BLAST XML reports query soft-mask intervals at bases 1--8,
+97--192, 228--321 and 703--776; 84/172 bp of the union hit interval overlaps
+these masks. The alignment remains significant, but the low-complexity overlap
+further limits biological interpretation of the local similarity.
+
+This search rules out a statement that `TXF000708` lacks all public nucleotide
+homology. It found no near-full-length match, while demonstrating local soybean
+homology in the first 172 bp. The retained evidence state is
+`no_near_full_length_core_nt_match_local_Glycine_max_homology_present`. The
+unmatched 613-bp remainder is a search observation under this database and
+parameter set, not proof that those bases or the 785-bp tandem unit are novel.
+The downloaded search receipt, detailed HSP table and six public subject
+records are retained locally under
+`tmp/txf000708_core_nt_hits_20260911/` and are excluded from GitHub under the
+current user instruction.
+
 ## Nested 10.9570x depth recurrence
 
 A second configuration was committed before inspecting output and applied to

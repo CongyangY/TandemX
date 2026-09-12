@@ -1,0 +1,5 @@
+panel	data_source	fields_used	scope
+A	paper/evidence/cascade_native_screen_heldout_v1/run/summary.tsv	tool; sequence_family_recall; array_f1; base_union_f1	Final TandemX, TRF and TideHunter across 13 positive held-out scenarios and three seeds each; values are means of non-NA records.
+B-left	paper/evidence/srf_formal_unified_v1/condition_summary.tsv	method; condition; family_recovery_mean	Formal read-based discovery recovery across six conditions and three simulation seeds per condition; competitive mapping is not a discovery method and is therefore N/A.
+B-right	paper/evidence/srf_formal_unified_v1/condition_summary.tsv	method; condition; MARE_mean	Positive-family mean absolute relative error across six formal conditions and three simulation seeds per condition.
+C	paper/evidence/srf_formal_unified_v1/condition_summary.tsv	method; condition=shared_fragment; negative_read_predicted_bp_mean	Mean bases predicted on non-target shared-fragment background reads across three formal replicates.

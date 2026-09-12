@@ -97,7 +97,7 @@ representatives provide a read-derived abundance estimate. The same family
 representative is then localized in an assembly, and overlapping intervals are
 unioned to measure assembled repeat bases. For read-derived abundance *R* and
 assembly representation *A*, TandemX reports *D* = max[*R* - *A*, 0) and the
-ratio *A*/*R* (Fig. 1C). Candidate deficits can then be tested across k-mer
+ratio *A*/*R* (Fig. 1B,C). Candidate deficits can then be tested across k-mer
 lengths or with independent sequencing platforms. A family with discordant
 measurements remains unresolved rather than contributing to a genome-wide score.
 
@@ -106,7 +106,7 @@ This linked family-level output is the main distinction from existing tools
 long-read mapping and genome-wide k-mer completeness are all established tasks.
 TandemX connects them around one operational family catalogue so that a reader
 can move directly from a read-supported family to its estimated abundance,
-assembly coordinates, representation ratio and evidence state (Fig. 1D).
+assembly coordinates, representation ratio and evidence state (Fig. 1C).
 
 **Table 1. Native analytical scope of tools relevant to tandem-repeat assembly
 assessment.** The table describes standard inputs and outputs rather than every
@@ -124,7 +124,10 @@ possible downstream combination.
 ### Controlled benchmarks establish analytical performance and method complementarity
 
 We evaluated repeat discovery, abundance estimation and assembly localization
-against planted truth before combining them in a unified comparison (Fig. 2A).
+against separate planted truth definitions before comparing tools at matched
+endpoints. The complete simulation design and TandemX-only validation panels are
+reported in the Supplementary material; the main figure is restricted to final
+production TandemX and external comparators.
 In a factorial 10-Mb simulation containing 55 planted families, TandemX recovered
 all founders from clean and high-error 5x long-read datasets. A broader validation
 spanning period, divergence, indels, array number and negative controls retained
@@ -147,32 +150,33 @@ recovery of the planted families from the more conservative stabilization of
 the complete operational catalogue.
 
 Quantification was scored with the planted catalogue supplied so that abundance
-error remained separate from discovery error (Fig. 2B). Across three independent
-10-Mb validation genomes and 1,485 family conditions, depth-gated normalization
-reduced mean absolute relative error from 0.409 to 0.363. The largest benefit
-occurred in the deliberately difficult 20x, 2%-divergence, high-error condition,
-where multi-k estimation reduced mean error from 56.6% at k=21 to 13.5%.
-Diagnostic support was insufficient in some low-coverage conditions, so the
-workflow reports availability and dispersion with each estimate.
+error remained separate from discovery error (Supplementary Fig. S3). Across three independent
+10-Mb validation genomes and 1,485 family conditions, the frozen production
+estimator had a mean absolute relative error of 0.363. Error remained highest in
+the deliberately difficult 20x, 2%-divergence, high-error condition. Diagnostic
+support was insufficient in some low-coverage conditions, so the workflow
+reports availability and dispersion with each estimate. Comparisons among
+earlier normalization variants are retained only in the Supplementary material.
 
 Assembly localization remained accurate when nearby anchors were bridged across
-no more than one monomer length (Fig. 2C). On new simulated genomes, mean recall
+no more than one monomer length (Supplementary Fig. S4). On new simulated genomes, mean recall
 was 0.981 and mean precision was 0.9996; recall in the weakest 5%-divergent,
 three-segment stratum was 0.949. The downstream binary comparison was more
 sensitive to abundance error: in the held-out test, sensitivity was 0.654, false-
 positive rate was 0.016 and precision was 0.983.
 
 Task-matched comparisons showed substantial overlap with existing tools rather
-than one universal winner (Fig. 2D). TandemX, TRF and TideHunter recovered all 55
+than one universal winner (Fig. 2A). TandemX, TRF and TideHunter recovered all 55
 founders in the read simulation, although one-to-one high-error array precision
 was 1.000, 0.699 and 0.920, respectively. Base-union precision exceeded 0.996 for
 all three, showing that overlapping and harmonic calls affected interval counts
-more than covered bases. TideHunter was generally faster. On assemblies, TRASH2
-recovered all planted families, and TideCluster achieved high base-union accuracy
-in completed runs.
+more than covered bases. On assemblies, TRASH2 recovered all planted families,
+and TideCluster achieved high base-union accuracy in completed runs. Runtime and
+memory measurements are reported in the Supplementary material rather than used
+to structure the main comparison.
 
 A unified experiment compared TandemX, SRF and ordinary competitive mapping on
-18 newly generated read datasets spanning six conditions (Fig. 2E;
+18 newly generated read datasets spanning six conditions (Fig. 2B,C;
 Supplementary Table S2). TandemX recovered all 54 planted family conditions,
 whereas SRF recovered 45 at k=151 and 53 at k=101. Positive-family abundance
 accuracy followed a different ranking: competitive mapping with the TandemX
@@ -348,15 +352,14 @@ repeat analysis. TandemX contributes the connected audit and family
 prioritization, while established tools remain preferable for several component
 tasks.
 
-The unresolved candidates reveal a second biological and analytical issue:
-different parts of a repeat consensus may have very different genomic
-specificity. TXF000695 contained two diagnostic-word depth components, and the
-median changed components when k increased from 21 to 31. This pattern is
-consistent with a repeat containing locally conserved sequence shared with a
-larger genomic background, although mosaic family structure and other forms of
-homology remain possible. Cross-k stability, observed-word fraction and depth
-dispersion provide practical indicators for distinguishing robust family signals
-from such composition-sensitive estimates.
+The unresolved candidates define a family-specific confidence boundary.
+TXF000695 contained two diagnostic-word depth components, and the median
+changed components between the separately evaluated k=21 and k=31 diagnostics.
+This pattern is consistent with a repeat containing locally conserved sequence
+shared with a larger genomic background, although mosaic family structure and
+other forms of homology remain possible. The observed-word fraction, depth
+dispersion and disagreement between the two fixed diagnostics are reported as
+QC context; they do not promote a new estimator or classifier.
 
 The present evidence has clear boundaries. The old/new analysis covers two
 species, the orthogonal analysis was restricted to six preselected candidates,
@@ -462,15 +465,14 @@ size, in that order of precedence. Estimated copy number is multiplied by
 monomer length to obtain read-derived family abundance. Median depth, median
 absolute deviation, zero or unobserved fractions and warnings are retained.
 
-The conditional multi-k analysis used k=15, 21, 27 and 31. A log-linear trend
-across supported k values estimated the intercept at zero word length; a
-single-k value was retained when multi-k support was insufficient. Joint
-read-level first and cross moments propagated the shared-read sampling variance
-through this fit. These intervals condition on the supplied genome size and
-catalogue and do not include family error, normalization error or systematic
-extrapolation bias. The final depth gate retained the conservative single-k
-rule below estimated haploid depth 2 and used the fixed multi-k blend at higher
-depth. No model was refitted in the old/new or orthogonal plant analyses.
+The frozen abundance estimator uses one specified diagnostic-k setting per
+analysis. In the orthogonal-read assessment, k=21 and k=31 were evaluated as
+separate fixed diagnostics and reported separately; they were not combined into
+one abundance estimate or used to refit the estimator. The fixed zero-or-one
+midpoint rule was retained for unobserved diagnostic words. Reported estimates
+condition on the supplied genome size and catalogue and do not include family
+error, normalization error or systematic extrapolation bias. No model was
+refitted in the old/new or orthogonal plant analyses.
 
 ### Assembly localization and comparison
 
@@ -599,8 +601,8 @@ and 780 Mb. The mapping estimate was used only to determine whether read
 occupancy supported more or less family sequence than the assembly.
 
 Residual under-representation required an assembly/orthogonal-read ratio below
-0.6, agreement with the HiFi direction and stability across k and applicable
-genome-size sensitivities. The strongest Macadamia interpretation additionally
+0.6, agreement with the HiFi direction and agreement between the separately
+evaluated k settings and applicable genome-size sensitivities. The strongest Macadamia interpretation additionally
 required concordant ONT direction. A quantification-bias interpretation
 required the orthogonal estimate to be compatible with the newer assembly while
 the fixed HiFi analysis indicated a deficit and exceeded orthogonal abundance by
@@ -648,26 +650,23 @@ regenerated from the recorded public sources and are not versioned in Git.
 ## Figure legends
 
 **Figure 1. TandemX links raw-read tandem-repeat families to assembly
-representation.** (A) Conceptual distinction between chromosome continuity and
-family-level repeat representation. (B) HiFi reads are converted into periodic
-intervals, candidate monomers and a sequence-supported operational family
-catalogue. (C) Diagnostic-k-mer depth estimates read-derived family abundance
-(*R*), while localization of the same representative measures assembly
-representation (*A*) and the read--assembly abundance deficit. (D) The family
-report connects abundance, assembly coordinates, the *A*/*R* ratio and
-cross-k or orthogonal evidence. Candidate relationships among representatives
-are shown separately from the operational family assignments.
+representation.** (A) Raw HiFi molecules support a long array of one satellite
+family, whereas an otherwise continuous assembly represents fewer units of the
+same family. (B) Periodic read intervals define an operational family catalogue;
+diagnostic k-mers estimate read-derived abundance, and the same representative
+is localized in the assembly. (C) Paired read and assembly estimates identify
+family-specific deficits, which are classified as supported or unresolved using
+cross-k and orthogonal evidence.
 
-**Figure 2. Controlled validation defines the analytical scope of TandemX.**
-(A) Simulation design and the separate truth endpoints for discovery,
-quantification, localization and binary comparison. (B) Family and interval
-recovery by TandemX, TRF and TideHunter across clean and high-error reads. (C)
-Abundance error across coverage, read-error and sequence-divergence conditions.
-(D) Base-union recall and precision for assembly localization, including
-divergent and interrupted arrays. (E) Unified TandemX, SRF and competitive-
-mapping comparison, showing family recovery, positive-family MARE and
-negative-read attribution as distinct endpoints. Runtime and peak-memory
-measurements are reported in Supplementary Figure S5.
+**Figure 2. Endpoint-matched comparisons define the analytical scope of
+TandemX.** (A) Family recovery and interval/base-union performance of production
+TandemX, TRF and TideHunter in held-out read simulations. (B) Native family
+recovery and positive-family abundance error for production TandemX, SRF at the
+two pre-specified k-mer lengths and ordinary competitive mapping; mapping uses
+the TandemX catalogue and therefore has no independent discovery endpoint. (C)
+Negative-read attribution in the shared-fragment background condition. Internal
+TandemX variants, binary-classification validation, runtime and peak memory are
+reported only in the Supplementary material.
 
 **Figure 3. TandemX operates across diverse plant long-read datasets.** (A)
 Species, accessions and total HiFi bases for ten complete libraries from eight
@@ -710,6 +709,65 @@ ribbons show ranges across three independently generated genomes. Dashed lines
 mark the pre-specified new-family fraction of 0.05 and Jaccard of 0.95;
 the vertical dotted line marks the first depth satisfying the two-consecutive-
 transition, all-seed saturation rule.
+
+**Supplementary Figure S2. Specified production validation endpoints.** (A)
+Array F1 for TandemX and TideHunter on the planted positive scenarios of the
+frozen validation record. (B) Negative-read call rate on three specified
+controls. One frozen validation seed was used for each condition; points are
+scenario outputs rather than biological replicates.
+
+**Supplementary Figure S3. Production quantification endpoints on the formal
+simulation record.** (A) TandemX mean absolute relative error across specified
+simulation conditions. (B) Base-union recall and precision for the same
+production endpoint. Values summarize three simulation seeds per condition and
+do not constitute population-level plant validation.
+
+**Supplementary Figure S4. TideCluster evaluable endpoint cells and completion
+record.** (A) Array recall and precision for the completed TideCluster cells of
+the frozen factorial assembly test. (B) Completion status across technical seed
+and setting cells. Unavailable external-tool accuracy is retained as
+unavailable rather than plotted as zero.
+
+**Supplementary Figure S5. Held-out simulated endpoint record.** (A) Mean
+array F1 for TandemX, TideHunter and TRF across positive held-out scenarios.
+(B) Mean negative-read call rate across held-out controls. Values are means of
+three frozen held-out simulation seeds; missing values remain unavailable.
+
+**Supplementary Figure S6. Formal SRF endpoint record.** (A) Mean abundance
+error, (B) base-union recall and (C) family recovery across the formal
+simulation conditions for TandemX, SRF k=151, SRF k=101 and competitive
+mapping. Competitive mapping reuses the TandemX catalogue and therefore is not
+an independent discovery endpoint; its family-recovery value is unavailable.
+
+**Supplementary Figure S7. Input-library and descriptive output context across
+plant long-read datasets.** (A) Complete-library bases, (B) median and N50
+read lengths, and (C) observed TandemX called-base fraction on matched random
+subsets. These panels describe input and output context, not cross-species
+biological replication or accuracy.
+
+**Supplementary Figure S8. Ey15-2 donor-matched reference context.** (A)
+New-assembly/read abundance ratio for source-eligible families, (B) the ratio
+under the specified depth sensitivity input, and (C) old-to-new alignment
+fractions. The newer assembly is a donor-matched reference proxy, not absolute
+copy-number truth.
+
+**Supplementary Figure S9. Macadamia donor-matched reference context.** (A)
+New-assembly/read abundance ratio for source-eligible families, (B) the ratio
+under the reported-depth sensitivity input, and (C) any and primary old-to-new
+alignment fractions. These comparisons provide reference context and do not
+establish absolute biological copy number.
+
+**Supplementary Figure S10. Orthogonal abundance evidence for six selected
+families.** (A) Newer-assembly, frozen HiFi and Illumina abundance estimates;
+ONT directional ranges remain in the source record. (B) Final evidence state:
+three candidates have direction support for residual collapse and three remain
+unresolved. The estimates are not physical copy-number truth.
+
+**Supplementary Figure S11. TXF000695 diagnostic-k-mer QC and unresolved
+context.** (A) Fraction of diagnostic k-mers observed at the frozen threshold,
+(B) median depth and depth MAD for k=21 and k=31 shown separately, and (C)
+assembly, HiFi and Illumina abundance estimates. The cross-k discrepancy leaves
+TXF000695 unresolved.
 
 ## Supplementary table legends
 

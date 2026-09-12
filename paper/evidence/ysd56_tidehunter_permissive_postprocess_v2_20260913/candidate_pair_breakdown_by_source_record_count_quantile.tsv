@@ -1,0 +1,5 @@
+source_record_count_quantile	query_count	direct_length_eligible_pair_count	integer_multiple_length_eligible_pair_count	length_eligible_pair_union_count
+Q1	2493	196928383	688427081	885355464
+Q2	2493	196735889	689839243	886575132
+Q3	2493	197943547	683063446	881006993
+Q4	2492	199783064	676998044	876781108

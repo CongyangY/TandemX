@@ -1,0 +1,4 @@
+panel	source_file	selection	metric	evidence_boundary
+A	paper/evidence/ey15_donor_matched_collapse_v1/results/evaluation_primary_total_bases/family_metrics.tsv	eligibility=eligible	new_read_ratio;reference_state	new assembly is a donor-matched reference proxy
+B	paper/evidence/ey15_donor_matched_collapse_v1/results/evaluation_primary_total_bases/family_metrics.tsv;paper/evidence/ey15_donor_matched_collapse_v1/results/evaluation_depth107_sensitivity/family_metrics.tsv	same eligible family IDs	new_read_ratio	read-depth sensitivity only
+C	paper/evidence/ey15_donor_matched_collapse_v1/results/old_new_alignment_context/family_alignment_context.tsv	eligible family IDs with alignment context	primary_alignment_fraction;same_chromosome_primary_mapq20_alignment_fraction	alignment context, not copy-number truth

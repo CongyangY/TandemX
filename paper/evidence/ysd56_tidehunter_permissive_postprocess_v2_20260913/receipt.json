@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "run_dir": "/Users/ycy/Codex/Sofw/TandemX/tmp/ysd56_formal_run_recovery_20260913",
+  "required_source_files": [
+    "normalization.sqlite",
+    "execution_summary.tsv",
+    "run_manifest.json"
+  ],
+  "matcher": "complete_shorter_vs_doubled_longer_edlib_HW_both_orientations",
+  "frozen_rule": {
+    "direct_glocal_identity_minimum": 0.9,
+    "direct_shorter_to_longer_length_ratio_minimum": 0.9,
+    "integer_period_multiple_identity_minimum": 0.8,
+    "integer_period_multiple_relative_error_maximum": 0.05
+  },
+  "final_candidate_method": "length_eligible_pairwise_edlib_in_bounded_comparator_blocks; no_4mer_index_for_final_matching",
+  "script_sha256": "76f5217e7f4e909215f69cbcfb7fb3518af6cab34d2f4980cfd05ff71965ada8",
+  "run_manifest_state": "validated_frozen_input_and_three_partitions",
+  "source_sha256": {
+    "normalization.sqlite": "8a1104dda51d1ef08cbc06b08c8007f13034825e40698bb05f7584d8c2ad38e8",
+    "execution_summary.tsv": "41ddc5e5ce6e1c7aa608b778525b7ceb22a1399a0d37d205a315148c52b23ae7",
+    "run_manifest.json": "b83a67a2b6af5a2cde49a42f2651fa86493552b6a564caed37c90500008e94f9"
+  },
+  "tidehunter_execution_state": "all_frozen_tidehunter_partitions_completed_and_normalized",
+  "status": "blocked_candidate_pair_estimate_exceeds_gate",
+  "recurrent_tandemx_family_count": 12070,
+  "exact_tidehunter_supported_family_count": 2099,
+  "recurrent_exact_unmatched_tandemx_family_count": 9971,
+  "permissive_only_tidehunter_supported_family_count": "NA",
+  "permissive_tidehunter_supported_family_count": "NA",
+  "unmatched_no_tidehunter_support_not_tandemx_only_count": "NA",
+  "unresolved_family_count": 9971,
+  "preflight_file": "candidate_index_preflight.json",
+  "qgram_preflight_file": "qgram_necessary_condition_preflight.json",
+  "output_sha256": {
+    "ysd56_tandemx_tidehunter_permissive_matches.tsv": "b2feb9fe9b8397879b8049c0483eedc5e513209b60865294ae87d5f774c13194",
+    "candidate_index_preflight.json": "72db6b8722e53708ef72617797da8b1b8cc968dfa0ded5ff5887c44d95e5d27e",
+    "qgram_necessary_condition_preflight.json": "0b68135882d850a0f8422b36e188f49c1476a69cc31c527da38f6954774d5342",
+    "candidate_pair_breakdown_by_query_length.tsv": "a034f52b8893923d1e1b86e2b0f7ba16acebccf48324a2c607e5154b3351c3d6",
+    "candidate_pair_breakdown_by_source_record_count_quantile.tsv": "df9ac10f8acb3aeca7b8dd769bd27dba42d1dd10b3944ef79a14626672ad6df1"
+  },
+  "interpretation_boundary": "Exact canonical-key support is reported for recurrent TandemX families. The nonexact recurrent population exceeded the exhaustive alignment budget and remains unresolved; no negative comparator conclusion was produced."
+}

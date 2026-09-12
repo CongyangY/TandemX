@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "zh13_hifi_30x_cross_tool_enrollment_v1",
+  "status": "metadata_closed_but_full_source_acquisition_not_started",
+  "scope": "benchmark-only source enrollment; no TandemX production-code change",
+  "assembly": {
+    "accession": "GWHBWDJ00000000.1",
+    "assembly_name": "ZH13-T2T",
+    "project": "PRJCA015269",
+    "biosample": "SAMC1127443",
+    "local_path": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/GWHBWDJ00000000.1.genome.fasta.gz",
+    "compressed_bytes": 286375748,
+    "publisher_md5": "86fe5e3cdd12510afa61c6e3345a4a97",
+    "local_sha256": "db628d16c550e4f587bf834eea36b2c2325afcbe633923161e04312fa8f32ca9",
+    "span_bp": 1007237669,
+    "record_count": 20,
+    "non_acgt_bases": 0,
+    "verification_receipt": "/Volumes/T7/Codex/TandemX/data/references/ZH13_T2T_GWHBWDJ00000000.1_range_resume_v2_20260908/independent_verification.json"
+  },
+  "raw_hifi": {
+    "project": "PRJCA015269",
+    "gsa_study": "CRA010060",
+    "experiment": "CRX631709",
+    "experiment_platform": "PacBio Sequel II",
+    "experiment_strategy": "WGS",
+    "biosample": "SAMC1127444",
+    "sample_title": "soybean_leaf_DNA_HiFi",
+    "runs": [
+      {
+        "accession": "CRR705248",
+        "alias": "soybean_HiFi_genome01",
+        "format": "BAM",
+        "url": "https://download.cncb.ac.cn/gsa2/CRA010060/CRR705248/CRR705248.bam",
+        "expected_bytes_from_https_head": 24194765935,
+        "etag": "6423edf1-5a21ed46f",
+        "last_modified": "2023-03-29T07:51:13Z"
+      },
+      {
+        "accession": "CRR705249",
+        "alias": "soybean_HiFi_genome02",
+        "format": "BAM",
+        "url": "https://download.cncb.ac.cn/gsa2/CRA010060/CRR705249/CRR705249.bam",
+        "expected_bytes_from_https_head": 22580796570,
+        "etag": "6423ee4b-541eb9c9a",
+        "last_modified": "2023-03-29T07:52:43Z"
+      }
+    ],
+    "combined_expected_bytes": 46775562505,
+    "repository_checksum": "not_published_on_run_pages",
+    "bam_index": "not_published_at_standard_bam_bai_or_bai_paths",
+    "header_probe": {
+      "run": "CRR705248",
+      "method": "decompress the complete leading BGZF block from the verified 1 MiB range probe",
+      "read_group_sample": "22D00017",
+      "library": "22D00017",
+      "platform": "PACBIO / SEQUELII",
+      "read_type": "CCS",
+      "interpretation": "the internal BAM sample identifier is not ZH13 and does not by itself close cultivar identity"
+    },
+    "direct_transport": {
+      "network_policy": "NO_PROXY=*; no_proxy=*; HTTPS_PROXY=; HTTP_PROXY=; ALL_PROXY=",
+      "accept_ranges": true,
+      "range_probe": "CRR705248 bytes=0-1048575 returned HTTP 206 and exact Content-Range on 2026-09-11",
+      "range_probe_interpretation": "transport supports byte ranges, but a BAM byte range without a published index is not a valid read/spot extractor"
+    }
+  },
+  "material_linkage": {
+    "assembly_to_ont": "same BioSample SAMC1127443; CRR705247 is ONT, not HiFi",
+    "assembly_to_hifi": "same official BioProject PRJCA015269 and same ZH13 genome-assembly study, but HiFi is BioSample SAMC1127444 while assembly is SAMC1127443",
+    "status": "project_and_study_level_supported; individual_extraction_level_and_BAM_internal_sample_to_cultivar_identity_not_publicly_closed",
+    "use_boundary": "eligible only as a positive/control cohort after the source-acquisition gate; do not describe it as an independently donor-matched HiFi validation"
+  },
+  "fixed_30x_plan": {
+    "input_order": ["CRR705248", "CRR705249"],
+    "selection": "three_evenly_spaced_source_order_preserving_disjoint_base_blocks",
+    "assembly_denominator_bp": 1007237669,
+    "target_bases_per_block": 10072376690,
+    "target_bases_total": 30217130070,
+    "target_coverage_per_block": 10,
+    "target_coverage_total": 30,
+    "freeze_rule_after_complete_source_qc": "Stream both complete BAM files in the listed order, calculate total biological read bases B, then use source-base offsets floor(i*(B-A)/2) through offset+A for i=0,1,2 and A=10072376690. Preserve complete read records, report the resulting read-boundary overshoot, exact bases, IDs and SHA256 for each FASTQ partition.",
+    "required_gates_before_extraction": [
+      "both downloaded BAM files equal their HEAD content lengths",
+      "both files pass BAM EOF/record parsing with an explicitly recorded reader version",
+      "self-computed SHA256 retained because no repository checksum is published",
+      "1000-read end-to-end converter gate on complete BAM input",
+      "no active V14167 block_01 or YSD56 sampling process is materially slowed"
+    ],
+    "current_gate_state": "blocked_before_source_acquisition: VDB spot-range converter applies to SRA VDB tab streams, not these NGDC BAM endpoints; no BAM reader/index is currently available and a byte-range fragment is not valid evidence of read extraction"
+  },
+  "analysis_boundary": "No result may be called 30x, HiFi-based, donor-matched, or TandemX-only until every source and partition gate completes and all three read-level discovery tools finish."
+}

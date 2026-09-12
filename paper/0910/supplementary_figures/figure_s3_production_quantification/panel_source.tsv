@@ -1,0 +1,3 @@
+panel,source_file,selection,metric,evidence_boundary
+A,paper/evidence/srf_formal_unified_v1/condition_summary.tsv,method=tandemx; all formal conditions,MARE_mean,mean across three simulation seeds
+B,paper/evidence/srf_formal_unified_v1/condition_summary.tsv,method=tandemx; all formal conditions,base_union_recall_mean;base_union_precision_mean,mean across three simulation seeds

@@ -99,4 +99,4 @@ TXF000367 的最长 run 是 5′ 端 `A×16`，其余较长 run 主要为 A×5�
 | 与本地其他 candidates | 11-mer 最高仅占目标 unique set 的 0.625% 或 0.681% | `local_catalogue_no_strong_short_motif_match`; 不等于外部数据库无匹配 |
 | biological interpretation | 后续全组装定位给出 chr13/chr19 长阵列；rDNA 排除已将 TXF000367 识别为 5S-related，TXF000708 仍缺 CENH3/FISH、TE 全库和全数据库检索 | TXF000367=`rDNA_related_known_repeat`; TXF000708=`preliminary_candidate_not_novel` |
 
-后续整合定位和 rDNA 排除已把队列缩小到 TXF000708；TXF000367 因 119/119-bp 5S rDNA 完全匹配而退出。TXF000708 仍需 10.957x nested 深度复现、完整 soybean/legume 与 TE 库检索、独立 ONT/Illumina 支持及必要的实验验证。在这些证据完成前，保持 `preliminary_candidate_not_novel`，不使用 novel、centromeric 或 HOR 命名。
+后续整合定位和 rDNA 排除已把队列缩小到 TXF000708；TXF000367 因 119/119-bp 5S rDNA 完全匹配而退出。TXF000708 已在 10.957x nested 深度精确复现。用户提供的 `core_nt` BLASTN 结果进一步显示其前 172/785 bp（21.91%）与多条公开 *Glycine max* 序列有显著局部同源，但没有近全长命中；因此状态更新为 `no_near_full_length_core_nt_match_local_Glycine_max_homology_present`。它仍需更完整的 soybean/legume 与 TE 库检索、独立 ONT/Illumina 支持及必要的实验验证。在这些证据完成前，保持 `preliminary_candidate_not_novel`，不使用 novel、centromeric 或 HOR 命名。

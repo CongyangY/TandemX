@@ -1,0 +1,7 @@
+{
+  "q": 4,
+  "length_eligible_sample_pairs": 35526,
+  "qgram_necessary_condition_retained_pairs": 27416,
+  "qgram_necessary_condition_removed_pairs": 8110,
+  "interpretation": "diagnostic necessary-condition preflight only; not used to call unmatched comparator support"
+}

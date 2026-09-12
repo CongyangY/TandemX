@@ -1,0 +1,4 @@
+panel	source_file	selection	metric	evidence_boundary
+A	paper/evidence/multispecies_input_qc/figures_v2/panel_source.tsv	metric=total_bases_Gb; all full libraries	total_bases_Gb	input QC only
+B	paper/evidence/multispecies_input_qc/figures_v2/panel_source.tsv	metric=median_read_length_kb or read_n50_kb	read-length summaries	input QC only
+C	paper/evidence/multispecies_real_diagnostics/figures_v2/panel_source.tsv	tool=tandemx; matched random subsets	input_Gb;observed_union_base_fraction	descriptive output; not biological replication

@@ -1,0 +1,4 @@
+panel	source_file	selection	metric	evidence_boundary
+A	paper/0910/source_data/figure6_txf000695_qc.tsv	TXF000695; k=21 and k=31	observed_fraction	frozen threshold QC; no estimator change
+B	paper/0910/source_data/figure6_txf000695_qc.tsv	TXF000695; k=21 and k=31	median_depth;depth_mad	settings shown separately; not pooled
+C	paper/evidence/orthogonal_abundance_validation_v1/figures_v2/panel_source.tsv	panel=A; macadamia TXF000695	value_bp;final_interpretation	unresolved evidence context; no new Result
