@@ -1,0 +1,13 @@
+{
+  "complete": false,
+  "formal_result_state": "technical_failure_not_completed",
+  "cells_planned": 6,
+  "cells_completed": 0,
+  "failed_cells": 1,
+  "not_run_cells": 5,
+  "stop_reason": "CellFailure:stage_failed:assemble",
+  "native_interpretation": "SRF k151 assembly timed out at the preregistered 7200-second limit",
+  "controller_interpretation": "terminal serializer then failed on an omitted field name",
+  "rerun_or_tuning_performed": false,
+  "proxy_metrics_available": false
+}

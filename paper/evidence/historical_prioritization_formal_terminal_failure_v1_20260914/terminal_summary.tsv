@@ -1,0 +1,7 @@
+cell_index	species	method	status	failure	eligible_families	available_families	unavailable_families	zero_supported_eligible_families	TP	FN	FP	TN	native_stages_completed	native_terminal_stage	native_terminal_exit_code	native_terminal_timed_out	native_stage_runtime_seconds	observed_cell_wall_seconds	peak_stage_rss_mib	result_origin
+1	ey15_2	srf_k151	technical_failure	CellFailure:stage_failed:assemble	19	0	19	0	0	0	0	0	count;dump	assemble	-9	True	8643.990427791141	8678.085329	6814.375	postmortem_reconstruction_from_frozen_receipts
+2	ey15_2	srf_k101	not_run_prior_failure	CellFailure:stage_failed:assemble	N/A	0	N/A	N/A	0	0	0	0		not_run	N/A	N/A	0	0	0	postmortem_reconstruction_from_absent_later_cell_directories
+3	ey15_2	competitive_mapping	not_run_prior_failure	CellFailure:stage_failed:assemble	N/A	0	N/A	N/A	0	0	0	0		not_run	N/A	N/A	0	0	0	postmortem_reconstruction_from_absent_later_cell_directories
+4	macadamia_jansenii	srf_k151	not_run_prior_failure	CellFailure:stage_failed:assemble	N/A	0	N/A	N/A	0	0	0	0		not_run	N/A	N/A	0	0	0	postmortem_reconstruction_from_absent_later_cell_directories
+5	macadamia_jansenii	srf_k101	not_run_prior_failure	CellFailure:stage_failed:assemble	N/A	0	N/A	N/A	0	0	0	0		not_run	N/A	N/A	0	0	0	postmortem_reconstruction_from_absent_later_cell_directories
+6	macadamia_jansenii	competitive_mapping	not_run_prior_failure	CellFailure:stage_failed:assemble	N/A	0	N/A	N/A	0	0	0	0		not_run	N/A	N/A	0	0	0	postmortem_reconstruction_from_absent_later_cell_directories

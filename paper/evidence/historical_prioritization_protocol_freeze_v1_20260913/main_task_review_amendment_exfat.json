@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-09-13",
+  "reviewer_role": "main_task_scientific_coordinator",
+  "decision": "approved_implementation_only_hash_amendment",
+  "supersedes": "main_task_review.json for config, runner, and test hashes only",
+  "scientific_protocol_changed": false,
+  "protocol_sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5",
+  "config_sha256": "c2d2d3888c665ff8a099ac7ac08652e2702afba9d72e177cb8ef2479faafd900",
+  "runner_sha256": "a81a4444ab4e5583c4486cfdd2c3f05be8a7843d5e27e37a65575168bb02f36c",
+  "test_sha256": "258bdd6e23c350c4f0d8d41d0ed96db7ae3f97c45016112e234db48e5484c584",
+  "candidate_receipt_sha256": "fc66fd179a68ddc8b8873722baa346dfd4bf2a13c90441df25f702f5a5d9cef1",
+  "review_checks": {
+    "focused_tests": "passed_6_of_6_in_main_task_recheck",
+    "git_diff_check": "passed",
+    "current_free_bytes": 2299199750144,
+    "free_bytes_method": "darwin_df_Pk_available_kib_x_1024",
+    "minimum_required_free_bytes": 250000000000,
+    "native_cells_started_before_fix": 0
+  },
+  "approved_scope": "Replace unreliable Darwin exFAT statvfs free-space measurement with parsed POSIX df -Pk Available KiB times 1024; no input, method, threshold, normalization, tool command, or production algorithm change.",
+  "launch_constraint": "Wait for K30076 five-chunk recovery and receipt finalization, then launch the six historical cells in resource isolation."
+}

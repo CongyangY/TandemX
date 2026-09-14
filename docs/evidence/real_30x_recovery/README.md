@@ -1,10 +1,34 @@
 # Real 30x recovery inventory
 
-The machine-readable inventory is `recovery_manifest_20260913.json`. All endpoint sizes are estimated downloads; sampled 30x FASTQ requires roughly the listed target bases plus staging.
+The original machine-readable interruption inventory is
+`recovery_manifest_20260913.json`. The direct-database and local-file re-audit is
+`recovery_manifest_v2_20260913.json`; see `cohort_reaudit_20260913.md` for the
+evidence boundary. Endpoint byte counts are download sizes, while sampled 30x
+FASTA/FASTQ requires roughly the listed target bases plus staging.
 
-K30076 correction: `block_01_attempt_003/block_receipt.json` is 0 B, so the block is invalid and cannot be reused. Nonzero chunk files are only recovery evidence until a regenerated receipt passes aggregate record, base-count and hash validation.
+At the 2026-09-13 audit, K30076's original
+`block_01_attempt_003/block_receipt.json` was 0 B and could not be reused.
+Nonzero chunk files were only recovery evidence until the later independently
+validated block-1 recovery described below.
 
-Recovery order: validate YSD56 receipts; repair K30076; finish V14167; enroll S245 then HN51. Direct no-proxy access is mandatory by default. Proxy use needs a receipted <=500 MB A/B test, stable >=2x acceleration and the 50 GB project cap.
+## K30076 terminal recovery update — 2026-09-14
+
+The block-1 recovery subsequently passed its independent gate, but block 2 did
+not. Although attempt 001 downloaded 34/34 chunks, independent validation found
+a stable SHA-256 mismatch and gzip corruption in chunk 3. Attempt 002 failed
+with zero rows from direct `vdb-dump`; attempt 003 failed with a T7 `Errno 5`
+write error followed by disappearance of the mount. Block 3 was not started,
+and the K30076 common 30x input and comparator remain blocked. See
+`k30076_block2_terminal_failure_20260914.md` and
+`k30076_block2_terminal_failure_20260914.json`. The current status is a
+technical acquisition/storage failure and must not be interpreted as a
+comparator or biological result.
+
+Recovery order: retain the validated YSD56 receipts; repair K30076; reconcile the
+remaining V14167 TandemX/TRF cells after its three TideHunter partitions closed;
+then enroll S245 and HN51. Direct no-proxy access is mandatory by default. Proxy
+use needs a receipted <=500 MB A/B test, stable >=2x acceleration and the 50 GB
+project cap.
 
 ## Read-only recovery integrity gate
 

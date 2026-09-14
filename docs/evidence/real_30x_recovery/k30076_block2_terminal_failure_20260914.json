@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "status": "terminal_recovery_failure",
+  "recorded_date": "2026-09-14",
+  "material": "K30076",
+  "scope": "frozen real_30x block2 recovery",
+  "evidence_basis": "internal_disk_snapshots_only_after_T7_disconnect",
+  "block1": {
+    "status": "previously_validated_complete",
+    "chunk_count": 34,
+    "record_count": 845098,
+    "total_bases": 14127589933,
+    "observed_coverage": 9.512162461338415,
+    "internal_validation_evidence": "tmp/k30076_block1_recovery_validation_20260914.json",
+    "internal_validation_evidence_sha256": "014d314061fd445c3cfd74038edfbfe2cb7c6030acd5999a1cf677884f1704a6",
+    "current_T7_readback_status": "not_rechecked_after_disconnect"
+  },
+  "block2_attempt001": {
+    "download_runner_status": "completed_before_independent_validation",
+    "downloaded_chunk_count": 34,
+    "record_count": 845098,
+    "total_bases": 15027572584,
+    "observed_coverage": 10.118124357832967,
+    "aggregate_receipt_sha256_before_independent_validation": "2df296e4efa2aa3f07186dcb70d35922a565281c7b7039611785a13f26b013ad",
+    "acceptance_status": "invalid",
+    "first_independent_integrity_mismatch": {
+      "chunk_index": 3,
+      "spot_range": {
+        "start": 4615107,
+        "end": 4640106
+      },
+      "expected_fastq_bytes": 370177772,
+      "observed_fastq_bytes": 370177772,
+      "receipt_fastq_sha256": "2e3fb14389a5674ec1a62c32db13e0476e5aa62aa1c8501bd86968af10734867",
+      "observed_fastq_sha256_repeated": [
+        "06bdc011167b5ddbf301da9fca458a79a4264a2ec86b74194cf6fe653cce4e56",
+        "06bdc011167b5ddbf301da9fca458a79a4264a2ec86b74194cf6fe653cce4e56"
+      ],
+      "gzip_errors": [
+        "invalid distance code",
+        "invalid literal/length/distance code"
+      ],
+      "first_two_chunks_sha256_and_gzip_valid": true,
+      "later_chunks_not_independently_accepted_after_first_mismatch": true
+    },
+    "internal_failure_evidence": "tmp/k30076_block2_integrity_failure_20260914.json",
+    "internal_failure_evidence_sha256": "1682809c43e3c86d88f9ab188279a995eb8b844338dfbb85380baceb432231b2"
+  },
+  "block2_attempt002": {
+    "scope": "isolated re-extraction of spots 4615107-4640106 only",
+    "network_route": "direct_vdb_dump_no_proxy",
+    "status": "failed",
+    "error": "received 0 rows but declared range requires 25000",
+    "stderr": "Failed to call external services.",
+    "completed_records": 0,
+    "completed_bases": 0,
+    "partial_fastq_bytes": 20,
+    "failed_receipt_bytes": 947,
+    "original_attempt001_artifacts_overwritten": false,
+    "internal_failure_evidence": "tmp/k30076_block2_attempt002_failure_20260914.json",
+    "internal_failure_evidence_sha256": "f0652ed972df0ad11dfc27c939b91d88031be0ce27d60356caf02f3a66b7af43"
+  },
+  "block2_attempt003": {
+    "scope": "isolated re-extraction of spots 4615107-4640106 only",
+    "network_route": "user_authorized_system_proxy_exception_for_target_chunk_only",
+    "proxy_addresses_or_credentials_recorded": false,
+    "status": "failed",
+    "managed_session": 89647,
+    "managed_session_exit_code": 1,
+    "primary_error": "OSError: [Errno 5] Input/output error",
+    "secondary_error": "T7 mount disappeared before pending failure receipt could be written",
+    "T7_mount_present_at_post_failure_snapshot": false,
+    "T7_USB_device_enumerated_at_post_failure_snapshot": true,
+    "automatic_mount_or_retry_performed": false,
+    "attempt001_and_attempt002_current_readback": "not_verifiable_while_T7_unmounted",
+    "internal_failure_evidence": "tmp/k30076_block2_attempt003_t7_io_failure_20260914.json",
+    "internal_failure_evidence_sha256": "8b3821bc71ae09330b3ed23acb0555187805dd907161d366ba0cd24d8780236e"
+  },
+  "block2_terminal_status": "invalid_no_acceptable_aggregate",
+  "block3": {
+    "status": "planned_not_started",
+    "payload_started": false
+  },
+  "common_30x_source": {
+    "status": "blocked",
+    "reason": "block2_invalid_and_block3_not_started"
+  },
+  "frozen_comparator": {
+    "status": "blocked_not_run",
+    "reason": "byte_identical_complete_three_block_input_gate_not_met"
+  },
+  "production_algorithm_changed": false,
+  "T7_access_during_terminal_documentation": false
+}

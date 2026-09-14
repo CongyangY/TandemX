@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-14",
+  "formal_root": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913",
+  "formal_terminal_state": "incomplete_technical_failure",
+  "native_failure": {
+    "cell": "ey15_2/srf_k151",
+    "stage": "assemble",
+    "command": "srf -p srf counts.txt",
+    "exit_code": -9,
+    "timed_out": true,
+    "runtime_seconds": 7201.48620670801,
+    "peak_rss_mib": 6814.375,
+    "srf_fasta_bytes": 0,
+    "srf_fasta_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "classification": "technical_failure_not_zero_family_result",
+    "rerun": false,
+    "parameter_change": false
+  },
+  "upstream_successes": {
+    "count": {
+      "exit_code": 0,
+      "timed_out": false,
+      "runtime_seconds": 1310.565004875185,
+      "peak_rss_mib": 2384.015625
+    },
+    "dump": {
+      "exit_code": 0,
+      "timed_out": false,
+      "runtime_seconds": 131.93921620794572,
+      "peak_rss_mib": 72.265625,
+      "counts_tsv_bytes": 20540890881,
+      "counts_tsv_sha256": "20e8536f2bb78450369c2f07a14b4a87f95e37f8df55bb8da4385142c53ef332"
+    }
+  },
+  "controller_failure": {
+    "exception": "ValueError: dict contains fields not in fieldnames: 'native_retained_read_bp'",
+    "cause": "score_estimates emitted native_retained_read_bp for technical-failure rows while run_cell omitted that field from its explicit DictWriter schema",
+    "frozen_source_location": "source_snapshot/benchmarks/scripts/run_historical_prioritization_srf_mapping.py:491",
+    "observed_partial_output": "147-byte header-only family_prioritization.tsv",
+    "root_summary_present": false,
+    "root_completion_present": false
+  },
+  "reconstructed_terminal_state": {
+    "first_cell": "technical_failure",
+    "first_cell_eligible_family_rows": 19,
+    "first_cell_available_proxy_predictions": 0,
+    "remaining_cells": 5,
+    "remaining_cell_state": "not_run_prior_failure",
+    "formal_complete": false,
+    "proxy_metrics_available": false,
+    "terminal_summary_sha256": "558103e24cd9cfaf8fb57ef41ea9cf279f496fd85b812ac2cd21a8c1dce44c56",
+    "terminal_completion_sha256": "c1b5edf7c0d12df4e2423e2811b7e5aab667b1d2101fa59d32831367ab64e658",
+    "formal_artifact_inventory_sha256": "fd3f381aa61ab34638d2a4c34c44af14f799ce25913dde4a6c1f9ec3d172d311",
+    "reconstruction_receipt_sha256": "da89aba6b010a5c9ad661fd0dff55a4e2e487799c8f31073372c720e7267590a"
+  },
+  "preserved_formal_bindings": {
+    "run_config_sha256": "c2d2d3888c665ff8a099ac7ac08652e2702afba9d72e177cb8ef2479faafd900",
+    "runner_snapshot_sha256": "a81a4444ab4e5583c4486cfdd2c3f05be8a7843d5e27e37a65575168bb02f36c",
+    "original_formal_files_modified": false
+  },
+  "future_serializer_fix": {
+    "scope": "add native_retained_read_bp to the explicit prioritization TSV field tuple",
+    "workspace_runner_sha256": "1929b8bd04d830aa3f1c34d4ef1eaa499b04cdaa9edaa9169d88ddb8acf238d5",
+    "workspace_test_sha256": "a1de06afb3b3373355b01dda84f4bcdc927d58f1974fd0944418ddb66c710cdb",
+    "reconstructor_sha256": "a6480dd7f2bafe46f74e9f21fbec8b7816a9d25f0a93e28d54a554d93e58c890",
+    "future_execution_requires_new_reviewed_source_binding": true
+  },
+  "scientific_boundary": "no native rerun, no tuning, no completed comparator claim, no proxy agreement or biological accuracy claim"
+}

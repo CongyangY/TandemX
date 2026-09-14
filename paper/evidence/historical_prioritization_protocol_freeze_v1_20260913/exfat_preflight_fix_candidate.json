@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "prepared_on": "2026-09-13",
+  "status": "implementation_only_fix_ready_for_main_task_amendment_review",
+  "trigger": {
+    "formal_launch_attempt_reached_native_cells": false,
+    "formal_output_directory_created": false,
+    "exception": "CellFailure: minimum_free_bytes_before_launch",
+    "python_shutil_disk_usage_free_bytes": 101790646272,
+    "macos_df_k_free_bytes": 2300889530368,
+    "root_cause": "macOS Python statvfs reports inconsistent block geometry for the mounted T7 exFAT volume"
+  },
+  "fix": {
+    "scope": "free_space_measurement_only",
+    "darwin_method": "df_-Pk_available_kib_times_1024",
+    "other_platform_method": "shutil.disk_usage_free",
+    "scientific_protocol_changed": false,
+    "input_or_method_order_changed": false,
+    "threshold_or_normalization_changed": false,
+    "native_tool_command_changed": false,
+    "production_algorithm_changed": false
+  },
+  "unchanged_protocol": {
+    "path": "docs/historical_prioritization_srf_mapping_protocol_v1_20260913.md",
+    "sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5"
+  },
+  "revised_bindings": {
+    "config_path": "benchmarks/configs/historical_prioritization_srf_mapping_v1_20260913.json",
+    "config_sha256": "c2d2d3888c665ff8a099ac7ac08652e2702afba9d72e177cb8ef2479faafd900",
+    "runner_path": "benchmarks/scripts/run_historical_prioritization_srf_mapping.py",
+    "runner_sha256": "a81a4444ab4e5583c4486cfdd2c3f05be8a7843d5e27e37a65575168bb02f36c",
+    "test_path": "tests/unit/test_historical_prioritization_srf_mapping_runner.py",
+    "test_sha256": "258bdd6e23c350c4f0d8d41d0ed96db7ae3f97c45016112e234db48e5484c584",
+    "binding_audit_path": "paper/evidence/historical_prioritization_protocol_freeze_v1_20260913/binding_audit_df_fix.json",
+    "binding_audit_sha256": "5f823c7f41452ad7d83d4b28537d7228a2b7ffdedd0f6648b7510776e07cd0c0"
+  },
+  "validation": {
+    "focused_and_dependency_tests": "24_passed_0_failed",
+    "new_df_parser_tests": "2_assertions_passed_valid_exfat_row_and_malformed_row_rejection",
+    "python_py_compile": "passed",
+    "six_cell_plan": "structurally_valid_unexecuted",
+    "full_binding_audit": "20_of_20_expected_observed_sha256_match",
+    "observed_fixed_free_bytes": 2300528820224,
+    "observed_fixed_method": "darwin_df_Pk_available_kib_x_1024",
+    "minimum_required_free_bytes": 250000000000
+  },
+  "prior_main_task_review": {
+    "path": "paper/evidence/historical_prioritization_protocol_freeze_v1_20260913/main_task_review.json",
+    "sha256": "801372bab17292aa2cd56db20f66d4a147940e6410f27fb624f704cea41308a7",
+    "state": "superseded_for_runner_config_test_hashes_only_if_amendment_is_approved"
+  },
+  "launch_gate": {
+    "main_task_hash_amendment_required": true,
+    "k30076_recovery_must_finish_first": true,
+    "historical_native_cells_started": 0,
+    "preexisting_paf_imported": false
+  }
+}

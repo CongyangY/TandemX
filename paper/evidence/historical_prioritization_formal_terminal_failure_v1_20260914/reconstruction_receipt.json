@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "scope": "postmortem_terminal_evidence_only_no_native_execution",
+  "formal_root": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913",
+  "frozen_run_config_sha256": "c2d2d3888c665ff8a099ac7ac08652e2702afba9d72e177cb8ef2479faafd900",
+  "frozen_runner_snapshot_sha256": "a81a4444ab4e5583c4486cfdd2c3f05be8a7843d5e27e37a65575168bb02f36c",
+  "count_receipt_sha256": "cdb7390a2abc91db1fa50ac0c70aedfa09d9b078c98fdd785759be56a19517cb",
+  "dump_receipt_sha256": "e54f2c24ad3a1892429caac91fb2b3f223ab285ac3a19f650b23065fe0f55f76",
+  "assemble_receipt_sha256": "b670030e7ea0435d4a63459b6ebabc7d2b1682c94c5ddbccfd7d3c0fca876ed3",
+  "controller_terminal_sha256": "6266b5c7c4b2597e86c80668ab02e826c23a32e7840a64bca94cd188f00d5401",
+  "header_only_family_tsv_sha256": "6ed4c3c88f2bfb8d3ec418fd4a77e3dc82df030d08f8a71a7293755558befc13",
+  "first_cell_state": "technical_failure",
+  "later_cell_state": "not_run_prior_failure",
+  "native_cells_launched": 1,
+  "native_cells_not_run": 5,
+  "formal_run_complete": false,
+  "native_stage_rerun": false,
+  "parameter_tuning": false,
+  "preexisting_paf_imported": false,
+  "original_formal_files_modified": false
+}

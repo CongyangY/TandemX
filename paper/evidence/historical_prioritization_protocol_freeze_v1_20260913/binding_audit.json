@@ -1,0 +1,148 @@
+{
+  "verified": true,
+  "files": [
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz",
+      "expected_bytes": 17397432231,
+      "expected_sha256": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8",
+      "observed_bytes": 17397432231,
+      "observed_sha256": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/ey15_donor_matched_collapse_v1/results/run/discover/monomers.fa",
+      "expected_bytes": 468673,
+      "expected_sha256": "277d376aa8961673ca84dd4603d5c31b057c805cfe26b642ab350b63f8556aeb",
+      "observed_bytes": 468673,
+      "observed_sha256": "277d376aa8961673ca84dd4603d5c31b057c805cfe26b642ab350b63f8556aeb"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/ey15_donor_matched_collapse_v1/results/evaluation_primary_total_bases/family_metrics.tsv",
+      "expected_bytes": 379987,
+      "expected_sha256": "985943042a79f2ef8c6e6793b13304847a0f9e836e3ad7425a9f75774df1b5b1",
+      "observed_bytes": 379987,
+      "observed_sha256": "985943042a79f2ef8c6e6793b13304847a0f9e836e3ad7425a9f75774df1b5b1"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/ey15_donor_matched_collapse_v1.json",
+      "expected_bytes": 4067,
+      "expected_sha256": "605562c404e6576522b4731e456efe06be9d734e6bfc3d4082358d733552f8e6",
+      "observed_bytes": 4067,
+      "observed_sha256": "605562c404e6576522b4731e456efe06be9d734e6bfc3d4082358d733552f8e6"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+      "expected_bytes": 6716963362,
+      "expected_sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6",
+      "observed_bytes": 6716963362,
+      "observed_sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+      "expected_bytes": 11433466175,
+      "expected_sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e",
+      "observed_bytes": 11433466175,
+      "observed_sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/macadamia_jansenii_donor_matched_collapse_v1/results/run/discover/monomers.fa",
+      "expected_bytes": 206239,
+      "expected_sha256": "905b38bd083c23c7b391b83f31540e5a17e3f72be9cfc7a8ed329b734bb0dbd8",
+      "observed_bytes": 206239,
+      "observed_sha256": "905b38bd083c23c7b391b83f31540e5a17e3f72be9cfc7a8ed329b734bb0dbd8"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/macadamia_jansenii_donor_matched_collapse_v1/results/evaluation_primary_total_bases/family_metrics.tsv",
+      "expected_bytes": 229524,
+      "expected_sha256": "4a9da94ae5fe162b6139f77efbb9dd98814c1c9bb2aa03b823702d083e0d03c9",
+      "observed_bytes": 229524,
+      "observed_sha256": "4a9da94ae5fe162b6139f77efbb9dd98814c1c9bb2aa03b823702d083e0d03c9"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/configs/macadamia_jansenii_donor_matched_collapse_v1.json",
+      "expected_bytes": 4975,
+      "expected_sha256": "b5da4f3b5c22c1a6c795075f3f4d2d580c2d70e61ba9264a53b202a7b5de5db9",
+      "observed_bytes": 4975,
+      "observed_sha256": "b5da4f3b5c22c1a6c795075f3f4d2d580c2d70e61ba9264a53b202a7b5de5db9"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/docs/historical_prioritization_srf_mapping_protocol_v1_20260913.md",
+      "expected_bytes": 11173,
+      "expected_sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5",
+      "observed_bytes": 11173,
+      "observed_sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/docs/srf_formal_unified_protocol_20260910.md",
+      "expected_sha256": "70e82d4e111a9e5924b497d9dc1961a05953e33ad0ccad93d212a6860636c180",
+      "observed_bytes": 8320,
+      "observed_sha256": "70e82d4e111a9e5924b497d9dc1961a05953e33ad0ccad93d212a6860636c180"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/run_historical_prioritization_srf_mapping.py",
+      "expected_sha256": "669edea0b66ab2972ef9a519c39acfb1b795aa18889179de8873fdc813b5e1db",
+      "observed_bytes": 33318,
+      "observed_sha256": "669edea0b66ab2972ef9a519c39acfb1b795aa18889179de8873fdc813b5e1db"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/challenge/unified_correspondence.py",
+      "expected_sha256": "7b97f8c985d36e803389f3936530373ab8bb85386e7a07b6d6fabfe2444a9134",
+      "observed_bytes": 5746,
+      "observed_sha256": "7b97f8c985d36e803389f3936530373ab8bb85386e7a07b6d6fabfe2444a9134"
+    },
+    {
+      "path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/challenge/unified_native_io.py",
+      "expected_sha256": "32a81d4f597094a844a8984df535ef161f9bc54ad992f802718ce10fc47ea75e",
+      "observed_bytes": 11031,
+      "observed_sha256": "32a81d4f597094a844a8984df535ef161f9bc54ad992f802718ce10fc47ea75e"
+    },
+    {
+      "name": "kmc",
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc",
+      "expected_bytes": 2719024,
+      "expected_sha256": "1f15325c3789bf1264d2d00206f890bca6cab6542f9c57acf1ec4ca6ad8ca623",
+      "observed_bytes": 2719024,
+      "observed_sha256": "1f15325c3789bf1264d2d00206f890bca6cab6542f9c57acf1ec4ca6ad8ca623"
+    },
+    {
+      "name": "kmc_dump",
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc_dump",
+      "expected_bytes": 93960,
+      "expected_sha256": "30778139e3b6411fdded29918e2bfff90624eb2282fe7b30a13dd38d2beefcc5",
+      "observed_bytes": 93960,
+      "observed_sha256": "30778139e3b6411fdded29918e2bfff90624eb2282fe7b30a13dd38d2beefcc5"
+    },
+    {
+      "name": "srf",
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/srf/srf",
+      "expected_bytes": 52128,
+      "expected_sha256": "e66758122e1b2b99c8bdcc8f80f5caa2374a6d45d321772a9fc0ed01bdda55d1",
+      "observed_bytes": 52128,
+      "observed_sha256": "e66758122e1b2b99c8bdcc8f80f5caa2374a6d45d321772a9fc0ed01bdda55d1"
+    },
+    {
+      "name": "k8",
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/k8-1.2/k8-arm64-Darwin",
+      "expected_bytes": 27699200,
+      "expected_sha256": "39da2ae0c4656181a16c478ecdf7aaa4eb9ca3f7412d2f1f2f228ebd0dc05c38",
+      "observed_bytes": 27699200,
+      "observed_sha256": "39da2ae0c4656181a16c478ecdf7aaa4eb9ca3f7412d2f1f2f228ebd0dc05c38"
+    },
+    {
+      "name": "minimap2",
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+      "expected_bytes": 254424,
+      "expected_sha256": "9747d27a83257eef51b4258b8b9248eaf313024ab8fc5dc5143ab7d22c9e3645",
+      "observed_bytes": 254424,
+      "observed_sha256": "9747d27a83257eef51b4258b8b9248eaf313024ab8fc5dc5143ab7d22c9e3645"
+    },
+    {
+      "name": "srfutils",
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/srf/srfutils.js",
+      "expected_bytes": 17546,
+      "expected_sha256": "1949e829506511b57b4c1dbc5582829b37f952296df18fa147f009bcc8cbf1be",
+      "observed_bytes": 17546,
+      "observed_sha256": "1949e829506511b57b4c1dbc5582829b37f952296df18fa147f009bcc8cbf1be"
+    }
+  ]
+}
+

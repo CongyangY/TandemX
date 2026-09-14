@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-09-13T13:24:37Z",
+  "status": "ready_but_deferred_for_active_v14167_cpu_cells",
+  "receipt_consistency": {
+    "main_task_review_sha256": "801372bab17292aa2cd56db20f66d4a147940e6410f27fb624f704cea41308a7",
+    "validation_receipt_sha256": "29470f4840eb2d710af49eb2a6f1234f0b6e065c7e7dcf713237992de7aca6fa",
+    "binding_audit_sha256": "138dee1c44c57e48fc1be5f79ee5ec1d9099ccae5e5eb83c0124469029c6ad3e",
+    "protocol_sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5",
+    "config_sha256": "d50fa199bf73056eaf7e618f33bbd1ac55037caedc6d54b4199b9432c55374c8",
+    "runner_sha256": "669edea0b66ab2972ef9a519c39acfb1b795aa18889179de8873fdc813b5e1db",
+    "test_sha256": "db77bf537bdb4e6ccf5377395af83b35bf4ed6a4b2a071ebe53cc7e5b4088e22",
+    "t7_volume_verification_sha256": "3cf77f5916dd55b286f337ac282067c1178fd647fe24170afe6c4487ad7bcd04",
+    "hashes_match_main_review_validation_current_files": true,
+    "main_review_focused_tests_5_of_5_vs_validation_broader_tests_23_of_23": "consistent",
+    "binding_audit_verified_files": 20,
+    "binding_audit_all_expected_observed_hashes_match": true
+  },
+  "launch": {
+    "output_directory": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913",
+    "output_directory_absent": true,
+    "t7_free_bytes": 2300984426496,
+    "minimum_required_free_bytes": 250000000000,
+    "free_space_preflight_passed": true,
+    "execution_acknowledgement": "HISTORICAL_PROTOCOL_V1_REVIEWED",
+    "command": [
+      "conda",
+      "run",
+      "-n",
+      "tandemx-dev",
+      "python",
+      "-m",
+      "benchmarks.scripts.run_historical_prioritization_srf_mapping",
+      "--config",
+      "benchmarks/configs/historical_prioritization_srf_mapping_v1_20260913.json",
+      "--outdir",
+      "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913",
+      "--execute",
+      "--ack",
+      "HISTORICAL_PROTOCOL_V1_REVIEWED"
+    ]
+  },
+  "concurrency_gate": {
+    "required_state": "both_v14167_trf_and_tidehunter_cpu_intensive_cells_finished",
+    "observed_state": "blocked",
+    "active_processes": [
+      {
+        "pid": 67651,
+        "role": "V14167_TRF_partition_00003"
+      },
+      {
+        "pid": 76834,
+        "role": "V14167_TideHunter_partition_00001_validator_controller"
+      }
+    ],
+    "historical_native_cells_started": 0
+  },
+  "preexisting_native_paf_imported": false,
+  "production_algorithm_changed": false
+}

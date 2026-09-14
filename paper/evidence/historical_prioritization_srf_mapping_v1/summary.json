@@ -1,0 +1,87 @@
+{
+  "endpoint": "historical_assembly_under_representation_prioritization",
+  "threshold": 0.6,
+  "truth": "frozen old/new ratio below 0.6 among predeclared >=15kb-new-assembly eligible families",
+  "competitive_mapping_discovery": "N/A_shared_TandemX_catalogue",
+  "formal_native_comparator_status": "blocked_t7_unverified",
+  "summaries": [
+    {
+      "species": "ey15",
+      "method": "tandemx_frozen",
+      "eligible_families": 19,
+      "available_families": 19,
+      "unavailable_families": 0,
+      "TP": 8,
+      "FN": 0,
+      "FP": 0,
+      "TN": 11,
+      "recall": 1.0,
+      "precision": 1.0
+    },
+    {
+      "species": "ey15",
+      "method": "srf",
+      "eligible_families": 19,
+      "available_families": 0,
+      "unavailable_families": 19,
+      "TP": 0,
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "recall": "N/A",
+      "precision": "N/A"
+    },
+    {
+      "species": "ey15",
+      "method": "competitive_mapping",
+      "eligible_families": 19,
+      "available_families": 0,
+      "unavailable_families": 19,
+      "TP": 0,
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "recall": "N/A",
+      "precision": "N/A"
+    },
+    {
+      "species": "macadamia",
+      "method": "tandemx_frozen",
+      "eligible_families": 43,
+      "available_families": 43,
+      "unavailable_families": 0,
+      "TP": 2,
+      "FN": 0,
+      "FP": 0,
+      "TN": 41,
+      "recall": 1.0,
+      "precision": 1.0
+    },
+    {
+      "species": "macadamia",
+      "method": "srf",
+      "eligible_families": 43,
+      "available_families": 0,
+      "unavailable_families": 43,
+      "TP": 0,
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "recall": "N/A",
+      "precision": "N/A"
+    },
+    {
+      "species": "macadamia",
+      "method": "competitive_mapping",
+      "eligible_families": 43,
+      "available_families": 0,
+      "unavailable_families": 43,
+      "TP": 0,
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "recall": "N/A",
+      "precision": "N/A"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+family_id	method	old_assembly_bp	old_read_ratio	outcome	predicted_positive	read_estimated_bp	species	state	truth_positive
+TXF000002	tandemx_frozen	3317.0	0.010684246960169239	TP	True	310457.0694	ey15	ok	True
+TXF000020	tandemx_frozen	46823.0	0.17744449925699876	TP	True	263874.0575	ey15	ok	True
+TXF000078	tandemx_frozen	6715.0	0.3889235026623247	TP	True	17265.6061	ey15	ok	True
+TXF000088	tandemx_frozen	35252.0	1.5995201621009234	TN	False	22039.1095	ey15	ok	False
+TXF000113	tandemx_frozen	57131.0	2.4130693671722097	TN	False	23675.6559	ey15	ok	False
+TXF000137	tandemx_frozen	40584.0	4.498619969844481	TN	False	9021.4333	ey15	ok	False
+TXF000153	tandemx_frozen	59043.0	5.084665497809921	TN	False	11611.9733	ey15	ok	False
+TXF000154	tandemx_frozen	0.0	0.0	TP	True	67445.4619	ey15	ok	True
+TXF000319	tandemx_frozen	0.0	0.0	TP	True	181957.782	ey15	ok	True
+TXF000556	tandemx_frozen	43873.0	5.632978860402142	TN	False	7788.5966	ey15	ok	False
+TXF000827	tandemx_frozen	15213.0	2.201167271205135	TN	False	6911.333	ey15	ok	False
+TXF001083	tandemx_frozen	21970.0	8.375441816945552	TN	False	2623.1452	ey15	ok	False
+TXF001094	tandemx_frozen	4288.0	0.3912198656922494	TP	True	10960.5886	ey15	ok	True
+TXF001097	tandemx_frozen	48829.0	73.08426400558463	TN	False	668.1192	ey15	ok	False
+TXF001517	tandemx_frozen	0.0	0.0	TP	True	45595.4284	ey15	ok	True
+TXF001519	tandemx_frozen	83381.0	8.624259484120321	TN	False	9668.1924	ey15	ok	False
+TXF001543	tandemx_frozen	17279.0	4.43830147058068	TN	False	3893.156	ey15	ok	False
+TXF001550	tandemx_frozen	0.0	0.0	TP	True	4244.5515	ey15	ok	True
+TXF001620	tandemx_frozen	23424.0	12.965361495798877	TN	False	1806.66	ey15	ok	False
+TXF000002	srf			N/A	N/A		ey15	N/A	True
+TXF000020	srf			N/A	N/A		ey15	N/A	True
+TXF000078	srf			N/A	N/A		ey15	N/A	True
+TXF000088	srf			N/A	N/A		ey15	N/A	False
+TXF000113	srf			N/A	N/A		ey15	N/A	False
+TXF000137	srf			N/A	N/A		ey15	N/A	False
+TXF000153	srf			N/A	N/A		ey15	N/A	False
+TXF000154	srf			N/A	N/A		ey15	N/A	True
+TXF000319	srf			N/A	N/A		ey15	N/A	True
+TXF000556	srf			N/A	N/A		ey15	N/A	False
+TXF000827	srf			N/A	N/A		ey15	N/A	False
+TXF001083	srf			N/A	N/A		ey15	N/A	False
+TXF001094	srf			N/A	N/A		ey15	N/A	True
+TXF001097	srf			N/A	N/A		ey15	N/A	False
+TXF001517	srf			N/A	N/A		ey15	N/A	True
+TXF001519	srf			N/A	N/A		ey15	N/A	False
+TXF001543	srf			N/A	N/A		ey15	N/A	False
+TXF001550	srf			N/A	N/A		ey15	N/A	True
+TXF001620	srf			N/A	N/A		ey15	N/A	False
+TXF000002	competitive_mapping			N/A	N/A		ey15	N/A	True
+TXF000020	competitive_mapping			N/A	N/A		ey15	N/A	True
+TXF000078	competitive_mapping			N/A	N/A		ey15	N/A	True
+TXF000088	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF000113	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF000137	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF000153	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF000154	competitive_mapping			N/A	N/A		ey15	N/A	True
+TXF000319	competitive_mapping			N/A	N/A		ey15	N/A	True
+TXF000556	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF000827	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF001083	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF001094	competitive_mapping			N/A	N/A		ey15	N/A	True
+TXF001097	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF001517	competitive_mapping			N/A	N/A		ey15	N/A	True
+TXF001519	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF001543	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF001550	competitive_mapping			N/A	N/A		ey15	N/A	True
+TXF001620	competitive_mapping			N/A	N/A		ey15	N/A	False
+TXF000012	tandemx_frozen	36044.0	1.3373706858942507	TN	False	26951.3908	macadamia	ok	False
+TXF000047	tandemx_frozen	41126.0	1.8433092890520655	TN	False	22310.9601	macadamia	ok	False
+TXF000058	tandemx_frozen	17928.0	2.339024298089181	TN	False	7664.7344	macadamia	ok	False
+TXF000075	tandemx_frozen	26223.0	2.810388179843623	TN	False	9330.7395	macadamia	ok	False
+TXF000077	tandemx_frozen	16041.0	1.169165500088622	TN	False	13720.0422	macadamia	ok	False
+TXF000084	tandemx_frozen	102232.0	2.892259759283143	TN	False	35346.756	macadamia	ok	False
+TXF000146	tandemx_frozen	25926.0	1.6164914701705604	TN	False	16038.4391	macadamia	ok	False
+TXF000209	tandemx_frozen	18136.0	2.0066004719383574	TN	False	9038.1719	macadamia	ok	False
+TXF000217	tandemx_frozen	19189.0	1.934201233856894	TN	False	9920.8912	macadamia	ok	False
+TXF000220	tandemx_frozen	16071.0	2.8140965874434243	TN	False	5710.8914	macadamia	ok	False
+TXF000230	tandemx_frozen	18069.0	3.7204318171724333	TN	False	4856.6943	macadamia	ok	False
+TXF000246	tandemx_frozen	33689.0	3.0668807034841166	TN	False	10984.7768	macadamia	ok	False
+TXF000264	tandemx_frozen	19389.0	2.328635588166943	TN	False	8326.335	macadamia	ok	False
+TXF000304	tandemx_frozen	45125.0	1.9739678241451142	TN	False	22860.0484	macadamia	ok	False
+TXF000327	tandemx_frozen	20206.0	1.9742004265996416	TN	False	10235.0297	macadamia	ok	False
+TXF000359	tandemx_frozen	45372.0	2.913470541365875	TN	False	15573.1796	macadamia	ok	False
+TXF000439	tandemx_frozen	60681.0	0.6995088917538872	TN	False	86748.0038	macadamia	ok	False
+TXF000495	tandemx_frozen	27159.0	1.7626051661302582	TN	False	15408.4423	macadamia	ok	False
+TXF000496	tandemx_frozen	27666.0	0.02172681252734486	TP	True	1273357.5146	macadamia	ok	True
+TXF000563	tandemx_frozen	18027.0	0.6450267185867793	TN	False	27947.6795	macadamia	ok	False
+TXF000579	tandemx_frozen	16087.0	2.274410391941832	TN	False	7073.0419	macadamia	ok	False
+TXF000580	tandemx_frozen	22905.0	1.594514563598489	TN	False	14364.8735	macadamia	ok	False
+TXF000642	tandemx_frozen	22238.0	1.327668193807484	TN	False	16749.6669	macadamia	ok	False
+TXF000653	tandemx_frozen	39397.0	1.470344917270435	TN	False	26794.3933	macadamia	ok	False
+TXF000695	tandemx_frozen	4073.0	0.004899334801075163	TP	True	831337.3479	macadamia	ok	True
+TXF000704	tandemx_frozen	15553.0	9.890721926674221	TN	False	1572.4838	macadamia	ok	False
+TXF000719	tandemx_frozen	197814.0	1.9004783765029878	TN	False	104086.425	macadamia	ok	False
+TXF000723	tandemx_frozen	32299.0	14.671272468409457	TN	False	2201.5132	macadamia	ok	False
+TXF000739	tandemx_frozen	15609.0	2.2721470910789194	TN	False	6869.7137	macadamia	ok	False
+TXF000766	tandemx_frozen	47446.0	5.58267443592585	TN	False	8498.794	macadamia	ok	False
+TXF000870	tandemx_frozen	35325.0	1.4770215894144654	TN	False	23916.3735	macadamia	ok	False
+TXF000888	tandemx_frozen	59637.0	12.648989161514994	TN	False	4714.7641	macadamia	ok	False
+TXF000890	tandemx_frozen	37500.0	1.2186755931523223	TN	False	30771.1094	macadamia	ok	False
+TXF000894	tandemx_frozen	431729.0	13.990430119211359	TN	False	30858.8797	macadamia	ok	False
+TXF000905	tandemx_frozen	19493.0	0.9991866211858801	TN	False	19508.8681	macadamia	ok	False
+TXF000910	tandemx_frozen	18535.0	8.99751647186287	TN	False	2060.0129	macadamia	ok	False
+TXF000932	tandemx_frozen	18817.0	0.6565920868500108	TN	False	28658.5848	macadamia	ok	False
+TXF000935	tandemx_frozen	33266.0	11.189062770184702	TN	False	2973.0819	macadamia	ok	False
+TXF000940	tandemx_frozen	16399.0	2.2650942620517234	TN	False	7239.8753	macadamia	ok	False
+TXF000942	tandemx_frozen	27022.0	2.3026300428680146	TN	False	11735.2764	macadamia	ok	False
+TXF000969	tandemx_frozen	62065.0	5.538071149558215	TN	False	11206.9705	macadamia	ok	False
+TXF001113	tandemx_frozen	36310.0	1.1268122863987042	TN	False	32223.6458	macadamia	ok	False
+TXF001121	tandemx_frozen	19645.0	2.1986364201297053	TN	False	8935.0835	macadamia	ok	False
+TXF000012	srf			N/A	N/A		macadamia	N/A	False
+TXF000047	srf			N/A	N/A		macadamia	N/A	False
+TXF000058	srf			N/A	N/A		macadamia	N/A	False
+TXF000075	srf			N/A	N/A		macadamia	N/A	False
+TXF000077	srf			N/A	N/A		macadamia	N/A	False
+TXF000084	srf			N/A	N/A		macadamia	N/A	False
+TXF000146	srf			N/A	N/A		macadamia	N/A	False
+TXF000209	srf			N/A	N/A		macadamia	N/A	False
+TXF000217	srf			N/A	N/A		macadamia	N/A	False
+TXF000220	srf			N/A	N/A		macadamia	N/A	False
+TXF000230	srf			N/A	N/A		macadamia	N/A	False
+TXF000246	srf			N/A	N/A		macadamia	N/A	False
+TXF000264	srf			N/A	N/A		macadamia	N/A	False
+TXF000304	srf			N/A	N/A		macadamia	N/A	False
+TXF000327	srf			N/A	N/A		macadamia	N/A	False
+TXF000359	srf			N/A	N/A		macadamia	N/A	False
+TXF000439	srf			N/A	N/A		macadamia	N/A	False
+TXF000495	srf			N/A	N/A		macadamia	N/A	False
+TXF000496	srf			N/A	N/A		macadamia	N/A	True
+TXF000563	srf			N/A	N/A		macadamia	N/A	False
+TXF000579	srf			N/A	N/A		macadamia	N/A	False
+TXF000580	srf			N/A	N/A		macadamia	N/A	False
+TXF000642	srf			N/A	N/A		macadamia	N/A	False
+TXF000653	srf			N/A	N/A		macadamia	N/A	False
+TXF000695	srf			N/A	N/A		macadamia	N/A	True
+TXF000704	srf			N/A	N/A		macadamia	N/A	False
+TXF000719	srf			N/A	N/A		macadamia	N/A	False
+TXF000723	srf			N/A	N/A		macadamia	N/A	False
+TXF000739	srf			N/A	N/A		macadamia	N/A	False
+TXF000766	srf			N/A	N/A		macadamia	N/A	False
+TXF000870	srf			N/A	N/A		macadamia	N/A	False
+TXF000888	srf			N/A	N/A		macadamia	N/A	False
+TXF000890	srf			N/A	N/A		macadamia	N/A	False
+TXF000894	srf			N/A	N/A		macadamia	N/A	False
+TXF000905	srf			N/A	N/A		macadamia	N/A	False
+TXF000910	srf			N/A	N/A		macadamia	N/A	False
+TXF000932	srf			N/A	N/A		macadamia	N/A	False
+TXF000935	srf			N/A	N/A		macadamia	N/A	False
+TXF000940	srf			N/A	N/A		macadamia	N/A	False
+TXF000942	srf			N/A	N/A		macadamia	N/A	False
+TXF000969	srf			N/A	N/A		macadamia	N/A	False
+TXF001113	srf			N/A	N/A		macadamia	N/A	False
+TXF001121	srf			N/A	N/A		macadamia	N/A	False
+TXF000012	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000047	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000058	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000075	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000077	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000084	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000146	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000209	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000217	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000220	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000230	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000246	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000264	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000304	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000327	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000359	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000439	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000495	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000496	competitive_mapping			N/A	N/A		macadamia	N/A	True
+TXF000563	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000579	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000580	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000642	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000653	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000695	competitive_mapping			N/A	N/A		macadamia	N/A	True
+TXF000704	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000719	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000723	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000739	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000766	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000870	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000888	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000890	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000894	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000905	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000910	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000932	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000935	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000940	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000942	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF000969	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF001113	competitive_mapping			N/A	N/A		macadamia	N/A	False
+TXF001121	competitive_mapping			N/A	N/A		macadamia	N/A	False

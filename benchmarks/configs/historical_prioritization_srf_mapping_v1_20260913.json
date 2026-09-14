@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "experiment_id": "historical_prioritization_srf_mapping_v1_20260913",
+  "status": "frozen_before_formal_historical_native_output",
+  "frozen_on": "2026-09-13",
+  "scientific_scope": "retrospective_historical_assembly_proxy_prioritization",
+  "protocol": {
+    "path": "docs/historical_prioritization_srf_mapping_protocol_v1_20260913.md",
+    "bytes": 11173,
+    "sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5"
+  },
+  "upstream_simulation_protocol": {
+    "path": "docs/srf_formal_unified_protocol_20260910.md",
+    "sha256": "70e82d4e111a9e5924b497d9dc1961a05953e33ad0ccad93d212a6860636c180"
+  },
+  "implementation_sources": [
+    {
+      "path": "benchmarks/scripts/run_historical_prioritization_srf_mapping.py",
+      "sha256": "a81a4444ab4e5583c4486cfdd2c3f05be8a7843d5e27e37a65575168bb02f36c"
+    },
+    {
+      "path": "benchmarks/challenge/unified_correspondence.py",
+      "sha256": "7b97f8c985d36e803389f3936530373ab8bb85386e7a07b6d6fabfe2444a9134"
+    },
+    {
+      "path": "benchmarks/challenge/unified_native_io.py",
+      "sha256": "32a81d4f597094a844a8984df535ef161f9bc54ad992f802718ce10fc47ea75e"
+    }
+  ],
+  "preregistration_guard": {
+    "native_output_inspected_for_parameter_selection": false,
+    "accept_preexisting_native_outputs": false,
+    "existing_macadamia_direction_only_paf_is_formal_input": false,
+    "required_execution_ack": "HISTORICAL_PROTOCOL_V1_REVIEWED"
+  },
+  "methods": [
+    "srf_k151",
+    "srf_k101",
+    "competitive_mapping"
+  ],
+  "tools": {
+    "kmc": {
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc",
+      "bytes": 2719024,
+      "sha256": "1f15325c3789bf1264d2d00206f890bca6cab6542f9c57acf1ec4ca6ad8ca623"
+    },
+    "kmc_dump": {
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/KMC/bin/kmc_dump",
+      "bytes": 93960,
+      "sha256": "30778139e3b6411fdded29918e2bfff90624eb2282fe7b30a13dd38d2beefcc5"
+    },
+    "srf": {
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/srf/srf",
+      "bytes": 52128,
+      "sha256": "e66758122e1b2b99c8bdcc8f80f5caa2374a6d45d321772a9fc0ed01bdda55d1"
+    },
+    "k8": {
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/k8-1.2/k8-arm64-Darwin",
+      "bytes": 27699200,
+      "sha256": "39da2ae0c4656181a16c478ecdf7aaa4eb9ca3f7412d2f1f2f228ebd0dc05c38"
+    },
+    "minimap2": {
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+      "bytes": 254424,
+      "sha256": "9747d27a83257eef51b4258b8b9248eaf313024ab8fc5dc5143ab7d22c9e3645"
+    },
+    "srfutils": {
+      "path": "/Volumes/T7/Codex/TandemX/tools/src/srf/srfutils.js",
+      "bytes": 17546,
+      "sha256": "1949e829506511b57b4c1dbc5582829b37f952296df18fa147f009bcc8cbf1be"
+    }
+  },
+  "srf": {
+    "k_values": [151, 101],
+    "minimum_count": 20,
+    "maximum_count": 100000,
+    "threads": 1,
+    "kmc_memory_gib": 2,
+    "strict_memory": true,
+    "input_format": "gzip_FASTQ_via_native_KMC_fq_at_file_list",
+    "abundance_field": "bed2abun_column_2_positive_flag_retained_read_bp"
+  },
+  "competitive_mapping": {
+    "template_bp": 10000,
+    "preset": "map-hifi",
+    "max_secondary": 1000000,
+    "minimizer_occurrence_floor": 1000,
+    "chaining_bandwidth": "100,100",
+    "threads": 1,
+    "minimum_alignment_block_bp": 100,
+    "minimum_identity": 0.9,
+    "retain_primary_and_secondary": true,
+    "cross_family_overlap": "exclude_and_report_once"
+  },
+  "correspondence": {
+    "identity": 0.9,
+    "max_integer_multiple": 64,
+    "length_tolerance_fraction": 0.1,
+    "unique_only": true,
+    "redistribute_unassigned": false
+  },
+  "normalization": {
+    "formula": "native_retained_read_bp/total_library_bases*genome_size_bp",
+    "fit_depth_from_native_output": false,
+    "quality_correction": false,
+    "newer_assembly_calibration": false
+  },
+  "evaluation": {
+    "collapse_threshold": 0.6,
+    "minimum_new_assembly_bp": 15000,
+    "reference_proxy": "old_assembly_bp/new_assembly_bp_below_0.6",
+    "prediction": "old_assembly_bp/read_estimated_bp_below_0.6",
+    "zero_estimate_prediction": "N/A_undefined_denominator",
+    "unmatched_native_motif": "retain_unassigned_not_family_false_positive",
+    "technical_failure": "N/A_not_zero",
+    "endpoint_wording": "agreement_with_retrospective_newer_assembly_proxy_not_physical_accuracy"
+  },
+  "resources": {
+    "serial_cells": true,
+    "stop_after_first_technical_failure": true,
+    "global_launch_seconds": 345600,
+    "minimum_free_bytes": 250000000000,
+    "maximum_cell_bytes": 500000000000,
+    "stage_timeout_seconds": {
+      "count": 28800,
+      "dump": 7200,
+      "assemble": 7200,
+      "elongate": 3600,
+      "map": 28800,
+      "filter": 7200,
+      "abundance": 3600
+    },
+    "disk_measurement": "prelaunch_and_post_stage_not_continuous_peak"
+  },
+  "species": [
+    {
+      "id": "ey15_2",
+      "species": "Arabidopsis thaliana",
+      "accession": "Ey15-2",
+      "genome_size_bp": 143120000,
+      "total_read_count": 837586,
+      "total_library_bases": 18636790429,
+      "reads": [
+        {
+          "run_accession": "ERR8666125",
+          "path": "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz",
+          "bytes": 17397432231,
+          "sha256": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8",
+          "read_count": 837586,
+          "total_bases": 18636790429
+        }
+      ],
+      "catalogue": {
+        "path": "paper/evidence/ey15_donor_matched_collapse_v1/results/run/discover/monomers.fa",
+        "bytes": 468673,
+        "sha256": "277d376aa8961673ca84dd4603d5c31b057c805cfe26b642ab350b63f8556aeb",
+        "records": 2133,
+        "selection": "complete_frozen_catalogue"
+      },
+      "reference_metrics": {
+        "path": "paper/evidence/ey15_donor_matched_collapse_v1/results/evaluation_primary_total_bases/family_metrics.tsv",
+        "bytes": 379987,
+        "sha256": "985943042a79f2ef8c6e6793b13304847a0f9e836e3ad7425a9f75774df1b5b1",
+        "eligible_records": 19
+      },
+      "source_config": {
+        "path": "benchmarks/configs/ey15_donor_matched_collapse_v1.json",
+        "bytes": 4067,
+        "sha256": "605562c404e6576522b4731e456efe06be9d734e6bfc3d4082358d733552f8e6"
+      }
+    },
+    {
+      "id": "macadamia_jansenii",
+      "species": "Macadamia jansenii",
+      "accession": "1005_same_sample_paper_level",
+      "genome_size_bp": 780000000,
+      "total_read_count": 1642394,
+      "total_library_bases": 22546488654,
+      "reads": [
+        {
+          "run_accession": "SRR13557763",
+          "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+          "bytes": 6716963362,
+          "sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6",
+          "read_count": 635246,
+          "total_bases": 8442858124
+        },
+        {
+          "run_accession": "SRR13557762",
+          "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+          "bytes": 11433466175,
+          "sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e",
+          "read_count": 1007148,
+          "total_bases": 14103630530
+        }
+      ],
+      "catalogue": {
+        "path": "paper/evidence/macadamia_jansenii_donor_matched_collapse_v1/results/run/discover/monomers.fa",
+        "bytes": 206239,
+        "sha256": "905b38bd083c23c7b391b83f31540e5a17e3f72be9cfc7a8ed329b734bb0dbd8",
+        "records": 1227,
+        "selection": "complete_frozen_catalogue"
+      },
+      "reference_metrics": {
+        "path": "paper/evidence/macadamia_jansenii_donor_matched_collapse_v1/results/evaluation_primary_total_bases/family_metrics.tsv",
+        "bytes": 229524,
+        "sha256": "4a9da94ae5fe162b6139f77efbb9dd98814c1c9bb2aa03b823702d083e0d03c9",
+        "eligible_records": 43
+      },
+      "source_config": {
+        "path": "benchmarks/configs/macadamia_jansenii_donor_matched_collapse_v1.json",
+        "bytes": 4975,
+        "sha256": "b5da4f3b5c22c1a6c795075f3f4d2d580c2d70e61ba9264a53b202a7b5de5db9"
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2087,
+      "sha256": "40892b05808c56772a5468909b6507d249b72394357e8c7ee73a8df93e0d3f43"
+    },
+    {
+      "path": "controller_terminal.stderr.txt",
+      "bytes": 1992,
+      "sha256": "6266b5c7c4b2597e86c80668ab02e826c23a32e7840a64bca94cd188f00d5401"
+    },
+    {
+      "path": "first_cell_family_terminal.tsv",
+      "bytes": 1970,
+      "sha256": "453c8953b1374eeb2da2fb1a7276862aee5c8e16c03d710586e35adabc7067f5"
+    },
+    {
+      "path": "formal_artifact_inventory.json",
+      "bytes": 6480,
+      "sha256": "fd3f381aa61ab34638d2a4c34c44af14f799ce25913dde4a6c1f9ec3d172d311"
+    },
+    {
+      "path": "postmortem.json",
+      "bytes": 3326,
+      "sha256": "e4c1d762da86e0ac46f215fa1f5c683984c64086dbecab55c3af118adbe59aa0"
+    },
+    {
+      "path": "reconstruction_receipt.json",
+      "bytes": 1207,
+      "sha256": "da89aba6b010a5c9ad661fd0dff55a4e2e487799c8f31073372c720e7267590a"
+    },
+    {
+      "path": "terminal_completion.json",
+      "bytes": 489,
+      "sha256": "c1b5edf7c0d12df4e2423e2811b7e5aab667b1d2101fa59d32831367ab64e658"
+    },
+    {
+      "path": "terminal_summary.tsv",
+      "bytes": 1498,
+      "sha256": "558103e24cd9cfaf8fb57ef41ea9cf279f496fd85b812ac2cd21a8c1dce44c56"
+    }
+  ]
+}

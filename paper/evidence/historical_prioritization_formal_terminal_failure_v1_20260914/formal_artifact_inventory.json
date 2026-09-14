@@ -1,0 +1,130 @@
+{
+  "formal_root": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913",
+  "files": [
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/environment.json",
+      "bytes": 16508,
+      "sha256": "440259202e5e004d350044a678e624c2e8d52744a21209c04cf975e098b71cb2"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/assemble.command.json",
+      "bytes": 185,
+      "sha256": "82b1f48e354a8d823274048b6d6853142159bc4806448ada3f0cc22a55b5ac44"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/assemble.receipt.json",
+      "bytes": 993,
+      "sha256": "b670030e7ea0435d4a63459b6ebabc7d2b1682c94c5ddbccfd7d3c0fca876ed3"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/assemble.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/count.command.json",
+      "bytes": 467,
+      "sha256": "3e6dfc607a137a434089287ddbdf5d5a1e4c27f320832aa16c733b5945d6baff"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/count.receipt.json",
+      "bytes": 1582,
+      "sha256": "cdb7390a2abc91db1fa50ac0c70aedfa09d9b078c98fdd785759be56a19517cb"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/count.stderr.log",
+      "bytes": 1822,
+      "sha256": "7d0084396ca57591efa556a5121c013a0a4b0d742fca350c17a1db3081ffa21b"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/count.stdout.log",
+      "bytes": 530,
+      "sha256": "6f98df18f517ce38cee91f73283d1d7ce43a7bcf3dce6ebfc5fc654565560db2"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/counts.kmc_pre",
+      "bytes": 1310812,
+      "sha256": "985ec9149dd19dae7885c06c410d87cb6ba739e5d932d1fb2990a3683671dc1c"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/counts.kmc_suf",
+      "bytes": 5298188048,
+      "sha256": "6c835348ebe28024a240fa93bbcb4f0c1bec78ba34eac7c95201ff385ae9a5ec"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/counts.txt",
+      "bytes": 20540890881,
+      "sha256": "20e8536f2bb78450369c2f07a14b4a87f95e37f8df55bb8da4385142c53ef332"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/dump.command.json",
+      "bytes": 289,
+      "sha256": "1f0d82bda2a1608dbb4cf29832a9a7bd251218535ca0a9432bebbfd96dab2409"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/dump.receipt.json",
+      "bytes": 1107,
+      "sha256": "e54f2c24ad3a1892429caac91fb2b3f223ab285ac3a19f650b23065fe0f55f76"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/dump.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/dump.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/family_prioritization.tsv",
+      "bytes": 147,
+      "sha256": "6ed4c3c88f2bfb8d3ec418fd4a77e3dc82df030d08f8a71a7293755558befc13"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/reads.list",
+      "bytes": 75,
+      "sha256": "e309507c53c521a69e8a0d1f649c6f4784a96a240b1f328b2055a407e4308bc6"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/ey15_2/srf_k151/srf.fa",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/input_manifest.json",
+      "bytes": 7641,
+      "sha256": "675e6f9dc2f38d676c07576468d7b7cf70834d7841feb40897d17a424e59b42d"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/plan.tsv",
+      "bytes": 315,
+      "sha256": "73d62bed94a9bd123bb0d01d51da6c7de59a8fa787534d3f442f3cbac1189dc0"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/run_config.json",
+      "bytes": 8190,
+      "sha256": "c2d2d3888c665ff8a099ac7ac08652e2702afba9d72e177cb8ef2479faafd900"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/source_snapshot/benchmarks/challenge/unified_correspondence.py",
+      "bytes": 5746,
+      "sha256": "7b97f8c985d36e803389f3936530373ab8bb85386e7a07b6d6fabfe2444a9134"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/source_snapshot/benchmarks/challenge/unified_native_io.py",
+      "bytes": 11031,
+      "sha256": "32a81d4f597094a844a8984df535ef161f9bc54ad992f802718ce10fc47ea75e"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/source_snapshot/benchmarks/scripts/run_historical_prioritization_srf_mapping.py",
+      "bytes": 34435,
+      "sha256": "a81a4444ab4e5583c4486cfdd2c3f05be8a7843d5e27e37a65575168bb02f36c"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913/source_snapshot/docs/historical_prioritization_srf_mapping_protocol_v1_20260913.md",
+      "bytes": 11173,
+      "sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5"
+    }
+  ]
+}

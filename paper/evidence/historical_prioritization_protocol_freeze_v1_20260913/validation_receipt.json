@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "historical_prioritization_srf_mapping_v1_20260913",
+  "validation_date": "2026-09-13",
+  "status": "protocol_frozen_and_source_bindings_verified_native_execution_not_started",
+  "protocol_sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5",
+  "config_sha256": "d50fa199bf73056eaf7e618f33bbd1ac55037caedc6d54b4199b9432c55374c8",
+  "runner_sha256": "669edea0b66ab2972ef9a519c39acfb1b795aa18889179de8873fdc813b5e1db",
+  "test_sha256": "db77bf537bdb4e6ccf5377395af83b35bf4ed6a4b2a071ebe53cc7e5b4088e22",
+  "binding_audit_sha256": "138dee1c44c57e48fc1be5f79ee5ec1d9099ccae5e5eb83c0124469029c6ad3e",
+  "binding_audit": {
+    "verified": true,
+    "bound_files": 20,
+    "fastq_bytes": 35547861768,
+    "fastq_files": 3,
+    "macadamia_fastq_order": [
+      "SRR13557763",
+      "SRR13557762"
+    ],
+    "catalogue_records": {
+      "ey15_2": 2133,
+      "macadamia_jansenii": 1227
+    },
+    "eligible_family_records": {
+      "ey15_2": 19,
+      "macadamia_jansenii": 43
+    }
+  },
+  "plan_validation": {
+    "status": "structurally_valid_unexecuted",
+    "cells": 6,
+    "order": [
+      "ey15_2/srf_k151",
+      "ey15_2/srf_k101",
+      "ey15_2/competitive_mapping",
+      "macadamia_jansenii/srf_k151",
+      "macadamia_jansenii/srf_k101",
+      "macadamia_jansenii/competitive_mapping"
+    ]
+  },
+  "tests": {
+    "command": "conda run -n tandemx-dev pytest -q tests/unit/test_historical_prioritization_srf_mapping_runner.py tests/unit/test_historical_prioritization.py tests/unit/test_unified_correspondence.py tests/unit/test_unified_native_io.py",
+    "passed": 23,
+    "failed": 0,
+    "wall_seconds": 0.23
+  },
+  "additional_checks": [
+    "python_py_compile_passed",
+    "git_diff_check_passed",
+    "full_reference_eligibility_recalculation_19_and_43_passed"
+  ],
+  "formal_native_cells_started": 0,
+  "preexisting_native_paf_imported": false,
+  "production_algorithm_changed": false,
+  "execution_gate": "main_task_review_then_ack_HISTORICAL_PROTOCOL_V1_REVIEWED",
+  "interpretation_boundary": "retrospective_newer_assembly_proxy_agreement_not_physical_or_biological_accuracy"
+}

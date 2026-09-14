@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "audited_at_utc": "2026-09-13T18:57:48Z",
+  "status": "metadata_and_exact_payload_plan_complete_no_payload_started",
+  "route": "direct NCBI/ENA/NGDC with proxy disabled",
+  "scope": {
+    "included": "six T2T peanut materials and selected small-genome legume/soybean controls",
+    "excluded": [
+      "Brachypodium",
+      "BLAST",
+      "family novelty interpretation",
+      "large payload transfer",
+      "compute-heavy comparator cells"
+    ]
+  },
+  "coordination_snapshot": {
+    "K30076_block2_attempt001": "active_heavy_network_and_T7_IO",
+    "K30076_block2_completed_valid_chunks": 1,
+    "K30076_block2_planned_chunks": 34,
+    "K30076_block2_aggregate": "not_created",
+    "K30076_block3": "not_started_attempt_directory_absent",
+    "hold": "do not start another payload or comparator until explicit safe-boundary handoff"
+  },
+  "t7_snapshot": {
+    "filesystem": "/dev/disk4s2",
+    "available_bytes": 2271772016640,
+    "capacity_percent": 44,
+    "boundary": "point-in-time and volatile while K30076 recovery is active"
+  },
+  "aggregate_payloads": {
+    "six_peanut_hifi_fastq_bytes": 1064376301492,
+    "six_peanut_assembly_fasta_gz_bytes": 3859022794,
+    "six_peanut_exact_advertised_total_bytes": 1068235324286,
+    "four_unstarted_tetraploid_peanut_hifi_fastq_bytes": 771558487092,
+    "interpretation": "exact advertised repository bytes, not transfer authorization"
+  },
+  "newly_closed_controls": {
+    "A17": {
+      "assembly_bytes": 129989665,
+      "assembly_md5": "0c958f2d29f053f72243cb319651eb47",
+      "hifi_bam_bytes": 20993038389,
+      "hifi_bases": 39872065358,
+      "hifi_reads": 2074971,
+      "raw_checksum": "N/A_not_published",
+      "raw_index": "N/A_not_published"
+    },
+    "R108": {
+      "assembly_bytes": 116010804,
+      "assembly_md5": "0b2498db11abffee1c8de5ca4695cba6",
+      "hifi_bam_bytes": 25092297745,
+      "hifi_bases": 47021704397,
+      "hifi_reads": 2334551,
+      "raw_checksum": "N/A_not_published",
+      "raw_index": "N/A_not_published"
+    },
+    "YP4": {
+      "assembly_bytes": 167792293,
+      "assembly_md5": "5a81dd28c6677f575b5f94cae9e86b3d",
+      "hifi_fastq_bytes": 24590641333,
+      "hifi_fastq_md5": "2820bb596e1cf407f614fe13ce0c8dae",
+      "hifi_bases": 31747954482,
+      "hifi_reads": 2108646,
+      "evidence_label": "T2T_claimed_partial_T2T_evidence_9_of_11"
+    },
+    "ZH13": {
+      "combined_hifi_bam_bytes": 46775562505,
+      "combined_hifi_bases": 67710780290,
+      "combined_hifi_reads": 4264476,
+      "raw_checksum": "N/A_not_published",
+      "raw_index": "N/A_not_published",
+      "material_linkage": "project_and_study_level_supported_not_independently_donor_matched"
+    }
+  },
+  "retained_unresolved_states": {
+    "HJD": "assembly file and MD5 closed; raw GSA CRA/CRR accession unresolved",
+    "Wm82": "ENA HiFi FASTQ closed; Wm82.a5 Figshare file inventory HTTP 403 and matched assembly BioSample unresolved",
+    "Lee": "exact raw and assembly files exist, but different BioSamples/projects and fragmented chromosome-level assembly make it ineligible",
+    "NGDC_browse_pages": "curl_empty_reply; download-server files remained directly accessible",
+    "ZH13_python_HEAD": "client_specific_connection_refused; independent direct curl HEAD returned HTTP 200 for both BAMs",
+    "HJD_PMC_supplement": "proof_of_work_HTML_received_instead_of_ZIP; no supplement payload accepted"
+  },
+  "source_queries": [
+    "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA1259747&result=read_run",
+    "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR28726931&result=read_run",
+    "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA919186&result=read_run",
+    "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA1072282&result=read_run",
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/",
+    "https://ftp.ncbi.nlm.nih.gov/genomes/all/",
+    "https://download.cncb.ac.cn/gwh/Plants/",
+    "https://download.cncb.ac.cn/gsa2/CRA010060/",
+    "https://download.cncb.ac.cn/gsa4/CRA027262/"
+  ],
+  "download_policy": {
+    "payload_started": false,
+    "proxy_used": false,
+    "small_metadata_only": true,
+    "complete_source_required_before_sampling": true,
+    "bam_byte_ranges_ineligible_without_index": true,
+    "technical_failure_is_not_zero_recovery": true
+  },
+  "interpretation_boundary": "Source integrity and transfer planning only. Native records are not biological families; no accuracy, exclusivity, novelty, sixth Result, or release conclusion is made."
+}

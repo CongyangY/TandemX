@@ -1,5 +1,106 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-14: K30076 block-2 integrity failure and T7 disconnect
+
+This checkpoint supersedes the 2026-09-13 statement below that K30076 blocks 2
+and 3 were merely `planned_not_started`, and it supersedes any inference that
+the earlier successful T7 volume check established continuing write
+reliability.
+
+K30076 block 1 had previously passed its bounded recovery gate: 34 contiguous
+chunks, 845,098 reads and 14,127,589,933 bp (9.512162461x). Block 2 later
+downloaded all 34 frozen chunks and initially emitted an aggregate receipt for
+845,098 reads and 15,027,572,584 bp (10.118124358x), but independent validation
+found that chunk 3 (spots 4,615,107--4,640,106) no longer matched its receipt.
+The file remained 370,177,772 bytes, while its expected SHA-256
+`2e3fb14389a5674ec1a62c32db13e0476e5aa62aa1c8501bd86968af10734867`
+had changed reproducibly to
+`06bdc011167b5ddbf301da9fca458a79a4264a2ec86b74194cf6fe653cce4e56`;
+gzip decompression also failed. Therefore the attempt-001 aggregate is invalid
+despite the 34/34 download count.
+
+An isolated direct/no-proxy attempt 002 requested only that chunk, but
+`vdb-dump` returned zero rows with `Failed to call external services.` An
+isolated attempt 003 then used the user-authorized system-proxy exception only
+for the same chunk, without recording proxy addresses or credentials. Its T7
+write failed with `Errno 5` and the `/Volumes/T7` mount disappeared before the
+failed receipt could be written. Session 89647 exited 1; no downloader remained
+and no automatic mount or retry was attempted. At the post-failure snapshot the
+Samsung T7 still enumerated over USB, but the filesystem was not mounted, so
+the current readback state of earlier T7 artifacts is unverified.
+
+macOS subsequently remounted the same T7 automatically as `/dev/disk5s2` at
+`/Volumes/T7`. Directory visibility was restored, but no large write, download,
+comparator, automatic filesystem verification, unmount or eject was resumed.
+The remount does not clear the observed I/O failure or revalidate the affected
+files; heavy T7 work remains paused pending a stable direct connection.
+
+K30076 block 2 is `invalid_no_acceptable_aggregate`; block 3 remains
+`planned_not_started`. The byte-identical common 30x input gate is not met and
+the frozen comparator remains `blocked_not_run`. These are technical
+acquisition/storage failures, not comparator or biological results. No
+production algorithm or frozen parameter changed. The terminal record is in
+`docs/evidence/real_30x_recovery/k30076_block2_terminal_failure_20260914.{md,json}`.
+
+## Checkpoint 2026-09-14: historical comparator stopped at frozen SRF timeout
+
+This checkpoint supersedes the 2026-09-13 statement below that the formal
+historical run was active.
+
+The accepted six-cell historical SRF/ordinary-mapping run stopped in its first
+cell. Ey15-2 SRF k151 KMC counting and dumping completed, but native SRF
+assembly reached the preregistered 7,200-second stage limit (`exit_code=-9`,
+`timed_out=true`, 7,201.486 s, 6,814.375 MiB peak RSS) and emitted a zero-byte
+`srf.fa`. This is a technical failure, not a zero-family result. The stage was
+not rerun and no parameter was changed.
+
+The controller then encountered a separate terminal-bookkeeping bug: its
+technical-failure row contained `native_retained_read_bp=N/A`, but the explicit
+TSV field list omitted that column. The resulting `DictWriter` exception left a
+header-only family TSV and prevented root summary/completion emission. A
+read-only reconstruction preserves the original formal config/source snapshot
+and records `ey15_2/srf_k151=technical_failure` plus five
+`not_run_prior_failure` cells. The run is incomplete and has no historical
+proxy-agreement metric. Evidence is under
+`paper/evidence/historical_prioritization_formal_terminal_failure_v1_20260914/`.
+
+The workspace serializer now includes the missing field and has a regression
+test for technical-failure rows. That implementation fix is for future reviewed
+runs; it does not revise the frozen formal output or authorize a rerun.
+
+## Checkpoint 2026-09-13: T7 filesystem verification passed and bounded recovery resumed
+
+The reconnected T7 volume passed a read-only `diskutil verifyVolume` check.
+`fsck_exfat -n -x /dev/rdisk4s2` reported that the volume appears to be OK,
+returned exit code 0, and restored the volume to its mounted state. The exact
+terminal record and interpretation boundary are retained in
+`docs/evidence/t7_volume_verification_20260913.md`. This removes the volume-level
+write freeze, but it does not validate missing, zero-byte, or interrupted
+benchmark files; those still require per-file hashes and atomic receipts.
+
+Bounded recovery resumed after that check. V14167 passed its source/common-
+FASTA/partition hash gates. TideHunter completed all three frozen partitions
+with valid receipts (5,652,836 native calls; 4,395,253 in the frozen period/span
+scope; 7,763.35 s total launcher runtime; 2.844 GB maximum single-partition
+RSS). TRF partition 3 reached the frozen 7,200-s limit and remains a validated
+technical timeout, not a zero result and not a completed endpoint.
+
+K30076's five invalid block-1 tail chunks were rebuilt through direct NCBI
+access without overwriting the 29 valid chunks. The new block-1 aggregate has
+34 contiguous chunks, 845,098 reads and 14,127,589,933 bp (9.512162461x), with
+all per-chunk and aggregate hashes validated. Blocks 2 and 3 remain
+`planned_not_started`, so the K30076 30x comparator is not yet eligible to run.
+
+The dedicated historical SRF/mapping protocol was frozen and main-task
+reviewed before native output. Its Darwin ExFAT free-space preflight required
+an implementation-only `df -Pk` fix; the scientific protocol did not change,
+and no native output existed before the hash amendment. The formal six-cell
+serial run is now active in isolation. The first Ey15-2 SRF k151 KMC count stage
+completed with exit code 0 in 1,310.565 s and 2,384.016 MiB peak RSS; downstream
+stages and the remaining five cells are unfinished. No release action, BLAST
+submission, Brachypodium work, sixth Result, or new production algorithm has
+been started.
+
 ## Checkpoint 2026-09-13: evidence recovery and unfinished-work boundary
 
 This checkpoint supersedes conflicting statements in the historical sections

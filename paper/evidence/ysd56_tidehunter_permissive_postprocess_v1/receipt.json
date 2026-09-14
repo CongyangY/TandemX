@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "run_dir": "/Volumes/T7/Codex/TandemX/results/soybean_ysd56_30x_comparison_v1_20260911",
+  "required_source_files": [
+    "normalization.sqlite",
+    "execution_summary.tsv",
+    "run_manifest.json"
+  ],
+  "matcher": "complete_shorter_vs_doubled_longer_edlib_HW_both_orientations",
+  "frozen_rule": {
+    "direct_glocal_identity_minimum": 0.9,
+    "direct_shorter_to_longer_length_ratio_minimum": 0.9,
+    "integer_period_multiple_identity_minimum": 0.8,
+    "integer_period_multiple_relative_error_maximum": 0.05
+  },
+  "final_candidate_method": "length_eligible_pairwise_edlib_in_bounded_comparator_blocks; no_4mer_index_for_final_matching",
+  "script_sha256": "e113b8e67edf04094a91f6bcd7d6cc26036833048c83d82f75713bb9af815116",
+  "status": "blocked_missing_post_remount_source_outputs",
+  "missing_source_files": [
+    "/Volumes/T7/Codex/TandemX/results/soybean_ysd56_30x_comparison_v1_20260911/normalization.sqlite",
+    "/Volumes/T7/Codex/TandemX/results/soybean_ysd56_30x_comparison_v1_20260911/execution_summary.tsv",
+    "/Volumes/T7/Codex/TandemX/results/soybean_ysd56_30x_comparison_v1_20260911/run_manifest.json"
+  ],
+  "exact_tidehunter_supported_family_count": "NA",
+  "permissive_tidehunter_supported_family_count": "NA",
+  "unresolved_family_count": "NA",
+  "interpretation_boundary": "No family support number was inferred: the post-remount source run outputs are absent."
+}

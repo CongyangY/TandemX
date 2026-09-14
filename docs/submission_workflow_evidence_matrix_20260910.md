@@ -10,23 +10,31 @@ baseline `81827c3`, cascade plus sequence, Rust and one thread. SRF reports
 k=151/ci20 as primary and k=101/ci20 as sensitivity. No benchmark, real input,
 or historical re-analysis was run for this audit.
 
+Post-audit update (2026-09-14): the fresh planted-read comparison later
+completed 72/72 cells. A separate frozen historical run subsequently reached
+only the first Ey15 SRF k151 cell, where native assembly timed out; all family
+estimates for that cell are unavailable and the remaining five historical
+cells are `not_run_prior_failure`. This technical-failure record does not create
+a common historical endpoint.
+
 “Not run” means no matching execution artifact was found. “N/A” means an
 endpoint is outside the stated arm, rather than a missing output.
 
 ## Historical evidence cannot provide a common tool-prioritization endpoint
 
 Existing TandemX evidence can rank its own discovered families by frozen
-read--assembly comparison and retain interpretation states. There is no matched
-SRF execution on Ey15 or Macadamia and no SRF/TandemX family-or-HOR
-correspondence table. It therefore cannot support a cross-tool historical
-prioritization comparison without new execution and a predeclared common score.
+read--assembly comparison and retain interpretation states. The only matched
+historical SRF execution attempt ended in technical failure before producing
+family estimates, and there is no completed SRF/TandemX family-or-HOR
+correspondence table. The record therefore cannot support a cross-tool
+historical prioritization comparison.
 
 | Historical material / endpoint | TandemX already executed | Ordinary mapping already executed | SRF already executed | Common historical endpoint |
 | --- | --- | --- | --- | --- |
-| Ey15 donor-matched catalogue, abundance and old/new arrays | Yes. `paper/evidence/ey15_donor_matched_collapse_v1/results/run/` retains discovery, primary/depth-107 copy-number and old/new arrays. Primary metrics retain 2,133 rows, 19 source-eligible rows and `not_source_eligible` states. | Not run as a family-level competitive read-occupancy table. The retained PAF is old-versus-new assembly context, not read-to-family occupancy. | Not run on Ey15 reads; available SRF products are synthetic development only. | Not available. |
-| Macadamia donor-matched catalogue, abundance and old/new arrays | Yes. `paper/evidence/macadamia_jansenii_donor_matched_collapse_v1/results/run/` retains discovery, primary/reported-depth copy-number and old/new arrays; primary metrics retain 1,227 rows and 43 source-eligible rows. | Partly, for a separate secondary endpoint. `orthogonal_abundance_validation_v1/ont/ont_occupancy.tsv` covers 43 eligible TandemX representatives; the direction table evaluates three preselected candidates only. | Not run on Macadamia reads. | Not available. The ONT output is a TandemX-template, direction-only audit, not a three-tool comparison. |
-| Final orthogonal interpretation | Yes. `final_evidence_summary.json` records two Ey15 and one Macadamia family with orthogonal support, and three unresolved candidates. | Macadamia ONT gives direction only; Ey15 has orthogonal Illumina k21/k31 metrics, not mapping occupancy. | Not run. | Not available; do not relabel it as cross-tool validation. |
-| De novo family recovery | Historical TandemX discovery outputs exist. | N/A: the planned mapper receives TandemX representatives, so it is an occupancy comparator. | Not run historically. | N/A for ordinary mapping; unmeasured for SRF. |
+| Ey15 donor-matched catalogue, abundance and old/new arrays | Yes. `paper/evidence/ey15_donor_matched_collapse_v1/results/run/` retains discovery, primary/depth-107 copy-number and old/new arrays. Primary metrics retain 2,133 rows, 19 source-eligible rows and `not_source_eligible` states. | The planned historical cell was not run because the preceding SRF cell failed. The retained old-versus-new PAF is assembly context, not read-to-family occupancy. | SRF k151 reached native assembly, timed out and produced no available family estimates; SRF k101 was `not_run_prior_failure`. | Not available. |
+| Macadamia donor-matched catalogue, abundance and old/new arrays | Yes. `paper/evidence/macadamia_jansenii_donor_matched_collapse_v1/results/run/` retains discovery, primary/reported-depth copy-number and old/new arrays; primary metrics retain 1,227 rows and 43 source-eligible rows. | Partly, for a separate secondary endpoint. `orthogonal_abundance_validation_v1/ont/ont_occupancy.tsv` covers 43 eligible TandemX representatives; the planned historical mapping cell was not run. | Both planned SRF cells were `not_run_prior_failure`. | Not available. The ONT output is a TandemX-template, direction-only audit, not a three-tool comparison. |
+| Final orthogonal interpretation | Yes. `final_evidence_summary.json` records two Ey15 and one Macadamia family with orthogonal support, and three unresolved candidates. | Macadamia ONT gives direction only; Ey15 has orthogonal Illumina k21/k31 metrics, not mapping occupancy. | No available historical SRF family result. | Not available; do not relabel it as cross-tool validation. |
+| De novo family recovery | Historical TandemX discovery outputs exist. | N/A: the planned mapper receives TandemX representatives, so it is an occupancy comparator. | The attempted Ey15 k151 cell failed before a catalogue was produced; other historical SRF cells were not run. | N/A for ordinary mapping; unavailable for SRF. |
 
 The reusable mapping implementation is
 `benchmarks/scripts/evaluate_macadamia_ont_occupancy.py:summarize_paf`: it
@@ -34,7 +42,10 @@ unions accepted primary query intervals by family and excludes whole reads with
 multiple accepted families. Its mapping-efficiency correction is explicitly
 direction-only, not an SRF abundance estimator or physical copy-number truth.
 
-## Fresh-comparison endpoint readiness
+## Fresh-comparison endpoint readiness at the 2026-09-10 audit
+
+This table records the pre-run requirements at that audit snapshot; the
+post-audit completion state is stated above.
 
 | Endpoint | TandemX arm | SRF arm | Ordinary mapper | Remaining link |
 | --- | --- | --- | --- | --- |
@@ -44,10 +55,11 @@ direction-only, not an SRF abundance estimator or physical copy-number truth.
 | Array/negative controls | Challenge interfaces score hidden truth after execution. | In-scope 30--1000-bp, >=100-bp arrays and empty states are preserved. | Not a de novo recovery arm. | Generate six conditions with truth withheld from commands. |
 | Resources/failures | Formal protocol must retain command/resource receipts. | Seven native-stage commands, stderr, hashes, wall/RSS and statuses are already retained. | Needs same receipt discipline. | Existing SRF timings are one-run development observations, not paired repetitions. |
 
-`run_srf_pilot.py:workflow()` accepts and receipts an explicit k; existing
-development runs establish k151/ci20 execution. The CLI `run()` still calls the
-default k151, and no completed k101/ci20 result was located. k101 is therefore
-planned sensitivity output, not prior evidence.
+At this audit snapshot, `run_srf_pilot.py:workflow()` accepted and receipted an
+explicit k; existing development runs established k151/ci20 execution. The CLI
+`run()` still called the default k151, and no completed k101/ci20 result had yet
+been located. The later formal planted-read study supplied the separate k101
+sensitivity record; it did not supply a historical real-read result.
 
 ## Workflow capability evidence
 
@@ -64,10 +76,9 @@ planned sensitivity output, not prior evidence.
 
 ## Submission-safe conclusion
 
-Before the authorized fresh comparison, the donor-matched records support only
-TandemX-specific prioritization and bounded orthogonal interpretation. They do
-not establish historical agreement, disagreement or superiority versus SRF or
-ordinary mapping. The formal fresh study should retain every tool status and
-raw native product, score the locked common endpoints, keep ordinary mapping
-de-novo recovery as N/A, and preserve SRF higher-order motifs rather than force
-them into monomer labels.
+The donor-matched records support only TandemX-specific prioritization and
+bounded orthogonal interpretation. They do not establish historical agreement,
+disagreement or superiority versus SRF or ordinary mapping. The later completed
+formal planted-read study retained every tool status and the locked common
+endpoints, kept ordinary-mapping de-novo recovery as N/A, and preserved the
+boundary between its controlled inputs and unavailable historical comparison.

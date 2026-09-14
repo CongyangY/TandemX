@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/run_historical_prioritization_srf_mapping.py", line 610, in <module>
+    main()
+  File "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/run_historical_prioritization_srf_mapping.py", line 606, in main
+    execute(args.config.resolve(), config, args.outdir.resolve(), root)
+  File "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/run_historical_prioritization_srf_mapping.py", line 563, in execute
+    result = run_cell(config, species, str(item["method"]), folder, root, deadline)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/run_historical_prioritization_srf_mapping.py", line 491, in run_cell
+    write_tsv(folder / "family_prioritization.tsv", scored, fields)
+  File "/Users/ycy/Codex/Sofw/TandemX/benchmarks/scripts/run_historical_prioritization_srf_mapping.py", line 59, in write_tsv
+    writer.writerows(rows)
+  File "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib/python3.11/csv.py", line 157, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib/python3.11/csv.py", line 149, in _dict_to_list
+    raise ValueError("dict contains fields not in fieldnames: "
+ValueError: dict contains fields not in fieldnames: 'native_retained_read_bp'
+
+ERROR conda.cli.main_run:execute(124): `conda run python -m benchmarks.scripts.run_historical_prioritization_srf_mapping --config benchmarks/configs/historical_prioritization_srf_mapping_v1_20260913.json --outdir /Volumes/T7/Codex/TandemX/results/historical_prioritization_srf_mapping_v1_20260913 --execute --ack HISTORICAL_PROTOCOL_V1_REVIEWED` failed. (See above for error)

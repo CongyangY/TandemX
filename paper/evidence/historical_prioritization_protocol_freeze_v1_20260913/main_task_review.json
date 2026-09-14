@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-09-13",
+  "reviewer_role": "main_task_scientific_coordinator",
+  "decision": "approved_for_formal_execution",
+  "execution_acknowledgement": "HISTORICAL_PROTOCOL_V1_REVIEWED",
+  "protocol_sha256": "e502892d74b926700852be9d30203836d55b5e141700e0243080c918e295ada5",
+  "config_sha256": "d50fa199bf73056eaf7e618f33bbd1ac55037caedc6d54b4199b9432c55374c8",
+  "runner_sha256": "669edea0b66ab2972ef9a519c39acfb1b795aa18889179de8873fdc813b5e1db",
+  "test_sha256": "db77bf537bdb4e6ccf5377395af83b35bf4ed6a4b2a071ebe53cc7e5b4088e22",
+  "review_checks": {
+    "structural_plan": "passed_6_cells",
+    "focused_tests": "passed_5_of_5_in_main_task_recheck",
+    "native_output_used_for_rule_selection": false,
+    "preexisting_paf_import_allowed": false,
+    "interpretation_boundary": "retrospective_newer_assembly_proxy_agreement_not_physical_accuracy"
+  },
+  "launch_constraint": "Start only after the active V14167 TRF and TideHunter recovery cells finish, so formal timing and RSS are not confounded by those CPU-intensive processes.",
+  "t7_volume_verification_receipt": {
+    "path": "docs/evidence/t7_volume_verification_20260913.md",
+    "sha256": "3cf77f5916dd55b286f337ac282067c1178fd647fe24170afe6c4487ad7bcd04",
+    "fsck_exit_code": 0
+  }
+}

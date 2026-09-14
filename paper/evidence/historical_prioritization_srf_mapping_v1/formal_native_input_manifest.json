@@ -1,0 +1,37 @@
+{
+  "status": "blocked_t7_unverified",
+  "endpoint": "historical_assembly_under_representation_prioritization",
+  "frozen_protocol_basis": [
+    "docs/srf_formal_unified_protocol_20260910.md",
+    "benchmarks/configs/ey15_donor_matched_collapse_v1.json",
+    "benchmarks/configs/macadamia_jansenii_donor_matched_collapse_v1.json"
+  ],
+  "methods": [
+    "srf_k151",
+    "srf_k101",
+    "competitive_mapping_shared_frozen_tandemx_catalogue"
+  ],
+  "inputs": [
+    {
+      "species": "ey15",
+      "frozen_tandemx_catalogue": "paper/evidence/ey15_donor_matched_collapse_v1/results/run/discover/monomers.fa",
+      "catalogue_sha256": "277d376aa8961673ca84dd4603d5c31b057c805cfe26b642ab350b63f8556aeb",
+      "native_srf_and_mapping_reads": [
+        "/Volumes/T7/Codex/TandemX/data/raw/ERR8666125_complete/ERR8666125.fastq.gz"
+      ],
+      "native_input_status": "blocked_t7_unverified",
+      "no_t7_write_performed": true
+    },
+    {
+      "species": "macadamia",
+      "frozen_tandemx_catalogue": "paper/evidence/macadamia_jansenii_donor_matched_collapse_v1/results/run/discover/monomers.fa",
+      "catalogue_sha256": "905b38bd083c23c7b391b83f31540e5a17e3f72be9cfc7a8ed329b734bb0dbd8",
+      "native_srf_and_mapping_reads": [
+        "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+        "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz"
+      ],
+      "native_input_status": "blocked_t7_unverified",
+      "no_t7_write_performed": true
+    }
+  ]
+}
