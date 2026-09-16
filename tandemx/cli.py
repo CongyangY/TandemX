@@ -315,6 +315,7 @@ def run_quantify(args: argparse.Namespace) -> int:
                 single_copy_min_depth=args.single_copy_min_depth,
                 read_error_rate=args.read_error_rate,
                 quality_correction_enabled=not args.disable_quality_correction,
+                checkpoint_every=args.checkpoint_every,
             ),
             logger=logger,
             progress=progress,
@@ -721,6 +722,7 @@ def build_parser() -> argparse.ArgumentParser:
     quantify.add_argument("--max-reads", type=int, help="Maximum input reads to count; useful for a subset matched to discover.")
     quantify.add_argument("--max-read-bases", type=int, help="Maximum cumulative input read bases to count without splitting a read.")
     quantify.add_argument("--progress-every", type=int, default=1000, help="Log and display progress after this many processed reads.")
+    quantify.add_argument("--checkpoint-every", type=int, help="Opt in to atomic scan checkpoints every N reads. On rerun, verify all input hashes and the saved read prefix before resuming target counting; full input hashing and gzip prefix replay add I/O.")
     quantify.add_argument("--no-progress", action="store_true", help="Disable live terminal progress output; run.log still records progress.")
     quantify.add_argument("--outdir", required=True, type=_path_value, help="Directory for run_config.yaml, run.log, and copy_number.tsv.")
     quantify.set_defaults(func=run_quantify)

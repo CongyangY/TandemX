@@ -5,6 +5,8 @@ from __future__ import annotations
 import logging
 import math
 import os
+import hashlib
+import json
 import tempfile
 import time
 from collections import Counter, defaultdict
@@ -55,6 +57,7 @@ class QuantifyConfig:
     single_copy_min_depth: float | None = None
     read_error_rate: float | None = None
     quality_correction_enabled: bool = True
+    checkpoint_every: int | None = None
 
 
 @dataclass(frozen=True)
@@ -165,7 +168,16 @@ def quantify_toy_copy_number(
     target_kmers.update(single_copy_controls)
     sequence_paths = normalize_sequence_paths(config.reads)
     uses_fastq = any(detect_sequence_format(path) == "fastq" for path in sequence_paths)
-    if config.quality_correction_enabled and (uses_fastq or config.read_error_rate is not None):
+    if config.checkpoint_every is not None:
+        read_kmers, total_read_bases, read_count, max_read_len, survival = (
+            count_selected_read_kmers_checkpointed(
+                config, sequence_paths, target_kmers,
+                quality_mode=config.quality_correction_enabled
+                and (uses_fastq or config.read_error_rate is not None),
+                logger=logger, progress=progress,
+            )
+        )
+    elif config.quality_correction_enabled and (uses_fastq or config.read_error_rate is not None):
         read_kmers, total_read_bases, read_count, max_read_len, survival = (
             count_selected_read_kmers_quality_and_bases(
                 sequence_paths,
@@ -309,6 +321,8 @@ def quantify_toy_copy_number(
 
     update_quantify_terminal_progress(progress, "write_outputs", read_count, total_read_bases, config)
     write_copy_number(config.outdir / "copy_number.tsv", estimates)
+    if config.checkpoint_every is not None:
+        (config.outdir / "quantify_scan.checkpoint.json").unlink(missing_ok=True)
     return estimates
 
 
@@ -332,6 +346,8 @@ def validate_quantify_config(config: QuantifyConfig) -> None:
         raise ValueError("--max-read-bases must be positive when provided")
     if config.progress_every <= 0:
         raise ValueError("--progress-every must be positive")
+    if config.checkpoint_every is not None and config.checkpoint_every <= 0:
+        raise ValueError("--checkpoint-every must be positive")
     if config.single_copy_kmers is not None and not config.single_copy_kmers.is_file():
         raise ValueError("--single-copy-kmers must be an existing TSV file")
     if config.single_copy_min_depth is not None:
@@ -349,6 +365,194 @@ def validate_quantify_config(config: QuantifyConfig) -> None:
         raise ValueError(
             "--read-error-rate cannot be combined with --disable-quality-correction"
         )
+
+
+def _checkpoint_json(value: object) -> bytes:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+
+
+def _file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(8 * 1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _checkpoint_identity(
+    config: QuantifyConfig, paths: Sequence[Path], targets: set[str], quality_mode: bool,
+) -> dict[str, object]:
+    def file_identity(path: Path) -> dict[str, str]:
+        return {"path": str(path.resolve()), "sha256": _file_sha256(path)}
+
+    return {
+        "reads": [file_identity(path) for path in paths],
+        "monomers": file_identity(config.monomers),
+        "single_copy_kmers": (
+            file_identity(config.single_copy_kmers) if config.single_copy_kmers else None
+        ),
+        "targets_sha256": hashlib.sha256(_checkpoint_json(sorted(targets))).hexdigest(),
+        "k": config.k, "genome_size": config.genome_size,
+        "haploid_depth": config.haploid_depth, "kmer_backend": config.kmer_backend,
+        "max_reads": config.max_reads, "max_read_bases": config.max_read_bases,
+        "single_copy_min_depth": config.single_copy_min_depth,
+        "read_error_rate": config.read_error_rate,
+        "quality_correction_enabled": config.quality_correction_enabled,
+        "quality_mode": quality_mode,
+        "checkpoint_every": config.checkpoint_every,
+    }
+
+
+def _save_scan_checkpoint(path: Path, body: dict[str, object]) -> None:
+    envelope = {
+        "body": body,
+        "body_sha256": hashlib.sha256(_checkpoint_json(body)).hexdigest(),
+    }
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="wb", dir=path.parent, prefix=f".{path.name}.", suffix=".tmp", delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            handle.write(_checkpoint_json(envelope) + b"\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
+def _load_scan_checkpoint(path: Path, identity: dict[str, object], targets: set[str]) -> dict[str, object]:
+    try:
+        envelope = json.loads(path.read_text(encoding="utf-8"))
+        body = envelope["body"]
+        if envelope["body_sha256"] != hashlib.sha256(_checkpoint_json(body)).hexdigest():
+            raise ValueError("checksum mismatch")
+        if body["version"] != 1 or body["identity"] != identity:
+            raise ValueError("input or scientific configuration changed")
+        if not isinstance(body["read_count"], int) or body["read_count"] <= 0:
+            raise ValueError("invalid read count")
+        for field in ("total_bases", "max_read_len", "window_count", "quality_windows", "assumed_windows"):
+            if not isinstance(body[field], int) or body[field] < 0:
+                raise ValueError(f"invalid {field}")
+        if not isinstance(body["survival_sum"], (int, float)) or not math.isfinite(body["survival_sum"]):
+            raise ValueError("invalid survival sum")
+        if not isinstance(body["prefix_sha256"], str) or len(body["prefix_sha256"]) != 64:
+            raise ValueError("invalid prefix checksum")
+        counts = body["counts"]
+        if not isinstance(counts, dict) or any(
+            key not in targets or not isinstance(value, int) or value < 0
+            for key, value in counts.items()
+        ):
+            raise ValueError("invalid target counts")
+        return body
+    except (OSError, UnicodeError, json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
+        raise ValueError(f"Invalid quantify scan checkpoint {path}: {exc}") from exc
+
+
+def count_selected_read_kmers_checkpointed(
+    config: QuantifyConfig,
+    paths: Sequence[Path],
+    targets: set[str],
+    *,
+    quality_mode: bool,
+    logger: logging.Logger,
+    progress: TerminalProgress | None,
+) -> tuple[Counter[str], int, int, int, KmerSurvivalStats]:
+    """Resume target counting from an exact, verified read-prefix boundary."""
+    assert config.checkpoint_every is not None
+    checkpoint = config.outdir / "quantify_scan.checkpoint.json"
+    if checkpoint.exists() and (config.outdir / "copy_number.tsv").exists():
+        raise ValueError(
+            "Quantify checkpoint coexists with copy_number.tsv; use a clean output directory "
+            "or remove the stale public result after independent review"
+        )
+    identity = _checkpoint_identity(config, paths, targets, quality_mode)
+    saved = _load_scan_checkpoint(checkpoint, identity, targets) if checkpoint.exists() else None
+    counts: Counter[str] = Counter(saved["counts"] if saved else {})
+    total_bases = int(saved["total_bases"]) if saved else 0
+    read_count = int(saved["read_count"]) if saved else 0
+    max_read_len = int(saved["max_read_len"]) if saved else 0
+    survival_sum = float(saved["survival_sum"]) if saved else 0.0
+    window_count = int(saved["window_count"]) if saved else 0
+    quality_windows = int(saved["quality_windows"]) if saved else 0
+    assumed_windows = int(saved["assumed_windows"]) if saved else 0
+    resume_reads = read_count
+    prefix = hashlib.sha256()
+    rust_counter = RustDiagnosticKmerCounter(config.k, targets) if config.kmer_backend == "rust" else None
+    python_target_codes = None if rust_counter is not None else selected_target_code_map(targets, config.k)
+    rust_batch: list[str] = []
+    rust_batch_bases = 0
+    started = time.perf_counter()
+
+    def flush_rust() -> None:
+        nonlocal rust_batch_bases, rust_counter
+        if rust_counter is not None and rust_batch:
+            rust_counter.count_sequences(rust_batch)
+            counts.update(rust_counter.counts())
+            rust_batch.clear()
+            rust_batch_bases = 0
+            # The native counter is cumulative; use a fresh instance after each flush.
+            rust_counter = RustDiagnosticKmerCounter(config.k, targets)
+
+    for index, record in enumerate(read_sequence_records_many(paths, check_duplicate_ids_across_files=False)):
+        if index < resume_reads:
+            _update_read_prefix(prefix, record.id, record.sequence, record.quality)
+            if index + 1 == resume_reads:
+                if prefix.hexdigest() != saved["prefix_sha256"]:
+                    raise ValueError("Quantify checkpoint read prefix changed")
+                logger.info("quantify_checkpoint_resumed reads=%s bases=%s", read_count, total_bases)
+            continue
+        if config.max_reads is not None and read_count >= config.max_reads:
+            break
+        if config.max_read_bases is not None and total_bases + len(record.sequence) > config.max_read_bases:
+            logger.info("limit_reached=max_read_bases configured_bases=%s next_read_bases=%s", config.max_read_bases, len(record.sequence))
+            break
+        _update_read_prefix(prefix, record.id, record.sequence, record.quality)
+        read_count += 1
+        total_bases += len(record.sequence)
+        max_read_len = max(max_read_len, len(record.sequence))
+        if quality_mode:
+            observed = quality_window_survival(record.sequence, record.quality, config.k, config.read_error_rate)
+            survival_sum += observed[0]
+            window_count += observed[1]
+            quality_windows += observed[2]
+            assumed_windows += observed[3]
+        if rust_counter is not None:
+            rust_batch.append(record.sequence)
+            rust_batch_bases += len(record.sequence)
+            if len(rust_batch) >= 512 or rust_batch_bases >= 8_000_000:
+                flush_rust()
+        else:
+            update_selected_python_kmer_counts(counts, record.sequence, config.k, targets, python_target_codes)
+        if read_count % config.checkpoint_every == 0:
+            flush_rust()
+            _save_scan_checkpoint(checkpoint, {
+                "version": 1, "identity": identity, "read_count": read_count,
+                "total_bases": total_bases, "max_read_len": max_read_len,
+                "counts": dict(counts), "prefix_sha256": prefix.hexdigest(),
+                "survival_sum": survival_sum, "window_count": window_count,
+                "quality_windows": quality_windows, "assumed_windows": assumed_windows,
+            })
+        if read_count % config.progress_every == 0:
+            log_quantify_progress(logger, read_count, total_bases, started, config.max_reads, config.max_read_bases)
+            update_quantify_read_progress(progress, read_count, total_bases, config.max_reads, config.max_read_bases)
+    if resume_reads and read_count == resume_reads and prefix.hexdigest() != saved["prefix_sha256"]:
+        raise ValueError("Quantify checkpoint read prefix is incomplete")
+    flush_rust()
+    log_quantify_progress(logger, read_count, total_bases, started, config.max_reads, config.max_read_bases)
+    update_quantify_read_progress(progress, read_count, total_bases, config.max_reads, config.max_read_bases)
+    return counts, total_bases, read_count, max_read_len, KmerSurvivalStats(
+        survival_sum, window_count, quality_windows, assumed_windows
+    )
+
+
+def _update_read_prefix(digest: object, identifier: str, sequence: str, quality: str | None) -> None:
+    for value in (identifier, sequence, quality):
+        encoded = (value if value is not None else "").encode("utf-8")
+        digest.update(len(encoded).to_bytes(8, "big"))
+        digest.update(encoded)
 
 
 def read_single_copy_kmers(path: Path, k: int) -> dict[str, float]:

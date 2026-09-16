@@ -127,7 +127,7 @@ MVP constraints:
 6. local boundaries are an identity-based estimate, not a complete array reconstruction;
 7. consensus is a cyclic column majority, not a full indel-aware multiple alignment;
 8. no higher-order repeat inference;
-9. no multiprocessing, intra-step checkpointing or production-scale full-workflow backend yet.
+9. direct `quantify` has an opt-in read-scan checkpoint; other commands and `tandemx run` have no intra-step checkpoint, and no production-scale full-workflow backend exists.
 
 Future work:
 

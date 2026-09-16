@@ -75,7 +75,9 @@ included in `tandemx-dev`, is a runtime dependency for this interface. Repeating
 the command automatically reuses only validated stages with matching input and
 command fingerprints. `--force` reruns stages; `--no-resume` refuses reuse;
 `--resume` remains a compatibility alias. This is stage-level resume, not an
-interrupted-stage checkpoint. Ctrl-C terminates the active step process group
+interrupted-stage checkpoint. Direct `tandemx quantify --checkpoint-every N`
+adds an opt-in scan checkpoint inside quantify; `tandemx run` does not pass that
+option. Ctrl-C terminates the active step process group
 and records exit status 130 with unvalidated outputs; partial stage files may
 remain and are not eligible for validated reuse. See [output fields](docs/file_formats.md) and the
 [minimal example](examples/toy/simple_report.md).
@@ -266,8 +268,23 @@ tandemx quantify \
   --genome-size 10000000 \
   --single-copy-kmers controls.tsv \
   --single-copy-min-depth 2 \
+  --checkpoint-every 100000 \
   --outdir results/quantify
 ```
+
+With `--checkpoint-every`, rerun the identical direct quantify command in the
+same output directory after interruption. Each completed interval saves target
+counts, read/base totals and quality correction statistics atomically. Resume
+verifies SHA-256 of every complete read input, monomer catalog and optional
+controls, then rereads and checks the saved read prefix before counting the
+remainder. Changed inputs or parameters, damaged checkpoints, and an existing
+`copy_number.tsv` beside a checkpoint cause an error. A successful run removes
+the checkpoint after publishing `copy_number.tsv`. Input hashing adds one full
+read pass on every invocation; replay of the processed prefix adds another
+read/decompression pass on resume, especially costly for gzip. Checkpoint
+snapshots also write one count per observed target k-mer, so small intervals
+increase disk traffic. The option does not change copy-number formulas or TSV
+fields; without it, the ordinary scan path is unchanged.
 
 The same dependency chain can be run in one command:
 
