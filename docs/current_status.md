@@ -18,6 +18,9 @@ resume, and the pipeline `run` command does not yet activate this option.
 The prior `quantify` checkpoint commit `135979d` passed [GitHub CI run
 35086069745](https://github.com/CongyangY/TandemX/actions/runs/35086069745)
 on macOS and Ubuntu. This validates source/build/tests, not T7 I/O stability.
+The `discover` checkpoint source commit `d769b7b` likewise passed
+[GitHub CI run 35087098905](https://github.com/CongyangY/TandemX/actions/runs/35087098905)
+on both platforms.
 
 ## Checkpoint 2026-09-16: opt-in quantify scan resume
 
