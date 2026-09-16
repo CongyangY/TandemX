@@ -1,9 +1,14 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "protocol_state": "development-input-inventory-only; no validation or final held-out opened",
   "datasets": [
     {
       "dataset": "ERR6210723_prefix1000",
+      "benchmark_task": "input-integrity-only",
+      "source_provenance_status": "unresolved",
+      "source_provenance_evidence": [],
+      "source_pairing_status": "unresolved",
+      "source_pairing_evidence": [],
       "sample": "SAMEA8961650",
       "species": "Arabidopsis thaliana",
       "truth_type": "none",
@@ -26,6 +31,7 @@
         {
           "path": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_prefix1000/reads.fa",
           "kind": "fasta",
+          "role": "reads",
           "bytes": 15710688,
           "sha256": "4adca195ae3587c52bf503751fd82fe68ae755fe15c7d10f3c09d2d1a1a2305f"
         }
@@ -33,6 +39,11 @@
     },
     {
       "dataset": "Col-CEN_v1.2_public_control",
+      "benchmark_task": "input-integrity-only",
+      "source_provenance_status": "unresolved",
+      "source_provenance_evidence": [],
+      "source_pairing_status": "not-applicable",
+      "source_pairing_evidence": [],
       "sample": "Col-CEN-public-reference",
       "species": "Arabidopsis thaliana",
       "truth_type": "assembly-proxy",
@@ -55,6 +66,7 @@
         {
           "path": "/Volumes/T7/Codex/TandemX/data/references/Col-CEN_v1.2/Col-CEN_v1.2.fasta.gz",
           "kind": "fasta",
+          "role": "assembly",
           "bytes": 38265592,
           "sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8"
         }
@@ -62,6 +74,11 @@
     },
     {
       "dataset": "YSD56_SRR28726931_sample001",
+      "benchmark_task": "input-integrity-only",
+      "source_provenance_status": "unresolved",
+      "source_provenance_evidence": [],
+      "source_pairing_status": "unresolved",
+      "source_pairing_evidence": [],
       "sample": "SAMN40909152",
       "species": "Glycine soja",
       "truth_type": "none",
@@ -84,6 +101,7 @@
         {
           "path": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_001.fastq.gz",
           "kind": "fastq",
+          "role": "reads",
           "bytes": 6635734,
           "sha256": "b03acf91c941b72fc5b5b2e40a3646596944cc90ed272b1b9d9806970268ae82"
         }
@@ -91,6 +109,11 @@
     },
     {
       "dataset": "K30076_block2_attempt001_known_bad",
+      "benchmark_task": "input-integrity-only",
+      "source_provenance_status": "unresolved",
+      "source_provenance_evidence": [],
+      "source_pairing_status": "unresolved",
+      "source_pairing_evidence": [],
       "sample": "K30076",
       "species": "Arachis hypogaea",
       "truth_type": "none",

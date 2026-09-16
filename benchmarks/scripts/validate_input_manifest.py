@@ -21,11 +21,24 @@ SPLITS = {"development", "validation", "final-heldout"}
 TRUTH_TYPES = {"none", "simulated-exact", "edited-delta", "physical", "assembly-proxy"}
 STATUSES = {"eligible", "pending", "invalid", "storage-failure", "source-unresolved"}
 FILE_KINDS = {"fasta", "fastq"}
+FILE_ROLES = {"reads", "assembly", "catalogue"}
+TASK_ROLES = {
+    "input-integrity-only": set(),
+    "raw-read-discovery": {"reads"},
+    "assembly-structure": {"assembly"},
+    "fixed-catalogue-abundance": {"reads", "catalogue"},
+    "read-assembly-deficit": {"reads", "assembly"},
+    "read-assembly-structure": {"reads", "assembly"},
+}
+PAIRING_STATES = {"verified", "unresolved", "not-applicable"}
+PROVENANCE_STATES = {"verified", "unresolved"}
 REQUIRED = {
     "dataset", "sample", "species", "truth_type", "family", "array_coordinates",
     "coverage", "read_source", "assembly_source", "split", "allowed_tuning",
     "metrics", "competitors", "software_versions", "donor_id", "accessions",
     "assembly_lineage", "family_homology_group", "status", "files",
+    "benchmark_task", "source_pairing_status", "source_pairing_evidence",
+    "source_provenance_status", "source_provenance_evidence",
 }
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 BASES = frozenset(b"ACGTRYSWKMBDHVNacgtryswkmbdhvn")
@@ -86,10 +99,15 @@ def _records(handle: BinaryIO, kind: str) -> tuple[int, int]:
 def check_file(spec: dict[str, Any]) -> dict[str, Any]:
     path = Path(_require_text(spec.get("path"), "file.path"))
     kind = spec.get("kind")
+    role = spec.get("role")
     expected_sha = spec.get("sha256")
     expected_size = spec.get("bytes")
     if kind not in FILE_KINDS or not isinstance(expected_sha, str) or not HEX64.fullmatch(expected_sha):
         raise ValueError(f"{path}: kind or sha256 invalid")
+    if role not in FILE_ROLES or (role in {"assembly", "catalogue"} and kind != "fasta"):
+        raise ValueError(f"{path}: invalid file role/kind")
+    if not path.is_absolute():
+        raise ValueError(f"{path}: absolute path required")
     if not isinstance(expected_size, int) or expected_size <= 0:
         raise ValueError(f"{path}: positive byte size required")
     digest = hashlib.sha256()
@@ -101,14 +119,14 @@ def check_file(spec: dict[str, Any]) -> dict[str, Any]:
         raise ValueError(f"{path}: size/SHA-256 mismatch")
     with _open(path) as handle:
         records, bases = _records(handle, kind)
-    return {"path": str(path), "kind": kind, "bytes": actual_size,
+    return {"path": str(path.resolve()), "kind": kind, "role": role, "bytes": actual_size,
             "sha256": digest.hexdigest(), "records": records, "bases": bases,
             "structure": "valid"}
 
 
 def validate(manifest: dict[str, Any]) -> dict[str, Any]:
-    if manifest.get("schema_version") != 1 or not isinstance(manifest.get("datasets"), list):
-        raise ValueError("schema_version 1 and datasets list required")
+    if manifest.get("schema_version") != 2 or not isinstance(manifest.get("datasets"), list):
+        raise ValueError("schema_version 2 and datasets list required")
     errors: list[str] = []
     checked: list[dict[str, Any]] = []
     groups: dict[tuple[str, str], set[str]] = defaultdict(set)
@@ -127,6 +145,20 @@ def validate(manifest: dict[str, Any]) -> dict[str, Any]:
                 raise ValueError("invalid split or truth_type")
             if entry["status"] not in STATUSES:
                 raise ValueError("invalid status")
+            task = entry["benchmark_task"]
+            if task not in TASK_ROLES:
+                raise ValueError("invalid benchmark_task")
+            if entry["source_pairing_status"] not in PAIRING_STATES:
+                raise ValueError("invalid source_pairing_status")
+            if entry["source_provenance_status"] not in PROVENANCE_STATES:
+                raise ValueError("invalid source_provenance_status")
+            if not isinstance(entry["source_pairing_evidence"], list):
+                raise ValueError("source_pairing_evidence must be list")
+            if not isinstance(entry["source_provenance_evidence"], list):
+                raise ValueError("source_provenance_evidence must be list")
+            for field in ("source_pairing_evidence", "source_provenance_evidence"):
+                for evidence in entry[field]:
+                    _require_text(evidence, field)
             for field in ("sample", "species", "donor_id", "family_homology_group", "assembly_lineage", "read_source", "assembly_source"):
                 _require_text(entry[field], field)
             if entry["coverage"] is not None and (not isinstance(entry["coverage"], (int, float)) or entry["coverage"] < 0):
@@ -150,8 +182,22 @@ def validate(manifest: dict[str, Any]) -> dict[str, Any]:
             for accession in entry["accessions"]:
                 groups[("accession", accession)].add(entry["split"])
             files = [check_file(file) for file in entry["files"]]
-            if entry["status"] == "eligible" and not files:
-                raise ValueError("eligible dataset needs validated files")
+            for file in files:
+                groups[("file_path", file["path"])].add(entry["split"])
+                groups[("file_sha256", file["sha256"])].add(entry["split"])
+            if entry["status"] == "eligible":
+                if task == "input-integrity-only":
+                    raise ValueError("integrity-only inventory cannot be benchmark-eligible")
+                missing_roles = TASK_ROLES[task] - {file["role"] for file in files}
+                if missing_roles:
+                    raise ValueError(f"eligible {task} missing file roles: {sorted(missing_roles)}")
+                if entry["source_provenance_status"] != "verified" or not entry["source_provenance_evidence"]:
+                    raise ValueError("eligible dataset needs verified source provenance and evidence")
+                if {"reads", "assembly"} <= TASK_ROLES[task]:
+                    if entry["source_pairing_status"] != "verified" or not entry["source_pairing_evidence"]:
+                        raise ValueError("eligible read+assembly task needs verified pairing and evidence")
+                elif entry["source_pairing_status"] == "unresolved":
+                    raise ValueError("eligible dataset cannot have unresolved source pairing")
             checked.append({"dataset": name, "status": entry["status"], "files": files})
         except (ValueError, OSError, EOFError) as exc:
             errors.append(f"{name}: {exc}")

@@ -1,16 +1,25 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "state": "draft-before-independent-heldout",
   "split_order": ["development", "validation", "final-heldout"],
-  "split_unit": ["species", "donor_id", "sample", "accession", "assembly_lineage", "family_homology_group"],
+  "split_unit": ["species", "donor_id", "sample", "accession", "assembly_lineage", "family_homology_group", "resolved_file_path", "file_sha256"],
   "split_rules": {
     "development": "All previously inspected Ey15-2, Macadamia, YSD56, Col-CEN and other observed datasets remain development or public positive controls; tuning permitted only here.",
     "validation": "New donor/species/family homology groups can test a frozen candidate once; findings may trigger a new development iteration, but that validation set cannot become final-heldout.",
     "final-heldout": "At least two previously unused plant species, donor groups and homolog groups sealed before model and baseline selection; one planned reveal after source, truth, denominator, power and commands are frozen.",
-    "leakage": "All reads, libraries, samples, accessions, haplotypes, assembly versions, edited descendants, nested subsets and homologous family variants of a donor or assembly lineage remain in one split. No random array/read split across a lineage.",
+    "leakage": "All reads, libraries, samples, accessions, haplotypes, assembly versions, edited descendants, nested subsets and homologous family variants of a donor or assembly lineage remain in one split. Identical resolved file paths or SHA-256 content across splits are rejected even if metadata is renamed. No random array/read split across a lineage.",
     "public_control": "Published human/Col-CEN examples used for method choice are development positive controls, not plant final-heldout."
   },
   "input_gate": ["source provenance and donor/extraction/haplotype relationship", "file byte size", "file SHA-256", "gzip trailer", "complete FASTA/FASTQ records", "read count and base count", "assembly coordinates and contig names", "T7 stable bounded write-readback before large acquisition or compute"],
+  "eligible_task_file_roles": {
+    "input-integrity-only": [],
+    "raw-read-discovery": ["reads"],
+    "assembly-structure": ["assembly"],
+    "fixed-catalogue-abundance": ["reads", "catalogue"],
+    "read-assembly-deficit": ["reads", "assembly"],
+    "read-assembly-structure": ["reads", "assembly"]
+  },
+  "eligibility_rule": "Only a declared non-integrity benchmark task with all required role-tagged, structurally validated files and verified source provenance plus evidence can be eligible. Read+assembly tasks additionally require verified same-source donor/haplotype pairing plus evidence. Otherwise retain source-unresolved or pending; evidence statements require human review and are not inferred from SHA alone.",
   "truth_hierarchy": {
     "simulated-exact": "known source molecules/copies and coordinates",
     "edited-delta": "exact injected assembly difference only; not physical biological copy truth",
