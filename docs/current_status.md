@@ -2,6 +2,8 @@
 
 ## Checkpoint 2026-09-16: confirmed T7 payload repair and block-2 revalidation
 
+The repair commit `4eb0ffd` passed [GitHub CI run 35084978248](https://github.com/CongyangY/TandemX/actions/runs/35084978248) on both macOS and Ubuntu. This is source/build/test validation, not whole-volume or biological validation.
+
 The user authorized direct repair of confirmed corruption. A direct no-proxy
 SRA re-extraction restored K30076 spots 4,615,107--4,640,106 to the **exact**
 historical successful FASTQ and raw-tab SHA-256 values. Its 25,000 records,

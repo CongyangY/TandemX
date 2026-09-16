@@ -15,7 +15,7 @@
 | 竞争工具 | TRF、TideHunter、CENdetectHOR、TideCluster、SRF 均在各自适用的小型输入上产生原生输出；CENdetectHOR 完成一次 11/11 步流程。 | CENdetectHOR/TideCluster 未恢复所设计的两个 30-bp 单体结构，这只是玩具结构检验。HiCAT-human 的精确依赖在 macOS arm64 无法求解，TRASH 的新运行受 Docker daemon 阻断；无跨工具同终点真实准确度排名。 |
 | 可靠性 | `run` 中断状态记为 130，清理遗留进程组；定量表使用临时文件、刷盘及原子替换，注入 EIO/ENOSPC 后不会留下半张正式表。 | 此时仍没有 `discover`/`quantify` 阶段内部断点续跑；不能把阶段级复用称作内部 resume。 |
 | T7 和 K30076 | 重新从原始 spot 范围提取 25,000 reads，FASTQ SHA-256 与原成功收据**完全一致**。新 T7 目录经过写入、刷盘和读回；旧损坏 gzip 与两个失败 partial 在核对身份后删除。block 2 的 34 个块逐一严格复核，合计 845,098 reads、15,027,572,584 bp；新的 aggregate 收据单独发布。另有已证实 SQLite `quick_check` 报 malformed 的 V14167 中断产物被记录哈希后删除。 | 历史损坏 aggregate 仍无效；block 1 在掉盘后未重读，block 3 未获取，30× 共同比较尚未运行。T7 小规模读写探针通过，但卷级文件系统复核因占用无法卸载；当前通过 VIA 设备枚举为最高 480 Mb/s，物理连接稳定性尚未证实。 |
-| 版本与测试 | 本地 `tandemx-dev` 全量 Python 测试在修复提交前通过 **958 项**；新增 ENOSPC 聚焦测试另通过 **4 项**。上述修复已推送。 | 当次 GitHub 双平台 CI 尚在运行，不能写作已通过；原生 Rust 与大数据 benchmark 未因本次存储修复重新运行。 |
+| 版本与测试 | 本地 `tandemx-dev` 全量 Python 测试在修复提交前通过 **958 项**；新增 ENOSPC 聚焦测试另通过 **4 项**。修复提交 `4eb0ffd` 的 [GitHub CI run 35084978248](https://github.com/CongyangY/TandemX/actions/runs/35084978248) 在 macOS 和 Ubuntu 两个平台均成功。 | 原生 Rust 与大数据 benchmark 未因本次存储修复重新运行；CI 通过不等于 T7 物理连接或真实数据科学验证通过。 |
 
 逐项输入哈希、命令、输出和失败边界见 `docs/current_status.md` 顶部、`docs/logs/t7_k30076_chunk_repair_20260916.md`、`docs/evidence/t7_k30076_repair_20260916/`、`docs/negative_results/` 和 `docs/logs/competitor_followup_20260916.md`。后续若 CI、卷检查或断点续跑状态发生变化，需以对应新证据更新此表，不能由任务启动推断完成。
 
