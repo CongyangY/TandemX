@@ -1,0 +1,1004 @@
+{
+  "status": "development_only_no_heldout",
+  "parameters": {
+    "unit_bp": 80,
+    "k": 5,
+    "gate_fraction": 0.22,
+    "foreground_reads": [
+      320,
+      180
+    ],
+    "unknown_reads": 100,
+    "bootstrap_replicates": 40,
+    "seeds": [
+      11,
+      29,
+      47
+    ]
+  },
+  "scenarios": [
+    [
+      "related_low_error",
+      3,
+      0.03,
+      0.0
+    ],
+    [
+      "related_high_error",
+      3,
+      0.12,
+      0.0
+    ],
+    [
+      "family_error_shift",
+      3,
+      0.06,
+      0.2
+    ],
+    [
+      "identical_unidentifiable",
+      0,
+      0.03,
+      0.0
+    ]
+  ],
+  "cases": [
+    {
+      "seed": 11,
+      "scenario": "related_low_error",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "reads_sha256": "8c7e2c3438d52d9251361adb4b40e29a8a02b5c3ff4d2e663f8f2702e79078bd",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 500,
+      "rejected_reads": 100,
+      "tied_mapping_reads": 0,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 180,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 320.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 303.48085106382956,
+        "f2": 169.56170212765983,
+        "decoy_zero": 26.95744680851069
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          282.6145478723404,
+          317.87619680851066
+        ],
+        "f2": [
+          154.65053191489386,
+          190.2442021276596
+        ],
+        "decoy_zero": [
+          24.974734042553173,
+          29.53736702127664
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.0,
+          "all_positive_mare_refusal_penalized": 0.0,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.05480644208037788,
+          "all_positive_mare_refusal_penalized": 0.05480644208037788,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 26.95744680851069,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": true
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.01977958297356963,
+        "regression": 0.010084625100716949,
+        "bootstrap": 0.39139708294533193
+      }
+    },
+    {
+      "seed": 29,
+      "scenario": "related_low_error",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "reads_sha256": "3de1b8682fdb743053d445150289ac4dd124b4980d9d95d059faa58d498259ce",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 500,
+      "rejected_reads": 100,
+      "tied_mapping_reads": 2,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 180,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 319.0,
+        "f2": 179.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 301.342374924653,
+        "f2": 171.02109704641381,
+        "decoy_zero": 27.63652802893321
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          291.14575045207897,
+          316.38247438215734
+        ],
+        "f2": [
+          155.49071729957822,
+          180.7234177215193
+        ],
+        "decoy_zero": [
+          24.965370705244172,
+          30.55890596745038
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.00434027777777779,
+          "all_positive_mare_refusal_penalized": 0.00434027777777779,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.05409393627352471,
+          "all_positive_mare_refusal_penalized": 0.05409393627352471,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 27.63652802893321,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": true
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.024321291828528047,
+        "regression": 0.012645208043977618,
+        "bootstrap": 0.6831683749333024
+      }
+    },
+    {
+      "seed": 47,
+      "scenario": "related_low_error",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "reads_sha256": "392c1b3ffb9c6e8e96ffc80ceeeb6a7610978b50a73489606de3117a55bcd118",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 500,
+      "rejected_reads": 100,
+      "tied_mapping_reads": 1,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 180,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 318.0,
+        "f2": 181.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 305.0944206008585,
+        "f2": 154.1673819742488,
+        "decoy_zero": 40.73819742489274
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          294.2901287553649,
+          318.8559012875539
+        ],
+        "f2": [
+          140.30790925812371,
+          166.1061771919069
+        ],
+        "decoy_zero": [
+          38.163902513795286,
+          42.503126916002444
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.005902777777777757,
+          "all_positive_mare_refusal_penalized": 0.005902777777777757,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.09504724010491195,
+          "all_positive_mare_refusal_penalized": 0.09504724010491195,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 40.73819742489274,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": false
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.0307413749396801,
+        "regression": 0.013412167085334659,
+        "bootstrap": 0.4095132921356708
+      }
+    },
+    {
+      "seed": 11,
+      "scenario": "related_high_error",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "reads_sha256": "08784eb99769f0929c5929d4ee3cf7348f57fb667db6d2172092eca0b7fc966d",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 499,
+      "rejected_reads": 101,
+      "tied_mapping_reads": 8,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 179,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 175.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 264.7797872340427,
+        "f2": 135.45957446808515,
+        "decoy_zero": 98.76063829787238
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          251.34906914893617,
+          274.7465691489364
+        ],
+        "f2": [
+          125.62037234042559,
+          148.8243617021277
+        ],
+        "decoy_zero": [
+          95.0897606382979,
+          102.5597074468085
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.020138888888888873,
+          "all_positive_mare_refusal_penalized": 0.020138888888888873,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.2100049867021273,
+          "all_positive_mare_refusal_penalized": 0.2100049867021273,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 98.76063829787238,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": false
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.02034529112279415,
+        "regression": 0.009000791935250163,
+        "bootstrap": 0.35775558394379914
+      }
+    },
+    {
+      "seed": 29,
+      "scenario": "related_high_error",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "reads_sha256": "c8daa5dfb401972005e0e8d92b776223bea745f7607e211cec29a530e2cf32de",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 500,
+      "rejected_reads": 100,
+      "tied_mapping_reads": 9,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 180,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 311.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 259.6835443037974,
+        "f2": 141.59493670886073,
+        "decoy_zero": 98.72151898734177
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          247.0839963833633,
+          271.62069017480405
+        ],
+        "f2": [
+          129.448206751055,
+          156.18765822784817
+        ],
+        "decoy_zero": [
+          95.99353526220614,
+          102.39285714285715
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.014062499999999978,
+          "all_positive_mare_refusal_penalized": 0.014062499999999978,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.2009251933895923,
+          "all_positive_mare_refusal_penalized": 0.2009251933895923,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 98.72151898734177,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": false
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.01940441713668406,
+        "regression": 0.009808332892134786,
+        "bootstrap": 0.3734155420679599
+      }
+    },
+    {
+      "seed": 47,
+      "scenario": "related_high_error",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "reads_sha256": "a963ad973625a06ff55093dc431f629e35d89f31d1e78336aa72cb2450f7f91e",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 498,
+      "rejected_reads": 102,
+      "tied_mapping_reads": 3,
+      "accepted_by_source": {
+        "f1": 319,
+        "f2": 179,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 179.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 269.13304721030056,
+        "f2": 101.72286940527268,
+        "decoy_zero": 127.14408338442679
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          259.72253218884146,
+          278.59130901287546
+        ],
+        "f2": [
+          91.47568976088273,
+          112.01827099938673
+        ],
+        "decoy_zero": [
+          123.24239730226853,
+          130.56561925199267
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.009027777777777746,
+          "all_positive_mare_refusal_penalized": 0.009027777777777746,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.29691608760814797,
+          "all_positive_mare_refusal_penalized": 0.29691608760814797,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 127.14408338442679,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": false
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.019109957851469517,
+        "regression": 0.00890966597944498,
+        "bootstrap": 0.3547987090423703
+      }
+    },
+    {
+      "seed": 11,
+      "scenario": "family_error_shift",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "reads_sha256": "b4568fd4f68b7c11fd3db865425076430fd6bbe9b111b7b0185b7443b969fb6d",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 364,
+      "rejected_reads": 236,
+      "tied_mapping_reads": 2,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 44,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 321.0,
+        "f2": 41.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 286.4265957446809,
+        "f2": 30.153191489361724,
+        "decoy_zero": 47.42021276595744
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          279.654414893617,
+          292.886569148936
+        ],
+        "f2": [
+          24.669414893617216,
+          35.266329787234135
+        ],
+        "decoy_zero": [
+          44.34547872340429,
+          49.920611702127744
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.38767361111111115,
+          "all_positive_mare_refusal_penalized": 0.38767361111111115,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.46869957890070907,
+          "all_positive_mare_refusal_penalized": 0.46869957890070907,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 47.42021276595744,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": false
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.018436333863064647,
+        "regression": 0.006540333153679967,
+        "bootstrap": 0.26291500008665025
+      }
+    },
+    {
+      "seed": 29,
+      "scenario": "family_error_shift",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "reads_sha256": "0976ca371a942fb16c39c059bfdf9b2103d1ee94f3d7730c9475508f6bb3d270",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 378,
+      "rejected_reads": 222,
+      "tied_mapping_reads": 7,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 58,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 55.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 280.93248945147656,
+        "f2": 43.95358649789047,
+        "decoy_zero": 53.11392405063291
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          269.5123568414706,
+          289.3251356238695
+        ],
+        "f2": [
+          38.750316455696314,
+          51.30938818565416
+        ],
+        "decoy_zero": [
+          49.906329113924095,
+          58.29430379746834
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.3534722222222222,
+          "all_positive_mare_refusal_penalized": 0.3534722222222222,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.43894968940459433,
+          "all_positive_mare_refusal_penalized": 0.43894968940459433,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 53.11392405063291,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": false
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.018584208097308874,
+        "regression": 0.0068957090843468904,
+        "bootstrap": 0.31544424989260733
+      }
+    },
+    {
+      "seed": 47,
+      "scenario": "family_error_shift",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "reads_sha256": "5862a1ee7617f9938011319e4c3f2e5ab77e0844691f6ca6cd9942022c869121",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 363,
+      "rejected_reads": 237,
+      "tied_mapping_reads": 7,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 43,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1"
+        ],
+        [
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {},
+      "ordinary_mapping": {
+        "f1": 318.0,
+        "f2": 38.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 278.9656652360515,
+        "f2": 20.88718577559774,
+        "decoy_zero": 63.147148988350736
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          273.12403433476385,
+          285.96652360515014
+        ],
+        "f2": [
+          14.266508277130718,
+          24.715695892090753
+        ],
+        "decoy_zero": [
+          59.15780196198649,
+          66.44578479460452
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 0.3975694444444444,
+          "all_positive_mare_refusal_penalized": 0.3975694444444444,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": 0.506096187580898,
+          "all_positive_mare_refusal_penalized": 0.506096187580898,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 63.147148988350736,
+          "positive_interval_covered": {
+            "f1": false,
+            "f2": false
+          }
+        }
+      },
+      "seconds": {
+        "mapping": 0.02320037502795458,
+        "regression": 0.007259000092744827,
+        "bootstrap": 0.3063757091294974
+      }
+    },
+    {
+      "seed": 11,
+      "scenario": "identical_unidentifiable",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "57d889fb4d01650cd9bf632fa2b244d0ab5954d677af993255383190c183ea88",
+      "reads_sha256": "ddcd8417fdf49792200625ee099c353588c461b6bccff386a4fa929c65ebd41f",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 500,
+      "rejected_reads": 100,
+      "tied_mapping_reads": 500,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 180,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1",
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {
+        "f1+f2": 464.42857142857025
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": null,
+        "f2": null,
+        "decoy_zero": 35.57142857142959
+      },
+      "bootstrap_95pct": {
+        "decoy_zero": [
+          33.705714285715096,
+          38.46642857142941
+        ],
+        "f1+f2": [
+          461.53357142857027,
+          466.2942857142846
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 1.0,
+          "all_positive_mare_refusal_penalized": 1.0,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": null,
+          "all_positive_mare_refusal_penalized": 1.0,
+          "individual_refused": 2,
+          "zero_decoy_assigned_reads": 35.57142857142959,
+          "positive_interval_covered": {}
+        }
+      },
+      "seconds": {
+        "mapping": 0.020431708078831434,
+        "regression": 0.008778541814535856,
+        "bootstrap": 0.3612125830259174
+      }
+    },
+    {
+      "seed": 29,
+      "scenario": "identical_unidentifiable",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "1c97c68b97b9c3267c62e0272ec9905e1e1dcbc24e8f50e41f74c573ff804b4b",
+      "reads_sha256": "17dd0798c280b2c84dc70411394575c94e9314b819b57a48c8657ef8912e34c9",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 500,
+      "rejected_reads": 100,
+      "tied_mapping_reads": 500,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 180,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1",
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {
+        "f1+f2": 466.72058823529284
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": null,
+        "f2": null,
+        "decoy_zero": 33.279411764707234
+      },
+      "bootstrap_95pct": {
+        "decoy_zero": [
+          30.773161764707073,
+          35.62867647058947
+        ],
+        "f1+f2": [
+          464.3713235294105,
+          469.22683823529286
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 1.0,
+          "all_positive_mare_refusal_penalized": 1.0,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": null,
+          "all_positive_mare_refusal_penalized": 1.0,
+          "individual_refused": 2,
+          "zero_decoy_assigned_reads": 33.279411764707234,
+          "positive_interval_covered": {}
+        }
+      },
+      "seconds": {
+        "mapping": 0.02074433397501707,
+        "regression": 0.009913000045344234,
+        "bootstrap": 0.3544980420265347
+      }
+    },
+    {
+      "seed": 47,
+      "scenario": "identical_unidentifiable",
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "catalogue_sha256": "353c8bd43f4752e7621ab21df8cb964ecdcad0f3505e143e56e63e18446f8fad",
+      "reads_sha256": "c91f5c20c9210883677645170a50769c142d4b9381f4ed5f496e705b8a3fc918",
+      "n_reads": 600,
+      "gate_mismatches": 18,
+      "accepted_reads": 500,
+      "rejected_reads": 100,
+      "tied_mapping_reads": 500,
+      "accepted_by_source": {
+        "f1": 320,
+        "f2": 180,
+        "unknown": 0
+      },
+      "identifiable_groups": [
+        [
+          "f1",
+          "f2"
+        ],
+        [
+          "decoy_zero"
+        ]
+      ],
+      "unresolved_group_estimates": {
+        "f1+f2": 459.7763157894731
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": null,
+        "f2": null,
+        "decoy_zero": 40.22368421052698
+      },
+      "bootstrap_95pct": {
+        "decoy_zero": [
+          37.71677631579022,
+          42.2414473684218
+        ],
+        "f1+f2": [
+          457.7585526315783,
+          462.2832236842097
+        ]
+      },
+      "scores": {
+        "ordinary_mapping": {
+          "identifiable_positive_mare": 1.0,
+          "all_positive_mare_refusal_penalized": 1.0,
+          "individual_refused": 0,
+          "zero_decoy_assigned_reads": 0.0,
+          "positive_interval_covered": {}
+        },
+        "shared_signature": {
+          "identifiable_positive_mare": null,
+          "all_positive_mare_refusal_penalized": 1.0,
+          "individual_refused": 2,
+          "zero_decoy_assigned_reads": 40.22368421052698,
+          "positive_interval_covered": {}
+        }
+      },
+      "seconds": {
+        "mapping": 0.020144250011071563,
+        "regression": 0.008641624823212624,
+        "bootstrap": 0.3571056660730392
+      }
+    }
+  ],
+  "source_sha256": {
+    "run.py": "792639344e15eca12f81465a3bec45f9f7553d9a2ff5744d4bc7fec1becc5a55",
+    "model.py": "741e18f84ea146db51dd4e3297ec498cfe7a3cefa5fca1b0b8bcb58e3f7fed3c"
+  },
+  "process_max_rss_raw": 34127872,
+  "resource_note": "macOS ru_maxrss reports bytes; timing includes Python/Numpy only; no T7 I/O"
+}
