@@ -1,5 +1,109 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-16: confirmed T7 payload repair and block-2 revalidation
+
+The user authorized direct repair of confirmed corruption. A direct no-proxy
+SRA re-extraction restored K30076 spots 4,615,107--4,640,106 to the **exact**
+historical successful FASTQ and raw-tab SHA-256 values. Its 25,000 records,
+440,057,073 bases and gzip/FASTQ/continuous-ID checks passed. An internal
+backup and a separate new T7 copy were both hash-verified. Only then were the
+old corrupted 370,177,772-byte FASTQ and two failed partial payloads removed;
+their receipts and failure logs remain. All 34 selected block-2 chunks were
+independently revalidated (845,098 records, 15,027,572,584 bp), and a new
+repaired aggregate receipt was published at
+`data/subsets/peanut_k30076_vdb_spot_range_benchmark_20260912/block_02_chunk3_repair_20260916/block_receipt_repaired.json`
+under `/Volumes/T7/Codex/TandemX`. The historical attempt-001 aggregate stays
+invalid. Block 1 still needs post-disconnect readback and block 3 has not
+started, so the common 30x comparator remains blocked.
+
+A separate interrupted V14167 `formal_run_v1_execute/normalization.sqlite`
+raised SQLite `database disk image is malformed`; its exact SHA-256 was
+recorded and the unused malformed file was removed. A different older SQLite
+file passed `quick_check` but was not substituted. The V14167 three-tool
+comparison remains incomplete.
+
+T7 passed isolated 1 MiB and 64 MiB write/fsync/readback probes and the
+repaired 370-MB chunk readback. **Whole-volume verification and physical
+connection reliability remain unconfirmed.** `diskutil verifyVolume` could
+not unmount the exFAT volume because Spotlight and other project processes
+held it; current USB enumeration shows only 480 Mb/s via a VIA device. No
+large new dataset acquisition or production benchmark was started. Exact
+commands, paths, checksums and receipts are in
+`docs/logs/t7_k30076_chunk_repair_20260916.md` and
+`docs/evidence/t7_k30076_repair_20260916/`.
+
+## Checkpoint 2026-09-16: Methods execution program, development evidence only
+
+This checkpoint supersedes the older feature-freeze and manuscript-finishing
+priority where they conflict with the user's 2026-09-16 execution mandate.
+The frozen production scientific estimators and historical results have not
+been rewritten. Manuscript polishing, Bioconda, Zenodo and a release tag remain
+paused. `unitFinder` remains stopped.
+
+The repository now contains a machine-readable benchmark manifest/protocol
+with donor/assembly-lineage and file-hash split guards. Three small existing
+T7 files passed bounded size/hash/format reads, but their source provenance is
+unresolved. At the initial methods audit the corrupted K30076 chunk was
+invalid; its subsequent repair is recorded in the newer checkpoint above.
+The T7 mount's presence alone did not clear its observed I/O failure.
+
+Controlled-collapse B1 produces ten exact synthetic array-edit cases with
+event/coordinate ledgers and a scorer that separates injected-edit technical
+metrics from read--assembly biological accuracy. A 124,029-bp archived YSD56
+array fragment has five separately receipted exact bp deletions (0, 31,007,
+62,014, 93,021, 124,029 bp). Its 785-bp dominant period is not a per-copy
+truth annotation; no original reads/flanks are paired with these edits, and
+the 100% deletion leaves an empty FASTA record. It is a development edit
+integrity result, not a collapse-detection accuracy result.
+
+M1 A--F were screened on the same 12 fixed-catalogue synthetic development
+cases. The five point-estimator alternatives did not consistently beat
+ordinary competitive mapping; uncertainty from B/E was uncalibrated. A
+bounded experimental streaming occupancy implementation was then tried once:
+edlib reduced a 600-read toy case from roughly 7--8 s for the Python DP to
+roughly 0.02 s, but error and wrong-family assignment did not improve
+consistently. Its eight-family cap and fixed 80-bp windows are research limits.
+The public CLI changes were withdrawn, the production estimator remains
+unchanged, and both negative-result rounds are retained in
+`docs/negative_results/` with source/input hashes. No independent validation
+or final-held-out result has been opened for M1.
+
+M2 is a pretrimmed, supplied-monomer, exact-sequence development prototype.
+Its 11 designed cases detect 8/8 planted label-path differences with 3/3
+negative controls, while an equal-input length check detects 4/8. These are
+regression cases constructed with the method, not biological accuracy.
+Adversarial tests demonstrate that correlated read errors can mimic a
+candidate and within-monomer variants can be missed; machine-readable
+warnings require external flank, molecule, sequencing-error and haplotype QC.
+The prototype cannot analyze megabase arrays or establish real read anchoring.
+
+Local TRF 4.10.0-rc.2 and TideHunter 1.5.5 both produced native output on an
+archived 360-bp toy input. Current CENdetectHOR completed a separate direct
+HOR-stage smoke on forced known monomer intervals and a full 11/11-step
+Snakemake pipeline smoke. The full pipeline emitted one 60-bp A+B unit rather
+than the designed two 30-bp A/B monomers and AB HOR, so structural truth did
+not pass. These runs establish availability/interface behavior only; no
+task-matched accuracy comparison is complete. Subsequently, TideCluster
+1.21.3 and pinned SRF also produced native toy outputs; neither recovered the
+designed two 30-bp units. HiCAT-human and TRASH remain blocked by local
+dependency and Docker availability, respectively. See the newer comparator
+logs before treating any tool as accuracy-validated.
+
+Production reliability fixes now record interrupted `tandemx run` steps as
+status 130, terminate the step's process group including surviving descendants,
+and prevent partial `copy_number.tsv` writes on injected EIO/ENOSPC by staging
+the file before replacement. These do not implement intra-stage checkpoints.
+The latest full Python regression after the M1 research round passed **955
+tests** in `tandemx-dev`; native Rust was not modified in this checkpoint.
+
+Evidence and commands: `benchmarks/inputs/methods_benchmark_protocol_v1.json`,
+`docs/controlled_collapse_benchmark.md`,
+`docs/negative_results/m1_acd_tournament_20260916.md`,
+`docs/negative_results/m1_competitive_occupancy_research_20260916.md`,
+`docs/logs/m2_exact_development_20260916.md`, and
+`docs/logs/cendetecthor_local_integration_20260916.md`. This is a handoff
+snapshot; inspect Git and receipts before treating any status as current.
+
 ## Checkpoint 2026-09-14: K30076 block-2 integrity failure and T7 disconnect
 
 This checkpoint supersedes the 2026-09-13 statement below that K30076 blocks 2

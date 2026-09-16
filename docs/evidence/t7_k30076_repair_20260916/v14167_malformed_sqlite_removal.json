@@ -1,0 +1,10 @@
+{
+  "bytes": 99483648,
+  "historical_valid_db_not_assumed_equivalent": true,
+  "path": "/Volumes/T7/Codex/TandemX/results/peanut_v14167_30x_comparison_v1_20260912/formal_run_v1_execute/normalization.sqlite",
+  "path_absent_after_removal": true,
+  "quick_check_error": "DatabaseError: database disk image is malformed",
+  "replacement": "not_available_in_this_interrupted_formal_run",
+  "sha256": "a2739fcd689ce15e4a1203ddac1901796105824f9a748bbd9d3de06cf8fce58e",
+  "status": "malformed_sqlite_removed"
+}

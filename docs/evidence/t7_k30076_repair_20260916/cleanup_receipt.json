@@ -1,0 +1,23 @@
+{
+  "deleted": [
+    {
+      "bytes": 370177772,
+      "path": "/Volumes/T7/Codex/TandemX/data/subsets/peanut_k30076_vdb_spot_range_benchmark_20260912/block_02_recovery_20260914_attempt_001/chunks/spot_4615107_4640106.fastq.gz",
+      "sha256": "06bdc011167b5ddbf301da9fca458a79a4264a2ec86b74194cf6fe653cce4e56"
+    },
+    {
+      "bytes": 20,
+      "path": "/Volumes/T7/Codex/TandemX/data/subsets/peanut_k30076_vdb_spot_range_benchmark_20260912/block_02_recovery_20260914_attempt_002/chunks/spot_4615107_4640106.fastq.gz.partial",
+      "sha256": "458c5a203299dd326aa747fee1bbc7709bfbd560507d1603459d9f7d9eb6be76"
+    },
+    {
+      "bytes": 306462727,
+      "path": "/Volumes/T7/Codex/TandemX/data/subsets/peanut_k30076_vdb_spot_range_benchmark_20260912/block_02_recovery_20260914_attempt_003/chunks/spot_4615107_4640106.fastq.gz.partial",
+      "sha256": "8088b04e0cc6f2bf194644ee6270c5969c8f13b1a6e7bd3ac1afb0630c675e52"
+    }
+  ],
+  "status": "corrupt_and_partial_payloads_removed",
+  "valid_replacement": "/Volumes/T7/Codex/TandemX/data/subsets/peanut_k30076_vdb_spot_range_benchmark_20260912/block_02_chunk3_repair_20260916/chunks/spot_4615107_4640106.fastq.gz",
+  "valid_replacement_still_matches": true,
+  "valid_sha256": "2e3fb14389a5674ec1a62c32db13e0476e5aa62aa1c8501bd86968af10734867"
+}

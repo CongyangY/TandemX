@@ -1,0 +1,11 @@
+{
+  "fastq_sha256": "2e3fb14389a5674ec1a62c32db13e0476e5aa62aa1c8501bd86968af10734867",
+  "receipt_sha256": "9b8ce055a3c35af0db7aac656749f92df3c8b0666426c6ceaf06477717769906",
+  "record_count": 25000,
+  "source_fastq": "tmp/k30076_chunk_recovery_20260916/spot_4615107_4640106.fastq.gz",
+  "source_receipt": "tmp/k30076_chunk_recovery_20260916/spot_4615107_4640106.receipt.json",
+  "status": "promoted_and_readback_verified",
+  "target_fastq": "/Volumes/T7/Codex/TandemX/data/subsets/peanut_k30076_vdb_spot_range_benchmark_20260912/block_02_chunk3_repair_20260916/chunks/spot_4615107_4640106.fastq.gz",
+  "target_receipt": "/Volumes/T7/Codex/TandemX/data/subsets/peanut_k30076_vdb_spot_range_benchmark_20260912/block_02_chunk3_repair_20260916/chunks/spot_4615107_4640106.receipt.json",
+  "total_bases": 440057073
+}
