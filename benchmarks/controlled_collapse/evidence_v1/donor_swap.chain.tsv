@@ -1,0 +1,3 @@
+case_id	contig	source_start	source_end	edited_start	edited_end	operation
+donor_swap	chrToy	0	156	0	156	match
+donor_swap	chrControl	0	40	0	40	match

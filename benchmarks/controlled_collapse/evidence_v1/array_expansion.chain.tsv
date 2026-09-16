@@ -1,0 +1,7 @@
+case_id	contig	source_start	source_end	edited_start	edited_end	operation
+array_expansion	chrToy	0	68	0	68	match
+array_expansion	chrToy	68	68	68	80	insert
+array_expansion	chrToy	68	136	80	148	match
+array_expansion	chrToy	136	136	148	160	insert
+array_expansion	chrToy	136	156	160	180	match
+array_expansion	chrControl	0	40	0	40	match

@@ -1,0 +1,4 @@
+case_id	contig	source_start	source_end	edited_start	edited_end	operation
+nonrepeat_deletion	chrToy	0	156	0	156	match
+nonrepeat_deletion	chrControl	0	24	0	0	delete
+nonrepeat_deletion	chrControl	24	40	0	16	match

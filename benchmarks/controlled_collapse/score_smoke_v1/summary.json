@@ -1,0 +1,27 @@
+{
+  "declared_consistent_pair_rows": 0,
+  "denominator": 20,
+  "injected_edit_metrics": {
+    "denominator": 18,
+    "fn": null,
+    "fp": null,
+    "fpr": null,
+    "missing_bp_mae": null,
+    "reason": "incomplete_predictions_or_single_truth_class",
+    "sensitivity": null,
+    "status": "blocked",
+    "threshold": 0.5,
+    "tn": null,
+    "tp": null
+  },
+  "positive_rows": 12,
+  "prediction_sha256": "0b0398afbc9666fd8c4e6398f31229dbd01dfeb5584623fb486a0ece4ad8df29",
+  "primary_auprc": null,
+  "primary_auprc_reason": "Requires preregistered eligible subset, baseline pairing, and full scored predictions; not computed by generator.",
+  "receipt_sha256": "9e2affaa5e5b37eed8277a8025bdb2f7f82506a49430e754e0f2d8f053856c00",
+  "status_counts": {
+    "not_reported": 20
+  },
+  "truth_scope": "injected_edit_delta_only",
+  "zero_representation_rows": 2
+}

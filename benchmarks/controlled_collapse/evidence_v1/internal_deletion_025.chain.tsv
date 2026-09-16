@@ -1,0 +1,7 @@
+case_id	contig	source_start	source_end	edited_start	edited_end	operation
+internal_deletion_025	chrToy	0	38	0	38	match
+internal_deletion_025	chrToy	38	50	38	38	delete
+internal_deletion_025	chrToy	50	106	38	94	match
+internal_deletion_025	chrToy	106	118	94	94	delete
+internal_deletion_025	chrToy	118	156	94	132	match
+internal_deletion_025	chrControl	0	40	0	40	match

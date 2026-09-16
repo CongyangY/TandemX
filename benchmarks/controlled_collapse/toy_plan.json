@@ -1,0 +1,14 @@
+{
+  "assembly_donor_id": "synthetic_donor_A",
+  "reads_donor_id": "synthetic_donor_A",
+  "assembly_haplotype_id": "hap_A",
+  "reads_haplotype_id": "hap_A",
+  "baseline_read_consistency": false,
+  "arrays": [
+    {"family_id": "toy_family_1", "locus_id": "locus_1", "contig": "chrToy", "start": 20, "end": 68, "unit_bp": 6,
+      "unit_labels": ["A", "A", "A", "A", "A", "A", "A", "A"], "unit_monomers": {"A": "ATGCCA"}},
+    {"family_id": "toy_mixed_A_B", "locus_id": "locus_2", "contig": "chrToy", "start": 88, "end": 136, "unit_bp": 6,
+      "unit_labels": ["A", "A", "B", "B", "A", "A", "B", "B"], "unit_monomers": {"A": "ATGCCA", "B": "ATGCCG"}}
+  ],
+  "nonrepeat_interval": {"contig": "chrControl", "start": 0, "end": 24}
+}

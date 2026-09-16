@@ -1,0 +1,21 @@
+case_id	family_id	locus_id	truth_positive	truth_missing_bp	prediction_status	prediction_score	predicted_missing_bp	absolute_error_bp	pairing_status	truth_scope
+contraction_000	toy_family_1	locus_1	0	0	not_reported				unverified_pair	injected_edit_delta_only
+contraction_000	toy_mixed_A_B	locus_2	0	0	not_reported				unverified_pair	injected_edit_delta_only
+contraction_025	toy_family_1	locus_1	1	12	not_reported				unverified_pair	injected_edit_delta_only
+contraction_025	toy_mixed_A_B	locus_2	1	12	not_reported				unverified_pair	injected_edit_delta_only
+contraction_050	toy_family_1	locus_1	1	24	not_reported				unverified_pair	injected_edit_delta_only
+contraction_050	toy_mixed_A_B	locus_2	1	24	not_reported				unverified_pair	injected_edit_delta_only
+contraction_075	toy_family_1	locus_1	1	36	not_reported				unverified_pair	injected_edit_delta_only
+contraction_075	toy_mixed_A_B	locus_2	1	36	not_reported				unverified_pair	injected_edit_delta_only
+contraction_100	toy_family_1	locus_1	1	48	not_reported				unverified_pair	injected_edit_delta_only
+contraction_100	toy_mixed_A_B	locus_2	1	48	not_reported				unverified_pair	injected_edit_delta_only
+internal_deletion_025	toy_family_1	locus_1	1	12	not_reported				unverified_pair	injected_edit_delta_only
+internal_deletion_025	toy_mixed_A_B	locus_2	1	12	not_reported				unverified_pair	injected_edit_delta_only
+boundary_left_025	toy_family_1	locus_1	1	12	not_reported				unverified_pair	injected_edit_delta_only
+boundary_left_025	toy_mixed_A_B	locus_2	1	12	not_reported				unverified_pair	injected_edit_delta_only
+nonrepeat_deletion	toy_family_1	locus_1	0	0	not_reported				unverified_pair	injected_edit_delta_only
+nonrepeat_deletion	toy_mixed_A_B	locus_2	0	0	not_reported				unverified_pair	injected_edit_delta_only
+array_expansion	toy_family_1	locus_1	0	0	not_reported				unverified_pair	injected_edit_delta_only
+array_expansion	toy_mixed_A_B	locus_2	0	0	not_reported				unverified_pair	injected_edit_delta_only
+donor_swap	toy_family_1	locus_1	0	0	not_reported				invalid_donor_pair	injected_edit_delta_only
+donor_swap	toy_mixed_A_B	locus_2	0	0	not_reported				invalid_donor_pair	injected_edit_delta_only

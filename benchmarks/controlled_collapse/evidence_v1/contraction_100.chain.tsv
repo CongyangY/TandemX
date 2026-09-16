@@ -1,0 +1,7 @@
+case_id	contig	source_start	source_end	edited_start	edited_end	operation
+contraction_100	chrToy	0	20	0	20	match
+contraction_100	chrToy	20	68	20	20	delete
+contraction_100	chrToy	68	88	20	40	match
+contraction_100	chrToy	88	136	40	40	delete
+contraction_100	chrToy	136	156	40	60	match
+contraction_100	chrControl	0	40	0	40	match

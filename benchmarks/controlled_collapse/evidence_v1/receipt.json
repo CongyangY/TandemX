@@ -1,0 +1,101 @@
+{
+  "cases": [
+    {
+      "case_id": "contraction_000",
+      "chain_sha256": "8a74a1d7d2bbda3f1e18a847738eeb98850f50c32c485f50f80c0d475b8a15f2",
+      "edit_type": "contraction",
+      "events_sha256": "c4da665f9938c7f35fb0763d092846e0691ec6d9b70c0e44b7fc63326772c00b",
+      "fasta_sha256": "c78a29a442a7e230d55cc861364b527ae86b889294978219f1d11ea3c57aaace",
+      "ledger_sha256": "43d37fd5e0dba7913d9753dd2050e427bbea3c51bc6ee6c8aed479fb70bd4876",
+      "level_percent": 0
+    },
+    {
+      "case_id": "contraction_025",
+      "chain_sha256": "faa7d3fc9b36900967d81cde2129529e56a16f5b6ab3dc905b9595dfd4ffb1c6",
+      "edit_type": "contraction",
+      "events_sha256": "6f2c1614d57c1f87ca182043164b67bd01490fc883d38176b24cc5389595bca9",
+      "fasta_sha256": "ddc529d54e6cd31fb3d7502938163894a077e2e3a1c76811347eb4b0153af6ad",
+      "ledger_sha256": "7a31873445cb98949ad50bb9bcc4a4569876f9ca20e1ce8e383ee92d59374ac7",
+      "level_percent": 25
+    },
+    {
+      "case_id": "contraction_050",
+      "chain_sha256": "1ff3ee2ac14d345bad82963532fda71b417846249ba33c0b9d44f7da0d2b7463",
+      "edit_type": "contraction",
+      "events_sha256": "81092b560242fadf560e8742fe1ea96caec165c3bbed488927e8298c3c038b45",
+      "fasta_sha256": "fa72b5b2e80fcb4be36918b36fba123db71950628296c711a119f69a1f7f55d7",
+      "ledger_sha256": "f0ebf6553f7ab77036b7f16d550764ea4b087d93abd2bc3fde4eec12d6be6564",
+      "level_percent": 50
+    },
+    {
+      "case_id": "contraction_075",
+      "chain_sha256": "8f9a037d8f6cdff8628fa38618db669f21e0fa86099a032cb39aea6abaaddb00",
+      "edit_type": "contraction",
+      "events_sha256": "32c836a9d85deab9a5a8462dffeb70cadfd7d7d06d1a44d6c17f5199a1af5ccd",
+      "fasta_sha256": "416d38288ed90e319513df77352cee5d5e7b316d4cb35f31a27b8186ada026df",
+      "ledger_sha256": "02dc5608f7f2e8373c74f63608354cf1622d03593642d0c1514be457e3d5c671",
+      "level_percent": 75
+    },
+    {
+      "case_id": "contraction_100",
+      "chain_sha256": "0601e9137981b1cdf1ebc134a0295cbedd71a7c42407030813bd61c6938c268e",
+      "edit_type": "contraction",
+      "events_sha256": "cec9b5f8c125aef2e5e1f52d0349a298962cbcf7e76f9a32137433e4b811af20",
+      "fasta_sha256": "128fa4a43edd4d78cde53331b441a44c362365e740a36c3059dd61894e581909",
+      "ledger_sha256": "568b719b5cfe08973601ded294a2424c0678800b27f0c07c6696e820e84d75d3",
+      "level_percent": 100
+    },
+    {
+      "case_id": "internal_deletion_025",
+      "chain_sha256": "8a543ae3223a6d7466044a6a61ec45a3b1efc1badc247e5c04b9ca2f5b8aaae9",
+      "edit_type": "internal_deletion",
+      "events_sha256": "636d043745c8da2688dac78effa9e921e1082ff8dd07c65d816b1456c9fed998",
+      "fasta_sha256": "048d317c3bb6d56079f2655f5fb38cb26b5664ffbd942606aa33a7bcc855198c",
+      "ledger_sha256": "32b4c589e72768791711fc6a867ef8196dc35a576b4b421511572d0bf9953f91",
+      "level_percent": 25
+    },
+    {
+      "case_id": "boundary_left_025",
+      "chain_sha256": "ef0b7e809b23ea2fc46f43b4ec4aba152c0773821920d7678dca533daf197e6e",
+      "edit_type": "boundary_left",
+      "events_sha256": "6bb564d0ef564b3c473b859eb574923902c61532e65b04db312c5a438453a76a",
+      "fasta_sha256": "8135e52acf91e712a921809ea56eca581f04acb85c1479fcd5663ef2c2c6861e",
+      "ledger_sha256": "c3b611977c944ee161dea5efc35253d369291044159991e3233cfee68174b1d5",
+      "level_percent": 25
+    },
+    {
+      "case_id": "nonrepeat_deletion",
+      "chain_sha256": "b1b48070068bf43ebf5685980bf2e6bbcbf2536be1448998a55ad9f4152caf25",
+      "edit_type": "nonrepeat_deletion",
+      "events_sha256": "151f089264c9f50a40c03172a6bed771e6eaf8d014decf35b2312b38e5cd3a0b",
+      "fasta_sha256": "7987e1c9ea2032333652f4536a3256ed5e3c18f0930570c79d853238f45c0054",
+      "ledger_sha256": "a9fa5af9dcba47a912dc78f8054ada9f8ab20064c3e7a7a26f595234157a24ec",
+      "level_percent": 0
+    },
+    {
+      "case_id": "array_expansion",
+      "chain_sha256": "32fffc109933b062fc0d9c00eb0fb77faff6da400545b723a6ae10181a6c6c94",
+      "edit_type": "expansion",
+      "events_sha256": "d5fe333cb6011bcc663c07fdf4104bb460cb7c693294ddf906e6b4fa63006d18",
+      "fasta_sha256": "6ef550de4abd670ce1d59280e709968e5a75ed69a8768c943294ccbb95597f62",
+      "ledger_sha256": "830f19b829658cf1b42ec5ba0e4ac1e4a69a5aeeb35531710a0704c8353622a9",
+      "level_percent": 25
+    },
+    {
+      "case_id": "donor_swap",
+      "chain_sha256": "0d379c5e303c1b8d2c7b26e9cf1f24f8e2409be46d8b75ebd2bcae52aa782511",
+      "edit_type": "donor_swap",
+      "events_sha256": "fca4e78924595596e0a1c673f7cb3617d6b87e35087f0b36dc5a90b688b8f604",
+      "fasta_sha256": "c78a29a442a7e230d55cc861364b527ae86b889294978219f1d11ea3c57aaace",
+      "ledger_sha256": "3ad9dab4f0bc86ab7586a0dd71ee7aa6f64fb47cf96fd2d70b040d529cf1b4e4",
+      "level_percent": 0
+    }
+  ],
+  "generator_sha256": "f5679bc956f439e0ea5e72d64ca790eb817c871b2d035099e178037008018e93",
+  "note": "Input assembly is a reference proxy; no physical copy-number truth is asserted.",
+  "plan_json": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/toy_plan.json",
+  "plan_sha256": "d852f78a1397273f1cb1f96c909d5c064bce0f6b0aa8ed9749ba9acc1d0ea744",
+  "source_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/toy_assembly.fa",
+  "source_sha256": "20ba97916ccb680059a2c653a8d76b3250514c765c88649cf32b0e34cd2078eb",
+  "truth_scope": "injected_edit_delta_only"
+}

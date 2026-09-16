@@ -1,0 +1,7 @@
+case_id	contig	source_start	source_end	edited_start	edited_end	operation
+boundary_left_025	chrToy	0	20	0	20	match
+boundary_left_025	chrToy	20	32	20	20	delete
+boundary_left_025	chrToy	32	88	20	76	match
+boundary_left_025	chrToy	88	100	76	76	delete
+boundary_left_025	chrToy	100	156	76	132	match
+boundary_left_025	chrControl	0	40	0	40	match

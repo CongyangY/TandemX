@@ -1,0 +1,7 @@
+case_id	contig	source_start	source_end	edited_start	edited_end	operation
+contraction_050	chrToy	0	44	0	44	match
+contraction_050	chrToy	44	68	44	44	delete
+contraction_050	chrToy	68	112	44	88	match
+contraction_050	chrToy	112	136	88	88	delete
+contraction_050	chrToy	136	156	88	108	match
+contraction_050	chrControl	0	40	0	40	match
