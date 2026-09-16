@@ -6,118 +6,118 @@
       "architecture_status": "no_supported_discordance",
       "assembly_bp": 32,
       "case": "no_edit_ab",
-      "elapsed_seconds": 0.09763354202732444,
+      "elapsed_seconds": 0.06416533305309713,
       "length_only_prediction": false,
       "read_bp": 32,
-      "truth_discordance": false
+      "truth_label_path_discordance": false
     },
     {
       "architecture_prediction": false,
       "architecture_status": "no_supported_discordance",
       "assembly_bp": 48,
       "case": "no_edit_abc",
-      "elapsed_seconds": 0.18432391714304686,
+      "elapsed_seconds": 0.10411054198630154,
       "length_only_prediction": false,
       "read_bp": 48,
-      "truth_discordance": false
+      "truth_label_path_discordance": false
     },
     {
       "architecture_prediction": false,
       "architecture_status": "no_supported_discordance",
       "assembly_bp": 32,
       "case": "no_edit_variant",
-      "elapsed_seconds": 0.14725420903414488,
+      "elapsed_seconds": 0.06356175011023879,
       "length_only_prediction": false,
       "read_bp": 32,
-      "truth_discordance": false
+      "truth_label_path_discordance": false
     },
     {
       "architecture_prediction": true,
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "copy_deletion",
-      "elapsed_seconds": 0.2207110410090536,
+      "elapsed_seconds": 0.09833862516097724,
       "length_only_prediction": true,
       "read_bp": 48,
-      "truth_discordance": true
+      "truth_label_path_discordance": true
     },
     {
       "architecture_prediction": true,
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "equal_length_variant",
-      "elapsed_seconds": 0.1370218750089407,
+      "elapsed_seconds": 0.06311683310195804,
       "length_only_prediction": false,
       "read_bp": 32,
-      "truth_discordance": true
+      "truth_label_path_discordance": true
     },
     {
       "architecture_prediction": true,
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "equal_length_label_swap",
-      "elapsed_seconds": 0.13917883415706456,
+      "elapsed_seconds": 0.06179908290505409,
       "length_only_prediction": false,
       "read_bp": 32,
-      "truth_discordance": true
+      "truth_label_path_discordance": true
     },
     {
       "architecture_prediction": true,
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "orientation_inversion",
-      "elapsed_seconds": 0.1725036248099059,
+      "elapsed_seconds": 0.05767729110084474,
       "length_only_prediction": false,
       "read_bp": 32,
-      "truth_discordance": true
+      "truth_label_path_discordance": true
     },
     {
       "architecture_prediction": true,
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "hor_rearrangement",
-      "elapsed_seconds": 0.10560141713358462,
+      "elapsed_seconds": 0.05991737497970462,
       "length_only_prediction": false,
       "read_bp": 32,
-      "truth_discordance": true
+      "truth_label_path_discordance": true
     },
     {
       "architecture_prediction": true,
       "architecture_status": "candidate_discordance",
       "assembly_bp": 24,
       "case": "monomer_deletion",
-      "elapsed_seconds": 0.13350829086266458,
+      "elapsed_seconds": 0.054530875058844686,
       "length_only_prediction": true,
       "read_bp": 32,
-      "truth_discordance": true
+      "truth_label_path_discordance": true
     },
     {
       "architecture_prediction": true,
       "architecture_status": "candidate_discordance",
       "assembly_bp": 40,
       "case": "monomer_duplication",
-      "elapsed_seconds": 0.16603366588242352,
+      "elapsed_seconds": 0.07534362492151558,
       "length_only_prediction": true,
       "read_bp": 32,
-      "truth_discordance": true
+      "truth_label_path_discordance": true
     },
     {
       "architecture_prediction": true,
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "hor_compression",
-      "elapsed_seconds": 0.2692536669783294,
+      "elapsed_seconds": 0.1296870419755578,
       "length_only_prediction": true,
       "read_bp": 64,
-      "truth_discordance": true
+      "truth_label_path_discordance": true
     }
   ],
   "input_sha256": "507628ecf3922d3d88877a2dfbc425cc413f26018b4de9c4b2851a252beb6b32",
   "prototype": "same_inputs_monomer_decomposition_and_order",
-  "source_commit": "3e8a952badf41186cbf607f0e8f3b9cedadd1041",
+  "source_commit": "d292f1bbe94653132eaeed06b151f3c12501361a",
   "source_sha256": {
-    "prototype.py": "a630345e9111b2199f5ba1fd497ce2bf7aa3008a6f6927b43a2fbb59a7746c09",
-    "run_development.py": "d9faab714ebf87744e48d9147fa6a73e40067da774e06d1db9f886b01658af61"
+    "prototype.py": "f565a7b8246bc9c6fe02ca4f00fff631ff19fa9a9ae93cc42b4379f31e02fc1f",
+    "run_development.py": "8bf89a2354b262929669110507501ace5a722dbf105d6aa22c4bfb8a53cf3fc7"
   },
   "status": "development_exact_synthetic_only",
   "summary": {

@@ -192,8 +192,10 @@ def compare_anchored_reads(
 ) -> Discordance:
     """Compare pre-verified, independently anchored read intervals to assembly.
 
-    This function does not prove that supplied reads really span both unique
-    flanks. That provenance must be verified before using its output as evidence.
+    This function does not prove unique flank anchoring, molecule independence,
+    sequencing-error independence or haplotype identity. It compares label
+    paths, not within-label sequence variants. External checks are required
+    before interpreting a candidate as an assembly error.
     """
     if min_supporting_reads < 2:
         raise ValueError("At least two independent molecules are required")
@@ -218,7 +220,8 @@ def compare_anchored_reads(
         return Discordance("unresolved", assembly, tuple(supporting),
                            tuple(discordant), "insufficient_independent_anchored_reads")
     if len(discordant) >= min_supporting_reads and len(discordant) / len(supporting) > 2 / 3:
-        warning = "requires_external_flank_and_molecule_qc"
+        warning = ("label_path_only;not_assembly_error_truth;"
+                   "requires_external_flank_molecule_error_haplotype_qc")
         if not assembly.cyclic_unit:
             warning += ";assembly_hor_period_unresolved"
         return Discordance("candidate_discordance", assembly, tuple(supporting),
@@ -227,4 +230,5 @@ def compare_anchored_reads(
         return Discordance("unresolved_mixed_molecules", assembly, tuple(supporting),
                            tuple(discordant), "possible_haplotype_or_alignment_mixture")
     return Discordance("no_supported_discordance", assembly, tuple(supporting),
-                       tuple(discordant), "does_not_prove_assembly_correctness")
+                       tuple(discordant),
+                       "label_path_only;sequence_variants_not_tested;does_not_prove_assembly_correctness")

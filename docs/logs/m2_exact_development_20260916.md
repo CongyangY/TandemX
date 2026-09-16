@@ -42,7 +42,24 @@ It retains `assembly_hor_period_unresolved` in the warning and does not claim a
 HOR for that assembly. The repeat run gives 8/8 planted differences and 3/3
 negative controls; equal-input length-only gives 4/8 and 3/3. This remains
 a designed exact-sequence regression challenge, not accuracy evidence. Focused
-prototype tests: 18 passed in 0.92 seconds.
+prototype tests: 18 passed in 0.92 seconds before the adversarial review below.
+
+Hostile review then constructed a correlated-error counterexample: closely
+related `A=ACGTTGCA` and `B=CCGTTGCA`, an `ABA` assembly, and two supplied
+`AAA` read strings. The comparator calls a label-path candidate, even though
+the same systematic read error could produce those strings. A second check
+showed that a within-label one-base change can leave the label path unchanged
+and is therefore not detected. These are explicit scope boundaries, not
+additional negative biological truth cases. The runner's truth field is now
+`truth_label_path_discordance`; candidate warnings require external flank,
+molecule, sequencing-error and haplotype QC, while concordance warns that
+within-label sequence variants were not tested. The positive warning also
+contains `label_path_only;not_assembly_error_truth` for machine readers. The
+11-case exact-string receipt was regenerated after these changes, and all 20
+focused tests passed in 0.97 seconds. Until independent noisy-read and
+haplotype controls pass,
+8/8 means only that this designed input-string challenge detected its planted
+label-path differences, not read-supported assembly-error accuracy.
 
 A second hostile example exposed a first-copy template bias: `CBABABAB`
 originally selected a four-label unit despite having one variant in a

@@ -58,7 +58,7 @@ def main() -> None:
         elapsed = perf_counter() - start
         rows.append({
             "case": case_id,
-            "truth_discordance": truth,
+            "truth_label_path_discordance": truth,
             "architecture_prediction": result.status == "candidate_discordance",
             "architecture_status": result.status,
             "length_only_prediction": len(read) != len(assembly),
@@ -70,10 +70,10 @@ def main() -> None:
     for method in ("architecture", "length_only"):
         key = f"{method}_prediction"
         summary[method] = {
-            "tp": sum(row[key] and row["truth_discordance"] for row in rows),
-            "fn": sum(not row[key] and row["truth_discordance"] for row in rows),
-            "fp": sum(row[key] and not row["truth_discordance"] for row in rows),
-            "tn": sum(not row[key] and not row["truth_discordance"] for row in rows),
+            "tp": sum(row[key] and row["truth_label_path_discordance"] for row in rows),
+            "fn": sum(not row[key] and row["truth_label_path_discordance"] for row in rows),
+            "fp": sum(row[key] and not row["truth_label_path_discordance"] for row in rows),
+            "tn": sum(not row[key] and not row["truth_label_path_discordance"] for row in rows),
         }
     commit = subprocess.run(["git", "rev-parse", "HEAD"], check=True,
                             capture_output=True, text=True).stdout.strip()

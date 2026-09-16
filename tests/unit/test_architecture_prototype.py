@@ -134,6 +134,28 @@ def test_nonperiodic_same_order_does_not_invent_discordance() -> None:
     assert result.status == "no_supported_discordance"
 
 
+def test_correlated_read_error_can_mimic_label_discordance() -> None:
+    # A repeated systematic error in both supplied reads is not biological
+    # replication; the candidate state must retain this interpretation gate.
+    close_monomers = {"A": "ACGTTGCA", "B": "CCGTTGCA"}
+    assembly = "ACGTTGCACCGTTGCAACGTTGCA"
+    reads = {"r1": "ACGTTGCA" * 3, "r2": "ACGTTGCA" * 3}
+    result = compare_anchored_reads(assembly, reads, close_monomers)
+    assert result.status == "candidate_discordance"
+    assert "not_assembly_error_truth" in result.warning
+    assert "error_haplotype_qc" in result.warning
+
+
+def test_within_monomer_sequence_variant_is_not_scored() -> None:
+    assembly = _array("ABAB")
+    variant = assembly[:2] + ("T" if assembly[2] != "T" else "A") + assembly[3:]
+    result = compare_anchored_reads(
+        assembly, {"r1": variant, "r2": variant}, MONOMERS
+    )
+    assert result.status == "no_supported_discordance"
+    assert "sequence_variants_not_tested" in result.warning
+
+
 @pytest.mark.parametrize("assembly", ["AAAAC" * 4, "AAACA" * 4])
 def test_ambiguous_assembly_decomposition_cannot_be_scored(assembly: str) -> None:
     monomers = {"A": "AAAAA", "B": "AACCA"}
