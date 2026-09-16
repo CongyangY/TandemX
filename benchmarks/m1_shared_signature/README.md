@@ -73,3 +73,35 @@ bootstrap time. It uses source truth only in scoring. The read-derived error
 estimate and uniform unknown model can be misspecified, especially for indels,
 platform errors, near-family decoys, or real full-genome background. The
 descriptive read bootstrap does not validate 95% biological coverage.
+
+## Bounded A/C/D completion
+
+`run_ablations.py` adds three fixed development candidates and checks that
+the catalogue/read hashes and B/E point estimates still match both earlier
+evidence files:
+
+```bash
+conda run -n tandemx-dev python -m benchmarks.m1_shared_signature.run_ablations \
+  --outdir /tmp/tandemx-m1-acd
+conda run -n tandemx-dev pytest -q tests/unit/test_m1_ablations.py
+```
+
+**A** weights only catalogue-exclusive circular 5-mers, correcting their
+expected count by a fixed 8% substitution survival factor. It has no
+per-read attribution beyond the common gate. **C** fits nonnegative family
+counts under an error-aware Poisson 5-mer count model, constrained to sum to
+accepted reads. **D** applies EM to each accepted read's composite 5-mer
+likelihood and assigns only posterior ≥0.95; overlapping 5-mer windows are
+not independent, so this is a pseudo-likelihood. A/C/D use the same
+predeclared 8% substitution assumption and the same known catalogue; no
+truth labels are input to inference. D can add ambiguous refusals. Exact
+equal-signature families are group-resolved only. A/C/D also use a fixed
+input-design singular-value ratio floor of 0.05; a more degenerate design
+returns only an aggregate group count, with no individual estimates.
+
+The runner reexecutes ordinary mapping, B, and E in the same process, checks
+their point estimates against the prior records, and reports all six methods
+plus the prior F read-bootstrap outcomes. A/C/D are point-estimate screens;
+they have no 95% interval calibration result. The prior F read bootstraps for
+B/E do not establish biological coverage. This closes one bounded M1 search
+round rather than opening a parameter or held-out search.
