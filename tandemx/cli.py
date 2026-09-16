@@ -244,6 +244,7 @@ def run_discover(args: argparse.Namespace) -> int:
         clustering_method=args.clustering_method,
         cluster_identity=args.cluster_identity,
         family_audit=args.family_audit,
+        checkpoint_every=args.checkpoint_every,
     )
     try:
         candidates, families = discover_toy_repeats(
@@ -663,6 +664,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     discover.add_argument("--chunk-size", type=int, default=1000, help="Maximum reads retained in one scan batch.")
     discover.add_argument("--chunk-bases", type=int, default=8_000_000, help="Maximum sequence bases retained in one scan batch, bounding memory for unusually long reads.")
+    discover.add_argument("--checkpoint-every", type=int, help="Opt in to atomic scan snapshots at completed chunks after at least N reads. Single input, sample-rate 1, and no auto-budget only. Snapshot size and write cost grow with all candidates; rerun the identical command to resume.")
     discover.add_argument(
         "--threads",
         type=int,

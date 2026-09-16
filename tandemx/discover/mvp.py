@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections import Counter, deque
 import hashlib
 import logging
+import os
 import random
 import time
 from contextlib import nullcontext
@@ -222,6 +223,7 @@ class DiscoverConfig:
     clustering_method: str = "auto"
     cluster_identity: float = 0.95
     family_audit: str = "full"
+    checkpoint_every: int | None = None
 
 
 @dataclass(frozen=True)
@@ -262,6 +264,24 @@ def discover_toy_repeats(
     logger = logger or logging.getLogger("tandemx.discover")
     candidate_path = config.outdir / "candidate_reads.tsv"
     candidate_tmp_path = candidate_path.with_suffix(candidate_path.suffix + ".tmp")
+    checkpoint_path = config.outdir / "discover_scan.checkpoint.json"
+    saved_checkpoint = None
+    checkpoint_identity = None
+    prefix_digest = None
+    if config.checkpoint_every is not None:
+        from tandemx.discover import checkpoint as discovery_checkpoint
+
+        sequence_inputs = normalize_sequence_paths(config.reads)
+        if len(sequence_inputs) != 1 or config.sample_rate != 1.0 or config.enable_auto_discovery_budget:
+            raise ValueError("Discover scan checkpoints require one read file, --sample-rate 1, and no automatic discovery budget")
+        checkpoint_identity = discovery_checkpoint.identity(config, sequence_inputs[0])
+        prefix_digest = hashlib.sha256()
+        if checkpoint_path.exists():
+            if (config.outdir / "discovery_summary.json").exists():
+                raise ValueError("Discover checkpoint coexists with completed discovery_summary.json; review the output directory")
+            saved_checkpoint, saved_candidates = discovery_checkpoint.load(checkpoint_path, checkpoint_identity, candidate_path)
+    elif checkpoint_path.exists():
+        raise ValueError("Discover checkpoint exists; rerun with the identical --checkpoint-every command or review the output directory")
     for stale_path in (
         config.outdir / "discovery_summary.json",
         config.outdir / "monomers.fa",
@@ -277,13 +297,15 @@ def discover_toy_repeats(
     ):
         stale_path.unlink(missing_ok=True)
 
-    candidates: list[CandidateRepeat] = []
-    processed_reads = 0
-    processed_bases = 0
-    skipped_short_reads = 0
-    skipped_short_kmer = 0
-    skipped_low_complexity = 0
-    seed_overflow_count = 0
+    candidates: list[CandidateRepeat] = saved_candidates if saved_checkpoint else []
+    processed_reads = int(saved_checkpoint["processed_reads"]) if saved_checkpoint else 0
+    processed_bases = int(saved_checkpoint["processed_bases"]) if saved_checkpoint else 0
+    skipped_short_reads = int(saved_checkpoint["skipped_short_reads"]) if saved_checkpoint else 0
+    skipped_short_kmer = int(saved_checkpoint["skipped_short_kmer"]) if saved_checkpoint else 0
+    skipped_low_complexity = int(saved_checkpoint["skipped_low_complexity"]) if saved_checkpoint else 0
+    seed_overflow_count = int(saved_checkpoint["seed_overflow_count"]) if saved_checkpoint else 0
+    resume_reads = processed_reads
+    resume_bases = processed_bases
     started = time.perf_counter()
     rng = random.Random(config.seed)
     sequence_paths = normalize_sequence_paths(config.reads)
@@ -341,13 +363,20 @@ def discover_toy_repeats(
             )
         )
 
-    candidate_tmp_path.write_text(candidate_reads_header() + "\n", encoding="utf-8")
+    with candidate_tmp_path.open("w", encoding="utf-8") as candidate_tmp:
+        candidate_tmp.write(candidate_reads_header() + "\n")
+        for item in candidates:
+            candidate_tmp.write(format_candidate_read(item) + "\n")
     candidate_tmp_path.replace(candidate_path)
     with candidate_path.open("a", encoding="utf-8") as handle:
         chunk: list[ReadScanTask] = []
         chunk_bases = 0
-        selected_reads = 0
-        selected_bases = 0
+        selected_reads = processed_reads
+        selected_bases = processed_bases
+        next_checkpoint = (
+            ((processed_reads // config.checkpoint_every) + 1) * config.checkpoint_every
+            if config.checkpoint_every is not None else None
+        )
 
         def handle_scan_result(result: ReadScanResult) -> None:
             nonlocal processed_reads
@@ -382,6 +411,8 @@ def discover_toy_repeats(
                     started,
                     discover_progress_total_reads(config, totals),
                     discover_progress_total_bases(config, totals),
+                    baseline_reads=resume_reads,
+                    baseline_bases=resume_bases,
                 )
                 update_discover_terminal_progress(
                     progress,
@@ -394,7 +425,7 @@ def discover_toy_repeats(
                 )
 
         def flush_chunk(executor: ThreadPoolExecutor | None) -> None:
-            nonlocal chunk_bases
+            nonlocal chunk_bases, next_checkpoint
             if not chunk:
                 return
             try:
@@ -414,6 +445,17 @@ def discover_toy_repeats(
                 for result in results:
                     handle_scan_result(result)
                 handle.flush()
+                if next_checkpoint is not None and processed_reads >= next_checkpoint:
+                    assert prefix_digest is not None and checkpoint_identity is not None
+                    handle.flush()
+                    os.fsync(handle.fileno())
+                    discovery_checkpoint.save(checkpoint_path, discovery_checkpoint.snapshot_body(
+                        checkpoint_identity, prefix_digest.hexdigest(), candidate_path, candidates,
+                        processed_reads=processed_reads, processed_bases=processed_bases,
+                        skipped_short_reads=skipped_short_reads, skipped_short_kmer=skipped_short_kmer,
+                        skipped_low_complexity=skipped_low_complexity, seed_overflow_count=seed_overflow_count,
+                    ))
+                    next_checkpoint = ((processed_reads // config.checkpoint_every) + 1) * config.checkpoint_every
             except RustBackendUnavailable as exc:
                 logger.error("rust_backend_unavailable=%s", exc)
                 raise ValueError(str(exc)) from exc
@@ -432,7 +474,17 @@ def discover_toy_repeats(
                 if auto_discovery_uses_round_robin(sequence_paths, effective_max_read_bases, config)
                 else read_fasta_many(sequence_paths)
             )
+            replay_remaining = processed_reads
             for record in record_iter:
+                if replay_remaining:
+                    assert prefix_digest is not None and saved_checkpoint is not None
+                    discovery_checkpoint.update_prefix(prefix_digest, record.read_id, record.sequence)
+                    replay_remaining -= 1
+                    if replay_remaining == 0:
+                        if prefix_digest.hexdigest() != saved_checkpoint["prefix_sha256"]:
+                            raise ValueError("Discover checkpoint read prefix changed")
+                        logger.info("discover_checkpoint_resumed reads=%s bases=%s", processed_reads, processed_bases)
+                    continue
                 poll_discover_count_future(count_future, totals, logger, config)
                 effective_max_reads, effective_max_read_bases = maybe_enable_auto_discovery_budget(
                     config,
@@ -458,11 +510,15 @@ def discover_toy_repeats(
 
                 selected_reads += 1
                 selected_bases += len(record.sequence)
+                if prefix_digest is not None:
+                    discovery_checkpoint.update_prefix(prefix_digest, record.read_id, record.sequence)
                 chunk.append(ReadScanTask(record=record))
                 chunk_bases += len(record.sequence)
                 if len(chunk) >= config.chunk_size or chunk_bases >= config.chunk_bases:
                     flush_chunk(executor)
             flush_chunk(executor)
+            if replay_remaining:
+                raise ValueError("Discover checkpoint read prefix is incomplete")
 
         poll_discover_count_future(count_future, totals, logger, config)
         log_discover_progress(
@@ -473,6 +529,8 @@ def discover_toy_repeats(
             started,
             discover_progress_total_reads(config, totals),
             discover_progress_total_bases(config, totals),
+            baseline_reads=resume_reads,
+            baseline_bases=resume_bases,
         )
         update_discover_terminal_progress(
             progress,
@@ -560,6 +618,7 @@ def discover_toy_repeats(
         write_families(config.outdir / "collapsed_families.tsv", collapsed_families)
         write_family_collapse(config.outdir / "family_collapse.tsv", collapse_records)
     write_discovery_summary(config.outdir, processed_reads, processed_bases, len(candidates), len(families))
+    checkpoint_path.unlink(missing_ok=True)
     return candidates, families
 
 
@@ -966,6 +1025,8 @@ def validate_discover_config(config: DiscoverConfig) -> None:
         raise ValueError("--chunk-size must be positive")
     if config.chunk_bases <= 0:
         raise ValueError("--chunk-bases must be positive")
+    if config.checkpoint_every is not None and config.checkpoint_every <= 0:
+        raise ValueError("--checkpoint-every must be positive")
     if config.threads <= 0:
         raise ValueError("--threads must be positive")
     if config.kmer_backend not in {"python", "rust"}:
@@ -1770,10 +1831,13 @@ def log_discover_progress(
     started: float,
     max_reads: int | None,
     max_read_bases: int | None,
+    *,
+    baseline_reads: int = 0,
+    baseline_bases: int = 0,
 ) -> None:
     elapsed = max(time.perf_counter() - started, 1e-9)
-    reads_per_second = processed_reads / elapsed
-    mb_per_second = (processed_bases / 1_000_000) / elapsed
+    reads_per_second = (processed_reads - baseline_reads) / elapsed
+    mb_per_second = ((processed_bases - baseline_bases) / 1_000_000) / elapsed
     remaining_estimates: list[float] = []
     if max_reads is not None and reads_per_second > 0:
         remaining_estimates.append(max(0, max_reads - processed_reads) / reads_per_second)

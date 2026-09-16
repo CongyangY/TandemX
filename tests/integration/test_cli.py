@@ -52,6 +52,21 @@ def test_discover_help_is_de_novo() -> None:
     assert "--truth" not in result.stdout
     assert "known " + "repeat" not in result.stdout.lower()
     assert "reference " + "repeat" not in result.stdout.lower()
+    assert "--checkpoint-every" in result.stdout
+
+
+def test_direct_discover_checkpoint_cli_completes_and_removes_snapshot(tmp_path: Path) -> None:
+    reads = write_file(tmp_path / "reads.fa", ">r1\nACGTACGTACGTACGT\n>r2\nACGTACGTACGTACGT\n")
+    outdir = tmp_path / "discover"
+    result = run_cli(
+        "discover", "--reads", str(reads), "--outdir", str(outdir),
+        "--min-period", "4", "--max-period", "8", "--min-support-reads", "1",
+        "--min-repeat-span", "8", "--chunk-size", "1", "--checkpoint-every", "1",
+        "--kmer-backend", "python", "--threads", "1", "--no-progress",
+    )
+    assert result.returncode == 0, result.stderr
+    assert (outdir / "discovery_summary.json").is_file()
+    assert not (outdir / "discover_scan.checkpoint.json").exists()
 
 
 def test_downstream_catalog_help_points_to_discover_output() -> None:

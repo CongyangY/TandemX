@@ -76,8 +76,17 @@ the command automatically reuses only validated stages with matching input and
 command fingerprints. `--force` reruns stages; `--no-resume` refuses reuse;
 `--resume` remains a compatibility alias. This is stage-level resume, not an
 interrupted-stage checkpoint. Direct `tandemx quantify --checkpoint-every N`
-adds an opt-in scan checkpoint inside quantify; `tandemx run` does not pass that
-option. Ctrl-C terminates the active step process group
+adds an opt-in scan checkpoint inside quantify. Direct `tandemx discover
+--checkpoint-every N` also saves exact candidate-state snapshots at completed
+scan chunks after at least N reads. It currently requires one input file,
+`--sample-rate 1`, and no automatic discovery budget. Rerun the identical
+command and output directory to resume; changed input bytes, a damaged
+checkpoint or candidate prefix, and a completed summary beside a checkpoint
+fail closed. Each snapshot writes every candidate accumulated so far, so its
+write volume is proportional to candidate count times snapshot count; full
+input hashing and read-prefix replay add I/O. This is a bounded reliability
+option, not a large-genome performance claim. `tandemx run` does not pass
+either checkpoint option. Ctrl-C terminates the active step process group
 and records exit status 130 with unvalidated outputs; partial stage files may
 remain and are not eligible for validated reuse. See [output fields](docs/file_formats.md) and the
 [minimal example](examples/toy/simple_report.md).
@@ -244,6 +253,10 @@ tandemx validate --project results
 ```
 
 In this workflow, `results/discover/monomers.fa` is a de novo discovery output. Passing it to `--catalog` in downstream commands reuses TandemX's discovered catalog; it does not mean TandemX needs repeat sequences before discovery.
+
+For an opt-in direct-discover scan snapshot, add `--checkpoint-every 10000`
+to a single-file `tandemx discover` command and rerun that identical command
+after interruption. The option is unavailable through `tandemx run`.
 
 For a separately curated set of genomic depth controls, add
 `--single-copy-kmers controls.tsv`; its required columns are `kmer` and

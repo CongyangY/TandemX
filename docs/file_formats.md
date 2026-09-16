@@ -42,6 +42,17 @@ path argument is rejected and duplicates within each file remain invalid.
 
 Produced by: `tandemx discover`
 
+When direct `discover --checkpoint-every N` is selected, the output directory
+temporarily contains `discover_scan.checkpoint.json`. It is an internal resume
+snapshot, not a biological output. Version 1 stores full input SHA-256 and
+command identity, selected-read prefix digest, processed read/base and filter
+counters, exact candidate fields, and a candidate table prefix digest inside a
+checksummed JSON envelope. It is removed after successful
+`discovery_summary.json` publication. A malformed snapshot, changed input or
+candidate prefix, or a coexisting completed summary fails closed. Bytes
+appended to `candidate_reads.tsv` after the last committed snapshot are
+discarded on resume. The default command does not create this file.
+
 This is a table of read-local evidence. Downstream catalogue arguments use
 `monomers.fa`; this table itself contains no monomer sequence.
 `read_id` may occur on several rows in elastic mode; `candidate_id` is unique.

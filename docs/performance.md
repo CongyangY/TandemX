@@ -36,6 +36,14 @@ At command start, discover creates:
 
 Each accepted candidate is appended and flushed immediately. Discover normally starts scanning without a separate full-input count, avoiding doubled input I/O and an uncancellable background task. A synchronous pre-count is used only when the user explicitly enables automatic budgeting without providing `--genome-size`. Progress logs report processed reads, processed bases, candidate reads, elapsed time, reads/s and MB/s; a percentage and remaining-time estimate are shown only when a configured limit or counted total is available. Ctrl-C leaves existing candidate output available for diagnosis.
 
+The optional direct-discover `--checkpoint-every N` path hashes the complete
+input before scanning and serializes the full accumulated candidate list at
+each completed chunk crossing an N-read boundary. It also replays the saved
+read prefix on resume. Thus checkpoint frequency trades recovery granularity
+for O(candidate count × snapshot count) total snapshot writes and transient
+JSON serialization memory. This path has toy-scale integrity and output-parity
+tests only; it has no measured large-genome speed or memory benefit.
+
 ## Pilot Controls
 
 Use these controls for real-read subsets:

@@ -127,7 +127,25 @@ MVP constraints:
 6. local boundaries are an identity-based estimate, not a complete array reconstruction;
 7. consensus is a cyclic column majority, not a full indel-aware multiple alignment;
 8. no higher-order repeat inference;
-9. direct `quantify` has an opt-in read-scan checkpoint; other commands and `tandemx run` have no intra-step checkpoint, and no production-scale full-workflow backend exists.
+9. direct `quantify` and the restricted single-file direct `discover` command have opt-in read-scan checkpoints; `tandemx run` does not pass these options, and no production-scale full-workflow backend exists.
+
+### Direct discover scan checkpoint
+
+`tandemx discover --checkpoint-every N` snapshots only after a completed scan
+chunk crosses the next N-read boundary. The snapshot stores exact (unrounded)
+candidate fields, counters, a full-file SHA-256 identity, command parameters,
+and a digest of the selected read prefix. It is atomically replaced after the
+candidate table is flushed and synchronized. Resume verifies input bytes and
+the candidate-table prefix, replays the saved read prefix without scanning it,
+then continues the read-local scan. The final catalogue is generated from the
+same candidate objects as an uninterrupted run; the default path is unchanged.
+This mode currently requires one input file, sampling rate 1, and disabled
+automatic discovery budget. A stale or damaged snapshot fails closed. It does
+not checkpoint family clustering or audit. Each snapshot serializes all
+candidates, so repeated snapshots cost O(candidate count × snapshot count)
+bytes written in the worst case, in addition to full input hashing and prefix
+replay. It has toy-scale parity and corruption tests, not a large-genome
+reliability or speed validation.
 
 Future work:
 
