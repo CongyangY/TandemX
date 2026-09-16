@@ -1,0 +1,1306 @@
+{
+  "status": "development_only_no_heldout",
+  "prior_results_sha256": "3004cd9040c45c2c1337ea00fd0514cfdb3c29118c719c5e3d3eeebf10ef993c",
+  "parameters": {
+    "unit_bp": 80,
+    "k": 5,
+    "gate_fraction": 0.22,
+    "foreground_reads": [
+      320,
+      180
+    ],
+    "unknown_reads": 100,
+    "bootstrap_replicates": 40,
+    "seeds": [
+      11,
+      29,
+      47
+    ]
+  },
+  "settings": {
+    "posterior_min": 0.95,
+    "max_mismatch": 18,
+    "error_floor": 0.02,
+    "error_ceiling": 0.3,
+    "max_iterations": 100,
+    "tolerance": 1e-09
+  },
+  "scenarios": [
+    [
+      "related_low_error",
+      3,
+      0.03,
+      0.0
+    ],
+    [
+      "related_high_error",
+      3,
+      0.12,
+      0.0
+    ],
+    [
+      "family_error_shift",
+      3,
+      0.06,
+      0.2
+    ],
+    [
+      "identical_unidentifiable",
+      0,
+      0.03,
+      0.0
+    ]
+  ],
+  "source_sha256": {
+    "run_probabilistic.py": "de260db63ebb31b992d395435b59563bd3511dc5f42f0e424b88667ee4517c5f",
+    "probabilistic.py": "544d82358cb3e4b61eddb9869ebe22ff3673c8248357700704fb2bf26916f5cd",
+    "run.py": "792639344e15eca12f81465a3bec45f9f7553d9a2ff5744d4bc7fec1becc5a55",
+    "model.py": "741e18f84ea146db51dd4e3297ec498cfe7a3cefa5fca1b0b8bcb58e3f7fed3c"
+  },
+  "cases": [
+    {
+      "seed": 11,
+      "scenario": "related_low_error",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "reads_sha256": "8c7e2c3438d52d9251361adb4b40e29a8a02b5c3ff4d2e663f8f2702e79078bd",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 320.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 303.48085106382956,
+        "f2": 169.56170212765983,
+        "decoy_zero": 26.95744680851069
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 320.0,
+          "f2": 179.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 1,
+        "rejected_gate": 100,
+        "assigned": 499,
+        "posterior_soft": {
+          "f1": 320.14877277266373,
+          "f2": 180.09672817287426,
+          "decoy_zero": 2.5042430314349614e-14
+        },
+        "mixture_weights": {
+          "f1": 0.5335812879538859,
+          "f2": 0.3001612136211647,
+          "decoy_zero": 9.999999999990007e-13,
+          "unknown": 0.16625749842394952
+        },
+        "iterations": 5
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.0,
+        "positive_mae_reads": 0.0,
+        "positive_bias_reads": 0.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.05480644208037788,
+        "positive_mae_reads": 13.478723404255305,
+        "positive_bias_reads": -13.478723404255305,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 26.95744680851069
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.002777777777777768,
+        "positive_mae_reads": 0.5,
+        "positive_bias_reads": -0.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->f1": 320,
+        "f2->ambiguous": 1,
+        "f2->f2": 179,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 0,
+      "rejected_by_source": {
+        "f1": 0,
+        "f2": 1,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          291.825,
+          351.1
+        ],
+        "f2": [
+          156.975,
+          205.075
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": true
+      },
+      "seconds": {
+        "ordinary_mapping": 0.01977958297356963,
+        "shared_signature": 0.010084625100716949,
+        "probabilistic_fit": 0.05383358313702047,
+        "probabilistic_bootstrap": 0.9384834580123425
+      }
+    },
+    {
+      "seed": 29,
+      "scenario": "related_low_error",
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "reads_sha256": "3de1b8682fdb743053d445150289ac4dd124b4980d9d95d059faa58d498259ce",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 319.0,
+        "f2": 179.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 301.342374924653,
+        "f2": 171.02109704641381,
+        "decoy_zero": 27.63652802893321
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 319.0,
+          "f2": 179.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 2,
+        "rejected_gate": 100,
+        "assigned": 498,
+        "posterior_soft": {
+          "f1": 320.33618546906825,
+          "f2": 179.67038107012598,
+          "decoy_zero": 1.2769503076863084e-14
+        },
+        "mixture_weights": {
+          "f1": 0.533893642447176,
+          "f2": 0.29945063511731657,
+          "decoy_zero": 9.999999999989987e-13,
+          "unknown": 0.1666557224345074
+        },
+        "iterations": 5
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.00434027777777779,
+        "positive_mae_reads": 1.0,
+        "positive_bias_reads": -1.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.05409393627352471,
+        "positive_mae_reads": 13.818264014466607,
+        "positive_bias_reads": -13.818264014466607,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 27.63652802893321
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.00434027777777779,
+        "positive_mae_reads": 1.0,
+        "positive_bias_reads": -1.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->ambiguous": 1,
+        "f1->f1": 319,
+        "f2->ambiguous": 1,
+        "f2->f2": 179,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 0,
+      "rejected_by_source": {
+        "f1": 1,
+        "f2": 1,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          304.925,
+          342.25
+        ],
+        "f2": [
+          153.95,
+          198.2
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": true
+      },
+      "seconds": {
+        "ordinary_mapping": 0.024321291828528047,
+        "shared_signature": 0.012645208043977618,
+        "probabilistic_fit": 0.020363541087135673,
+        "probabilistic_bootstrap": 0.8249747920781374
+      }
+    },
+    {
+      "seed": 47,
+      "scenario": "related_low_error",
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "reads_sha256": "392c1b3ffb9c6e8e96ffc80ceeeb6a7610978b50a73489606de3117a55bcd118",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 318.0,
+        "f2": 181.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 305.0944206008585,
+        "f2": 154.1673819742488,
+        "decoy_zero": 40.73819742489274
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 318.0,
+          "f2": 181.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 1,
+        "rejected_gate": 100,
+        "assigned": 499,
+        "posterior_soft": {
+          "f1": 318.93334469161664,
+          "f2": 181.23708687855583,
+          "decoy_zero": 2.0799691263565158e-14
+        },
+        "mixture_weights": {
+          "f1": 0.5315555744853201,
+          "f2": 0.3020618114641089,
+          "decoy_zero": 9.99999999998999e-13,
+          "unknown": 0.16638261404957108
+        },
+        "iterations": 5
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.005902777777777757,
+        "positive_mae_reads": 1.5,
+        "positive_bias_reads": -0.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.09504724010491195,
+        "positive_mae_reads": 20.36909871244636,
+        "positive_bias_reads": -20.36909871244636,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 40.73819742489274
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.005902777777777757,
+        "positive_mae_reads": 1.5,
+        "positive_bias_reads": -0.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->ambiguous": 1,
+        "f1->f1": 318,
+        "f1->f2": 1,
+        "f2->f2": 180,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 1,
+      "rejected_by_source": {
+        "f1": 1,
+        "f2": 0,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          295.925,
+          337.1
+        ],
+        "f2": [
+          163.975,
+          204.14999999999998
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": true
+      },
+      "seconds": {
+        "ordinary_mapping": 0.0307413749396801,
+        "shared_signature": 0.013412167085334659,
+        "probabilistic_fit": 0.01981112500652671,
+        "probabilistic_bootstrap": 0.8274936669040471
+      }
+    },
+    {
+      "seed": 11,
+      "scenario": "related_high_error",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "reads_sha256": "08784eb99769f0929c5929d4ee3cf7348f57fb667db6d2172092eca0b7fc966d",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 175.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 264.7797872340427,
+        "f2": 135.45957446808515,
+        "decoy_zero": 98.76063829787238
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 316.0,
+          "f2": 157.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 26,
+        "rejected_gate": 101,
+        "assigned": 473,
+        "posterior_soft": {
+          "f1": 321.9475203031657,
+          "f2": 178.2752509542167,
+          "decoy_zero": 6.036827198193772e-13
+        },
+        "mixture_weights": {
+          "f1": 0.5365792004715738,
+          "f2": 0.2971254182896221,
+          "decoy_zero": 9.999999999990013e-13,
+          "unknown": 0.16629538123780402
+        },
+        "iterations": 7
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.020138888888888873,
+        "positive_mae_reads": 4.5,
+        "positive_bias_reads": -4.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.2100049867021273,
+        "positive_mae_reads": 49.88031914893607,
+        "positive_bias_reads": -49.88031914893607,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 98.76063829787238
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.07013888888888886,
+        "positive_mae_reads": 13.5,
+        "positive_bias_reads": -13.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->ambiguous": 6,
+        "f1->f1": 314,
+        "f2->ambiguous": 20,
+        "f2->f1": 2,
+        "f2->f2": 157,
+        "f2->gate": 1,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 2,
+      "rejected_by_source": {
+        "f1": 6,
+        "f2": 21,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          283.975,
+          336.1
+        ],
+        "f2": [
+          135.95,
+          188.075
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": true
+      },
+      "seconds": {
+        "ordinary_mapping": 0.02034529112279415,
+        "shared_signature": 0.009000791935250163,
+        "probabilistic_fit": 0.0213727920781821,
+        "probabilistic_bootstrap": 0.8705072500742972
+      }
+    },
+    {
+      "seed": 29,
+      "scenario": "related_high_error",
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "reads_sha256": "c8daa5dfb401972005e0e8d92b776223bea745f7607e211cec29a530e2cf32de",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 311.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 259.6835443037974,
+        "f2": 141.59493670886073,
+        "decoy_zero": 98.72151898734177
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 311.0,
+          "f2": 159.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 30,
+        "rejected_gate": 100,
+        "assigned": 470,
+        "posterior_soft": {
+          "f1": 317.67167124658255,
+          "f2": 183.15553845714152,
+          "decoy_zero": 4.0706069459541396e-13
+        },
+        "mixture_weights": {
+          "f1": 0.5294527853828811,
+          "f2": 0.30525923078968653,
+          "decoy_zero": 9.99999999999001e-13,
+          "unknown": 0.16528798382643245
+        },
+        "iterations": 7
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.014062499999999978,
+        "positive_mae_reads": 4.5,
+        "positive_bias_reads": -4.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.2009251933895923,
+        "positive_mae_reads": 49.360759493670926,
+        "positive_bias_reads": -49.360759493670926,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 98.72151898734177
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.07239583333333333,
+        "positive_mae_reads": 15.0,
+        "positive_bias_reads": -15.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->ambiguous": 10,
+        "f1->f1": 310,
+        "f2->ambiguous": 20,
+        "f2->f1": 1,
+        "f2->f2": 159,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 1,
+      "rejected_by_source": {
+        "f1": 10,
+        "f2": 20,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          289.925,
+          328.2
+        ],
+        "f2": [
+          139.975,
+          183.14999999999998
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": true
+      },
+      "seconds": {
+        "ordinary_mapping": 0.01940441713668406,
+        "shared_signature": 0.009808332892134786,
+        "probabilistic_fit": 0.020205541979521513,
+        "probabilistic_bootstrap": 0.8340843750629574
+      }
+    },
+    {
+      "seed": 47,
+      "scenario": "related_high_error",
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "reads_sha256": "a963ad973625a06ff55093dc431f629e35d89f31d1e78336aa72cb2450f7f91e",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 179.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 269.13304721030056,
+        "f2": 101.72286940527268,
+        "decoy_zero": 127.14408338442679
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 315.0,
+          "f2": 160.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 23,
+        "rejected_gate": 102,
+        "assigned": 475,
+        "posterior_soft": {
+          "f1": 320.1362162144465,
+          "f2": 180.53640010226303,
+          "decoy_zero": 7.350297941842997e-13
+        },
+        "mixture_weights": {
+          "f1": 0.5335603603541358,
+          "f2": 0.30089400017287665,
+          "decoy_zero": 9.999999999990017e-13,
+          "unknown": 0.1655456394719876
+        },
+        "iterations": 7
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.009027777777777746,
+        "positive_mae_reads": 2.5,
+        "positive_bias_reads": -2.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.29691608760814797,
+        "positive_mae_reads": 64.57204169221339,
+        "positive_bias_reads": -64.57204169221339,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 127.14408338442679
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.06336805555555558,
+        "positive_mae_reads": 12.5,
+        "positive_bias_reads": -12.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->ambiguous": 4,
+        "f1->f1": 315,
+        "f1->gate": 1,
+        "f2->ambiguous": 19,
+        "f2->f2": 160,
+        "f2->gate": 1,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 0,
+      "rejected_by_source": {
+        "f1": 5,
+        "f2": 20,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          298.975,
+          334.1
+        ],
+        "f2": [
+          144.975,
+          178.075
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": false
+      },
+      "seconds": {
+        "ordinary_mapping": 0.019109957851469517,
+        "shared_signature": 0.00890966597944498,
+        "probabilistic_fit": 0.020536832977086306,
+        "probabilistic_bootstrap": 0.833044792059809
+      }
+    },
+    {
+      "seed": 11,
+      "scenario": "family_error_shift",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "reads_sha256": "b4568fd4f68b7c11fd3db865425076430fd6bbe9b111b7b0185b7443b969fb6d",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 321.0,
+        "f2": 41.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 286.4265957446809,
+        "f2": 30.153191489361724,
+        "decoy_zero": 47.42021276595744
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 321.0,
+          "f2": 31.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 12,
+        "rejected_gate": 236,
+        "assigned": 352,
+        "posterior_soft": {
+          "f1": 349.32986412137774,
+          "f2": 150.70276582272513,
+          "decoy_zero": 2.0335332564479318e-11
+        },
+        "mixture_weights": {
+          "f1": 0.5822164401463726,
+          "f2": 0.2511712764263026,
+          "decoy_zero": 9.99999999999034e-13,
+          "unknown": 0.16661228342632473
+        },
+        "iterations": 10
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.38767361111111115,
+        "positive_mae_reads": 70.0,
+        "positive_bias_reads": -69.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.46869957890070907,
+        "positive_mae_reads": 91.71010638297868,
+        "positive_bias_reads": -91.71010638297868,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 47.42021276595744
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.4154513888888889,
+        "positive_mae_reads": 75.0,
+        "positive_bias_reads": -74.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->ambiguous": 1,
+        "f1->f1": 319,
+        "f2->ambiguous": 11,
+        "f2->f1": 2,
+        "f2->f2": 31,
+        "f2->gate": 136,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 2,
+      "rejected_by_source": {
+        "f1": 1,
+        "f2": 147,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          294.95,
+          343.05
+        ],
+        "f2": [
+          18.0,
+          39.025
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": false
+      },
+      "seconds": {
+        "ordinary_mapping": 0.018436333863064647,
+        "shared_signature": 0.006540333153679967,
+        "probabilistic_fit": 0.020151166943833232,
+        "probabilistic_bootstrap": 0.8518532498273998
+      }
+    },
+    {
+      "seed": 29,
+      "scenario": "family_error_shift",
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "reads_sha256": "0976ca371a942fb16c39c059bfdf9b2103d1ee94f3d7730c9475508f6bb3d270",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 55.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 280.93248945147656,
+        "f2": 43.95358649789047,
+        "decoy_zero": 53.11392405063291
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 316.0,
+          "f2": 45.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 17,
+        "rejected_gate": 222,
+        "assigned": 361,
+        "posterior_soft": {
+          "f1": 332.84359282473235,
+          "f2": 167.2540335650241,
+          "decoy_zero": 6.503266191237485e-08
+        },
+        "mixture_weights": {
+          "f1": 0.5547393214125647,
+          "f2": 0.27875672236661175,
+          "decoy_zero": 3.120658211236754e-10,
+          "unknown": 0.16650395590875777
+        },
+        "iterations": 16
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.3534722222222222,
+        "positive_mae_reads": 64.5,
+        "positive_bias_reads": -64.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.43894968940459433,
+        "positive_mae_reads": 87.5569620253165,
+        "positive_bias_reads": -87.5569620253165,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 53.11392405063291
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.38125,
+        "positive_mae_reads": 69.5,
+        "positive_bias_reads": -69.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->ambiguous": 4,
+        "f1->f1": 316,
+        "f2->ambiguous": 13,
+        "f2->f2": 45,
+        "f2->gate": 122,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 0,
+      "rejected_by_source": {
+        "f1": 4,
+        "f2": 135,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          294.9,
+          347.05
+        ],
+        "f2": [
+          34.0,
+          56.025
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": false
+      },
+      "seconds": {
+        "ordinary_mapping": 0.018584208097308874,
+        "shared_signature": 0.0068957090843468904,
+        "probabilistic_fit": 0.02034708298742771,
+        "probabilistic_bootstrap": 0.9813096669968218
+      }
+    },
+    {
+      "seed": 47,
+      "scenario": "family_error_shift",
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "reads_sha256": "5862a1ee7617f9938011319e4c3f2e5ab77e0844691f6ca6cd9942022c869121",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 318.0,
+        "f2": 38.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": 278.9656652360515,
+        "f2": 20.88718577559774,
+        "decoy_zero": 63.147148988350736
+      },
+      "probabilistic": {
+        "family": {
+          "f1": 318.0,
+          "f2": 31.0,
+          "decoy_zero": 0.0
+        },
+        "groups": {},
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 14,
+        "rejected_gate": 237,
+        "assigned": 349,
+        "posterior_soft": {
+          "f1": 346.80879043201554,
+          "f2": 154.16053880195963,
+          "decoy_zero": 1.2826010176394398e-09
+        },
+        "mixture_weights": {
+          "f1": 0.5780146507904149,
+          "f2": 0.2569342312442168,
+          "decoy_zero": 2.4029975581836033e-11,
+          "unknown": 0.16505111794133817
+        },
+        "iterations": 9
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 0.3975694444444444,
+        "positive_mae_reads": 72.0,
+        "positive_bias_reads": -72.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 0.506096187580898,
+        "positive_mae_reads": 100.07357449417538,
+        "positive_bias_reads": -100.07357449417538,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 63.147148988350736
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 0.41701388888888885,
+        "positive_mae_reads": 75.5,
+        "positive_bias_reads": -75.5,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->ambiguous": 3,
+        "f1->f1": 317,
+        "f2->ambiguous": 11,
+        "f2->f1": 1,
+        "f2->f2": 31,
+        "f2->gate": 137,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 1,
+      "rejected_by_source": {
+        "f1": 3,
+        "f2": 148,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "f1": [
+          299.9,
+          340.125
+        ],
+        "f2": [
+          19.975,
+          40.025
+        ],
+        "decoy_zero": [
+          0.0,
+          0.0
+        ]
+      },
+      "bootstrap_positive_coverage": {
+        "f1": true,
+        "f2": false
+      },
+      "seconds": {
+        "ordinary_mapping": 0.02320037502795458,
+        "shared_signature": 0.007259000092744827,
+        "probabilistic_fit": 0.025209915824234486,
+        "probabilistic_bootstrap": 0.9513418329879642
+      }
+    },
+    {
+      "seed": 11,
+      "scenario": "identical_unidentifiable",
+      "catalogue_sha256": "57d889fb4d01650cd9bf632fa2b244d0ab5954d677af993255383190c183ea88",
+      "reads_sha256": "ddcd8417fdf49792200625ee099c353588c461b6bccff386a4fa929c65ebd41f",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": null,
+        "f2": null,
+        "decoy_zero": 35.57142857142959
+      },
+      "probabilistic": {
+        "family": {
+          "f1": null,
+          "f2": null,
+          "decoy_zero": 0.0
+        },
+        "groups": {
+          "f1+f2": 500.0
+        },
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 0,
+        "rejected_gate": 100,
+        "assigned": 500,
+        "posterior_soft": {
+          "f1+f2": 500.23922361209713,
+          "decoy_zero": 3.064484761271726e-13
+        },
+        "mixture_weights": {
+          "f1+f2": 0.8337320393526526,
+          "decoy_zero": 9.99999999999e-13,
+          "unknown": 0.16626796064634747
+        },
+        "iterations": 5
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 2,
+        "zero_decoy_assigned_reads": 35.57142857142959
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 2,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->f1+f2": 320,
+        "f2->f1+f2": 180,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 0,
+      "rejected_by_source": {
+        "f1": 0,
+        "f2": 0,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "decoy_zero": [
+          0.0,
+          0.0
+        ],
+        "f1+f2": [
+          481.0,
+          517.075
+        ]
+      },
+      "bootstrap_positive_coverage": {},
+      "seconds": {
+        "ordinary_mapping": 0.020431708078831434,
+        "shared_signature": 0.008778541814535856,
+        "probabilistic_fit": 0.016574000008404255,
+        "probabilistic_bootstrap": 0.8162130420096219
+      }
+    },
+    {
+      "seed": 29,
+      "scenario": "identical_unidentifiable",
+      "catalogue_sha256": "1c97c68b97b9c3267c62e0272ec9905e1e1dcbc24e8f50e41f74c573ff804b4b",
+      "reads_sha256": "17dd0798c280b2c84dc70411394575c94e9314b819b57a48c8657ef8912e34c9",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": null,
+        "f2": null,
+        "decoy_zero": 33.279411764707234
+      },
+      "probabilistic": {
+        "family": {
+          "f1": null,
+          "f2": null,
+          "decoy_zero": 0.0
+        },
+        "groups": {
+          "f1+f2": 500.0
+        },
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 0,
+        "rejected_gate": 100,
+        "assigned": 500,
+        "posterior_soft": {
+          "f1+f2": 500.00371298236195,
+          "decoy_zero": 1.2026098661752311e-14
+        },
+        "mixture_weights": {
+          "f1+f2": 0.8333395216364358,
+          "decoy_zero": 9.999999999990013e-13,
+          "unknown": 0.16666047836256417
+        },
+        "iterations": 3
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 2,
+        "zero_decoy_assigned_reads": 33.279411764707234
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 2,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->f1+f2": 320,
+        "f2->f1+f2": 180,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 0,
+      "rejected_by_source": {
+        "f1": 0,
+        "f2": 0,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "decoy_zero": [
+          0.0,
+          0.0
+        ],
+        "f1+f2": [
+          476.925,
+          518.0
+        ]
+      },
+      "bootstrap_positive_coverage": {},
+      "seconds": {
+        "ordinary_mapping": 0.02074433397501707,
+        "shared_signature": 0.009913000045344234,
+        "probabilistic_fit": 0.017307500122115016,
+        "probabilistic_bootstrap": 0.7150488330516964
+      }
+    },
+    {
+      "seed": 47,
+      "scenario": "identical_unidentifiable",
+      "catalogue_sha256": "353c8bd43f4752e7621ab21df8cb964ecdcad0f3505e143e56e63e18446f8fad",
+      "reads_sha256": "c91f5c20c9210883677645170a50769c142d4b9381f4ed5f496e705b8a3fc918",
+      "n_reads": 600,
+      "truth_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "shared_signature": {
+        "f1": null,
+        "f2": null,
+        "decoy_zero": 40.22368421052698
+      },
+      "probabilistic": {
+        "family": {
+          "f1": null,
+          "f2": null,
+          "decoy_zero": 0.0
+        },
+        "groups": {
+          "f1+f2": 500.0
+        },
+        "rejected_unknown": 0,
+        "rejected_ambiguous": 0,
+        "rejected_gate": 100,
+        "assigned": 500,
+        "posterior_soft": {
+          "f1+f2": 500.2325238366557,
+          "decoy_zero": 3.894784980447654e-14
+        },
+        "mixture_weights": {
+          "f1+f2": 0.8337208730602486,
+          "decoy_zero": 9.999999999990003e-13,
+          "unknown": 0.16627912693875146
+        },
+        "iterations": 5
+      },
+      "ordinary_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 0,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "shared_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 2,
+        "zero_decoy_assigned_reads": 40.22368421052698
+      },
+      "probabilistic_score": {
+        "positive_mare_refusal_penalized": 1.0,
+        "positive_mae_reads": 250.0,
+        "positive_bias_reads": -250.0,
+        "individual_refused": 2,
+        "zero_decoy_assigned_reads": 0.0
+      },
+      "probabilistic_confusion": {
+        "f1->f1+f2": 320,
+        "f2->f1+f2": 180,
+        "unknown->gate": 100
+      },
+      "negative_false_attribution": 0,
+      "wrong_family_attribution": 0,
+      "rejected_by_source": {
+        "f1": 0,
+        "f2": 0,
+        "unknown": 100
+      },
+      "bootstrap_95pct": {
+        "decoy_zero": [
+          0.0,
+          0.0
+        ],
+        "f1+f2": [
+          478.95,
+          516.0
+        ]
+      },
+      "bootstrap_positive_coverage": {},
+      "seconds": {
+        "ordinary_mapping": 0.020144250011071563,
+        "shared_signature": 0.008641624823212624,
+        "probabilistic_fit": 0.01762291695922613,
+        "probabilistic_bootstrap": 0.8223669999279082
+      }
+    }
+  ],
+  "process_max_rss_raw": 35028992,
+  "resource_note": "macOS ru_maxrss bytes; one process; timing excludes toy generation; no T7 I/O"
+}
