@@ -1,0 +1,3 @@
+case_id	operation	source_start0	source_end0	edited_start0	edited_end0
+bp_deletion_025	match	0	93022	0	93022
+bp_deletion_025	delete	93022	124029	93022	93022

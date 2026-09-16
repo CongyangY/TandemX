@@ -396,19 +396,20 @@ def score(outdir: Path, predictions: Path, scoredir: Path, decision_threshold: f
         raise ValueError(f"unknown prediction keys: {sorted(predictions_by_key)}")
     scoredir.mkdir(parents=True, exist_ok=False)
     write_tsv(scoredir / "scored.tsv", SCORE_FIELDS, rows)
-    eligible = [row for row in rows if row["pairing_status"] != "invalid_donor_pair"]
-    complete = bool(eligible) and all(row["prediction_status"] == "ok" for row in eligible)
-    positives = sum(row["truth_positive"] for row in eligible)
-    negatives = len(eligible) - positives
+    technical = [row for row in rows if row["pairing_status"] != "invalid_donor_pair"]
+    complete = bool(technical) and all(row["prediction_status"] == "ok" for row in technical)
+    positives = sum(row["truth_positive"] for row in technical)
+    negatives = len(technical) - positives
     metric = dict(status="ok" if complete and positives and negatives else "blocked",
                   reason="" if complete and positives and negatives else
                   "incomplete_predictions_or_single_truth_class",
-                  threshold=decision_threshold, denominator=len(eligible),
+                  threshold=decision_threshold, technical_injected_edit_denominator=len(technical),
+                  scope="injected_edit_technical_only",
                   tp=None, fn=None, fp=None, tn=None, sensitivity=None, fpr=None,
                   missing_bp_mae=None)
     if metric["status"] == "ok":
         counts = dict(tp=0, fn=0, fp=0, tn=0)
-        for row in eligible:
+        for row in technical:
             true_positive = bool(row["truth_positive"])
             predicted_positive = float(row["prediction_score"]) >= decision_threshold
             label = ("tp" if true_positive else "fp") if predicted_positive else (
@@ -417,13 +418,15 @@ def score(outdir: Path, predictions: Path, scoredir: Path, decision_threshold: f
         metric.update(counts)
         metric["sensitivity"] = counts["tp"] / positives
         metric["fpr"] = counts["fp"] / negatives
-        metric["missing_bp_mae"] = sum(row["absolute_error_bp"] for row in eligible) / len(eligible)
+        metric["missing_bp_mae"] = sum(row["absolute_error_bp"] for row in technical) / len(technical)
     summary = dict(denominator=len(rows), status_counts={state: sum(x["prediction_status"] == state for x in rows)
                                                          for state in sorted({x["prediction_status"] for x in rows})},
                    declared_consistent_pair_rows=sum(x["pairing_status"] == "declared_same_donor_baseline_consistent" for x in rows),
                    positive_rows=sum(x["truth_positive"] for x in rows),
                    zero_representation_rows=sum(x["case_id"] == "contraction_100" for x in rows),
                    injected_edit_metrics=metric,
+                   verified_same_donor_read_baseline_rows=0,
+                   read_assembly_accuracy_status="blocked_no_independent_pairing_and_baseline_evidence",
                    primary_auprc=None,
                    primary_auprc_reason="Requires preregistered eligible subset, baseline pairing, and full scored predictions; not computed by generator.",
                    truth_scope="injected_edit_delta_only", prediction_sha256=sha256_file(predictions),

@@ -99,15 +99,18 @@ prediction keys. Its `absolute_error_bp` is descriptive error against the
 read/assembly pairing label. The summary
 retains all statuses, positive and 100%-deletion row counts. Pass a
 preselected inclusive `--decision-threshold` in `[0,1]`. If **all** rows with
-a valid pairing label are `ok`, the summary reports TP/FN/FP/TN,
-sensitivity, FPR, and injected missing-bp MAE on that entire fixed subset.
+a non-invalid pairing label are `ok`, the summary reports TP/FN/FP/TN,
+sensitivity, FPR, and injected missing-bp MAE on that technical edit subset.
 Otherwise every metric is null with `status=blocked`; abstentions, failures,
 and missing rows are never treated as true negatives. The invalid donor-swap
 rows remain in the overall denominator and status counts but are excluded
-from paired edit-recovery metrics. The toy fixture's complete-prediction test
+from technical edit metrics. The declared same-donor metadata is never
+promoted to verified status; the separate verified same-donor/read-baseline
+count stays zero and read–assembly accuracy is blocked until independent
+source and baseline evidence is validated. The toy fixture's complete-prediction test
 copies ledger truth into predictions and is a tautological scorer smoke test,
 not a model accuracy result or independent statistical replication. The
-summary states both the total family-row denominator and valid-pair metric
+summary states both the total family-row denominator and technical edit metric
 denominator, so the donor-swap rows cannot silently disappear. `primary_auprc`
 remains null until a prospective evaluation freezes the eligible denominator,
 the primary same-input mapping baseline, and statistical protocol. The

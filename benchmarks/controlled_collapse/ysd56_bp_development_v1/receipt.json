@@ -1,0 +1,60 @@
+{
+  "archive_manifest_sha256": "d0af413da2b5aff24a8d7bdb69391e3b429667c287da26af44cac0fa5fac26c5",
+  "cases": [
+    {
+      "case_id": "bp_deletion_000",
+      "chain_sha256": "f7777fc3eedc3a6f4379b218566dc0aea051562caa48f18dce70c2ad1fd19b27",
+      "empty_fasta_record": false,
+      "fasta_sha256": "b7f1ffeb56bd4dfd54a79494cf0f4f3234848264b4e3c284ae3c185bda9cc5d2",
+      "ledger_sha256": "3b16de75018e5c3b2a95526b9a33f934688a0a4de09dba8f3f57786257e93e1a"
+    },
+    {
+      "case_id": "bp_deletion_025",
+      "chain_sha256": "46a4ffe1217a156910420a5236138f66cc70fdc64d0ecbb10e7716945b8ddefe",
+      "empty_fasta_record": false,
+      "fasta_sha256": "c50f4a9ca5fb327c65c545ade9e9339676e7aa65061fc7ec7e9cb19d1fe0e21c",
+      "ledger_sha256": "c75d8826e6b88345e46a2853d8aaced7b2edbc3e744d4fd43a7cdb7a660fa449"
+    },
+    {
+      "case_id": "bp_deletion_050",
+      "chain_sha256": "15014c782882e3e5985480c7926d391b11f1ed28bd873c5e49f81a900a8ce1dc",
+      "empty_fasta_record": false,
+      "fasta_sha256": "da0ffa2bc1921851a4672479a9dc1160607544774b3327a678691d2daade77bd",
+      "ledger_sha256": "a5e53399200c87f6a37c75483fbaf8590261e6046abd7cba9fec030c7118ce28"
+    },
+    {
+      "case_id": "bp_deletion_075",
+      "chain_sha256": "9344585c26822af0270e7aa1e53b5391ce8affb39c59d547ce8dd51bcfa6f5d9",
+      "empty_fasta_record": false,
+      "fasta_sha256": "d988f32f2d7d08cf24a059e2a9f812ddb55d3f20551dadc9e11f55552c63ddc4",
+      "ledger_sha256": "c9ce8eaac5a3068881425ab17cbc28e133569f126525538d6f92c9d1554f566c"
+    },
+    {
+      "case_id": "bp_deletion_100",
+      "chain_sha256": "624a4a68a3865596cd9fd7fa39971bb83e2f695c5a75869464399770f5266e05",
+      "empty_fasta_record": true,
+      "fasta_sha256": "c101ad7c750d4566f3dfcedfc1f478049289dd3a60ce6a06b10197a7ede9dd4c",
+      "ledger_sha256": "f6a28a7225f903f7240345f55319ae0b868b6876c6e2b4da7b25bf3ef3f95e11"
+    }
+  ],
+  "complete_unit_count_truth": "unknown",
+  "development_only": true,
+  "dominant_period_context_bp": 785,
+  "extraction_receipt_sha256": "478233f22a0a3315833abdd01ff6af3df1caeca203db470b7d2838d5503b637c",
+  "generator_sha256": "f3e0e7dbef1636ccf6378a6d77a72b7f373a75570329d1027918871b66e31bff",
+  "read_pairing_status": "not_evaluated",
+  "schema_version": 1,
+  "source_archive_fasta": "/Users/ycy/Codex/Sofw/TandemX/paper/evidence/legume_ysd56_candidate_v1/TXF000708_array.fasta",
+  "source_archive_fasta_sha256": "0866dbf818cbcd81b7a768c974fb21f221b3de95cfd20e95b9314613b5b04df9",
+  "source_fragment_length_bp": 124029,
+  "source_length_mod_period": 784,
+  "source_region": {
+    "end0": 14090910,
+    "extracted_length_bp": 124029,
+    "region_id": "TXF000708_array",
+    "sequence_id": "CP154579.1",
+    "start0": 13966881
+  },
+  "tandem_confirmation_summary_sha256": "9ad4aea00b73382764a8f559e13ece90153b4b2506e23bb8970e502cdc499ee3",
+  "truth_scope": "injected_bp_delta_only"
+}

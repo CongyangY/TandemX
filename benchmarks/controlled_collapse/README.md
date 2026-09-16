@@ -31,7 +31,7 @@ bounded scoring change. The
 receipt has 10 cases × 2 loci = 20 fixed-denominator rows. Twelve rows carry
 injected positive deletion, including two completely absent arrays; all 20
 smoke predictions are `not_reported`, and classification/MAE and primary AUPRC
-are null. Total ledger denominator is **20**; the valid-pair edit-metric
+are null. Total ledger denominator is **20**; the technical injected-edit
 denominator is **18**, excluding the two invalid donor-swap rows while keeping
 them in the total and status counts. A separate full-`ok` test copies the known
 ledger truth into predictions and produces TP=12, FN=0, FP=0, TN=6,
@@ -39,6 +39,11 @@ sensitivity=1, FPR=0, and injected edit MAE=0 at the preregistered toy
 threshold 0.5. This is a **tautological scorer smoke test**, not a model
 performance result. The generated
 fixture is not evidence of TandemX detection accuracy.
+The corrected scorer reports zero independently verified same-donor/read-baseline
+rows and blocks read–assembly accuracy; its 18-row metric is technical only.
+The original `score_smoke_v1/` summary is retained as a historical receipt.
+`score_smoke_v2/` is the corrected-label replay against the same frozen
+generated case hashes.
 An additional independent test plan adds an eight-copy 8-bp locus to exercise
 different unit lengths; it is not part of the committed 10-case toy receipt.
 

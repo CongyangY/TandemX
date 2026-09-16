@@ -1,0 +1,3 @@
+case_id	operation	source_start0	source_end0	edited_start0	edited_end0
+bp_deletion_050	match	0	62015	0	62015
+bp_deletion_050	delete	62015	124029	62015	62015

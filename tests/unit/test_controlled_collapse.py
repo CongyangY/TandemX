@@ -132,9 +132,11 @@ def test_complete_scoring_has_binary_and_continuous_metrics(tmp_path):
     summary = json.loads((scored / "summary.json").read_text())
     metric = summary["injected_edit_metrics"]
     assert metric["status"] == "ok"
-    assert (metric["denominator"], metric["tp"], metric["fn"], metric["fp"], metric["tn"]) == (18, 12, 0, 0, 6)
+    assert (metric["technical_injected_edit_denominator"], metric["tp"], metric["fn"], metric["fp"], metric["tn"]) == (18, 12, 0, 0, 6)
     assert (metric["sensitivity"], metric["fpr"], metric["missing_bp_mae"]) == (1.0, 0.0, 0.0)
     assert summary["denominator"] == 20
+    assert summary["verified_same_donor_read_baseline_rows"] == 0
+    assert summary["read_assembly_accuracy_status"].startswith("blocked_")
     assert summary["status_counts"] == {"not_reported": 2, "ok": 18}
     assert summary["primary_auprc"] is None
 
@@ -239,3 +241,20 @@ def test_prediction_state_validation(tmp_path, status, score_value, bp):
                      f"contraction_025\ttoy_family_1\tlocus_1\t{status}\t{score_value}\t{bp}\n")
     with pytest.raises(ValueError):
         score(out, preds, tmp_path / "scored", 0.5)
+
+
+def test_declared_donor_metadata_never_becomes_verified_truth(tmp_path):
+    plan = json.loads(PLAN.read_text())
+    plan["baseline_read_consistency"] = True
+    path = tmp_path / "declared.json"
+    path.write_text(json.dumps(plan))
+    out = tmp_path / "generated"
+    generate(SOURCE, path, out)
+    preds = tmp_path / "predictions.tsv"
+    preds.write_text("case_id\tfamily_id\tlocus_id\tstatus\tscore\tpredicted_missing_bp\n")
+    scored = tmp_path / "scored"
+    score(out, preds, scored, 0.5)
+    summary = json.loads((scored / "summary.json").read_text())
+    assert summary["declared_consistent_pair_rows"] == 18
+    assert summary["verified_same_donor_read_baseline_rows"] == 0
+    assert summary["read_assembly_accuracy_status"].startswith("blocked_")
