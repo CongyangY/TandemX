@@ -1,10 +1,29 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-16: bounded direct-discover scan resume
+
+Commit `108a644` adds opt-in `tandemx discover --checkpoint-every N` for a
+single input file with sample rate 1 and automatic discovery budget disabled.
+It retains exact CandidateRepeat state at chunk boundaries, checks complete
+input SHA-256 and the processed read prefix on resume, and compares the saved
+candidate table prefix. Interrupted FASTA and gzip-FASTQ cases matched fresh
+public output bytes; corrupt or conflicting state fails closed. The full local
+Python suite passed 972 tests on the final code state in 127.24 seconds;
+focused final tests passed 16. No large-input or T7 run was performed. The
+existing discover candidate list stays in memory, while each snapshot writes
+all candidates and rehashes the candidate table; both memory and repeated
+snapshot I/O can grow substantially. This does not establish production-scale
+resume, and the pipeline `run` command does not yet activate this option.
+
+The prior `quantify` checkpoint commit `135979d` passed [GitHub CI run
+35086069745](https://github.com/CongyangY/TandemX/actions/runs/35086069745)
+on macOS and Ubuntu. This validates source/build/tests, not T7 I/O stability.
+
 ## Checkpoint 2026-09-16: opt-in quantify scan resume
 
 Commit `d492e09` adds `tandemx quantify --checkpoint-every N` for a direct
 quantify run. It atomically replaces a count/quality-stat snapshot after each
-N accepted reads, authenticates the checkpoint and full input/configuration,
+N accepted reads, checks the checkpoint checksum and full input/configuration,
 and revalidates the processed read prefix before continuing. Four combinations
 of Python/Rust and FASTA/FASTQ interruption/resume matched fresh default TSV
 bytes; corrupt checkpoint, changed input tail and stale output fail closed.
