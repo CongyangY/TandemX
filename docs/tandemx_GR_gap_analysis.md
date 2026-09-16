@@ -169,7 +169,7 @@
 - 将 `docs/comparator_matrix.md` 和 README 中过时的 competitor/版本与 MVP 口径更新，但**本轮先保留原样作为历史档案**。
 - `docs/current_status.md` 的旧时间段包含已被 9 月 14 日检查点覆盖的“正在运行”；新实验不得引用被覆盖状态。
 - 可复现 benchmark 必须保存完整 input/source/executable hash、配置、机器/线程、全部输出及空/失败/拒判行；模型成功才推进生产代码与文稿。
-- 该审计没有实际安装或运行 2026 CENdetectHOR、TideCluster 新版或 HiCAT-human；文献/README 能力与本地同机性能必须分开。
+- 该 Phase-1 审计时点没有实际安装或运行 2026 CENdetectHOR、TideCluster 新版或 HiCAT-human；文献/README 能力与本地同机性能必须分开。**后续状态（2026-09-16）：**CENdetectHOR 已在本机项目隔离环境做小型合成输入的接口 smoke，11/11 pipeline 步骤完成，但未恢复设计的 30 bp A/B 单体及 AB HOR，不能算结构准确性通过；TideCluster 新版与 HiCAT-human 仍未本机运行。详见[后续运行证据](logs/cendetecthor_local_integration_20260916.md)。
 
 ## 6. 独立严苛审稿后的修订记录
 
@@ -177,4 +177,4 @@
 
 ## 7. 审计覆盖与尚未验证的范围
 
-本轮核对了仓库规则与[当前状态总账](current_status.md)、[9 月 16 日专家现状盘点](tandemx_expert_status_20260916_zh.md)、生产发现/定量/层级/管线实现、相关单元与集成测试、[性能说明](performance.md)、已冻结的模拟/SRF/旧新组装/正交读段证据摘要及[稿件 v5](../paper/0910/manuscript_v5.md)。文献侧核对官方 CENdetectHOR、SRF、TideCluster、HiCAT-human 等项目与相应方法原文，并把官方能力与尚未本地复现的能力区分。仓库中还有大量历史运行收据、原始比较数据和图稿；本轮**没有逐文件复验全部仓库内容或 T7 上的大文件**。2026 竞品没有安装在同一机器重跑，新增真值材料没有下载，资源预测没有取代测量；这些是下一阶段明确的未完成工作。
+本轮核对了仓库规则与[当前状态总账](current_status.md)、[9 月 16 日专家现状盘点](tandemx_expert_status_20260916_zh.md)、生产发现/定量/层级/管线实现、相关单元与集成测试、[性能说明](performance.md)、已冻结的模拟/SRF/旧新组装/正交读段证据摘要及[稿件 v5](../paper/0910/manuscript_v5.md)。文献侧核对官方 CENdetectHOR、SRF、TideCluster、HiCAT-human 等项目与相应方法原文，并把官方能力与尚未本地复现的能力区分。仓库中还有大量历史运行收据、原始比较数据和图稿；本轮**没有逐文件复验全部仓库内容或 T7 上的大文件**。在此 Phase-1 审计时点，2026 竞品没有安装在同一机器重跑，新增真值材料没有下载，资源预测没有取代测量；后续小型接口 smoke 状态见[独立日志](logs/cendetecthor_local_integration_20260916.md)。

@@ -1,0 +1,8 @@
+Removed sequence feature toy:0-5700[5040:5100](+) overlapping (60 bps) with sequence feature toy:0-5700[5040:5100](+).
+Removed sequence feature toy:0-5700[5100:5147](+) overlapping (47 bps) with sequence feature toy:0-5700[5100:5147](+).
+Removed sequence feature toy:0-5700[5147:5190](+) overlapping (43 bps) with sequence feature toy:0-5700[5147:5190](+).
+# of chunks for computing distance matrix: 1
+Chunk size: 100
+Num processes: 1
+Blocks: ['([0:0](100,100))']
+Block result shapes: [[(100, 100)]]

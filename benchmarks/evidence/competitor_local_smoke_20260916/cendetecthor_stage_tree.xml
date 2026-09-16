@@ -1,0 +1,204 @@
+<phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phyloxml.org" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd">
+  <phylogeny rooted="true">
+    <name>monomers</name>
+    <clade>
+      <name>F</name>
+      <branch_length>0</branch_length>
+      <clade>
+        <name>F1#1</name>
+        <branch_length>7.5</branch_length>
+        <clade>
+          <name>monomer_01</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[0:30](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_03</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[60:90](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_05</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[120:150](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_07</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[180:210](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_09</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[240:270](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_11</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[300:330](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_13</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[360:390](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_15</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[420:450](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_17</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[480:510](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_19</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[540:570](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_21</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[600:630](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_23</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[660:690](+)</location>
+          </sequence>
+        </clade>
+      </clade>
+      <clade>
+        <name>F1#2</name>
+        <branch_length>7.5</branch_length>
+        <clade>
+          <name>monomer_02</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[30:60](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_04</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[90:120](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_06</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[150:180](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_08</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[210:240](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_10</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[270:300](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_12</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[330:360](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_14</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[390:420](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_16</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[450:480](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_18</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[510:540](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_20</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[570:600](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_22</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[630:660](+)</location>
+          </sequence>
+        </clade>
+        <clade>
+          <name>monomer_24</name>
+          <branch_length>0.0</branch_length>
+          <sequence type="dna">
+            <location>toy.chr1[690:720](+)</location>
+          </sequence>
+        </clade>
+      </clade>
+    </clade>
+  </phylogeny>
+  <phylogeny rooted="true">
+    <name>hors</name>
+    <clade>
+      <name>H</name>
+      <branch_length>0</branch_length>
+      <sequence type="dna">
+        <location>toy.chr1[0:720](+)</location>
+      </sequence>
+      <property ref="monomer_clade_seq" datatype="xsd:string" applies_to="clade">F</property>
+      <clade>
+        <name>H1</name>
+        <branch_length>7.5</branch_length>
+        <sequence type="dna">
+          <location>toy.chr1[0:720](+)</location>
+        </sequence>
+        <property ref="monomer_clade_seq" datatype="xsd:string" applies_to="clade">F1#1,F1#2</property>
+      </clade>
+    </clade>
+  </phylogeny>
+</phyloxml>

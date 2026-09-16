@@ -1,0 +1,4 @@
+2026-09-16 17:24:15.060 system_profiler[80882:32579438] XType: Using static font registry.
+Matplotlib is building the font cache; this may take a moment.
+/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/.venv/lib/python3.11/site-packages/Bio/Phylo/PhyloXML.py:985: PhyloXMLWarning: String monomer_clade_seq doesn't match the given regexp
+  _check_str(ref, self.re_ref.match)

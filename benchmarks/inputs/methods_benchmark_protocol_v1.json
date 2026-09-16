@@ -46,7 +46,8 @@
     "TRF": "4.10.0-rc.2 verified local .conda-benchmark/bin/trf",
     "TideHunter": "1.5.5 verified local .conda-benchmark/bin/TideHunter",
     "SRF": "historical frozen run exists; current executable path/version unresolved",
-    "TideCluster": "historical 1.21.2 image is distinct from current release; current commit unresolved",
-    "CENdetectHOR": "pipeline commit unresolved; package 0.0.6 is a distinct version identity, not locally installed/verified"
+    "TideCluster": "historical 1.21.2 image is distinct from current 1.21.3 source HEAD 8131547e75f73a1e61298a89ff4e861fbd613b7e; current release not run locally; osx-arm64 conda solve failed on TideHunter 1.4.3 dependency",
+    "CENdetectHOR": "pipeline 969f4ef515fadd8b8a035357294971ff57d4618f with library 0.0.6 at bdc3a9df5b60adafdd17eaded1b994edd22aae03: local toy interface smoke 11/11, but 30-bp A/B and AB HOR truth not recovered; not a benchmark pass",
+    "HiCAT-human": "source HEAD 9e1f1697b5bdc2287e21375566153555261b6d8e inspected; not installed or run locally"
   }
 }

@@ -1,0 +1,5 @@
+# of chunks for computing distance matrix: 1
+Chunk size: 24
+Num processes: 1
+Blocks: ['([0:0](24,24))']
+Block result shapes: [[(24, 24)]]
