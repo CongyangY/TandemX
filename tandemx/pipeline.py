@@ -649,6 +649,12 @@ def run_command_with_live_logs(
                 except ProcessLookupError:
                     pass
                 process.wait()
+            # The group leader may exit before a descendant that ignored TERM.
+            # End any remaining members of this step's isolated process group.
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
             for thread in threads:
                 thread.join(timeout=5)
             raise

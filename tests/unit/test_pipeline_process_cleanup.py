@@ -93,3 +93,49 @@ def test_sigint_terminates_active_step_process(tmp_path: Path) -> None:
         if parent.poll() is None:
             parent.kill()
             parent.wait()
+
+
+@pytest.mark.skipif(os.name != "posix", reason="process groups require POSIX")
+def test_sigint_terminates_descendant_after_leader_exits(tmp_path: Path) -> None:
+    ready = tmp_path / "grandchild.ready"
+    delayed_write = tmp_path / "grandchild_survived"
+    grandchild_code = (
+        "import pathlib,signal,sys,time;"
+        "signal.signal(signal.SIGTERM,signal.SIG_IGN);"
+        "pathlib.Path(sys.argv[1]).touch();"
+        "time.sleep(1.5);"
+        "pathlib.Path(sys.argv[2]).touch()"
+    )
+    child_code = (
+        "import subprocess,sys,time;"
+        "subprocess.Popen([sys.executable,'-c',sys.argv[1],sys.argv[2],sys.argv[3]]);"
+        "time.sleep(30)"
+    )
+    wrapper = (
+        "import sys\n"
+        "from pathlib import Path\n"
+        "from tandemx.pipeline import run_command_with_live_logs\n"
+        "run_command_with_live_logs([sys.executable, '-c', "
+        f"{child_code!r}, {grandchild_code!r}, sys.argv[1], sys.argv[2]], "
+        "Path(sys.argv[3]), Path(sys.argv[4]))\n"
+    )
+    parent = subprocess.Popen(
+        [sys.executable, "-c", wrapper, str(ready), str(delayed_write),
+         str(tmp_path / "stdout.log"), str(tmp_path / "stderr.log")],
+        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+    )
+    try:
+        deadline = time.monotonic() + 8
+        while not ready.is_file() and time.monotonic() < deadline:
+            if parent.poll() is not None:
+                pytest.fail("wrapper exited before descendant started")
+            time.sleep(0.05)
+        assert ready.is_file()
+        os.kill(parent.pid, signal.SIGINT)
+        assert parent.wait(timeout=8) != 0
+        time.sleep(1.6)
+        assert not delayed_write.exists()
+    finally:
+        if parent.poll() is None:
+            parent.kill()
+            parent.wait()
