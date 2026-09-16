@@ -1,0 +1,98 @@
+{
+  "baseline": "equal_input_anchored_read_vs_assembly_bp_length_only",
+  "cases": [
+    {
+      "architecture_prediction": false,
+      "architecture_status": "no_supported_discordance",
+      "assembly_bp": 32,
+      "case": "no_edit_ab",
+      "elapsed_seconds": 0.07133029191754758,
+      "length_only_prediction": false,
+      "read_bp": 32,
+      "truth_discordance": false
+    },
+    {
+      "architecture_prediction": false,
+      "architecture_status": "no_supported_discordance",
+      "assembly_bp": 48,
+      "case": "no_edit_abc",
+      "elapsed_seconds": 0.11392487492412329,
+      "length_only_prediction": false,
+      "read_bp": 48,
+      "truth_discordance": false
+    },
+    {
+      "architecture_prediction": false,
+      "architecture_status": "no_supported_discordance",
+      "assembly_bp": 32,
+      "case": "no_edit_variant",
+      "elapsed_seconds": 0.06792979198507965,
+      "length_only_prediction": false,
+      "read_bp": 32,
+      "truth_discordance": false
+    },
+    {
+      "architecture_prediction": true,
+      "architecture_status": "candidate_discordance",
+      "assembly_bp": 32,
+      "case": "copy_deletion",
+      "elapsed_seconds": 0.10554191702976823,
+      "length_only_prediction": true,
+      "read_bp": 48,
+      "truth_discordance": true
+    },
+    {
+      "architecture_prediction": true,
+      "architecture_status": "candidate_discordance",
+      "assembly_bp": 32,
+      "case": "equal_length_variant",
+      "elapsed_seconds": 0.0677274998743087,
+      "length_only_prediction": false,
+      "read_bp": 32,
+      "truth_discordance": true
+    },
+    {
+      "architecture_prediction": true,
+      "architecture_status": "candidate_discordance",
+      "assembly_bp": 32,
+      "case": "equal_length_label_swap",
+      "elapsed_seconds": 0.06619058293290436,
+      "length_only_prediction": false,
+      "read_bp": 32,
+      "truth_discordance": true
+    },
+    {
+      "architecture_prediction": true,
+      "architecture_status": "candidate_discordance",
+      "assembly_bp": 32,
+      "case": "orientation_inversion",
+      "elapsed_seconds": 0.05982400011271238,
+      "length_only_prediction": false,
+      "read_bp": 32,
+      "truth_discordance": true
+    }
+  ],
+  "input_sha256": "1268bdefbc54b8e749a9e39950fe9782f3671733263b3234d96cf771294e17b8",
+  "prototype": "same_inputs_monomer_decomposition_and_order",
+  "source_commit": "8d4a66f7cec60e2aad807590209333782a823fe6",
+  "source_sha256": {
+    "prototype.py": "5e067fc1790a07270915d4121eac2a6c3d1ca449292102f3d422555ee5617403",
+    "run_development.py": "6ebd319bbcecb3377ae8ec73dbf48b857e2066b6a0d34bfd927cdcda3feeb35a"
+  },
+  "status": "development_exact_synthetic_only",
+  "summary": {
+    "architecture": {
+      "fn": 0,
+      "fp": 0,
+      "tn": 3,
+      "tp": 4
+    },
+    "length_only": {
+      "fn": 3,
+      "fp": 0,
+      "tn": 3,
+      "tp": 1
+    }
+  },
+  "warning": "identical_synthetic_read_sequences_are_not_biological_replication"
+}
