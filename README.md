@@ -75,7 +75,9 @@ included in `tandemx-dev`, is a runtime dependency for this interface. Repeating
 the command automatically reuses only validated stages with matching input and
 command fingerprints. `--force` reruns stages; `--no-resume` refuses reuse;
 `--resume` remains a compatibility alias. This is stage-level resume, not an
-interrupted-stage checkpoint. See [output fields](docs/file_formats.md) and the
+interrupted-stage checkpoint. Ctrl-C terminates the active step process group
+and records exit status 130 with unvalidated outputs; partial stage files may
+remain and are not eligible for validated reuse. See [output fields](docs/file_formats.md) and the
 [minimal example](examples/toy/simple_report.md).
 
 ## Existing analysis modules and evidence

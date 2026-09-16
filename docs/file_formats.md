@@ -502,7 +502,7 @@ Produced by: `tandemx run` and `benchmarks/scripts/run_pipeline_benchmark.py`.
 | exit_status | integer | Process exit status; zero for successful or intentionally skipped steps |
 | output_dir | path | Step output directory |
 | output_validated | boolean | Whether expected outputs passed current validation |
-| notes | string | Skip reason, failure reason, profiling state, or recorded thread setting |
+| notes | string | Skip reason, failure reason, profiling state, or recorded thread setting; an interrupted child step uses `interrupted_child_process_group_terminated` with exit status 130 and `output_validated=false` |
 
 Each successfully completed non-validation step also stores a hidden
 `.resume_fingerprint.json` beside its outputs. `tandemx run --resume` compares

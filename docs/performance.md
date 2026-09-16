@@ -79,7 +79,7 @@ When this bounded mode is active and multiple files are supplied, discover reads
 The default `--min-period` is 2 bp. Use `--min-period 20` when engineering pilots
 should focus on longer satellite-like monomers and ignore STR-like periods.
 
-`--chunk-size` and `--chunk-bases` jointly bound how many selected reads and sequence bases are submitted to the Rust thread pool at once. They are not checkpoint boundaries. Step-level `tandemx run --resume` uses validated outputs plus SHA-256 input/command fingerprints, but intra-step checkpointing is not implemented.
+`--chunk-size` and `--chunk-bases` jointly bound how many selected reads and sequence bases are submitted to the Rust thread pool at once. They are not checkpoint boundaries. Step-level `tandemx run --resume` uses validated outputs plus SHA-256 input/command fingerprints, but intra-step checkpointing is not implemented. When `tandemx run` receives Ctrl-C during a child step, it terminates that step's process group and records exit status 130. Partially written stage files can remain for diagnosis but cannot satisfy validated resume.
 
 `tandemx quantify` uses the same live progress style while scanning reads for diagnostic k-mers. When commands are launched through `tandemx run`, child command output is streamed to the terminal while still being saved under `logs/`.
 

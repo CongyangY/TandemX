@@ -580,7 +580,9 @@ and ambiguity. Figure selection affects display only, with full tables retained.
 The simplified run interface uses the existing fixed diagnostic k=21 and host
 thread cap. Advanced YAML is strictly validated, with explicit CLI precedence.
 Automatic resume requires validated stage outputs and matching input/command
-fingerprints. An assembly total may provide a visibly provisional normalization
+fingerprints. A child step runs in its own process group; interruption sends
+termination to that group and records status 130 without validating partial
+outputs. An assembly total may provide a visibly provisional normalization
 denominator when genome size is omitted; this is not a genome-size estimator.
 Reads-only discovery remains available without a denominator, while absolute
 abundance remains unavailable. Existing explicitly normalized analyses retain

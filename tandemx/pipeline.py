@@ -7,7 +7,9 @@ import csv
 import hashlib
 import json
 import math
+import os
 import shlex
+import signal
 import subprocess
 import sys
 import threading
@@ -611,6 +613,7 @@ def run_command_with_live_logs(
             stderr=subprocess.PIPE,
             text=True,
             bufsize=1,
+            start_new_session=True,
         )
 
         def forward(pipe: TextIO, log_handle: TextIO, mirror: TextIO) -> None:
@@ -626,9 +629,29 @@ def run_command_with_live_logs(
         ]
         for thread in threads:
             thread.start()
-        returncode = process.wait()
-        for thread in threads:
-            thread.join()
+        try:
+            returncode = process.wait()
+            for thread in threads:
+                thread.join()
+        except BaseException:
+            # A terminal interruption must not leave the long-running step or
+            # a descendant compressor/alignment process writing partial output.
+            # The new session gives this one step a dedicated process group.
+            try:
+                os.killpg(process.pid, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                process.wait()
+            for thread in threads:
+                thread.join(timeout=5)
+            raise
         return returncode
 
 
@@ -788,11 +811,28 @@ def run_pipeline(config: PipelineConfig) -> tuple[list[StepRecord], int]:
             flush=True,
         )
         started = time.perf_counter()
-        returncode = run_command_with_live_logs(
-            actual_command,
-            logs_dir / f"{step}.stdout.log",
-            logs_dir / f"{step}.stderr.log",
-        )
+        try:
+            returncode = run_command_with_live_logs(
+                actual_command,
+                logs_dir / f"{step}.stdout.log",
+                logs_dir / f"{step}.stderr.log",
+            )
+        except KeyboardInterrupt:
+            runtime = time.perf_counter() - started
+            end_time = utc_now()
+            records.append(make_record(
+                config, run_id, step, command=actual_command,
+                start_time=start_time, end_time=end_time,
+                runtime_seconds=runtime, exit_status=130,
+                output_validated=False, notes="interrupted_child_process_group_terminated",
+            ))
+            with pipeline_log.open("at", encoding="utf-8") as handle:
+                handle.write(
+                    f"{end_time} step={step} exit_status=130 "
+                    f"runtime_seconds={runtime:.6f} validated=false interrupted=true\n"
+                )
+            finalize_run_outputs(config, records)
+            return records, 130
         runtime = time.perf_counter() - started
         end_time = utc_now()
         print(
