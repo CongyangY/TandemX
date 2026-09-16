@@ -13,7 +13,7 @@
 | M1 读段丰度研究 | A–F 候选在同一固定目录的 12 个合成 development 案例中筛选；普通竞争映射整体更稳。另做一次流式竞争占据原型，edlib 在 600-read 玩具例上把局部 Python DP 的约 7–8 s 降到约 0.02 s，但误差和错家族归属未稳定改善。负结果保留。 | 未通过独立验证；新原型未进入公共 CLI，生产估计器保持原样。局部 DP 加速不能外推到全流程。 |
 | M2 阵列结构 | 用提供的 monomer 做精确标签路径原型：11 个设计案例中，8/8 植入的路径差异被检出、3/3 阴性保持阴性；同输入长度规则只能检出 4/8。 | 同方法设计的回归案例不构成独立准确度。相关读段错误可伪造候选，单体内部变异可漏检；没有真实长阵列锚定或生物验证。 |
 | 竞争工具 | TRF、TideHunter、CENdetectHOR、TideCluster、SRF 均在各自适用的小型输入上产生原生输出；CENdetectHOR 完成一次 11/11 步流程。 | CENdetectHOR/TideCluster 未恢复所设计的两个 30-bp 单体结构，这只是玩具结构检验。HiCAT-human 的精确依赖在 macOS arm64 无法求解，TRASH 的新运行受 Docker daemon 阻断；无跨工具同终点真实准确度排名。 |
-| 可靠性 | `run` 中断状态记为 130，清理遗留进程组；定量表使用临时文件、刷盘及原子替换，注入 EIO/ENOSPC 后不会留下半张正式表。 | 此时仍没有 `discover`/`quantify` 阶段内部断点续跑；不能把阶段级复用称作内部 resume。 |
+| 可靠性 | `run` 中断状态记为 130，清理遗留进程组；定量表使用临时文件、刷盘及原子替换，注入 EIO/ENOSPC 后不会留下半张正式表。其后提交 `d492e09` 为直接执行的 `quantify` 增加可选 `--checkpoint-every N`：断点和完整输入身份校验，重启时验证已处理读段前缀；Python/Rust × FASTA/FASTQ 的中断续跑均与新跑默认 TSV 字节一致。 | `discover` 阶段内部续跑和 `run` 对新模式的调用未建立；续跑需每次先完整哈希输入并从头解码已处理前缀，JSON 计数快照也会重复写入。百 GB 输入的额外 I/O 尚未测量，T7 不稳定时不能据此声称可安全恢复大型作业。 |
 | T7 和 K30076 | 重新从原始 spot 范围提取 25,000 reads，FASTQ SHA-256 与原成功收据**完全一致**。新 T7 目录经过写入、刷盘和读回；旧损坏 gzip 与两个失败 partial 在核对身份后删除。block 2 的 34 个块逐一严格复核，合计 845,098 reads、15,027,572,584 bp；新的 aggregate 收据单独发布。另有已证实 SQLite `quick_check` 报 malformed 的 V14167 中断产物被记录哈希后删除。 | 历史损坏 aggregate 仍无效；block 1 在掉盘后未重读，block 3 未获取，30× 共同比较尚未运行。T7 小规模读写探针通过，但卷级文件系统复核因占用无法卸载；当前通过 VIA 设备枚举为最高 480 Mb/s，物理连接稳定性尚未证实。 |
 | 版本与测试 | 本地 `tandemx-dev` 全量 Python 测试在修复提交前通过 **958 项**；新增 ENOSPC 聚焦测试另通过 **4 项**。修复提交 `4eb0ffd` 的 [GitHub CI run 35084978248](https://github.com/CongyangY/TandemX/actions/runs/35084978248) 在 macOS 和 Ubuntu 两个平台均成功。 | 原生 Rust 与大数据 benchmark 未因本次存储修复重新运行；CI 通过不等于 T7 物理连接或真实数据科学验证通过。 |
 

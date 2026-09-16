@@ -1,5 +1,22 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-16: opt-in quantify scan resume
+
+Commit `d492e09` adds `tandemx quantify --checkpoint-every N` for a direct
+quantify run. It atomically replaces a count/quality-stat snapshot after each
+N accepted reads, authenticates the checkpoint and full input/configuration,
+and revalidates the processed read prefix before continuing. Four combinations
+of Python/Rust and FASTA/FASTQ interruption/resume matched fresh default TSV
+bytes; corrupt checkpoint, changed input tail and stale output fail closed.
+The full local Python suite passed 965 tests before a final default-path
+compatibility edit; focused final tests passed 36. Default quantify output
+semantics and estimator are unchanged. The checkpoint mode has a full-input
+SHA-256 read on each invocation, sequential decompression/read-prefix replay
+on resume, and repeated JSON count snapshots. It is not random-access resume
+and has unmeasured, potentially substantial extra I/O on 100-GB inputs. No
+T7/real large-input run was performed. `discover` intra-stage resume is still
+absent.
+
 ## Checkpoint 2026-09-16: confirmed T7 payload repair and block-2 revalidation
 
 The repair commit `4eb0ffd` passed [GitHub CI run 35084978248](https://github.com/CongyangY/TandemX/actions/runs/35084978248) on both macOS and Ubuntu. This is source/build/test validation, not whole-volume or biological validation.
