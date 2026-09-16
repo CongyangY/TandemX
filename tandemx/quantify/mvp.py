@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import math
 import os
+import tempfile
 import time
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -951,4 +952,19 @@ def write_copy_number(path: Path, estimates: Sequence[CopyNumberEstimate]) -> No
                 ]
             )
         )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    # Keep an incomplete write out of the public result path. The temporary
+    # file lives beside the result so the final replace is on one filesystem.
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=path.parent,
+            prefix=f".{path.name}.", suffix=".tmp", delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            handle.write("\n".join(lines) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
