@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "protocol_state": "development-input-inventory-only; no validation or final held-out opened",
+  "datasets": [
+    {
+      "dataset": "ERR6210723_prefix1000",
+      "sample": "SAMEA8961650",
+      "species": "Arabidopsis thaliana",
+      "truth_type": "none",
+      "family": [],
+      "array_coordinates": [],
+      "coverage": null,
+      "read_source": "ENA ERR6210723, first 1000 records; prefix sampling is biased",
+      "assembly_source": "none; no matched assembly enrolled",
+      "split": "development",
+      "allowed_tuning": true,
+      "metrics": ["input-integrity-only"],
+      "competitors": [],
+      "software_versions": {},
+      "donor_id": "unresolved-ERR6210723",
+      "accessions": ["ERR6210723", "SAMEA8961650"],
+      "assembly_lineage": "none-ERR6210723",
+      "family_homology_group": "unassigned-ERR6210723",
+      "status": "source-unresolved",
+      "files": [
+        {
+          "path": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_prefix1000/reads.fa",
+          "kind": "fasta",
+          "bytes": 15710688,
+          "sha256": "4adca195ae3587c52bf503751fd82fe68ae755fe15c7d10f3c09d2d1a1a2305f"
+        }
+      ]
+    },
+    {
+      "dataset": "Col-CEN_v1.2_public_control",
+      "sample": "Col-CEN-public-reference",
+      "species": "Arabidopsis thaliana",
+      "truth_type": "assembly-proxy",
+      "family": [],
+      "array_coordinates": [],
+      "coverage": null,
+      "read_source": "none; assembly-only public control",
+      "assembly_source": "schatzlab/Col-CEN v1.2 commit abb9b614d91c8a0bbd05a199c694fb5eafb5fe30",
+      "split": "development",
+      "allowed_tuning": true,
+      "metrics": ["input-integrity-only"],
+      "competitors": [],
+      "software_versions": {},
+      "donor_id": "unresolved-Col-CEN",
+      "accessions": ["Col-CEN-v1.2"],
+      "assembly_lineage": "Col-CEN-v1.2",
+      "family_homology_group": "unassigned-Col-CEN",
+      "status": "source-unresolved",
+      "files": [
+        {
+          "path": "/Volumes/T7/Codex/TandemX/data/references/Col-CEN_v1.2/Col-CEN_v1.2.fasta.gz",
+          "kind": "fasta",
+          "bytes": 38265592,
+          "sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8"
+        }
+      ]
+    },
+    {
+      "dataset": "YSD56_SRR28726931_sample001",
+      "sample": "SAMN40909152",
+      "species": "Glycine soja",
+      "truth_type": "none",
+      "family": [],
+      "array_coordinates": [],
+      "coverage": 0.01157093946110163,
+      "read_source": "ENA SRR28726931 Revio YSD56 HiFi, deterministic 0.00025 sample",
+      "assembly_source": "none enrolled in this small-input inventory",
+      "split": "development",
+      "allowed_tuning": true,
+      "metrics": ["input-integrity-only"],
+      "competitors": [],
+      "software_versions": {},
+      "donor_id": "YSD56-source-link-pending",
+      "accessions": ["SRR28726931", "SAMN40909152", "PRJNA1095640"],
+      "assembly_lineage": "none-SRR28726931",
+      "family_homology_group": "unassigned-YSD56",
+      "status": "source-unresolved",
+      "files": [
+        {
+          "path": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_001.fastq.gz",
+          "kind": "fastq",
+          "bytes": 6635734,
+          "sha256": "b03acf91c941b72fc5b5b2e40a3646596944cc90ed272b1b9d9806970268ae82"
+        }
+      ]
+    },
+    {
+      "dataset": "K30076_block2_attempt001_known_bad",
+      "sample": "K30076",
+      "species": "Arachis hypogaea",
+      "truth_type": "none",
+      "family": [],
+      "array_coordinates": [],
+      "coverage": null,
+      "read_source": "K30076 block 2 attempt 001 chunk 3; recorded integrity failure, do not consume",
+      "assembly_source": "none enrolled",
+      "split": "development",
+      "allowed_tuning": false,
+      "metrics": [],
+      "competitors": [],
+      "software_versions": {},
+      "donor_id": "K30076-source-link-pending",
+      "accessions": ["K30076"],
+      "assembly_lineage": "none-K30076",
+      "family_homology_group": "unassigned-K30076",
+      "status": "invalid",
+      "failure_reason": "2026-09-14 block 2 chunk 3 unchanged byte count but changed SHA-256 and failed gzip; aggregate invalid; later T7 EIO",
+      "files": []
+    }
+  ]
+}

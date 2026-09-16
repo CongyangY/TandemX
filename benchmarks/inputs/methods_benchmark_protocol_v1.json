@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "state": "draft-before-independent-heldout",
+  "split_order": ["development", "validation", "final-heldout"],
+  "split_unit": ["species", "donor_id", "sample", "accession", "assembly_lineage", "family_homology_group"],
+  "split_rules": {
+    "development": "All previously inspected Ey15-2, Macadamia, YSD56, Col-CEN and other observed datasets remain development or public positive controls; tuning permitted only here.",
+    "validation": "New donor/species/family homology groups can test a frozen candidate once; findings may trigger a new development iteration, but that validation set cannot become final-heldout.",
+    "final-heldout": "At least two previously unused plant species, donor groups and homolog groups sealed before model and baseline selection; one planned reveal after source, truth, denominator, power and commands are frozen.",
+    "leakage": "All reads, libraries, samples, accessions, haplotypes, assembly versions, edited descendants, nested subsets and homologous family variants of a donor or assembly lineage remain in one split. No random array/read split across a lineage.",
+    "public_control": "Published human/Col-CEN examples used for method choice are development positive controls, not plant final-heldout."
+  },
+  "input_gate": ["source provenance and donor/extraction/haplotype relationship", "file byte size", "file SHA-256", "gzip trailer", "complete FASTA/FASTQ records", "read count and base count", "assembly coordinates and contig names", "T7 stable bounded write-readback before large acquisition or compute"],
+  "truth_hierarchy": {
+    "simulated-exact": "known source molecules/copies and coordinates",
+    "edited-delta": "exact injected assembly difference only; not physical biological copy truth",
+    "physical": "independent molecule or validated assay sufficient for biological abundance",
+    "assembly-proxy": "reference representation only; never absolute copy truth",
+    "none": "integrity or feasibility observations only"
+  },
+  "preregistration_required_before_reveal": ["primary endpoint and denominator including zeros/absent arrays", "identifiability rule from input only", "primary baseline and multiple-comparison rule", "minimum meaningful difference", "independent donor/species cluster count and power", "confidence interval/coverage rule", "negative controls", "software source/build/executable hashes and versions", "input hashes", "threads/memory/time/scratch caps", "failure-state mapping"],
+  "endpoint_rules": {
+    "abundance": "Report paired positive-family log2 error, MARE and bias; zero-family false attribution separately; reject/unknown retained in denominator. Diagnostic, assigned and physical bp remain distinct.",
+    "collapse": "Binary classification and continuous injected missing-bp magnitude scored separately; all-zero and complete-deletion cases remain in denominator.",
+    "structure": "HOR order/copy truth only for methods with that output; same assembly and same prior information for direct CENdetectHOR comparison.",
+    "resources": "Full dependency pipeline and preparation costs; same host/input/budget; at least three isolated repeats except preregistered whole-genome feasibility single run."
+  },
+  "run_states": ["ok", "valid-empty", "rejected-unknown", "not-applicable-predeclared", "timeout", "technical-failure", "storage-failure", "input-ineligible", "not-run"],
+  "comparator_tracks": {
+    "raw-read-discovery": ["TandemX", "SRF", "TRF read-local", "TideHunter read-local"],
+    "fixed-catalogue-abundance": ["TandemX A0", "ordinary competitive mapping", "candidate M1"],
+    "assembly-structure": ["TandemX where same assembly and priors available", "CENdetectHOR pipeline", "TideCluster/KITE", "TRASH", "HiCAT where applicable"],
+    "read-assembly-deficit": ["TandemX", "ordinary mapping plus localization", "SRF complete workflow where applicable"]
+  },
+  "version_inventory": {
+    "TandemX": "0.1.0 editable local install; commit recorded per run",
+    "TRF": "4.10.0-rc.2 verified local .conda-benchmark/bin/trf",
+    "TideHunter": "1.5.5 verified local .conda-benchmark/bin/TideHunter",
+    "SRF": "historical frozen run exists; current executable path/version unresolved",
+    "TideCluster": "historical 1.21.2 image is distinct from current release; current commit unresolved",
+    "CENdetectHOR": "pipeline commit unresolved; package 0.0.6 is a distinct version identity, not locally installed/verified"
+  }
+}
