@@ -8,8 +8,8 @@ N accepted reads, authenticates the checkpoint and full input/configuration,
 and revalidates the processed read prefix before continuing. Four combinations
 of Python/Rust and FASTA/FASTQ interruption/resume matched fresh default TSV
 bytes; corrupt checkpoint, changed input tail and stale output fail closed.
-The full local Python suite passed 965 tests before a final default-path
-compatibility edit; focused final tests passed 36. Default quantify output
+The full local Python suite passed 965 tests on the final code state in
+123.88 seconds; focused final tests also passed 36. Default quantify output
 semantics and estimator are unchanged. The checkpoint mode has a full-input
 SHA-256 read on each invocation, sequential decompression/read-prefix replay
 on resume, and repeated JSON count snapshots. It is not random-access resume
