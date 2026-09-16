@@ -26,3 +26,6 @@ def test_competitor_smoke_fixture_is_deterministic(tmp_path: Path) -> None:
     assert len(bed) == 24
     assert bed[0].split("\t")[:3] == ["toy.chr1", "0", "30"]
     assert bed[-1].split("\t")[:3] == ["toy.chr1", "690", "720"]
+    counts = (out / "srf_k151_counts.txt").read_text().splitlines()
+    assert sum(int(line.split("\t")[1]) for line in counts) == 5700 - 151 + 1
+    assert all(len(line.split("\t")[0]) == 151 for line in counts)

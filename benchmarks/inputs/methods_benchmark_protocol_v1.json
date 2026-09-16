@@ -45,9 +45,10 @@
     "TandemX": "0.1.0 editable local install; commit recorded per run",
     "TRF": "4.10.0-rc.2 verified local .conda-benchmark/bin/trf",
     "TideHunter": "1.5.5 verified local .conda-benchmark/bin/TideHunter",
-    "SRF": "historical frozen run exists; current executable path/version unresolved",
-    "TideCluster": "historical 1.21.2 image is distinct from current 1.21.3 source HEAD 8131547e75f73a1e61298a89ff4e861fbd613b7e; current release not run locally; osx-arm64 conda solve failed on TideHunter 1.4.3 dependency",
+    "SRF": "historical pinned e54ca8c8eccf6b1f19428b0f862f2c90575290a0; locally built core discovery smoke on deterministic k151 count text exited 0, not complete KMC/read workflow",
+    "TideCluster": "historical 1.21.2 image distinct from 1.21.3 source HEAD 8131547e75f73a1e61298a89ff4e861fbd613b7e; native tidehunter+clustering toy smoke exited 0 with source-built TideHunter 1.4.3; full TAREAN/KITE pipeline not run, 30-bp A/B truth not recovered",
+    "TRASH": "historical Docker image sha256:50ff2f2af62681892295d76ddd79b8c87a06135455ffe0e79f1c81dc07939243 with TRASH1 f7d53a013aa4664ec275f5f5544d3a3906a43c00 and TRASH2 f290a5efe2341b5525711dcaabfbfc9087edf3cb has archived native outputs; current Docker daemon unavailable, no new run",
     "CENdetectHOR": "pipeline 969f4ef515fadd8b8a035357294971ff57d4618f with library 0.0.6 at bdc3a9df5b60adafdd17eaded1b994edd22aae03: local toy interface smoke 11/11, but 30-bp A/B and AB HOR truth not recovered; not a benchmark pass",
-    "HiCAT-human": "source HEAD 9e1f1697b5bdc2287e21375566153555261b6d8e inspected; not installed or run locally"
+    "HiCAT-human": "official xjtu-omics source HEAD 86558becd73e07a96845017b0e82fe68844ff8b7, version 1.0.0; CLI help passes but pinned osx-arm64 dependency solve lacks seqtk 1.2 and no eligible paired human sample was enrolled; inference not run"
   }
 }

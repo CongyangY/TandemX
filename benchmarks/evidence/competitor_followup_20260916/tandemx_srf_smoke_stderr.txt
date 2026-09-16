@@ -1,0 +1,1 @@
+[M::main] read 60 distinct k-mers

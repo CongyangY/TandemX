@@ -1,0 +1,10 @@
+conda-forge/osx-arm64                                       Using cache
+conda-forge/noarch                                          Using cache
+bioconda/osx-arm64                                          Using cache
+bioconda/noarch                                             Using cache
+
+Looking for: ['biopython==1.79', 'joblib==1.1.0', 'lastz==1.04.22', 'matplotlib==3.5.1', 'numpy==1.22.3', 'pandas==1.4.0', 'python-edlib==1.3.9', 'python-levenshtein==0.12.2', 'scikit-learn==1.0.2', 'seqtk==1.2', 'setuptools==61.2.0']
+
+Could not solve for environment specs
+The following package could not be installed
+└─ seqtk 1.2  does not exist (perhaps a typo or a missing channel).

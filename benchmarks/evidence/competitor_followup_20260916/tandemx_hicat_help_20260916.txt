@@ -1,0 +1,25 @@
+usage: HiCAT_human.py [-h]
+                      {reads,assembly,reads_aggregate,assembly_match,only_reads,reads_with_assembly}
+                      ...
+
+automatically annotate centromere HOR patterns from reads and assemblies
+
+positional arguments:
+  {reads,assembly,reads_aggregate,assembly_match,only_reads,reads_with_assembly}
+                        Modes: reads,assembly,reads_aggregate,assembly_match,o
+                        nly_reads,reads_with_assembly
+    reads               Annotate centromere HOR patterns from reads
+    assembly            Annotate centromere HOR patterns from assembly
+    reads_aggregate     Merge the reads HOR annotation results for multi-
+                        samples, and plot the normalized HOR number change
+                        graph among samples
+    assembly_match      Match the assembly HOR annotation results for multi-
+                        samples based on reads annotation results
+    only_reads          Reads annotation and aggregate
+    reads_with_assembly
+                        Annotation for reads and assemblies, aggregate the
+                        results
+
+options:
+  -h, --help            show this help message and exit
+

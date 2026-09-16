@@ -1,0 +1,2 @@
+running TideHunter
+TideHunter -f 2 -o /var/folders/mf/5br25b256j91jmdswjg2m6080000gn/T/tmpq09hj37s.out -p 30 -P 100 -c 2 -e 0.25 -t 1 /var/folders/mf/5br25b256j91jmdswjg2m6080000gn/T/tmpq09hj37s

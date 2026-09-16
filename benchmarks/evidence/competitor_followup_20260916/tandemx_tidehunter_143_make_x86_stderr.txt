@@ -1,0 +1,21 @@
+src/main.c:429:110: warning: format specifies type 'long' but the argument has type 'int64_t' (aka 'long long') [-Wformat]
+                                          err_printf("\n[main] Error: k-mer length can not be larger than %d (%ld).\n", MAX_KMER_SIZE, mtp->k);
+                                                                                                              ~~~                      ^~~~~~
+                                                                                                              %lld
+src/main.c:442:85: warning: format specifies type 'long' but the argument has type 'int64_t' (aka 'long long') [-Wformat]
+                                                  err_printf("Error: -p --min-period needs to be >= %u. (%ld)\n", MIN_PERIOD, mtp->min_p); 
+                                                                                                         ~~~                  ^~~~~~~~~~
+                                                                                                         %lld
+src/main.c:448:85: warning: format specifies type 'long' but the argument has type 'int64_t' (aka 'long long') [-Wformat]
+                                                  err_printf("Error: -P --max-period needs to be <= %u. (%ld)\n", MAX_PERIOD, mtp->max_p); 
+                                                                                                         ~~~                  ^~~~~~~~~~
+                                                                                                         %lld
+src/partition.c:27:23: warning: variable 'tot_len' set but not used [-Wunused-but-set-variable]
+    int par_i = 0, l, tot_len; 
+                      ^
+1 warning generated.
+3 warnings generated.
+src/simd_abpoa_align.c:1472:9: warning: variable 'tot_dp_sn' set but not used [-Wunused-but-set-variable]
+    int tot_dp_sn = 0;
+        ^
+1 warning generated.

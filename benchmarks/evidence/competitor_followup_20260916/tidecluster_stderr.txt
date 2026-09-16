@@ -1,0 +1,12 @@
+WARNING: --max_memory=1.0 GB is below one TideHunter part's typical peak; pools will run serially
+Traceback (most recent call last):
+  File "/private/tmp/tandemx_tidecluster_20260916/TideCluster.py", line 1781, in <module>
+    tidehunter(
+  File "/private/tmp/tandemx_tidecluster_20260916/TideCluster.py", line 1000, in tidehunter
+    results = tc.run_tidehunter(
+              ^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/tandemx_tidecluster_20260916/tc_utils.py", line 1802, in run_tidehunter
+    subprocess.check_call(tidehunter_cmd, shell=True)
+  File "/opt/homebrew/Caskroom/mambaforge/base/envs/tandemx-dev/lib/python3.11/subprocess.py", line 413, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'TideHunter -f 2 -o /var/folders/mf/5br25b256j91jmdswjg2m6080000gn/T/tmp3nybnxmp.out -p 30 -P 100 -c 2 -e 0.25 -t 1 /var/folders/mf/5br25b256j91jmdswjg2m6080000gn/T/tmp3nybnxmp' died with <Signals.SIGILL: 4>.

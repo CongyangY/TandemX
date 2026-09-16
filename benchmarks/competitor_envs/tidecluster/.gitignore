@@ -1,0 +1,5 @@
+.venv/
+.conda-osx64/
+.conda-clustering/
+.local-bin/
+work/

@@ -1,0 +1,3 @@
+running filtering on gff3 file
+Clustering by mmseqs2
+Clustering by BLASTN

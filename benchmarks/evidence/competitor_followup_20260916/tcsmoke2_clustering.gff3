@@ -1,0 +1,2 @@
+##gff-version 3
+toy:0-5700	TideCluster	tandem_repeat	1	5700	1	.	.	Name=TRC_1;repeat_type=TR
