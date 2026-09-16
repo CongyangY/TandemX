@@ -6,7 +6,7 @@
       "architecture_status": "no_supported_discordance",
       "assembly_bp": 32,
       "case": "no_edit_ab",
-      "elapsed_seconds": 0.07133029191754758,
+      "elapsed_seconds": 0.09763354202732444,
       "length_only_prediction": false,
       "read_bp": 32,
       "truth_discordance": false
@@ -16,7 +16,7 @@
       "architecture_status": "no_supported_discordance",
       "assembly_bp": 48,
       "case": "no_edit_abc",
-      "elapsed_seconds": 0.11392487492412329,
+      "elapsed_seconds": 0.18432391714304686,
       "length_only_prediction": false,
       "read_bp": 48,
       "truth_discordance": false
@@ -26,7 +26,7 @@
       "architecture_status": "no_supported_discordance",
       "assembly_bp": 32,
       "case": "no_edit_variant",
-      "elapsed_seconds": 0.06792979198507965,
+      "elapsed_seconds": 0.14725420903414488,
       "length_only_prediction": false,
       "read_bp": 32,
       "truth_discordance": false
@@ -36,7 +36,7 @@
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "copy_deletion",
-      "elapsed_seconds": 0.10554191702976823,
+      "elapsed_seconds": 0.2207110410090536,
       "length_only_prediction": true,
       "read_bp": 48,
       "truth_discordance": true
@@ -46,7 +46,7 @@
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "equal_length_variant",
-      "elapsed_seconds": 0.0677274998743087,
+      "elapsed_seconds": 0.1370218750089407,
       "length_only_prediction": false,
       "read_bp": 32,
       "truth_discordance": true
@@ -56,7 +56,7 @@
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "equal_length_label_swap",
-      "elapsed_seconds": 0.06619058293290436,
+      "elapsed_seconds": 0.13917883415706456,
       "length_only_prediction": false,
       "read_bp": 32,
       "truth_discordance": true
@@ -66,18 +66,58 @@
       "architecture_status": "candidate_discordance",
       "assembly_bp": 32,
       "case": "orientation_inversion",
-      "elapsed_seconds": 0.05982400011271238,
+      "elapsed_seconds": 0.1725036248099059,
       "length_only_prediction": false,
       "read_bp": 32,
       "truth_discordance": true
+    },
+    {
+      "architecture_prediction": true,
+      "architecture_status": "candidate_discordance",
+      "assembly_bp": 32,
+      "case": "hor_rearrangement",
+      "elapsed_seconds": 0.10560141713358462,
+      "length_only_prediction": false,
+      "read_bp": 32,
+      "truth_discordance": true
+    },
+    {
+      "architecture_prediction": true,
+      "architecture_status": "candidate_discordance",
+      "assembly_bp": 24,
+      "case": "monomer_deletion",
+      "elapsed_seconds": 0.13350829086266458,
+      "length_only_prediction": true,
+      "read_bp": 32,
+      "truth_discordance": true
+    },
+    {
+      "architecture_prediction": true,
+      "architecture_status": "candidate_discordance",
+      "assembly_bp": 40,
+      "case": "monomer_duplication",
+      "elapsed_seconds": 0.16603366588242352,
+      "length_only_prediction": true,
+      "read_bp": 32,
+      "truth_discordance": true
+    },
+    {
+      "architecture_prediction": true,
+      "architecture_status": "candidate_discordance",
+      "assembly_bp": 32,
+      "case": "hor_compression",
+      "elapsed_seconds": 0.2692536669783294,
+      "length_only_prediction": true,
+      "read_bp": 64,
+      "truth_discordance": true
     }
   ],
-  "input_sha256": "1268bdefbc54b8e749a9e39950fe9782f3671733263b3234d96cf771294e17b8",
+  "input_sha256": "507628ecf3922d3d88877a2dfbc425cc413f26018b4de9c4b2851a252beb6b32",
   "prototype": "same_inputs_monomer_decomposition_and_order",
-  "source_commit": "8d4a66f7cec60e2aad807590209333782a823fe6",
+  "source_commit": "3e8a952badf41186cbf607f0e8f3b9cedadd1041",
   "source_sha256": {
-    "prototype.py": "5e067fc1790a07270915d4121eac2a6c3d1ca449292102f3d422555ee5617403",
-    "run_development.py": "6ebd319bbcecb3377ae8ec73dbf48b857e2066b6a0d34bfd927cdcda3feeb35a"
+    "prototype.py": "a630345e9111b2199f5ba1fd497ce2bf7aa3008a6f6927b43a2fbb59a7746c09",
+    "run_development.py": "d9faab714ebf87744e48d9147fa6a73e40067da774e06d1db9f886b01658af61"
   },
   "status": "development_exact_synthetic_only",
   "summary": {
@@ -85,13 +125,13 @@
       "fn": 0,
       "fp": 0,
       "tn": 3,
-      "tp": 4
+      "tp": 8
     },
     "length_only": {
-      "fn": 3,
+      "fn": 4,
       "fp": 0,
       "tn": 3,
-      "tp": 1
+      "tp": 4
     }
   },
   "warning": "identical_synthetic_read_sequences_are_not_biological_replication"

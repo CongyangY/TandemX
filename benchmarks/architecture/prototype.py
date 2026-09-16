@@ -198,13 +198,13 @@ def compare_anchored_reads(
     if min_supporting_reads < 2:
         raise ValueError("At least two independent molecules are required")
     assembly = infer_architecture(assembly_sequence, monomers)
-    if not assembly.cyclic_unit or assembly.status == "unresolved_ambiguous_decomposition":
+    if not assembly.copies or assembly.status == "unresolved_ambiguous_decomposition":
         return Discordance("unresolved", assembly, (), (), "assembly_architecture_unresolved")
     supporting: list[str] = []
     discordant: list[str] = []
     for read_id, sequence in sorted(anchored_read_intervals.items()):
         read = infer_architecture(sequence, monomers)
-        if not read.cyclic_unit or read.status == "unresolved_ambiguous_decomposition":
+        if not read.copies or read.status == "unresolved_ambiguous_decomposition":
             continue
         supporting.append(read_id)
         assembly_order = tuple((copy.label, copy.orientation) for copy in assembly.copies)
@@ -218,8 +218,11 @@ def compare_anchored_reads(
         return Discordance("unresolved", assembly, tuple(supporting),
                            tuple(discordant), "insufficient_independent_anchored_reads")
     if len(discordant) >= min_supporting_reads and len(discordant) / len(supporting) > 2 / 3:
+        warning = "requires_external_flank_and_molecule_qc"
+        if not assembly.cyclic_unit:
+            warning += ";assembly_hor_period_unresolved"
         return Discordance("candidate_discordance", assembly, tuple(supporting),
-                           tuple(discordant), "requires_external_flank_and_molecule_qc")
+                           tuple(discordant), warning)
     if discordant:
         return Discordance("unresolved_mixed_molecules", assembly, tuple(supporting),
                            tuple(discordant), "possible_haplotype_or_alignment_mixture")

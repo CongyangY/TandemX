@@ -34,6 +34,10 @@ def _cases() -> list[tuple[str, str, str, bool]]:
         ("equal_length_label_swap", _array("ACAC"), _array("ABAB"), True),
         ("orientation_inversion", _array("ABAB"),
          MONOMERS["A"] + _reverse_complement(MONOMERS["B"]) + _array("AB"), True),
+        ("hor_rearrangement", _array("ABAC"), _array("ACAB"), True),
+        ("monomer_deletion", _array("ABA"), _array("ABAB"), True),
+        ("monomer_duplication", _array("ABAAB"), _array("ABAB"), True),
+        ("hor_compression", _array("ABAB"), _array("ABACABAC"), True),
     ]
 
 

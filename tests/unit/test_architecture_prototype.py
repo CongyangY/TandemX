@@ -113,6 +113,27 @@ def test_variant_position_relative_to_left_flank_is_retained() -> None:
     assert result.status == "candidate_discordance"
 
 
+@pytest.mark.parametrize("assembly_labels", ["ABA", "ABAAB"])
+def test_nonperiodic_edit_can_be_compared_as_ordered_copies(
+    assembly_labels: str,
+) -> None:
+    result = compare_anchored_reads(
+        _array(assembly_labels), {"r1": _array("ABAB"), "r2": _array("ABAB")},
+        MONOMERS,
+    )
+    assert result.assembly.status == "unresolved_no_repeated_unit"
+    assert result.status == "candidate_discordance"
+    assert "assembly_hor_period_unresolved" in result.warning
+
+
+def test_nonperiodic_same_order_does_not_invent_discordance() -> None:
+    sequence = _array("ABA")
+    result = compare_anchored_reads(
+        sequence, {"r1": sequence, "r2": sequence}, MONOMERS
+    )
+    assert result.status == "no_supported_discordance"
+
+
 @pytest.mark.parametrize("assembly", ["AAAAC" * 4, "AAACA" * 4])
 def test_ambiguous_assembly_decomposition_cannot_be_scored(assembly: str) -> None:
     monomers = {"A": "AAAAA", "B": "AACCA"}
