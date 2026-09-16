@@ -1,0 +1,126 @@
+{
+  "status": "development_smoke_not_validation",
+  "seed": 11,
+  "rows": [
+    {
+      "scenario": "related_low_error",
+      "seed": 11,
+      "reads_sha256": "8c7e2c3438d52d9251361adb4b40e29a8a02b5c3ff4d2e663f8f2702e79078bd",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 320.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.0,
+      "occupancy_read_equivalents": {
+        "f1": 307.0,
+        "f2": 176.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.03142361111111114,
+      "assigned_bp": 38640,
+      "ambiguous_bp": 1360,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "wall_seconds": 7.1500848340801895
+    },
+    {
+      "scenario": "related_high_error",
+      "seed": 11,
+      "reads_sha256": "08784eb99769f0929c5929d4ee3cf7348f57fb667db6d2172092eca0b7fc966d",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 175.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.020138888888888873,
+      "occupancy_read_equivalents": {
+        "f1": 144.0,
+        "f2": 90.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.525,
+      "assigned_bp": 18720,
+      "ambiguous_bp": 2800,
+      "unknown_bp": 26480,
+      "total_bp": 48000,
+      "wall_seconds": 7.621642915997654
+    },
+    {
+      "scenario": "family_error_shift",
+      "seed": 11,
+      "reads_sha256": "b4568fd4f68b7c11fd3db865425076430fd6bbe9b111b7b0185b7443b969fb6d",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 321.0,
+        "f2": 41.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.38767361111111115,
+      "occupancy_read_equivalents": {
+        "f1": 304.0,
+        "f2": 2.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.5194444444444445,
+      "assigned_bp": 24480,
+      "ambiguous_bp": 960,
+      "unknown_bp": 22560,
+      "total_bp": 48000,
+      "wall_seconds": 7.964562499895692
+    },
+    {
+      "scenario": "identical_unidentifiable",
+      "seed": 11,
+      "reads_sha256": "ddcd8417fdf49792200625ee099c353588c461b6bccff386a4fa929c65ebd41f",
+      "catalogue_sha256": "57d889fb4d01650cd9bf632fa2b244d0ab5954d677af993255383190c183ea88",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 1.0,
+      "occupancy_read_equivalents": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 1.0,
+      "assigned_bp": 0,
+      "ambiguous_bp": 40000,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "wall_seconds": 7.962976582814008
+    }
+  ],
+  "prior_results_sha256": "3004cd9040c45c2c1337ea00fd0514cfdb3c29118c719c5e3d3eeebf10ef993c",
+  "source_sha256": {
+    "benchmarks/m1_shared_signature/occupancy_optin_smoke.py": "652c21d91c9c80dac03f764a4fb7250791d99d67cc0ad2674ccf54a657512fd5",
+    "benchmarks/m1_shared_signature/run.py": "792639344e15eca12f81465a3bec45f9f7553d9a2ff5744d4bc7fec1becc5a55",
+    "tandemx/quantify/competitive_mapping.py": "e5453306e88be88b8fe1da13cb03fc4afe9c99c73fb63d1f585a1eedd4915f2b"
+  },
+  "process_max_rss_raw": 34521088,
+  "resource_note": "macOS ru_maxrss bytes; one Python process; includes simulation and benchmarking; no T7 I/O"
+}

@@ -105,3 +105,34 @@ plus the prior F read-bootstrap outcomes. A/C/D are point-estimate screens;
 they have no 95% interval calibration result. The prior F read bootstraps for
 B/E do not establish biological coverage. This closes one bounded M1 search
 round rather than opening a parameter or held-out search.
+
+## Competitive occupancy research gate
+
+`occupancy_research.py` is a separate streaming research prototype. It is not
+imported by the public `tandemx quantify` command. It compares each
+non-overlapping 80-bp read window to periodic catalogue units in both
+orientations using unit-cost edit distance, with explicit ambiguous and
+unknown bp. The fixed research caps are eight families, 1,024 bp per unit,
+and 1,000,000 bp per read. A native `edlib` call, when installed, computes
+the same semiglobal distance much faster than the two-row Python fallback;
+`edlib` is not added as a production dependency.
+
+The initial Python-DP configuration used a 12% edit gate and a two-edit
+family margin. After its same-input loss, one bounded revision aligned the
+80-bp edit gate to the ordinary baseline's 18 mismatches, allowed a unique
+best family at a one-edit margin, and forced catalogue pairs within one
+periodic edit into an ambiguity group. The 12-case replay can be run with:
+
+```bash
+conda run -n tandemx-dev python -m benchmarks.m1_shared_signature.occupancy_research_smoke \
+  --outdir /tmp/tandemx-occupancy-research
+conda run -n tandemx-dev pytest -q tests/unit/test_competitive_occupancy.py
+```
+
+The script regenerates the frozen M1 inputs, checks their SHA-256 values, and
+reports ordinary-mapping and occupancy MARE, wrong-family calls, zero-decoy
+calls, ambiguous/unknown bp, wall time and peak process RSS. Truth labels are
+used only after classification. The record in `docs/negative_results/` explains
+the no-go decision. Fixed 80-bp windows, at most eight catalogue families,
+uncalibrated gates and an optional native dependency preclude a large-genome
+production claim.

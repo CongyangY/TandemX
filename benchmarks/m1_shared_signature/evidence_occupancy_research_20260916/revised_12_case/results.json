@@ -1,0 +1,479 @@
+{
+  "status": "development_smoke_not_validation",
+  "seeds": [
+    11,
+    29,
+    47
+  ],
+  "rows": [
+    {
+      "scenario": "related_low_error",
+      "seed": 11,
+      "reads_sha256": "8c7e2c3438d52d9251361adb4b40e29a8a02b5c3ff4d2e663f8f2702e79078bd",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 320.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.0,
+      "occupancy_read_equivalents": {
+        "f1": 320.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.0,
+      "assigned_bp": 40000,
+      "ambiguous_bp": 0,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->f1": 320,
+        "f2->f2": 180,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 0,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.019921707920730114,
+      "truth_scoring_seconds": 0.01924074999988079
+    },
+    {
+      "scenario": "related_low_error",
+      "seed": 29,
+      "reads_sha256": "3de1b8682fdb743053d445150289ac4dd124b4980d9d95d059faa58d498259ce",
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 319.0,
+        "f2": 179.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.00434027777777779,
+      "occupancy_read_equivalents": {
+        "f1": 319.0,
+        "f2": 179.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.00434027777777779,
+      "assigned_bp": 39840,
+      "ambiguous_bp": 160,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 1,
+        "f1->f1": 319,
+        "f2->ambiguous": 1,
+        "f2->f2": 179,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 0,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.020566416904330254,
+      "truth_scoring_seconds": 0.019469291903078556
+    },
+    {
+      "scenario": "related_low_error",
+      "seed": 47,
+      "reads_sha256": "392c1b3ffb9c6e8e96ffc80ceeeb6a7610978b50a73489606de3117a55bcd118",
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 318.0,
+        "f2": 181.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.005902777777777757,
+      "occupancy_read_equivalents": {
+        "f1": 318.0,
+        "f2": 181.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.005902777777777757,
+      "assigned_bp": 39920,
+      "ambiguous_bp": 80,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 1,
+        "f1->f1": 318,
+        "f1->f2": 1,
+        "f2->f2": 180,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 1,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.021218958077952266,
+      "truth_scoring_seconds": 0.019729125080630183
+    },
+    {
+      "scenario": "related_high_error",
+      "seed": 11,
+      "reads_sha256": "08784eb99769f0929c5929d4ee3cf7348f57fb667db6d2172092eca0b7fc966d",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 175.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.020138888888888873,
+      "occupancy_read_equivalents": {
+        "f1": 316.0,
+        "f2": 175.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.020138888888888873,
+      "assigned_bp": 39280,
+      "ambiguous_bp": 640,
+      "unknown_bp": 8080,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 5,
+        "f1->f1": 314,
+        "f1->f2": 1,
+        "f2->ambiguous": 3,
+        "f2->f1": 2,
+        "f2->f2": 174,
+        "f2->unknown": 1,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 3,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.021529542049393058,
+      "truth_scoring_seconds": 0.020359541988000274
+    },
+    {
+      "scenario": "related_high_error",
+      "seed": 29,
+      "reads_sha256": "c8daa5dfb401972005e0e8d92b776223bea745f7607e211cec29a530e2cf32de",
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 311.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.014062499999999978,
+      "occupancy_read_equivalents": {
+        "f1": 311.0,
+        "f2": 180.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.014062499999999978,
+      "assigned_bp": 39280,
+      "ambiguous_bp": 720,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 8,
+        "f1->f1": 310,
+        "f1->f2": 2,
+        "f2->ambiguous": 1,
+        "f2->f1": 1,
+        "f2->f2": 178,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 3,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.0210210420191288,
+      "truth_scoring_seconds": 0.020026582991704345
+    },
+    {
+      "scenario": "related_high_error",
+      "seed": 47,
+      "reads_sha256": "a963ad973625a06ff55093dc431f629e35d89f31d1e78336aa72cb2450f7f91e",
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 179.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.009027777777777746,
+      "occupancy_read_equivalents": {
+        "f1": 314.0,
+        "f2": 178.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.014930555555555558,
+      "assigned_bp": 39360,
+      "ambiguous_bp": 480,
+      "unknown_bp": 8160,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 4,
+        "f1->f1": 314,
+        "f1->f2": 1,
+        "f1->unknown": 1,
+        "f2->ambiguous": 2,
+        "f2->f2": 177,
+        "f2->unknown": 1,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 1,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.020839666947722435,
+      "truth_scoring_seconds": 0.02029358292929828
+    },
+    {
+      "scenario": "family_error_shift",
+      "seed": 11,
+      "reads_sha256": "b4568fd4f68b7c11fd3db865425076430fd6bbe9b111b7b0185b7443b969fb6d",
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 321.0,
+        "f2": 41.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.38767361111111115,
+      "occupancy_read_equivalents": {
+        "f1": 323.0,
+        "f2": 48.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.37135416666666665,
+      "assigned_bp": 29680,
+      "ambiguous_bp": 240,
+      "unknown_bp": 18080,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 1,
+        "f1->f1": 319,
+        "f2->ambiguous": 2,
+        "f2->f1": 4,
+        "f2->f2": 48,
+        "f2->unknown": 126,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 4,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.02051554201170802,
+      "truth_scoring_seconds": 0.020149208139628172
+    },
+    {
+      "scenario": "family_error_shift",
+      "seed": 29,
+      "reads_sha256": "0976ca371a942fb16c39c059bfdf9b2103d1ee94f3d7730c9475508f6bb3d270",
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 316.0,
+        "f2": 55.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.3534722222222222,
+      "occupancy_read_equivalents": {
+        "f1": 316.0,
+        "f2": 57.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.34791666666666665,
+      "assigned_bp": 29840,
+      "ambiguous_bp": 720,
+      "unknown_bp": 17440,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 4,
+        "f1->f1": 316,
+        "f2->ambiguous": 5,
+        "f2->f2": 57,
+        "f2->unknown": 118,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 0,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.020909500075504184,
+      "truth_scoring_seconds": 0.020125000039115548
+    },
+    {
+      "scenario": "family_error_shift",
+      "seed": 47,
+      "reads_sha256": "5862a1ee7617f9938011319e4c3f2e5ab77e0844691f6ca6cd9942022c869121",
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 318.0,
+        "f2": 38.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 0.3975694444444444,
+      "occupancy_read_equivalents": {
+        "f1": 318.0,
+        "f2": 45.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 0.378125,
+      "assigned_bp": 29040,
+      "ambiguous_bp": 720,
+      "unknown_bp": 18240,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 3,
+        "f1->f1": 317,
+        "f2->ambiguous": 6,
+        "f2->f1": 1,
+        "f2->f2": 45,
+        "f2->unknown": 128,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 1,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.021401207894086838,
+      "truth_scoring_seconds": 0.02141262497752905
+    },
+    {
+      "scenario": "identical_unidentifiable",
+      "seed": 11,
+      "reads_sha256": "ddcd8417fdf49792200625ee099c353588c461b6bccff386a4fa929c65ebd41f",
+      "catalogue_sha256": "57d889fb4d01650cd9bf632fa2b244d0ab5954d677af993255383190c183ea88",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 1.0,
+      "occupancy_read_equivalents": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 1.0,
+      "assigned_bp": 0,
+      "ambiguous_bp": 40000,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 320,
+        "f2->ambiguous": 180,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 0,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.020588290877640247,
+      "truth_scoring_seconds": 0.019715083995833993
+    },
+    {
+      "scenario": "identical_unidentifiable",
+      "seed": 29,
+      "reads_sha256": "17dd0798c280b2c84dc70411394575c94e9314b819b57a48c8657ef8912e34c9",
+      "catalogue_sha256": "1c97c68b97b9c3267c62e0272ec9905e1e1dcbc24e8f50e41f74c573ff804b4b",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 1.0,
+      "occupancy_read_equivalents": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 1.0,
+      "assigned_bp": 0,
+      "ambiguous_bp": 40000,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 320,
+        "f2->ambiguous": 180,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 0,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.021945874905213714,
+      "truth_scoring_seconds": 0.021052457857877016
+    },
+    {
+      "scenario": "identical_unidentifiable",
+      "seed": 47,
+      "reads_sha256": "c91f5c20c9210883677645170a50769c142d4b9381f4ed5f496e705b8a3fc918",
+      "catalogue_sha256": "353c8bd43f4752e7621ab21df8cb964ecdcad0f3505e143e56e63e18446f8fad",
+      "truth_unit_sized_reads": {
+        "f1": 320,
+        "f2": 180,
+        "decoy_zero": 0
+      },
+      "ordinary_mapping": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "ordinary_positive_mare": 1.0,
+      "occupancy_read_equivalents": {
+        "f1": 0.0,
+        "f2": 0.0,
+        "decoy_zero": 0.0
+      },
+      "occupancy_positive_mare": 1.0,
+      "assigned_bp": 0,
+      "ambiguous_bp": 40000,
+      "unknown_bp": 8000,
+      "total_bp": 48000,
+      "source_to_call": {
+        "f1->ambiguous": 320,
+        "f2->ambiguous": 180,
+        "unknown->unknown": 100
+      },
+      "wrong_family_calls": 0,
+      "negative_false_calls": 0,
+      "wall_seconds": 0.02279012487269938,
+      "truth_scoring_seconds": 0.02486029197461903
+    }
+  ],
+  "prior_results_sha256": "3004cd9040c45c2c1337ea00fd0514cfdb3c29118c719c5e3d3eeebf10ef993c",
+  "source_sha256": {
+    "benchmarks/m1_shared_signature/occupancy_research_smoke.py": "d5b916a4f0d2e003b27109ba79a1c1725a2a93b6223f92f03f32f3b76104bacd",
+    "benchmarks/m1_shared_signature/run.py": "792639344e15eca12f81465a3bec45f9f7553d9a2ff5744d4bc7fec1becc5a55",
+    "benchmarks/m1_shared_signature/occupancy_research.py": "cf8382064796aca03889cab280d6a156d2ae71aeadad149c3254931ab0164cdb"
+  },
+  "process_max_rss_raw": 35700736,
+  "resource_note": "macOS ru_maxrss bytes; one Python process; includes simulation and benchmarking; no T7 I/O"
+}

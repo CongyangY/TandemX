@@ -65,6 +65,13 @@ is misspecified. C assigns ~16.8 reads/case to a truly absent decoy at 12%
 error. High error and family-specific error produce large common-gate losses;
 more aggressive refusal does not recover true abundance.
 
+An independent reviewer also reconstructed ordinary-mapping wrong-family
+calls from each read's best cyclic-Hamming hit, retaining the original 600-read
+denominator per case. In seed order 11/29/47, these were **0/0/1** at 3% error,
+**3/3/1** at 12% error, and **2/0/1** with the `f2` error shift. Thus the
+ordinary baseline also makes some false family calls; its zero-decoy count in
+the aggregate table must not be read as zero wrong-family attribution.
+
 F read-bootstrap coverage was B 2/18 and E 14/18 across the identifiable
 positive-family cells. These 18 family/seed cells are correlated development
 observations, not 18 independent donors. A/C/D have no intervals and cannot
