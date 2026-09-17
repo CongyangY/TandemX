@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTROL = ROOT / "benchmarks/assembly_hor_comparator_v1/control/control.chr1.fasta"
-EXPECTED = "60e65dd68af2af8774a872ea25656225714a01415d840b4aec59cfb09a9d1079"
+EXPECTED = "f2a968383dd9bef0af38ee5891ce97b7228f67cbe71495e36340adc20d956e8e"
 OUT = ROOT / "benchmarks/assembly_hor_comparator_v1/run_manifests"
 CEN = ROOT / "benchmarks/competitor_envs/cendetecthor"
 TIDE = ROOT / "benchmarks/competitor_envs/tidecluster"

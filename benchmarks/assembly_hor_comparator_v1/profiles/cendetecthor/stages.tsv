@@ -1,0 +1,2 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+cendetecthor_full_pipeline	1	1.255376	0.628099	0.168059	0.000000	0	39049	7	cendetecthor_full_pipeline.stdout.log	cendetecthor_full_pipeline.stderr.log

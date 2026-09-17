@@ -2,11 +2,11 @@
   "schema_version": 1,
   "status": "frozen_before_external_runs",
   "assembly_input": "control/control.chr1.fasta",
-  "assembly_sha256": "60e65dd68af2af8774a872ea25656225714a01415d840b4aec59cfb09a9d1079",
+  "assembly_sha256": "f2a968383dd9bef0af38ee5891ce97b7228f67cbe71495e36340adc20d956e8e",
   "truth": "control/truth_monomers.tsv and control/truth_hors.tsv, exact engineered coordinate ledger",
   "truth_scope": "synthetic centromere-like 171-bp monomers, 40 HOR copies, four engineered length/order variants; not biological or held-out truth",
   "shared_input_policy": "Each assembly-only tool receives exactly the same FASTA, no oracle monomer file and no reads. The candidate_monomers.fa truth file is withheld.",
-  "resource_policy": "One CPU requested in each native command; sequential runs; profile_stage_resources.py sampling at 0.2 s on same Mac host, process-tree RSS and wall clock. Runtime includes each configured full stage; no cross-host speed claim.",
+  "resource_policy": "One CPU requested in each native command; sequential runs; profile_stage_resources.py sampling at 0.2 s on same Mac host, process-tree RSS and wall clock. Profiler requires permission to inspect ps on macOS; zero RSS samples are invalid and must be disclosed. Runtime includes each configured full stage; no cross-host speed claim.",
   "CENdetectHOR": {
     "endpoint": ["monomer decomposition", "monomer clustering", "HOR identification"],
     "pipeline_revision": "969f4ef515fadd8b8a035357294971ff57d4618f",

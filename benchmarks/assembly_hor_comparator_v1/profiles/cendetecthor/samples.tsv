@@ -1,0 +1,8 @@
+stage	elapsed_seconds	rss_mib	process_count	scratch_bytes
+cendetecthor_full_pipeline	0.004496	0.000000	0	36788
+cendetecthor_full_pipeline	0.215448	0.000000	0	36788
+cendetecthor_full_pipeline	0.423423	0.000000	0	36788
+cendetecthor_full_pipeline	0.630876	0.000000	0	39049
+cendetecthor_full_pipeline	0.839758	0.000000	0	39049
+cendetecthor_full_pipeline	1.046895	0.000000	0	39049
+cendetecthor_full_pipeline	1.254715	0.000000	0	38580

@@ -52,17 +52,18 @@ def build(outdir: Path) -> dict[str, object]:
     assembly = left + "".join(row[5] for row in copies) + right
     outdir.mkdir(parents=True, exist_ok=False)
     fasta = outdir / "control.chr1.fasta"
-    fasta.write_text(">control.chr1\n" + assembly + "\n")
+    sequence_id = f"control:0-{len(assembly)}"
+    fasta.write_text(f">{sequence_id}\n" + assembly + "\n")
     (outdir / "candidate_monomers.fa").write_text(
         "".join(f">{label}\n{sequence}\n" for label, sequence in monomers.items()))
     with (outdir / "truth_monomers.tsv").open("w") as handle:
         handle.write("sequence_id\tstart0\tend0\tlabel\thor_index\twithin_hor_index\torientation\n")
         for hor_index, within_index, label, start, end, _ in copies:
-            handle.write(f"control.chr1\t{start}\t{end}\t{label}\t{hor_index}\t{within_index}\t+\n")
+            handle.write(f"{sequence_id}\t{start}\t{end}\t{label}\t{hor_index}\t{within_index}\t+\n")
     with (outdir / "truth_hors.tsv").open("w") as handle:
         handle.write("sequence_id\tstart0\tend0\thor_index\tlabel_path\tcanonical\n")
         for index, start, end, path, canonical in hors:
-            handle.write(f"control.chr1\t{start}\t{end}\t{index}\t{path}\t{int(canonical)}\n")
+            handle.write(f"{sequence_id}\t{start}\t{end}\t{index}\t{path}\t{int(canonical)}\n")
     receipt = {
         "schema_version": 1, "seed": SEED, "truth_type": "exact_engineered_only",
         "biological_source_status": "synthetic_centromere_like_not_biological_truth",
