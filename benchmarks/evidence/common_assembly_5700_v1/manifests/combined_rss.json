@@ -1,0 +1,79 @@
+{
+  "stages": [
+    {
+      "name": "cendetecthor_full_pipeline",
+      "command": [
+        "/usr/bin/env",
+        "PATH=/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/.venv/bin:/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/.conda-r/bin:/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/.conda-tools/bin:/private/tmp/tandemx_cendetecthor_20260916/stringdecomposer/bin:/Users/ycy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Users/ycy/.codex/tmp/arg0/codex-arg0AcUEgZ:/Users/ycy/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ycy/.local/bin:/opt/homebrew/Caskroom/mambaforge/base/bin:/opt/homebrew/Caskroom/mambaforge/base/condabin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/ycy/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/Visual Studio Code.app/Contents/Resources/app/bin",
+        "MPLCONFIGDIR=/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/work/mpl",
+        "TMPDIR=/private/tmp",
+        "PYTHONHASHSEED=0",
+        "OPENBLAS_NUM_THREADS=1",
+        "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/.venv/bin/snakemake",
+        "--snakefile",
+        "/private/tmp/tandemx_cendetecthor_20260916/pipeline/Snakefile",
+        "--cores",
+        "1",
+        "--shared-fs-usage",
+        "input-output",
+        "persistence",
+        "software-deployment",
+        "software-deployment-cache",
+        "sources",
+        "storage-local-copies",
+        "--config",
+        "workdir=/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/work/common_assembly_5700_v2/",
+        "consFile=no",
+        "CHRcons=toy.chr1.fasta",
+        "HORdet_threads=1",
+        "windowSize=1000"
+      ],
+      "cwd": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/work/common_assembly_5700_v2",
+      "scratch_dir": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/cendetecthor/work/common_assembly_5700_v2"
+    },
+    {
+      "name": "tidehunter",
+      "command": [
+        "/usr/bin/env",
+        "PATH=/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/.conda-clustering/bin:/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/.local-bin:/Users/ycy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Users/ycy/.codex/tmp/arg0/codex-arg0AcUEgZ:/Users/ycy/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ycy/.local/bin:/opt/homebrew/Caskroom/mambaforge/base/bin:/opt/homebrew/Caskroom/mambaforge/base/condabin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/ycy/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/Visual Studio Code.app/Contents/Resources/app/bin",
+        "OPENBLAS_NUM_THREADS=1",
+        "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/.venv/bin/python",
+        "/private/tmp/tandemx_tidecluster_20260916/TideCluster.py",
+        "tidehunter",
+        "-c",
+        "1",
+        "-f",
+        "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/work/common_assembly_5700_v2/fasta/toy.chr1.fasta",
+        "-pr",
+        "toy",
+        "-T",
+        "-p 30 -P 100 -c 2 -e 0.25",
+        "--max_memory",
+        "1"
+      ],
+      "cwd": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/work/common_assembly_5700_v2",
+      "scratch_dir": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/work/common_assembly_5700_v2"
+    },
+    {
+      "name": "tidecluster_clustering",
+      "command": [
+        "/usr/bin/env",
+        "PATH=/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/.conda-clustering/bin:/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/.local-bin:/Users/ycy/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Users/ycy/.codex/tmp/arg0/codex-arg0AcUEgZ:/Users/ycy/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/ycy/.local/bin:/opt/homebrew/Caskroom/mambaforge/base/bin:/opt/homebrew/Caskroom/mambaforge/base/condabin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/ycy/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/Visual Studio Code.app/Contents/Resources/app/bin",
+        "OPENBLAS_NUM_THREADS=1",
+        "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/.venv/bin/python",
+        "/private/tmp/tandemx_tidecluster_20260916/TideCluster.py",
+        "clustering",
+        "-c",
+        "1",
+        "-f",
+        "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/work/common_assembly_5700_v2/fasta/toy.chr1.fasta",
+        "-pr",
+        "toy",
+        "-m",
+        "100"
+      ],
+      "cwd": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/work/common_assembly_5700_v2",
+      "scratch_dir": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/competitor_envs/tidecluster/work/common_assembly_5700_v2"
+    }
+  ]
+}

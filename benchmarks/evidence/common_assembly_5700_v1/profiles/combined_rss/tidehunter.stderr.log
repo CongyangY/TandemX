@@ -1,0 +1,2 @@
+WARNING: --max_memory=1.0 GB is below one TideHunter part's typical peak; pools will run serially
+[main] Real time: 0.009 sec; CPU: 0.014 sec; Peak RSS: 0.006 GB

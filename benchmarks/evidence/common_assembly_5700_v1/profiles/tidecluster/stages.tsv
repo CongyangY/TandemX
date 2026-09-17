@@ -1,0 +1,2 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+tidecluster_clustering	0	12.847226	5.522469	3.672089	0.000000	0	7162	63	tidecluster_clustering.stdout.log	tidecluster_clustering.stderr.log

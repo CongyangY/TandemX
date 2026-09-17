@@ -1,0 +1,4 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+cendetecthor_full_pipeline	0	9.329226	21.808682	4.055733	2328.500000	14	111421	41	cendetecthor_full_pipeline.stdout.log	cendetecthor_full_pipeline.stderr.log
+tidehunter	0	0.248043	0.116586	0.067517	0.234375	1	6401	2	tidehunter.stdout.log	tidehunter.stderr.log
+tidecluster_clustering	0	11.722446	5.607366	4.356104	7861.875000	4	7162	51	tidecluster_clustering.stdout.log	tidecluster_clustering.stderr.log

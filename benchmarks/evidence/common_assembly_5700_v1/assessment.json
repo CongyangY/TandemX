@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "input_sha256": "0acf542594ff333c69ffa5bcb4850c8b3a75fc4c0a828a4d6b6765a7215616c5",
+  "input_bp": 5700,
+  "engineered_truth_array_0_based_half_open": [
+    0,
+    5700
+  ],
+  "cendetecthor_selected_interval_0_based_half_open": [
+    0,
+    5700
+  ],
+  "tidecluster_selected_interval_0_based_half_open": [
+    0,
+    5700
+  ],
+  "array_base_recall": {
+    "CENdetectHOR": 1.0,
+    "TideCluster": 1.0
+  },
+  "array_base_precision": {
+    "CENdetectHOR": 1.0,
+    "TideCluster": 1.0
+  },
+  "native_repeat_length_bp": {
+    "CENdetectHOR_monomer": 60,
+    "TideHunter_consensus": 60
+  },
+  "designed_AB_unit_bp": [
+    30,
+    30
+  ],
+  "hor_order_endpoint": "not_common; TideCluster stages do not report HOR order",
+  "scope": "development interface control; full-length array without flanks; no held-out, plant or human biological accuracy"
+}

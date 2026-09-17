@@ -1,0 +1,2 @@
+##gff-version 3
+toy:0-5700	TideHunter	tandem_repeat	1	5700	96.7	.	.	ID=rep0_toy:0-5700_0;consensus_sequence=TTGACCGATGCTAGACCTGAGTCATCGTACACGTGCAATGTCAGTACCGTACGATCGTTA;consensus_length=60;copy_number=90.5;cverage_match=96.7
