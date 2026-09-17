@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.metadata
 import json
 import math
 import re
@@ -11,7 +12,8 @@ import statistics
 from pathlib import Path
 
 from benchmarks.m2_routes.native_read_pilot import (
-    fasta_records, fastq_records, reverse_complement, trim_between_flanks,
+    MAX_FLANK_ERROR_FRACTION, fasta_records, fastq_records, reverse_complement,
+    trim_between_flanks,
 )
 from benchmarks.scripts.build_native_read_collapse import sha256_file
 from benchmarks.scripts.verify_native_bp_collapse import verify
@@ -31,6 +33,7 @@ def run(output: Path) -> dict:
             or protocol["case_denominator"] != 9
             or protocol["natural_flank_bp_each_side"] != 1024
             or protocol["flank_edit_distance_fraction_max"] != 0.05
+            or MAX_FLANK_ERROR_FRACTION != protocol["flank_edit_distance_fraction_max"]
             or protocol["minimum_eligible_distinct_native_reads"] != 3):
         raise ValueError("Score protocol does not match the frozen implementation")
     manifest_path = SOURCE / "source_eligibility_manifest.json"
@@ -176,6 +179,8 @@ def run(output: Path) -> dict:
                "edit_receipt_sha256": sha256_file(EDIT / "receipt.json"),
                "score_protocol_sha256": sha256_file(PROTOCOL),
                "scorer_sha256": sha256_file(Path(__file__)),
+               "flank_matcher_source_sha256": sha256_file(ROOT / "benchmarks/m2_routes/native_read_pilot.py"),
+               "edlib_version": importlib.metadata.version("edlib"),
                "read_trims_sha256": sha256_file(output / "read_trims.json"),
                "per_case_sha256": sha256_file(output / "per_case.jsonl"),
                "verification_receipt_sha256": verified["receipt_sha256"]}
