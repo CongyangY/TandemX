@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-09-17",
+  "purpose": "source_enrollment_for_real_read_controlled_collapse",
+  "final_heldout_enrolled": false,
+  "independent_biological_truth_enrolled": false,
+  "datasets": [
+    {
+      "dataset": "Col_CEN_v1.2_ERR6210723",
+      "species": "Arabidopsis thaliana",
+      "accession_or_cultivar": "Col-0",
+      "assembly_lineage": "Col-CEN-v1.2",
+      "read_run": "ERR6210723",
+      "read_biosample": "SAMEA8961650",
+      "read_project": "PRJEB46164",
+      "split": "development",
+      "source_pairing_level": "same_published_assembly_study_and_accession_individual_unverified",
+      "source_pairing_evidence": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC10164409/",
+        "https://www.ebi.ac.uk/ena/browser/view/PRJEB46164"
+      ],
+      "assembly_full_sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8",
+      "read_full_sha256_historical_receipt": "79dd524760b6db4eb9d44db5a4776a25dd4b72e80b24186213e92ea83f264c25",
+      "read_full_current_readback": "not_performed",
+      "bounded_native_subset_sha256_current": "3460277f5659bf362f2b32050ae0333cd8762ee58db3e8c65dc338e60978b8a9",
+      "bounded_subset_read_count": 74600,
+      "controlled_array_intervals": {
+        "C1": "Chr1:15585019-15588579",
+        "C2": "Chr2:3965542-3969102",
+        "C3": "Chr3:15060000-15063560"
+      },
+      "native_original_molecules_spanning_array_and_at_least_1kb_each_flank": {
+        "C1": 2,
+        "C2": 1,
+        "C3": 3
+      },
+      "locus_mapping_scope": "three_13560bp_local_contexts_not_full_genome_uniqueness",
+      "edit_truth_scope": "exact_injected_assembly_edit_only",
+      "read_pairing_eligibility": "development_local_context_technical_input",
+      "biological_accuracy_eligibility": "pending_individual_donor_and_genomewide_locus_resolution",
+      "final_heldout_eligibility": "ineligible_prior_development_lineage"
+    },
+    {
+      "dataset": "Ey15_2_9994_ERR8666125",
+      "species": "Arabidopsis thaliana",
+      "accession_or_cultivar": "Ey15-2 (9994)",
+      "assembly_lineage": "9994.HiFi_Hifiasm",
+      "read_run": "ERR8666125",
+      "read_biosample": "SAMEA13018399",
+      "read_project": "PRJEB50694",
+      "split": "development",
+      "source_pairing_level": "same_published_sample_9994",
+      "source_pairing_evidence": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9757041/",
+        "https://doi.org/10.5281/zenodo.7326462"
+      ],
+      "assembly_full_sha256_historical_receipt": "48d67e8d26c5d9ebc1fbd772e877e2f957437b5a3b27bbdde4a1d3c77923208c",
+      "read_full_sha256_historical_receipt": "bac8475a653b22dc7df7d53baef71fc1098d36f5d56706225ec27b4c739572f8",
+      "read_full_current_readback": "not_performed",
+      "bounded_native_subset_sha256_current": "3ce493ee08111e7929000df5ac9c30373fae1af5106ccd2bc47095a0215da8e5",
+      "bounded_subset_read_count": 517,
+      "native_interval_support": "not_measured_in_this_audit",
+      "read_pairing_eligibility": "source_paired_development_pending_native_interval_extract",
+      "biological_accuracy_eligibility": "reference_proxy_only_not_absolute_copy_truth",
+      "final_heldout_eligibility": "ineligible_prior_development_lineage"
+    },
+    {
+      "dataset": "Mo17_SRR15447419_GCA_022117705.1",
+      "species": "Zea mays",
+      "accession_or_cultivar": "Mo17 / Mo17-2021",
+      "assembly_lineage": "GCA_022117705.1",
+      "read_run": "SRR15447419",
+      "read_biosample": "SAMN20604744",
+      "assembly_biosample": "SAMN20854702",
+      "read_project": "PRJNA751841",
+      "split": "development",
+      "source_pairing_level": "same_project_cultivar_distinct_biosamples_exact_donor_unverified",
+      "source_pairing_evidence": [
+        "https://www.ncbi.nlm.nih.gov/sra/SRX11746829",
+        "https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_022117705.1/"
+      ],
+      "assembly_full_sha256_historical_receipt": "2ac74f8a6dc9f3651cd54fcfb4ba644c012a299aa2c6d3ebcd23d756192d15e0",
+      "read_full_sha256_historical_receipt": "3047df8fc93cd0c87d03b968ad702a95a2edf6ae3474d92b08350827d847f05c",
+      "read_full_current_readback": "not_performed",
+      "bounded_native_subset_sha256_current": "ffcfcc117cdf1eecd8acff612d34a6bce5bd44fc58a7a79d0e59b6fef4947fc1",
+      "bounded_subset_read_count": 840,
+      "native_interval_support": "not_measured_in_this_audit",
+      "read_pairing_eligibility": "pending_exact_donor_or_haplotype_link",
+      "biological_accuracy_eligibility": "not_eligible",
+      "final_heldout_eligibility": "not_enrolled"
+    }
+  ]
+}

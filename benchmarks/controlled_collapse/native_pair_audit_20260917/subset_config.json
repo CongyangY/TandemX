@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "subsets": [
+    {
+      "dataset": "Col_CEN_ERR6210723_seed6101_sample001",
+      "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_001.fastq.gz",
+      "bytes": 9867645,
+      "sha256": "f2a7a97f9cf3a2967fb492fb7421c6a69a8d127f5b7a8194958d88ba17226bc2",
+      "read_count": 752,
+      "total_bases": 11765868
+    },
+    {
+      "dataset": "Ey15_2_ERR8666125_seed6101_sample001",
+      "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR8666125_seed6101_v1/sample_001.fastq.gz",
+      "bytes": 11810482,
+      "sha256": "3ce493ee08111e7929000df5ac9c30373fae1af5106ccd2bc47095a0215da8e5",
+      "read_count": 517,
+      "total_bases": 11698437
+    },
+    {
+      "dataset": "Mo17_SRR15447419_seed6101_sample001",
+      "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR15447419_seed6101_v1/sample_001.fastq.gz",
+      "bytes": 12020854,
+      "sha256": "ffcfcc117cdf1eecd8acff612d34a6bce5bd44fc58a7a79d0e59b6fef4947fc1",
+      "read_count": 840,
+      "total_bases": 11680888
+    }
+  ]
+}

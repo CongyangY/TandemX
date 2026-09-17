@@ -1,0 +1,40 @@
+{
+  "reads": [
+    {
+      "bases": 14716,
+      "id": "ERR6210723.285454",
+      "record_sha256": "ea9466c7ede6298c89e66876baf029f424d0345ca268e3c56e90c4fad89cb873"
+    },
+    {
+      "bases": 14883,
+      "id": "ERR6210723.385647",
+      "record_sha256": "12469a6832daf08b383629926ba76d441900f27ce2831ba5011cf96df82a731b"
+    },
+    {
+      "bases": 15122,
+      "id": "ERR6210723.422623",
+      "record_sha256": "74c343fe3a26c9d458239cb45dc2bd91cf21663391d7d7708b911ea5f2c55733"
+    },
+    {
+      "bases": 19612,
+      "id": "ERR6210723.790432",
+      "record_sha256": "d6eb33c5f1fb6447bd716cab2715a0fece799e9b82cbf4b4fd13ed754a736e35"
+    },
+    {
+      "bases": 18270,
+      "id": "ERR6210723.792415",
+      "record_sha256": "2ef60fb25a60b8fbf19646cb246f6f3ed6c2d16f73a63094feee14989b1e0755"
+    },
+    {
+      "bases": 16693,
+      "id": "ERR6210723.879668",
+      "record_sha256": "b2959db161246affb3092a66b8bd128c747836f586bf791948eae25b8408d39c"
+    }
+  ],
+  "selected_fastq": "benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_spanners.fastq.gz",
+  "selected_fastq_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+  "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_003.fastq.gz",
+  "source_gzip_trailer_checked": true,
+  "source_read_count": 74600,
+  "source_sha256": "3460277f5659bf362f2b32050ae0333cd8762ee58db3e8c65dc338e60978b8a9"
+}

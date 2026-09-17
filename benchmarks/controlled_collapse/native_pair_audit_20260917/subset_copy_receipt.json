@@ -1,0 +1,42 @@
+{
+  "config_sha256": "4a0ba56e97fde623d127e080ea01d3059e0798b5d58c7537c390303f0103f0aa",
+  "full_source_current_readback": "not_performed",
+  "native_interval_support": "not_measured",
+  "schema_version": 1,
+  "scope": "bounded_native_read_subset_integrity_only",
+  "subsets": [
+    {
+      "bytes": 9867645,
+      "copy": "tmp/native_pair_audit_20260917/subset_copies/Col_CEN_ERR6210723_seed6101_sample001.fastq.gz",
+      "dataset": "Col_CEN_ERR6210723_seed6101_sample001",
+      "gzip_trailer_checked": true,
+      "read_count": 752,
+      "sha256": "f2a7a97f9cf3a2967fb492fb7421c6a69a8d127f5b7a8194958d88ba17226bc2",
+      "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_001.fastq.gz",
+      "source_and_copy_hash_verified": true,
+      "total_bases": 11765868
+    },
+    {
+      "bytes": 11810482,
+      "copy": "tmp/native_pair_audit_20260917/subset_copies/Ey15_2_ERR8666125_seed6101_sample001.fastq.gz",
+      "dataset": "Ey15_2_ERR8666125_seed6101_sample001",
+      "gzip_trailer_checked": true,
+      "read_count": 517,
+      "sha256": "3ce493ee08111e7929000df5ac9c30373fae1af5106ccd2bc47095a0215da8e5",
+      "source": "/Volumes/T7/Codex/TandemX/data/subsets/ERR8666125_seed6101_v1/sample_001.fastq.gz",
+      "source_and_copy_hash_verified": true,
+      "total_bases": 11698437
+    },
+    {
+      "bytes": 12020854,
+      "copy": "tmp/native_pair_audit_20260917/subset_copies/Mo17_SRR15447419_seed6101_sample001.fastq.gz",
+      "dataset": "Mo17_SRR15447419_seed6101_sample001",
+      "gzip_trailer_checked": true,
+      "read_count": 840,
+      "sha256": "ffcfcc117cdf1eecd8acff612d34a6bce5bd44fc58a7a79d0e59b6fef4947fc1",
+      "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR15447419_seed6101_v1/sample_001.fastq.gz",
+      "source_and_copy_hash_verified": true,
+      "total_bases": 11680888
+    }
+  ]
+}
