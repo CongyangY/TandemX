@@ -1,0 +1,33 @@
+{
+  "abstain_cases": 0,
+  "biological_accuracy": "not_evaluated",
+  "case_count": 9,
+  "distinct_source_read_count": 7,
+  "edit_receipt_sha256": "6744d822c6d6751c7c929ec93f7c2a43f9bb0f4d8451374819a204d97bdbb2c9",
+  "eligible_read_count": 7,
+  "eligible_read_spans_bp": [
+    3244,
+    3240,
+    3246,
+    3252,
+    3244,
+    3241,
+    3248
+  ],
+  "fn": 0,
+  "fp": 0,
+  "frozen_m2_evaluated_cases": 0,
+  "median_native_read_span_bp": 3244,
+  "native_context_PAF_sha256": "71dc32a740df01e6518a137064ee1a40a25d5099365b0e0e0a660efb5e05093e",
+  "original_native_fastq_sha256": "e38b4bb7726a9975992137f681c56ccd1adc8ee15dde1401ad447dcc27a736d0",
+  "per_case_sha256": "b9f4990d95296529360ee0af2d1b2f85171dae5d18175aa933598ea4ee660af7",
+  "physical_copy_truth": "unavailable",
+  "read_trims_sha256": "b0fba6a31b29662540cd58441ece7ee0c2d50a1f495eacb59350a591a9cd47bc",
+  "schema_version": 1,
+  "score_protocol_sha256": "aba7a5396f5b79dd2f6c6e743ed56af4df017fcfb514e47bb608ae5e6eb2b85f",
+  "scorer_sha256": "f9497760947bb720a71ddca4d438faeeca091404b3264bdf8d8ccc5e9f0fa4d2",
+  "source_manifest_sha256": "9de5c7ad328fb43ba68fcac7fe60330acfa0453706dfc344ed4da0ad3ee3707d",
+  "tn": 1,
+  "tp": 8,
+  "verification_receipt_sha256": "6744d822c6d6751c7c929ec93f7c2a43f9bb0f4d8451374819a204d97bdbb2c9"
+}

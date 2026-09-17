@@ -1,0 +1,191 @@
+[
+  {
+    "left_edit_cost": 1,
+    "left_hit_0based": [
+      10769,
+      11794
+    ],
+    "observed_array_span_bp": 3244,
+    "original_read_sha256": "14351f1c160f5ae4525e7ec61bde29f5dad165ded56470667fa513113c0233ee",
+    "read_id": "ERR8666125.104100",
+    "read_length_bp": 30965,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 0,
+    "right_hit_0based": [
+      15038,
+      16062
+    ],
+    "spanning_context_PAF_projected_array_interval_0based": [
+      11794,
+      15038
+    ],
+    "status": "ELIGIBLE",
+    "strand": "+",
+    "trim_interval_0based": [
+      11794,
+      15038
+    ]
+  },
+  {
+    "left_edit_cost": 3,
+    "left_hit_0based": [
+      5364,
+      6391
+    ],
+    "observed_array_span_bp": 3240,
+    "original_read_sha256": "493cabaff9126c3f81327dd110e49cfa82aca39281929ddfe85974c2c7ee02fb",
+    "read_id": "ERR8666125.25142",
+    "read_length_bp": 20787,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 2,
+    "right_hit_0based": [
+      9631,
+      10655
+    ],
+    "spanning_context_PAF_projected_array_interval_0based": [
+      6391,
+      9631
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      6391,
+      9631
+    ]
+  },
+  {
+    "left_edit_cost": 0,
+    "left_hit_0based": [
+      21944,
+      22968
+    ],
+    "observed_array_span_bp": 3246,
+    "original_read_sha256": "d951673764606530fab4b4123b4715b555b54e2affe9f47e5a42aa27e02f2cc9",
+    "read_id": "ERR8666125.268942",
+    "read_length_bp": 29689,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 1,
+    "right_hit_0based": [
+      26214,
+      27237
+    ],
+    "spanning_context_PAF_projected_array_interval_0based": [
+      22968,
+      26214
+    ],
+    "status": "ELIGIBLE",
+    "strand": "+",
+    "trim_interval_0based": [
+      22968,
+      26214
+    ]
+  },
+  {
+    "left_edit_cost": 5,
+    "left_hit_0based": [
+      6548,
+      7574
+    ],
+    "observed_array_span_bp": 3252,
+    "original_read_sha256": "7d9b1c98ad8602bb5d047e71312819091bbf1d4f62d60e4af96fe6cf50a625f3",
+    "read_id": "ERR8666125.34021",
+    "read_length_bp": 26438,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 5,
+    "right_hit_0based": [
+      10826,
+      11851
+    ],
+    "spanning_context_PAF_projected_array_interval_0based": [
+      7574,
+      10826
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      7574,
+      10826
+    ]
+  },
+  {
+    "left_edit_cost": 2,
+    "left_hit_0based": [
+      11497,
+      12523
+    ],
+    "observed_array_span_bp": 3244,
+    "original_read_sha256": "730f3337d50554112dec5990d6ec521370b75f45a851270ffd17815d6c50c32d",
+    "read_id": "ERR8666125.359151",
+    "read_length_bp": 19603,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 2,
+    "right_hit_0based": [
+      15767,
+      16793
+    ],
+    "spanning_context_PAF_projected_array_interval_0based": [
+      12523,
+      15767
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      12523,
+      15767
+    ]
+  },
+  {
+    "left_edit_cost": 2,
+    "left_hit_0based": [
+      4764,
+      5788
+    ],
+    "observed_array_span_bp": 3241,
+    "original_read_sha256": "71c1468d772a569e76a61aac10ec8600598c1662f5f3d9783c550b048dff70e5",
+    "read_id": "ERR8666125.375932",
+    "read_length_bp": 31903,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 6,
+    "right_hit_0based": [
+      9029,
+      10047
+    ],
+    "spanning_context_PAF_projected_array_interval_0based": [
+      5788,
+      9029
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      5788,
+      9029
+    ]
+  },
+  {
+    "left_edit_cost": 3,
+    "left_hit_0based": [
+      960,
+      1985
+    ],
+    "observed_array_span_bp": 3248,
+    "original_read_sha256": "a72efc72089d4b89b78970c64f8bd4ea15357055897577e96622c737815c29c4",
+    "read_id": "ERR8666125.684116",
+    "read_length_bp": 25383,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 2,
+    "right_hit_0based": [
+      5233,
+      6255
+    ],
+    "spanning_context_PAF_projected_array_interval_0based": [
+      1985,
+      5233
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      1985,
+      5233
+    ]
+  }
+]

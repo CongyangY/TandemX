@@ -1,16 +1,54 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-17: two source-qualified native development lineages
+
+The Col-CEN six original HiFi molecules were mapped against the **complete**
+132,081,078-bp Col-CEN v1.2 reference under protocol commit `b788469`.
+Each has one reported primary alignment over its expected array and natural
+flanks, minimum MAPQ 37 and minimum alignment identity 0.99837; no secondary
+was reported under the bounded minimap2 settings. This extends the earlier
+local-context eligibility evidence but does not prove unique origin across
+all haplotypes or exact individual/extraction pairing. See
+`docs/logs/colcen_full_reference_mapping_20260917.md`.
+
+A second native development lineage, Ey15-2 (9994), now has seven distinct
+original HiFi molecules spanning one selected 3,244-bp Chr1 repeat interval.
+All seven have one reported primary alignment at the locus on the complete
+136,162,473-bp assembly. The source and read archive is
+`benchmarks/controlled_collapse/ey15_native_pair_audit_20260917/`.
+Nine exact assembly edits were independently reconstructed 9/9, with
+unchanged read hashes and byte-identical generator replay. The frozen
+source-guided 5% read-span rule found 7/7 eligible molecules (median span
+3,244 bp) and classified all eight large injected deletions plus the intact
+control correctly, with no abstention. The smallest deletion is 811 bp versus
+a 163-bp threshold. The nine cases are correlated edits of one selected
+array, and exact extraction pairing remains unverified. The only ground truth
+is the injected assembly bp difference; biological copy truth and
+independent-donor accuracy are not established. See
+`docs/logs/ey15_native_bp_edits_20260917.md` and
+`docs/logs/ey15_native_span_score_20260917.md`.
+
+The frozen M2 route evaluated **0/9 Ey15-2 cases** because its 300-bp
+monomer cap excludes this catalogue's operational 420-bp period. Its prior
+synthetic Gate B **NO-GO** remains in force. Ey15 adds independent source
+lineage and a length-baseline feasibility result; it does not rescue the M2
+method or supply final held-out biological validation. These source lineages
+are Arabidopsis development materials, not demonstrated transfer to large
+plant genomes. Formal release, Bioconda, Zenodo, and manuscript promotion
+remain paused under the current instructions.
+
 ## Checkpoint 2026-09-17: native development inputs and exact edit archive
 
 The bounded source audit in `benchmarks/controlled_collapse/native_pair_audit_20260917/`
 rechecked the Col-CEN assembly copy, a 74,600-read ERR6210723 subset, and
 six byte-preserved original HiFi molecules. Two molecules span the C1 array
 and at least 1 kb of each natural flank, one spans C2, and three span C3.
-These are local alignments to three 13,560-bp contexts and one pooled Col-0N
-read run. Full-genome mapping uniqueness, identical individual donor, and
-haplotype pairing are unverified. Ey15-2 and Mo17 bounded source copies also
-passed integrity checks; their native interval support and exact pairing are
-not yet established. A Macadamia jansenii HiFi assembly/read pair was added
+These were initially local alignments to three 13,560-bp contexts and one pooled
+Col-0N read run. Full-reference Col-CEN mapping and an Ey15 native interval
+were subsequently checked as recorded in the newer checkpoint above; exact
+individual donor/extraction and haplotype pairing remain unverified. Mo17
+bounded source copies passed integrity checks but native interval support and
+exact pairing remain unestablished. A Macadamia jansenii HiFi assembly/read pair was added
 to the source inventory from existing historical receipts, with distinct
 archival BioSamples and no current bounded interval verification. These are
 four assembly lineages at different eligibility states, not four scored
