@@ -1,0 +1,386 @@
+{
+  "case_count": 14,
+  "cases": [
+    {
+      "case_id": "intact",
+      "elapsed_seconds": 0.0013837497681379318,
+      "result": {
+        "ambiguity": [],
+        "discordant_count": 0,
+        "event_class": "graph_concordant",
+        "graph_distance": 0,
+        "implicated_transitions": [],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "SUPPORTED",
+        "support_count": 3,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 68357,
+      "truth_scope": "intact_transition_graph"
+    },
+    {
+      "case_id": "copy_compression",
+      "elapsed_seconds": 0.0004876661114394665,
+      "result": {
+        "ambiguity": [],
+        "discordant_count": 3,
+        "event_class": "copy_count_or_graph_multiplicity",
+        "graph_distance": 3,
+        "implicated_transitions": [
+          [
+            "A",
+            "B",
+            1,
+            2
+          ],
+          [
+            "B",
+            "C",
+            1,
+            2
+          ],
+          [
+            "C",
+            "A",
+            0,
+            1
+          ]
+        ],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "DISCORDANT",
+        "support_count": 3,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 4659,
+      "truth_scope": "discordant_transition_graph"
+    },
+    {
+      "case_id": "order_rewiring",
+      "elapsed_seconds": 0.0004482083022594452,
+      "result": {
+        "ambiguity": [],
+        "discordant_count": 3,
+        "event_class": "transition_rewiring",
+        "graph_distance": 4,
+        "implicated_transitions": [
+          [
+            "B",
+            "<RIGHT_FLANK>",
+            0,
+            1
+          ],
+          [
+            "B",
+            "A",
+            1,
+            0
+          ],
+          [
+            "C",
+            "<RIGHT_FLANK>",
+            1,
+            0
+          ],
+          [
+            "C",
+            "A",
+            0,
+            1
+          ]
+        ],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "DISCORDANT",
+        "support_count": 3,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 5112,
+      "truth_scope": "discordant_transition_graph"
+    },
+    {
+      "case_id": "subclass_replacement",
+      "elapsed_seconds": 0.0004163747653365135,
+      "result": {
+        "ambiguity": [],
+        "discordant_count": 3,
+        "event_class": "transition_rewiring",
+        "graph_distance": 4,
+        "implicated_transitions": [
+          [
+            "A",
+            "<RIGHT_FLANK>",
+            0,
+            1
+          ],
+          [
+            "B",
+            "A",
+            0,
+            1
+          ],
+          [
+            "B",
+            "C",
+            1,
+            0
+          ],
+          [
+            "C",
+            "<RIGHT_FLANK>",
+            1,
+            0
+          ]
+        ],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "DISCORDANT",
+        "support_count": 3,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 4683,
+      "truth_scope": "discordant_transition_graph"
+    },
+    {
+      "case_id": "equal_edges_different_order",
+      "elapsed_seconds": 0.0002510827034711838,
+      "result": {
+        "ambiguity": [
+          "equal_edge_spectra_do_not_identify_full_monomer_order"
+        ],
+        "discordant_count": 0,
+        "event_class": "order_unidentifiable_from_transitions",
+        "graph_distance": 0,
+        "implicated_transitions": [],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "AMBIGUOUS",
+        "support_count": 3,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 5808,
+      "truth_scope": "discordant_full_order_but_equal_transition_graph"
+    },
+    {
+      "case_id": "close_monomer_variant_or_systematic_motif_error",
+      "elapsed_seconds": 0.0003682500682771206,
+      "result": {
+        "ambiguity": [
+          "near_equivalent_monomer_labels"
+        ],
+        "discordant_count": 3,
+        "event_class": "label_identity_unresolved",
+        "graph_distance": 4,
+        "implicated_transitions": [
+          [
+            "A",
+            "A_snp",
+            0,
+            1
+          ],
+          [
+            "A",
+            "B",
+            1,
+            0
+          ],
+          [
+            "A_snp",
+            "A",
+            0,
+            1
+          ],
+          [
+            "B",
+            "A",
+            1,
+            0
+          ]
+        ],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "AMBIGUOUS",
+        "support_count": 3,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 3899,
+      "truth_scope": "identity_unresolved"
+    },
+    {
+      "case_id": "one_molecule",
+      "elapsed_seconds": 5.412520840764046e-05,
+      "result": {
+        "ambiguity": [
+          "too_few_qualified_full_flank_molecules"
+        ],
+        "discordant_count": 0,
+        "event_class": "unresolved",
+        "graph_distance": null,
+        "implicated_transitions": [],
+        "informative_error_profiles": 1,
+        "rejected_count": 0,
+        "status": "INSUFFICIENT_READ_SUPPORT",
+        "support_count": 1,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 1688,
+      "truth_scope": "insufficient_molecules"
+    },
+    {
+      "case_id": "substitution_assignment_uncertain",
+      "elapsed_seconds": 7.083406671881676e-05,
+      "result": {
+        "ambiguity": [
+          "too_few_qualified_full_flank_molecules"
+        ],
+        "discordant_count": 0,
+        "event_class": "unresolved",
+        "graph_distance": null,
+        "implicated_transitions": [],
+        "informative_error_profiles": 0,
+        "rejected_count": 3,
+        "status": "INSUFFICIENT_READ_SUPPORT",
+        "support_count": 0,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 1688,
+      "truth_scope": "upstream_assignment_uncertain"
+    },
+    {
+      "case_id": "indel_assignment_uncertain",
+      "elapsed_seconds": 6.83753751218319e-05,
+      "result": {
+        "ambiguity": [
+          "too_few_qualified_full_flank_molecules"
+        ],
+        "discordant_count": 0,
+        "event_class": "unresolved",
+        "graph_distance": null,
+        "implicated_transitions": [],
+        "informative_error_profiles": 0,
+        "rejected_count": 3,
+        "status": "INSUFFICIENT_READ_SUPPORT",
+        "support_count": 0,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 1688,
+      "truth_scope": "upstream_assignment_uncertain"
+    },
+    {
+      "case_id": "homopolymer_assignment_uncertain",
+      "elapsed_seconds": 6.749993190169334e-05,
+      "result": {
+        "ambiguity": [
+          "too_few_qualified_full_flank_molecules"
+        ],
+        "discordant_count": 0,
+        "event_class": "unresolved",
+        "graph_distance": null,
+        "implicated_transitions": [],
+        "informative_error_profiles": 0,
+        "rejected_count": 3,
+        "status": "INSUFFICIENT_READ_SUPPORT",
+        "support_count": 0,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 1688,
+      "truth_scope": "upstream_assignment_uncertain"
+    },
+    {
+      "case_id": "correlated_error_profile",
+      "elapsed_seconds": 0.00016058282926678658,
+      "result": {
+        "ambiguity": [
+          "dominant_graph_lacks_independent_error_profiles"
+        ],
+        "discordant_count": 3,
+        "event_class": "profile_limited",
+        "graph_distance": null,
+        "implicated_transitions": [],
+        "informative_error_profiles": 1,
+        "rejected_count": 0,
+        "status": "AMBIGUOUS",
+        "support_count": 3,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 3248,
+      "truth_scope": "profile_confounded"
+    },
+    {
+      "case_id": "within_label_snp_unseen",
+      "elapsed_seconds": 0.00020741717889904976,
+      "result": {
+        "ambiguity": [],
+        "discordant_count": 0,
+        "event_class": "graph_concordant",
+        "graph_distance": 0,
+        "implicated_transitions": [],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "SUPPORTED",
+        "support_count": 3,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 3832,
+      "truth_scope": "within_label_variant_unobservable"
+    },
+    {
+      "case_id": "mixed_haplotypes",
+      "elapsed_seconds": 0.0001771249808371067,
+      "result": {
+        "ambiguity": [
+          "multiple_haplotypes_unphased_for_assembly_comparison"
+        ],
+        "discordant_count": 3,
+        "event_class": "mixed_haplotypes",
+        "graph_distance": null,
+        "implicated_transitions": [],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "AMBIGUOUS",
+        "support_count": 6,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 4472,
+      "truth_scope": "mixed_haplotypes"
+    },
+    {
+      "case_id": "rare_variant_single_molecule",
+      "elapsed_seconds": 0.00025091739371418953,
+      "result": {
+        "ambiguity": [],
+        "discordant_count": 1,
+        "event_class": "graph_concordant",
+        "graph_distance": 0,
+        "implicated_transitions": [],
+        "informative_error_profiles": 2,
+        "rejected_count": 0,
+        "status": "SUPPORTED",
+        "support_count": 5,
+        "warning": "research_only;requires_external_flank_molecule_assignment_error_haplotype_qc;graph_spectrum_is_not_complete_order_or_assembly_error_truth"
+      },
+      "tracemalloc_peak_bytes": 5288,
+      "truth_scope": "one_minor_molecule_unresolved_biology"
+    }
+  ],
+  "counts_by_status": {
+    "AMBIGUOUS": 4,
+    "DISCORDANT": 3,
+    "INSUFFICIENT_READ_SUPPORT": 4,
+    "SUPPORTED": 3
+  },
+  "input_sha256": "33cd8d2d88e9a9583e37615183d14a6ecb03e316849200d65f6b1774ab6cdead",
+  "limitations": [
+    "engineered labels and assignment confidence are supplied, not inferred from reads",
+    "two error profiles are names in metadata, not independent sequencing validation",
+    "source sequences are 8 bp motifs and cannot model realistic centromeric arrays",
+    "tracemalloc measures Python allocations, not process RSS",
+    "cases were developed alongside the algorithm and are not validation or held-out data"
+  ],
+  "max_case_elapsed_seconds": 0.0013837497681379318,
+  "max_case_tracemalloc_peak_bytes": 68357,
+  "prototype_sha256": "2fcc3d46f4396b0512131c38ad8f2379c8703e99d703b079ccf4a3894589f9da",
+  "runner_sha256": "fcae0c4f7d6170cb83d350acf5aa5f5a5945c56cb124ba90b3ebbcecd83d7909",
+  "status": "development_engineered_label_component_only"
+}
