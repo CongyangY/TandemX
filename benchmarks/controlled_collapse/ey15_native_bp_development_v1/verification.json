@@ -1,0 +1,6 @@
+{
+  "case_count": 9,
+  "original_native_fastq_sha256": "e38b4bb7726a9975992137f681c56ccd1adc8ee15dde1401ad447dcc27a736d0",
+  "receipt_sha256": "6744d822c6d6751c7c929ec93f7c2a43f9bb0f4d8451374819a204d97bdbb2c9",
+  "status": "verified_injected_bp_only"
+}

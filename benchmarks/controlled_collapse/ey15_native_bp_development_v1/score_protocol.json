@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "split": "development",
+  "status": "frozen_before_scoring",
+  "source_manifest": "benchmarks/controlled_collapse/ey15_native_pair_audit_20260917/source_eligibility_manifest.json",
+  "edited_case_receipt": "benchmarks/controlled_collapse/ey15_native_bp_development_v1/receipt.json",
+  "case_denominator": 9,
+  "natural_flank_bp_each_side": 1024,
+  "flank_edit_distance_fraction_max": 0.05,
+  "flank_hit_rule": "one near-exact end-to-end hit for each flank; correct orientation from source manifest; left hit must precede right hit",
+  "minimum_eligible_distinct_native_reads": 3,
+  "read_span_summary": "median of bp strictly between the two natural-flank hits",
+  "binary_rule": "abs(assembly_span_bp - median_read_span_bp) > max(2, ceil(0.05 * max(assembly_span_bp, median_read_span_bp)))",
+  "signed_delta": "assembly_span_bp - median_read_span_bp",
+  "truth": "exact injected assembly bp deletion; intact case is negative; physical donor copy truth unavailable",
+  "frozen_m2_status": "ineligible_420bp_family_period_exceeds_300bp_route_cap",
+  "purpose": "technical stop-loss diagnostic for a source-guided development lineage; no biological sensitivity claim",
+  "read_pairing": "same published sample 9994; exact DNA extraction not separately established",
+  "previous_rule_source": "benchmarks/m2_routes/native_read_pilot.py, Col-CEN C3 development pilot"
+}

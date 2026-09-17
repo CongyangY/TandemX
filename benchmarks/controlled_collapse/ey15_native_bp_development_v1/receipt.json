@@ -1,0 +1,365 @@
+{
+  "cases": [
+    {
+      "case_id": "E1_terminal_000",
+      "edit_type": "terminal",
+      "edited_array_bp": 3244,
+      "edited_array_context_interval": [
+        3000,
+        6244
+      ],
+      "edited_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "edited_breakpoint0": 6244,
+      "edited_fasta_sha256": "3e76b731aff0036d93b4d25a57cfac724741f12665067ba33cb8668c047ddfcb",
+      "injected_deleted_bp": 0,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 0,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        6244,
+        6244
+      ],
+      "source_deleted_genome_interval": [
+        12832478,
+        12832478
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "E1_terminal_025",
+      "edit_type": "terminal",
+      "edited_array_bp": 2433,
+      "edited_array_context_interval": [
+        3000,
+        5433
+      ],
+      "edited_array_sha256": "6ea91f803a6b387f1045b74cf07e6f53b9c03f9a9d5b34adcbf71661942cf123",
+      "edited_breakpoint0": 5433,
+      "edited_fasta_sha256": "586fe46f70a15417cc903787b205aa8faf21e404e3d62b4106e287f0adbd7340",
+      "injected_deleted_bp": 811,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 25,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        5433,
+        6244
+      ],
+      "source_deleted_genome_interval": [
+        12831667,
+        12832478
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "E1_terminal_050",
+      "edit_type": "terminal",
+      "edited_array_bp": 1622,
+      "edited_array_context_interval": [
+        3000,
+        4622
+      ],
+      "edited_array_sha256": "38c84c5adfa784dc4e9b617347e58a663646131cb9f73a23f5ff6e2c4b8639f7",
+      "edited_breakpoint0": 4622,
+      "edited_fasta_sha256": "93a2322a2c693cb8e27153ee91af0149bf017a6a610b277c74cd54458803581f",
+      "injected_deleted_bp": 1622,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 50,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        4622,
+        6244
+      ],
+      "source_deleted_genome_interval": [
+        12830856,
+        12832478
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "E1_terminal_075",
+      "edit_type": "terminal",
+      "edited_array_bp": 811,
+      "edited_array_context_interval": [
+        3000,
+        3811
+      ],
+      "edited_array_sha256": "29dcabcfc550f8a9ac83f23b31195196cac1c8bff5db5481d6ae80792756e1c4",
+      "edited_breakpoint0": 3811,
+      "edited_fasta_sha256": "255435c14c4728fe5621b20cdc744867ea69cf64343edd1d0d12696ec49a7dcb",
+      "injected_deleted_bp": 2433,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 75,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        3811,
+        6244
+      ],
+      "source_deleted_genome_interval": [
+        12830045,
+        12832478
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "E1_terminal_100",
+      "edit_type": "terminal",
+      "edited_array_bp": 0,
+      "edited_array_context_interval": [
+        3000,
+        3000
+      ],
+      "edited_array_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "edited_breakpoint0": 3000,
+      "edited_fasta_sha256": "39938ad683a368d81d29e4595d8e3575f16d723cf0eb71be64d3f2e6690cc1d0",
+      "injected_deleted_bp": 3244,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 100,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        3000,
+        6244
+      ],
+      "source_deleted_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "E1_internal_025",
+      "edit_type": "internal",
+      "edited_array_bp": 2433,
+      "edited_array_context_interval": [
+        3000,
+        5433
+      ],
+      "edited_array_sha256": "3fc3d5c6ae603bdff0167ee285f3ceecc96dc4445d320b3fef0edab231ad43ab",
+      "edited_breakpoint0": 4216,
+      "edited_fasta_sha256": "eb66fe6a642f1cfb0e86a416e3ba96b3c67a82f61561f572f834715eab6897d1",
+      "injected_deleted_bp": 811,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 25,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        4216,
+        5027
+      ],
+      "source_deleted_genome_interval": [
+        12830450,
+        12831261
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "E1_internal_050",
+      "edit_type": "internal",
+      "edited_array_bp": 1622,
+      "edited_array_context_interval": [
+        3000,
+        4622
+      ],
+      "edited_array_sha256": "f1ea196cefb63409a5ee7930a6f3d46174621b5f16042f0f7a9fd20f84ef1cd5",
+      "edited_breakpoint0": 3811,
+      "edited_fasta_sha256": "6bc031c4e7a727b95bfbf22ce0adccc69698c6b94fc10985f1f725a780af9fc4",
+      "injected_deleted_bp": 1622,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 50,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        3811,
+        5433
+      ],
+      "source_deleted_genome_interval": [
+        12830045,
+        12831667
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "E1_internal_075",
+      "edit_type": "internal",
+      "edited_array_bp": 811,
+      "edited_array_context_interval": [
+        3000,
+        3811
+      ],
+      "edited_array_sha256": "b8f57443bd3caade4772bafd09e4dc194e7061d73c2675a760b2b6ec369144c0",
+      "edited_breakpoint0": 3405,
+      "edited_fasta_sha256": "3326b1cf01ba7ae56d2d537a136cf4420b43823009325c60aa15d4c4067409a5",
+      "injected_deleted_bp": 2433,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 75,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        3405,
+        5838
+      ],
+      "source_deleted_genome_interval": [
+        12829639,
+        12832072
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "E1_boundary_left_025",
+      "edit_type": "boundary_left",
+      "edited_array_bp": 2433,
+      "edited_array_context_interval": [
+        3000,
+        5433
+      ],
+      "edited_array_sha256": "a8e135288f0aeb6a1c0d872951502b18f7d8f8ae5da2b87714497e19f3ee545d",
+      "edited_breakpoint0": 3000,
+      "edited_fasta_sha256": "b967e63ce4ac1baa237563e340d6e6b8e6a8bb9444b7c813bd42777e4689a649",
+      "injected_deleted_bp": 811,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "same_published_sample_9994; exact DNA extraction not separately established",
+      "requested_deletion_percent": 25,
+      "source_array_bp": 3244,
+      "source_array_context_interval": [
+        3000,
+        6244
+      ],
+      "source_array_genome_interval": [
+        12829234,
+        12832478
+      ],
+      "source_array_sha256": "4ad53b884f3c373aa46d37f9e37be2b195cc02223c9014b876492308e78a1385",
+      "source_context_genome_interval": [
+        12826234,
+        12835478
+      ],
+      "source_deleted_context_interval": [
+        3000,
+        3811
+      ],
+      "source_deleted_genome_interval": [
+        12829234,
+        12830045
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    }
+  ],
+  "generator_sha256": "a3e5cb6256148b2e80b51df98499647340ba0306263e5b30228fb16dbee9300c",
+  "independent_donor_count": 1,
+  "material_id": "Ey15-2 (9994)",
+  "original_native_fastq_sha256": "e38b4bb7726a9975992137f681c56ccd1adc8ee15dde1401ad447dcc27a736d0",
+  "raw_reads_modified": false,
+  "schema_version": 1,
+  "source_context_sha256": "35b10d849c6a97bb6a89640f2e54832c5b92bc7eb966e06f2153a7e9452a5ace",
+  "source_manifest_sha256": "9de5c7ad328fb43ba68fcac7fe60330acfa0453706dfc344ed4da0ad3ee3707d",
+  "split": "development",
+  "truth_scope": "injected_bp_delta_only"
+}
