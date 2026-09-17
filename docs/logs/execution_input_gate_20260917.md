@@ -25,11 +25,26 @@ Read-only live checks at 11:35 UTC, before new real-read experiments.
   `8076ed6b2563dabb34351dc56b65f4c05ef186ac41baf18f8c89e0a4008ab256`.
   These are integrity checks on synthetic benchmark artifacts, not native-read
   validation.
+- The internal-disk Col-CEN v1.2 gzip copy independently matched SHA-256
+  `b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8`,
+  passed `gzip -t`, and streamed as seven nonempty FASTA records totaling
+  132,081,078 bases (five nuclear chromosomes plus ChrM and ChrC). This
+  validates assembly bytes/structure only; original-read pairing is a
+  separate provenance gate.
 - The existing methods benchmark protocol v1 already declares development,
   validation and final-heldout splits, task-specific input roles, donor and
   file-hash leakage guards, and a truth hierarchy. Its current four-item
   manifest remains an input-integrity inventory; it does not by itself enroll
   a paired original-read/assembly validation set.
+- The v1 manifest validator was rerun read-only on its three enrolled files.
+  Size, SHA-256 and full sequence structure passed for 1,000 ERR6210723
+  prefix FASTA reads (15,666,956 bp), the T7 Col-CEN assembly (seven records,
+  132,081,078 bp), and 673 YSD56 FASTQ reads (11,669,565 bp). Its known-bad
+  K30076 attempt remains `invalid` with no file eligible for analysis.
+  Machine output is archived at
+  `docs/evidence/methods_execution_20260917/input_manifest_v1_recheck.json`.
+  This bounded readback is evidence for those exact files, not T7-wide
+  stability or source donor pairing.
 
 Open gate: inspect real read/assembly source correspondence and archived
 per-file receipts, then extract only bounded verified inputs for controlled

@@ -1,0 +1,60 @@
+{
+  "valid": true,
+  "datasets_checked": [
+    {
+      "dataset": "ERR6210723_prefix1000",
+      "status": "source-unresolved",
+      "files": [
+        {
+          "path": "/Volumes/T7/Codex/TandemX/data/raw/ERR6210723_prefix1000/reads.fa",
+          "kind": "fasta",
+          "role": "reads",
+          "bytes": 15710688,
+          "sha256": "4adca195ae3587c52bf503751fd82fe68ae755fe15c7d10f3c09d2d1a1a2305f",
+          "records": 1000,
+          "bases": 15666956,
+          "structure": "valid"
+        }
+      ]
+    },
+    {
+      "dataset": "Col-CEN_v1.2_public_control",
+      "status": "source-unresolved",
+      "files": [
+        {
+          "path": "/Volumes/T7/Codex/TandemX/data/references/Col-CEN_v1.2/Col-CEN_v1.2.fasta.gz",
+          "kind": "fasta",
+          "role": "assembly",
+          "bytes": 38265592,
+          "sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8",
+          "records": 7,
+          "bases": 132081078,
+          "structure": "valid"
+        }
+      ]
+    },
+    {
+      "dataset": "YSD56_SRR28726931_sample001",
+      "status": "source-unresolved",
+      "files": [
+        {
+          "path": "/Volumes/T7/Codex/TandemX/data/raw/SRR28726931_complete/sampling_v1/sample_001.fastq.gz",
+          "kind": "fastq",
+          "role": "reads",
+          "bytes": 6635734,
+          "sha256": "b03acf91c941b72fc5b5b2e40a3646596944cc90ed272b1b9d9806970268ae82",
+          "records": 673,
+          "bases": 11669565,
+          "structure": "valid"
+        }
+      ]
+    },
+    {
+      "dataset": "K30076_block2_attempt001_known_bad",
+      "status": "invalid",
+      "files": []
+    }
+  ],
+  "errors": []
+}
+
