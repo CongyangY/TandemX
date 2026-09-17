@@ -99,4 +99,6 @@ claimed. The single abstention blocks the frozen protocol's all-case primary
 aggregate; a separate selective-coverage descriptive table may be computed by
 the scorer but cannot replace the 13-case denominator. The detailed read and
 assembly copy counts, graph transitions, timing and Python allocation peaks
-are in the audit receipt.
+are in the audit receipt. The maximum per-case elapsed time was 0.0062 s and
+the maximum `tracemalloc` peak was 73,179 bytes on this exact 13-case bundle;
+neither is a process-RSS measurement or a scale benchmark.
