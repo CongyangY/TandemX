@@ -1,0 +1,2398 @@
+{
+  "gate_mismatches": 18,
+  "k": 5,
+  "limits": [
+    "Structural states condition on a supplied error-free family catalogue and circular k-mer features.",
+    "Read attribution uses known synthetic source labels only for diagnosis, never to fit an estimator.",
+    "Neither structural identifiability nor read assignment establishes physical copy-number truth.",
+    "The 12 cases share only three simulation seeds and are not independent biological samples.",
+    "Prior formal simulation catalogues are not independent held-out validation for a new gate."
+  ],
+  "m1_development_cases": [
+    {
+      "case_id": "related_low_error_s11",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.7692573625742662,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 24,
+            "exclusive_kmer_position_fraction": 0.3375,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 15,
+            "exclusive_kmer_position_fraction": 0.1875,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 7,
+            "exclusive_kmer_position_fraction": 0.0875,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 115,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.40350877192982454
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.48148148148148145
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.385613991655102,
+          6.518277778376964,
+          3.8165645398727164
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 320,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.0,
+          "rejected": 0,
+          "tied_best": 0,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 1.0,
+          "wrong_unique": 0
+        },
+        "f2": {
+          "accepted": 180,
+          "correct_unique": 180,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.0,
+          "rejected": 0,
+          "tied_best": 0,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 1.0,
+          "wrong_unique": 0
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "8c7e2c3438d52d9251361adb4b40e29a8a02b5c3ff4d2e663f8f2702e79078bd"
+    },
+    {
+      "case_id": "related_low_error_s29",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.7003037122767757,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 23,
+            "exclusive_kmer_position_fraction": 0.3125,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 14,
+            "exclusive_kmer_position_fraction": 0.175,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 8,
+            "exclusive_kmer_position_fraction": 0.1,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 116,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.42857142857142855
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.5094339622641509
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.054588852464308,
+          6.167820791848839,
+          3.7982257526143983
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 319,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.003125,
+          "rejected": 0,
+          "tied_best": 1,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.996875,
+          "wrong_unique": 0
+        },
+        "f2": {
+          "accepted": 180,
+          "correct_unique": 179,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.005555555555555556,
+          "rejected": 0,
+          "tied_best": 1,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.9944444444444445,
+          "wrong_unique": 0
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "3de1b8682fdb743053d445150289ac4dd124b4980d9d95d059faa58d498259ce"
+    },
+    {
+      "case_id": "related_low_error_s47",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.9876306565468815,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 26,
+            "exclusive_kmer_position_fraction": 0.325,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 14,
+            "exclusive_kmer_position_fraction": 0.175,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 5,
+            "exclusive_kmer_position_fraction": 0.0625,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 113,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.391304347826087
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.4953271028037383
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.84377881127047,
+          6.148622083099826,
+          3.7224557863452055
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 318,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.003125,
+          "rejected": 0,
+          "tied_best": 1,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.99375,
+          "wrong_unique": 1
+        },
+        "f2": {
+          "accepted": 180,
+          "correct_unique": 180,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.0,
+          "rejected": 0,
+          "tied_best": 0,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 1.0,
+          "wrong_unique": 0
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "392c1b3ffb9c6e8e96ffc80ceeeb6a7610978b50a73489606de3117a55bcd118"
+    },
+    {
+      "case_id": "related_high_error_s11",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.7692573625742662,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 24,
+            "exclusive_kmer_position_fraction": 0.3375,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 15,
+            "exclusive_kmer_position_fraction": 0.1875,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 7,
+            "exclusive_kmer_position_fraction": 0.0875,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 115,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.40350877192982454
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.48148148148148145
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.385613991655102,
+          6.518277778376964,
+          3.8165645398727164
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 314,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.015625,
+          "rejected": 0,
+          "tied_best": 5,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.98125,
+          "wrong_unique": 1
+        },
+        "f2": {
+          "accepted": 179,
+          "correct_unique": 174,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.01675977653631285,
+          "rejected": 1,
+          "tied_best": 3,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.9666666666666667,
+          "wrong_unique": 2
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "08784eb99769f0929c5929d4ee3cf7348f57fb667db6d2172092eca0b7fc966d"
+    },
+    {
+      "case_id": "related_high_error_s29",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.7003037122767757,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 23,
+            "exclusive_kmer_position_fraction": 0.3125,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 14,
+            "exclusive_kmer_position_fraction": 0.175,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 8,
+            "exclusive_kmer_position_fraction": 0.1,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 116,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.42857142857142855
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.5094339622641509
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.054588852464308,
+          6.167820791848839,
+          3.7982257526143983
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 310,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.025,
+          "rejected": 0,
+          "tied_best": 8,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.96875,
+          "wrong_unique": 2
+        },
+        "f2": {
+          "accepted": 180,
+          "correct_unique": 178,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.005555555555555556,
+          "rejected": 0,
+          "tied_best": 1,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.9888888888888889,
+          "wrong_unique": 1
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "c8daa5dfb401972005e0e8d92b776223bea745f7607e211cec29a530e2cf32de"
+    },
+    {
+      "case_id": "related_high_error_s47",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.9876306565468815,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 26,
+            "exclusive_kmer_position_fraction": 0.325,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 14,
+            "exclusive_kmer_position_fraction": 0.175,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 5,
+            "exclusive_kmer_position_fraction": 0.0625,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 113,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.391304347826087
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.4953271028037383
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.84377881127047,
+          6.148622083099826,
+          3.7224557863452055
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "read_assignment": {
+        "f1": {
+          "accepted": 319,
+          "correct_unique": 316,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.006269592476489028,
+          "rejected": 1,
+          "tied_best": 2,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.9875,
+          "wrong_unique": 1
+        },
+        "f2": {
+          "accepted": 179,
+          "correct_unique": 178,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.00558659217877095,
+          "rejected": 1,
+          "tied_best": 1,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.9888888888888889,
+          "wrong_unique": 0
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "a963ad973625a06ff55093dc431f629e35d89f31d1e78336aa72cb2450f7f91e"
+    },
+    {
+      "case_id": "family_error_shift_s11",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.7692573625742662,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 24,
+            "exclusive_kmer_position_fraction": 0.3375,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 15,
+            "exclusive_kmer_position_fraction": 0.1875,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 7,
+            "exclusive_kmer_position_fraction": 0.0875,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 115,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.40350877192982454
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.48148148148148145
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.385613991655102,
+          6.518277778376964,
+          3.8165645398727164
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "acfa31c4c7e53a474d7baf507d5454c46a73ed6f9a6d6d8e4e5894efb403fdb8",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 319,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.003125,
+          "rejected": 0,
+          "tied_best": 1,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.996875,
+          "wrong_unique": 0
+        },
+        "f2": {
+          "accepted": 44,
+          "correct_unique": 41,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.022727272727272728,
+          "rejected": 136,
+          "tied_best": 1,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.22777777777777777,
+          "wrong_unique": 2
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "b4568fd4f68b7c11fd3db865425076430fd6bbe9b111b7b0185b7443b969fb6d"
+    },
+    {
+      "case_id": "family_error_shift_s29",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.7003037122767757,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 23,
+            "exclusive_kmer_position_fraction": 0.3125,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 14,
+            "exclusive_kmer_position_fraction": 0.175,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 8,
+            "exclusive_kmer_position_fraction": 0.1,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 116,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.42857142857142855
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.5094339622641509
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.054588852464308,
+          6.167820791848839,
+          3.7982257526143983
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "1c89a51543a734e838a9d174ffa1b87825430caa7475f0ab78bff0d623060cfd",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 316,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.0125,
+          "rejected": 0,
+          "tied_best": 4,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.9875,
+          "wrong_unique": 0
+        },
+        "f2": {
+          "accepted": 58,
+          "correct_unique": 55,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.05172413793103448,
+          "rejected": 122,
+          "tied_best": 3,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.3055555555555556,
+          "wrong_unique": 0
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "0976ca371a942fb16c39c059bfdf9b2103d1ee94f3d7730c9475508f6bb3d270"
+    },
+    {
+      "case_id": "family_error_shift_s47",
+      "catalogue": {
+        "condition_number_full_rank_only": 3.9876306565468815,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 26,
+            "exclusive_kmer_position_fraction": 0.325,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 14,
+            "exclusive_kmer_position_fraction": 0.175,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 5,
+            "exclusive_kmer_position_fraction": 0.0625,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 113,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.391304347826087
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.4953271028037383
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.6842105263157895
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          14.84377881127047,
+          6.148622083099826,
+          3.7224557863452055
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "aee06ecbb4e45f49e6b157af31f01cfbd08cec026e496b2ea2fa305c1233f14c",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 317,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.009375,
+          "rejected": 0,
+          "tied_best": 3,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.990625,
+          "wrong_unique": 0
+        },
+        "f2": {
+          "accepted": 43,
+          "correct_unique": 38,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 0.09302325581395349,
+          "rejected": 137,
+          "tied_best": 4,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.2111111111111111,
+          "wrong_unique": 1
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "5862a1ee7617f9938011319e4c3f2e5ab77e0844691f6ca6cd9942022c869121"
+    },
+    {
+      "case_id": "identical_unidentifiable_s11",
+      "catalogue": {
+        "condition_number_full_rank_only": null,
+        "effective_identifiable_family_dimensions": 2,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 32,
+            "exclusive_kmer_position_fraction": 0.4,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 0,
+            "exclusive_kmer_position_fraction": 0.0,
+            "nullspace_involvement": 0.5000000000000001,
+            "reason": "aggregate_kmer_matrix_nullspace_involves_family",
+            "status": "NON_IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 0,
+            "exclusive_kmer_position_fraction": 0.0,
+            "nullspace_involvement": 0.4999999999999999,
+            "reason": "aggregate_kmer_matrix_nullspace_involves_family",
+            "status": "NON_IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 110,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.391304347826087
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.391304347826087
+          },
+          {
+            "identical_kmer_signature": true,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 1.0
+          }
+        ],
+        "signature_rank": 2,
+        "singular_values": [
+          14.507730298088015,
+          6.747278088084036,
+          2.3506611047614023e-15
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "57d889fb4d01650cd9bf632fa2b244d0ab5954d677af993255383190c183ea88",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 1.0,
+          "rejected": 0,
+          "tied_best": 320,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        },
+        "f2": {
+          "accepted": 180,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 1.0,
+          "rejected": 0,
+          "tied_best": 180,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "ddcd8417fdf49792200625ee099c353588c461b6bccff386a4fa929c65ebd41f"
+    },
+    {
+      "case_id": "identical_unidentifiable_s29",
+      "catalogue": {
+        "condition_number_full_rank_only": null,
+        "effective_identifiable_family_dimensions": 2,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 28,
+            "exclusive_kmer_position_fraction": 0.375,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 0,
+            "exclusive_kmer_position_fraction": 0.0,
+            "nullspace_involvement": 0.4999999999999998,
+            "reason": "aggregate_kmer_matrix_nullspace_involves_family",
+            "status": "NON_IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 0,
+            "exclusive_kmer_position_fraction": 0.0,
+            "nullspace_involvement": 0.5000000000000001,
+            "reason": "aggregate_kmer_matrix_nullspace_involves_family",
+            "status": "NON_IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 107,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.44144144144144143
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.44144144144144143
+          },
+          {
+            "identical_kmer_signature": true,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 1.0
+          }
+        ],
+        "signature_rank": 2,
+        "singular_values": [
+          14.344082714934743,
+          6.651863728843989,
+          7.942592499367677e-16
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "1c97c68b97b9c3267c62e0272ec9905e1e1dcbc24e8f50e41f74c573ff804b4b",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 1.0,
+          "rejected": 0,
+          "tied_best": 320,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        },
+        "f2": {
+          "accepted": 180,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 1.0,
+          "rejected": 0,
+          "tied_best": 180,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "17dd0798c280b2c84dc70411394575c94e9314b819b57a48c8657ef8912e34c9"
+    },
+    {
+      "case_id": "identical_unidentifiable_s47",
+      "catalogue": {
+        "condition_number_full_rank_only": null,
+        "effective_identifiable_family_dimensions": 2,
+        "family": {
+          "decoy_zero": {
+            "exclusive_kmer_count": 36,
+            "exclusive_kmer_position_fraction": 0.45,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "f1": {
+            "exclusive_kmer_count": 0,
+            "exclusive_kmer_position_fraction": 0.0,
+            "nullspace_involvement": 0.4999999999999999,
+            "reason": "aggregate_kmer_matrix_nullspace_involves_family",
+            "status": "NON_IDENTIFIABLE"
+          },
+          "f2": {
+            "exclusive_kmer_count": 0,
+            "exclusive_kmer_position_fraction": 0.0,
+            "nullspace_involvement": 0.5000000000000001,
+            "reason": "aggregate_kmer_matrix_nullspace_involves_family",
+            "status": "NON_IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "decoy_zero",
+          "f1",
+          "f2"
+        ],
+        "k": 5,
+        "n_kmers": 110,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f1",
+            "weighted_shared_kmer_fraction": 0.36752136752136755
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "decoy_zero",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 0.36752136752136755
+          },
+          {
+            "identical_kmer_signature": true,
+            "left": "f1",
+            "right": "f2",
+            "weighted_shared_kmer_fraction": 1.0
+          }
+        ],
+        "signature_rank": 2,
+        "singular_values": [
+          14.906212911172664,
+          6.914102736204421,
+          1.761667708767543e-16
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "catalogue_sha256": "353c8bd43f4752e7621ab21df8cb964ecdcad0f3505e143e56e63e18446f8fad",
+      "read_assignment": {
+        "f1": {
+          "accepted": 320,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 1.0,
+          "rejected": 0,
+          "tied_best": 320,
+          "total": 320,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        },
+        "f2": {
+          "accepted": 180,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": 1.0,
+          "rejected": 0,
+          "tied_best": 180,
+          "total": 180,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        },
+        "unknown": {
+          "accepted": 0,
+          "correct_unique": 0,
+          "mean_best_hit_tie_entropy_bits_per_accepted": null,
+          "rejected": 100,
+          "tied_best": 0,
+          "total": 100,
+          "uniquely_correct_fraction_all_source_reads": 0.0,
+          "wrong_unique": 0
+        }
+      },
+      "reads_sha256": "c91f5c20c9210883677645170a50769c142d4b9381f4ed5f496e705b8a3fc918"
+    }
+  ],
+  "method": "noiseless_circular_kmer_linear_rank_plus_known_source_cyclic_hamming_assignment",
+  "prior_formal_simulation_catalogues": [
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.4479360527960365,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 113,
+            "exclusive_kmer_position_fraction": 0.7251461988304093,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 89,
+            "exclusive_kmer_position_fraction": 0.5730994152046783,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 94,
+            "exclusive_kmer_position_fraction": 0.5789473684210527,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 376,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07547169811320754
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.17123287671232876
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          17.13386008183854,
+          13.6163091970445,
+          11.833298886889517
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "clean_s2026091001",
+      "fasta_sha256": "807fcf10da80818f4e4eddf8c93c4932fa329b661c29e50255b944e827da085a"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2100675367222338,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 132,
+            "exclusive_kmer_position_fraction": 0.783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 119,
+            "exclusive_kmer_position_fraction": 0.7368421052631579,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 120,
+            "exclusive_kmer_position_fraction": 0.7485380116959064,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 428,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.062111801242236024
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.042682926829268296
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          15.396788095427448,
+          13.116443106931511,
+          12.723908069737533
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "clean_s2026091002",
+      "fasta_sha256": "b8573e8f781928a39bab1af0d38653c4c051cf296b5a58c68348467b8e1c4771"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2779499280733169,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 110,
+            "exclusive_kmer_position_fraction": 0.7192982456140351,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 109,
+            "exclusive_kmer_position_fraction": 0.6842105263157895,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 103,
+            "exclusive_kmer_position_fraction": 0.6783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 393,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.1032258064516129
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          16.201932970655257,
+          13.48198878755912,
+          12.678065560113042
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "clean_s2026091003",
+      "fasta_sha256": "fda920a4036772963e0865096aefa4231cb09d99dedcf3123a7fd036017e80e2"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.4479360527960365,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 113,
+            "exclusive_kmer_position_fraction": 0.7251461988304093,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 89,
+            "exclusive_kmer_position_fraction": 0.5730994152046783,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 94,
+            "exclusive_kmer_position_fraction": 0.5789473684210527,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 376,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07547169811320754
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.17123287671232876
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          17.13386008183854,
+          13.6163091970445,
+          11.833298886889517
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "divergence_s2026091001",
+      "fasta_sha256": "807fcf10da80818f4e4eddf8c93c4932fa329b661c29e50255b944e827da085a"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2100675367222338,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 132,
+            "exclusive_kmer_position_fraction": 0.783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 119,
+            "exclusive_kmer_position_fraction": 0.7368421052631579,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 120,
+            "exclusive_kmer_position_fraction": 0.7485380116959064,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 428,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.062111801242236024
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.042682926829268296
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          15.396788095427448,
+          13.116443106931511,
+          12.723908069737533
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "divergence_s2026091002",
+      "fasta_sha256": "b8573e8f781928a39bab1af0d38653c4c051cf296b5a58c68348467b8e1c4771"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2779499280733169,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 110,
+            "exclusive_kmer_position_fraction": 0.7192982456140351,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 109,
+            "exclusive_kmer_position_fraction": 0.6842105263157895,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 103,
+            "exclusive_kmer_position_fraction": 0.6783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 393,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.1032258064516129
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          16.201932970655257,
+          13.48198878755912,
+          12.678065560113042
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "divergence_s2026091003",
+      "fasta_sha256": "fda920a4036772963e0865096aefa4231cb09d99dedcf3123a7fd036017e80e2"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.4479360527960365,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 113,
+            "exclusive_kmer_position_fraction": 0.7251461988304093,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 89,
+            "exclusive_kmer_position_fraction": 0.5730994152046783,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 94,
+            "exclusive_kmer_position_fraction": 0.5789473684210527,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 376,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07547169811320754
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.17123287671232876
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          17.13386008183854,
+          13.6163091970445,
+          11.833298886889517
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "indel_s2026091001",
+      "fasta_sha256": "807fcf10da80818f4e4eddf8c93c4932fa329b661c29e50255b944e827da085a"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2100675367222338,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 132,
+            "exclusive_kmer_position_fraction": 0.783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 119,
+            "exclusive_kmer_position_fraction": 0.7368421052631579,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 120,
+            "exclusive_kmer_position_fraction": 0.7485380116959064,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 428,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.062111801242236024
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.042682926829268296
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          15.396788095427448,
+          13.116443106931511,
+          12.723908069737533
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "indel_s2026091002",
+      "fasta_sha256": "b8573e8f781928a39bab1af0d38653c4c051cf296b5a58c68348467b8e1c4771"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2779499280733169,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 110,
+            "exclusive_kmer_position_fraction": 0.7192982456140351,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 109,
+            "exclusive_kmer_position_fraction": 0.6842105263157895,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 103,
+            "exclusive_kmer_position_fraction": 0.6783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 393,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.1032258064516129
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          16.201932970655257,
+          13.48198878755912,
+          12.678065560113042
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "indel_s2026091003",
+      "fasta_sha256": "fda920a4036772963e0865096aefa4231cb09d99dedcf3123a7fd036017e80e2"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.4479360527960365,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 113,
+            "exclusive_kmer_position_fraction": 0.7251461988304093,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 89,
+            "exclusive_kmer_position_fraction": 0.5730994152046783,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 94,
+            "exclusive_kmer_position_fraction": 0.5789473684210527,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 376,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07547169811320754
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.17123287671232876
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          17.13386008183854,
+          13.6163091970445,
+          11.833298886889517
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "low_abundance_s2026091001",
+      "fasta_sha256": "807fcf10da80818f4e4eddf8c93c4932fa329b661c29e50255b944e827da085a"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2100675367222338,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 132,
+            "exclusive_kmer_position_fraction": 0.783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 119,
+            "exclusive_kmer_position_fraction": 0.7368421052631579,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 120,
+            "exclusive_kmer_position_fraction": 0.7485380116959064,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 428,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.062111801242236024
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.042682926829268296
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          15.396788095427448,
+          13.116443106931511,
+          12.723908069737533
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "low_abundance_s2026091002",
+      "fasta_sha256": "b8573e8f781928a39bab1af0d38653c4c051cf296b5a58c68348467b8e1c4771"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2779499280733169,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 110,
+            "exclusive_kmer_position_fraction": 0.7192982456140351,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 109,
+            "exclusive_kmer_position_fraction": 0.6842105263157895,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 103,
+            "exclusive_kmer_position_fraction": 0.6783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 393,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.1032258064516129
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          16.201932970655257,
+          13.48198878755912,
+          12.678065560113042
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "low_abundance_s2026091003",
+      "fasta_sha256": "fda920a4036772963e0865096aefa4231cb09d99dedcf3123a7fd036017e80e2"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2502338403290816,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 85,
+            "exclusive_kmer_position_fraction": 0.7416666666666667,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 84,
+            "exclusive_kmer_position_fraction": 0.7416666666666667,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 88,
+            "exclusive_kmer_position_fraction": 0.7916666666666666,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 294,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.08597285067873303
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.05263157894736842
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.061946902654867256
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          13.218103630130223,
+          11.291761276329707,
+          10.57250508165017
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "shared_fragment_s2026091001",
+      "fasta_sha256": "acf2dcc4e839287985091e631b7f4bf55d0aec7513f687d5cea1dfdf316df15c"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.1980786658556062,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 87,
+            "exclusive_kmer_position_fraction": 0.775,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 98,
+            "exclusive_kmer_position_fraction": 0.8333333333333334,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 84,
+            "exclusive_kmer_position_fraction": 0.7416666666666667,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 306,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.034482758620689655
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08108108108108109
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.05726872246696035
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          12.673666525170136,
+          10.930562609152961,
+          10.578325853185321
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "shared_fragment_s2026091002",
+      "fasta_sha256": "1a2facf4372957389438f379d651ee14d3357f9498fd954678f169045181634b"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.1176905058222706,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 101,
+            "exclusive_kmer_position_fraction": 0.8666666666666667,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 93,
+            "exclusive_kmer_position_fraction": 0.8333333333333334,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 99,
+            "exclusive_kmer_position_fraction": 0.875,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 317,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.03896103896103896
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.02564102564102564
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.03896103896103896
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          12.329214447113207,
+          11.149353921227306,
+          11.030973586057943
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "shared_fragment_s2026091003",
+      "fasta_sha256": "0ddb99cee8ee8e3cbb50bd308309cff745b09c9df70dc7c5ed27944cbe8b3965"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.4479360527960365,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 113,
+            "exclusive_kmer_position_fraction": 0.7251461988304093,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 89,
+            "exclusive_kmer_position_fraction": 0.5730994152046783,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 94,
+            "exclusive_kmer_position_fraction": 0.5789473684210527,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 376,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07547169811320754
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.17123287671232876
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          17.13386008183854,
+          13.6163091970445,
+          11.833298886889517
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "substitution_s2026091001",
+      "fasta_sha256": "807fcf10da80818f4e4eddf8c93c4932fa329b661c29e50255b944e827da085a"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2100675367222338,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 132,
+            "exclusive_kmer_position_fraction": 0.783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 119,
+            "exclusive_kmer_position_fraction": 0.7368421052631579,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 120,
+            "exclusive_kmer_position_fraction": 0.7485380116959064,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 428,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.062111801242236024
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.042682926829268296
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          15.396788095427448,
+          13.116443106931511,
+          12.723908069737533
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "substitution_s2026091002",
+      "fasta_sha256": "b8573e8f781928a39bab1af0d38653c4c051cf296b5a58c68348467b8e1c4771"
+    },
+    {
+      "catalogue": {
+        "condition_number_full_rank_only": 1.2779499280733169,
+        "effective_identifiable_family_dimensions": 3,
+        "family": {
+          "truth_f1": {
+            "exclusive_kmer_count": 110,
+            "exclusive_kmer_position_fraction": 0.7192982456140351,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f2": {
+            "exclusive_kmer_count": 109,
+            "exclusive_kmer_position_fraction": 0.6842105263157895,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          },
+          "truth_f3": {
+            "exclusive_kmer_count": 103,
+            "exclusive_kmer_position_fraction": 0.6783625730994152,
+            "nullspace_involvement": 0.0,
+            "reason": "noiseless_catalogue_signature_separable",
+            "status": "IDENTIFIABLE"
+          }
+        },
+        "family_count": 3,
+        "family_order": [
+          "truth_f1",
+          "truth_f2",
+          "truth_f3"
+        ],
+        "k": 5,
+        "n_kmers": 393,
+        "pairwise": [
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f2",
+            "weighted_shared_kmer_fraction": 0.07210031347962383
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f1",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.08227848101265822
+          },
+          {
+            "identical_kmer_signature": false,
+            "left": "truth_f2",
+            "right": "truth_f3",
+            "weighted_shared_kmer_fraction": 0.1032258064516129
+          }
+        ],
+        "signature_rank": 3,
+        "singular_values": [
+          16.201932970655257,
+          13.48198878755912,
+          12.678065560113042
+        ],
+        "status_scope": "noiseless_given_catalogue_kmer_features_only"
+      },
+      "dataset": "substitution_s2026091003",
+      "fasta_sha256": "fda920a4036772963e0865096aefa4231cb09d99dedcf3123a7fd036017e80e2"
+    }
+  ],
+  "source_sha256": {
+    "diagnostics.py": "a01a25f918fbf609600a40d4d04cb7569940c933b39a8ddc366ba90b42fc2e73",
+    "model.py": "741e18f84ea146db51dd4e3297ec498cfe7a3cefa5fca1b0b8bcb58e3f7fed3c",
+    "run.py": "792639344e15eca12f81465a3bec45f9f7553d9a2ff5744d4bc7fec1becc5a55"
+  },
+  "status": "development_diagnostic_not_independent_validation"
+}
