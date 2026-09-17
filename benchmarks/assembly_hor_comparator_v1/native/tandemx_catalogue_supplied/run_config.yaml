@@ -1,0 +1,28 @@
+command: "tandemx locate"
+subcommand: "locate"
+version: "0.1.0"
+timestamp_utc: "2026-09-17T02:14:22.616403+00:00"
+cwd: "/Users/ycy/Codex/Sofw/TandemX"
+argv:
+  - "locate"
+  - "--assembly"
+  - "benchmarks/assembly_hor_comparator_v1/control/control.chr1.fasta"
+  - "--catalogue"
+  - "benchmarks/assembly_hor_comparator_v1/control/candidate_monomers.fa"
+  - "--outdir"
+  - "/private/tmp/tandemx_assembly_control_catalogue_supplied"
+python_version: "3.11.15"
+platform: "macOS-14.4.1-arm64-arm-64bit"
+status: "locate_mvp_completed"
+parameters:
+  assembly: "benchmarks/assembly_hor_comparator_v1/control/control.chr1.fasta"
+  catalogue: "benchmarks/assembly_hor_comparator_v1/control/candidate_monomers.fa"
+  command: "locate"
+  copy_number: null
+  identity_model: "exact_kmer_fraction"
+  k: 21
+  min_identity: 0.8
+  monomers: null
+  outdir: "/private/tmp/tandemx_assembly_control_catalogue_supplied"
+  step_size: 10000
+  window_size: 100000

@@ -1,0 +1,16 @@
+{
+  "array_bp_precision": 1.0,
+  "array_bp_recall": 0.9873439818451601,
+  "called_array_bp": 33936,
+  "comparison_status": "not_rankable_against_de_novo_TideCluster_or_CENdetectHOR",
+  "condition": "supplied_truth_derived_candidate_monomer_catalogue",
+  "overlap_bp": 33936,
+  "predicted_calls": 199,
+  "prediction_sha256": "b7ce359f264fbfcca5b0a6041dc0bf80ab16f3f91aecb5014e8ae3d3359d342f",
+  "task": "assembly_only_monomer_localization_not_HOR_order",
+  "truth_array_bp": 34371,
+  "truth_calls": 201,
+  "truth_monomer_call_denominator": 201,
+  "truth_monomer_calls_with_matching_label_and_both_boundaries_within_10bp": 176,
+  "truth_sha256": "9a41779c32a097616bea713098513cb9a75cc3f0ca2585e334ff1ba77f61ce7f"
+}

@@ -1,0 +1,9 @@
+2026-09-17 10:14:22,580 INFO command=tandemx locate
+2026-09-17 10:14:22,580 INFO timestamp_utc=2026-09-17T02:14:22.580679+00:00
+2026-09-17 10:14:22,580 INFO output_directory=/private/tmp/tandemx_assembly_control_catalogue_supplied
+2026-09-17 10:14:22,581 INFO status=locate_running
+2026-09-17 10:14:22,616 INFO status=locate_mvp_completed
+2026-09-17 10:14:22,616 INFO density_window_count=1
+2026-09-17 10:14:22,616 INFO array_count=199
+2026-09-17 10:14:22,616 INFO comparison_count=5
+2026-09-17 10:14:22,617 INFO Locate MVP supports toy-scale FASTA assembly input, including gzip-compressed files
