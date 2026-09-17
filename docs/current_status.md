@@ -1,5 +1,78 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-17: native development inputs and exact edit archive
+
+The bounded source audit in `benchmarks/controlled_collapse/native_pair_audit_20260917/`
+rechecked the Col-CEN assembly copy, a 74,600-read ERR6210723 subset, and
+six byte-preserved original HiFi molecules. Two molecules span the C1 array
+and at least 1 kb of each natural flank, one spans C2, and three span C3.
+These are local alignments to three 13,560-bp contexts and one pooled Col-0N
+read run. Full-genome mapping uniqueness, identical individual donor, and
+haplotype pairing are unverified. Ey15-2 and Mo17 bounded source copies also
+passed integrity checks; their native interval support and exact pairing are
+not yet established. A Macadamia jansenii HiFi assembly/read pair was added
+to the source inventory from existing historical receipts, with distinct
+archival BioSamples and no current bounded interval verification. These are
+four assembly lineages at different eligibility states, not four scored
+biological replicates. No newly enrolled final biological heldout exists.
+
+The versioned development archive
+`benchmarks/controlled_collapse/native_edit_development_v1/` contains 27
+exact, receipt-backed edits on those three Col-CEN contexts. It covers
+0/25/50/75/100% terminal deletions and internal/left-boundary deletions;
+the original six-read FASTQ hash stays unchanged. An independent coordinate
+reconstruction passed 27/27, and clean replay matched every output byte.
+These are injected assembly deltas, not biological missing-copy truth; three
+contexts from one lineage are not three independent materials. See
+`docs/logs/native_controlled_collapse_20260917.md`.
+
+The new complete-record, locally tiled M1 competitive prototype is research
+only. On one frozen 18-read synthetic development set, its assigned-read-bp
+MARE was 0.3410 versus 0.5928 for an 80-bp chunked ordinary-mapping adapter,
+but wrong-family assignment was 7 versus 4 bp. Identical twin families
+remained fully ambiguous. Production `quantify` has a different genomic-bp
+endpoint, so no cross-endpoint error rank was computed; timing/RSS work scopes
+also differ and are not ranked. Independent hostile review verified the
+receipt and limitations. No backend changed, and no heldout validation was
+opened. See `docs/logs/m1_full_read_research_20260917.md` and
+`docs/logs/m1_full_read_hostile_audit_20260917.md`.
+
+A fresh same-FASTA 5,700-bp development interface replay completed both
+CENdetectHOR and TideHunter/TideCluster. Both selected the all-array input
+and a 60-bp period; neither produced the designed separate 30-bp A/B label
+order. The meaningful flanked 171-bp CENdetectHOR comparison is still a
+technical incomplete run. See `docs/logs/common_assembly_comparator_20260917.md`.
+
+On the C3 native-read **development** context, a source-guided natural-flank
+trim found three original HiFi molecules spanning the nominated array. With
+supplied 178-bp operational monomer templates and the frozen M2 path code,
+the technical path comparison detected 8/8 engineered deletions, supported
+the one intact edited context, and abstained on none. A simple 5% read-span
+length rule on those same reads made exactly the same nine decisions. The
+extra unedited source row is a duplicate control outside that denominator.
+The 1,024-bp flank choice was made after examining this development material;
+donor/haplotype pairing and genome-wide uniqueness remain unverified, so the
+biological audit was not evaluated. See
+`benchmarks/m2_routes/native_read_evidence_20260917/README.md`.
+
+A separate equal-length C3 structural challenge was frozen at `a1d3ad9`
+before its scoring. Five engineered operations and one intact control have
+zero bp-length delta. On this same development lineage, the frozen M2
+label/orientation path detected the two inversions and missed two swaps and
+one tile replacement (2/5 overall), while the length baseline detected 0/5.
+The three misses are invisible to **this supplied-template label/orientation
+representation**; this is not a biological or sequence-level impossibility
+claim. M2 received monomer templates whereas the length baseline did not,
+and both used source-guided native-read trimming. This is a diagnostic
+research comparison, not equal-prior method superiority or independent
+validation. The independent audit in
+`docs/logs/c3_equal_length_hostile_audit_20260917.md` reconstructed all six
+edits and matched the scorer replay byte for byte; its primary denominator
+remains 2/5, not the representation-selected 2/2 subgroup. The full local
+`tandemx-dev` suite passed **1,050 tests in 117.10 s** after the native-read
+and equal-length scoring additions. The older M1/M2 NO-GO gates below remain
+in force.
+
 ## Checkpoint 2026-09-17: method convergence and frozen stop-loss
 
 The current decision record is `docs/logs/method_gate_decision_20260917.md`;
