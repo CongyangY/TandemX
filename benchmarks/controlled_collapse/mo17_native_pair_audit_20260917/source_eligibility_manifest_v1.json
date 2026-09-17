@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "scope": "Mo17 bounded native-source development screen",
+  "selection_frozen_before_read_mapping": true,
+  "assembly": {
+    "accession": "GCA_022117705.1",
+    "biosample": "SAMN20854702",
+    "bioproject": "PRJNA751841",
+    "path": "/Volumes/T7/Codex/TandemX/data/references/Mo17_T2T_GCA_022117705.1/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_genomic.fna.gz",
+    "compressed_bytes": 645529558,
+    "sha256": "2ac74f8a6dc9f3651cd54fcfb4ba644c012a299aa2c6d3ebcd23d756192d15e0",
+    "current_full_compressed_hash_verified": true,
+    "current_gzip_trailer_and_fasta_structure_verified": true,
+    "records": 10,
+    "acgt_bases": 2178604320,
+    "source_receipt": "paper/evidence/Mo17_input_qc/reference/reference_receipt.json"
+  },
+  "read_run": {
+    "accession": "SRR15447419",
+    "biosample": "SAMN20604744",
+    "bioproject": "PRJNA751841",
+    "complete_source_sha256_from_archived_receipt_only": "3047df8fc93cd0c87d03b968ad702a95a2edf6ae3474d92b08350827d847f05c",
+    "complete_source_current_readback": "not_attempted_due_to_T7_USB_fault_and_5.35_GB_size",
+    "bounded_nested_sample_path": "/Volumes/T7/Codex/TandemX/data/subsets/SRR15447419_seed6101_v1/sample_003.fastq.gz",
+    "bounded_nested_sample_bytes": 1150477582,
+    "bounded_nested_sample_sha256": "58dfb8812b54f536dcf3ca76a1b41d75511aeab6f0617f58181884acb6f2bb81",
+    "current_full_bounded_sample_hash_verified": true,
+    "current_gzip_trailer_and_fastq_structure_verified": true,
+    "bounded_sample_reads": 81775,
+    "bounded_sample_bases": 1128793699,
+    "bounded_sample_nominal_assembly_coverage": 0.5181269901273307,
+    "source_receipts": [
+      "paper/evidence/Mo17_input_qc/download_receipt.json",
+      "paper/evidence/Mo17_input_qc/sampling/sampling_receipt.json"
+    ]
+  },
+  "published_region_source": {
+    "table": "/Volumes/T7/Codex/TandemX/data/curated/Mo17_2023_supplement/regions_v1/published_regions.tsv",
+    "table_sha256": "54148ce8f96246bd56dc3d93571beaf17897b46deb4d12f0037090d3a46482c6",
+    "current_table_hash_verified": true,
+    "supplement_workbook_sha256": "863da22bbc8fa3170035f966f6ced723e418e81541fda96de0e5cc9355569e1d",
+    "coordinate_rule": "end_minus_start_consistent_origin_inferred_0_based_not_explicit",
+    "biological_truth": "published region annotation is not independent base-level or copy-number truth"
+  },
+  "pre_read_candidate_selection": {
+    "region_ids_screened": [
+      "Mo17_S9_R5", "Mo17_S8_R7", "Mo17_S9_R7",
+      "Mo17_S7_R9", "Mo17_S8_R18", "Mo17_S6_R9"
+    ],
+    "selection_denominator": "six hand-selected published satellite regions; not all 64 annotated regions",
+    "extracted_regions_fasta": "pre_read_six_candidate_regions.fa",
+    "extracted_regions_fasta_sha256": "e002daa3880a300bab74e22bb90838ace5dfa74455ae22a2af388276858c7f7a",
+    "screen_file": "region_periodicity_screen.tsv",
+    "screen_file_sha256": "8a4f70ef974396f4ecd087e172c77d6600c3476008a8e41a9938826495e35506",
+    "screen_rule": "3,000-bp windows at 250-bp offsets within each region plus 3,000-bp margins; compare sequence with period-shifted copy near the published label's nominal period",
+    "selected_region_id": "Mo17_S8_R7",
+    "published_label": "CentC",
+    "published_component_percent": 99.97,
+    "published_contig": "CM039151.1",
+    "published_region_start_0based": 98993717,
+    "published_region_end_0based": 99023934,
+    "selected_array_start_0based": 98994467,
+    "selected_array_end_0based": 98997467,
+    "selected_array_length_bp": 3000,
+    "selected_best_shift_bp": 155,
+    "selected_period_shift_identity": 0.934973638,
+    "context_start_0based": 98991467,
+    "context_end_0based": 99000467,
+    "context_sha256": "3112513b13d8f4fed2f20266d6732fc8e947c9d80ba83c10e3bda5e90a38e918",
+    "array_sequence_sha256": "4c8d253b270c5f88d983e71e55cd7dd1bf389785ab2caba67475467c3c11f0b3"
+  },
+  "read_screen": {
+    "minimap2_version": "2.31-r1302",
+    "preset": "map-hifi",
+    "paf_file": "sample_003_context_map_hifi.paf",
+    "paf_sha256": "04dd2976972f58b1aadd210b88b751e00f9b4b3fe64f95b9d8176469f73b04ba",
+    "minimum_natural_flank_bp_each_side": 1000,
+    "minimum_whole_alignment_identity": 0.95,
+    "local_alignment_audit": "local_alignment_audit.json",
+    "geometric_spanner_count": 6,
+    "qualifying_spanner_count": 0,
+    "raw_diagnostic_fastq": "geometric_spanners_original.fastq.gz",
+    "raw_diagnostic_fastq_sha256": "5ed4f6e81c52671322d5970eb39e02b51fa74dd899830c1fcae3c381b271203b",
+    "raw_record_hashes": "read_extraction_receipt.json",
+    "whole_reference_mapping": "not_run_because_no_qualifying_spanners"
+  },
+  "source_pairing": "same_Mo17_cultivar_and_BioProject_but_different_archive_BioSamples_exact_donor_unresolved",
+  "development_eligibility": "ineligible_no_three_high_identity_native_spanners_in_bounded_sample",
+  "final_heldout_eligibility": "not_enrolled",
+  "physical_array_truth": "unknown"
+}

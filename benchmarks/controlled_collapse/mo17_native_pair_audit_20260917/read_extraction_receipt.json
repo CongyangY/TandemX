@@ -1,0 +1,40 @@
+{
+  "reads": [
+    {
+      "bases": 14833,
+      "id": "SRR15447419.160143",
+      "record_sha256": "32932b8ec61c521eee39aa43e29b3da506852566f811a92fc5258151488fc207"
+    },
+    {
+      "bases": 17534,
+      "id": "SRR15447419.190597",
+      "record_sha256": "433b5992f5a9b2b340dabbd766b61c8941686a9465fc258bebcee74e123fb23d"
+    },
+    {
+      "bases": 15142,
+      "id": "SRR15447419.242874",
+      "record_sha256": "170195fd20ec760b716379ba3c6f612ac386bd8d0f4954675bdbeee5432ac915"
+    },
+    {
+      "bases": 11558,
+      "id": "SRR15447419.258595",
+      "record_sha256": "0be56bad5521eaf65caf55f30a4e055d39471dc26d45a88a172bd0a550b18492"
+    },
+    {
+      "bases": 11642,
+      "id": "SRR15447419.295074",
+      "record_sha256": "e189dd807abfdb3f977f639f77ffc262d8cc64b0b05a59a8558e3500431d91bd"
+    },
+    {
+      "bases": 15724,
+      "id": "SRR15447419.95824",
+      "record_sha256": "08cad8e5d2fc3cdffaf75464edc38baadc4694e694b0cc368f780063f7f13b07"
+    }
+  ],
+  "selected_fastq": "benchmarks/controlled_collapse/mo17_native_pair_audit_20260917/geometric_spanners_original.fastq.gz",
+  "selected_fastq_sha256": "5ed4f6e81c52671322d5970eb39e02b51fa74dd899830c1fcae3c381b271203b",
+  "source": "/Volumes/T7/Codex/TandemX/data/subsets/SRR15447419_seed6101_v1/sample_003.fastq.gz",
+  "source_gzip_trailer_checked": true,
+  "source_read_count": 81775,
+  "source_sha256": "58dfb8812b54f536dcf3ca76a1b41d75511aeab6f0617f58181884acb6f2bb81"
+}

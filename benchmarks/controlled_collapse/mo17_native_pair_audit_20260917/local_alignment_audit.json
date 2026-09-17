@@ -1,0 +1,174 @@
+{
+  "array_context_end_0based": 6000,
+  "array_context_start_0based": 3000,
+  "context_sha256": "3112513b13d8f4fed2f20266d6732fc8e947c9d80ba83c10e3bda5e90a38e918",
+  "diagnostic_reads_sha256": "5ed4f6e81c52671322d5970eb39e02b51fa74dd899830c1fcae3c381b271203b",
+  "geometric_alignments": [
+    {
+      "array": {
+        "columns": 3929,
+        "identity": 0.723594,
+        "matches": 2843
+      },
+      "identity": 0.782941,
+      "left_flank": {
+        "columns": 3359,
+        "identity": 0.818101,
+        "matches": 2748
+      },
+      "mapq_local": 60,
+      "query_end": 12126,
+      "query_length": 14833,
+      "query_start": 1413,
+      "read_id": "SRR15447419.160143",
+      "right_flank": {
+        "columns": 3451,
+        "identity": 0.816285,
+        "matches": 2817
+      },
+      "strand": "+",
+      "target_end": 8980,
+      "target_start": 200
+    },
+    {
+      "array": {
+        "columns": 3196,
+        "identity": 0.876721,
+        "matches": 2802
+      },
+      "identity": 0.838169,
+      "left_flank": {
+        "columns": 3394,
+        "identity": 0.80878,
+        "matches": 2745
+      },
+      "mapq_local": 60,
+      "query_end": 10409,
+      "query_length": 17534,
+      "query_start": 458,
+      "read_id": "SRR15447419.190597",
+      "right_flank": {
+        "columns": 3371,
+        "identity": 0.831207,
+        "matches": 2802
+      },
+      "strand": "-",
+      "target_end": 9000,
+      "target_start": 193
+    },
+    {
+      "array": {
+        "columns": 3013,
+        "identity": 0.834052,
+        "matches": 2513
+      },
+      "identity": 0.813297,
+      "left_flank": {
+        "columns": 2720,
+        "identity": 0.794485,
+        "matches": 2161
+      },
+      "mapq_local": 60,
+      "query_end": 11651,
+      "query_length": 15142,
+      "query_start": 5662,
+      "read_id": "SRR15447419.242874",
+      "right_flank": {
+        "columns": 1246,
+        "identity": 0.804173,
+        "matches": 1002
+      },
+      "strand": "-",
+      "target_end": 7241,
+      "target_start": 281
+    },
+    {
+      "array": {
+        "columns": 3009,
+        "identity": 0.901296,
+        "matches": 2712
+      },
+      "identity": 0.900597,
+      "left_flank": {
+        "columns": 2810,
+        "identity": 0.909253,
+        "matches": 2555
+      },
+      "mapq_local": 60,
+      "query_end": 7855,
+      "query_length": 11558,
+      "query_start": 0,
+      "read_id": "SRR15447419.258595",
+      "right_flank": {
+        "columns": 2561,
+        "identity": 0.890277,
+        "matches": 2280
+      },
+      "strand": "-",
+      "target_end": 8550,
+      "target_start": 193
+    },
+    {
+      "array": {
+        "columns": 3010,
+        "identity": 0.751495,
+        "matches": 2262
+      },
+      "identity": 0.81058,
+      "left_flank": {
+        "columns": 2815,
+        "identity": 0.850444,
+        "matches": 2394
+      },
+      "mapq_local": 60,
+      "query_end": 7113,
+      "query_length": 11642,
+      "query_start": 0,
+      "read_id": "SRR15447419.295074",
+      "right_flank": {
+        "columns": 2606,
+        "identity": 0.835764,
+        "matches": 2178
+      },
+      "strand": "-",
+      "target_end": 8589,
+      "target_start": 193
+    },
+    {
+      "array": {
+        "columns": 5727,
+        "identity": 0.495722,
+        "matches": 2839
+      },
+      "identity": 0.689264,
+      "left_flank": {
+        "columns": 3191,
+        "identity": 0.863366,
+        "matches": 2755
+      },
+      "mapq_local": 60,
+      "query_end": 13042,
+      "query_length": 15724,
+      "query_start": 810,
+      "read_id": "SRR15447419.95824",
+      "right_flank": {
+        "columns": 3340,
+        "identity": 0.85479,
+        "matches": 2855
+      },
+      "strand": "+",
+      "target_end": 9000,
+      "target_start": 198
+    }
+  ],
+  "geometric_spanner_count": 6,
+  "minimum_natural_flank_bp_each_side": 1000,
+  "minimum_whole_alignment_identity": 0.95,
+  "paf_alignment_count": 1433,
+  "paf_distinct_query_count": 421,
+  "paf_sha256": "04dd2976972f58b1aadd210b88b751e00f9b4b3fe64f95b9d8176469f73b04ba",
+  "primary_array_overlap_read_count": 58,
+  "qualified_read_ids": [],
+  "qualified_spanner_count": 0,
+  "schema_version": 1
+}
