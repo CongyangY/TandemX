@@ -1,0 +1,4 @@
+stage	elapsed_seconds	rss_mib	process_count	scratch_bytes
+tidehunter	0.021044	0.218750	1	36389
+tidehunter	0.243758	64.562500	2	36819
+tidehunter	0.467472	0.000000	1	42303

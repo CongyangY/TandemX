@@ -1,0 +1,2 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+tidehunter	0	0.467745	0.286981	0.087854	64.562500	2	42303	3	tidehunter.stdout.log	tidehunter.stderr.log
