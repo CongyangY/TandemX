@@ -21,13 +21,15 @@ raw reads -> tandemx discover -> de novo repeat catalog -> quantify/locate/compa
 
 ## Current Status
 
-The current manuscript is [paper/0910/manuscript_v2.md](paper/0910/manuscript_v2.md).
-The completed historical/newer-assembly and orthogonal abundance experiments
-remain frozen. The newly authorized scope is a bounded targeted-recovery proof
-of concept and a simpler, evidence-first user workflow; see
-[the implementation and stop rules](docs/recovery_and_reporting_plan.md).
-This remains research software, not a claim of complete satellite-array recovery
-or a finished production release.
+The verified research state is in [docs/current_status.md](docs/current_status.md),
+with the current method decision in
+[docs/logs/method_gate_decision_20260917.md](docs/logs/method_gate_decision_20260917.md).
+The archived manuscript [v2](paper/0910/manuscript_v2.md) and subsequent editorial
+drafts do not establish submission readiness. The current M1 absolute-abundance
+and M2 structural-audit research gates are **NO-GO** under their declared tests;
+the frozen production methods have not been replaced. This remains research
+software, not a claim of complete satellite-array recovery or a finished
+production release.
 
 ## Run and open the report
 
@@ -93,9 +95,16 @@ remain and are not eligible for validated reuse. See [output fields](docs/file_f
 
 ## Existing analysis modules and evidence
 
-This repository currently contains a toy dataset simulator, toy-scale `discover`, `quantify`, `locate`, `compare`, `probe`, and `visualize` MVPs, and a step-level `tandemx run` orchestrator.
-
-No production-scale tandem repeat discovery, copy-number estimation, assembly localization, assembly/read comparison, probe scoring, or visualization algorithm is available yet.
+This repository contains a toy dataset simulator, working `discover`, `quantify`,
+`locate`, `compare`, `probe`, and `visualize` commands, and the step-level
+`tandemx run` orchestrator. Real-read discovery has completed on inputs above
+1 Gb, with measured time, RSS, and output parity in the dated evidence. Those
+runs establish bounded execution capability, not general accuracy or reliable
+end-to-end operation on 7–20-Gb genomes. Read-derived abundance is not
+calibrated absolute physical copy number, assembly-versus-read deficits are not
+automatically biological collapse, and FISH rankings are not experimental
+validation. The exact performance scope is indexed in
+[docs/logs/performance_scope_20260917.md](docs/logs/performance_scope_20260917.md).
 
 The expanded research/release programme is tracked in [docs/release_program.md](docs/release_program.md).
 It includes an independent challenge benchmark and public-data provenance, with
@@ -120,7 +129,9 @@ The broader comparator and multi-metric contract is in
 [docs/comparator_matrix.md](docs/comparator_matrix.md). These results do not establish
 production readiness or a universal advantage over external tools.
 
-The first implementation target is a toy-scale MVP. It should run on small simulated data and should not claim support for real 7-20 Gb plant genomes until benchmarked.
+The original implementation target was a toy-scale MVP. A verified isolated
+large-genome performance and biological-truth benchmark is still required
+before claiming 7–20-Gb plant-genome readiness.
 
 ## Development Environment
 
