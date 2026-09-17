@@ -1,0 +1,21 @@
+{
+  "source_sha256": "cbe51d6615380bb441b7cf531ebc0ae58f498bc7982d2db07c549376a7638270",
+  "v1_seed_table_sha256": "9260f72332f61dc30e6df034a4386996c6241323cdcd44abb6033704701f93cb",
+  "seed_count": 100,
+  "region_count": 500,
+  "period_evaluations": 235500,
+  "eligible_evaluations": 920,
+  "selected": {
+    "contig": "CP132242.1",
+    "array_start_0": 12995500,
+    "array_end_0": 13000500,
+    "period_bp": 155,
+    "matching_shift_bases": 4235,
+    "shift_identity": 0.8740970072239422,
+    "array_entropy_bits": 1.98572846729511,
+    "flank_unique_31mer_fraction": 0.7171717171717171
+  },
+  "all_candidate_scores.tsv.gz_sha256": "24dfc52ebc6f8de47ca0f9f5f7b9066c84c4307f8aa9897d9a2b25da5e53abad",
+  "region_summary.tsv_sha256": "f0bb57d0dfcc465318ba37c3a7b6b4bbbc89ba7d981ac22c2a7b6d016931e224",
+  "selected_context.fa_sha256": "48d27907c4d51d9f2017db28dee38eebabdca84808674c5d16165cd2832fced8"
+}
