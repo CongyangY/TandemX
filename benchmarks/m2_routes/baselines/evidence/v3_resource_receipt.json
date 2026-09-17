@@ -1,0 +1,8 @@
+{
+  "wall_elapsed_seconds": 0.008759832940995693,
+  "peak_rss_bytes": 17498112,
+  "measurement": "predict_cases_perf_counter_and_process_ru_maxrss_Darwin",
+  "process": "tandemx-dev Python direct module invocation",
+  "prediction_file": "benchmarks/m2_routes/baselines/evidence/v3_predictions.jsonl",
+  "note": "One 39-case run; wall time excludes process startup and output writing"
+}

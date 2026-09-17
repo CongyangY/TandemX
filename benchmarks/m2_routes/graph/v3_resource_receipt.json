@@ -1,0 +1,9 @@
+{
+  "wall_elapsed_seconds": 0.0019586305133998394,
+  "peak_rss_bytes": 20496384,
+  "measurement": "sum_per_case_perf_counter_first_run_and_process_ru_maxrss_Darwin_rerun",
+  "process": "tandemx-dev Python direct module rerun",
+  "prediction_file": "benchmarks/m2_routes/graph/v3_predictions.jsonl",
+  "rerun_prediction_sha256": "21e490113d9fd8af22238d6e27ef58ca966f3f88a0f0444deda3a722554b8039",
+  "note": "39/39 abstentions; per-case time is early rejection, not completed inference speed; rerun predictions byte-identical to archived first run"
+}
