@@ -82,3 +82,35 @@ conda run -n tandemx-dev python -m benchmarks.scripts.score_b1_colcen_cases \
 
 The 33 TP/6 TN unit-test fixture reads the truth ledger directly to verify
 scorer arithmetic. It is a tautological smoke test, not method performance.
+
+## Frozen development run
+
+The v3 source, protocol, metrics, scorer and tests were committed as
+`931f0e9` before predictions were scored. The input-only route predictions
+were saved under `benchmarks/m2_routes/`; `score_audit.json` fixes their hashes
+and the scoring receipt hashes. `route_comparison_per_case.tsv` retains every
+case, including refusals. Full repository `pytest -q` passed 1,023 tests
+before the scoring pass.
+
+| Route | `ok` / 39 | TP | FN | FP | TN | unresolved intact | Intent sensitivity | Core time |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Alignment | 36 | 24 | 9 | 0 | 6 | 0 | 24/33 | 164.211 s |
+| Graph | 0 | 0 | 33 | 0 | 0 | 6 | 0/33 | 0.00196 s |
+| Simple flank baseline | 39 | 18 | 15 | 0 | 6 | 0 | 18/33 | 0.00876 s |
+
+The graph time measures immediate refusal, not completed inference speed.
+These are route core times from different implementations, excluding process
+startup and output writing; they are descriptive, not a normalized runtime
+comparison. FPR is zero for all three, but graph has a 6/6 negative failure
+rate because it refuses all intact controls. Alignment eligible-only
+sensitivity is 24/30; its all-case intent sensitivity is 24/33. Alignment
+detects inversion and one-tile loss in these cases; the simple flank baseline
+misses both classes. Both routes miss all three rearrangements and all three
+within-tile compression cases. Alignment explicitly abstains on three of six
+duplications. The case families share source intervals and edit rules,
+so the 39 rows are not 39 independent biological replicates.
+
+No route supplies complete exact event-type or edited-breakpoint predictions,
+so those aggregates remain N/A. The simple flank baseline reports zero signed
+bp MAE on exact synthetic full-flank pairs, which is deterministic length
+arithmetic here and does not establish raw-read copy-number accuracy.
