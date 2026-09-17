@@ -1,0 +1,15 @@
+{
+  "status": "development_only_frozen_before_scoring",
+  "seed": 60417,
+  "read_repetitions_per_scenario": 3,
+  "unit_bp": 80,
+  "scenarios": ["pure_f1", "mixed_f1_f2", "reverse_f2", "shared_twin", "background_only", "indel_mixed"],
+  "catalogue_families": ["f1", "f2", "twin_a", "twin_b", "decoy_zero"],
+  "truth_labels": ["f1", "f2", "twin_a", "background"],
+  "candidate_settings": {"core_bp": 40, "flank_bp": 40, "max_edit_fraction": 0.225, "min_margin_edits": 2},
+  "ordinary_mapping": "frozen cyclic-Hamming align_and_gate applied to nonoverlapping 80-bp read chunks with 18-mismatch gate; short tail unknown",
+  "production_quantify": "frozen tandemx quantify with explicit haploid depth 1 and diagnostic k=21; estimate in bp",
+  "primary_metrics": ["positive_family_bp_mare_with_abstentions_penalized", "wrong_family_assigned_bp", "zero_decoy_assigned_bp", "unknown_background_bp", "shared_twin_ambiguous_bp", "assigned_bp", "ambiguous_bp", "unknown_bp"],
+  "resources": ["equal_input_wall_seconds", "peak_process_rss_bytes"],
+  "decision": "Research feasibility only. No public backend promotion without separately frozen independent donor/lineage full-read validation and physical-copy calibration."
+}

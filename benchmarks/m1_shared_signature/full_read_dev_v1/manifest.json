@@ -1,0 +1,10 @@
+{
+  "files": {
+    "catalogue.fa": "51dcb53793a7205b412024e0084b418031ae44747687adf12c082fa0ef388ef1",
+    "reads.fa": "4327dc04fb4904928b6760930f72e808fd36fe0de313435885ed8b26609436af",
+    "truth.json": "26cfff38c9c0dcdbb159a21fd3de3dc5aa0ffddab205971309f4fed5b6d8bac6"
+  },
+  "protocol_sha256": "3823f168966a37108ed64238ebea09e0ded81cbb3ae21feb7e3b0ba87c5431d5",
+  "read_count": 18,
+  "total_read_bp": 11161
+}

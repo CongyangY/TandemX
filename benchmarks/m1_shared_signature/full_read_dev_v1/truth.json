@@ -1,0 +1,290 @@
+[
+  {
+    "length_bp": 400,
+    "read_id": "pure_f1_0",
+    "spans": [
+      {
+        "end": 400,
+        "label": "f1",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 400,
+    "read_id": "pure_f1_1",
+    "spans": [
+      {
+        "end": 400,
+        "label": "f1",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 400,
+    "read_id": "pure_f1_2",
+    "spans": [
+      {
+        "end": 400,
+        "label": "f1",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 1040,
+    "read_id": "mixed_f1_f2_0",
+    "spans": [
+      {
+        "end": 120,
+        "label": "background",
+        "start": 0
+      },
+      {
+        "end": 520,
+        "label": "f1",
+        "start": 120
+      },
+      {
+        "end": 920,
+        "label": "f2",
+        "start": 520
+      },
+      {
+        "end": 1040,
+        "label": "background",
+        "start": 920
+      }
+    ]
+  },
+  {
+    "length_bp": 1040,
+    "read_id": "mixed_f1_f2_1",
+    "spans": [
+      {
+        "end": 120,
+        "label": "background",
+        "start": 0
+      },
+      {
+        "end": 520,
+        "label": "f1",
+        "start": 120
+      },
+      {
+        "end": 920,
+        "label": "f2",
+        "start": 520
+      },
+      {
+        "end": 1040,
+        "label": "background",
+        "start": 920
+      }
+    ]
+  },
+  {
+    "length_bp": 1040,
+    "read_id": "mixed_f1_f2_2",
+    "spans": [
+      {
+        "end": 120,
+        "label": "background",
+        "start": 0
+      },
+      {
+        "end": 520,
+        "label": "f1",
+        "start": 120
+      },
+      {
+        "end": 920,
+        "label": "f2",
+        "start": 520
+      },
+      {
+        "end": 1040,
+        "label": "background",
+        "start": 920
+      }
+    ]
+  },
+  {
+    "length_bp": 400,
+    "read_id": "reverse_f2_0",
+    "spans": [
+      {
+        "end": 400,
+        "label": "f2",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 400,
+    "read_id": "reverse_f2_1",
+    "spans": [
+      {
+        "end": 400,
+        "label": "f2",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 400,
+    "read_id": "reverse_f2_2",
+    "spans": [
+      {
+        "end": 400,
+        "label": "f2",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 400,
+    "read_id": "shared_twin_0",
+    "spans": [
+      {
+        "end": 400,
+        "label": "twin_a",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 400,
+    "read_id": "shared_twin_1",
+    "spans": [
+      {
+        "end": 400,
+        "label": "twin_a",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 400,
+    "read_id": "shared_twin_2",
+    "spans": [
+      {
+        "end": 400,
+        "label": "twin_a",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 520,
+    "read_id": "background_only_0",
+    "spans": [
+      {
+        "end": 520,
+        "label": "background",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 520,
+    "read_id": "background_only_1",
+    "spans": [
+      {
+        "end": 520,
+        "label": "background",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 520,
+    "read_id": "background_only_2",
+    "spans": [
+      {
+        "end": 520,
+        "label": "background",
+        "start": 0
+      }
+    ]
+  },
+  {
+    "length_bp": 964,
+    "read_id": "indel_mixed_0",
+    "spans": [
+      {
+        "end": 80,
+        "label": "background",
+        "start": 0
+      },
+      {
+        "end": 483,
+        "label": "f1",
+        "start": 80
+      },
+      {
+        "end": 884,
+        "label": "f2",
+        "start": 483
+      },
+      {
+        "end": 964,
+        "label": "background",
+        "start": 884
+      }
+    ]
+  },
+  {
+    "length_bp": 960,
+    "read_id": "indel_mixed_1",
+    "spans": [
+      {
+        "end": 80,
+        "label": "background",
+        "start": 0
+      },
+      {
+        "end": 481,
+        "label": "f1",
+        "start": 80
+      },
+      {
+        "end": 882,
+        "label": "f2",
+        "start": 481
+      },
+      {
+        "end": 960,
+        "label": "background",
+        "start": 882
+      }
+    ]
+  },
+  {
+    "length_bp": 957,
+    "read_id": "indel_mixed_2",
+    "spans": [
+      {
+        "end": 81,
+        "label": "background",
+        "start": 0
+      },
+      {
+        "end": 481,
+        "label": "f1",
+        "start": 81
+      },
+      {
+        "end": 878,
+        "label": "f2",
+        "start": 481
+      },
+      {
+        "end": 957,
+        "label": "background",
+        "start": 878
+      }
+    ]
+  }
+]
