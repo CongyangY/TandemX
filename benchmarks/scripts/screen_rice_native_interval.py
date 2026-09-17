@@ -23,6 +23,8 @@ def entropy(sequence: bytes) -> float:
 def flank_unique_fraction(context: bytes, array_start: int, array_end: int, k: int = 31) -> float:
     all_kmers = Counter(context[i:i + k] for i in range(len(context) - k + 1))
     positions = list(range(array_start - k + 1)) + list(range(array_end, len(context) - k + 1))
+    if not positions:
+        return 0.0
     return sum(all_kmers[context[i:i + k]] == 1 for i in positions) / len(positions)
 
 
@@ -58,11 +60,14 @@ def select(candidates: list[tuple], sequences: dict[str, bytes], config: dict):
     flank = rule["flank_bp_each_side"]
     length = rule["array_length_bp"]
     checked = []
-    for identity, contig, start, matches in sorted(candidates, key=lambda x: (-x[0], x[1], x[2])):
+    ranked = sorted(candidates, key=lambda x: (-x[0], x[1], x[2]))
+    for identity, contig, start, matches in ranked[:rule["max_ranked_candidates_to_screen"]]:
         context = sequences[contig][start - flank:start + length + flank]
         array = context[flank:flank + length]
         h = entropy(array)
-        unique = flank_unique_fraction(context, flank, flank + length)
+        unique = (flank_unique_fraction(context, flank, flank + length)
+                  if identity >= rule["minimum_period_shift_identity"] and
+                  h >= rule["minimum_base_shannon_entropy_bits_per_base"] else 0.0)
         passed = (identity >= rule["minimum_period_shift_identity"] and
                   h >= rule["minimum_base_shannon_entropy_bits_per_base"] and
                   unique >= rule["minimum_flank_31mer_uniqueness_fraction_within_context"])

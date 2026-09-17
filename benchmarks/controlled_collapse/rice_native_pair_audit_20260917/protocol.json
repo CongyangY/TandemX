@@ -21,6 +21,7 @@
     "minimum_period_shift_identity": 0.85,
     "minimum_base_shannon_entropy_bits_per_base": 1.6,
     "minimum_flank_31mer_uniqueness_fraction_within_context": 0.8,
+    "max_ranked_candidates_to_screen": 1000,
     "no_candidate_substitution_after_read_mapping": true,
     "note": "155-bp is an operational fixed period; this protocol makes no claim of biological monomer identity"
   },
