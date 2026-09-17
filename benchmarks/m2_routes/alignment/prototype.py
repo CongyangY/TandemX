@@ -251,6 +251,7 @@ def audit(
     pairing_status: str,
     min_informative_reads: int = 3,
     min_consensus_fraction: float = 0.75,
+    min_resolved_fraction: float = 0.75,
     minimum_label_margin: int = 2,
 ) -> AuditResult:
     """Audit a single same-locus array using anchored independent molecules.
@@ -259,7 +260,8 @@ def audit(
     biological interpretation requires ``'verified'`` external flank,
     molecule and haplotype checks. ``'unverified'`` explicitly abstains.
     """
-    if min_informative_reads < 2 or not 0.5 < min_consensus_fraction <= 1:
+    if min_informative_reads < 2 or not 0.5 < min_consensus_fraction <= 1 or \
+            not 0.5 < min_resolved_fraction <= 1:
         raise ValueError("Invalid read support settings")
     if pairing_status not in {"verified", "synthetic", "synthetic_simulated",
                               "unverified", "absent"}:
@@ -292,6 +294,9 @@ def audit(
     prefix = (tuple(read_paths), support, discordant, ambiguous)
     if informative < min_informative_reads:
         return AuditResult("INSUFFICIENT_READ_SUPPORT", "too_few_resolved_anchored_reads",
+                           assembly, *prefix, None, None, None)
+    if informative / len(anchored_reads) < min_resolved_fraction:
+        return AuditResult("AMBIGUOUS", "too_many_unresolved_read_paths",
                            assembly, *prefix, None, None, None)
     dominant_path, dominant_ids = max(groups.items(), key=lambda item: (len(item[1]), item[0]))
     if len(dominant_ids) / informative < min_consensus_fraction:

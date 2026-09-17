@@ -56,6 +56,15 @@ def test_mixed_haplotypes_and_low_support_abstain() -> None:
     assert low.state == "INSUFFICIENT_READ_SUPPORT"
 
 
+def test_many_unresolved_reads_cannot_be_silently_discarded() -> None:
+    molecules = {**reads("ABAB", 3), "bad1": "TTTTTTTT",
+                 "bad2": "TTTTTTTT"}
+    result = audit(array("ABAB"), molecules, M, pairing_status="synthetic")
+    assert result.state == "AMBIGUOUS"
+    assert result.reason == "too_many_unresolved_read_paths"
+    assert result.ambiguous_count == 2
+
+
 def test_unverified_pairing_cannot_be_called() -> None:
     result = audit(array("ABAB"), reads("ABABAB"), M,
                    pairing_status="unverified")

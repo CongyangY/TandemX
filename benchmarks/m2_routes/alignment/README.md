@@ -22,6 +22,7 @@ Frozen development parameters:
 | --- | ---: |
 | Minimum informative independently anchored reads | 3 |
 | Minimum dominant path fraction | 0.75 |
+| Minimum resolvable read fraction | 0.75 |
 | Minimum local/global label margin | 2 edit costs |
 | Maximum per-monomer edit fraction | 0.15 |
 | Maximum monomer length variation | 0.08 |

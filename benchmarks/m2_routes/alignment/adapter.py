@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import platform
+import resource
 from pathlib import Path
 from time import perf_counter
 from typing import Any, Mapping
@@ -104,9 +106,11 @@ def run_cases(input_path: Path, output_path: Path) -> dict[str, Any]:
     with output_path.open("w") as target:
         for row in rows:
             target.write(json.dumps(row, sort_keys=True) + "\n")
+    peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     return {"cases": len(rows), "ok": sum(row["status"] == "ok" for row in rows),
             "abstain": sum(row["status"] == "abstain" for row in rows),
-            "seconds": sum(row["elapsed_seconds"] for row in rows)}
+            "seconds": sum(row["elapsed_seconds"] for row in rows),
+            "peak_process_rss_bytes": peak if platform.system() == "Darwin" else peak * 1024}
 
 
 def main() -> None:
