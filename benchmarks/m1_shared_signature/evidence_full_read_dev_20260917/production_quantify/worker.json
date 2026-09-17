@@ -1,0 +1,35 @@
+{
+  "confidence_warning": {
+    "decoy_zero": {
+      "confidence": "medium",
+      "warning": "genome_background_uniqueness_not_verified"
+    },
+    "f1": {
+      "confidence": "medium",
+      "warning": "genome_background_uniqueness_not_verified"
+    },
+    "f2": {
+      "confidence": "medium",
+      "warning": "genome_background_uniqueness_not_verified"
+    },
+    "twin_a": {
+      "confidence": "low",
+      "warning": "no_diagnostic_kmers"
+    },
+    "twin_b": {
+      "confidence": "low",
+      "warning": "no_diagnostic_kmers"
+    }
+  },
+  "estimated_bp": {
+    "decoy_zero": 0.0,
+    "f1": 1600.0,
+    "f2": 1680.0,
+    "twin_a": 0.0,
+    "twin_b": 0.0
+  },
+  "method": "production_quantify",
+  "peak_process_rss_raw": 35717120,
+  "timing_scope": "production quantify end-to-end function including output write",
+  "wall_seconds": 0.008799416944384575
+}

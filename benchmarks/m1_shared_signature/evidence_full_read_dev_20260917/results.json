@@ -1,0 +1,140 @@
+{
+  "frozen_commit": "9346de2",
+  "input_manifest": {
+    "files": {
+      "catalogue.fa": "51dcb53793a7205b412024e0084b418031ae44747687adf12c082fa0ef388ef1",
+      "reads.fa": "4327dc04fb4904928b6760930f72e808fd36fe0de313435885ed8b26609436af",
+      "truth.json": "26cfff38c9c0dcdbb159a21fd3de3dc5aa0ffddab205971309f4fed5b6d8bac6"
+    },
+    "protocol_sha256": "3823f168966a37108ed64238ebea09e0ded81cbb3ae21feb7e3b0ba87c5431d5",
+    "read_count": 18,
+    "total_read_bp": 11161
+  },
+  "resource_comparison_status": "not_rankable_unequal_timing_scopes",
+  "resource_note": "Separate child processes on macOS; ru_maxrss raw bytes; equal input but unequal timed work; toy inputs only",
+  "rows": {
+    "full_read": {
+      "confidence_warning": null,
+      "endpoint": "assigned_read_bp",
+      "estimates_bp": {
+        "decoy_zero": 0,
+        "f1": 3560,
+        "f2": 3560,
+        "twin_a": 0,
+        "twin_b": 0
+      },
+      "peak_process_rss_raw": 35880960,
+      "positive_family_bp_mare_with_abstentions_penalized": 0.3410150001588183,
+      "segment_scoring": {
+        "assigned_by_family": {
+          "decoy_zero": 0,
+          "f1": 3560,
+          "f2": 3560,
+          "twin_a": 0,
+          "twin_b": 0
+        },
+        "background_false_assigned_bp": 3,
+        "mass_by_status": {
+          "ambiguous": 1200,
+          "assigned": 7120,
+          "unknown": 2841
+        },
+        "shared_twin_ambiguous_bp": 1200,
+        "unknown_background_bp": 2755,
+        "unknown_positive_bp": 86,
+        "wrong_family_assigned_bp": 7
+      },
+      "timing_scope": "one streaming inference pass; scoring trace generated after resource measurement",
+      "wall_seconds": 0.03826191695407033,
+      "zero_decoy_assigned_bp": 0
+    },
+    "ordinary_mapping": {
+      "confidence_warning": null,
+      "endpoint": "assigned_read_bp",
+      "estimates_bp": {
+        "decoy_zero": 0,
+        "f1": 2800,
+        "f2": 1600,
+        "twin_a": 0,
+        "twin_b": 0
+      },
+      "peak_process_rss_raw": 36732928,
+      "positive_family_bp_mare_with_abstentions_penalized": 0.5928391750205616,
+      "segment_scoring": {
+        "assigned_by_family": {
+          "decoy_zero": 0,
+          "f1": 2800,
+          "f2": 1600,
+          "twin_a": 0,
+          "twin_b": 0
+        },
+        "background_false_assigned_bp": 0,
+        "mass_by_status": {
+          "ambiguous": 1200,
+          "assigned": 4400,
+          "unknown": 5561
+        },
+        "shared_twin_ambiguous_bp": 1200,
+        "unknown_background_bp": 2758,
+        "unknown_positive_bp": 2803,
+        "wrong_family_assigned_bp": 4
+      },
+      "timing_scope": "one pass of 80-bp chunked mapping",
+      "wall_seconds": 0.34893104108050466,
+      "zero_decoy_assigned_bp": 0
+    },
+    "production_quantify": {
+      "confidence_warning": {
+        "decoy_zero": {
+          "confidence": "medium",
+          "warning": "genome_background_uniqueness_not_verified"
+        },
+        "f1": {
+          "confidence": "medium",
+          "warning": "genome_background_uniqueness_not_verified"
+        },
+        "f2": {
+          "confidence": "medium",
+          "warning": "genome_background_uniqueness_not_verified"
+        },
+        "twin_a": {
+          "confidence": "low",
+          "warning": "no_diagnostic_kmers"
+        },
+        "twin_b": {
+          "confidence": "low",
+          "warning": "no_diagnostic_kmers"
+        }
+      },
+      "endpoint": "uncalibrated_genome_scaled_estimated_bp",
+      "estimates_bp": {
+        "decoy_zero": 0.0,
+        "f1": 1600.0,
+        "f2": 1680.0,
+        "twin_a": 0.0,
+        "twin_b": 0.0
+      },
+      "peak_process_rss_raw": 35717120,
+      "positive_family_bp_mare_with_abstentions_penalized": null,
+      "segment_scoring": null,
+      "timing_scope": "production quantify end-to-end function including output write",
+      "wall_seconds": 0.008799416944384575,
+      "zero_decoy_assigned_bp": 0.0
+    }
+  },
+  "source_sha256": {
+    "benchmarks/m1_shared_signature/full_read_research.py": "2134fc87d55c51943d7e56f70a16f99d67c1702f290e90ff96c63043d9cd0c2c",
+    "benchmarks/m1_shared_signature/model.py": "741e18f84ea146db51dd4e3297ec498cfe7a3cefa5fca1b0b8bcb58e3f7fed3c",
+    "benchmarks/m1_shared_signature/occupancy_research.py": "cf8382064796aca03889cab280d6a156d2ae71aeadad149c3254931ab0164cdb",
+    "benchmarks/m1_shared_signature/run_full_read_dev.py": "1df2e3765954206c25c2bec9ae8a9884409712c1dc62307c308c2fb69f00b6ab",
+    "tandemx/io/sequences.py": "c7fa43597e447999be81d8e6d4876f64c71e2908c8d46724b5fb773b1ceb886e",
+    "tandemx/quantify/mvp.py": "8c6219fc3edd2725428597d064e1caaaba4746851e24d5efebff397d8b2325ad"
+  },
+  "status": "development_only_no_backend_promotion",
+  "truth_bp": {
+    "background": 2758,
+    "f1": 3604,
+    "f2": 3599,
+    "twin_a": 1200
+  }
+}

@@ -136,3 +136,23 @@ used only after classification. The record in `docs/negative_results/` explains
 the no-go decision. Fixed 80-bp windows, at most eight catalogue families,
 uncalibrated gates and an optional native dependency preclude a large-genome
 production claim.
+
+## Full-read research follow-up
+
+`full_read_research.py` accepts whole reads, including mixed-family reads and
+background, and conserves each base in an assigned, ambiguous or unknown
+partition. It is a bounded research candidate, not a public quantify backend.
+The immutable development challenge is `full_read_protocol_v1.json` plus
+`full_read_dev_v1/`, committed before scoring. Reproduce the fixed comparison:
+
+```bash
+conda run -n tandemx-dev python -m benchmarks.m1_shared_signature.run_full_read_dev \
+  --outdir /tmp/tandemx-m1-full-read-replay
+conda run -n tandemx-dev pytest -q tests/unit/test_m1_full_read_research.py
+```
+
+The comparison calls the frozen ordinary mapper on non-overlapping 80-bp
+chunks and runs current production quantify on the same FASTA/catalogue.
+The development-only results, adverse assignments and endpoint mismatch are
+recorded in `docs/logs/m1_full_read_research_20260917.md`. No threshold
+selection or public estimator change follows from this toy screen.

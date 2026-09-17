@@ -1,0 +1,6 @@
+family_id	monomer_length	diagnostic_kmer_count	median_kmer_depth	haploid_depth	estimated_copy_number	estimated_bp	depth_mad	copy_number_interval_low	copy_number_interval_high	normalization_method	raw_median_kmer_depth	kmer_survival_probability	single_copy_control_kmer_count	single_copy_control_mean_depth	single_copy_control_median_depth	single_copy_control_depth_mad	single_copy_control_zero_fraction	quality_window_count	confidence	warning
+f1	80	80	20.0000	1.0000	20.0000	1600.0000	3.0000	16.0000	26.0000	explicit_haploid_depth	20.0000	1.00000000	0	NA	NA	NA	NA	0	medium	genome_background_uniqueness_not_verified
+f2	80	80	21.0000	1.0000	21.0000	1680.0000	1.0000	18.9000	24.0000	explicit_haploid_depth	21.0000	1.00000000	0	NA	NA	NA	NA	0	medium	genome_background_uniqueness_not_verified
+twin_a	80	0	0.0000	1.0000	0.0000	0.0000	0.0000	0.0000	0.0000	explicit_haploid_depth	0.0000	1.00000000	0	NA	NA	NA	NA	0	low	no_diagnostic_kmers
+twin_b	80	0	0.0000	1.0000	0.0000	0.0000	0.0000	0.0000	0.0000	explicit_haploid_depth	0.0000	1.00000000	0	NA	NA	NA	NA	0	low	no_diagnostic_kmers
+decoy_zero	80	80	0.0000	1.0000	0.0000	0.0000	0.0000	0.0000	0.0000	explicit_haploid_depth	0.0000	1.00000000	0	NA	NA	NA	NA	0	medium	genome_background_uniqueness_not_verified
