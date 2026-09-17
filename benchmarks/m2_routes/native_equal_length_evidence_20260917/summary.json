@@ -1,0 +1,25 @@
+{
+  "biological_accuracy": "not_evaluated",
+  "case_count": 6,
+  "length_baseline": {
+    "identifiable_positive_detected": 0,
+    "negative_abstained": 0,
+    "negative_false_positive": 0,
+    "negative_supported": 1,
+    "positive_abstained": 0,
+    "positive_detected": 0,
+    "positive_missed_supported": 5
+  },
+  "m2_technical": {
+    "identifiable_positive_detected": 2,
+    "negative_abstained": 0,
+    "negative_false_positive": 0,
+    "negative_supported": 1,
+    "positive_abstained": 0,
+    "positive_detected": 2,
+    "positive_missed_supported": 3
+  },
+  "negative_count": 1,
+  "path_identifiable_positive_count": 2,
+  "positive_count": 5
+}

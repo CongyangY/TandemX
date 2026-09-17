@@ -1,0 +1,5 @@
+validated frozen protocol, generated receipt, six case FASTAs and array hashes
+validated source FASTQ, context, PAF, prior trim receipt and B1 monomer catalogue
+reconstructed all three original C3 read trims and matched archived plus PAF coordinates
+ran unchanged M2 decompose defaults and frozen 5% span threshold
+biological audit not evaluated; same-study donor/haplotype pairing unverified

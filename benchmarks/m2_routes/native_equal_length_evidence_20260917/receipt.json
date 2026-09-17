@@ -1,0 +1,36 @@
+{
+  "M2_prototype_sha256": "043122d1b5987e35dcd957a6471c930f6211fe7a8902055d3a8c37f06d4ed651",
+  "biological_accuracy": "not_evaluated",
+  "case_count": 6,
+  "challenge_receipt_sha256": "0dd3c35c20dfcf166602ca3c5477abb48e96355305da5d343ec9134c2329b499",
+  "native_PAF_sha256": "f5226de81d2be785872f1ac7247eb91ff90714e1390a3e92ea0f2ce75cf06674",
+  "native_context_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+  "native_fastq_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+  "per_case_sha256": "2dc29de8a14df7f88157d8844730ed307ac2911b727096fceecf0fde3979bac5",
+  "prior_trim_receipt_sha256": "a7e69092cb50dd1058d9bc62c5682c4ac678df8402e7d8ade96ebec18e290f66",
+  "prior_trim_table_sha256": "c04691c40a368377607977f28b43ba348f3e290458717e24f3f96eeeea0579f0",
+  "protocol_sha256": "1e716f6bfd4e82bb8b053ae9414c01586d4be1905f5739f58975bb468cbb0d9c",
+  "read_ids": [
+    "ERR6210723.285454",
+    "ERR6210723.792415",
+    "ERR6210723.879668"
+  ],
+  "read_trim_intervals_0based": {
+    "ERR6210723.285454": [
+      4769,
+      8324
+    ],
+    "ERR6210723.792415": [
+      3967,
+      7527
+    ],
+    "ERR6210723.879668": [
+      3280,
+      6840
+    ]
+  },
+  "run_log_sha256": "c23c7e4ce8032245512668a1cc9d951774a7387744ead56e98da7180a835ca40",
+  "score_script_sha256": "17182c62ee414e2ea06cae67137354b31c632f46f1edadde686083f8890f287b",
+  "split": "development",
+  "summary_sha256": "b2d16d5e728d3f0db68a405b1f16c9ee75f0f7330d98a85b76bf6f00b25fe8ad"
+}
