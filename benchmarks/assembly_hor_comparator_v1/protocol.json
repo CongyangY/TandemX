@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_external_runs",
+  "assembly_input": "control/control.chr1.fasta",
+  "assembly_sha256": "60e65dd68af2af8774a872ea25656225714a01415d840b4aec59cfb09a9d1079",
+  "truth": "control/truth_monomers.tsv and control/truth_hors.tsv, exact engineered coordinate ledger",
+  "truth_scope": "synthetic centromere-like 171-bp monomers, 40 HOR copies, four engineered length/order variants; not biological or held-out truth",
+  "shared_input_policy": "Each assembly-only tool receives exactly the same FASTA, no oracle monomer file and no reads. The candidate_monomers.fa truth file is withheld.",
+  "resource_policy": "One CPU requested in each native command; sequential runs; profile_stage_resources.py sampling at 0.2 s on same Mac host, process-tree RSS and wall clock. Runtime includes each configured full stage; no cross-host speed claim.",
+  "CENdetectHOR": {
+    "endpoint": ["monomer decomposition", "monomer clustering", "HOR identification"],
+    "pipeline_revision": "969f4ef515fadd8b8a035357294971ff57d4618f",
+    "library_revision": "bdc3a9df5b60adafdd17eaded1b994edd22aae03",
+    "parameters": {"cores": 1, "consFile": "no", "CHRcons": "control.chr1.fasta", "HORdet_threads": 1, "windowSize": 1000, "expMonSize": "no"}
+  },
+  "TideCluster": {
+    "endpoint": ["array localization", "reported repeat consensus period", "family grouping"],
+    "source_revision": "8131547e75f73a1e61298a89ff4e861fbd613b7e",
+    "stages": ["tidehunter", "clustering"],
+    "tidehunter_arguments": "-p 100 -P 2000 -c 2 -e 0.25",
+    "parameters": {"cpu": 1, "min_cluster_size_kb": 0.1, "max_memory_gb": 1},
+    "hor_order_endpoint": "N/A: these two stages do not emit monomer/HOR label order; full TAREAN/KITE is a distinct unrun pipeline"
+  },
+  "TandemX": {
+    "assembly_only_hor_endpoint": "N/A unless a method runs with the same FASTA and no supplied truth-derived monomer templates"
+  },
+  "primary_metrics": {
+    "array_recall_bp": "truth array bp overlapped by union of predicted array intervals / truth array bp",
+    "array_precision_bp": "predicted array bp overlapping truth array / all predicted array bp",
+    "monomer_length_error_bp": "absolute error of the dominant predicted monomer length against 171; unavailable if method does not emit monomer calls",
+    "monomer_partition_pair_f1": "pairwise same-family F1 on truth copies with one-to-one >=0.5 reciprocal overlap to native decomposition intervals; unavailable if no unit-level calls",
+    "hor_unit_length_error_bp": "absolute error against 855 bp canonical HOR, only if native output declares a HOR unit",
+    "hor_variant_recall": "exact or documented compatible native variant HOR calls matched to four injected variants; unavailable if native output lacks coordinates/order",
+    "runtime_seconds": "wall clock from shared process-tree profiler",
+    "peak_process_tree_rss_mib": "maximum sampled sum of process-tree RSS, subject to 0.2 s sampling"
+  },
+  "failure_policy": "Retain native outputs and stderr. Exit 0 without correct structure remains a failed accuracy result; process failure is technical unavailable, never scored as accuracy zero. No parameter tuning after truth inspection."
+}
