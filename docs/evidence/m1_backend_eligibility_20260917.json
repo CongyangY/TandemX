@@ -1,0 +1,36 @@
+{
+  "checks": {
+    "frozen_acd_source_matches_receipt": true,
+    "frozen_occupancy_source_matches_receipt": true,
+    "independent_full_read_copy_bp_validation_in_m1_receipts": false,
+    "mapping_accepts_full_reads": false,
+    "mapping_refuses_identical_family_attribution": true,
+    "occupancy_dominates_mapping_all_identifiable_conditions": false,
+    "paired_public_backend_runtime_rss_in_m1_receipts": false,
+    "same_12_development_inputs": true
+  },
+  "development_positive_mare": {
+    "family_error_shift": {
+      "occupancy": 0.3657986111111111,
+      "ordinary_mapping": 0.3795717592592593
+    },
+    "identical_unidentifiable": {
+      "occupancy": 1.0,
+      "ordinary_mapping": 1.0
+    },
+    "related_high_error": {
+      "occupancy": 0.016377314814814803,
+      "ordinary_mapping": 0.014409722222222199
+    },
+    "related_low_error": {
+      "occupancy": 0.003414351851851849,
+      "ordinary_mapping": 0.003414351851851849
+    }
+  },
+  "evidence_sha256": {
+    "benchmarks/m1_shared_signature/evidence_acd_20260916/results.json": "17129bf12e19b20549d3c30a2dc58045f155e67bfa0077aa7feb44a19d3c381e",
+    "benchmarks/m1_shared_signature/evidence_occupancy_research_20260916/revised_12_case/results.json": "173e3e7cd196c4a29a68aa4862c424973c0d8b26c89e3590903eb530d9d11808"
+  },
+  "scope": "Existing frozen M1 mapping and occupancy implementations only; no held-out data opened.",
+  "status": "not_eligible"
+}
