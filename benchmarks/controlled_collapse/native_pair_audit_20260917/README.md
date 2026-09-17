@@ -46,13 +46,17 @@ keeps these data in development; it cannot serve as independent final held-out
 evidence. The exact edited-assembly ledger can establish injected edit truth,
 but not native biological missing-copy truth.
 
-`eligibility_manifest.json` also records two distinct assembly lineages with
+`eligibility_manifest.json` also records three distinct assembly lineages with
 existing genuine HiFi reads. [Ey15-2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9757041/)
 is a published same-sample 9994 source pair, but this audit did not recruit
-native reads to a chosen interval. [Mo17 SRR15447419](https://www.ncbi.nlm.nih.gov/sra/SRX11746829)
+native reads to a chosen interval. The [Macadamia jansenii update](https://www.gigabytejournal.com/articles/24)
+reports a higher-contiguity HiFi IPA assembly from the same sample as an
+earlier CLR comparison; archival BioSample identifiers differ and the same DNA
+extraction is unverified. Its 284-contig, 4.49-Mb-N50 assembly is a reference
+proxy, with no native interval selected in this audit. [Mo17 SRR15447419](https://www.ncbi.nlm.nih.gov/sra/SRX11746829)
 and [GCA_022117705.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_022117705.1/)
 share a project/cultivar; their BioSamples differ, so exact donor pairing is
-pending. Their small 11.7-Mb read subsets were copied to internal `tmp/` and
+pending. The Col-CEN, Ey15-2 and Mo17 small 11.7-Mb read subsets were copied to internal `tmp/` and
 rechecked for source/copy SHA-256, gzip, and FASTQ structure; those subsets do
 not establish array support. No new public download or large T7 write was made.
 

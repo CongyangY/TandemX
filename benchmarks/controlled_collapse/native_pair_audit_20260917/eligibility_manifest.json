@@ -65,6 +65,41 @@
       "final_heldout_eligibility": "ineligible_prior_development_lineage"
     },
     {
+      "dataset": "Macadamia_jansenii_SRR13557763_62_GigaDB100906",
+      "species": "Macadamia jansenii",
+      "accession_or_cultivar": "M. jansenii published source material",
+      "assembly_lineage": "GigaDB100906_HiFi_IPA_primary",
+      "read_runs": [
+        "SRR13557763",
+        "SRR13557762"
+      ],
+      "read_biosamples": [
+        "SAMN17524927",
+        "SAMN17524928"
+      ],
+      "older_CLR_biosample": "SAMN14217788",
+      "read_project": "PRJNA694456",
+      "split": "development",
+      "source_pairing_level": "paper_same_sample_distinct_archive_biosamples_same_extraction_unverified",
+      "source_pairing_evidence": [
+        "https://www.gigabytejournal.com/articles/24",
+        "https://doi.org/10.5524/100906",
+        "https://doi.org/10.5524/100812"
+      ],
+      "assembly_full_sha256_historical_receipt": "d6e9272438d072662f51de7960bdef18cb3c834d97d4ca44213715b7196498a9",
+      "assembly_contigs": 284,
+      "assembly_contig_n50_bp": 4485544,
+      "read_full_sha256_historical_receipts": {
+        "SRR13557763": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6",
+        "SRR13557762": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e"
+      },
+      "read_full_current_readback": "not_performed",
+      "native_interval_support": "not_measured_in_this_audit",
+      "read_pairing_eligibility": "paper_same_sample_development_pending_native_interval_extract",
+      "biological_accuracy_eligibility": "reference_proxy_only_not_absolute_copy_truth",
+      "final_heldout_eligibility": "ineligible_prior_development_lineage"
+    },
+    {
       "dataset": "Mo17_SRR15447419_GCA_022117705.1",
       "species": "Zea mays",
       "accession_or_cultivar": "Mo17 / Mo17-2021",
