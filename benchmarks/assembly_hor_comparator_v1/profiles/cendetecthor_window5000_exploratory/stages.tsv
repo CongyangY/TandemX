@@ -1,0 +1,2 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+cendetecthor_window5000_exploratory	1	11.677073	11.004861	0.993592	213.765625	2	118303	53	cendetecthor_window5000_exploratory.stdout.log	cendetecthor_window5000_exploratory.stderr.log
