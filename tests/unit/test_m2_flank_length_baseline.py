@@ -19,7 +19,7 @@ def test_length_baseline_detects_large_span_loss() -> None:
     row = _row("ACGT" * 15, ["ACGT" * 20] * 3)
     result = predict_case(row)
     assert result["audit_state"] == "DISCORDANT"
-    assert result["predicted_signed_bp_delta"] == 20
+    assert result["predicted_signed_bp_delta"] == -20
 
 
 def test_length_baseline_does_not_detect_order_only_edit() -> None:

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import platform
+import resource
 import time
 from pathlib import Path
 
@@ -25,7 +27,10 @@ def main() -> None:
     args.predictions.write_text(
         "".join(json.dumps(row, sort_keys=True) + "\n" for row in predictions)
     )
-    print(json.dumps({"cases": len(rows), "elapsed_seconds": elapsed}, sort_keys=True))
+    peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    rss_bytes = peak if platform.system() == "Darwin" else peak * 1024
+    print(json.dumps({"cases": len(rows), "elapsed_seconds": elapsed,
+                      "peak_process_rss_bytes": rss_bytes}, sort_keys=True))
 
 
 if __name__ == "__main__":

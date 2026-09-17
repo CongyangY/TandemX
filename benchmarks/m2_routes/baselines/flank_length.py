@@ -74,7 +74,7 @@ def predict_case(row: Mapping[str, Any]) -> dict[str, Any]:
             event_score=1.0,
             event_type="array_length_discordance",
             predicted_edited_interval_bp=list(assembly),
-            predicted_signed_bp_delta=delta,
+            predicted_signed_bp_delta=-delta,
             reason="median_two_flank_read_span_differs_from_assembly",
         )
     else:
@@ -83,7 +83,7 @@ def predict_case(row: Mapping[str, Any]) -> dict[str, Any]:
             audit_state="SUPPORTED",
             event_score=0.0,
             predicted_edited_interval_bp=list(assembly),
-            predicted_signed_bp_delta=delta,
+            predicted_signed_bp_delta=-delta,
             reason="median_two_flank_read_span_within_fixed_tolerance",
         )
     return base

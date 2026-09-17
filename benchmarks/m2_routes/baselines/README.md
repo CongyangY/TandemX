@@ -12,6 +12,10 @@ the v3 truth. One case represents one edited assembly, not three independent
 observations merely because three read IDs exist. Event scores 0/1 are binary
 decisions, not calibrated probabilities.
 
+The optional signed bp delta uses `assembly span - median read span`, matching
+the controlled-edit ledger convention. It is a span difference, not a validated
+estimate of missing physical array sequence.
+
 This baseline detects length differences, including copy loss and duplication.
 It cannot detect equal-length order, inversion, or sequence replacement events.
 It rejects partial reads and any case without uniquely placed paired flanks.

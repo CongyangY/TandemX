@@ -1,0 +1,297 @@
+{
+  "adapter_sha256": "68a327bc81a05d4a36a4fce7452efa602a0b0665b5ef00981fcd50f1e8d87f39",
+  "audit_state_counts": {
+    "COMPONENT_UNRESOLVED": 39
+  },
+  "case_count": 39,
+  "cases": [
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R223adf1ba42e",
+      "elapsed_seconds": 8.399970829486847e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 7386
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R3d8a32080450",
+      "elapsed_seconds": 7.875030860304832e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 7082
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Rbe995259d460",
+      "elapsed_seconds": 5.295872688293457e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6728
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Rd526083c0ae8",
+      "elapsed_seconds": 5.037523806095123e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 7084
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R7eb9053e949e",
+      "elapsed_seconds": 5.1042065024375916e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 7618
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R52f4cc311dfb",
+      "elapsed_seconds": 7.862504571676254e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 7618
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R1e4c7b56288a",
+      "elapsed_seconds": 5.7165976613759995e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 7084
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Rb0743f61386e",
+      "elapsed_seconds": 4.929210990667343e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R359d1ad14837",
+      "elapsed_seconds": 4.7291629016399384e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6550
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R6842b075b222",
+      "elapsed_seconds": 5.066581070423126e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6550
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Reebb6c2457d6",
+      "elapsed_seconds": 4.89172525703907e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 7618
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R9bca37b4f7d4",
+      "elapsed_seconds": 4.629185423254967e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R9e14d26b4fd3",
+      "elapsed_seconds": 4.558311775326729e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6728
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R26c7fb05b7c2",
+      "elapsed_seconds": 4.100007936358452e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6402
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Rb1ccebc71fa4",
+      "elapsed_seconds": 4.4916290789842606e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6258
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R6934357c95ff",
+      "elapsed_seconds": 4.520779475569725e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R4e14c788871f",
+      "elapsed_seconds": 5.983375012874603e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6194
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Rf05b2ce34168",
+      "elapsed_seconds": 5.916692316532135e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6194
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R77b540662dfa",
+      "elapsed_seconds": 5.1291659474372864e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R947963ca1ddc",
+      "elapsed_seconds": 4.662526771426201e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R5a9deafaa66e",
+      "elapsed_seconds": 6.137508898973465e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R270fc708d1db",
+      "elapsed_seconds": 4.583410918712616e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6194
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R2430eb09ffe4",
+      "elapsed_seconds": 4.5791734009981155e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R23972fc02545",
+      "elapsed_seconds": 5.020899698138237e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R00a3d06cf497",
+      "elapsed_seconds": 4.695821553468704e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 7084
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R4b2b9185a1a5",
+      "elapsed_seconds": 4.333397373557091e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6194
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R32b413599acb",
+      "elapsed_seconds": 4.449998959898949e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6194
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Reb21ec6f567d",
+      "elapsed_seconds": 3.604171797633171e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6402
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R70641c9ed7a3",
+      "elapsed_seconds": 4.620896652340889e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6970
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Re255e9e5c312",
+      "elapsed_seconds": 4.429183900356293e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6550
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R4bf1eea36908",
+      "elapsed_seconds": 5.929218605160713e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Ra45744f61474",
+      "elapsed_seconds": 4.3209176510572433e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6194
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R4eb663138970",
+      "elapsed_seconds": 4.366738721728325e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6728
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R61034cb07df7",
+      "elapsed_seconds": 4.300009459257126e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6194
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R885d12ab2e85",
+      "elapsed_seconds": 3.6292243748903275e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6402
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R75ea7c76414f",
+      "elapsed_seconds": 4.6208035200834274e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6970
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R3d6034e0bce5",
+      "elapsed_seconds": 4.312489181756973e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6194
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1R97221e8cf697",
+      "elapsed_seconds": 4.5165885239839554e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B1Rd4ed90b80017",
+      "elapsed_seconds": 4.512537270784378e-05,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 6906
+    }
+  ],
+  "inputs_sha256": "168064efaf1406e74ba016312b18d89307c5fddaa18fecd56b124cc87c6e30aa",
+  "limitations": [
+    "24-bp equal-length exact tile decomposition is possible only by construction",
+    "one named error profile is allowed only because all input reads are exact synthetic",
+    "synthetic flanks do not prove biological same-locus anchoring",
+    "no noisy reads, held-out donor, or real molecule validation",
+    "event scores are binary decisions, not calibrated probabilities"
+  ],
+  "prediction_status_counts": {
+    "abstain": 39
+  },
+  "predictions_sha256": "21e490113d9fd8af22238d6e27ef58ca966f3f88a0f0444deda3a722554b8039",
+  "prototype_sha256": "860149fc8f9d86df698dd6f3984265aac68d101b2fc5984ce3d117e698386ce0",
+  "status": "development_input_only_exact_synthetic_component",
+  "truth_file_opened": false
+}
