@@ -114,3 +114,7 @@ predictions are both retained. The independent hostile review is in
 `docs/logs/hostile_method_gate_20260917.md`. The full local `tandemx-dev`
 pytest suite passed 1,028 tests in 118.68 s on the final B2 code and scoring
 state.
+An independent deterministic replay under `/private/tmp/b2_bundle_replay_20260917`
+matched the archived source manifest, input JSONL, truth JSONL and receipt
+byte-for-byte by SHA-256. This verifies generator reproducibility, not
+biological validity.
