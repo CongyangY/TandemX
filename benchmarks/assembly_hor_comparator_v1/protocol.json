@@ -18,7 +18,7 @@
     "source_revision": "8131547e75f73a1e61298a89ff4e861fbd613b7e",
     "stages": ["tidehunter", "clustering"],
     "tidehunter_arguments": "-p 100 -P 2000 -c 2 -e 0.25",
-    "parameters": {"cpu": 1, "min_cluster_size_kb": 0.1, "max_memory_gb": 1},
+    "parameters": {"cpu": 1, "clustering_min_array_length_bp": 100, "tidehunter_max_memory_gb": 1, "clustering_max_memory_gb": null},
     "hor_order_endpoint": "N/A: these two stages do not emit monomer/HOR label order; full TAREAN/KITE is a distinct unrun pipeline"
   },
   "TandemX": {

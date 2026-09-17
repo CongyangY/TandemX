@@ -1,0 +1,2 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+cendetecthor_window5000_known171_exploratory	1	11.251708	10.892195	0.921847	213.703125	2	113307	51	cendetecthor_window5000_known171_exploratory.stdout.log	cendetecthor_window5000_known171_exploratory.stderr.log
