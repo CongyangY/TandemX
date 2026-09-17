@@ -6,6 +6,10 @@ were committed as `9346de2` **before** the first scoring run. This is a new
 development set; no B2 or previously reserved M1 final holdout was used.
 Evidence: `benchmarks/m1_shared_signature/evidence_full_read_dev_20260917/`.
 
+Here **full-read** means that complete input records are accepted and every
+base is accounted for. Decisions are local to 40-bp core tiles with 40-bp
+flanks; the candidate has no read-wide joint optimization or path inference.
+
 The candidate streams complete reads and classifies disjoint 40-bp core tiles
 with 40-bp flanking context against five supplied periodic 80-bp units. It
 requires a unique best family in both core and context. Conflicts and the

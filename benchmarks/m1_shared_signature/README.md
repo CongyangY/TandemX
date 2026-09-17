@@ -142,6 +142,8 @@ production claim.
 `full_read_research.py` accepts whole reads, including mixed-family reads and
 background, and conserves each base in an assigned, ambiguous or unknown
 partition. It is a bounded research candidate, not a public quantify backend.
+Its decisions are local to 40-bp tiles and flanks, with no read-wide joint
+path inference; "full-read" describes input acceptance and mass accounting.
 The immutable development challenge is `full_read_protocol_v1.json` plus
 `full_read_dev_v1/`, committed before scoring. Reproduce the fixed comparison:
 
