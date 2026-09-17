@@ -80,7 +80,9 @@ catalogue tiles on either orientation. This exact segmentation is possible by
 construction; it is not a general noisy-read decomposition method. Because
 the declared reads have zero engineered sequencing error, this run allowed one
 named `exact_synthetic` profile. The ordinary two-profile requirement remains
-in effect for other data. One partial-tile assembly interval abstained.
+in effect for other data. The three read strings per case are identical copies
+of one engineered source path with distinct synthetic IDs; those IDs are not
+independent biological molecules. One partial-tile assembly interval abstained.
 
 Command:
 
