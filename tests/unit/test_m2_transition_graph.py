@@ -4,6 +4,7 @@ import pytest
 
 from benchmarks.m2_routes.graph import ReadPath, audit_transition_graph, to_common_prediction
 from benchmarks.m2_routes.graph.prototype import transition_counts
+from benchmarks.m2_routes.graph.run_common_development import predict_case
 
 
 MONOMERS = {"A": "ACGTTGCA", "B": "GGAATCCA", "C": "CATGAGTC",
@@ -19,6 +20,7 @@ def reads(labels: str | tuple[str, ...], n: int = 3, *, confidence: float = 1.0,
 def test_transition_graph_retains_flank_phase_and_copy_multiplicity() -> None:
     assert transition_counts(tuple("ABAB")) != transition_counts(tuple("BABA"))
     assert transition_counts(tuple("ABAB")) != transition_counts(tuple("ABABAB"))
+    assert transition_counts(())[("<LEFT_FLANK>", "<RIGHT_FLANK>")] == 1
 
 
 def test_copy_compression_candidate_requires_cross_profile_support() -> None:
@@ -131,3 +133,40 @@ def test_common_prediction_keeps_abstention_and_uncalibrated_binary_score() -> N
     prediction = to_common_prediction("opaque-2", abstain)
     assert prediction["status"] == "abstain"
     assert prediction["event_score"] is None
+
+
+def test_exact_synthetic_mode_can_audit_complete_deletion_but_not_real_profile() -> None:
+    exact_reads = [ReadPath(f"mol{i}", tuple("ABC"), (1.0,) * 3,
+                            "exact_synthetic") for i in range(3)]
+    call = audit_transition_graph((), exact_reads, monomer_sequences=MONOMERS,
+                                  min_error_profiles=1,
+                                  synthetic_error_free_mode=True)
+    assert call.status == "DISCORDANT"
+    with pytest.raises(ValueError, match="only for exact synthetic"):
+        audit_transition_graph((), exact_reads, monomer_sequences=MONOMERS,
+                               min_error_profiles=1)
+    with pytest.raises(ValueError, match="requires exact_synthetic"):
+        audit_transition_graph((), reads("ABC"), monomer_sequences=MONOMERS,
+                               min_error_profiles=1, synthetic_error_free_mode=True)
+
+
+def test_common_exact_synthetic_input_only_adapter() -> None:
+    left, right = "GGGG", "CCCC"
+    array = MONOMERS["A"] + MONOMERS["B"] + MONOMERS["C"]
+    row = {"case_id": "opaque", "schema_version": 2, "split": "development",
+           "input_status": "ok", "read_pairing_status": "synthetic_simulated",
+           "error_profile": {"name": "exact_synthetic", "indel_rate": 0,
+                             "substitution_rate": 0},
+           "candidate_monomers": {k: MONOMERS[k] for k in "ABC"},
+           "left_flank_sequence": left, "right_flank_sequence": right,
+           "assembly_sequence": left + right,
+           "raw_read_sequences": {f"m{i}": left + array + right for i in range(3)},
+           "haplotype_id": "h1"}
+    prediction, detail = predict_case(row)
+    assert prediction["status"] == "ok"
+    assert prediction["event_score"] == 1.0
+    assert detail["assembly_copy_count"] == 0
+    row["assembly_sequence"] = left + MONOMERS["A"][:-1] + right
+    prediction, _ = predict_case(row)
+    assert prediction["status"] == "abstain"
+    assert prediction["reason"] == "partial_or_nontiled_array_interval"

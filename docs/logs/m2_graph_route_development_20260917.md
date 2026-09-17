@@ -37,7 +37,8 @@ python -m benchmarks.m2_routes.graph.run_development \
 pytest -q tests/unit/test_m2_transition_graph.py
 ```
 
-Thirteen focused tests passed. The 14 engineered-label cases returned three
+Fifteen focused tests passed after adding the exact synthetic B1 adapter. The
+14 engineered-label cases returned three
 `DISCORDANT`, three `SUPPORTED`, four `AMBIGUOUS`, and four
 `INSUFFICIENT_READ_SUPPORT`. The three graph-positive examples are copy
 multiplicity, transition rewiring, and replacement by a distinct supplied
@@ -62,8 +63,40 @@ is invisible to this graph and produces graph support. Systematic errors can
 still cross the named profiles; the profile rule reduces one confound but does
 not establish sequencing-error independence.
 
-This route has not yet consumed the common B1 sequence-only development inputs,
-any realistic noisy reads, a held-out split, or real same-locus molecules. It
-must not be called an assembly-error detector from this receipt. All status
-and error-type denominators for the planned tournament must be computed from
-the frozen common bundle, including abstentions.
+At this initial component check, the route had not consumed the common B1
+sequence-only development inputs, any realistic noisy reads, a held-out split,
+or real same-locus molecules. It must not be called an assembly-error detector
+from this receipt. All status and error-type denominators for the planned
+tournament must be computed from the frozen common bundle, including
+abstentions.
+
+## Frozen B1 input-only development run
+
+After the B1 input-only bundle and metric contract were frozen, a separate
+strict adapter consumed its 13 opaque public rows without reading `truth.jsonl`.
+It accepted only the declared exact synthetic error profile, required one
+occurrence of each engineered flank, and split the interior into exact 24-bp
+catalogue tiles on either orientation. This exact segmentation is possible by
+construction; it is not a general noisy-read decomposition method. Because
+the declared reads have zero engineered sequencing error, this run allowed one
+named `exact_synthetic` profile. The ordinary two-profile requirement remains
+in effect for other data. One partial-tile assembly interval abstained.
+
+Command:
+
+```bash
+python -m benchmarks.m2_routes.graph.run_common_development \
+  --inputs benchmarks/controlled_collapse/v2/development_bundle/inputs.jsonl \
+  --predictions benchmarks/m2_routes/graph/common_development_predictions.jsonl \
+  --audit docs/logs/m2_graph_common_development_20260917.json
+```
+
+The input-only outputs are 10 `DISCORDANT`, two `SUPPORTED`, and one
+`COMPONENT_UNRESOLVED`. These counts are not accuracy because the sealed truth
+was not inspected in this step. The prediction rows retain every case ID and
+the abstention. No exact event type, edited bp count, or full label path is
+claimed. The single abstention blocks the frozen protocol's all-case primary
+aggregate; a separate selective-coverage descriptive table may be computed by
+the scorer but cannot replace the 13-case denominator. The detailed read and
+assembly copy counts, graph transitions, timing and Python allocation peaks
+are in the audit receipt.

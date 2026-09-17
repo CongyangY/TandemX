@@ -43,8 +43,6 @@ class GraphAudit:
 
 def transition_counts(labels: Sequence[str]) -> Counter[tuple[str, str]]:
     """Include unique flank sentinels so copy count and phase affect the graph."""
-    if not labels:
-        raise ValueError("A local array path needs at least one monomer")
     if any(not label or label in (START, END) for label in labels):
         raise ValueError("Monomer labels must be nonempty and distinct from flank sentinels")
     return Counter(zip((START, *labels), (*labels, END)))
@@ -104,6 +102,7 @@ def audit_transition_graph(
     min_error_profiles: int = 2,
     min_assignment_confidence: float = 0.9,
     similarity_cutoff: float = 0.15,
+    synthetic_error_free_mode: bool = False,
 ) -> GraphAudit:
     """Audit local, full-flank paths with conservative graph-level abstention.
 
@@ -112,10 +111,12 @@ def audit_transition_graph(
     to reduce one-platform correlated-error artifacts. They do not guarantee
     independence. Parameters are development defaults, not calibrated cutoffs.
     """
-    if not assembly_labels or any(not label for label in assembly_labels):
-        raise ValueError("Assembly needs a nonempty ordered monomer path")
-    if min_molecules < 2 or min_error_profiles < 2:
-        raise ValueError("Require at least two molecules and two error profiles")
+    if any(not label for label in assembly_labels):
+        raise ValueError("Assembly labels must be nonempty strings")
+    if min_molecules < 2 or min_error_profiles < 1:
+        raise ValueError("Require at least two molecules and one error profile")
+    if min_error_profiles < 2 and not synthetic_error_free_mode:
+        raise ValueError("One error profile is allowed only for exact synthetic reads")
     if not 0 <= min_assignment_confidence <= 1 or not 0 <= similarity_cutoff <= 1:
         raise ValueError("Confidence and similarity thresholds must be in [0, 1]")
     if monomer_sequences is not None:
@@ -138,11 +139,15 @@ def audit_transition_graph(
             raise ValueError("Each read needs an error-profile identifier")
         if len(read.labels) != len(read.assignment_confidence):
             raise ValueError("Each monomer must have an assignment confidence")
-        if not read.labels or any(not label for label in read.labels):
-            raise ValueError("Each read path needs nonempty labels")
+        if any(not label for label in read.labels):
+            raise ValueError("Read labels must be nonempty strings")
         if any(not 0 <= confidence <= 1 for confidence in read.assignment_confidence):
             raise ValueError("Assignment confidences must be in [0, 1]")
-        if not read.both_flanks_verified or min(read.assignment_confidence) < min_assignment_confidence:
+        if synthetic_error_free_mode and read.error_profile != "exact_synthetic":
+            raise ValueError("Synthetic mode requires exact_synthetic error profiles")
+        if not read.both_flanks_verified or any(
+            confidence < min_assignment_confidence for confidence in read.assignment_confidence
+        ):
             rejected += 1
             continue
         accepted.append(read)
@@ -222,7 +227,7 @@ def to_common_prediction(case_id: str, audit: GraphAudit) -> dict[str, object]:
         "status": "ok" if decided else "abstain",
         "event_score": (1.0 if audit.status == "DISCORDANT" else 0.0)
         if decided else None,
-        "event_type": audit.event_class if audit.status == "DISCORDANT" else None,
+        "event_type": None,
         "predicted_edited_label_path": None,
         "predicted_edited_interval_bp": None,
         "predicted_signed_bp_delta": None,
