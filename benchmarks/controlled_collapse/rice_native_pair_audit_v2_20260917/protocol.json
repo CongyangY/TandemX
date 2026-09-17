@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-17",
+  "split": "development",
+  "rationale": "v1 fixed 155-bp/4-kb window and hard 0.8 flank uniqueness selected no interval; v2 evaluates bounded transformed assembly-derived candidates over 30-500-bp periods and ranks flank uniqueness first",
+  "assembly_path": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/GCA_034140825.1_AGIS1.0_genomic.fna.gz",
+  "assembly_sha256": "cbe51d6615380bb441b7cf531ebc0ae58f498bc7982d2db07c549376a7638270",
+  "read_subset_path": "/Volumes/T7/Codex/TandemX/data/subsets/SRR25241090_seed6101_v1/sample_003.fastq.gz",
+  "read_subset_sha256": "88e05ea73487dffa014ca3f8bf87881eb58071635fcde65a75349264d20a821f",
+  "prior_assembly_only_candidate_table": {
+    "path": "benchmarks/controlled_collapse/rice_native_pair_audit_20260917/ranked_screen.tsv",
+    "sha256": "9260f72332f61dc30e6df034a4386996c6241323cdcd44abb6033704701f93cb",
+    "reviewed_rows": 1000,
+    "seed_ranking": "highest prior flank_unique_31mer_fraction then highest prior shift_identity then contig then start",
+    "seed_count": 100
+  },
+  "candidate_generation_before_any_read_alignment": {
+    "center": "midpoint of each selected v1 4-kb window",
+    "array_lengths_bp": [
+      1000,
+      2000,
+      3000,
+      4000,
+      5000
+    ],
+    "periods_bp_inclusive": [
+      30,
+      500
+    ],
+    "natural_flank_bp_each_side": 3000,
+    "expected_evaluations": 235500,
+    "eligibility_filter": {
+      "direct_period_shift_identity_min": 0.85,
+      "array_entropy_bits_min": 1.6
+    },
+    "ranking": "highest flank_unique_31mer_fraction_within_6kb_flanks then highest direct_period_shift_identity then longer array then contig lexical then start ascending then period ascending",
+    "flank_uniqueness": "fraction of flank-started 31-mers occurring exactly once across full array+6-kb context",
+    "flank_uniqueness_interpretation": "ranking criterion only; no hard threshold and no proof of genome-wide uniqueness; v1 top-1000 seeds carry centromeric flank-repetitiveness risk",
+    "no_read_informed_reselection": true
+  },
+  "read_alignment_only_after_selected_context_committed": {
+    "mapper": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2 v2.31-r1302",
+    "options": [
+      "-x",
+      "map-hifi",
+      "-c",
+      "--secondary=yes",
+      "-N",
+      "20",
+      "-t",
+      "2"
+    ],
+    "spanner_min_distinct_original_records": 3,
+    "spanner_min_identity_nmatch_over_alignment_columns": 0.99,
+    "spanner_min_natural_flank_bp_each_side": 1000,
+    "full_reference_mapping": "only_if_context_spanner_count_at_least_3",
+    "full_reference_claim": "heuristic locus support, not mathematical uniqueness"
+  },
+  "pairing": "read SAMN36368305 versus assembly SAMN36344332, same Nipponbare AGIS-1.0 label but distinct dates; exact donor/extraction unverified",
+  "claim_scope": "technical development only, not biological copy truth or final heldout"
+}
