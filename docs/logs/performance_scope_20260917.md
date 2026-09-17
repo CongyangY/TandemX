@@ -51,3 +51,13 @@ T7 access is through a 480-Mb/s USB2 path with prior I/O failures; the full
 large-input rebenchmark must wait for a verified reliable storage path and a
 method/endpoint freeze. Small development runs and successful CI do not close
 that gate.
+
+For an expert resource comparison, the missing common measurements are
+substantial: these archived runs do not form one isolated matrix of repeated
+wall/CPU time, direct-child versus process-tree/unique peak memory, temporary
+disk peak, persistent output bytes, read and write throughput, and failures at
+the same input format, thread count, filesystem and endpoint. Some historical
+receipts include CPU or output sizes individually, but no all-tool completed
+table has been validated with those definitions. Relative wall and RSS values
+above should therefore be read as observations for their stated runs, not as
+an efficiency frontier or a plant-genome scaling law.

@@ -37,6 +37,57 @@ are Arabidopsis development materials, not demonstrated transfer to large
 plant genomes. Formal release, Bioconda, Zenodo, and manuscript promotion
 remain paused under the current instructions.
 
+An independent hostile audit in
+`docs/logs/ey15_native_hostile_audit_20260917.md` reproduced every score,
+verified all seven source CIGAR/flank boundaries, and added a regression test
+that prevents ledger-only assembly-span scoring. The scorer now measures each
+edited FASTA directly and checks the ledger afterward. The archived score
+remained 8/8 large injected deletions and 1/1 intact control; its biological
+accuracy remains not evaluated.
+
+The bounded Mo17 source screen in
+`benchmarks/controlled_collapse/mo17_native_pair_audit_20260917/` selected a
+3-kb CentC interval from six assembly-only candidates **before** read mapping.
+The complete 2.179-Gb assembly and current 81,775-read nested HiFi subset
+passed hashes and structure. Six original reads crossed the nominated interval
+and at least 1-kb flanks, but all failed the frozen 95% whole-alignment
+identity gate (best 90.06%); qualified native spanners = **0**. Flank identity
+was also low. Mo17 is ineligible for these native controlled edits; no
+post-result locus replacement, full-reference scan, or edit was performed.
+Read and assembly archive BioSamples differ.
+
+The independent rice and Macadamia source screens are also negative under
+their declared scope. Rice's 385.711-Mb assembly and 62,345-read HiFi subset
+passed complete integrity checks, but the frozen 155-bp/4-kb assembly screen
+found no interval passing the natural-flank uniqueness threshold among the
+top 1,000 of 771,185 windows. It did not map reads or make edits. Macadamia
+has no existing bounded verified original-HiFi subset; two full original
+streams total 18.150 GB and were not scanned under the current USB2/EIO
+constraint. Both have unresolved exact read/assembly donor pairing. See
+`benchmarks/controlled_collapse/rice_native_pair_audit_20260917/` and
+`benchmarks/controlled_collapse/macadamia_native_pair_audit_20260917/`.
+The machine-readable current source reconciliation is
+`benchmarks/inputs/native_source_registry_20260917.json`; it records two
+technical development lineages and three negative/not-enrolled source screens.
+No native biological heldout or physical copy truth is enrolled.
+
+On the previously incomplete 36,371-bp flanked 171-bp common assembly
+control, a faithful CENdetectHOR default replay and a preregistered no-prior
+8-mer/5-kb diagnostic both failed before final decomposition/HOR output.
+One produced an empty periodicity BED and `windowsFiltering.py` IndexError;
+the other produced an intermediate 1710-bp window and zero-byte consensus,
+then `Extract5mon.py` NameError. Both exact settings and their unsuccessful
+resources are archived in
+`docs/logs/cendetecthor_171_precondition_20260917.md`. Accuracy is technical
+**N/A**, not a false negative. Historical measured production/competitor
+performance and its incomparable scopes are indexed in
+`docs/logs/performance_scope_20260917.md`; current capability boundaries are
+consolidated in `docs/logs/expert_capability_record_20260917.md`.
+The merged local `tandemx-dev` Python suite passed **1,069 tests in 116.57 s**
+after the five-source reconciliation and comparator audit. Hosted
+Ubuntu/macOS Python, Rust and wheel validation for pushed commit `c3e8624`
+passed; the later evidence commits have a separate hosted run in progress.
+
 ## Checkpoint 2026-09-17: native development inputs and exact edit archive
 
 The bounded source audit in `benchmarks/controlled_collapse/native_pair_audit_20260917/`
