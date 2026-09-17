@@ -93,8 +93,13 @@ consolidated in `docs/logs/expert_capability_record_20260917.md`.
 The merged local `tandemx-dev` Python suite passed **1,075 tests in 116.97 s**
 after the rice v2 negative audit, five-source reconciliation and comparator
 audit. Hosted Ubuntu/macOS Python, Rust and wheel validation for pushed commits
-`c3e8624` and `16538ca` passed; the final evidence commit still requires its
-own hosted run.
+`c3e8624`, `16538ca`, and final evidence commit `93753f7` passed. The latter
+is Source validation run 35224854877; both platform jobs completed with
+success. This verifies source and packaging checks, not biological accuracy.
+On 2026-09-17, `system_profiler SPUSBDataType` still enumerated the Samsung
+PSSD T7 beneath a USB2.0 Hub. This current observation does not clear the
+prior T7 EIO/unmount events, so large T7 write/rebenchmark work remains gated
+by a demonstrably reliable direct storage connection.
 
 ## Checkpoint 2026-09-17: native development inputs and exact edit archive
 

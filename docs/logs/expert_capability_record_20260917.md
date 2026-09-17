@@ -40,7 +40,8 @@ tradeoff and was rejected. Full details and the unfavorable real-tool
 comparisons are in `performance_scope_20260917.md`. The latest full local suite
 after the rice v2 audit and five-source eligibility reconciliation passed
 1,075 Python tests; hosted Ubuntu/macOS Python, Rust, and wheel validation at
-commits `c3e8624` and `16538ca` passed.
+commits `c3e8624`, `16538ca`, and `93753f7` passed. The final evidence
+commit is CI run 35224854877 with both platform jobs successful.
 Tests and CI establish source behavior under covered inputs, not biological
 accuracy or 7–20-Gb production readiness.
 
