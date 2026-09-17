@@ -1,0 +1,42 @@
+{
+  "arrays": [
+    {
+      "adjacent_tile_identity_mean": 0.9491425192193969,
+      "adjacent_tile_identity_min": 0.9157303370786517,
+      "array_id": "C1",
+      "biological_monomer_boundary_status": "unverified_operational_phase",
+      "chromosome": "Chr1",
+      "end0": 15588579,
+      "operational_tile_count": 20,
+      "period_bp": 178,
+      "sequence_sha256": "4920e04ad3ba7a3dec5ce0b6be07233d56e70afce6132d645ad479ea09458bd0",
+      "start0": 15585019
+    },
+    {
+      "adjacent_tile_identity_mean": 0.959787108219988,
+      "adjacent_tile_identity_min": 0.9325842696629213,
+      "array_id": "C2",
+      "biological_monomer_boundary_status": "unverified_operational_phase",
+      "chromosome": "Chr2",
+      "end0": 3969102,
+      "operational_tile_count": 20,
+      "period_bp": 178,
+      "sequence_sha256": "7540f2adbab018e3a7e755eac8c45f16c0858da419f108571b18a69ee2a6cb03",
+      "start0": 3965542
+    },
+    {
+      "adjacent_tile_identity_mean": 0.9556475458308694,
+      "adjacent_tile_identity_min": 0.9101123595505618,
+      "array_id": "C3",
+      "biological_monomer_boundary_status": "unverified_operational_phase",
+      "chromosome": "Chr3",
+      "end0": 15063560,
+      "operational_tile_count": 20,
+      "period_bp": 178,
+      "sequence_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "start0": 15060000
+    }
+  ],
+  "source_assembly_sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8",
+  "source_fasta_sha256": "a7249d68f6a595f62e35a505c1ef116441783d3d93621cf91ceda23e50e848cc"
+}

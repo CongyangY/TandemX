@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "protocol": "B1_structure_development_v3",
+  "frozen_before_common_predictions": true,
+  "split": "development",
+  "statistical_unit": "one_Col_CEN_assembly_lineage_three_nuclear_intervals",
+  "case_count": 39,
+  "positive_count": 33,
+  "intact_negative_count": 6,
+  "primary_endpoint": "intent_to_diagnose_injected_edit_event_detection",
+  "primary_denominator": "all_39_predeclared_cases_including_abstain_failure_and_unreported",
+  "truth_positive_rule": "event_status==positive",
+  "decision_threshold": 0.5,
+  "event_score_meaning": "uncalibrated_decision_value_not_probability",
+  "positive_non_ok_rule": "FN_in_intent_to_diagnose",
+  "intact_non_ok_rule": "unresolved_negative_not_TN_or_FP;count_separately",
+  "primary_metrics": ["tp", "fn", "fp", "tn", "unresolved_negative", "sensitivity", "fpr", "negative_failure_rate"],
+  "primary_formulas": {
+    "sensitivity": "TP/33;non_ok_positive_is_FN",
+    "fpr": "FP/6;non_ok_intact_is_unresolved_negative",
+    "negative_failure_rate": "(FP+unresolved_negative)/6"
+  },
+  "eligible_only_metrics": "separate_TP_FN_FP_TN_sensitivity_FPR_on_status_ok_only_with_ok_denominator_and_coverage",
+  "abstention_fraction": "non_ok_or_unreported_rows/39;report_status_counts_separately",
+  "causal_vs_observable_rule": "exact_edit_ledger_is_causal_truth;event_subtype_and_breakpoint_evaluation_NA_for_exactly_identical_observed_sequence_with_distinct_causal_truth",
+  "secondary_metrics": {
+    "event_type_accuracy": "on_identifiable_positive_cases_with_status_ok_and_explicit_exact_type_only;report_denominator_and_missing",
+    "signed_bp_delta_mae": "on_status_ok_cases_with_finite_explicit_prediction;missing_is_NA_not_zero",
+    "breakpoint_localization_error_bp": "on_identifiable_positive_cases_with_same_number_of_explicit_predicted_edited_junctions;minimum_bipartite_mean_absolute_bp_distance;otherwise_NA_with_reason",
+    "HOR_period_error_bp": "NA_unverified_native_HOR_period;do_not_substitute_178bp_tile_period",
+    "repeat_order_accuracy": "NA_native_tile_identity_and_boundary_not_independently_validated;report_label_path_edit_distance_only_as_component_diagnostic_if_available",
+    "ambiguity_rejected_fraction": "all_non_ok_or_unreported_rows/39_plus_per_reason_counts",
+    "runtime_seconds": "route_wall_elapsed_seconds_if_external_route_receipt_supplies_measured_value_else_NA",
+    "peak_rss_bytes": "route_peak_RSS_if_external_route_receipt_supplies_measured_value_else_NA"
+  },
+  "auprc_status": "not_reported_uncalibrated_binary_scores_three_intervals_one_lineage",
+  "confidence_interval_status": "not_estimable_one_assembly_lineage",
+  "physical_or_read_assembly_accuracy_status": "blocked_no_verified_original_raw_read_pairing_or_native_copy_truth",
+  "held_out_status": "not_enrolled",
+  "no_parameter_change_after_predictions": true
+}
