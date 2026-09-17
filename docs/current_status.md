@@ -1,5 +1,52 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-17: method convergence and frozen stop-loss
+
+The current decision record is `docs/logs/method_gate_decision_20260917.md`;
+an independent hostile review and B2 addendum are in
+`docs/logs/hostile_method_gate_20260917.md`. The project is in method
+convergence, with nonessential engineering and manuscript polishing frozen.
+
+Gate A is **NO-GO** for accurate absolute family abundance as a present Methods
+novelty claim. Identical family signatures are mathematically non-identifiable,
+and six development estimator approaches did not stably outperform mapping.
+The frozen production score remains read-derived family evidence / assembly
+audit, not calibrated physical copy number.
+
+Two M2 research routes were independently frozen: an edlib monomer-path
+alignment route and an exact transition-multiplicity graph. The alignment
+route was selected only as the better research candidate on the Col-CEN
+development input. In three real-assembly intervals with synthetic exact
+reads, it detected 24/33 injected edits versus 18/33 for a fixed paired-flank
+length baseline; the graph rejected all 39 cases. Three read IDs per case
+were identical sequences, and the intervals all belong to one Col-CEN
+lineage. This is not native-read structural support.
+
+The separate frozen B2 synthetic structural hold-out uses 100/200/300/400 bp
+founders, nested labels, noisy reads and low support (52 cases, 44 injected
+edits, eight intact controls). Alignment detected 6/44 events and gave 45/52
+abstentions; the simple length baseline detected 20/44 and gave 24/52
+abstentions; the graph rejected all 52 due its frozen development-split gate.
+All six alignment TPs came from the 100 bp founder. **Gate B is NO-GO for the
+present frozen M2 method under this declared synthetic range.** Native
+donor-held-out performance remains unmeasured. Gate C (independent biological
+utility) remains untested. These outcomes do not support a Genome Research
+Methods core-method claim or a superiority claim.
+
+On one engineered 171 bp common assembly control, TideCluster localized the
+array at base recall 1.0 and precision ~0.99994 and reported an 855 bp
+period. CENdetectHOR had recorded upstream technical failures. TandemX locate
+covered 98.73% of truth array bases only when given truth-derived monomers,
+so no fair cross-tool HOR or de novo accuracy ranking is available. The
+historical 30 bp CENdetectHOR smoke remains installation evidence only.
+
+T7's physical connection remains a separate blocker for K30076, V14167 and
+large 30x work; it did not block the internal-disk M1/M2 analysis. Formal
+release, Bioconda, Zenodo and manuscript promotion remain paused. No M2
+research prototype was promoted into the production CLI. The full local
+`tandemx-dev` pytest suite passed **1,028 tests in 118.68 s** after the B2
+source, scoring, baseline adapter and gate decision were added.
+
 ## Checkpoint 2026-09-16: bounded direct-discover scan resume
 
 Commit `108a644` adds opt-in `tandemx discover --checkpoint-every N` for a

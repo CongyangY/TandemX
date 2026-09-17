@@ -111,4 +111,6 @@ See `benchmarks/controlled_collapse/b2/{protocol.json,metrics_frozen.json,
 held_out_bundle/receipt.json,alignment_score/summary.json,graph_score/
 summary.json,baseline_score/summary.json}`. Raw and normalized baseline
 predictions are both retained. The independent hostile review is in
-`docs/logs/hostile_method_gate_20260917.md`.
+`docs/logs/hostile_method_gate_20260917.md`. The full local `tandemx-dev`
+pytest suite passed 1,028 tests in 118.68 s on the final B2 code and scoring
+state.
