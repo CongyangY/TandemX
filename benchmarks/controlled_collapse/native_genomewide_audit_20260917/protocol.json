@@ -1,0 +1,49 @@
+{
+  "boundary": "mapper-dependent genome-wide competition only; source read selection was local; no individual donor/haplotype or physical copy truth",
+  "command": [
+    "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+    "-x",
+    "map-hifi",
+    "-c",
+    "--secondary=yes",
+    "-N",
+    "20",
+    "-t",
+    "2",
+    "/private/tmp/Col-CEN_v1.2_full_native_audit_20260917.fa",
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_spanners.fastq.gz"
+  ],
+  "minimap2_executable": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+  "minimap2_executable_sha256": "9747d27a83257eef51b4258b8b9248eaf313024ab8fc5dc5143ab7d22c9e3645",
+  "minimap2_version": "2.31-r1302",
+  "primary_eligibility": "same read ID, primary alignment spans nominated array and >=1000bp on each side, alignment identity >=0.99, MAPQ >=20",
+  "question": "Do the six locally selected native reads retain array-plus-flank primary mappings and what alternatives appear on complete Col-CEN v1.2?",
+  "read_selection_status": "selected_using_three_local_contexts_before_this_map",
+  "reads_path": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_spanners.fastq.gz",
+  "reads_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+  "reference_compressed_path": "/Users/ycy/Codex/Sofw/LTRscape/test_data/arabidopsis/Col-CEN_v1.2.fasta.gz",
+  "reference_compressed_sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8",
+  "reference_decompressed_path": "/private/tmp/Col-CEN_v1.2_full_native_audit_20260917.fa",
+  "reference_decompressed_sha256": "21c467339262bcc1854492451894241ac1bc31de63c5a1521caeb5439075bcd2",
+  "report": "all PAF alignments; per-read top alternatives and whether primary crosses declared locus; no source-aware filtering during mapping",
+  "schema_version": 1,
+  "split": "development",
+  "status": "frozen_before_full_reference_mapping",
+  "target_arrays_zero_based_half_open": {
+    "C1": [
+      "Chr1",
+      15585019,
+      15588579
+    ],
+    "C2": [
+      "Chr2",
+      3965542,
+      3969102
+    ],
+    "C3": [
+      "Chr3",
+      15060000,
+      15063560
+    ]
+  }
+}
