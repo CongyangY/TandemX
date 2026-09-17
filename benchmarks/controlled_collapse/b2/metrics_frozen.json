@@ -1,0 +1,32 @@
+{
+  "schema_version": 2,
+  "protocol": "B2_synthetic_structural_held_out_v1",
+  "frozen_before_predictions": true,
+  "split": "synthetic_held_out",
+  "case_count": 52,
+  "positive_count": 44,
+  "intact_negative_count": 8,
+  "statistical_unit": "four_independent_synthetic_founders_not_biological_donors",
+  "primary_endpoint": "intent_to_diagnose_injected_structural_edit_detection",
+  "decision_threshold": 0.5,
+  "positive_non_ok_rule": "FN_in_all_case_denominator",
+  "intact_non_ok_rule": "unresolved_negative_not_TN_or_FP;negative_failure_rate_counts_it",
+  "primary_metrics": ["tp", "fn", "fp", "tn", "unresolved_negative", "sensitivity", "fpr", "negative_failure_rate"],
+  "eligible_only_metrics": "separate_confusion_and_sensitivity_FPR_for_status_ok_rows_with_explicit_coverage",
+  "abstention_fraction": "non_ok_or_missing_rows_divided_by_52;status_counts_and_reasons_preserved",
+  "observable_equivalence_rule": "exact_same_public_assembly_sequence_with_distinct_causal_truth_blocks_exact_subtype_and_breakpoint_scoring",
+  "secondary_metrics": {
+    "event_type_accuracy": "identifiable_positive_rows_with_status_ok_and_explicit_exact_event_type;missing_or_non_ok_preserved",
+    "signed_bp_delta_mae": "all_status_ok_cases_must_report_finite_signed_bp_delta_else_formal_metric_NA",
+    "breakpoint_localization_error_bp": "identifiable_positive_rows_with_exact_predicted_junction_count;minimum_sorted_one_to_one_absolute_bp_distance;otherwise_NA",
+    "HOR_period_error_monomers": "truth_canonical_period_5_for_synthetic_source;evaluate_only_if_explicit_predicted_HOR_period_monomers_on_all_applicable_rows",
+    "repeat_order_accuracy": "exact_edited_label_path_accuracy_on_all_status_ok_rows_with_predicted_paths_and_equal_lengths;otherwise_NA",
+    "ambiguity_rejected_fraction": "all_non_ok_or_missing_rows_divided_by_52",
+    "runtime_seconds": "measured_route_core_elapsed_if_receipt_provided_else_NA",
+    "peak_rss_bytes": "measured_route_process_peak_RSS_if_receipt_provided_else_NA"
+  },
+  "auprc_status": "not_reported_uncalibrated_binary_decision_values",
+  "confidence_interval_status": "not_biological_independent_replication_four_synthetic_founders",
+  "physical_or_read_assembly_accuracy_status": "not_applicable_synthetic_reads_and_source",
+  "no_route_parameter_change_after_bundle_reveal": true
+}
