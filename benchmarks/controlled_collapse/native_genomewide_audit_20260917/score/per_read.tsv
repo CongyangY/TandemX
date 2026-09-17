@@ -1,0 +1,7 @@
+read_id	local_context	target	target_start0	target_end0	strand	mapq	identity	left_flank_bp	right_flank_bp	reported_secondary_count	status
+ERR6210723.285454	C3	Chr3	15055228	15069960	-	41	0.99837111	4772	6400	0	full_reference_primary_spanner
+ERR6210723.385647	C1	Chr1	15577980	15592864	-	41	0.99986563	7039	4285	0	full_reference_primary_spanner
+ERR6210723.422623	C2	Chr2	3963109	3978232	-	41	0.99960325	2433	9130	0	full_reference_primary_spanner
+ERR6210723.790432	C1	Chr1	15580398	15600007	-	37	0.99867475	4621	11428	0	full_reference_primary_spanner
+ERR6210723.792415	C3	Chr3	15056032	15074304	-	52	0.99978109	3968	10744	0	full_reference_primary_spanner
+ERR6210723.879668	C3	Chr3	15056720	15073413	+	47	0.99970049	3280	9853	0	full_reference_primary_spanner

@@ -1,0 +1,15 @@
+{
+  "by_local_context": {
+    "C1": 2,
+    "C2": 1,
+    "C3": 3
+  },
+  "donor_haplotype_pairing": "unverified",
+  "full_reference_primary_spanner_count": 6,
+  "interpretation": "mapper_dependent_full_reference_competition_for_locally_selected_reads_only",
+  "minimum_primary_identity": 0.99837111,
+  "minimum_primary_mapq": 37,
+  "native_biological_copy_truth": "unverified",
+  "selected_read_count": 6,
+  "total_reported_secondary_count": 0
+}
