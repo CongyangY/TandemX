@@ -1,0 +1,1095 @@
+{
+  "cases": [
+    {
+      "array_id": "C1",
+      "case_id": "C1_terminal_000",
+      "deletion_percent": 0,
+      "edit_type": "terminal",
+      "edited_array_bp": 3560,
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_breakpoint0": 8560,
+      "edited_fasta_sha256": "bd9e36b96362479e4e018232ebee0f4680788a9551d74e05359418e9ad985b73",
+      "injected_deleted_bp": 0,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        8560,
+        8560
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C1",
+      "case_id": "C1_terminal_025",
+      "deletion_percent": 25,
+      "edit_type": "terminal",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 7670,
+      "edited_fasta_sha256": "90ff5e9384d351b935574b3385c4f532bce81d8973a3b156e0ca1dc643879a0b",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        7670,
+        8560
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C1",
+      "case_id": "C1_terminal_050",
+      "deletion_percent": 50,
+      "edit_type": "terminal",
+      "edited_array_bp": 1780,
+      "edited_array_interval": [
+        5000,
+        6780
+      ],
+      "edited_breakpoint0": 6780,
+      "edited_fasta_sha256": "e74f66a13cbb9f4401a447e2e5bd3ebccd9bca130374c20089251805692abd10",
+      "injected_deleted_bp": 1780,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        6780,
+        8560
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C1",
+      "case_id": "C1_terminal_075",
+      "deletion_percent": 75,
+      "edit_type": "terminal",
+      "edited_array_bp": 890,
+      "edited_array_interval": [
+        5000,
+        5890
+      ],
+      "edited_breakpoint0": 5890,
+      "edited_fasta_sha256": "e006906a9f15bee435f4773b94398e5b015c647318860acf58262551f060d0a9",
+      "injected_deleted_bp": 2670,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5890,
+        8560
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C1",
+      "case_id": "C1_terminal_100",
+      "deletion_percent": 100,
+      "edit_type": "terminal",
+      "edited_array_bp": 0,
+      "edited_array_interval": [
+        5000,
+        5000
+      ],
+      "edited_breakpoint0": 5000,
+      "edited_fasta_sha256": "f4f0252dd2a63fd31724c40dedf1135fe25e70179b72e0137fe9ef080541ff3e",
+      "injected_deleted_bp": 3560,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5000,
+        8560
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C1",
+      "case_id": "C1_internal_025",
+      "deletion_percent": 25,
+      "edit_type": "internal",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 6246,
+      "edited_fasta_sha256": "b55ccf4432ea2095b9316a666c90f6ab2213f2d73e69f65d3bc0f1aeb0644838",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        6246,
+        7136
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C1",
+      "case_id": "C1_internal_050",
+      "deletion_percent": 50,
+      "edit_type": "internal",
+      "edited_array_bp": 1780,
+      "edited_array_interval": [
+        5000,
+        6780
+      ],
+      "edited_breakpoint0": 5890,
+      "edited_fasta_sha256": "701b251b247f175937a8f5de730aae1ca366e9b2e41ecf9c4cd80aca839b64f8",
+      "injected_deleted_bp": 1780,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5890,
+        7670
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C1",
+      "case_id": "C1_internal_075",
+      "deletion_percent": 75,
+      "edit_type": "internal",
+      "edited_array_bp": 890,
+      "edited_array_interval": [
+        5000,
+        5890
+      ],
+      "edited_breakpoint0": 5356,
+      "edited_fasta_sha256": "f367e84b0b67b9c824a26485fa6216220e58bcf3018c82cfd49111aa6e565421",
+      "injected_deleted_bp": 2670,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5356,
+        8026
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C1",
+      "case_id": "C1_boundary_left_025",
+      "deletion_percent": 25,
+      "edit_type": "boundary_left",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 5000,
+      "edited_fasta_sha256": "b544862007f7986b4e1c056fcdde3afcf58a5d2ff484c739b5d256b58e515f60",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5000,
+        5890
+      ],
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "source_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_terminal_000",
+      "deletion_percent": 0,
+      "edit_type": "terminal",
+      "edited_array_bp": 3560,
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_breakpoint0": 8560,
+      "edited_fasta_sha256": "2740101f87fa572c823f4bb27a01a95caf7304e5946360d1d5b4ffa7a95afbf5",
+      "injected_deleted_bp": 0,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        8560,
+        8560
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_terminal_025",
+      "deletion_percent": 25,
+      "edit_type": "terminal",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 7670,
+      "edited_fasta_sha256": "20b5c7379b30777ca46994e28314b872f43d6cf0064874ddb594c1c93dd1bfe2",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        7670,
+        8560
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_terminal_050",
+      "deletion_percent": 50,
+      "edit_type": "terminal",
+      "edited_array_bp": 1780,
+      "edited_array_interval": [
+        5000,
+        6780
+      ],
+      "edited_breakpoint0": 6780,
+      "edited_fasta_sha256": "710c624818c67187c4ab361c700e0c52c40ef7f1bd66c6a030053f6e673bc8c1",
+      "injected_deleted_bp": 1780,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        6780,
+        8560
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_terminal_075",
+      "deletion_percent": 75,
+      "edit_type": "terminal",
+      "edited_array_bp": 890,
+      "edited_array_interval": [
+        5000,
+        5890
+      ],
+      "edited_breakpoint0": 5890,
+      "edited_fasta_sha256": "ec3af3578b7cae0e707c67c16af0facd924bdde79dd9b5e768ed3f3ac92fb3e3",
+      "injected_deleted_bp": 2670,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5890,
+        8560
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_terminal_100",
+      "deletion_percent": 100,
+      "edit_type": "terminal",
+      "edited_array_bp": 0,
+      "edited_array_interval": [
+        5000,
+        5000
+      ],
+      "edited_breakpoint0": 5000,
+      "edited_fasta_sha256": "06286395d76f0e84c937a2609e8f07c115be721d17ee68085fae49bebcea1bf0",
+      "injected_deleted_bp": 3560,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5000,
+        8560
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_internal_025",
+      "deletion_percent": 25,
+      "edit_type": "internal",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 6246,
+      "edited_fasta_sha256": "5c8c7f9e33d1ed6f4830a9d5ee6704952f31bbcbf05d311f92498056ae947e8d",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        6246,
+        7136
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_internal_050",
+      "deletion_percent": 50,
+      "edit_type": "internal",
+      "edited_array_bp": 1780,
+      "edited_array_interval": [
+        5000,
+        6780
+      ],
+      "edited_breakpoint0": 5890,
+      "edited_fasta_sha256": "3f6ce5348432ef9dd9464f66715a2247b243dc979e7799dda710351fc7e71200",
+      "injected_deleted_bp": 1780,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5890,
+        7670
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_internal_075",
+      "deletion_percent": 75,
+      "edit_type": "internal",
+      "edited_array_bp": 890,
+      "edited_array_interval": [
+        5000,
+        5890
+      ],
+      "edited_breakpoint0": 5356,
+      "edited_fasta_sha256": "3fbbfd61099644b1b5f44638f2c36ee0497ab438daab5ac755ea1b39af666a8a",
+      "injected_deleted_bp": 2670,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5356,
+        8026
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C2",
+      "case_id": "C2_boundary_left_025",
+      "deletion_percent": 25,
+      "edit_type": "boundary_left",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 5000,
+      "edited_fasta_sha256": "a38b4073d4d83361495311002b94462efa0de872f85d0e19260b911698ea4682",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5000,
+        5890
+      ],
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "source_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_terminal_000",
+      "deletion_percent": 0,
+      "edit_type": "terminal",
+      "edited_array_bp": 3560,
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_breakpoint0": 8560,
+      "edited_fasta_sha256": "5c7bceca69ac6b6bdc95277f9670550808b65296fe09aa4e4aa3aac5cfeb3e23",
+      "injected_deleted_bp": 0,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        8560,
+        8560
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_terminal_025",
+      "deletion_percent": 25,
+      "edit_type": "terminal",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 7670,
+      "edited_fasta_sha256": "0308ac0c197c51b4ae82e7d12248fd342c6494914d7ba5668680a9d2b46eefc5",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        7670,
+        8560
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_terminal_050",
+      "deletion_percent": 50,
+      "edit_type": "terminal",
+      "edited_array_bp": 1780,
+      "edited_array_interval": [
+        5000,
+        6780
+      ],
+      "edited_breakpoint0": 6780,
+      "edited_fasta_sha256": "72b92e5559a4294d1469436aa725b4a6fd9ee0e21fde9bef5c1812b62180b8f7",
+      "injected_deleted_bp": 1780,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        6780,
+        8560
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_terminal_075",
+      "deletion_percent": 75,
+      "edit_type": "terminal",
+      "edited_array_bp": 890,
+      "edited_array_interval": [
+        5000,
+        5890
+      ],
+      "edited_breakpoint0": 5890,
+      "edited_fasta_sha256": "ad3c85ed1700918b9e018980aae51168cbe6f4bbab5262a0c863faebf99d3e5a",
+      "injected_deleted_bp": 2670,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5890,
+        8560
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_terminal_100",
+      "deletion_percent": 100,
+      "edit_type": "terminal",
+      "edited_array_bp": 0,
+      "edited_array_interval": [
+        5000,
+        5000
+      ],
+      "edited_breakpoint0": 5000,
+      "edited_fasta_sha256": "c46c99a5d80cb3f50b0a8946fe4032ebadf5f4595e11fda849cb27bac1f82641",
+      "injected_deleted_bp": 3560,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5000,
+        8560
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_internal_025",
+      "deletion_percent": 25,
+      "edit_type": "internal",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 6246,
+      "edited_fasta_sha256": "0fdcc565170a71bf332a5e3e447011c8a0525fd04f2401bf948d2483934f48bf",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        6246,
+        7136
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_internal_050",
+      "deletion_percent": 50,
+      "edit_type": "internal",
+      "edited_array_bp": 1780,
+      "edited_array_interval": [
+        5000,
+        6780
+      ],
+      "edited_breakpoint0": 5890,
+      "edited_fasta_sha256": "1c16e99c974af19c318d9d53b85bb53cd33d490380a4371f6883d81ee43f8fe1",
+      "injected_deleted_bp": 1780,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5890,
+        7670
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_internal_075",
+      "deletion_percent": 75,
+      "edit_type": "internal",
+      "edited_array_bp": 890,
+      "edited_array_interval": [
+        5000,
+        5890
+      ],
+      "edited_breakpoint0": 5356,
+      "edited_fasta_sha256": "de6b9406338ad228e2c30ba27a89f4d5c1b5cc6b291d51bbd826fe2512330825",
+      "injected_deleted_bp": 2670,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5356,
+        8026
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    },
+    {
+      "array_id": "C3",
+      "case_id": "C3_boundary_left_025",
+      "deletion_percent": 25,
+      "edit_type": "boundary_left",
+      "edited_array_bp": 2670,
+      "edited_array_interval": [
+        5000,
+        7670
+      ],
+      "edited_breakpoint0": 5000,
+      "edited_fasta_sha256": "fe8b39de9ae3bb2d4bcbe4315ba16a031ff3ef08b3e2c513193ba269142157b4",
+      "injected_deleted_bp": 890,
+      "native_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+      "operational_unit_bp": 178,
+      "operational_unit_count": 20,
+      "original_array_bp": 3560,
+      "read_pairing_status": "lineage_context_supported_donor_unverified",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_deleted_interval": [
+        5000,
+        5890
+      ],
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "source_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "source_reference_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ],
+      "truth_scope": "injected_edit_delta_only",
+      "unit_boundary_status": "operational_not_independently_verified_native_monomer_truth"
+    }
+  ],
+  "config_sha256": "8676ce3498617c8c7273e33d83264b8a709bea5f2e00868d6c755460fc7b6cf6",
+  "generator_sha256": "77b1408c2828f716e3c4b865e34c3820656a6f227d8acb4eb0e42c59542b82c5",
+  "independent_donor_count": 1,
+  "material_id": "Col_CEN_v1.2_ERR6210723_same_study_pooled_Col0N",
+  "raw_read_bundle": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_spanners.fastq.gz",
+  "raw_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+  "raw_reads_modified": false,
+  "read_pairing_status": "lineage_context_supported_donor_unverified",
+  "schema_version": 1,
+  "split": "development",
+  "truth_scope": "injected_edit_delta_only"
+}

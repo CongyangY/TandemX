@@ -1,0 +1,66 @@
+{
+  "contexts": [
+    {
+      "array_end0": 8560,
+      "array_id": "C1",
+      "array_sequence_sha256": "4920e04ad3ba7a3dec5ce0b6be07233d56e70afce6132d645ad479ea09458bd0",
+      "array_start0": 5000,
+      "operational_unit_bp": 178,
+      "reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "reference_fasta_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "reference_record_id": "C1|Chr1:15580019-15593579|array:15585019-15588579",
+      "source_genome_interval": [
+        15580019,
+        15593579
+      ],
+      "supporting_read_ids": [
+        "ERR6210723.385647",
+        "ERR6210723.790432"
+      ]
+    },
+    {
+      "array_end0": 8560,
+      "array_id": "C2",
+      "array_sequence_sha256": "7540f2adbab018e3a7e755eac8c45f16c0858da419f108571b18a69ee2a6cb03",
+      "array_start0": 5000,
+      "operational_unit_bp": 178,
+      "reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "reference_fasta_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "reference_record_id": "C2|Chr2:3960542-3974102|array:3965542-3969102",
+      "source_genome_interval": [
+        3960542,
+        3974102
+      ],
+      "supporting_read_ids": [
+        "ERR6210723.422623"
+      ]
+    },
+    {
+      "array_end0": 8560,
+      "array_id": "C3",
+      "array_sequence_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "array_start0": 5000,
+      "operational_unit_bp": 178,
+      "reference_fasta": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_contexts.fa",
+      "reference_fasta_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+      "reference_record_id": "C3|Chr3:15055000-15068560|array:15060000-15063560",
+      "source_genome_interval": [
+        15055000,
+        15068560
+      ],
+      "supporting_read_ids": [
+        "ERR6210723.285454",
+        "ERR6210723.792415",
+        "ERR6210723.879668"
+      ]
+    }
+  ],
+  "independent_donor_count": 1,
+  "material_id": "Col_CEN_v1.2_ERR6210723_same_study_pooled_Col0N",
+  "raw_read_bundle": "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/native_pair_audit_20260917/colcen_native_spanners.fastq.gz",
+  "raw_read_bundle_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+  "read_pairing_status": "lineage_context_supported_donor_unverified",
+  "schema_version": 1,
+  "source_assembly_sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8",
+  "split": "development"
+}

@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from benchmarks.scripts.build_native_read_collapse import generate, sha256_file, sha256_sequence
+from benchmarks.scripts.verify_native_read_collapse import verify
 
 
 def fixture(tmp_path: Path) -> Path:
@@ -47,6 +48,11 @@ def test_native_context_edits_preserve_reads_and_exact_delta(tmp_path: Path) -> 
         assert row["source_deleted_interval"][1] - row["source_deleted_interval"][0] == row["injected_deleted_bp"]
         assert sha256_file(out / f"{row['case_id']}.fa") == row["edited_fasta_sha256"]
     assert next(row for row in receipt["cases"] if row["case_id"] == "C1_terminal_100")["edited_array_bp"] == 0
+    assert verify(config, out)["case_count"] == 9
+    altered = out / "C1_internal_025.fa"
+    altered.write_text(altered.read_text().replace("T", "A", 1))
+    with pytest.raises(ValueError, match="hash mismatch"):
+        verify(config, out)
 
 
 def test_rejects_changed_read_bundle_and_unsupported_pairing(tmp_path: Path) -> None:
