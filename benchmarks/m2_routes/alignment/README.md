@@ -49,3 +49,25 @@ no cyclic monomer phase search; no intra-label variant calls; no posterior
 calibration; no mixture deconvolution; no whole-array megabase scaling. The
 adapter is suitable for B1 synthetic development cases. A real-data result
 requires independent native anchor and same-donor/haplotype validation.
+
+## Frozen B1 v2 development input-only run
+
+The method parameters and tests were fixed before reading the B1 v2 input.
+Input SHA256:
+`7b27e7cdb5b1a0d15a97e6ac08f5947de028c90096d644a8c927a07cc532383a`.
+Prototype SHA256:
+`043122d1b5987e35dcd957a6471c930f6211fe7a8902055d3a8c37f06d4ed651`.
+Adapter SHA256:
+`6d601b28746276426b3191768ef2b3150acf5101451f6272421b35715e9a982f`.
+Prediction SHA256:
+`cac9c50a50d60217f747ae51332f21d42ee5cf3a2d10911797ff75b75380a5d3`.
+
+The 13 opaque development inputs produced 10 `DISCORDANT`, 2 `SUPPORTED`,
+and 1 `AMBIGUOUS`/`abstain` outcomes. Summed per-case elapsed time was 0.157 s;
+peak process RSS was 17,301,504 bytes on the local macOS host with the
+`tandemx-dev` interpreter. This tiny single-lineage run is not a scale
+benchmark. The abstaining edited interval contains 352 bases against 24-base
+candidate templates, so the full-tiling assumption fails. It was retained and
+the algorithm was not adjusted after seeing the input. Truth, sensitivity,
+precision and false-positive metrics are assigned by the independent B1
+scorer, not inferred from the above call counts.
