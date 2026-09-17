@@ -1,0 +1,14 @@
+case_id	truth_event_type	event_type_identifiability_status	observable_equivalence_class_size	alignment_status	alignment_confusion_cell	alignment_event_type_match	alignment_label_distance	graph_status	graph_confusion_cell	graph_event_type_match	graph_label_distance
+B1886d1427a89a	internal_deletion	identifiable_within_bundle	1	ok	tp	False	0	ok	tp	NA	NA
+B1cd6d99ffb713	monomer_deletion	identifiable_within_bundle	1	ok	tp	False	0	ok	tp	NA	NA
+B1923bbcd7abdc	copy_loss	not_identifiable_from_available_sequences	3	ok	tp	NA	0	ok	tp	NA	NA
+B10bbb9001ba79	duplication	identifiable_within_bundle	1	ok	tp	False	0	ok	tp	NA	NA
+B128154e40f9fc	intact	identifiable_within_bundle	2	ok	tn	NA	0	ok	tn	NA	NA
+B17a48fec6ad6b	intact	identifiable_within_bundle	2	ok	tn	NA	0	ok	tn	NA	NA
+B11479971542eb	duplication	identifiable_within_bundle	1	ok	tp	False	0	ok	tp	NA	NA
+B1c027db69708e	complete_deletion	identifiable_within_bundle	1	ok	tp	False	0	ok	tp	NA	NA
+B1dc1b4cbf29ba	HOR_copy_deletion	not_identifiable_from_available_sequences	3	ok	tp	NA	0	ok	tp	NA	NA
+B15d97ab2b84ff	rearrangement	identifiable_within_bundle	1	ok	tp	False	0	ok	tp	NA	NA
+B16c213f427e38	inversion	identifiable_within_bundle	1	ok	tp	False	0	ok	tp	NA	NA
+B13a5e0d6d13b9	boundary_truncation	not_identifiable_from_available_sequences	3	ok	tp	NA	0	ok	tp	NA	NA
+B1e57ee14ed857	compression	identifiable_within_bundle	1	abstain	NA	NA	NA	abstain	NA	NA	NA

@@ -1,0 +1,44 @@
+{
+  "auprc_status": "not_reported_uncalibrated_binary_scores_single_material",
+  "benchmark": "B1_structure_development_v2",
+  "biological_accuracy_status": "blocked_no_original_reads_or_native_copy_truth",
+  "confidence_interval_status": "not_estimable_one_engineered_material",
+  "denominator": 13,
+  "event_type_nonidentifiable_case_count": 3,
+  "inputs_sha256": "7b27e7cdb5b1a0d15a97e6ac08f5947de028c90096d644a8c927a07cc532383a",
+  "intact_negative_count": 2,
+  "material_count": 1,
+  "metrics_sha256": "c2f2ad6889457f20641cb135a3cedbf20785d0b8571dcd6216262c5cca5e2dd0",
+  "observable_equivalence_class_count": 10,
+  "positive_count": 11,
+  "prediction_sha256": "178a74593d013fc3b0488c636d6a54a5cd1327516062fd5eb692210f6cb2538d",
+  "primary": {
+    "fn": null,
+    "fp": null,
+    "fpr": null,
+    "ppv": null,
+    "sensitivity": null,
+    "tn": null,
+    "tp": null
+  },
+  "primary_status": "blocked_incomplete_predictions",
+  "schema_version": 2,
+  "secondary": {
+    "edited_array_interval_mean_iou": null,
+    "edited_label_path_mean_distance": null,
+    "edited_orientation_path_mean_accuracy": null,
+    "event_type_accuracy": null,
+    "signed_bp_delta_mae": null
+  },
+  "secondary_status": "blocked_incomplete_predictions_or_fields",
+  "split": "development",
+  "status_counts": {
+    "abstain": 1,
+    "failed": 0,
+    "not_reported": 0,
+    "not_run": 0,
+    "ok": 12,
+    "unmapped": 0
+  },
+  "truth_sha256": "36226f9f77a65161a5cc20aa05c08ff53a4a3396b29f338e772488b38f07d1ff"
+}

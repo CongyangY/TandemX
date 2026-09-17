@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "protocol": "B1_structure_development_v2",
+  "frozen_before_common_predictions": true,
+  "split": "development",
+  "statistical_unit": "one_engineered_source_material",
+  "case_count": 13,
+  "primary_endpoint": "technical_event_detection",
+  "primary_denominator": "all_13_predeclared_case_ids_including_two_intact_controls_and_complete_deletion",
+  "truth_positive_rule": "event_status==positive",
+  "decision_rule": "status==ok_and_event_score>=0.5",
+  "event_score_meaning": "uncalibrated_decision_value_not_probability",
+  "missing_or_non_ok_rule": "retain_row_and_set_primary_aggregate_null_blocked",
+  "primary_metrics": ["tp", "fn", "fp", "tn", "sensitivity", "fpr", "ppv"],
+  "secondary_metrics": {
+    "event_type_accuracy": "positive_rows_with_exact_event_type_over_all_positive_rows_if_all_ok",
+    "edited_label_path_distance": "Levenshtein_distance_per_case_and_mean_if_all_ok_and_all_paths_reported",
+    "edited_orientation_path_accuracy": "exact_elementwise_accuracy_only_when_truth_and_prediction_label_paths_have_same_length",
+    "signed_bp_delta_mae": "mean_abs(predicted_signed_bp_delta-truth_signed_bp_delta)_if_all_ok_and_all_reported",
+    "edited_array_interval_iou": "half_open_bp_iou_if_all_ok_and_all_reported;two_equal_empty_intervals_score_1_else_0"
+  },
+  "no_imputation": true,
+  "auprc_status": "not_reported_uncalibrated_binary_scores_single_material",
+  "physical_or_read_assembly_accuracy_status": "blocked_no_original_reads_or_native_copy_truth",
+  "confidence_interval_status": "not_estimable_one_engineered_material",
+  "held_out_status": "not_enrolled",
+  "no_parameter_change_after_predictions": true
+}
