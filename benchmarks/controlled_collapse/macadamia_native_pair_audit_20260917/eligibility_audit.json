@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-17",
+  "status": "not_enrolled",
+  "negative_result": "no_preexisting_bounded_original_HiFi_subset_found",
+  "assembly": "GigaDB100906 HiFi IPA primary",
+  "assembly_path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/new_assembly.fa",
+  "assembly_size_bytes": 737617956,
+  "assembly_expected_sha256_historical": "d6e9272438d072662f51de7960bdef18cb3c834d97d4ca44213715b7196498a9",
+  "read_runs": [
+    {
+      "accession": "SRR13557763",
+      "biosample": "SAMN17524927",
+      "expected_sha256_historical": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6",
+      "gzip_size_bytes": 6716963362
+    },
+    {
+      "accession": "SRR13557762",
+      "biosample": "SAMN17524928",
+      "expected_sha256_historical": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e",
+      "gzip_size_bytes": 11433466175
+    }
+  ],
+  "comparison_older_CLR_biosample": "SAMN14217788",
+  "pairing_level": "same published sample according to update paper; distinct archive BioSamples and extraction/individual unverified",
+  "search_scope": [
+    "/Volumes/T7/Codex/TandemX/data/subsets",
+    "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909",
+    "/Users/ycy/Codex/Sofw/TandemX/tmp/native_pair_audit_20260917"
+  ],
+  "read_support_for_any_nominated_array": "not_measured",
+  "current_full_input_hash_and_gzip_readback": "not_performed",
+  "reason": "Original HiFi available only as 17.3-GiB combined full streams; current USB2/EIO cap forbids large scan and no bounded verified subset is present. Published old/new assembly family comparisons do not establish original molecule spanners for a chosen array.",
+  "scientific_fate": "technical_native_interval_ineligible_pending_verified_bounded_original_read_subset",
+  "biological_truth": "unavailable",
+  "final_heldout": "ineligible_development_lineage",
+  "no_posthoc_reselection": true
+}

@@ -1,0 +1,10 @@
+{
+  "path": "/Volumes/T7/Codex/TandemX/data/subsets/SRR25241090_seed6101_v1/sample_003.fastq.gz",
+  "size_bytes": 1071470526,
+  "sha256": "88e05ea73487dffa014ca3f8bf87881eb58071635fcde65a75349264d20a821f",
+  "gzip_trailer_valid": true,
+  "fastq_structure_valid": true,
+  "read_count": 62345,
+  "total_bases": 1150127844,
+  "unique_read_ids": 62345
+}
