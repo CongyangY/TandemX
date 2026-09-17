@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-17",
+  "split": "development",
+  "source": "Macadamia jansenii GigaDB100906 HiFi IPA primary versus original PacBio HiFi SRR13557763/62",
+  "source_pairing_level": "paper_same_sample_distinct_archive_biosamples_same_extraction_unverified",
+  "assembly_path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/new_assembly.fa",
+  "assembly_expected_sha256": "d6e9272438d072662f51de7960bdef18cb3c834d97d4ca44213715b7196498a9",
+  "reads": [
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+      "expected_sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6"
+    },
+    {
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+      "expected_sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e"
+    }
+  ],
+  "prior_catalogue": {
+    "arrays_bed": {
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/locate_new/arrays.bed",
+      "sha256": "a79bbd6e9da087d43f6daa679bd03ff68b72a9e129ed7c81348846019da89419"
+    },
+    "families_tsv": {
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/families.tsv",
+      "sha256": "4f9f1d5d4227ac48623a26f557ec206cfcd846926cea0fe7abbe08a0e978c14e"
+    }
+  },
+  "interval_selection_before_read_mapping": {
+    "source": "prior locate_new arrays.bed + prior discovered family periods",
+    "array_length_bp_inclusive": [
+      3000,
+      5000
+    ],
+    "family_period_bp_inclusive": [
+      30,
+      300
+    ],
+    "natural_flank_bp_each_side": 3000,
+    "rank": "maximum direct period-shift identity; ties by longer interval, contig lexicographic, start ascending",
+    "identity_formula": "matching bases between array[0:L-period] and array[period:L] / (L-period)",
+    "no_posthoc_candidate_substitution": true
+  },
+  "read_screen": {
+    "order": [
+      "SRR13557763",
+      "SRR13557762"
+    ],
+    "scope": "complete original gzip streams if feasible; record actual bytes and stop reason",
+    "mapper": "minimap2 v2.31-r1302 -x map-hifi -c --secondary=yes -N 20 -t 2",
+    "spanner": "primary alignment spans nominated array plus >=1000 bp each natural flank, >=0.99 nmatch/alignment-column identity; distinct PacBio ZMW",
+    "full_assembly_validation": "required for qualified locus support; sole reported primary is heuristic not proof of uniqueness"
+  },
+  "claim_scope": "original-molecule support for injected assembly technical edit; no physical copy-number truth; no final held-out"
+}

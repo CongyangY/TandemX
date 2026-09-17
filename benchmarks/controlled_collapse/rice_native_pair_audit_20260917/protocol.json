@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-17",
+  "split": "development",
+  "source": "Oryza sativa Nipponbare AGIS1.0 GCA_034140825.1 assembly and original HiFi SRR25241090",
+  "assembly_biosample": "SAMN36344332",
+  "read_biosample": "SAMN36368305",
+  "pairing": "same cultivar/isolate label AGIS-1.0, distinct BioSamples and collection dates; exact donor/extraction unverified",
+  "assembly_path": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/GCA_034140825.1_AGIS1.0_genomic.fna.gz",
+  "assembly_sha256_expected": "cbe51d6615380bb441b7cf531ebc0ae58f498bc7982d2db07c549376a7638270",
+  "original_read_subset_path": "/Volumes/T7/Codex/TandemX/data/subsets/SRR25241090_seed6101_v1/sample_003.fastq.gz",
+  "subset_sha256_expected": "88e05ea73487dffa014ca3f8bf87881eb58071635fcde65a75349264d20a821f",
+  "subset_selection": "prior Bernoulli 0.035 seed6101 62345 original complete FASTQ records; no resampling",
+  "interval_selection_before_read_mapping": {
+    "scope": "12 nuclear chromosome contigs in reference receipt",
+    "period_bp": 155,
+    "array_length_bp": 4000,
+    "stride_bp": 500,
+    "flank_bp_each_side": 3000,
+    "rank": "highest direct period-shift identity; ties lexicographic chromosome identifier then lowest start",
+    "minimum_period_shift_identity": 0.85,
+    "minimum_base_shannon_entropy_bits_per_base": 1.6,
+    "minimum_flank_31mer_uniqueness_fraction_within_context": 0.8,
+    "no_candidate_substitution_after_read_mapping": true,
+    "note": "155-bp is an operational fixed period; this protocol makes no claim of biological monomer identity"
+  },
+  "read_eligibility": {
+    "min_natural_flank_each_side_bp": 1000,
+    "min_nmatch_over_alignment_columns": 0.99,
+    "distinct_molecule": "distinct FASTQ record IDs",
+    "full_reference_mapping_required_for_locus_qualification": true,
+    "mapper": "minimap2 2.31-r1302 -x map-hifi -c --secondary=yes -N 20 -t 2"
+  },
+  "claim_scope": "technical injected assembly edit only; no physical copy truth, no final held-out, no biologically independent donor"
+}
