@@ -1,0 +1,2 @@
+read_id	read_length	query_start_0	query_end_0	strand	target_start_0	target_end_0	matching_bases	alignment_columns	identity	mapq
+SRR25241090.1152352	22760	688	11685	+	0	11000	10985	11012	0.997548129	60

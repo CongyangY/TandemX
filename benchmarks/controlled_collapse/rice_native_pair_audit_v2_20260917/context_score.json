@@ -1,0 +1,12 @@
+{
+  "selected_context_sha256": "48d27907c4d51d9f2017db28dee38eebabdca84808674c5d16165cd2832fced8",
+  "context_paf_sha256": "35d7a6c2961314b3faf3fa533033b0d8e968c561318cc3e5bdd537ffb864c357",
+  "reported_alignment_count": 9068,
+  "reported_primary_alignment_count": 3041,
+  "reported_distinct_primary_reads": 1265,
+  "qualifying_distinct_spanners": 1,
+  "required_distinct_spanners": 3,
+  "identity_min": 0.99,
+  "natural_flank_bp_each_side_min": 1000,
+  "pass_for_full_reference_step": false
+}
