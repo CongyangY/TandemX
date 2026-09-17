@@ -1,0 +1,144 @@
+{
+  "HOR_period_error_monomers": null,
+  "HOR_period_status": "NA_missing_or_non_ok_HOR_predictions",
+  "ambiguity_rejected_fraction": 0.8653846153846154,
+  "auprc_status": "not_reported_uncalibrated_binary_decision_values",
+  "benchmark": "B2_synthetic_structural_held_out_v1",
+  "biological_accuracy_status": "not_applicable_synthetic_reads_and_source",
+  "biological_donor_count": 0,
+  "breakpoint_denominator": 44,
+  "breakpoint_localization_error_bp": null,
+  "breakpoint_status": "NA_missing_or_nonidentifiable_breakpoint_predictions",
+  "confidence_interval_status": "not_biological_independent_replication_four_synthetic_founders",
+  "denominator": 52,
+  "eligible_only": {
+    "coverage": 0.1346153846153846,
+    "denominator": 7,
+    "fn": 0,
+    "fp": 0,
+    "fpr": 0.0,
+    "intact_negative_count": 1,
+    "positive_count": 6,
+    "sensitivity": 1.0,
+    "tn": 1,
+    "tp": 6
+  },
+  "event_type_accuracy": null,
+  "event_type_denominator": 44,
+  "inputs_sha256": "3cd49dded8921d3cfe15227ebce162ab509bb7243eb1105d995a1851984252bc",
+  "intact_negative_count": 8,
+  "metrics_sha256": "bc385201a78b733960d62f3b040ee8a9f5d72a457338316ad9ecd7f7c9652325",
+  "observable_equivalence_class_count": 48,
+  "peak_rss_bytes": 22740992,
+  "peak_rss_status": "measured",
+  "positive_count": 44,
+  "prediction_sha256": "292dce688e4d5c903cf143fb5e0a49c1797d8de35d247e0e733d1dab765ae428",
+  "primary_intent_to_diagnose": {
+    "fn": 38,
+    "fp": 0,
+    "fpr": 0.0,
+    "negative_failure_rate": 0.875,
+    "sensitivity": 0.13636363636363635,
+    "tn": 1,
+    "tp": 6,
+    "unresolved_negative": 7
+  },
+  "repeat_order_accuracy": null,
+  "repeat_order_status": "NA_missing_or_length_mismatched_label_paths",
+  "runtime_seconds": 12.216573962941766,
+  "runtime_status": "measured",
+  "schema_version": 2,
+  "signed_bp_delta_mae": null,
+  "signed_bp_delta_status": "NA_missing_or_non_ok_predictions",
+  "split": "synthetic_held_out",
+  "status_counts": {
+    "abstain": 45,
+    "failed": 0,
+    "not_reported": 0,
+    "not_run": 0,
+    "ok": 7,
+    "unmapped": 0
+  },
+  "strata": {
+    "error_mode": {
+      "exact": {
+        "denominator": 8,
+        "fn": 4,
+        "fp": 0,
+        "non_ok": 7,
+        "tn": 1,
+        "tp": 0,
+        "unresolved_negative": 3
+      },
+      "noisy": {
+        "denominator": 44,
+        "fn": 34,
+        "fp": 0,
+        "non_ok": 38,
+        "tn": 0,
+        "tp": 6,
+        "unresolved_negative": 4
+      }
+    },
+    "monomer_length_bp": {
+      "100": {
+        "denominator": 13,
+        "fn": 5,
+        "fp": 0,
+        "non_ok": 6,
+        "tn": 1,
+        "tp": 6,
+        "unresolved_negative": 1
+      },
+      "200": {
+        "denominator": 13,
+        "fn": 11,
+        "fp": 0,
+        "non_ok": 13,
+        "tn": 0,
+        "tp": 0,
+        "unresolved_negative": 2
+      },
+      "300": {
+        "denominator": 13,
+        "fn": 11,
+        "fp": 0,
+        "non_ok": 13,
+        "tn": 0,
+        "tp": 0,
+        "unresolved_negative": 2
+      },
+      "400": {
+        "denominator": 13,
+        "fn": 11,
+        "fp": 0,
+        "non_ok": 13,
+        "tn": 0,
+        "tp": 0,
+        "unresolved_negative": 2
+      }
+    },
+    "synthetic_read_support": {
+      "1": {
+        "denominator": 24,
+        "fn": 20,
+        "fp": 0,
+        "non_ok": 24,
+        "tn": 0,
+        "tp": 0,
+        "unresolved_negative": 4
+      },
+      "3": {
+        "denominator": 28,
+        "fn": 18,
+        "fp": 0,
+        "non_ok": 21,
+        "tn": 1,
+        "tp": 6,
+        "unresolved_negative": 3
+      }
+    }
+  },
+  "synthetic_founder_count": 4,
+  "truth_sha256": "8076ed6b2563dabb34351dc56b65f4c05ef186ac41baf18f8c89e0a4008ab256"
+}

@@ -1,0 +1,7 @@
+{
+  "wall_elapsed_seconds": 0.012264666147530079,
+  "peak_rss_bytes": 18825216,
+  "measurement": "predict_cases_perf_counter_and_process_ru_maxrss_Darwin",
+  "prediction_file": "benchmarks/m2_routes/baselines/evidence/b2_predictions.jsonl",
+  "note": "52-case synthetic held-out run; time excludes process startup and output writing; 24 abstentions"
+}

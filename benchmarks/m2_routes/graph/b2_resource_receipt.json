@@ -1,0 +1,7 @@
+{
+  "wall_elapsed_seconds": 0.00007870793342590332,
+  "peak_rss_bytes": null,
+  "measurement": "sum_per_case_perf_counter_development_split_gate_only",
+  "prediction_file": "benchmarks/m2_routes/graph/b2_predictions.jsonl",
+  "note": "52/52 metadata refusals because held-out split is not accepted; this is not completed inference speed"
+}

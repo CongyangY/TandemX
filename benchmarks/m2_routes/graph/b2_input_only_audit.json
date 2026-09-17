@@ -1,0 +1,388 @@
+{
+  "adapter_sha256": "68a327bc81a05d4a36a4fce7452efa602a0b0665b5ef00981fcd50f1e8d87f39",
+  "audit_state_counts": {
+    "COMPONENT_UNRESOLVED": 52
+  },
+  "case_count": 52,
+  "cases": [
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B27a835e5da2e0d",
+      "elapsed_seconds": 7.4999406933784485e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 536
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B21a117ba9b35ac",
+      "elapsed_seconds": 2.874992787837982e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 576
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B23060f92856c62",
+      "elapsed_seconds": 2.3329630494117737e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 576
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2651bd31b0f6bc",
+      "elapsed_seconds": 2.207700163125992e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 576
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2b134e3d98c25b",
+      "elapsed_seconds": 2.1671876311302185e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 576
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2196f9f320c5f3",
+      "elapsed_seconds": 2.209097146987915e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 576
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B235a66658e5d9f",
+      "elapsed_seconds": 2.250075340270996e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 576
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2a399e69292627",
+      "elapsed_seconds": 4.167202860116959e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2f179deb32031b",
+      "elapsed_seconds": 1.584179699420929e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B20a97070d88fe2",
+      "elapsed_seconds": 1.458916813135147e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B20519e8d7f1f0a",
+      "elapsed_seconds": 1.25030055642128e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B242fec65ea8154",
+      "elapsed_seconds": 1.25030055642128e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2f1673536ff066",
+      "elapsed_seconds": 1.25030055642128e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2ab8ce48f41040",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B23b5c1dc7212a0",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2a5b8524d17f06",
+      "elapsed_seconds": 1.166015863418579e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2d52d881b2ac96",
+      "elapsed_seconds": 1.2083910405635834e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2b02f1b314e21a",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2bbde8acfc86b0",
+      "elapsed_seconds": 1.166015863418579e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2ed25ec9bda25e",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2f6fe371349ce0",
+      "elapsed_seconds": 1.125037670135498e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2d63e4c986e9a9",
+      "elapsed_seconds": 1.2498348951339722e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2ab8f4f96be7d7",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2fb4df4e46635f",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B29c44c64b1650b",
+      "elapsed_seconds": 1.166015863418579e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2373c10074800c",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2761fc82be1af4",
+      "elapsed_seconds": 1.2922100722789764e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2bece2411b8d0d",
+      "elapsed_seconds": 1.2498348951339722e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B263f1d1b330fed",
+      "elapsed_seconds": 1.2498348951339722e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2b877f93f30fa2",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B27ee748e6287bd",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2a644ef89bc1b5",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2f74c8bfe6fcf7",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2d0c937c5153cb",
+      "elapsed_seconds": 1.2917444109916687e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B272cd682b5c446",
+      "elapsed_seconds": 1.166015863418579e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2c2b8eadec6427",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B29414baccc969e",
+      "elapsed_seconds": 1.125037670135498e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B260e715e83451c",
+      "elapsed_seconds": 1.166015863418579e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2d6826915d060f",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2bf2e4541e607c",
+      "elapsed_seconds": 1.125037670135498e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2a9acb684d278e",
+      "elapsed_seconds": 1.125037670135498e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2e95d60b53c4dd",
+      "elapsed_seconds": 1.125037670135498e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B22bfc3d08a68f1",
+      "elapsed_seconds": 1.125037670135498e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B24113824626f24",
+      "elapsed_seconds": 1.2088567018508911e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B228b511d1f87f9",
+      "elapsed_seconds": 1.125037670135498e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B20964b087c63bc",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2f7b738859e804",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2460af7ced6880",
+      "elapsed_seconds": 1.166015863418579e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B24188ef4d0696e",
+      "elapsed_seconds": 1.2088567018508911e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B29a164254b9e70",
+      "elapsed_seconds": 1.1669471859931946e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B2f75cf606d66b7",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    },
+    {
+      "audit_state": "COMPONENT_UNRESOLVED",
+      "case_id": "B258a3994eac44a",
+      "elapsed_seconds": 1.2079253792762756e-06,
+      "prediction_status": "abstain",
+      "tracemalloc_peak_bytes": 552
+    }
+  ],
+  "inputs_sha256": "3cd49dded8921d3cfe15227ebce162ab509bb7243eb1105d995a1851984252bc",
+  "limitations": [
+    "24-bp equal-length exact tile decomposition is possible only by construction",
+    "one named error profile is allowed only because all input reads are exact synthetic",
+    "synthetic flanks do not prove biological same-locus anchoring",
+    "no noisy reads, held-out donor, or real molecule validation",
+    "event scores are binary decisions, not calibrated probabilities"
+  ],
+  "prediction_status_counts": {
+    "abstain": 52
+  },
+  "predictions_sha256": "de1f45f9244e47827f9cc6a061b623f4f286b06b105b701b7ec207f1526a47ee",
+  "prototype_sha256": "860149fc8f9d86df698dd6f3984265aac68d101b2fc5984ce3d117e698386ce0",
+  "status": "development_input_only_exact_synthetic_component",
+  "truth_file_opened": false
+}

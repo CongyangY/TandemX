@@ -1,0 +1,11 @@
+{
+  "reason": "frozen_B2_scorer_accepts_schema_v2_abstain_not_baseline_internal_insufficient_read_support",
+  "raw_predictions_sha256": "d46d2f0160a753a75773badf8b9da3353a1ae077b309757736c6e4ff06ecbc27",
+  "scorer_predictions_sha256": "70fc14fe760970f80240bde8f1a353312df0d892f47aae304dbaba5ac8d19f04",
+  "row_count": 52,
+  "status_changes": 24,
+  "mapping": {"insufficient_read_support": "abstain"},
+  "other_changes": "reason_prefixed_schema_v2_status_normalization;all_other_fields_byte_equivalent_after_JSON_parse",
+  "event_decisions_changed": 0,
+  "truth_used": false
+}
