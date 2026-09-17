@@ -152,3 +152,76 @@ partial spanning reads, and intact negatives. It must report all-case
 abstention cost, per-array rather than per-edit uncertainty, and the endpoints
 that are actually observable. A failure of that test must remain a failure;
 it cannot be rescued by retuning on the held-out truth.
+
+## Addendum: B2 synthetic held-out audit after source/scorer freeze
+
+The separately seeded B2 source, input/truth bundle, metrics and scorer were
+committed as `6c4df79` before the reported route execution. The B2 route
+predictions and score directories were still untracked at the time of this
+audit; their files and hashes are explicit below. This is a useful frozen
+development-to-synthetic-held-out transition, but repository commit order
+alone is not secure proof that no person could inspect the committed truth.
+The evaluation's statistical units are **four synthetic founders** at
+100/200/300/400-bp monomer lengths, each subjected to the same 13 case
+design, not 52 independent genomes. It contains 44 injected positives, eight
+intact controls and 48 unique edited assembly sequences. Synthetic read error
+realizations are independent in noisy rows; there are zero biological donors,
+native raw reads, or independent biological copy truths.
+
+I independently keyed B2 raw inputs, causal truths and four prediction files
+by case ID and applied the frozen 0.5/non-`ok` rules without calling the B2
+scorer. All counts below match the archived `summary.json` files.
+
+| Frozen route | Prediction SHA-256 used by scorer | TP / FN / FP / TN / unresolved intact | `ok` / abstain | All-case sensitivity | Negative failure rate |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Monomer-path alignment | `292dce688e4d5c903cf143fb5e0a49c1797d8de35d247e0e733d1dab765ae428` | 6 / 38 / 0 / 1 / 7 | 7 / 45 | 6/44 = 0.1364 | 7/8 = 0.875 |
+| Transition graph | `de1f45f9244e47827f9cc6a061b623f4f286b06b105b701b7ec207f1526a47ee` | 0 / 44 / 0 / 0 / 8 | 0 / 52 | 0 | 8/8 = 1.0 |
+| Two-flank length baseline | `70fc14fe760970f80240bde8f1a353312df0d892f47aae304dbaba5ac8d19f04` | 20 / 24 / 0 / 4 / 4 | 28 / 24 | 20/44 = 0.4545 | 4/8 = 0.5 |
+
+The baseline's raw prediction file SHA-256
+`d46d2f0160a753a75773badf8b9da3353a1ae077b309757736c6e4ff06ecbc27`
+has the non-schema status `insufficient_read_support` on exactly 24 rows.
+The scored adapter changes **only** those rows' status to `abstain` and
+prefixes their reason with `schema_v2_status_normalization:`. Event scores,
+decisions, case IDs and other fields are unchanged. Treating the raw status
+as non-`ok` gives the same 20/24/0/4/4 confusion counts, so the adapter does
+not improve the baseline outcome. It is a schema compatibility repair that
+must be disclosed, not hidden as a different method run.
+
+All six alignment true positives and its sole true negative occur in the
+100-bp founder. At 200, 300 and 400 bp, each 13-case founder receives no
+`ok` call. Of the 45 alignment abstentions, 38 report the frozen 4,096-bp
+array ceiling, six report too few resolved anchored reads, and one reports
+candidate-monomer length outside the route's 4..300-bp bound. The 24
+one-read B2 cases are all non-`ok` for both alignment and baseline, as their
+three-read support rules require. The graph route rejects all 52 because its
+frozen adapter admits `split=development`, whereas B2 correctly declares
+`split=synthetic_held_out`; its zero calls are an **interface eligibility
+failure**, not evidence that a graph architecture was evaluated on the B2
+sequences. These declared operating limits are legitimate reasons to abstain,
+but their cost belongs in the primary denominator.
+
+Alignment's eligible-only 6/6 = 1.0 sensitivity applies to just six positive
+cases and 7/52 total coverage. The baseline's eligible-only 20/24 = 0.8333
+applies to different eligible cases and 28/52 coverage. Neither conditional
+rate overrides the all-case comparison. All three nominal intact FPR values
+are 0/8; seven, eight, and four unresolved intact controls respectively make
+those values poor specificity evidence. Event subtype, breakpoint, signed-bp,
+HOR-period and order summary metrics are null for incomplete route outputs.
+The B2 core-time receipts report 12.217 s and 22.74 MB peak process RSS for
+alignment versus 0.0123 s and 18.83 MB for the baseline, excluding process
+startup and output writing. The graph's 0.000079 s measures only its split
+gate and has no RSS receipt. None of these is a completed workflow or
+large-genome scaling measurement.
+
+**Stop-loss disposition:** On this frozen synthetic held-out design, the
+current alignment route does not beat the simple two-flank length baseline:
+6 versus 20 true injected-edit detections at the same zero explicit false
+positives, with 45 versus 24 abstentions. The graph route is unusable under
+its frozen input contract. The user-defined M2 superiority stop-loss is
+therefore triggered for the **present prototypes**. The result is not a
+biological Gate B pass or a general theorem that architecture auditing cannot
+work. Because B2 truth is now consumed, any redesigned route or expanded
+operating range must be treated as new development and evaluated on another
+independent, prespecified held-out source; B2 cannot be reused as final
+validation. Biological Gate B and Gate C remain untested.
