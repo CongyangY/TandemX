@@ -1,0 +1,92 @@
+[
+  {
+    "left_edit_cost": 2,
+    "left_hit_0based": [
+      3747,
+      4769
+    ],
+    "local_context_identity": 0.99835,
+    "local_context_mapq": 60,
+    "oriented_read_length_bp": 14716,
+    "original_read_length_bp": 14716,
+    "original_read_sha256": "ced1a9a98c752d5dc56ce280e1f331b5bf5d7b2a22937841d5747dc0ed990de9",
+    "other_context_max_identity": 0.931689,
+    "primary_PAF_projected_interval_0based": [
+      4769,
+      8324
+    ],
+    "read_id": "ERR6210723.285454",
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 1,
+    "right_hit_0based": [
+      8324,
+      9347
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      4769,
+      8324
+    ]
+  },
+  {
+    "left_edit_cost": 0,
+    "left_hit_0based": [
+      2943,
+      3967
+    ],
+    "local_context_identity": 0.999761,
+    "local_context_mapq": 60,
+    "oriented_read_length_bp": 18270,
+    "original_read_length_bp": 18270,
+    "original_read_sha256": "63558ad7f6d8a07ab33e17de2a85bcd1d7c2bf8a23da7ccaa0a85672292f94f9",
+    "other_context_max_identity": 0.796583,
+    "primary_PAF_projected_interval_0based": [
+      3967,
+      7527
+    ],
+    "read_id": "ERR6210723.792415",
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 0,
+    "right_hit_0based": [
+      7527,
+      8551
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      3967,
+      7527
+    ]
+  },
+  {
+    "left_edit_cost": 0,
+    "left_hit_0based": [
+      2256,
+      3280
+    ],
+    "local_context_identity": 0.999747,
+    "local_context_mapq": 60,
+    "oriented_read_length_bp": 16693,
+    "original_read_length_bp": 16693,
+    "original_read_sha256": "5352d26bc4e95dba7850705f73baed237f435c0b094e489108f89719e40aeb55",
+    "other_context_max_identity": 0.875827,
+    "primary_PAF_projected_interval_0based": [
+      3280,
+      6840
+    ],
+    "read_id": "ERR6210723.879668",
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 0,
+    "right_hit_0based": [
+      6840,
+      7864
+    ],
+    "status": "ELIGIBLE",
+    "strand": "+",
+    "trim_interval_0based": [
+      3280,
+      6840
+    ]
+  }
+]

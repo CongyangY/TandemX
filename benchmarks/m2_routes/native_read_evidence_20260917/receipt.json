@@ -1,0 +1,25 @@
+{
+  "biological_accuracy_status": "not_evaluated",
+  "case_count": 10,
+  "edit_receipt_sha256": "c9839b7b7cbf690ead5fb5c93a5832807029cba6540393fcf3aa8786e13bae90",
+  "eligible_read_count": 3,
+  "flank_bp": 1024,
+  "flank_max_edit_fraction": 0.05,
+  "frozen_b1_inputs_sha256": "168064efaf1406e74ba016312b18d89307c5fddaa18fecd56b124cc87c6e30aa",
+  "frozen_m2_prototype_sha256": "043122d1b5987e35dcd957a6471c930f6211fe7a8902055d3a8c37f06d4ed651",
+  "native_PAF_sha256": "f5226de81d2be785872f1ac7247eb91ff90714e1390a3e92ea0f2ce75cf06674",
+  "native_fastq_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+  "pairing_status": "lineage_context_supported_donor_unverified",
+  "per_case_sha256": "81c9ca70db1f2aa54c2e54ae2ea5b0320abe3219b0ef7db96a4f3d3d0d5dba26",
+  "pilot_scope": "single_C3_development_lineage",
+  "read_ids": [
+    "ERR6210723.285454",
+    "ERR6210723.792415",
+    "ERR6210723.879668"
+  ],
+  "read_trims_sha256": "c04691c40a368377607977f28b43ba348f3e290458717e24f3f96eeeea0579f0",
+  "source_config_sha256": "8676ce3498617c8c7273e33d83264b8a709bea5f2e00868d6c755460fc7b6cf6",
+  "source_context_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+  "source_receipt_sha256": "2d5f821f8707bcfaad072c01c5a0ab17df9610ebc21544a9f9f8ff1863a595ea",
+  "truth_scope": "injected_edit_delta_only"
+}

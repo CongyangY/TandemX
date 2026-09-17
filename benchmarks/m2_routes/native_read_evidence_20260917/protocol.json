@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "post_hoc_technical_replay_after_preliminary_development_run",
+  "registered_before_scoring": false,
+  "split": "development",
+  "scope": "one_C3_Col_CEN_lineage_three_original_distinct_ZMW_molecules",
+  "case_denominator": {
+    "edited_case_count": 9,
+    "injected_deletion_positive_count": 8,
+    "intact_negative_count": 1,
+    "duplicate_source_original_reported_separately": true
+  },
+  "source_sha256": {
+    "colcen_native_contexts_fa": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+    "original_native_reads_fastq_gz": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+    "original_native_primary_and_secondary_paf": "f5226de81d2be785872f1ac7247eb91ff90714e1390a3e92ea0f2ce75cf06674",
+    "native_source_receipt": "2d5f821f8707bcfaad072c01c5a0ab17df9610ebc21544a9f9f8ff1863a595ea",
+    "edit_source_config": "8676ce3498617c8c7273e33d83264b8a709bea5f2e00868d6c755460fc7b6cf6",
+    "generated_edit_receipt": "c9839b7b7cbf690ead5fb5c93a5832807029cba6540393fcf3aa8786e13bae90",
+    "frozen_B1_v3_monomer_inputs": "168064efaf1406e74ba016312b18d89307c5fddaa18fecd56b124cc87c6e30aa",
+    "frozen_M2_prototype": "043122d1b5987e35dcd957a6471c930f6211fe7a8902055d3a8c37f06d4ed651"
+  },
+  "eligibility": {
+    "context": "C3",
+    "required_original_read_ids": [
+      "ERR6210723.285454",
+      "ERR6210723.792415",
+      "ERR6210723.879668"
+    ],
+    "local_context_primary_alignment_identity_minimum": 0.99,
+    "local_context_mapq_minimum": 20,
+    "minimum_natural_flank_coverage_each_side_bp": 1000,
+    "source_guided_trim_flank_bp": 1024,
+    "source_guided_trim_flank_max_edit_fraction": 0.05,
+    "require_unique_best_flank_hits_in_read": true,
+    "maximum_trim_vs_primary_PAF_boundary_difference_bp": 10,
+    "whole_genome_locus_uniqueness_verified": false,
+    "identical_donor_haplotype_pairing_verified": false
+  },
+  "m2_frozen": {
+    "candidate_monomers": "supplied_B1_v3_C1_C2_C3_operational_178bp_templates",
+    "maximum_array_interval_bp": 4096,
+    "maximum_candidate_alignments_per_sequence": 250000,
+    "maximum_monomer_edit_fraction": 0.15,
+    "maximum_monomer_length_variation_fraction": 0.08,
+    "minimum_label_margin_edit_cost": 2,
+    "technical_comparison_only": true,
+    "biological_audit_pairing_status": "unverified"
+  },
+  "baseline": {
+    "method": "median_two_flank_read_span_minus_assembly_span",
+    "minimum_eligible_reads": 3,
+    "discordance_threshold": "max(2bp,ceil(0.05*max(assembly_span,median_read_span)))",
+    "same_eligible_reads_as_M2": true
+  },
+  "interpretation": {
+    "truth_scope": "injected_edit_delta_only",
+    "biological_accuracy_score": "not_evaluated",
+    "biological_replicate_count": 1,
+    "independent_native_donor_heldout": false,
+    "resource_scope": "10_tiny_C3_rows_on_local_workstation_no_scale_or_peak_memory_claim"
+  }
+}
