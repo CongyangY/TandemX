@@ -25,17 +25,25 @@ def sha256_sequence(sequence: str) -> str:
     return hashlib.sha256(sequence.encode("ascii")).hexdigest()
 
 
-def read_one_fasta(path: Path) -> tuple[str, str]:
+def read_named_fasta(path: Path, record_id: str) -> str:
     if path.stat().st_size > 2_000_000:
         raise ValueError("Native context exceeds the bounded 2-MB input cap")
     lines = path.read_text(encoding="ascii").splitlines()
-    if not lines or not lines[0].startswith(">") or any(line.startswith(">") for line in lines[1:]):
-        raise ValueError("Expected exactly one FASTA record")
-    name = lines[0][1:].split()[0]
-    sequence = "".join(lines[1:]).upper()
-    if not name or not sequence or set(sequence) - set("ACGT"):
-        raise ValueError("Native context must have one named ACGT sequence")
-    return name, sequence
+    records: dict[str, str] = {}
+    name = None
+    for line in lines:
+        if line.startswith(">"):
+            name = line[1:].split()[0]
+            if not name or name in records:
+                raise ValueError("Native context FASTA has empty or duplicate record ID")
+            records[name] = ""
+        elif name is None or not line or set(line.upper()) - set("ACGT"):
+            raise ValueError("Native context FASTA has malformed sequence")
+        else:
+            records[name] += line.upper()
+    if record_id not in records or not records[record_id]:
+        raise ValueError("Native context record is absent or empty")
+    return records[record_id]
 
 
 def fastq_read_ids(path: Path) -> set[str]:
@@ -100,7 +108,7 @@ def generate(config_path: Path, outdir: Path) -> dict:
         source = Path(row["reference_fasta"])
         if sha256_file(source) != row["reference_fasta_sha256"]:
             raise ValueError(f"Native source FASTA hash mismatch: {array_id}")
-        name, sequence = read_one_fasta(source)
+        sequence = read_named_fasta(source, row["reference_record_id"])
         genomic_interval = row["source_genome_interval"]
         if (not isinstance(genomic_interval, list) or len(genomic_interval) != 2
                 or not all(isinstance(value, int) for value in genomic_interval)
@@ -108,7 +116,7 @@ def generate(config_path: Path, outdir: Path) -> dict:
                 or genomic_interval[1] - genomic_interval[0] != len(sequence)):
             raise ValueError(f"Native source genome interval mismatch: {array_id}")
         left, right, unit = row["array_start0"], row["array_end0"], row["operational_unit_bp"]
-        if (name != row["reference_record_id"] or not all(isinstance(x, int) for x in (left, right, unit))
+        if (not all(isinstance(x, int) for x in (left, right, unit))
                 or unit < 4 or left < 500 or right > len(sequence) - 500 or right <= left
                 or (right - left) % unit):
             raise ValueError(f"Invalid array/flank coordinates: {array_id}")

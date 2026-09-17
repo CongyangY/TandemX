@@ -61,3 +61,14 @@ def test_rejects_changed_read_bundle_and_unsupported_pairing(tmp_path: Path) -> 
     config.write_text(json.dumps(payload))
     with pytest.raises(ValueError, match="requires evidence"):
         generate(config, tmp_path / "also_bad")
+
+
+def test_selects_declared_record_from_shared_context_fasta(tmp_path: Path) -> None:
+    config = fixture(tmp_path)
+    payload = json.loads(config.read_text())
+    source = Path(payload["contexts"][0]["reference_fasta"])
+    source.write_text(">other\n" + "C" * 1016 + "\n" + source.read_text())
+    payload["contexts"][0]["reference_fasta_sha256"] = sha256_file(source)
+    config.write_text(json.dumps(payload))
+    receipt = generate(config, tmp_path / "selected")
+    assert receipt["cases"][0]["source_record_id"] == "C1_context"
