@@ -1,0 +1,5 @@
+stage	elapsed_seconds	rss_mib	process_count	scratch_bytes
+cendetecthor_171_default_replay	0.018911	0.046875	1	36791
+cendetecthor_171_default_replay	0.245903	34.875000	1	36791
+cendetecthor_171_default_replay	0.472825	58.468750	1	36791
+cendetecthor_171_default_replay	0.701582	0.000000	1	36791

@@ -1,0 +1,16 @@
+{
+  "frozen_before_runs": "2026-09-17",
+  "purpose": "Bounded native CENdetectHOR technical-completion diagnosis on the existing equal-input flanked 171-bp assembly control",
+  "input": "benchmarks/assembly_hor_comparator_v1/control/control.chr1.fasta",
+  "input_sha256": "f2a968383dd9bef0af38ee5891ce97b7228f67cbe71495e36340adc20d956e8e",
+  "upstream_commit": "969f4ef515fadd8b8a035357294971ff57d4618f",
+  "upstream_snakefile_sha256": "7cd4a1ba66224751b37f316fb7f3a33e7a33c18c087407cb30ce126f524ebfe1",
+  "fixed_conditions_in_order": [
+    {"name": "default_replay", "windowSize": 1000, "kmerSize": 10},
+    {"name": "documented_k8_w5000", "windowSize": 5000, "kmerSize": 8}
+  ],
+  "shared_settings": {"consFile": "no", "expMonSize": "no", "CHRcons": "control.chr1.fasta", "HORdet_threads": 1, "cores": 1},
+  "setting_basis": "kmerSize=8 is listed in upstream config/README.md; windowSize=5000 was already archived as an exploratory diagnostic. Neither uses the 171-bp truth as a supplied monomer prior.",
+  "stopping_rule": "Run each once in a fresh workdir. If the full native pipeline lacks its declared final outputs, retain technical N/A and inspect native intermediates; do not tune further or assign an accuracy zero.",
+  "resource_scope": "Complete Snakemake stage, wall/CPU and sampled aggregate process-tree RSS at 0.2-second intervals; no successful-only timing selection."
+}

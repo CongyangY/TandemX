@@ -1,0 +1,4 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+ValueError in file /private/tmp/tandemx_cendetecthor_20260916/pipeline/Snakefile, line 11:
+invalid literal for int() with base 10: 'no'
+  File "/private/tmp/tandemx_cendetecthor_20260916/pipeline/Snakefile", line 11, in <module>

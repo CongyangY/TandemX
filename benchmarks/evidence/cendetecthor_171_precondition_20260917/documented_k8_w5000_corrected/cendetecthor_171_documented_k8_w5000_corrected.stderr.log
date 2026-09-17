@@ -1,0 +1,115 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Assuming unrestricted shared filesystem usage.
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                count
+---------------  -------
+HORdet                 1
+all                    1
+concatenateMons        1
+concatenateWind        1
+extractCons            1
+extractMon             1
+mon2bed                1
+periodicity            1
+selectWind             1
+stringDec              1
+uniqueMons             1
+total                 11
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Sep 17 20:37:19 2026]
+localrule periodicity:
+    input: fasta/control.chr1.fasta
+    output: results/wind_summary/control.chr1.txt, results/wind2analize/control.chr1.windows.bed
+    jobid: 9
+    reason: Missing output files: results/wind2analize/control.chr1.windows.bed
+    wildcards: PREFIX=control, CHR=1
+    resources: tmpdir=/private/tmp
+
+[Thu Sep 17 20:37:28 2026]
+Finished job 9.
+1 of 11 steps (9%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Sep 17 20:37:28 2026]
+localrule concatenateWind:
+    input: results/wind2analize/control.chr1.windows.bed
+    output: results/wind2analize/control.FULLchr.windows.bed
+    jobid: 8
+    reason: Missing output files: results/wind2analize/control.FULLchr.windows.bed; Input files updated by another job: results/wind2analize/control.chr1.windows.bed
+    wildcards: PREFIX=control
+    resources: tmpdir=/private/tmp
+
+[Thu Sep 17 20:37:28 2026]
+Finished job 8.
+2 of 11 steps (18%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Sep 17 20:37:28 2026]
+localrule selectWind:
+    input: results/wind2analize/control.FULLchr.windows.bed
+    output: results/wind2analize/control.FULLchr.windows.filtered.bed
+    jobid: 7
+    reason: Missing output files: results/wind2analize/control.FULLchr.windows.filtered.bed; Input files updated by another job: results/wind2analize/control.FULLchr.windows.bed
+    wildcards: PREFIX=control
+    resources: tmpdir=/private/tmp
+
+[Thu Sep 17 20:37:28 2026]
+Finished job 7.
+3 of 11 steps (27%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Sep 17 20:37:28 2026]
+localrule extractCons:
+    input: fasta/control.chr1.fasta, results/wind2analize/control.FULLchr.windows.filtered.bed
+    output: monomers/control_chr0cons.fasta
+    jobid: 10
+    reason: Missing output files: monomers/control_chr0cons.fasta; Input files updated by another job: results/wind2analize/control.FULLchr.windows.filtered.bed
+    wildcards: PREFIX=control
+    resources: tmpdir=/private/tmp
+
+[Thu Sep 17 20:37:28 2026]
+Finished job 10.
+4 of 11 steps (36%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Sep 17 20:37:28 2026]
+localrule extractMon:
+    input: fasta/control.chr1.fasta, results/wind2analize/control.FULLchr.windows.filtered.bed, monomers/control_chr0cons.fasta
+    output: results/monomers/control.chr1_mons.fasta
+    jobid: 6
+    reason: Missing output files: results/monomers/control.chr1_mons.fasta; Input files updated by another job: results/wind2analize/control.FULLchr.windows.filtered.bed, monomers/control_chr0cons.fasta
+    wildcards: PREFIX=control, CHR=1
+    resources: tmpdir=/private/tmp
+
+Traceback (most recent call last):
+  File "/private/tmp/tandemx_cendetecthor_20260916/pipeline/scripts/Extract5mon.py", line 63, in <module>
+    print(cons)
+          ^^^^
+NameError: name 'cons' is not defined
+[Thu Sep 17 20:37:28 2026]
+Error in rule extractMon:
+    jobid: 6
+    input: fasta/control.chr1.fasta, results/wind2analize/control.FULLchr.windows.filtered.bed, monomers/control_chr0cons.fasta
+    output: results/monomers/control.chr1_mons.fasta
+    shell:
+        
+		python /private/tmp/tandemx_cendetecthor_20260916/pipeline/scripts/Extract5mon.py --fasta fasta/control.chr1.fasta --bed results/wind2analize/control.FULLchr.windows.filtered.bed --cons-file monomers/control_chr0cons.fasta --out results/monomers/control.chr1_mons.fasta --n 5
+		
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2026-09-17T203719.183664.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

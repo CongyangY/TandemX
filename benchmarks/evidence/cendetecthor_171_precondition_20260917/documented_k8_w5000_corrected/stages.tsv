@@ -1,0 +1,2 @@
+stage	exit_code	wall_seconds	user_cpu_seconds	system_cpu_seconds	peak_process_tree_rss_mib	peak_process_count	peak_scratch_bytes	sample_count	stdout_log	stderr_log
+cendetecthor_171_documented_k8_w5000_corrected	1	9.509823	9.116222	0.776548	213.984375	2	118053	43	cendetecthor_171_documented_k8_w5000_corrected.stdout.log	cendetecthor_171_documented_k8_w5000_corrected.stderr.log

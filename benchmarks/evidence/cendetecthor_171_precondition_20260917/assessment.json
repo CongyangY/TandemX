@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "technical_incomplete",
+  "accuracy": null,
+  "scoring_denominator": null,
+  "conditions": {
+    "default_replay": {
+      "input_sha256": "f2a968383dd9bef0af38ee5891ce97b7228f67cbe71495e36340adc20d956e8e",
+      "exit_code": 1,
+      "wall_seconds": 0.701967,
+      "peak_process_tree_rss_mib": 58.46875,
+      "peak_process_count": 1,
+      "native_final_decomposition_exists": false,
+      "native_hor_tree_exists": false
+    },
+    "default_replay_corrected": {
+      "input_sha256": "f2a968383dd9bef0af38ee5891ce97b7228f67cbe71495e36340adc20d956e8e",
+      "exit_code": 1,
+      "wall_seconds": 3.622558,
+      "peak_process_tree_rss_mib": 130.21875,
+      "peak_process_count": 3,
+      "native_final_decomposition_exists": false,
+      "native_hor_tree_exists": false
+    },
+    "documented_k8_w5000_corrected": {
+      "input_sha256": "f2a968383dd9bef0af38ee5891ce97b7228f67cbe71495e36340adc20d956e8e",
+      "exit_code": 1,
+      "wall_seconds": 9.509823,
+      "peak_process_tree_rss_mib": 213.984375,
+      "peak_process_count": 2,
+      "native_final_decomposition_exists": false,
+      "native_hor_tree_exists": false
+    }
+  }
+}
