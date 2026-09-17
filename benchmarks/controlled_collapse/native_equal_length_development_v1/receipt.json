@@ -1,0 +1,121 @@
+{
+  "cases": [
+    {
+      "case_id": "C3_intact",
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_array_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "edited_fasta_sha256": "7c88fa0fb28195ec1ec607ca10f5816ca9723cf52789f015a7cca93d0d57a727",
+      "injected_bp_delta": 0,
+      "operation": "intact",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_array_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "truth_scope": "injected_equal_length_structure_only",
+      "truth_status": "intact_negative"
+    },
+    {
+      "case_id": "C3_invert_tile_05",
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_array_sha256": "5c17392eadb48dff52f7d56fb763eec06ba35f48cc521b472f41c2f35410c95d",
+      "edited_fasta_sha256": "c8a854d4b63a83db4ed0ff5654a8c19ecb354e1cf5121c0669252a4c5f8f28ca",
+      "injected_bp_delta": 0,
+      "operation": "invert_tile_05",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_array_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "truth_scope": "injected_equal_length_structure_only",
+      "truth_status": "engineered_structural_positive"
+    },
+    {
+      "case_id": "C3_invert_block_05_09",
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_array_sha256": "c1a9b8fccdaa2a4b89f458a8f18a575a83393446f99b9c2193dd289c67e2b6d7",
+      "edited_fasta_sha256": "7f2068f0988a8803e0ee9bcb8af4484309d70813916044c2ebfca5e165086fba",
+      "injected_bp_delta": 0,
+      "operation": "invert_block_05_09",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_array_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "truth_scope": "injected_equal_length_structure_only",
+      "truth_status": "engineered_structural_positive"
+    },
+    {
+      "case_id": "C3_swap_adjacent_05_06",
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_array_sha256": "2df4eb0f946668d4eb8336d7eb1cbe9c13917d1d39e3b0dbfcb266fd30aef51c",
+      "edited_fasta_sha256": "fa02e243bbe1ccb525802eb78ba51c2694039e11903d3642889e6c8907598e1b",
+      "injected_bp_delta": 0,
+      "operation": "swap_adjacent_05_06",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_array_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "truth_scope": "injected_equal_length_structure_only",
+      "truth_status": "engineered_structural_positive"
+    },
+    {
+      "case_id": "C3_swap_distant_05_15",
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_array_sha256": "feddeb4892ec1d0877f606c394d5d97b9f72084e36fb25ff37b46864bd55be4b",
+      "edited_fasta_sha256": "b8ddf4e9daa3ada0c9d4bdebaf015a47752d196b29feaf223e66f7b0a19bab20",
+      "injected_bp_delta": 0,
+      "operation": "swap_distant_05_15",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_array_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "truth_scope": "injected_equal_length_structure_only",
+      "truth_status": "engineered_structural_positive"
+    },
+    {
+      "case_id": "C3_replace_tile_05_with_06",
+      "edited_array_interval": [
+        5000,
+        8560
+      ],
+      "edited_array_sha256": "fbd8e3c0b155b5e2a9b64f5b00ead750b8a6e741c183a437d344735c054cf007",
+      "edited_fasta_sha256": "5edeea564f4720919eb1d80e8e3e8adb3b8bea87298e6ad6b5e5c1050d6af2e4",
+      "injected_bp_delta": 0,
+      "operation": "replace_tile_05_with_06",
+      "source_array_interval": [
+        5000,
+        8560
+      ],
+      "source_array_sha256": "5dd73936c87ead82819dd4107dae3e2089b40f0ac0b79dd2b0bcaf73e8905ebe",
+      "truth_scope": "injected_equal_length_structure_only",
+      "truth_status": "engineered_structural_positive"
+    }
+  ],
+  "generator_sha256": "70d466c10b88cfd337e1e62539cf43f516fec81b5c91c93f2c915a677e9a5b83",
+  "original_native_fastq_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+  "read_pairing_status": "lineage_context_supported_donor_unverified",
+  "schema_version": 1,
+  "source_assembly_lineage_count": 1,
+  "source_config_sha256": "8676ce3498617c8c7273e33d83264b8a709bea5f2e00868d6c755460fc7b6cf6",
+  "source_context_sha256": "638b0b0503b82f28b0c166a2b5351f2a2ced06bf4d8bed38de3657ffaaea4c67",
+  "split": "development",
+  "truth_scope": "injected_equal_length_structure_only"
+}

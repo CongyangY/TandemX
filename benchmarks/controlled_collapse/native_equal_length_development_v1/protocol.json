@@ -1,0 +1,36 @@
+{
+  "baseline": "same three eligible native read spans with fixed 5% or 2bp length threshold from prior C3 technical pilot",
+  "biological_accuracy": "not_evaluated",
+  "case_denominator": 6,
+  "frozen_m2_prototype_sha256": "043122d1b5987e35dcd957a6471c930f6211fe7a8902055d3a8c37f06d4ed651",
+  "generated_receipt_sha256": "0dd3c35c20dfcf166602ca3c5477abb48e96355305da5d343ec9134c2329b499",
+  "generator_sha256": "70d466c10b88cfd337e1e62539cf43f516fec81b5c91c93f2c915a677e9a5b83",
+  "independent_validation": false,
+  "interpretation_limits": [
+    "one assembly lineage",
+    "same three original pooled HiFi molecules as prior C3 development pilot",
+    "source-guided natural flank trimming",
+    "supplied operational 178bp monomer templates",
+    "no native biological structure truth or genome-wide unique mapping"
+  ],
+  "native_read_fastq_sha256": "ff5387b874021554cebc53c4b4781f1f0f4739b8260fad03a9bf074b79e527a4",
+  "native_trim_pilot_sha256": "bee76afab339e27f636aee57989a7faaeed8b1882071cc473426abd7dabf0462",
+  "negative_operation": "intact",
+  "no_parameter_tuning_after_score": true,
+  "pairing_status": "lineage_context_supported_donor_unverified",
+  "positive_operations": [
+    "invert_tile_05",
+    "invert_block_05_09",
+    "swap_adjacent_05_06",
+    "swap_distant_05_15",
+    "replace_tile_05_with_06"
+  ],
+  "primary_endpoint": "technical path discordance versus three fixed, source-guided native C3 read paths; abstentions count as missed positives and unresolved negatives",
+  "rationale": "C3 deletion pilot offered no gain over read-span length; test equal-length structural edits without changing the frozen M2 route",
+  "registered_before_scoring": true,
+  "schema_version": 1,
+  "source_config_sha256": "8676ce3498617c8c7273e33d83264b8a709bea5f2e00868d6c755460fc7b6cf6",
+  "source_lineage": "Col_CEN_v1.2_ERR6210723_pooled_Col0N",
+  "split": "development",
+  "status": "development_extension_frozen_before_equal_length_scoring"
+}
