@@ -35,6 +35,13 @@ archived but deliberately not ranked. The Ey15 native span diagnostic uses
 seven selected reads and nine small contexts and supplies no meaningful
 large-genome speed or memory measurement.
 
+The separate rice v2 source-eligibility alignment mapped one 62,345-read
+subset to one selected 11-kb context. Minimap2 reported 46.252 s wall,
+90.499 s CPU and 2.098 GB peak RSS. It found only one qualifying molecule;
+the full-reference step was correctly skipped. These numbers measure the
+read-to-small-context source gate, not TandemX discovery or a successful
+whole-genome localization workload.
+
 TideCluster's Morex 100-Mb stage measurements were 331.52 s / 5,152,444 kB
 for its TideHunter stage and 60.99 s / 7,770,936 kB for clustering. The
 frozen 1-Gb preflight refused execution because the 100-Mb clustering peak

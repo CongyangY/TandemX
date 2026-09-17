@@ -64,6 +64,16 @@ def test_native_source_registry_agrees_with_source_receipts() -> None:
     assert rice["screened_assembly_window_count"] == rice_selection["candidate_windows"] == rice_audit["window_denominator"]
     assert rice["ranked_window_review_count"] == rice_selection["ranked_candidates_checked"] == 1000
     assert rice_selection["selected"] is None and rice["passing_candidate_count"] == 0
+    rice_v2 = rice["v2_development_screen"]
+    rice_v2_source = _read(CONTROLLED / "rice_native_pair_audit_v2_20260917/source_eligibility_manifest.json")
+    assert rice_v2["protocol_commit"] == rice_v2_source["pre_read_protocol_commit"]
+    assert rice_v2["selected_context_commit"] == rice_v2_source["pre_read_selected_context_commit"]
+    assert rice_v2["evaluated_assembly_candidates"] == rice_v2_source["screen_denominator"] == 235500
+    assert rice_v2["filter_eligible_evaluations"] == rice_v2_source["eligible_evaluations"] == 920
+    assert rice_v2["selected_context_sha256"] == rice_v2_source["file_sha256"]["selected_context.fa"]
+    assert rice_v2["distinct_qualifying_native_spanners"] == rice_v2_source["context_read_alignment"]["distinct_qualifying_spanners"] == 1
+    assert rice_v2["required_native_spanners"] == rice_v2_source["context_read_alignment"]["required_spanners"] == 3
+    assert rice_v2_source["post_read_reselection"] == "none"
 
     mac = rows["Macadamia_jansenii_SRR13557763_62"]
     mac_audit = _read(CONTROLLED / "macadamia_native_pair_audit_20260917/eligibility_audit.json")

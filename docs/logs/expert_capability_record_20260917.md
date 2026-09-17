@@ -38,9 +38,9 @@ optimization reduced both time and RSS in two paired Mo17 replays; all core
 products matched byte for byte. A later workspace-reuse idea had a time/RSS
 tradeoff and was rejected. Full details and the unfavorable real-tool
 comparisons are in `performance_scope_20260917.md`. The latest full local suite
-after the five-source eligibility reconciliation passed 1,069 Python tests;
-hosted Ubuntu/macOS Python, Rust, and wheel validation at commit `c3e8624`
-passed.
+after the rice v2 audit and five-source eligibility reconciliation passed
+1,075 Python tests; hosted Ubuntu/macOS Python, Rust, and wheel validation at
+commits `c3e8624` and `16538ca` passed.
 Tests and CI establish source behavior under covered inputs, not biological
 accuracy or 7–20-Gb production readiness.
 
@@ -160,10 +160,17 @@ The completed Nipponbare/AGIS1.0 bounded source screen verified the current
 and structure. Its precommitted 155-bp/4-kb interval selection examined
 771,185 assembly windows and the top 1,000 ranked candidates; none met the
 frozen 0.8 within-context flank 31-mer uniqueness threshold (maximum 0.638).
-No array was selected, reads were not mapped, and no edits were made. The
-distinct assembly/read BioSamples and dates also leave exact donor pairing
-unverified. The outcome applies to that selection protocol, not all rice
-arrays. See `benchmarks/controlled_collapse/rice_native_pair_audit_20260917/`.
+No array was selected and reads were not mapped in v1. A separately frozen
+**development v2** used assembly-only information from the v1 top 1,000 to
+evaluate 235,500 length/period combinations. It committed the selected
+CP132242.1 5-kb context before read mapping. Of 62,345 original reads, only
+one met the fixed >=99% identity and >=1-kb flank criteria, below the required
+three distinct spanners. It therefore did not run full-reference anchoring or
+make edits, and it did not reselect an interval. The distinct assembly/read
+BioSamples and dates also leave exact donor pairing unverified. These outcomes
+apply to their declared screens, not all rice arrays. See
+`benchmarks/controlled_collapse/rice_native_pair_audit_20260917/` and
+`benchmarks/controlled_collapse/rice_native_pair_audit_v2_20260917/`.
 
 Macadamia jansenii has a published assembly/read relationship but no existing
 bounded original-HiFi subset was found. The two full compressed read streams
@@ -179,3 +186,8 @@ It is a post-experiment reconciliation, not benchmark preregistration. Current
 T7 access is through a 480-Mb/s USB2 path with prior I/O errors. Large
 unverified source files and large T7 writes are excluded from current
 benchmark input until integrity and storage reliability are established.
+The previously identified K30076 block-2 attempt-001 gzip/chunk is invalid:
+same byte count but changed SHA-256 and failed gzip, followed by T7 I/O
+errors. It is excluded from every current benchmark. Reacquiring and
+revalidating that input requires a reliable storage path; its failed bytes
+must not be reclassified as biological zero coverage.

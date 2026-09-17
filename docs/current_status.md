@@ -66,6 +66,13 @@ streams total 18.150 GB and were not scanned under the current USB2/EIO
 constraint. Both have unresolved exact read/assembly donor pairing. See
 `benchmarks/controlled_collapse/rice_native_pair_audit_20260917/` and
 `benchmarks/controlled_collapse/macadamia_native_pair_audit_20260917/`.
+The separately frozen rice **v2 development** protocol evaluated 235,500
+assembly-only length/period candidates derived from the v1 top 1,000, then
+committed one 5-kb CP132242.1 context before read mapping. Only **1/3**
+required distinct original molecules met >=99% identity and >=1-kb natural
+flanks. No full-reference anchoring, locus replacement, or edit followed.
+The complete negative archive is
+`benchmarks/controlled_collapse/rice_native_pair_audit_v2_20260917/`.
 The machine-readable current source reconciliation is
 `benchmarks/inputs/native_source_registry_20260917.json`; it records two
 technical development lineages and three negative/not-enrolled source screens.
@@ -83,10 +90,11 @@ resources are archived in
 performance and its incomparable scopes are indexed in
 `docs/logs/performance_scope_20260917.md`; current capability boundaries are
 consolidated in `docs/logs/expert_capability_record_20260917.md`.
-The merged local `tandemx-dev` Python suite passed **1,069 tests in 116.57 s**
-after the five-source reconciliation and comparator audit. Hosted
-Ubuntu/macOS Python, Rust and wheel validation for pushed commit `c3e8624`
-passed; the later evidence commits have a separate hosted run in progress.
+The merged local `tandemx-dev` Python suite passed **1,075 tests in 116.97 s**
+after the rice v2 negative audit, five-source reconciliation and comparator
+audit. Hosted Ubuntu/macOS Python, Rust and wheel validation for pushed commits
+`c3e8624` and `16538ca` passed; the final evidence commit still requires its
+own hosted run.
 
 ## Checkpoint 2026-09-17: native development inputs and exact edit archive
 
