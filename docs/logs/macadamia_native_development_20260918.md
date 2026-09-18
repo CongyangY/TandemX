@@ -93,8 +93,20 @@ The existing M2 synthetic Gate B NO-GO remains unchanged.
 
 This Macadamia development set adds a second plant taxon for exact injected-bp
 read-span feasibility but does not establish independent biological copy
-truth, donor-held-out accuracy, or M1 absolute-abundance validity. M1 Gate A
-remains NO-GO; no new abundance estimator was introduced. The mapping times
+truth, donor-held-out accuracy, or M1 absolute-abundance validity. The existing
+production `quantify_primary` configuration, full-catalogue monomers and
+`copy_number.tsv` were rehashed after the source-read requalification. The
+`TXF000219` row is internally arithmetically consistent: k=21, 115 diagnostic
+k-mers, 766.454 median depth / 28.9058 assumed haploid depth = 26.5156
+estimated copies, or 3,818.2494 estimated family-wide bp. The row has
+`medium` confidence, a broad 4.2282–62.5697 copy interval, zero empirical
+single-copy controls and warnings about depth normalization, base-error
+survival and unverified genome-background uniqueness. The 3,155-bp selected
+array and seven spanners describe one locus; they cannot validate the
+family-wide physical copy estimate. Exact hashes, bytes and the unchanged
+row are in `benchmarks/controlled_collapse/macadamia_bp_provisional_v1/m1_existing_quantify_audit.json`.
+M1 Gate A remains NO-GO; no new abundance
+estimator was introduced. The mapping times
 and memory recorded in source receipts are diagnostic run metadata only; no
 formal TandemX runtime or scalability inference is drawn under USB2.
 

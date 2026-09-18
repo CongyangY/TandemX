@@ -1,0 +1,53 @@
+{
+  "M1_gate_A": "NO_GO_unchanged",
+  "arithmetic_consistent": true,
+  "files": {
+    "discovery_families": {
+      "bytes": 376497,
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/families.tsv",
+      "sha256": "4f9f1d5d4227ac48623a26f557ec206cfcd846926cea0fe7abbe08a0e978c14e"
+    },
+    "discovery_monomers": {
+      "bytes": 206239,
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/monomers.fa",
+      "sha256": "905b38bd083c23c7b391b83f31540e5a17e3f72be9cfc7a8ed329b734bb0dbd8"
+    },
+    "quantify_config": {
+      "bytes": 1813,
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_primary/run_config.yaml",
+      "sha256": "1b4222e406e3fa9b015b061b9c09e282b1005d4697547dac9472ed3a939ab1f2"
+    },
+    "quantify_copy_number": {
+      "bytes": 447053,
+      "path": "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/quantify_primary/copy_number.tsv",
+      "sha256": "45f2d731699418f2fccbc79877c3ae290fa55cb46aa6616d20fbda5a4b605fba"
+    }
+  },
+  "interpretation": "full-catalogue family-wide read-derived estimate; selected one-locus native-read span and injected deletion are not independent physical copy truth or a validation of this absolute estimate",
+  "schema_version": 1,
+  "selected_family_row": {
+    "confidence": "medium",
+    "copy_number_interval_high": "62.5697",
+    "copy_number_interval_low": "4.2282",
+    "depth_mad": "522.0173",
+    "diagnostic_kmer_count": "115",
+    "estimated_bp": "3818.2494",
+    "estimated_copy_number": "26.5156",
+    "family_id": "TXF000219",
+    "haploid_depth": "28.9058",
+    "kmer_survival_probability": "0.96548517",
+    "median_kmer_depth": "766.4540",
+    "monomer_length": "144",
+    "normalization_method": "total_read_bases_divided_by_genome_size",
+    "quality_window_count": "22513640774",
+    "raw_median_kmer_depth": "740.0000",
+    "single_copy_control_depth_mad": "NA",
+    "single_copy_control_kmer_count": "0",
+    "single_copy_control_mean_depth": "NA",
+    "single_copy_control_median_depth": "NA",
+    "single_copy_control_zero_fraction": "NA",
+    "warning": "haploid_depth_estimated_from_total_read_bases_and_genome_size;independent_base_error_survival_approximation;phred_scores_treated_as_calibrated_probabilities;genome_background_uniqueness_not_verified"
+  },
+  "source_reads_full_sha256_and_gzip": "docs/evidence/t7_stability_20260918/mac_source_readback.json",
+  "status": "existing_production_output_integrity_and_arithmetic_only"
+}

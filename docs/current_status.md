@@ -18,6 +18,10 @@ injected bp differences, not biological accuracy. The separately frozen M2
 single-template path route abstained on all 9/9 cases because all seven
 original read intervals lacked a full monomer tiling; its NO-GO remains.
 M1 absolute-abundance Gate A also remains NO-GO, with no estimator change.
+The existing Macadamia `quantify_primary` files were rehashed and the selected
+`TXF000219` row's depth, copy and bp arithmetic checked. Its 26.5156
+family-wide estimated copies (3,818.2494 bp) have no independent physical
+truth; the selected 3,155-bp locus is not that truth denominator.
 See `docs/logs/macadamia_native_development_20260918.md` and the machine-readable
 archives it identifies. Post-experiment T7 mount and scoped macOS error-log
 checks still found no I/O error or unexpected unmount; USB2 remains a formal

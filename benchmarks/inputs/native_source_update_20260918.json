@@ -43,6 +43,7 @@
     "supplied_monomer_prior": true
   },
   "M1_absolute_abundance_gate": "NO_GO_unchanged",
+  "M1_existing_output_audit": "benchmarks/controlled_collapse/macadamia_bp_provisional_v1/m1_existing_quantify_audit.json",
   "biological_accuracy": "not_evaluated",
   "final_heldout": false,
   "formal_performance_eligible_under_current_USB2": false,
