@@ -138,12 +138,14 @@ def run(output: Path) -> dict:
         diagnostic = array_diagnostic(oriented[left:right], motif)
         diagnostic.update(read_id=read_id, frozen_m2_state=frozen_paths[read_id]["state"],
                           frozen_m2_reason=frozen_paths[read_id]["reason"],
+                          usable_monomer_copy_count=frozen_paths[read_id]["copy_count"],
                           flank_trim_status=row["status"], original_read_length_bp=len(sequence))
         per_read.append(diagnostic)
     frozen_cases = [json.loads(line) for line in m2_rows.read_text().splitlines()]
     edit_receipt = json.loads((EDIT / "generated/receipt.json").read_text())
     if len(frozen_cases) != 9 or len(edit_receipt["cases"]) != 9:
         raise ValueError("Frozen case denominator changed")
+    counts = primary_overlap_counts(paf, 3000, 6155)
     per_case = []
     for frozen, edit in zip(frozen_cases, edit_receipt["cases"]):
         if frozen["case_id"] != edit["case_id"]:
@@ -156,6 +158,9 @@ def run(output: Path) -> dict:
         assembly = array_diagnostic(seq[left:right], motif)
         case = {"case_id": frozen["case_id"], "injected_deleted_bp": edit["injected_deleted_bp"],
                 "qualified_original_spanning_records": len(per_read),
+                "partially_overlapping_primary_context_alignments": counts["partial_array_overlap"],
+                "whole_array_spanning_primary_context_alignments_before_identity_and_flank_gates":
+                    counts["whole_array_span"],
                 "assembly": assembly,
                 "assembly_supported_path": frozen["assembly_path"]["labels"] if
                     frozen["assembly_path"]["state"] == "RESOLVED" else None,
@@ -172,7 +177,6 @@ def run(output: Path) -> dict:
                 "frozen_abstention_rule": frozen["m2_technical"]["reason"],
                 "cause_category": "C_monomer_decomposition_failure;D_multi_label_HOR_not_identifiable_from_one_template"}
         per_case.append(case)
-    counts = primary_overlap_counts(paf, 3000, 6155)
     result = {"case_count": len(per_case), "qualified_spanning_record_count": len(per_read),
               "all_primary_context_overlap_counts": counts,
               "record_identity_scope": "distinct SRA records; original ZMW unavailable",

@@ -17,7 +17,8 @@
     "max_tiled_prefix_bp": 0,
     "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
     "original_read_length_bp": 16555,
-    "read_id": "SRR13557762.132335"
+    "read_id": "SRR13557762.132335",
+    "usable_monomer_copy_count": 0
   },
   {
     "best_local_template_edit": 3,
@@ -37,7 +38,8 @@
     "max_tiled_prefix_bp": 0,
     "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
     "original_read_length_bp": 11501,
-    "read_id": "SRR13557762.809068"
+    "read_id": "SRR13557762.809068",
+    "usable_monomer_copy_count": 0
   },
   {
     "best_local_template_edit": 4,
@@ -57,7 +59,8 @@
     "max_tiled_prefix_bp": 0,
     "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
     "original_read_length_bp": 13018,
-    "read_id": "SRR13557763.249116"
+    "read_id": "SRR13557763.249116",
+    "usable_monomer_copy_count": 0
   },
   {
     "best_local_template_edit": 3,
@@ -77,7 +80,8 @@
     "max_tiled_prefix_bp": 0,
     "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
     "original_read_length_bp": 12506,
-    "read_id": "SRR13557763.265562"
+    "read_id": "SRR13557763.265562",
+    "usable_monomer_copy_count": 0
   },
   {
     "best_local_template_edit": 4,
@@ -97,7 +101,8 @@
     "max_tiled_prefix_bp": 0,
     "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
     "original_read_length_bp": 12214,
-    "read_id": "SRR13557763.541041"
+    "read_id": "SRR13557763.541041",
+    "usable_monomer_copy_count": 0
   },
   {
     "best_local_template_edit": 3,
@@ -117,7 +122,8 @@
     "max_tiled_prefix_bp": 0,
     "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
     "original_read_length_bp": 13488,
-    "read_id": "SRR13557763.66818"
+    "read_id": "SRR13557763.66818",
+    "usable_monomer_copy_count": 0
   },
   {
     "best_local_template_edit": 3,
@@ -137,6 +143,7 @@
     "max_tiled_prefix_bp": 0,
     "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
     "original_read_length_bp": 12550,
-    "read_id": "SRR13557763.78067"
+    "read_id": "SRR13557763.78067",
+    "usable_monomer_copy_count": 0
   }
 ]
