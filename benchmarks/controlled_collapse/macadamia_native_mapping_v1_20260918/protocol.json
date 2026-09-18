@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "split": "development_source_eligibility",
+  "selection_commit": "cbc28a1",
+  "selection_receipt": "benchmarks/controlled_collapse/macadamia_assembly_candidate_v1_20260918/selection_receipt.json",
+  "context_fasta": "benchmarks/controlled_collapse/macadamia_assembly_candidate_v1_20260918/selected_context.fa",
+  "context_fasta_sha256": "a24e5695a9cb9d7a28bbedb58aa7d58c494f1b96bb369630eb2cc482dc96c5c6",
+  "context_name": "ctg.000105F:115439-124594",
+  "array_start_0_in_context": 3000,
+  "array_end_0_in_context": 6155,
+  "input_readback": "docs/evidence/t7_stability_20260918/mac_source_readback.json",
+  "read_inputs": [
+    {
+      "run": "SRR13557763",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+      "sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6"
+    },
+    {
+      "run": "SRR13557762",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+      "sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e"
+    }
+  ],
+  "minimap2_executable": "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+  "minimap2_sha256": "9747d27a83257eef51b4258b8b9248eaf313024ab8fc5dc5143ab7d22c9e3645",
+  "minimap2_version": "2.31-r1302",
+  "minimap2_flags": ["-x", "map-hifi", "-c", "--secondary=yes", "-N", "20", "-t", "2"],
+  "primary_only": true,
+  "minimum_natural_flank_bp_each_side": 1000,
+  "minimum_nmatch_over_alignment_columns": 0.99,
+  "minimum_distinct_original_records": 3,
+  "molecule_identity_gate": "Requires distinct PacBio ZMW; ENA FASTQ may omit original ZMW metadata. If absent, record-level support remains provisional and cannot pass molecule-qualified eligibility.",
+  "full_reference_mapping_if_record_gate_passes": "Diagnostic only until molecule identity and exact donor pairing are verified",
+  "no_posthoc_candidate_substitution": true,
+  "biological_truth": "none; exact injected assembly delta only if later edited"
+}
