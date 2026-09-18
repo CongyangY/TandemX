@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_new_source_selection_or_validation",
+  "development_only_sources": [
+    {
+      "source": "Ey15-2_9994_ERR8666125",
+      "accession_lineage": "Arabidopsis_thaliana_Ey15-2_9994",
+      "case_count": 9,
+      "score_protocol_sha256": "aba7a5396f5b79dd2f6c6e743ed56af4df017fcfb514e47bb608ae5e6eb2b85f",
+      "score_summary_sha256": "02c61cf71fa4fb36fdcc110b93b5e0578947c2264d65c4205d6fcf5736cde58b",
+      "array": "Chr1:12829234-12832478",
+      "physical_copy_truth": "unavailable",
+      "validation_eligible": false
+    },
+    {
+      "source": "Macadamia_jansenii_SRR13557763_62",
+      "accession_lineage": "Macadamia_jansenii_GigaDB100906",
+      "case_count": 9,
+      "score_protocol_sha256": "373c6737375de72eeb62cbb98a5191daeba68260539c83921db05df17c9590c8",
+      "score_summary_sha256": "ff1aa49c8a5d3a62d90ed335c1304e25cc1ef395cac6f72ccddd3294b46b521c",
+      "array": "ctg.000105F:118439-121594",
+      "physical_copy_truth": "unavailable",
+      "validation_eligible": false
+    }
+  ],
+  "source_and_truth_gates": {
+    "minimum_independent_validation_clusters": 3,
+    "taxon_requirements": ["Arabidopsis", "small-genome grass", "large-genome plant"],
+    "architecture_targets": ["short-unit high-copy", "long-unit satellite", "centromeric", "higher-order or nested if available", "sequence-divergent"],
+    "independent_cluster_unit": "biological sample or accession lineage, never FASTQ file or edit count",
+    "assembly_and_reads": "same accession/sample provenance verified; exact individual and DNA extraction uncertainties retained",
+    "read_molecule_identity": "distinct original molecules or an explicitly provisional record-only tier",
+    "whole_reference_locus_check": "map selected spanners to complete assembly; report primary, MAPQ, identity and secondaries",
+    "source_integrity": "full size and SHA-256 plus complete gzip/FASTQ validation before use",
+    "truth": "injected assembly bp difference only; physical copy truth evaluated separately",
+    "selection_order": "freeze sample, assembly, candidate interval, edit geometry and denominator before inspecting read-supported score",
+    "denominator": "all frozen cases including insufficient-read and intact controls"
+  },
+  "unchanged_frozen_read_span_rule": {
+    "flank_bp_each_side": 1024,
+    "max_flank_edit_fraction": 0.05,
+    "flank_hit_rule": "one near-exact end-to-end hit per natural flank in correctly oriented read; ordered nonoverlapping hits",
+    "minimum_full_locus_source_alignment_identity": 0.99,
+    "minimum_full_locus_source_alignment_flank_bp_each_side": 1000,
+    "maximum_flank_hit_vs_primary_PAF_CIGAR_boundary_difference_bp": 10,
+    "minimum_distinct_eligible_reads_or_records": 3,
+    "read_span": "bp strictly between natural-flank hits; median over all eligible reads",
+    "assembly_span": "direct natural-flank trim of edited FASTA; verify ledger only afterward",
+    "signed_deficit_bp": "median_read_span_bp - assembly_span_bp",
+    "binary_discordance": "abs(assembly_span_bp - median_read_span_bp) > max(2, ceil(0.05 * max(assembly_span_bp, median_read_span_bp)))",
+    "abstain_if": [
+      "source integrity or provenance gate fails",
+      "assembly natural-flank trim is absent or nonunique",
+      "fewer than three distinct eligible reads or explicitly provisional records",
+      "after per-read exclusion for absent/nonunique flank or >10-bp CIGAR disagreement, fewer than three distinct eligible reads remain"
+    ],
+    "coverage_rule": "coverage is nominal sequenced bases divided by frozen assembly genome size; report actual local eligible-spanner count separately",
+    "coverage_levels_x": [5, 10, 20, 30, "full"],
+    "coverage_subsampling": "deterministic seeded whole-read selection, frozen before scoring; levels exceeding verified source coverage are not estimable, never upsample",
+    "confidence": "no calibrated probability; output decision and explicit abstention reason"
+  },
+  "required_validation_endpoints": [
+    "all-case_binary_confusion_with_abstentions",
+    "signed_deficit_vs_true_injected_deleted_bp",
+    "absolute_bp_error",
+    "relative_error_for_nonzero_deletions_only",
+    "array_localization_error_if_locus_position_is_inferred",
+    "minimum_detectable_deletion_among_predeclared_magnitudes",
+    "coverage_and_local_read_support_dependence",
+    "read_length_dependence",
+    "intact_false_discordance"
+  ],
+  "case_design": {
+    "minimum_edit_geometry": ["intact", "terminal_25pct", "terminal_50pct", "terminal_75pct", "complete_deletion"],
+    "architecture_specific_changes": "must be committed before opening the source's read-score result",
+    "correlated_edits": "report clustered by original array and sample; never count edits as independent biological replicates"
+  },
+  "method_change_policy": "any changed threshold or algorithm gets a new version and new held-out source clusters; these sources stay development data",
+  "formal_runtime_benchmark": "excluded_under_current_USB2_storage_path"
+}
