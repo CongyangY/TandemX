@@ -1,0 +1,142 @@
+[
+  {
+    "best_local_template_edit": 3,
+    "first_144bp_best_rotation_edit": 10,
+    "first_tile_min_edit": 27,
+    "flank_trim_status": "ELIGIBLE",
+    "frozen_indel_width_range_bp": [
+      133,
+      155
+    ],
+    "frozen_m2_reason": "no_full_monomer_tiling",
+    "frozen_m2_state": "AMBIGUOUS",
+    "frozen_per_tile_max_edit": 21,
+    "full_tiling_possible": false,
+    "length_bp": 3155,
+    "length_divided_by_144": 21.90972222222222,
+    "max_tiled_prefix_bp": 0,
+    "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
+    "original_read_length_bp": 16555,
+    "read_id": "SRR13557762.132335"
+  },
+  {
+    "best_local_template_edit": 3,
+    "first_144bp_best_rotation_edit": 12,
+    "first_tile_min_edit": 27,
+    "flank_trim_status": "ELIGIBLE",
+    "frozen_indel_width_range_bp": [
+      133,
+      155
+    ],
+    "frozen_m2_reason": "no_full_monomer_tiling",
+    "frozen_m2_state": "AMBIGUOUS",
+    "frozen_per_tile_max_edit": 21,
+    "full_tiling_possible": false,
+    "length_bp": 3156,
+    "length_divided_by_144": 21.916666666666668,
+    "max_tiled_prefix_bp": 0,
+    "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
+    "original_read_length_bp": 11501,
+    "read_id": "SRR13557762.809068"
+  },
+  {
+    "best_local_template_edit": 4,
+    "first_144bp_best_rotation_edit": 10,
+    "first_tile_min_edit": 27,
+    "flank_trim_status": "ELIGIBLE",
+    "frozen_indel_width_range_bp": [
+      133,
+      155
+    ],
+    "frozen_m2_reason": "no_full_monomer_tiling",
+    "frozen_m2_state": "AMBIGUOUS",
+    "frozen_per_tile_max_edit": 21,
+    "full_tiling_possible": false,
+    "length_bp": 3156,
+    "length_divided_by_144": 21.916666666666668,
+    "max_tiled_prefix_bp": 0,
+    "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
+    "original_read_length_bp": 13018,
+    "read_id": "SRR13557763.249116"
+  },
+  {
+    "best_local_template_edit": 3,
+    "first_144bp_best_rotation_edit": 10,
+    "first_tile_min_edit": 27,
+    "flank_trim_status": "ELIGIBLE",
+    "frozen_indel_width_range_bp": [
+      133,
+      155
+    ],
+    "frozen_m2_reason": "no_full_monomer_tiling",
+    "frozen_m2_state": "AMBIGUOUS",
+    "frozen_per_tile_max_edit": 21,
+    "full_tiling_possible": false,
+    "length_bp": 3145,
+    "length_divided_by_144": 21.84027777777778,
+    "max_tiled_prefix_bp": 0,
+    "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
+    "original_read_length_bp": 12506,
+    "read_id": "SRR13557763.265562"
+  },
+  {
+    "best_local_template_edit": 4,
+    "first_144bp_best_rotation_edit": 10,
+    "first_tile_min_edit": 27,
+    "flank_trim_status": "ELIGIBLE",
+    "frozen_indel_width_range_bp": [
+      133,
+      155
+    ],
+    "frozen_m2_reason": "no_full_monomer_tiling",
+    "frozen_m2_state": "AMBIGUOUS",
+    "frozen_per_tile_max_edit": 21,
+    "full_tiling_possible": false,
+    "length_bp": 3157,
+    "length_divided_by_144": 21.92361111111111,
+    "max_tiled_prefix_bp": 0,
+    "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
+    "original_read_length_bp": 12214,
+    "read_id": "SRR13557763.541041"
+  },
+  {
+    "best_local_template_edit": 3,
+    "first_144bp_best_rotation_edit": 10,
+    "first_tile_min_edit": 27,
+    "flank_trim_status": "ELIGIBLE",
+    "frozen_indel_width_range_bp": [
+      133,
+      155
+    ],
+    "frozen_m2_reason": "no_full_monomer_tiling",
+    "frozen_m2_state": "AMBIGUOUS",
+    "frozen_per_tile_max_edit": 21,
+    "full_tiling_possible": false,
+    "length_bp": 3157,
+    "length_divided_by_144": 21.92361111111111,
+    "max_tiled_prefix_bp": 0,
+    "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
+    "original_read_length_bp": 13488,
+    "read_id": "SRR13557763.66818"
+  },
+  {
+    "best_local_template_edit": 3,
+    "first_144bp_best_rotation_edit": 10,
+    "first_tile_min_edit": 27,
+    "flank_trim_status": "ELIGIBLE",
+    "frozen_indel_width_range_bp": [
+      133,
+      155
+    ],
+    "frozen_m2_reason": "no_full_monomer_tiling",
+    "frozen_m2_state": "AMBIGUOUS",
+    "frozen_per_tile_max_edit": 21,
+    "full_tiling_possible": false,
+    "length_bp": 3153,
+    "length_divided_by_144": 21.895833333333332,
+    "max_tiled_prefix_bp": 0,
+    "no_full_tiling_interpretation": "first_boundary_phase_incompatible_with_unrotated_template",
+    "original_read_length_bp": 12550,
+    "read_id": "SRR13557763.78067"
+  }
+]

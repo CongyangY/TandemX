@@ -1,0 +1,37 @@
+{
+  "comparisons": {
+    "L4": {
+      "per_case.jsonl": {
+        "identical": true,
+        "sha256": "2dc29de8a14df7f88157d8844730ed307ac2911b727096fceecf0fde3979bac5"
+      },
+      "receipt.json": {
+        "identical": true,
+        "sha256": "27c07a9f2992b0f679677c546228712f759efe5c85b9367c1e3352a1cf5ee6bf"
+      },
+      "run_log.txt": {
+        "identical": true,
+        "sha256": "c23c7e4ce8032245512668a1cc9d951774a7387744ead56e98da7180a835ca40"
+      },
+      "summary.json": {
+        "identical": true,
+        "sha256": "b2d16d5e728d3f0db68a405b1f16c9ee75f0f7330d98a85b76bf6f00b25fe8ad"
+      }
+    },
+    "L5": {
+      "per_case.jsonl": {
+        "identical": true,
+        "sha256": "fca6db4808844d00723602f852a9e1fb5bef6c88cbebb8eef51b415939e78f9d"
+      },
+      "read_paths.json": {
+        "identical": true,
+        "sha256": "df2c88ad388aa2cb1b0add11c7be5cf0a2c1ffb9ba654f3e578eaa144f2e2ec3"
+      },
+      "summary.json": {
+        "identical": true,
+        "sha256": "3996014af228b7e24e21b61f84789955a4abfe588e39b319fb3cdacf06e91cf5"
+      }
+    }
+  },
+  "status": "byte_identical_replay"
+}

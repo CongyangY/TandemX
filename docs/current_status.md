@@ -1,5 +1,40 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-18: M2 five-level truth ladder and method decision
+
+The existing Ey15-2 and Macadamia nine-case read-span results are now frozen
+as development data under
+`benchmarks/controlled_collapse/read_span_validation_v1_20260918/protocol.json`.
+No threshold was changed. Their injected-bp continuous endpoints were
+recomputed and archived; both have 8/8 large injected deletions detected and
+one intact control supported, but the edits are correlated within one array
+per source. Coverage, localization error and independent biological severity
+remain unmeasured. See
+`docs/logs/read_span_development_continuous_endpoints_20260918.md`.
+
+The unchanged M2 prototype passed frozen rule/noise/plant-consensus truth
+ladder Levels 1–3 (2/2, 2/2 and 1/1 exact paths). Real Col-CEN C3 equal-length
+edits at Level 4 reproduced 2/5 detection plus 1/1 intact support; real
+Macadamia-read Level 5 reproduced 0/9 technical decision coverage. Independent
+reruns of Levels 4–5 matched archived bytes. A nine-case Macadamia diagnosis
+identified a concrete phase mismatch: the first unrotated 144-bp template
+tile costs 27 edits versus the frozen 21-edit limit in all seven original
+records; an exploratory post-result phase rotation reduced the first-tile
+distance but still left one read and five edited assemblies unresolved.
+This probe does not alter the frozen 0/9 score. The present **full HOR
+reconstruction route is NO-GO as a core contribution**. Read-supported
+structural discordance detection is the narrower research target, subject to
+new held-out validation and fair comparator tests; neither route is promoted
+to production. See
+`docs/logs/m2_truth_ladder_and_macadamia_failure_20260918.md`.
+The separate three-cluster read-span validation, 5/10/20/30× coverage series,
+new competitor endpoints, independently matched biological truth and a blind
+prospective finding are **not completed by this M2 decision**. Existing
+Arabidopsis materials are distinct accession labels (Col-0N and Ey15-2),
+but neither their exact extraction pairing nor their inclusion as new held-out
+clusters can be inferred from different FASTQ files. No formal runtime
+benchmark was conducted on the USB2 path.
+
 ## Checkpoint 2026-09-18: resumed Macadamia controlled-collapse development
 
 After the T7 gate below, the full 737.6-MB Macadamia assembly and both complete

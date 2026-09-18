@@ -1,0 +1,17 @@
+{
+  "cannot_promote_frozen_M2_accuracy": true,
+  "edited_assembly_count": 9,
+  "edited_assembly_resolved": 4,
+  "original_record_count": 7,
+  "original_record_resolved": 6,
+  "per_input_sha256": "42e35031e7640861bc219a5cd07903b8bde2b34017b2e816e3d8f4d03b513635",
+  "phase": {
+    "best_phase_tie_count": 1,
+    "first_144bp_edit_distance": 10,
+    "rotation_bp": 130,
+    "strand": "+"
+  },
+  "phase_template_sha256": "5e892229214429e0d09b1064accace6eb2e6accd50f2e95f42835b3d0c921a4c",
+  "selected_phase_from": "intact_assembly_first_144bp",
+  "status": "post_result_exploratory_phase_probe_not_frozen_M2_score"
+}

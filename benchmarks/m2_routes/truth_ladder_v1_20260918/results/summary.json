@@ -1,0 +1,25 @@
+{
+  "input_sha256": "c3d08b250567e661881cf80c8c1e1b324ad445f19e1a593ac97df253f5294073",
+  "level_1_pass": true,
+  "level_2_pass": true,
+  "level_3_pass": true,
+  "level_4": {
+    "negative_count": 1,
+    "negative_supported": 1,
+    "pass": false,
+    "positive_count": 5,
+    "positive_detected": 2,
+    "source_summary_sha256": "b2d16d5e728d3f0db68a405b1f16c9ee75f0f7330d98a85b76bf6f00b25fe8ad"
+  },
+  "level_5": {
+    "biological_accuracy": "not_evaluated",
+    "case_count": 9,
+    "original_read_resolved_count": 0,
+    "pass": false,
+    "source_summary_sha256": "3996014af228b7e24e21b61f84789955a4abfe588e39b319fb3cdacf06e91cf5",
+    "technical_coverage": 0
+  },
+  "per_case_sha256": "60b89b40aca341727e6974d56e03d484485c9f4e044389d3019c377f6a47a7bf",
+  "protocol_sha256": "d837e8dcfd928475a3ab4d36b23e803ccef47dbcc40f275390ce906d22963577",
+  "status": "development_diagnostic_only"
+}

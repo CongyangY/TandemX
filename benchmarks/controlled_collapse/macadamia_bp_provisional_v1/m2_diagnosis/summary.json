@@ -1,0 +1,19 @@
+{
+  "all_primary_context_overlap_counts": {
+    "all_primary": 2550,
+    "array_overlap": 1682,
+    "no_array_overlap": 868,
+    "partial_array_overlap": 1451,
+    "whole_array_span": 231
+  },
+  "biological_accuracy": "not_evaluated",
+  "case_count": 9,
+  "frozen_M2_prototype_sha256": "043122d1b5987e35dcd957a6471c930f6211fe7a8902055d3a8c37f06d4ed651",
+  "m2_protocol_sha256": "82910aef591ae60b7ac2a0176063a6ffa7d08ca4c8f315210326ad18f978a9ed",
+  "m2_summary_sha256": "3996014af228b7e24e21b61f84789955a4abfe588e39b319fb3cdacf06e91cf5",
+  "no_algorithm_or_threshold_change": true,
+  "per_case_sha256": "2d1269b85acd41ef6fac73cc04aa7ed06a3e71e694aacb28f2fc23e14d677e4d",
+  "per_read_sha256": "2ee5adb6c17f5448c5e0132c0b301eba811acec5e7f5c31ce1d77b4f762f66f8",
+  "qualified_spanning_record_count": 7,
+  "record_identity_scope": "distinct SRA records; original ZMW unavailable"
+}
