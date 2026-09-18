@@ -13,12 +13,18 @@ from benchmarks.scripts.score_native_genomewide_mapping import parse_paf_line
 
 def score(protocol: Path, paf: Path, outdir: Path) -> dict:
     config = json.loads(protocol.read_text())
+    if config.get("status") != "frozen_before_full_reference_mapping":
+        raise ValueError("full-reference mapping protocol is not frozen")
     archive = json.loads(Path(config["extraction_receipt"]).read_text())
     if archive["status"] != "complete":
         raise ValueError("selected source reads are not complete")
     expected = {}
     for run in archive["runs"]:
         fastq = Path(run["selected_fastq"])
+        run_id = fastq.name.split("_", 1)[0]
+        if ("selected_fastq_sha256" in config and
+                config["selected_fastq_sha256"].get(run_id) != run["selected_fastq_sha256"]):
+            raise ValueError("selected FASTQ changed after full-reference freeze")
         if sha256(fastq) != run["selected_fastq_sha256"]:
             raise ValueError("selected source FASTQ changed")
         for item in run["reads"]:

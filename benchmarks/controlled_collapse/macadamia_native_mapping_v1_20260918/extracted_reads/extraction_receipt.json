@@ -1,0 +1,64 @@
+{
+  "distinct_zmw_verified": false,
+  "mapping_protocol_sha256": "b0a3a20582c3d2374c3c2bcff3d4625a29921cc33b3ad7677c885f8d2354d6de",
+  "mapping_receipt_sha256": "16f405b5b6e2dd274ed4ee86dcdc9dd9e91f29005e711b0f2e617c0b7179c18e",
+  "qualifying_record_count": 7,
+  "runs": [
+    {
+      "reads": [
+        {
+          "bases": 13018,
+          "id": "SRR13557763.249116",
+          "record_sha256": "bb3f3ee689bb292d7711805926783ce446039bd4333e3e2017569925ea27bcd8"
+        },
+        {
+          "bases": 12506,
+          "id": "SRR13557763.265562",
+          "record_sha256": "0259a0358aa95c5e11a2148e2f48f355e264787ceaa2268a87f982a1d8f7689b"
+        },
+        {
+          "bases": 12214,
+          "id": "SRR13557763.541041",
+          "record_sha256": "1bd9a35cb5656b304339fbaca5a9e3e60e1797d29156f372044e17b90500e9df"
+        },
+        {
+          "bases": 13488,
+          "id": "SRR13557763.66818",
+          "record_sha256": "7a88b313844dce4ed5cc613e494d60e8caa9828ec92b973b154f0782170f5982"
+        },
+        {
+          "bases": 12550,
+          "id": "SRR13557763.78067",
+          "record_sha256": "2ec09fae474d9842624e1abf8dc0f51fa119e1985e96f850686823b5979af4bf"
+        }
+      ],
+      "selected_fastq": "benchmarks/controlled_collapse/macadamia_native_mapping_v1_20260918/extracted_reads/SRR13557763_qualified.fastq.gz",
+      "selected_fastq_sha256": "99fdf29a2321d9b8e6fef094b5f626284af79f79e3c938fb8b3c178533ec834c",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+      "source_gzip_trailer_checked": true,
+      "source_read_count": 635246,
+      "source_sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6"
+    },
+    {
+      "reads": [
+        {
+          "bases": 16555,
+          "id": "SRR13557762.132335",
+          "record_sha256": "4b5a22778865a88fb8fda18fef7aa1350424c72243ac2c72a22e29d574f7aba9"
+        },
+        {
+          "bases": 11501,
+          "id": "SRR13557762.809068",
+          "record_sha256": "7b87eb0396355dc62a0ad7725fe19e18f27c8a69d8ccc00e0f93749660d73ec1"
+        }
+      ],
+      "selected_fastq": "benchmarks/controlled_collapse/macadamia_native_mapping_v1_20260918/extracted_reads/SRR13557762_qualified.fastq.gz",
+      "selected_fastq_sha256": "1983c723d9ed6f336fc6b060a2ca60d0be0108938a85dc04dcce2f5cbb8f7c78",
+      "source": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+      "source_gzip_trailer_checked": true,
+      "source_read_count": 1007148,
+      "source_sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e"
+    }
+  ],
+  "status": "complete"
+}

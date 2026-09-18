@@ -19,6 +19,7 @@ def test_full_reference_denominator_includes_unmapped_and_wrong_locus(tmp_path):
     }]}))
     config = tmp_path / "config.json"
     config.write_text(json.dumps({
+        "status": "frozen_before_full_reference_mapping",
         "extraction_receipt": str(extraction), "expected_selected_record_count": 3,
         "contig": "ctg", "array_start_0": 3000, "array_end_0": 6000,
         "minimum_natural_flank_bp_each_side": 1000,
