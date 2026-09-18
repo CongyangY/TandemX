@@ -1,0 +1,10 @@
+{
+  "status": "frozen_before_v2_scoring_after_v1_baseline_defect_detected",
+  "v1_protocol_sha256": "d415717c946a0b5235bc4d7d35c5b4113f5c4ca9f2d5553c3910c06c3586e246",
+  "v1_results_sha256": "07c040b1647757e8dd33d5f559ca81c2c479199854f9c4bab9fcc4613d653dee",
+  "defect": "v1 ordinary_segments uses best cyclic Hamming mapping without reverse-complement orientation, so it is an incomplete competitive baseline on bidirectional reads; retain its scores as historical and do not rank it as the fair baseline",
+  "corrected_baseline": "Frozen research classify_window, disjoint 80-bp windows, minimum tail 80 bp, both orientations with periodic edit distance, max edit fraction 0.225, unique best with edit margin 1, ambiguous and unknown unassigned",
+  "normalization": "assigned read bp divided by actual total read bp / original source genome bp; do not use edited assembly size to normalize",
+  "input": "Regenerate exactly the source/read matrix from protocol.json; every regenerated read SHA-256 must match the v1 archived panel receipt before scoring",
+  "scoring": "Use unchanged injected deficits, signed prediction, error and gates from protocol.json; no fit or change to any estimator after v1 outcome"
+}
