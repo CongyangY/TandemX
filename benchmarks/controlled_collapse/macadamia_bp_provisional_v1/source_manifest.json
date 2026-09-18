@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "split": "development",
+  "status": "development_provisional_record_support",
+  "support_tier": "full_reference_records_zmw_unverified",
+  "sample": "Macadamia jansenii GigaDB100906 HiFi IPA source relationship",
+  "source_pairing": "paper_same_sample_exact_individual_and_extraction_unverified",
+  "context_record_id": "ctg.000105F:115439-124594",
+  "case_prefix": "MJ1",
+  "artifact_sha256": {
+    "selected_context.fa": "a24e5695a9cb9d7a28bbedb58aa7d58c494f1b96bb369630eb2cc482dc96c5c6",
+    "selected_original_reads.fastq.gz": "da4c778e76c99c8489d0dfad429509cd1a64ec4a5c88051b92b5799fac7a9b70"
+  },
+  "array": {
+    "chromosome": "ctg.000105F",
+    "context_start0": 115439,
+    "context_end0": 124594,
+    "start0": 118439,
+    "end0": 121594,
+    "context_array_start0": 3000,
+    "context_array_end0": 6155,
+    "length_bp": 3155,
+    "family_id": "TXF000219",
+    "family_period_bp": 144,
+    "monomer_boundary_status": "operational_period_not_independently_verified_copy_boundaries",
+    "natural_flank_bp_each_side": 3000
+  },
+  "source_selection_receipt": "benchmarks/controlled_collapse/macadamia_assembly_candidate_v1_20260918/selection_receipt.json",
+  "context_mapping_receipt": "benchmarks/controlled_collapse/macadamia_native_mapping_v1_20260918/score/run_receipt.json",
+  "full_reference_score": "benchmarks/controlled_collapse/macadamia_native_mapping_v1_20260918/full_reference_score/summary.json",
+  "combined_record_receipt": "benchmarks/controlled_collapse/macadamia_bp_provisional_v1/combination_receipt.json",
+  "truth_scope": "exact_injected_assembly_bp_delta_only",
+  "native_biological_copy_truth": "unavailable",
+  "independent_donor_validation": false,
+  "final_heldout": false
+}

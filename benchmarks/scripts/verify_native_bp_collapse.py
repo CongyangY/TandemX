@@ -27,8 +27,14 @@ def verify(manifest_path: Path, context_path: Path, reads_path: Path, generated:
             or manifest["artifact_sha256"][reads_path.name] != sha256_file(reads_path)):
         raise ValueError("Native source/read hash mismatch")
     array = manifest["array"]
-    name = (f"E1|{array['chromosome']}:{array['context_start0']}-{array['context_end0']}|"
-            f"array:{array['start0']}-{array['end0']}|family:{array['family_id']}")
+    name = manifest.get("context_record_id") or (
+        f"E1|{array['chromosome']}:{array['context_start0']}-{array['context_end0']}|"
+        f"array:{array['start0']}-{array['end0']}|family:{array['family_id']}")
+    case_prefix = manifest.get("case_prefix", "E1")
+    if manifest.get("status") == "development_provisional_record_support":
+        if (receipt.get("source_support_tier") != "full_reference_records_zmw_unverified"
+                or receipt.get("independent_molecule_count", "missing") is not None):
+            raise ValueError("Provisional source support was promoted in edit receipt")
     source = read_named_fasta(context_path, name)
     start, end = array["context_array_start0"], array["context_array_end0"]
     if end - start != array["length_bp"] or len(source) != array["context_end0"] - array["context_start0"]:
@@ -60,7 +66,7 @@ def verify(manifest_path: Path, context_path: Path, reads_path: Path, generated:
             raise ValueError(f"Edited FASTA hash mismatch: {case_id}")
         if path.read_text(encoding="ascii") != f">{case_id}\n{expected}\n":
             raise ValueError(f"Edited FASTA sequence mismatch: {case_id}")
-    if observed != {"E1_" + label for label in EXPECTED_LABELS}:
+    if observed != {case_prefix + "_" + label for label in EXPECTED_LABELS}:
         raise ValueError("Case denominator mismatch")
     present = {p.name for p in generated.iterdir()}
     if present - {"verification.json", "score_protocol.json"} != {"receipt.json"} | {name + ".fa" for name in observed}:

@@ -35,16 +35,25 @@ def edit_specs(array_bp: int) -> list[tuple[str, int, int]]:
 
 def generate(manifest_path: Path, context_path: Path, reads_path: Path, outdir: Path) -> dict:
     manifest = json.loads(manifest_path.read_text())
-    if manifest.get("split") != "development" or manifest.get("status") != \
-            "development_source_enrolled_native_interval_supported":
-        raise ValueError("Expected source-qualified development manifest")
+    status = manifest.get("status")
+    if manifest.get("split") != "development" or status not in {
+            "development_source_enrolled_native_interval_supported",
+            "development_provisional_record_support"}:
+        raise ValueError("Expected supported development manifest")
+    if (status == "development_provisional_record_support" and
+            manifest.get("support_tier") != "full_reference_records_zmw_unverified"):
+        raise ValueError("Provisional support tier must identify unverified ZMWs")
     array = manifest["array"]
     if sha256_file(context_path) != manifest["artifact_sha256"][context_path.name]:
         raise ValueError("Context FASTA hash mismatch")
     if sha256_file(reads_path) != manifest["artifact_sha256"][reads_path.name]:
         raise ValueError("Original native FASTQ hash mismatch")
-    name = (f"E1|{array['chromosome']}:{array['context_start0']}-{array['context_end0']}|"
-            f"array:{array['start0']}-{array['end0']}|family:{array['family_id']}")
+    name = manifest.get("context_record_id") or (
+        f"E1|{array['chromosome']}:{array['context_start0']}-{array['context_end0']}|"
+        f"array:{array['start0']}-{array['end0']}|family:{array['family_id']}")
+    case_prefix = manifest.get("case_prefix", "E1")
+    if not case_prefix or not case_prefix.replace("_", "").isalnum():
+        raise ValueError("Invalid case prefix")
     source = read_named_fasta(context_path, name)
     start, end = array["context_array_start0"], array["context_array_end0"]
     if (start < 1000 or end > len(source) - 1000 or end <= start
@@ -58,7 +67,7 @@ def generate(manifest_path: Path, context_path: Path, reads_path: Path, outdir: 
         delete_start, delete_end = start + local_start, start + local_end
         edited = source[:delete_start] + source[delete_end:]
         removed = delete_end - delete_start
-        case_id = f"E1_{label}"
+        case_id = f"{case_prefix}_{label}"
         path = outdir / f"{case_id}.fa"
         path.write_text(f">{case_id}\n{edited}\n", encoding="ascii")
         if len(edited) != len(source) - removed:
@@ -92,6 +101,9 @@ def generate(manifest_path: Path, context_path: Path, reads_path: Path, outdir: 
                "generator_sha256": sha256_file(Path(__file__)),
                "raw_reads_modified": False, "truth_scope": "injected_bp_delta_only",
                "independent_donor_count": 1, "cases": cases}
+    if status == "development_provisional_record_support":
+        receipt["source_support_tier"] = manifest["support_tier"]
+        receipt["independent_molecule_count"] = None
     (outdir / "receipt.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     return receipt
 
