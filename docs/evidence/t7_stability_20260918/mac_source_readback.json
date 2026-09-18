@@ -1,0 +1,39 @@
+{
+  "completed_at": "2026-09-18T09:42:57+0800",
+  "mode": "inputs",
+  "mount_device": 16777240,
+  "results": [
+    {
+      "bytes": 737617956,
+      "decompressed_bytes": null,
+      "elapsed_seconds": 20.108,
+      "gzip_complete": null,
+      "name": "macadamia_hifi_ipa_assembly",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/new_assembly.fa",
+      "sha256": "d6e9272438d072662f51de7960bdef18cb3c834d97d4ca44213715b7196498a9",
+      "status": "pass"
+    },
+    {
+      "bytes": 6716963362,
+      "decompressed_bytes": 16906457156,
+      "elapsed_seconds": 387.643,
+      "gzip_complete": true,
+      "name": "macadamia_original_hifi_SRR13557763",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+      "sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6",
+      "status": "pass"
+    },
+    {
+      "bytes": 11433466175,
+      "decompressed_bytes": 28240289032,
+      "elapsed_seconds": 618.632,
+      "gzip_complete": true,
+      "name": "macadamia_original_hifi_SRR13557762",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+      "sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e",
+      "status": "pass"
+    }
+  ],
+  "started_at": "2026-09-18T09:25:51+0800",
+  "status": "pass"
+}
