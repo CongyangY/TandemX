@@ -1,5 +1,28 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-18: final M1 injected-deficit decision
+
+The M1 decision protocol was committed before scoring at `8386133`. A
+24-panel fixed-read synthetic controlled-collapse matrix, with 72 source-family
+observations and five correlated assembly edits each, was executed. The
+current production quantifier failed the prespecified bp-calibration gate;
+mean absolute error across its edited-assembly rows was 1747.6 bp and the
+worst source-relative error 97.16%. The first mapping baseline was discovered
+to omit reverse-complement handling; its result was retained, and the
+correction protocol was independently frozen at `7cfb915` before the dual-
+strand rerun. The corrected baseline and full-read prototype also failed the
+absolute gate, each with about 371 bp mean absolute error. Idealized exact-
+flank median span had zero conditional error but only 62/72 family-panel
+decisions overall, with no real-read or family-wide generalization. Fixed-read
+assembly edits guarantee slope-one monotonicity algebraically and cannot test
+independent read-side severity ordering. **Final current M1 claim: Level C
+scope only; stop quantitative missing-bp and unvalidated ordinal severity
+claims.** Level C binary accuracy is still unvalidated. See
+`docs/logs/m1_final_injected_deficit_decision_20260918.md` and the two
+versioned result archives under `benchmarks/m1_final_deficit/`. This completes
+the requested M1 A/B/C go/no-go stop gate, not the cross-cluster structural or
+prospective biological validation gates. Frozen M2 NO-GO remains unchanged.
+
 ## Checkpoint 2026-09-18: M2 five-level truth ladder and method decision
 
 The existing Ey15-2 and Macadamia nine-case read-span results are now frozen
