@@ -1,0 +1,8 @@
+read_id	status	target	target_start_0	target_end_0	identity	mapq	left_flank_bp	right_flank_bp	reported_secondary_count
+SRR13557762.132335	full_reference_primary_spanner	ctg.000105F	107876	124427	0.999637594	60	10563	2833	0
+SRR13557762.809068	full_reference_primary_spanner	ctg.000105F	114469	125976	0.996355432	60	3970	4382	0
+SRR13557763.249116	full_reference_primary_spanner	ctg.000105F	114472	127491	0.991731741	60	3967	5897	0
+SRR13557763.265562	full_reference_primary_spanner	ctg.000105F	110853	123377	0.996808680	60	7586	1783	0
+SRR13557763.541041	full_reference_primary_spanner	ctg.000105F	112183	124394	0.999426981	60	6256	2800	0
+SRR13557763.66818	full_reference_primary_spanner	ctg.000105F	109892	123368	0.998665777	60	8547	1774	0
+SRR13557763.78067	full_reference_primary_spanner	ctg.000105F	114747	127309	0.999044738	60	3692	5715	0

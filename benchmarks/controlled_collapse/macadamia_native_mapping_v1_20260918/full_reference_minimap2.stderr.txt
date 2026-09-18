@@ -1,0 +1,11 @@
+[M::mm_idx_gen::20.136*0.40] collected minimizers
+[M::mm_idx_gen::22.073*0.54] sorted minimizers
+[M::main::22.073*0.54] loaded/built the index for 284 target sequence(s)
+[M::mm_mapopt_update::22.445*0.55] mid_occ = 195
+[M::mm_idx_stat] kmer size: 19; skip: 19; is_hpc: 0; #seq: 284
+[M::mm_idx_stat::22.648*0.55] distinct minimizers: 49110573 (88.40% are singletons); average occurrences: 1.517; average spacing: 9.901; total length: 737613980
+[M::worker_pipeline::22.700*0.55] mapped 5 sequences
+[M::worker_pipeline::22.721*0.55] mapped 2 sequences
+[M::main] Version: 2.31-r1302
+[M::main] CMD: /Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2 -x map-hifi -c --secondary=yes -N 20 -t 2 /Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/new_assembly.fa benchmarks/controlled_collapse/macadamia_native_mapping_v1_20260918/extracted_reads/SRR13557763_qualified.fastq.gz benchmarks/controlled_collapse/macadamia_native_mapping_v1_20260918/extracted_reads/SRR13557762_qualified.fastq.gz
+[M::main] Real time: 22.797 sec; CPU: 12.590 sec; Peak RSS: 3.649 GB

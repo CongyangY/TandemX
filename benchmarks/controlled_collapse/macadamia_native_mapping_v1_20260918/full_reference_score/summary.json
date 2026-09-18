@@ -1,0 +1,12 @@
+{
+  "distinct_zmw_verified": false,
+  "full_reference_primary_spanner_count": 7,
+  "no_primary_count": 0,
+  "paf_sha256": "6fae6945e3fe1762a57efffbe1dca24260179132a82b53f02e0f92f57343b462",
+  "per_read_sha256": "77ad32ce9cc7726565f693c32790e611db8f6a3f3d73b436da99a37d3573ad0d",
+  "physical_copy_truth": "unavailable",
+  "protocol_sha256": "335d7e74c179a85ae1cee15b42755b644d5f2c18079ec87a8ef1d0892ab2c455",
+  "selected_record_count": 7,
+  "source_pairing": "paper_same_sample_exact_extraction_unverified",
+  "total_reported_secondary_count": 0
+}
