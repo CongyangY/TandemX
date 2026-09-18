@@ -1,0 +1,89 @@
+{
+  "completed_at": "2026-09-18T09:21:22+0800",
+  "mode": "inputs",
+  "mount_device": 16777240,
+  "results": [
+    {
+      "bytes": 38265592,
+      "decompressed_bytes": 134282475,
+      "elapsed_seconds": 2.09,
+      "gzip_complete": true,
+      "name": "colcen_assembly",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Col-CEN_v1.2/Col-CEN_v1.2.fasta.gz",
+      "sha256": "b059bf9b589a7a6cd13c67179b80293b91809c3c61cb8b9393a518619d8b5fa8",
+      "status": "pass"
+    },
+    {
+      "bytes": 970235145,
+      "decompressed_bytes": 2344036325,
+      "elapsed_seconds": 52.661,
+      "gzip_complete": true,
+      "name": "colcen_original_hifi_subset",
+      "path": "/Volumes/T7/Codex/TandemX/data/subsets/ERR6210723_seed6101_v1/sample_003.fastq.gz",
+      "sha256": "3460277f5659bf362f2b32050ae0333cd8762ee58db3e8c65dc338e60978b8a9",
+      "status": "pass"
+    },
+    {
+      "bytes": 136162508,
+      "decompressed_bytes": null,
+      "elapsed_seconds": 3.718,
+      "gzip_complete": null,
+      "name": "ey15_assembly",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Ey15-2_CLR_HiFi_Zenodo_7326462/enrolled_v2/new_assembly.fa",
+      "sha256": "48d67e8d26c5d9ebc1fbd772e877e2f957437b5a3b27bbdde4a1d3c77923208c",
+      "status": "pass"
+    },
+    {
+      "bytes": 1125515371,
+      "decompressed_bytes": 2240784874,
+      "elapsed_seconds": 61.417,
+      "gzip_complete": true,
+      "name": "ey15_original_hifi_subset",
+      "path": "/Volumes/T7/Codex/TandemX/data/subsets/ERR8666125_seed6101_v1/sample_003.fastq.gz",
+      "sha256": "1f05335279f80e604d0f451a72741d45fb53e31d35e139023e0afbe528b26baf",
+      "status": "pass"
+    },
+    {
+      "bytes": 645529558,
+      "decompressed_bytes": 2205837719,
+      "elapsed_seconds": 34.989,
+      "gzip_complete": true,
+      "name": "mo17_assembly",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Mo17_T2T_GCA_022117705.1/GCA_022117705.1_Zm-Mo17-REFERENCE-CAU-T2T-assembly_genomic.fna.gz",
+      "sha256": "2ac74f8a6dc9f3651cd54fcfb4ba644c012a299aa2c6d3ebcd23d756192d15e0",
+      "status": "pass"
+    },
+    {
+      "bytes": 1150477582,
+      "decompressed_bytes": 2260241499,
+      "elapsed_seconds": 62.39,
+      "gzip_complete": true,
+      "name": "mo17_original_hifi_subset",
+      "path": "/Volumes/T7/Codex/TandemX/data/subsets/SRR15447419_seed6101_v1/sample_003.fastq.gz",
+      "sha256": "58dfb8812b54f536dcf3ca76a1b41d75511aeab6f0617f58181884acb6f2bb81",
+      "status": "pass"
+    },
+    {
+      "bytes": 120079535,
+      "decompressed_bytes": 390533153,
+      "elapsed_seconds": 6.547,
+      "gzip_complete": true,
+      "name": "rice_assembly",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Nipponbare_AGIS1_GCA034140825v1/GCA_034140825.1_AGIS1.0_genomic.fna.gz",
+      "sha256": "cbe51d6615380bb441b7cf531ebc0ae58f498bc7982d2db07c549376a7638270",
+      "status": "pass"
+    },
+    {
+      "bytes": 1071470526,
+      "decompressed_bytes": 2304044131,
+      "elapsed_seconds": 58.341,
+      "gzip_complete": true,
+      "name": "rice_original_hifi_subset",
+      "path": "/Volumes/T7/Codex/TandemX/data/subsets/SRR25241090_seed6101_v1/sample_003.fastq.gz",
+      "sha256": "88e05ea73487dffa014ca3f8bf87881eb58071635fcde65a75349264d20a821f",
+      "status": "pass"
+    }
+  ],
+  "started_at": "2026-09-18T09:16:39+0800",
+  "status": "pass"
+}

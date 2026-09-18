@@ -1,5 +1,21 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-18: T7 storage gate passed for bounded accuracy work
+
+The user clarified that USB2 is a throughput limitation, not a scientific
+accuracy stop condition. T7 remains mounted as `/dev/disk5s2` through a USB2.0
+Hub. Eight relevant Col-CEN, Ey15-2, Mo17 and rice inputs (5.258 GB total)
+passed current full SHA-256 readback; all seven gzip files decompressed to
+completion. A disposable 3 GiB sequential write, `fsync`/`F_FULLFSYNC`,
+uncached readback and SHA-256 comparison passed; the file was deleted, mount
+identity remained constant, and the scoped recent log query found no matching
+I/O error or unexpected unmount. This **requalifies bounded accuracy and
+controlled-collapse work** on checked inputs. New input files require their
+own gate, and formal runtime/scalability comparison remains excluded under
+the current USB2 path. See
+`docs/logs/t7_stability_requalification_20260918.md` and its evidence archive.
+The previously blocked Macadamia original-source check has resumed.
+
 ## Checkpoint 2026-09-17: two source-qualified native development lineages
 
 The Col-CEN six original HiFi molecules were mapped against the **complete**
@@ -96,10 +112,11 @@ audit. Hosted Ubuntu/macOS Python, Rust and wheel validation for pushed commits
 `c3e8624`, `16538ca`, and final evidence commit `93753f7` passed. The latter
 is Source validation run 35224854877; both platform jobs completed with
 success. This verifies source and packaging checks, not biological accuracy.
-On 2026-09-17, `system_profiler SPUSBDataType` still enumerated the Samsung
-PSSD T7 beneath a USB2.0 Hub. This current observation does not clear the
-prior T7 EIO/unmount events, so large T7 write/rebenchmark work remains gated
-by a demonstrably reliable direct storage connection.
+On 2026-09-17, `system_profiler SPUSBDataType` enumerated the Samsung PSSD T7
+beneath a USB2.0 Hub; the 2026-09-18 bounded integrity/stability gate above
+subsequently passed. Historical EIO/unmount events remain in the record, while
+USB2 no longer blocks checked-input accuracy work. Formal isolated performance
+work still requires appropriate fixed storage.
 
 ## Checkpoint 2026-09-17: native development inputs and exact edit archive
 

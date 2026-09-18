@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "scope": "Macadamia original HiFi candidate source eligibility after T7 stability gate; development only",
+  "inputs": [
+    {
+      "name": "macadamia_hifi_ipa_assembly",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/new_assembly.fa",
+      "expected_bytes": 737617956,
+      "expected_sha256": "d6e9272438d072662f51de7960bdef18cb3c834d97d4ca44213715b7196498a9"
+    },
+    {
+      "name": "macadamia_original_hifi_SRR13557763",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+      "expected_bytes": 6716963362,
+      "expected_sha256": "0a2cd32e6ed4a407aade9e67f427f90d4d02836ba7e670faff1949957e9ea4f6"
+    },
+    {
+      "name": "macadamia_original_hifi_SRR13557762",
+      "path": "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz",
+      "expected_bytes": 11433466175,
+      "expected_sha256": "24eefee1b6eae17156674964e797cb77fb5c4b16c5f004bd07d117e236c82a4e"
+    }
+  ]
+}

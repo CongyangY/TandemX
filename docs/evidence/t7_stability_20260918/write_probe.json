@@ -1,0 +1,15 @@
+{
+  "bytes": 3221225472,
+  "completed_at": "2026-09-18T09:24:22+0800",
+  "fsync_completed": true,
+  "fullfsync_completed": true,
+  "mode": "write_probe",
+  "mount_device": 16777240,
+  "read_sha256": "fd4edc9e45cd1870ca34fda1c44c9a23cef407f1f661a29e6e2ac5395a2ba5cc",
+  "readback_seconds": 72.866,
+  "started_at": "2026-09-18T09:21:41+0800",
+  "status": "pass",
+  "temporary_file_deleted": true,
+  "write_fsync_seconds": 88.735,
+  "write_sha256": "fd4edc9e45cd1870ca34fda1c44c9a23cef407f1f661a29e6e2ac5395a2ba5cc"
+}
