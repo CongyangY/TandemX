@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-09-18",
+  "updates_registry": "benchmarks/inputs/native_source_registry_20260917.json",
+  "registry_type": "post_experiment_source_reconciliation_not_preregistration",
+  "dataset": "Macadamia_jansenii_SRR13557763_62",
+  "prior_screen_state": "not_enrolled_no_bounded_subset_or_full_reread_as_of_2026-09-17",
+  "current_source_state": "eligible_provisional_record_level_development_only",
+  "source_integrity": {
+    "assembly_and_both_original_fastq_complete_size_sha256": "pass",
+    "both_original_fastq_full_gzip": "pass",
+    "receipt": "docs/evidence/t7_stability_20260918/mac_source_readback.json"
+  },
+  "array_coordinates_0based_half_open": "ctg.000105F:118439-121594",
+  "family": "TXF000219; operational 144-bp period; biological copy boundaries unverified",
+  "assembly_selection": "assembly_score_committed_before_2026-09-18_original_read_mapping; earlier_TandemX_family_catalogue_used",
+  "source_mapping": {
+    "complete_original_sra_record_count": 1642394,
+    "qualifying_distinct_record_count": 7,
+    "full_reference_primary_spanner_count": 7,
+    "reported_secondary_count": 0,
+    "minimum_identity": 0.99,
+    "minimum_flank_bp_each_side": 1000,
+    "minimum_full_reference_mapq": 20,
+    "distinct_original_zmw_verified": false
+  },
+  "source_pairing": "paper_same_sample_exact_individual_extraction_and_haplotype_unverified",
+  "truth_type": "exact_injected_assembly_bp_delta_only",
+  "frozen_case_count": 9,
+  "fixed_five_percent_span": {
+    "eligible_record_count": 7,
+    "injected_deletions_discordant": 8,
+    "injected_deletion_count": 8,
+    "intact_controls_supported": 1,
+    "intact_control_count": 1,
+    "abstentions": 0
+  },
+  "frozen_M2_native_path": {
+    "evaluated_case_count": 9,
+    "technical_decision_coverage_count": 0,
+    "abstention_count": 9,
+    "original_read_full_monomer_tiling_count": 0,
+    "supplied_monomer_prior": true
+  },
+  "M1_absolute_abundance_gate": "NO_GO_unchanged",
+  "biological_accuracy": "not_evaluated",
+  "final_heldout": false,
+  "formal_performance_eligible_under_current_USB2": false,
+  "source_package": "benchmarks/controlled_collapse/macadamia_assembly_candidate_v1_20260918",
+  "mapping_package": "benchmarks/controlled_collapse/macadamia_native_mapping_v1_20260918",
+  "edit_and_score_package": "benchmarks/controlled_collapse/macadamia_bp_provisional_v1",
+  "narrative_audit": "docs/logs/macadamia_native_development_20260918.md"
+}

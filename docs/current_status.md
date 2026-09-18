@@ -1,5 +1,28 @@
 # TandemX current status and handoff
 
+## Checkpoint 2026-09-18: resumed Macadamia controlled-collapse development
+
+After the T7 gate below, the full 737.6-MB Macadamia assembly and both complete
+original HiFi FASTQ.gz streams (18.150 GB combined) matched historical sizes
+and SHA-256 values; both gzip streams decompressed fully. Assembly-led
+selection committed a 3,155-bp `ctg.000105F` interval before this original-read
+mapping. Seven distinct SRA records passed the frozen >=99% identity and
+>=1-kb natural-flank gates. All seven also had one reported primary at the
+expected locus on the full assembly, MAPQ 60. Original ZMW identities, exact
+DNA extraction pairing and physical copy truth remain unknown. Nine exact
+assembly edits were independently reconstructed and deterministically replayed.
+The precommitted 5% native read-span rule called all eight large injected
+deletions discordant and the intact control supported, with 7/7 eligible
+records and no abstention. These correlated edits are development checks of
+injected bp differences, not biological accuracy. The separately frozen M2
+single-template path route abstained on all 9/9 cases because all seven
+original read intervals lacked a full monomer tiling; its NO-GO remains.
+M1 absolute-abundance Gate A also remains NO-GO, with no estimator change.
+See `docs/logs/macadamia_native_development_20260918.md` and the machine-readable
+archives it identifies. Post-experiment T7 mount and scoped macOS error-log
+checks still found no I/O error or unexpected unmount; USB2 remains a formal
+performance exclusion only.
+
 ## Checkpoint 2026-09-18: T7 storage gate passed for bounded accuracy work
 
 The user clarified that USB2 is a throughput limitation, not a scientific
@@ -14,7 +37,8 @@ controlled-collapse work** on checked inputs. New input files require their
 own gate, and formal runtime/scalability comparison remains excluded under
 the current USB2 path. See
 `docs/logs/t7_stability_requalification_20260918.md` and its evidence archive.
-The previously blocked Macadamia original-source check has resumed.
+The previously blocked Macadamia original-source check resumed; its newer
+result is in the checkpoint above.
 
 ## Checkpoint 2026-09-17: two source-qualified native development lineages
 
@@ -72,8 +96,9 @@ was also low. Mo17 is ineligible for these native controlled edits; no
 post-result locus replacement, full-reference scan, or edit was performed.
 Read and assembly archive BioSamples differ.
 
-The independent rice and Macadamia source screens are also negative under
-their declared scope. Rice's 385.711-Mb assembly and 62,345-read HiFi subset
+The following rice and Macadamia screen outcomes describe their **2026-09-17
+declared scope**; the 2026-09-18 Macadamia full-source follow-up is recorded
+at the top of this file. Rice's 385.711-Mb assembly and 62,345-read HiFi subset
 passed complete integrity checks, but the frozen 155-bp/4-kb assembly screen
 found no interval passing the natural-flank uniqueness threshold among the
 top 1,000 of 771,185 windows. It did not map reads or make edits. Macadamia
@@ -232,8 +257,9 @@ covered 98.73% of truth array bases only when given truth-derived monomers,
 so no fair cross-tool HOR or de novo accuracy ranking is available. The
 historical 30 bp CENdetectHOR smoke remains installation evidence only.
 
-T7's physical connection remains a separate blocker for K30076, V14167 and
-large 30x work; it did not block the internal-disk M1/M2 analysis. Formal
+At this 2026-09-17 checkpoint, T7's unverified physical stability blocked
+K30076, V14167 and large 30x work; the 2026-09-18 integrity gate above
+supersedes USB2 as a general accuracy stop condition. Formal
 release, Bioconda, Zenodo and manuscript promotion remain paused. No M2
 research prototype was promoted into the production CLI. The full local
 `tandemx-dev` pytest suite passed **1,028 tests in 118.68 s** after the B2

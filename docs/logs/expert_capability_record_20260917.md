@@ -1,5 +1,14 @@
 # TandemX expert capability record, 2026-09-17
 
+**Dated snapshot:** the 2026-09-18 T7 integrity/stability gate passed despite
+the USB2 connection, and the complete Macadamia source was revalidated and
+used for a bounded controlled-collapse development experiment. The 2026-09-17
+Macadamia and storage statements below are historical, not the current gate.
+See `docs/current_status.md`,
+`docs/logs/t7_stability_requalification_20260918.md`, and
+`docs/logs/macadamia_native_development_20260918.md`. Formal runtime and
+scalability comparison remains excluded under USB2.
+
 This record describes the checked repository and archived evidence as of the
 current development branch. It distinguishes implemented software, completed
 technical experiments, independent validation, and open claims. `README.md`
