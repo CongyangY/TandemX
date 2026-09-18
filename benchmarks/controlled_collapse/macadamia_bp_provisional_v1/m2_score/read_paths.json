@@ -1,0 +1,58 @@
+{
+  "SRR13557762.132335": {
+    "alternative_score": null,
+    "copy_count": 0,
+    "labels": [],
+    "reason": "no_full_monomer_tiling",
+    "score": null,
+    "state": "AMBIGUOUS"
+  },
+  "SRR13557762.809068": {
+    "alternative_score": null,
+    "copy_count": 0,
+    "labels": [],
+    "reason": "no_full_monomer_tiling",
+    "score": null,
+    "state": "AMBIGUOUS"
+  },
+  "SRR13557763.249116": {
+    "alternative_score": null,
+    "copy_count": 0,
+    "labels": [],
+    "reason": "no_full_monomer_tiling",
+    "score": null,
+    "state": "AMBIGUOUS"
+  },
+  "SRR13557763.265562": {
+    "alternative_score": null,
+    "copy_count": 0,
+    "labels": [],
+    "reason": "no_full_monomer_tiling",
+    "score": null,
+    "state": "AMBIGUOUS"
+  },
+  "SRR13557763.541041": {
+    "alternative_score": null,
+    "copy_count": 0,
+    "labels": [],
+    "reason": "no_full_monomer_tiling",
+    "score": null,
+    "state": "AMBIGUOUS"
+  },
+  "SRR13557763.66818": {
+    "alternative_score": null,
+    "copy_count": 0,
+    "labels": [],
+    "reason": "no_full_monomer_tiling",
+    "score": null,
+    "state": "AMBIGUOUS"
+  },
+  "SRR13557763.78067": {
+    "alternative_score": null,
+    "copy_count": 0,
+    "labels": [],
+    "reason": "no_full_monomer_tiling",
+    "score": null,
+    "state": "AMBIGUOUS"
+  }
+}

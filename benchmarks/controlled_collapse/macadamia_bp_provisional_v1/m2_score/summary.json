@@ -1,0 +1,14 @@
+{
+  "assembly_resolved_count": 1,
+  "biological_accuracy": "not_evaluated",
+  "case_count": 9,
+  "eligible_original_record_count": 7,
+  "m2_protocol_sha256": "82910aef591ae60b7ac2a0176063a6ffa7d08ca4c8f315210326ad18f978a9ed",
+  "molecule_identity": "unverified_ZMW",
+  "original_read_resolved_count": 0,
+  "per_case_sha256": "fca6db4808844d00723602f852a9e1fb5bef6c88cbebb8eef51b415939e78f9d",
+  "read_paths_sha256": "df2c88ad388aa2cb1b0add11c7be5cf0a2c1ffb9ba654f3e578eaa144f2e2ec3",
+  "technical_abstain_count": 9,
+  "technical_discordant_count": 0,
+  "technical_supported_count": 0
+}
