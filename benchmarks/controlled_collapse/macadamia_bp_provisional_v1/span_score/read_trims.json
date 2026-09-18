@@ -1,0 +1,191 @@
+[
+  {
+    "left_edit_cost": 1,
+    "left_hit_0based": [
+      9540,
+      10565
+    ],
+    "observed_array_span_bp": 3155,
+    "original_read_sequence_sha256": "6fb8fb4eea5913b3300dbc366e315552340f0f95a9f0e0f00ab1d3338458211f",
+    "primary_PAF_projected_interval_0based": [
+      10565,
+      13720
+    ],
+    "read_id": "SRR13557762.132335",
+    "read_length_bp": 16555,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 0,
+    "right_hit_0based": [
+      13720,
+      14744
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      10565,
+      13720
+    ]
+  },
+  {
+    "left_edit_cost": 2,
+    "left_hit_0based": [
+      2938,
+      3964
+    ],
+    "observed_array_span_bp": 3156,
+    "original_read_sequence_sha256": "6fac7755b148d23fe34d72c127c1f3976409d349e1091baae73d5450384cf6b8",
+    "primary_PAF_projected_interval_0based": [
+      3964,
+      7120
+    ],
+    "read_id": "SRR13557762.809068",
+    "read_length_bp": 11501,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 0,
+    "right_hit_0based": [
+      7120,
+      8144
+    ],
+    "status": "ELIGIBLE",
+    "strand": "+",
+    "trim_interval_0based": [
+      3964,
+      7120
+    ]
+  },
+  {
+    "left_edit_cost": 2,
+    "left_hit_0based": [
+      2937,
+      3961
+    ],
+    "observed_array_span_bp": 3156,
+    "original_read_sequence_sha256": "49b50e429bfc2c1272b8e36d74469dd3daad92474f168e72b6e6d13ca96c0229",
+    "primary_PAF_projected_interval_0based": [
+      3961,
+      7117
+    ],
+    "read_id": "SRR13557763.249116",
+    "read_length_bp": 13018,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 7,
+    "right_hit_0based": [
+      7117,
+      8135
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      3961,
+      7117
+    ]
+  },
+  {
+    "left_edit_cost": 12,
+    "left_hit_0based": [
+      6560,
+      7584
+    ],
+    "observed_array_span_bp": 3145,
+    "original_read_sequence_sha256": "fdf43bd07f374675798e974be6bf962dc6916a693b7a5ddcb906ad052936e439",
+    "primary_PAF_projected_interval_0based": [
+      7584,
+      10729
+    ],
+    "read_id": "SRR13557763.265562",
+    "read_length_bp": 12506,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 4,
+    "right_hit_0based": [
+      10729,
+      11751
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      7584,
+      10729
+    ]
+  },
+  {
+    "left_edit_cost": 0,
+    "left_hit_0based": [
+      5231,
+      6255
+    ],
+    "observed_array_span_bp": 3157,
+    "original_read_sequence_sha256": "e6ed4eada4ac675edd5abf18ac03ad853b9dcc8574345730de4cfd56f725aeb2",
+    "primary_PAF_projected_interval_0based": [
+      6255,
+      9412
+    ],
+    "read_id": "SRR13557763.541041",
+    "read_length_bp": 12214,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 0,
+    "right_hit_0based": [
+      9412,
+      10436
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      6255,
+      9412
+    ]
+  },
+  {
+    "left_edit_cost": 1,
+    "left_hit_0based": [
+      7530,
+      8555
+    ],
+    "observed_array_span_bp": 3157,
+    "original_read_sequence_sha256": "629d5eff38a6ccb277a6efde0cb619f99503b46f665f52c2c789e681bbb8f387",
+    "primary_PAF_projected_interval_0based": [
+      8555,
+      11712
+    ],
+    "read_id": "SRR13557763.66818",
+    "read_length_bp": 13488,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 2,
+    "right_hit_0based": [
+      11712,
+      12738
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      8555,
+      11712
+    ]
+  },
+  {
+    "left_edit_cost": 0,
+    "left_hit_0based": [
+      2664,
+      3688
+    ],
+    "observed_array_span_bp": 3153,
+    "original_read_sequence_sha256": "c30f31ac80daa2514bc9fc0b3bfff3c95aa60473a1bea97ab1bead85dea964a0",
+    "primary_PAF_projected_interval_0based": [
+      3688,
+      6841
+    ],
+    "read_id": "SRR13557763.78067",
+    "read_length_bp": 12550,
+    "reason": "two_unique_natural_flanks_in_read",
+    "right_edit_cost": 0,
+    "right_hit_0based": [
+      6841,
+      7865
+    ],
+    "status": "ELIGIBLE",
+    "strand": "-",
+    "trim_interval_0based": [
+      3688,
+      6841
+    ]
+  }
+]

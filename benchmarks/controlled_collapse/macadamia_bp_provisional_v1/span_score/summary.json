@@ -1,0 +1,28 @@
+{
+  "abstain_cases": 0,
+  "biological_accuracy": "not_evaluated",
+  "case_count": 9,
+  "eligible_record_count": 7,
+  "eligible_spans_bp": [
+    3155,
+    3156,
+    3156,
+    3145,
+    3157,
+    3157,
+    3153
+  ],
+  "fn": 0,
+  "fp": 0,
+  "median_original_record_span_bp": 3156,
+  "molecule_identity": "unverified_ZMW",
+  "per_case_sha256": "1d04d9d6d9383e67dbd7823a963419003b2e2ffe0580b27731667a7df046f20f",
+  "physical_copy_truth": "unavailable",
+  "read_trims_sha256": "1397b787f25d6ab8b02bf1f5cef84f9657d513343a53a2a2215d37da721870a6",
+  "score_protocol_sha256": "373c6737375de72eeb62cbb98a5191daeba68260539c83921db05df17c9590c8",
+  "selected_original_record_count": 7,
+  "source_manifest_sha256": "52a87f1902762696ba8535d9b139047db5adbe7026e77c8c0b20ef4feb08ebbf",
+  "tn": 1,
+  "tp": 8,
+  "verified_edit_receipt_sha256": "cdead308d700f9f23a1967f83993bdd97d5014396e9bce5645734f737f3159e9"
+}
