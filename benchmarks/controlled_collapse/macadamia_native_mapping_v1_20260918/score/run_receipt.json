@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/Volumes/T7/Codex/TandemX/tools/src/minimap2/minimap2",
+    "-x",
+    "map-hifi",
+    "-c",
+    "--secondary=yes",
+    "-N",
+    "20",
+    "-t",
+    "2",
+    "/Users/ycy/Codex/Sofw/TandemX/benchmarks/controlled_collapse/macadamia_assembly_candidate_v1_20260918/selected_context.fa",
+    "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557763/SRR13557763_subreads.fastq.gz",
+    "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/source_v1/SRR13557762/SRR13557762_subreads.fastq.gz"
+  ],
+  "distinct_zmw_count": null,
+  "elapsed_seconds": 493.603,
+  "input_readback_sha256": "605d3db2750fea9072a61792824ddf2c73a35a120deaa3ae2ab4423e03ded636",
+  "minimum_identity": 0.99,
+  "minimum_natural_flank_bp_each_side": 1000,
+  "molecule_gate_pass": false,
+  "molecule_identity_boundary": "original_ZMW_unverifiable_from_FASTQ_ids",
+  "paf_gzip_sha256": "6a2d7d5169d97b770a5ef958cbba53c1cd085b00e0938d0739f11c222ec64318",
+  "primary_geometric_spanner_alignment_count": 86,
+  "protocol_sha256": "b0a3a20582c3d2374c3c2bcff3d4625a29921cc33b3ad7677c885f8d2354d6de",
+  "qualifying_distinct_record_count": 7,
+  "qualifying_tsv_sha256": "78f3c48ace222520f8f2ed71c4c85fbf359d9469894f5316b34ca0e8f01e83d9",
+  "record_gate_pass": true,
+  "reported_alignment_count": 2650,
+  "reported_primary_alignment_count": 2550,
+  "required_distinct_record_count": 3,
+  "status": "completed"
+}

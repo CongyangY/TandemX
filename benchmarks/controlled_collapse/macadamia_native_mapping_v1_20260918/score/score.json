@@ -1,0 +1,15 @@
+{
+  "distinct_zmw_count": null,
+  "minimum_identity": 0.99,
+  "minimum_natural_flank_bp_each_side": 1000,
+  "molecule_gate_pass": false,
+  "molecule_identity_boundary": "original_ZMW_unverifiable_from_FASTQ_ids",
+  "paf_gzip_sha256": "6a2d7d5169d97b770a5ef958cbba53c1cd085b00e0938d0739f11c222ec64318",
+  "primary_geometric_spanner_alignment_count": 86,
+  "qualifying_distinct_record_count": 7,
+  "qualifying_tsv_sha256": "78f3c48ace222520f8f2ed71c4c85fbf359d9469894f5316b34ca0e8f01e83d9",
+  "record_gate_pass": true,
+  "reported_alignment_count": 2650,
+  "reported_primary_alignment_count": 2550,
+  "required_distinct_record_count": 3
+}
