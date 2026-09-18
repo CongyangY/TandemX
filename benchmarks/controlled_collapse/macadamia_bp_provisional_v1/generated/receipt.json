@@ -1,0 +1,367 @@
+{
+  "cases": [
+    {
+      "case_id": "MJ1_terminal_000",
+      "edit_type": "terminal",
+      "edited_array_bp": 3155,
+      "edited_array_context_interval": [
+        3000,
+        6155
+      ],
+      "edited_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "edited_breakpoint0": 6155,
+      "edited_fasta_sha256": "e7defad16f33556e5724abea5b99250e6720365f7980b647ebfc77fbabe1362f",
+      "injected_deleted_bp": 0,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 0,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        6155,
+        6155
+      ],
+      "source_deleted_genome_interval": [
+        121594,
+        121594
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "MJ1_terminal_025",
+      "edit_type": "terminal",
+      "edited_array_bp": 2367,
+      "edited_array_context_interval": [
+        3000,
+        5367
+      ],
+      "edited_array_sha256": "7480ff6a0ba74a086e1c4986bf87d317d153fa1ff4c43b36d2162c011c08284a",
+      "edited_breakpoint0": 5367,
+      "edited_fasta_sha256": "8a33b61d00da367cfb1be9d11c5ebea48dd9d8d64cc667b933757d383676fa71",
+      "injected_deleted_bp": 788,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 25,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        5367,
+        6155
+      ],
+      "source_deleted_genome_interval": [
+        120806,
+        121594
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "MJ1_terminal_050",
+      "edit_type": "terminal",
+      "edited_array_bp": 1578,
+      "edited_array_context_interval": [
+        3000,
+        4578
+      ],
+      "edited_array_sha256": "a308bebcf9a0f3c769f423e259a763cfc56c7ecbdf87b07b51e1ff28c1f4fb45",
+      "edited_breakpoint0": 4578,
+      "edited_fasta_sha256": "3181da0db00a8624a7c17e3b86a40bdf5ad3fa731b556f560fc23b9685b63b6b",
+      "injected_deleted_bp": 1577,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 50,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        4578,
+        6155
+      ],
+      "source_deleted_genome_interval": [
+        120017,
+        121594
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "MJ1_terminal_075",
+      "edit_type": "terminal",
+      "edited_array_bp": 789,
+      "edited_array_context_interval": [
+        3000,
+        3789
+      ],
+      "edited_array_sha256": "bddf67abb05d3db7df5b1753fa37f5055f94c860386037db6fe0408a471a7367",
+      "edited_breakpoint0": 3789,
+      "edited_fasta_sha256": "1e2c61afdd7e2b3a376b595557cb7f821ce76d60cd6e65d7c66b9af69a8b23cc",
+      "injected_deleted_bp": 2366,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 75,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        3789,
+        6155
+      ],
+      "source_deleted_genome_interval": [
+        119228,
+        121594
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "MJ1_terminal_100",
+      "edit_type": "terminal",
+      "edited_array_bp": 0,
+      "edited_array_context_interval": [
+        3000,
+        3000
+      ],
+      "edited_array_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "edited_breakpoint0": 3000,
+      "edited_fasta_sha256": "e60b4f79aa754eae9e538282c7dbe35bab2e4df2aa7584ce5e1cd33398103394",
+      "injected_deleted_bp": 3155,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 100,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        3000,
+        6155
+      ],
+      "source_deleted_genome_interval": [
+        118439,
+        121594
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "MJ1_internal_025",
+      "edit_type": "internal",
+      "edited_array_bp": 2367,
+      "edited_array_context_interval": [
+        3000,
+        5367
+      ],
+      "edited_array_sha256": "f226175d5ee1ea0db49096ded8491457da57dd69c9d6d97b3a5e02652de6c94b",
+      "edited_breakpoint0": 4183,
+      "edited_fasta_sha256": "72549e5db164891d6336dd27f6e6f23b72decda9ec0eee508d19031214a6a152",
+      "injected_deleted_bp": 788,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 25,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        4183,
+        4971
+      ],
+      "source_deleted_genome_interval": [
+        119622,
+        120410
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "MJ1_internal_050",
+      "edit_type": "internal",
+      "edited_array_bp": 1578,
+      "edited_array_context_interval": [
+        3000,
+        4578
+      ],
+      "edited_array_sha256": "81c1cfcf9589f221d091d51f7b6c6f8d918c5fdddef03452fdbb9d0a16124b90",
+      "edited_breakpoint0": 3789,
+      "edited_fasta_sha256": "1e226b8c7c05ac191a3d59e3f16f63d580d07c24095c1d4e1f50638beeb87d5a",
+      "injected_deleted_bp": 1577,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 50,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        3789,
+        5366
+      ],
+      "source_deleted_genome_interval": [
+        119228,
+        120805
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "MJ1_internal_075",
+      "edit_type": "internal",
+      "edited_array_bp": 789,
+      "edited_array_context_interval": [
+        3000,
+        3789
+      ],
+      "edited_array_sha256": "6cbf29e19e07edfea40d2cfed03b901697afe01ffca6910d225c07f8e0acace6",
+      "edited_breakpoint0": 3394,
+      "edited_fasta_sha256": "51b87a0f6cc3674843c494215337a0de2cf29ea98923e1dc58f80398805e5605",
+      "injected_deleted_bp": 2366,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 75,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        3394,
+        5760
+      ],
+      "source_deleted_genome_interval": [
+        118833,
+        121199
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    },
+    {
+      "case_id": "MJ1_boundary_left_025",
+      "edit_type": "boundary_left",
+      "edited_array_bp": 2367,
+      "edited_array_context_interval": [
+        3000,
+        5367
+      ],
+      "edited_array_sha256": "e54df3ef6cafc86672705c23e51eb76ffaceaffcef0bab69e979ecfbf79021d7",
+      "edited_breakpoint0": 3000,
+      "edited_fasta_sha256": "abeb6cccf8f65a46a96017bb238d3ee05aa822d0db15fd0989df877c661a6098",
+      "injected_deleted_bp": 788,
+      "monomer_copy_truth": "unknown_noninteger_period_and_unverified_boundaries",
+      "read_pairing_status": "paper_same_sample_exact_individual_and_extraction_unverified",
+      "requested_deletion_percent": 25,
+      "source_array_bp": 3155,
+      "source_array_context_interval": [
+        3000,
+        6155
+      ],
+      "source_array_genome_interval": [
+        118439,
+        121594
+      ],
+      "source_array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+      "source_context_genome_interval": [
+        115439,
+        124594
+      ],
+      "source_deleted_context_interval": [
+        3000,
+        3788
+      ],
+      "source_deleted_genome_interval": [
+        118439,
+        119227
+      ],
+      "truth_scope": "injected_bp_delta_only"
+    }
+  ],
+  "generator_sha256": "170de36b06dadbbb5aae71c10ed7eae816c25214013d167fc9b90fed22b8c969",
+  "independent_donor_count": 1,
+  "independent_molecule_count": null,
+  "material_id": "Macadamia jansenii GigaDB100906 HiFi IPA source relationship",
+  "original_native_fastq_sha256": "da4c778e76c99c8489d0dfad429509cd1a64ec4a5c88051b92b5799fac7a9b70",
+  "raw_reads_modified": false,
+  "schema_version": 1,
+  "source_context_sha256": "a24e5695a9cb9d7a28bbedb58aa7d58c494f1b96bb369630eb2cc482dc96c5c6",
+  "source_manifest_sha256": "52a87f1902762696ba8535d9b139047db5adbe7026e77c8c0b20ef4feb08ebbf",
+  "source_support_tier": "full_reference_records_zmw_unverified",
+  "split": "development",
+  "truth_scope": "injected_bp_delta_only"
+}
