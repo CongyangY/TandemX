@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "selection_type": "assembly_only_before_original_read_inspection",
+  "frozen_protocol_path": "benchmarks/controlled_collapse/macadamia_native_pair_audit_20260917/protocol.json",
+  "frozen_protocol_sha256": "2b986f3f0d3ff658d51304b58b63a3a8c13552bb82dac2eb7491de5e4178c415",
+  "source_sha256": {
+    "/Volumes/T7/Codex/TandemX/data/references/Macadamia_jansenii_GigaDB_100812_100906/enrolled_v1/new_assembly.fa": "d6e9272438d072662f51de7960bdef18cb3c834d97d4ca44213715b7196498a9",
+    "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/locate_new/arrays.bed": "a79bbd6e9da087d43f6daa679bd03ff68b72a9e129ed7c81348846019da89419",
+    "/Volumes/T7/Codex/TandemX/results/macadamia_jansenii_donor_matched_collapse_v1_20260909/run/discover/families.tsv": "4f9f1d5d4227ac48623a26f557ec206cfcd846926cea0fe7abbe08a0e978c14e"
+  },
+  "catalogue_rows_examined": 28368,
+  "length_eligible_rows": 7,
+  "eligible_candidates": 2,
+  "selection_rank": "maximum direct period-shift identity; ties by longer interval, contig lexicographic, start ascending",
+  "selected": {
+    "contig": "ctg.000105F",
+    "start": 118439,
+    "end": 121594,
+    "family_id": "TXF000219",
+    "length_bp": 3155,
+    "period_bp": 144,
+    "flank_bp": 3000,
+    "period_shift_matches": 2796,
+    "period_shift_compared": 3011,
+    "period_shift_identity": 0.9285951511125872,
+    "array_sha256": "c507d4a326e68406fbd145a85335540f0f15829a27d171278c031007974f59f9",
+    "context_sha256": "583a95f41d7132baa76b90f6b32d3619435496dabbee2a3c5e980801ea203b03"
+  },
+  "all_candidate_scores_sha256": "d048bf62a28b143840974345793b2040085a6e480cf30f7f6864c88d2063b9dd",
+  "length_filter_trace_sha256": "7702de93f67e9f7edebd352c9cd0121c0e7c17ed7eec39874ee9bb227c86070b",
+  "selected_context_fasta_sha256": "a24e5695a9cb9d7a28bbedb58aa7d58c494f1b96bb369630eb2cc482dc96c5c6",
+  "original_reads_inspected": false,
+  "biological_truth": "unavailable"
+}
